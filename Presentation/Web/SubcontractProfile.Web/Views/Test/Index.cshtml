@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
+
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -15,60 +15,117 @@
                 <form class="forms-sample">
                     <div class="form-group">
                         <label for="exampleInputName1">Name</label>
-                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <label for="dtpDate">Date of Birth</label>
-                        <input data-date-format="dd/mm/yyyy" class="form-control" id="datepicker">
+                        <div class='input-group'>
+                            <input type="text" class="form-control fa fa-address-book" id="exampleInputName1" placeholder="Name">
+                            <span class="input-group-addon">
+                                <span class="fa fa-user"></span>
+                            </span>
+                        </div>
 
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword4">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword4" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleSelectGender">Gender</label>
-                        <select class="form-control" id="exampleSelectGender">
-                            <option>Male</option>
-                            <option>Female</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>File upload</label>
-                        <input type="file" name="img[]" class="file-upload-default">
-                        <div class="input-group col-xs-12">
-                            <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                            <span class="input-group-append">
-                                <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                        <label for="exampleInputEmail3">Email address</label>
+                        <div class='input-group'>
+                            <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+                            <span class="input-group-addon">
+                                <span class="fa fa-envelope-o"></span>
                             </span>
                         </div>
+
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputCity1">City</label>
-                        <input type="text" class="form-control" id="exampleInputCity1" placeholder="Location">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleTextarea1">Textarea</label>
-                        <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                    <button class="btn btn-light">Cancel</button>
-                </form>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword4">Password</label>
+                            <div class='input-group'>
+
+                                <input type="password" class="form-control" id="exampleInputPassword4" placeholder="Password">
+                                <span class="input-group-addon">
+                                    <span class="fa fa-key"></span>
+                                </span>
+                            </div>
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleSelectGender">Gender</label>
+                            <select class="form-control" id="exampleSelectGender">
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>File upload</label>
+                            <input type="file" name="img[]" class="file-upload-default">
+                            <div class="input-group col-xs-12">
+                                <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                                <span class="input-group-append">
+                                    <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputCity1">City</label>
+                            <div class='input-group'>
+
+                                <input type="text" class="form-control" id="exampleInputCity1" placeholder="Location">
+                                <span class="input-group-addon">
+                                    <span class="fa fa-thumb-tack"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleTextarea1">Textarea</label>
+                            <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="datepicker1"> DateFrom</label>
+                            <div class='input-group date' id='datepicker1'>
+
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="datepicker2">DateTo</label>
+                            <div class='input-group date' id='datepicker2'>
+
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                        <button class="btn btn-light">Cancel</button>
+</form>
             </div>
         </div>
     </div>
 
-</div>
 
+
+@section scripts
+{
 
     <script type="text/javascript">
+        $(function () {
+            $('#datepicker1').datepicker({
 
-        // console.log("fist Commit");
+                autoclose: true,
+                todayHighlight: true,
+            });
+            $('#datepicker2').datepicker({
 
+                autoclose: true,
+                todayHighlight: true,
+
+            });
+
+        });
     </script>
 
+}
 
