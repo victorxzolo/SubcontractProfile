@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frameworks", "Frameworks", "{3FEF74B5-E2E5-4CDB-ABBB-5EC4FE38FBC0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{3D390677-DC36-4F8B-98BE-A37671DA9F35}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{6D894F45-AE79-4471-973F-FEA7C2CF25C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Jobs", "Jobs", "{D4E02EAE-9B3A-45F1-8B09-D430D9B02177}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebServices", "WebServices", "{BB4E4148-C123-439F-A034-1ECE69F79824}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubcontractProfile.Entity", "Frameworks\SubcontractProfile.Entity\SubcontractProfile.Entity.csproj", "{EF126374-88DA-4D34-A08E-61477561EC41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubcontractProfile.Data", "Frameworks\SubcontractProfile.Data\SubcontractProfile.Data.csproj", "{1AB86E4C-6E24-4B00-ADB4-7AEA382FC95B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubcontractProfile.Web", "Presentation\Web\SubcontractProfile.Web\SubcontractProfile.Web.csproj", "{DD09371B-CD68-4582-BE43-8E53916F0C26}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF126374-88DA-4D34-A08E-61477561EC41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF126374-88DA-4D34-A08E-61477561EC41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF126374-88DA-4D34-A08E-61477561EC41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF126374-88DA-4D34-A08E-61477561EC41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AB86E4C-6E24-4B00-ADB4-7AEA382FC95B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AB86E4C-6E24-4B00-ADB4-7AEA382FC95B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AB86E4C-6E24-4B00-ADB4-7AEA382FC95B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AB86E4C-6E24-4B00-ADB4-7AEA382FC95B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD09371B-CD68-4582-BE43-8E53916F0C26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD09371B-CD68-4582-BE43-8E53916F0C26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD09371B-CD68-4582-BE43-8E53916F0C26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD09371B-CD68-4582-BE43-8E53916F0C26}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6D894F45-AE79-4471-973F-FEA7C2CF25C3} = {3D390677-DC36-4F8B-98BE-A37671DA9F35}
+		{D4E02EAE-9B3A-45F1-8B09-D430D9B02177} = {3D390677-DC36-4F8B-98BE-A37671DA9F35}
+		{EF126374-88DA-4D34-A08E-61477561EC41} = {3FEF74B5-E2E5-4CDB-ABBB-5EC4FE38FBC0}
+		{1AB86E4C-6E24-4B00-ADB4-7AEA382FC95B} = {3FEF74B5-E2E5-4CDB-ABBB-5EC4FE38FBC0}
+		{DD09371B-CD68-4582-BE43-8E53916F0C26} = {6D894F45-AE79-4471-973F-FEA7C2CF25C3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AAE0F65E-4D95-40BC-8145-94D4256281CD}
+	EndGlobalSection
+EndGlobal
