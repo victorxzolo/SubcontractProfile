@@ -1,216 +1,124 @@
-﻿@{
-    Layout = null;
+﻿
+@{
+Layout = "~/Views/Shared/_LayoutRegister.cshtml";
+
 }
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Include Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<div class="row justify-content-center">
+    <div class="grid-margin stretch-card col-md-12 ">
+        <div class="card shadow p-3 mb-5 bg-white rounded">
+            <div class="card-header bg-white">
+                <h1 class="card-title">ข้อมูลผู้สมัคร</h1>
+            </div>
+            <div class="card-body">
+                <div id="smartwizard">
+                    <ul>
+                        <li><a href="#step-1">Step 1</a></li>
+                        <li><a href="#step-2">Step 2</a></li>
+                        <li><a href="#step-3">Step 3</a></li>
+                        <li><a href="#step-4">Step 4</a></li>
+                        <li><a href="#step-5">Step 5</a></li>
+                    </ul>
+                    <div>
+                        <div id="step-1">
+                    
+                                @await Html.PartialAsync("_PartialStep1")
 
-    <!-- Include SmartWizard CSS -->
-    <link href="~/dist/css/smart_wizard.css" rel="stylesheet" type="text/css" />
+                   
 
-    <!-- Optional SmartWizard theme -->
-    <link href="~/dist/css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
 
-</head>
+                        </div>
+                        <div id="step-2">
 
-<body>
-    <style>
-        body {
-        margin-right:15px;
-        }
+                            @await Html.PartialAsync("_PartialStep2")
 
-    </style>
-    <div class="row">
-        <div class="clearfix" style="height:50px"></div>
-        <br />
-    </div>
-    <div class="container">
+                        </div>
+                        <div id="step-3">
 
-        <!-- SmartWizard html -->
-        <div id="smartwizard">
-            <ul>
-                <li><a href="#step-1">Step 1</a></li>
-                <li><a href="#step-2">Step 2</a></li>
-                <li><a href="#step-3">Step 3</a></li>
-                <li><a href="#step-4">Step 4</a></li>
-                <li><a href="#step-5">Step 5</a></li>
-            </ul>
+                            @await Html.PartialAsync("_PartialStep3")
 
-            <div>
-                <div id="step-1" class="">
-                    <h3 class="border-bottom border-gray pb-2">Step 1 Information</h3>
+                        </div>
+                        <div id="step-4">
 
-                    <div class="card">
-                        <div class="card-header">More Information</div>
-                        <div class="card-block p-0">
-                            <table class="table">
-                                <tbody>
-                                    <tr> <th>Name:</th> <td>Tim Smith</td> </tr>
-                                    <tr> <th>Email:</th> <td>example@example.com</td> </tr>
-                                </tbody>
-                            </table>
+                            @await Html.PartialAsync("_PartialStep4")
+
+                        </div>
+                        <div id="step-5">
+
+                            @await Html.PartialAsync("_PartialStep5")
+
+                        </div>
+                        <div>
+
                         </div>
                     </div>
-                </div>
-                <div id="step-2" class="">
-                    <h3 class="border-bottom border-gray pb-2">Step 2 Content</h3>
 
-                    <div class="card">
-                        <div class="card-header">More Content</div>
-                        <div class="card-block p-0">
-                            <table class="table">
-                                <tbody>
-                                    <tr> <th>Name:</th> <td>Tim Smith</td> </tr>
-                                    <tr> <th>Email:</th> <td>example@example.com</td> </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                 </div>
-                <div id="step-3" class="">
-                    <h3 class="border-bottom border-gray pb-2">Step 3 MoreDetail</h3>
-                    <div class="card">
-                        <div class="card-header">MoreDetail</div>
-                        <div class="card-block p-0">
-                            <table class="table">
-                                <tbody>
-                                    <tr> <th>Name:</th> <td>Tim Smith</td> </tr>
-                                    <tr> <th>Email:</th> <td>example@example.com</td> </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div id="step-4" class="">
-                    <h3 class="border-bottom border-gray pb-2">Step 4 Content</h3>
-                    <div class="card">
-                        <div class="card-header">My Details</div>
-                        <div class="card-block p-0">
-                            <table class="table">
-                                <tbody>
-                                    <tr> <th>Name:</th> <td>Tim Smith</td> </tr>
-                                    <tr> <th>Email:</th> <td>example@example.com</td> </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div id="step-5" class="">
-                    <h3 class="border-bottom border-gray pb-2">Step 5 Finish</h3>
-                    <div class="card">
-                        <div class="card-header">Finish</div>
-                        <div class="card-block p-0">
-                            <table class="table">
-                                <tbody>
-                                    <tr> <th>Name:</th> <td>Tim Smith</td> </tr>
-                                    <tr> <th>Email:</th> <td>example@example.com</td> </tr>
-                                    <tr> <th>Submit</th> <td>  <button class="btn btn-primary" id="nexts-btn" type="button">Submit</button></td> </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
 
     </div>
-
-    <div class="row">
-        <div class="clearfix" style="height:25px"></div>
-        <br />
-    </div>
-    <div class="row">
-
-        <div class="col-md-12 col-sm-12 ">
+</div>
 
 
-            <div role="group" class="float-right" style="margin-right:120px">
-                <button class="btn btn-secondary" id="prev-btn" type="button">Previous</button>
-                <button class="btn btn-secondary" id="next-btn" type="button">Next</button>
-                <button class="btn btn-danger" id="reset-btn" type="button">Reset</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Include jQuery -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
-
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-    <!-- Include SmartWizard JavaScript source -->
-    <script type="text/javascript" src="~/dist/js/jquery.smartWizard.min.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
+<script type="text/javascript">
+    $(document).ready(function () {
 
 
-            $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
-                //alert("You are on step "+stepNumber+" now");
-                if (stepPosition === 'first') {
-                    $("#prev-btn").addClass('disabled');
-                } else if (stepPosition === 'final') {
-                    $("#next-btn").addClass('disabled');
-                } else {
-                    $("#prev-btn").removeClass('disabled');
-                    $("#next-btn").removeClass('disabled');
-                }
-            });
+        $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
+            //alert("You are on step "+stepNumber+" now");
+            if (stepPosition === 'first') {
+                $("#prev-btn").addClass('disabled');
+            } else if (stepPosition === 'final') {
+                $("#next-btn").addClass('disabled');
+            } else {
+                $("#prev-btn").removeClass('disabled');
+                $("#next-btn").removeClass('disabled');
+            }
+        });
 
-            // Toolbar extra buttons
-            //var btnFinish = $('<button></button>').text('Finish')
-            //                                 .addClass('btn btn-info')
-            //                                 .on('click', function(){ alert('Finish Clicked'); });
-            //var btnCancel = $('<button></button>').text('Cancel')
-            //                                 .addClass('btn btn-danger')
-            //                                 .on('click', function(){ $('#smartwizard').smartWizard("reset"); });
-
-
-            // Smart Wizard
-            $('#smartwizard').smartWizard({
-                selected: 0,
-                theme: 'arrows',
-                transitionEffect: 'fade',
-                showStepURLhash: true,
+        // Toolbar extra buttons
+        //var btnFinish = $('<button></button>').text('Finish')
+        //                                 .addClass('btn btn-info')
+        //                                 .on('click', function(){ alert('Finish Clicked'); });
+        //var btnCancel = $('<button></button>').text('Cancel')
+        //                                 .addClass('btn btn-danger')
+        //                                 .on('click', function(){ $('#smartwizard').smartWizard("reset"); });
 
 
-            });
+        // Smart Wizard
+        $('#smartwizard').smartWizard({
+            selected: 0,
+            theme: 'arrows',
+            transitionEffect: 'fade',
+            showStepURLhash: true,
 
+
+        });
+
+        $('.sw-btn-group').hide();
+
+        // External Button Events
+        $("#reset-btn").on("click", function () {
+            // Reset wizard
+
+            $('#smartwizard').smartWizard("reset");
             $('.sw-btn-group').hide();
+            return true;
+        });
 
-            // External Button Events
-            $("#reset-btn").on("click", function () {
-                // Reset wizard
+        $("#prev-btn").on("click", function () {
+            // Navigate previous
+            $('#smartwizard').smartWizard("prev");
+            return true;
+        });
 
-                $('#smartwizard').smartWizard("reset");
-                $('.sw-btn-group').hide();
-                return true;
-            });
-
-            $("#prev-btn").on("click", function () {
-                // Navigate previous
-                $('#smartwizard').smartWizard("prev");
-                return true;
-            });
-
-            $("#next-btn").on("click", function () {
-                // Navigate next
-                $('#smartwizard').smartWizard("next");
-                return true;
-            });
+        $("#next-btn").on("click", function () {
+            // Navigate next
+            $('#smartwizard').smartWizard("next");
+            return true;
+        });
 
 
-        });</script>
-</body>
-</html>
-
-
+    });</script>
