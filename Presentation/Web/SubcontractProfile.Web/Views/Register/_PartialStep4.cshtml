@@ -1,4 +1,134 @@
 ﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+<div class="row my-3">
+    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <p class="font-weight-bolder lead">
+            ข้อมูล บัญชีธนาคาร
+        </p>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อธนาคาร :</label>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <input type="text" class="form-control form-control-sm" id="txtbankcode" placeholder="รหัสธนาคาร" />
+            </div>
+            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                <div class="input-group">
+                    <input type="text" class="form-control form-control-sm" id="txtbankname" placeholder="ชื่อธนาคาร">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อสาขา :</label>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <input type="text" class="form-control form-control-sm" id="txtbranchcode" placeholder="รหัสสาขา" />
+            </div>
+            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                <div class="input-group">
+                    <input type="text" class="form-control form-control-sm" id="txtbranchname" placeholder="ชื่อสาขา">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเภทบัญชี :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <select class="form-control form-control-sm" id="ddlaccounttype">
+                    <option>ออมทรัพย์</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เลขที่บัญชี :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtaccountnumber" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อบัญชี :</label>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <select class="form-control form-control-sm" id="ddlaccountname">
+                    <option></option>
+                </select>
+            </div>
+            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                <input type="text" class="form-control form-control-sm" id="txtaccountname" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเภทธุรกิจ :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtbusinesstype" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row my-3">
+    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <p class="font-weight-bolder lead">
+            ข้อมูล เอกสารบริษัท
+        </p>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือรับรองบริษัท :</label>
+            <input type="file" name="img[]" class="file-upload-default">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control file-upload-info form-control-sm" disabled>
+                <span class="input-group-append">
+                    <button class="file-upload-browse btn btn-secondary" type="button">Browse</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือทะเบียนพานิช :</label>
+            <input type="file" name="img[]" class="file-upload-default">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control file-upload-info form-control-sm" disabled>
+                <span class="input-group-append">
+                    <button class="file-upload-browse btn btn-secondary" type="button">Browse</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือ ภ.พ. 20. :</label>
+            <input type="file" name="img[]" class="file-upload-default">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control file-upload-info form-control-sm" disabled>
+                <span class="input-group-append">
+                    <button class="file-upload-browse btn btn-secondary" type="button">Browse</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

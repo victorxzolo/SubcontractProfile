@@ -1,25 +1,550 @@
 ﻿
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">ประเภทผู้สมัคร :</label>
-        <div class="col-sm-3">
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="membershipRadios" id="chknewsub" value="" checked>
-                    New Subcontract
-                </label>
+
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">ประเภทผู้สมัคร :</label>
+            <div class="col-sm-5">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="N">
+                        New Subcontract
+                    </label>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="membershipRadios" id="chkdealer" value="option2">
-                    Dealer
-                </label>
+            <div class="col-sm-4">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="D">
+                        Dealer
+                    </label>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
+<div id="divnewsubcontract" style="display:none;">
     <div class="form-group">
-        <div class="card-header bg-white">
-            <text class="card-title">ข้อมูลที่ตั้ง</text>
+        <div class="">
+            <p class="font-weight-bolder lead">
+                ข้อมูลช่องทาง
+            </p>
+            <hr />
         </div>
     </div>
+    <div class="row my-3">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Distribution Channel :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <select class="form-control form-control-sm" id="ddldistribution">
+                        <option>Channel1</option>
+                        <option>Channel2</option>
+                        <option>Channel3</option>
+                        <option>Channel4</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Channel Sale Group :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <select class="form-control form-control-sm" id="ddlchannelsalegroup">
+                        <option>Group1</option>
+                        <option>Group2</option>
+                        <option>Group3</option>
+                        <option>Group4</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+            <p class="font-weight-bolder lead">
+                ข้อมูลบริษัท
+            </p>
+            <hr />
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">เลขทะเบียนนิติบุคคล :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-sm" id="txtjuristicnew" placeholder="เลขทะเบียนนิติบุคคล" aria-label="เลขทะเบียนนิติบุคคล">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อย่อบริษัท :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txtbussinessnew"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(ไทย) :</label>
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <select class="form-control form-control-sm" id="ddlprefixnewT">
+                        <option>นาย</option>
+                        <option>นางสาว</option>
+                        <option>นาง</option>
+                    </select>
+                </div>
+                <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <input type="text" class="form-control form-control-sm" id="txtjuristicnewT" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(อังกฤษ) :</label>
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <select class="form-control form-control-sm" id="ddlprefixnewE">
+                        <option>Mr.</option>
+                        <option>Miss</option>
+                        <option>Mrs.</option>
+                    </select>
+                </div>
+                <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <input type="text" class="form-control form-control-sm" id="txtjuristicnewE" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อภาษีหัก ณ ที่จ่าย :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txttaxnew">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ภาษีมูลค่าเพิ่ม :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <div class="form-group row">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" id="chktaxnew" value="T" checked>
+                                ภาษีมูลค่าเพิ่ม
+                            </label>
+                        </div>
+
+
+                        <div class="form-check ml-4">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" id="chknottaxnew" value="E">
+                                ไม่มีภาษีมูลค่าเพิ่ม
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+            <p class="font-weight-bolder lead">
+                User Account
+            </p>
+            <hr />
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">User Name :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txtcreateuser" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Password :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txtcreatepass" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Confirm Password :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txtconfirmpass" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="divdealer">
+    <div class="form-group">
+        <div class="">
+            <p class="font-weight-bolder lead">
+                ข้อมูลที่ตั้ง
+            </p>
+            <hr />
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Location Code :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-sm" aria-label="Location Code" id="txtlocationcode">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-secondary" id="btnsearchlocation" type="button">
+                            <i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Distribution Channel :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txtdistribution" disabled />
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Location Name :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txtlocationname" disabled />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Channel Sale Group :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txtchannelsalegroup" disabled />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+            <p class="font-weight-bolder lead">
+                ข้อมูลบริษัท
+            </p>
+            <hr />
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">เลขทะเบียนนิติบุคคล :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" placeholder="เลขทะเบียนนิติบุคคล" aria-label="เลขทะเบียนนิติบุคคล" id="txtjuristicdealer" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อย่อบริษัท :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txtbussinessdealer" disabled />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(ไทย) :</label>
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <select class="form-control form-control-sm" id="ddlprefixdealerT">
+                        <option>นาย</option>
+                        <option>นางสาว</option>
+                        <option>นาง</option>
+                    </select>
+                </div>
+                <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <input type="text" class="form-control form-control-sm" id="txtjuristicdealerT" disabled/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(อังกฤษ) :</label>
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <select class="form-control form-control-sm"  id="ddlprefixdealerE">
+                        <option>Mr.</option>
+                        <option>Miss</option>
+                        <option>Mrs.</option>
+                    </select>
+                </div>
+                <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <input type="text" class="form-control form-control-sm" id="txtjuristicdealerE" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อภาษีหัก ณ ที่จ่าย :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txttaxdealer">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ภาษีมูลค่าเพิ่ม :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <div class="form-group row">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" id="chktaxdealer" value="T" checked>
+                                ภาษีมูลค่าเพิ่ม
+                            </label>
+                        </div>
+
+
+                        <div class="form-check ml-4">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" id="chknottaxdealer" value="E">
+                                ไม่มีภาษีมูลค่าเพิ่ม
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-lg" id="Searchlocation" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Location Search</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">ชื่อนิติบุคคล(ไทย) :</label>
+                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                <input type="text" class="form-control form-control-sm" id="txtjuristicTmodal" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">ชื่อนิติบุคคล(อังกฤษ) :</label>
+                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                <input type="text" class="form-control form-control-sm" id="txtjuristicEmodal" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">ชื่อย่อบริษัท :</label>
+                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                <input type="text" class="form-control form-control-sm" id="txtbussinessmodal" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">รหัสบริษัท :</label>
+                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                <input type="text" class="form-control form-control-sm" id="txtbussinesscodemodal" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Location Name(TH) :</label>
+                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                <input type="text" class="form-control form-control-sm" id="txtlocationnameTHmodal" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Location Name(TH) :</label>
+                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                <input type="text" class="form-control form-control-sm" id="txtlocationnameTHmodal" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Location Code :</label>
+                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                <input type="text" class="form-control form-control-sm" id="txtlocationcodemodal" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Distribution Channel :</label>
+                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                <input type="text" class="form-control form-control-sm" id="txtdistributionmodal" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                        <div class="d-flex align-items-center justify-content-center h-100" role="group">
+                            <button class="btn btn-secondary mr-2" id="rbtnresetlocationmodal" type="button">รีเช็ต</button>
+                            <button class="btn btn-info" id="btnsearchlocationmodal" type="button">ค้นหา</button>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                        <div class="table-responsive pt-3">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>ชื่อบริษัท</th>
+                                        <th>Location Code</th>
+                                        <th>Location Name</th>
+                                        <th>Distribution Channel</th>
+                                        <th>Channel Sale Group</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                        <nav aria-label="...">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <span class="page-link">Previous</span>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item active">
+                                    <span class="page-link">
+                                        2
+                                        <span class="sr-only">(current)</span>
+                                    </span>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">ตกลง</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+
+        $('#btnsearchlocation').click(function () {
+            $('#Searchlocation').modal('show');
+        });
+        $("#chktype").on("change", function () {
+            debugger;
+            if ($(this).attr("value") == "N") {
+                $("#divdealer").hide('slow');
+                $('#divnewsubcontract').show('slow');
+            }
+            else if ($(this).attr("value") == "D") {
+                $("#divnewsubcontract").hide('slow');
+                $("#divdealer").show('slow');
+            }
+        })
+     
+      
+    });
+</script>

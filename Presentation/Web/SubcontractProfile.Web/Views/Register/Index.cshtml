@@ -1,17 +1,22 @@
 ﻿
 @{
-Layout = "~/Views/Shared/_LayoutRegister.cshtml";
+    Layout = "~/Views/Shared/_LayoutRegister.cshtml";
 
 }
 
 <div class="row justify-content-center">
     <div class="grid-margin stretch-card col-md-12 ">
         <div class="card shadow p-3 mb-5 bg-white rounded">
-            <div class="card-header bg-white">
-                <h1 class="card-title">ข้อมูลผู้สมัคร</h1>
+            <div class="form-group my-4">
+                <div class="card-header bg-white">
+                    <h3>ข้อมูลผู้สมัคร</h3>
+                </div>
             </div>
+
             <div class="card-body">
-                <div id="smartwizard">
+
+                @*<div class="form-group">*@
+                <div id="smartwizard" >
                     <ul>
                         <li><a href="#step-1">Step 1</a></li>
                         <li><a href="#step-2">Step 2</a></li>
@@ -21,11 +26,8 @@ Layout = "~/Views/Shared/_LayoutRegister.cshtml";
                     </ul>
                     <div>
                         <div id="step-1">
-                    
-                                @await Html.PartialAsync("_PartialStep1")
 
-                   
-
+                            @await Html.PartialAsync("_PartialStep1")
 
                         </div>
                         <div id="step-2">
@@ -55,6 +57,20 @@ Layout = "~/Views/Shared/_LayoutRegister.cshtml";
 
                 </div>
 
+
+
+            </div>
+            <div class="row">
+
+                <div class="col-md-12 col-sm-12 ">
+
+
+                    <div role="group" class="float-right" style="margin-right:120px">
+                        <button class="btn btn-secondary" id="prev-btn" type="button">ย้อนกลับ</button>
+                        <button class="btn btn-danger" id="reset-btn" type="button">ล้างข้อมูล</button>
+                        <button class="btn btn-success" id="next-btn" type="button">ถัดไป</button>
+                    </div>
+                </div>
             </div>
         </div>
 

@@ -13,11 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Jobs", "Jobs", "{D4E02EAE-9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebServices", "WebServices", "{BB4E4148-C123-439F-A034-1ECE69F79824}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubcontractProfile.Entity", "Frameworks\SubcontractProfile.Entity\SubcontractProfile.Entity.csproj", "{EF126374-88DA-4D34-A08E-61477561EC41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubcontractProfile.Entity", "Frameworks\SubcontractProfile.Entity\SubcontractProfile.Entity.csproj", "{EF126374-88DA-4D34-A08E-61477561EC41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubcontractProfile.Data", "Frameworks\SubcontractProfile.Data\SubcontractProfile.Data.csproj", "{1AB86E4C-6E24-4B00-ADB4-7AEA382FC95B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubcontractProfile.Data", "Frameworks\SubcontractProfile.Data\SubcontractProfile.Data.csproj", "{1AB86E4C-6E24-4B00-ADB4-7AEA382FC95B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubcontractProfile.Web", "Presentation\Web\SubcontractProfile.Web\SubcontractProfile.Web.csproj", "{DD09371B-CD68-4582-BE43-8E53916F0C26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubcontractProfile.Web", "Presentation\Web\SubcontractProfile.Web\SubcontractProfile.Web.csproj", "{DD09371B-CD68-4582-BE43-8E53916F0C26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
