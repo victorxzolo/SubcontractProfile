@@ -156,11 +156,34 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="@Url.Action("Index", "Register")" class="nav-link">
+                    <a href="@Url.Action("Index", "Account")" class="nav-link">
                         <i class="fa fa-registered menu-icon" aria-hidden="true"></i>
                         <span class="menu-title">Register</span>
 
                     </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#registrationmenu" aria-expanded="false" aria-controls="registrationmenu">
+                        <i class="fa fa-tasks menu-icon"></i>
+                        <span class="menu-title">Registration</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="registrationmenu">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a href="@Url.Action("SearchCompanyVerify", "Registration")" class="nav-link">
+                                    Company Verify
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("ActivateProfile", "Registration")" class="nav-link">
+                                    Activate Profile
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+
                 </li>
             </ul>
         </nav>
