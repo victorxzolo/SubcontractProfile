@@ -1,0 +1,312 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="form-group my-4">
+    <div class="card-header bg-white">
+        <p class="font-weight-bolder lead">Search Activate Profile</p>
+    </div>
+</div>
+<div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-left">Register Type :</label>
+                        <div class="col-sm-2">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="N" checked>
+                                    ALL
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="D">
+                                    New Subcontract
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="D">
+                                    Dealer
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Company name :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtcompanyname" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Tax ID :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txttaxid" />
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Register Date From :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <div class='input-group date' id='regisdatefrom'>
+                                <input type='text' class="form-control form-control-sm" />
+                                <span class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Register Date To :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <div class='input-group date' id='regisdateto'>
+                                <input type='text' class="form-control form-control-sm" />
+                                <span class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Activate Date From :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <div class='input-group date' id='activatedatefrom'>
+                                <input type='text' class="form-control form-control-sm" />
+                                <span class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Activate Date To :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <div class='input-group date' id='ractivatedateto'>
+                                <input type='text' class="form-control form-control-sm" />
+                                <span class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Activate Status :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <select class="form-control form-control-sm" id="ddlActivateStatus">
+                                <option>Active</option>
+                                <option>Not Active</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <div class="d-flex align-items-center justify-content-center h-100" role="group">
+                        <button class="btn btn-secondary mr-2" id="btnclear" type="button">Clear</button>
+                        <button class="btn btn-success" id="btnSearch" type="button">Search</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <div class="" role="group">
+                        <button class="btn btn-success float-right" id="btnactivateprofile" type="button">
+                            Activate Profile
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <p class="font-weight-bolder lead">
+                        Search Result
+                    </p>
+                    <hr />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="thead-light text-center" >
+                                <tr>
+                                    <th scope="col" class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                
+                                           @*<input type="checkbox" class="form-check-input" name="optionsRadios" id="chktype" value="A">*@
+                                        <input type="checkbox" class="select-all checkbox" name="select-all" />
+                                    </th>
+                                    <th scope="col">Company Verify Status</th>
+                                    <th scope="col">Training Staus</th>
+                                    <th scope="col">Payment Status</th>
+                                    <th scope="col">Tax ID</th>
+                                    <th scope="col">Cpmpaby Name</th>
+                                    <th scope="col">Company Address</th>
+                                    <th scope="col">Contract Email</th>
+                                    <th scope="col">Contract Phone</th>
+                                    <th scope="col">Register Date</th>
+                                    <th scope="col">Training Date</th>
+                                    <th scope="col">Activate Date</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">
+                                        <input type="checkbox" class="select-item checkbox" name="select-item" value="1" />
+                                    </td>
+                                    <td>Approve</td>
+                                    <td>Active</td>
+                                    <td>Paid</td>
+                                    <td>1111111111111</td>
+                                    <td>บริษัท xxx จำกัด</td>
+                                    <td>xxxxxxxxx</td>
+                                    <td>xxxx@xxxx.com</td>
+                                    <td>0000000000</td>
+                                    <td>10/05/2020</td>
+                                    <td>10/05/2020</td>
+                                    <td>10/05/2020</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <input type="checkbox" class="select-item checkbox" name="select-item" value="2" />
+                                    </td>
+                                    <td>Approve</td>
+                                    <td>Active</td>
+                                    <td>Paid</td>
+                                    <td>2222222222222</td>
+                                    <td>บริษัท zzz จำกัด</td>
+                                    <td>xxxxxxxx</td>
+                                    <td>xxxx@xx.com</td>
+                                    <td>2223334444</td>
+                                    <td>10/05/2020</td>
+                                    <td>10/05/2020</td>
+                                    <td>10/05/2020</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <span class="page-link">Previous</span>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active">
+                                <span class="page-link">
+                                    2
+                                    <span class="sr-only">(current)</span>
+                                </span>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts
+{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#regisdatefrom').datepicker({
+
+                autoclose: true,
+                todayHighlight: true,
+            });
+            $('#regisdateto').datepicker({
+
+                autoclose: true,
+                todayHighlight: true,
+
+            });
+            $('#activatedatefrom').datepicker({
+
+                autoclose: true,
+                todayHighlight: true,
+            });
+            $('#ractivatedateto').datepicker({
+
+                autoclose: true,
+                todayHighlight: true,
+
+            });
+
+            $("input.select-all").click(function () {
+                var checked = this.checked;
+                $("input.select-item").each(function (index, item) {
+                    item.checked = checked;
+                });
+            });
+
+            $("input.select-item").click(function () {
+                var checked = this.checked;
+                var all = $("input.select-all")[0];
+                var total = $("input.select-item").length;
+                var len = $("input.select-item:checked:checked").length;
+                all.checked = len === total;
+            });
+
+            $('#btnactivateprofile').click(function () {
+                showFeedback("light", 'Are you sure confrim activate profile?', "Information",
+                    " <button type='button' class='btn btn-success' id='btnconfrim'>OK</button>\
+                      <button type = 'button' class= 'btn btn-secondary' data-dismiss='modal' id='btncancelpopup'>Cancel</button >");
+            });
+        });
+        
+    </script>
+
+}

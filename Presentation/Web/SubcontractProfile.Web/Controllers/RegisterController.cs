@@ -8,7 +8,7 @@ namespace SubcontractProfile.Web.Controllers
 {
     public class RegisterController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index2()
         {
             return View();
         }

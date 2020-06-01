@@ -6,14 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SubcontractProfile.Web.Controllers
 {
-    public class AccountController : Controller
+    public class RegistrationController : Controller
     {
-        public IActionResult Login()
+       
+        public IActionResult ActivateProfile()
         {
             return View();
         }
-
-        public IActionResult Index()
+        public IActionResult SearchCompanyVerify()
+        {
+            return View();
+        }
+        public IActionResult CompanyVerify(int id)
         {
             return View();
         }

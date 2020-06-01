@@ -49,17 +49,17 @@
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+
+                <div>
+                    <a class="navbar-brand brand-logo" href="index.html"> <img src="~/img/ais.png" style="height:39px;width:104px;" class="mr-2" alt="logo" /></a>
+
+                </div>
                 <button class="navbar-toggler navbar-toggler hidden-xs-down align-self-center " type="button" data-toggle="minimize">
                     <span class="fa fa-align-justify"></span>
                 </button>
                 <button class="navbar-toggler navbar-toggler-left d-lg-none align-self-center" type="button" data-toggle="offcanvas">
                     <span class="fa fa-align-justify"></span>
                 </button>
-                <div>
-                    <a class="navbar-brand brand-logo mr-5" href="index.html"> <img src="~/img/ais.png" style="height:39px;width:104px;" class="mr-2" alt="logo" /></a>
-
-                </div>
-              
 
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -94,7 +94,7 @@
                         </div>
                     </li>
                 </ul>
-                
+
             </div>
         </nav>
     </div>
@@ -196,7 +196,23 @@
     </div>
 
 
+    <div class="modal fade" id="MessageFeedbackPopUp" tabindex="-1" role="dialog" aria-labelledby="MessageFeedbackPopUpLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" id="headerMessageFeedback">
+                    <h4 class="modal-title" id="MessageFeedbackPopUpLabel">Notification</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
+                </div>
+                <div class="modal-body">
+                    <label id="lbMessageFeedback"></label>
+                </div>
+                <div class="modal-footer">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     @*<footer class="border-top footer text-muted">
@@ -209,7 +225,7 @@
 
 
     <script src="~/jquery/jquery.js"></script>
-  
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 
 
@@ -239,7 +255,7 @@
     }
 
 
-    function showFeedback(type, msg, title) {
+    function showFeedback(type, msg, title, footer) {
         //if (msg !== "") {
         $("#headerMessageFeedback").removeClass();
         $("#headerMessageFeedback").addClass("modal-header");
@@ -248,13 +264,17 @@
         else if (type === "info") { $("#headerMessageFeedback").addClass("btn-info"); }
         else if (type === "warning") { $("#headerMessageFeedback").addClass("btn-warning"); }
         else if (type === "error") { $("#headerMessageFeedback").addClass("btn-danger"); }
+        else if (type === "light") { $("#headerMessageFeedback").addClass("btn-light"); }
+        else if (type === "secondary") { $("#headerMessageFeedback").addClass("btn-secondary"); }
         else { $("#headerMessageFeedback").addClass("btn-default"); }
 
         if (title !== undefined) $("#MessageFeedbackPopUpLabel").text(title); else $("#MessageFeedbackPopUpLabel").text("Notification");
 
 
         $("#lbMessageFeedback").html(msg);
-
+        if (footer != "") {
+            $('.modal-footer').html(footer)
+        }
         $("#MessageFeedbackPopUp").modal('show');
         //}
     }

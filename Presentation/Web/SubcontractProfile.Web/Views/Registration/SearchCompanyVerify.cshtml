@@ -1,0 +1,320 @@
+﻿@{
+    //Layout = "~/Views/Shared/_LayoutRegister.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="form-group my-4">
+    <div class="card-header bg-white">
+        <p class="font-weight-bolder lead">Search Company Verify</p>
+    </div>
+</div>
+<div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-left">Register Type :</label>
+                        <div class="col-sm-2">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="N" checked>
+                                    ALL
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="D">
+                                    New Subcontract
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="D">
+                                    Dealer
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Tax ID :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txttaxid" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Company name :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtcompanyname" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Distribution Channel :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <select class="form-control form-control-sm" id="ddldistribution">
+                                <option>Channel1</option>
+                                <option>Channel2</option>
+                                <option>Channel3</option>
+                                <option>Channel4</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Channel Sale Group :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <select class="form-control form-control-sm" id="ddlchannelsalegroup">
+                                <option>Group1</option>
+                                <option>Group2</option>
+                                <option>Group3</option>
+                                <option>Group4</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Register Date From :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <div class='input-group date' id='regisdatefrom'>
+                                <input type='text' class="form-control form-control-sm" />
+                                <span class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Register Date To :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <div class='input-group date' id='regisdateto'>
+                                <input type='text' class="form-control form-control-sm" />
+                                <span class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Vender Code :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtvendercode" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Status :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <select class="form-control form-control-sm" id="ddlStatus">
+                                <option>Waiting</option>
+                                <option>Approve</option>
+                                <option>Not Approve</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <div class="d-flex align-items-center justify-content-center h-100" role="group">
+                        <button class="btn btn-secondary mr-2" id="btnclear" type="button">Clear</button>
+                        <button class="btn btn-success" id="btnSearch" type="button">Search</button>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <div class="" role="group">
+                        <button class="btn btn-success float-right" id="btnverifycompany" type="button"
+                                onclick="location.href='@Url.Action("CompanyVerify", "Registration" ,new {id=1 })'">Verify Company</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <p class="font-weight-bolder lead">
+                        Search Result
+                    </p>
+                    <hr />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Select</th>
+                                    <th>Status</th>
+                                    <th>Register Type</th>
+                                    <th>Tax ID</th>
+                                    <th>Company Name (TH)</th>
+                                    <th>Cpmpaby Name (EN)</th>
+                                    <th>Vender Code</th>
+                                    <th>Distribution Channel</th>
+                                    <th>Channel Sale Group</th>
+                                    <th>Register Date</th>
+                                    <th>Verify Date</th>
+                                    <th>Verify By</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">
+                                
+                                            <input type="radio" class="form-check-input position-static" name="optionsRadios" id="chktype" value="1" checked>
+                                       
+                                    </td>
+                                    <td>Waiting</td>
+                                    <td>New Sub</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        
+                                            <input type="radio" class="form-check-input position-static" name="optionsRadios" id="chktype" value="2" checked>
+                                        
+                                    </td>
+                                    <td>Approve</td>
+                                    <td>Dealer</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <span class="page-link">Previous</span>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active">
+                                <span class="page-link">
+                                    2
+                                    <span class="sr-only">(current)</span>
+                                </span>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section scripts
+{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#regisdatefrom').datepicker({
+
+                autoclose: true,
+                todayHighlight: true,
+            });
+            $('#regisdateto').datepicker({
+
+                autoclose: true,
+                todayHighlight: true,
+
+            });
+
+            //$('#btnverifycompany').click(function () {
+            //    $.ajax({
+            //        type: "POST",
+            //        url: "/Registration/CompanyVerify",
+            //        data: {
+            //            id: 1
+            //        },
+            //        dataType: "json",
+            //        async: false,
+            //        success: function (response) {
+                       
+
+            //        },
+            //        error: function (response) {
+            //            console.log(response)
+            //        }
+            //    });
+            //});
+        });
+    </script>
+
+}

@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+    <div class="form-group my-4">
+        <div class="card-header bg-white">
+            <p class="font-weight-bolder lead">Company Verify</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header bg-white">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" id="action-tab" href="#tabaction" data-toggle="tab"  role="tab" aria-controls="action" aria-selected="true">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="location-tab" href="#tablocation" data-toggle="tab" role="tab" aria-controls="location" aria-selected="false">Location</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="team-tab" href="#tateam" data-toggle="tab"  role="tab" aria-controls="team" aria-selected="false">Team</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="engineer-tab" href="#tabengineer" data-toggle="tab"  role="tab" aria-controls="engineer" aria-selected="false">Engineer</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body tab-content">
+            <div class="tab-pane fade show active" id="tabaction" role="tabpanel" aria-labelledby="action-tab">
+                @await Html.PartialAsync("_PartialAction")
+            </div>
+            <div class="tab-pane fade" id="tablocation" role="tabpanel" aria-labelledby="aloction-tab">
+                @await Html.PartialAsync("_PartialLocation")
+            </div>
+            <div class="tab-pane fade" id="tateam" role="tabpanel" aria-labelledby="team-tab">
+                @await Html.PartialAsync("_PartialTeam")
+            </div>
+            <div class="tab-pane fade" id="tabengineer" role="tabpanel" aria-labelledby="engineer-tab">
+                @await Html.PartialAsync("_PartialEngineer")
+            </div>
+        </div>
+      
+    </div>

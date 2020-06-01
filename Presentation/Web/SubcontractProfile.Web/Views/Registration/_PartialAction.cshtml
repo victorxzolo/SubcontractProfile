@@ -1,0 +1,803 @@
+﻿
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row mb-0">
+            <label class="col-sm-3 col-form-label">ประเภทผู้สมัคร :</label>
+            <div class="col-sm-5">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="N" checked disabled>
+                        New Subcontract
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="D" disabled>
+                        Dealer
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Distribution Channel :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <select class="form-control form-control-sm" id="ddldistribution">
+                    <option>Channel1</option>
+                    <option>Channel2</option>
+                    <option>Channel3</option>
+                    <option>Channel4</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Channel Sale Group :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <select class="form-control form-control-sm" id="ddlchannelsalegroup">
+                    <option>Group1</option>
+                    <option>Group2</option>
+                    <option>Group3</option>
+                    <option>Group4</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <p class="font-weight-bolder lead">
+            ข้อมูลบริษัท
+        </p>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">เลขทะเบียนนิติบุคคล :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <div class="input-group">
+                    <input type="text" class="form-control form-control-sm" id="txtjuristicnew" placeholder="เลขทะเบียนนิติบุคคล" aria-label="เลขทะเบียนนิติบุคคล">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อย่อบริษัท :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtbussinessnew" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(ไทย) :</label>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <select class="form-control form-control-sm" id="ddlprefixnewT">
+                    <option>นาย</option>
+                    <option>นางสาว</option>
+                    <option>นาง</option>
+                </select>
+            </div>
+            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                <input type="text" class="form-control form-control-sm" id="txtjuristicnewT" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(อังกฤษ) :</label>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <select class="form-control form-control-sm" id="ddlprefixnewE">
+                    <option>Mr.</option>
+                    <option>Miss</option>
+                    <option>Mrs.</option>
+                </select>
+            </div>
+            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                <input type="text" class="form-control form-control-sm" id="txtjuristicnewE" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อภาษีหัก ณ ที่จ่าย :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txttaxnew">
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ภาษีมูลค่าเพิ่ม :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <div class="form-group row">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" id="chktaxnew" value="T" checked>
+                            ภาษีมูลค่าเพิ่ม
+                        </label>
+                    </div>
+
+
+                    <div class="form-check ml-4">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" id="chknottaxnew" value="E">
+                            ไม่มีภาษีมูลค่าเพิ่ม
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="row my-3">
+    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <p class="font-weight-bolder lead">
+            ข้อมูลที่อยู่บริษัท
+        </p>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">ประเภทที่อยู่</label>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <div class="form-group row">
+            <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="optionsRadios" id="chktype" value="N">
+                        ที่อยู่ตามที่ตั้งสาขา
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="optionsRadios" id="chktype" value="D">
+                        ที่อยู่ตามใบกำกับภาษี
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="optionsRadios" id="chktype" value="D">
+                        ที่อยู่ตาม W/T
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                <button class="btn btn-secondary btn-sm" id="btndeleteaddress" type="button">ลบ</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <div class="form-group row">
+            <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="optionsRadios" id="chktype" value="N">
+                        ที่อยู่จัดส่งเอกสาร
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="optionsRadios" id="chktype" value="D">
+                        ที่อยู่จัดส่งสินค้า
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="optionsRadios" id="chktype" value="D">
+                        ที่อยู่จัดส่ง POP
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเทศ :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <select class="form-control form-control-sm" id="ddlcountry">
+                    <option>Thailand</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">รหัสไปรษณีย์ :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <select class="form-control form-control-sm" id="ddlzipcode">
+                    <option>12120</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เลขที่ :</label>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                <input type="text" class="form-control form-control-sm" id="txthomenumber" />
+            </div>
+            <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">หมู่ที่ :</label>
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                <input type="text" class="form-control form-control-sm" id="txtVillageNo" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">หมู่บ้าน :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtvillage" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อาคาร :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtbuilding" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชั้น :</label>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <input type="text" class="form-control form-control-sm" id="txtfloor" />
+            </div>
+            <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">ห้อง :</label>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <input type="text" class="form-control form-control-sm" id="txtroom" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ซอย :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtsoi" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ถนน :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtroad" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ตำบล/แขวง :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <select class="form-control form-control-sm" id="ddlsubdistrict">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อำเภอ/เขต :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <select class="form-control form-control-sm" id="ddldistrict">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">จังหวัด :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <select class="form-control form-control-sm" id="ddlprovince">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ภาค :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <select class="form-control form-control-sm" id="ddlzone">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <div class="d-flex align-items-center justify-content-center h-100" role="group">
+            <button class="btn btn-secondary mr-2" id="btnresetaddress" type="button">รีเช็ต</button>
+            <button class="btn btn-secondary" id="btnaddaddress" type="button">เพิ่มที่อยู่</button>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+    <div class="col-md-10 col-sm-10 col-xl-10 col-lg-10">
+        <div class="table-responsive pt-3">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th>ประเภทที่อยู่</th>
+                        <th>ที่อยู่</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ที่อยู่ตามใบกำกับภาษี</td>
+                        <td>34/203 หมู่บ้านภัสสร ต.คลองสาม อ.คลองหวงง จ.ปทุมธานี 12120</td>
+                        <td><button class="btn btn-secondary btn-sm">แก้ไข</button></td>
+                        <td><button class="btn btn-secondary btn-sm">ลบ</button></td>
+                    </tr>
+                    <tr>
+                        <td>ที่อยู่จัดส่งเอกสาร</td>
+                        <td>34/203 หมู่บ้านภัสสร ต.คลองสาม อ.คลองหวงง จ.ปทุมธานี 12120</td>
+                        <td><button class="btn btn-secondary btn-sm">แก้ไข</button></td>
+                        <td><button class="btn btn-secondary btn-sm">ลบ</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+    <div class="col-md-10 col-sm-10 col-xl-10 col-lg-10">
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item">
+                    <span class="page-link">Previous</span>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active">
+                    <span class="page-link">
+                        2
+                        <span class="sr-only">(current)</span>
+                    </span>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</div>
+
+<div class="row my-3">
+    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <p class="font-weight-bolder lead">
+            ข้อมูล ติดต่อบริษัท
+        </p>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อีเมล์ บริษัท :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtemailbussiness">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อผู้ติดต่อ :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtjuristicdealer">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อีเมล์ :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtemail">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เบอร์ไทร :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtbussinessdealer" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <p class="font-weight-bolder lead">
+            ข้อมูล ติดต่อแผนก
+        </p>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 text-left">
+        <p class="font-weight-bolder lead">
+            แผนกติดตั้ง
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อผู้ติดต่อ :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtjuristicdealer">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เบอร์ไทร :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtbussinessdealer" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อีเมล์ :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtemail">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 text-left">
+        <p class="font-weight-bolder lead">
+            แผนกซ่อมบำรุง
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อผู้ติดต่อ :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtjuristicdealer">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เบอร์ไทร :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtbussinessdealer" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อีเมล์ :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtemail">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 text-left">
+        <p class="font-weight-bolder lead">
+            แผนกบัญชี
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อผู้ติดต่อ :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtjuristicdealer">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เบอร์ไทร :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtbussinessdealer" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อีเมล์ :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtemail">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <p class="font-weight-bolder lead">
+            ข้อมูล บัญชีธนาคาร
+        </p>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อธนาคาร :</label>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <input type="text" class="form-control form-control-sm" id="txtbankcode" placeholder="รหัสธนาคาร" />
+            </div>
+            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                <div class="input-group">
+                    <input type="text" class="form-control form-control-sm" id="txtbankname" placeholder="ชื่อธนาคาร">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อสาขา :</label>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <input type="text" class="form-control form-control-sm" id="txtbranchcode" placeholder="รหัสสาขา" />
+            </div>
+            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                <div class="input-group">
+                    <input type="text" class="form-control form-control-sm" id="txtbranchname" placeholder="ชื่อสาขา">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเภทบัญชี :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <select class="form-control form-control-sm" id="ddlaccounttype">
+                    <option>ออมทรัพย์</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เลขที่บัญชี :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtaccountnumber" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อบัญชี :</label>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <select class="form-control form-control-sm" id="ddlaccountname">
+                    <option></option>
+                </select>
+            </div>
+            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                <input type="text" class="form-control form-control-sm" id="txtaccountname" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเภทธุรกิจ :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <input type="text" class="form-control form-control-sm" id="txtbusinesstype" />
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">BookBank Attach File :</label>
+            <input type="file" name="img[]" class="file-upload-default">
+            <div class="ccol-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-5">
+                <input type="text" class="form-control file-upload-info form-control-sm" disabled>
+                <span class="input-group-append">
+                    <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <p class="font-weight-bolder lead">
+            ข้อมูล เอกสารบริษัท
+        </p>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือรับรองบริษัท :</label>
+            <input type="file" name="img[]" class="file-upload-default">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
+                <input type="text" class="form-control file-upload-info form-control-sm" disabled>
+                <span class="input-group-append">
+                    <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือทะเบียนพานิช :</label>
+            <input type="file" name="img[]" class="file-upload-default">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
+                <input type="text" class="form-control file-upload-info form-control-sm" disabled>
+                <span class="input-group-append">
+                    <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือ ภ.พ. 20 :</label>
+            <input type="file" name="img[]" class="file-upload-default">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
+                <input type="text" class="form-control file-upload-info form-control-sm" disabled>
+                <span class="input-group-append">
+                    <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <p class="font-weight-bolder lead">
+            สำหรับเจ้าหน้าที่ AIS
+        </p>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Contract Start Date :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <div class='input-group date' id='contractstartdate'>
+                    <input type='text' class="form-control form-control-sm" />
+                    <span class="input-group-addon">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Contract End Date :</label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <div class='input-group date' id='contractenddate'>
+                    <input type='text' class="form-control form-control-sm" />
+                    <span class="input-group-addon">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <div class="d-flex align-items-center justify-content-center h-100" role="group">
+            <button class="btn btn-secondary mr-2" id="rbtnresetlocationmodal" type="button">Back</button>
+            <button class="btn btn-warning mr-2" id="btnsearchlocationmodal" type="button">Not Approve</button>
+            <button class="btn btn-success" id="btnsearchlocationmodal" type="button">Approve</button>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+@section scripts
+{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#contractstartdate').datepicker({
+
+                autoclose: true,
+                todayHighlight: true,
+            });
+            $('#contractenddate').datepicker({
+
+                autoclose: true,
+                todayHighlight: true,
+
+            });
+        });
+    </script>
+
+}
