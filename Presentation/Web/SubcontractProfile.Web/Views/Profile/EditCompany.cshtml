@@ -1,0 +1,558 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+    <style>
+        .form-control {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }
+        .btn-default {
+            color: #8DC63F; /*before color #74a333*/
+            background-color: #DDE1E4;
+            border-color: #ccc;
+        }
+    </style>
+
+    <body>
+        <h3>Edit Company</h3>
+        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>Register Type</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="radio" id="1" name="type" value="new">
+                    <label for="new">New Subcontract</label>&nbsp;&nbsp;
+                    <input type="radio" id="2" name="type" value="deal">
+                    <label for="deal">Dealer</label>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>Distribution Channel :</label>
+                </div>
+                <div class="col-sm-4">
+                    <select id="Distribution" name="Distribution" style="width:300px">
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <label>Channel Sale Group :</label>
+                </div>
+                <div class="col-sm-4">
+                    <select id="Channel" name="Channel" style="width:300px">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <h4><label style="color:#8DC63F">ข้อมูลบริษัท</label></h4>
+        <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>เลขทะเบียนนิติบุคคล</label>
+                    <label style="color:red">*</label>
+                    <label>:</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="1" style="width:300px" class="form-control">
+                </div>
+                <div class="col-sm-2">
+                    <label>ชื่อบริษัท</label>
+                    <label style="color:red">*</label>
+                    <label>&nbsp;:</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="2" style="width:300px" class="form-control">
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>ชื่อนิติบุคคล(ไทย)</label>
+                    <label style="color:red">*</label>
+                    <label>&nbsp;:</label>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row col-sm-12">
+                        <select id="1" name="1" style="width:90px">
+                        </select>&nbsp;&nbsp;
+                        <input type="text" id="3" style="width:200px" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label>ชื่อนิติบุคคล(อังกฤษ)</label>
+                    <label style="color:red">*</label>
+                    <label>:</label>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row col-sm-12">
+                        <select id="2" name="2" style="width:90px">
+                        </select>&nbsp;&nbsp;
+                        <input type="text" id="4" style="width:200px" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>ชื่อภาษ๊หัก ณ ที่จ่าย</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="5" style="width:300px" class="form-control">
+                </div>
+                <div class="col-sm-2">
+                    <label>ภาษีมูลค่าเพิ่ม</label>
+                    <label style="color:red">*</label>
+                    <label>&nbsp;:</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="radio" id="3" name="type" value="1">
+                    <label for="1">ภาษีมูลค่าเพิ่ม</label>&nbsp;&nbsp;
+                    <input type="radio" id="4" name="type" value="2">
+                    <label for="2">ไม่มีภาษีมูลค่าเพิ่ม</label>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <h4><label style="color:#8DC63F">ข้อมูลที่อยู่บริษัท</label></h4>
+        <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label>ประเภทที่อยู่</label>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-1">
+
+                </div>
+                <div class="col-sm-3">
+                    <input id="Checkbox1" type="checkbox" value="1" />
+                    <label>ที่อยู่ตามที่ตั้งสาขา</label><br />
+                    <input id="Checkbox2" type="checkbox" value="2" />
+                    <label>ที่อยู่จัดส่งเอกสาร</label>
+                </div>
+                <div class="col-sm-3">
+                    <input id="Checkbox3" type="checkbox" value="3" />
+                    <label>ที่อยู่ตามใบกำกับภาษี</label><br />
+                    <input id="Checkbox4" type="checkbox" value="4" />
+                    <label>ที่อยู่จัดส่งสินค้า</label>
+                </div>
+                <div class="col-sm-3">
+                    <input id="Checkbox5" type="checkbox" value="5" />
+                    <label>ที่อยู่ตาม W/T</label><br />
+                    <input id="Checkbox5" type="checkbox" value="5" />
+                    <label>ที่อยู่จักส่ง POP</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="button" id="btnDel" value="Delete" width="100" />
+                </div>
+
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>ประเทศ :</label>
+                </div>
+                <div class="col-sm-4">
+                    <select id="country" name="country" style="width:300px">
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <label>รหัสไปรษณีย์ :</label>
+                </div>
+                <div class="col-sm-4">
+                    <select id="portcode" name="portcode" style="width:300px">
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>เลขที่ :</label>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row col-sm-12">
+                        <input type="text" id="6" style="width:120px" class="form-control">
+                        <label>&nbsp;&nbsp;&nbsp;&nbsp;หมู่ที่ :</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" id="7" style="width:110px" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label>หมู่บ้าน :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="8" style="width:300px" class="form-control">
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>อาคาร :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="9" style="width:300px" class="form-control">
+                </div>
+                <div class="col-sm-2">
+                    <label>ชั้น :</label>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row col-sm-12">
+                        <input type="text" id="10" style="width:120px" class="form-control">
+                        <label>&nbsp;&nbsp;&nbsp;&nbsp;ห้อง :</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" id="11" style="width:110px" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>ซอย :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="12" style="width:300px" class="form-control">
+                </div>
+                <div class="col-sm-2">
+                    <label>ถนน :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="13" style="width:300px" class="form-control">
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>ตำบล/แขวง :</label>
+                </div>
+                <div class="col-sm-4">
+                    <select id="5" name="5" style="width:300px">
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <label>อำเภอ/เขต :</label>
+                </div>
+                <div class="col-sm-4">
+                    <select id="6" name="6" style="width:300px">
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>จังหวัด :</label>
+                </div>
+                <div class="col-sm-4">
+                    <select id="7" name="7" style="width:300px">
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <label>ภาค :</label>
+                </div>
+                <div class="col-sm-4">
+                    <select id="8" name="8" style="width:300px">
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-6" style="text-align:right; ">
+                    <input type="button" id="btnClear" value="Clear" width="100" class="btn btn-default" />
+                </div>
+                <div class="col-sm-6">
+                    <input type="button" id="btnAdd" value="Add Address" width="100" class="btn btn-default" />
+                </div>
+            </div>
+            <br />
+            <div class="row col-sm-12">
+                <table align="center" width="100%">
+                    <tr style="line-height: 20px; background-color:lightgray;">
+                        <td style="vertical-align: top;" width="30%">
+                            <label>ประเภทที่อยู่</label>
+                        </td>
+                        <td width="50%">
+                            <label>ที่อยู่</label>
+                        </td>
+                        <td width="10%">
+                            <label>แก้ไข</label>
+                        </td>
+                        <td width="10%">
+                            <label>ลบ</label>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        <br />
+
+        <h4><label style="color:#8DC63F">ข้อมูลติดต่อบริษัท</label></h4>
+        <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>อีเมลล์ บริษัท :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="mailCompany" style="width:300px" class="form-control">
+                </div>
+                <div class="col-sm-2">
+                    <label>ชื่อผู้ติดต่อ :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="nameContract" style="width:300px" class="form-control">
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>อีเมลล์ :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="mailContract" style="width:300px" class="form-control">
+                </div>
+                <div class="col-sm-2">
+                    <label>เบอร์โทร :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="telContract" style="width:300px" class="form-control">
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <h4><label style="color:#8DC63F">ข้อมูลติดต่อบริษัท</label></h4>
+        <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+        <div class="container">
+            <div class="row col-sm-2">
+                <label>แผนกติดตั้ง</label>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>ชื่อผู้ติดต่อ :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="name1" style="width:300px" class="form-control">
+                </div>
+                <div class="col-sm-2">
+                    <label>เบอร์โทร :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="tel1" style="width:300px" class="form-control">
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>อีเมลล์ :</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="text" id="mail1" style="width:300px" class="form-control">
+                </div>
+            </div>
+            <br />
+            <div class="row col-sm-2">
+                <label>แผนกซ่อมบำรุง</label>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>ชื่อผู้ติดต่อ :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="name2" style="width:300px" class="form-control">
+                </div>
+                <div class="col-sm-2">
+                    <label>เบอร์โทร :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="tel2" style="width:300px" class="form-control">
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>อีเมลล์ :</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="text" id="mail2" style="width:300px" class="form-control">
+                </div>
+            </div>
+            <br />
+            <div class="row col-sm-2">
+                <label>แผนกบัญชี</label>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>ชื่อผู้ติดต่อ :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="name3" style="width:300px" class="form-control">
+                </div>
+                <div class="col-sm-2">
+                    <label>เบอร์โทร :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="tel3" style="width:300px" class="form-control">
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>อีเมลล์ :</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="text" id="mail3" style="width:300px" class="form-control">
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <h4><label style="color:#8DC63F">ข้อมูลบัญชีธนาคาร</label></h4>
+        <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>ชื่อธนาคาร :</label>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row col-sm-12">
+                        <input type="text" id="codeBank" style="width:100px" class="form-control">&nbsp;&nbsp;&nbsp;
+                        <input type="text" id="nameBank" style="width:170px" class="form-control">
+                        <input type="button" id="btnBank" value="" width="40" />
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label>ชื่อสาขา :</label>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row col-sm-12">
+                        <input type="text" id="codeBranch" style="width:100px" class="form-control">&nbsp;&nbsp;&nbsp;
+                        <input type="text" id="nameBranch" style="width:170px" class="form-control">
+                        <input type="button" id="btnBranch" value="" width="40" />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>ประเภทบัญชี :</label>
+                </div>
+                <div class="col-sm-4">
+                    <select id="AccType" name="AccType" style="width:300px">
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <label>เลขบัญชี :</label>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row col-sm-12">
+                        <input type="text" id="codeNumber" style="width:300px" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>ชื่อบัญชี :</label>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row col-sm-12">
+                        <select id="businessName" name="businessName" style="width:120px">
+                        </select>&nbsp;&nbsp;
+                        <input type="text" id="busiName" style="width:170px" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label>ประเภทธุรกิจ :</label>
+                </div>
+                <div class="col-sm-4">
+                    <select id="businessType" name="businessType" style="width:300px">
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>Book Bank Attach File:</label>
+                </div>
+                <div class="col-sm-10">
+                    <div class="row col-sm-12">
+                        <input type="text" id="busiName" style="width:220px" class="form-control">
+                        <input type="button" id="btnFile" value="Browse" width="50" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <h4><label style="color:#8DC63F">ข้อมูลเอกสารบริษัท</label></h4>
+        <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>หนังสือรับรองบริษัท :</label>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row col-sm-12">
+                        <input type="text" id="ensureBook" style="width:220px" class="form-control">
+                        <input type="button" id="btnBook1" value="Browse" width="50" />
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label>หนังสือทะเบียนพานิชย์:</label>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row col-sm-12">
+                        <input type="text" id="commerceName" style="width:220px" class="form-control">
+                        <input type="button" id="btnBook2" value="Browse" width="50" />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>หนังสือ ก.พ. 20 :</label>
+                </div>
+                <div class="col-sm-10">
+                    <div class="row col-sm-12">
+                        <input type="text" id="20Name" style="width:220px" class="form-control">
+                        <input type="button" id="btnBook3" value="Browse" width="50" />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-6" style="text-align:right; ">
+                    <input type="button" id="btnBack" value="Back" width="100" class="btn btn-default" />
+                </div>
+                <div class="col-sm-6">
+                    <input type="button" id="btnSubmit" value="Submit" width="100" class="btn btn-default" />
+                </div>
+            </div>
+            <br />
+        </div>
+    </body>
