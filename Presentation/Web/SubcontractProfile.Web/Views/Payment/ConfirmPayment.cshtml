@@ -1,0 +1,401 @@
+﻿@{
+    ViewData["Title"] = "ConfirmPayment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+    <div class="container">
+        
+        <p class="h5" style="margin-top: 30px"><strong>Search Confirm Payment</strong></p>
+        <hr>
+        <div class="row mt-3 ml-2">
+
+            <div class=" col-md-6 mt-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="">Location Code:</p>
+                    </div>
+                    <div class="col-md-7">                    
+                        <select class="form-control" id="exampleSelectGender">
+                            <option>Please Select</option>
+                        </select>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 mt-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="">Team Name:</p>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="exampleSelectGender">
+                            <option>Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 mt-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="">Engineer Name:</p>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="Your Email" />
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 mt-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="">Position:</p>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="exampleSelectGender">
+                            <option>Position</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 mt-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="">Status:</p>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="exampleSelectGender">
+                            <option>Select ALL</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 mt-4"></div>
+            <div class=" col-md-6 mt-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="">Payment Date From:</p>
+                    </div>
+                    <div class="col-md-7">
+                        <div class='input-group date' id='datepicker1'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 mt-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="">Payment Date To:</p>
+                    </div>
+                    <div class="col-md-7">
+                        <div class='input-group date' id='datepicker2'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn2 mt-5" style="text-align: center;">
+            <button class="btn btn-secondary" style="width:120px;color:white;">Clear</button>
+            <button class="btn btn-success" style="width:120px">Search</button>
+        </div>
+    </div>
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <p class="h5" ><strong>Serach Result</strong></p>
+           
+            <hr />
+        </div>
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover ">
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th scope="col">Action</th>
+                            <th scope="col">No</th>
+                            <th scope="col">Order No</th>
+                            <th scope="col">LocationName</th>
+                            <th scope="col">Team Name</th>
+                            <th scope="col">Engineer Name</th>
+                            <th scope="col">Contact Phone</th>
+                            <th scope="col">Contact Email</th>
+                            <th scope="col">Payment Date</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th><p><ins>Confirm</ins></p></th>
+                            <td>1</td>
+                            <td>00001</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxx</td>
+                            <td>02 333333</td>
+                            <td>xxx@xxx.com</td>
+                            <td></td>
+                            <td>Transferred Away</td>
+                        </tr>
+                        <tr>
+                            <th><p><ins>View</ins></p></th>
+                            <td>2</td>
+                            <td>00002</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxx</td>
+                            <td>02 4444444</td>
+                            <td>zzz@zzz.com</td>
+                            <td>10/06/2020</td>
+                            <td>Active</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <ul class="pagination ">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+
+        </div>
+
+
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <p class="h5"><strong>Confirm Payment</strong></p>
+            
+        </div>
+    </div>
+    <div class="row mt-3  mb-5">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-8">
+            <div class=" col-md-12 mt-3 ">
+                <div class="row">
+                    <div class="col-md-5">
+                        <p class="">เลขที่ใบสั่งซื้อ:</p>
+                    </div>
+                    <div class="col-md-7">
+                        <p class="">000001</p>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-12 mt-4 ">
+                <div class="row">
+                    <div class="col-md-5">
+                        <p class="">ช่องทางการชำระเงิน*:</p>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="exampleSelectGender">
+                            <option>โอนเงินผ่านบัญชีธนาคาร</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-12 mt-3 ">
+                <div class="row">
+                    <div class="col-md-5">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-12 ml-4">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                <p class=""> ธนาคารกรุงศรีอยุธยา ชื่อบัญชี xxxx สาขาลาดพร้าว99 เลขบีญชี 111-1-1111-1</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-12 mt-4  ">
+                <div class="row">
+                    <div class="col-md-5">
+                        <p class="">วันที่ชำระเงิน*:</p>
+                    </div>
+                    <div class="col-md-7">
+                        <div class='input-group date' id='datepicker3'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-12 mt-4  ">
+                <div class="row">
+                    <div class="col-md-5">
+                        <p class="">เวลาชำระเงิน*:</p>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker3'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="fa fa-clock-o"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class=" col-md-12 mt-2  ">
+                <div class="row">
+                    <div class="col-md-5">
+                        <p class="">ยอดเงินที่โอน (B)*:</p>
+                    </div>
+                    <div class="col-md-7">
+                        <input type='text' style="background-color: #c1bdbd ;" value="1000" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-12 mt-4  ">
+                <div class="row">
+                    <div class="col-md-5">
+                        <p class="">ธนาคารต้นทางที่โอน*:</p>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="exampleSelectGender">
+                            <option>SCB</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-12 mt-4 ">
+                <div class="row">
+                    <div class="col-md-5">
+                        <p class="">สาขา:</p>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="" />
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-12 mt-4 ">
+                <div class="row">
+                    <div class="col-md-5">
+                        <p class="">หลักฐานการโอนเงิน*</p>
+                    </div>
+                    <div class="col-md-7 ">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+                            <label class="custom-file-label" for="validatedCustomFile"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-12 mt-3 ">
+                <div class="row">
+                    <div class="col-md-5">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-12 ml-0">
+                                <p class="">ขนาดไฟล์ไม่เกิน 3 Mb และไฟล์ประกอบประเภท PDF หรือ JPG,JPEG,PNG เท่านั้น</p>
+                                <p style="color:red">การใช้หลักฐานปลอม มีความผิดตาม พรบ.คอมพิวเตอร์</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-12 mt-3 ">
+                <div class="row">
+                    <div class="col-md-5">
+                        <p>หมายเหตุ :</p>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-12 ml-0">
+                                <textarea id="w3review" name="w3review" rows="7" style="width:inherit;border-color:#E0E0E0"> </textarea>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+</div>
+<div class="container btn2 mt-5 mb-3" style="background-color:#E0E0E0; text-align:center">
+    <div class="row">
+
+        <div class="col-md-7 ">
+
+        </div>
+   
+        <div class="col-md-5 col-sm-12 mt-2 mb-2">
+            <div class="row">
+                <div class="col-md-3 ml-3 ">
+                    <button class="btn btn-secondary" style="width:120px ;color:white;">ปิด</button>
+                </div>
+                <div class="col-md-3  ml-3">
+                    <button class="btn btn-secondary" style="width:120px;color:white">ล้างข้อมูล</button>
+                </div>
+                <div class="col-md-3  ml-3">
+                    <button class="btn btn-success" style="width:120px">แจ้งโอนเงิน</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+    @section scripts
+{
+
+        <script type="text/javascript">
+
+            // console.log('Feature1');
+            // console.log('Feature2');
+            //console.log('Test push Branch dev')
+            $(function () {
+                $('#datepicker1').datepicker({
+
+                    autoclose: true,
+                    todayHighlight: true,
+                });
+                $('#datepicker2').datepicker({
+
+                    autoclose: true,
+                    todayHighlight: true,
+
+                });
+                $('#datepicker3').datepicker({
+
+                    autoclose: true,
+                    todayHighlight: true,
+
+                });
+                $('#datetimepicker3').datetimepicker({
+                    format: 'LT',
+                    autoclose: true,
+                    todayHighlight: true,
+
+                });
+
+            });
+        </script>
+
+    }
+
+
+

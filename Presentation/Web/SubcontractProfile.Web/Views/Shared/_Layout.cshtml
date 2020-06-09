@@ -7,8 +7,6 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
 
-
-
     <link rel="stylesheet" href="~/css/site.css" />
     <!-- plugins:css -->
     <link rel="stylesheet" href="~/vendors/ti-icons/css/themify-icons.css">
@@ -137,6 +135,64 @@
                         </ul>
                     </div>
 
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-basicPayment" aria-expanded="false" aria-controls="ui-basicPayment">
+                        <i class="fa fa-tasks menu-icon"></i>
+                        <span class="menu-title">Payment</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basicPayment">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a href="@Url.Action("ConfirmPayment", "Payment")" class="nav-link">
+                                    ConfirmPayment
+                                </a>
+                            </li>
+
+                        </ul>
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a href="@Url.Action("VerifyPayment", "Payment")" class="nav-link">
+                                    Verify Payment
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-basicTraining" aria-expanded="false" aria-controls="ui-basicTraining">
+                        <i class="fa fa-tasks menu-icon"></i>
+                        <span class="menu-title">Training</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basicTraining">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a href="@Url.Action("RequestTraining", "Training")" class="nav-link">
+                                    RequestTraining
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("RequestTrainingauthorities", "Training")" class="nav-link">
+                                    RequestTraining
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Reporttestresult", "Training")" class="nav-link">
+                                    Report Test Result
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Reporttestresultauthorities", "Training")" class="nav-link">
+                                    Report Test Result
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
                 </li>
 
                 <li class="nav-item">

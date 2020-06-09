@@ -1,0 +1,220 @@
+﻿@{
+    ViewData["Title"] = "ReportTestResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+   
+    
+<style>
+  /*  th {
+        font-size: 13px !important;
+    }
+    td {
+        font-size: 10px !important;
+    }*/
+</style>
+<div class="container" style="display:block">    
+    <p class="h5"style="margin-top: 30px"><strong>Search Report Test Result</strong></p>
+    <hr>
+    <div class="row mt-3 ml-2">
+
+        <div class=" col-md-6 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Location Code:</p>
+                </div>
+                <div class="col-md-7">
+                    <select class="form-control" id="exampleSelectGender">
+                        <option>Select ALL</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Team Name:</p>
+                </div>
+                <div class="col-md-7">
+                    <select class="form-control" id="exampleSelectGender">
+                        <option>Select ALL</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Engineer Name:</p>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" placeholder="" />
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Test Status:</p>
+                </div>
+                <div class="col-md-7">
+                    <select class="form-control" id="exampleSelectGender">
+                        <option>Select ALL</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Skill:</p>
+                </div>
+                <div class="col-md-7">
+                    <select class="form-control" id="exampleSelectGender">
+                        <option>Select ALL</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Grade:</p>
+                </div>
+                <div class="col-md-7">
+                    <select class="form-control" id="exampleSelectGender">
+                        <option>Select ALL</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Test Date From:</p>
+                </div>
+                <div class="col-md-7">
+                    <div class='input-group date' id='datepicker1'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Test Date To:</p>
+                </div>
+                <div class="col-md-7">
+                    <div class='input-group date' id='datepicker2'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="btn2 mt-5" style="text-align: center;">
+        <button class="btn btn-secondary" style="width:120px;color:white;">Clear</button>
+        <button class="btn btn-success" style="width:120px">Search</button>
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-4 mb-3">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 mt-4">
+                    <p class="h5" ><strong>Serach Result</strong></p>
+                    
+                </div>
+
+            </div>
+            <hr />
+        </div>
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="example">
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th>No</th>
+                            <th>Action(Re test)</th>
+                            <th>Test No</th>
+                            <th>Company Name</th>
+                            <th>Tax ID</th>
+                            <th>Location Name</th>
+                            <th>Team Name</th>
+                            <th>Engineer Name</th>
+                            <th>Training Date</th>
+                            <th>Skill</th>
+                            <th>Grade</th>
+                            <th>Test Date</th>
+                            <th>Test Status</th>
+                            <th>No of Test</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size:3px">
+                        <tr>
+
+                            <td>1</td>
+                            <td>xxxxxx</td>
+                            <td>001</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>10/06/2020</td>
+                            <td>Standard</td>
+                            <td>C</td>
+                            <td>15/05/2020</td>
+                            <td>Pass</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+
+                            <td>2</td>
+                            <td>Book</td>
+                            <td>001</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>04/06/2020</td>
+                            <td>Standard</td>
+                            <td>C</td>
+                            <td>15/05/2020</td>
+                            <td>Not Pass</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+
+        </div>
+
+
+    </div>
+</div>
+@section scripts
+{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+
+}
