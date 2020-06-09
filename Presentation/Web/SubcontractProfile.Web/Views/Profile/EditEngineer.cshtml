@@ -1,0 +1,628 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+    <style>
+        .form-control {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }
+
+        .btn-default {
+            color: #8DC63F; /*before color #74a333*/
+            background-color: #DDE1E4;
+            border-color: #ccc;
+        }
+    </style>
+    <body onload="openTabs(event, 'Engineer')">
+        <h3>New Location </h3>
+        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+        <div class="container">
+            <div class="tab">
+                <button class="tablinks" onclick="openTabs(event, 'Engineer')">Engineer</button>
+                <button class="tablinks" onclick="openTabs(event, 'Personal')">Personal</button>
+            </div><br/>
+
+                <div id="Engineer" class="tabcontent">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Company Name :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>xxxxxxxxxxxxxxx</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Register Type :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="radio" id="1" name="type" value="new">
+                            <label for="new">New Subcontract</label>&nbsp;&nbsp;
+                            <input type="radio" id="2" name="type" value="deal">
+                            <label for="deal">Dealer</label>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Location Name</label>
+                            <label style="color:red">*</label>
+                            <label>&nbsp;:</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="Location" name="Location" style="width:300px">
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Team Name(TH)</label>
+                            <label style="color:red">*</label>
+                            <label>&nbsp;:</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="Team" name="Team" style="width:300px">
+                            </select>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Staff Name :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="StaffName" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Staff Name(TH) :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="StaffNameT" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Staff Name(EN) :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="StaffNameE" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Position :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="Position" name="Position" style="width:300px">
+                            </select>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Citizen ID :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="CitizenID" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Position :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+                                <input type="text" id="BankAttach" style="width:220px" class="form-control">
+                                <input type="button" id="btnFile" value="Browse" width="50" />
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>T-Shirt size :</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <select id="size" name="size" style="width:300px">
+                            </select>
+                        </div>
+                    </div>
+                    <br />
+
+                    <h4><label style="color:#8DC63F">Contract Infomation</label></h4>
+                    <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Contract Phone1 :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="ContractPhone1" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Contract Phone2 :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="ContractPhone2" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Contract email :</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" id="ContractEmail" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+
+                    <h4><label style="color:#8DC63F">Vehicle Infomation</label></h4>
+                    <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Vehicle Type :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="VehicleType" name="VehicleType" style="width:300px">
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Vehicle Brand :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="VehicleBrand" name="VehicleBrand" style="width:300px">
+                            </select>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Vehicle Serise :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="VehicleSerise" name="VehicleSerise" style="width:300px">
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Vehicle Color :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="VehicleColor" name="VehicleColor" style="width:300px">
+                            </select>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Vehicle Year :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="VehicleYear" name="VehicleYear" style="width:300px">
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Vehicle license plate :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="VehicleLicense" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Vehicle Year :</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="row col-sm-12">
+                                <input type="text" id="BankAttach" style="width:220px" class="form-control">
+                                <input type="button" id="btnFile" value="Browse" width="50" />
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+
+                    <h4><label style="color:#8DC63F">Tool Infomation</label></h4>
+                    <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Tool otdr :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="Tool1" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Tool splicing :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="Tool2" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+
+                    <h4><label style="color:#8DC63F">Bank Infomation</label></h4>
+                    <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Bank Name :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="BankName" name="BankName" style="width:300px">
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Bank Code :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="BankCode" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Account No :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="AccNo" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Account Name :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="AccName" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-12" style="text-align:center; ">
+                            <input type="button" id="btnBack" value="Back" width="100" class="btn btn-default" />&nbsp;&nbsp;
+                            <input type="button" id="btnClear" value="Clear" width="100" class="btn btn-default" />&nbsp;&nbsp;
+                            <input type="button" id="btnSubmit" value="Submit" width="100" class="btn btn-default" />
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+
+                <div id="Personal" class="tabcontent">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Citizen ID :</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" id="CitizenID2" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Title Name :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="Title" name="Title" style="width:300px">
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Full Name(TH) :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="FullNameT" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Full Name(EN) :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="FullNameT" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Birth date :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+                                <input type="text" id="BirthDate" style="width:280px" class="form-control">
+                                <input type="button" id="btnBirht" value="" width="50" />
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Gender :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="radio" id="1" name="type" value="new">
+                            <label for="new">New Subcontract</label>&nbsp;&nbsp;
+                            <input type="radio" id="2" name="type" value="deal">
+                            <label for="deal">Dealer</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Race :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="Race" name="Race" style="width:300px">
+                            </select>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Nationality :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="Nationality" name="Nationality" style="width:300px">
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Religion :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="Religion" name="Religion" style="width:300px">
+                            </select>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Identity by :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="Identity" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Contract email :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="ContractEmail2" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Identity card address :</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <textarea name="IdentiAddress" rows="2" style="width:300px;"></textarea>
+                        </div>
+                    </div>
+                    <br />
+
+                    <h4><label style="color:#8DC63F">Contract Infomation</label></h4>
+                    <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Contract phone1 :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="PContractPhone1" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Contract phone2 :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="PContractPhone2" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Contract email :</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" id="PContractMail" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+
+                    <h4><label style="color:#8DC63F">Work experience infomation</label></h4>
+                    <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Work permit no :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="WorkPermit" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Work permit attach file:</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+                                <input type="text" id="WorkPermitAttach" style="width:220px" class="form-control">
+                                <input type="button" id="btnFile2" value="Browse" width="50" />
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Proflie img attach file :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+                                <input type="text" id="ProfileAttach" style="width:220px" class="form-control">
+                                <input type="button" id="btnFile3" value="Browse" width="50" />
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Course skill :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="CourseSkill" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+
+                    <h4><label style="color:#8DC63F">Education infomation</label></h4>
+                    <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Education :</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <textarea name="LocationAddress" rows="2" style="width:880px;"></textarea>
+                        </div>
+                    </div>
+                    <br />
+
+                    <h4><label style="color:#8DC63F">Languqges infomation</label></h4>
+                    <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Languqges :</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <input id="Checkbox1" type="checkbox" value="1" />
+                            <label>Listening Thai</label><br />
+                            <input id="Checkbox2" type="checkbox" value="2" />
+                            <label>Speaking Thai</label><br />
+                            <input id="Checkbox3" type="checkbox" value="2" />
+                            <label>Reading Thai</label><br />
+                            <input id="Checkbox4" type="checkbox" value="2" />
+                            <label>Writing Thai</label><br />
+                        </div>
+                        <div class="col-sm-8">
+                            <input id="Checkbox5" type="checkbox" value="1" />
+                            <label>Listening Eng</label><br />
+                            <input id="Checkbox6" type="checkbox" value="2" />
+                            <label>Speaking Eng</label><br />
+                            <input id="Checkbox7" type="checkbox" value="2" />
+                            <label>Reading Eng</label><br />
+                            <input id="Checkbox8" type="checkbox" value="2" />
+                            <label>Writing Eng</label><br />
+                        </div>
+                    </div>
+                    <br />
+
+                    <h4><label style="color:#8DC63F">Certificate infomation</label></h4>
+                    <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Certificate type :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="CertificateType" name="CertificateType" style="width:300px">
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Certificate no :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="CertificateNo" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Certificate expire date :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+                                <input type="text" id="CertificateDAte" style="width:280px" class="form-control">
+                                <input type="button" id="btnDate" width="50" />
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Certificate attach file :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+                                <input type="text" id="CertificateAttach" style="width:220px" class="form-control">
+                                <input type="button" id="btnFile3" value="Browse" width="50" />
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+
+                    <h4><label style="color:#8DC63F">Bank infomation</label></h4>
+                    <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Bank Name :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="BankName2" name="BankName2" style="width:300px">
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Bank Code :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="BankCode2" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Account no :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="AccNo2" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Account Name :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="AccName2" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Bank branch name:</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="BranchName" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Bank Branch Code:</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="BranchCode" style="width:300px" class="form-control">
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-12" style="text-align:center; ">
+                            <input type="button" id="btnBack2" value="Back" width="100" class="btn btn-default" />&nbsp;&nbsp;
+                            <input type="button" id="btnClear2" value="Clear" width="100" class="btn btn-default" />&nbsp;&nbsp;
+                            <input type="button" id="btnSubmit2" value="Submit" width="100" class="btn btn-default" />
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+        </div>
+    </body>
+
+<script>
+    function openTabs(evt, TabName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(TabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>

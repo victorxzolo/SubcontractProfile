@@ -1,0 +1,206 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+    <style>
+        .form-control {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }
+
+        .btn-default {
+            color: #8DC63F; /*before color #74a333*/
+            background-color: #DDE1E4;
+            border-color: #ccc;
+        }
+    </style>
+
+    <body>
+        <h3>Edit Team</h3>
+        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>Register Type</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="radio" id="1" name="type" value="new">
+                    <label for="new">New Subcontract</label>&nbsp;&nbsp;
+                    <input type="radio" id="2" name="type" value="deal">
+                    <label for="deal">Dealer</label>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>Location Code :</label>
+                </div>
+                <div class="col-sm-4">
+                    <select id="location" name="location" style="width:300px">
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <label>Team Code :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="TeamCode" style="width:300px" class="form-control">
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>Vendor Code :</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="text" id="VendorCode" style="width:300px" class="form-control">
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>Team Name(TH) :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="TeamNameT" style="width:300px" class="form-control">
+                </div>
+                <div class="col-sm-2">
+                    <label>Team Name(EH) :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="TeamNameE" style="width:300px" class="form-control">
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>Storage Location :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="Storage" style="width:300px" class="form-control">
+                </div>
+                <div class="col-sm-2">
+                    <label>Ship To :</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="Ship" style="width:300px" class="form-control">
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>Out of service storage Location:</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="OutStorage" style="width:300px" class="form-control">
+                </div>
+                <div class="col-sm-2">
+                    <label>Warranty MA :</label>
+                </div>
+                <div class="col-sm-4">
+                    <select id="WarrantyMA" name="Warranty" style="width:300px">
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>Warranty Install :</label>
+                </div>
+                <div class="col-sm-4">
+                    <select id="WarrantyInstall" name="WarrantyInstall" style="width:300px">
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <label>Service skill :</label>
+                </div>
+                <div class="col-sm-4">
+                    <textarea name="ServiceSkill" rows="2" style="width:300px;"></textarea>
+                </div>
+            </div>
+            <br />
+
+            <h4><label style="color:#8DC63F">Contract Phone</label></h4>
+            <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+            <div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Installations contract phone:</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" id="InstallationPhone" style="width:300px" class="form-control">
+                    </div>
+                    <div class="col-sm-2">
+                        <label>Maintenance contract phone:</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" id="MaintenancePhone" style="width:300px" class="form-control">
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Etc contract phone:</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" id="EtcPhone" style="width:300px" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <h4><label style="color:#8DC63F">Contract Mail</label></h4>
+            <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+            <div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Installations contract Mail:</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" id="InstallationMail" style="width:300px" class="form-control">
+                    </div>
+                    <div class="col-sm-2">
+                        <label>Maintenance contract Mail:</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" id="MaintenanceMail" style="width:300px" class="form-control">
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Etc contract Mail:</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" id="EtcMail" style="width:300px" class="form-control">
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-12" style="text-align:center; ">
+                        <input type="button" id="btnBack" value="Back" width="100" class="btn btn-default" />&nbsp;&nbsp;
+                        <input type="button" id="btnClear" value="Clear" width="100" class="btn btn-default" />&nbsp;&nbsp;
+                        <input type="button" id="btnSubmit" value="Submit" width="100" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+            <br/>
+        </div>
+
+
+    </body>
