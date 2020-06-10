@@ -1,0 +1,486 @@
+﻿@{
+    ViewData["Title"] = "RequestTraining";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" ">
+    <p class="h5" style="margin-top: 30px"><strong>Search Request Training</strong></p>
+    <hr>
+    <div class="row mt-3 ml-2">
+
+        <div class=" col-md-6 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Company Name:</p>
+                </div>
+                <div class="col-md-7">
+                    <div class='input-group date' id=''>
+                        <input type='text' class="form-control" placeholder="Search" />
+                        <span class="input-group-addon">
+                            <span class="fa fa-search"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Tax ID:</p>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" placeholder="" />
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Location Name:</p>
+                </div>
+                <div class="col-md-7">
+                    <select class="form-control" id="exampleSelectGender">
+                        <option>Select ALL</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Team Name:</p>
+                </div>
+                <div class="col-md-7">
+                    <select class="form-control" id="exampleSelectGender">
+                        <option>Select ALL</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Request No:</p>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" placeholder="" />
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Status:</p>
+                </div>
+                <div class="col-md-7">
+                    <select class="form-control" id="exampleSelectGender">
+                        <option>Select ALL</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Request Date From:</p>
+                </div>
+                <div class="col-md-7">
+                    <div class='input-group date' id='datepicker1'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Request Date To:</p>
+                </div>
+                <div class="col-md-7">
+                    <div class='input-group date' id='datepicker2'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="btn2 mt-5" style="text-align: center;">
+        <button class="btn btn-secondary" style="width:120px;color:white;">Clear</button>
+        <button class="btn btn-success" style="width:120px">Search</button>
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-4 mb-3">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 mt-4">
+                    <p class="h5"><strong>Serach Result</strong></p>
+
+                </div>
+
+            </div>
+            <hr />
+        </div>
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="example">
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th>No</th>
+                            <th>Action</th>
+                            <th>Request No</th>
+                            <th>Company Name</th>
+                            <th>Tax ID</th>
+                            <th>Location Name</th>
+                            <th>Team Name</th>
+                            <th>Engineer Name</th>
+                            <th>Request Date</th>
+                            <th>Training Date</th>
+                            <th>Request Status</th>
+                            <th>Payment Status</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size:3px">
+                        <tr>
+
+                            <td>1</td>
+                            <td><p><ins>Edit</ins></p></td>
+                            <td>0001</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>10/06/2020</td>
+                            <td></td>
+                            <td>Request</td>
+                            <td>Waiting</td>
+
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><p><ins>Edit</ins></p></td>
+                            <td>0002</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>04/06/2020</td>
+                            <td>15/06/2020</td>
+                            <td>Active</td>
+                            <td>Paid</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+
+        </div>
+
+
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <p class="h5"><strong>Request Training</strong></p>
+
+        </div>
+    </div>
+    <div class="row mt-4 ml-5 mr-1">
+
+        <div class=" col-md-6 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Company Name:</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="">บริษัท xxxxxxx จำกัด</p>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Tax ID :</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="">1234567890111</p>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Contact Name:</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="">คุณ xxxxxxxx xxxxxxxx</p>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Contact Phone:</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="">02 789 3322</p>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Email:</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="">xxxxxx@mail.com</p>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Course:</p>
+                </div>
+                <div class="col-md-7 ">
+                    <div class="row">
+                        <div class="col-md-12 ml-4">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
+                            <p class=""> xxxxxxxxxxxxxxxxxxxxxxxxx</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Request Date:</p>
+                </div>
+                <div class="col-md-8">
+                    <div class='input-group date' id='datepicker1'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Payment Status:</p>
+                </div>
+                <div class="col-md-7 ">
+                    <button class="btn btn-success" style="color:white;border-radius:30px;width:150px">Paid</button>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Payment Date:</p>
+                </div>
+                <div class="col-md-8">
+                    <div class='input-group date' id='datepicker1'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-12 mt-3">
+            <div class="row">
+                <div class="col-md-2">
+                    <p class="">Remark:</p>
+                </div>
+                <div class="col-md-10 ">
+                    <textarea id="w3review" name="w3review" style="width:inherit;border-color:#E0E0E0;background-color: #c1bdbd" rows="6"> </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="container">
+    <div class="row mt-5 ml-3 mr-3">
+        <div class="col-md-12 ">
+            <p class="h5"><strong>ผู้เข้าอบรม</strong></p>
+            <hr>
+        </div>
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover ">
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Location Name</th>
+                            <th scope="col">Team Name</th>
+                            <th scope="col">Engineer Name</th>                            
+                            <th scope="col">Position</th>
+                            <th scope="col">Contact Phone1</th>
+                            <th scope="col">Contact Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>1</th>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxx</td>
+                            <td>xxxxxx</td>
+                           
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxx</td>
+                            <td>xxxxxx</td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-12 mt-5">
+            <div class="row">
+                <div class="col-md-9 "></div>
+                <div class="col-md-3 col-sm-12">
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>ราคารวม</p>
+                                </div>
+                                <div class="col-md-6" style="text-align:left;">
+                                    <p>10000</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>Vat7%</p>
+                                </div>
+                                <div class="col-md-6" style="text-align:left;">
+                                    <p>700</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>ราคาสุทธิ(บาท) </p>
+                                </div>
+                                <div class="col-md-6" style="text-align:left;">
+                                    <p>10,700</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="container">
+    <div class="mt-5 ml-3 mr-3">
+        <div class="col-md-12">
+            <p class="h5"><strong>สำหรับเจ้าหน้าที่ AIS (เลือกวันTraining)</strong></p>
+            <hr />
+        </div>
+
+        <div class="col-md-12">
+            <div class="row ml-3 mr-3"> 
+               
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class=" col-md-6 mt-3 ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <p class="">Booking Training Date:</p>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class='input-group date' id='datepicker3'>
+                                        <input type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-md-6 mt-3 ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <p class="">Remark:</p>
+                                </div>
+                                <div class="col-md-7">
+                                    <textarea id="w3review" name="w3review" rows="3" style="width:inherit;border-color:#E0E0E0"> </textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="container btn2 mt-5 mb-3" style="background-color:#E0E0E0; text-align:center">
+    <div class="row">
+
+        <div class="col-md-7 ">
+
+        </div>
+
+        <div class="col-md-5 col-sm-12 mt-2 mb-2">
+            <div class="row">
+                <div class="col-md-3  ">
+
+                </div>
+                <div class="col-md-3  ml-3">
+                    <button class="btn btn-secondary" style="width:120px;color:white">Close</button>
+                </div>
+                <div class="col-md-3  ml-3">
+                    <button class="btn btn-success" style="width:120px">Booking</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

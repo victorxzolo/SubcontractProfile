@@ -23,8 +23,9 @@ namespace SubcontractProfile.Web.Controllers
         
         public IActionResult Index()
         {
-           
-           // ViewData["TestConn"] = TestConnect();
+
+            // ViewData["TestConn"] = TestConnect();
+            string x = "xxx";
 
             return View();
         }

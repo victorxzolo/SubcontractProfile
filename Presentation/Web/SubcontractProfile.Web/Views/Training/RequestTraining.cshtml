@@ -1,0 +1,415 @@
+﻿@{
+    ViewData["Title"] = "RequestTraining";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+</style>
+
+<div class="container">
+    <p class="h5" style="margin-top: 30px"><strong>Search Request Traning</strong></p>
+    <hr>
+    <div class="row mt-3 ml-2">
+
+        <div class=" col-md-6 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Location Code:</p>
+
+                </div>
+                <div class="col-md-7">
+                    <select class="form-control" id="exampleSelectGender">
+                        <option>Please Select</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Team Name:</p>
+                </div>
+                <div class="col-md-7">
+                    <select class="form-control" id="exampleSelectGender">
+                        <option>Please Select</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Engineer Name:</p>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" placeholder="" />
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Position:</p>
+                </div>
+                <div class="col-md-7">
+                    <select class="form-control" id="exampleSelectGender">
+                        <option>Position</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Status:</p>
+                </div>
+                <div class="col-md-7">
+                    <select class="form-control" id="exampleSelectGender">
+                        <option>Select ALL</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4"></div>
+        <div class=" col-md-6 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Payment Date From:</p>
+                </div>
+                <div class="col-md-7">
+                    <div class='input-group date' id='datepicker1'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Payment Date To:</p>
+                </div>
+                <div class="col-md-7">
+                    <div class='input-group date' id='datepicker2'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="btn2 mt-5" style="text-align: center;">
+        <button class="btn btn-secondary" style="width:120px;color:white;">Clear</button>
+        <button class="btn btn-success" style="width:120px">Search</button>
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 mt-4">
+                    <p class="h5"><strong>Serach Result</strong></p>
+                   
+                </div>
+
+                <div class="col-md-6 " style="text-align: right;">
+                    <button class="btn btn-success" style="">Request Training</button>
+                </div>
+            </div>
+            <hr />
+        </div>
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover ">
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th scope="col"><input type="checkbox" value="" /></th>
+                            <th scope="col">No</th>
+                            <th scope="col">LocationName</th>
+                            <th scope="col">Team Name</th>
+                            <th scope="col">Engineer Name</th>
+                            <th scope="col">Position</th>
+                            <th scope="col">Contact Phone</th>
+                            <th scope="col">Contact Email</th>
+                            <th scope="col">Payment Date</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" value="" /></td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" value="" /></td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </div>
+
+
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <p class="h5"><strong>Request Training</strong></p>
+            
+        </div>
+    </div>
+    <div class="row mt-4 ml-3 mr-1">
+
+        <div class=" col-md-6 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Company Name:</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="">บริษัท xxxxxxx จำกัด</p>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Tax ID :</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="">1234567890111</p>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Contact Phone:</p>
+                </div>
+                <div class="col-md-7">
+                    <input type='text' style="background-color: #c1bdbd ;" value="02 12345678" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Email :</p>
+                </div>
+                <div class="col-md-7">
+                    <input type='text' style="background-color: #c1bdbd ;" value="" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Course:</p>
+                </div>
+                <div class="col-md-7 ">
+                    <div class="row">
+                        <div class="col-md-12 ml-4">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                            <p class=""> xxxxxxxxxxxxxxxxxxxxxxxxx</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Date range training:</p>
+                </div>
+                <div class="col-md-7">
+                    <div class='input-group date' id='datepicker1'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-12 mt-3">
+            <div class="row">
+                <div class="col-md-2">
+                    <p class="">Remark:</p>
+                </div>
+                <div class="col-md-9 ">
+                    <textarea id="w3review" name="w3review" style="width:inherit;border-color:#E0E0E0" rows="6"> </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-5 ml-3 mr-3">
+        <div class="col-md-12 ">
+            <p class="h5"><strong>ผู้เข้าอบรม</strong></p>            
+            <hr>
+        </div>
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover ">
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Location Name</th>
+                            <th scope="col">Team Name</th>
+                            <th scope="col">Engineer Name</th>
+                            <th scope="col">Team Name</th>
+                            <th scope="col">Position</th>
+                            <th scope="col">Contact Phone1</th>
+                            <th scope="col">Contact Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>1</th>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxx</td>
+                            <td>xxxxxx</td>
+                            <td>xxxxxx</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>           
+        </div>
+        <div class="col-md-12 mt-5">
+            <div class="row">
+                <div class="col-md-9 "></div>
+                <div class="col-md-3 col-sm-12">
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>ราคารวม</p>
+                                </div>
+                                <div class="col-md-6" style="text-align: left;">
+                                    <p>10000</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>Vat7%</p>
+                                </div>
+                                <div class="col-md-6" style="text-align: left;">
+                                    <p>700</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>ราคาสุทธิ(บาท) </p>
+                                </div>
+                                <div class="col-md-6" style="text-align: left;">
+                                    <p>10,700</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="container">
+    <div class="row mt-5 ml-3 mr-3">
+        <div class="col-md-12 ">
+            <p class="h5"><strong>การชำระเงิน</strong></p>           
+            <hr>
+        </div>
+        <div class="col-md-12 ml-5 mt-2 ">
+            <h5>ชำระเงินผ่านทางธนาคาร internet Banking หรือตู้ ATM โดยการโอนเงินเข้าบัญชี</h5>
+        </div>
+        <div class="col-md-12 mt-3">
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-3">
+                    <p style="font-size:12px">ธนาคาร กรุงศรีอยุธยา จำกัดสาขา xxxxxxx</p>
+                    <p style="font-size:12px">ชื่อบัญชี บริษัท xxxxxx </p>
+                    <p style="font-size:12px">บัญชีออมทรัพย์ เลขที่บัญชี 111-1-1111-1</p>
+                    <br><p style="font-size:12px">(ชำระเงินยอดรวมภาษี 7% ทุกยอด)</p>
+                </div>
+                <div class="col-md-3">
+                    <p style="font-size:12px">ธนาคาร กสิกรไทย จำกัดสาขา xxxxxxx</p>
+                    <p style="font-size:12px">ชื่อบัญชี บริษัท xxxxxx </p>
+                    <p style="font-size:12px">บัญชีออมทรัพย์ เลขที่บัญชี 111-1-1111-1</p>
+                    <br><p style="font-size:12px">(ชำระเงินยอดรวมภาษี 7% ทุกยอด)</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="container btn2 mt-5 mb-3" style="background-color:#E0E0E0; text-align:center;">
+    <div class="row">
+
+        <div class="col-md-7 col-sm-1">
+
+        </div>
+        <div class="col-md-5 col-sm-12 mt-2 mb-2">
+            <div class="row">
+                <div class="col-md-3  ">
+                    <button class="btn btn-secondary" style="width:120px ;color:white;">Close</button>
+                </div>
+                <div class="col-md-3  ml-3">
+                    <button class="btn btn-secondary" style="width:120px;color:white">Clear</button>
+                </div>
+                <div class="col-md-3  ml-3">
+                    <button class="btn btn-success" style="width:120px">Request</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
