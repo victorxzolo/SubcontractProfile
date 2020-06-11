@@ -24,6 +24,21 @@
       "provider": "cdnjs",
       "library": "jqueryui@1.12.1",
       "destination": "wwwroot/lib/jqueryui/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "popper.js@2.4.1",
+      "destination": "wwwroot/lib/popper.js/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "moment.js@2.26.0",
+      "destination": "wwwroot/lib/moment.js/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "bootstrap-datepicker@1.9.0",
+      "destination": "wwwroot/lib/bootstrap-datepicker/"
     }
   ]
 }

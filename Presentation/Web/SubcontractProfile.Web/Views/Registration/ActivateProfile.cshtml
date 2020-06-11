@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
 
 }
 
@@ -68,11 +68,14 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Register Date From :</label>
                         <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                            <div class='input-group date' id='regisdatefrom'>
+                            <div class='input-group p-0 date' id='regisdatefrom'>
                                 <input type='text' class="form-control form-control-sm" />
-                                <span class="input-group-addon">
-                                    <span class="fa fa-calendar"></span>
-                                </span>
+                                <div class="input-group-append input-group-addon">
+                                    <span class="input-group-text px-4">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+
                             </div>
                         </div>
 
@@ -82,11 +85,13 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Register Date To :</label>
                         <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                            <div class='input-group date' id='regisdateto'>
+                            <div class='input-group p-0 date' id='regisdateto'>
                                 <input type='text' class="form-control form-control-sm" />
-                                <span class="input-group-addon">
-                                    <span class="fa fa-calendar"></span>
-                                </span>
+                                <div class="input-group-append input-group-addon">
+                                    <span class="input-group-text px-4">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
@@ -98,11 +103,13 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Activate Date From :</label>
                         <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                            <div class='input-group date' id='activatedatefrom'>
+                            <div class='input-group p-0 date' id='activatedatefrom'>
                                 <input type='text' class="form-control form-control-sm" />
-                                <span class="input-group-addon">
-                                    <span class="fa fa-calendar"></span>
-                                </span>
+                                <div class="input-group-append input-group-addon">
+                                    <span class="input-group-text px-4">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
@@ -112,11 +119,13 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Activate Date To :</label>
                         <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                            <div class='input-group date' id='ractivatedateto'>
+                            <div class='input-group p-0 date' id='ractivatedateto'>
                                 <input type='text' class="form-control form-control-sm" />
-                                <span class="input-group-addon">
-                                    <span class="fa fa-calendar"></span>
-                                </span>
+                                <div class="input-group-append input-group-addon">
+                                    <span class="input-group-text px-4">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
@@ -263,25 +272,36 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#regisdatefrom').datepicker({
-
+                format: 'dd/mm/yyyy',
+                daysOfWeekHighlighted: "6,0",
                 autoclose: true,
                 todayHighlight: true,
+                clearBtn: true,
             });
             $('#regisdateto').datepicker({
 
+                format: 'dd/mm/yyyy',
+                daysOfWeekHighlighted: "6,0",
                 autoclose: true,
                 todayHighlight: true,
+                clearBtn: true,
 
             });
             $('#activatedatefrom').datepicker({
 
+                format: 'dd/mm/yyyy',
+                daysOfWeekHighlighted: "6,0",
                 autoclose: true,
                 todayHighlight: true,
+                clearBtn: true,
             });
             $('#ractivatedateto').datepicker({
 
+                format: 'dd/mm/yyyy',
+                daysOfWeekHighlighted: "6,0",
                 autoclose: true,
                 todayHighlight: true,
+                clearBtn: true,
 
             });
 

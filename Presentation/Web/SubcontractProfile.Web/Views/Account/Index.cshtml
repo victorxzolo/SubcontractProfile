@@ -1,22 +1,30 @@
 ﻿
 @{
-    Layout = "~/Views/Shared/_LayoutRegister.cshtml";
-
+    //Layout = "~/Views/Shared/_LayoutRegister.cshtml";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
+<!-- Include SmartWizard CSS -->
+<link href="~/dist/css/smart_wizard.css" rel="stylesheet" type="text/css" />
+
+<!-- Optional SmartWizard theme -->
+<link href="~/dist/css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
+
+<!-- Include SmartWizard JavaScript source -->
+<script type="text/javascript" src="~/dist/js/jquery.smartWizard.min.js"></script>
 
 <div class="row justify-content-center">
     <div class="grid-margin stretch-card col-md-12 ">
-        <div class="card shadow p-3 mb-5 bg-white rounded">
+        @*<div class="card shadow p-3 mb-5 bg-white rounded">*@
             <div class="form-group my-4">
                 <div class="card-header bg-white">
                     <h3>ข้อมูลผู้สมัคร</h3>
                 </div>
             </div>
 
-            <div class="card-body">
+            @*<div class="card-body">*@
 
                 @*<div class="form-group">*@
-                <div id="smartwizard" >
+                <div id="smartwizard">
                     <ul>
                         <li><a href="#step-1">Step 1</a></li>
                         <li><a href="#step-2">Step 2</a></li>
@@ -56,8 +64,8 @@
 
 
 
-            </div>
-            <div class="row">
+            @*</div>*@
+            <div class="row mt-2">
 
                 <div class="col-md-12 col-sm-12 ">
 
@@ -69,7 +77,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        @*</div>*@
 
     </div>
 </div>

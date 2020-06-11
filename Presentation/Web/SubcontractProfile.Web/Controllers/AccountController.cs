@@ -15,6 +15,8 @@ namespace SubcontractProfile.Web.Controllers
 
         public IActionResult Index()
         {
+            ViewData["Controller"] = "Register";
+            ViewData["View"] = "Register";
             return View();
         }
     }

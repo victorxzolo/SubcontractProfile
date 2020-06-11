@@ -1,0 +1,179 @@
+.akrobatlight {font-family: 'akrobatlight';}
+.akrobatregular{font-family: 'akrobatregular';}
+.akrobatbold{font-family: 'akrobatbold';}
+.akrobatblack{font-family: 'akrobatblack';}
+
+.db_heaventlight{font-family: 'db_heaventlight';}
+.db_heaventregular{font-family: 'db_heaventregular';}
+.db_heaventmed{font-family: 'db_heaventmed';}
+.db_heaventbold{font-family: 'db_heaventbold';}
+
+.db_heaventlight_cond{font-family: 'db_heaventlight_cond';}
+.db_heavent_cond{font-family: 'db_heavent_cond';}
+.db_heaventmed_cond{font-family: 'db_heaventmed_cond';}
+.db_heaventbold_cond{font-family: 'db_heaventbold_cond';}
+
+.fzlantinghei{font-family: 'fzlantinghei-db-gbkregular';}
+
+/*//////////////////// akrobat ////////////////////*/
+@font-face {
+    font-family: 'akrobatlight';
+    src: url('akrobat-light-webfont.eot');
+    src: url('akrobat-light-webfontd41d.eot?#iefix') format('embedded-opentype'),
+         url('https://business.ais.co.th/error404_business.html') format('woff2'),
+         url('akrobat-light-webfont.woff') format('woff'),
+         url('akrobat-light-webfont.ttf') format('truetype'),
+         url('akrobat-light-webfont.svg#akrobatlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'akrobatregular';
+    src: url('akrobat-regular-webfont.eot');
+    src: url('akrobat-regular-webfontd41d.eot?#iefix') format('embedded-opentype'),
+         url('https://business.ais.co.th/error404_business.html') format('woff2'),
+         url('akrobat-regular-webfont.woff') format('woff'),
+         url('akrobat-regular-webfont.ttf') format('truetype'),
+         url('akrobat-regular-webfont.svg#akrobatregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'akrobatbold';
+    src: url('akrobat-bold-webfont.eot');
+    src: url('akrobat-bold-webfontd41d.eot?#iefix') format('embedded-opentype'),
+         url('https://business.ais.co.th/error404_business.html') format('woff2'),
+         url('akrobat-bold-webfont.woff') format('woff'),
+         url('akrobat-bold-webfont.ttf') format('truetype'),
+         url('akrobat-bold-webfont.svg#akrobatbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'akrobatblack';
+    src: url('akrobat-black-webfont.eot');
+    src: url('akrobat-black-webfontd41d.eot?#iefix') format('embedded-opentype'),
+         url('https://business.ais.co.th/error404_business.html') format('woff2'),
+         url('akrobat-black-webfont.woff') format('woff'),
+         url('akrobat-black-webfont.ttf') format('truetype'),
+         url('akrobat-black-webfont.svg#akrobatblack') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+/*//////////////////// heavent ////////////////////*/
+@font-face {
+    font-family: 'db_heaventlight';
+    src: url('db_heavent_li_v3.2-webfont.eot');
+    src: url('db_heavent_li_v3.2-webfontd41d.eot?#iefix') format('embedded-opentype'),
+         url('https://business.ais.co.th/error404_business.html') format('woff2'),
+         url('db_heavent_li_v3.2-webfont.woff') format('woff'),
+         url('db_heavent_li_v3.2-webfont.ttf') format('truetype'),
+         url('db_heavent_li_v3.2-webfont.svg#db_heaventlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'db_heaventregular';
+    src: url('db_heavent_v3.2-webfont.eot');
+    src: url('db_heavent_v3.2-webfontd41d.eot?#iefix') format('embedded-opentype'),
+         url('https://business.ais.co.th/error404_business.html') format('woff2'),
+         url('db_heavent_v3.2-webfont.woff') format('woff'),
+         url('db_heavent_v3.2-webfont.ttf') format('truetype'),
+         url('db_heavent_v3.2-webfont.svg#db_heaventregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'db_heaventmed';
+    src: url('db_heavent_med_v3.2-webfont.eot');
+    src: url('db_heavent_med_v3.2-webfontd41d.eot?#iefix') format('embedded-opentype'),
+         url('https://business.ais.co.th/error404_business.html') format('woff2'),
+         url('db_heavent_med_v3.2-webfont.woff') format('woff'),
+         url('db_heavent_med_v3.2-webfont.ttf') format('truetype'),
+         url('db_heavent_med_v3.2-webfont.svg#db_heaventmed') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'db_heaventbold';
+    src: url('db_heavent_bd_v3.2-webfont.eot');
+    src: url('db_heavent_bd_v3.2-webfontd41d.eot?#iefix') format('embedded-opentype'),
+         url('https://business.ais.co.th/error404_business.html') format('woff2'),
+         url('db_heavent_bd_v3.2-webfont.woff') format('woff'),
+         url('db_heavent_bd_v3.2-webfont.ttf') format('truetype'),
+         url('db_heavent_bd_v3.2-webfont.svg#db_heaventbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+/*//////////////////// heavent ////////////////////*/
+@font-face {
+    font-family: 'db_heaventlight_cond';
+    src: url('db_heavent_li_cond_v3.2-webfont.eot');
+    src: url('db_heavent_li_cond_v3.2-webfontd41d.eot?#iefix') format('embedded-opentype'),
+         url('https://business.ais.co.th/error404_business.html') format('woff2'),
+         url('db_heavent_li_cond_v3.2-webfont.woff') format('woff'),
+         url('db_heavent_li_cond_v3.2-webfont.ttf') format('truetype'),
+         url('db_heavent_li_cond_v3.2-webfont.svg#db_heaventlight_cond') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'db_heavent_cond';
+    src: url('db_heavent_cond_v3.2-webfont.eot');
+    src: url('db_heavent_cond_v3.2-webfontd41d.eot?#iefix') format('embedded-opentype'),
+         url('https://business.ais.co.th/error404_business.html') format('woff2'),
+         url('db_heavent_cond_v3.2-webfont.woff') format('woff'),
+         url('db_heavent_cond_v3.2-webfont.ttf') format('truetype'),
+         url('db_heavent_cond_v3.2-webfont.svg#db_heaventcond') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'db_heaventmed_cond';
+    src: url('db_heavent_med_cond_v3.2-webfont.eot');
+    src: url('db_heavent_med_cond_v3.2-webfontd41d.eot?#iefix') format('embedded-opentype'),
+         url('https://business.ais.co.th/error404_business.html') format('woff2'),
+         url('db_heavent_med_cond_v3.2-webfont.woff') format('woff'),
+         url('db_heavent_med_cond_v3.2-webfont.ttf') format('truetype'),
+         url('db_heavent_med_cond_v3.2-webfont.svg#db_heaventmed_cond') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'db_heaventbold_cond';
+    src: url('db_heavent_bd_cond_v3.2-webfont.eot');
+    src: url('db_heavent_bd_cond_v3.2-webfontd41d.eot?#iefix') format('embedded-opentype'),
+         url('https://business.ais.co.th/error404_business.html') format('woff2'),
+         url('db_heavent_bd_cond_v3.2-webfont.woff') format('woff'),
+         url('db_heavent_bd_cond_v3.2-webfont.ttf') format('truetype'),
+         url('db_heavent_bd_cond_v3.2-webfont.svg#db_heaventbold_cond') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'fzlantinghei-db-gbkregular';
+    src: url('https://business.ais.co.th/error404_business.html') format('woff2'),
+         url('fzltzhk-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}

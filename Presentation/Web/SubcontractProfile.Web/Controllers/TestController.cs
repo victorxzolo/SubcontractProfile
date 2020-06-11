@@ -15,5 +15,12 @@ namespace SubcontractProfile.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult Dashboard()
+        {
+            ViewData["Controller"] = "Test";
+            ViewData["View"] = "Dashboard";
+            return View();
+        }
     }
 }

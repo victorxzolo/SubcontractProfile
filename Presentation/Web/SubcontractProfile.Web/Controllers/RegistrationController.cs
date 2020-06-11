@@ -11,14 +11,20 @@ namespace SubcontractProfile.Web.Controllers
        
         public IActionResult ActivateProfile()
         {
+            ViewData["Controller"] = "Registration";
+            ViewData["View"] = "Activate Profile";
             return View();
         }
         public IActionResult SearchCompanyVerify()
         {
+            ViewData["Controller"] = "Registration";
+            ViewData["View"] = "Search Company Verify";
             return View();
         }
         public IActionResult CompanyVerify(int id)
         {
+            ViewData["Controller"] = "Registration";
+            ViewData["View"] = "Company Verify";
             return View();
         }
     }

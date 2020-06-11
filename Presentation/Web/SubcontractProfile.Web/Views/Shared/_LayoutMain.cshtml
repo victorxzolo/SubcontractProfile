@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TestTheme</title>
+
+
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+    <link href="~/lib/fonts/fonts.css" rel="stylesheet" />
+    <link href="~/lib/css/main.css" rel="stylesheet" />
+    <link href="~/lib/css/responsive.css" rel="stylesheet" />
+    <link href="~/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/popper.js/umd/popper.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/moment.js/moment.js"></script>
+    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <script src="~/lib/assets/revamp/js/plugins/jquery.matchHeight-min.js"></script>
+    <script src="~/js/jsMain/jquery.sticky-sidebar.js"></script>
+
+    <style type="text/css">
+
+        .datepicker {
+            font-size: 0.875em;
+        }
+
+            .datepicker td, .datepicker th {
+                width: 1.5em;
+                height: 1.5em;
+            }
+    </style>
+</head>
+        <body>
+            <div id="container">
+                <div id="wrapper">
+                    <ol class="breadcrumb breadcrumb_sme">
+                        <li class="breadcrumb-item"><a href="#"><img src="https://business.ais.co.th/sme/images/home.svg" alt=""></a></li>
+                        <li class="breadcrumb-item"><a href="#">@ViewData["Controller"]</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@ViewData["View"]</li>
+                    </ol>
+
+                    <section id="main_package" class="pad_section">
+                        <div class="container-fluid">
+
+                            <div class="row">
+                                <div class="col p-0">
+                                    <div class="box_txthead_main">
+                                        <div class="txthead_main_left hei"></div>
+                                        <div class="txthead_main_right txtblack hei">
+                                            <h2><span class="txtgreen2">@ViewData["View"]</span></h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="wrap_left_menu">
+                                    @*<div class="wrap_menu_bar">
+                                            <div class="menu_bar">
+                                                <div class="thumbnail icon_menu"></div>
+
+                                            </div>
+                                        </div>*@
+    <div class="filter_nav filter">
+        <div class="filter_nav_in">
+            <div class="item">
+                <a href="#" class="link_head"></a>
+                <div class="heading">Dashboard</div>
+                <div class="content">
+                    <a href="@Url.Action("Dashboard", "Test")" class="filter_sub"><span>Dashboard</span></a>
+
+                </div>
+
+            </div>
+            <div class="item ">
+                <a href="#" class="link_head"></a>
+                <div class="heading">Main</div>
+                <div class="content">
+                    <a href="@Url.Action("Login", "Account")" class="filter_sub"><span>Login</span></a>
+                    <a href="@Url.Action("Index", "Account")" class="filter_sub"><span>Register</span></a>
+
+                </div>
+            </div>
+            <div class="item open">
+                <a href="#" class="link_head"></a>
+                <div class="heading">Registration</div>
+                <div class="content" style="display: block;">
+                    <a href="@Url.Action("SearchCompanyVerify", "Registration")" class="filter_sub"><span>CompanyVerify</span></a>
+                    <a href="@Url.Action("ActivateProfile", "Registration")" class="filter_sub"><span>ActivateProfile</span></a>
+                </div>
+            </div>
+            <div class="item ">
+                <a href="#" class="link_head"></a>
+                <div class="heading">Training</div>
+                <div class="content">
+                    <a href="@Url.Action("RequestTraining", "Training")" class="filter_sub"><span>RequestTraining</span></a>
+                    <a href="@Url.Action("RequestTrainingauthorities", "Training")" class="filter_sub"><span>RequestTraining Authorities</span></a>
+                    <a href="@Url.Action("Reporttestresult", "Training")" class="filter_sub"><span>Report Test Result</span></a>
+                    <a href="@Url.Action("Reporttestresultauthorities", "Training")" class="filter_sub"><span>Report Test Result</span></a>
+                </div>
+            </div>
+
+            <div class="item">
+                <a href="#" class="link_head"></a>
+                <div class="heading">Payment</div>
+                <div class="content">
+                    <a href="@Url.Action("ConfirmPayment", "Payment")" class="filter_sub"><span>Confirm Payment</span></a>
+                    <a href="@Url.Action("VerifyPayment", "Payment")" class="filter_sub"><span>Verify Payment</span></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+
+    <div class="overlay_content_card"></div>
+    <div class="content_card filter" style="z-index:0;">
+
+
+        <div class="row m-0 ">
+
+            <div class="col-xl-12 col-lg-12 col-md-12 mb-sm-12 mb-1 group-all group02">
+                <div class="box-card">
+                    <div class="box_card_txt" style="width:100%;height:100%;">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+    </div>
+    </div>
+    </section>
+
+
+    </div>
+    </div>
+    <div id="aisfooter"></div>
+
+
+    <div class="modal fade" id="MessageFeedbackPopUp" tabindex="-1" role="dialog" aria-labelledby="MessageFeedbackPopUpLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" id="headerMessageFeedback">
+                    <h4 class="modal-title" id="MessageFeedbackPopUpLabel">Notification</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <label id="lbMessageFeedback"></label>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('.hei,.hei2,.hei3,.hei4,.hei5,.hei_price').matchHeight();
+
+            $('.filter_nav_in .item .heading').click(function () {
+                var a = $(this).closest('.item');
+                var b = $(a).hasClass('open');
+                var c = $(a).closest('.filter_nav_in').find('.open');
+                if (b != true) {
+                    $(c).find('.content').slideUp(200);
+                    $(c).removeClass('open');
+                }
+                $(a).toggleClass('open');
+                $(a).find('.content').slideToggle(200);
+            });
+
+            $('.menu_bar').click(function (event) {
+                open_menu();
+            });
+            $('.overlay_content_card').click(function (event) {
+                close_menu();
+            });
+
+
+            $('.filter_mb ul li').click(function () {
+                $('.filter_mb ul li').removeClass('active');
+                $(this).addClass('active');
+            });
+
+
+
+            $('.wrap_left_menu').stickySidebar({
+                topSpacing: 50,
+                bottomSpacing: 50,
+                containerSelector: '#main_package',
+                innerWrapperSelector: '.wrap_left_menu',
+                minWidth: 576
+            });
+
+
+
+
+
+        });
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 1200) {
+                close_menu();
+            }
+        });
+
+        //$(window).scroll(function () {
+        //    if ($(this).scrollTop() > $('#main_package').height() - 100) {
+        //        $('.wrap_menu_bar').fadeOut('slow');
+        //    } else {
+        //        console.log('error');
+        //        $('.wrap_menu_bar').fadeIn('slow');
+        //    }
+        //});
+
+        $(window).resize(function () {
+            close_menu();
+        });
+
+        function open_menu() {
+            $('.filter_nav.filter').toggleClass('open');
+            $('.overlay_content_card').toggleClass('open');
+            $('.content_card').toggleClass('open');
+            $('.icon_menu').toggleClass('open');
+            $('.box_txthead_main').toggleClass('open');
+        }
+
+        function close_menu() {
+            $('.filter_nav.filter').removeClass('open');
+            $('.overlay_content_card').removeClass('open');
+            $('.content_card').removeClass('open');
+            $('.icon_menu').removeClass('open');
+            $('.box_txthead_main').removeClass('open');
+        }
+        function showFeedback(type, msg, title, footer) {
+            //if (msg !== "") {
+            $("#headerMessageFeedback").removeClass();
+            $("#headerMessageFeedback").addClass("modal-header");
+            if (type === "primary") { $("#headerMessageFeedback").addClass("btn-primary"); }
+            else if (type === "success") { $("#headerMessageFeedback").addClass("btn-success"); }
+            else if (type === "info") { $("#headerMessageFeedback").addClass("btn-info"); }
+            else if (type === "warning") { $("#headerMessageFeedback").addClass("btn-warning"); }
+            else if (type === "error") { $("#headerMessageFeedback").addClass("btn-danger"); }
+            else if (type === "light") { $("#headerMessageFeedback").addClass("btn-light"); }
+            else if (type === "secondary") { $("#headerMessageFeedback").addClass("btn-secondary"); }
+            else { $("#headerMessageFeedback").addClass("btn-default"); }
+
+            if (title !== undefined) $("#MessageFeedbackPopUpLabel").text(title); else $("#MessageFeedbackPopUpLabel").text("Notification");
+
+
+            $("#lbMessageFeedback").html(msg);
+            if (footer != "") {
+                $('.modal-footer').html(footer)
+            }
+            $("#MessageFeedbackPopUp").modal('show');
+            //}
+        }
+    </script>
+
+    @RenderSection("Scripts", required: false)
+    </body>
+</html>
