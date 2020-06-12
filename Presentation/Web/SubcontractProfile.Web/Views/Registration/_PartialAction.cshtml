@@ -741,11 +741,13 @@
         <div class="form-group row">
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Contract Start Date :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <div class='input-group date' id='contractstartdate'>
+                <div class='input-group p-0 date' id='contractstartdate'>
                     <input type='text' class="form-control form-control-sm" />
-                    <span class="input-group-addon">
-                        <span class="fa fa-calendar"></span>
-                    </span>
+                    <div class="input-group-append input-group-addon">
+                        <span class="input-group-text px-4">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
                 </div>
             </div>
 
@@ -755,11 +757,13 @@
         <div class="form-group row">
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Contract End Date :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <div class='input-group date' id='contractenddate'>
+                <div class='input-group p-0 date' id='contractenddate'>
                     <input type='text' class="form-control form-control-sm" />
-                    <span class="input-group-addon">
-                        <span class="fa fa-calendar"></span>
-                    </span>
+                    <div class="input-group-append input-group-addon">
+                        <span class="input-group-text px-4">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
                 </div>
             </div>
 
@@ -781,23 +785,25 @@
 
 
 
-@section scripts
-{
 
     <script type="text/javascript">
         $(document).ready(function () {
+     
             $('#contractstartdate').datepicker({
-
+                format: 'dd/mm/yyyy',
+                daysOfWeekHighlighted: "6,0",
                 autoclose: true,
                 todayHighlight: true,
+                clearBtn: true,
             });
             $('#contractenddate').datepicker({
-
+                format: 'dd/mm/yyyy',
+                daysOfWeekHighlighted: "6,0",
                 autoclose: true,
                 todayHighlight: true,
-
+                clearBtn: true,
             });
         });
     </script>
 
-}
+
