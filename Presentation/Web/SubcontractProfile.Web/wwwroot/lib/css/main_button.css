@@ -39,6 +39,7 @@ button:focus {
         font-family: 'db_heaventmed_cond';
         /*	transform: translateY(-15%);*/
         top: 50%;
+        margin-right: 5px;
     }
 
     .btn-search:before {
@@ -91,6 +92,7 @@ button:focus {
         font-family: 'db_heaventmed_cond';
         /*	transform: translateY(-15%);*/
         top: 50%;
+        margin-right: 5px;
     }
 
     .btn-clear:before {
@@ -116,7 +118,7 @@ button:focus {
 
 
 
-.btn-active {
+.btn-check {
     font-size: 15px;
     background: #97cd1f;
     border-radius: 50px;
@@ -137,7 +139,7 @@ button:focus {
     bottom: 5px;
 }
 
-    .btn-active span {
+    .btn-check span {
         opacity: 1;
         transition: all 0.2s ease;
         position: relative;
@@ -145,9 +147,10 @@ button:focus {
         font-family: 'db_heaventmed_cond';
         /*	transform: translateY(-15%);*/
         top: 50%;
+        margin-right: 5px;
     }
 
-    .btn-active:before {
+    .btn-check:before {
         content: "\f00c";
         font-family: FontAwesome;
         position: absolute;
@@ -155,15 +158,400 @@ button:focus {
         transition: all 0.2s ease;
     }
 
-    .btn-active:hover:before {
+    .btn-check:hover:before {
         left: calc(100% - 55%);
     }
 
-    .btn-active:hover span {
+    .btn-check:hover span {
         opacity: 0;
     }
 
-    .btn-active > * {
+    .btn-check > * {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+
+
+.btn-cancel {
+    font-size: 15px;
+    color: #fff;
+    display: block;
+    border-radius: 50px;
+    background: #000;
+    height: 35px;
+    text-align: center;
+    line-height: 34px;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    max-width: 20em;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    bottom: 5px;
+    
+}
+
+    .btn-cancel span {
+        opacity: 1;
+        transition: all 0.2s ease;
+        position: relative;
+        padding-left: 23px;
+        font-family: 'db_heaventmed_cond';
+        /*	transform: translateY(-15%);*/
+        top: 50%;
+        margin-right: 5px;
+    }
+
+    .btn-cancel:before {
+        content: "\f05e";
+        font-family: FontAwesome;
+        position: absolute;
+        left: calc(100% - 90%);
+        transition: all 0.2s ease;
+    }
+
+    .btn-cancel:hover:before {
+        left: calc(100% - 55%);
+    }
+
+    .btn-cancel:hover span {
+        opacity: 0;
+    }
+
+    .btn-cancel > * {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+
+.btn-undo {
+    font-size: 15px;
+    color: #fff;
+    display: block;
+    border-radius: 50px;
+    background: #6c757d;
+    height: 35px;
+    text-align: center;
+    line-height: 34px;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    max-width: 20em;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    bottom: 5px;
+}
+
+    .btn-undo span {
+        opacity: 1;
+        transition: all 0.2s ease;
+        position: relative;
+        padding-left: 23px;
+        font-family: 'db_heaventmed_cond';
+        /*	transform: translateY(-15%);*/
+        top: 50%;
+        margin-right: 5px;
+    }
+
+    .btn-undo:before {
+        content: "\f0e2";
+        font-family: FontAwesome;
+        position: absolute;
+        left: calc(100% - 90%);
+        transition: all 0.2s ease;
+    }
+
+    .btn-undo:hover:before {
+        left: calc(100% - 55%);
+    }
+
+    .btn-undo:hover span {
+        opacity: 0;
+    }
+
+    .btn-undo > * {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+
+.btn-times {
+    font-size: 15px;
+    color: #212529;
+    display: block;
+    border-radius: 50px;
+    background: #ffc107;
+    height: 35px;
+    text-align: center;
+    line-height: 34px;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    max-width: 20em;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    bottom: 5px;
+}
+
+    .btn-times span {
+        opacity: 1;
+        transition: all 0.2s ease;
+        position: relative;
+        padding-left: 23px;
+        font-family: 'db_heaventmed_cond';
+        /*	transform: translateY(-15%);*/
+        top: 50%;
+        margin-right: 5px;
+        color: #212529;
+    }
+
+    .btn-times:before {
+        content: "\f00d";
+        font-family: FontAwesome;
+        position: absolute;
+        left: calc(100% - 90%);
+        transition: all 0.2s ease;
+        color: #212529;
+    }
+
+    .btn-times:hover:before {
+        left: calc(100% - 55%);
+    }
+
+    .btn-times:hover span {
+        opacity: 0;
+    }
+
+    .btn-times > * {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+
+
+.btn-refresh {
+    font-size: 15px;
+    color: #fff;
+    display: block;
+    border-radius: 50px;
+    background: #000;
+    height: 35px;
+    text-align: center;
+    line-height: 34px;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    max-width: 20em;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    bottom: 5px;
+}
+
+    .btn-refresh span {
+        opacity: 1;
+        transition: all 0.2s ease;
+        position: relative;
+        padding-left: 23px;
+        font-family: 'db_heaventmed_cond';
+        /*	transform: translateY(-15%);*/
+        top: 50%;
+        margin-right: 5px;
+    }
+
+    .btn-refresh:before {
+        content: "\f021";
+        font-family: FontAwesome;
+        position: absolute;
+        left: calc(100% - 90%);
+        transition: all 0.2s ease;
+    }
+
+    .btn-refresh:hover:before {
+        left: calc(100% - 55%);
+    }
+
+    .btn-refresh:hover span {
+        opacity: 0;
+    }
+
+    .btn-refresh > * {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+
+.btn-plus-circle {
+    font-size: 15px;
+    background: #97cd1f;
+    border-radius: 50px;
+    color: #fff;
+    height: 35px;
+    text-align: center;
+    line-height: 34px;
+    outline: none;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    max-width: 20em;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    bottom: 5px;
+}
+
+    .btn-plus-circle span {
+        opacity: 1;
+        transition: all 0.2s ease;
+        position: relative;
+        padding-left: 23px;
+        font-family: 'db_heaventmed_cond';
+        /*	transform: translateY(-15%);*/
+        top: 50%;
+        margin-right: 5px;
+    }
+
+    .btn-plus-circle:before {
+        content: "\f055";
+        font-family: FontAwesome;
+        position: absolute;
+        left: calc(100% - 90%);
+        transition: all 0.2s ease;
+    }
+
+    .btn-plus-circle:hover:before {
+        left: calc(100% - 55%);
+    }
+
+    .btn-plus-circle:hover span {
+        opacity: 0;
+    }
+
+    .btn-plus-circle > * {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+
+
+.btn-edit {
+    font-size: 15px;
+    background: #97cd1f;
+    border-radius: 50px;
+    color: #fff;
+    height: 35px;
+    text-align: center;
+    line-height: 34px;
+    outline: none;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    max-width: 20em;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    bottom: 5px;
+}
+
+    .btn-edit span {
+        opacity: 1;
+        transition: all 0.2s ease;
+        position: relative;
+        padding-left: 23px;
+        font-family: 'db_heaventmed_cond';
+        /*	transform: translateY(-15%);*/
+        top: 50%;
+        margin-right: 5px;
+    }
+
+    .btn-edit:before {
+        content: "\f040";
+        font-family: FontAwesome;
+        position: absolute;
+        left: calc(100% - 90%);
+        transition: all 0.2s ease;
+    }
+
+    .btn-edit:hover:before {
+        left: calc(100% - 55%);
+    }
+
+    .btn-edit:hover span {
+        opacity: 0;
+    }
+
+    .btn-edit > * {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+
+
+.btn-forward {
+    font-size: 15px;
+    background: #97cd1f;
+    border-radius: 50px;
+    color: #fff;
+    height: 35px;
+    text-align: center;
+    line-height: 34px;
+    outline: none;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    max-width: 20em;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    bottom: 5px;
+}
+
+    .btn-forward span {
+        opacity: 1;
+        transition: all 0.2s ease;
+        position: relative;
+        padding-left: 23px;
+        font-family: 'db_heaventmed_cond';
+        /*	transform: translateY(-15%);*/
+        top: 50%;
+        margin-right: 5px;
+    }
+
+    .btn-forward:before {
+        content: "\f061";
+        font-family: FontAwesome;
+        position: absolute;
+        left: calc(100% - 90%);
+        transition: all 0.2s ease;
+    }
+
+    .btn-forward:hover:before {
+        left: calc(100% - 55%);
+    }
+
+    .btn-forward:hover span {
+        opacity: 0;
+    }
+
+    .btn-forward > * {
         display: inline-block;
         vertical-align: middle;
     }

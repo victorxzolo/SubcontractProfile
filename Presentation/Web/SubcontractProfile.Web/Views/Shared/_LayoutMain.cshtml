@@ -7,11 +7,9 @@
 
 
 
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-
-
-    <link href="~/lib/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet" />
-    <link href="~/lib/bootstrap/dist/css/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/bootstrap/dist/css/bootstrap-reboot.css" rel="stylesheet" />
     <link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
 
     <link href="~/lib/fonts/fonts.css" rel="stylesheet" />
@@ -21,10 +19,11 @@
     <link href="~/lib/css/main_button.css" rel="stylesheet" />
 
 
-    <script src="~/lib/jquery/dist/jquery.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
+    <script src="~/jquery/jquery.js"></script>
     <script src="~/lib/popper.js/umd/popper.js"></script>
 
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/lib/moment.js/moment.js"></script>
     <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 
@@ -46,11 +45,11 @@
         <body>
             <div id="container">
                 <div id="wrapper">
-                    <ol class="breadcrumb breadcrumb_sme">
+                    <ul class="breadcrumb breadcrumb_sme">
                         <li class="breadcrumb-item"><a href="#"><img src="https://business.ais.co.th/sme/images/home.svg" alt=""></a></li>
                         <li class="breadcrumb-item"><a href="#">@ViewData["Controller"]</a></li>
                         <li class="breadcrumb-item active" aria-current="page">@ViewData["View"]</li>
-                    </ol>
+                    </ul>
 
                     <section id="main_package" class="pad_section">
                         <div class="container-fluid">
@@ -129,7 +128,7 @@
 
 
     <div class="overlay_content_card"></div>
-    <div class="content_card filter" style="z-index:0;">
+    <div class="content_card filter">
 
 
         <div class="row m-0 ">

@@ -1,6 +1,6 @@
 ﻿
 @{
-    //Layout = "~/Views/Shared/_LayoutRegister.cshtml";
+   // Layout = "~/Views/Shared/_LayoutRegister.cshtml";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 <!-- Include SmartWizard CSS -->
@@ -67,13 +67,18 @@
             @*</div>*@
             <div class="row mt-2">
 
-                <div class="col-md-12 col-sm-12 ">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12 ">
 
 
-                    <div role="group" class="float-right" style="margin-right:120px">
-                        <button class="btn btn-secondary" id="prev-btn" type="button">ย้อนกลับ</button>
-                        <button class="btn btn-danger" id="reset-btn" type="button">ล้างข้อมูล</button>
-                        <button class="btn btn-success" id="next-btn" type="button">ถัดไป</button>
+                    <div role="group" class="d-flex float-right" style="margin-right:120px">
+                        @*<button class="btn btn-secondary" id="prev-btn" type="button">ย้อนกลับ</button>
+        <button class="btn btn-danger" id="reset-btn" type="button">ล้างข้อมูล</button>
+        <button class="btn btn-success" id="next-btn" type="button">ถัดไป</button>*@
+
+                        <button class="btn-border btn-undo mr-2" id="prev-btn" type="button"><span>ย้อนกลับ</span></button>
+                        <button class="btn-border btn-clear mr-2" id="reset-btn" type="button"><span>ล้างข้อมูล</span></button>
+                        <button class="btn-border btn-forward" id="next-btn" type="button"><span>ถัดไป</span></button>
+
                     </div>
                 </div>
             </div>

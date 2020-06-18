@@ -166,7 +166,7 @@
                         @*<button class="btn btn-success float-right" id="btnactivateprofile" type="button">
             Activate Profile
         </button>*@
-                        <button class="btn-border btn-active float-right" type="button" id="btnactivateprofile">
+                        <button class="btn-border btn-check float-right" type="button" id="btnactivateprofile">
                             <span>Activate Profile</span>
                         </button>
                     </div>
@@ -331,8 +331,8 @@
 
             $('#btnactivateprofile').click(function () {
                 showFeedback("light", 'Are you sure confrim activate profile?', "Information",
-                    " <button type='button' class='btn btn-success' id='btnconfrim'>OK</button>\
-                      <button type = 'button' class= 'btn btn-secondary' data-dismiss='modal' id='btncancelpopup'>Cancel</button >");
+                    " <button type='button' class='btn-border btn-check' id='btnconfrim'><span>OK</span></button>\
+                      <button type = 'button' class= 'btn-border btn-cancel' data-dismiss='modal' id='btncancelpopup'><span>Cancel</span></button >");
             });
         });
         
