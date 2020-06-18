@@ -10,7 +10,7 @@ button:focus {
     color: #fff;
 }
 
-.btn-search {
+.btn-green {
     font-size: 15px;
     background: #97cd1f;
     border-radius: 50px;
@@ -31,7 +31,7 @@ button:focus {
     bottom: 5px;
 }
 
-    .btn-search span {
+    .btn-green span {
         opacity: 1;
         transition: all 0.2s ease;
         position: relative;
@@ -42,85 +42,30 @@ button:focus {
         margin-right: 5px;
     }
 
-    .btn-search:before {
-        content: "\f002";
-        font-family: FontAwesome;
-        position: absolute;
+    .btn-green .icon {
+        position: relative;
         left: calc(100% - 90%);
         transition: all 0.2s ease;
     }
 
-    .btn-search:hover:before {
+    .btn-green:hover .icon {
         left: calc(100% - 55%);
     }
 
-    .btn-search:hover span {
+    .btn-green:hover span {
         opacity: 0;
     }
 
-    .btn-search > * {
+
+    .btn-green > * {
         display: inline-block;
         vertical-align: middle;
     }
 
-.btn-clear {
+
+.btn-black {
     font-size: 15px;
-    color: #fff;
-    display: block;
-    border-radius: 50px;
     background: #000;
-    height: 35px;
-    text-align: center;
-    line-height: 34px;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-    max-width: 20em;
-    white-space: nowrap;
-    overflow: hidden;
-    position: relative;
-    bottom: 5px;
-}
-
-    .btn-clear span {
-        opacity: 1;
-        transition: all 0.2s ease;
-        position: relative;
-        padding-left: 23px;
-        font-family: 'db_heaventmed_cond';
-        /*	transform: translateY(-15%);*/
-        top: 50%;
-        margin-right: 5px;
-    }
-
-    .btn-clear:before {
-        content: "\f1f8";
-        font-family: FontAwesome;
-        position: absolute;
-        left: calc(100% - 90%);
-        transition: all 0.2s ease;
-    }
-
-    .btn-clear:hover:before {
-        left: calc(100% - 55%);
-    }
-
-    .btn-clear:hover span {
-        opacity: 0;
-    }
-
-    .btn-clear > * {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-
-
-.btn-check {
-    font-size: 15px;
-    background: #97cd1f;
     border-radius: 50px;
     color: #fff;
     height: 35px;
@@ -139,7 +84,7 @@ button:focus {
     bottom: 5px;
 }
 
-    .btn-check span {
+    .btn-black span {
         opacity: 1;
         transition: all 0.2s ease;
         position: relative;
@@ -150,93 +95,36 @@ button:focus {
         margin-right: 5px;
     }
 
-    .btn-check:before {
-        content: "\f00c";
-        font-family: FontAwesome;
-        position: absolute;
-        left: calc(100% - 90%);
-        transition: all 0.2s ease;
-    }
-
-    .btn-check:hover:before {
-        left: calc(100% - 55%);
-    }
-
-    .btn-check:hover span {
-        opacity: 0;
-    }
-
-    .btn-check > * {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-
-
-.btn-cancel {
-    font-size: 15px;
-    color: #fff;
-    display: block;
-    border-radius: 50px;
-    background: #000;
-    height: 35px;
-    text-align: center;
-    line-height: 34px;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-    max-width: 20em;
-    white-space: nowrap;
-    overflow: hidden;
-    position: relative;
-    bottom: 5px;
-    
-}
-
-    .btn-cancel span {
-        opacity: 1;
-        transition: all 0.2s ease;
+    .btn-black .icon {
         position: relative;
-        padding-left: 23px;
-        font-family: 'db_heaventmed_cond';
-        /*	transform: translateY(-15%);*/
-        top: 50%;
-        margin-right: 5px;
-    }
-
-    .btn-cancel:before {
-        content: "\f05e";
-        font-family: FontAwesome;
-        position: absolute;
         left: calc(100% - 90%);
         transition: all 0.2s ease;
     }
 
-    .btn-cancel:hover:before {
+    .btn-black:hover .icon {
         left: calc(100% - 55%);
     }
 
-    .btn-cancel:hover span {
+    .btn-black:hover span {
         opacity: 0;
     }
 
-    .btn-cancel > * {
+
+    .btn-black > * {
         display: inline-block;
         vertical-align: middle;
     }
 
 
-.btn-undo {
+.btn-gray {
     font-size: 15px;
-    color: #fff;
-    display: block;
-    border-radius: 50px;
     background: #6c757d;
+    border-radius: 50px;
+    color: #fff;
     height: 35px;
     text-align: center;
     line-height: 34px;
+    outline: none;
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -moz-transition: 0.5s all;
@@ -249,7 +137,7 @@ button:focus {
     bottom: 5px;
 }
 
-    .btn-undo span {
+    .btn-gray span {
         opacity: 1;
         transition: all 0.2s ease;
         position: relative;
@@ -260,144 +148,32 @@ button:focus {
         margin-right: 5px;
     }
 
-    .btn-undo:before {
-        content: "\f0e2";
-        font-family: FontAwesome;
-        position: absolute;
+    .btn-gray .icon {
+        position: relative;
         left: calc(100% - 90%);
         transition: all 0.2s ease;
     }
 
-    .btn-undo:hover:before {
+    .btn-gray:hover .icon {
         left: calc(100% - 55%);
     }
 
-    .btn-undo:hover span {
+    .btn-gray:hover span {
         opacity: 0;
     }
 
-    .btn-undo > * {
+
+    .btn-gray > * {
         display: inline-block;
         vertical-align: middle;
     }
 
 
-.btn-times {
+.btn-orange {
     font-size: 15px;
-    color: #212529;
-    display: block;
-    border-radius: 50px;
     background: #ffc107;
-    height: 35px;
-    text-align: center;
-    line-height: 34px;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-    max-width: 20em;
-    white-space: nowrap;
-    overflow: hidden;
-    position: relative;
-    bottom: 5px;
-}
-
-    .btn-times span {
-        opacity: 1;
-        transition: all 0.2s ease;
-        position: relative;
-        padding-left: 23px;
-        font-family: 'db_heaventmed_cond';
-        /*	transform: translateY(-15%);*/
-        top: 50%;
-        margin-right: 5px;
-        color: #212529;
-    }
-
-    .btn-times:before {
-        content: "\f00d";
-        font-family: FontAwesome;
-        position: absolute;
-        left: calc(100% - 90%);
-        transition: all 0.2s ease;
-        color: #212529;
-    }
-
-    .btn-times:hover:before {
-        left: calc(100% - 55%);
-    }
-
-    .btn-times:hover span {
-        opacity: 0;
-    }
-
-    .btn-times > * {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-
-
-.btn-refresh {
-    font-size: 15px;
-    color: #fff;
-    display: block;
     border-radius: 50px;
-    background: #000;
-    height: 35px;
-    text-align: center;
-    line-height: 34px;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-    max-width: 20em;
-    white-space: nowrap;
-    overflow: hidden;
-    position: relative;
-    bottom: 5px;
-}
-
-    .btn-refresh span {
-        opacity: 1;
-        transition: all 0.2s ease;
-        position: relative;
-        padding-left: 23px;
-        font-family: 'db_heaventmed_cond';
-        /*	transform: translateY(-15%);*/
-        top: 50%;
-        margin-right: 5px;
-    }
-
-    .btn-refresh:before {
-        content: "\f021";
-        font-family: FontAwesome;
-        position: absolute;
-        left: calc(100% - 90%);
-        transition: all 0.2s ease;
-    }
-
-    .btn-refresh:hover:before {
-        left: calc(100% - 55%);
-    }
-
-    .btn-refresh:hover span {
-        opacity: 0;
-    }
-
-    .btn-refresh > * {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-
-.btn-plus-circle {
-    font-size: 15px;
-    background: #97cd1f;
-    border-radius: 50px;
-    color: #fff;
+    color: #212529;
     height: 35px;
     text-align: center;
     line-height: 34px;
@@ -414,7 +190,7 @@ button:focus {
     bottom: 5px;
 }
 
-    .btn-plus-circle span {
+    .btn-orange span {
         opacity: 1;
         transition: all 0.2s ease;
         position: relative;
@@ -425,133 +201,21 @@ button:focus {
         margin-right: 5px;
     }
 
-    .btn-plus-circle:before {
-        content: "\f055";
-        font-family: FontAwesome;
-        position: absolute;
-        left: calc(100% - 90%);
-        transition: all 0.2s ease;
-    }
-
-    .btn-plus-circle:hover:before {
-        left: calc(100% - 55%);
-    }
-
-    .btn-plus-circle:hover span {
-        opacity: 0;
-    }
-
-    .btn-plus-circle > * {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-
-
-.btn-edit {
-    font-size: 15px;
-    background: #97cd1f;
-    border-radius: 50px;
-    color: #fff;
-    height: 35px;
-    text-align: center;
-    line-height: 34px;
-    outline: none;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-    max-width: 20em;
-    white-space: nowrap;
-    overflow: hidden;
-    position: relative;
-    bottom: 5px;
-}
-
-    .btn-edit span {
-        opacity: 1;
-        transition: all 0.2s ease;
+    .btn-orange .icon {
         position: relative;
-        padding-left: 23px;
-        font-family: 'db_heaventmed_cond';
-        /*	transform: translateY(-15%);*/
-        top: 50%;
-        margin-right: 5px;
-    }
-
-    .btn-edit:before {
-        content: "\f040";
-        font-family: FontAwesome;
-        position: absolute;
         left: calc(100% - 90%);
         transition: all 0.2s ease;
     }
 
-    .btn-edit:hover:before {
+    .btn-orange:hover .icon {
         left: calc(100% - 55%);
     }
 
-    .btn-edit:hover span {
+    .btn-orange:hover span {
         opacity: 0;
     }
 
-    .btn-edit > * {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-
-
-.btn-forward {
-    font-size: 15px;
-    background: #97cd1f;
-    border-radius: 50px;
-    color: #fff;
-    height: 35px;
-    text-align: center;
-    line-height: 34px;
-    outline: none;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-    max-width: 20em;
-    white-space: nowrap;
-    overflow: hidden;
-    position: relative;
-    bottom: 5px;
-}
-
-    .btn-forward span {
-        opacity: 1;
-        transition: all 0.2s ease;
-        position: relative;
-        padding-left: 23px;
-        font-family: 'db_heaventmed_cond';
-        /*	transform: translateY(-15%);*/
-        top: 50%;
-        margin-right: 5px;
-    }
-
-    .btn-forward:before {
-        content: "\f061";
-        font-family: FontAwesome;
-        position: absolute;
-        left: calc(100% - 90%);
-        transition: all 0.2s ease;
-    }
-
-    .btn-forward:hover:before {
-        left: calc(100% - 55%);
-    }
-
-    .btn-forward:hover span {
-        opacity: 0;
-    }
-
-    .btn-forward > * {
+    .btn-orange > * {
         display: inline-block;
         vertical-align: middle;
     }

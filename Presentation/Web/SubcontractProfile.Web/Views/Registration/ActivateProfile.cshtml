@@ -151,11 +151,11 @@
                     <div class="d-flex align-items-center justify-content-center h-100" role="group">
                         @*<button class="btn btn-secondary mr-2" id="btnclear" type="button">Clear</button>
         <button class="btn btn-success" id="btnSearch" type="button">Search</button>*@
-                        <button class="btn-border btn-clear mr-2" type="button" id="btnclear">
-                            <span>Clear</span>
+                        <button class="btn-border btn-black mr-2" type="button" id="btnclear">
+                            <i class="fa fa-trash-o icon"></i><span>Clear</span>
                         </button>
-                        <button class="btn-border btn-search" type="button" id="btnSearch">
-                            <span>Search</span>
+                        <button class="btn-border btn-green" type="button" id="btnSearch">
+                            <i class="fa fa-search icon"></i><span>Search</span>
                         </button>
                     </div>
                 </div>
@@ -166,8 +166,8 @@
                         @*<button class="btn btn-success float-right" id="btnactivateprofile" type="button">
             Activate Profile
         </button>*@
-                        <button class="btn-border btn-check float-right" type="button" id="btnactivateprofile">
-                            <span>Activate Profile</span>
+                        <button class="btn-border btn-green float-right" type="button" id="btnactivateprofile">
+                            <i class="fa fa-check icon"></i><span>Activate Profile</span>
                         </button>
                     </div>
                 </div>
@@ -331,8 +331,8 @@
 
             $('#btnactivateprofile').click(function () {
                 showFeedback("light", 'Are you sure confrim activate profile?', "Information",
-                    " <button type='button' class='btn-border btn-check' id='btnconfrim'><span>OK</span></button>\
-                      <button type = 'button' class= 'btn-border btn-cancel' data-dismiss='modal' id='btncancelpopup'><span>Cancel</span></button >");
+                    " <button type='button' class='btn-border btn-green' id='btnconfrim'><i class='fa fa-check icon'></i><span>OK</span></button>\
+                      <button type = 'button' class= 'btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
             });
         });
         
