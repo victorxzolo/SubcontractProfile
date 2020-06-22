@@ -199,7 +199,14 @@
 	.btn_menu_filter {display: block;}
 	.filter_nav_in .item:nth-child(1) {border-top: 0;}
 
-	.menu_bar {display: block; height: 50px; background: #000; width: 100%; position: absolute; top:0;}
+	.menu_bar {
+		display: block;
+		height: 50px;
+		/*background: #000; */
+		width: 100%;
+		position: absolute;
+		top: 0;
+	}
 	.menu_bar h2 {color:#fff;}
 	.wrap_left_menu {position: absolute; z-index: 10; top:0px; width: 100%;}
 
@@ -231,7 +238,9 @@
 
 	.expand_condition {padding-left: 5px;}
 
-	.wrap_left_menu {display: none;}
+	/*display icon menu */
+	/*	.wrap_left_menu {display: none;}*/
+
 	.wrap_filter_mb {display: block; margin-bottom: 30px;}
 	#main_package {padding-top: 0;}
 
