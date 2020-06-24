@@ -45,11 +45,11 @@
         <body>
             <div id="container">
                 <div id="wrapper">
-                    <ul class="breadcrumb breadcrumb_sme">
+                    <ol class="breadcrumb breadcrumb_sme">
                         <li class="breadcrumb-item"><a href="#"><img src="https://business.ais.co.th/sme/images/home.svg" alt=""></a></li>
                         <li class="breadcrumb-item"><a href="#">@ViewData["Controller"]</a></li>
                         <li class="breadcrumb-item active" aria-current="page">@ViewData["View"]</li>
-                    </ul>
+                    </ol>
 
                     <section id="main_package" class="pad_section">
                         <div class="container-fluid">
@@ -69,90 +69,90 @@
                             <div class="row">
                                 <div class="wrap_left_menu">
                                     <div class="wrap_menu_bar">
-                                            <div class="menu_bar">
-                                                <div class="thumbnail icon_menu"></div>
+                                        <div class="menu_bar">
+                                            <div class="thumbnail icon_menu"></div>
+
+                                        </div>
+                                    </div>
+                                    <div class="filter_nav filter">
+                                        <div class="filter_nav_in">
+                                            <div class="item">
+                                                <a href="#" class="link_head"></a>
+                                                <div class="heading">Dashboard</div>
+                                                <div class="content">
+                                                    <a href="@Url.Action("Dashboard", "Test")" class="filter_sub"><span>Dashboard</span></a>
+
+                                                </div>
 
                                             </div>
+                                            <div class="item ">
+                                                <a href="#" class="link_head"></a>
+                                                <div class="heading">Main</div>
+                                                <div class="content">
+                                                    <a href="@Url.Action("Login", "Account")" class="filter_sub"><span>Login</span></a>
+                                                    <a href="@Url.Action("Index", "Account")" class="filter_sub"><span>Register</span></a>
+
+                                                </div>
+                                            </div>
+                                            <div class="item open">
+                                                <a href="#" class="link_head"></a>
+                                                <div class="heading">Registration</div>
+                                                <div class="content" style="display: block;">
+                                                    <a href="@Url.Action("SearchCompanyVerify", "Registration")" class="filter_sub"><span>CompanyVerify</span></a>
+                                                    <a href="@Url.Action("ActivateProfile", "Registration")" class="filter_sub"><span>ActivateProfile</span></a>
+                                                </div>
+                                            </div>
+                                            <div class="item ">
+                                                <a href="#" class="link_head"></a>
+                                                <div class="heading">Training</div>
+                                                <div class="content">
+                                                    <a href="@Url.Action("RequestTraining", "Training")" class="filter_sub"><span>RequestTraining</span></a>
+                                                    <a href="@Url.Action("RequestTrainingauthorities", "Training")" class="filter_sub"><span>RequestTraining Authorities</span></a>
+                                                    <a href="@Url.Action("Reporttestresult", "Training")" class="filter_sub"><span>Report Test Result</span></a>
+                                                    <a href="@Url.Action("Reporttestresultauthorities", "Training")" class="filter_sub"><span>Report Test Result</span></a>
+                                                </div>
+                                            </div>
+
+                                            <div class="item">
+                                                <a href="#" class="link_head"></a>
+                                                <div class="heading">Payment</div>
+                                                <div class="content">
+                                                    <a href="@Url.Action("ConfirmPayment", "Payment")" class="filter_sub"><span>Confirm Payment</span></a>
+                                                    <a href="@Url.Action("VerifyPayment", "Payment")" class="filter_sub"><span>Verify Payment</span></a>
+                                                </div>
+                                            </div>
+
                                         </div>
-    <div class="filter_nav filter">
-        <div class="filter_nav_in">
-            <div class="item">
-                <a href="#" class="link_head"></a>
-                <div class="heading">Dashboard</div>
-                <div class="content">
-                    <a href="@Url.Action("Dashboard", "Test")" class="filter_sub"><span>Dashboard</span></a>
+                                    </div>
+                                </div>
+
+
+                                <div class="overlay_content_card"></div>
+                                <div class="content_card filter">
+
+
+                                    <div class="row m-0 ">
+
+                                        <div class="col-xl-12 col-lg-12 col-md-12 mb-sm-12 mb-1 group-all group02">
+                                            <div class="box-card">
+                                                <div class="box_card_txt" style="width:100%;height:100%;">
+                                                    @RenderBody()
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
 
                 </div>
-
-            </div>
-            <div class="item ">
-                <a href="#" class="link_head"></a>
-                <div class="heading">Main</div>
-                <div class="content">
-                    <a href="@Url.Action("Login", "Account")" class="filter_sub"><span>Login</span></a>
-                    <a href="@Url.Action("Index", "Account")" class="filter_sub"><span>Register</span></a>
-
-                </div>
-            </div>
-            <div class="item open">
-                <a href="#" class="link_head"></a>
-                <div class="heading">Registration</div>
-                <div class="content" style="display: block;">
-                    <a href="@Url.Action("SearchCompanyVerify", "Registration")" class="filter_sub"><span>CompanyVerify</span></a>
-                    <a href="@Url.Action("ActivateProfile", "Registration")" class="filter_sub"><span>ActivateProfile</span></a>
-                </div>
-            </div>
-            <div class="item ">
-                <a href="#" class="link_head"></a>
-                <div class="heading">Training</div>
-                <div class="content">
-                    <a href="@Url.Action("RequestTraining", "Training")" class="filter_sub"><span>RequestTraining</span></a>
-                    <a href="@Url.Action("RequestTrainingauthorities", "Training")" class="filter_sub"><span>RequestTraining Authorities</span></a>
-                    <a href="@Url.Action("Reporttestresult", "Training")" class="filter_sub"><span>Report Test Result</span></a>
-                    <a href="@Url.Action("Reporttestresultauthorities", "Training")" class="filter_sub"><span>Report Test Result</span></a>
-                </div>
-            </div>
-
-            <div class="item">
-                <a href="#" class="link_head"></a>
-                <div class="heading">Payment</div>
-                <div class="content">
-                    <a href="@Url.Action("ConfirmPayment", "Payment")" class="filter_sub"><span>Confirm Payment</span></a>
-                    <a href="@Url.Action("VerifyPayment", "Payment")" class="filter_sub"><span>Verify Payment</span></a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    </div>
-
-
-    <div class="overlay_content_card"></div>
-    <div class="content_card filter">
-
-
-        <div class="row m-0 ">
-
-            <div class="col-xl-12 col-lg-12 col-md-12 mb-sm-12 mb-1 group-all group02">
-                <div class="box-card">
-                    <div class="box_card_txt" style="width:100%;height:100%;">
-                        @RenderBody()
-                    </div>
-                </div>
-            </div>
-
-
-
-        </div>
-
-
-    </div>
-    </div>
-    </div>
-    </section>
-
-
-    </div>
     </div>
     <div id="aisfooter"></div>
 

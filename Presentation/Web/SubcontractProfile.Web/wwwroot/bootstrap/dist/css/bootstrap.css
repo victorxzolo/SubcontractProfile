@@ -4991,7 +4991,7 @@ input[type="button"].btn-block {
 }
 
 .breadcrumb-item {
-  display: -ms-flexbox;
+ /* display: -ms-flexbox;*/
 /*  display: flex;*/
 }
 
