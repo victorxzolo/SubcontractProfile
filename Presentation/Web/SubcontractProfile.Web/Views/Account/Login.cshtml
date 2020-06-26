@@ -32,47 +32,67 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-6">
-                            <h1 class="card-title">Sign in</h1>
+                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                            <p class="font-weight-bolder lead">Sign in</p>
                         </div>
-                        <div class="col-6" align="right">
+                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6" align="right">
                             <div class="form-group">
-                                <a href="#">Forget Password?</a>
+                                <a href="#" class="font-weight-bolder lead">Forget Password?</a>
                             </div>
                         </div>
                     </div>
 
-                    <form>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                            <div class="form-group">
+                                <input type="text" id="txtusername" class="form-control" placeholder="User ID" value="" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                            <div class="form-group">
+                                <div class="input-group p-0 ">
+                                    <input type="password" id="txtpassword" class="form-control" name="password" autocomplete="new-password" placeholder="Password">
+                                    <div class="input-group-append input-group-addon ">
+                                        <span class="input-group-text px-4 toggle-password"><i class="fa fa-eye-slash"></i></span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                            <div class="form-group">
+                                <div class="form-check form-check-flat form-check-primary">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" id="chkkeep">
+                                        Keep me sign in
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                        
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="User ID" value="" />
-                        </div>
-                        <div class="form-group input-group">
-                            <input type="password" class="form-control" name="password" autocomplete="new-password" placeholder="Password">
-        <div class="input-group-addon toggle-password">
-            <span class="fa fa-eye-slash "></span>
-        </div>
-
-
+                            <button type="button" class="btn btn-secondary btn-block" id="btnsignin">Sign in</button>
                         </div>
 
-                        <div class="form-check form-check-flat form-check-primary">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input">
-                                Keep me sign in
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-secondary btn-block" id="btnSubmit">Sign in</button>
-                        </div>
-                     
                         <div class="form-group">
                             <div class="hr-sect">New Account</div>
                         </div>
-                        
+
                         <div class="form-group">
                             <button type="button" class="btn btn-secondary btn-block" id="btnnewregis">Create new register subcontract profile</button>
                         </div>
-                    </form>
+                    
                 </div>
             </div>
 
@@ -94,7 +114,8 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
         $('.toggle-password').click(function () {
             $(this).children().toggleClass('fa-eye-slash fa-eye');
             let input = $(this).prev();
-            input.attr('type', input.attr('type') === 'password' ? 'text' : 'password');
+            $('#txtpassword').attr('type', $('#txtpassword').attr('type') === 'password' ? 'text' : 'password');
+          
         });
     });
 

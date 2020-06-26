@@ -49,13 +49,13 @@ ul, ol {
     margin: 0;
 }
 
-a {
+/*a {
     color: initial;
 }
 
     a:hover, a:active, a:focus {
         text-decoration: none !important;
-    }
+    }*/
 
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0;
@@ -2134,11 +2134,11 @@ h1, h2, h3, h4, h5, h6 {
     min-height: 55px;
 }
 
-a:hover,
+/*a:hover,
 a:active,
 a:focus {
     color: #fff;
-}
+}*/
 
 .btn-more {
     font-size: 17px;
@@ -3741,6 +3741,7 @@ td, th {
     width: 15%;
     right: 19%;
 }
+
 
 
 
