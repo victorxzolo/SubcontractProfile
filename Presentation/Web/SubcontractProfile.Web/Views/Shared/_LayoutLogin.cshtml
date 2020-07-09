@@ -67,5 +67,48 @@
     <div class="container my-5">
         @RenderBody()
     </div>
+    <div class="modal fade" id="MessageFeedbackPopUp" tabindex="-1" role="dialog" aria-labelledby="MessageFeedbackPopUpLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" id="headerMessageFeedback">
+                    <h4 class="modal-title" id="MessageFeedbackPopUpLabel">Notification</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <label id="lbMessageFeedback"></label>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showFeedback(type, msg, title, footer) {
+            //if (msg !== "") {
+            $("#headerMessageFeedback").removeClass();
+            $("#headerMessageFeedback").addClass("modal-header");
+            if (type === "primary") { $("#headerMessageFeedback").addClass("btn-primary"); }
+            else if (type === "success") { $("#headerMessageFeedback").addClass("btn-success"); }
+            else if (type === "info") { $("#headerMessageFeedback").addClass("btn-info"); }
+            else if (type === "warning") { $("#headerMessageFeedback").addClass("btn-warning"); }
+            else if (type === "error") { $("#headerMessageFeedback").addClass("btn-danger"); }
+            else if (type === "light") { $("#headerMessageFeedback").addClass("btn-light"); }
+            else if (type === "secondary") { $("#headerMessageFeedback").addClass("btn-secondary"); }
+            else { $("#headerMessageFeedback").addClass("btn-default"); }
+
+            if (title !== undefined) $("#MessageFeedbackPopUpLabel").text(title); else $("#MessageFeedbackPopUpLabel").text("Notification");
+
+
+            $("#lbMessageFeedback").html(msg);
+            if (footer != "") {
+                $('.modal-footer').html(footer)
+            }
+            $("#MessageFeedbackPopUp").modal('show');
+            //}
+        }
+    </script>
 </body>
 </html>

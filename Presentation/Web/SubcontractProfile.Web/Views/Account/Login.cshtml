@@ -45,7 +45,7 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                             <div class="form-group">
-                                <input type="text" id="txtusername" class="form-control" placeholder="User ID" value="" />
+                                <input type="text" id="txtusername" class="form-control" placeholder="User ID" value="" maxlength="50" />
 
                             </div>
                         </div>
@@ -54,10 +54,10 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                         <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                             <div class="form-group">
                                 <div class="input-group p-0 ">
-                                    <input type="password" id="txtpassword" class="form-control" name="password" autocomplete="new-password" placeholder="Password">
-                                    <div class="input-group-append input-group-addon ">
+                                    <input type="password" id="txtpassword" class="form-control" name="password" autocomplete="new-password" placeholder="Password" maxlength="50">
+                                    @*<div class="input-group-append input-group-addon ">
                                         <span class="input-group-text px-4 toggle-password"><i class="fa fa-eye-slash"></i></span>
-                                    </div>
+                                    </div>*@
 
 
                                 </div>
@@ -67,17 +67,75 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                         
                     </div>
                     <div class="row">
+                        
                         <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                             <div class="form-group">
-                                <div class="form-check form-check-flat form-check-primary">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" id="chkkeep">
-                                        Keep me sign in
-                                    </label>
+                                <select class="form-control" id="ddlLanguage">
+                                    <option value="">Select Language</option>
+                                    <option value="TH">Thai</option>
+                                    <option value="EN">English</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                            <div class="form-group row">
+                                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                    <div class="form-check form-check-flat form-check-primary">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" id="chkshowpass">
+                                            Show password
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="W" checked>
+                                            Waiting Activate
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    
+                            
+                      
+                       
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                            <div class="form-group row">
+                                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+
+                                    <div class="form-check form-check-flat form-check-primary">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" id="chkkeep">
+                                            Keep me sign in
+                                        </label>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="P" checked>
+                                            Profile Activate
+                                        </label>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
                         
+                       
                     </div>
 
                         
@@ -90,7 +148,7 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                         </div>
 
                         <div class="form-group">
-                            <button type="button" class="btn btn-secondary btn-block" id="btnnewregis">Create new register subcontract profile</button>
+                            <button type="button" class="btn btn-secondary btn-block" id="btnnewregis" onclick="window.location.href = '/Account/Register';">Create new register subcontract profile</button>
                         </div>
                     
                 </div>
@@ -108,15 +166,4 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 </div>
 
 
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $('.toggle-password').click(function () {
-            $(this).children().toggleClass('fa-eye-slash fa-eye');
-            let input = $(this).prev();
-            $('#txtpassword').attr('type', $('#txtpassword').attr('type') === 'password' ? 'text' : 'password');
-          
-        });
-    });
-
-</script>
+<script src="~/Scripts/View/Login.js"></script>

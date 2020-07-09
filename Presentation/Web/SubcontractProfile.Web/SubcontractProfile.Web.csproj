@@ -19,8 +19,4 @@
     <ProjectReference Include="..\..\..\Frameworks\SubcontractProfile.Entity\SubcontractProfile.Entity.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\Scripts\View\" />
-  </ItemGroup>
-
 </Project>
