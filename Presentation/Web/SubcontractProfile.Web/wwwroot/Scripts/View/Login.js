@@ -13,7 +13,9 @@
 
 
     $('#btnsignin').click(function () {
-        var model = {
+
+        if (!check()) {
+   var model = {
             username:$('#txtusername').val(),
             password:$('#txtpassword').val()
         }
@@ -38,6 +40,36 @@
               
             }
         });
+        }
+     
     });
-    
 });
+
+function check() {
+    var errorMessage = $("#idmsAlert");
+        var hasError = false;
+
+        $(".form-control.inputValidation").each(function () {
+            var $this = $(this);
+            var fieldvalue = $this.val();
+
+            if (!fieldvalue) {
+              
+                hasError = true;
+                $this.addClass("inputError");
+                $($this).focusout(function () {
+                    $(this).addClass('desired');
+                });
+                errorMessage.show();
+                //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
+            }
+            if ($this.val() != "") {
+                $this.removeClass("inputError");
+            } else {
+                return true;
+            }
+        }); //Input
+
+    return hasError; 
+  
+}

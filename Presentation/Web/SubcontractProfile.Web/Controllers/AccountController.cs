@@ -20,14 +20,6 @@ namespace SubcontractProfile.Web.Controllers
             return View();
         }
 
-        public IActionResult Register(string language="TH")
-        {
-            ViewData["Controller"] = "Register";
-            ViewData["View"] = "Register";
-            return View();
-        }
-
-       
         public List<string> GetScreenConfig(string page)
         {
             List<string> test = new List<string>();
@@ -127,9 +119,44 @@ namespace SubcontractProfile.Web.Controllers
         //    return false;
         //}
 
+
+        #region Register
+        public IActionResult Register(string language = "TH")
+        {
+            ViewData["Controller"] = "Register";
+            ViewData["View"] = "Register";
+            return View();
+        }
+
+        public IActionResult SearchLocation(Search_subcontract_profile_location model)
+        {
+            var data = new List<subcontract_profile_locationModel>();
+  
+                var query = new subcontract_profile_locationQuery()
+                {
+
+                         p_company_name_th =model.company_name_th,
+                         p_company_name_en =model.company_name_en,
+                         p_company_alias=model.company_alias,
+                         p_company_code =model.company_code,
+                         p_location_name_th=model.location_name_th,
+                         p_location_name_en =model.location_name_en,
+                         p_location_code=model.location_code,
+                         p_distribution_channel =model.distribution_channel,
+                         p_channel_sale_group=model.channel_sale_group,
+                         PAGE_INDEX=model.PageIndex,
+                         PAGE_SIZE=model.PageSize
+                };
+
+                //var result = _queryProcessor.Execute(query);
+            
+            return Json(new { response = data });
+        }
+        #endregion
     }
 
-    public class LoginModel
+    #region Login
+  public class LoginModel
     {
         public string username { get; set; }
         public string password { get; set; }
@@ -192,5 +219,59 @@ namespace SubcontractProfile.Web.Controllers
 
         public static int LatestUICulture { get; set; }
     }
-   
+
+    #endregion
+
+
+
+    #region Register 
+
+    public class Search_subcontract_profile_location: DataSourceRequest //รับ Search จากหน้าจอ
+    {
+        public string company_name_th { get; set; }
+        public string company_name_en { get; set; }
+        public string company_alias { get; set; }
+        public string company_code { get; set; }
+        public string location_name_th { get; set; }
+        public string location_name_en { get; set; }
+        public string location_code { get; set; }
+        public string distribution_channel { get; set; }
+        public string channel_sale_group { get; set; }
+    }
+    public class subcontract_profile_locationQuery //ส่งเข้าDatabase
+    {
+        public string p_company_name_th { get; set; }
+        public string p_company_name_en { get; set; }
+        public string p_company_alias { get; set; }
+        public string p_company_code { get; set; }
+        public string p_location_name_th { get; set; }
+        public string p_location_name_en { get; set; }
+        public string p_location_code { get; set; }
+        public string p_distribution_channel { get; set; }
+        public string p_channel_sale_group { get; set; }
+    public int PAGE_INDEX { get; set; }
+    public int PAGE_SIZE { get; set; }
+    public string ret_code { get; set; }
+        public string cur { get; set; }
+    }
+
+    public class subcontract_profile_locationModel //รับจากDatabase
+    {
+        public string company_name_th { get; set; }
+        public string location_name_th { get; set; }
+        public string distribution_channel { get; set; }
+        public string channel_sale_group { get; set; }
+    public decimal RowNumber { get; set; }
+    public decimal CNT { get; set; }
+}
+
+    public class DataSourceRequest
+    {
+        public int PageIndex { get; set; }
+        public int PageSize { get; set; }
+        public string Sort { get; set; }
+        public string Filter { get; set; }
+    }
+    #endregion
+
 }

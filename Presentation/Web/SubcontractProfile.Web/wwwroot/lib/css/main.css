@@ -3776,4 +3776,12 @@ td, th {
     display: none;
 }*/
 
+.inputError {
+    background-color: #f4bfbf;
+    border: 1px solid #d03e3e;
+    color: #d03e3e;
+}
 
+    .inputError::-webkit-input-placeholder {
+        color: #d03e3e;
+    }
