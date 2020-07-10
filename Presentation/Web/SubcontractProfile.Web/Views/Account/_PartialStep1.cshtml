@@ -5,17 +5,19 @@
         <div class="form-group row mb-0">
             <label class="col-sm-3 col-form-label">ประเภทผู้สมัคร :</label>
             <div class="col-sm-5">
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="N">
-                        New Subcontract
-                    </label>
+                <div class="custom-control custom-radio">
+                    
+                        <input type="radio" class="custom-control-input" name="optionsRadios" id="chktypeN" value="N">
+                        <label class="custom-control-label" for="chktypeN">
+                            New Subcontract
+                        </label>
                 </div>
             </div>
             <div class="col-sm-4">
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="D">
+                <div class="custom-control custom-radio">
+
+                    <input type="radio" class="custom-control-input" name="optionsRadios" id="chktypeD" value="D">
+                    <label class="custom-control-label" for="chktypeD">
                         Dealer
                     </label>
                 </div>
@@ -77,7 +79,7 @@
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">เลขทะเบียนนิติบุคคล :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <div class="input-group">
-                        <input type="text" class="form-control form-control-sm" id="txtjuristicnew" placeholder="เลขทะเบียนนิติบุคคล" aria-label="เลขทะเบียนนิติบุคคล" maxlength="100">
+                        <input type="text" class="form-control inputValidation form-control-sm" id="txtjuristicnew" placeholder="เลขทะเบียนนิติบุคคล" aria-label="เลขทะเบียนนิติบุคคล" maxlength="100">
                         <div class="input-group-append">
                             <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-search"></i></button>
                         </div>
@@ -90,7 +92,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อย่อบริษัท :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control form-control-sm" id="txtbussinessnew" maxlength="100"/>
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtbussinessnew" maxlength="100"/>
                 </div>
             </div>
         </div>
@@ -100,14 +102,14 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(ไทย) :</label>
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                    <select class="form-control form-control-sm" id="ddlprefixnewT"  maxlength="100">
+                    <select class="form-control inputValidation form-control-sm" id="ddlprefixnewT"  maxlength="100">
                         <option>นาย</option>
                         <option>นางสาว</option>
                         <option>นาง</option>
                     </select>
                 </div>
                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                    <input type="text" class="form-control form-control-sm" id="txtjuristicnewT" />
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtjuristicnewT" />
                 </div>
             </div>
         </div>
@@ -115,14 +117,14 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(อังกฤษ) :</label>
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                    <select class="form-control form-control-sm" id="ddlprefixnewE"  maxlength="100">
+                    <select class="form-control inputValidation form-control-sm" id="ddlprefixnewE"  maxlength="100">
                         <option>Mr.</option>
                         <option>Miss</option>
                         <option>Mrs.</option>
                     </select>
                 </div>
                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                    <input type="text" class="form-control form-control-sm" id="txtjuristicnewE" />
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtjuristicnewE" />
                 </div>
             </div>
         </div>
@@ -132,7 +134,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อภาษีหัก ณ ที่จ่าย :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control form-control-sm" id="txttaxnew"  maxlength="100">
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txttaxnew"  maxlength="100">
                 </div>
 
             </div>
@@ -142,19 +144,21 @@
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ภาษีมูลค่าเพิ่ม :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <div class="form-group row">
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input type="radio" class="form-check-input" id="chktaxnew" value="T" checked>
+                        <div class="custom-control custom-radio">
+
+                            <input type="radio" class="custom-control-input" name="rdtax" id="chktaxnew" value="T" checked>
+                            <label class="custom-control-label" for="chktaxnew">
                                 ภาษีมูลค่าเพิ่ม
                             </label>
                         </div>
 
 
-                        <div class="form-check ml-4">
-                            <label class="form-check-label">
-                                <input type="radio" class="form-check-input" id="chknottaxnew" value="E">
-                                ไม่มีภาษีมูลค่าเพิ่ม
-                            </label>
+                        <div class="custom-control custom-radio ml-4">
+                            
+                                <input type="radio" class="custom-control-input"  name="rdtax" id="chknottaxnew" value="E">
+                                <label class="custom-control-label" for="chknottaxnew">
+                                    ไม่มีภาษีมูลค่าเพิ่ม
+                                </label>
                         </div>
                     </div>
 
@@ -177,7 +181,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">User Name :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control form-control-sm" id="txtcreateuser"  maxlength="50"/>
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtcreateuser"  maxlength="50"/>
                 </div>
             </div>
         </div>
@@ -188,7 +192,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Password :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control form-control-sm" id="txtcreatepass" maxlength="50"/>
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtcreatepass" maxlength="50"/>
                 </div>
             </div>
         </div>
@@ -196,7 +200,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Confirm Password :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control form-control-sm" id="txtconfirmpass" maxlength="50"/>
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtconfirmpass" maxlength="50"/>
                 </div>
             </div>
         </div>
@@ -233,7 +237,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Distribution Channel :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control form-control-sm" id="txtdistribution" disabled  maxlength="250"/>
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtdistribution" disabled  maxlength="250"/>
                 </div>
             </div>
 
@@ -244,7 +248,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Location Name :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control form-control-sm" id="txtlocationname" disabled maxlength="250"/>
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtlocationname" disabled maxlength="250"/>
                 </div>
             </div>
         </div>
@@ -252,7 +256,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Channel Sale Group :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control form-control-sm" id="txtchannelsalegroup" disabled />
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtchannelsalegroup" disabled />
                 </div>
             </div>
         </div>
@@ -271,7 +275,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">เลขทะเบียนนิติบุคคล :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control form-control-sm" placeholder="เลขทะเบียนนิติบุคคล" aria-label="เลขทะเบียนนิติบุคคล" id="txtjuristicdealer" disabled maxlength="100">
+                    <input type="text" class="form-control inputValidation form-control-sm" placeholder="เลขทะเบียนนิติบุคคล" aria-label="เลขทะเบียนนิติบุคคล" id="txtjuristicdealer" disabled maxlength="100">
                 </div>
             </div>
         </div>
@@ -279,7 +283,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อย่อบริษัท :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control form-control-sm" id="txtbussinessdealer" disabled maxlength="100"/>
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtbussinessdealer" disabled maxlength="100"/>
                 </div>
             </div>
         </div>
@@ -289,14 +293,14 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(ไทย) :</label>
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                    <select class="form-control form-control-sm" id="ddlprefixdealerT">
+                    <select class="form-control inputValidation form-control-sm" id="ddlprefixdealerT">
                         <option>นาย</option>
                         <option>นางสาว</option>
                         <option>นาง</option>
                     </select>
                 </div>
                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                    <input type="text" class="form-control form-control-sm" id="txtjuristicdealerT" disabled maxlength="100"/>
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtjuristicdealerT" disabled maxlength="100"/>
                 </div>
             </div>
         </div>
@@ -304,14 +308,14 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(อังกฤษ) :</label>
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                    <select class="form-control form-control-sm"  id="ddlprefixdealerE">
+                    <select class="form-control inputValidation form-control-sm"  id="ddlprefixdealerE">
                         <option>Mr.</option>
                         <option>Miss</option>
                         <option>Mrs.</option>
                     </select>
                 </div>
                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                    <input type="text" class="form-control form-control-sm" id="txtjuristicdealerE" maxlength="100"/>
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtjuristicdealerE" maxlength="100"/>
                 </div>
             </div>
         </div>
@@ -321,7 +325,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อภาษีหัก ณ ที่จ่าย :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control form-control-sm" id="txttaxdealer" maxlength="100"/>
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txttaxdealer" maxlength="100"/>
                 </div>
 
             </div>
@@ -331,19 +335,21 @@
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ภาษีมูลค่าเพิ่ม :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <div class="form-group row">
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input type="radio" class="form-check-input" id="chktaxdealer" value="T" checked>
+                        <div class="custom-control custom-radio">
+
+                            <input type="radio" class="custom-control-input" name="rdtaxJ" id="chktaxdealer" value="T" checked>
+                            <label class="custom-control-label" for="chktaxdealer">
                                 ภาษีมูลค่าเพิ่ม
                             </label>
                         </div>
 
 
-                        <div class="form-check ml-4">
-                            <label class="form-check-label">
-                                <input type="radio" class="form-check-input" id="chknottaxdealer" value="E">
-                                ไม่มีภาษีมูลค่าเพิ่ม
-                            </label>
+                        <div class="custom-control custom-radio ml-4">
+                            
+                                <input type="radio" class="custom-control-input" name="rdtaxJ" id="chknottaxdealer" value="E">
+                                <label class="custom-control-label" for="chknottaxdealer">
+                                    ไม่มีภาษีมูลค่าเพิ่ม
+                                </label>
                         </div>
                     </div>
                 </div>
@@ -371,7 +377,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">ชื่อนิติบุคคล(ไทย) :</label>
                                 <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
-                                    <input type="text" class="form-control form-control-sm" id="txtjuristicTmodal" disabled />
+                                    <input type="text" class="form-control inputValidationModal form-control-sm" id="txtjuristicTmodal" disabled />
                                 </div>
                             </div>
                         </div>
@@ -429,11 +435,33 @@
                                 </div>
                             </div>
                         </div>
+                        
+                    </div>
+                    <div class="row">
                         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
                             <div class="form-group row">
                                 <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">Distribution Channel :</label>
                                 <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
-                                    <input type="text" class="form-control form-control-sm" id="txtdistributionmodal" />
+                                    <select class="form-control form-control-sm" id="ddldistributionModal">
+                                        <option>Channel1</option>
+                                        <option>Channel2</option>
+                                        <option>Channel3</option>
+                                        <option>Channel4</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">Channel Sale Group :</label>
+                                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                    <select class="form-control form-control-sm" id="ddlchannelsalegroupModal">
+                                        <option>Group1</option>
+                                        <option>Group2</option>
+                                        <option>Group3</option>
+                                        <option>Group4</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -540,4 +568,3 @@
 
 
 
-<script src="~/Scripts/View/Register.js"></script>

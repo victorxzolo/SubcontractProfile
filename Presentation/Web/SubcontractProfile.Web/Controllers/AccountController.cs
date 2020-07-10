@@ -127,7 +127,7 @@ namespace SubcontractProfile.Web.Controllers
             ViewData["View"] = "Register";
             return View();
         }
-
+        [HttpPost]
         public IActionResult SearchLocation(Search_subcontract_profile_location model)
         {
             var data = new List<subcontract_profile_locationModel>();

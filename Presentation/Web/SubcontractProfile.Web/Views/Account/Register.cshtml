@@ -33,6 +33,12 @@
                         <li><a href="#step-5">Step 5</a></li>
                     </ul>
                     <div>
+                        <div style="display:none" class="alert alert-danger alert-dismissible fade show" role="alert" id="idmsAlert">
+                            <p>กรุณาระบุข้อมูลให้ครบถ้วน</p>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                         <div id="step-1">
 
                             @await Html.PartialAsync("_PartialStep1")
@@ -76,11 +82,17 @@
         <button class="btn btn-success" id="next-btn" type="button">ถัดไป</button>*@
 
                         <button class="btn-border btn-gray mr-2" id="prev-btn" type="button">
-                        <i class="fa fa-undo icon"></i><span>ย้อนกลับ</span></button>
+                            <i class="fa fa-undo icon"></i><span>ย้อนกลับ</span>
+                        </button>
                         <button class="btn-border btn-black mr-2" id="reset-btn" type="button">
-                        <i class="fa fa-trash icon"></i><span>ล้างข้อมูล</span></button>
+                            <i class="fa fa-trash icon"></i><span>ล้างข้อมูล</span>
+                        </button>
                         <button class="btn-border btn-green" id="next-btn" type="button">
-                        <i class="fa fa-forward icon"></i><span>ถัดไป</span></button>
+                            <i class="fa fa-forward icon"></i><span>ถัดไป</span>
+                        </button>
+                        <button class="btn-border btn-green" id="btnregis" type="button" style="display:none;">
+                            <i class="fa fa-sign-in icon"></i><span>สมัคร</span>
+                        </button>
 
                     </div>
                 </div>
@@ -90,64 +102,4 @@
     </div>
 </div>
 
-
-<script type="text/javascript">
-    $(document).ready(function () {
-
-
-        $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
-            //alert("You are on step "+stepNumber+" now");
-            if (stepPosition === 'first') {
-                $("#prev-btn").addClass('disabled');
-            } else if (stepPosition === 'final') {
-                $("#next-btn").addClass('disabled');
-            } else {
-                $("#prev-btn").removeClass('disabled');
-                $("#next-btn").removeClass('disabled');
-            }
-        });
-
-        // Toolbar extra buttons
-        //var btnFinish = $('<button></button>').text('Finish')
-        //                                 .addClass('btn btn-info')
-        //                                 .on('click', function(){ alert('Finish Clicked'); });
-        //var btnCancel = $('<button></button>').text('Cancel')
-        //                                 .addClass('btn btn-danger')
-        //                                 .on('click', function(){ $('#smartwizard').smartWizard("reset"); });
-
-
-        // Smart Wizard
-        $('#smartwizard').smartWizard({
-            selected: 0,
-            theme: 'arrows',
-            transitionEffect: 'fade',
-            showStepURLhash: true,
-
-
-        });
-
-        $('.sw-btn-group').hide();
-
-        // External Button Events
-        $("#reset-btn").on("click", function () {
-            // Reset wizard
-
-            $('#smartwizard').smartWizard("reset");
-            $('.sw-btn-group').hide();
-            return true;
-        });
-
-        $("#prev-btn").on("click", function () {
-            // Navigate previous
-            $('#smartwizard').smartWizard("prev");
-            return true;
-        });
-
-        $("#next-btn").on("click", function () {
-            // Navigate next
-            $('#smartwizard').smartWizard("next");
-            return true;
-        });
-
-
-    });</script>
+<script src="~/Scripts/View/Register.js"></script>
