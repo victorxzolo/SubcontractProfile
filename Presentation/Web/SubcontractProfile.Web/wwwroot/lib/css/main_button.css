@@ -236,3 +236,61 @@ button:focus {
         display: inline-block;
         vertical-align: middle;
     }
+
+
+
+.btn-blue {
+    font-size: 15px;
+    background: #235574;
+    border-radius: 50px;
+    color: #fff;
+    height: 35px;
+    text-align: center;
+    line-height: 34px;
+    outline: none;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    max-width: 20em;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    bottom: 5px;
+}
+
+    .btn-blue span {
+        opacity: 1;
+        transition: all 0.2s ease;
+        position: relative;
+        padding-left: 23px;
+        font-family: 'db_heaventmed_cond';
+        -webkit-transform: translateY(0%);
+        -moz-transform: translateY(-49%);
+        -o-transform: translateY(-49%);
+        -ms-transform: translateY(-49%);
+        /*   transform: translateY(-49%);*/
+        top: 50%;
+        margin-right: 5px;
+    }
+
+    .btn-blue .icon {
+        position: relative;
+        left: calc(100% - 90%);
+        transition: all 0.2s ease;
+    }
+
+    .btn-blue:hover .icon {
+        left: calc(100% - 55%);
+    }
+
+    .btn-blue:hover span {
+        opacity: 0;
+    }
+
+
+    .btn-blue > * {
+        display: inline-block;
+        vertical-align: middle;
+    }

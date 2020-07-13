@@ -144,12 +144,33 @@ namespace SubcontractProfile.Web.Controllers
                          p_location_code=model.location_code,
                          p_distribution_channel =model.distribution_channel,
                          p_channel_sale_group=model.channel_sale_group,
-                         PAGE_INDEX=model.PageIndex,
-                         PAGE_SIZE=model.PageSize
+                    PAGE_INDEX = model.PageIndex,
+                    PAGE_SIZE = model.PageSize
                 };
 
-                //var result = _queryProcessor.Execute(query);
-            
+            //var result = _queryProcessor.Execute(query);
+
+            data.Add(new subcontract_profile_locationModel
+            {
+                company_name_th = "test",
+                location_code = model.location_code,
+                location_name_th = "test33",
+                distribution_channel = "Channel2",
+                channel_sale_group = "Group3"
+               
+            }); 
+            data.Add(new subcontract_profile_locationModel
+            {
+                company_name_th = "test2",
+                location_code = model.location_code,
+                location_name_th = "test34",
+                distribution_channel = "Channel5",
+                channel_sale_group = "Group3"
+                
+            });
+
+
+
             return Json(new { response = data });
         }
         #endregion
@@ -261,9 +282,10 @@ namespace SubcontractProfile.Web.Controllers
         public string location_name_th { get; set; }
         public string distribution_channel { get; set; }
         public string channel_sale_group { get; set; }
-    public decimal RowNumber { get; set; }
-    public decimal CNT { get; set; }
-}
+        public string location_code { get; set; }
+    //public decimal RowNumber { get; set; }
+    //public decimal CNT { get; set; }
+    }
 
     public class DataSourceRequest
     {

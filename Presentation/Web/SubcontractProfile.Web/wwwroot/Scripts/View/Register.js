@@ -64,10 +64,50 @@
 
 
 
-    /*Step1*/
+/*Step1*/
+
+
+ 
+
+    var tbLocation = $('#tblocationModal').DataTable({
+        ordering: true,
+        select: true,
+        retrieve: true,
+        paging: true,
+        destroy: true,
+        searching: false,
+        //scrollY: 400,
+        //processing: true,
+        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        columns: [
+            { "data": "company_name_th" },
+            { "data":"location_code"},
+            { "data": "location_name_th" },
+            { "data": "distribution_channel" },
+            { "data": "channel_sale_group" }
+        ],
+    });
+   
 
     $('#btnsearchlocation').click(function () {
         $('#Searchlocation').modal('show');
+        $('#txtlocationcodemodal').val($('#txtlocationcode').val());
+        $("#btn_search_modal").trigger("click");
+    });
+
+    $('#btn_reset_modal').click(function () {
+        ClearDataModalLocation();
+    });
+
+    $('#tblocationModal tbody').on('click', 'tr', function () {
+       // $(this).toggleClass('selected');
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        }
+        else {
+            tbLocation.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
     });
 
     $('#chktypeN').on("change", function () {
@@ -75,6 +115,19 @@
             $("#divdealer").hide('slow');
             $('#divnewsubcontract').show('slow');
         }
+    });
+
+    $('#btn_select_location').click(function () {
+        var value = tbLocation.rows('.selected').data();
+        console.log(value[0]);
+        console.log(value[0].location_code)
+        $('#txtlocationcode').val(value[0].location_code);
+        $('#txtlocationname').val(value[0].location_name_th);
+        $('#txtdistribution').val(value[0].distribution_channel);
+        $('#txtchannelsalegroup').val(value[0].channel_sale_group);
+        ClearDataModalLocation();
+        $('#Searchlocation').modal('hide');
+
     });
 
     $('#chktypeD').on("change", function () {
@@ -101,19 +154,15 @@
             Filter:''
 
         }
-        console.log(value);
 
         $.ajax({
             type: "POST",
             url: "/Account/SearchLocation",
+            data: { model: value },
             dataType: "json",
-            contentType: 'application/json; charset=utf-8',
-            data: {
-                model: JSON.stringify(value)
-            },
-            async: false,
             success: function (data) {
-                console.log(data);
+                
+                BindDatatable(tbLocation, data.response)
 
             },
             error: function (xhr, status, error) {
@@ -122,30 +171,70 @@
                 console.log(status);
                 showFeedback("error", xhr.responseText, "System Information",
                     "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-
-
             }
         });
     });
 
+    function BindDatatable(table, datamodel) {
+        //console.log("BindDatatable");
+        //console.log(datamodel);
+        //table.data(datamodel);
+        table.clear().draw();
+        table.rows.add(datamodel).draw();
+
+    }
+
+    function ClearDataModalLocation() {
+        $('#txtjuristicTmodal').val('')
+        $('#txtjuristicEmodal').val('')
+        $('#txtbussinessmodal').val('')
+        $('#txtbussinesscodemodal').val('')
+        $('#txtlocationnameTHmodal').val('')
+        $('#txtlocationnameTHmodal').val('')
+        $('#txtlocationcodemodal').val('')
+        $('#ddldistributionModal option').filter(':selected').val('')
+        $('#ddlchannelsalegroupModal option').filter(':selected').val('')
+        tbLocation.clear().draw();
+    }
+
+/*************************************/
 
 
-    /*************************************/
+/*Step2*/
+
+    var tbaddressstep2 = $('#tbaddressstep2').DataTable({
+        ordering: true,
+        select: true,
+        retrieve: true,
+        paging: true,
+        destroy: true,
+        searching: false,
+        //scrollY: 400,
+        //processing: true,
+        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        columns: [
+            { "data": "address_type_id", "visible": false},
+            { "data": "address_type" },
+            { "data": "address" },
+            { "data": "" },
+            { "data": "" }
+        ],
+    });
+
+    $('#btnaddaddress').click(function () {
+        var val = [];
+        $(':checkbox:checked').each(function (i) {
+            val[i] = $(this).val();
+        });
+        console.log(val);
+    });
 
 
+/*************************************/
 });
 
-function ClearModal() {
-     $('#txtjuristicTmodal').val(''),
-     $('#txtjuristicEmodal').val(''),
-     $('#txtbussinessmodal').val(''),
-     $('#txtbussinesscodemodal').val(''),
-    $('#txtlocationnameTHmodal').val(''),
-   $('#txtlocationnameTHmodal').val(''),
-   $('#txtlocationcodemodal').val(''),
-   $('#ddldistributionModal').val(''),
-   $('#ddlchannelsalegroupModal').val('')
-}
+
+
 
 function Validate() {
     var errorMessage = $("#idmsAlert");

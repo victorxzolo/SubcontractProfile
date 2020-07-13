@@ -17,27 +17,29 @@
         <div class="form-group row">
             <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
             <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="optionsRadios" id="chktype" value="N">
-                        ที่อยู่ตามที่ตั้งสาขา
-                    </label>
+                <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrbranch" value="B">
+                        <label class="custom-control-label" for="chkaddrbranch">
+                            ที่อยู่ตามที่ตั้งสาขา
+                        </label>
                 </div>
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="optionsRadios" id="chktype" value="D">
-                        ที่อยู่ตามใบกำกับภาษี
-                    </label>
+                <div class="custom-control custom-checkbox">
+                    
+                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrtax" value="T">
+                        <label class="custom-control-label" for="chkaddrtax">
+                            ที่อยู่ตามใบกำกับภาษี
+                        </label>
                 </div>
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="optionsRadios" id="chktype" value="D">
-                        ที่อยู่ตาม W/T
-                    </label>
+                <div class="custom-control custom-checkbox">
+                    
+                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrwt" value="WT">
+                        <label class="custom-control-label" for="chkaddrwt">
+                            ที่อยู่ตาม W/T
+                        </label>
                 </div>
             </div>
         </div>
@@ -48,25 +50,28 @@
         <div class="form-group row">
             <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
             <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="optionsRadios" id="chktype" value="N">
+                <div class="custom-control custom-checkbox">
+
+                    <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrdoc" value="DOC">
+                    <label class="custom-control-label" for="chkaddrdoc">
                         ที่อยู่จัดส่งเอกสาร
                     </label>
                 </div>
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="optionsRadios" id="chktype" value="D">
-                        ที่อยู่จัดส่งสินค้า
-                    </label>
+                <div class="custom-control custom-checkbox">
+                    
+                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrshipping" value="SH">
+                        <label class="custom-control-label" for="chkaddrshipping">
+                            ที่อยู่จัดส่งสินค้า
+                        </label>
                 </div>
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="optionsRadios" id="chktype" value="D">
+                <div class="custom-control custom-checkbox">
+
+                    <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrpop" value="POP">
+                    <label class="custom-control-label" for="chkaddrpop">
                         ที่อยู่จัดส่ง POP
                     </label>
                 </div>
@@ -221,7 +226,7 @@
     <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
     <div class="col-md-10 col-sm-10 col-xl-10 col-lg-10">
         <div class="table-responsive pt-3">
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover" id="tbaddressstep2">
                 <thead class="thead-light">
                     <tr>
                         <th>ประเภทที่อยู่</th>
@@ -231,7 +236,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    @*<tr>
                         <td>ที่อยู่ตามใบกำกับภาษี</td>
                         <td>34/203 หมู่บ้านภัสสร ต.คลองสาม อ.คลองหวงง จ.ปทุมธานี 12120</td>
                         <td><button class="btn-border btn-green"><i class="fa fa-edit icon"></i><span>แก้ไข</span></button></td>
@@ -242,14 +247,14 @@
                         <td>34/203 หมู่บ้านภัสสร ต.คลองสาม อ.คลองหวงง จ.ปทุมธานี 12120</td>
                         <td><button class="btn-border btn-green"><i class="fa fa-edit icon"></i><span>แก้ไข</span></button></td>
                         <td><button class="btn-border btn-black"><i class="fa fa-trash icon"></i><span>ลบ</span></button></td>
-                    </tr>
+                    </tr>*@
                 </tbody>
             </table>
         </div>
     </div>
    
 </div>
-<div class="row">
+@*<div class="row">
     <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
     <div class="col-md-10 col-sm-10 col-xl-10 col-lg-10">
         <nav aria-label="...">
@@ -272,4 +277,4 @@
         </nav>
     </div>
 
-</div>
+</div>*@
