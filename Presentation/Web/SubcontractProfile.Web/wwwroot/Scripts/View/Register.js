@@ -161,7 +161,7 @@
             data: { model: value },
             dataType: "json",
             success: function (data) {
-                
+                tbLocation.clear().draw();
                 BindDatatable(tbLocation, data.response)
 
             },
@@ -179,7 +179,7 @@
         //console.log("BindDatatable");
         //console.log(datamodel);
         //table.data(datamodel);
-        table.clear().draw();
+        
         table.rows.add(datamodel).draw();
 
     }
@@ -201,7 +201,9 @@
 
 
 /*Step2*/
-
+    BindDDLprovince();
+    BindDDLdistrict();
+    BindDDLsubdistrict();
     var tbaddressstep2 = $('#tbaddressstep2').DataTable({
         ordering: true,
         select: true,
@@ -216,25 +218,185 @@
             { "data": "address_type_id", "visible": false},
             { "data": "address_type" },
             { "data": "address" },
-            { "data": "" },
-            { "data": "" }
+            {
+                "data": null,
+               
+            },
+            {
+                "data": null,
+            }
         ],
+        columnDefs: [{
+            "targets": -2,
+            "data": null,
+            "defaultContent": "<button class='btn-border btn-green'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button>"
+        },
+            {
+                "targets": -1,
+                "data": null,
+                "defaultContent": "<button class='btn-border btn-black'><i class='fa fa-trash icon'></i><span>ลบ</span></button>"
+            }
+        ]
     });
 
     $('#btnaddaddress').click(function () {
         var val = [];
+        var stuff = [];
+
         $(':checkbox:checked').each(function (i) {
-            val[i] = $(this).val();
+            //val[i] = $(this).val();
+            //val[i] = $(this).parent().text().trim();
+           
+
+            var strnumber = $('#txthomenumber').val() != '' ? $('#txthomenumber').val() : '';
+            var strvillage = $('#txtvillage').val() != '' ? $('#txtvillage').parent().parent().text().split(":")[0].trim() + ' '+$('#txtvillage').val() : '';
+            var strvillageno = $('#txtVillageNo').val() != '' ? $('#txtVillageNo').parent().parent().text().split(":")[1].trim() + ' '  + $('#txtVillageNo').val() : '';
+            var strbuilding = $('#txtbuilding').val() != '' ? $('#txtbuilding').parent().parent().text().split(":")[0].trim() + ' '  + $('#txtbuilding').val() : '';
+            var strfloor = $('#txtfloor').val() != '' ? $('#txtfloor').parent().parent().text().split(":")[0].trim() + ' '  + $('#txtfloor').val() : '';
+            var strroom = $('#txtroom').val() != '' ? $('#txtroom').parent().parent().text().split(":")[1].trim() + ' '  + $('#txtroom').val() : '';
+            var strsoi = $('#txtsoi').val() != '' ? $('#txtsoi').parent().parent().text().split(":")[0].trim() + ' '  + $('#txtsoi').val() : '';
+            var strroad = $('#txtroad').val() != '' ? $('#txtroad').parent().parent().text().split(":")[0].trim() + ' '  + $('#txtroad').val() : '';
+            var strsubdistrict = $('#ddlsubdistrict option').filter(':selected').val() != 0 ? $('#ddlsubdistrict').parent().parent().text().split(":")[0].trim() + ' ' +
+                 $('#ddlsubdistrict option').filter(':selected').text() : '';
+            var strdistrict = $('#ddldistrict option').filter(':selected').val() != 0 ? $('#ddldistrict').parent().parent().text().split(":")[0].trim() + ' ' +
+                $('#ddldistrict option').filter(':selected').text() : '';
+            var strprovince = $('#ddlprovince option').filter(':selected').val() != 0 ? $('#ddlprovince').parent().parent().text().split(":")[0].trim() + ' ' +
+                $('#ddlprovince option').filter(':selected').text() : '';
+            var strzipcode = $('#ddlzipcode option').filter(':selected').val() != '' ? $('#ddlzipcode').parent().parent().text().split(":")[0].trim() + ' ' +
+                $('#ddlzipcode option').filter(':selected').text() : '';
+
+            var strdata = {
+                address_type_id: $(this).val(),
+                address_type: $(this).parent().text().trim(),
+                address: strnumber.trim() + ' ' + strvillage.trim() + ' ' + strvillageno.trim() + ' ' + strbuilding.trim() + ' ' + strfloor.trim() + ' ' +
+                    strroom.trim() + ' ' + strsoi.trim() + ' ' + strsubdistrict.trim() + ' ' + strdistrict.trim() + ' ' + strzipcode.trim(),
+              
+            };
+            var data = {
+                address_type_id: $(this).val(),
+                country: $('#ddlcountry option').filter(':selected').val(),
+                zip_code: $('#ddlzipcode option').filter(':selected').val(),
+                house_no: $('#txthomenumber').val(),
+                moo: $('#txtVillageNo').val(),
+                village_name: $('#txtvillage').val(),
+                building: $('#txtbuilding').val(),
+                floor: $('#txtfloor').val(),
+                room_no: $('#txtroom').val(),
+                soi: $('#txtsoi').val(),
+                road: $('#txtroad').val(),
+                sub_district_id: $('#ddlsubdistrict option').filter(':selected').val(),
+                district_id: $('#ddldistrict option').filter(':selected').val(),
+                province_id: $('#ddlprovince option').filter(':selected').val(),
+                region_id: $('#ddlzone option').filter(':selected').val()
+            }
+            stuff.push(data);
+            val.push(strdata)
         });
-        console.log(val);
+       
+        BindDatatable(tbaddressstep2, val)
+        $.ajax({
+            type: "POST",
+            url: "/Account/DaftAddress",
+            data: { daftdata: stuff},
+            dataType: "json",
+            success: function (data) {
+
+                console.log(data);
+
+            },
+            error: function (xhr, status, error) {
+                //Loading(0);
+                //clearForEdit();
+                console.log(status);
+                showFeedback("error", xhr.responseText, "System Information",
+                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            }
+        });
+    });
+
+
+    $('#ddlprovince').change(function () {
+
+        BindDDLdistrict($('#ddlprovince option').filter(':selected').val());
+    });
+    $('#ddldistrict').change(function () {
+        BindDDLsubdistrict($('#ddldistrict option').filter(':selected').val())
     });
 
 
 /*************************************/
 });
 
+function BindDDLprovince() {
 
+    $.ajax({
+        type: "POST",
+        url: "/Account/DDLsubcontract_profile_province",
+        dataType: "json",
+        success: function (data) {
 
+            $.each(data.response, function () {
+                $('#ddlprovince').append($("<option></option>").val(this.province_id).text(this.province_name));
+            });
+
+        },
+        error: function (xhr, status, error) {
+            //Loading(0);
+            //clearForEdit();
+            console.log(status);
+            showFeedback("error", xhr.responseText, "System Information",
+                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+        }
+    });
+}
+
+function BindDDLdistrict(province) {
+    $.ajax({
+        type: "POST",
+        url: "/Account/DDLsubcontract_profile_district",
+        data: { province_id: province },
+        dataType: "json",
+        success: function (data) {
+            $('#ddldistrict').empty();
+            $.each(data.response, function () {
+                $('#ddldistrict').append($("<option></option>").val(this.district_id).text(this.district_name));
+            });
+
+        },
+        error: function (xhr, status, error) {
+            //Loading(0);
+            //clearForEdit();
+            console.log(status);
+            showFeedback("error", xhr.responseText, "System Information",
+                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+        }
+    });
+}
+
+function BindDDLsubdistrict(district) {
+    $.ajax({
+        type: "POST",
+        url: "/Account/DDLsubcontract_profile_sub_district",
+        data: { district_id: district},
+        dataType: "json",
+        success: function (data) {
+            $('#ddlsubdistrict').empty();
+            $('#ddlzipcode').empty();
+            $.each(data.response, function () {
+                $('#ddlsubdistrict').append($("<option></option>").val(this.sub_district_id).text(this.sub_district_name));
+                $('#ddlzipcode').append($("<option></option>").val(this.zip_code).text(this.zip_code));
+            });
+
+        },
+        error: function (xhr, status, error) {
+            //Loading(0);
+            //clearForEdit();
+            console.log(status);
+            showFeedback("error", xhr.responseText, "System Information",
+                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+        }
+    });
+}
 
 function Validate() {
     var errorMessage = $("#idmsAlert");

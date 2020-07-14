@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SubcontractProfile.Web.Extension;
 
 namespace SubcontractProfile.Web.Controllers
@@ -109,7 +112,12 @@ namespace SubcontractProfile.Web.Controllers
             return authenLDAPResult;
         }
 
-
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            HttpContext.SignOutAsync();
+            return View();
+        }
 
         //public  bool IsThaiCulture(this int currentCulture)
         //{
@@ -127,6 +135,136 @@ namespace SubcontractProfile.Web.Controllers
             ViewData["View"] = "Register";
             return View();
         }
+
+       
+        [HttpPost]
+        public IActionResult DDLsubcontract_profile_sub_district(int district_id=0)
+        {
+            var output = new List<subcontract_profile_sub_district>();
+            output.Add(new subcontract_profile_sub_district
+            {
+                sub_district_id = 0,
+                sub_district_name = "--Select Sub District--"
+            });
+            output.Add(new subcontract_profile_sub_district {
+                sub_district_id=1,
+                sub_district_name="วังทองหลาง",
+                zip_code="10310",
+                district_id = 1
+            });
+            output.Add(new subcontract_profile_sub_district
+            {
+                sub_district_id = 2,
+                sub_district_name = "คลองเจ้าคุณสิงห์",
+                zip_code = "10310",
+                district_id = 1
+            });
+            output.Add(new subcontract_profile_sub_district
+            {
+                sub_district_id = 3,
+                sub_district_name = "คลองจั่น",
+                zip_code = "10240",
+                district_id = 2
+            });
+            output.Add(new subcontract_profile_sub_district
+            {
+                sub_district_id = 4,
+                sub_district_name = "หัวหมาก",
+                zip_code = "10240",
+                district_id = 2
+            });
+
+
+            output.Add(new subcontract_profile_sub_district
+            {
+                sub_district_id = 5,
+                sub_district_name = "แพรกษา",
+                zip_code = "10280",
+                district_id = 3
+            });
+            output.Add(new subcontract_profile_sub_district
+            {
+                sub_district_id = 6,
+                sub_district_name = "บางหญ้าแพรก",
+                zip_code = "10130",
+                district_id = 4
+            });
+
+            if (district_id != 0)
+            {
+                output = output.Where(x => x.district_id==district_id).ToList();
+            }
+
+            return Json(new { response = output });
+        }
+        [HttpPost]
+        public IActionResult DDLsubcontract_profile_district(int province_id=0)
+        {
+            var output = new List<subcontract_profile_district>();
+            output.Add(new subcontract_profile_district
+            {
+                district_id = 0,
+                district_name = "--Select District--"
+            });
+            output.Add(new subcontract_profile_district
+            {
+                district_id = 1,
+                district_name = "วังทองหลาง",
+                province_id=1
+            });
+            output.Add(new subcontract_profile_district
+            {
+                district_id = 2,
+                district_name = "บางกะปิ",
+                province_id = 1
+            });
+
+            output.Add(new subcontract_profile_district
+            {
+                district_id = 3,
+                district_name = "เมืองสมุทรปราการ",
+                province_id = 2
+            });
+            output.Add(new subcontract_profile_district
+            {
+                district_id = 4,
+                district_name = "พระประแดง",
+                province_id = 2
+            });
+            if (province_id!=0)
+            {
+                output = output.Where(x => x.province_id==province_id).ToList();
+            }
+           
+           
+            return Json(new { response = output });
+        }
+        [HttpPost]
+        public IActionResult DDLsubcontract_profile_province()
+        {
+            var output = new List<subcontract_profile_province>();
+            output.Add(new subcontract_profile_province
+            {
+                province_id = 0,
+                province_name = "--Select Province--"
+
+            });
+            output.Add(new subcontract_profile_province
+            {
+                province_id=1,
+                province_name="กรุงเทพฯ"
+
+            });
+            output.Add(new subcontract_profile_province
+            {
+                province_id = 2,
+                province_name = "สมุทรปราการ"
+
+            });
+            return Json(new { response = output });
+        }
+
+
         [HttpPost]
         public IActionResult SearchLocation(Search_subcontract_profile_location model)
         {
@@ -170,6 +308,15 @@ namespace SubcontractProfile.Web.Controllers
             });
 
 
+
+            return Json(new { response = data });
+        }
+
+        [HttpPost]
+        public IActionResult DaftAddress(List<subcontract_profile_address> daftdata)
+        {
+            var data = new List<subcontract_profile_address>();
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaft", daftdata);
 
             return Json(new { response = data });
         }
@@ -294,6 +441,48 @@ namespace SubcontractProfile.Web.Controllers
         public string Sort { get; set; }
         public string Filter { get; set; }
     }
+
+    #region Address
+    public class subcontract_profile_address
+    {
+        public string address_type_id { get; set; }
+        public string country { get; set; }
+        public string zip_code { get; set; }
+        public string house_no { get; set; }
+        public string moo { get; set; }
+        public string village_name { get; set; }
+        public string building { get; set; }
+        public string floor { get; set; }
+        public string room_no { get; set; }
+        public string soi { get; set; }
+        public string road { get; set; }
+        public string sub_district_id { get; set; }
+        public string district_id { get; set; }
+        public string province_id { get; set; }
+        public string region_id { get; set; }
+    }
+
+    public class subcontract_profile_sub_district 
+    { 
+        public int sub_district_id { get; set; }
+        public string sub_district_name { get; set; }
+        public string zip_code { get; set; }
+        public int district_id { get; set; }
+    }
+    public class subcontract_profile_district
+    {
+        public int district_id { get; set; }
+        public string district_name { get; set; }
+        public int province_id { get; set; }
+    }
+    public class subcontract_profile_province
+    {
+        public int province_id { get; set; }
+        public string province_name { get; set; }
+    }
+
+    #endregion
+
     #endregion
 
 }
