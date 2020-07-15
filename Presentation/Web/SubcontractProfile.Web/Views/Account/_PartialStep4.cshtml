@@ -12,11 +12,11 @@
         <div class="form-group row">
             <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อธนาคาร :</label>
             <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <input type="text" class="form-control form-control-sm" id="txtbankcode" placeholder="รหัสธนาคาร" />
+                <input type="text" class="form-control form-control-sm" id="txtbank_Code" placeholder="รหัสธนาคาร" />
             </div>
             <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
                 <div class="input-group">
-                    <input type="text" class="form-control form-control-sm" id="txtbankname" placeholder="ชื่อธนาคาร">
+                    <input type="text" class="form-control form-control-sm" id="txtbank_Name" placeholder="ชื่อธนาคาร">
                     <div class="input-group-append">
                         <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-search"></i></button>
                     </div>
@@ -28,11 +28,11 @@
         <div class="form-group row">
             <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อสาขา :</label>
             <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <input type="text" class="form-control form-control-sm" id="txtbranchcode" placeholder="รหัสสาขา" />
+                <input type="text" class="form-control form-control-sm" id="txtbranch_Code" placeholder="รหัสสาขา" />
             </div>
             <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
                 <div class="input-group">
-                    <input type="text" class="form-control form-control-sm" id="txtbranchname" placeholder="ชื่อสาขา">
+                    <input type="text" class="form-control form-control-sm" id="txtbranch_Name" placeholder="ชื่อสาขา">
                     <div class="input-group-append">
                         <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-search"></i></button>
                     </div>
@@ -46,7 +46,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเภทบัญชี :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control form-control-sm" id="ddlaccounttype">
+                <select class="form-control form-control-sm" id="ddlbank_account_type">
                     <option>ออมทรัพย์</option>
                 </select>
             </div>
@@ -56,7 +56,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เลขที่บัญชี :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <input type="text" class="form-control form-control-sm" id="txtaccountnumber" />
+                <input type="text" class="form-control form-control-sm" id="txtaccount_Number" />
             </div>
         </div>
     </div>
@@ -66,12 +66,12 @@
         <div class="form-group row">
             <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อบัญชี :</label>
             <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <select class="form-control form-control-sm" id="ddlaccountname">
+                <select class="form-control form-control-sm" id="ddlaccount_Name">
                     <option></option>
                 </select>
             </div>
             <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                <input type="text" class="form-control form-control-sm" id="txtaccountname" />
+                <input type="text" class="form-control form-control-sm" id="txtaccount_Name" />
             </div>
         </div>
     </div>
@@ -79,7 +79,9 @@
         <div class="form-group row">
             <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเภทธุรกิจ :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <input type="text" class="form-control form-control-sm" id="txtbusinesstype" />
+                <select class="form-control form-control-sm" id="ddlbusiness_type">
+                    <option></option>
+                </select>
             </div>
         </div>
     </div>
@@ -96,24 +98,32 @@
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือรับรองบริษัท :</label>
-            <input type="file" name="img[]" class="file-upload-default">
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
-                <input type="text" class="form-control file-upload-info form-control-sm" disabled>
-                <span class="input-group-append">
-                    <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
-                </span>
+            @*<input type="file" name="img[]" class="file-upload-default">
+        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
+            <input type="text" class="form-control file-upload-info form-control-sm" disabled>
+            <span class="input-group-append">
+                <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
+            </span>
+        </div>*@
+            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file">
+                <input type="file" class="custom-file-input" id="company_certified_file">
+                <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
         </div>
     </div>
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือทะเบียนพานิช :</label>
-            <input type="file" name="img[]" class="file-upload-default">
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
-                <input type="text" class="form-control file-upload-info form-control-sm" disabled>
-                <span class="input-group-append">
-                    <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
-                </span>
+            @*<input type="file" name="img[]" class="file-upload-default">
+        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
+            <input type="text" class="form-control file-upload-info form-control-sm" disabled>
+            <span class="input-group-append">
+                <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
+            </span>
+        </div>*@
+            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file">
+                <input type="file" class="custom-file-input" id="commercial_registration_file">
+                <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
         </div>
     </div>
@@ -122,12 +132,16 @@
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือ ภ.พ. 20 :</label>
-            <input type="file" name="img[]" class="file-upload-default">
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
-                <input type="text" class="form-control file-upload-info form-control-sm" disabled>
-                <span class="input-group-append">
-                    <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
-                </span>
+            @*<input type="file" name="img[]" class="file-upload-default">
+        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
+            <input type="text" class="form-control file-upload-info form-control-sm" disabled>
+            <span class="input-group-append">
+                <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
+            </span>
+        </div>*@
+            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file">
+                <input type="file" class="custom-file-input" id="vat_registration_certificate_file">
+                <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -193,6 +194,12 @@ namespace SubcontractProfile.Web.Controllers
             if (district_id != 0)
             {
                 output = output.Where(x => x.district_id==district_id).ToList();
+                output.Add(new subcontract_profile_sub_district
+                {
+                    sub_district_id = 0,
+                    sub_district_name = "--Select Sub District--"
+                });
+                output = output.OrderBy(x => x.sub_district_id).ToList();
             }
 
             return Json(new { response = output });
@@ -234,6 +241,12 @@ namespace SubcontractProfile.Web.Controllers
             if (province_id!=0)
             {
                 output = output.Where(x => x.province_id==province_id).ToList();
+                output.Add(new subcontract_profile_district
+                {
+                    district_id = 0,
+                    district_name = "--Select District--"
+                });
+                output = output.OrderBy(x => x.district_id).ToList();
             }
            
            
@@ -312,14 +325,76 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { response = data });
         }
 
+        #region DaftAddress Register
         [HttpPost]
-        public IActionResult DaftAddress(List<subcontract_profile_address> daftdata)
+        public IActionResult SaveDaftAddress(List<subcontract_profile_address> daftdata)
         {
-            var data = new List<subcontract_profile_address>();
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaft", daftdata);
+            try
+            {
+                var data = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
+                if (data != null && data.Count !=0)
+                {
+                    data.RemoveAll(x => x.address_type_id.Contains(daftdata[0].address_type_id));
 
-            return Json(new { response = data });
+                    data.Add(daftdata[0]);
+                    SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaft", data);
+                }
+                else
+                {
+                    SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaft", daftdata);
+                   data = daftdata;
+                }
+                
+
+               
+
+                return Json(new { response = data, status = true });
+            }
+            catch (Exception e)
+            {
+                return Json(new { message = e.Message, status = false });
+            }
+
         }
+        [HttpPost]
+        public IActionResult GetDaftAddress(string address_type_id)
+        {
+            try
+            {
+                var data = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
+                data = data.Where(x => x.address_type_id == address_type_id).ToList();
+                return Json(new { response = data, status = true });
+            }
+            catch (Exception e)
+            {
+                return Json(new { message = e.Message, status = false });
+            }
+
+        }
+        [HttpPost]
+        public IActionResult DeleteDaftAddress(string address_type_id)
+        {
+            try
+            {
+                var data = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft").ToList();
+                data.RemoveAll(x => x.address_type_id.Contains(address_type_id));
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaft", data);
+                var data_delete = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
+                if(data_delete==null)
+                {
+                    SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaft");
+                }
+                return Json(new { response = data_delete, status = true });
+            }
+            catch (Exception e)
+            {
+                return Json(new { message = e.Message, status = false });
+                throw;
+            }
+
+        }
+        #endregion
+
         #endregion
     }
 
@@ -446,6 +521,7 @@ namespace SubcontractProfile.Web.Controllers
     public class subcontract_profile_address
     {
         public string address_type_id { get; set; }
+        public string address_type_name { get; set; }
         public string country { get; set; }
         public string zip_code { get; set; }
         public string house_no { get; set; }
@@ -456,9 +532,12 @@ namespace SubcontractProfile.Web.Controllers
         public string room_no { get; set; }
         public string soi { get; set; }
         public string road { get; set; }
-        public string sub_district_id { get; set; }
-        public string district_id { get; set; }
+        public int sub_district_id { get; set; }
+        public string sub_district_name { get; set; }
+        public int district_id { get; set; }
+        public string district_name { get; set; }
         public string province_id { get; set; }
+        public string province_name { get; set; }
         public string region_id { get; set; }
     }
 
