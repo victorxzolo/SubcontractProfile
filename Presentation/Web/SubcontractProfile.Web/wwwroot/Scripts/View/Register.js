@@ -9,6 +9,7 @@
             $("#next-btn").addClass('disabled');
             $("#next-btn").hide();
             $('#btnregis').show();
+            BindDataAddress();
         } else {
             $("#prev-btn").removeClass('disabled');
             $("#next-btn").removeClass('disabled');
@@ -58,9 +59,6 @@
     });
 
 
-    $('#btnregis').click(function () {
-
-    });
 
 
 
@@ -230,19 +228,7 @@
                 orderable: false,
                 "defaultContent": "<button class='btn-border btn-black delete_btn'><i class='fa fa-trash icon'></i><span>ลบ</span></button>"
             }
-        ],
-        //columnDefs: [
-        // {
-        //    "targets": -2,
-        //    "data": null,
-        //    "defaultContent": "<button class='btn-border btn-green edit_btn'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button>"
-        //},
-        //    {
-        //        "targets": -1,
-        //        "data": null,
-        //        "defaultContent": "<button class='btn-border btn-black delete_btn'><i class='fa fa-trash icon'></i><span>ลบ</span></button>"
-        //    }
-        //]
+        ]
     });
 
     $('#btnaddaddress').click(function () {
@@ -489,6 +475,160 @@
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
+
+/*************************************/
+
+
+
+/*Step5*/
+
+    var tbaddressstep5 = $('#tbaddressstep5').DataTable({
+        ordering: true,
+        select: true,
+        retrieve: true,
+        paging: true,
+        destroy: true,
+        searching: false,
+        //scrollY: 400,
+        //processing: true,
+        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        columns: [
+            { "data": "address_type_id", "visible": false },
+            { "data": "address_type", orderable: true, },
+            { "data": "address", orderable: true, }
+            ]
+    });
+
+    $('#btnregis').click(function (){
+
+        var chksubcontract_type = null;
+        var distribution_channel = null;
+        var channel_sale_group = null;
+        var tax_id = null;
+        var company_alias = null;
+        var company_title_name_th = null;
+        var company_title_name_en = null;
+        var company_name_th = null;
+        var company_name_en = null;
+        var wt_name = null;
+        var vat_type = null;
+
+
+
+        if ($("#chktypeN").is(":checked")) {
+            chksubcontract_type = $("#chktypeN").val();
+            distribution_channel = $('#ddldistribution option').filter(':selected').val();
+            channel_sale_group = $('#ddlchannelsalegroup option').filter(':selected').val();
+            tax_id = $('#txttax_id').val();
+            company_alias = $('#txtcompany_alias').val();
+            company_title_name_th = $('#ddlprefixcompany_name_th option').filter(':selected').val();
+            company_name_th = $('#txtcompany_name_th').val();
+            company_title_name_en = $('#ddlprefixcompany_name_en option').filter(':selected').val();
+            company_name_en = $('#txtcompany_name_en').val();
+            wt_name = $('#txtwt_name').val();
+            vat_type= $('#chkvat_typeT').is(':checked') ? $('#chkvat_typeT').val() : $('#chkvat_typeE').val();
+        }
+        else if ($("#chktypeD").is(":checked")) {
+            chksubcontract_type = $("#chktypeD").val();
+            distribution_channel = $('#txtdistribution').val();
+            channel_sale_group = $('#txtchannelsalegroup').val();
+            tax_id = $('#txttax_id_dealer').val();
+            company_alias = $('#txtcompany_alias_dealer').val();
+            company_title_name_th = $('#ddlprefixcompany_name_th_dealer option').filter(':selected').val();
+            company_name_th = $('#txtcompany_name_th_dealer').val();
+            company_title_name_en = $('#ddlprefixcompany_name_en_dealer option').filter(':selected').val();
+            company_name_en =$('#txtcompany_name_en_dealer').val();
+            wt_name = $('#txtwt_name_dealer').val();
+            vat_type = $('#chkvat_typeT_dealer').is(':checked') ? $('#chkvat_typeT_dealer').val() : $('#chkvat_typeE_dealer').val();
+        }
+
+        var data = {
+            subcontract_profile_type: chksubcontract_type,
+            location_code: $('#txtlocationcode').val(),
+            location_name_th: $('#txtlocationname').val(),
+            location_name_en: $('#txtlocationname').val(),
+            distribution_channel: distribution_channel,
+            channel_sale_group: channel_sale_group,
+            tax_id: tax_id,
+            company_alias: company_alias,
+            company_title_name_th: company_title_name_th,
+            company_name_th: company_name_th,
+            company_title_name_en: company_title_name_en,
+            company_name_en: company_name_en,
+            wt_name: wt_name,
+            vat_type: vat_type,
+            company_Email: $('#txtcompany_Email').val(),
+            contract_name: $('#txtcontract_name').val(),
+            contract_phone: $('#txtcontract_phone').val(),
+            contract_email: $('#txtcontract_email').val(),
+            dept_of_install_name: $('#txtdept_of_install_name').val(),
+            dept_of_install_phone: $('#txtdept_of_install_phone').val(),
+            dept_of_install_email: $('#txtdept_of_install_email').val(),
+            dept_of_mainten_name: $('#txtdept_of_mainten_name').val(),
+            dept_of_mainten_phone: $('#txtdept_of_mainten_phone').val(),
+            dept_of_mainten_email: $('#txtdept_of_mainten_email').val(),
+            dept_of_Account_name: $('#txtdept_of_Account_name').val(),
+            dept_of_Account_phone: $('#txtdept_of_Account_phone').val(),
+            dept_of_Account_email: $('#txtdept_of_Account_email').val(),
+            account_Name: $('#ddlaccount_Name option').filter(':selected').val(),
+            branch_Name: $('#txtbranch_Name').val(),
+            branch_Code: $('#txtbranch_Code').val(),
+            bank_account_type_id: $('#ddlbank_account_type option').filter(':selected').val(),
+            company_certified_file: $('#company_certified_file').val(),
+            commercial_registration_file: $('#commercial_registration_file').val(),
+            vat_registration_certificate_file: $('#vat_registration_certificate_file').val(),
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Account/NewRegister",
+            data: { model: data },
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+
+            },
+            error: function (xhr, status, error) {
+                //Loading(0);
+                //clearForEdit();
+                console.log(status);
+                showFeedback("error", xhr.responseText, "System Information",
+                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            }
+        });
+    });
+
+    function BindDataAddress() {
+        $.ajax({
+            type: "POST",
+            url: "/Account/GetDaftAddress",
+            data: { address_type_id: null },
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+
+                if (data.status) {
+                    var val = []
+                    val = ConcatstrAddress(data.response);
+                    tbaddressstep5.clear().draw();
+                    BindDatatable(tbaddressstep5, val);
+                }
+                else {
+                    showFeedback("error", data.message, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+
+                }
+            },
+            error: function (xhr, status, error) {
+                //Loading(0);
+                //clearForEdit();
+                console.log(status);
+                showFeedback("error", xhr.responseText, "System Information",
+                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            }
+        });
+    }
+
 
 /*************************************/
 });

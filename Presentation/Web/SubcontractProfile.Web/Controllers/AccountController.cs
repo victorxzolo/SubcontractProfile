@@ -361,9 +361,17 @@ namespace SubcontractProfile.Web.Controllers
         {
             try
             {
-                var data = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
-                data = data.Where(x => x.address_type_id == address_type_id).ToList();
-                return Json(new { response = data, status = true });
+                if(address_type_id !=null && address_type_id !="")
+                {
+                    var data = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
+                    data = data.Where(x => x.address_type_id == address_type_id).ToList();
+                    return Json(new { response = data, status = true });
+                }
+              else
+                {
+                    var data = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
+                    return Json(new { response = data, status = true });
+                }
             }
             catch (Exception e)
             {
@@ -394,6 +402,76 @@ namespace SubcontractProfile.Web.Controllers
 
         }
         #endregion
+
+        [HttpPost]
+        public IActionResult NewRegister(subcontract_profile_New_Register model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var dataaddr = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
+                    model.L_address = new List<subcontract_profile_address>();
+
+                    if (dataaddr != null && dataaddr.Count!=0)
+                    {
+                        
+                        foreach(var d in dataaddr)
+                        {
+                            model.L_address.Add(new subcontract_profile_address { 
+                                address_type_id=d.address_type_id,
+                                building=d.building,
+                                country=d.country,
+                                district_id=d.district_id,
+                                floor=d.floor,
+                                house_no=d.house_no,
+                                moo=d.moo,
+                                province_id=d.province_id,
+                               region_id=d.region_id,
+                               road=d.road,
+                               room_no=d.room_no,
+                               soi=d.soi,
+                               sub_district_id=d.sub_district_id,
+                               village_name=d.village_name,
+                               zip_code=d.zip_code
+                            });
+                        }
+
+                        //Command.Handle(model)
+                        //output ret_code,ret
+                        //ret_msg
+                    }
+                    else
+                    {
+                        return Json(new
+                        {
+                            status = "-1",
+                            message = "Address Data isnot correct, Please Check Data or Contact System Admin"
+                        });
+                    }
+                    return Json(new
+                    {
+                        status = "1",
+                        message = "Success"
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        status = "-1",
+                        message = "Data isnot correct, Please Check Data or Contact System Admin"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                string _msg = string.Empty;
+                _msg = "Please Contact System Admin";
+                return Json(new { status = "-1", message = _msg });
+                throw;
+            }
+        }
 
         #endregion
     }
@@ -561,6 +639,125 @@ namespace SubcontractProfile.Web.Controllers
     }
 
     #endregion
+
+
+    public class subcontract_profile_New_Register //ส่งค่ามาจากหน้าจอ
+    {
+        public string subcontract_profile_type { get; set; }
+        public string location_code { get; set; }
+        public string location_name_th { get; set; }
+        public string location_name_en { get; set; }
+        public string distribution_channel { get; set; }
+        public string channel_sale_group { get; set; }
+        public string tax_id { get; set; }
+        public string company_alias { get; set; }
+        public string company_title_name_th { get; set; } //รอเอกสารspec เพิ่ม
+        public string company_name_th { get; set; }
+        public string company_title_name_en { get; set; } //รอเอกสารspec เพิ่ม
+        public string company_name_en { get; set; }
+        public string wt_name { get; set; }
+        public string vat_type { get; set; }
+        //public string house_no { get; set; }
+        //public string building { get; set; }
+        //public string floor { get; set; }
+        //public string moo { get; set; }
+        //public string soi { get; set; }
+        //public string road { get; set; }
+        //public string sub_district_id { get; set; }
+        //public string district_id { get; set; }
+        //public string province_id { get; set; }
+        //public string region_id { get; set; }
+        //public string address_type_id { get; set; }
+        //public string zip_code { get; set; }
+        //public string country { get; set; }
+        //public string village_name { get; set; }
+        //public string room_no { get; set; }
+
+        public List<subcontract_profile_address> L_address { get; set; }
+
+        public string company_Email { get; set; }
+        public string contract_name { get; set; }
+        public string contract_phone { get; set; }
+        public string contract_email { get; set; }
+        public string dept_of_install_name { get; set; }
+        public string dept_of_install_phone { get; set; }
+        public string dept_of_install_email { get; set; }
+        public string dept_of_mainten_name { get; set; }
+        public string dept_of_mainten_phone { get; set; }
+        public string dept_of_mainten_email { get; set; }
+        public string dept_of_Account_name { get; set; }
+        public string dept_of_Account_phone { get; set; }
+        public string dept_of_Account_email { get; set; }
+        public string account_Name { get; set; }
+        public string branch_Name { get; set; }
+        public string branch_Code { get; set; }
+        public string bank_account_type_id { get; set; }
+        public string company_certified_file { get; set; }
+        public string commercial_registration_file { get; set; }
+        public string vat_registration_certificate_file { get; set; }
+    }
+
+    public class subcontract_profileCommand //ส่งเข้าDatabase
+    {
+        public subcontract_profileCommand()
+        {
+            this.ret_code = -1;
+            this.ret_msg = "";
+        }
+        public string p_subcontract_profile_type { get; set; }
+        public string p_location_code { get; set; }
+        public string p_location_name_th { get; set; }
+        public string p_location_name_en { get; set; }
+        public string p_distribution_channel { get; set; }
+        public string p_channel_sale_group { get; set; }
+        public string p_tax_id { get; set; }
+        public string p_company_alias { get; set; }
+       public string p_company_title_name_th { get; set; }//รอเอกสารspec เพิ่ม
+        public string p_company_name_th { get; set; }
+        public string p_company_title_name_en { get; set; }//รอเอกสารspec เพิ่ม
+        public string p_company_name_en { get; set; }
+        public string p_wt_name { get; set; }
+        public string p_vat_type { get; set; }
+        public string p_house_no { get; set; }
+        public string p_building { get; set; }
+        public string p_floor { get; set; }
+        public string p_moo { get; set; }
+        public string p_soi { get; set; }
+        public string p_road { get; set; }
+        public string p_sub_district_id { get; set; }
+        public string p_district_id { get; set; }
+        public string p_province_id { get; set; }
+        public string p_region_id { get; set; }
+        public string p_address_type_id { get; set; }
+        public string p_zip_code { get; set; }
+        public string p_country { get; set; }
+        public string p_village_name { get; set; }
+        public string p_room_no { get; set; }
+        public string p_company_Email { get; set; }
+        public string p_contract_name { get; set; }
+        public string p_contract_phone { get; set; }
+        public string p_contract_email { get; set; }
+        public string p_dept_of_install_name { get; set; }
+        public string p_dept_of_install_phone { get; set; }
+        public string p_dept_of_install_email { get; set; }
+        public string p_dept_of_mainten_name { get; set; }
+        public string p_dept_of_mainten_phone { get; set; }
+        public string p_dept_of_mainten_email { get; set; }
+        public string p_dept_of_Account_name { get; set; }
+        public string p_dept_of_Account_phone { get; set; }
+        public string p_dept_of_Account_email { get; set; }
+        public string p_account_Name { get; set; }
+        public string p_branch_Name { get; set; }
+        public string p_branch_Code { get; set; }
+        public string p_bank_account_type_id { get; set; }
+        public string p_company_certified_file { get; set; }
+        public string p_commercial_registration_file { get; set; }
+        public string p_vat_registration_certificate_file { get; set; }
+
+
+        public Nullable<decimal> ret_code { get; set; }
+        public string ret_msg { get; set; }
+    }
 
     #endregion
 
