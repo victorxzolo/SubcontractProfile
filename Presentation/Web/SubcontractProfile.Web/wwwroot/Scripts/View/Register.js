@@ -9,10 +9,13 @@
             $("#next-btn").addClass('disabled');
             $("#next-btn").hide();
             $('#btnregis').show();
-            BindDataAddress();
+            BindDataStep5();
+            
         } else {
             $("#prev-btn").removeClass('disabled');
             $("#next-btn").removeClass('disabled');
+            $("#next-btn").show();
+            $('#btnregis').hide();
         }
     });
 
@@ -499,6 +502,8 @@
             ]
     });
 
+
+
     $('#btnregis').click(function (){
 
         var chksubcontract_type = null;
@@ -629,6 +634,98 @@
         });
     }
 
+    function BindDataStep5() {
+        
+        var chksubcontract_type = null;
+        var distribution_channel = null;
+        var channel_sale_group = null;
+        var tax_id = null;
+        var company_alias = null;
+        var company_title_name_th = null;
+        var company_title_name_en = null;
+        var company_name_th = null;
+        var company_name_en = null;
+        var wt_name = null;
+        var vat_type = null;
+
+        if ($("#chktypeN").is(":checked")) {
+            chksubcontract_type =$("#chktypeN").parent().text().trim();
+
+            distribution_channel = $('#ddldistribution option').filter(':selected').text();
+            channel_sale_group = $('#ddlchannelsalegroup option').filter(':selected').text();
+
+            tax_id = $('#txttax_id').val();
+            company_alias = $('#txtcompany_alias').val();
+
+            company_title_name_th = $('#ddlprefixcompany_name_th option').filter(':selected').text();
+            company_name_th = $('#txtcompany_name_th').val();
+
+            company_title_name_en = $('#ddlprefixcompany_name_en option').filter(':selected').text();
+            company_name_en = $('#txtcompany_name_en').val();
+
+            wt_name = $('#txtwt_name').val();
+            vat_type = $('#chkvat_typeT').is(':checked') ? $('#chkvat_typeT').parent().text().trim() : $('#chkvat_typeE').parent().text().trim();
+        }
+        else if ($("#chktypeD").is(":checked")) {
+            chksubcontract_type = $('#chktypeD').parent().text().trim();
+   
+            distribution_channel = $('#txtdistribution').val();
+            channel_sale_group = $('#txtchannelsalegroup').val();
+
+            tax_id = $('#txttax_id_dealer').val();
+            company_alias = $('#txtcompany_alias_dealer').val();
+
+            company_title_name_th = $('#ddlprefixcompany_name_th_dealer option').filter(':selected').text();
+            company_name_th = $('#txtcompany_name_th_dealer').val();
+
+            company_title_name_en = $('#ddlprefixcompany_name_en_dealer option').filter(':selected').text();
+            company_name_en = $('#txtcompany_name_en_dealer').val();
+
+            wt_name = $('#txtwt_name_dealer').val();
+            vat_type = $('#chkvat_typeT_dealer').is(':checked') ? $('#chkvat_typeT_dealer').parent().text().trim() : $('#chkvat_typeE_dealer').parent().text().trim();
+        }
+
+        $('#lbsubcontract_profile_type').text(chksubcontract_type);
+        $('#lbdistribution_channel').text(distribution_channel);
+        $('#lbchannel_sale_group').text(channel_sale_group);
+        $('#lbtax_id').text(tax_id);
+        $('#lbcompany_alias').text(company_alias);
+        $('#lbcompany_name_th').text(company_title_name_th + ' ' + company_name_th);
+        $('#lbcompany_name_en').text(company_title_name_en + ' ' + company_name_en);
+        $('#lbwt_name').text(wt_name);
+        $('#vat_type').text(vat_type);
+
+        $('#lbcompany_Email').text($('#txtcompany_Email').val());
+        $('#lbcontract_name').text($('#txtcontract_name').val());
+        $('#lbcontract_phone').text($('#txtcontract_phone').val());
+        $('#lbcontract_email').text($('#txtcontract_email').val());
+
+        $('#lbdept_of_install_name').text($('#txtdept_of_install_name').val());
+        $('#lbdept_of_install_phone').text($('#txtdept_of_install_phone').val());
+        $('#lbdept_of_install_email').text($('#txtdept_of_install_email').val());
+
+        $('#lbdept_of_mainten_name').text($('#txtdept_of_mainten_name').val());
+        $('#lbdept_of_mainten_phone').text($('#txtdept_of_mainten_phone').val());
+        $('#lbdept_of_mainten_email').text($('#txtdept_of_mainten_email').val());
+
+        $('#lbdept_of_Account_name').text($('#txtdept_of_Account_name').val());
+        $('#lbdept_of_Account_phone').text($('#txtdept_of_Account_phone').val());
+        $('#lbdept_of_Account_email').text($('#txtdept_of_Account_email').val());
+
+        $('#lbbank_Name').text($('#txtbank_Name').val());
+        $('#lbbranch_Name').text($('#txtbranch_Name').val());
+        $('#lbbank_account_type_id').text($('#ddlbank_account_type option').filter(':selected').text());
+        $('#lbaccount_Number').text($('#txtaccount_Number').val());
+        $('#lbaccount_Name').text($('#ddlaccount_Name option').filter(':selected').text() + ' ' + $('#txtaccount_Name').val());
+        $('#lbbusiness_type').text($('#ddlbank_account_type option').filter(':selected').text());
+
+        $('#lbcompany_certified_file').text($('#company_certified_file').val());
+        $('#lbcommercial_registration_file').text($('#commercial_registration_file').val());
+        $('#lbvat_registration_certificate_file').text($('#vat_registration_certificate_file').val());
+
+
+        BindDataAddress();
+    }
 
 /*************************************/
 });
