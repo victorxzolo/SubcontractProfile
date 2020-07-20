@@ -282,7 +282,26 @@ namespace SubcontractProfile.Web.Controllers
         public IActionResult SearchLocation(Search_subcontract_profile_location model)
         {
             var data = new List<subcontract_profile_locationModel>();
-  
+            int filteredResultsCount;
+            int totalResultsCount;
+
+            //var res = YourCustomSearchFunc(model, out filteredResultsCount, out totalResultsCount);
+
+
+            var take = model.length;
+            var skip = model.start;
+
+            string sortBy = "";
+            bool sortDir = true;
+
+            if (model.order != null)
+            {
+                // in this example we just default sort on the 1st column
+                sortBy = model.columns[model.order[0].column].data;
+                sortDir = model.order[0].dir.ToLower() == "asc";
+            }
+            if(model !=null)
+            {
                 var query = new subcontract_profile_locationQuery()
                 {
 
@@ -295,34 +314,216 @@ namespace SubcontractProfile.Web.Controllers
                          p_location_code=model.location_code,
                          p_distribution_channel =model.distribution_channel,
                          p_channel_sale_group=model.channel_sale_group,
-                    PAGE_INDEX = model.PageIndex,
-                    PAGE_SIZE = model.PageSize
-                };
+                    PAGE_INDEX = skip,
+                    PAGE_SIZE = take
+            };
+                //var result = _queryProcessor.Execute(query);
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test",
+                    location_code = model.location_code,
+                    location_name_th = "test33",
+                    distribution_channel = "Channel2",
+                    channel_sale_group = "Group3"
 
-            //var result = _queryProcessor.Execute(query);
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test2",
+                    location_code = model.location_code,
+                    location_name_th = "test34",
+                    distribution_channel = "Channel5",
+                    channel_sale_group = "Group3"
 
-            data.Add(new subcontract_profile_locationModel
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test3",
+                    location_code = model.location_code,
+                    location_name_th = "test22",
+                    distribution_channel = "Channel2",
+                    channel_sale_group = "Group2"
+
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test",
+                    location_code = model.location_code,
+                    location_name_th = "test33",
+                    distribution_channel = "Channel2",
+                    channel_sale_group = "Group3"
+
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test2",
+                    location_code = model.location_code,
+                    location_name_th = "test34",
+                    distribution_channel = "Channel5",
+                    channel_sale_group = "Group3"
+
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test3",
+                    location_code = model.location_code,
+                    location_name_th = "test22",
+                    distribution_channel = "Channel2",
+                    channel_sale_group = "Group2"
+
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test",
+                    location_code = model.location_code,
+                    location_name_th = "test33",
+                    distribution_channel = "Channel2",
+                    channel_sale_group = "Group3"
+
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test2",
+                    location_code = model.location_code,
+                    location_name_th = "test34",
+                    distribution_channel = "Channel5",
+                    channel_sale_group = "Group3"
+
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test3",
+                    location_code = model.location_code,
+                    location_name_th = "test22",
+                    distribution_channel = "Channel2",
+                    channel_sale_group = "Group2"
+
+
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test",
+                    location_code = model.location_code,
+                    location_name_th = "test33",
+                    distribution_channel = "Channel2",
+                    channel_sale_group = "Group3"
+
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test2",
+                    location_code = model.location_code,
+                    location_name_th = "test34",
+                    distribution_channel = "Channel5",
+                    channel_sale_group = "Group3"
+
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test3",
+                    location_code = model.location_code,
+                    location_name_th = "test22",
+                    distribution_channel = "Channel2",
+                    channel_sale_group = "Group2"
+
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test",
+                    location_code = model.location_code,
+                    location_name_th = "test33",
+                    distribution_channel = "Channel2",
+                    channel_sale_group = "Group3"
+
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test2",
+                    location_code = model.location_code,
+                    location_name_th = "test34",
+                    distribution_channel = "Channel5",
+                    channel_sale_group = "Group3"
+
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test3",
+                    location_code = model.location_code,
+                    location_name_th = "test22",
+                    distribution_channel = "Channel2",
+                    channel_sale_group = "Group2"
+
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test",
+                    location_code = model.location_code,
+                    location_name_th = "test33",
+                    distribution_channel = "Channel2",
+                    channel_sale_group = "Group3"
+
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test2",
+                    location_code = model.location_code,
+                    location_name_th = "test34",
+                    distribution_channel = "Channel5",
+                    channel_sale_group = "Group3"
+
+                });
+                data.Add(new subcontract_profile_locationModel
+                {
+                    company_name_th = "test3",
+                    location_code = model.location_code,
+                    location_name_th = "test22",
+                    distribution_channel = "Channel2",
+                    channel_sale_group = "Group2"
+
+                });
+
+                var result = data.Where(x => x.channel_sale_group.Contains(model.channel_sale_group!=null? model.channel_sale_group:"")).Skip(skip).Take(take).ToList();
+
+
+                filteredResultsCount = data.Where(x => x.channel_sale_group.Contains(model.channel_sale_group != null ? model.channel_sale_group : "")).Count(); //output from Database
+                totalResultsCount = data.Count(); //output from Database
+
+                return Json(new
+                {
+                    // this is what datatables wants sending back
+                    draw = model.draw,
+                    recordsTotal = totalResultsCount,
+                    recordsFiltered = filteredResultsCount,
+                    data = result
+                });
+            }
+            else
             {
-                company_name_th = "test",
-                location_code = model.location_code,
-                location_name_th = "test33",
-                distribution_channel = "Channel2",
-                channel_sale_group = "Group3"
-               
-            }); 
-            data.Add(new subcontract_profile_locationModel
-            {
-                company_name_th = "test2",
-                location_code = model.location_code,
-                location_name_th = "test34",
-                distribution_channel = "Channel5",
-                channel_sale_group = "Group3"
-                
-            });
+                var result = data.Skip(skip).Take(take).ToList();
+
+                filteredResultsCount = data.Count(); //output from Database
+                totalResultsCount = data.Count(); //output from Database
+
+                return Json(new
+                {
+                    // this is what datatables wants sending back
+                    draw = model.draw,
+                    recordsTotal = totalResultsCount,
+                    recordsFiltered = filteredResultsCount,
+                    data = result
+                });
+            }
+
+          
+
+           
+
+           
+
+           
 
 
-
-            return Json(new { response = data });
+          
         }
 
         #region DaftAddress Register
@@ -546,8 +747,28 @@ namespace SubcontractProfile.Web.Controllers
 
 
     #region Register 
-
-    public class Search_subcontract_profile_location: DataSourceRequest //รับ Search จากหน้าจอ
+    public class DataTableAjaxPostModel
+    {
+        // properties are not capital due to json mapping
+        public int draw { get; set; }
+        public int start { get; set; }
+        public int length { get; set; }
+        public List<Column> columns { get; set; }
+        public List<Order> order { get; set; }
+    }
+    public class Order
+    {
+        public int column { get; set; }
+        public string dir { get; set; }
+    }
+    public class Column
+    {
+        public string data { get; set; }
+        public string name { get; set; }
+        public bool searchable { get; set; }
+        public bool orderable { get; set; }
+    }
+    public class Search_subcontract_profile_location: DataTableAjaxPostModel //รับ Search จากหน้าจอ
     {
         public string company_name_th { get; set; }
         public string company_name_en { get; set; }
@@ -587,13 +808,6 @@ namespace SubcontractProfile.Web.Controllers
     //public decimal CNT { get; set; }
     }
 
-    public class DataSourceRequest
-    {
-        public int PageIndex { get; set; }
-        public int PageSize { get; set; }
-        public string Sort { get; set; }
-        public string Filter { get; set; }
-    }
 
     #region Address
     public class subcontract_profile_address

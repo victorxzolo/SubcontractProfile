@@ -4991,8 +4991,8 @@ input[type="button"].btn-block {
 }
 
 .breadcrumb-item {
- /* display: -ms-flexbox;*/
-/*  display: flex;*/
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .breadcrumb-item + .breadcrumb-item {
@@ -6053,9 +6053,9 @@ a.close.disabled {
   background-color: #000;
 }
 
-    .modal-backdrop.fade {
-        opacity: 0;
-    }
+.modal-backdrop.fade {
+  opacity: 0;
+}
 
 .modal-backdrop.show {
   opacity: 0.5;

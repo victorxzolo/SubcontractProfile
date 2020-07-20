@@ -67,19 +67,61 @@
 
 /*Step1*/
 
+    function GetValueSerachLocation() {
+        var valueSearch = {
+            company_name_th: $('#txtjuristicTmodal').val(),
+            company_name_en: $('#txtjuristicEmodal').val(),
+            company_alias: $('#txtbussinessmodal').val(),
+            company_code: $('#txtbussinesscodemodal').val(),
+            location_name_th: $('#txtlocationnameTHmodal').val(),
+            location_name_en: $('#txtlocationnameTHmodal').val(),
+            location_code: $('#txtlocationcodemodal').val(),
+            distribution_channel: $('#ddldistributionModal option').filter(':selected').val(),
+            channel_sale_group: $('#ddlchannelsalegroupModal option').filter(':selected').val()
 
+        }
+        return valueSearch;
+    }
  
 
     var tbLocation = $('#tblocationModal').DataTable({
         ordering: true,
         select: true,
         retrieve: true,
-        paging: true,
+        //paging: true,
         destroy: true,
         searching: false,
+        //pageLength: 10,
+        proccessing: true,
+        serverSide: true,
+        ajax: {
+            type: "POST",
+            url: "/Account/SearchLocation",
+            data: {
+                company_name_th: function () { return $('#txtjuristicTmodal').val() },
+                company_name_en: function () { return $('#txtjuristicEmodal').val() },
+                company_alias: function () { return $('#txtbussinessmodal').val()},
+                company_code: function () {return $('#txtbussinesscodemodal').val()},
+                location_name_th: function () {return $('#txtlocationnameTHmodal').val()},
+                location_name_en: function () {return $('#txtlocationnameTHmodal').val()},
+                location_code: function () {return $('#txtlocationcodemodal').val()},
+                distribution_channel: function () {return $('#ddldistributionModal option').filter(':selected').val()},
+                channel_sale_group: function () {return $('#ddlchannelsalegroupModal option').filter(':selected').val()}
+            },
+            dataType: "json",
+            error: function (xhr, status, error) {
+                //Loading(0);
+                //clearForEdit();
+                console.log(status);
+                showFeedback("error", xhr.responseText, "System Information",
+                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            }
+
+        },
         //scrollY: 400,
         //processing: true,
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        //lengthChange: false,
         columns: [
             { "data": "company_name_th" },
             { "data":"location_code"},
@@ -87,6 +129,13 @@
             { "data": "distribution_channel" },
             { "data": "channel_sale_group" }
         ],
+        language: {
+            infoEmpty: "No items to display",
+            lengthMenu: "_MENU_ items per page",
+            zeroRecords: "Nothing found",
+            info: "_START_ - _END_  of _TOTAL_  items",
+            infoFiltered:""
+        }
     });
    
 
@@ -139,41 +188,26 @@
     });
 
     $('#btn_search_modal').click(function () {
-        var value = {
-            company_name_th: $('#txtjuristicTmodal').val(),
-            company_name_en: $('#txtjuristicEmodal').val(),
-            company_alias: $('#txtbussinessmodal').val(),
-            company_code: $('#txtbussinesscodemodal').val(),
-            location_name_th: $('#txtlocationnameTHmodal').val(),
-            location_name_en: $('#txtlocationnameTHmodal').val(),
-            location_code: $('#txtlocationcodemodal').val(),
-            distribution_channel: $('#ddldistributionModal option').filter(':selected').val(),
-            channel_sale_group: $('#ddlchannelsalegroupModal option').filter(':selected').val(),
-            PageIndex: 1,
-            PageSize: 10,
-            Sort: '',
-            Filter:''
+        
+        tbLocation.ajax.reload();
+        //$.ajax({
+        //    type: "POST",
+        //    url: "/Account/SearchLocation",
+        //    data: { model: GetValueSerachLocation() },
+        //    dataType: "json",
+        //    success: function (data) {
+        //        tbLocation.clear().draw();
+        //        BindDatatable(tbLocation, data.response)
 
-        }
-
-        $.ajax({
-            type: "POST",
-            url: "/Account/SearchLocation",
-            data: { model: value },
-            dataType: "json",
-            success: function (data) {
-                tbLocation.clear().draw();
-                BindDatatable(tbLocation, data.response)
-
-            },
-            error: function (xhr, status, error) {
-                //Loading(0);
-                //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-            }
-        });
+        //    },
+        //    error: function (xhr, status, error) {
+        //        //Loading(0);
+        //        //clearForEdit();
+        //        console.log(status);
+        //        showFeedback("error", xhr.responseText, "System Information",
+        //            "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+        //    }
+        //});
     });
 
     function BindDatatable(table, datamodel) {
@@ -193,9 +227,9 @@
         $('#txtlocationnameTHmodal').val('')
         $('#txtlocationnameTHmodal').val('')
         $('#txtlocationcodemodal').val('')
-        $('#ddldistributionModal option').filter(':selected').val('')
-        $('#ddlchannelsalegroupModal option').filter(':selected').val('')
-        tbLocation.clear().draw();
+        $('#ddldistributionModal').val('')
+        $('#ddlchannelsalegroupModal').val('')
+        tbLocation.ajax.reload();
     }
 
 /*************************************/
