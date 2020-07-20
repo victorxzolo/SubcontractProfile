@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SubcontractProfile.Entity.Model.Mapping;
+//using SubcontractProfile.Entity.Model.Mapping;
 using System;
 //using SubcontractProfile.Entity.Model.Mapping;
 
@@ -31,10 +31,10 @@ namespace SubcontractProfile.Web
                 options.Cookie.IsEssential = true;
             });
 
-            services.AddDbContext<DBContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("Context"));
-            });
+            //services.AddDbContext<DBContext>(options =>
+            //{
+            //    options.UseSqlServer(Configuration.GetConnectionString("Context"));
+            //});
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
