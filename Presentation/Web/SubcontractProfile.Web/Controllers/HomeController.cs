@@ -59,7 +59,11 @@ namespace SubcontractProfile.Web.Controllers
             return View();
         }
 
+<<<<<<< HEAD
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+=======
+       // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+>>>>>>> 79a873151f6b7f5bceed3fcb7b499287e71a5a26
         //public IActionResult Error()
         //{
         //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
