@@ -12,11 +12,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SubcontractProfile.Web.Extension;
+//using SubcontractProfile.BusinessLayer;
+//using SubcontractProfile.Core.Entities;
 
 namespace SubcontractProfile.Web.Controllers
 {
     public class AccountController : Controller
     {
+        //private readonly SubcontractProfileCompanyBLL _queryProcessor;
         public IActionResult Login()
         {
             ViewBag.ReturnURL = "";
@@ -601,6 +604,66 @@ namespace SubcontractProfile.Web.Controllers
                 throw;
             }
 
+        }
+
+        [HttpPost]
+        public IActionResult SearchAddress(DataTableAjaxPostModel model)
+        {
+            try
+            {
+               
+                int filteredResultsCount;
+                int totalResultsCount;
+
+                //var res = YourCustomSearchFunc(model, out filteredResultsCount, out totalResultsCount);
+                //var m = new SubcontractProfileCompany()
+                //{
+
+                //};
+
+
+                //  var ee = _queryProcessor.GetByQueryCompanyId(m);
+
+
+                var take = model.length;
+                var skip = model.start;
+
+                string sortBy = "";
+                bool sortDir = true;
+
+                if (model.order != null)
+                {
+                    // in this example we just default sort on the 1st column
+                    sortBy = model.columns[model.order[0].column].data;
+                    sortDir = model.order[0].dir.ToLower() == "asc";
+                }
+
+                List<subcontract_profile_address> result = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
+                if (result != null && result.Count != 0)
+                {
+                    filteredResultsCount = result.Count(); //output from Database
+                    totalResultsCount = result.Count(); //output from Database
+                }
+                else
+                {
+                    filteredResultsCount =0; //output from Database
+                    totalResultsCount =0; //output from Database
+                }
+                
+                return Json(new
+                {
+                    // this is what datatables wants sending back
+                    draw = model.draw,
+                    recordsTotal = totalResultsCount,
+                    recordsFiltered = filteredResultsCount,
+                    data = result
+                });
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
         }
         #endregion
 
