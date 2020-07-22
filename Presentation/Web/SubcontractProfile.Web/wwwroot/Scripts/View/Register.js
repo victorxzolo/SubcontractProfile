@@ -118,8 +118,6 @@
             }
 
         },
-        //scrollY: 400,
-        //processing: true,
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         //lengthChange: false,
         columns: [
@@ -246,9 +244,21 @@
         paging: true,
         destroy: true,
         searching: false,
-        //scrollY: 400,
-        //processing: true,
+        proccessing: true,
+        serverSide: true,
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        ajax: {
+            type: "POST",
+            url: "/Account/SearchAddress",
+            error: function (xhr, status, error) {
+                //Loading(0);
+                //clearForEdit();
+                console.log(status);
+                showFeedback("error", xhr.responseText, "System Information",
+                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            }
+
+        },
         columns: [
             { "data": "address_type_id", "visible": false},
             { "data": "address_type", orderable: true,},
@@ -265,7 +275,14 @@
                 orderable: false,
                 "defaultContent": "<button class='btn-border btn-black delete_btn'><i class='fa fa-trash icon'></i><span>ลบ</span></button>"
             }
-        ]
+        ],
+        language: {
+            infoEmpty: "No items to display",
+            lengthMenu: "_MENU_ items per page",
+            zeroRecords: "Nothing found",
+            info: "_START_ - _END_  of _TOTAL_  items",
+            infoFiltered: ""
+        }
     });
 
     $('#btnaddaddress').click(function () {

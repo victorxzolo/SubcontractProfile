@@ -12,17 +12,23 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SubcontractProfile.Web.Extension;
+<<<<<<< HEAD
 using SubcontractProfile.BusinessLayer;
 using SubcontractProfile.Core;
 using Microsoft.Extensions.Logging;
 using SubContractProfile.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using SubcontractProfile.Core.Entities;
+=======
+//using SubcontractProfile.BusinessLayer;
+//using SubcontractProfile.Core.Entities;
+>>>>>>> 43cc8fc5daa6df39084b0571c517d84d0f0ac0c7
 
 namespace SubcontractProfile.Web.Controllers
 {
     public class AccountController : Controller
     {
+<<<<<<< HEAD
       //  private readonly ILogger<AccountController> _log;
       //  private readonly IConfiguration _config;
         private readonly ISubcontractProfileCompanyBLL _profileCompBll ;
@@ -39,6 +45,9 @@ namespace SubcontractProfile.Web.Controllers
             _profileCompRepo = profileCompRepo;
         }
 
+=======
+        //private readonly SubcontractProfileCompanyBLL _queryProcessor;
+>>>>>>> 43cc8fc5daa6df39084b0571c517d84d0f0ac0c7
         public IActionResult Login()
         {
             //SubcontractProfileCompanyBLL aa = new SubcontractProfileCompanyBLL();
@@ -629,6 +638,66 @@ namespace SubcontractProfile.Web.Controllers
                 throw;
             }
 
+        }
+
+        [HttpPost]
+        public IActionResult SearchAddress(DataTableAjaxPostModel model)
+        {
+            try
+            {
+               
+                int filteredResultsCount;
+                int totalResultsCount;
+
+                //var res = YourCustomSearchFunc(model, out filteredResultsCount, out totalResultsCount);
+                //var m = new SubcontractProfileCompany()
+                //{
+
+                //};
+
+
+                //  var ee = _queryProcessor.GetByQueryCompanyId(m);
+
+
+                var take = model.length;
+                var skip = model.start;
+
+                string sortBy = "";
+                bool sortDir = true;
+
+                if (model.order != null)
+                {
+                    // in this example we just default sort on the 1st column
+                    sortBy = model.columns[model.order[0].column].data;
+                    sortDir = model.order[0].dir.ToLower() == "asc";
+                }
+
+                List<subcontract_profile_address> result = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
+                if (result != null && result.Count != 0)
+                {
+                    filteredResultsCount = result.Count(); //output from Database
+                    totalResultsCount = result.Count(); //output from Database
+                }
+                else
+                {
+                    filteredResultsCount =0; //output from Database
+                    totalResultsCount =0; //output from Database
+                }
+                
+                return Json(new
+                {
+                    // this is what datatables wants sending back
+                    draw = model.draw,
+                    recordsTotal = totalResultsCount,
+                    recordsFiltered = filteredResultsCount,
+                    data = result
+                });
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
         }
         #endregion
 
