@@ -4,6 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using SubcontractProfile.BusinessLayer;
+using SubcontractProfile.Core.Entities;
+using SubContractProfile.Infrastructure;
 //using SubcontractProfile.Entity.Model.Mapping;
 using System;
 //using SubcontractProfile.Entity.Model.Mapping;
@@ -35,12 +39,25 @@ namespace SubcontractProfile.Web
             //{
             //    options.UseSqlServer(Configuration.GetConnectionString("Context"));
             //});
+
+
             services.AddControllersWithViews();
             services.AddRazorPages();
+            // Add framework services.
+            services.AddMvc()
+                    .AddControllersAsServices();  // <---- Super important
+            services.AddTransient<IDbContext, SubContractProfile.Infrastructure.DbContext>();
+
+            //BusinessLayer
+            services.AddScoped<ISubcontractProfileCompanyBLL, SubcontractProfileCompanyBLL>();
+            services.AddScoped<ISubcontractProfileCompanyRepo, SubcontractProfileCompanyBLL>();
+
         }
 
+      
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -67,6 +84,8 @@ namespace SubcontractProfile.Web
                     //pattern: "{controller=Home}/{action=Index}/{id?}");
                     pattern: "{controller=Account}/{action=Login}/{id?}");
             });
+
+            loggerFactory.AddFile("Logs/SubcontractProfileLog-{Date}.txt");
         }
     }
 }

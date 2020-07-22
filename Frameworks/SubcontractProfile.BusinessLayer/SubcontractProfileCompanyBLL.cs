@@ -10,17 +10,34 @@ using SubcontractProfile.Core.Entities;
 
 namespace SubcontractProfile.BusinessLayer
 {
-    public class SubcontractProfileCompanyBLL 
+    public partial interface ISubcontractProfileCompanyBLL
     {
-        private readonly ILogger<SubcontractProfileCompanyRepo> _log;
-        private readonly ISubcontractProfileCompanyRepo _profileComp;
-        private readonly IDbContext _dbContext;
-        public SubcontractProfileCompanyBLL(ILogger<SubcontractProfileCompanyRepo> logger, ISubcontractProfileCompanyRepo profileComp,
-         IDbContext context)
+        Task<IEnumerable<SubcontractProfileCompany>> GetByQueryCompanyId(SubcontractProfileCompany subcontractProfileCompany);
+   
+    }
+
+    public partial class SubcontractProfileCompanyBLL : ISubcontractProfileCompanyBLL, ISubcontractProfileCompanyRepo
+    {
+        private readonly ILogger<SubcontractProfileCompanyBLL> _log;
+         private readonly SubContractProfile.Infrastructure.DbContext _dbContext;
+        private readonly IConfiguration _config;
+        private readonly ISubcontractProfileCompanyRepo _companyRepo;
+
+        //public SubcontractProfileCompanyBLL( ISubcontractProfileCompanyRepo profileComp,
+        // IDbContext context)
+        //{
+        //   // _log = logger;
+        //    _profileComp = profileComp;
+        //    _dbContext = context;
+        //}
+
+
+        public SubcontractProfileCompanyBLL(IConfiguration config, ILogger<SubcontractProfileCompanyBLL> logger
+            , ISubcontractProfileCompanyRepo companyRepo)
         {
-            _log = logger;
-            _profileComp = profileComp;
-            _dbContext = context;
+             _log = logger;
+            _dbContext = new DbContext(config);
+            _companyRepo = companyRepo;
         }
 
 
@@ -49,6 +66,40 @@ namespace SubcontractProfile.BusinessLayer
             return entity;
         }
 
+        Task<bool> ISubcontractProfileCompanyRepo.BulkInsert(IEnumerable<SubcontractProfileCompany> subcontractProfileCompanyList)
+        {
+            return _companyRepo.BulkInsert(subcontractProfileCompanyList);
+          
+        }
 
+        Task<bool> ISubcontractProfileCompanyRepo.Delete(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<IEnumerable<SubcontractProfileCompany>> ISubcontractProfileCompanyRepo.GetAll()
+        {
+            return _companyRepo.GetAll();
+        }
+
+        Task<SubcontractProfileCompany> ISubcontractProfileCompanyRepo.GetByCompanyId(Guid companyId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<IEnumerable<SubcontractProfileCompany>> ISubcontractProfileCompanyRepo.GetByPKList(IEnumerable<SubcontractProfileCompany_PK> pkList)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<bool> ISubcontractProfileCompanyRepo.Insert(SubcontractProfileCompany subcontractProfileCompany)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<bool> ISubcontractProfileCompanyRepo.Update(SubcontractProfileCompany subcontractProfileCompany)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

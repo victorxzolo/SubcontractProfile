@@ -29,9 +29,6 @@ namespace SubContractProfile.Infrastructure
 
     }
 
-
-
-
     /// =================================================================
     /// Author: kessada x10
     /// Description:	Class for the repo SubcontractProfileCompanyRepo 

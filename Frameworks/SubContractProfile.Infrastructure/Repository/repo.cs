@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 
-
+using System.IO;
 
 /// =================================================================
 /// Author: kessada x10
@@ -114,8 +114,15 @@ namespace SubContractProfile.Infrastructure {
         public DbContext(IConfiguration config)
         {
             _config = config;
+            var builder = new ConfigurationBuilder()
+                       .SetBasePath(Directory.GetCurrentDirectory())
+                       .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            _config = builder.Build();
+
             DefaultTypeMap.MatchNamesWithUnderscores = true;
             _cn = new SqlConnection(_config.GetConnectionString("Default"));
+
+
         }
         
 
