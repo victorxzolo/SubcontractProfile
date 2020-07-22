@@ -12,15 +12,43 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SubcontractProfile.Web.Extension;
+using SubcontractProfile.BusinessLayer;
+using SubcontractProfile.Core;
+using Microsoft.Extensions.Logging;
+using SubContractProfile.Infrastructure;
+using Microsoft.Extensions.Configuration;
+using SubcontractProfile.Core.Entities;
 
 namespace SubcontractProfile.Web.Controllers
 {
     public class AccountController : Controller
     {
+      //  private readonly ILogger<AccountController> _log;
+      //  private readonly IConfiguration _config;
+        private readonly ISubcontractProfileCompanyBLL _profileCompBll ;
+        private readonly ISubcontractProfileCompanyRepo _profileCompRepo;
+
+        public AccountController(ISubcontractProfileCompanyBLL profilecomp
+            , ISubcontractProfileCompanyRepo profileCompRepo) //ILogger<AccountController> logger, IConfiguration config,
+
+        {
+            //_log = logger;
+            //_config = config;
+
+            _profileCompBll = profilecomp;
+            _profileCompRepo = profileCompRepo;
+        }
+
         public IActionResult Login()
         {
-            ViewBag.ReturnURL = "";
-            int dd = SiteSession.CurrentUICulture;
+            //SubcontractProfileCompanyBLL aa = new SubcontractProfileCompanyBLL();
+            //ViewBag.ReturnURL = "";
+            //int dd = SiteSession.CurrentUICulture;
+            SubcontractProfileCompany test = new SubcontractProfileCompany();
+            test.CompanyId = Guid.NewGuid();
+            
+            var aa = _profileCompRepo.GetAll();
+
             return View();
         }
 
