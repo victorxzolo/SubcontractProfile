@@ -88,7 +88,8 @@
         ordering: true,
         select: true,
         retrieve: true,
-        //paging: true,
+        paging: true,
+        pagingType: "full_numbers",
         destroy: true,
         searching: false,
         //pageLength: 10,
@@ -132,7 +133,13 @@
             lengthMenu: "_MENU_ items per page",
             zeroRecords: "Nothing found",
             info: "_START_ - _END_  of _TOTAL_  items",
-            infoFiltered:""
+            infoFiltered: "",
+            paginate: {
+                previous: "<",
+                next: ">",
+                last: ">|",
+                first: "|<"
+            }
         }
     });
    
@@ -239,17 +246,26 @@
     BindDDLsubdistrict();
     var tbaddressstep2 = $('#tbaddressstep2').DataTable({
         ordering: true,
+        order: [[1, "asc"]],
         select: true,
         retrieve: true,
         paging: true,
+        pagingType: "full_numbers",
         destroy: true,
         searching: false,
         proccessing: true,
         serverSide: true,
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        dom: 'rt<"float-left"pl><"float-right"i>',
         ajax: {
             type: "POST",
             url: "/Account/SearchAddress",
+            dataSrc: function (data) {
+                var val = []
+                val = ConcatstrAddress(data.data);
+                data.data = val;
+                return data.data;
+            },
             error: function (xhr, status, error) {
                 //Loading(0);
                 //clearForEdit();
@@ -281,7 +297,14 @@
             lengthMenu: "_MENU_ items per page",
             zeroRecords: "Nothing found",
             info: "_START_ - _END_  of _TOTAL_  items",
-            infoFiltered: ""
+            infoFiltered: "",
+            paginate: {
+                previous: "<",
+                next: ">",
+                last: ">|",
+                first: "|<"
+            }
+            
         }
     });
 
@@ -326,13 +349,14 @@
             dataType: "json",
             success: function (data) {
 
-                console.log(data);
+             
                 if (data.status) {
 
-                    var val = []
-                    val = ConcatstrAddress(data.response);
-                    tbaddressstep2.clear().draw();
-                    BindDatatable(tbaddressstep2, val);
+                    //var val = []
+                    //val = ConcatstrAddress(data.response);
+                    //tbaddressstep2.clear().draw();
+                    //BindDatatable(tbaddressstep2, val);
+                    tbaddressstep2.ajax.reload();
                 }
                 else {
                     showFeedback("error", data.message, "System Information",
@@ -538,6 +562,7 @@
 
     var tbaddressstep5 = $('#tbaddressstep5').DataTable({
         ordering: true,
+        order: [[1, "asc"]],
         select: true,
         retrieve: true,
         paging: true,
@@ -550,7 +575,14 @@
             { "data": "address_type_id", "visible": false },
             { "data": "address_type", orderable: true, },
             { "data": "address", orderable: true, }
-            ]
+        ],
+        language: {
+            infoEmpty: "No items to display",
+            lengthMenu: "_MENU_ items per page",
+            zeroRecords: "Nothing found",
+            info: "_START_ - _END_  of _TOTAL_  items",
+            infoFiltered: ""
+        }
     });
 
 
