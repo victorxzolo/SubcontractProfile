@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,9 +12,9 @@ using SubcontractProfile.WebApi.Services.Contracts;
 
 namespace SubcontractProfile.WebApi.API.Controllers
 {
-
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
     [Route("api/v{version:apiVersion}/SubcontractProfileCompany")]
+    //[Route("api/SubcontractProfileCompany")]
     [ApiController]
     public class RegisterCompanyController : Controller
     {

@@ -20,7 +20,11 @@ namespace SubcontractProfile.Web.Controllers
 {
     public class AccountController : Controller
     {
-
+        private readonly IConfiguration _configuration;
+        public AccountController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public IActionResult Login()
         {
             // SubcontractProfileCompanyBLL aa = new SubcontractProfileCompanyBLL();
@@ -144,6 +148,9 @@ namespace SubcontractProfile.Web.Controllers
         {
             ViewData["Controller"] = "Register";
             ViewData["View"] = "Register";
+
+            //เรียก appsetting.json path api
+            //var v = _configuration.GetValue<string>("Pathapi:Local").ToString();
             return View();
         }
 
