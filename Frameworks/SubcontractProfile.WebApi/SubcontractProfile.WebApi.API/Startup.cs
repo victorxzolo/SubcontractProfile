@@ -24,8 +24,8 @@ using System.Net;
 using System.Reflection;
 using System.Text.Json;
 using Repository;
-using SubcontractProfile.WebApi.Services.Contracts;
-using SubcontractProfile.WebApi.Services;
+using AutoMapper;
+
 
 #pragma warning disable CS1591
 namespace SubcontractProfile.WebApi.API
@@ -114,8 +114,11 @@ namespace SubcontractProfile.WebApi.API
                     //Mappings
                     services.ConfigureMappings();
 
+                   // services.AddAutoMapper(typeof(Startup));
+                    services.AddControllersWithViews();
+
                     //Business settings  
-                  
+
                     services.AddTransient<IDbContext, DbContext>();
                     //services.AddScoped<IDbContext, DbContext>();
                     //services.AddScoped<ISubcontractProfileCompanyRepo, SubcontractProfileCompanyRepo>();

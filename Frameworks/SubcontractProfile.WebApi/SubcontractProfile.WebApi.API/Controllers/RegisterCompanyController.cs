@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SubcontractProfile.WebApi.API.DataContracts;
 using SubcontractProfile.WebApi.Services.Contracts;
+using SubcontractProfile.WebApi.Services.Model;
 
 namespace SubcontractProfile.WebApi.API.Controllers
 {
@@ -46,7 +47,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CompanyRegister))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(CompanyRegister))]
         [HttpGet("{id}")]
-        public async Task<CompanyRegister> GetALL()
+        public async Task<IEnumerable<SubcontractProfileCompany>> GetALL()
         {
             //_logger.LogDebug($"UserControllers::GetALL::{id}");
             _logger.LogDebug($"UserControllers::GetALL");
@@ -54,7 +55,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
             var data = await _service.GetAll();
 
             if (data != null)
-                return _mapper.Map<CompanyRegister>(data);
+                return data; //_mapper.Map<SubcontractProfileCompany>(data);
             else
                 return null;
         }
