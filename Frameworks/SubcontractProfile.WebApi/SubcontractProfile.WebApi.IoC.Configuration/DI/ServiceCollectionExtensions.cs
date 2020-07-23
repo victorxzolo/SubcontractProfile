@@ -16,29 +16,28 @@ namespace SubcontractProfile.WebApi.IoC.Configuration.DI
             if (services != null)
             {
                 services.AddTransient<IUserService, UserService>();
-                services.AddTransient<IDbContext, DbContext>();
-                services.AddTransient<ISubcontractProfileAddressRepo, SubcontractProfileAddressRepo>();
-                services.AddTransient<ISubcontractProfileAsstEngineerRepo, SubcontractProfileAsstEngineerRepo>();
-                services.AddTransient<ISubcontractProfileBankingRepo, SubcontractProfileBankingRepo>();
-                services.AddTransient<ISubcontractProfileCompanyRepo, SubcontractProfileCompanyRepo>();
-                services.AddTransient<ISubcontractProfileDistrictRepo, SubcontractProfileDistrictRepo>();
-                services.AddTransient<ISubcontractProfileEngineerRepo, SubcontractProfileEngineerRepo>();
-                services.AddTransient<ISubcontractProfileLocationRepo, SubcontractProfileLocationRepo>();
-                services.AddTransient<ISubcontractProfileNationalityRepo, SubcontractProfileNationalityRepo>();
-                services.AddTransient<ISubcontractProfilePaymentRepo, SubcontractProfilePaymentRepo>();
-                services.AddTransient<ISubcontractProfilePersonalRepo, SubcontractProfilePersonalRepo>();
-                services.AddTransient<ISubcontractProfileProvinceRepo, SubcontractProfileProvinceRepo>();
-                services.AddTransient<ISubcontractProfileRaceRepo, SubcontractProfileRaceRepo>();
-                services.AddTransient<ISubcontractProfileReligionRepo, SubcontractProfileReligionRepo>();
-                services.AddTransient<ISubcontractProfileSubDistrictRepo, SubcontractProfileSubDistrictRepo>();
-                services.AddTransient<ISubcontractProfileTeamRepo, SubcontractProfileTeamRepo>();
-                services.AddTransient<ISubcontractProfileTitleRepo, SubcontractProfileTitleRepo>();
-                services.AddTransient<ISubcontractProfileTrainingRepo, SubcontractProfileTrainingRepo>();
-                services.AddTransient<ISubcontractProfileUserRepo, SubcontractProfileUserRepo>();
-                services.AddTransient<ISubcontractProfileVerhicleBrandRepo, SubcontractProfileVerhicleBrandRepo>();
-                services.AddTransient<ISubcontractProfileVerhicleSeriseRepo, SubcontractProfileVerhicleSeriseRepo>();
-                services.AddTransient<ISubcontractProfileVerhicleTypeRepo, SubcontractProfileVerhicleTypeRepo>();
-                services.AddTransient<ISubcontractProfileWarrantyRepo, SubcontractProfileWarrantyRepo>();
+                services.AddScoped<ISubcontractProfileAddressRepo, SubcontractProfileAddressRepo>();
+                services.AddScoped<ISubcontractProfileAsstEngineerRepo, SubcontractProfileAsstEngineerRepo>();
+                services.AddScoped<ISubcontractProfileBankingRepo, SubcontractProfileBankingRepo>();
+                services.AddScoped<ISubcontractProfileCompanyRepo, SubcontractProfileCompanyRepo>();
+                services.AddScoped<ISubcontractProfileDistrictRepo, SubcontractProfileDistrictRepo>();
+                services.AddScoped<ISubcontractProfileEngineerRepo, SubcontractProfileEngineerRepo>();
+                services.AddScoped<ISubcontractProfileLocationRepo, SubcontractProfileLocationRepo>();
+                services.AddScoped<ISubcontractProfileNationalityRepo, SubcontractProfileNationalityRepo>();
+                services.AddScoped<ISubcontractProfilePaymentRepo, SubcontractProfilePaymentRepo>();
+                services.AddScoped<ISubcontractProfilePersonalRepo, SubcontractProfilePersonalRepo>();
+                services.AddScoped<ISubcontractProfileProvinceRepo, SubcontractProfileProvinceRepo>();
+                services.AddScoped<ISubcontractProfileRaceRepo, SubcontractProfileRaceRepo>();
+                services.AddScoped<ISubcontractProfileReligionRepo, SubcontractProfileReligionRepo>();
+                services.AddScoped<ISubcontractProfileSubDistrictRepo, SubcontractProfileSubDistrictRepo>();
+                services.AddScoped<ISubcontractProfileTeamRepo, SubcontractProfileTeamRepo>();
+                services.AddScoped<ISubcontractProfileTitleRepo, SubcontractProfileTitleRepo>();
+                services.AddScoped<ISubcontractProfileTrainingRepo, SubcontractProfileTrainingRepo>();
+                services.AddScoped<ISubcontractProfileUserRepo, SubcontractProfileUserRepo>();
+                services.AddScoped<ISubcontractProfileVerhicleBrandRepo, SubcontractProfileVerhicleBrandRepo>();
+                services.AddScoped<ISubcontractProfileVerhicleSeriseRepo, SubcontractProfileVerhicleSeriseRepo>();
+                services.AddScoped<ISubcontractProfileVerhicleTypeRepo, SubcontractProfileVerhicleTypeRepo>();
+                services.AddScoped<ISubcontractProfileWarrantyRepo, SubcontractProfileWarrantyRepo>();
             }
 
         }

@@ -18,9 +18,9 @@ namespace SubcontractProfile.WebApi.Services.Services
     public partial class SubcontractProfileAddressRepo : ISubcontractProfileAddressRepo
     {
 
-        protected Repository.DbContext _dbContext = null;
+        private IDbContext _dbContext;
 
-        public SubcontractProfileAddressRepo(Repository.DbContext dbContext)
+        public SubcontractProfileAddressRepo(IDbContext dbContext)
         {
             _dbContext = dbContext;
         }

@@ -12,9 +12,10 @@ using SubcontractProfile.WebApi.Services.Contracts;
 
 namespace SubcontractProfile.WebApi.API.Controllers
 {
-    //[Route("api/[controller]")]
+
+    [ApiVersion("1.0")]
+    [Route("api/SubcontractProfileCompany")]//required for default versioning
     [Route("api/v{version:apiVersion}/SubcontractProfileCompany")]
-    //[Route("api/SubcontractProfileCompany")]
     [ApiController]
     public class RegisterCompanyController : Controller
     {

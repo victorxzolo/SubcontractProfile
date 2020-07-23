@@ -23,6 +23,9 @@ using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Text.Json;
+using Repository;
+using SubcontractProfile.WebApi.Services.Contracts;
+using SubcontractProfile.WebApi.Services;
 
 #pragma warning disable CS1591
 namespace SubcontractProfile.WebApi.API
@@ -105,10 +108,19 @@ namespace SubcontractProfile.WebApi.API
                         });
                     }
 
+      
+                    services.AddMvc().AddControllersAsServices();
+
                     //Mappings
                     services.ConfigureMappings();
 
-                    //Business settings            
+                    //Business settings  
+                  
+                    services.AddTransient<IDbContext, DbContext>();
+                    //services.AddScoped<IDbContext, DbContext>();
+                    //services.AddScoped<ISubcontractProfileCompanyRepo, SubcontractProfileCompanyRepo>();
+
+
                     services.ConfigureBusinessServices(Configuration);
 
                     _logger.LogDebug("Startup::ConfigureServices::ApiVersioning, Swagger and DI settings");

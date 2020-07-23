@@ -9,7 +9,7 @@ using System.Data.SqlTypes;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SubcontractProfile.WebApi.Services.Services
+namespace SubcontractProfile.WebApi.Services
 {
 
     /// =================================================================

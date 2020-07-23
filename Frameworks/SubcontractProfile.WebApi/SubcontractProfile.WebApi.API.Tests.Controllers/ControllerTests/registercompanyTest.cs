@@ -21,7 +21,7 @@ namespace SubcontractProfile.WebApi.API.Tests.Controllers.ControllerTests
             var loggerFactory = _serviceProvider.GetRequiredService<ILoggerFactory>();
             var logger = loggerFactory.CreateLogger<RegisterCompanyController>();
 
-            _comp_controller = new RegisterCompanyController(businessService, mapper, logger);
+          //  _comp_controller = new RegisterCompanyController(businessService, mapper, logger);
         }
 
         [TestMethod]

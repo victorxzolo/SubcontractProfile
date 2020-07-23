@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Repository;
 using SubcontractProfile.WebApi.Services.Contracts;
 using SubcontractProfile.WebApi.Services.Model;
 using System;
@@ -17,9 +18,9 @@ namespace SubcontractProfile.WebApi.Services.Services
     public partial class SubcontractProfileDistrictRepo : ISubcontractProfileDistrictRepo
     {
 
-        protected Repository.DbContext _dbContext = null;
+        protected IDbContext _dbContext;
 
-        public SubcontractProfileDistrictRepo(Repository.DbContext dbContext)
+        public SubcontractProfileDistrictRepo(IDbContext dbContext)
         {
             _dbContext = dbContext;
         }

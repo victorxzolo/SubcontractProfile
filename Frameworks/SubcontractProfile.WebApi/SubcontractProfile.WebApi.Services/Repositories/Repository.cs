@@ -117,7 +117,7 @@ namespace Repository
             get
             {
                 if (_subcontractProfileCompanyRepo == null)
-                    _subcontractProfileCompanyRepo = new SubcontractProfile.WebApi.Services.Services.SubcontractProfileCompanyRepo(this);
+                    _subcontractProfileCompanyRepo = new SubcontractProfile.WebApi.Services.SubcontractProfileCompanyRepo(this);
                 return _subcontractProfileCompanyRepo;
             }
         }
