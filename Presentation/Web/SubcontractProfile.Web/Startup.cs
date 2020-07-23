@@ -5,12 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using SubcontractProfile.BusinessLayer;
-using SubcontractProfile.Core.Entities;
-using SubContractProfile.Infrastructure;
-//using SubcontractProfile.Entity.Model.Mapping;
+
 using System;
-//using SubcontractProfile.Entity.Model.Mapping;
+
 
 namespace SubcontractProfile.Web
 {
@@ -46,11 +43,12 @@ namespace SubcontractProfile.Web
             // Add framework services.
             services.AddMvc()
                     .AddControllersAsServices();  // <---- Super important
-            services.AddTransient<IDbContext, SubContractProfile.Infrastructure.DbContext>();
+          //  services.AddTransient<IDbContext, SubContractProfile.Infrastructure.DbContext>();
 
             //BusinessLayer
-            services.AddScoped<ISubcontractProfileCompanyBLL, SubcontractProfileCompanyBLL>();
-            services.AddScoped<ISubcontractProfileCompanyRepo, SubcontractProfileCompanyBLL>();
+           // services.AddScoped<ISubcontractProfileCompanyBLL, SubcontractProfileCompanyBLL>();
+            //services.AddScoped<ISubcontractProfileCompanyRepo, SubcontractProfileCompanyBLL>();
+            //services.AddScoped<ISubcontractProfileCompanyRepo, SubcontractProfileCompanyRepo>();
 
         }
 

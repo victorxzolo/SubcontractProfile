@@ -12,61 +12,38 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SubcontractProfile.Web.Extension;
-<<<<<<< HEAD
-using SubcontractProfile.BusinessLayer;
-using SubcontractProfile.Core;
+
 using Microsoft.Extensions.Logging;
-using SubContractProfile.Infrastructure;
+
 using Microsoft.Extensions.Configuration;
-using SubcontractProfile.Core.Entities;
-=======
-//using SubcontractProfile.BusinessLayer;
-//using SubcontractProfile.Core.Entities;
->>>>>>> 43cc8fc5daa6df39084b0571c517d84d0f0ac0c7
+
 
 namespace SubcontractProfile.Web.Controllers
 {
     public class AccountController : Controller
     {
-<<<<<<< HEAD
-      //  private readonly ILogger<AccountController> _log;
-      //  private readonly IConfiguration _config;
-        private readonly ISubcontractProfileCompanyBLL _profileCompBll ;
-        private readonly ISubcontractProfileCompanyRepo _profileCompRepo;
+      
 
-        public AccountController(ISubcontractProfileCompanyBLL profilecomp
-            , ISubcontractProfileCompanyRepo profileCompRepo) //ILogger<AccountController> logger, IConfiguration config,
-
+        public AccountController(
+            ) 
         {
-            //_log = logger;
-            //_config = config;
-
-            _profileCompBll = profilecomp;
-            _profileCompRepo = profileCompRepo;
+         
+      
         }
 
-=======
-        //private readonly SubcontractProfileCompanyBLL _queryProcessor;
->>>>>>> 43cc8fc5daa6df39084b0571c517d84d0f0ac0c7
         public IActionResult Login()
         {
-            //SubcontractProfileCompanyBLL aa = new SubcontractProfileCompanyBLL();
-            //ViewBag.ReturnURL = "";
-            //int dd = SiteSession.CurrentUICulture;
-            SubcontractProfileCompany test = new SubcontractProfileCompany();
-            test.CompanyId = Guid.NewGuid();
             
-            var aa = _profileCompRepo.GetAll();
-
+           
             return View();
         }
 
         public List<string> GetScreenConfig(string page)
         {
             List<string> test = new List<string>();
-            if (SiteSession.CurrentUICulture==1)
+            if (SiteSession.CurrentUICulture == 1)
             {
-  
+
             }
             else
             {
@@ -116,7 +93,7 @@ namespace SubcontractProfile.Web.Controllers
                     //    ModelState.AddModelError("", model.username + " not found.");
                     //}
 
-                    Url= "/Test/Dashboard";
+                    Url = "/Test/Dashboard";
                 }
             }
 
@@ -174,9 +151,9 @@ namespace SubcontractProfile.Web.Controllers
             return View();
         }
 
-       
+
         [HttpPost]
-        public IActionResult DDLsubcontract_profile_sub_district(int district_id=0)
+        public IActionResult DDLsubcontract_profile_sub_district(int district_id = 0)
         {
             var output = new List<subcontract_profile_sub_district>();
             output.Add(new subcontract_profile_sub_district
@@ -184,10 +161,11 @@ namespace SubcontractProfile.Web.Controllers
                 sub_district_id = 0,
                 sub_district_name = "--Select Sub District--"
             });
-            output.Add(new subcontract_profile_sub_district {
-                sub_district_id=1,
-                sub_district_name="วังทองหลาง",
-                zip_code="10310",
+            output.Add(new subcontract_profile_sub_district
+            {
+                sub_district_id = 1,
+                sub_district_name = "วังทองหลาง",
+                zip_code = "10310",
                 district_id = 1
             });
             output.Add(new subcontract_profile_sub_district
@@ -230,7 +208,7 @@ namespace SubcontractProfile.Web.Controllers
 
             if (district_id != 0)
             {
-                output = output.Where(x => x.district_id==district_id).ToList();
+                output = output.Where(x => x.district_id == district_id).ToList();
                 output.Add(new subcontract_profile_sub_district
                 {
                     sub_district_id = 0,
@@ -242,7 +220,7 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { response = output });
         }
         [HttpPost]
-        public IActionResult DDLsubcontract_profile_district(int province_id=0)
+        public IActionResult DDLsubcontract_profile_district(int province_id = 0)
         {
             var output = new List<subcontract_profile_district>();
             output.Add(new subcontract_profile_district
@@ -254,7 +232,7 @@ namespace SubcontractProfile.Web.Controllers
             {
                 district_id = 1,
                 district_name = "วังทองหลาง",
-                province_id=1
+                province_id = 1
             });
             output.Add(new subcontract_profile_district
             {
@@ -275,9 +253,9 @@ namespace SubcontractProfile.Web.Controllers
                 district_name = "พระประแดง",
                 province_id = 2
             });
-            if (province_id!=0)
+            if (province_id != 0)
             {
-                output = output.Where(x => x.province_id==province_id).ToList();
+                output = output.Where(x => x.province_id == province_id).ToList();
                 output.Add(new subcontract_profile_district
                 {
                     district_id = 0,
@@ -285,8 +263,8 @@ namespace SubcontractProfile.Web.Controllers
                 });
                 output = output.OrderBy(x => x.district_id).ToList();
             }
-           
-           
+
+
             return Json(new { response = output });
         }
         [HttpPost]
@@ -301,8 +279,8 @@ namespace SubcontractProfile.Web.Controllers
             });
             output.Add(new subcontract_profile_province
             {
-                province_id=1,
-                province_name="กรุงเทพฯ"
+                province_id = 1,
+                province_name = "กรุงเทพฯ"
 
             });
             output.Add(new subcontract_profile_province
@@ -337,23 +315,23 @@ namespace SubcontractProfile.Web.Controllers
                 sortBy = model.columns[model.order[0].column].data;
                 sortDir = model.order[0].dir.ToLower() == "asc";
             }
-            if(model !=null)
+            if (model != null)
             {
                 var query = new subcontract_profile_locationQuery()
                 {
 
-                         p_company_name_th =model.company_name_th,
-                         p_company_name_en =model.company_name_en,
-                         p_company_alias=model.company_alias,
-                         p_company_code =model.company_code,
-                         p_location_name_th=model.location_name_th,
-                         p_location_name_en =model.location_name_en,
-                         p_location_code=model.location_code,
-                         p_distribution_channel =model.distribution_channel,
-                         p_channel_sale_group=model.channel_sale_group,
+                    p_company_name_th = model.company_name_th,
+                    p_company_name_en = model.company_name_en,
+                    p_company_alias = model.company_alias,
+                    p_company_code = model.company_code,
+                    p_location_name_th = model.location_name_th,
+                    p_location_name_en = model.location_name_en,
+                    p_location_code = model.location_code,
+                    p_distribution_channel = model.distribution_channel,
+                    p_channel_sale_group = model.channel_sale_group,
                     PAGE_INDEX = skip,
                     PAGE_SIZE = take
-            };
+                };
                 //var result = _queryProcessor.Execute(query);
                 data.Add(new subcontract_profile_locationModel
                 {
@@ -519,7 +497,7 @@ namespace SubcontractProfile.Web.Controllers
 
                 });
 
-                var result = data.Where(x => x.channel_sale_group.Contains(model.channel_sale_group!=null? model.channel_sale_group:"")).Skip(skip).Take(take).ToList();
+                var result = data.Where(x => x.channel_sale_group.Contains(model.channel_sale_group != null ? model.channel_sale_group : "")).Skip(skip).Take(take).ToList();
 
 
                 filteredResultsCount = data.Where(x => x.channel_sale_group.Contains(model.channel_sale_group != null ? model.channel_sale_group : "")).Count(); //output from Database
@@ -551,16 +529,16 @@ namespace SubcontractProfile.Web.Controllers
                 });
             }
 
-          
-
-           
-
-           
-
-           
 
 
-          
+
+
+
+
+
+
+
+
         }
 
         #region DaftAddress Register
@@ -570,7 +548,7 @@ namespace SubcontractProfile.Web.Controllers
             try
             {
                 var data = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
-                if (data != null && data.Count !=0)
+                if (data != null && data.Count != 0)
                 {
                     data.RemoveAll(x => x.address_type_id.Contains(daftdata[0].address_type_id));
 
@@ -580,11 +558,11 @@ namespace SubcontractProfile.Web.Controllers
                 else
                 {
                     SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaft", daftdata);
-                   data = daftdata;
+                    data = daftdata;
                 }
-                
 
-               
+
+
 
                 return Json(new { response = data, status = true });
             }
@@ -599,13 +577,13 @@ namespace SubcontractProfile.Web.Controllers
         {
             try
             {
-                if(address_type_id !=null && address_type_id !="")
+                if (address_type_id != null && address_type_id != "")
                 {
                     var data = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
                     data = data.Where(x => x.address_type_id == address_type_id).ToList();
                     return Json(new { response = data, status = true });
                 }
-              else
+                else
                 {
                     var data = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
                     return Json(new { response = data, status = true });
@@ -626,7 +604,7 @@ namespace SubcontractProfile.Web.Controllers
                 data.RemoveAll(x => x.address_type_id.Contains(address_type_id));
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaft", data);
                 var data_delete = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
-                if(data_delete==null)
+                if (data_delete == null)
                 {
                     SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaft");
                 }
@@ -638,66 +616,6 @@ namespace SubcontractProfile.Web.Controllers
                 throw;
             }
 
-        }
-
-        [HttpPost]
-        public IActionResult SearchAddress(DataTableAjaxPostModel model)
-        {
-            try
-            {
-               
-                int filteredResultsCount;
-                int totalResultsCount;
-
-                //var res = YourCustomSearchFunc(model, out filteredResultsCount, out totalResultsCount);
-                //var m = new SubcontractProfileCompany()
-                //{
-
-                //};
-
-
-                //  var ee = _queryProcessor.GetByQueryCompanyId(m);
-
-
-                var take = model.length;
-                var skip = model.start;
-
-                string sortBy = "";
-                bool sortDir = true;
-
-                if (model.order != null)
-                {
-                    // in this example we just default sort on the 1st column
-                    sortBy = model.columns[model.order[0].column].data;
-                    sortDir = model.order[0].dir.ToLower() == "asc";
-                }
-
-                List<subcontract_profile_address> result = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
-                if (result != null && result.Count != 0)
-                {
-                    filteredResultsCount = result.Count(); //output from Database
-                    totalResultsCount = result.Count(); //output from Database
-                }
-                else
-                {
-                    filteredResultsCount =0; //output from Database
-                    totalResultsCount =0; //output from Database
-                }
-                
-                return Json(new
-                {
-                    // this is what datatables wants sending back
-                    draw = model.draw,
-                    recordsTotal = totalResultsCount,
-                    recordsFiltered = filteredResultsCount,
-                    data = result
-                });
-            }
-            catch (Exception e)
-            {
-
-                throw;
-            }
         }
         #endregion
 
@@ -711,27 +629,28 @@ namespace SubcontractProfile.Web.Controllers
                     var dataaddr = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
                     model.L_address = new List<subcontract_profile_address>();
 
-                    if (dataaddr != null && dataaddr.Count!=0)
+                    if (dataaddr != null && dataaddr.Count != 0)
                     {
-                        
-                        foreach(var d in dataaddr)
+
+                        foreach (var d in dataaddr)
                         {
-                            model.L_address.Add(new subcontract_profile_address { 
-                                address_type_id=d.address_type_id,
-                                building=d.building,
-                                country=d.country,
-                                district_id=d.district_id,
-                                floor=d.floor,
-                                house_no=d.house_no,
-                                moo=d.moo,
-                                province_id=d.province_id,
-                               region_id=d.region_id,
-                               road=d.road,
-                               room_no=d.room_no,
-                               soi=d.soi,
-                               sub_district_id=d.sub_district_id,
-                               village_name=d.village_name,
-                               zip_code=d.zip_code
+                            model.L_address.Add(new subcontract_profile_address
+                            {
+                                address_type_id = d.address_type_id,
+                                building = d.building,
+                                country = d.country,
+                                district_id = d.district_id,
+                                floor = d.floor,
+                                house_no = d.house_no,
+                                moo = d.moo,
+                                province_id = d.province_id,
+                                region_id = d.region_id,
+                                road = d.road,
+                                room_no = d.room_no,
+                                soi = d.soi,
+                                sub_district_id = d.sub_district_id,
+                                village_name = d.village_name,
+                                zip_code = d.zip_code
                             });
                         }
 
@@ -775,7 +694,7 @@ namespace SubcontractProfile.Web.Controllers
     }
 
     #region Login
-  public class LoginModel
+    public class LoginModel
     {
         public string username { get; set; }
         public string password { get; set; }
@@ -865,7 +784,7 @@ namespace SubcontractProfile.Web.Controllers
         public bool searchable { get; set; }
         public bool orderable { get; set; }
     }
-    public class Search_subcontract_profile_location: DataTableAjaxPostModel //รับ Search จากหน้าจอ
+    public class Search_subcontract_profile_location : DataTableAjaxPostModel //รับ Search จากหน้าจอ
     {
         public string company_name_th { get; set; }
         public string company_name_en { get; set; }
@@ -888,9 +807,9 @@ namespace SubcontractProfile.Web.Controllers
         public string p_location_code { get; set; }
         public string p_distribution_channel { get; set; }
         public string p_channel_sale_group { get; set; }
-    public int PAGE_INDEX { get; set; }
-    public int PAGE_SIZE { get; set; }
-    public string ret_code { get; set; }
+        public int PAGE_INDEX { get; set; }
+        public int PAGE_SIZE { get; set; }
+        public string ret_code { get; set; }
         public string cur { get; set; }
     }
 
@@ -901,8 +820,8 @@ namespace SubcontractProfile.Web.Controllers
         public string distribution_channel { get; set; }
         public string channel_sale_group { get; set; }
         public string location_code { get; set; }
-    //public decimal RowNumber { get; set; }
-    //public decimal CNT { get; set; }
+        //public decimal RowNumber { get; set; }
+        //public decimal CNT { get; set; }
     }
 
 
@@ -930,8 +849,8 @@ namespace SubcontractProfile.Web.Controllers
         public string region_id { get; set; }
     }
 
-    public class subcontract_profile_sub_district 
-    { 
+    public class subcontract_profile_sub_district
+    {
         public int sub_district_id { get; set; }
         public string sub_district_name { get; set; }
         public string zip_code { get; set; }
@@ -1023,7 +942,7 @@ namespace SubcontractProfile.Web.Controllers
         public string p_channel_sale_group { get; set; }
         public string p_tax_id { get; set; }
         public string p_company_alias { get; set; }
-       public string p_company_title_name_th { get; set; }//รอเอกสารspec เพิ่ม
+        public string p_company_title_name_th { get; set; }//รอเอกสารspec เพิ่ม
         public string p_company_name_th { get; set; }
         public string p_company_title_name_en { get; set; }//รอเอกสารspec เพิ่ม
         public string p_company_name_en { get; set; }
