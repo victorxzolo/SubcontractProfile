@@ -35,10 +35,10 @@ namespace SubcontractProfile.WebApi.IoC.Configuration.DI
                 services.AddTransient<ISubcontractProfileTitleRepo, SubcontractProfileTitleRepo>();
                 services.AddTransient<ISubcontractProfileTrainingRepo, SubcontractProfileTrainingRepo>();
                 services.AddTransient<ISubcontractProfileUserRepo, SubcontractProfileUserRepo>();
-                //services.AddTransient<ISubcontractProfileCompanyRepo, SubcontractProfileCompanyRepo>();
-                //services.AddTransient<ISubcontractProfileCompanyRepo, SubcontractProfileCompanyRepo>();
-                //services.AddTransient<ISubcontractProfileCompanyRepo, SubcontractProfileCompanyRepo>();
-                //services.AddTransient<ISubcontractProfileCompanyRepo, SubcontractProfileCompanyRepo>();
+                services.AddTransient<ISubcontractProfileVerhicleBrandRepo, SubcontractProfileVerhicleBrandRepo>();
+                services.AddTransient<ISubcontractProfileVerhicleSeriseRepo, SubcontractProfileVerhicleSeriseRepo>();
+                services.AddTransient<ISubcontractProfileVerhicleTypeRepo, SubcontractProfileVerhicleTypeRepo>();
+                services.AddTransient<ISubcontractProfileWarrantyRepo, SubcontractProfileWarrantyRepo>();
             }
 
         }
