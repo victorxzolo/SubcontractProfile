@@ -17,4 +17,14 @@
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Frameworks\SubcontractProfile.BusinessLayer\SubcontractProfile.BusinessLayer.csproj" />
+    <ProjectReference Include="..\..\..\Frameworks\SubcontractProfile.Core\SubcontractProfile.Core.csproj" />
+    <ProjectReference Include="..\..\..\Frameworks\SubContractProfile.Infrastructure\SubContractProfile.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logs\" />
+  </ItemGroup>
+
 </Project>

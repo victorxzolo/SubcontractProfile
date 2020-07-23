@@ -12,9 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SubcontractProfile.Web.Extension;
-
 using Microsoft.Extensions.Logging;
-
 using Microsoft.Extensions.Configuration;
 
 
@@ -22,19 +20,17 @@ namespace SubcontractProfile.Web.Controllers
 {
     public class AccountController : Controller
     {
-      
-
-        public AccountController(
-            ) 
-        {
-         
-      
-        }
 
         public IActionResult Login()
         {
-            
-           
+            // SubcontractProfileCompanyBLL aa = new SubcontractProfileCompanyBLL();
+            ViewBag.ReturnURL = "";
+            int dd = SiteSession.CurrentUICulture;
+            //SubcontractProfileCompany test = new SubcontractProfileCompany();
+            //test.CompanyId = Guid.NewGuid();
+
+            //var aa = _profileCompRepo.GetAll();
+
             return View();
         }
 
@@ -616,6 +612,91 @@ namespace SubcontractProfile.Web.Controllers
                 throw;
             }
 
+        }
+
+        [HttpPost]
+        public IActionResult SearchAddress(DataTableAjaxPostModel model)
+        {
+            try
+            {
+
+                int filteredResultsCount;
+                int totalResultsCount;
+
+                //var res = YourCustomSearchFunc(model, out filteredResultsCount, out totalResultsCount);
+
+                //Guid id = Guid.NewGuid();
+                //var m = new SubcontractProfileCompany()
+                //{
+                //    CompanyId= id,
+                //    CompanyName = "AA_keep"
+                //};
+
+                //  var ee = _queryProcessor.GetByQueryCompanyId(m);
+
+
+                var take = model.length;
+                var skip = model.start;
+
+                string sortBy = "";
+                bool sortDir = true;
+
+                if (model.order != null)
+                {
+                    // in this example we just default sort on the 1st column
+                    sortBy = model.columns[model.order[0].column].data;
+                    sortDir = model.order[0].dir.ToLower() == "asc";
+                }
+
+                List<subcontract_profile_address> result = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
+                if (result != null && result.Count != 0)
+                {
+                    if (sortDir) //asc
+                    {
+                        if (sortBy == "address_type")
+                        {
+                            result = result.OrderBy(c => c.address_type_name).ToList();
+                        }
+                        else if (sortBy == "address")
+                        {
+                            result = result.OrderBy(c => c.house_no).ToList();
+                        }
+                    }
+                    else //desc
+                    {
+                        if (sortBy == "address_type")
+                        {
+                            result = result.OrderByDescending(c => c.address_type_name).ToList();
+                        }
+                        else if (sortBy == "address")
+                        {
+                            result = result.OrderByDescending(c => c.house_no).ToList();
+                        }
+                    }
+
+                    filteredResultsCount = result.Count(); //output from Database
+                    totalResultsCount = result.Count(); //output from Database
+                }
+                else
+                {
+                    filteredResultsCount = 0; //output from Database
+                    totalResultsCount = 0; //output from Database
+                }
+
+                return Json(new
+                {
+                    // this is what datatables wants sending back
+                    draw = model.draw,
+                    recordsTotal = totalResultsCount,
+                    recordsFiltered = filteredResultsCount,
+                    data = result
+                });
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
         }
         #endregion
 
