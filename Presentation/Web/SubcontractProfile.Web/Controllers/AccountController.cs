@@ -14,16 +14,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SubcontractProfile.Web.Extension;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
-
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using System.Text;
+using SubcontractProfile.Web.Model;
 
 namespace SubcontractProfile.Web.Controllers
 {
     public class AccountController : Controller
     {
         private readonly IConfiguration _configuration;
+        private readonly string strpathAPI;
         public AccountController(IConfiguration configuration)
         {
             _configuration = configuration;
+
+
+            //เรียก appsetting.json path api
+            strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
         }
         public IActionResult Login()
         {
@@ -149,8 +158,19 @@ namespace SubcontractProfile.Web.Controllers
             ViewData["Controller"] = "Register";
             ViewData["View"] = "Register";
 
-            //เรียก appsetting.json path api
-            //var v = _configuration.GetValue<string>("Pathapi:Local").ToString();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "v1.0/SubcontractProfileCompany", 1);
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                var t = JsonConvert.DeserializeObject<List<SubcontractProfileCompanyModel>>(v);
+            }
+
+
             return View();
         }
 
@@ -546,20 +566,27 @@ namespace SubcontractProfile.Web.Controllers
 
         #region DaftAddress Register
         [HttpPost]
-        public IActionResult SaveDaftAddress(List<subcontract_profile_address> daftdata)
+        public IActionResult SaveDaftAddress(List<SubcontractProfileAddressModel> daftdata)
         {
             try
             {
-                var data = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
+                var data = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
                 if (data != null && data.Count != 0)
                 {
-                    data.RemoveAll(x => x.address_type_id.Contains(daftdata[0].address_type_id));
+                    data.RemoveAll(x => x.AddressId==daftdata[0].AddressId);
 
                     data.Add(daftdata[0]);
                     SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaft", data);
                 }
                 else
                 {
+                    foreach(var e in daftdata)
+                    {
+                        Guid addr_id = Guid.NewGuid();
+                        e.AddressId = addr_id;
+                    }
+                   
+                   
                     SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaft", daftdata);
                     data = daftdata;
                 }
@@ -576,19 +603,19 @@ namespace SubcontractProfile.Web.Controllers
 
         }
         [HttpPost]
-        public IActionResult GetDaftAddress(string address_type_id)
+        public IActionResult GetDaftAddress(string AddressId)
         {
             try
             {
-                if (address_type_id != null && address_type_id != "")
+                if (AddressId != null && AddressId != "")
                 {
-                    var data = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
-                    data = data.Where(x => x.address_type_id == address_type_id).ToList();
+                    var data = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
+                    data = data.Where(x => x.AddressId.ToString() == AddressId).ToList();
                     return Json(new { response = data, status = true });
                 }
                 else
                 {
-                    var data = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
+                    var data = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
                     return Json(new { response = data, status = true });
                 }
             }
@@ -603,10 +630,12 @@ namespace SubcontractProfile.Web.Controllers
         {
             try
             {
-                var data = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft").ToList();
-                data.RemoveAll(x => x.address_type_id.Contains(address_type_id));
+                var data = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft").ToList();
+
+                data.RemoveAll(x => x.AddressId.ToString().Contains(address_type_id));
+
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaft", data);
-                var data_delete = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
+                var data_delete = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
                 if (data_delete == null)
                 {
                     SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaft");
@@ -622,7 +651,7 @@ namespace SubcontractProfile.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult SearchAddress(DataTableAjaxPostModel model)
+        public IActionResult SearchAddress(DataTableAjaxModel model)
         {
             try
             {
@@ -633,13 +662,6 @@ namespace SubcontractProfile.Web.Controllers
                 //var res = YourCustomSearchFunc(model, out filteredResultsCount, out totalResultsCount);
 
                 //Guid id = Guid.NewGuid();
-                //var m = new SubcontractProfileCompany()
-                //{
-                //    CompanyId= id,
-                //    CompanyName = "AA_keep"
-                //};
-
-                //  var ee = _queryProcessor.GetByQueryCompanyId(m);
 
 
                 var take = model.length;
@@ -655,7 +677,7 @@ namespace SubcontractProfile.Web.Controllers
                     sortDir = model.order[0].dir.ToLower() == "asc";
                 }
 
-                List<subcontract_profile_address> result = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
+                List<SubcontractProfileAddressModel> result = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
                 if (result != null && result.Count != 0)
                 {
                     if (sortDir) //asc
@@ -666,7 +688,7 @@ namespace SubcontractProfile.Web.Controllers
                         }
                         else if (sortBy == "address")
                         {
-                            result = result.OrderBy(c => c.house_no).ToList();
+                            result = result.OrderBy(c => c.HouseNo).ToList();
                         }
                     }
                     else //desc
@@ -677,7 +699,7 @@ namespace SubcontractProfile.Web.Controllers
                         }
                         else if (sortBy == "address")
                         {
-                            result = result.OrderByDescending(c => c.house_no).ToList();
+                            result = result.OrderByDescending(c => c.HouseNo).ToList();
                         }
                     }
 
@@ -692,7 +714,6 @@ namespace SubcontractProfile.Web.Controllers
 
                 return Json(new
                 {
-                    // this is what datatables wants sending back
                     draw = model.draw,
                     recordsTotal = totalResultsCount,
                     recordsFiltered = filteredResultsCount,
@@ -714,31 +735,44 @@ namespace SubcontractProfile.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var dataaddr = SessionHelper.GetObjectFromJson<List<subcontract_profile_address>>(HttpContext.Session, "userAddressDaft");
-                    model.L_address = new List<subcontract_profile_address>();
+                    var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
+                    model.L_address = new List<SubcontractProfileAddressModel>();
 
                     if (dataaddr != null && dataaddr.Count != 0)
                     {
 
                         foreach (var d in dataaddr)
                         {
-                            model.L_address.Add(new subcontract_profile_address
+                            model.L_address.Add(new SubcontractProfileAddressModel
                             {
-                                address_type_id = d.address_type_id,
-                                building = d.building,
-                                country = d.country,
-                                district_id = d.district_id,
-                                floor = d.floor,
-                                house_no = d.house_no,
-                                moo = d.moo,
-                                province_id = d.province_id,
-                                region_id = d.region_id,
-                                road = d.road,
-                                room_no = d.room_no,
-                                soi = d.soi,
-                                sub_district_id = d.sub_district_id,
-                                village_name = d.village_name,
-                                zip_code = d.zip_code
+                                //address_type_id = d.,
+                                //building = d.building,
+                                //country = d.country,
+                                //district_id = d.district_id,
+                                //floor = d.floor,
+                                //house_no = d.house_no,
+                                //moo = d.moo,
+                                //province_id = d.province_id,
+                                //region_id = d.region_id,
+                                //road = d.road,
+                                //room_no = d.room_no,
+                                //soi = d.soi,
+                                //sub_district_id = d.sub_district_id,
+                                //village_name = d.village_name,
+                                //zip_code = d.zip_code
+                                AddressId=d.AddressId,
+                                Building=d.Building,
+                                DistrictId=d.DistrictId,
+                                Floor=d.Floor,
+                                HouseNo=d.HouseNo,
+                                Moo=d.Moo,
+                                Road=d.Road,
+                                Soi=d.Soi,
+                                SubDistrictId=d.SubDistrictId,
+                                ProvinceId=d.ProvinceId,
+                                village_name=d.village_name,
+                                country=d.country,
+                                region_id=d.region_id
                             });
                         }
 
@@ -851,39 +885,6 @@ namespace SubcontractProfile.Web.Controllers
 
 
     #region Register 
-    public class DataTableAjaxPostModel
-    {
-        // properties are not capital due to json mapping
-        public int draw { get; set; }
-        public int start { get; set; }
-        public int length { get; set; }
-        public List<Column> columns { get; set; }
-        public List<Order> order { get; set; }
-    }
-    public class Order
-    {
-        public int column { get; set; }
-        public string dir { get; set; }
-    }
-    public class Column
-    {
-        public string data { get; set; }
-        public string name { get; set; }
-        public bool searchable { get; set; }
-        public bool orderable { get; set; }
-    }
-    public class Search_subcontract_profile_location : DataTableAjaxPostModel //รับ Search จากหน้าจอ
-    {
-        public string company_name_th { get; set; }
-        public string company_name_en { get; set; }
-        public string company_alias { get; set; }
-        public string company_code { get; set; }
-        public string location_name_th { get; set; }
-        public string location_name_en { get; set; }
-        public string location_code { get; set; }
-        public string distribution_channel { get; set; }
-        public string channel_sale_group { get; set; }
-    }
     public class subcontract_profile_locationQuery //ส่งเข้าDatabase
     {
         public string p_company_name_th { get; set; }
@@ -914,28 +915,6 @@ namespace SubcontractProfile.Web.Controllers
 
 
     #region Address
-    public class subcontract_profile_address
-    {
-        public string address_type_id { get; set; }
-        public string address_type_name { get; set; }
-        public string country { get; set; }
-        public string zip_code { get; set; }
-        public string house_no { get; set; }
-        public string moo { get; set; }
-        public string village_name { get; set; }
-        public string building { get; set; }
-        public string floor { get; set; }
-        public string room_no { get; set; }
-        public string soi { get; set; }
-        public string road { get; set; }
-        public int sub_district_id { get; set; }
-        public string sub_district_name { get; set; }
-        public int district_id { get; set; }
-        public string district_name { get; set; }
-        public string province_id { get; set; }
-        public string province_name { get; set; }
-        public string region_id { get; set; }
-    }
 
     public class subcontract_profile_sub_district
     {
@@ -991,7 +970,7 @@ namespace SubcontractProfile.Web.Controllers
         //public string village_name { get; set; }
         //public string room_no { get; set; }
 
-        public List<subcontract_profile_address> L_address { get; set; }
+        public List<SubcontractProfileAddressModel> L_address { get; set; }
 
         public string company_Email { get; set; }
         public string contract_name { get; set; }

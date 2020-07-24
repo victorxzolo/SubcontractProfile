@@ -256,7 +256,7 @@
         proccessing: true,
         serverSide: true,
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        dom: 'rt<"float-left"pl><"float-right"i>',
+        dom: 'rt<"float-left"p><"float-left"l><"float-right"i>',
         ajax: {
             type: "POST",
             url: "/Account/SearchAddress",
@@ -276,6 +276,7 @@
 
         },
         columns: [
+            { "data": "addressId", "visible": false },
             { "data": "address_type_id", "visible": false},
             { "data": "address_type", orderable: true,},
             { "data": "address", orderable: true,},
@@ -321,19 +322,19 @@
                 address_type_name: $(this).parent().text().trim(),
                 country: $('#ddlcountry option').filter(':selected').val(),
                 zip_code: $('#ddlzipcode option').filter(':selected').val(),
-                house_no: $('#txthomenumber').val(),
-                moo: $('#txtVillageNo').val(),
+                HouseNo: $('#txthomenumber').val(),
+                Moo: $('#txtVillageNo').val(),
                 village_name: $('#txtvillage').val(),
-                building: $('#txtbuilding').val(),
-                floor: $('#txtfloor').val(),
+                Building: $('#txtbuilding').val(),
+                Floor: $('#txtfloor').val(),
                 room_no: $('#txtroom').val(),
-                soi: $('#txtsoi').val(),
-                road: $('#txtroad').val(),
-                sub_district_id: $('#ddlsubdistrict option').filter(':selected').val(),
+                Soi: $('#txtsoi').val(),
+                Road: $('#txtroad').val(),
+                SubDistrictId: $('#ddlsubdistrict option').filter(':selected').val(),
                 sub_district_name: $('#ddlsubdistrict option').filter(':selected').text(),
-                district_id: $('#ddldistrict option').filter(':selected').val(),
+                DistrictId: $('#ddldistrict option').filter(':selected').val(),
                 district_name: $('#ddldistrict option').filter(':selected').text(),
-                province_id: $('#ddlprovince option').filter(':selected').val(),
+                ProvinceId: $('#ddlprovince option').filter(':selected').val(),
                 province_name: $('#ddlprovince option').filter(':selected').text(),
                 region_id: $('#ddlzone option').filter(':selected').val()
             }
@@ -388,7 +389,7 @@
         $.ajax({
             type: "POST",
             url: "/Account/GetDaftAddress",
-            data: { address_type_id: data_row.address_type_id },
+            data: { AddressId: data_row.AddressId },
             dataType: "json",
             success: function (data) {
                 $('#ddlcountry option').filter(':selected').val('')
@@ -424,31 +425,31 @@
                     $.each(data.response, function () {
                         $('#ddlcountry option').filter(':selected').val(this.country)
 
-                        $('#ddlprovince option').filter(':selected').val(this.province_id)
+                        $('#ddlprovince option').filter(':selected').val(this.ProvinceId)
                         $('#ddlprovince').trigger('change');
 
-                        $('#ddldistrict option').filter(':selected').val(this.district_id)
+                        $('#ddldistrict option').filter(':selected').val(this.DistrictId)
                         $('#ddldistrict').trigger('change');
 
-                        $('#ddlsubdistrict option').filter(':selected').val(this.sub_district_id)
+                        $('#ddlsubdistrict option').filter(':selected').val(this.SubDistrictId)
 
                         $('#ddlzipcode option').filter(':selected').val(this.zip_code)
 
                         $('#ddlzone option').filter(':selected').val(this.region_id)
 
-                        $('#txthomenumber').val(this.house_no)
-                        $('#txtVillageNo').val(this.moo)
+                        $('#txthomenumber').val(this.HouseNo)
+                        $('#txtVillageNo').val(this.Moo)
                         $('#txtvillage').val(this.village_name)
-                        $('#txtbuilding').val(this.building)
-                        $('#txtfloor').val(this.floor)
+                        $('#txtbuilding').val(this.Building)
+                        $('#txtfloor').val(this.Floor)
                         $('#txtroom').val(this.room_no)
-                        $('#txtsoi').val(this.soi)
-                        $('#txtroad').val(this.road)
+                        $('#txtsoi').val(this.Soi)
+                        $('#txtroad').val(this.Road)
 
-                        var addr_id = this.address_type_id
+                        var addr_type_id = this.address_type_id
                         $(':checkbox').each(function (i) {
                            
-                            if (addr_id == $(this).val()) {
+                            if (addr_type_id == $(this).val()) {
                                 $(this).prop('checked', true);
                             }
                         });
@@ -510,7 +511,7 @@
         var val = [];
         $.each(data, function () {
 
-            var strnumber = this.house_no != '' && this.house_no != null ? this.house_no : '';
+            var strnumber = this.houseNo != '' && this.houseNo != null ? this.houseNo : '';
             var strvillage = this.village_name != '' && this.village_name != null ? $('#txtvillage').parent().parent().text().split(":")[0].trim() + ' ' + this.village_name : '';
             var strvillageno = this.moo != '' && this.moo != null ? $('#txtVillageNo').parent().parent().text().split(":")[1].trim() + ' ' + this.moo : '';
 
@@ -520,23 +521,23 @@
             var strsoi = this.soi != '' && this.soi != null ? $('#txtsoi').parent().parent().text().split(":")[0].trim() + ' ' + this.soi : '';
 
             var strroad = this.road != '' && this.road != null ? $('#txtroad').parent().parent().text().split(":")[0].trim() + ' ' + this.road : '';
-            var strsubdistrict = this.sub_district_id != '' && this.sub_district_id != null ? $('#ddlsubdistrict').parent().parent().text().split(":")[0].trim() + ' ' +
+            var strsubdistrict = this.subDistrictId != '' && this.subDistrictId != null ? $('#ddlsubdistrict').parent().parent().text().split(":")[0].trim() + ' ' +
                 this.sub_district_name : '';
-            var strdistrict = this.district_id != 0 && this.district_id != null ? $('#ddldistrict').parent().parent().text().split(":")[0].trim() + ' ' +
+            var strdistrict = this.districtId != 0 && this.districtId != null ? $('#ddldistrict').parent().parent().text().split(":")[0].trim() + ' ' +
                 this.district_name : '';
-            var strprovince = this.province_id != 0 && this.province_id != null ? $('#ddlprovince').parent().parent().text().split(":")[0].trim() + ' ' +
+            var strprovince = this.provinceId != 0 && this.provinceId != null ? $('#ddlprovince').parent().parent().text().split(":")[0].trim() + ' ' +
                 this.province_name : '';
 
             var strzipcode = this.zip_code != '' && this.zip_code != null ? $('#ddlzipcode').parent().parent().text().split(":")[0].trim() + ' ' +
                 this.zip_code : '';
 
             var strdata = {
+                addressId: this.addressId,
                 address_type_id: this.address_type_id,
                 address_type: this.address_type_name,
                 address: strnumber.trim() + ' ' + strvillage.trim() + ' ' + strvillageno.trim() + ' ' + strbuilding.trim() + ' ' + strfloor.trim() + ' ' +
                     strroom.trim() + ' ' + strsoi.trim() + ' ' + strroad.trim() + ' ' + strsubdistrict.trim() + ' ' + strdistrict.trim() + ' ' +
                     strprovince.trim() + ' ' + strzipcode.trim(),
-
             };
 
        val.push(strdata);
