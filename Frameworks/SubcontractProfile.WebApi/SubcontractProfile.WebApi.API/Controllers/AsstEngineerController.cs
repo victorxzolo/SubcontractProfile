@@ -31,7 +31,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileAsstEngineer))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileAsstEngineer))]
-        [HttpGet("{id}")]
+        [HttpGet("GetAll")]
         public async Task<IEnumerable<SubcontractProfileAsstEngineer>> GetAll()
         {
 
@@ -51,7 +51,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileAsstEngineer))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileAsstEngineer))]
-        [HttpGet("{id}")]
+        [HttpGet("GetByAsstEngineerId/{asstEngineerId}")]
         public async Task<SubcontractProfileAsstEngineer> GetByAsstEngineerId(string asstEngineerId)
         {
             _logger.LogInformation($"Start AsstEngineerController::GetByAsstEngineerId", asstEngineerId);
