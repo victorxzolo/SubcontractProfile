@@ -69,8 +69,8 @@ namespace SubcontractProfile.WebApi.API.Controllers
         }
 
 
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DistrictController))]
-        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(DistrictController))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileDistrict))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileDistrict))]
         [HttpGet("GetDistrictByProvinceId/{provinceId}")]
         public List<SubcontractProfile.WebApi.Services.Model.SubcontractProfileDistrict> GetDistrictByProvinceId(int provinceId)
         {
