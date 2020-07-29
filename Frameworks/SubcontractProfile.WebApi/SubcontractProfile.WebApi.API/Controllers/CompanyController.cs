@@ -156,7 +156,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         {
             _logger.LogInformation($"Start CompanyController::Delete", id);
 
-            if (id == 0)
+            if (id == "")
                 _logger.LogWarning($"Start CompanyController::Delete", id);
 
             return _service.Delete(id);
