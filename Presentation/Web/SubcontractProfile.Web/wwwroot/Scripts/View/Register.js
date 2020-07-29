@@ -386,10 +386,12 @@
 
     $('#tbaddressstep2').on('click', 'tbody .edit_btn', function () {
         var data_row = tbaddressstep2.row($(this).closest('tr')).data();
+        tbaddressstep2.row($(this).closest('tr')).remove().draw();//เดี๋ยวกลับมาทำ 
+
         $.ajax({
             type: "POST",
             url: "/Account/GetDaftAddress",
-            data: { AddressId: data_row.AddressId },
+            data: { AddressId: data_row.addressId },
             dataType: "json",
             success: function (data) {
                 $('#ddlcountry option').filter(':selected').val('')
@@ -425,26 +427,26 @@
                     $.each(data.response, function () {
                         $('#ddlcountry option').filter(':selected').val(this.country)
 
-                        $('#ddlprovince option').filter(':selected').val(this.ProvinceId)
+                        $('#ddlprovince option').filter(':selected').val(this.provinceId)
                         $('#ddlprovince').trigger('change');
 
-                        $('#ddldistrict option').filter(':selected').val(this.DistrictId)
+                        $('#ddldistrict option').filter(':selected').val(this.districtId)
                         $('#ddldistrict').trigger('change');
 
-                        $('#ddlsubdistrict option').filter(':selected').val(this.SubDistrictId)
+                        $('#ddlsubdistrict option').filter(':selected').val(this.subDistrictId)
 
                         $('#ddlzipcode option').filter(':selected').val(this.zip_code)
 
                         $('#ddlzone option').filter(':selected').val(this.region_id)
 
-                        $('#txthomenumber').val(this.HouseNo)
-                        $('#txtVillageNo').val(this.Moo)
+                        $('#txthomenumber').val(this.houseNo)
+                        $('#txtVillageNo').val(this.moo)
                         $('#txtvillage').val(this.village_name)
-                        $('#txtbuilding').val(this.Building)
-                        $('#txtfloor').val(this.Floor)
+                        $('#txtbuilding').val(this.building)
+                        $('#txtfloor').val(this.floor)
                         $('#txtroom').val(this.room_no)
-                        $('#txtsoi').val(this.Soi)
-                        $('#txtroad').val(this.Road)
+                        $('#txtsoi').val(this.soi)
+                        $('#txtroad').val(this.road)
 
                         var addr_type_id = this.address_type_id
                         $(':checkbox').each(function (i) {
@@ -480,7 +482,7 @@
         $.ajax({
             type: "POST",
             url: "/Account/DeleteDaftAddress",
-            data: { address_type_id: data_row.address_type_id },
+            data: { AddressId: data_row.addressId },
             dataType: "json",
             success: function (data) {
 
