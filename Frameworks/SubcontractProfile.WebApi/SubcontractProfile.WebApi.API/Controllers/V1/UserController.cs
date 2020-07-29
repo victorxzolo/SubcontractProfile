@@ -69,8 +69,8 @@ namespace SubcontractProfile.WebApi.API.Controllers.V1
         /// <param name="value"></param>
         /// <returns>A newly created user.</returns>
         /// <response code="201">Returns the newly created item.</response>
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(User))]
+        //[HttpPost]
+        //[ProducesResponseType(StatusCodes.Status201Created, Type = typeof(User))]
         //public async Task<User> CreateUser([FromBody] UserCreationRequest value)
         //{
         //    _logger.LogDebug($"UserControllers::Post::");

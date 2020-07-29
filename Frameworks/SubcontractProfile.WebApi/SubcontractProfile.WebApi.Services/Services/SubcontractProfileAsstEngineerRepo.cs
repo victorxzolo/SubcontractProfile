@@ -42,7 +42,7 @@ namespace SubcontractProfile.WebApi.Services.Services
         /// <summary>
         /// Get by PK
         /// </summary>
-        public async Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileAsstEngineer> GetByAsstEngineerId(System.Guid asstEngineerId)
+        public async Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileAsstEngineer> GetByAsstEngineerId(string asstEngineerId)
         {
             var p = new DynamicParameters();
             p.Add("@asst_engineer_id", asstEngineerId);

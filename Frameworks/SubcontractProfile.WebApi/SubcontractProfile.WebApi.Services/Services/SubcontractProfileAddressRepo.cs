@@ -40,7 +40,7 @@ namespace SubcontractProfile.WebApi.Services.Services
         /// <summary>
         /// Get by PK
         /// </summary>
-        public async Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileAddress> GetByAddressId(System.Guid addressId)
+        public async Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileAddress> GetByAddressId(string addressId)
         {
             var p = new DynamicParameters();
             p.Add("@address_id", addressId);

@@ -13,7 +13,7 @@ namespace SubcontractProfile.WebApi.Services.Contracts
     {
 
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileAddress>> GetAll();
-        Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileAddress> GetByAddressId(System.Guid addressId);
+        Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileAddress> GetByAddressId(string addressId);
         Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileAddress subcontractProfileAddress);
         Task<bool> BulkInsert(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileAddress> subcontractProfileAddressList);
         Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileAddress subcontractProfileAddress);

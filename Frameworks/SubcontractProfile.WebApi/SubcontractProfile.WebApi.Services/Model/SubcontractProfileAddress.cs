@@ -17,9 +17,8 @@ namespace SubcontractProfile.WebApi.Services.Model
         public System.Guid AddressId { get; set; }
 
     }
-
     /// =================================================================
-    /// Author: AIS Fibre
+    /// Author: AIS Fibre -X10
     /// Description: Entity class for the table [dbo].[subcontract_profile_address] 
     /// =================================================================
 
@@ -50,6 +49,36 @@ namespace SubcontractProfile.WebApi.Services.Model
         public int? DistrictId { get; set; }
 
         public int? ProvinceId { get; set; }
+
+        public int? RegionId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(50)]
+        public string AddressTypeId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(10)]
+        public string ZipCode { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string Country { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(500)]
+        public string VillageName { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(30)]
+        public string RoomNo { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string CompanyId { get; set; }
+
+        public System.DateTime? CreateDate { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(50)]
+        public string CreateBy { get; set; }
+
+        public System.DateTime? ModifiedDate { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(50)]
+        public string ModifiedBy { get; set; }
 
 
         public object Clone()

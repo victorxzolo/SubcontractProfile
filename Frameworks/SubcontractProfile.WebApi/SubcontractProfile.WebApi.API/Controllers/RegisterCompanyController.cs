@@ -32,18 +32,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         }
 
         #region GET
-        /// <summary>
-        /// Returns a user entity according to the provided Id.
-        /// </summary>
-        /// <remarks>
-        /// XML comments included in controllers will be extracted and injected in Swagger/OpenAPI file.
-        /// </remarks>
-        /// <param name="id"></param>
-        /// <returns>
-        /// Returns a user entity according to the provided Id.
-        /// </returns>
-        /// <response code="201">Returns the newly created item.</response>
-        /// <response code="204">If the item is null.</response>
+       
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CompanyRegister))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(CompanyRegister))]
         [HttpGet("{id}")]
@@ -55,12 +44,47 @@ namespace SubcontractProfile.WebApi.API.Controllers
             var data = await _service.GetAll();
 
             if (data != null)
-                return data; //_mapper.Map<SubcontractProfileCompany>(data);
+                return data.ToList(); //_mapper.Map<SubcontractProfileCompany>(data);
             else
                 return null;
         }
+
+        // GET api/values
+        [HttpGet]
+        public ActionResult<IEnumerable<string>> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
+
+        // GET api/values/5
+        [HttpGet("{id}")]
+        public ActionResult<string> Get(int id)
+        {
+            return "value";
+        }
+
         #endregion
 
+
+        #region POST
+        // POST api/values
+        [HttpPost]
+        public void Post([FromBody] string value)
+        {
+        }
+
+        // PUT api/values/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
+        }
+
+        // DELETE api/values/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+        }
+        #endregion
 
     }
 }

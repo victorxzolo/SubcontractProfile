@@ -13,7 +13,7 @@ namespace SubcontractProfile.WebApi.Services.Contracts
     {
 
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileAsstEngineer>> GetAll();
-        Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileAsstEngineer> GetByAsstEngineerId(System.Guid asstEngineerId);
+        Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileAsstEngineer> GetByAsstEngineerId(string asstEngineerId);
         Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileAsstEngineer subcontractProfileAsstEngineer);
         Task<bool> BulkInsert(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileAsstEngineer> subcontractProfileAsstEngineerList);
         Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileAsstEngineer subcontractProfileAsstEngineer);

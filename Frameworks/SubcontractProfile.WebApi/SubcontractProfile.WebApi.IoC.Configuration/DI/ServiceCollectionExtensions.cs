@@ -48,6 +48,8 @@ namespace SubcontractProfile.WebApi.IoC.Configuration.DI
             {
                 //Automap settings
                 services.AddAutoMapper(Assembly.GetExecutingAssembly());
+              
+
             }
         }
     }
