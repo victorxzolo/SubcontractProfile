@@ -771,8 +771,9 @@ namespace SubcontractProfile.Web.Controllers
                                 SubDistrictId=d.SubDistrictId,
                                 ProvinceId=d.ProvinceId,
                                 village_name=d.village_name,
-                                country=d.country,
-                                region_id=d.region_id
+                                Country=d.Country,
+                                region_id=d.region_id,
+                                ZipCode=d.ZipCode
                             });
                         }
 

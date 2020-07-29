@@ -41,7 +41,9 @@ namespace SubcontractProfile.Web.Model
         public string village_name { get; set; }
         public string region_id { get; set; }
         public string room_no { get; set; }
-        public string country { get; set; }
-        public string zip_code { get; set; }
+        public string Country { get; set; }
+        public string ZipCode { get; set; }
+
+        public string City { get; set; }
     }
 }

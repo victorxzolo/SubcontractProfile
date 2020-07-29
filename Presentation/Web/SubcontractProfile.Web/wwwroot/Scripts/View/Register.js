@@ -435,7 +435,7 @@
 
                         $('#ddlsubdistrict option').filter(':selected').val(this.subDistrictId)
 
-                        $('#ddlzipcode option').filter(':selected').val(this.zip_code)
+                        $('#ddlzipcode option').filter(':selected').val(this.zipCode)
 
                         $('#ddlzone option').filter(':selected').val(this.region_id)
 
@@ -530,8 +530,8 @@
             var strprovince = this.provinceId != 0 && this.provinceId != null ? $('#ddlprovince').parent().parent().text().split(":")[0].trim() + ' ' +
                 this.province_name : '';
 
-            var strzipcode = this.zip_code != '' && this.zip_code != null ? $('#ddlzipcode').parent().parent().text().split(":")[0].trim() + ' ' +
-                this.zip_code : '';
+            var strzipcode = this.zipCode != '' && this.zipCode != null ? $('#ddlzipcode').parent().parent().text().split(":")[0].trim() + ' ' +
+                this.zipCode : '';
 
             var strdata = {
                 addressId: this.addressId,

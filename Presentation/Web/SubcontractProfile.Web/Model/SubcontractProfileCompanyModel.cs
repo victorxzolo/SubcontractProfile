@@ -172,5 +172,6 @@ namespace SubcontractProfile.Web.Model
         public string Status { get; set; }
 
         public System.DateTime? ActivateDate { get; set; }
+
     }
 }
