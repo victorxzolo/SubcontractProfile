@@ -9,7 +9,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EngineeringController : ControllerBase
+    public class TitleController : ControllerBase
     {
     }
 }
