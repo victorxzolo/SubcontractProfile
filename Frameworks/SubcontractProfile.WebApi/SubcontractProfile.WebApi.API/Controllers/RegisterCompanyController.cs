@@ -35,7 +35,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
        
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CompanyRegister))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(CompanyRegister))]
-        [HttpGet("{id}")]
+        [HttpGet("GetALL/{id}")]
         public async Task<IEnumerable<SubcontractProfileCompany>> GetALL()
         {
             //_logger.LogDebug($"UserControllers::GetALL::{id}");
