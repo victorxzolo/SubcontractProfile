@@ -13,7 +13,7 @@ namespace SubcontractProfile.WebApi.Services.Contracts
     {
 
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>> GetAll();
-        Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment> GetByPaymentId(char paymentId);
+        Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment> GetByPaymentId(string paymentId);
         Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment subcontractProfilePayment);
         Task<bool> BulkInsert(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment> subcontractProfilePaymentList);
         Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment subcontractProfilePayment);

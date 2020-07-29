@@ -40,7 +40,7 @@ namespace SubcontractProfile.WebApi.Services.Services
         /// <summary>
         /// Get by PK
         /// </summary>
-        public async Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment> GetByPaymentId(char paymentId)
+        public async Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment> GetByPaymentId(string paymentId)
         {
             var p = new DynamicParameters();
             p.Add("@payment_id", paymentId);
