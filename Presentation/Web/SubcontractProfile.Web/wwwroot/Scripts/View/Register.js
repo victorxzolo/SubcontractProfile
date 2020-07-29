@@ -853,7 +853,7 @@ function BindDDLdistrict(province) {
         success: function (data) {
             $('#ddldistrict').empty();
             $.each(data.response, function () {
-                $('#ddldistrict').append($("<option></option>").val(this.district_id).text(this.district_name));
+                $('#ddldistrict').append($("<option></option>").val(this.districtId).text(this.districtName));
             });
 
         },

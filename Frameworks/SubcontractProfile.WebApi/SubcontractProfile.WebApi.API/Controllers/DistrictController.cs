@@ -69,6 +69,29 @@ namespace SubcontractProfile.WebApi.API.Controllers
         }
 
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DistrictController))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(DistrictController))]
+        [HttpGet("GetDistrictByProvinceId/{provinceId}")]
+        public List<SubcontractProfile.WebApi.Services.Model.SubcontractProfileDistrict> GetDistrictByProvinceId(int provinceId)
+        {
+
+            _logger.LogInformation($"DistrictController::GetALL");
+
+            var entities = _service.GetAll().Result;
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"DistrictController::", "GetALL NOT FOUND");
+                return null;
+            }
+            else
+            {
+                var result = entities.Where(x => x.ProvinceId == provinceId).ToList();
+                return result;
+            }
+
+        }
+
         #endregion
 
         #region POST

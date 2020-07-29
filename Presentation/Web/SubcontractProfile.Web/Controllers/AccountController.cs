@@ -158,18 +158,46 @@ namespace SubcontractProfile.Web.Controllers
             ViewData["Controller"] = "Register";
             ViewData["View"] = "Register";
 
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue("application/json"));
+            #region Example GET
+            //HttpClient client = new HttpClient();
+            //client.DefaultRequestHeaders.Accept.Add(
+            //new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "v1.0/SubcontractProfileCompany/GetALL", 1);
-            HttpResponseMessage response = client.GetAsync(uriString).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var v = response.Content.ReadAsStringAsync().Result;
-                var t = JsonConvert.DeserializeObject<List<SubcontractProfileCompanyModel>>(v);
-            }
+            //string uriString = string.Format("{0}/{1}", strpathAPI + "v1.0/SubcontractProfileCompany/GetALL", 1);
+            //HttpResponseMessage response = client.GetAsync(uriString).Result;
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    var v = response.Content.ReadAsStringAsync().Result;
+            //    var t = JsonConvert.DeserializeObject<List<SubcontractProfileCompanyModel>>(v);
+            //}
+            #endregion
 
+
+            #region Example POST
+            //HttpClient client = new HttpClient();
+            //client.DefaultRequestHeaders.Accept.Add(
+            //new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //var httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+            //HttpResponseMessage response = client.PostAsync(uri, httpContent).Result;
+            #endregion
+
+            #region Example PUT
+            //HttpClient client = new HttpClient();
+            //string uriString = string.Format("{0}{1}", uri, data.Id);
+            //client.DefaultRequestHeaders.Accept.Add(
+            //new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //var httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+            //HttpResponseMessage response = client.PutAsync(uriString, httpContent).Result;
+            #endregion
+
+            #region Example DELETE
+            //HttpClient client = new HttpClient();
+            //string uriString = string.Format("{0}{1}", uri, id);
+            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //HttpResponseMessage response = client.DeleteAsync(uriString).Result;
+            #endregion
 
             return View();
         }
@@ -179,112 +207,127 @@ namespace SubcontractProfile.Web.Controllers
         public IActionResult DDLsubcontract_profile_sub_district(int district_id = 0)
         {
             var output = new List<subcontract_profile_sub_district>();
-            output.Add(new subcontract_profile_sub_district
-            {
-                sub_district_id = 0,
-                sub_district_name = "Select Sub District"
-            });
-            output.Add(new subcontract_profile_sub_district
-            {
-                sub_district_id = 1,
-                sub_district_name = "วังทองหลาง",
-                zip_code = "10310",
-                district_id = 1
-            });
-            output.Add(new subcontract_profile_sub_district
-            {
-                sub_district_id = 2,
-                sub_district_name = "คลองเจ้าคุณสิงห์",
-                zip_code = "10310",
-                district_id = 1
-            });
-            output.Add(new subcontract_profile_sub_district
-            {
-                sub_district_id = 3,
-                sub_district_name = "คลองจั่น",
-                zip_code = "10240",
-                district_id = 2
-            });
-            output.Add(new subcontract_profile_sub_district
-            {
-                sub_district_id = 4,
-                sub_district_name = "หัวหมาก",
-                zip_code = "10240",
-                district_id = 2
-            });
+            //output.Add(new subcontract_profile_sub_district
+            //{
+            //    sub_district_id = 0,
+            //    sub_district_name = "Select Sub District"
+            //});
+            //output.Add(new subcontract_profile_sub_district
+            //{
+            //    sub_district_id = 1,
+            //    sub_district_name = "วังทองหลาง",
+            //    zip_code = "10310",
+            //    district_id = 1
+            //});
+            //output.Add(new subcontract_profile_sub_district
+            //{
+            //    sub_district_id = 2,
+            //    sub_district_name = "คลองเจ้าคุณสิงห์",
+            //    zip_code = "10310",
+            //    district_id = 1
+            //});
+            //output.Add(new subcontract_profile_sub_district
+            //{
+            //    sub_district_id = 3,
+            //    sub_district_name = "คลองจั่น",
+            //    zip_code = "10240",
+            //    district_id = 2
+            //});
+            //output.Add(new subcontract_profile_sub_district
+            //{
+            //    sub_district_id = 4,
+            //    sub_district_name = "หัวหมาก",
+            //    zip_code = "10240",
+            //    district_id = 2
+            //});
 
 
-            output.Add(new subcontract_profile_sub_district
-            {
-                sub_district_id = 5,
-                sub_district_name = "แพรกษา",
-                zip_code = "10280",
-                district_id = 3
-            });
-            output.Add(new subcontract_profile_sub_district
-            {
-                sub_district_id = 6,
-                sub_district_name = "บางหญ้าแพรก",
-                zip_code = "10130",
-                district_id = 4
-            });
+            //output.Add(new subcontract_profile_sub_district
+            //{
+            //    sub_district_id = 5,
+            //    sub_district_name = "แพรกษา",
+            //    zip_code = "10280",
+            //    district_id = 3
+            //});
+            //output.Add(new subcontract_profile_sub_district
+            //{
+            //    sub_district_id = 6,
+            //    sub_district_name = "บางหญ้าแพรก",
+            //    zip_code = "10130",
+            //    district_id = 4
+            //});
 
-            if (district_id != 0)
-            {
-                output = output.Where(x => x.district_id == district_id).ToList();
-                output.Add(new subcontract_profile_sub_district
-                {
-                    sub_district_id = 0,
-                    sub_district_name = "--Select Sub District--"
-                });
-                output = output.OrderBy(x => x.sub_district_id).ToList();
-            }
+            //if (district_id != 0)
+            //{
+            //    output = output.Where(x => x.district_id == district_id).ToList();
+            //    output.Add(new subcontract_profile_sub_district
+            //    {
+            //        sub_district_id = 0,
+            //        sub_district_name = "--Select Sub District--"
+            //    });
+            //    output = output.OrderBy(x => x.sub_district_id).ToList();
+            //}
 
             return Json(new { response = output });
         }
         [HttpPost]
         public IActionResult DDLsubcontract_profile_district(int province_id = 0)
         {
-            var output = new List<subcontract_profile_district>();
-            output.Add(new subcontract_profile_district
-            {
-                district_id = 0,
-                district_name = "Select District"
-            });
-            output.Add(new subcontract_profile_district
-            {
-                district_id = 1,
-                district_name = "วังทองหลาง",
-                province_id = 1
-            });
-            output.Add(new subcontract_profile_district
-            {
-                district_id = 2,
-                district_name = "บางกะปิ",
-                province_id = 1
-            });
+            var output = new List<SubcontractProfileDistrictModel>();
+            //output.Add(new subcontract_profile_district
+            //{
+            //    district_id = 0,
+            //    district_name = "Select District"
+            //});
+            //output.Add(new subcontract_profile_district
+            //{
+            //    district_id = 1,
+            //    district_name = "วังทองหลาง",
+            //    province_id = 1
+            //});
+            //output.Add(new subcontract_profile_district
+            //{
+            //    district_id = 2,
+            //    district_name = "บางกะปิ",
+            //    province_id = 1
+            //});
 
-            output.Add(new subcontract_profile_district
-            {
-                district_id = 3,
-                district_name = "เมืองสมุทรปราการ",
-                province_id = 2
-            });
-            output.Add(new subcontract_profile_district
-            {
-                district_id = 4,
-                district_name = "พระประแดง",
-                province_id = 2
-            });
+            //output.Add(new subcontract_profile_district
+            //{
+            //    district_id = 3,
+            //    district_name = "เมืองสมุทรปราการ",
+            //    province_id = 2
+            //});
+            //output.Add(new subcontract_profile_district
+            //{
+            //    district_id = 4,
+            //    district_name = "พระประแดง",
+            //    province_id = 2
+            //});
+            //if (province_id != 0)
+            //{
+            //    output = output.Where(x => x.province_id == province_id).ToList();
+            //    output.Add(new subcontract_profile_district
+            //    {
+            //        district_id = 0,
+            //        district_name = "--Select District--"
+            //    });
+            //    output = output.OrderBy(x => x.district_id).ToList();
+            //}
+
             if (province_id != 0)
             {
-                output = output.Where(x => x.province_id == province_id).ToList();
-                output.Add(new subcontract_profile_district
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string uriString = string.Format("{0}/{1}", strpathAPI + "DistrictController/GetDistrictByProvince", province_id);
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    district_id = 0,
-                    district_name = "--Select District--"
-                });
-                output = output.OrderBy(x => x.district_id).ToList();
+                    var v = response.Content.ReadAsStringAsync().Result;
+                    output = JsonConvert.DeserializeObject<List<SubcontractProfileDistrictModel>>(v);
+                }
             }
 
 
