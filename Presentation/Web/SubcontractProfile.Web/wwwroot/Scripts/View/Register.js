@@ -851,10 +851,14 @@ function BindDDLdistrict(province) {
         data: { province_id: province },
         dataType: "json",
         success: function (data) {
-            $('#ddldistrict').empty();
-            $.each(data.response, function () {
-                $('#ddldistrict').append($("<option></option>").val(this.districtId).text(this.districtName));
-            });
+            if (data != null) {
+                $('#ddldistrict').empty();
+                $('#ddldistrict').append($('<option></option>').val(0).text('Select District'));
+                $.each(data.response, function () {
+                    $('#ddldistrict').append($("<option></option>").val(this.districtId).text(this.districtName));
+                });
+            }
+          
 
         },
         error: function (xhr, status, error) {

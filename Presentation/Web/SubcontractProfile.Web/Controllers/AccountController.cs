@@ -321,7 +321,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "DistrictController/GetDistrictByProvince", province_id);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "DistrictController/GetDistrictByProvinceId", province_id);
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
