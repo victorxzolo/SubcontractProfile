@@ -74,7 +74,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         #endregion
 
         #region POST
-        [HttpPost]
+        [HttpPost("Insert/subcontractProfileAddressType")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileAddressType))]
         Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileAddressType subcontractProfileAddressType)
         {
@@ -150,7 +150,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         /// Boolean notifying if the user has been deleted properly.
         /// </returns>
         /// <response code="200">Boolean notifying if the user has been deleted properly.</response>
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         public async Task<bool> Delete(string id)
         {

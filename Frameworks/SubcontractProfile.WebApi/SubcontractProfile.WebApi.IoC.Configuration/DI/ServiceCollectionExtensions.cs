@@ -17,6 +17,7 @@ namespace SubcontractProfile.WebApi.IoC.Configuration.DI
             {
                 services.AddTransient<IUserService, UserService>();
                 services.AddScoped<ISubcontractProfileAddressRepo, SubcontractProfileAddressRepo>();
+                services.AddScoped<ISubcontractProfileAddressTypeRepo, SubcontractProfileAddressTypeRepo>();
                 services.AddScoped<ISubcontractProfileAsstEngineerRepo, SubcontractProfileAsstEngineerRepo>();
                 services.AddScoped<ISubcontractProfileBankingRepo, SubcontractProfileBankingRepo>();
                 services.AddScoped<ISubcontractProfileCompanyRepo, SubcontractProfileCompanyRepo>();
