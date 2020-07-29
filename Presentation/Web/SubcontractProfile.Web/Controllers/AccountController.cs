@@ -626,13 +626,13 @@ namespace SubcontractProfile.Web.Controllers
 
         }
         [HttpPost]
-        public IActionResult DeleteDaftAddress(string address_type_id)
+        public IActionResult DeleteDaftAddress(string AddressId)
         {
             try
             {
                 var data = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft").ToList();
 
-                data.RemoveAll(x => x.AddressId.ToString().Contains(address_type_id));
+                data.RemoveAll(x => x.AddressId.ToString().Contains(AddressId));
 
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaft", data);
                 var data_delete = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
