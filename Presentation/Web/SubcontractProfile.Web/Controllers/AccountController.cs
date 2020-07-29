@@ -19,6 +19,7 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Text;
 using SubcontractProfile.Web.Model;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -206,7 +207,8 @@ namespace SubcontractProfile.Web.Controllers
         [HttpPost]
         public IActionResult DDLsubcontract_profile_sub_district(int district_id = 0)
         {
-            var output = new List<subcontract_profile_sub_district>();
+            var output = new List<SubcontractProfileSubDistrictModel>();
+            var resultZipCode = new List<SubcontractProfileSubDistrictModel>();
             //output.Add(new subcontract_profile_sub_district
             //{
             //    sub_district_id = 0,
@@ -268,7 +270,38 @@ namespace SubcontractProfile.Web.Controllers
             //    output = output.OrderBy(x => x.sub_district_id).ToList();
             //}
 
-            return Json(new { response = output });
+            if (district_id != 0)
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string uriString = string.Format("{0}/{1}", strpathAPI + "SubDistrictController/GetSubDistrictByDistrict", district_id);
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var v = response.Content.ReadAsStringAsync().Result;
+                    output = JsonConvert.DeserializeObject<List<SubcontractProfileSubDistrictModel>>(v);
+                    resultZipCode = output.GroupBy(c => c.ZipCode).Select(g => g.First()).ToList();
+                }
+            }
+            else
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string uriString = string.Format("{0}", strpathAPI + "SubDistrictController/GetAll");
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var v = response.Content.ReadAsStringAsync().Result;
+                    output = JsonConvert.DeserializeObject<List<SubcontractProfileSubDistrictModel>>(v);
+                    resultZipCode = output.GroupBy(c => c.ZipCode).Select(g => g.First()).ToList();
+                }
+            }
+
+            return Json(new { response = output ,responsezipcode= resultZipCode });
         }
         [HttpPost]
         public IActionResult DDLsubcontract_profile_district(int province_id = 0)
@@ -322,6 +355,20 @@ namespace SubcontractProfile.Web.Controllers
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
                 string uriString = string.Format("{0}/{1}", strpathAPI + "DistrictController/GetDistrictByProvinceId", province_id);
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var v = response.Content.ReadAsStringAsync().Result;
+                    output = JsonConvert.DeserializeObject<List<SubcontractProfileDistrictModel>>(v);
+                }
+            }
+            else
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string uriString = string.Format("{0}", strpathAPI + "DistrictController/GetAll");
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {

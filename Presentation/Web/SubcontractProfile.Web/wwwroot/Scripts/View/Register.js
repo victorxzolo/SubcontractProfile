@@ -878,16 +878,21 @@ function BindDDLsubdistrict(district) {
         data: { district_id: district},
         dataType: "json",
         success: function (data) {
-            $('#ddlsubdistrict').empty();
-            $('#ddlzipcode').empty();
-            //$('#ddlzipcode').append($("<option></option>").val(0).text('--Select Zip Code--'));
-            $.each(data.response, function () {
-               
-                    $('#ddlsubdistrict').append($("<option></option>").val(this.sub_district_id).text(this.sub_district_name));
-                    $('#ddlzipcode').append($("<option></option>").val(this.zip_code).text(this.zip_code));
-                
-               
-            });
+            if (data != null) {
+                $('#ddlsubdistrict').empty();
+                $('#ddlzipcode').empty();
+                $('#ddlzipcode').append($("<option></option>").val(0).text('Select Zip Code'));
+                $('#ddlsubdistrict').append($("<option></option>").val(0).text('Select Sub District'));
+                $.each(data.response, function () {
+
+                    $('#ddlsubdistrict').append($("<option></option>").val(this.subDistrictId).text(this.subDistrictName));
+                });
+                $.each(data.responsezipcode, function () {
+
+                    $('#ddlzipcode').append($("<option></option>").val(this.zipCode).text(this.zipCode));
+                })
+            }
+          
 
         },
         error: function (xhr, status, error) {
