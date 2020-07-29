@@ -182,7 +182,7 @@ namespace SubcontractProfile.Web.Controllers
             output.Add(new subcontract_profile_sub_district
             {
                 sub_district_id = 0,
-                sub_district_name = "--Select Sub District--"
+                sub_district_name = "Select Sub District"
             });
             output.Add(new subcontract_profile_sub_district
             {
@@ -249,7 +249,7 @@ namespace SubcontractProfile.Web.Controllers
             output.Add(new subcontract_profile_district
             {
                 district_id = 0,
-                district_name = "--Select District--"
+                district_name = "Select District"
             });
             output.Add(new subcontract_profile_district
             {
@@ -293,25 +293,40 @@ namespace SubcontractProfile.Web.Controllers
         [HttpPost]
         public IActionResult DDLsubcontract_profile_province()
         {
-            var output = new List<subcontract_profile_province>();
-            output.Add(new subcontract_profile_province
-            {
-                province_id = 0,
-                province_name = "--Select Province--"
+            var output = new List<SubcontractProfileProvinceModel>();
+            //output.Add(new subcontract_profile_province
+            //{
+            //    province_id = 0,
+            //    province_name = "--Select Province--"
 
-            });
-            output.Add(new subcontract_profile_province
-            {
-                province_id = 1,
-                province_name = "กรุงเทพฯ"
+            //});
+            //output.Add(new subcontract_profile_province
+            //{
+            //    province_id = 1,
+            //    province_name = "กรุงเทพฯ"
 
-            });
-            output.Add(new subcontract_profile_province
-            {
-                province_id = 2,
-                province_name = "สมุทรปราการ"
+            //});
+            //output.Add(new subcontract_profile_province
+            //{
+            //    province_id = 2,
+            //    province_name = "สมุทรปราการ"
 
-            });
+            //});
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "ProvinceController/GetALL");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                 output = JsonConvert.DeserializeObject<List<SubcontractProfileProvinceModel>>(v);
+            }
+
+
+
             return Json(new { response = output });
         }
 
@@ -930,12 +945,7 @@ namespace SubcontractProfile.Web.Controllers
         public string district_name { get; set; }
         public int province_id { get; set; }
     }
-    public class subcontract_profile_province
-    {
-        public int province_id { get; set; }
-        public string province_name { get; set; }
-    }
-
+   
     #endregion
 
 

@@ -823,10 +823,15 @@ function BindDDLprovince() {
         url: "/Account/DDLsubcontract_profile_province",
         dataType: "json",
         success: function (data) {
-
-            $.each(data.response, function () {
-                $('#ddlprovince').append($("<option></option>").val(this.province_id).text(this.province_name));
-            });
+            console.log(data);
+            if (data != null) {
+                $('#ddlprovince').empty();
+                $('#ddlprovince').append($('<option></option>').val(0).text('Select Province'));
+                $.each(data.response, function () {
+                    $('#ddlprovince').append($('<option></option>').val(this.provinceId).text(this.provinceName));
+                });
+            }
+           
 
         },
         error: function (xhr, status, error) {
