@@ -61,5 +61,89 @@ namespace SubcontractProfile.WebApi.API.Controllers
         }
         #endregion
 
+        #region POST
+        [HttpPost("Insert/{subcontractProfileProvince}")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileProvince))]
+        public Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileProvince subcontractProfileProvince)
+        {
+            _logger.LogInformation($"Start ProvinceController::Insert", subcontractProfileProvince);
+
+            if (subcontractProfileProvince == null)
+                _logger.LogWarning($"Start ProvinceController::Insert", subcontractProfileProvince);
+
+
+            var result = _service.Insert(subcontractProfileProvince);
+
+            if (result == null)
+            {
+                _logger.LogWarning($"ProvinceController::", "Insert NOT FOUND", subcontractProfileProvince);
+
+            }
+            return result;
+
+        }
+
+        [HttpPost("BulkInsert/{subcontractProfileProvinceList}")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileProvince))]
+        public Task<bool> BulkInsert(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileProvince> subcontractProfileProvinceList)
+        {
+            _logger.LogInformation($"Start ProvinceController::BulkInsert", subcontractProfileProvinceList);
+
+            if (subcontractProfileProvinceList == null)
+                _logger.LogWarning($"Start ProvinceController::BulkInsert", subcontractProfileProvinceList);
+
+
+            var result = _service.BulkInsert(subcontractProfileProvinceList);
+
+            if (result == null)
+            {
+                _logger.LogWarning($"ProvinceController::", "BulkInsert NOT FOUND", subcontractProfileProvinceList);
+            }
+            return result;
+
+        }
+        #endregion
+
+        #region PUT
+
+        [HttpPut("Update/{subcontractProfileProvince}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        public Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileProvince subcontractProfileProvince)
+        {
+            _logger.LogInformation($"Start ProvinceController::Update", subcontractProfileProvince);
+
+            if (subcontractProfileProvince == null)
+                _logger.LogWarning($"Start ProvinceController::Update", subcontractProfileProvince);
+
+            var result = _service.Update(subcontractProfileProvince);
+
+            if (result == null)
+            {
+                _logger.LogWarning($"ProvinceController::", "Update NOT FOUND", subcontractProfileProvince);
+
+            }
+            return result;
+        }
+
+        #endregion
+
+        #region DELETE
+
+        [HttpDelete("Delete/{provinceId}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        public Task<bool> Delete(int provinceId)
+        {
+            _logger.LogInformation($"Start ProvinceController::Delete", provinceId);
+
+            if (provinceId == 0)
+            {
+                _logger.LogWarning($"Start ProvinceController::Delete", provinceId);
+            }
+
+            return _service.Delete(provinceId);
+        }
+
+        #endregion
+
     }
 }

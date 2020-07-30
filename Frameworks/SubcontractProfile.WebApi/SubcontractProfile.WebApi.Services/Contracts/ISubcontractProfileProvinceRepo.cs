@@ -17,7 +17,7 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileProvince subcontractProfileProvince);
         Task<bool> BulkInsert(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileProvince> subcontractProfileProvinceList);
         Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileProvince subcontractProfileProvince);
-        Task<bool> Delete(string id);
+        Task<bool> Delete(int id);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileProvince>> GetByPKList(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileProvince_PK> pkList);
 
     }

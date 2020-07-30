@@ -85,7 +85,7 @@ namespace SubcontractProfile.WebApi.Services.Services
         /// <summary>
         /// Delete
         /// </summary>
-        public async Task<bool> Delete(string provinceId)
+        public async Task<bool> Delete(int provinceId)
         {
             var p = new DynamicParameters();
             p.Add("@province_id", provinceId);

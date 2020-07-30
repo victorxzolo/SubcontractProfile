@@ -35,6 +35,8 @@ namespace SubcontractProfile.Web.Controllers
             //เรียก appsetting.json path api
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
         }
+
+        #region Login
         public IActionResult Login()
         {
             // SubcontractProfileCompanyBLL aa = new SubcontractProfileCompanyBLL();
@@ -151,6 +153,8 @@ namespace SubcontractProfile.Web.Controllers
 
         //    return false;
         //}
+        #endregion
+
 
 
         #region Register
@@ -1019,24 +1023,6 @@ namespace SubcontractProfile.Web.Controllers
         //public decimal CNT { get; set; }
     }
 
-
-    #region Address
-
-    public class subcontract_profile_sub_district
-    {
-        public int sub_district_id { get; set; }
-        public string sub_district_name { get; set; }
-        public string zip_code { get; set; }
-        public int district_id { get; set; }
-    }
-    public class subcontract_profile_district
-    {
-        public int district_id { get; set; }
-        public string district_name { get; set; }
-        public int province_id { get; set; }
-    }
-   
-    #endregion
 
 
     public class subcontract_profile_New_Register //ส่งค่ามาจากหน้าจอ
