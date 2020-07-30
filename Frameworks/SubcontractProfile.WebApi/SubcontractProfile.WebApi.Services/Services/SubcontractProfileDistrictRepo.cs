@@ -59,7 +59,8 @@ namespace SubcontractProfile.WebApi.Services.Services
             var p = new DynamicParameters();
 
             p.Add("@district_id", subcontractProfileDistrict.DistrictId);
-            p.Add("@district_name", subcontractProfileDistrict.DistrictName);
+            p.Add("@district_name_th", subcontractProfileDistrict.DistrictNameTh);
+            p.Add("@district_name_en", subcontractProfileDistrict.DistrictNameEn);
             p.Add("@province_id", subcontractProfileDistrict.ProvinceId);
 
             var ok = await _dbContext.Connection.ExecuteAsync
@@ -75,7 +76,8 @@ namespace SubcontractProfile.WebApi.Services.Services
         {
             var p = new DynamicParameters();
             p.Add("@district_id", subcontractProfileDistrict.DistrictId);
-            p.Add("@district_name", subcontractProfileDistrict.DistrictName);
+            p.Add("@district_name_th", subcontractProfileDistrict.DistrictNameTh);
+            p.Add("@district_name_en", subcontractProfileDistrict.DistrictNameEn);
             p.Add("@province_id", subcontractProfileDistrict.ProvinceId);
 
             var ok = await _dbContext.Connection.ExecuteAsync
@@ -119,7 +121,8 @@ namespace SubcontractProfile.WebApi.Services.Services
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("district_id", typeof(SqlInt32));
-            dt.Columns.Add("district_name", typeof(SqlString));
+            dt.Columns.Add("district_name_th", typeof(SqlString));
+            dt.Columns.Add("district_name_en", typeof(SqlString));
             dt.Columns.Add("province_id", typeof(SqlInt32));
 
             if (SubcontractProfileDistrictList != null)
@@ -127,7 +130,8 @@ namespace SubcontractProfile.WebApi.Services.Services
                 {
                     DataRow row = dt.NewRow();
                     row["district_id"] = new SqlInt32((int)curObj.DistrictId);
-                    row["district_name"] = new SqlString(curObj.DistrictName);
+                    row["district_name_th"] = new SqlString(curObj.DistrictNameTh);
+                    row["district_name_en"] = new SqlString(curObj.DistrictNameEn);
                     row["province_id"] = new SqlInt32((int)curObj.ProvinceId);
 
                     dt.Rows.Add(row);

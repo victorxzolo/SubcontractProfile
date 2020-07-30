@@ -7,7 +7,7 @@ namespace SubcontractProfile.WebApi.Services.Model
 
 
     /// =================================================================
-    /// Author: AIS Fibre
+    /// Author: AIS Fibre - X10
     /// Description: PK class for the table [dbo].[subcontract_profile_district] 
     /// It's bit heavy (a lot of useless types in the DB) but you can
     /// use get by PKList even if your pk is a composite one...
@@ -20,7 +20,7 @@ namespace SubcontractProfile.WebApi.Services.Model
     }
 
     /// =================================================================
-    /// Author: AIS Fibre
+    /// Author: AIS Fibre - X10
     /// Description: Entity class for the table [dbo].[subcontract_profile_district] 
     /// =================================================================
 
@@ -30,8 +30,13 @@ namespace SubcontractProfile.WebApi.Services.Model
         public int DistrictId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string DistrictName { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
+        public string DistrictNameTh { get; set; }
 
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string DistrictNameEn { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
         public int ProvinceId { get; set; }
 
 
