@@ -10,7 +10,7 @@ using SubcontractProfile.WebApi.Services.Model;
 
 namespace SubcontractProfile.WebApi.API.Controllers
 {
-    [Route("api/TeamController")]
+    [Route("api/Team")]
     [ApiController]
     public class TeamController : ControllerBase
     {

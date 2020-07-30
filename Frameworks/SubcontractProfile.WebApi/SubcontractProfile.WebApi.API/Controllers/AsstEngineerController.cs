@@ -13,7 +13,7 @@ using SubcontractProfile.WebApi.Services.Model;
 
 namespace SubcontractProfile.WebApi.API.Controllers
 {
-    [Route("api/AsstEngineerController")]
+    [Route("api/AsstEngineer")]
     [ApiController]
     public class AsstEngineerController : ControllerBase
     {

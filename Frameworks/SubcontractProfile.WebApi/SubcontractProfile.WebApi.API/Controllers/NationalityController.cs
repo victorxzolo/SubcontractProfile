@@ -13,7 +13,7 @@ using SubcontractProfile.WebApi.Services.Model;
 
 namespace SubcontractProfile.WebApi.API.Controllers
 {
-    [Route("api/NationalityController")]
+    [Route("api/Nationality")]
     [ApiController]
     public class NationalityController : ControllerBase
     {

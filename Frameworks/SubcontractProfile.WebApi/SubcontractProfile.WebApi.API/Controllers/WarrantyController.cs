@@ -10,7 +10,7 @@ using SubcontractProfile.WebApi.Services.Model;
 
 namespace SubcontractProfile.WebApi.API.Controllers
 {
-    [Route("api/WarrantyController")]
+    [Route("api/Warranty")]
     [ApiController]
     public class WarrantyController : ControllerBase
     {

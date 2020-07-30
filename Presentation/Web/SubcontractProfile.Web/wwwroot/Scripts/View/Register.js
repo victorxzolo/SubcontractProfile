@@ -82,7 +82,7 @@
         }
         return valueSearch;
     }
- 
+    BindDDLTitle();
 
     var tbLocation = $('#tblocationModal').DataTable({
         ordering: true,
@@ -805,9 +805,12 @@
         $('#lbaccount_Name').text($('#ddlaccount_Name option').filter(':selected').text() + ' ' + $('#txtaccount_Name').val());
         $('#lbbusiness_type').text($('#ddlbank_account_type option').filter(':selected').text());
 
-        $('#lbcompany_certified_file').text($('#company_certified_file').val());
-        $('#lbcommercial_registration_file').text($('#commercial_registration_file').val());
-        $('#lbvat_registration_certificate_file').text($('#vat_registration_certificate_file').val());
+
+        $('#lbcompany_certified_file').text($('#company_certified_file').val().split("\\").pop());
+        
+        $('#lbcommercial_registration_file').text($('#commercial_registration_file').val().split("\\").pop());
+       
+        $('#lbvat_registration_certificate_file').text($('#vat_registration_certificate_file').val().split("\\").pop());
 
 
         BindDataAddress();
@@ -904,6 +907,51 @@ function BindDDLsubdistrict(district) {
         }
     });
 }
+
+function BindDDLTitle() {
+    $.ajax({
+        type: "POST",
+        url: "/Account/DDLTitle",
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+            if (data != null) {
+
+                $('#ddlprefixcompany_name_th').empty();
+                $('#ddlprefixcompany_name_en').empty();
+
+                $('#ddlprefixcompany_name_th_dealer').empty();
+                $('#ddlprefixcompany_name_en_dealer').empty();
+
+                $('#ddlprefixcompany_name_th').append($('<option></option>').val(0).text('Select Title'));
+                $('#ddlprefixcompany_name_en').append($('<option></option>').val(0).text('Select Title'));
+
+                $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val(0).text('Select Title'));
+                $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val(0).text('Select Title'));
+
+                $.each(data.response, function () {
+                    $('#ddlprefixcompany_name_th').append($('<option></option>').val(this.TitleId).text(this.TitleNameTh));
+                    $('#ddlprefixcompany_name_en').append($('<option></option>').val(this.TitleId).text(this.TitleNameEn));
+
+                    $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val(this.TitleId).text(this.TitleNameTh));
+                    $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val(this.TitleId).text(this.TitleNameEn));
+                });
+            }
+
+
+        },
+        error: function (xhr, status, error) {
+            //Loading(0);
+            //clearForEdit();
+            console.log(status);
+            showFeedback("error", xhr.responseText, "System Information",
+                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+        }
+    });
+}
+
+
+
 
 function Validate() {
     var errorMessage = $("#idmsAlert");

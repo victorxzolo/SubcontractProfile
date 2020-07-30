@@ -10,7 +10,7 @@ using SubcontractProfile.WebApi.Services.Model;
 
 namespace SubcontractProfile.WebApi.API.Controllers
 {
-    [Route("api/ProvinceController")]
+    [Route("api/Province")]
     [ApiController]
     public class ProvinceController : ControllerBase
     {

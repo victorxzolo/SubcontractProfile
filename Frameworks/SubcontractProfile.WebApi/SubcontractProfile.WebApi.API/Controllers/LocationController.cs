@@ -13,7 +13,7 @@ using SubcontractProfile.WebApi.Services.Model;
 
 namespace SubcontractProfile.WebApi.API.Controllers
 {
-    [Route("api/LocationController")]
+    [Route("api/Location")]
     [ApiController]
     public class LocationController : ControllerBase
     {

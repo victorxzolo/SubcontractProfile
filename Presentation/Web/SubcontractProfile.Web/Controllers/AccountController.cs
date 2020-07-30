@@ -20,6 +20,7 @@ using Newtonsoft.Json;
 using System.Text;
 using SubcontractProfile.Web.Model;
 using Microsoft.EntityFrameworkCore.Internal;
+using System.IO;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -417,6 +418,48 @@ namespace SubcontractProfile.Web.Controllers
             {
                 var v = response.Content.ReadAsStringAsync().Result;
                  output = JsonConvert.DeserializeObject<List<SubcontractProfileProvinceModel>>(v);
+            }
+
+
+
+            return Json(new { response = output });
+        }
+
+        [HttpPost]
+        public IActionResult DDLTitle()
+        {
+            var output = new List<SubcontractProfileTitleModel>();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "TitleController/GetALL");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                output = JsonConvert.DeserializeObject<List<SubcontractProfileTitleModel>>(v);
+            }
+
+
+
+            return Json(new { response = output });
+        }
+
+        [HttpPost]
+        public IActionResult DDLNationality()
+        {
+            var output = new List<SubcontractProfileNationalityModel>();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "NationalityController/GetALL");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                output = JsonConvert.DeserializeObject<List<SubcontractProfileNationalityModel>>(v);
             }
 
 
@@ -921,6 +964,9 @@ namespace SubcontractProfile.Web.Controllers
                 throw;
             }
         }
+
+
+     
 
         #endregion
     }

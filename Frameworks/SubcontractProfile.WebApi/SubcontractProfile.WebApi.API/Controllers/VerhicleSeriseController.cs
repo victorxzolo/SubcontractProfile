@@ -10,7 +10,7 @@ using SubcontractProfile.WebApi.Services.Model;
 
 namespace SubcontractProfile.WebApi.API.Controllers
 {
-    [Route("api/VerhicleSeriseController")]
+    [Route("api/VerhicleSerise")]
     [ApiController]
     public class VerhicleSeriseController : ControllerBase
     {
