@@ -10,8 +10,13 @@ namespace SubcontractProfile.Web.Model
         public int DistrictId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string DistrictName { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
+        public string DistrictNameTh { get; set; }
 
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string DistrictNameEn { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
         public int ProvinceId { get; set; }
     }
 }

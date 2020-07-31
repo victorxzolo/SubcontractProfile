@@ -10,6 +10,12 @@ namespace SubcontractProfile.Web.Model
         public int ProvinceId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string ProvinceName { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
+        public string ProvinceNameTh { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string ProvinceNameEn { get; set; }
+
+        public int? RegionId { get; set; }
     }
 }
