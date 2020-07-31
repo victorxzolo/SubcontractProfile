@@ -73,7 +73,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         #region POST
         [HttpPost("Insert/{subcontractProfileBanking}")]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileAddressType))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileBanking))]
         public Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileBanking subcontractProfileBanking)
         {
             _logger.LogInformation($"Start BankingController::Insert", subcontractProfileBanking);
@@ -94,7 +94,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         }
 
         [HttpPost("BulkInsert/{subcontractProfileBankingList}")]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileAddressType))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileBanking))]
         public Task<bool> BulkInsert(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileBanking> subcontractProfileBankingList)
         {
             _logger.LogInformation($"Start BankingController::BulkInsert", subcontractProfileBankingList);
