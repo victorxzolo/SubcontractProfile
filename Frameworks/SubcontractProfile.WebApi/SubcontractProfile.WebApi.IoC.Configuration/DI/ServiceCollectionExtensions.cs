@@ -39,6 +39,8 @@ namespace SubcontractProfile.WebApi.IoC.Configuration.DI
                 services.AddScoped<ISubcontractProfileVerhicleSeriseRepo, SubcontractProfileVerhicleSeriseRepo>();
                 services.AddScoped<ISubcontractProfileVerhicleTypeRepo, SubcontractProfileVerhicleTypeRepo>();
                 services.AddScoped<ISubcontractProfileWarrantyRepo, SubcontractProfileWarrantyRepo>();
+
+                services.AddScoped<ISubcontractProfileRegionRepo, SubcontractProfileRegionRepo>();
             }
 
         }
