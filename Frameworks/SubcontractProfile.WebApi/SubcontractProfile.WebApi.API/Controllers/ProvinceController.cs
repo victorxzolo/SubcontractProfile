@@ -59,6 +59,28 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
             return entities;
         }
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileProvince))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileProvince))]
+        [HttpGet("GetProvinceByRegionId/{regionId}")]
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileProvince>> GetAll(int regionId)
+        {
+            _logger.LogInformation($"ProvinceController::GetALL");
+
+            var entities = await _service.GetAll();
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"ProvinceController::", "GetALL NOT FOUND");
+                return null;
+            }
+            else
+            {
+                var result = entities.Where(x => x.RegionId == regionId).ToList();
+                return result;
+            }
+        }
+
         #endregion
 
         #region POST

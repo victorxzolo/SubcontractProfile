@@ -28,6 +28,7 @@ namespace SubcontractProfile.Web.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly string strpathAPI;
+        private string Lang = "";
         public AccountController(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -35,6 +36,7 @@ namespace SubcontractProfile.Web.Controllers
 
             //เรียก appsetting.json path api
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
+            Lang = "TH";
         }
 
         #region Login
@@ -209,71 +211,15 @@ namespace SubcontractProfile.Web.Controllers
         }
 
 
+        #region DDL
         [HttpPost]
         public IActionResult DDLsubcontract_profile_sub_district(int district_id = 0)
         {
             var output = new List<SubcontractProfileSubDistrictModel>();
             var resultZipCode = new List<SubcontractProfileSubDistrictModel>();
-            //output.Add(new subcontract_profile_sub_district
-            //{
-            //    sub_district_id = 0,
-            //    sub_district_name = "Select Sub District"
-            //});
-            //output.Add(new subcontract_profile_sub_district
-            //{
-            //    sub_district_id = 1,
-            //    sub_district_name = "วังทองหลาง",
-            //    zip_code = "10310",
-            //    district_id = 1
-            //});
-            //output.Add(new subcontract_profile_sub_district
-            //{
-            //    sub_district_id = 2,
-            //    sub_district_name = "คลองเจ้าคุณสิงห์",
-            //    zip_code = "10310",
-            //    district_id = 1
-            //});
-            //output.Add(new subcontract_profile_sub_district
-            //{
-            //    sub_district_id = 3,
-            //    sub_district_name = "คลองจั่น",
-            //    zip_code = "10240",
-            //    district_id = 2
-            //});
-            //output.Add(new subcontract_profile_sub_district
-            //{
-            //    sub_district_id = 4,
-            //    sub_district_name = "หัวหมาก",
-            //    zip_code = "10240",
-            //    district_id = 2
-            //});
 
-
-            //output.Add(new subcontract_profile_sub_district
-            //{
-            //    sub_district_id = 5,
-            //    sub_district_name = "แพรกษา",
-            //    zip_code = "10280",
-            //    district_id = 3
-            //});
-            //output.Add(new subcontract_profile_sub_district
-            //{
-            //    sub_district_id = 6,
-            //    sub_district_name = "บางหญ้าแพรก",
-            //    zip_code = "10130",
-            //    district_id = 4
-            //});
-
-            //if (district_id != 0)
-            //{
-            //    output = output.Where(x => x.district_id == district_id).ToList();
-            //    output.Add(new subcontract_profile_sub_district
-            //    {
-            //        sub_district_id = 0,
-            //        sub_district_name = "--Select Sub District--"
-            //    });
-            //    output = output.OrderBy(x => x.sub_district_id).ToList();
-            //}
+            List<SelectListItem> getAllSubDistrictList = new List<SelectListItem>();
+            List<SelectListItem> getAllZipcodeList = new List<SelectListItem>();
 
             if (district_id != 0)
             {
@@ -281,7 +227,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "SubDistrictController/GetSubDistrictByDistrict", district_id);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "SubDistrict/GetSubDistrictByDistrict", district_id);
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -306,60 +252,76 @@ namespace SubcontractProfile.Web.Controllers
                 }
             }
 
-            return Json(new { response = output ,responsezipcode= resultZipCode });
+            if (Lang == "TH")
+            {
+
+                output.Add(new SubcontractProfileSubDistrictModel
+                {
+                    SubDistrictId = 0,
+                    SubDistrictNameTh = "กรุณาเลือกแขวง/ตำบล"
+                });
+
+                getAllSubDistrictList = output.Select(a => new SelectListItem
+                {
+                    Text = a.SubDistrictNameTh,
+                    Value = a.SubDistrictId.ToString()
+                }).OrderBy(c => c.Value).ToList();
+
+
+                getAllZipcodeList = resultZipCode.Select(c => new SelectListItem
+                {
+                    Text = c.ZipCode,
+                    Value = c.ZipCode
+                }).ToList();
+                getAllZipcodeList.Add(new SelectListItem
+                {
+                    Text = "กรุณาเลือกรหัสไปรษณีย์",
+                    Value = "0"
+                });
+                getAllZipcodeList.OrderBy(d => d.Value).ToList();
+            }
+            else
+            {
+
+                output.Add(new SubcontractProfileSubDistrictModel
+                {
+                    SubDistrictId = 0,
+                    SubDistrictNameTh = "Select Sub District"
+                });
+                getAllSubDistrictList = output.Select(a => new SelectListItem
+                {
+                    Text = a.SubDistrictNameEn,
+                    Value = a.SubDistrictId.ToString()
+                }).OrderBy(c => c.Value).ToList();
+
+                
+                getAllZipcodeList = resultZipCode.Select(c => new SelectListItem
+                {
+                    Text = c.ZipCode,
+                    Value = c.ZipCode
+                }).ToList();
+                getAllZipcodeList.Add(new SelectListItem
+                {
+                    Text = "Select Zip Code",
+                    Value = "0"
+                });
+                getAllZipcodeList.OrderBy(d => d.Value).ToList();
+            }
+
+            return Json(new { responsesubdistrict = getAllSubDistrictList, responsezipcode = getAllZipcodeList });
         }
         [HttpPost]
         public IActionResult DDLsubcontract_profile_district(int province_id = 0)
         {
             var output = new List<SubcontractProfileDistrictModel>();
-            //output.Add(new subcontract_profile_district
-            //{
-            //    district_id = 0,
-            //    district_name = "Select District"
-            //});
-            //output.Add(new subcontract_profile_district
-            //{
-            //    district_id = 1,
-            //    district_name = "วังทองหลาง",
-            //    province_id = 1
-            //});
-            //output.Add(new subcontract_profile_district
-            //{
-            //    district_id = 2,
-            //    district_name = "บางกะปิ",
-            //    province_id = 1
-            //});
-
-            //output.Add(new subcontract_profile_district
-            //{
-            //    district_id = 3,
-            //    district_name = "เมืองสมุทรปราการ",
-            //    province_id = 2
-            //});
-            //output.Add(new subcontract_profile_district
-            //{
-            //    district_id = 4,
-            //    district_name = "พระประแดง",
-            //    province_id = 2
-            //});
-            //if (province_id != 0)
-            //{
-            //    output = output.Where(x => x.province_id == province_id).ToList();
-            //    output.Add(new subcontract_profile_district
-            //    {
-            //        district_id = 0,
-            //        district_name = "--Select District--"
-            //    });
-            //    output = output.OrderBy(x => x.district_id).ToList();
-            //}
-
+            List<SelectListItem> getAllDistrictList = new List<SelectListItem>();
             if (province_id != 0)
             {
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "DistrictController/GetDistrictByProvinceId", province_id);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "District/GetDistrictByProvinceId", province_id);
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -382,58 +344,97 @@ namespace SubcontractProfile.Web.Controllers
                 }
             }
 
+            if (Lang == "TH")
+            {
+                output.Add(new SubcontractProfileDistrictModel
+                {
+                    DistrictId = 0,
+                    DistrictNameTh = "กรุณาเลือกเขต/อำเภอ"
+                });
+                getAllDistrictList = output.Select(a => new SelectListItem
+                {
+                    Text = a.DistrictNameTh,
+                    Value = a.DistrictId.ToString()
+                }).OrderBy(c => c.Value).ToList();
 
-            return Json(new { response = output });
+            }
+            else
+            {
+                output.Add(new SubcontractProfileDistrictModel
+                {
+                    DistrictId = 0,
+                    DistrictNameTh = "Select District"
+                });
+                getAllDistrictList = output.Select(a => new SelectListItem
+                {
+                    Text = a.DistrictNameEn,
+                    Value = a.DistrictId.ToString()
+                }).OrderBy(c => c.Value).ToList();
+            }
+
+            return Json(new { responsedistricrt = getAllDistrictList });
         }
         [HttpPost]
-        public IActionResult DDLsubcontract_profile_province()
+        public IActionResult DDLsubcontract_profile_province(int region_id)
         {
             var output = new List<SubcontractProfileProvinceModel>();
-            //output.Add(new subcontract_profile_province
-            //{
-            //    province_id = 0,
-            //    province_name = "--Select Province--"
-
-            //});
-            //output.Add(new subcontract_profile_province
-            //{
-            //    province_id = 1,
-            //    province_name = "กรุงเทพฯ"
-
-            //});
-            //output.Add(new subcontract_profile_province
-            //{
-            //    province_id = 2,
-            //    province_name = "สมุทรปราการ"
-
-            //});
+            List<SelectListItem> getAllProvinceList = new List<SelectListItem>();
 
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}", strpathAPI + "ProvinceController/GetALL");
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Province/GetProvinceByRegionId", region_id);
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
                 var v = response.Content.ReadAsStringAsync().Result;
-                 output = JsonConvert.DeserializeObject<List<SubcontractProfileProvinceModel>>(v);
+                output = JsonConvert.DeserializeObject<List<SubcontractProfileProvinceModel>>(v);
+            }
+
+            if (Lang == "TH")
+            {
+                output.Add(new SubcontractProfileProvinceModel
+                {
+                    ProvinceId = 0,
+                    ProvinceNameTh = "กรุณาเลือกจังหวัด"
+                });
+                getAllProvinceList = output.Select(a => new SelectListItem
+                {
+                    Text = a.ProvinceNameTh,
+                    Value = a.ProvinceId.ToString()
+                }).OrderBy(c=>c.Value).ToList();
+            }
+            else
+            {
+                output.Add(new SubcontractProfileProvinceModel
+                {
+                    ProvinceId = 0,
+                    ProvinceNameTh = "Select Province"
+                });
+                getAllProvinceList = output.Select(a => new SelectListItem
+                {
+                    Text = a.ProvinceNameEn,
+                    Value = a.ProvinceId.ToString()
+                }).OrderBy(c => c.Value).ToList();
+
             }
 
 
-
-            return Json(new { response = output });
+            return Json(new { responseprovince = getAllProvinceList });
         }
 
         [HttpPost]
         public IActionResult DDLTitle()
         {
             var output = new List<SubcontractProfileTitleModel>();
+
+
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}", strpathAPI + "TitleController/GetALL");
+            string uriString = string.Format("{0}", strpathAPI + "Title/GetALL");
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -442,8 +443,7 @@ namespace SubcontractProfile.Web.Controllers
             }
 
 
-
-            return Json(new { response = output });
+            return Json(new { responsetitle = output });
         }
 
         [HttpPost]
@@ -454,7 +454,7 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}", strpathAPI + "NationalityController/GetALL");
+            string uriString = string.Format("{0}", strpathAPI + "Nationality/GetALL");
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -466,6 +466,58 @@ namespace SubcontractProfile.Web.Controllers
 
             return Json(new { response = output });
         }
+
+        [HttpPost]
+        public IActionResult DDLsubcontract_profile_Region()
+        {
+            var output = new List<SubcontractProfileRegionModel>();
+            List<SelectListItem> getAllRegionList = new List<SelectListItem>();
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "Region/GetALL");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                output = JsonConvert.DeserializeObject<List<SubcontractProfileRegionModel>>(v);
+            }
+
+            if (Lang == "TH")
+            {
+                output.Add(new SubcontractProfileRegionModel
+                {
+                    RegionId = 0,
+                    RegionName = "กรุณาเลือกภาค"
+                });
+
+               getAllRegionList = output.Select(a => new SelectListItem
+                {
+                    Text = a.RegionName,
+                    Value = a.RegionId.ToString()
+                }).OrderBy(c => c.Value).ToList();
+            }
+            else
+            {
+                output.Add(new SubcontractProfileRegionModel
+                {
+                    RegionId = 0,
+                    RegionName = "Select Region"
+                });
+                getAllRegionList = output.Select(a => new SelectListItem
+                {
+                    Text = a.RegionName,
+                    Value = a.RegionId.ToString()
+                }).OrderBy(c => c.Value).ToList();
+
+            }
+
+            return Json(new { responseregion = getAllRegionList });
+        }
+        #endregion
+
 
 
         [HttpPost]
@@ -887,6 +939,10 @@ namespace SubcontractProfile.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    //Insert Company
+                    ////////////////
+
+                    #region Insert Address
                     var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
                     model.L_address = new List<SubcontractProfileAddressModel>();
 
@@ -897,41 +953,29 @@ namespace SubcontractProfile.Web.Controllers
                         {
                             model.L_address.Add(new SubcontractProfileAddressModel
                             {
-                                //address_type_id = d.,
-                                //building = d.building,
-                                //country = d.country,
-                                //district_id = d.district_id,
-                                //floor = d.floor,
-                                //house_no = d.house_no,
-                                //moo = d.moo,
-                                //province_id = d.province_id,
-                                //region_id = d.region_id,
-                                //road = d.road,
-                                //room_no = d.room_no,
-                                //soi = d.soi,
-                                //sub_district_id = d.sub_district_id,
-                                //village_name = d.village_name,
-                                //zip_code = d.zip_code
-                                AddressId=d.AddressId,
-                                Building=d.Building,
-                                DistrictId=d.DistrictId,
-                                Floor=d.Floor,
-                                HouseNo=d.HouseNo,
-                                Moo=d.Moo,
-                                Road=d.Road,
-                                Soi=d.Soi,
-                                SubDistrictId=d.SubDistrictId,
-                                ProvinceId=d.ProvinceId,
-                                village_name=d.village_name,
-                                Country=d.Country,
-                                region_id=d.region_id,
-                                ZipCode=d.ZipCode
+                                AddressId = d.AddressId,
+                                AddressTypeId = d.AddressTypeId,
+                                Building = d.Building,
+                                City = d.City,
+                                Country = d.Country,
+                                DistrictId = d.DistrictId,
+                                Floor = d.Floor,
+                                HouseNo = d.HouseNo,
+                                Moo = d.Moo,
+                                ProvinceId = d.ProvinceId,
+                                CompanyId = d.CompanyId,
+                                CreateBy = d.CreateBy,
+                                CreateDate = DateTime.Now,
+                                RegionId = d.RegionId,
+                                Road = d.Road,
+                                Soi = d.Soi,
+                                RoomNo = d.RoomNo,
+                                SubDistrictId = d.SubDistrictId,
+                                VillageName = d.VillageName,
+                                ZipCode = d.ZipCode
                             });
                         }
 
-                        //Command.Handle(model)
-                        //output ret_code,ret
-                        //ret_msg
                     }
                     else
                     {
@@ -941,6 +985,10 @@ namespace SubcontractProfile.Web.Controllers
                             message = "Address Data isnot correct, Please Check Data or Contact System Admin"
                         });
                     }
+                    #endregion
+
+
+
                     return Json(new
                     {
                         status = "1",
@@ -966,7 +1014,86 @@ namespace SubcontractProfile.Web.Controllers
         }
 
 
-     
+        [HttpPost]
+        public IActionResult Uploadfile(IList<IFormFile> files,string fid)
+        {
+            bool statusupload=true;
+            List<FileUploadModal> L_File = new List<FileUploadModal>();
+            FileStream output;
+            string strmess = "";
+            try
+            {
+                foreach (FormFile source in files)
+                {
+                    Guid id = Guid.NewGuid();
+
+
+                    //string filename = ContentDispositionHeaderValue.Parse(source.ContentDisposition).FileName.Trim('"');
+
+                    //filename = this.EnsureCorrectFilename(filename);
+
+                    //using (output = System.IO.File.Create(this.GetPathAndFilename(filename)))
+                    //await source.CopyToAsync(output);
+
+                    
+
+                    if (source.Length > 0)
+                    {
+                        using (var ms = new MemoryStream())
+                        {
+                            source.CopyTo(ms);
+                            var fileBytes = ms.ToArray();
+                            string s = Convert.ToBase64String(fileBytes);
+                            L_File.Add(new FileUploadModal
+                            {
+                                file_id = id,
+                                Fileupload = s
+                            });
+                        }
+                    }
+                    var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
+                    if (data != null)
+                    {
+                       
+                        data.RemoveAll(x => x.file_id.ToString() == fid);
+                        data.Add(L_File[0]);
+                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", data);
+
+                    }
+                    else
+                    {
+                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", L_File);
+                    }
+                    
+                    
+                }
+                strmess = "Upload file success";
+            }
+            catch (Exception e)
+            {
+                statusupload = false;
+                strmess = e.Message.ToString();
+                throw;
+            }
+
+
+            return Json(new { status = statusupload ,message= strmess ,response= L_File[0].file_id });
+        }
+      
+        private string EnsureCorrectFilename(string filename)
+        {
+            if (filename.Contains("\\"))
+                filename = filename.Substring(filename.LastIndexOf("\\") + 1);
+
+            return filename;
+        }
+
+        private string GetPathAndFilename(string filename)
+        {
+            //return this.hostingEnvironment.WebRootPath + "\\uploads\\" + filename;
+            string path = "D:\\2.Document\\SubcontractProfile" + "\\uploads\\" + filename;
+            return path;
+        }
 
         #endregion
     }
