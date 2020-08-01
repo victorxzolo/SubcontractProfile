@@ -66,12 +66,17 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@bank_transfer", subcontractProfilePayment.BankTransfer);
             p.Add("@bank_branch", subcontractProfilePayment.BankBranch);
             p.Add("@slip_attach_file", subcontractProfilePayment.SlipAttachFile);
+            p.Add("@contact_name", subcontractProfilePayment.ContactName);
+            p.Add("@contact_phone_no", subcontractProfilePayment.ContactPhoneNo);
+            p.Add("@contact_email", subcontractProfilePayment.ContactEmail);
             p.Add("@remark", subcontractProfilePayment.Remark);
+            p.Add("@status", subcontractProfilePayment.Status);
             p.Add("@create_date", subcontractProfilePayment.CreateDate);
             p.Add("@create_by", subcontractProfilePayment.CreateBy);
             p.Add("@modified_by", subcontractProfilePayment.ModifiedBy);
             p.Add("@modified_date", subcontractProfilePayment.ModifiedDate);
             p.Add("@training_id", subcontractProfilePayment.TrainingId);
+            p.Add("@company_id", subcontractProfilePayment.CompanyId);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfilePayment_Insert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -93,12 +98,17 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@bank_transfer", subcontractProfilePayment.BankTransfer);
             p.Add("@bank_branch", subcontractProfilePayment.BankBranch);
             p.Add("@slip_attach_file", subcontractProfilePayment.SlipAttachFile);
+            p.Add("@contact_name", subcontractProfilePayment.ContactName);
+            p.Add("@contact_phone_no", subcontractProfilePayment.ContactPhoneNo);
+            p.Add("@contact_email", subcontractProfilePayment.ContactEmail);
             p.Add("@remark", subcontractProfilePayment.Remark);
+            p.Add("@status", subcontractProfilePayment.Status);
             p.Add("@create_date", subcontractProfilePayment.CreateDate);
             p.Add("@create_by", subcontractProfilePayment.CreateBy);
             p.Add("@modified_by", subcontractProfilePayment.ModifiedBy);
             p.Add("@modified_date", subcontractProfilePayment.ModifiedDate);
             p.Add("@training_id", subcontractProfilePayment.TrainingId);
+            p.Add("@company_id", subcontractProfilePayment.CompanyId);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfilePayment_Update", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -148,12 +158,17 @@ namespace SubcontractProfile.WebApi.Services.Services
             dt.Columns.Add("bank_transfer", typeof(SqlString));
             dt.Columns.Add("bank_branch", typeof(SqlString));
             dt.Columns.Add("slip_attach_file", typeof(SqlString));
+            dt.Columns.Add("contact_name", typeof(SqlString));
+            dt.Columns.Add("contact_phone_no", typeof(SqlString));
+            dt.Columns.Add("contact_email", typeof(SqlString));
             dt.Columns.Add("remark", typeof(SqlString));
+            dt.Columns.Add("status", typeof(SqlString));
             dt.Columns.Add("create_date", typeof(SqlDateTime));
             dt.Columns.Add("create_by", typeof(SqlString));
             dt.Columns.Add("modified_by", typeof(SqlString));
             dt.Columns.Add("modified_date", typeof(SqlDateTime));
-            dt.Columns.Add("training_id", typeof(SqlGuid));
+            dt.Columns.Add("training_id", typeof(SqlString));
+            dt.Columns.Add("company_id", typeof(SqlString));
 
             if (SubcontractProfilePaymentList != null)
                 foreach (var curObj in SubcontractProfilePaymentList)
@@ -162,17 +177,22 @@ namespace SubcontractProfile.WebApi.Services.Services
                     row["payment_id"] = new SqlString(curObj.PaymentId);
                     row["payment_no"] = new SqlString(curObj.PaymentNo);
                     row["payment_channal"] = new SqlString(curObj.PaymentChannal);
-                    row["payment_datetime"] = curObj.PaymentDatetime == null ? SqlDateTime.Null : new SqlDateTime(curObj.PaymentDatetime.Value);
-                    row["amount_transfer"] = curObj.AmountTransfer == null ? SqlDecimal.Null : new SqlDecimal(curObj.AmountTransfer.Value);
+                    row["payment_datetime"] = new SqlDateTime(curObj.PaymentDatetime);
+                    row["amount_transfer"] = new SqlDecimal(curObj.AmountTransfer);
                     row["bank_transfer"] = new SqlString(curObj.BankTransfer);
                     row["bank_branch"] = new SqlString(curObj.BankBranch);
                     row["slip_attach_file"] = new SqlString(curObj.SlipAttachFile);
+                    row["contact_name"] = new SqlString(curObj.ContactName);
+                    row["contact_phone_no"] = new SqlString(curObj.ContactPhoneNo);
+                    row["contact_email"] = new SqlString(curObj.ContactEmail);
                     row["remark"] = new SqlString(curObj.Remark);
+                    row["status"] = new SqlString(curObj.Status);
                     row["create_date"] = curObj.CreateDate == null ? SqlDateTime.Null : new SqlDateTime(curObj.CreateDate.Value);
                     row["create_by"] = new SqlString(curObj.CreateBy);
                     row["modified_by"] = new SqlString(curObj.ModifiedBy);
                     row["modified_date"] = curObj.ModifiedDate == null ? SqlDateTime.Null : new SqlDateTime(curObj.ModifiedDate.Value);
-                    row["training_id"] = new SqlGuid(curObj.TrainingId);
+                    row["training_id"] = new SqlString(curObj.TrainingId);
+                    row["company_id"] = new SqlString(curObj.CompanyId);
 
                     dt.Rows.Add(row);
                 }
@@ -215,5 +235,23 @@ namespace SubcontractProfile.WebApi.Services.Services
 
         }
 
+        public async Task<SubcontractProfilePayment> searchPayment(string payment_no, string request_training_no,
+            string request_date_from, string request_date_to, string payment_date_from, string payment_date_to,
+            string payment_status)
+        {
+            var p = new DynamicParameters();
+            p.Add("@payment_no", payment_no);
+            p.Add("@request_training_no", request_training_no);
+            p.Add("@request_date_from", request_date_from);
+            p.Add("@request_date_to", request_date_to);
+            p.Add("@payment_date_from", payment_date_from);
+            p.Add("@payment_date_to", payment_date_to);
+            p.Add("@payment_status", payment_status);
+
+            var entity = await _dbContext.Connection.QuerySingleOrDefaultAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>
+            ("uspSubcontractProfilePayment_searchPayment", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
     }
 }
