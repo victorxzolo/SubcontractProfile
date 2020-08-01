@@ -69,6 +69,9 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@tax", subcontractProfileTraining.Tax);
             p.Add("@status", subcontractProfileTraining.Status);
             p.Add("@request_no", subcontractProfileTraining.RequestNo);
+            p.Add("@engineer_id", subcontractProfileTraining.EngineerId);
+            p.Add("@team_id", subcontractProfileTraining.TeamId);
+            p.Add("@location_id", subcontractProfileTraining.LocationId);
             p.Add("@create_by", subcontractProfileTraining.CreateBy);
             p.Add("@create_date", subcontractProfileTraining.CreateDate);
             p.Add("@modified_by", subcontractProfileTraining.ModifiedBy);
@@ -96,6 +99,9 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@tax", subcontractProfileTraining.Tax);
             p.Add("@status", subcontractProfileTraining.Status);
             p.Add("@request_no", subcontractProfileTraining.RequestNo);
+            p.Add("@engineer_id", subcontractProfileTraining.EngineerId);
+            p.Add("@team_id", subcontractProfileTraining.TeamId);
+            p.Add("@location_id", subcontractProfileTraining.LocationId);
             p.Add("@create_by", subcontractProfileTraining.CreateBy);
             p.Add("@create_date", subcontractProfileTraining.CreateDate);
             p.Add("@modified_by", subcontractProfileTraining.ModifiedBy);
@@ -151,6 +157,9 @@ namespace SubcontractProfile.WebApi.Services.Services
             dt.Columns.Add("tax", typeof(SqlDecimal));
             dt.Columns.Add("status", typeof(SqlString));
             dt.Columns.Add("request_no", typeof(SqlString));
+            dt.Columns.Add("engineer_id", typeof(SqlString));
+            dt.Columns.Add("team_id", typeof(SqlString));
+            dt.Columns.Add("location_id", typeof(SqlString));
             dt.Columns.Add("create_by", typeof(SqlString));
             dt.Columns.Add("create_date", typeof(SqlDateTime));
             dt.Columns.Add("modified_by", typeof(SqlString));
@@ -170,6 +179,9 @@ namespace SubcontractProfile.WebApi.Services.Services
                     row["tax"] = curObj.Tax == null ? SqlDecimal.Null : new SqlDecimal(curObj.Tax.Value);
                     row["status"] = new SqlString(curObj.Status);
                     row["request_no"] = new SqlString(curObj.RequestNo);
+                    row["engineer_id"] = new SqlString(curObj.EngineerId);
+                    row["team_id"] = new SqlString(curObj.TeamId);
+                    row["location_id"] = new SqlString(curObj.LocationId);
                     row["create_by"] = new SqlString(curObj.CreateBy);
                     row["create_date"] = curObj.CreateDate == null ? SqlDateTime.Null : new SqlDateTime(curObj.CreateDate.Value);
                     row["modified_by"] = new SqlString(curObj.ModifiedBy);
@@ -215,6 +227,28 @@ namespace SubcontractProfile.WebApi.Services.Services
             return dt.AsTableValuedParameter();
 
         }
+
+        public async Task<SubcontractProfileTraining> SearchTraining(string company_id, string location_code,
+            string team_id, string staff_name_th, string position_id, string status,
+            string date_from, string date_to)
+        {
+            var p = new DynamicParameters();
+            p.Add("@company_id", company_id);
+            p.Add("@location_code", location_code);
+            p.Add("@team_id", team_id);
+            p.Add("@staff_name_th", staff_name_th);
+            p.Add("@position_id", position_id);
+            p.Add("@status", status);
+            p.Add("@date_from", date_from);
+            p.Add("@date_to", date_to);
+
+
+            var entity = await _dbContext.Connection.QuerySingleOrDefaultAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>
+            ("uspSubcontractProfileTraining_searchTraining", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
     }
+
 
 }

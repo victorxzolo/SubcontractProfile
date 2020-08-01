@@ -55,6 +55,15 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string RequestNo { get; set; }
 
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string EngineerId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string TeamId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string LocationId { get; set; }
+
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string CreateBy { get; set; }
 
@@ -65,11 +74,45 @@ namespace SubcontractProfile.WebApi.Services.Model
 
         public System.DateTime? ModifiedDate { get; set; }
 
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string company_name_th { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string tax_id { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string contract_name { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string contract_email { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string contract_phone { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string location_name_th { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string location_name_en { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string team_name_th { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string team_name_en { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string staff_name_th { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string staff_name_en { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string contract_phone1 { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string contract_email_en { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string position { get; set; }
+
 
         public object Clone()
         {
             return this.MemberwiseClone();
         }
+
 
     }
 }
