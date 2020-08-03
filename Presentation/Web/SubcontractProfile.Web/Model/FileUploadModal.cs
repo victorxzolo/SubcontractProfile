@@ -13,5 +13,9 @@ namespace SubcontractProfile.Web.Model
         public byte[] Fileupload { get; set; }
 
         public string typefile { get; set; }
+         public string ContentDisposition { get; set; }
+        public string ContentType { get; set; }
+        public string Filename { get; set; }
+
     }
 }

@@ -22,6 +22,7 @@ using SubcontractProfile.Web.Model;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Diagnostics.Eventing.Reader;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -934,140 +935,158 @@ namespace SubcontractProfile.Web.Controllers
         #endregion
 
         [HttpPost]
-        public IActionResult NewRegister(SubcontractProfileCompanyModel model)
+        public async Task<IActionResult> NewRegister(SubcontractProfileCompanyModel model)
         {
+            bool resultGetFile = true;
+            ResponseModel res = new ResponseModel();
             try
             {
                 if (ModelState.IsValid)
                 {
-                    #region Insert Company
+                   
                     Guid companyId = Guid.NewGuid();
                     model.CompanyId = companyId;
+                    model.CreateDate = DateTime.Now;
+                    model.CreateBy = "SYSTEM";
 
                     var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
+
                     if(dataUploadfile !=null && dataUploadfile.Count!=0)
                     {
-                        FileStream output;
+                        #region Copy File to server
                         foreach (var e in dataUploadfile)
                         {
-                            var stream = new MemoryStream(e.Fileupload);
-                            FormFile files = new FormFile(stream, 0, e.Fileupload.Length, "name", "fileName");
-                           
-                               // string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
-                              string  filename = EnsureCorrectFilename(files.FileName);
-                                using (output = System.IO.File.Create(this.GetPathAndFilename(filename)))
-                                files.CopyToAsync(output);
-                           
-                              
+                            resultGetFile = await GetFile(e,model.CompanyId.ToString());
 
-                            //string filename = ContentDispositionHeaderValue.Parse(e.Fileupload.ContentDisposition).FileName.Trim('"');
-                            //filename = EnsureCorrectFilename(filename);
-                            //using (output = System.IO.File.Create(this.GetPathAndFilename(filename)))
-                            //  e.Fileupload.CopyToAsync(output);
+                            string filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
+                            filename = EnsureCorrectFilename(filename);
 
-                            //switch (e.typefile)
-                            //    {
-                            //        case "CompanyCertifiedFile":
-                            //            model.CompanyCertifiedFile = filename;
-                            //        break;
-                            //        case "CommercialRegistrationFile":
-                            //            model.CommercialRegistrationFile = filename;
-                            //            break;
-                            //        case "VatRegistrationCertificateFile":
-                            //            model.VatRegistrationCertificateFile = filename;
-                            //            break;
-                            //    }
-
-
-
-
+                            switch (e.typefile)
+                            {
+                                case "CompanyCertifiedFile":
+                                    model.CompanyCertifiedFile = filename;
+                                    break;
+                                case "CommercialRegistrationFile":
+                                    model.CommercialRegistrationFile = filename;
+                                    break;
+                                case "VatRegistrationCertificateFile":
+                                    model.VatRegistrationCertificateFile = filename;
+                                    break;
+                            }
                         }
+                        #endregion
+
                     }
-
-                    //var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
-                    //HttpClient clientCompany = new HttpClient();
-                    //clientCompany.DefaultRequestHeaders.Accept.Add(
-                    //new MediaTypeWithQualityHeaderValue("application/json"));
-
-                    //var httpContentCompany = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                    //HttpResponseMessage responseCompany = clientCompany.PostAsync(uriCompany, httpContentCompany).Result;
-
-                    #endregion
-
-                    #region Insert Address
-                    var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
-
-                    if (dataaddr != null && dataaddr.Count != 0)
+                    if (resultGetFile)
                     {
+                        #region Insert Company
+                        var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
+                        HttpClient clientCompany = new HttpClient();
+                        clientCompany.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
 
-                        foreach (var d in dataaddr)
+
+                        var rr = JsonConvert.SerializeObject(model);
+
+                        var httpContentCompany = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                        HttpResponseMessage responseCompany = clientCompany.PostAsync(uriCompany, httpContentCompany).Result;
+                        if(responseCompany.IsSuccessStatusCode)
                         {
-                            SubcontractProfileAddressModel addr = new SubcontractProfileAddressModel();
-                            addr.AddressId = d.AddressId;
-                            addr.AddressTypeId = d.AddressTypeId;
-                            addr.Building = d.Building;
-                            addr.City = d.City;
-                            addr.Country = d.Country;
-                            addr.DistrictId = d.DistrictId;
-                            addr.Floor = d.Floor;
-                            addr.HouseNo = d.HouseNo;
-                            addr.Moo = d.Moo;
-                            addr.ProvinceId = d.ProvinceId;
-                            addr.CompanyId = companyId.ToString();
-                            addr.CreateBy = d.CreateBy;
-                            addr.CreateDate = DateTime.Now;
-                            addr.RegionId = d.RegionId;
-                            addr.Road = d.Road;
-                            addr.Soi = d.Soi;
-                            addr.RoomNo = d.RoomNo;
-                            addr.SubDistrictId = d.SubDistrictId;
-                            addr.VillageName = d.VillageName;
-                            addr.ZipCode = d.ZipCode;
+                            #region Insert Address
+                            var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
 
-                            //var uriAddress = new Uri(Path.Combine(strpathAPI, "Address", "Insert"));
-                            //HttpClient clientAddress = new HttpClient();
-                            //clientAddress.DefaultRequestHeaders.Accept.Add(
-                            //new MediaTypeWithQualityHeaderValue("application/json"));
+                            if (dataaddr != null && dataaddr.Count != 0)
+                            {
 
-                            //var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                            //HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
+                                foreach (var d in dataaddr)
+                                {
+                                    SubcontractProfileAddressModel addr = new SubcontractProfileAddressModel();
+                                    addr.AddressId = d.AddressId;
+                                    addr.AddressTypeId = d.AddressTypeId;
+                                    addr.Building = d.Building;
+                                    addr.City = d.City;
+                                    addr.Country = d.Country;
+                                    addr.DistrictId = d.DistrictId;
+                                    addr.Floor = d.Floor;
+                                    addr.HouseNo = d.HouseNo;
+                                    addr.Moo = d.Moo;
+                                    addr.ProvinceId = d.ProvinceId;
+                                    addr.CompanyId = companyId.ToString();
+                                    addr.CreateBy = "SYSTEM";
+                                    addr.CreateDate = DateTime.Now;
+                                    addr.RegionId = d.RegionId;
+                                    addr.Road = d.Road;
+                                    addr.Soi = d.Soi;
+                                    addr.RoomNo = d.RoomNo;
+                                    addr.SubDistrictId = d.SubDistrictId;
+                                    addr.VillageName = d.VillageName;
+                                    addr.ZipCode = d.ZipCode;
+
+                                    var uriAddress = new Uri(Path.Combine(strpathAPI, "Address", "Insert"));
+                                    HttpClient clientAddress = new HttpClient();
+                                    clientAddress.DefaultRequestHeaders.Accept.Add(
+                                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                                    var httpContent = new StringContent(JsonConvert.SerializeObject(addr), Encoding.UTF8, "application/json");
+                                    HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
+                                    if (responseAddress.IsSuccessStatusCode)
+                                    {
+                                        res.Status = true;
+                                        res.Message = "Register Success";
+                                        res.StatusError = "-1";
+                                    }
+                                    else
+                                    {
+                                        res.Status = false;
+                                        res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                        res.StatusError = "-1";
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                res.Status = false;
+                                res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                res.StatusError = "-1";
+                            }
+                            #endregion
                         }
-
+                        else
+                        {
+                            res.Status = false;
+                            res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                            res.StatusError = "-1";
+                        }
                     }
                     else
                     {
-                        return Json(new
-                        {
-                            status = "-1",
-                            message = "Address Data isnot correct, Please Check Data or Contact System Admin"
-                        });
+                        res.Status = false;
+                        res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        res.StatusError = "-1";
                     }
+
+
                     #endregion
-
-
-
-                    return Json(new
-                    {
-                        status = "1",
-                        message = "Success"
-                    });
                 }
                 else
                 {
-                    return Json(new
-                    {
-                        status = "-1",
-                        message = "Data isnot correct, Please Check Data or Contact System Admin"
-                    });
+                    res.Status = false;
+                    res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                    res.StatusError = "-1";
                 }
             }
             catch (Exception e)
             {
-                string _msg = string.Empty;
-                _msg = "Please Contact System Admin";
-                return Json(new { status = "-1", message = _msg });
+                res.Status = false;
+                res.Message = e.Message;
+                res.StatusError = "-1";
+
+               
                 throw;
             }
+
+            return Json(new { Response=res });
         }
 
 
@@ -1080,32 +1099,33 @@ namespace SubcontractProfile.Web.Controllers
         {
             bool statusupload = true;
             List<FileUploadModal> L_File = new List<FileUploadModal>();
-           // FileStream output;
+            //FileStream output;
             string strmess = "";
             try
             {
                 foreach (FormFile source in files)
                 {
-                    //string filename = ContentDispositionHeaderValue.Parse(source.ContentDisposition).FileName.Trim('"');
-                    //filename = EnsureCorrectFilename(filename);
-                    //using (output = System.IO.File.Create(this.GetPathAndFilename(filename)))
-                    //await source.CopyToAsync(output);
-
                     if (source.Length > 0)
                     {
-                        //string filename = ContentDispositionHeaderValue.Parse(source.ContentDisposition).FileName.Trim('"');
-                        //filename = this.EnsureCorrectFilename(filename);
+                        string filename = ContentDispositionHeaderValue.Parse(source.ContentDisposition).FileName.Trim('"');
+                        filename = EnsureCorrectFilename(filename);
+                        //using (output = System.IO.File.Create(this.GetPathAndFilename(filename)))
+                        //    await source.CopyToAsync(output);
+
+
                         Guid id = Guid.NewGuid();
                         using (var ms = new MemoryStream())
                         {
                             source.CopyTo(ms);
                             var fileBytes = ms.ToArray();
-                        //    string s = Convert.ToBase64String(fileBytes);
                             L_File.Add(new FileUploadModal
                             {
                                 file_id = id,
                                 Fileupload = fileBytes,
-                                typefile=type_file
+                                typefile = type_file,
+                                ContentDisposition = source.ContentDisposition,
+                                ContentType = source.ContentType,
+                                Filename = filename
                             });
                         }
                     }
@@ -1125,7 +1145,7 @@ namespace SubcontractProfile.Web.Controllers
                     }
                     else
                     {
-                       // HttpContext.Session.Set("userUploadfileDaft", ToByteArray<List<FileUploadModal>>(L_File));
+                        // HttpContext.Session.Set("userUploadfileDaft", ToByteArray<List<FileUploadModal>>(L_File));
 
                         SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", L_File);
                     }
@@ -1143,32 +1163,30 @@ namespace SubcontractProfile.Web.Controllers
 
 
             return Json(new { status = statusupload, message = strmess, response = L_File[0].file_id });
+
+           // return Json(new { status = statusupload, message = strmess });
         }
 
-        public byte[] ToByteArray<T>(T obj)
+     private async Task<bool> GetFile(FileUploadModal file,string guid)
         {
-            if (obj == null)
-                return null;
-            BinaryFormatter bf = new BinaryFormatter();
-            using (MemoryStream ms = new MemoryStream())
+            FileStream output;
+            try
             {
-                bf.Serialize(ms, obj);
-                return ms.ToArray();
-            }
-        }
+                var stream = new MemoryStream(file.Fileupload);
+                FormFile files = new FormFile(stream, 0, file.Fileupload.Length, "name", "fileName");
 
-        public T FromByteArray<T>(byte[] data)
-        {
-            if (data == null)
-                return default(T);
-            BinaryFormatter bf = new BinaryFormatter();
-            using (MemoryStream ms = new MemoryStream(data))
+                string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                filename = EnsureCorrectFilename(file.Filename);
+                using (output = System.IO.File.Create(this.GetPathAndFilename(guid,filename)))
+                  await  files.CopyToAsync(output);
+            }
+            catch (Exception e)
             {
-                object obj = bf.Deserialize(ms);
-                return (T)obj;
+                return false;
+                throw;
             }
+            return true;
         }
-
         private string EnsureCorrectFilename(string filename)
         {
             if (filename.Contains("\\"))
@@ -1177,11 +1195,18 @@ namespace SubcontractProfile.Web.Controllers
             return filename;
         }
 
-        private string GetPathAndFilename(string filename)
+        private string GetPathAndFilename(string guid, string filename)
         {
             //return this.hostingEnvironment.WebRootPath + "\\uploads\\" + filename;
-            string path = "D:\\2.Document\\SubcontractProfile" + "\\uploads\\" + filename;
-            return path;
+            string dir=_configuration.GetValue<string>("PathUploadfile:Local").ToString();
+            string pathdir = Path.Combine(dir, guid);
+            string PathOutput = "";
+            if (!Directory.Exists(pathdir))
+            {
+                Directory.CreateDirectory(pathdir);
+            }
+            PathOutput = Path.Combine(pathdir, filename);
+            return PathOutput;
         }
 
         #endregion
