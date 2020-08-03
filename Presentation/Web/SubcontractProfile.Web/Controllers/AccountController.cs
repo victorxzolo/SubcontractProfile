@@ -525,7 +525,7 @@ namespace SubcontractProfile.Web.Controllers
         [HttpPost]
         public IActionResult SearchLocation(Search_subcontract_profile_location model)
         {
-            var data = new List<subcontract_profile_locationModel>();
+            var result = new SubcontractProfileLocationSearchOutputModel();
             int filteredResultsCount;
             int totalResultsCount;
 
@@ -538,199 +538,36 @@ namespace SubcontractProfile.Web.Controllers
             string sortBy = "";
             bool sortDir = true;
 
-            if (model.order != null)
-            {
-                // in this example we just default sort on the 1st column
-                sortBy = model.columns[model.order[0].column].data;
-                sortDir = model.order[0].dir.ToLower() == "asc";
-            }
-            if (model != null)
-            {
-                var query = new subcontract_profile_locationQuery()
+           
+          
+                if (model.order != null)
                 {
+                    // in this example we just default sort on the 1st column
+                    sortBy = model.columns[model.order[0].column].data;
+                    sortDir = model.order[0].dir.ToLower() == "asc";
+                }
+                model.PAGE_INDEX = skip;
+                model.PAGE_SIZE = take;
 
-                    p_company_name_th = model.company_name_th,
-                    p_company_name_en = model.company_name_en,
-                    p_company_alias = model.company_alias,
-                    p_company_code = model.company_code,
-                    p_location_name_th = model.location_name_th,
-                    p_location_name_en = model.location_name_en,
-                    p_location_code = model.location_code,
-                    p_distribution_channel = model.distribution_channel,
-                    p_channel_sale_group = model.channel_sale_group,
-                    PAGE_INDEX = skip,
-                    PAGE_SIZE = take
-                };
-                //var result = _queryProcessor.Execute(query);
-                data.Add(new subcontract_profile_locationModel
+                
+
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string uriString = string.Format("{0}/{1}", strpathAPI + "Location/GetListLocation", model);
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    company_name_th = "test",
-                    location_code = model.location_code,
-                    location_name_th = "test33",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group3"
+                    var v = response.Content.ReadAsStringAsync().Result;
+                    result = JsonConvert.DeserializeObject<SubcontractProfileLocationSearchOutputModel>(v);
+                }
 
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test2",
-                    location_code = model.location_code,
-                    location_name_th = "test34",
-                    distribution_channel = "Channel5",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test3",
-                    location_code = model.location_code,
-                    location_name_th = "test22",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group2"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test",
-                    location_code = model.location_code,
-                    location_name_th = "test33",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test2",
-                    location_code = model.location_code,
-                    location_name_th = "test34",
-                    distribution_channel = "Channel5",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test3",
-                    location_code = model.location_code,
-                    location_name_th = "test22",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group2"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test",
-                    location_code = model.location_code,
-                    location_name_th = "test33",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test2",
-                    location_code = model.location_code,
-                    location_name_th = "test34",
-                    distribution_channel = "Channel5",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test3",
-                    location_code = model.location_code,
-                    location_name_th = "test22",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group2"
+                //var result = data.Where(x => x.channel_sale_group.Contains(model.channel_sale_group != null ? model.channel_sale_group : "")).Skip(skip).Take(take).ToList();
 
 
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test",
-                    location_code = model.location_code,
-                    location_name_th = "test33",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test2",
-                    location_code = model.location_code,
-                    location_name_th = "test34",
-                    distribution_channel = "Channel5",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test3",
-                    location_code = model.location_code,
-                    location_name_th = "test22",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group2"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test",
-                    location_code = model.location_code,
-                    location_name_th = "test33",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test2",
-                    location_code = model.location_code,
-                    location_name_th = "test34",
-                    distribution_channel = "Channel5",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test3",
-                    location_code = model.location_code,
-                    location_name_th = "test22",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group2"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test",
-                    location_code = model.location_code,
-                    location_name_th = "test33",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test2",
-                    location_code = model.location_code,
-                    location_name_th = "test34",
-                    distribution_channel = "Channel5",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test3",
-                    location_code = model.location_code,
-                    location_name_th = "test22",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group2"
-
-                });
-
-                var result = data.Where(x => x.channel_sale_group.Contains(model.channel_sale_group != null ? model.channel_sale_group : "")).Skip(skip).Take(take).ToList();
-
-
-                filteredResultsCount = data.Where(x => x.channel_sale_group.Contains(model.channel_sale_group != null ? model.channel_sale_group : "")).Count(); //output from Database
-                totalResultsCount = data.Count(); //output from Database
+                filteredResultsCount = result.result.Count(); //output from Database
+                totalResultsCount = result.TotalResultsCount; //output from Database
 
                 return Json(new
                 {
@@ -740,33 +577,6 @@ namespace SubcontractProfile.Web.Controllers
                     recordsFiltered = filteredResultsCount,
                     data = result
                 });
-            }
-            else
-            {
-                var result = data.Skip(skip).Take(take).ToList();
-
-                filteredResultsCount = data.Count(); //output from Database
-                totalResultsCount = data.Count(); //output from Database
-
-                return Json(new
-                {
-                    // this is what datatables wants sending back
-                    draw = model.draw,
-                    recordsTotal = totalResultsCount,
-                    recordsFiltered = filteredResultsCount,
-                    data = result
-                });
-            }
-
-
-
-
-
-
-
-
-
-
 
         }
 

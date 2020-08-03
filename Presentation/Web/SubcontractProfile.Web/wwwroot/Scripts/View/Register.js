@@ -123,8 +123,8 @@
         //lengthChange: false,
         columns: [
             { "data": "company_name_th" },
-            { "data":"location_code"},
-            { "data": "location_name_th" },
+            { "data":"LocationCode"},
+            { "data": "LocationNameTh" },
             { "data": "distribution_channel" },
             { "data": "channel_sale_group" }
         ],
