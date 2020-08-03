@@ -72,7 +72,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         #endregion
 
         #region POST
-        [HttpPost]
+        [HttpPost("Insert")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileAsstEngineer))]
         public Task<bool> Insert(SubcontractProfileAsstEngineer SubcontractProfileAsstEngineer)
         {
@@ -93,7 +93,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("BulkInsert")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileAsstEngineer))]
         public Task<bool> BulkInsert(IEnumerable<SubcontractProfileAsstEngineer> subcontractProfileAddressList)
         {
@@ -116,7 +116,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         #endregion
 
         #region PUT
-        [HttpPut()]
+        [HttpPut("Update")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         public Task<bool> Update(SubcontractProfileAsstEngineer SubcontractProfileAsstEngineer)
         {
@@ -148,7 +148,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         /// Boolean notifying if the user has been deleted properly.
         /// </returns>
         /// <response code="200">Boolean notifying if the user has been deleted properly.</response>
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         public async Task<bool> Delete(string id)
         {
