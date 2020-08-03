@@ -10,7 +10,8 @@ namespace SubcontractProfile.Web.Model
     public class FileUploadModal
     {
         public Guid file_id { get; set; }
-        public string Fileupload { get; set; }
+        public byte[] Fileupload { get; set; }
 
+        public string typefile { get; set; }
     }
 }

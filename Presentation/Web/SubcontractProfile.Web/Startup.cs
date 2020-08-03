@@ -73,6 +73,7 @@ namespace SubcontractProfile.Web
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCookiePolicy();
             app.UseSession();
 
             app.UseEndpoints(endpoints =>

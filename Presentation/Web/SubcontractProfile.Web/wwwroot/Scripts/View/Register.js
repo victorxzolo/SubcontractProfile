@@ -581,14 +581,22 @@
         var files = input.files;
         var formData = new FormData();
         var id = "";
+        var typefile = "";
         switch (inputId) {
-            case "company_certified_file": id = $('#hdupfilecompany_certified').val(); break;
-            case "commercial_registration_file": id = $('#hdupfilecommercial_registration').val(); break;
-            case "vat_registration_certificate_file": id = $('#hdupfilevat_registration_certificate').val(); break;
+            case "company_certified_file": id = $('#hdupfilecompany_certified').val();
+                typefile = "CompanyCertifiedFile";
+                break;
+            case "commercial_registration_file": id = $('#hdupfilecommercial_registration').val();
+                typefile = "CommercialRegistrationFile";
+                break;
+            case "vat_registration_certificate_file": id = $('#hdupfilevat_registration_certificate').val();
+                typefile = "VatRegistrationCertificateFile";
+                break;
         }
         for (var i = 0; i != files.length; i++) {
             formData.append("files", files[i]);
             formData.append("fid", id);
+            formData.append("type_file", typefile);
         }
         
 
@@ -705,40 +713,102 @@
         }
 
         var data = {
-            subcontract_profile_type: chksubcontract_type,
-            location_code: $('#txtlocationcode').val(),
-            location_name_th: $('#txtlocationname').val(),
-            location_name_en: $('#txtlocationname').val(),
-            distribution_channel: distribution_channel,
-            channel_sale_group: channel_sale_group,
-            tax_id: tax_id,
-            company_alias: company_alias,
-            company_title_name_th: company_title_name_th,
-            company_name_th: company_name_th,
-            company_title_name_en: company_title_name_en,
-            company_name_en: company_name_en,
-            wt_name: wt_name,
-            vat_type: vat_type,
-            company_Email: $('#txtcompany_Email').val(),
-            contract_name: $('#txtcontract_name').val(),
-            contract_phone: $('#txtcontract_phone').val(),
-            contract_email: $('#txtcontract_email').val(),
-            dept_of_install_name: $('#txtdept_of_install_name').val(),
-            dept_of_install_phone: $('#txtdept_of_install_phone').val(),
-            dept_of_install_email: $('#txtdept_of_install_email').val(),
-            dept_of_mainten_name: $('#txtdept_of_mainten_name').val(),
-            dept_of_mainten_phone: $('#txtdept_of_mainten_phone').val(),
-            dept_of_mainten_email: $('#txtdept_of_mainten_email').val(),
-            dept_of_Account_name: $('#txtdept_of_Account_name').val(),
-            dept_of_Account_phone: $('#txtdept_of_Account_phone').val(),
-            dept_of_Account_email: $('#txtdept_of_Account_email').val(),
-            account_Name: $('#ddlaccount_Name option').filter(':selected').val(),
-            branch_Name: $('#txtbranch_Name').val(),
-            branch_Code: $('#txtbranch_Code').val(),
-            bank_account_type_id: $('#ddlbank_account_type option').filter(':selected').val(),
-            company_certified_file: $('#company_certified_file').val(),
-            commercial_registration_file: $('#commercial_registration_file').val(),
-            vat_registration_certificate_file: $('#vat_registration_certificate_file').val(),
+            //CompanyId
+            //CompanyCode
+            //CompanyName
+            CompanyNameTh: company_name_th,
+            CompanyNameEn: company_name_en,
+            CompanyAlias: company_alias,
+            DistributionChannel: distribution_channel,
+            ChannelSaleGroup: channel_sale_group,
+           // VendorCode
+           // CustomerCode:
+            //AreaId
+            TaxId: tax_id,
+            WtName: wt_name,
+            VatType: vat_type,
+            //CompanyCertifiedFile 'Upload file'
+            //CommercialRegistrationFile 'Upload file'
+            //VatRegistrationCertificateFile 'Upload file'
+            //ContractAgreementFile
+            //DepositAuthorizationLevel
+            //DepositPaymentType
+            //ContractStartDate
+            //ContractEndDate
+            //OverDraftDeposit
+            //BalanceDeposit
+            //CompanyStatus: '',
+            //CompanyAddress
+            //VatAddress
+            CompanyEmail: $('#txtcompany_Email').val(),
+            ContractName: $('#txtcontract_name').val(),
+            ContractPhone: $('#txtcontract_phone').val(),
+            ContractEmail: $('#txtcontract_email').val(),
+
+            BankCode: $('#txtbank_Code').val(),
+            BankName: $('#txtbank_Name').val(),
+            AccountNumber: $('#txtaccount_Number').val(),
+            AccountName:$('#ddlaccount_Name option').filter(':selected').val(),
+           // AttachFile
+            BranchCode: $('#txtbranch_Code').val(),
+            BranchName: $('#txtbranch_Name').val(),
+
+            DeptOfInstallName: $('#txtdept_of_install_name').val(),
+            DeptOfMaintenName: $('#txtdept_of_mainten_name').val(),
+            DeptOfAccountName: $('#txtdept_of_Account_name').val(),
+
+            DeptOfInstallPhone: $('#txtdept_of_install_phone').val(),
+            DeptOfMaintenPhone: $('#txtdept_of_mainten_phone').val(),
+            DeptOfAccountPhone: $('#txtdept_of_Account_phone').val(),
+
+            DeptOfInstallEmail: $('#txtdept_of_install_email').val(),
+            DeptOfMaintenEmail: $('#txtdept_of_mainten_email').val(),
+            DeptOfAccountEmail: $('#txtdept_of_Account_email').val(),
+
+            LocationCode: $('#txtlocationcode').val(),
+            LocationNameTh: $('#txtlocationname').val(),
+            LocationNameEn: $('#txtlocationname').val(),
+
+            BankAccountTypeId: $('#ddlbank_account_type option').filter(':selected').val(),
+            SubcontractProfileType: chksubcontract_type,
+            CompanyTitleThId: company_title_name_th,
+            CompanyTitleEnId: company_title_name_en,
+            //Status
+            
+            //subcontract_profile_type: chksubcontract_type,
+            //LocationCode: $('#txtlocationcode').val(),
+            //LocationNameTh: $('#txtlocationname').val(),
+            //LocationNameEn: $('#txtlocationname').val(),
+            //DistributionChannel: distribution_channel,
+            //ChannelSaleGroup: channel_sale_group,
+            //tax_id: tax_id,
+            //company_alias: company_alias,
+            //company_title_name_th: company_title_name_th,
+            //company_name_th: company_name_th,
+            //company_title_name_en: company_title_name_en,
+            //company_name_en: company_name_en,
+            //wt_name: wt_name,
+            //vat_type: vat_type,
+            //company_Email: $('#txtcompany_Email').val(),
+            //contract_name: $('#txtcontract_name').val(),
+            //contract_phone: $('#txtcontract_phone').val(),
+            //contract_email: $('#txtcontract_email').val(),
+            //dept_of_install_name: $('#txtdept_of_install_name').val(),
+            //dept_of_install_phone: $('#txtdept_of_install_phone').val(),
+            //dept_of_install_email: $('#txtdept_of_install_email').val(),
+            //dept_of_mainten_name: $('#txtdept_of_mainten_name').val(),
+            //dept_of_mainten_phone: $('#txtdept_of_mainten_phone').val(),
+            //dept_of_mainten_email: $('#txtdept_of_mainten_email').val(),
+            //dept_of_Account_name: $('#txtdept_of_Account_name').val(),
+            //dept_of_Account_phone: $('#txtdept_of_Account_phone').val(),
+            //dept_of_Account_email: $('#txtdept_of_Account_email').val(),
+            //account_Name: $('#ddlaccount_Name option').filter(':selected').val(),
+            //branch_Name: $('#txtbranch_Name').val(),
+            //branch_Code: $('#txtbranch_Code').val(),
+            //bank_account_type_id: $('#ddlbank_account_type option').filter(':selected').val(),
+            //company_certified_file: $('#company_certified_file').val(),
+            //commercial_registration_file: $('#commercial_registration_file').val(),
+            //vat_registration_certificate_file: $('#vat_registration_certificate_file').val(),
         }
 
         $.ajax({

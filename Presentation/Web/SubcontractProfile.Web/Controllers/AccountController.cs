@@ -21,6 +21,7 @@ using System.Text;
 using SubcontractProfile.Web.Model;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -933,47 +934,103 @@ namespace SubcontractProfile.Web.Controllers
         #endregion
 
         [HttpPost]
-        public IActionResult NewRegister(subcontract_profile_New_Register model)
+        public IActionResult NewRegister(SubcontractProfileCompanyModel model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    //Insert Company
-                    ////////////////
+                    #region Insert Company
+                    Guid companyId = Guid.NewGuid();
+                    model.CompanyId = companyId;
+
+                    var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
+                    if(dataUploadfile !=null && dataUploadfile.Count!=0)
+                    {
+                        FileStream output;
+                        foreach (var e in dataUploadfile)
+                        {
+                            var stream = new MemoryStream(e.Fileupload);
+                            FormFile files = new FormFile(stream, 0, e.Fileupload.Length, "name", "fileName");
+                           
+                               // string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
+                              string  filename = EnsureCorrectFilename(files.FileName);
+                                using (output = System.IO.File.Create(this.GetPathAndFilename(filename)))
+                                files.CopyToAsync(output);
+                           
+                              
+
+                            //string filename = ContentDispositionHeaderValue.Parse(e.Fileupload.ContentDisposition).FileName.Trim('"');
+                            //filename = EnsureCorrectFilename(filename);
+                            //using (output = System.IO.File.Create(this.GetPathAndFilename(filename)))
+                            //  e.Fileupload.CopyToAsync(output);
+
+                            //switch (e.typefile)
+                            //    {
+                            //        case "CompanyCertifiedFile":
+                            //            model.CompanyCertifiedFile = filename;
+                            //        break;
+                            //        case "CommercialRegistrationFile":
+                            //            model.CommercialRegistrationFile = filename;
+                            //            break;
+                            //        case "VatRegistrationCertificateFile":
+                            //            model.VatRegistrationCertificateFile = filename;
+                            //            break;
+                            //    }
+
+
+
+
+                        }
+                    }
+
+                    //var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
+                    //HttpClient clientCompany = new HttpClient();
+                    //clientCompany.DefaultRequestHeaders.Accept.Add(
+                    //new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    //var httpContentCompany = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                    //HttpResponseMessage responseCompany = clientCompany.PostAsync(uriCompany, httpContentCompany).Result;
+
+                    #endregion
 
                     #region Insert Address
                     var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
-                    model.L_address = new List<SubcontractProfileAddressModel>();
 
                     if (dataaddr != null && dataaddr.Count != 0)
                     {
 
                         foreach (var d in dataaddr)
                         {
-                            model.L_address.Add(new SubcontractProfileAddressModel
-                            {
-                                AddressId = d.AddressId,
-                                AddressTypeId = d.AddressTypeId,
-                                Building = d.Building,
-                                City = d.City,
-                                Country = d.Country,
-                                DistrictId = d.DistrictId,
-                                Floor = d.Floor,
-                                HouseNo = d.HouseNo,
-                                Moo = d.Moo,
-                                ProvinceId = d.ProvinceId,
-                                CompanyId = d.CompanyId,
-                                CreateBy = d.CreateBy,
-                                CreateDate = DateTime.Now,
-                                RegionId = d.RegionId,
-                                Road = d.Road,
-                                Soi = d.Soi,
-                                RoomNo = d.RoomNo,
-                                SubDistrictId = d.SubDistrictId,
-                                VillageName = d.VillageName,
-                                ZipCode = d.ZipCode
-                            });
+                            SubcontractProfileAddressModel addr = new SubcontractProfileAddressModel();
+                            addr.AddressId = d.AddressId;
+                            addr.AddressTypeId = d.AddressTypeId;
+                            addr.Building = d.Building;
+                            addr.City = d.City;
+                            addr.Country = d.Country;
+                            addr.DistrictId = d.DistrictId;
+                            addr.Floor = d.Floor;
+                            addr.HouseNo = d.HouseNo;
+                            addr.Moo = d.Moo;
+                            addr.ProvinceId = d.ProvinceId;
+                            addr.CompanyId = companyId.ToString();
+                            addr.CreateBy = d.CreateBy;
+                            addr.CreateDate = DateTime.Now;
+                            addr.RegionId = d.RegionId;
+                            addr.Road = d.Road;
+                            addr.Soi = d.Soi;
+                            addr.RoomNo = d.RoomNo;
+                            addr.SubDistrictId = d.SubDistrictId;
+                            addr.VillageName = d.VillageName;
+                            addr.ZipCode = d.ZipCode;
+
+                            //var uriAddress = new Uri(Path.Combine(strpathAPI, "Address", "Insert"));
+                            //HttpClient clientAddress = new HttpClient();
+                            //clientAddress.DefaultRequestHeaders.Accept.Add(
+                            //new MediaTypeWithQualityHeaderValue("application/json"));
+
+                            //var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                            //HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
                         }
 
                     }
@@ -1014,47 +1071,53 @@ namespace SubcontractProfile.Web.Controllers
         }
 
 
+        #region Upload File
+
+
         [HttpPost]
-        public IActionResult Uploadfile(IList<IFormFile> files,string fid)
+        [DisableRequestSizeLimit]
+        public IActionResult Uploadfile(IList<IFormFile> files, string fid,string type_file)
         {
-            bool statusupload=true;
+            bool statusupload = true;
             List<FileUploadModal> L_File = new List<FileUploadModal>();
-            FileStream output;
+           // FileStream output;
             string strmess = "";
             try
             {
                 foreach (FormFile source in files)
                 {
-                    Guid id = Guid.NewGuid();
-
-
                     //string filename = ContentDispositionHeaderValue.Parse(source.ContentDisposition).FileName.Trim('"');
-
-                    //filename = this.EnsureCorrectFilename(filename);
-
+                    //filename = EnsureCorrectFilename(filename);
                     //using (output = System.IO.File.Create(this.GetPathAndFilename(filename)))
                     //await source.CopyToAsync(output);
 
-                    
-
                     if (source.Length > 0)
                     {
+                        //string filename = ContentDispositionHeaderValue.Parse(source.ContentDisposition).FileName.Trim('"');
+                        //filename = this.EnsureCorrectFilename(filename);
+                        Guid id = Guid.NewGuid();
                         using (var ms = new MemoryStream())
                         {
                             source.CopyTo(ms);
                             var fileBytes = ms.ToArray();
-                            string s = Convert.ToBase64String(fileBytes);
+                        //    string s = Convert.ToBase64String(fileBytes);
                             L_File.Add(new FileUploadModal
                             {
                                 file_id = id,
-                                Fileupload = s
+                                Fileupload = fileBytes,
+                                typefile=type_file
                             });
                         }
                     }
                     var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
+                    //byte[] byteArrayValue = HttpContext.Session.Get("userUploadfileDaft");
+                    //var data = FromByteArray<List<FileUploadModal>>(byteArrayValue);
+
+                    //var objComplex = HttpContext.Session.GetObject("userUploadfileDaft");
+
                     if (data != null)
                     {
-                       
+
                         data.RemoveAll(x => x.file_id.ToString() == fid);
                         data.Add(L_File[0]);
                         SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", data);
@@ -1062,10 +1125,12 @@ namespace SubcontractProfile.Web.Controllers
                     }
                     else
                     {
+                       // HttpContext.Session.Set("userUploadfileDaft", ToByteArray<List<FileUploadModal>>(L_File));
+
                         SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", L_File);
                     }
-                    
-                    
+
+
                 }
                 strmess = "Upload file success";
             }
@@ -1077,9 +1142,33 @@ namespace SubcontractProfile.Web.Controllers
             }
 
 
-            return Json(new { status = statusupload ,message= strmess ,response= L_File[0].file_id });
+            return Json(new { status = statusupload, message = strmess, response = L_File[0].file_id });
         }
-      
+
+        public byte[] ToByteArray<T>(T obj)
+        {
+            if (obj == null)
+                return null;
+            BinaryFormatter bf = new BinaryFormatter();
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bf.Serialize(ms, obj);
+                return ms.ToArray();
+            }
+        }
+
+        public T FromByteArray<T>(byte[] data)
+        {
+            if (data == null)
+                return default(T);
+            BinaryFormatter bf = new BinaryFormatter();
+            using (MemoryStream ms = new MemoryStream(data))
+            {
+                object obj = bf.Deserialize(ms);
+                return (T)obj;
+            }
+        }
+
         private string EnsureCorrectFilename(string filename)
         {
             if (filename.Contains("\\"))
@@ -1094,6 +1183,9 @@ namespace SubcontractProfile.Web.Controllers
             string path = "D:\\2.Document\\SubcontractProfile" + "\\uploads\\" + filename;
             return path;
         }
+
+        #endregion
+
 
         #endregion
     }
@@ -1194,126 +1286,6 @@ namespace SubcontractProfile.Web.Controllers
         public string location_code { get; set; }
         //public decimal RowNumber { get; set; }
         //public decimal CNT { get; set; }
-    }
-
-
-
-    public class subcontract_profile_New_Register //ส่งค่ามาจากหน้าจอ
-    {
-        public string subcontract_profile_type { get; set; }
-        public string location_code { get; set; }
-        public string location_name_th { get; set; }
-        public string location_name_en { get; set; }
-        public string distribution_channel { get; set; }
-        public string channel_sale_group { get; set; }
-        public string tax_id { get; set; }
-        public string company_alias { get; set; }
-        public string company_title_name_th { get; set; } //รอเอกสารspec เพิ่ม
-        public string company_name_th { get; set; }
-        public string company_title_name_en { get; set; } //รอเอกสารspec เพิ่ม
-        public string company_name_en { get; set; }
-        public string wt_name { get; set; }
-        public string vat_type { get; set; }
-        //public string house_no { get; set; }
-        //public string building { get; set; }
-        //public string floor { get; set; }
-        //public string moo { get; set; }
-        //public string soi { get; set; }
-        //public string road { get; set; }
-        //public string sub_district_id { get; set; }
-        //public string district_id { get; set; }
-        //public string province_id { get; set; }
-        //public string region_id { get; set; }
-        //public string address_type_id { get; set; }
-        //public string zip_code { get; set; }
-        //public string country { get; set; }
-        //public string village_name { get; set; }
-        //public string room_no { get; set; }
-
-        public List<SubcontractProfileAddressModel> L_address { get; set; }
-
-        public string company_Email { get; set; }
-        public string contract_name { get; set; }
-        public string contract_phone { get; set; }
-        public string contract_email { get; set; }
-        public string dept_of_install_name { get; set; }
-        public string dept_of_install_phone { get; set; }
-        public string dept_of_install_email { get; set; }
-        public string dept_of_mainten_name { get; set; }
-        public string dept_of_mainten_phone { get; set; }
-        public string dept_of_mainten_email { get; set; }
-        public string dept_of_Account_name { get; set; }
-        public string dept_of_Account_phone { get; set; }
-        public string dept_of_Account_email { get; set; }
-        public string account_Name { get; set; }
-        public string branch_Name { get; set; }
-        public string branch_Code { get; set; }
-        public string bank_account_type_id { get; set; }
-        public string company_certified_file { get; set; }
-        public string commercial_registration_file { get; set; }
-        public string vat_registration_certificate_file { get; set; }
-    }
-
-    public class subcontract_profileCommand //ส่งเข้าDatabase
-    {
-        public subcontract_profileCommand()
-        {
-            this.ret_code = -1;
-            this.ret_msg = "";
-        }
-        public string p_subcontract_profile_type { get; set; }
-        public string p_location_code { get; set; }
-        public string p_location_name_th { get; set; }
-        public string p_location_name_en { get; set; }
-        public string p_distribution_channel { get; set; }
-        public string p_channel_sale_group { get; set; }
-        public string p_tax_id { get; set; }
-        public string p_company_alias { get; set; }
-        public string p_company_title_name_th { get; set; }//รอเอกสารspec เพิ่ม
-        public string p_company_name_th { get; set; }
-        public string p_company_title_name_en { get; set; }//รอเอกสารspec เพิ่ม
-        public string p_company_name_en { get; set; }
-        public string p_wt_name { get; set; }
-        public string p_vat_type { get; set; }
-        public string p_house_no { get; set; }
-        public string p_building { get; set; }
-        public string p_floor { get; set; }
-        public string p_moo { get; set; }
-        public string p_soi { get; set; }
-        public string p_road { get; set; }
-        public string p_sub_district_id { get; set; }
-        public string p_district_id { get; set; }
-        public string p_province_id { get; set; }
-        public string p_region_id { get; set; }
-        public string p_address_type_id { get; set; }
-        public string p_zip_code { get; set; }
-        public string p_country { get; set; }
-        public string p_village_name { get; set; }
-        public string p_room_no { get; set; }
-        public string p_company_Email { get; set; }
-        public string p_contract_name { get; set; }
-        public string p_contract_phone { get; set; }
-        public string p_contract_email { get; set; }
-        public string p_dept_of_install_name { get; set; }
-        public string p_dept_of_install_phone { get; set; }
-        public string p_dept_of_install_email { get; set; }
-        public string p_dept_of_mainten_name { get; set; }
-        public string p_dept_of_mainten_phone { get; set; }
-        public string p_dept_of_mainten_email { get; set; }
-        public string p_dept_of_Account_name { get; set; }
-        public string p_dept_of_Account_phone { get; set; }
-        public string p_dept_of_Account_email { get; set; }
-        public string p_account_Name { get; set; }
-        public string p_branch_Name { get; set; }
-        public string p_branch_Code { get; set; }
-        public string p_bank_account_type_id { get; set; }
-        public string p_company_certified_file { get; set; }
-        public string p_commercial_registration_file { get; set; }
-        public string p_vat_registration_certificate_file { get; set; }
-
-
-        public Nullable<decimal> ret_code { get; set; }
-        public string ret_msg { get; set; }
     }
 
     #endregion
