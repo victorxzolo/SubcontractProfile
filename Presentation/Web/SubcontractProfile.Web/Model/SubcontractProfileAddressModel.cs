@@ -32,18 +32,43 @@ namespace SubcontractProfile.Web.Model
 
         public int? ProvinceId { get; set; }
 
+        public int? RegionId { get; set; }
 
-        public string address_type_id { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(50)]
+        public string AddressTypeId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(10)]
+        public string ZipCode { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string Country { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(500)]
+        public string VillageName { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(30)]
+        public string RoomNo { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string CompanyId { get; set; }
+
+        public System.DateTime? CreateDate { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(50)]
+        public string CreateBy { get; set; }
+
+        public System.DateTime? ModifiedDate { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(50)]
+        public string ModifiedBy { get; set; }
+
+
+
+
         public string address_type_name { get; set; }
         public string sub_district_name { get; set; }
         public string district_name { get; set; }
         public string province_name { get; set; }
-        public string village_name { get; set; }
-        public string region_id { get; set; }
-        public string room_no { get; set; }
-        public string Country { get; set; }
-        public string ZipCode { get; set; }
-
         public string City { get; set; }
     }
 }

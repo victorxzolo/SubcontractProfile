@@ -11,7 +11,6 @@ namespace SubcontractProfile.WebApi.Services.Contracts
     /// ================================================================= 
     public partial interface ISubcontractProfileTrainingRepo
     {
-
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> GetAll();
         Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining> GetByTrainingId(System.Guid trainingId);
         Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining subcontractProfileTraining);

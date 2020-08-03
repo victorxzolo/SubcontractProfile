@@ -21,6 +21,8 @@ using System.Text;
 using SubcontractProfile.Web.Model;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Diagnostics.Eventing.Reader;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -28,6 +30,7 @@ namespace SubcontractProfile.Web.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly string strpathAPI;
+        private string Lang = "";
         public AccountController(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -35,6 +38,7 @@ namespace SubcontractProfile.Web.Controllers
 
             //เรียก appsetting.json path api
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
+            Lang = "TH";
         }
 
         #region Login
@@ -209,71 +213,15 @@ namespace SubcontractProfile.Web.Controllers
         }
 
 
+        #region DDL
         [HttpPost]
         public IActionResult DDLsubcontract_profile_sub_district(int district_id = 0)
         {
             var output = new List<SubcontractProfileSubDistrictModel>();
             var resultZipCode = new List<SubcontractProfileSubDistrictModel>();
-            //output.Add(new subcontract_profile_sub_district
-            //{
-            //    sub_district_id = 0,
-            //    sub_district_name = "Select Sub District"
-            //});
-            //output.Add(new subcontract_profile_sub_district
-            //{
-            //    sub_district_id = 1,
-            //    sub_district_name = "วังทองหลาง",
-            //    zip_code = "10310",
-            //    district_id = 1
-            //});
-            //output.Add(new subcontract_profile_sub_district
-            //{
-            //    sub_district_id = 2,
-            //    sub_district_name = "คลองเจ้าคุณสิงห์",
-            //    zip_code = "10310",
-            //    district_id = 1
-            //});
-            //output.Add(new subcontract_profile_sub_district
-            //{
-            //    sub_district_id = 3,
-            //    sub_district_name = "คลองจั่น",
-            //    zip_code = "10240",
-            //    district_id = 2
-            //});
-            //output.Add(new subcontract_profile_sub_district
-            //{
-            //    sub_district_id = 4,
-            //    sub_district_name = "หัวหมาก",
-            //    zip_code = "10240",
-            //    district_id = 2
-            //});
 
-
-            //output.Add(new subcontract_profile_sub_district
-            //{
-            //    sub_district_id = 5,
-            //    sub_district_name = "แพรกษา",
-            //    zip_code = "10280",
-            //    district_id = 3
-            //});
-            //output.Add(new subcontract_profile_sub_district
-            //{
-            //    sub_district_id = 6,
-            //    sub_district_name = "บางหญ้าแพรก",
-            //    zip_code = "10130",
-            //    district_id = 4
-            //});
-
-            //if (district_id != 0)
-            //{
-            //    output = output.Where(x => x.district_id == district_id).ToList();
-            //    output.Add(new subcontract_profile_sub_district
-            //    {
-            //        sub_district_id = 0,
-            //        sub_district_name = "--Select Sub District--"
-            //    });
-            //    output = output.OrderBy(x => x.sub_district_id).ToList();
-            //}
+            List<SelectListItem> getAllSubDistrictList = new List<SelectListItem>();
+            List<SelectListItem> getAllZipcodeList = new List<SelectListItem>();
 
             if (district_id != 0)
             {
@@ -281,7 +229,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "SubDistrictController/GetSubDistrictByDistrict", district_id);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "SubDistrict/GetSubDistrictByDistrict", district_id);
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -306,60 +254,76 @@ namespace SubcontractProfile.Web.Controllers
                 }
             }
 
-            return Json(new { response = output ,responsezipcode= resultZipCode });
+            if (Lang == "TH")
+            {
+
+                output.Add(new SubcontractProfileSubDistrictModel
+                {
+                    SubDistrictId = 0,
+                    SubDistrictNameTh = "กรุณาเลือกแขวง/ตำบล"
+                });
+
+                getAllSubDistrictList = output.Select(a => new SelectListItem
+                {
+                    Text = a.SubDistrictNameTh,
+                    Value = a.SubDistrictId.ToString()
+                }).OrderBy(c => c.Value).ToList();
+
+
+                getAllZipcodeList = resultZipCode.Select(c => new SelectListItem
+                {
+                    Text = c.ZipCode,
+                    Value = c.ZipCode
+                }).ToList();
+                getAllZipcodeList.Add(new SelectListItem
+                {
+                    Text = "กรุณาเลือกรหัสไปรษณีย์",
+                    Value = "0"
+                });
+                getAllZipcodeList.OrderBy(d => d.Value).ToList();
+            }
+            else
+            {
+
+                output.Add(new SubcontractProfileSubDistrictModel
+                {
+                    SubDistrictId = 0,
+                    SubDistrictNameTh = "Select Sub District"
+                });
+                getAllSubDistrictList = output.Select(a => new SelectListItem
+                {
+                    Text = a.SubDistrictNameEn,
+                    Value = a.SubDistrictId.ToString()
+                }).OrderBy(c => c.Value).ToList();
+
+                
+                getAllZipcodeList = resultZipCode.Select(c => new SelectListItem
+                {
+                    Text = c.ZipCode,
+                    Value = c.ZipCode
+                }).ToList();
+                getAllZipcodeList.Add(new SelectListItem
+                {
+                    Text = "Select Zip Code",
+                    Value = "0"
+                });
+                getAllZipcodeList.OrderBy(d => d.Value).ToList();
+            }
+
+            return Json(new { responsesubdistrict = getAllSubDistrictList, responsezipcode = getAllZipcodeList });
         }
         [HttpPost]
         public IActionResult DDLsubcontract_profile_district(int province_id = 0)
         {
             var output = new List<SubcontractProfileDistrictModel>();
-            //output.Add(new subcontract_profile_district
-            //{
-            //    district_id = 0,
-            //    district_name = "Select District"
-            //});
-            //output.Add(new subcontract_profile_district
-            //{
-            //    district_id = 1,
-            //    district_name = "วังทองหลาง",
-            //    province_id = 1
-            //});
-            //output.Add(new subcontract_profile_district
-            //{
-            //    district_id = 2,
-            //    district_name = "บางกะปิ",
-            //    province_id = 1
-            //});
-
-            //output.Add(new subcontract_profile_district
-            //{
-            //    district_id = 3,
-            //    district_name = "เมืองสมุทรปราการ",
-            //    province_id = 2
-            //});
-            //output.Add(new subcontract_profile_district
-            //{
-            //    district_id = 4,
-            //    district_name = "พระประแดง",
-            //    province_id = 2
-            //});
-            //if (province_id != 0)
-            //{
-            //    output = output.Where(x => x.province_id == province_id).ToList();
-            //    output.Add(new subcontract_profile_district
-            //    {
-            //        district_id = 0,
-            //        district_name = "--Select District--"
-            //    });
-            //    output = output.OrderBy(x => x.district_id).ToList();
-            //}
-
+            List<SelectListItem> getAllDistrictList = new List<SelectListItem>();
             if (province_id != 0)
             {
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "DistrictController/GetDistrictByProvinceId", province_id);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "District/GetDistrictByProvinceId", province_id);
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -382,58 +346,97 @@ namespace SubcontractProfile.Web.Controllers
                 }
             }
 
+            if (Lang == "TH")
+            {
+                output.Add(new SubcontractProfileDistrictModel
+                {
+                    DistrictId = 0,
+                    DistrictNameTh = "กรุณาเลือกเขต/อำเภอ"
+                });
+                getAllDistrictList = output.Select(a => new SelectListItem
+                {
+                    Text = a.DistrictNameTh,
+                    Value = a.DistrictId.ToString()
+                }).OrderBy(c => c.Value).ToList();
 
-            return Json(new { response = output });
+            }
+            else
+            {
+                output.Add(new SubcontractProfileDistrictModel
+                {
+                    DistrictId = 0,
+                    DistrictNameTh = "Select District"
+                });
+                getAllDistrictList = output.Select(a => new SelectListItem
+                {
+                    Text = a.DistrictNameEn,
+                    Value = a.DistrictId.ToString()
+                }).OrderBy(c => c.Value).ToList();
+            }
+
+            return Json(new { responsedistricrt = getAllDistrictList });
         }
         [HttpPost]
-        public IActionResult DDLsubcontract_profile_province()
+        public IActionResult DDLsubcontract_profile_province(int region_id)
         {
             var output = new List<SubcontractProfileProvinceModel>();
-            //output.Add(new subcontract_profile_province
-            //{
-            //    province_id = 0,
-            //    province_name = "--Select Province--"
-
-            //});
-            //output.Add(new subcontract_profile_province
-            //{
-            //    province_id = 1,
-            //    province_name = "กรุงเทพฯ"
-
-            //});
-            //output.Add(new subcontract_profile_province
-            //{
-            //    province_id = 2,
-            //    province_name = "สมุทรปราการ"
-
-            //});
+            List<SelectListItem> getAllProvinceList = new List<SelectListItem>();
 
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}", strpathAPI + "ProvinceController/GetALL");
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Province/GetProvinceByRegionId", region_id);
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
                 var v = response.Content.ReadAsStringAsync().Result;
-                 output = JsonConvert.DeserializeObject<List<SubcontractProfileProvinceModel>>(v);
+                output = JsonConvert.DeserializeObject<List<SubcontractProfileProvinceModel>>(v);
+            }
+
+            if (Lang == "TH")
+            {
+                output.Add(new SubcontractProfileProvinceModel
+                {
+                    ProvinceId = 0,
+                    ProvinceNameTh = "กรุณาเลือกจังหวัด"
+                });
+                getAllProvinceList = output.Select(a => new SelectListItem
+                {
+                    Text = a.ProvinceNameTh,
+                    Value = a.ProvinceId.ToString()
+                }).OrderBy(c=>c.Value).ToList();
+            }
+            else
+            {
+                output.Add(new SubcontractProfileProvinceModel
+                {
+                    ProvinceId = 0,
+                    ProvinceNameTh = "Select Province"
+                });
+                getAllProvinceList = output.Select(a => new SelectListItem
+                {
+                    Text = a.ProvinceNameEn,
+                    Value = a.ProvinceId.ToString()
+                }).OrderBy(c => c.Value).ToList();
+
             }
 
 
-
-            return Json(new { response = output });
+            return Json(new { responseprovince = getAllProvinceList });
         }
 
         [HttpPost]
         public IActionResult DDLTitle()
         {
             var output = new List<SubcontractProfileTitleModel>();
+
+
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}", strpathAPI + "TitleController/GetALL");
+            string uriString = string.Format("{0}", strpathAPI + "Title/GetALL");
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -442,8 +445,7 @@ namespace SubcontractProfile.Web.Controllers
             }
 
 
-
-            return Json(new { response = output });
+            return Json(new { responsetitle = output });
         }
 
         [HttpPost]
@@ -454,7 +456,7 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}", strpathAPI + "NationalityController/GetALL");
+            string uriString = string.Format("{0}", strpathAPI + "Nationality/GetALL");
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -467,11 +469,63 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { response = output });
         }
 
+        [HttpPost]
+        public IActionResult DDLsubcontract_profile_Region()
+        {
+            var output = new List<SubcontractProfileRegionModel>();
+            List<SelectListItem> getAllRegionList = new List<SelectListItem>();
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "Region/GetALL");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                output = JsonConvert.DeserializeObject<List<SubcontractProfileRegionModel>>(v);
+            }
+
+            if (Lang == "TH")
+            {
+                output.Add(new SubcontractProfileRegionModel
+                {
+                    RegionId = 0,
+                    RegionName = "กรุณาเลือกภาค"
+                });
+
+               getAllRegionList = output.Select(a => new SelectListItem
+                {
+                    Text = a.RegionName,
+                    Value = a.RegionId.ToString()
+                }).OrderBy(c => c.Value).ToList();
+            }
+            else
+            {
+                output.Add(new SubcontractProfileRegionModel
+                {
+                    RegionId = 0,
+                    RegionName = "Select Region"
+                });
+                getAllRegionList = output.Select(a => new SelectListItem
+                {
+                    Text = a.RegionName,
+                    Value = a.RegionId.ToString()
+                }).OrderBy(c => c.Value).ToList();
+
+            }
+
+            return Json(new { responseregion = getAllRegionList });
+        }
+        #endregion
+
+
 
         [HttpPost]
         public IActionResult SearchLocation(Search_subcontract_profile_location model)
         {
-            var data = new List<subcontract_profile_locationModel>();
+            var result = new SubcontractProfileLocationSearchOutputModel();
             int filteredResultsCount;
             int totalResultsCount;
 
@@ -484,199 +538,36 @@ namespace SubcontractProfile.Web.Controllers
             string sortBy = "";
             bool sortDir = true;
 
-            if (model.order != null)
-            {
-                // in this example we just default sort on the 1st column
-                sortBy = model.columns[model.order[0].column].data;
-                sortDir = model.order[0].dir.ToLower() == "asc";
-            }
-            if (model != null)
-            {
-                var query = new subcontract_profile_locationQuery()
+           
+          
+                if (model.order != null)
                 {
+                    // in this example we just default sort on the 1st column
+                    sortBy = model.columns[model.order[0].column].data;
+                    sortDir = model.order[0].dir.ToLower() == "asc";
+                }
+                model.PAGE_INDEX = skip;
+                model.PAGE_SIZE = take;
 
-                    p_company_name_th = model.company_name_th,
-                    p_company_name_en = model.company_name_en,
-                    p_company_alias = model.company_alias,
-                    p_company_code = model.company_code,
-                    p_location_name_th = model.location_name_th,
-                    p_location_name_en = model.location_name_en,
-                    p_location_code = model.location_code,
-                    p_distribution_channel = model.distribution_channel,
-                    p_channel_sale_group = model.channel_sale_group,
-                    PAGE_INDEX = skip,
-                    PAGE_SIZE = take
-                };
-                //var result = _queryProcessor.Execute(query);
-                data.Add(new subcontract_profile_locationModel
+                
+
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string uriString = string.Format("{0}/{1}", strpathAPI + "Location/GetListLocation", model);
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    company_name_th = "test",
-                    location_code = model.location_code,
-                    location_name_th = "test33",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group3"
+                    var v = response.Content.ReadAsStringAsync().Result;
+                    result = JsonConvert.DeserializeObject<SubcontractProfileLocationSearchOutputModel>(v);
+                }
 
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test2",
-                    location_code = model.location_code,
-                    location_name_th = "test34",
-                    distribution_channel = "Channel5",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test3",
-                    location_code = model.location_code,
-                    location_name_th = "test22",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group2"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test",
-                    location_code = model.location_code,
-                    location_name_th = "test33",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test2",
-                    location_code = model.location_code,
-                    location_name_th = "test34",
-                    distribution_channel = "Channel5",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test3",
-                    location_code = model.location_code,
-                    location_name_th = "test22",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group2"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test",
-                    location_code = model.location_code,
-                    location_name_th = "test33",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test2",
-                    location_code = model.location_code,
-                    location_name_th = "test34",
-                    distribution_channel = "Channel5",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test3",
-                    location_code = model.location_code,
-                    location_name_th = "test22",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group2"
+                //var result = data.Where(x => x.channel_sale_group.Contains(model.channel_sale_group != null ? model.channel_sale_group : "")).Skip(skip).Take(take).ToList();
 
 
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test",
-                    location_code = model.location_code,
-                    location_name_th = "test33",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test2",
-                    location_code = model.location_code,
-                    location_name_th = "test34",
-                    distribution_channel = "Channel5",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test3",
-                    location_code = model.location_code,
-                    location_name_th = "test22",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group2"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test",
-                    location_code = model.location_code,
-                    location_name_th = "test33",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test2",
-                    location_code = model.location_code,
-                    location_name_th = "test34",
-                    distribution_channel = "Channel5",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test3",
-                    location_code = model.location_code,
-                    location_name_th = "test22",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group2"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test",
-                    location_code = model.location_code,
-                    location_name_th = "test33",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test2",
-                    location_code = model.location_code,
-                    location_name_th = "test34",
-                    distribution_channel = "Channel5",
-                    channel_sale_group = "Group3"
-
-                });
-                data.Add(new subcontract_profile_locationModel
-                {
-                    company_name_th = "test3",
-                    location_code = model.location_code,
-                    location_name_th = "test22",
-                    distribution_channel = "Channel2",
-                    channel_sale_group = "Group2"
-
-                });
-
-                var result = data.Where(x => x.channel_sale_group.Contains(model.channel_sale_group != null ? model.channel_sale_group : "")).Skip(skip).Take(take).ToList();
-
-
-                filteredResultsCount = data.Where(x => x.channel_sale_group.Contains(model.channel_sale_group != null ? model.channel_sale_group : "")).Count(); //output from Database
-                totalResultsCount = data.Count(); //output from Database
+                filteredResultsCount = result.result.Count(); //output from Database
+                totalResultsCount = result.TotalResultsCount; //output from Database
 
                 return Json(new
                 {
@@ -686,33 +577,6 @@ namespace SubcontractProfile.Web.Controllers
                     recordsFiltered = filteredResultsCount,
                     data = result
                 });
-            }
-            else
-            {
-                var result = data.Skip(skip).Take(take).ToList();
-
-                filteredResultsCount = data.Count(); //output from Database
-                totalResultsCount = data.Count(); //output from Database
-
-                return Json(new
-                {
-                    // this is what datatables wants sending back
-                    draw = model.draw,
-                    recordsTotal = totalResultsCount,
-                    recordsFiltered = filteredResultsCount,
-                    data = result
-                });
-            }
-
-
-
-
-
-
-
-
-
-
 
         }
 
@@ -881,92 +745,282 @@ namespace SubcontractProfile.Web.Controllers
         #endregion
 
         [HttpPost]
-        public IActionResult NewRegister(subcontract_profile_New_Register model)
+        public async Task<IActionResult> NewRegister(SubcontractProfileCompanyModel model)
         {
+            bool resultGetFile = true;
+            ResponseModel res = new ResponseModel();
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
-                    model.L_address = new List<SubcontractProfileAddressModel>();
+                   
+                    Guid companyId = Guid.NewGuid();
+                    model.CompanyId = companyId;
+                    model.CreateDate = DateTime.Now;
+                    model.CreateBy = "SYSTEM";
 
-                    if (dataaddr != null && dataaddr.Count != 0)
+                    var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
+
+                    if(dataUploadfile !=null && dataUploadfile.Count!=0)
                     {
-
-                        foreach (var d in dataaddr)
+                        #region Copy File to server
+                        foreach (var e in dataUploadfile)
                         {
-                            model.L_address.Add(new SubcontractProfileAddressModel
-                            {
-                                //address_type_id = d.,
-                                //building = d.building,
-                                //country = d.country,
-                                //district_id = d.district_id,
-                                //floor = d.floor,
-                                //house_no = d.house_no,
-                                //moo = d.moo,
-                                //province_id = d.province_id,
-                                //region_id = d.region_id,
-                                //road = d.road,
-                                //room_no = d.room_no,
-                                //soi = d.soi,
-                                //sub_district_id = d.sub_district_id,
-                                //village_name = d.village_name,
-                                //zip_code = d.zip_code
-                                AddressId=d.AddressId,
-                                Building=d.Building,
-                                DistrictId=d.DistrictId,
-                                Floor=d.Floor,
-                                HouseNo=d.HouseNo,
-                                Moo=d.Moo,
-                                Road=d.Road,
-                                Soi=d.Soi,
-                                SubDistrictId=d.SubDistrictId,
-                                ProvinceId=d.ProvinceId,
-                                village_name=d.village_name,
-                                Country=d.Country,
-                                region_id=d.region_id,
-                                ZipCode=d.ZipCode
-                            });
-                        }
+                            resultGetFile = await GetFile(e,model.CompanyId.ToString());
 
-                        //Command.Handle(model)
-                        //output ret_code,ret
-                        //ret_msg
+                            string filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
+                            filename = EnsureCorrectFilename(filename);
+
+                            switch (e.typefile)
+                            {
+                                case "CompanyCertifiedFile":
+                                    model.CompanyCertifiedFile = filename;
+                                    break;
+                                case "CommercialRegistrationFile":
+                                    model.CommercialRegistrationFile = filename;
+                                    break;
+                                case "VatRegistrationCertificateFile":
+                                    model.VatRegistrationCertificateFile = filename;
+                                    break;
+                            }
+                        }
+                        #endregion
+
+                    }
+                    if (resultGetFile)
+                    {
+                        #region Insert Company
+                        var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
+                        HttpClient clientCompany = new HttpClient();
+                        clientCompany.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+                        var rr = JsonConvert.SerializeObject(model);
+
+                        var httpContentCompany = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                        HttpResponseMessage responseCompany = clientCompany.PostAsync(uriCompany, httpContentCompany).Result;
+                        if(responseCompany.IsSuccessStatusCode)
+                        {
+                            #region Insert Address
+                            var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
+
+                            if (dataaddr != null && dataaddr.Count != 0)
+                            {
+
+                                foreach (var d in dataaddr)
+                                {
+                                    SubcontractProfileAddressModel addr = new SubcontractProfileAddressModel();
+                                    addr.AddressId = d.AddressId;
+                                    addr.AddressTypeId = d.AddressTypeId;
+                                    addr.Building = d.Building;
+                                    addr.City = d.City;
+                                    addr.Country = d.Country;
+                                    addr.DistrictId = d.DistrictId;
+                                    addr.Floor = d.Floor;
+                                    addr.HouseNo = d.HouseNo;
+                                    addr.Moo = d.Moo;
+                                    addr.ProvinceId = d.ProvinceId;
+                                    addr.CompanyId = companyId.ToString();
+                                    addr.CreateBy = "SYSTEM";
+                                    addr.CreateDate = DateTime.Now;
+                                    addr.RegionId = d.RegionId;
+                                    addr.Road = d.Road;
+                                    addr.Soi = d.Soi;
+                                    addr.RoomNo = d.RoomNo;
+                                    addr.SubDistrictId = d.SubDistrictId;
+                                    addr.VillageName = d.VillageName;
+                                    addr.ZipCode = d.ZipCode;
+
+                                    var uriAddress = new Uri(Path.Combine(strpathAPI, "Address", "Insert"));
+                                    HttpClient clientAddress = new HttpClient();
+                                    clientAddress.DefaultRequestHeaders.Accept.Add(
+                                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                                    var httpContent = new StringContent(JsonConvert.SerializeObject(addr), Encoding.UTF8, "application/json");
+                                    HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
+                                    if (responseAddress.IsSuccessStatusCode)
+                                    {
+                                        res.Status = true;
+                                        res.Message = "Register Success";
+                                        res.StatusError = "-1";
+                                    }
+                                    else
+                                    {
+                                        res.Status = false;
+                                        res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                        res.StatusError = "-1";
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                res.Status = false;
+                                res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                res.StatusError = "-1";
+                            }
+                            #endregion
+                        }
+                        else
+                        {
+                            res.Status = false;
+                            res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                            res.StatusError = "-1";
+                        }
                     }
                     else
                     {
-                        return Json(new
-                        {
-                            status = "-1",
-                            message = "Address Data isnot correct, Please Check Data or Contact System Admin"
-                        });
+                        res.Status = false;
+                        res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        res.StatusError = "-1";
                     }
-                    return Json(new
-                    {
-                        status = "1",
-                        message = "Success"
-                    });
+
+
+                    #endregion
                 }
                 else
                 {
-                    return Json(new
-                    {
-                        status = "-1",
-                        message = "Data isnot correct, Please Check Data or Contact System Admin"
-                    });
+                    res.Status = false;
+                    res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                    res.StatusError = "-1";
                 }
             }
             catch (Exception e)
             {
-                string _msg = string.Empty;
-                _msg = "Please Contact System Admin";
-                return Json(new { status = "-1", message = _msg });
+                res.Status = false;
+                res.Message = e.Message;
+                res.StatusError = "-1";
+
+               
                 throw;
             }
+
+            return Json(new { Response=res });
         }
 
 
-     
+        #region Upload File
+
+
+        [HttpPost]
+        [DisableRequestSizeLimit]
+        public IActionResult Uploadfile(IList<IFormFile> files, string fid,string type_file)
+        {
+            bool statusupload = true;
+            List<FileUploadModal> L_File = new List<FileUploadModal>();
+            //FileStream output;
+            string strmess = "";
+            try
+            {
+                foreach (FormFile source in files)
+                {
+                    if (source.Length > 0)
+                    {
+                        string filename = ContentDispositionHeaderValue.Parse(source.ContentDisposition).FileName.Trim('"');
+                        filename = EnsureCorrectFilename(filename);
+                        //using (output = System.IO.File.Create(this.GetPathAndFilename(filename)))
+                        //    await source.CopyToAsync(output);
+
+
+                        Guid id = Guid.NewGuid();
+                        using (var ms = new MemoryStream())
+                        {
+                            source.CopyTo(ms);
+                            var fileBytes = ms.ToArray();
+                            L_File.Add(new FileUploadModal
+                            {
+                                file_id = id,
+                                Fileupload = fileBytes,
+                                typefile = type_file,
+                                ContentDisposition = source.ContentDisposition,
+                                ContentType = source.ContentType,
+                                Filename = filename
+                            });
+                        }
+                    }
+                    var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
+                    //byte[] byteArrayValue = HttpContext.Session.Get("userUploadfileDaft");
+                    //var data = FromByteArray<List<FileUploadModal>>(byteArrayValue);
+
+                    //var objComplex = HttpContext.Session.GetObject("userUploadfileDaft");
+
+                    if (data != null)
+                    {
+
+                        data.RemoveAll(x => x.file_id.ToString() == fid);
+                        data.Add(L_File[0]);
+                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", data);
+
+                    }
+                    else
+                    {
+                        // HttpContext.Session.Set("userUploadfileDaft", ToByteArray<List<FileUploadModal>>(L_File));
+
+                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", L_File);
+                    }
+
+
+                }
+                strmess = "Upload file success";
+            }
+            catch (Exception e)
+            {
+                statusupload = false;
+                strmess = e.Message.ToString();
+                throw;
+            }
+
+
+            return Json(new { status = statusupload, message = strmess, response = L_File[0].file_id });
+
+           // return Json(new { status = statusupload, message = strmess });
+        }
+
+     private async Task<bool> GetFile(FileUploadModal file,string guid)
+        {
+            FileStream output;
+            try
+            {
+                var stream = new MemoryStream(file.Fileupload);
+                FormFile files = new FormFile(stream, 0, file.Fileupload.Length, "name", "fileName");
+
+                string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                filename = EnsureCorrectFilename(file.Filename);
+                using (output = System.IO.File.Create(this.GetPathAndFilename(guid,filename)))
+                  await  files.CopyToAsync(output);
+            }
+            catch (Exception e)
+            {
+                return false;
+                throw;
+            }
+            return true;
+        }
+        private string EnsureCorrectFilename(string filename)
+        {
+            if (filename.Contains("\\"))
+                filename = filename.Substring(filename.LastIndexOf("\\") + 1);
+
+            return filename;
+        }
+
+        private string GetPathAndFilename(string guid, string filename)
+        {
+            //return this.hostingEnvironment.WebRootPath + "\\uploads\\" + filename;
+            string dir=_configuration.GetValue<string>("PathUploadfile:Local").ToString();
+            string pathdir = Path.Combine(dir, guid);
+            string PathOutput = "";
+            if (!Directory.Exists(pathdir))
+            {
+                Directory.CreateDirectory(pathdir);
+            }
+            PathOutput = Path.Combine(pathdir, filename);
+            return PathOutput;
+        }
+
+        #endregion
+
 
         #endregion
     }
@@ -1067,126 +1121,6 @@ namespace SubcontractProfile.Web.Controllers
         public string location_code { get; set; }
         //public decimal RowNumber { get; set; }
         //public decimal CNT { get; set; }
-    }
-
-
-
-    public class subcontract_profile_New_Register //ส่งค่ามาจากหน้าจอ
-    {
-        public string subcontract_profile_type { get; set; }
-        public string location_code { get; set; }
-        public string location_name_th { get; set; }
-        public string location_name_en { get; set; }
-        public string distribution_channel { get; set; }
-        public string channel_sale_group { get; set; }
-        public string tax_id { get; set; }
-        public string company_alias { get; set; }
-        public string company_title_name_th { get; set; } //รอเอกสารspec เพิ่ม
-        public string company_name_th { get; set; }
-        public string company_title_name_en { get; set; } //รอเอกสารspec เพิ่ม
-        public string company_name_en { get; set; }
-        public string wt_name { get; set; }
-        public string vat_type { get; set; }
-        //public string house_no { get; set; }
-        //public string building { get; set; }
-        //public string floor { get; set; }
-        //public string moo { get; set; }
-        //public string soi { get; set; }
-        //public string road { get; set; }
-        //public string sub_district_id { get; set; }
-        //public string district_id { get; set; }
-        //public string province_id { get; set; }
-        //public string region_id { get; set; }
-        //public string address_type_id { get; set; }
-        //public string zip_code { get; set; }
-        //public string country { get; set; }
-        //public string village_name { get; set; }
-        //public string room_no { get; set; }
-
-        public List<SubcontractProfileAddressModel> L_address { get; set; }
-
-        public string company_Email { get; set; }
-        public string contract_name { get; set; }
-        public string contract_phone { get; set; }
-        public string contract_email { get; set; }
-        public string dept_of_install_name { get; set; }
-        public string dept_of_install_phone { get; set; }
-        public string dept_of_install_email { get; set; }
-        public string dept_of_mainten_name { get; set; }
-        public string dept_of_mainten_phone { get; set; }
-        public string dept_of_mainten_email { get; set; }
-        public string dept_of_Account_name { get; set; }
-        public string dept_of_Account_phone { get; set; }
-        public string dept_of_Account_email { get; set; }
-        public string account_Name { get; set; }
-        public string branch_Name { get; set; }
-        public string branch_Code { get; set; }
-        public string bank_account_type_id { get; set; }
-        public string company_certified_file { get; set; }
-        public string commercial_registration_file { get; set; }
-        public string vat_registration_certificate_file { get; set; }
-    }
-
-    public class subcontract_profileCommand //ส่งเข้าDatabase
-    {
-        public subcontract_profileCommand()
-        {
-            this.ret_code = -1;
-            this.ret_msg = "";
-        }
-        public string p_subcontract_profile_type { get; set; }
-        public string p_location_code { get; set; }
-        public string p_location_name_th { get; set; }
-        public string p_location_name_en { get; set; }
-        public string p_distribution_channel { get; set; }
-        public string p_channel_sale_group { get; set; }
-        public string p_tax_id { get; set; }
-        public string p_company_alias { get; set; }
-        public string p_company_title_name_th { get; set; }//รอเอกสารspec เพิ่ม
-        public string p_company_name_th { get; set; }
-        public string p_company_title_name_en { get; set; }//รอเอกสารspec เพิ่ม
-        public string p_company_name_en { get; set; }
-        public string p_wt_name { get; set; }
-        public string p_vat_type { get; set; }
-        public string p_house_no { get; set; }
-        public string p_building { get; set; }
-        public string p_floor { get; set; }
-        public string p_moo { get; set; }
-        public string p_soi { get; set; }
-        public string p_road { get; set; }
-        public string p_sub_district_id { get; set; }
-        public string p_district_id { get; set; }
-        public string p_province_id { get; set; }
-        public string p_region_id { get; set; }
-        public string p_address_type_id { get; set; }
-        public string p_zip_code { get; set; }
-        public string p_country { get; set; }
-        public string p_village_name { get; set; }
-        public string p_room_no { get; set; }
-        public string p_company_Email { get; set; }
-        public string p_contract_name { get; set; }
-        public string p_contract_phone { get; set; }
-        public string p_contract_email { get; set; }
-        public string p_dept_of_install_name { get; set; }
-        public string p_dept_of_install_phone { get; set; }
-        public string p_dept_of_install_email { get; set; }
-        public string p_dept_of_mainten_name { get; set; }
-        public string p_dept_of_mainten_phone { get; set; }
-        public string p_dept_of_mainten_email { get; set; }
-        public string p_dept_of_Account_name { get; set; }
-        public string p_dept_of_Account_phone { get; set; }
-        public string p_dept_of_Account_email { get; set; }
-        public string p_account_Name { get; set; }
-        public string p_branch_Name { get; set; }
-        public string p_branch_Code { get; set; }
-        public string p_bank_account_type_id { get; set; }
-        public string p_company_certified_file { get; set; }
-        public string p_commercial_registration_file { get; set; }
-        public string p_vat_registration_certificate_file { get; set; }
-
-
-        public Nullable<decimal> ret_code { get; set; }
-        public string ret_msg { get; set; }
     }
 
     #endregion

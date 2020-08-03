@@ -28,14 +28,32 @@ namespace SubcontractProfile.WebApi.Services.Model
 
         public System.Guid TrainingId { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
         public System.Guid CompanyId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
+        [System.ComponentModel.DataAnnotations.Required]
         public string Course { get; set; }
 
-        public System.DateTime? RequestDate { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.DateTime RequestDate { get; set; }
 
         public string Remark { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public decimal TotalPrice { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public decimal Vat { get; set; }
+
+        public decimal? Tax { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(10)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Status { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(50)]
+        public string RequestNo { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string CreateBy { get; set; }
@@ -46,18 +64,6 @@ namespace SubcontractProfile.WebApi.Services.Model
         public string ModifiedBy { get; set; }
 
         public System.DateTime? ModifiedDate { get; set; }
-
-        public decimal? TotalPrice { get; set; }
-
-        public decimal? Vat { get; set; }
-
-        public decimal? Tax { get; set; }
-
-        [System.ComponentModel.DataAnnotations.StringLength(10)]
-        public string Status { get; set; }
-
-        [System.ComponentModel.DataAnnotations.StringLength(50)]
-        public string RequestNo { get; set; }
 
 
         public object Clone()

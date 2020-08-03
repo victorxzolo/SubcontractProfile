@@ -74,7 +74,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         #endregion
 
         #region POST
-        [HttpPost]
+        [HttpPost("Insert")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileAddress))]
         public Task<bool> Insert(SubcontractProfileAddress subcontractProfileAddress)
         {
@@ -95,7 +95,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("BulkInsert")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileAddress))]
         public Task<bool> BulkInsert(IEnumerable<SubcontractProfileAddress> subcontractProfileAddressList)
         {
@@ -118,7 +118,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         #endregion
 
         #region PUT
-        [HttpPut()]
+        [HttpPut("Update")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         public Task<bool> Update(SubcontractProfileAddress subcontractProfileAddress)
         {
