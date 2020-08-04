@@ -19,6 +19,9 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation subcontractProfileLocation);
         Task<bool> Delete(string id);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>> GetByPKList(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation_PK> pkList);
+        Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation> SearchLocation(System.Guid company_id,string location_code,
+            string location_name, string location_name_en, string phone);
+
 
     }
 }
