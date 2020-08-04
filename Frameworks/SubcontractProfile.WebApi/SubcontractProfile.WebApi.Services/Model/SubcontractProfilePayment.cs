@@ -78,13 +78,13 @@ namespace SubcontractProfile.WebApi.Services.Model
 
         public System.DateTime? ModifiedDate { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public string TrainingId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
         [System.ComponentModel.DataAnnotations.Required]
-        public string CompanyId { get; set; }
+        public System.Guid TrainingId { get; set; }
+
+     
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Guid CompanyId { get; set; }
 
 
         public object Clone()
