@@ -401,5 +401,28 @@ namespace SubcontractProfile.WebApi.Services
 
         }
 
+        public async Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany> SearchCompany(string subcontract_profile_type, 
+            string location_code, string vendor_code, string company_th,
+            string company_en, string company_alias, string company_code, 
+            string distibution_channel, string channel_sale_group)
+        {
+            var p = new DynamicParameters();
+            p.Add("@subcontract_profile_type", subcontract_profile_type);
+            p.Add("@location_code", location_code);
+            p.Add("@vendor_code", vendor_code);
+            p.Add("@company_th", company_th);
+            p.Add("@company_en", company_en);
+            p.Add("@company_alias", company_alias);
+            p.Add("@company_code", company_code);
+            p.Add("@distibution_channel", distibution_channel);
+            p.Add("@channel_sale_group", channel_sale_group);
+
+            var entity = await _dbContext.Connection.QuerySingleOrDefaultAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>
+            ("uspSubcontractProfileCompany_Search", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+
+          
+        }
     }
 }
