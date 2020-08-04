@@ -79,7 +79,21 @@ namespace SubcontractProfile.WebApi.API.Controllers
         {
             _logger.LogInformation($"Start PaymentController::SearchPayment", payment_no, request_training_no, request_date_from,
                 request_date_to, payment_date_from, payment_date_to, payment_status);
+        
+            if(payment_no =="NULL")
+            {
+                payment_no = "";
+            }
 
+            if (request_training_no == "NULL")
+            {
+                request_training_no = "";
+            }
+
+            if (payment_status == "NULL")
+            {
+                payment_status = "";
+            }
             var entities = _service.searchPayment(payment_no, request_training_no, request_date_from, request_date_to, payment_date_from, payment_date_to, payment_status);
 
             if (entities == null)
