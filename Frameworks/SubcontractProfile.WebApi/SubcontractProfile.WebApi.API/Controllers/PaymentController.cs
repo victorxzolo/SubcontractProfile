@@ -73,7 +73,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfilePayment))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfilePayment))]
         [HttpGet("SearchPayment/{payment_no}/{request_training_no}/{request_date_from}/{request_date_to}/{payment_date_from}/{payment_date_to}/{payment_status}")]
-        public Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment> SearchPayment(string payment_no,
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>> SearchPayment(string payment_no,
            string request_training_no, string request_date_from, string request_date_to, string payment_date_from,
            string payment_date_to, string payment_status)
         {
