@@ -157,6 +157,15 @@ namespace SubcontractProfile.Web.Model
         public string location_code { get; set; }
         public string distribution_channel { get; set; }
         public string channel_sale_group { get; set; }
+
+        public int PAGE_INDEX { get; set; }
+        public int PAGE_SIZE { get; set; }
+    }
+
+    public class SubcontractProfileLocationSearchOutputModel
+    {
+        public List<SubcontractProfileLocationModel> result { get; set; }
+        public int TotalResultsCount { get; set; }
     }
     #endregion
 }

@@ -123,8 +123,8 @@
         //lengthChange: false,
         columns: [
             { "data": "company_name_th" },
-            { "data":"location_code"},
-            { "data": "location_name_th" },
+            { "data":"LocationCode"},
+            { "data": "LocationNameTh" },
             { "data": "distribution_channel" },
             { "data": "channel_sale_group" }
         ],
@@ -166,7 +166,7 @@
     });
 
     $('#chktypeN').on("change", function () {
-        if ($(this).attr("value") == "N") {
+        if ($(this).attr("value") == "NewSubContract") {
             $("#divdealer").hide('slow');
             $('#divnewsubcontract').show('slow');
         }
@@ -186,7 +186,7 @@
     });
 
     $('#chktypeD').on("change", function () {
-        if ($(this).attr("value") == "D") {
+        if ($(this).attr("value") == "Dealer") {
             $("#divnewsubcontract").hide('slow');
             $("#divdealer").show('slow');
         }
@@ -818,7 +818,14 @@
             dataType: "json",
             success: function (data) {
                 console.log(data)
-
+                if (data.Response.Status) {
+                    showFeedback("success", data.Response.Message, "System Information",
+                        "<button type='button' class='btn-border btn-green' data-dismiss='modal' id='btnOKpopup'><i class='fa fa-check icon'></i><span>OK</span></button >");
+                }
+                else {
+                    showFeedback("error", data.Response.Message, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
             },
             error: function (xhr, status, error) {
                 //Loading(0);
