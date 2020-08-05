@@ -1,0 +1,3 @@
+2020-08-05T15:25:16.7247070+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-08-05T15:25:16.7441462+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-08-05T15:25:16.7443414+07:00  [INF] Content root path: "D:\Developer Project\SubcontractProfile\Presentation\Web\SubcontractProfile.Web" (b5d60022)

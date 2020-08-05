@@ -22,9 +22,7 @@
                     <p class="">Payment No:</p>
                 </div>
                 <div class="col-md-7">
-                    <select class="form-control" id="paymentno">
-                        <option>Please Select</option>
-                    </select>
+                    <input type="text" class="form-control inputValidation form-control-sm" id="paymentno" maxlength="100">
 
                 </div>
             </div>
@@ -35,9 +33,7 @@
                     <p class="">Request Training no:</p>
                 </div>
                 <div class="col-md-7">
-                    <select class="form-control" id="paymentrequesttraningno">
-                        <option>Please Select</option>                       
-                    </select>
+                    <input type="text" class="form-control inputValidation form-control-sm" id="paymentrequesttraningno" maxlength="100">
                 </div>
             </div>
         </div>
@@ -47,8 +43,8 @@
                     <p class="">Request Date From</p>
                 </div>
                 <div class="col-md-7">
-                    <div class='input-group p-0 date' id='paymantrequestdatefrom'>
-                        <input type='text' class="form-control form-control-sm" />
+                    <div class='input-group p-0 date' id='paymentrequestdatefrom'>
+                        <input type='text' class="form-control form-control-sm" id="textpaymentrequestdatefrom" />
                         <div class="input-group-append input-group-addon">
                             <span class="input-group-text px-4">
                                 <i class="fa fa-calendar"></i>
@@ -67,7 +63,7 @@
                 </div>
                 <div class="col-md-7">
                     <div class='input-group p-0 date' id='paymentrequestdateto'>
-                        <input type='text' class="form-control form-control-sm" />
+                        <input type='text' class="form-control form-control-sm" id="textpaymentrequestdateto" />
                         <div class="input-group-append input-group-addon">
                             <span class="input-group-text px-4">
                                 <i class="fa fa-calendar"></i>
@@ -85,7 +81,7 @@
                 </div>
                 <div class="col-md-7">
                     <div class='input-group p-0 date' id='paymentdatefrom'>
-                        <input type='text' class="form-control form-control-sm" />
+                        <input type='text' class="form-control form-control-sm" id="textpaymentdatefrom" />
                         <div class="input-group-append input-group-addon">
                             <span class="input-group-text px-4">
                                 <i class="fa fa-calendar"></i>
@@ -103,7 +99,7 @@
                 </div>
                 <div class="col-md-7">
                     <div class='input-group p-0 date' id='paymentdateto'>
-                        <input type='text' class="form-control form-control-sm" />
+                        <input type='text' class="form-control form-control-sm" id="textpaymentdateto" />
                         <div class="input-group-append input-group-addon">
                             <span class="input-group-text px-4">
                                 <i class="fa fa-calendar"></i>
@@ -122,8 +118,8 @@
                 <div class="col-md-7">
                     <select class="form-control" id="paymentstatus">
                         <option>Please Select</option>
-                        <option value="00001">00001</option>
-                        <option value="00002">00002</option>
+                        <option value="paid">paid</option>
+                        <option value="notpaid">not paid</option>
                     </select>
                 </div>
             </div>
@@ -396,22 +392,22 @@
 
 
     <script type="text/javascript">
-        //$("#paymentdatefrom").datepicker("setDate", new Date());       
+        //$("#paymentdatefrom").datepicker("setDate", new Date());
 
-        load_dataselect();
-        $(function () {
 
+        $(function () {          
             $(".custom-file-input").on("change", function () {
                 var fileName = $(this).val().split("\\").pop();
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             });
 
-            $('#paymantrequestdatefrom').datepicker({
+            $('#paymentrequestdatefrom').datepicker({
                 format: 'dd/mm/yyyy',
                 daysOfWeekHighlighted: "6,0",
                 autoclose: true,
                 todayHighlight: true,
-                clearBtn: true,
+                clearBtn: true,             
+
             });
             $('#paymentrequestdateto').datepicker({
                 format: 'dd/mm/yyyy',
@@ -436,48 +432,20 @@
             });
 
         });
-
-        function load_dataselect() {
-
+     
+        function Searchconfirmpayment() {            
+          
             $.ajax({
                 type: "GET",
-                url: "/Payment/GetDataselect",                
-                dataType: "json",
-                async: false,
-                success: function (response) {                     
-                    load_select(response.data);
-                },
-                failure: function (msg) {
-                }
-            });
-           
-        };
-        function load_select(data_Dropdown) {           
-            data_Dropdown.forEach(function (data) {
-                console.log(data.paymentNo)                
-                $('#paymentno').append('<option value="' + data.paymentNo + '">' + data.paymentNo + '</option>');                    
-                $('#paymentrequesttraningno').append('<option value="' + data.trainingId + '">' + data.trainingId + '</option>');
-            });
-        };
-        function Searchconfirmpayment() {
-
-            var dateTimefrom = $('#paymentdatefrom').datepicker('getDate');
-            var dateTimeto = $('#paymentdateto').datepicker('getDate');
-
-            var strpaymentdatefrom = dateTimefrom.getDate() + "/" + dateTimefrom.getMonth() + "/" + dateTimefrom.getFullYear();
-            var strpaymentdateto = dateTimeto.getDate() + "/" + dateTimeto.getMonth() + "/" + dateTimeto.getFullYear();
-
-            $.ajax({
-                type: "POST",
                 url: "/Payment/Searchconfirmpayment",
                 data: {
-                    Locationcode: function () { return $('#locationcode').val() },
-                    Teamname: function () { return $('#teamname').val() },
-                    Engineername: function () { return $('#engineername').val() },
-                    Position: function () { return $('#position').val() },
-                    Status: function () { return $('#status').val() },
-                    Paymentdatefrom: function () { return strpaymentdatefrom },
-                    Paymentdateto: function () { return strpaymentdateto }
+                    Paymentno: function () { return $('#paymentno').val() },
+                    Paymentrequesttraningno: function () { return $('#paymentrequesttraningno').val() },
+                    Paymantrequestdatefrom: function () { return $('#textpaymentrequestdatefrom').val() },
+                    Paymentrequestdateto: function () { return $('#textpaymentrequestdateto').val() },
+                    Paymentdatefrom: function () { return $('#textpaymentdatefrom').val() },
+                    Paymentdateto: function () { return $('#textpaymentdateto').val() },
+                    Paymentstatus: function () { return $('#paymentstatus').val() }
 
                 },
                 dataType: "json",

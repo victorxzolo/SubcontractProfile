@@ -34,7 +34,7 @@ namespace SubcontractProfile.Web.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult GetData()
+        public IActionResult GetDataselect()
         {
             var data = new List<SubcontractProfilePayment>();
 
@@ -48,6 +48,21 @@ namespace SubcontractProfile.Web.Controllers
                 data = JsonConvert.DeserializeObject<List<SubcontractProfilePayment>>(dataresponse);
             }
 
+            return Json(new { Data = data });
+        }
+        [HttpGet]
+        public IActionResult Searchconfirmpayment(SubcontractProfileSearchPayment searchPayment)
+        {
+            var data = new SubcontractProfilePayment();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string x = "http://localhost:66/api/Payment/SearchPayment/null/null/2020-10-7/2020-10-7/2020-12-12/2020-12-12/null";
+            //string uriString = string.Format("{0}", strpathAPI + "Payment/SearchPayment");
+            HttpResponseMessage response = client.GetAsync(x).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var dataresponse = response.Content.ReadAsStringAsync().Result;
+                data = JsonConvert.DeserializeObject<SubcontractProfilePayment>(dataresponse);
+            }
             return Json(new { Data = data });
         }
     }
