@@ -375,7 +375,7 @@ namespace SubcontractProfile.WebApi.Services.Services
             return entity;
         }
 
-        public async Task<SubcontractProfileLocationList> SearchListLocation(SearchSubcontractProfileLocationQuery data)
+        public async Task<List<SubcontractProfileLocationList>> SearchListLocation(SearchSubcontractProfileLocationQuery data)
         {
             var p = new DynamicParameters();
             p.Add("@company_name_th",data.company_name_th);
