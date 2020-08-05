@@ -375,7 +375,7 @@ namespace SubcontractProfile.WebApi.Services.Services
             return entity;
         }
 
-        public async Task<List<SubcontractProfileLocationList>> SearchListLocation(SearchSubcontractProfileLocationQuery data)
+        public async Task<IEnumerable<SubcontractProfileLocationList>> SearchListLocation(SearchSubcontractProfileLocationQuery data)
         {
             var p = new DynamicParameters();
             p.Add("@company_name_th",data.company_name_th);
@@ -393,7 +393,7 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@sort_dir",data.sort_dir);
 
 
-            var entity = await _dbContext.Connection.QuerySingleOrDefaultAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocationList>
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocationList>
             ("uspSubcontractProfileLocation_searchListLocation", p, commandType: CommandType.StoredProcedure);
 
             return entity;
