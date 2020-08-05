@@ -169,7 +169,8 @@ namespace SubcontractProfile.WebApi.Services.Model
 
     }
 
-    public class Search_SubcontractProfileLocationQuery
+    #region Search
+    public class SearchSubcontractProfileLocationQuery
     {
         public string company_name_th { get; set; }
         public string company_name_en { get; set; }
@@ -181,17 +182,23 @@ namespace SubcontractProfile.WebApi.Services.Model
         public string distribution_channel { get; set; }
         public string channel_sale_group { get; set; }
 
-        public int PAGE_INDEX { get; set; }
-        public int PAGE_SIZE { get; set; }
+        public int page_index { get; set; }
+        public int page_size { get; set; }
 
-        public string ordercolumn { get; set; }
-        public string dir { get; set; }
+        public string sort_col { get; set; }
+        public string sort_dir { get; set; }
     }
-  
+    public class SubcontractProfileLocationList : SubcontractProfileLocation
+    {
+        public string company_name_th { get; set; }
+        public int row_total { get; set; }
+    }
     public class SubcontractProfileLocationOutput
     {
-        public List<SubcontractProfileLocation> ListResult{ get; set; }
+        public List<SubcontractProfileLocationList> ListResult { get; set; }
         public int TotalResultsCount { get; set; }
     }
+    #endregion
+
 }
 

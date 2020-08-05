@@ -90,8 +90,8 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LocationController))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(LocationController))]
-        [HttpGet("GetListLocation/{data}")]
-        public async Task<SubcontractProfileLocationOutput> GetAll(Search_SubcontractProfileLocationQuery data)
+        [HttpPost("GetListLocation")]
+        public async Task<SubcontractProfileLocationOutput> GetAll(SearchSubcontractProfileLocationQuery data)
         {
 
             _logger.LogInformation($"LocationController::GetALL");
@@ -108,60 +108,69 @@ namespace SubcontractProfile.WebApi.API.Controllers
             }
             else
             {
-                if(data.dir.ToLower()=="asc")
-                {
-                    switch(data.ordercolumn)
-                    {
-                        case "company_name_th":break;
-                        case "LocationCode":
-                            Output.ListResult = entities.Where(x => x.LocationCode.Contains(data.location_code != null ? data.location_code : "")
-                                        || x.LocationNameTh.Contains(data.location_name_th != null ? data.location_name_th : "")
-                                        || x.LocationNameEn.Contains(data.location_name_en != null ? data.location_name_en : "")
-                                        ).OrderBy(r => r.LocationCode).ToList();
-                            break;
-                        case "LocationNameTh":
-                            Output.ListResult = entities.Where(x => x.LocationCode.Contains(data.location_code != null ? data.location_code : "")
-                                        || x.LocationNameTh.Contains(data.location_name_th != null ? data.location_name_th : "")
-                                        || x.LocationNameEn.Contains(data.location_name_en != null ? data.location_name_en : "")
-                                        ).OrderBy(r => r.LocationNameTh).ToList();
-                            break;
-                        case "distribution_channel":break;
-                        case "channel_sale_group":break;
-
-                    }
-                   
-                }
-                else if(data.dir.ToLower()=="desc")
-                {
-                    switch (data.ordercolumn)
-                    {
-                        case "company_name_th": break;
-                        case "LocationCode":
-                            Output.ListResult = entities.Where(x => x.LocationCode.Contains(data.location_code != null ? data.location_code : "")
-                                        || x.LocationNameTh.Contains(data.location_name_th != null ? data.location_name_th : "")
-                                        || x.LocationNameEn.Contains(data.location_name_en != null ? data.location_name_en : "")
-                                        ).OrderByDescending(r => r.LocationCode).ToList();
-                            break;
-                        case "LocationNameTh":
-                            Output.ListResult = entities.Where(x => x.LocationCode.Contains(data.location_code != null ? data.location_code : "")
-                                        || x.LocationNameTh.Contains(data.location_name_th != null ? data.location_name_th : "")
-                                        || x.LocationNameEn.Contains(data.location_name_en != null ? data.location_name_en : "")
-                                        ).OrderByDescending(r => r.LocationNameTh).ToList();
-                            break;
-                        case "distribution_channel": break;
-                        case "channel_sale_group": break;
-
-                    }
-                }
-               
-                Output.TotalResultsCount = Output.ListResult.Count();
-                Output.ListResult = Output.ListResult.Skip(data.PAGE_INDEX).Take(data.PAGE_SIZE).ToList();
+                Output.TotalResultsCount = Output.ListResult[0].row_total;
 
                 return Output;
             }
+           // else
+            //{
 
-           
+            
+            //{
+            //    if(data.dir.ToLower()=="asc")
+            //    {
+            //        switch(data.ordercolumn)
+            //        {
+            //            case "company_name_th":break;
+            //            case "LocationCode":
+            //                Output.ListResult = entities.Where(x => x.LocationCode.Contains(data.location_code != null ? data.location_code : "")
+            //                            || x.LocationNameTh.Contains(data.location_name_th != null ? data.location_name_th : "")
+            //                            || x.LocationNameEn.Contains(data.location_name_en != null ? data.location_name_en : "")
+            //                            ).OrderBy(r => r.LocationCode).ToList();
+            //                break;
+            //            case "LocationNameTh":
+            //                Output.ListResult = entities.Where(x => x.LocationCode.Contains(data.location_code != null ? data.location_code : "")
+            //                            || x.LocationNameTh.Contains(data.location_name_th != null ? data.location_name_th : "")
+            //                            || x.LocationNameEn.Contains(data.location_name_en != null ? data.location_name_en : "")
+            //                            ).OrderBy(r => r.LocationNameTh).ToList();
+            //                break;
+            //            case "distribution_channel":break;
+            //            case "channel_sale_group":break;
 
+            //        }
+                   
+            //    }
+            //    else if(data.dir.ToLower()=="desc")
+            //    {
+            //        switch (data.ordercolumn)
+            //        {
+            //            case "company_name_th": break;
+            //            case "LocationCode":
+            //                Output.ListResult = entities.Where(x => x.LocationCode.Contains(data.location_code != null ? data.location_code : "")
+            //                            || x.LocationNameTh.Contains(data.location_name_th != null ? data.location_name_th : "")
+            //                            || x.LocationNameEn.Contains(data.location_name_en != null ? data.location_name_en : "")
+            //                            ).OrderByDescending(r => r.LocationCode).ToList();
+            //                break;
+            //            case "LocationNameTh":
+            //                Output.ListResult = entities.Where(x => x.LocationCode.Contains(data.location_code != null ? data.location_code : "")
+            //                            || x.LocationNameTh.Contains(data.location_name_th != null ? data.location_name_th : "")
+            //                            || x.LocationNameEn.Contains(data.location_name_en != null ? data.location_name_en : "")
+            //                            ).OrderByDescending(r => r.LocationNameTh).ToList();
+            //                break;
+            //            case "distribution_channel": break;
+            //            case "channel_sale_group": break;
+
+            //        }
+            //    }
+               
+            //    Output.TotalResultsCount = Output.ListResult.Count();
+            //    Output.ListResult = Output.ListResult.Skip(data.PAGE_INDEX).Take(data.PAGE_SIZE).ToList();
+
+            //    return Output;
+            //}
+
+
+            
         }
 
         #endregion

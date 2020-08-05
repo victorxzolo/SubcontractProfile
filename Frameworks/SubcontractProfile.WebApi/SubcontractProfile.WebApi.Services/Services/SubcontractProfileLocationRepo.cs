@@ -374,6 +374,30 @@ namespace SubcontractProfile.WebApi.Services.Services
 
             return entity;
         }
+
+        public async Task<SubcontractProfileLocationList> SearchListLocation(SearchSubcontractProfileLocationQuery data)
+        {
+            var p = new DynamicParameters();
+            p.Add("@company_name_th",data.company_name_th);
+            p.Add("@company_name_en",data.company_name_en);
+            p.Add("@company_alias",data.company_alias);
+            p.Add("@company_code",data.company_code);
+            p.Add("@location_name_th",data.location_name_th);
+            p.Add("@location_name_en",data.location_name_en);
+            p.Add("@location_code",data.location_code);
+            p.Add("@distribution_channel",data.distribution_channel);
+            p.Add("@channel_sale_group",data.channel_sale_group);
+            p.Add("@page_index",data.page_index);
+            p.Add("@page_size",data.page_size);
+            p.Add("@sort_col",data.sort_col);
+            p.Add("@sort_dir",data.sort_dir);
+
+
+            var entity = await _dbContext.Connection.QuerySingleOrDefaultAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocationList>
+            ("uspSubcontractProfileLocation_searchListLocation", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
     }
 
 }
