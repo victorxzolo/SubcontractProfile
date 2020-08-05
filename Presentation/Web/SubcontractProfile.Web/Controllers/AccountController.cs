@@ -523,7 +523,7 @@ namespace SubcontractProfile.Web.Controllers
 
 
         [HttpPost]
-        public IActionResult SearchLocation(SearchSubcontractProfileLocationQueryModel model)
+        public IActionResult SearchLocation(SearchSubcontractProfileLocationViewModel model)
         {
             var result = new SubcontractProfileLocationSearchOutputModel();
             int filteredResultsCount;
@@ -551,29 +551,29 @@ namespace SubcontractProfile.Web.Controllers
             model.sort_col = sortBy;
             model.sort_dir = sortDir?"asc":"desc";
 
-            //Search_SubcontractProfileLocationQuery n = new Search_SubcontractProfileLocationQuery();
-            //n.channel_sale_group = model.channel_sale_group;
-            //n.company_alias = model.company_alias;
-            //n.company_code = model.company_code;
-            //n.company_name_en = model.company_name_en;
-            //n.company_name_th = model.company_name_th;
-            //n.dir = model.dir;
-            //n.distribution_channel = model.distribution_channel;
-            //n.location_code = model.location_code;
-            //n.location_name_en = model.location_name_en;
-            //n.location_name_th = model.location_name_th;
-            //n.ordercolumn = model.ordercolumn;
-            //n.PAGE_INDEX = model.PAGE_INDEX;
-            //n.PAGE_SIZE = model.PAGE_SIZE;
+            SearchSubcontractProfileLocationQueryModel query = new SearchSubcontractProfileLocationQueryModel();
+            query.channel_sale_group = model.channel_sale_group;
+            query.company_alias = model.company_alias;
+            query.company_code = model.company_code;
+            query.company_name_en = model.company_name_en;
+            query.company_name_th = model.company_name_th;
+            query.distribution_channel = model.distribution_channel;
+            query.location_code = model.location_code;
+            query.location_name_en = model.location_name_en;
+            query.location_name_th = model.location_name_th;
+            query.page_index = model.page_index;
+            query.page_size = model.page_size;
+            query.sort_col = model.sort_col;
+            query.sort_dir = model.sort_dir;
 
-            var rr = JsonConvert.SerializeObject(model);
+            var rr = JsonConvert.SerializeObject(query);
 
             HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
                 string uriString = string.Format("{0}", strpathAPI + "Location/GetListLocation");
-            var httpContentLocation = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            var httpContentLocation = new StringContent(JsonConvert.SerializeObject(query), Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PostAsync(uriString, httpContentLocation).Result;
                 if (response.IsSuccessStatusCode)
                 {

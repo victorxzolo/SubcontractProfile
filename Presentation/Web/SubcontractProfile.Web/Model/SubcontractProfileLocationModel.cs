@@ -148,7 +148,7 @@ namespace SubcontractProfile.Web.Model
 
 
     #region View
-    public class SearchSubcontractProfileLocationQueryModel : DataTableAjaxModel //รับ Search จากหน้าจอ
+    public class SearchSubcontractProfileLocationViewModel : DataTableAjaxModel //รับ Search จากหน้าจอ
     {
         public string company_name_th { get; set; }
         public string company_name_en { get; set; }
@@ -177,7 +177,7 @@ namespace SubcontractProfile.Web.Model
 
 
 
-    public class Search_SubcontractProfileLocationQuery
+    public class SearchSubcontractProfileLocationQueryModel
     {
         public string company_name_th { get; set; }
         public string company_name_en { get; set; }
@@ -189,11 +189,11 @@ namespace SubcontractProfile.Web.Model
         public string distribution_channel { get; set; }
         public string channel_sale_group { get; set; }
 
-        public int PAGE_INDEX { get; set; }
-        public int PAGE_SIZE { get; set; }
+        public int page_index { get; set; }
+        public int page_size { get; set; }
 
-        public string ordercolumn { get; set; }
-        public string dir { get; set; }
+        public string sort_col { get; set; }
+        public string sort_dir { get; set; }
     }
     #endregion
 }

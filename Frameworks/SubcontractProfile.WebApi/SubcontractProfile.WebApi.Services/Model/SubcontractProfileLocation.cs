@@ -191,6 +191,8 @@ namespace SubcontractProfile.WebApi.Services.Model
     public class SubcontractProfileLocationList : SubcontractProfileLocation
     {
         public string company_name_th { get; set; }
+        public string distribution_channel { get; set; }
+        public string channel_sale_group { get; set; }
         public int row_total { get; set; }
     }
     public class SubcontractProfileLocationOutput
