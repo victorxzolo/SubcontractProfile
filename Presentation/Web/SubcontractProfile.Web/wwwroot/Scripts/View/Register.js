@@ -83,7 +83,6 @@
         return valueSearch;
     }
     BindDDLTitle();
-
     var tbLocation = $('#tblocationModal').DataTable({
         ordering: true,
         select: true,
@@ -99,15 +98,12 @@
             type: "POST",
             url: "/Account/SearchLocation",
             data: {
-                company_name_th: function () { return $('#txtjuristicTmodal').val() },
-                company_name_en: function () { return $('#txtjuristicEmodal').val() },
-                company_alias: function () { return $('#txtbussinessmodal').val()},
-                company_code: function () {return $('#txtbussinesscodemodal').val()},
-                location_name_th: function () {return $('#txtlocationnameTHmodal').val()},
-                location_name_en: function () {return $('#txtlocationnameTHmodal').val()},
-                location_code: function () {return $('#txtlocationcodemodal').val()},
-                distribution_channel: function () {return $('#ddldistributionModal option').filter(':selected').val()},
-                channel_sale_group: function () {return $('#ddlchannelsalegroupModal option').filter(':selected').val()}
+                asc_code: function () { return $('#txtasccodemodal').val() },
+                asc_mobile_no: function () { return $('#txtmobilenomodal').val() },
+                id_Number: function () { return $('#txtidnumbermodal').val()},
+                location_code: function () { return $('#txtlocationcodemodal').val()},
+                sap_code: function () { return $('#txtsapcodemodal').val()},
+                user_id: function () { return $('#txtuseridmodal').val()}
             },
             dataType: "json",
             error: function (xhr, status, error) {
@@ -122,11 +118,13 @@
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         //lengthChange: false,
         columns: [
-            { "data": "company_name_th" },
-            { "data":"locationCode"},
-            { "data": "locationNameTh" },
-            { "data": "distribution_channel" },
-            { "data": "channel_sale_group" }
+            { "data": "outcompanyName" },
+            { "data": "outCompanyShortname" },
+            { "data": "outTaxId" },
+            { "data":"outLocationCode"},
+            { "data": "outLocationName" },
+            { "data": "outDistchn" },
+            { "data": "outChnSales" }
         ],
         language: {
             infoEmpty: "No items to display",
@@ -142,6 +140,65 @@
             }
         }
     });
+
+    //var tbLocation = $('#tblocationModal').DataTable({
+    //    ordering: true,
+    //    select: true,
+    //    retrieve: true,
+    //    paging: true,
+    //    pagingType: "full_numbers",
+    //    destroy: true,
+    //    searching: false,
+    //    //pageLength: 10,
+    //    proccessing: true,
+    //    serverSide: true,
+    //    ajax: {
+    //        type: "POST",
+    //        url: "/Account/SearchLocation",
+    //        data: {
+    //            company_name_th: function () { return $('#txtjuristicTmodal').val() },
+    //            company_name_en: function () { return $('#txtjuristicEmodal').val() },
+    //            company_alias: function () { return $('#txtbussinessmodal').val()},
+    //            company_code: function () {return $('#txtbussinesscodemodal').val()},
+    //            location_name_th: function () {return $('#txtlocationnameTHmodal').val()},
+    //            location_name_en: function () {return $('#txtlocationnameTHmodal').val()},
+    //            location_code: function () {return $('#txtlocationcodemodal').val()},
+    //            distribution_channel: function () {return $('#ddldistributionModal option').filter(':selected').val()},
+    //            channel_sale_group: function () {return $('#ddlchannelsalegroupModal option').filter(':selected').val()}
+    //        },
+    //        dataType: "json",
+    //        error: function (xhr, status, error) {
+    //            //Loading(0);
+    //            //clearForEdit();
+    //            console.log(status);
+    //            showFeedback("error", xhr.responseText, "System Information",
+    //                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+    //        }
+
+    //    },
+    //    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+    //    //lengthChange: false,
+    //    columns: [
+    //        { "data": "company_name_th" },
+    //        { "data":"locationCode"},
+    //        { "data": "locationNameTh" },
+    //        { "data": "distribution_channel" },
+    //        { "data": "channel_sale_group" }
+    //    ],
+    //    language: {
+    //        infoEmpty: "No items to display",
+    //        lengthMenu: "_MENU_ items per page",
+    //        zeroRecords: "Nothing found",
+    //        info: "_START_ - _END_  of _TOTAL_  items",
+    //        infoFiltered: "",
+    //        paginate: {
+    //            previous: "<",
+    //            next: ">",
+    //            last: ">|",
+    //            first: "|<"
+    //        }
+    //    }
+    //});
    
 
     $('#btnsearchlocation').click(function () {
