@@ -196,6 +196,7 @@ namespace SubcontractProfile.WebApi.Services.Model
     public class SubcontractProfileLocationOutput
     {
         public List<SubcontractProfileLocationList> ListResult { get; set; }
+        public int filteredResultsCount { get; set; }
         public int TotalResultsCount { get; set; }
     }
     #endregion
