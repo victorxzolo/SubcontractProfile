@@ -141,12 +141,14 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string CompanyId { get; set; }
 
+        public string company_name_th { get; set; }
+
     }
 
 
 
     #region View
-    public class Search_subcontract_profile_location : DataTableAjaxModel //รับ Search จากหน้าจอ
+    public class SearchSubcontractProfileLocationViewModel : DataTableAjaxModel //รับ Search จากหน้าจอ
     {
         public string company_name_th { get; set; }
         public string company_name_en { get; set; }
@@ -158,14 +160,40 @@ namespace SubcontractProfile.Web.Model
         public string distribution_channel { get; set; }
         public string channel_sale_group { get; set; }
 
-        public int PAGE_INDEX { get; set; }
-        public int PAGE_SIZE { get; set; }
+        public int page_index { get; set; }
+        public int page_size { get; set; }
+
+        public string sort_col { get; set; }
+        public string sort_dir { get; set; }
     }
 
     public class SubcontractProfileLocationSearchOutputModel
     {
-        public List<SubcontractProfileLocationModel> result { get; set; }
+        public List<SubcontractProfileLocationModel> ListResult { get; set; }
+        public int filteredResultsCount { get; set; }
         public int TotalResultsCount { get; set; }
+    }
+
+
+
+
+    public class SearchSubcontractProfileLocationQueryModel
+    {
+        public string company_name_th { get; set; }
+        public string company_name_en { get; set; }
+        public string company_alias { get; set; }
+        public string company_code { get; set; }
+        public string location_name_th { get; set; }
+        public string location_name_en { get; set; }
+        public string location_code { get; set; }
+        public string distribution_channel { get; set; }
+        public string channel_sale_group { get; set; }
+
+        public int page_index { get; set; }
+        public int page_size { get; set; }
+
+        public string sort_col { get; set; }
+        public string sort_dir { get; set; }
     }
     #endregion
 }

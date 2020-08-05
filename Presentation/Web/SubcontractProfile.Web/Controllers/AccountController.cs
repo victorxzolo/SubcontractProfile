@@ -523,7 +523,7 @@ namespace SubcontractProfile.Web.Controllers
 
 
         [HttpPost]
-        public IActionResult SearchLocation(Search_subcontract_profile_location model)
+        public IActionResult SearchLocation(SearchSubcontractProfileLocationViewModel model)
         {
             var result = new SubcontractProfileLocationSearchOutputModel();
             int filteredResultsCount;
@@ -546,37 +546,67 @@ namespace SubcontractProfile.Web.Controllers
                     sortBy = model.columns[model.order[0].column].data;
                     sortDir = model.order[0].dir.ToLower() == "asc";
                 }
-                model.PAGE_INDEX = skip;
-                model.PAGE_SIZE = take;
+                model.page_index = skip;
+                model.page_size = take;
+            model.sort_col = sortBy;
+            model.sort_dir = sortDir?"asc":"desc";
 
-                
+            SearchSubcontractProfileLocationQueryModel query = new SearchSubcontractProfileLocationQueryModel();
+            query.channel_sale_group = model.channel_sale_group;
+            query.company_alias = model.company_alias;
+            query.company_code = model.company_code;
+            query.company_name_en = model.company_name_en;
+            query.company_name_th = model.company_name_th;
+            query.distribution_channel = model.distribution_channel;
+            query.location_code = model.location_code;
+            query.location_name_en = model.location_name_en;
+            query.location_name_th = model.location_name_th;
+            query.page_index = model.page_index;
+            query.page_size = model.page_size;
+            query.sort_col = model.sort_col;
+            query.sort_dir = model.sort_dir;
 
-                HttpClient client = new HttpClient();
+            var rr = JsonConvert.SerializeObject(query);
+
+            HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "Location/GetListLocation", model);
-                HttpResponseMessage response = client.GetAsync(uriString).Result;
+                string uriString = string.Format("{0}", strpathAPI + "Location/GetListLocation");
+            var httpContentLocation = new StringContent(JsonConvert.SerializeObject(query), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PostAsync(uriString, httpContentLocation).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var v = response.Content.ReadAsStringAsync().Result;
                     result = JsonConvert.DeserializeObject<SubcontractProfileLocationSearchOutputModel>(v);
                 }
 
-                //var result = data.Where(x => x.channel_sale_group.Contains(model.channel_sale_group != null ? model.channel_sale_group : "")).Skip(skip).Take(take).ToList();
-
-
-                filteredResultsCount = result.result.Count(); //output from Database
+                if(result !=null)
+            {
+                filteredResultsCount = result.filteredResultsCount; //output from Database
                 totalResultsCount = result.TotalResultsCount; //output from Database
-
                 return Json(new
                 {
                     // this is what datatables wants sending back
                     draw = model.draw,
                     recordsTotal = totalResultsCount,
                     recordsFiltered = filteredResultsCount,
-                    data = result
+                    data = result.ListResult
                 });
+            }
+                else
+            {
+                return Json(new
+                {
+                    draw = model.draw,
+                    recordsTotal = 0,
+                    recordsFiltered = 0,
+                    data = new List<SubcontractProfileLocationModel>()
+                });
+            }
+
+
+              
 
         }
 
@@ -794,10 +824,6 @@ namespace SubcontractProfile.Web.Controllers
                         HttpClient clientCompany = new HttpClient();
                         clientCompany.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
-
-
-                        var rr = JsonConvert.SerializeObject(model);
-
                         var httpContentCompany = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
                         HttpResponseMessage responseCompany = clientCompany.PostAsync(uriCompany, httpContentCompany).Result;
                         if(responseCompany.IsSuccessStatusCode)

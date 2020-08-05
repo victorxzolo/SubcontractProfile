@@ -235,20 +235,20 @@ namespace SubcontractProfile.WebApi.Services.Services
 
         }
 
-        public async Task<SubcontractProfilePayment> searchPayment(string payment_no, string request_training_no,
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>> searchPayment(string payment_no, string request_training_no,
             string request_date_from, string request_date_to, string payment_date_from, string payment_date_to,
             string payment_status)
         {
             var p = new DynamicParameters();
-            p.Add("@payment_no", payment_no);
-            p.Add("@request_training_no", request_training_no);
-            p.Add("@request_date_from", request_date_from);
-            p.Add("@request_date_to", request_date_to);
-            p.Add("@payment_date_from", payment_date_from);
-            p.Add("@payment_date_to", payment_date_to);
-            p.Add("@payment_status", payment_status);
+            p.Add("@payment_no", payment_no.Trim());
+            p.Add("@request_training_no", request_training_no.Trim());
+            p.Add("@request_date_from", request_date_from.Trim());
+            p.Add("@request_date_to", request_date_to.Trim());
+            p.Add("@payment_date_from", payment_date_from.Trim());
+            p.Add("@payment_date_to", payment_date_to.Trim());
+            p.Add("@payment_status", payment_status.Trim());
 
-            var entity = await _dbContext.Connection.QuerySingleOrDefaultAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>
             ("uspSubcontractProfilePayment_searchPayment", p, commandType: CommandType.StoredProcedure);
 
             return entity;
