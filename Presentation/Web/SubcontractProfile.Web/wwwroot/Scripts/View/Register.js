@@ -118,13 +118,14 @@
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         //lengthChange: false,
         columns: [
-            { "data": "outcompanyName" },
-            { "data": "outCompanyShortname" },
+            { "data": "outCompanyName" },
+            { "data": "outCompanyShortName" },
             { "data": "outTaxId" },
             { "data":"outLocationCode"},
             { "data": "outLocationName" },
-            { "data": "outDistchn" },
-            { "data": "outChnSales" }
+            { "data": "outDistChn" },
+            { "data": "outChnSales" },
+            { "data": "location_id", "visible": false }
         ],
         language: {
             infoEmpty: "No items to display",
@@ -140,66 +141,6 @@
             }
         }
     });
-
-    //var tbLocation = $('#tblocationModal').DataTable({
-    //    ordering: true,
-    //    select: true,
-    //    retrieve: true,
-    //    paging: true,
-    //    pagingType: "full_numbers",
-    //    destroy: true,
-    //    searching: false,
-    //    //pageLength: 10,
-    //    proccessing: true,
-    //    serverSide: true,
-    //    ajax: {
-    //        type: "POST",
-    //        url: "/Account/SearchLocation",
-    //        data: {
-    //            company_name_th: function () { return $('#txtjuristicTmodal').val() },
-    //            company_name_en: function () { return $('#txtjuristicEmodal').val() },
-    //            company_alias: function () { return $('#txtbussinessmodal').val()},
-    //            company_code: function () {return $('#txtbussinesscodemodal').val()},
-    //            location_name_th: function () {return $('#txtlocationnameTHmodal').val()},
-    //            location_name_en: function () {return $('#txtlocationnameTHmodal').val()},
-    //            location_code: function () {return $('#txtlocationcodemodal').val()},
-    //            distribution_channel: function () {return $('#ddldistributionModal option').filter(':selected').val()},
-    //            channel_sale_group: function () {return $('#ddlchannelsalegroupModal option').filter(':selected').val()}
-    //        },
-    //        dataType: "json",
-    //        error: function (xhr, status, error) {
-    //            //Loading(0);
-    //            //clearForEdit();
-    //            console.log(status);
-    //            showFeedback("error", xhr.responseText, "System Information",
-    //                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-    //        }
-
-    //    },
-    //    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-    //    //lengthChange: false,
-    //    columns: [
-    //        { "data": "company_name_th" },
-    //        { "data":"locationCode"},
-    //        { "data": "locationNameTh" },
-    //        { "data": "distribution_channel" },
-    //        { "data": "channel_sale_group" }
-    //    ],
-    //    language: {
-    //        infoEmpty: "No items to display",
-    //        lengthMenu: "_MENU_ items per page",
-    //        zeroRecords: "Nothing found",
-    //        info: "_START_ - _END_  of _TOTAL_  items",
-    //        infoFiltered: "",
-    //        paginate: {
-    //            previous: "<",
-    //            next: ">",
-    //            last: ">|",
-    //            first: "|<"
-    //        }
-    //    }
-    //});
-   
 
     $('#btnsearchlocation').click(function () {
         $('#Searchlocation').modal('show');
@@ -231,12 +172,41 @@
 
     $('#btn_select_location').click(function () {
         var value = tbLocation.rows('.selected').data();
-        console.log(value[0]);
-        console.log(value[0].location_code)
-        $('#txtlocationcode').val(value[0].location_code);
-        $('#txtlocationname').val(value[0].location_name_th);
-        $('#txtdistribution').val(value[0].distribution_channel);
-        $('#txtchannelsalegroup').val(value[0].channel_sale_group);
+        var lo_id = value[0].location_id;
+
+        $.ajax({
+            type: "POST",
+            url: "/Account/GetLocationSession",
+            dataType: "json",
+            data: { location_id: lo_id},
+            success: function (data) {
+              
+                if (data.response.status) {
+                    $('#txtlocationcode').val(data.locationListModel[0].outLocationCode);
+                    $('#txtlocationname').val(data.locationListModel[0].outLocationName);
+                    $('#txtdistribution').val(data.locationListModel[0].outDistChn);
+                    $('#txtchannelsalegroup').val(data.locationListModel[0].outChnSales);
+                    $('#txttax_id_dealer').val(data.locationListModel[0].outTaxId);
+                    $('#txtcompany_alias_dealer').val(data.locationListModel[0].outCompanyShortName);
+                    $('#ddlprefixcompany_name_th_dealer option').filter(':selected').text(data.locationListModel[0].outTitle)
+                    $('#txtcompany_name_th_dealer').val(data.locationListModel[0].outCompanyName);
+                    $('#ddlprefixcompany_name_en_dealer option').filter(':selected').text(data.locationListModel[0].outTitle)
+                    $('#txtcompany_name_en_dealer').val();
+                    $('#txtwt_name_dealer').val(data.locationListModel[0].outWTName);
+                }
+
+            },
+            error: function (xhr, status, error) {
+                //Loading(0);
+                //clearForEdit();
+                console.log(status);
+                showFeedback("error", xhr.responseText, "System Information",
+                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            }
+        });
+
+      
+
         ClearDataModalLocation();
         $('#Searchlocation').modal('hide');
 

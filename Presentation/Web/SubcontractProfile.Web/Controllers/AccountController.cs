@@ -23,6 +23,9 @@ using Microsoft.EntityFrameworkCore.Internal;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Diagnostics.Eventing.Reader;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -616,6 +619,8 @@ namespace SubcontractProfile.Web.Controllers
         [HttpPost]
         public IActionResult SearchLocation(SearchSubcontractProfileLocationViewModel model)
         {
+           ASCProfileModel result = new ASCProfileModel();
+            List<LocationListModel> locate = new List<LocationListModel>();
             try
             {
                 HttpClient client = new HttpClient();
@@ -632,15 +637,76 @@ namespace SubcontractProfile.Web.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var v = response.Content.ReadAsStringAsync().Result;
-                    var ee = JsonConvert.DeserializeObject<List<outputtt>>(v);
+                    result = JsonConvert.DeserializeObject<ASCProfileModel>(v);
+                    if(result.outStatus== "0000")
+                    {
+                        foreach (var e in result.resultData)
+                        {
+                            foreach(var r in e.LocationList)
+                            {
+                                Guid l_id = Guid.NewGuid();
+                                locate.Add(new LocationListModel {
+                                    outTitle=r.outTitle,
+                                    outCompanyName = r.outCompanyName,
+                                    outPartnerName = r.outPartnerName,
+                                    outCompanyShortName = r.outCompanyShortName,
+                                    outTaxId = r.outTaxId,
+                                    outWTName = r.outWTName,
+                                    outDistChn = r.outDistChn,
+                                    outChnSales = r.outChnSales,
+                                    outType = r.outType,
+                                    outSubType = r.outSubType,
+                                    outBusinessType = r.outBusinessType,
+                                    outCharacteristic = r.outCharacteristic,
+                                    outLocationCode = r.outLocationCode,
+                                    outLocationName = r.outLocationName,
+                                    outShopArea = r.outShopArea,
+                                    outShopType = r.outShopType,
+                                    outOperatorClass = r.outOperatorClass,
+                                    outLocationPhoneNo = r.outLocationPhoneNo,
+                                    outLocationFax = r.outLocationFax,
+                                    outContractName = r.outContractName,
+                                    outContractPhoneNo = r.outContractPhoneNo,
+                                    outLocationStatus = r.outLocationStatus,
+                                    outRetailShop = r.outRetailShop,
+                                    outBusinessRegistration = r.outBusinessRegistration,
+                                    outVatType = r.outVatType,
+                                    outEffectiveDt = r.outEffectiveDt,
+                                    outIdType = r.outIdType,
+                                    outHQFlag = r.outHQFlag,
+                                    outChnName = r.outChnName,
+                                    outSAPVendorCode = r.outSAPVendorCode,
+                                    outMobileForService = r.outMobileForService,
+                                    outLocationRegion = r.outLocationRegion,
+                                    outLocationSubRegion = r.outLocationSubRegion,
+                                    outPaymentChannelCode = r.outPaymentChannelCode,
+                                    outPaymentChannelName = r.outPaymentChannelName,
+                                    outLocationRemark = r.outLocationRemark,
+                                    outBusinessName = r.outBusinessName,
+                                    outPubid = r.outPubid,
+                                    outLocationAbbr = r.outLocationAbbr,
+                                    addressLocationList=r.addressLocationList,
+                                    SAPCustomerList=r.SAPCustomerList,
+                                    ASCList=r.ASCList,
+                                    location_id= l_id.ToString()
+                                });
 
+                               
+
+                            }
+                           
+
+                        }
+                        SessionHelper.SetObjectAsJson(HttpContext.Session, "LocationDealer", locate);
+                    }
                     return Json(new
                     {
                         draw = model.draw,
-                        recordsTotal = ee.Count(),
-                        recordsFiltered = ee.Count(),
-                        data = ee
+                        recordsTotal = locate.Count(),
+                        recordsFiltered = locate.Count(),
+                        data = locate
                     });
+
                 }
                 else
                 {
@@ -649,7 +715,7 @@ namespace SubcontractProfile.Web.Controllers
                         draw = model.draw,
                         recordsTotal = 0,
                         recordsFiltered = 0,
-                        data = new List<outputtt>()
+                        data = locate
                     });
                 }
 
@@ -663,20 +729,39 @@ namespace SubcontractProfile.Web.Controllers
                     draw = model.draw,
                     recordsTotal = 0,
                     recordsFiltered = 0,
-                    data = new List<outputtt>()
+                    data = locate
                 });
                 throw;
             }
         }
-        public class outputtt
+
+        [HttpPost]
+        public IActionResult GetLocationSession(string location_id)
         {
-            public string outcompanyName { get; set; }
-            public string outCompanyShortname { get; set; }
-            public string outTaxId { get; set; }
-            public string outLocationCode { get; set; }
-            public string outLocationName { get; set; }
-            public string outDistchn { get; set; }
-            public string outChnSales { get; set; }
+            List<LocationListModel> resultLocation = new List<LocationListModel>();
+            ResponseModel res = new ResponseModel();
+            try
+            {
+                var data = SessionHelper.GetObjectFromJson<List<LocationListModel>>(HttpContext.Session, "LocationDealer");
+                if(data !=null)
+                {
+                    resultLocation = data.Where(x => x.location_id == location_id).ToList();
+                    res.Status = true;
+                }
+               
+            }
+            catch (Exception e)
+            {
+                res.Status = false;
+                res.Message = e.Message;
+                throw;
+            }
+            return Json(new
+            {
+                LocationListModel = resultLocation,
+                Response=res
+
+            });
         }
 
         #region DaftAddress Register
