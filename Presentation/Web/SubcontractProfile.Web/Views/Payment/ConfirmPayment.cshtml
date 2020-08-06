@@ -5,113 +5,122 @@
 
 
 
-    <div class="container">
-        
-        <p class="h5" style="margin-top: 30px"><strong>Search Confirm Payment</strong></p>
-        <hr>
-        <div class="row mt-3 ml-2">
+<div class="container">
 
-            <div class=" col-md-6 mt-3">
-                <div class="row">
-                    <div class="col-md-4">
-                        <p class="">Location Code:</p>
-                    </div>
-                    <div class="col-md-7">                    
-                        <select class="form-control" id="exampleSelectGender">
-                            <option>Please Select</option>
-                        </select>
-                        
-                    </div>
+    <p class="h5" style="margin-top: 30px"><strong>Search Confirm Payment</strong></p>
+    <hr>
+    <div class="row mt-3 ml-2">
+
+        <div class=" col-md-6 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Location Code:</p>
+                </div>
+                <div class="col-md-7">
+                    <select class="form-control" id="locationcode">
+                        <option>Please Select</option>
+                        <option value="00001">00001</option>
+                        <option value="00002">00002</option>
+                    </select>
+
                 </div>
             </div>
-            <div class=" col-md-6 mt-3">
-                <div class="row">
-                    <div class="col-md-4">
-                        <p class="">Team Name:</p>
-                    </div>
-                    <div class="col-md-7">
-                        <select class="form-control" id="exampleSelectGender">
-                            <option>Please Select</option>
-                        </select>
-                    </div>
+        </div>
+        <div class=" col-md-6 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Team Name:</p>
+                </div>
+                <div class="col-md-7">
+                    <select class="form-control" id="teamname">
+                        <option>Please Select</option>
+                        <option value="oneteam">oneteam</option>
+                        <option value="twoteam">oneteam</option>
+                    </select>
                 </div>
             </div>
-            <div class=" col-md-6 mt-4">
-                <div class="row">
-                    <div class="col-md-4">
-                        <p class="">Engineer Name:</p>
-                    </div>
-                    <div class="col-md-7">
-                        <input type="text" class="form-control" placeholder="Your Email" />
-                    </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Engineer Name:</p>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" id="engineername" class="form-control" placeholder="Your Name" />
                 </div>
             </div>
-            <div class=" col-md-6 mt-4">
-                <div class="row">
-                    <div class="col-md-4">
-                        <p class="">Position:</p>
-                    </div>
-                    <div class="col-md-7">
-                        <select class="form-control" id="exampleSelectGender">
-                            <option>Position</option>
-                        </select>
-                    </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Position:</p>
+
+                </div>
+                <div class="col-md-7">
+                    <select class="form-control" id="position">
+                        <option>Position</option>
+                        <option value="Dev">Dev</option>
+                        <option value="Sa">Sa</option>
+                    </select>
                 </div>
             </div>
-            <div class=" col-md-6 mt-4">
-                <div class="row">
-                    <div class="col-md-4">
-                        <p class="">Status:</p>
-                    </div>
-                    <div class="col-md-7">
-                        <select class="form-control" id="exampleSelectGender">
-                            <option>Select ALL</option>
-                        </select>
-                    </div>
+        </div>
+        <div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Status:</p>
+                </div>
+                <div class="col-md-7">
+                    <select class="form-control" id="status">
+                        <option>Select ALL</option>
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
                 </div>
             </div>
-            <div class=" col-md-6 mt-4"></div>
-            <div class=" col-md-6 mt-3">
-                <div class="row">
-                    <div class="col-md-4">
-                        <p class="">Payment Date From:</p>
-                    </div>
-                    <div class="col-md-7">
-                        <div class='input-group date' id='datepicker1'>
-                            <input type='text' class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="fa fa-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
+        </div>
+        <div class=" col-md-6 mt-4"></div>
+        <div class=" col-md-6 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Payment Date From:</p>
                 </div>
-            </div>
-            <div class=" col-md-6 mt-3">
-                <div class="row">
-                    <div class="col-md-4">
-                        <p class="">Payment Date To:</p>
-                    </div>
-                    <div class="col-md-7">
-                        <div class='input-group date' id='datepicker2'>
-                            <input type='text' class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="fa fa-calendar"></span>
-                            </span>
-                        </div>
+                <div class="col-md-7">
+                    <div class='input-group date' id="paymentdatefrom">
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="btn2 mt-5" style="text-align: center;">
-            <button class="btn btn-secondary" style="width:120px;color:white;">Clear</button>
-            <button class="btn btn-success" style="width:120px">Search</button>
+        <div class=" col-md-6 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="">Payment Date To:</p>
+                </div>
+                <div class="col-md-7">
+                    <div class='input-group date' id="paymentdateto">
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <div class="btn2 mt-5" style="text-align: center;">
+        <button class="btn btn-secondary" style="width:120px;color:white;">Clear</button>
+        <button class="btn btn-success" onclick="Searchconfirmpayment();" style="width:120px">Search</button>
+    </div>
+</div>
 <div class="container">
     <div class="row mt-4">
         <div class="col-md-12">
-            <p class="h5" ><strong>Serach Result</strong></p>
-           
+            <p class="h5"><strong>Serach Result</strong></p>
+
             <hr />
         </div>
         <div class="col-md-12">
@@ -178,7 +187,7 @@
     <div class="row mt-5">
         <div class="col-md-12">
             <p class="h5"><strong>Confirm Payment</strong></p>
-            
+
         </div>
     </div>
     <div class="row mt-3  mb-5">
@@ -201,7 +210,7 @@
                         <p class="">ช่องทางการชำระเงิน*:</p>
                     </div>
                     <div class="col-md-7">
-                        <select class="form-control" id="exampleSelectGender">
+                        <select class="form-control" id="Bank">
                             <option>โอนเงินผ่านบัญชีธนาคาร</option>
                         </select>
                     </div>
@@ -227,11 +236,13 @@
                         <p class="">วันที่ชำระเงิน*:</p>
                     </div>
                     <div class="col-md-7">
-                        <div class='input-group date' id='datepicker3'>
-                            <input type='text' class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="fa fa-calendar"></span>
-                            </span>
+                        <div class="form-group">
+                            <div class='input-group date' id="Date">
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -243,7 +254,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <div class='input-group date' id='datetimepicker3'>
+                            <div class='input-group date' id="Time">
                                 <input type='text' class="form-control" />
                                 <span class="input-group-addon">
                                     <span class="fa fa-clock-o"></span>
@@ -260,7 +271,7 @@
                         <p class="">ยอดเงินที่โอน (B)*:</p>
                     </div>
                     <div class="col-md-7">
-                        <input type='text' style="background-color: #c1bdbd ;" value="1000" class="form-control" />
+                        <input type='text' id="Balance" style="background-color: #c1bdbd;" value="1000" class="form-control" />
                     </div>
                 </div>
             </div>
@@ -270,7 +281,7 @@
                         <p class="">ธนาคารต้นทางที่โอน*:</p>
                     </div>
                     <div class="col-md-7">
-                        <select class="form-control" id="exampleSelectGender">
+                        <select class="form-control" id="SourceBank">
                             <option>SCB</option>
                         </select>
                     </div>
@@ -282,7 +293,7 @@
                         <p class="">สาขา:</p>
                     </div>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" placeholder="" />
+                        <input type="text" id="branch" class="form-control" placeholder="" />
                     </div>
                 </div>
             </div>
@@ -292,9 +303,9 @@
                         <p class="">หลักฐานการโอนเงิน*</p>
                     </div>
                     <div class="col-md-7 ">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-                            <label class="custom-file-label" for="validatedCustomFile"></label>
+                        <div class="custom-file ">
+                            <input type="file" class="custom-file-input" id="credit" name="filename">
+                            <label class="custom-file-label" for="credit"></label>
                         </div>
                     </div>
                 </div>
@@ -322,7 +333,7 @@
                     <div class="col-md-7">
                         <div class="row">
                             <div class="col-md-12 ml-0">
-                                <textarea id="w3review" name="w3review" rows="7" style="width:inherit;border-color:#E0E0E0"> </textarea>
+                                <textarea id="Note" name="w3review" rows="7" style="width:inherit;border-color:#E0E0E0"> </textarea>
 
                             </div>
                         </div>
@@ -340,7 +351,7 @@
         <div class="col-md-7 ">
 
         </div>
-   
+
         <div class="col-md-5 col-sm-12 mt-2 mb-2">
             <div class="row">
                 <div class="col-md-3 ml-3 ">
@@ -350,7 +361,7 @@
                     <button class="btn btn-secondary" style="width:120px;color:white">ล้างข้อมูล</button>
                 </div>
                 <div class="col-md-3  ml-3">
-                    <button class="btn btn-success" style="width:120px">แจ้งโอนเงิน</button>
+                    <button class="btn btn-success" onclick="confirmpayment()" style="width:120px">แจ้งโอนเงิน</button>
                 </div>
             </div>
         </div>
@@ -359,43 +370,122 @@
     </div>
 
 </div>
-    @section scripts
+@section scripts
 {
+    
 
-        <script type="text/javascript">
+    <script type="text/javascript">
+        //$("#paymentdatefrom").datepicker("setDate", new Date());
 
-            // console.log('Feature1');
-            // console.log('Feature2');
-            //console.log('Test push Branch dev')
-            $(function () {
-                $('#datepicker1').datepicker({
 
-                    autoclose: true,
-                    todayHighlight: true,
-                });
-                $('#datepicker2').datepicker({
+        $(function () {
 
-                    autoclose: true,
-                    todayHighlight: true,
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
 
-                });
-                $('#datepicker3').datepicker({
-
-                    autoclose: true,
-                    todayHighlight: true,
-
-                });
-                $('#datetimepicker3').datetimepicker({
-                    format: 'LT',
-                    autoclose: true,
-                    todayHighlight: true,
-
-                });
+            $('#paymentdateto').datepicker({
+                dateFormat: 'mm-dd-yy',
+                autoclose: true,
+                todayHighlight: true,
 
             });
-        </script>
+            $('#paymentdatefrom').datepicker({
+                dateFormat: 'mm-dd-yy',
+                autoclose: true,
+                todayHighlight: true,
 
-    }
+
+            });
+            $('#Date').datepicker({
+                dateFormat: 'mm-dd-yy',
+                autoclose: true,
+                todayHighlight: true,
+
+
+            });
+            $("#Time").datetimepicker({
+                timeFormat: "h:m t",
+                ampm: true
+            });
+
+        });
+
+
+        function Searchconfirmpayment() {
+
+            var dateTimefrom = $('#paymentdatefrom').datepicker('getDate');
+            var dateTimeto = $('#paymentdateto').datepicker('getDate');
+
+            var strpaymentdatefrom = dateTimefrom.getDate() + "/" + dateTimefrom.getMonth() + "/" + dateTimefrom.getFullYear();
+            var strpaymentdateto = dateTimeto.getDate() + "/" + dateTimeto.getMonth() + "/" + dateTimeto.getFullYear();
+
+            $.ajax({
+                type: "POST",
+                url: "/Payment/Searchconfirmpayment",
+                data: {
+                    Locationcode: function () { return $('#locationcode').val() },
+                    Teamname: function () { return $('#teamname').val() },
+                    Engineername: function () { return $('#engineername').val() },
+                    Position: function () { return $('#position').val() },
+                    Status: function () { return $('#status').val() },
+                    Paymentdatefrom: function () { return strpaymentdatefrom },
+                    Paymentdateto: function () { return strpaymentdateto }
+
+                },
+                dataType: "json",
+                async: false,
+                success: function (response) {
+
+                    if (response.data == "true") {
+
+
+
+                    }
+                },
+                failure: function (msg) {
+                }
+            });
+        }
+        function confirmpayment() {
+
+            var datefrom = $('#Date').datepicker('getDate');
+            var strdatefrom = datefrom.getDate() + "/" + datefrom.getMonth() + "/" + datefrom.getFullYear();
+
+            var data = new FormData();
+            data.append("Bank", $('#Bank').val());
+            data.append("Date", strdatefrom);
+            data.append("Time", $('#Time').val());
+            data.append("Balance", $('#Balance').val());
+            data.append("SourceBank", $('#SourceBank').val());
+            data.append("branch", $('#branch').val());
+            data.append("credit", $("#credit").get(0).files[0]);
+            data.append("Note", $('#Note').val());
+
+            $.ajax({
+                type: "POST",
+                url: "/Payment/confirmpayment",
+                data: data,
+                processData: false,
+                contentType: false,
+                async: false,
+                success: function (response) {
+
+                    if (response.data == "true") {
+
+
+
+                    }
+                },
+                failure: function (msg) {
+                }
+            });
+        }
+
+    </script>
+
+}
 
 
 
