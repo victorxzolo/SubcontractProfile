@@ -23,6 +23,9 @@ using Microsoft.EntityFrameworkCore.Internal;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Diagnostics.Eventing.Reader;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -30,6 +33,7 @@ namespace SubcontractProfile.Web.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly string strpathAPI;
+        private string strpathASCProfile;
         private string Lang = "";
         public AccountController(IConfiguration configuration)
         {
@@ -39,6 +43,7 @@ namespace SubcontractProfile.Web.Controllers
             //เรียก appsetting.json path api
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
             Lang = "TH";
+            strpathASCProfile = _configuration.GetValue<string>("PathASCProfile:DEV").ToString();
         }
 
         #region Login
@@ -521,93 +526,242 @@ namespace SubcontractProfile.Web.Controllers
         #endregion
 
 
+        #region Comment
+        //[HttpPost]
+        //public IActionResult SearchLocation(SearchSubcontractProfileLocationViewModel model)
+        //{
+        //    var result = new SubcontractProfileLocationSearchOutputModel();
+        //    int filteredResultsCount;
+        //    int totalResultsCount;
+
+        //    var res = YourCustomSearchFunc(model, out filteredResultsCount, out totalResultsCount);
+
+
+        //    var take = model.length;
+        //    var skip = model.start;
+
+        //    string sortBy = "";
+        //    bool sortDir = true;
+
+
+
+        //    if (model.order != null)
+        //    {
+        //         in this example we just default sort on the 1st column
+        //        sortBy = model.columns[model.order[0].column].data;
+        //        sortDir = model.order[0].dir.ToLower() == "asc";
+        //    }
+        //    model.page_index = skip;
+        //    model.page_size = take;
+        //    model.sort_col = sortBy;
+        //    model.sort_dir = sortDir ? "asc" : "desc";
+
+        //    SearchSubcontractProfileLocationQueryModel query = new SearchSubcontractProfileLocationQueryModel();
+        //    query.channel_sale_group = model.channel_sale_group;
+        //    query.company_alias = model.company_alias;
+        //    query.company_code = model.company_code;
+        //    query.company_name_en = model.company_name_en;
+        //    query.company_name_th = model.company_name_th;
+        //    query.distribution_channel = model.distribution_channel;
+        //    query.location_code = model.location_code;
+        //    query.location_name_en = model.location_name_en;
+        //    query.location_name_th = model.location_name_th;
+        //    query.page_index = model.page_index;
+        //    query.page_size = model.page_size;
+        //    query.sort_col = model.sort_col;
+        //    query.sort_dir = model.sort_dir;
+
+        //    var rr = JsonConvert.SerializeObject(query);
+
+        //    HttpClient client = new HttpClient();
+        //    client.DefaultRequestHeaders.Accept.Add(
+        //    new MediaTypeWithQualityHeaderValue("application/json"));
+
+        //    string uriString = string.Format("{0}", strpathAPI + "Location/GetListLocation");
+        //    var httpContentLocation = new StringContent(JsonConvert.SerializeObject(query), Encoding.UTF8, "application/json");
+        //    HttpResponseMessage response = client.PostAsync(uriString, httpContentLocation).Result;
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var v = response.Content.ReadAsStringAsync().Result;
+        //        result = JsonConvert.DeserializeObject<SubcontractProfileLocationSearchOutputModel>(v);
+        //    }
+
+        //    if (result != null)
+        //    {
+        //        filteredResultsCount = result.filteredResultsCount; //output from Database
+        //        totalResultsCount = result.TotalResultsCount; //output from Database
+        //        return Json(new
+        //        {
+        //            this is what datatables wants sending back
+        //            draw = model.draw,
+        //            recordsTotal = totalResultsCount,
+        //            recordsFiltered = filteredResultsCount,
+        //            data = result.ListResult
+        //        });
+        //    }
+        //    else
+        //    {
+        //        return Json(new
+        //        {
+        //            draw = model.draw,
+        //            recordsTotal = 0,
+        //            recordsFiltered = 0,
+        //            data = new List<SubcontractProfileLocationModel>()
+        //        });
+        //    }
+
+
+
+
+        //}
+        #endregion'
 
         [HttpPost]
         public IActionResult SearchLocation(SearchSubcontractProfileLocationViewModel model)
         {
-            var result = new SubcontractProfileLocationSearchOutputModel();
-            int filteredResultsCount;
-            int totalResultsCount;
-
-            //var res = YourCustomSearchFunc(model, out filteredResultsCount, out totalResultsCount);
-
-
-            var take = model.length;
-            var skip = model.start;
-
-            string sortBy = "";
-            bool sortDir = true;
-
-           
-          
-                if (model.order != null)
-                {
-                    // in this example we just default sort on the 1st column
-                    sortBy = model.columns[model.order[0].column].data;
-                    sortDir = model.order[0].dir.ToLower() == "asc";
-                }
-                model.page_index = skip;
-                model.page_size = take;
-            model.sort_col = sortBy;
-            model.sort_dir = sortDir?"asc":"desc";
-
-            SearchSubcontractProfileLocationQueryModel query = new SearchSubcontractProfileLocationQueryModel();
-            query.channel_sale_group = model.channel_sale_group;
-            query.company_alias = model.company_alias;
-            query.company_code = model.company_code;
-            query.company_name_en = model.company_name_en;
-            query.company_name_th = model.company_name_th;
-            query.distribution_channel = model.distribution_channel;
-            query.location_code = model.location_code;
-            query.location_name_en = model.location_name_en;
-            query.location_name_th = model.location_name_th;
-            query.page_index = model.page_index;
-            query.page_size = model.page_size;
-            query.sort_col = model.sort_col;
-            query.sort_dir = model.sort_dir;
-
-            var rr = JsonConvert.SerializeObject(query);
-
-            HttpClient client = new HttpClient();
+           ASCProfileModel result = new ASCProfileModel();
+            List<LocationListModel> locate = new List<LocationListModel>();
+            try
+            {
+                HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}", strpathAPI + "Location/GetListLocation");
-            var httpContentLocation = new StringContent(JsonConvert.SerializeObject(query), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PostAsync(uriString, httpContentLocation).Result;
+                //string uriString = string.Format("http://10.138.34.60:8080/phxPartner/v1/partner/ChannelASCProfile.json?filter=(&(inSource={0})(inEvent={1})" +
+                //                                 "(inASCCode={2})(inASCMobileNo={3})(inIdNo={4})(inLocationCode={5})(inSAPCode={6})(inUserID={7}))"
+                //                                , "FBB", "evLocationInfo",model.asc_code,model.asc_mobile_no,model.id_Number,model.location_code,model.sap_code,
+                //                                model.user_id);
+                string uriString = string.Format(strpathASCProfile, "FBB", "evLocationInfo", model.asc_code, model.asc_mobile_no, model.id_Number
+                                            , model.location_code, model.sap_code, model.user_id);
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var v = response.Content.ReadAsStringAsync().Result;
-                    result = JsonConvert.DeserializeObject<SubcontractProfileLocationSearchOutputModel>(v);
+                    result = JsonConvert.DeserializeObject<ASCProfileModel>(v);
+                    if(result.outStatus== "0000")
+                    {
+                        foreach (var e in result.resultData)
+                        {
+                            foreach(var r in e.LocationList)
+                            {
+                                Guid l_id = Guid.NewGuid();
+                                locate.Add(new LocationListModel {
+                                    outTitle=r.outTitle,
+                                    outCompanyName = r.outCompanyName,
+                                    outPartnerName = r.outPartnerName,
+                                    outCompanyShortName = r.outCompanyShortName,
+                                    outTaxId = r.outTaxId,
+                                    outWTName = r.outWTName,
+                                    outDistChn = r.outDistChn,
+                                    outChnSales = r.outChnSales,
+                                    outType = r.outType,
+                                    outSubType = r.outSubType,
+                                    outBusinessType = r.outBusinessType,
+                                    outCharacteristic = r.outCharacteristic,
+                                    outLocationCode = r.outLocationCode,
+                                    outLocationName = r.outLocationName,
+                                    outShopArea = r.outShopArea,
+                                    outShopType = r.outShopType,
+                                    outOperatorClass = r.outOperatorClass,
+                                    outLocationPhoneNo = r.outLocationPhoneNo,
+                                    outLocationFax = r.outLocationFax,
+                                    outContractName = r.outContractName,
+                                    outContractPhoneNo = r.outContractPhoneNo,
+                                    outLocationStatus = r.outLocationStatus,
+                                    outRetailShop = r.outRetailShop,
+                                    outBusinessRegistration = r.outBusinessRegistration,
+                                    outVatType = r.outVatType,
+                                    outEffectiveDt = r.outEffectiveDt,
+                                    outIdType = r.outIdType,
+                                    outHQFlag = r.outHQFlag,
+                                    outChnName = r.outChnName,
+                                    outSAPVendorCode = r.outSAPVendorCode,
+                                    outMobileForService = r.outMobileForService,
+                                    outLocationRegion = r.outLocationRegion,
+                                    outLocationSubRegion = r.outLocationSubRegion,
+                                    outPaymentChannelCode = r.outPaymentChannelCode,
+                                    outPaymentChannelName = r.outPaymentChannelName,
+                                    outLocationRemark = r.outLocationRemark,
+                                    outBusinessName = r.outBusinessName,
+                                    outPubid = r.outPubid,
+                                    outLocationAbbr = r.outLocationAbbr,
+                                    addressLocationList=r.addressLocationList,
+                                    SAPCustomerList=r.SAPCustomerList,
+                                    ASCList=r.ASCList,
+                                    location_id= l_id.ToString()
+                                });
+
+                               
+
+                            }
+                           
+
+                        }
+                        SessionHelper.SetObjectAsJson(HttpContext.Session, "LocationDealer", locate);
+                    }
+                    return Json(new
+                    {
+                        draw = model.draw,
+                        recordsTotal = locate.Count(),
+                        recordsFiltered = locate.Count(),
+                        data = locate
+                    });
+
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        draw = model.draw,
+                        recordsTotal = 0,
+                        recordsFiltered = 0,
+                        data = locate
+                    });
                 }
 
-                if(result !=null)
-            {
-                filteredResultsCount = result.filteredResultsCount; //output from Database
-                totalResultsCount = result.TotalResultsCount; //output from Database
-                return Json(new
-                {
-                    // this is what datatables wants sending back
-                    draw = model.draw,
-                    recordsTotal = totalResultsCount,
-                    recordsFiltered = filteredResultsCount,
-                    data = result.ListResult
-                });
+               
             }
-                else
+            catch (Exception e)
             {
+
                 return Json(new
                 {
                     draw = model.draw,
                     recordsTotal = 0,
                     recordsFiltered = 0,
-                    data = new List<SubcontractProfileLocationModel>()
+                    data = locate
                 });
+                throw;
             }
+        }
 
+        [HttpPost]
+        public IActionResult GetLocationSession(string location_id)
+        {
+            List<LocationListModel> resultLocation = new List<LocationListModel>();
+            ResponseModel res = new ResponseModel();
+            try
+            {
+                var data = SessionHelper.GetObjectFromJson<List<LocationListModel>>(HttpContext.Session, "LocationDealer");
+                if(data !=null)
+                {
+                    resultLocation = data.Where(x => x.location_id == location_id).ToList();
+                    res.Status = true;
+                }
+               
+            }
+            catch (Exception e)
+            {
+                res.Status = false;
+                res.Message = e.Message;
+                throw;
+            }
+            return Json(new
+            {
+                LocationListModel = resultLocation,
+                Response=res
 
-              
-
+            });
         }
 
         #region DaftAddress Register

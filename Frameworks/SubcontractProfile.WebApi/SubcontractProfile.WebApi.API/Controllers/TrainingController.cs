@@ -70,7 +70,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileTraining))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileTraining))]
         [HttpGet("SearchTraining/{trainingId}/{location_code}/{team_id}/{staff_name_th}/{position_id}/{status}/{date_from}/{date_to}")]
-        public Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining> SearchTraining(string company_id, string location_code,
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTraining(string company_id, string location_code,
             string team_id, string staff_name_th, string position_id, string status,
             string date_from, string date_to)
         {

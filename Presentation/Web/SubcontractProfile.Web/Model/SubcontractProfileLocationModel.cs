@@ -142,6 +142,8 @@ namespace SubcontractProfile.Web.Model
         public string CompanyId { get; set; }
 
         public string company_name_th { get; set; }
+        public string distribution_channel { get; set; }
+        public string channel_sale_group { get; set; }
 
     }
 
@@ -150,15 +152,14 @@ namespace SubcontractProfile.Web.Model
     #region View
     public class SearchSubcontractProfileLocationViewModel : DataTableAjaxModel //รับ Search จากหน้าจอ
     {
-        public string company_name_th { get; set; }
-        public string company_name_en { get; set; }
-        public string company_alias { get; set; }
-        public string company_code { get; set; }
-        public string location_name_th { get; set; }
-        public string location_name_en { get; set; }
+        public string asc_code { get; set; }
+        public string asc_mobile_no { get; set; }
+        public string id_Number { get; set; }
         public string location_code { get; set; }
-        public string distribution_channel { get; set; }
-        public string channel_sale_group { get; set; }
+        public string sap_code { get; set; }
+        public string user_id { get; set; }
+        public string inevent{ get;set; }
+        public string insource { get; set; }
 
         public int page_index { get; set; }
         public int page_size { get; set; }
@@ -174,26 +175,5 @@ namespace SubcontractProfile.Web.Model
         public int TotalResultsCount { get; set; }
     }
 
-
-
-
-    public class SearchSubcontractProfileLocationQueryModel
-    {
-        public string company_name_th { get; set; }
-        public string company_name_en { get; set; }
-        public string company_alias { get; set; }
-        public string company_code { get; set; }
-        public string location_name_th { get; set; }
-        public string location_name_en { get; set; }
-        public string location_code { get; set; }
-        public string distribution_channel { get; set; }
-        public string channel_sale_group { get; set; }
-
-        public int page_index { get; set; }
-        public int page_size { get; set; }
-
-        public string sort_col { get; set; }
-        public string sort_dir { get; set; }
-    }
     #endregion
 }
