@@ -340,3 +340,4 @@ ASALocalRun/
 healthchecksdb
 Presentation/Web/SubcontractProfile.Web/Logs/SubcontractProfileLog-20200723.txt
 Presentation/Web/SubcontractProfile.Web/Logs/SubcontractProfileLog-20200722.txt
+*.txt
