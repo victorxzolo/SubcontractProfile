@@ -1,0 +1,664 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+
+}
+<div class="form-group my-4">
+    <div class="card-header bg-white">
+        <p class="font-weight-bolder lead">Location</p>
+    </div>
+</div>
+<div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Company Name :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <label id="txtCompanyName" class="col-form-label">xxxxxxxxxxxxxxx</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row mb-0">
+                        <label class="col-sm-3 col-form-label">ประเภทผู้สมัคร :</label>
+                        <div class="col-sm-5">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="N" checked disabled>
+                                    New Subcontract
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="D" disabled>
+                                    Dealer
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Location Code :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtLocationCode" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Location Name Alias :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtLocationAlias" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Location Name(TH) :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtLocationNameT" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Location Name(EN) :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtLocationNameE" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Storage Location :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtStorage" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Ship To :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtShipTo" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Out of Service Storage location :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtOutService" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Vat branch Number :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtBranchNumber" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <p class="font-weight-bolder lead">
+                        Contract Phone
+                    </p>
+                    <hr />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Phone No :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtPhoneNo" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Company main contract phone :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtPhoneCompany" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Installations contract phone :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtPhoneInstallations" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Maintenence contract phone :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtPhoneMaintenence" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Inventory contract phone :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtPhoneInventory" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Payment contract phone :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtPhonePayment" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Etc contract phone :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtPhoneEtc" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            @*/////////////////////////////*@
+            <div class="row my-3">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <p class="font-weight-bolder lead">
+                        Contract Email
+                    </p>
+                    <hr />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Company group mail :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtMailCompany" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Installation contract mail :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtMailInstallation" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Maintanence contract mail :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtMailMaintanence" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Inventory contract mail :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtMailInventory" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Payment contract mail :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtMailPayment" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Etc contract mail :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtMailEtc" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-3">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <p class="font-weight-bolder lead">
+                        Address
+                    </p>
+                    <hr />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Location Address :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <textarea id="LocationAddress" class="form-control form-control-sm" rows="2" ></textarea>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Post Address :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <textarea id="PostAddress" class="form-control form-control-sm" rows="2" ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Tax Address :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <textarea id="TaxAddress" class="form-control form-control-sm" rows="2"></textarea>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">WT Address :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <textarea id="WTAddress" class="form-control form-control-sm" rows="2" ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-3">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <p class="font-weight-bolder lead">
+                        Bank
+                    </p>
+                    <hr />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Bank code :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtBankcode" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Bank Name :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control form-control-sm" id="txtBankName" >
+                                <div class="input-group-append">
+                                    <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Bank Account No :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtBankAccountNo" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Bank Account Name :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtBankAccountName" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Bank Branch No :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtBankBranchNo" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Bank Branch Name :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtBankBranchName" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Bank Attach File :</label>
+                        <input type="file" name="img[]" class="file-upload-default">
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
+                            <input type="text" class="form-control file-upload-info form-control-sm" disabled>
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Panalty contract phone :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtPanaltyPhone" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Panalty contract mail :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtPanaltyMail" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Contract name :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtContractName" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Contract email :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtContractMail" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <div class="d-flex align-items-center justify-content-center h-100" role="group">
+                        @*<button class="btn btn-secondary mr-2" id="rbtnresetlocationmodal" type="button">Back</button>
+                    <button class="btn btn-warning mr-2" id="btnsearchlocationmodal" type="button">Not Approve</button>
+                    <button class="btn btn-success" id="btnsearchlocationmodal" type="button">Approve</button>*@
+                        <button class="btn-border btn-gray mr-2" id="btnBack" type="button" onclick="location.href='@Url.Action("LocationIndex", "Profile")'">
+                            <i class="fa fa-undo icon"></i><span>Back</span>
+                        </button>
+                        <button class="btn-border btn-orange mr-2" id="btnClear" type="button">
+                            <i class="fa fa-refresh icon"></i><span>Cancel</span>
+                        </button>
+                        <button class="btn-border btn-green" id="btnApprove" type="button" onclick="addLocation()">
+                            <i class="fa fa-check icon"></i><span>Add</span>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section scripts
+{
+
+    <script type="text/javascript">
+
+        //$(document).ready(function () {
+            $('#regisdatefrom').datepicker({
+                format: 'dd/mm/yyyy',
+                daysOfWeekHighlighted: "6,0",
+                autoclose: true,
+                todayHighlight: true,
+                clearBtn: true,
+            });
+            $('#regisdateto').datepicker({
+                format: 'dd/mm/yyyy',
+                daysOfWeekHighlighted: "6,0",
+                autoclose: true,
+                todayHighlight: true,
+                clearBtn: true,
+
+            });
+
+        function addLocation() {
+            //alert("22");
+            //var data = {
+            //    //"CompanyId": " ",
+            //    "CompanyCode" : $("#txtCompanyCode").val(),
+            //    "CompanyName" : " ",
+            //    "CompanyNameTh" : $("#txtCompanyNameT").val(),
+            //    "CompanyNameEn" :  $("#txtCompanyNameE").val(),
+            //    "CompanyAlias" :  $("#txtCompanyAlias").val(),
+            //    "DistributionChannel" : " ",
+            //    "ChannelSaleGroup" : " ",
+            //    "VendorCode" : " ",
+            //    "CustomerCode" : " ",
+            //    "AreaId" : " ",
+            //    "TaxId" : " ",
+            //    "WtName" : $("#txttaxnew").val(),
+            //    "VatType" : " ",
+            //    "CompanyCertifiedFile" : " ",
+            //    "CommercialRegistrationFile" : " ",
+            //    "VatRegistrationCertificateFile" : " ",
+            //    "ContractAgreementFile" : " ",
+            //    "DepositAuthorizationLevel" : " ",
+            //    "DepositPaymentType" : " ",
+            //    "ContractStartDate" : " ",
+            //    "ContractEndDate" : " ",
+            //    "OverDraftDeposit" : " ",
+            //    "BalanceDeposit" : " ",
+            //    "CompanyStatus" : " ",
+            //    "CompanyAddress" : " ",
+            //    "VatAddress" : " ",
+            //    "CreateBy" : " ",
+            //    "CreateDate" : " ",
+            //    "UpdateBy" : " ",
+            //    "UpdateDate" : " ",
+            //    "CompanyEmail" : $("#txtCompanyEmail").val(),
+            //    "ContractName" : $("#txtContractName").val(),
+            //    "ContractPhone" : $("#txtContractPhone").val(),
+            //    "ContractEmail" : $("#txtContractEmail").val(),
+            //    "BankCode" : $("#txtbankcode").val(),
+            //    "BankName" : $("#txtbankname").val(),
+            //    "AccountNumber" : $("#txtaccountname").val(),
+            //    "AccountName" : $("#ddlaccountname").val(),
+            //    "AttachFile" : " ",
+            //    "BranchCode" : $("#txtbranchcode").val(),
+            //    "BranchName" : $("#txtbranchname").val(),
+            //    "DeptOfInstallName" : $("#txtInstallName").val(),
+            //    "DeptOfMaintenName" : $("#txtMaintenName").val(),
+            //    "DeptOfAccountName" : $("#txtAccountName").val(),
+            //    "DeptOfInstallPhone" : $("#txtInstallPhone").val(),
+            //    "DeptOfMaintenPhone" : $("#txtMaintenPhone").val(),
+            //    "DeptOfAccountPhone" : $("#txtAccountPhone").val(),
+            //    "DeptOfInstallEmail" : $("#txtInstallEmail").val(),
+            //    "DeptOfMaintenEmail" : $("#txtMaintenEmail").val(),
+            //    "DeptOfAccountEmail" : $("#txtAccountEmail").val(),
+            //    "LocationCode" : " ",
+            //    "LocationNameTh" : " ",
+            //    "LocationNameEn" : " ",
+            //    "BankAccountTypeId" : " ",
+            //    "SubcontractProfileType" : " ",
+            //    "CompanyTitleThId" : $("#ddlprefixnewT").val(),
+            //    "CompanyTitleEnId" : $("#ddlprefixnewE").val(),
+            //    "Status" : " ",
+            //    "ActivateDate" : " ",
+            //};
+
+            var data = {
+                //"CompanyId": " ",
+                "CompanyCode": " ",
+                "CompanyName": " ",
+                "CompanyNameTh": $("#txtCompanyNameT").val(),
+                "CompanyNameEn": $("#txtCompanyNameE").val(),
+                "CompanyAlias": $("#txtCompanyAlias").val(),
+                "DistributionChannel": " ",
+                "ChannelSaleGroup": " ",
+                "VendorCode": " ",
+                "CustomerCode": " ",
+                "AreaId": " ",
+                "TaxId": " ",
+                "WtName": " ",
+                "VatType": " ",
+                "CompanyCertifiedFile": " ",
+                "CommercialRegistrationFile": " ",
+                "VatRegistrationCertificateFile": " ",
+                "ContractAgreementFile": " ",
+                "DepositAuthorizationLevel": " ",
+                "DepositPaymentType": " ",
+                "ContractStartDate": " ",
+                "ContractEndDate": " ",
+                "OverDraftDeposit": " ",
+                "BalanceDeposit": " ",
+                "CompanyStatus": " ",
+                "CompanyAddress": " ",
+                "VatAddress": " ",
+                "CreateBy": " ",
+                "CreateDate": " ",
+                "UpdateBy": " ",
+                "UpdateDate": " ",
+                "CompanyEmail": " ",
+                "ContractName": " ",
+                "ContractPhone": " ",
+                "ContractEmail": " ",
+                "BankCode": " ",
+                "BankName": " ",
+                "AccountNumber": " ",
+                "AccountName": " ",
+                "AttachFile": " ",
+                "BranchCode": " ",
+                "BranchName": " ",
+                "DeptOfInstallName": " ",
+                "DeptOfMaintenName": " ",
+                "DeptOfAccountName": " ",
+                "DeptOfInstallPhone": " ",
+                "DeptOfMaintenPhone": " ",
+                "DeptOfAccountPhone": " ",
+                "DeptOfInstallEmail": " ",
+                "DeptOfMaintenEmail": " ",
+                "DeptOfAccountEmail": " ",
+                "LocationCode": " ",
+                "LocationNameTh": " ",
+                "LocationNameEn": " ",
+                "BankAccountTypeId": " ",
+                "SubcontractProfileType": " ",
+                "CompanyTitleThId": " ",
+                "CompanyTitleEnId": " ",
+                "Status": " ",
+                "ActivateDate": " ",
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Profile/AddCompany",
+                data: { Company: data },
+                //dataType: "json",
+                success: function (data) {
+                    console.log(data)
+
+                },
+                error: function (xhr, status, error) {
+                    //Loading(0);
+                    //clearForEdit();
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+    </script>
+
+}

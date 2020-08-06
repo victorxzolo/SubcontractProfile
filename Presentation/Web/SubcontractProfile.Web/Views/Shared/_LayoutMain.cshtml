@@ -87,26 +87,27 @@
                                                 <a href="#" class="link_head"></a>
                                                 <div class="heading">Dashboard</div>
                                                 <div class="content">
-                                                    <a href="@Url.Action("Dashboard", "Test")" class="filter_sub"><span>Dashboard</span></a>
+                                                    <a href="@Url.Action("Index", "Test")" class="filter_sub"><span>Dashboard</span></a>
 
                                                 </div>
 
                                             </div>
                                             @*<div class="item ">
-                                                <a href="#" class="link_head"></a>
-                                                <div class="heading">Main</div>
-                                                <div class="content">
-                                                    <a href="@Url.Action("Login", "Account")" class="filter_sub"><span>Login</span></a>
-                                                    <a href="@Url.Action("Register", "Account")" class="filter_sub"><span>Register</span></a>
+            <a href="#" class="link_head"></a>
+            <div class="heading">Main</div>
+            <div class="content">
+                <a href="@Url.Action("Login", "Account")" class="filter_sub"><span>Login</span></a>
+                <a href="@Url.Action("Register", "Account")" class="filter_sub"><span>Register</span></a>
 
-                                                </div>
-                                            </div>*@
+            </div>
+        </div>*@
                                             <div class="item open">
                                                 <a href="#" class="link_head"></a>
                                                 <div class="heading">Registration</div>
                                                 <div class="content" style="display: block;">
                                                     <a href="@Url.Action("SearchCompanyVerify", "Registration")" class="filter_sub"><span>CompanyVerify</span></a>
                                                     <a href="@Url.Action("ActivateProfile", "Registration")" class="filter_sub"><span>ActivateProfile</span></a>
+                                                    @*<a href="~/Views/Profile/CompanyIndex.cshtml" class="filter_sub"><span>ActivateProfile</span></a>*@
                                                 </div>
                                             </div>
                                             <div class="item ">
@@ -129,6 +130,17 @@
                                                 </div>
                                             </div>
 
+
+                                            <div class="item open">
+                                                <a href="#" class="link_head"></a>
+                                                <div class="heading">Profile</div>
+                                                <div class="content" style="display: block;">
+                                                    <a href="@Url.Action("CompanyIndex", "Profile")" class="filter_sub"><span>Company</span></a>
+                                                    <a href="@Url.Action("EngineerIndex", "Profile")" class="filter_sub"><span>Engineer</span></a>
+                                                    <a href="@Url.Action("LocationIndex", "Profile")" class="filter_sub"><span>Location</span></a>
+                                                    <a href="@Url.Action("TeamIndex", "Profile")" class="filter_sub"><span>Team</span></a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

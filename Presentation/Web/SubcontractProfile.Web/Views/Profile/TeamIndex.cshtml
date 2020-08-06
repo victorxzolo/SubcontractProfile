@@ -2,157 +2,304 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    //ViewData["Title"] = "CompanyIndex";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
-    <style>
-        .form-control {
-            display: block;
-            width: 100%;
-            height: 34px;
-            padding: 6px 12px;
-            font-size: 14px;
-            line-height: 1.42857143;
-            color: #555;
-            background-color: #fff;
-            background-image: none;
-            border: 1px solid #ccc;
-            border-radius: 0;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+<div class="form-group my-4">
+    <div class="card-header bg-white">
+        <p class="font-weight-bolder lead">Search Team</p>
+    </div>
+</div>
+<div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-left">Register Type :</label>
+                        <div class="col-sm-3">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="D">
+                                    New Subcontract
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="D">
+                                    Dealer
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Location Code :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <select class="form-control form-control-sm" id="ddlLocationCode">
+                                <option>Location1</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Vender Code :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtVenderCode" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Team Code :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtTeamCode" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Team Name(TH) :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtTeamNameT" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Team Name(EN) :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtTeamNameE" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Storage Location :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtStorage" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Ship To :</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <input type="text" class="form-control form-control-sm" id="txtShipTo" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <div class="d-flex align-items-center justify-content-center h-100" role="group">
+                        @*<button class="btn btn-secondary mr-2" id="btnclear" type="button">Clear</button>
+                    <button class="btn btn-success" id="btnSearch" type="button">Search</button>*@
+                        <button class="btn-border btn-black mr-2" type="button" id="btnclear">
+                            <i class="fa fa-refresh icon"></i><span>Clear</span>
+                        </button>
+                        <button class="btn-border btn-green" type="button" id="btnSearch">
+                            <i class="fa fa-search icon"></i><span>Search</span>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <div class="d-flex align-items-center justify-content-center h-100 float-right" role="group">
+                        <button class="btn-border btn-black mr-2 float-right" type="button" id="btnDelete">
+                            <i class="fa fa-trash-o icon"></i><span>Delete</span>
+                        </button>
+                        @*<button class="btn-border btn-green float-right" type="button" id="btnNewcompany"
+                            onclick="location.href='@Url.Action("CompanyVerify", "Registration" ,new {id=1 })'">
+                        <i class="fa fa-check icon"></i><span>New Company</span>
+                    </button>*@
+                        <button class="btn-border btn-green float-right" type="button" id="btnNewTeam"
+                                onclick="location.href='@Url.Action("_PartialCompany", "Profile")'">
+                            <i class="fa fa-check icon"></i><span>New Team</span>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <p class="font-weight-bolder lead">
+                        Search Result
+                    </p>
+                    <hr />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Select</th>
+                                    <th>Status</th>
+                                    <th>Register Type</th>
+                                    <th>Tax ID</th>
+                                    <th>Company Name (TH)</th>
+                                    <th>Cpmpaby Name (EN)</th>
+                                    <th>Vender Code</th>
+                                    <th>Distribution Channel</th>
+                                    <th>Channel Sale Group</th>
+                                    <th>Register Date</th>
+                                    <th>Verify Date</th>
+                                    <th>Verify By</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">
+
+                                        <input type="radio" class="form-check-input position-static" name="optionsRadios" id="chktype" value="1" checked>
+
+                                    </td>
+                                    <td>Waiting</td>
+                                    <td>New Sub</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+
+                                        <input type="radio" class="form-check-input position-static" name="optionsRadios" id="chktype" value="2" checked>
+
+                                    </td>
+                                    <td>Approve</td>
+                                    <td>Dealer</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <span class="page-link">Previous</span>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active">
+                                <span class="page-link">
+                                    2
+                                    <span class="sr-only">(current)</span>
+                                </span>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section scripts
+{
+
+    <script type="text/javascript">
+
+        //$(document).ready(function () {
+        $('#regisdatefrom').datepicker({
+            format: 'dd/mm/yyyy',
+            daysOfWeekHighlighted: "6,0",
+            autoclose: true,
+            todayHighlight: true,
+            clearBtn: true,
+        });
+        $('#regisdateto').datepicker({
+            format: 'dd/mm/yyyy',
+            daysOfWeekHighlighted: "6,0",
+            autoclose: true,
+            todayHighlight: true,
+            clearBtn: true,
+
+        });
+
+
+        function getAllCompany() {
+            var groupId = '0';
+            $.ajax({
+                url: "/Profile/GetCompany",
+                dataType: 'JSON',
+                data: { 'CompanyID': groupId },
+                type: 'POST',
+                success: function (result) {
+
+                },
+                error: function (result) {
+
+                }
+            });
         }
 
-        .btn-default {
-            color: #8DC63F; /*before color #74a333*/
-            background-color: #DDE1E4;
-            border-color: #ccc;
-        }
-    </style>
 
-    <body>
-        <h3>Search Team</h3>
-        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-2">
-                    <label>Register Type</label>
-                </div>
-                <div class="col-sm-10">
-                    <input type="radio" id="1" name="type" value="new">
-                    <label for="new">New Subcontract</label>&nbsp;&nbsp;
-                    <input type="radio" id="2" name="type" value="deal">
-                    <label for="deal">Dealer</label>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-sm-2">
-                    <label>Location Code :</label>
-                </div>
-                <div class="col-sm-4">
-                    <select id="location" name="location" style="width:300px">
-                    </select>
-                </div>
-                <div class="col-sm-2">
-                    <label>Team Code :</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" id="TeamCode" style="width:300px" class="form-control">
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-sm-2">
-                    <label>Vendor Code :</label>
-                </div>
-                <div class="col-sm-10">
-                    <input type="text" id="VendorCode" style="width:300px" class="form-control">
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-sm-2">
-                    <label>Team Name(TH) :</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" id="TeamNameT" style="width:300px" class="form-control">
-                </div>
-                <div class="col-sm-2">
-                    <label>Team Name(EH) :</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" id="TeamNameE" style="width:300px" class="form-control">
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-sm-2">
-                    <label>Storage Location :</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" id="Storage" style="width:300px" class="form-control">
-                </div>
-                <div class="col-sm-2">
-                    <label>Ship To :</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" id="Ship" style="width:300px" class="form-control">
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-sm-6" style="text-align:right; ">
-                    <input type="button" id="btnClear" value="Clear" width="100" class="btn btn-default" />
-                </div>
-                <div class="col-sm-6">
-                    <input type="button" id="btnSearch" value="Search" width="100" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-        <br />
+    </script>
 
-        <div class="row" style="margin-left:5px;">
-            <h3>Search Result</h3>
-            <input type="button" id="btnDel" value="Delete" width="100" class="btn btn-default" style="position: absolute; right: 170px;" />
-            <input type="button" id="btnNew" value="New Team" width="100" class="btn btn-default" style="position: absolute; right: 10px;" />
-        </div>
-        <hr style="height:1px;border-width:0;color:gray;background-color:gray">
-        <br />
-        <table align="center" width="100%" border="1">
-            <tr style="line-height: 20px; background-color:lightgray;">
-                <td style="vertical-align: central;" width="5%" align="center">
-                    <input id="Checkbox1" type="checkbox" />
-                </td>
-                <td width="5%">
-                    <label>Edit</label>
-                </td>
-                <td width="5%">
-                    <label>Register Type</label>
-                </td>
-                <td width="10%">
-                    <label>Location Code</label>
-                </td>
-                <td width="15%">
-                    <label>Vendor Code</label>
-                </td>
-                <td width="25%">
-                    <label>Team Code</label>
-                </td>
-                <td width="10%">
-                    <label>Team Name(EH)</label>
-                </td>
-                <td width="10%">
-                    <label>Team Name(EH)</label>
-                </td>
-                <td width="10%">
-                    <label>Storage Location</label>
-                </td>
-                <td width="10%">
-                    <label>Ship To</label>
-                </td>
-            </tr>
-        </table>
-
-
-    </body>
+}
