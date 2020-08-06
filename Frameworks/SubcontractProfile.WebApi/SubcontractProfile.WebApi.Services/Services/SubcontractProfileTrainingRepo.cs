@@ -228,7 +228,7 @@ namespace SubcontractProfile.WebApi.Services.Services
 
         }
 
-        public async Task<SubcontractProfileTraining> SearchTraining(string company_id, string location_code,
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTraining(string company_id, string location_code,
             string team_id, string staff_name_th, string position_id, string status,
             string date_from, string date_to)
         {
@@ -243,7 +243,7 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@date_to", date_to);
 
 
-            var entity = await _dbContext.Connection.QuerySingleOrDefaultAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>
             ("uspSubcontractProfileTraining_searchTraining", p, commandType: CommandType.StoredProcedure);
 
             return entity;
