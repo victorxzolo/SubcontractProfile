@@ -795,7 +795,7 @@
                         <button class="btn-border btn-gray mr-2" id="btnBack" type="button" onclick="location.href='@Url.Action("CompanyIndex", "Profile")'">
                             <i class="fa fa-undo icon"></i><span>Back</span>
                         </button>
-                        <button class="btn-border btn-orange mr-2" id="btnClear" type="button" >
+                        <button class="btn-border btn-orange mr-2" id="btnClear" type="button" onclick="clearData()" >
                             <i class="fa fa-refresh icon"></i><span>Cancel</span>
                         </button>
                         <button class="btn-border btn-green" id="btnApprove" type="button" onclick="addCompany()">
@@ -843,74 +843,232 @@
 
         });
 
-        function addCompany() {
-            //alert("22");
-            //var data = {
-            //    //"CompanyId": " ",
-            //    "CompanyCode" : $("#txtCompanyCode").val(),
-            //    "CompanyName" : " ",
-            //    "CompanyNameTh" : $("#txtCompanyNameT").val(),
-            //    "CompanyNameEn" :  $("#txtCompanyNameE").val(),
-            //    "CompanyAlias" :  $("#txtCompanyAlias").val(),
-            //    "DistributionChannel" : " ",
-            //    "ChannelSaleGroup" : " ",
-            //    "VendorCode" : " ",
-            //    "CustomerCode" : " ",
-            //    "AreaId" : " ",
-            //    "TaxId" : " ",
-            //    "WtName" : $("#txttaxnew").val(),
-            //    "VatType" : " ",
-            //    "CompanyCertifiedFile" : " ",
-            //    "CommercialRegistrationFile" : " ",
-            //    "VatRegistrationCertificateFile" : " ",
-            //    "ContractAgreementFile" : " ",
-            //    "DepositAuthorizationLevel" : " ",
-            //    "DepositPaymentType" : " ",
-            //    "ContractStartDate" : " ",
-            //    "ContractEndDate" : " ",
-            //    "OverDraftDeposit" : " ",
-            //    "BalanceDeposit" : " ",
-            //    "CompanyStatus" : " ",
-            //    "CompanyAddress" : " ",
-            //    "VatAddress" : " ",
-            //    "CreateBy" : " ",
-            //    "CreateDate" : " ",
-            //    "UpdateBy" : " ",
-            //    "UpdateDate" : " ",
-            //    "CompanyEmail" : $("#txtCompanyEmail").val(),
-            //    "ContractName" : $("#txtContractName").val(),
-            //    "ContractPhone" : $("#txtContractPhone").val(),
-            //    "ContractEmail" : $("#txtContractEmail").val(),
-            //    "BankCode" : $("#txtbankcode").val(),
-            //    "BankName" : $("#txtbankname").val(),
-            //    "AccountNumber" : $("#txtaccountname").val(),
-            //    "AccountName" : $("#ddlaccountname").val(),
-            //    "AttachFile" : " ",
-            //    "BranchCode" : $("#txtbranchcode").val(),
-            //    "BranchName" : $("#txtbranchname").val(),
-            //    "DeptOfInstallName" : $("#txtInstallName").val(),
-            //    "DeptOfMaintenName" : $("#txtMaintenName").val(),
-            //    "DeptOfAccountName" : $("#txtAccountName").val(),
-            //    "DeptOfInstallPhone" : $("#txtInstallPhone").val(),
-            //    "DeptOfMaintenPhone" : $("#txtMaintenPhone").val(),
-            //    "DeptOfAccountPhone" : $("#txtAccountPhone").val(),
-            //    "DeptOfInstallEmail" : $("#txtInstallEmail").val(),
-            //    "DeptOfMaintenEmail" : $("#txtMaintenEmail").val(),
-            //    "DeptOfAccountEmail" : $("#txtAccountEmail").val(),
-            //    "LocationCode" : " ",
-            //    "LocationNameTh" : " ",
-            //    "LocationNameEn" : " ",
-            //    "BankAccountTypeId" : " ",
-            //    "SubcontractProfileType" : " ",
-            //    "CompanyTitleThId" : $("#ddlprefixnewT").val(),
-            //    "CompanyTitleEnId" : $("#ddlprefixnewE").val(),
-            //    "Status" : " ",
-            //    "ActivateDate" : " ",
-            //};
+        function clearData() {
+            $('#txtCompanyCode').val(" ");
+            $('#txtCompanyAlias').val(" ");
+            $('#txtCompanyNameT').val(" ");
+            $('#txtCompanyNameE').val(" ");
+            $('#txttaxnew').val(" ");
+            $('#txthomenumber').val(" ");
+            $('#txtVillageNo').val(" ");
+            $('#txtvillage').val(" ");
+            $('#txtbuilding').val(" ");
+            $('#txtfloor').val(" ");
+            $('#txtroom').val(" ");
+            $('#txtsoi').val(" ");
+            $('#txtroad').val(" ");
+            $('#txtCompanyEmail').val(" ");
+            $('#txtContractName').val(" ");
+            $('#txtContractEmail').val(" ");
+            $('#txtContractPhone').val(" ");
+            $('#txtInstallName').val(" ");
+            $('#txtInstallPhone').val(" ");
+            $('#txtInstallEmail').val(" ");
+            $('#txtMaintenName').val(" ");
+            $('#txtMaintenPhone').val(" ");
+            $('#txtMaintenEmail').val(" ");
+            $('#txtAccountName').val(" ");
+            $('#txtAccountPhone').val(" ");
+            $('#txtAccountEmail').val(" ");
+            $('#txtbankcode').val(" ");
+            $('#txtbankname').val(" ");
+            $('#txtbranchcode').val(" ");
+            $('#txtbranchname').val(" ");
+            $('#txtaccountnumber').val(" ");
+            $('#txtbusinesstype').val(" ");
 
+        }
+
+        function getAllCompany() {
+            var groupId = '0';
+            $.ajax({
+                url: "/Profile/GetCompany",
+                dataType: 'JSON',
+                data: { 'CompanyID': groupId },
+                type: 'POST',
+                success: function (data) {
+                    
+                    $('#txtCompanyAlias').val(data.CompanyAlias);
+                    $('#txtCompanyNameT').val(data.CompanyNameTh);
+                    $('#ddlprefixnewT').val(data.CompanyTitleThId);
+                    $('#ddlprefixnewE').val(data.CompanyTitleEnId);
+                    $('#txttaxnew').val(data.WtName);
+                    $('#txtCompanyEmail').val(data.CompanyEmail);
+                    $('#txtContractName').val(data.ContractName);
+                    $('#txtContractEmail').val(data.ContractEmail);
+                    $('#txtContractPhone').val(data.ContractPhone);
+                    $('#txtInstallName').val(data.DeptOfInstallName);
+                    $('#txtInstallPhone').val(data.DeptOfInstallPhone);
+                    $('#txtInstallEmail').val(data.DeptOfInstallEmail);
+                    $('#txtMaintenName').val(data.DeptOfMaintenName);
+                    $('#txtMaintenPhone').val(data.DeptOfMaintenPhone);
+                    $('#txtMaintenEmail').val(data.DeptOfMaintenEmail);
+                    $('#txtAccountName').val(data.DeptOfAccountName);
+                    $('#txtAccountPhone').val(data.DeptOfAccountPhone);
+                    $('#txtAccountEmail').val(data.DeptOfAccountEmail);
+                    $('#txtbankcode').val(data.BankCode);
+                    $('#txtbankname').val(data.BankName);
+                    $('#txtbranchcode').val(data.BranchCode);
+                    $('#txtbranchname').val(data.BranchName);
+                    $('#txtaccountnumber').val(data.AccountNumber);
+                    $('#txtaccountname').val(data.AccountName);
+                },
+                error: function (result) {
+
+                }
+            });
+        }
+
+        function addCompany() {
             var data = {
                 //"CompanyId": " ",
-                "CompanyCode": " ",
+                "CompanyCode" : $("#txtCompanyCode").val(),
+                "CompanyName" : " ",
+                "CompanyNameTh" : $("#txtCompanyNameT").val(),
+                "CompanyNameEn" :  $("#txtCompanyNameE").val(),
+                "CompanyAlias" :  $("#txtCompanyAlias").val(),
+                "DistributionChannel" : " ",
+                "ChannelSaleGroup" : " ",
+                "VendorCode" : " ",
+                "CustomerCode" : " ",
+                "AreaId" : " ",
+                "TaxId" : " ",
+                "WtName" : $("#txttaxnew").val(),
+                "VatType" : " ",
+                "CompanyCertifiedFile" : " ",
+                "CommercialRegistrationFile" : " ",
+                "VatRegistrationCertificateFile" : " ",
+                "ContractAgreementFile" : " ",
+                "DepositAuthorizationLevel" : " ",
+                "DepositPaymentType" : " ",
+                "ContractStartDate" : " ",
+                "ContractEndDate" : " ",
+                "OverDraftDeposit" : " ",
+                "BalanceDeposit" : " ",
+                "CompanyStatus" : " ",
+                "CompanyAddress" : " ",
+                "VatAddress" : " ",
+                "CreateBy" : " ",
+                "CreateDate" : " ",
+                "UpdateBy" : " ",
+                "UpdateDate" : " ",
+                "CompanyEmail" : $("#txtCompanyEmail").val(),
+                "ContractName" : $("#txtContractName").val(),
+                "ContractPhone" : $("#txtContractPhone").val(),
+                "ContractEmail" : $("#txtContractEmail").val(),
+                "BankCode" : $("#txtbankcode").val(),
+                "BankName" : $("#txtbankname").val(),
+                "AccountNumber" : $("#txtaccountname").val(),
+                "AccountName" : $("#ddlaccountname").val(),
+                "AttachFile" : " ",
+                "BranchCode" : $("#txtbranchcode").val(),
+                "BranchName" : $("#txtbranchname").val(),
+                "DeptOfInstallName" : $("#txtInstallName").val(),
+                "DeptOfMaintenName" : $("#txtMaintenName").val(),
+                "DeptOfAccountName" : $("#txtAccountName").val(),
+                "DeptOfInstallPhone" : $("#txtInstallPhone").val(),
+                "DeptOfMaintenPhone" : $("#txtMaintenPhone").val(),
+                "DeptOfAccountPhone" : $("#txtAccountPhone").val(),
+                "DeptOfInstallEmail" : $("#txtInstallEmail").val(),
+                "DeptOfMaintenEmail" : $("#txtMaintenEmail").val(),
+                "DeptOfAccountEmail" : $("#txtAccountEmail").val(),
+                "LocationCode" : " ",
+                "LocationNameTh" : " ",
+                "LocationNameEn" : " ",
+                "BankAccountTypeId" : " ",
+                "SubcontractProfileType" : " ",
+                "CompanyTitleThId" : $("#ddlprefixnewT").val(),
+                "CompanyTitleEnId" : $("#ddlprefixnewE").val(),
+                "Status" : " ",
+                "ActivateDate" : " ",
+            };
+
+            //var data = {
+            //    //"CompanyId": " ",
+            //    "CompanyCode": " ",
+            //    "CompanyName": " ",
+            //    "CompanyNameTh": $("#txtCompanyNameT").val(),
+            //    "CompanyNameEn": $("#txtCompanyNameE").val(),
+            //    "CompanyAlias": $("#txtCompanyAlias").val(),
+            //    "DistributionChannel": " ",
+            //    "ChannelSaleGroup": " ",
+            //    "VendorCode": " ",
+            //    "CustomerCode": " ",
+            //    "AreaId": " ",
+            //    "TaxId": " ",
+            //    "WtName": " ",
+            //    "VatType": " ",
+            //    "CompanyCertifiedFile": " ",
+            //    "CommercialRegistrationFile": " ",
+            //    "VatRegistrationCertificateFile": " ",
+            //    "ContractAgreementFile": " ",
+            //    "DepositAuthorizationLevel": " ",
+            //    "DepositPaymentType": " ",
+            //    "ContractStartDate": " ",
+            //    "ContractEndDate": " ",
+            //    "OverDraftDeposit": " ",
+            //    "BalanceDeposit": " ",
+            //    "CompanyStatus": " ",
+            //    "CompanyAddress": " ",
+            //    "VatAddress": " ",
+            //    "CreateBy": " ",
+            //    "CreateDate": " ",
+            //    "UpdateBy": " ",
+            //    "UpdateDate": " ",
+            //    "CompanyEmail": " ",
+            //    "ContractName": " ",
+            //    "ContractPhone": " ",
+            //    "ContractEmail": " ",
+            //    "BankCode": " ",
+            //    "BankName": " ",
+            //    "AccountNumber": " ",
+            //    "AccountName": " ",
+            //    "AttachFile": " ",
+            //    "BranchCode": " ",
+            //    "BranchName": " ",
+            //    "DeptOfInstallName": " ",
+            //    "DeptOfMaintenName": " ",
+            //    "DeptOfAccountName": " ",
+            //    "DeptOfInstallPhone": " ",
+            //    "DeptOfMaintenPhone": " ",
+            //    "DeptOfAccountPhone": " ",
+            //    "DeptOfInstallEmail": " ",
+            //    "DeptOfMaintenEmail": " ",
+            //    "DeptOfAccountEmail": " ",
+            //    "LocationCode": " ",
+            //    "LocationNameTh": " ",
+            //    "LocationNameEn": " ",
+            //    "BankAccountTypeId": " ",
+            //    "SubcontractProfileType": " ",
+            //    "CompanyTitleThId": " ",
+            //    "CompanyTitleEnId": " ",
+            //    "Status": " ",
+            //    "ActivateDate": " ",
+            //};
+
+            $.ajax({
+                type: "POST",
+                url: "/Profile/AddCompany",
+                data: { Company: data },
+                //dataType: "json",
+                success: function (data) {
+                    console.log(data)
+
+                },
+                error: function (xhr, status, error) {
+                    //Loading(0);
+                    //clearForEdit();
+                    console.log(status);
+                    //showFeedback("error", xhr.responseText, "System Information",
+                        //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function editCompany() {
+            var data = {
+                "CompanyId": " ",
+                "CompanyCode": $("#txtCompanyCode").val(),
                 "CompanyName": " ",
                 "CompanyNameTh": $("#txtCompanyNameT").val(),
                 "CompanyNameEn": $("#txtCompanyNameE").val(),
@@ -921,7 +1079,7 @@
                 "CustomerCode": " ",
                 "AreaId": " ",
                 "TaxId": " ",
-                "WtName": " ",
+                "WtName": $("#txttaxnew").val(),
                 "VatType": " ",
                 "CompanyCertifiedFile": " ",
                 "CommercialRegistrationFile": " ",
@@ -940,33 +1098,33 @@
                 "CreateDate": " ",
                 "UpdateBy": " ",
                 "UpdateDate": " ",
-                "CompanyEmail": " ",
-                "ContractName": " ",
-                "ContractPhone": " ",
-                "ContractEmail": " ",
-                "BankCode": " ",
-                "BankName": " ",
-                "AccountNumber": " ",
-                "AccountName": " ",
+                "CompanyEmail": $("#txtCompanyEmail").val(),
+                "ContractName": $("#txtContractName").val(),
+                "ContractPhone": $("#txtContractPhone").val(),
+                "ContractEmail": $("#txtContractEmail").val(),
+                "BankCode": $("#txtbankcode").val(),
+                "BankName": $("#txtbankname").val(),
+                "AccountNumber": $("#txtaccountname").val(),
+                "AccountName": $("#ddlaccountname").val(),
                 "AttachFile": " ",
-                "BranchCode": " ",
-                "BranchName": " ",
-                "DeptOfInstallName": " ",
-                "DeptOfMaintenName": " ",
-                "DeptOfAccountName": " ",
-                "DeptOfInstallPhone": " ",
-                "DeptOfMaintenPhone": " ",
-                "DeptOfAccountPhone": " ",
-                "DeptOfInstallEmail": " ",
-                "DeptOfMaintenEmail": " ",
-                "DeptOfAccountEmail": " ",
+                "BranchCode": $("#txtbranchcode").val(),
+                "BranchName": $("#txtbranchname").val(),
+                "DeptOfInstallName": $("#txtInstallName").val(),
+                "DeptOfMaintenName": $("#txtMaintenName").val(),
+                "DeptOfAccountName": $("#txtAccountName").val(),
+                "DeptOfInstallPhone": $("#txtInstallPhone").val(),
+                "DeptOfMaintenPhone": $("#txtMaintenPhone").val(),
+                "DeptOfAccountPhone": $("#txtAccountPhone").val(),
+                "DeptOfInstallEmail": $("#txtInstallEmail").val(),
+                "DeptOfMaintenEmail": $("#txtMaintenEmail").val(),
+                "DeptOfAccountEmail": $("#txtAccountEmail").val(),
                 "LocationCode": " ",
                 "LocationNameTh": " ",
                 "LocationNameEn": " ",
                 "BankAccountTypeId": " ",
                 "SubcontractProfileType": " ",
-                "CompanyTitleThId": " ",
-                "CompanyTitleEnId": " ",
+                "CompanyTitleThId": $("#ddlprefixnewT").val(),
+                "CompanyTitleEnId": $("#ddlprefixnewE").val(),
                 "Status": " ",
                 "ActivateDate": " ",
             };
@@ -984,8 +1142,8 @@
                     //Loading(0);
                     //clearForEdit();
                     console.log(status);
-                    showFeedback("error", xhr.responseText, "System Information",
-                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    //showFeedback("error", xhr.responseText, "System Information",
+                    //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
                 }
             });
         }

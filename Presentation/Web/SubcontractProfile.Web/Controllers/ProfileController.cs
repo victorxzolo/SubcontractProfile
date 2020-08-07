@@ -21,6 +21,7 @@ using System.Text;
 using SubcontractProfile.Web.Model;
 using SubcontractProfile;
 using System.Data;
+using Microsoft.AspNetCore.Http.Connections;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -57,6 +58,118 @@ namespace SubcontractProfile.Web.Controllers
         }
 
         #region Company
+
+        [HttpPost]
+        public IActionResult SearchCompany(SubcontractProfileCompanyModel Company)
+        {
+            int filteredResultsCount;
+            int totalResultsCount;
+            var output = new List<SubcontractProfileCompanyModel>();
+            //var resultZipCode = new List<SubcontractProfileCompanyModel>();
+            var tbModel = new List<DataTableAjaxModel>();
+            var model = new List<SubcontractProfileCompanyModel>();
+
+            if (Company != null)
+            {
+
+                model.Add(new SubcontractProfileCompanyModel
+                {
+                    CompanyId = Guid.NewGuid(),
+                    CompanyCode = " ",
+                    CompanyName = " ",
+                    CompanyNameTh = Company.CompanyNameTh,
+                    CompanyNameEn = Company.CompanyNameEn,
+                    CompanyAlias = Company.CompanyAlias,
+                    DistributionChannel = " ",
+                    ChannelSaleGroup = " ",
+                    VendorCode = " ",
+                    CustomerCode = " ",
+                    AreaId = " ",
+                    TaxId = " ",
+                    WtName = " ",
+                    VatType = " ",
+                    CompanyCertifiedFile = " ",
+                    CommercialRegistrationFile = " ",
+                    VatRegistrationCertificateFile = " ",
+                    ContractAgreementFile = " ",
+                    DepositAuthorizationLevel = " ",
+                    DepositPaymentType = " ",
+                    ContractStartDate = DateTime.Now,  //Company.ContractStartDate,
+                    ContractEndDate = DateTime.Now,
+                    OverDraftDeposit = " ",
+                    BalanceDeposit = 1,
+                    CompanyStatus = " ",
+                    CompanyAddress = " ",
+                    VatAddress = " ",
+                    CreateBy = " ",
+                    CreateDate = DateTime.Now,
+                    UpdateBy = " ",
+                    UpdateDate = DateTime.Now,
+                    CompanyEmail = " ",
+                    ContractName = " ",
+                    ContractPhone = " ",
+                    ContractEmail = " ",
+                    BankCode = " ",
+                    BankName = " ",
+                    AccountNumber = " ",
+                    AccountName = " ",
+                    AttachFile = " ",
+                    BranchCode = " ",
+                    BranchName = " ",
+                    DeptOfInstallName = " ",
+                    DeptOfMaintenName = " ",
+                    DeptOfAccountName = " ",
+                    DeptOfInstallPhone = " ",
+                    DeptOfMaintenPhone = " ",
+                    DeptOfAccountPhone = " ",
+                    DeptOfInstallEmail = " ",
+                    DeptOfMaintenEmail = " ",
+                    DeptOfAccountEmail = " ",
+                    LocationCode = " ",
+                    LocationNameTh = " ",
+                    LocationNameEn = " ",
+                    BankAccountTypeId = " ",
+                    SubcontractProfileType = " ",
+                    CompanyTitleThId = " ",
+                    CompanyTitleEnId = " ",
+                    Status = " ",
+                    ActivateDate = DateTime.Now
+
+                });
+
+                //Command.Handle(model)
+                //output ret_code,ret
+                //ret_msg
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string uriString = string.Format("{0}/{1}", strpathAPI + "CompanyController/Search", model);
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var v = response.Content.ReadAsStringAsync().Result;
+                    output = JsonConvert.DeserializeObject<List<SubcontractProfileCompanyModel>>(v);
+                }
+                filteredResultsCount = output.Count(); //output from Database
+                totalResultsCount = output.Count(); //output from Database
+                return Json(new
+                {
+                    draw = 10 ,//draw = tbModel,
+                    recordsTotal = totalResultsCount,
+                    recordsFiltered = filteredResultsCount,
+                    data = output
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    status = "-1",
+                    message = "Data isnot correct, Please Check Data or Contact System Admin"
+                });
+            }
+        }
 
         [HttpPost]
         public IActionResult GetCompany(string CompanyID)
@@ -898,142 +1011,6 @@ namespace SubcontractProfile.Web.Controllers
         public IActionResult _PartialEngineer()
         {
             return PartialView("_PartialEngineerEdit");
-        }
-
-        [HttpGet]
-        public DataTable Loaddata()
-        {
-            DataTable table = new DataTable("TestTable");
-            DataColumn CompanyID = new DataColumn("CompanyId", typeof(Guid));
-            //DataColumn RegisterType = new DataColumn("CompanyNameTh", typeof(string));
-            DataColumn CompanyCode = new DataColumn("CompanyCode", typeof(int));
-            DataColumn CompanyNameT = new DataColumn("CompanyNameTh", typeof(string));
-            DataColumn CompanyNameE = new DataColumn("CompanyNameEn", typeof(string));
-            DataColumn Distribution = new DataColumn("DistributionChannel", typeof(string));
-            DataColumn Channel = new DataColumn("ChannelSaleGroup", typeof(string));
-            DataColumn Address = new DataColumn("CompanyAddress", typeof(string));
-
-            table.Columns.Add(CompanyID);
-            //table.Columns.Add(RegisterType);
-            table.Columns.Add(CompanyCode);
-            table.Columns.Add(CompanyNameT);
-            table.Columns.Add(CompanyNameE);
-            table.Columns.Add(Distribution);
-            table.Columns.Add(Channel);
-            table.Columns.Add(Address);
-
-            DataRow newRow = table.NewRow();
-            newRow["CompanyId"] = Guid.NewGuid();
-            //newRow["RegisterType"] = "A";
-            newRow["CompanyCode"] = 1;
-            newRow["CompanyNameTh"] = "Test1T";
-            newRow["CompanyNameEn"] = "Test1E";
-            newRow["DistributionChannel"] = "Test1";
-            newRow["ChannelSaleGroup"] = "Test1";
-            newRow["CompanyAddress"] = "AddressTest1";
-            table.Rows.Add(newRow);
-
-            newRow = table.NewRow();
-            newRow["CompanyId"] = Guid.NewGuid();
-            //newRow["RegisterType"] = "B";
-            newRow["CompanyCode"] = 2;
-            newRow["CompanyNameTh"] = "Test2T";
-            newRow["CompanyNameEn"] = "Test2E";
-            newRow["DistributionChannel"] = "Test2";
-            newRow["ChannelSaleGroup"] = "Test2";
-            newRow["CompanyAddress"] = "AddressTest2";
-            table.Rows.Add(newRow);
-
-            newRow = table.NewRow();
-            newRow["CompanyId"] = Guid.NewGuid();
-            //newRow["RegisterType"] = "C";
-            newRow["CompanyCode"] = 3;
-            newRow["CompanyNameTh"] = "Test3T";
-            newRow["CompanyNameEn"] = "Test3E";
-            newRow["DistributionChannel"] = "Test3";
-            newRow["ChannelSaleGroup"] = "Test3";
-            newRow["CompanyAddress"] = "AddressTest3";
-            table.Rows.Add(newRow);
-
-
-            return table;
-
-        }
-
-        public IActionResult SearchCompany(DataTableAjaxModel model)
-        {
-            try
-            {
-
-                int filteredResultsCount;
-                int totalResultsCount;
-
-                //var res = YourCustomSearchFunc(model, out filteredResultsCount, out totalResultsCount);
-
-                //Guid id = Guid.NewGuid();
-
-
-                var take = model.length;
-                var skip = model.start;
-
-                string sortBy = "";
-                bool sortDir = true;
-
-                if (model.order != null)
-                {
-                    // in this example we just default sort on the 1st column
-                    sortBy = model.columns[model.order[0].column].data;
-                    sortDir = model.order[0].dir.ToLower() == "asc";
-                }
-
-                List<SubcontractProfileCompanyModel> result;
-                //if (result != null && result.Count != 0)
-                //{
-                //    if (sortDir) //asc
-                //    {
-                //        if (sortBy == "address_type")
-                //        {
-                //            result = result.OrderBy(c => c.CompanyNameTh).ToList();
-                //        }
-                //        else if (sortBy == "address")
-                //        {
-                //            result = result.OrderBy(c => c.HouseNo).ToList();
-                //        }
-                //    }
-                //    else //desc
-                //    {
-                //        if (sortBy == "address_type")
-                //        {
-                //            result = result.OrderByDescending(c => c.address_type_name).ToList();
-                //        }
-                //        else if (sortBy == "address")
-                //        {
-                //            result = result.OrderByDescending(c => c.HouseNo).ToList();
-                //        }
-                //    }
-
-                //    filteredResultsCount = result.Count(); //output from Database
-                //    totalResultsCount = result.Count(); //output from Database
-                //}
-                //else
-                //{
-                //    filteredResultsCount = 0; //output from Database
-                //    totalResultsCount = 0; //output from Database
-                //}
-
-                return Json(new
-                {
-                    draw = model.draw,
-                    recordsTotal = totalResultsCount,
-                    recordsFiltered = filteredResultsCount,
-                    data = result
-                });
-            }
-            catch (Exception e)
-            {
-
-                throw;
-            }
         }
 
         #region DDL

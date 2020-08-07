@@ -17,7 +17,7 @@
                         <div class="col-sm-3">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="D">
+                                    <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="N">
                                     New Subcontract
                                 </label>
                             </div>
@@ -139,7 +139,7 @@
                         <button class="btn-border btn-black mr-2" type="button" id="btnclear">
                             <i class="fa fa-refresh icon"></i><span>Clear</span>
                         </button>
-                        <button class="btn-border btn-green" type="button" id="btnSearch" onclick="getAllCompany()">
+                        <button class="btn-border btn-green" type="button" id="btnSearch" onclick="SearchCompany()">
                             <i class="fa fa-search icon"></i><span>Search</span>
                         </button>
                     </div>
@@ -151,9 +151,9 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                     <div class="d-flex align-items-center justify-content-center h-100 float-right" role="group">
-                        <button class="btn-border btn-black mr-2 float-right" type="button" id="btnDelete">
+                        @*<button class="btn-border btn-black mr-2 float-right" type="button" id="btnDelete">
                             <i class="fa fa-trash-o icon"></i><span>Delete</span>
-                        </button>
+                        </button>*@
                         @*<button class="btn-border btn-green float-right" type="button" id="btnNewcompany"
                                     onclick="location.href='@Url.Action("CompanyVerify", "Registration" ,new {id=1 })'">
                                 <i class="fa fa-check icon"></i><span>New Company</span>
@@ -183,7 +183,7 @@
                         <table class="table table-bordered table-hover" id="SearchCompanyResult">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>Select</th>
+                                    @*<th>Select</th>*@
                                     <th>ID</th>
                                     <th>Register Type</th>
                                     <th>Company Code</th>
@@ -203,7 +203,7 @@
 
                 </div>
 
-            <div class="row">
+            @*<div class="row">
                 <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover" id="Searcht">
@@ -266,7 +266,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div>*@
 
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
@@ -308,70 +308,70 @@
 {
 
     <script type="text/javascript">
-        var SearchCompanyResult = $('#SearchCompanyResult').DataTable({
-            ordering: true,
-            order: [[1, "asc"]],
-            select: true,
-            retrieve: true,
-            paging: true,
-            pagingType: "full_numbers",
-            destroy: true,
-            searching: false,
-            proccessing: true,
-            serverSide: true,
-            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-            dom: 'rt<"float-left"p><"float-left"l><"float-right"i>',
-            ajax: {
-                type: "POST",
-                url: "/Account/SearchAddress",
-                dataSrc: function (data) {
-                    var val = []
-                    val = ConcatstrAddress(data.data);
-                    data.data = val;
-                    return data.data;
-                },
-                error: function (xhr, status, error) {
-                    //Loading(0);
-                    //clearForEdit();
-                    console.log(status);
-                    showFeedback("error", xhr.responseText, "System Information",
-                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-                }
+        //var SearchCompanyResult = $('#SearchCompanyResult').DataTable({
+        //    ordering: true,
+        //    order: [[1, "asc"]],
+        //    select: true,
+        //    retrieve: true,
+        //    paging: true,
+        //    pagingType: "full_numbers",
+        //    destroy: true,
+        //    searching: false,
+        //    proccessing: true,
+        //    serverSide: true,
+        //    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        //    dom: 'rt<"float-left"p><"float-left"l><"float-right"i>',
+        //    ajax: {
+        //        type: "POST",
+        //        url: "/Account/SearchAddress",
+        //        dataSrc: function (data) {
+        //            var val = []
+        //            val = ConcatstrAddress(data.data);
+        //            data.data = val;
+        //            return data.data;
+        //        },
+        //        error: function (xhr, status, error) {
+        //            //Loading(0);
+        //            //clearForEdit();
+        //            console.log(status);
+        //            showFeedback("error", xhr.responseText, "System Information",
+        //                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+        //        }
 
-            },
-            columns: [
-                { "data": "addressId", "visible": false },
-                { "data": "address_type_id", "visible": false },
-                { "data": "address_type", orderable: true, },
-                { "data": "address", orderable: true, },
-                {
-                    "targets": -2,
-                    "data": null,
-                    orderable: false,
-                    "defaultContent": "<button class='btn-border btn-green edit_btn'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button>"
-                },
-                {
-                    "targets": -1,
-                    "data": null,
-                    orderable: false,
-                    "defaultContent": "<button class='btn-border btn-black delete_btn'><i class='fa fa-trash icon'></i><span>ลบ</span></button>"
-                }
-            ],
-            language: {
-                infoEmpty: "No items to display",
-                lengthMenu: "_MENU_ items per page",
-                zeroRecords: "Nothing found",
-                info: "_START_ - _END_  of _TOTAL_  items",
-                infoFiltered: "",
-                paginate: {
-                    previous: "<",
-                    next: ">",
-                    last: ">|",
-                    first: "|<"
-                }
+        //    },
+        //    columns: [
+        //        { "data": "addressId", "visible": false },
+        //        { "data": "address_type_id", "visible": false },
+        //        { "data": "address_type", orderable: true, },
+        //        { "data": "address", orderable: true, },
+        //        {
+        //            "targets": -2,
+        //            "data": null,
+        //            orderable: false,
+        //            "defaultContent": "<button class='btn-border btn-green edit_btn'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button>"
+        //        },
+        //        {
+        //            "targets": -1,
+        //            "data": null,
+        //            orderable: false,
+        //            "defaultContent": "<button class='btn-border btn-black delete_btn'><i class='fa fa-trash icon'></i><span>ลบ</span></button>"
+        //        }
+        //    ],
+        //    language: {
+        //        infoEmpty: "No items to display",
+        //        lengthMenu: "_MENU_ items per page",
+        //        zeroRecords: "Nothing found",
+        //        info: "_START_ - _END_  of _TOTAL_  items",
+        //        infoFiltered: "",
+        //        paginate: {
+        //            previous: "<",
+        //            next: ">",
+        //            last: ">|",
+        //            first: "|<"
+        //        }
 
-            }
-        });
+        //    }
+        //});
 
 
         $('#regisdatefrom').datepicker({
@@ -406,7 +406,123 @@
                 }
             });
         }
-        
+
+        function SearchCompany() {
+            var data = {
+                //"CompanyId": " ",
+                "RegisterType": $("#chktype").val(),
+                "LocationCode": $("#ddlLocationCode").val(),
+                "VenderCode": $("#txtVenderCode").val(),
+                "CompanyNameT": $("#txtCompanyNameT").val(),
+                "CompanyNameE": $("#txtCompanyNameE").val(),
+                "CompanyAlias": $("#txtCompanyAlias").val(),
+                "CompanyCode": $("#txtCompanyCode").val(),
+                "Distribution": $("#ddldistribution").val(),
+                "Channel": $("#ddlchannelsalegroup").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Profile/SearchConpamy",
+                data: { Company: data },
+                //dataType: "json",
+                success: function (data) {
+                    BindTableData(data);
+                },
+                error: function (xhr, status, error) {
+                    //Loading(0);
+                    //clearForEdit();
+                    console.log(status);
+                }
+            });
+        }
+
+        function BindTableData(data) {
+            var SearchCompanyResult = $('#SearchCompanyResult').DataTable({
+                ordering: true,
+                order: [[1, "asc"]],
+                select: true,
+                retrieve: true,
+                paging: true,
+                pagingType: "full_numbers",
+                destroy: true,
+                searching: false,
+                proccessing: true,
+                serverSide: true,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                dom: 'rt<"float-left"p><"float-left"l><"float-right"i>',
+                ajax: {
+                    type: "POST",
+                    url: "/Account/SearchAddress",
+                    //dataSrc: function (data) {
+                    //    var val = []
+                    //    val = ConcatstrAddress(data.data);
+                    //    data.data = val;
+                    //    return data.data;
+                    //},
+                    error: function (xhr, status, error) {
+                        //Loading(0);
+                        //clearForEdit();
+                        console.log(status);
+                        showFeedback("error", xhr.responseText, "System Information",
+                            "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+
+                },
+                columns: [
+                    { "data": "CompanyId", "visible": false },
+                    { "data": "CompanyCode"},
+                    { "data": "CompanyNameT", orderable: true, },
+                    { "data": "CompanyNameE", orderable: true, },
+                    { "data": "Distribution" },
+                    { "data": "Channel" },
+                    { "data": "Address" },
+                    {
+                        "targets": -2,
+                        "data": null,
+                        orderable: false,
+                        "defaultContent": "<button class='btn-border btn-green edit_btn' onclick='location.href=" + @Url.Action("_PartialCompany", "Profile") + "'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button>"
+                        //"defaultContent": "<button class='btn-border btn-green edit_btn'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button>"
+                    },
+                    {
+                        "targets": -1,
+                        "data": null,
+                        orderable: false,
+                        "defaultContent": "<button class='btn-border btn-black delete_btn' onclick='DelCompany(" + data[0] + ")'><i class='fa fa-trash icon'></i><span>ลบ</span></button>"
+                    }
+                ],
+                language: {
+                    infoEmpty: "No items to display",
+                    lengthMenu: "_MENU_ items per page",
+                    zeroRecords: "Nothing found",
+                    info: "_START_ - _END_  of _TOTAL_  items",
+                    infoFiltered: "",
+                    paginate: {
+                        previous: "<",
+                        next: ">",
+                        last: ">|",
+                        first: "|<"
+                    }
+
+                }
+            });
+        }
+
+        function DelCompany(comId) {
+            //var comId = '0';
+            $.ajax({
+                url: "/Profile/DeleteCompany",
+                dataType: 'JSON',
+                data: { 'CompanyId': comId },
+                type: 'POST',
+                success: function (result) {
+                    //clearData();
+                },
+                error: function (result) {
+
+                }
+            });
+        }
 
     </script>
 
