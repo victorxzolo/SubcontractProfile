@@ -19,7 +19,7 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany subcontractProfileCompany);
         Task<bool> Delete(string id);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> GetByPKList(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany_PK> pkList);
-        Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany> SearchCompany(string subcontract_profile_type
+        Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchCompany(string subcontract_profile_type
             ,string location_code, string vendor_code, string company_th
             , string company_en, string company_alias, string company_code
             , string distibution_channel, string channel_sale_group);
