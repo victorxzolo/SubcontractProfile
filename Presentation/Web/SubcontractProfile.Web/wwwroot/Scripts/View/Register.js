@@ -83,7 +83,6 @@
         return valueSearch;
     }
     BindDDLTitle();
-
     var tbLocation = $('#tblocationModal').DataTable({
         ordering: true,
         select: true,
@@ -99,15 +98,12 @@
             type: "POST",
             url: "/Account/SearchLocation",
             data: {
-                company_name_th: function () { return $('#txtjuristicTmodal').val() },
-                company_name_en: function () { return $('#txtjuristicEmodal').val() },
-                company_alias: function () { return $('#txtbussinessmodal').val()},
-                company_code: function () {return $('#txtbussinesscodemodal').val()},
-                location_name_th: function () {return $('#txtlocationnameTHmodal').val()},
-                location_name_en: function () {return $('#txtlocationnameTHmodal').val()},
-                location_code: function () {return $('#txtlocationcodemodal').val()},
-                distribution_channel: function () {return $('#ddldistributionModal option').filter(':selected').val()},
-                channel_sale_group: function () {return $('#ddlchannelsalegroupModal option').filter(':selected').val()}
+                asc_code: function () { return $('#txtasccodemodal').val() },
+                asc_mobile_no: function () { return $('#txtmobilenomodal').val() },
+                id_Number: function () { return $('#txtidnumbermodal').val()},
+                location_code: function () { return $('#txtlocationcodemodal').val()},
+                sap_code: function () { return $('#txtsapcodemodal').val()},
+                user_id: function () { return $('#txtuseridmodal').val()}
             },
             dataType: "json",
             error: function (xhr, status, error) {
@@ -122,11 +118,14 @@
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         //lengthChange: false,
         columns: [
-            { "data": "company_name_th" },
-            { "data":"location_code"},
-            { "data": "location_name_th" },
-            { "data": "distribution_channel" },
-            { "data": "channel_sale_group" }
+            { "data": "outCompanyName" },
+            { "data": "outCompanyShortName" },
+            { "data": "outTaxId" },
+            { "data":"outLocationCode"},
+            { "data": "outLocationName" },
+            { "data": "outDistChn" },
+            { "data": "outChnSales" },
+            { "data": "location_id", "visible": false }
         ],
         language: {
             infoEmpty: "No items to display",
@@ -142,7 +141,6 @@
             }
         }
     });
-   
 
     $('#btnsearchlocation').click(function () {
         $('#Searchlocation').modal('show');
@@ -166,7 +164,7 @@
     });
 
     $('#chktypeN').on("change", function () {
-        if ($(this).attr("value") == "N") {
+        if ($(this).attr("value") == "NewSubContract") {
             $("#divdealer").hide('slow');
             $('#divnewsubcontract').show('slow');
         }
@@ -174,19 +172,48 @@
 
     $('#btn_select_location').click(function () {
         var value = tbLocation.rows('.selected').data();
-        console.log(value[0]);
-        console.log(value[0].location_code)
-        $('#txtlocationcode').val(value[0].location_code);
-        $('#txtlocationname').val(value[0].location_name_th);
-        $('#txtdistribution').val(value[0].distribution_channel);
-        $('#txtchannelsalegroup').val(value[0].channel_sale_group);
+        var lo_id = value[0].location_id;
+
+        $.ajax({
+            type: "POST",
+            url: "/Account/GetLocationSession",
+            dataType: "json",
+            data: { location_id: lo_id},
+            success: function (data) {
+              
+                if (data.response.status) {
+                    $('#txtlocationcode').val(data.locationListModel[0].outLocationCode);
+                    $('#txtlocationname').val(data.locationListModel[0].outLocationName);
+                    $('#txtdistribution').val(data.locationListModel[0].outDistChn);
+                    $('#txtchannelsalegroup').val(data.locationListModel[0].outChnSales);
+                    $('#txttax_id_dealer').val(data.locationListModel[0].outTaxId);
+                    $('#txtcompany_alias_dealer').val(data.locationListModel[0].outCompanyShortName);
+                    $('#ddlprefixcompany_name_th_dealer option').filter(':selected').text(data.locationListModel[0].outTitle)
+                    $('#txtcompany_name_th_dealer').val(data.locationListModel[0].outCompanyName);
+                    $('#ddlprefixcompany_name_en_dealer option').filter(':selected').text(data.locationListModel[0].outTitle)
+                    $('#txtcompany_name_en_dealer').val();
+                    $('#txtwt_name_dealer').val(data.locationListModel[0].outWTName);
+                }
+
+            },
+            error: function (xhr, status, error) {
+                //Loading(0);
+                //clearForEdit();
+                console.log(status);
+                showFeedback("error", xhr.responseText, "System Information",
+                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            }
+        });
+
+      
+
         ClearDataModalLocation();
         $('#Searchlocation').modal('hide');
 
     });
 
     $('#chktypeD').on("change", function () {
-        if ($(this).attr("value") == "D") {
+        if ($(this).attr("value") == "Dealer") {
             $("#divnewsubcontract").hide('slow');
             $("#divdealer").show('slow');
         }
@@ -244,6 +271,7 @@
     BindDDLprovince();
     BindDDLdistrict();
     BindDDLsubdistrict();
+    BindRegion();
     var tbaddressstep2 = $('#tbaddressstep2').DataTable({
         ordering: true,
         order: [[1, "asc"]],
@@ -318,16 +346,16 @@
             //val[i] = $(this).parent().text().trim();
 
             var data = {
-                address_type_id: $(this).val(),
+                AddressTypeId: $(this).val(),
                 address_type_name: $(this).parent().text().trim(),
-                country: $('#ddlcountry option').filter(':selected').val(),
-                zip_code: $('#ddlzipcode option').filter(':selected').val(),
+                Country: $('#ddlcountry option').filter(':selected').val(),
+                ZipCode: $('#ddlzipcode option').filter(':selected').val(),
                 HouseNo: $('#txthomenumber').val(),
                 Moo: $('#txtVillageNo').val(),
-                village_name: $('#txtvillage').val(),
+                VillageName: $('#txtvillage').val(),
                 Building: $('#txtbuilding').val(),
                 Floor: $('#txtfloor').val(),
-                room_no: $('#txtroom').val(),
+                RoomNo: $('#txtroom').val(),
                 Soi: $('#txtsoi').val(),
                 Road: $('#txtroad').val(),
                 SubDistrictId: $('#ddlsubdistrict option').filter(':selected').val(),
@@ -336,7 +364,7 @@
                 district_name: $('#ddldistrict option').filter(':selected').text(),
                 ProvinceId: $('#ddlprovince option').filter(':selected').val(),
                 province_name: $('#ddlprovince option').filter(':selected').text(),
-                region_id: $('#ddlzone option').filter(':selected').val()
+                RegionId: $('#ddlzone option').filter(':selected').val()
             }
             stuff.push(data);
             
@@ -374,6 +402,11 @@
                     "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
             }
         });
+    });
+
+    $('#ddlzone').change(function(){
+
+        BindDDLprovince($('#ddlzone option').filter(':selected').val());
     });
 
     $('#ddlprovince').change(function () {
@@ -437,18 +470,18 @@
 
                         $('#ddlzipcode option').filter(':selected').val(this.zipCode)
 
-                        $('#ddlzone option').filter(':selected').val(this.region_id)
+                        $('#ddlzone option').filter(':selected').val(this.regionId)
 
                         $('#txthomenumber').val(this.houseNo)
                         $('#txtVillageNo').val(this.moo)
-                        $('#txtvillage').val(this.village_name)
+                        $('#txtvillage').val(this.villageName)
                         $('#txtbuilding').val(this.building)
                         $('#txtfloor').val(this.floor)
-                        $('#txtroom').val(this.room_no)
+                        $('#txtroom').val(this.roomNo)
                         $('#txtsoi').val(this.soi)
                         $('#txtroad').val(this.road)
 
-                        var addr_type_id = this.address_type_id
+                        var addr_type_id = this.addressTypeId
                         $(':checkbox').each(function (i) {
                            
                             if (addr_type_id == $(this).val()) {
@@ -514,12 +547,12 @@
         $.each(data, function () {
 
             var strnumber = this.houseNo != '' && this.houseNo != null ? this.houseNo : '';
-            var strvillage = this.village_name != '' && this.village_name != null ? $('#txtvillage').parent().parent().text().split(":")[0].trim() + ' ' + this.village_name : '';
+            var strvillage = this.villageName != '' && this.villageName != null ? $('#txtvillage').parent().parent().text().split(":")[0].trim() + ' ' + this.villageName : '';
             var strvillageno = this.moo != '' && this.moo != null ? $('#txtVillageNo').parent().parent().text().split(":")[1].trim() + ' ' + this.moo : '';
 
             var strbuilding = this.building != '' && this.building != null ? $('#txtbuilding').parent().parent().text().split(":")[0].trim() + ' ' + this.building : '';
             var strfloor = this.floor != '' && this.floor != null ? $('#txtfloor').parent().parent().text().split(":")[0].trim() + ' ' + this.floor : '';
-            var strroom = this.room_no != '' && this.room_no != null ? $('#txtroom').parent().parent().text().split(":")[1].trim() + ' ' + this.room_no : '';
+            var strroom = this.roomNo != '' && this.roomNo != null ? $('#txtroom').parent().parent().text().split(":")[1].trim() + ' ' + this.roomNo : '';
             var strsoi = this.soi != '' && this.soi != null ? $('#txtsoi').parent().parent().text().split(":")[0].trim() + ' ' + this.soi : '';
 
             var strroad = this.road != '' && this.road != null ? $('#txtroad').parent().parent().text().split(":")[0].trim() + ' ' + this.road : '';
@@ -535,7 +568,7 @@
 
             var strdata = {
                 addressId: this.addressId,
-                address_type_id: this.address_type_id,
+                address_type_id: this.addressTypeId,
                 address_type: this.address_type_name,
                 address: strnumber.trim() + ' ' + strvillage.trim() + ' ' + strvillageno.trim() + ' ' + strbuilding.trim() + ' ' + strfloor.trim() + ' ' +
                     strroom.trim() + ' ' + strsoi.trim() + ' ' + strroad.trim() + ' ' + strsubdistrict.trim() + ' ' + strdistrict.trim() + ' ' +
@@ -556,6 +589,79 @@
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
+
+    $('#company_certified_file').change(function () {
+
+        uploadFiles('company_certified_file')
+    });
+
+    $('#commercial_registration_file').change(function () {
+        uploadFiles('commercial_registration_file')
+    });
+
+    $('#vat_registration_certificate_file').change(function () {
+        uploadFiles('vat_registration_certificate_file')
+    });
+
+    function uploadFiles(inputId) {
+        var input = document.getElementById(inputId);
+        var files = input.files;
+        var formData = new FormData();
+        var id = "";
+        var typefile = "";
+        switch (inputId) {
+            case "company_certified_file": id = $('#hdupfilecompany_certified').val();
+                typefile = "CompanyCertifiedFile";
+                break;
+            case "commercial_registration_file": id = $('#hdupfilecommercial_registration').val();
+                typefile = "CommercialRegistrationFile";
+                break;
+            case "vat_registration_certificate_file": id = $('#hdupfilevat_registration_certificate').val();
+                typefile = "VatRegistrationCertificateFile";
+                break;
+        }
+        for (var i = 0; i != files.length; i++) {
+            formData.append("files", files[i]);
+            formData.append("fid", id);
+            formData.append("type_file", typefile);
+        }
+        
+
+        $.ajax(
+            {
+                type: "POST",
+                url: "/Account/UploadFile",
+                processData: false,
+                contentType: false,
+                dataType: "json",
+                data: formData,
+                success: function (data) {
+                    console.log(data);
+                    if (data.status) {
+                        switch (inputId) {
+                            case "company_certified_file": $('#hdupfilecompany_certified').val(data.response); break;
+                            case "commercial_registration_file": $('#hdupfilecommercial_registration').val(data.response); break;
+                            case "vat_registration_certificate_file": $('#hdupfilevat_registration_certificate').val(data.response); break;
+                        }
+                        showFeedback("success", data.message, "System Information",
+                            "<button type='button' class='btn-border btn-green' data-dismiss='modal' id='btnOKpopup'><i class='fa fa-check icon'></i><span>OK</span></button >")
+                    }
+                    else {
+                        showFeedback("error", data.message, "System Information",
+                            "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+                   
+                },
+                error: function (xhr, status, error) {
+                    //Loading(0);
+                    //clearForEdit();
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            }
+        );
+    }
 
 /*************************************/
 
@@ -634,40 +740,102 @@
         }
 
         var data = {
-            subcontract_profile_type: chksubcontract_type,
-            location_code: $('#txtlocationcode').val(),
-            location_name_th: $('#txtlocationname').val(),
-            location_name_en: $('#txtlocationname').val(),
-            distribution_channel: distribution_channel,
-            channel_sale_group: channel_sale_group,
-            tax_id: tax_id,
-            company_alias: company_alias,
-            company_title_name_th: company_title_name_th,
-            company_name_th: company_name_th,
-            company_title_name_en: company_title_name_en,
-            company_name_en: company_name_en,
-            wt_name: wt_name,
-            vat_type: vat_type,
-            company_Email: $('#txtcompany_Email').val(),
-            contract_name: $('#txtcontract_name').val(),
-            contract_phone: $('#txtcontract_phone').val(),
-            contract_email: $('#txtcontract_email').val(),
-            dept_of_install_name: $('#txtdept_of_install_name').val(),
-            dept_of_install_phone: $('#txtdept_of_install_phone').val(),
-            dept_of_install_email: $('#txtdept_of_install_email').val(),
-            dept_of_mainten_name: $('#txtdept_of_mainten_name').val(),
-            dept_of_mainten_phone: $('#txtdept_of_mainten_phone').val(),
-            dept_of_mainten_email: $('#txtdept_of_mainten_email').val(),
-            dept_of_Account_name: $('#txtdept_of_Account_name').val(),
-            dept_of_Account_phone: $('#txtdept_of_Account_phone').val(),
-            dept_of_Account_email: $('#txtdept_of_Account_email').val(),
-            account_Name: $('#ddlaccount_Name option').filter(':selected').val(),
-            branch_Name: $('#txtbranch_Name').val(),
-            branch_Code: $('#txtbranch_Code').val(),
-            bank_account_type_id: $('#ddlbank_account_type option').filter(':selected').val(),
-            company_certified_file: $('#company_certified_file').val(),
-            commercial_registration_file: $('#commercial_registration_file').val(),
-            vat_registration_certificate_file: $('#vat_registration_certificate_file').val(),
+            //CompanyId
+            //CompanyCode
+            //CompanyName
+            CompanyNameTh: company_name_th,
+            CompanyNameEn: company_name_en,
+            CompanyAlias: company_alias,
+            DistributionChannel: distribution_channel,
+            ChannelSaleGroup: channel_sale_group,
+           // VendorCode
+           // CustomerCode:
+            //AreaId
+            TaxId: tax_id,
+            WtName: wt_name,
+            VatType: vat_type,
+            //CompanyCertifiedFile 'Upload file'
+            //CommercialRegistrationFile 'Upload file'
+            //VatRegistrationCertificateFile 'Upload file'
+            //ContractAgreementFile
+            //DepositAuthorizationLevel
+            //DepositPaymentType
+            //ContractStartDate
+            //ContractEndDate
+            //OverDraftDeposit
+            //BalanceDeposit
+            //CompanyStatus: '',
+            //CompanyAddress
+            //VatAddress
+            CompanyEmail: $('#txtcompany_Email').val(),
+            ContractName: $('#txtcontract_name').val(),
+            ContractPhone: $('#txtcontract_phone').val(),
+            ContractEmail: $('#txtcontract_email').val(),
+
+            BankCode: $('#txtbank_Code').val(),
+            BankName: $('#txtbank_Name').val(),
+            AccountNumber: $('#txtaccount_Number').val(),
+            AccountName:$('#ddlaccount_Name option').filter(':selected').val(),
+           // AttachFile
+            BranchCode: $('#txtbranch_Code').val(),
+            BranchName: $('#txtbranch_Name').val(),
+
+            DeptOfInstallName: $('#txtdept_of_install_name').val(),
+            DeptOfMaintenName: $('#txtdept_of_mainten_name').val(),
+            DeptOfAccountName: $('#txtdept_of_Account_name').val(),
+
+            DeptOfInstallPhone: $('#txtdept_of_install_phone').val(),
+            DeptOfMaintenPhone: $('#txtdept_of_mainten_phone').val(),
+            DeptOfAccountPhone: $('#txtdept_of_Account_phone').val(),
+
+            DeptOfInstallEmail: $('#txtdept_of_install_email').val(),
+            DeptOfMaintenEmail: $('#txtdept_of_mainten_email').val(),
+            DeptOfAccountEmail: $('#txtdept_of_Account_email').val(),
+
+            LocationCode: $('#txtlocationcode').val(),
+            LocationNameTh: $('#txtlocationname').val(),
+            LocationNameEn: $('#txtlocationname').val(),
+
+            BankAccountTypeId: $('#ddlbank_account_type option').filter(':selected').val(),
+            SubcontractProfileType: chksubcontract_type,
+            CompanyTitleThId: company_title_name_th,
+            CompanyTitleEnId: company_title_name_en,
+            //Status
+            
+            //subcontract_profile_type: chksubcontract_type,
+            //LocationCode: $('#txtlocationcode').val(),
+            //LocationNameTh: $('#txtlocationname').val(),
+            //LocationNameEn: $('#txtlocationname').val(),
+            //DistributionChannel: distribution_channel,
+            //ChannelSaleGroup: channel_sale_group,
+            //tax_id: tax_id,
+            //company_alias: company_alias,
+            //company_title_name_th: company_title_name_th,
+            //company_name_th: company_name_th,
+            //company_title_name_en: company_title_name_en,
+            //company_name_en: company_name_en,
+            //wt_name: wt_name,
+            //vat_type: vat_type,
+            //company_Email: $('#txtcompany_Email').val(),
+            //contract_name: $('#txtcontract_name').val(),
+            //contract_phone: $('#txtcontract_phone').val(),
+            //contract_email: $('#txtcontract_email').val(),
+            //dept_of_install_name: $('#txtdept_of_install_name').val(),
+            //dept_of_install_phone: $('#txtdept_of_install_phone').val(),
+            //dept_of_install_email: $('#txtdept_of_install_email').val(),
+            //dept_of_mainten_name: $('#txtdept_of_mainten_name').val(),
+            //dept_of_mainten_phone: $('#txtdept_of_mainten_phone').val(),
+            //dept_of_mainten_email: $('#txtdept_of_mainten_email').val(),
+            //dept_of_Account_name: $('#txtdept_of_Account_name').val(),
+            //dept_of_Account_phone: $('#txtdept_of_Account_phone').val(),
+            //dept_of_Account_email: $('#txtdept_of_Account_email').val(),
+            //account_Name: $('#ddlaccount_Name option').filter(':selected').val(),
+            //branch_Name: $('#txtbranch_Name').val(),
+            //branch_Code: $('#txtbranch_Code').val(),
+            //bank_account_type_id: $('#ddlbank_account_type option').filter(':selected').val(),
+            //company_certified_file: $('#company_certified_file').val(),
+            //commercial_registration_file: $('#commercial_registration_file').val(),
+            //vat_registration_certificate_file: $('#vat_registration_certificate_file').val(),
         }
 
         $.ajax({
@@ -677,7 +845,14 @@
             dataType: "json",
             success: function (data) {
                 console.log(data)
-
+                if (data.Response.Status) {
+                    showFeedback("success", data.Response.Message, "System Information",
+                        "<button type='button' class='btn-border btn-green' data-dismiss='modal' id='btnOKpopup'><i class='fa fa-check icon'></i><span>OK</span></button >");
+                }
+                else {
+                    showFeedback("error", data.Response.Message, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
             },
             error: function (xhr, status, error) {
                 //Loading(0);
@@ -819,19 +994,19 @@
 /*************************************/
 });
 
-function BindDDLprovince() {
+function BindDDLprovince(regionid) {
 
     $.ajax({
         type: "POST",
         url: "/Account/DDLsubcontract_profile_province",
+        data: { region_id: regionid },
         dataType: "json",
         success: function (data) {
             console.log(data);
             if (data != null) {
                 $('#ddlprovince').empty();
-                $('#ddlprovince').append($('<option></option>').val(0).text('Select Province'));
-                $.each(data.response, function () {
-                    $('#ddlprovince').append($('<option></option>').val(this.provinceId).text(this.provinceName));
+                $.each(data.responseprovince, function () {
+                    $('#ddlprovince').append($('<option></option>').val(this.value).text(this.text));
                 });
             }
            
@@ -856,9 +1031,9 @@ function BindDDLdistrict(province) {
         success: function (data) {
             if (data != null) {
                 $('#ddldistrict').empty();
-                $('#ddldistrict').append($('<option></option>').val(0).text('Select District'));
-                $.each(data.response, function () {
-                    $('#ddldistrict').append($("<option></option>").val(this.districtId).text(this.districtName));
+
+                $.each(data.responsedistricrt, function () {
+                    $('#ddldistrict').append($("<option></option>").val(this.value).text(this.text));
                 });
             }
           
@@ -884,16 +1059,17 @@ function BindDDLsubdistrict(district) {
             if (data != null) {
                 $('#ddlsubdistrict').empty();
                 $('#ddlzipcode').empty();
-                $('#ddlzipcode').append($("<option></option>").val(0).text('Select Zip Code'));
-                $('#ddlsubdistrict').append($("<option></option>").val(0).text('Select Sub District'));
-                $.each(data.response, function () {
 
-                    $('#ddlsubdistrict').append($("<option></option>").val(this.subDistrictId).text(this.subDistrictName));
+                $.each(data.responsesubdistrict, function () {
+
+                    $('#ddlsubdistrict').append($("<option></option>").val(this.value).text(this.text));
                 });
                 $.each(data.responsezipcode, function () {
 
-                    $('#ddlzipcode').append($("<option></option>").val(this.zipCode).text(this.zipCode));
+                    $('#ddlzipcode').append($("<option></option>").val(this.value).text(this.text));
                 })
+
+                $('#ddlzipcode').val("0")
             }
           
 
@@ -929,12 +1105,12 @@ function BindDDLTitle() {
                 $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val(0).text('Select Title'));
                 $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val(0).text('Select Title'));
 
-                $.each(data.response, function () {
-                    $('#ddlprefixcompany_name_th').append($('<option></option>').val(this.TitleId).text(this.TitleNameTh));
-                    $('#ddlprefixcompany_name_en').append($('<option></option>').val(this.TitleId).text(this.TitleNameEn));
+                $.each(data.responsetitle, function () {
+                    $('#ddlprefixcompany_name_th').append($('<option></option>').val(this.titleId).text(this.titleNameTh));
+                    $('#ddlprefixcompany_name_en').append($('<option></option>').val(this.titleId).text(this.TitleNameEn));
 
-                    $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val(this.TitleId).text(this.TitleNameTh));
-                    $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val(this.TitleId).text(this.TitleNameEn));
+                    $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val(this.titleId).text(this.titleNameTh));
+                    $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val(this.titleId).text(this.titleNameEn));
                 });
             }
 
@@ -950,7 +1126,32 @@ function BindDDLTitle() {
     });
 }
 
+function BindRegion() {
+    $.ajax({
+        type: "POST",
+        url: "/Account/DDLsubcontract_profile_Region",
+        //data: { province_id: province },
+        dataType: "json",
+        success: function (data) {
+            if (data != null) {
+                $('#ddlzone').empty();
 
+                $.each(data.responseregion, function () {
+                    $('#ddlzone').append($("<option></option>").val(this.value).text(this.text));
+                });
+            }
+
+
+        },
+        error: function (xhr, status, error) {
+            //Loading(0);
+            //clearForEdit();
+            console.log(status);
+            showFeedback("error", xhr.responseText, "System Information",
+                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+        }
+    });
+}
 
 
 function Validate() {

@@ -59,7 +59,9 @@ namespace SubcontractProfile.WebApi.Services.Services
             var p = new DynamicParameters();
 
             p.Add("@province_id", subcontractProfileProvince.ProvinceId);
-            p.Add("@province_name", subcontractProfileProvince.ProvinceName);
+            p.Add("@province_name_th", subcontractProfileProvince.ProvinceNameTh);
+            p.Add("@province_name_en", subcontractProfileProvince.ProvinceNameEn);
+            p.Add("@region_id", subcontractProfileProvince.RegionId);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileProvince_Insert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -74,7 +76,9 @@ namespace SubcontractProfile.WebApi.Services.Services
         {
             var p = new DynamicParameters();
             p.Add("@province_id", subcontractProfileProvince.ProvinceId);
-            p.Add("@province_name", subcontractProfileProvince.ProvinceName);
+            p.Add("@province_name_th", subcontractProfileProvince.ProvinceNameTh);
+            p.Add("@province_name_en", subcontractProfileProvince.ProvinceNameEn);
+            p.Add("@region_id", subcontractProfileProvince.RegionId);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileProvince_Update", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -117,14 +121,18 @@ namespace SubcontractProfile.WebApi.Services.Services
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("province_id", typeof(SqlInt32));
-            dt.Columns.Add("province_name", typeof(SqlString));
+            dt.Columns.Add("province_name_th", typeof(SqlString));
+            dt.Columns.Add("province_name_en", typeof(SqlString));
+            dt.Columns.Add("region_id", typeof(SqlInt32));
 
             if (SubcontractProfileProvinceList != null)
                 foreach (var curObj in SubcontractProfileProvinceList)
                 {
                     DataRow row = dt.NewRow();
                     row["province_id"] = new SqlInt32((int)curObj.ProvinceId);
-                    row["province_name"] = new SqlString(curObj.ProvinceName);
+                    row["province_name_th"] = new SqlString(curObj.ProvinceNameTh);
+                    row["province_name_en"] = new SqlString(curObj.ProvinceNameEn);
+                    row["region_id"] = curObj.RegionId == null ? SqlInt32.Null : new SqlInt32((int)curObj.RegionId.Value);
 
                     dt.Rows.Add(row);
                 }

@@ -12,7 +12,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อธนาคาร :</label>
             <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <input type="text" class="form-control form-control-sm" id="txtbank_Code" placeholder="รหัสธนาคาร" />
+                <input type="text" class="form-control form-control-sm" id="txtbank_Code" placeholder="รหัสธนาคาร" disabled />
             </div>
             <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
                 <div class="input-group">
@@ -28,7 +28,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อสาขา :</label>
             <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <input type="text" class="form-control form-control-sm" id="txtbranch_Code" placeholder="รหัสสาขา" />
+                <input type="text" class="form-control form-control-sm" id="txtbranch_Code" placeholder="รหัสสาขา" disabled />
             </div>
             <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
                 <div class="input-group">
@@ -98,14 +98,9 @@
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือรับรองบริษัท :</label>
-            @*<input type="file" name="img[]" class="file-upload-default">
-        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
-            <input type="text" class="form-control file-upload-info form-control-sm" disabled>
-            <span class="input-group-append">
-                <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
-            </span>
-        </div>*@
+            
             <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file">
+                <input type="hidden" id="hdupfilecompany_certified" />
                 <input type="file" class="custom-file-input" id="company_certified_file">
                 <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
@@ -121,10 +116,12 @@
                 <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
             </span>
         </div>*@
-            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file">
-                <input type="file" class="custom-file-input" id="commercial_registration_file">
-                <label class="custom-file-label" for="customFile">Choose file</label>
-            </div>
+           
+        <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file">
+            <input type="hidden" id="hdupfilecommercial_registration" />
+            <input type="file" class="custom-file-input" id="commercial_registration_file">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
         </div>
     </div>
 </div>
@@ -139,10 +136,12 @@
                 <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
             </span>
         </div>*@
-            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file">
-                <input type="file" class="custom-file-input" id="vat_registration_certificate_file">
-                <label class="custom-file-label" for="customFile">Choose file</label>
-            </div>
+            
+        <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file">
+            <input type="hidden" id="hdupfilevat_registration_certificate" />
+            <input type="file" class="custom-file-input" id="vat_registration_certificate_file">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
         </div>
     </div>
 </div>

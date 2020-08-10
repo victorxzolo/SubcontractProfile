@@ -1,341 +1,327 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SubcontractProfile</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>AIS | Subcontract Profile </title>
+    <link rel="icon" type="image/x-icon" href="~/assets/img/favicon.ico" />
+  
+    <link href="~/assets/css/loader.css" rel="stylesheet" type="text/css" />
+    <script src="~/assets/js/loader.js"></script>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link href="~/plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/dashboard/dash_1.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/datatables.css">
+    <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/dt-global_style.css">
+    <!-- END PAGE LEVEL STYLES -->
+    <!--  BEGIN CUSTOM STYLE FILE  -->
+    <link href="~/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/select2/select2.min.css">
+    <!--  END CUSTOM STYLE FILE  -->
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/plugins/font-icons/fontawesome/css/regular.css">
+    <link rel="stylesheet" href="~/plugins/font-icons/fontawesome/css/fontawesome.css">
 
-    <link rel="stylesheet" href="~/css/site.css" />
-    <!-- plugins:css -->
-    <link rel="stylesheet" href="~/vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="~/vendors/base/vendor.bundle.base.css">
-    <!-- endinject -->
-    <!-- plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <link rel="stylesheet" href="~/css/style.css">
-    <link rel="stylesheet" href="~/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="~/font-awesome/css/font-awesome.min.css">
-
-
-
+    <link rel="stylesheet" type="text/css" href="~/assets/css/forms/theme-checkbox-radio.css">
+    <link href="~/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
-
-    <!-- plugins:js -->
-    <script src="~/vendors/base/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page-->
-    <script src="~/vendors/chart.js/Chart.min.js"></script>
-    <!-- End plugin js for this page-->
-    <!-- inject:js -->
-    <script src="~/js/off-canvas.js"></script>
-    <script src="~/js/hoverable-collapse.js"></script>
-    <script src="~/js/template.js"></script>
-    <script src="~/js/todolist.js"></script>
-    <script src="~/js/chart.js"></script>
-    <script src="~/js/file-upload.js"></script>
-    @*endinject
-        Custom js for this page*@
-    <script src="~/js/dashboard.js"></script>
-
-    <div class="container-scroller">
-
-        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-
-            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-
-                <div>
-                    <a class="navbar-brand brand-logo" href="index.html"> <img src="~/img/ais.png" style="height:39px;width:104px;" class="mr-2" alt="logo" /></a>
-
-                </div>
-                <button class="navbar-toggler navbar-toggler hidden-xs-down align-self-center " type="button" data-toggle="minimize">
-                    <span class="fa fa-align-justify"></span>
-                </button>
-                <button class="navbar-toggler navbar-toggler-left d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-                    <span class="fa fa-align-justify"></span>
-                </button>
-
+    <!-- BEGIN LOADER -->
+    <div id="load_screen">
+        <div class="loader">
+            <div class="loader-content">
+                <div class="spinner-grow align-self-center"></div>
             </div>
-            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-
-                @*<ul class="navbar-nav mr-lg-2">
-                        <li class="nav-item nav-search d-none d-lg-block">
-                            <div class="input-group">
-                                <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                                    <span class="input-group-text" id="search">
-                                        <i class="ti-search"></i>
-                                    </span>
-                                </div>
-                                <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-                            </div>
-                        </li>
-                    </ul>*@
-                <ul class="navbar-nav navbar-nav-right">
-
-                    <li class="nav-item nav-profile dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" data-target="#dw-s2" id="profileDropdown">
-                            <img src="~/img/userlogo.png" style="height:39px;width:39px" alt="profile" />
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" id="dw-s2" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item">
-                                <i class="ti-settings text-primary"></i>
-                                Settings
-                            </a>
-                            <a class="dropdown-item">
-                                <i class="ti-power-off text-primary"></i>
-                                Logout
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-
-            </div>
-        </nav>
+        </div>
     </div>
+    <!--  END LOADER -->
+    <!--  BEGIN NAVBAR  -->
+    <div class="header-container fixed-top">
+        <header class="header navbar navbar-expand-sm" style="background-color:#ffffff">
 
-    <div class="container-fluid page-body-wrapper">
-
-        <nav class="sidebar sidebar-offcanvas" id="sidebar">
-            <ul class="nav">
-
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                        <i class="fa fa-tasks menu-icon"></i>
-                        <span class="menu-title">Doc&Instruction</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="ui-basic">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item">
-                                <a href="@Url.Action("DashBoard", "DocInstruction")" class="nav-link">
-                                    DashBoard
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="@Url.Action("formelement", "DocInstruction")" class="nav-link">
-                                    Formelements
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="@Url.Action("Table", "DocInstruction")" class="nav-link">
-                                    Tables
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="@Url.Action("Charts", "DocInstruction")" class="nav-link">
-                                    Charts
-                                </a>
-                            </li>
-
-
-                        </ul>
-                    </div>
-
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#ui-basicPayment" aria-expanded="false" aria-controls="ui-basicPayment">
-                        <i class="fa fa-tasks menu-icon"></i>
-                        <span class="menu-title">Payment</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="ui-basicPayment">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item">
-                                <a href="@Url.Action("ConfirmPayment", "Payment")" class="nav-link">
-                                    ConfirmPayment
-                                </a>
-                            </li>
-
-                        </ul>
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item">
-                                <a href="@Url.Action("VerifyPayment", "Payment")" class="nav-link">
-                                    Verify Payment
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#ui-basicTraining" aria-expanded="false" aria-controls="ui-basicTraining">
-                        <i class="fa fa-tasks menu-icon"></i>
-                        <span class="menu-title">Training</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="ui-basicTraining">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item">
-                                <a href="@Url.Action("RequestTraining", "Training")" class="nav-link">
-                                    RequestTraining
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="@Url.Action("RequestTrainingauthorities", "Training")" class="nav-link">
-                                    RequestTraining
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="@Url.Action("Reporttestresult", "Training")" class="nav-link">
-                                    Report Test Result
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="@Url.Action("Reporttestresultauthorities", "Training")" class="nav-link">
-                                    Report Test Result
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <a href="@Url.Action("Index", "Test")" class="nav-link">
-                        <i class="fa fa-exclamation-triangle menu-icon"></i>
-                        <span class="menu-title">TestPage</span>
-
+            <ul class="navbar-item theme-brand flex-row  text-center">
+                <li class="nav-item theme-logo">
+                    <a href="index.html">
+                        <img src="~/assets/img/ais-logob.png" class="navbar-logo" style="width:95px" alt="logo">
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="@Url.Action("Login", "Account")" class="nav-link">
-                        <i class="fa fa-registered menu-icon" aria-hidden="true"></i>
-                        <span class="menu-title">Login</span>
-
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="@Url.Action("Index", "Account")" class="nav-link">
-                        <i class="fa fa-registered menu-icon" aria-hidden="true"></i>
-                        <span class="menu-title">Register</span>
-
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#registrationmenu" aria-expanded="false" aria-controls="registrationmenu">
-                        <i class="fa fa-tasks menu-icon"></i>
-                        <span class="menu-title">Registration</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="registrationmenu">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item">
-                                <a href="@Url.Action("SearchCompanyVerify", "Registration")" class="nav-link">
-                                    Company Verify
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="@Url.Action("ActivateProfile", "Registration")" class="nav-link">
-                                    Activate Profile
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-
+                <li class="nav-item theme-text">
+                    <!--<a href="index.html" class="nav-link"> CORK </a>-->
                 </li>
             </ul>
-        </nav>
-
-        <div style="margin-top:10px;" class="col-md-10 col-sm-10">
-            @RenderBody()
-        </div>
 
 
+
+            <ul class="navbar-item flex-row ml-md-auto">
+
+                <li class="nav-item dropdown language-dropdown">
+                    <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="language-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="~/assets/img/th.png" class="flag-width" alt="flag">
+                    </a>
+                    <div class="dropdown-menu position-absolute" aria-labelledby="language-dropdown">
+
+                        <a class="dropdown-item d-flex" href="javascript:void(0);"><img src="~/assets/img/en.png" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;English</span></a>
+                    </div>
+                </li>
+
+
+
+
+                <li class="nav-item dropdown user-profile-dropdown">
+                    <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <img src="~/assets/img/boy.png" alt="avatar">
+                    </a>
+                    <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
+                        <div class="">
+                            <div class="dropdown-item">
+                                <a class="" href="user_profile.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> My Profile</a>
+                            </div>
+                            <div class="dropdown-item">
+                                <a class="" href="apps_mailbox.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg> Inbox</a>
+                            </div>
+                            <div class="dropdown-item">
+                                <a class="" href="auth_lockscreen.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Lock Screen</a>
+                            </div>
+                            <div class="dropdown-item">
+                                <a class="" href="auth_login.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Sign Out</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </header>
     </div>
+    <!--  END NAVBAR  -->
+    <!--  BEGIN NAVBAR  -->
+    <div class="sub-header-container">
+        <header class="header navbar navbar-expand-sm" style="background-color:#303031">
+            <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
+
+            <ul class="navbar-nav flex-row">
+                <li>
+                    <div class="page-header">
+
+                        <nav class="breadcrumb-one" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);" style="color:#ffffff">Registration</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span style="color:#ffffff">Company</span></li>
+                            </ol>
+                        </nav>
+
+                    </div>
+                </li>
+            </ul>
+
+        </header>
+    </div>
+    <!--  END NAVBAR  -->
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+        <!--  BEGIN SIDEBAR  -->
+        <div class="sidebar-wrapper sidebar-theme">
+
+            <nav id="sidebar">
+                <div class="shadow-bottom"></div>
+                <ul class="list-unstyled menu-categories" id="accordionExample">
+                    <li class="menu">
+                        <a href="#dashboard" data-active="false" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <span>Dashboard</span>
+                            </div>
+                            <!--<div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>-->
+                        </a>
+                        <!--<ul class="collapse submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
+                            <li class="active">
+                                <a href="index.html"> Sales </a>
+                            </li>
+                            <li>
+                                <a href="index2.html"> Analytics </a>
+                            </li>
+                        </ul>-->
+                    </li>
+
+                    <li class="menu">
+                        <a href="#Registration" data-active="true" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                                <span>Registration</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled" id="Registration" data-parent="#accordionExample">
+                            <li>
+                                <a href="#"> Company </a>
+                            </li>
+                            <li>
+                                <a href="#"> Location  </a>
+                            </li>
+                            <li>
+                                <a href="#"> Team </a>
+                            </li>
+                            <li>
+                                <a href="#"> Engineer </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="menu">
+                        <a href="#Training" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                                <span>Training</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled" id="Training" data-parent="#accordionExample">
+                            <li>
+                                <a href="#"> Request Training </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="menu">
+                        <a href="#Payment" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                                <span>Payment</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled" id="Payment" data-parent="#accordionExample">
+                            <li>
+                                <a href="#"> Confirm Payment </a>
+                            </li>
+
+                        </ul>
+                    </li>
 
 
-    <div class="modal fade" id="MessageFeedbackPopUp" tabindex="-1" role="dialog" aria-labelledby="MessageFeedbackPopUpLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header" id="headerMessageFeedback">
-                    <h4 class="modal-title" id="MessageFeedbackPopUpLabel">Notification</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
-                </div>
-                <div class="modal-body">
-                    <label id="lbMessageFeedback"></label>
-                </div>
-                <div class="modal-footer">
-                   
+                    <li class="menu">
+                        <a href="login" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                                <span>Sign Out</span>
+                            </div>
+                        </a>
+                    </li>
+
+
+                </ul>
+                <!-- <div class="shadow-bottom"></div> -->
+
+            </nav>
+
+        </div>
+        <!--  END SIDEBAR  -->
+        <!--  BEGIN CONTENT AREA  -->
+        <div id="content" class="main-content" style="background-image:url(~/assets/img/solution-list-bg1.jpg);background-repeat: no-repeat, repeat;">
+            <div class="layout-px-spacing">
+                <div class="row layout-top-spacing">
+                    @RenderBody()
+
+                  
+
+
                 </div>
             </div>
-        </div>
-    </div>
+            <div class="footer-wrapper">
+                <div class="footer-section f-section-1">
 
+                    <p class="">Copyright ©
+                    <script>document.write(new Date().getFullYear())</script>  ADVANCED INFO SERVICE PLC. ALL RIGHTS RESERVED.</p>
+                </div>
+                <div class="footer-section f-section-2">
 
-    @*<footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2020 - SubcontractProfile - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
             </div>
-        </footer>*@
 
 
 
+        </div>
+        <!--  END CONTENT AREA  -->
 
-    <script src="~/jquery/jquery.js"></script>
+    </div>
+    <!-- END MAIN CONTAINER -->
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
+    <script src="~/bootstrap/js/popper.min.js"></script>
+    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="~/assets/js/app.js"></script>
+    <script>
+        $(document).ready(function () {
+            App.init();
+        });
+    </script>
+    <script src="~/plugins/highlight/highlight.pack.js"></script>
+    <script src="~/assets/js/custom.js"></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script src="~/plugins/apex/apexcharts.min.js"></script>
+    <script src="~/assets/js/dashboard/dash_1.js"></script>
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="~/plugins/table/datatable/datatables.js"></script>
+    <script>
 
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        $('#default-ordering').DataTable({
+            "oLanguage": {
+                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                //"sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                //"sSearchPlaceholder": "Search...",
+                "sSearch": false,
+                "sLengthMenu": "Results :  _MENU_",
+            },
+            "order": [[3, "desc"]],
+            "stripeClasses": [],
+            "lengthMenu": [7, 10, 20, 50],
+            "pageLength": 7,
+            drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+        });
+    </script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!--  BEGIN CUSTOM SCRIPTS FILE  -->
+    <script src="~/assets/js/scrollspyNav.js"></script>
+    <script src="~/plugins/select2/select2.min.js"></script>
+    <script src="~/plugins/select2/custom-select2.js"></script>
+    <!--  BEGIN CUSTOM SCRIPTS FILE  -->
+
+    <script src="~/plugins/font-icons/feather/feather.min.js"></script>
+    <script type="text/javascript">
+        feather.replace();
+        checkall('todoAll', 'todochkbox');
+        $('[data-toggle="tooltip"]').tooltip()
+    </script>
 
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet" />
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
-
-
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
 </body>
+
 </html>
-<script>
-
-    function onPanelToggle(e) {
-        var id = $("#" + e.id + "Arrow");
-        var cls = id.attr("class");
-        if (cls === "fa fa-chevron-circle-down fa-lg") {
-            id.removeClass();
-            id.addClass("fa fa-chevron-circle-up fa-lg");
-        }
-        else {
-            id.removeClass();
-            id.addClass("fa fa-chevron-circle-down fa-lg");
-        }
-    }
-
-
-    function showFeedback(type, msg, title, footer) {
-        //if (msg !== "") {
-        $("#headerMessageFeedback").removeClass();
-        $("#headerMessageFeedback").addClass("modal-header");
-        if (type === "primary") { $("#headerMessageFeedback").addClass("btn-primary"); }
-        else if (type === "success") { $("#headerMessageFeedback").addClass("btn-success"); }
-        else if (type === "info") { $("#headerMessageFeedback").addClass("btn-info"); }
-        else if (type === "warning") { $("#headerMessageFeedback").addClass("btn-warning"); }
-        else if (type === "error") { $("#headerMessageFeedback").addClass("btn-danger"); }
-        else if (type === "light") { $("#headerMessageFeedback").addClass("btn-light"); }
-        else if (type === "secondary") { $("#headerMessageFeedback").addClass("btn-secondary"); }
-        else { $("#headerMessageFeedback").addClass("btn-default"); }
-
-        if (title !== undefined) $("#MessageFeedbackPopUpLabel").text(title); else $("#MessageFeedbackPopUpLabel").text("Notification");
-
-
-        $("#lbMessageFeedback").html(msg);
-        if (footer != "") {
-            $('.modal-footer').html(footer)
-        }
-        $("#MessageFeedbackPopUp").modal('show');
-        //}
-    }
-
-
-   
-
-</script>

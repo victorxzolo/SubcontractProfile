@@ -33,6 +33,7 @@ namespace Repository
         SubcontractProfile.WebApi.Services.Contracts.ISubcontractProfileCompanyRepo SubcontractProfileCompanyRepo { get; }
         SubcontractProfile.WebApi.Services.Contracts.ISubcontractProfileDistrictRepo SubcontractProfileDistrictRepo { get; }
         SubcontractProfile.WebApi.Services.Contracts.ISubcontractProfileEngineerRepo SubcontractProfileEngineerRepo { get; }
+        SubcontractProfile.WebApi.Services.Contracts.ISubcontractProfileRegionRepo SubcontractProfileRegionRepo { get; }
         SubcontractProfile.WebApi.Services.Contracts.ISubcontractProfileLocationRepo SubcontractProfileLocationRepo { get; }
         SubcontractProfile.WebApi.Services.Contracts.ISubcontractProfileNationalityRepo SubcontractProfileNationalityRepo { get; }
         SubcontractProfile.WebApi.Services.Contracts.ISubcontractProfilePaymentRepo SubcontractProfilePaymentRepo { get; }
@@ -143,6 +144,17 @@ namespace Repository
                 if (_subcontractProfileEngineerRepo == null)
                     _subcontractProfileEngineerRepo = new SubcontractProfile.WebApi.Services.Services.SubcontractProfileEngineerRepo(this);
                 return _subcontractProfileEngineerRepo;
+            }
+        }
+
+        protected SubcontractProfile.WebApi.Services.Contracts.ISubcontractProfileRegionRepo _subcontractProfileRegionRepo;
+        public SubcontractProfile.WebApi.Services.Contracts.ISubcontractProfileRegionRepo SubcontractProfileRegionRepo
+        {
+            get
+            {
+                if (_subcontractProfileRegionRepo == null)
+                    _subcontractProfileRegionRepo = new SubcontractProfile.WebApi.Services.Services.SubcontractProfileRegionRepo(this);
+                return _subcontractProfileRegionRepo;
             }
         }
 

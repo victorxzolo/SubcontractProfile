@@ -66,7 +66,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileSubDistrict))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileSubDistrict))]
-        [HttpGet("GetSubDistrictByDistrict/{provinceId}")]
+        [HttpGet("GetSubDistrictByDistrict/{districtId}")]
         public List<SubcontractProfile.WebApi.Services.Model.SubcontractProfileSubDistrict> GetSubDistrictByDistrict(int districtId)
         {
 
@@ -90,7 +90,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         #endregion
 
         #region POST
-        [HttpPost("Insert/{subcontractProfileSubDistrict}")]
+        [HttpPost("Insert")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileDistrict))]
         public Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileSubDistrict subcontractProfileSubDistrict)
         {
@@ -111,7 +111,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         }
 
-        [HttpPost("BulkInsert/{subcontractProfileSubDistrictList}")]
+        [HttpPost("BulkInsert")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileSubDistrict))]
         public Task<bool> BulkInsert(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileSubDistrict> subcontractProfileSubDistrictList)
         {
@@ -134,7 +134,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         #endregion
 
         #region PUT
-        [HttpPut("Update/{subcontractProfileSubDistrict}")]
+        [HttpPut("Update")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         public Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileSubDistrict subcontractProfileSubDistrict)
         {

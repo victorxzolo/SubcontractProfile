@@ -59,7 +59,8 @@ namespace SubcontractProfile.WebApi.Services.Services
             var p = new DynamicParameters();
 
             p.Add("@sub_district_id", subcontractProfileSubDistrict.SubDistrictId);
-            p.Add("@sub_district_name", subcontractProfileSubDistrict.SubDistrictName);
+            p.Add("@sub_district_name_th", subcontractProfileSubDistrict.SubDistrictNameTh);
+            p.Add("@sub_district_name_en", subcontractProfileSubDistrict.SubDistrictNameEn);
             p.Add("@zip_code", subcontractProfileSubDistrict.ZipCode);
             p.Add("@district_id", subcontractProfileSubDistrict.DistrictId);
 
@@ -76,7 +77,8 @@ namespace SubcontractProfile.WebApi.Services.Services
         {
             var p = new DynamicParameters();
             p.Add("@sub_district_id", subcontractProfileSubDistrict.SubDistrictId);
-            p.Add("@sub_district_name", subcontractProfileSubDistrict.SubDistrictName);
+            p.Add("@sub_district_name_th", subcontractProfileSubDistrict.SubDistrictNameTh);
+            p.Add("@sub_district_name_en", subcontractProfileSubDistrict.SubDistrictNameEn);
             p.Add("@zip_code", subcontractProfileSubDistrict.ZipCode);
             p.Add("@district_id", subcontractProfileSubDistrict.DistrictId);
 
@@ -121,7 +123,8 @@ namespace SubcontractProfile.WebApi.Services.Services
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("sub_district_id", typeof(SqlInt32));
-            dt.Columns.Add("sub_district_name", typeof(SqlString));
+            dt.Columns.Add("sub_district_name_th", typeof(SqlString));
+            dt.Columns.Add("sub_district_name_en", typeof(SqlString));
             dt.Columns.Add("zip_code", typeof(SqlString));
             dt.Columns.Add("district_id", typeof(SqlInt32));
 
@@ -130,7 +133,8 @@ namespace SubcontractProfile.WebApi.Services.Services
                 {
                     DataRow row = dt.NewRow();
                     row["sub_district_id"] = new SqlInt32((int)curObj.SubDistrictId);
-                    row["sub_district_name"] = new SqlString(curObj.SubDistrictName);
+                    row["sub_district_name_th"] = new SqlString(curObj.SubDistrictNameTh);
+                    row["sub_district_name_en"] = new SqlString(curObj.SubDistrictNameEn);
                     row["zip_code"] = new SqlString(curObj.ZipCode);
                     row["district_id"] = new SqlInt32((int)curObj.DistrictId);
 
@@ -176,6 +180,5 @@ namespace SubcontractProfile.WebApi.Services.Services
         }
 
     }
-
 
 }

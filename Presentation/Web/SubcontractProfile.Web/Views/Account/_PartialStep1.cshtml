@@ -7,7 +7,7 @@
             <div class="col-sm-5">
                 <div class="custom-control custom-radio">
                     
-                        <input type="radio" class="custom-control-input" name="optionsRadios" id="chktypeN" value="N">
+                        <input type="radio" class="custom-control-input" name="optionsRadios" id="chktypeN" value="NewSubContract">
                         <label class="custom-control-label" for="chktypeN">
                             New Subcontract
                         </label>
@@ -16,7 +16,7 @@
             <div class="col-sm-4">
                 <div class="custom-control custom-radio">
 
-                    <input type="radio" class="custom-control-input" name="optionsRadios" id="chktypeD" value="D">
+                    <input type="radio" class="custom-control-input" name="optionsRadios" id="chktypeD" value="Dealer">
                     <label class="custom-control-label" for="chktypeD">
                         Dealer
                     </label>
@@ -362,6 +362,60 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
                             <div class="form-group row">
+                                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">ASC Code :</label>
+                                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                    <input type="text" class="form-control inputValidationModal form-control-sm" id="txtasccodemodal" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Mobile No :</label>
+                                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                    <input type="text" class="form-control form-control-sm" id="txtmobilenomodal" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">Location Code :</label>
+                                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                    <input type="text" class="form-control form-control-sm" id="txtlocationcodemodal" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">ID Number :</label>
+                                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                    <input type="text" class="form-control form-control-sm" id="txtidnumbermodal" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">Sap Code :</label>
+                                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                    <input type="text" class="form-control form-control-sm" id="txtsapcodemodal" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">User Id :</label>
+                                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                    <input type="text" class="form-control form-control-sm" id="txtuseridmodal" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="row">
+                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                            <div class="form-group row">
                                 <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">ชื่อนิติบุคคล(ไทย) :</label>
                                 <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                     <input type="text" class="form-control inputValidationModal form-control-sm" id="txtjuristicTmodal" />
@@ -455,7 +509,7 @@
                             </div>
 
                         </div>
-                    </div>
+                    </div>*@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                             <div class="d-flex align-items-center justify-content-center h-100" role="group">
@@ -478,43 +532,37 @@
                                     <thead class="thead-light">
                                         <tr>
                                             <th>ชื่อบริษัท</th>
+                                            <th>ชื่อย่อบริษัท</th>
+                                            <th>เลขนิติบุคคล</th>
                                             <th>Location Code</th>
                                             <th>Location Name</th>
                                             <th>Distribution Channel</th>
                                             <th>Channel Sale Group</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       
                                     </tbody>
                                 </table>
+                                @*<table class="table table-bordered table-hover" id="tblocationModal">
+            <thead class="thead-light">
+                <tr>
+                    <th>ชื่อบริษัท</th>
+                    <th>Location Code</th>
+                    <th>Location Name</th>
+                    <th>Distribution Channel</th>
+                    <th>Channel Sale Group</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>*@
                             </div>
                         </div>
 
                     </div>
-                    @*<div class="row">
-                        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                            <nav aria-label="...">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <span class="page-link">Previous</span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active">
-                                        <span class="page-link">
-                                            2
-                                            <span class="sr-only">(current)</span>
-                                        </span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-
-                    </div>*@
+                  
                 </div>
                 
             </div>

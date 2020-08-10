@@ -59,10 +59,32 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
             return entities;
         }
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileProvince))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileProvince))]
+        [HttpGet("GetProvinceByRegionId/{regionId}")]
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileProvince>> GetAll(int regionId)
+        {
+            _logger.LogInformation($"ProvinceController::GetALL");
+
+            var entities = await _service.GetAll();
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"ProvinceController::", "GetALL NOT FOUND");
+                return null;
+            }
+            else
+            {
+                var result = entities.Where(x => x.RegionId == regionId).ToList();
+                return result;
+            }
+        }
+
         #endregion
 
         #region POST
-        [HttpPost("Insert/{subcontractProfileProvince}")]
+        [HttpPost("Insert")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileProvince))]
         public Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileProvince subcontractProfileProvince)
         {
@@ -83,7 +105,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         }
 
-        [HttpPost("BulkInsert/{subcontractProfileProvinceList}")]
+        [HttpPost("BulkInsert")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileProvince))]
         public Task<bool> BulkInsert(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileProvince> subcontractProfileProvinceList)
         {
@@ -106,7 +128,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         #region PUT
 
-        [HttpPut("Update/{subcontractProfileProvince}")]
+        [HttpPut("Update")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         public Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileProvince subcontractProfileProvince)
         {

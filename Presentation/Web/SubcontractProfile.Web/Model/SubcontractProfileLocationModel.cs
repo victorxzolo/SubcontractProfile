@@ -141,22 +141,39 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string CompanyId { get; set; }
 
+        public string company_name_th { get; set; }
+        public string distribution_channel { get; set; }
+        public string channel_sale_group { get; set; }
+
     }
 
 
 
     #region View
-    public class Search_subcontract_profile_location : DataTableAjaxModel //รับ Search จากหน้าจอ
+    public class SearchSubcontractProfileLocationViewModel : DataTableAjaxModel //รับ Search จากหน้าจอ
     {
-        public string company_name_th { get; set; }
-        public string company_name_en { get; set; }
-        public string company_alias { get; set; }
-        public string company_code { get; set; }
-        public string location_name_th { get; set; }
-        public string location_name_en { get; set; }
+        public string asc_code { get; set; }
+        public string asc_mobile_no { get; set; }
+        public string id_Number { get; set; }
         public string location_code { get; set; }
-        public string distribution_channel { get; set; }
-        public string channel_sale_group { get; set; }
+        public string sap_code { get; set; }
+        public string user_id { get; set; }
+        public string inevent{ get;set; }
+        public string insource { get; set; }
+
+        public int page_index { get; set; }
+        public int page_size { get; set; }
+
+        public string sort_col { get; set; }
+        public string sort_dir { get; set; }
     }
+
+    public class SubcontractProfileLocationSearchOutputModel
+    {
+        public List<SubcontractProfileLocationModel> ListResult { get; set; }
+        public int filteredResultsCount { get; set; }
+        public int TotalResultsCount { get; set; }
+    }
+
     #endregion
 }
