@@ -74,7 +74,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileAddress))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileAddress))]
         [HttpGet("SearchCompany/{subcontract_profile_type}/{location_code}/{vendor_code}/{company_th}/{company_en}/{company_alias}/{company_code}/{distibution_channel}/{channel_sale_group}")]
-        public Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany> SearchCompany(string subcontract_profile_type,
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchCompany(string subcontract_profile_type,
             string location_code, string vendor_code, string company_th,
             string company_en, string company_alias, string company_code,
             string distibution_channel, string channel_sale_group)
