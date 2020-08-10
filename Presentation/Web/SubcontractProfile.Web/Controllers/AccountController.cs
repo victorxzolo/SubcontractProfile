@@ -26,6 +26,7 @@ using System.Diagnostics.Eventing.Reader;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.EntityFrameworkCore.Update.Internal;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -773,27 +774,58 @@ namespace SubcontractProfile.Web.Controllers
                 var data = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
                 if (data != null && data.Count != 0)
                 {
-                    data.RemoveAll(x => x.AddressId==daftdata[0].AddressId);
-
-                    data.Add(daftdata[0]);
-                    SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaft", data);
+                    foreach(var e in daftdata)
+                    {
+                        if(e.AddressId ==null)
+                        {
+                            if(e.location_code!="")//มาจาก dealer
+                            {
+                                data.RemoveAll(x => x.location_code == e.location_code && x.AddressTypeId==e.AddressTypeId);
+                            }
+                                List<SubcontractProfileAddressModel> newaddr = new List<SubcontractProfileAddressModel>();
+                                newaddr.Add(new SubcontractProfileAddressModel {
+                                      AddressTypeId=e.AddressTypeId,
+                                      address_type_name=e.address_type_name,
+                                      Country = e.Country,
+                                      ZipCode = e.ZipCode,
+                                      HouseNo = e.HouseNo,
+                                      Moo=e.Moo,
+                                      VillageName=e.VillageName,
+                                      Building=e.Building,
+                                      Floor=e.Floor,
+                                      RoomNo=e.RoomNo,
+                                      Soi=e.Soi,
+                                      Road=e.Road,
+                                      SubDistrictId=e.SubDistrictId,
+                                      sub_district_name=e.sub_district_name,
+                                      DistrictId=e.DistrictId,
+                                      district_name=e.district_name,
+                                      ProvinceId=e.ProvinceId,
+                                      province_name=e.province_name,
+                                      RegionId=e.RegionId,
+                                      outFullAddress=e.outFullAddress,
+                                      location_code=e.location_code
+                                });
+                            foreach(var r in SaveAddressSession(newaddr))
+                            {
+                                data.Add(r);
+                            }
+                            
+                        }
+                        else
+                        {
+                            data.RemoveAll(x => x.AddressId == e.AddressId);
+                            data.Add(e);
+                        }
+                          
+                    }
+                    
                 }
                 else
                 {
-                    foreach(var e in daftdata)
-                    {
-                        Guid addr_id = Guid.NewGuid();
-                        e.AddressId = addr_id;
-                    }
-                   
-                   
-                    SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaft", daftdata);
-                    data = daftdata;
+                  data=  SaveAddressSession(daftdata);
                 }
-
-
-
-
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaft", data);
                 return Json(new { response = data, status = true });
             }
             catch (Exception e)
@@ -802,6 +834,111 @@ namespace SubcontractProfile.Web.Controllers
             }
 
         }
+
+        private List<SubcontractProfileAddressModel> SaveAddressSession(List<SubcontractProfileAddressModel> daftdata)
+        {
+            List<SubcontractProfileAddressModel> data = new List<SubcontractProfileAddressModel>();
+            try
+            {
+                var outputprovince = new List<SubcontractProfileProvinceModel>();
+                var outputdistrict = new List<SubcontractProfileDistrictModel>();
+                var outputsubdistrict = new List<SubcontractProfileSubDistrictModel>();
+
+                string uriprovice = string.Format("{0}", strpathAPI + "Province/GetAll");
+                string uridistrict = string.Format("{0}", strpathAPI + "District/GetDistrictByProvinceId");
+                string urisubdistrict = string.Format("{0}", strpathAPI + "SubDistrict/GetSubDistrictByDistrict");
+
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response;
+
+                foreach (var e in daftdata)
+                {
+                    Guid addr_id = Guid.NewGuid();
+                    e.AddressId = addr_id;
+
+
+                    if (e.ProvinceId == 0)
+                    {
+                        response = client.GetAsync(uriprovice).Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var v = response.Content.ReadAsStringAsync().Result;
+                            outputprovince = JsonConvert.DeserializeObject<List<SubcontractProfileProvinceModel>>(v);
+                            string[] s_provice = e.province_name.Split(" ");
+                            if (Lang == "TH")
+                            {
+                                var w = outputprovince.First(x => x.ProvinceNameTh.Contains(s_provice[1].ToString()));
+                                e.ProvinceId = w.ProvinceId;
+                                e.RegionId = w.RegionId;
+
+                            }
+                            else
+                            {
+                                var w = outputprovince.First(x => x.ProvinceNameEn.Contains(s_provice[1].ToString()));
+                                e.ProvinceId = w.ProvinceId;
+                                e.RegionId = w.RegionId;
+                            }
+                        }
+                    }
+                    if (e.DistrictId == 0)
+                    {
+                        response = client.GetAsync(uridistrict + "/" + e.ProvinceId).Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var v = response.Content.ReadAsStringAsync().Result;
+                            outputdistrict = JsonConvert.DeserializeObject<List<SubcontractProfileDistrictModel>>(v);
+                            string[] s_district = e.district_name.Split(" ");
+                            if (Lang == "TH")
+                            {
+                                var w = outputdistrict.First(d => d.DistrictNameTh.Contains(s_district[1].ToString()));
+                                e.DistrictId = w.DistrictId;
+                            }
+                            else
+                            {
+                                var w = outputdistrict.First(d => d.DistrictNameEn.Contains(s_district[1].ToString()));
+                                e.DistrictId = w.DistrictId;
+                            }
+
+                        }
+
+                    }
+                    if (e.SubDistrictId == 0)
+                    {
+                        response = client.GetAsync(urisubdistrict + "/" + e.DistrictId).Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var v = response.Content.ReadAsStringAsync().Result;
+                            outputsubdistrict = JsonConvert.DeserializeObject<List<SubcontractProfileSubDistrictModel>>(v);
+
+                            string[] s_subdistrict = e.sub_district_name.Split(" ");
+                            if (Lang == "TH")
+                            {
+                                var w = outputsubdistrict.First(d => d.SubDistrictNameTh.Contains(s_subdistrict[1].ToString()));
+                                e.SubDistrictId = w.SubDistrictId;
+                            }
+                            else
+                            {
+                                var w = outputsubdistrict.First(d => d.SubDistrictNameEn.Contains(s_subdistrict[1].ToString()));
+                                e.SubDistrictId = w.SubDistrictId;
+                            }
+
+                        }
+                    }
+                }
+
+                data = daftdata;
+                
+                
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+            return data;
+        }
+
         [HttpPost]
         public IActionResult GetDaftAddress(string AddressId)
         {

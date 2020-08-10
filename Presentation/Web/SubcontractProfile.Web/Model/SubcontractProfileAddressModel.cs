@@ -7,7 +7,7 @@ namespace SubcontractProfile.Web.Model
 {
     public class SubcontractProfileAddressModel
     {
-        public System.Guid AddressId { get; set; }
+        public System.Guid? AddressId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string HouseNo { get; set; }
@@ -70,5 +70,7 @@ namespace SubcontractProfile.Web.Model
         public string district_name { get; set; }
         public string province_name { get; set; }
         public string City { get; set; }
+        public string outFullAddress { get; set; }
+        public string location_code { get; set; }
     }
 }

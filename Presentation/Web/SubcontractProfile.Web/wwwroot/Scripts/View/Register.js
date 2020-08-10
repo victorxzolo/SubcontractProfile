@@ -173,14 +173,13 @@
     $('#btn_select_location').click(function () {
         var value = tbLocation.rows('.selected').data();
         var lo_id = value[0].location_id;
-
         $.ajax({
             type: "POST",
             url: "/Account/GetLocationSession",
             dataType: "json",
             data: { location_id: lo_id},
             success: function (data) {
-              
+                console.log(data)
                 if (data.response.status) {
                     $('#txtlocationcode').val(data.locationListModel[0].outLocationCode);
                     $('#txtlocationname').val(data.locationListModel[0].outLocationName);
@@ -188,11 +187,64 @@
                     $('#txtchannelsalegroup').val(data.locationListModel[0].outChnSales);
                     $('#txttax_id_dealer').val(data.locationListModel[0].outTaxId);
                     $('#txtcompany_alias_dealer').val(data.locationListModel[0].outCompanyShortName);
-                    $('#ddlprefixcompany_name_th_dealer option').filter(':selected').text(data.locationListModel[0].outTitle)
+
+                    if ($('#ddlprefixcompany_name_th_dealer option:selected').text() == data.locationListModel[0].outTitle) {
+                        $('#ddlprefixcompany_name_th_dealer').text(data.locationListModel[0].outTitle).change();
+                    } 
+
                     $('#txtcompany_name_th_dealer').val(data.locationListModel[0].outCompanyName);
-                    $('#ddlprefixcompany_name_en_dealer option').filter(':selected').text(data.locationListModel[0].outTitle)
+
+                    if ($('#ddlprefixcompany_name_en_dealer option:selected').text() == data.locationListModel[0].outTitle) {
+                        $('#ddlprefixcompany_name_en_dealer').text(data.locationListModel[0].outTitle).change();
+                    } 
+
                     $('#txtcompany_name_en_dealer').val();
                     $('#txtwt_name_dealer').val(data.locationListModel[0].outWTName);
+
+                    if (data.locationListModel[0].outVatType == "VAT") {
+                        $('#chkvat_typeT_dealer').prop('checked', true);
+                    }
+                    else if (data.locationListModel[0].outVatType == "NON_VAT"){
+                        $('#chkvat_typeE_dealer').prop('checked', true);
+                    }
+
+                    if (data.locationListModel[0].addressLocationList != null) {
+                        var stuff = [];
+                        jQuery.each(data.locationListModel[0].addressLocationList, function (i, val) {
+                            var address_type_name = "";
+                            $(':checkbox').each(function (i) {
+
+                                if (val.outAddressType == $(this).val()) {
+                                    address_type_name = $(this).parent().text().trim();
+                                }
+                            });
+                            var data = {
+                                AddressTypeId: val.outAddressType,
+                                address_type_name: address_type_name,
+                                Country: val.outCountry,
+                                ZipCode: val.outZipcode,
+                                HouseNo: val.outHouseNo,
+                                Moo: val.outMoo,
+                                VillageName: val.outMooban,
+                                Building: val.outBuilding,
+                                Floor: val.outFloor,
+                                RoomNo: val.outRoom,
+                                Soi: val.outSoi,
+                                Road: val.outStreet,
+                                SubDistrictId: 0,
+                                sub_district_name: val.outTumbol,
+                                DistrictId: 0,
+                                district_name: val.outAmphur,
+                                ProvinceId: 0,
+                                province_name: val.outProvince,
+                                RegionId: 0,
+                                outFullAddress: val.outFullAddress,
+                                location_code: $('#txtlocationcode').val()
+                            }
+                            stuff.push(data);
+                        });
+                        SaveDaftAddress(stuff);
+                    }
                 }
 
             },
@@ -252,15 +304,12 @@
     }
 
     function ClearDataModalLocation() {
-        $('#txtjuristicTmodal').val('')
-        $('#txtjuristicEmodal').val('')
-        $('#txtbussinessmodal').val('')
-        $('#txtbussinesscodemodal').val('')
-        $('#txtlocationnameTHmodal').val('')
-        $('#txtlocationnameTHmodal').val('')
+        $('#txtasccodemodal').val('')
+        $('#txtmobilenomodal').val('')
         $('#txtlocationcodemodal').val('')
-        $('#ddldistributionModal').val('')
-        $('#ddlchannelsalegroupModal').val('')
+        $('#txtidnumbermodal').val('')
+        $('#txtsapcodemodal').val('')
+        $('#txtuseridmodal').val('')
         tbLocation.ajax.reload();
     }
 
@@ -364,44 +413,13 @@
                 district_name: $('#ddldistrict option').filter(':selected').text(),
                 ProvinceId: $('#ddlprovince option').filter(':selected').val(),
                 province_name: $('#ddlprovince option').filter(':selected').text(),
-                RegionId: $('#ddlzone option').filter(':selected').val()
+                RegionId: $('#ddlzone option').filter(':selected').val(),
+                 location_code: $('#txtlocationcode').val()
             }
             stuff.push(data);
             
         });
-       
-    
-        $.ajax({
-            type: "POST",
-            url: "/Account/SaveDaftAddress",
-            data: { daftdata: stuff},
-            dataType: "json",
-            success: function (data) {
-
-             
-                if (data.status) {
-
-                    //var val = []
-                    //val = ConcatstrAddress(data.response);
-                    //tbaddressstep2.clear().draw();
-                    //BindDatatable(tbaddressstep2, val);
-                    tbaddressstep2.ajax.reload();
-                }
-                else {
-                    showFeedback("error", data.message, "System Information",
-                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-
-                }
-              
-            },
-            error: function (xhr, status, error) {
-                //Loading(0);
-                //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-            }
-        });
+        SaveDaftAddress(stuff);
     });
 
     $('#ddlzone').change(function(){
@@ -518,8 +536,6 @@
             data: { AddressId: data_row.addressId },
             dataType: "json",
             success: function (data) {
-
-                console.log(data);
                 if (data.status) {
                     var val = []
                         val= ConcatstrAddress(data.response);
@@ -544,40 +560,89 @@
 
     function ConcatstrAddress(data) {
         var val = [];
+
         $.each(data, function () {
+            if (this.outFullAddress != null && this.outFullAddress != "") {
+                var strdata = {
+                    addressId: this.addressId,
+                    address_type_id: this.addressTypeId,
+                    address_type: this.address_type_name,
+                    address: this.outFullAddress
+                };
 
-            var strnumber = this.houseNo != '' && this.houseNo != null ? this.houseNo : '';
-            var strvillage = this.villageName != '' && this.villageName != null ? $('#txtvillage').parent().parent().text().split(":")[0].trim() + ' ' + this.villageName : '';
-            var strvillageno = this.moo != '' && this.moo != null ? $('#txtVillageNo').parent().parent().text().split(":")[1].trim() + ' ' + this.moo : '';
+                val.push(strdata);
+            }
+            else {
+                var strnumber = this.houseNo != '' && this.houseNo != null ? this.houseNo : '';
+                var strvillage = this.villageName != '' && this.villageName != null ? $('#txtvillage').parent().parent().text().split(":")[0].trim() + ' ' + this.villageName : '';
+                var strvillageno = this.moo != '' && this.moo != null ? $('#txtVillageNo').parent().parent().text().split(":")[1].trim() + ' ' + this.moo : '';
 
-            var strbuilding = this.building != '' && this.building != null ? $('#txtbuilding').parent().parent().text().split(":")[0].trim() + ' ' + this.building : '';
-            var strfloor = this.floor != '' && this.floor != null ? $('#txtfloor').parent().parent().text().split(":")[0].trim() + ' ' + this.floor : '';
-            var strroom = this.roomNo != '' && this.roomNo != null ? $('#txtroom').parent().parent().text().split(":")[1].trim() + ' ' + this.roomNo : '';
-            var strsoi = this.soi != '' && this.soi != null ? $('#txtsoi').parent().parent().text().split(":")[0].trim() + ' ' + this.soi : '';
+                var strbuilding = this.building != '' && this.building != null ? $('#txtbuilding').parent().parent().text().split(":")[0].trim() + ' ' + this.building : '';
+                var strfloor = this.floor != '' && this.floor != null ? $('#txtfloor').parent().parent().text().split(":")[0].trim() + ' ' + this.floor : '';
+                var strroom = this.roomNo != '' && this.roomNo != null ? $('#txtroom').parent().parent().text().split(":")[1].trim() + ' ' + this.roomNo : '';
+                var strsoi = this.soi != '' && this.soi != null ? $('#txtsoi').parent().parent().text().split(":")[0].trim() + ' ' + this.soi : '';
 
-            var strroad = this.road != '' && this.road != null ? $('#txtroad').parent().parent().text().split(":")[0].trim() + ' ' + this.road : '';
-            var strsubdistrict = this.subDistrictId != '' && this.subDistrictId != null ? $('#ddlsubdistrict').parent().parent().text().split(":")[0].trim() + ' ' +
-                this.sub_district_name : '';
-            var strdistrict = this.districtId != 0 && this.districtId != null ? $('#ddldistrict').parent().parent().text().split(":")[0].trim() + ' ' +
-                this.district_name : '';
-            var strprovince = this.provinceId != 0 && this.provinceId != null ? $('#ddlprovince').parent().parent().text().split(":")[0].trim() + ' ' +
-                this.province_name : '';
+                var strroad = this.road != '' && this.road != null ? $('#txtroad').parent().parent().text().split(":")[0].trim() + ' ' + this.road : '';
+                var strsubdistrict = this.subDistrictId != '' && this.subDistrictId != null ? $('#ddlsubdistrict').parent().parent().text().split(":")[0].trim() + ' ' +
+                    this.sub_district_name : '';
+                var strdistrict = this.districtId != 0 && this.districtId != null ? $('#ddldistrict').parent().parent().text().split(":")[0].trim() + ' ' +
+                    this.district_name : '';
+                var strprovince = this.provinceId != 0 && this.provinceId != null ? $('#ddlprovince').parent().parent().text().split(":")[0].trim() + ' ' +
+                    this.province_name : '';
 
-            var strzipcode = this.zipCode != '' && this.zipCode != null ? $('#ddlzipcode').parent().parent().text().split(":")[0].trim() + ' ' +
-                this.zipCode : '';
+                var strzipcode = this.zipCode != '' && this.zipCode != null ? $('#ddlzipcode').parent().parent().text().split(":")[0].trim() + ' ' +
+                    this.zipCode : '';
 
-            var strdata = {
-                addressId: this.addressId,
-                address_type_id: this.addressTypeId,
-                address_type: this.address_type_name,
-                address: strnumber.trim() + ' ' + strvillage.trim() + ' ' + strvillageno.trim() + ' ' + strbuilding.trim() + ' ' + strfloor.trim() + ' ' +
-                    strroom.trim() + ' ' + strsoi.trim() + ' ' + strroad.trim() + ' ' + strsubdistrict.trim() + ' ' + strdistrict.trim() + ' ' +
-                    strprovince.trim() + ' ' + strzipcode.trim(),
-            };
+                var strdata = {
+                    addressId: this.addressId,
+                    address_type_id: this.addressTypeId,
+                    address_type: this.address_type_name,
+                    address: strnumber.trim() + ' ' + strvillage.trim() + ' ' + strvillageno.trim() + ' ' + strbuilding.trim() + ' ' + strfloor.trim() + ' ' +
+                        strroom.trim() + ' ' + strsoi.trim() + ' ' + strroad.trim() + ' ' + strsubdistrict.trim() + ' ' + strdistrict.trim() + ' ' +
+                        strprovince.trim() + ' ' + strzipcode.trim(),
+                };
 
-       val.push(strdata);
-        });
+                val.push(strdata);
+            }
+
+              
+            });
+
+
         return val;
+    }
+
+    function SaveDaftAddress(stuff) {
+
+        $.ajax({
+            type: "POST",
+            url: "/Account/SaveDaftAddress",
+            data: { daftdata: stuff },
+            dataType: "json",
+            success: function (data) {
+                if (data.status) {
+
+                    //var val = []
+                    //val = ConcatstrAddress(data.response);
+                    //tbaddressstep2.clear().draw();
+                    //BindDatatable(tbaddressstep2, val);
+                    tbaddressstep2.ajax.reload();
+                }
+                else {
+                    showFeedback("error", data.message, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+
+                }
+
+            },
+            error: function (xhr, status, error) {
+                //Loading(0);
+                //clearForEdit();
+                console.log(status);
+                showFeedback("error", xhr.responseText, "System Information",
+                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            }
+        });
     }
 
 /*************************************/
@@ -1002,7 +1067,6 @@ function BindDDLprovince(regionid) {
         data: { region_id: regionid },
         dataType: "json",
         success: function (data) {
-            console.log(data);
             if (data != null) {
                 $('#ddlprovince').empty();
                 $.each(data.responseprovince, function () {
@@ -1090,7 +1154,6 @@ function BindDDLTitle() {
         url: "/Account/DDLTitle",
         dataType: "json",
         success: function (data) {
-            console.log(data);
             if (data != null) {
 
                 $('#ddlprefixcompany_name_th').empty();
