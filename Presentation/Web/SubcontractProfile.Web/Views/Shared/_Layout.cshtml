@@ -246,7 +246,7 @@
                 <div class="row layout-top-spacing">
                     @RenderBody()
 
-                  
+
 
 
                 </div>
@@ -254,8 +254,10 @@
             <div class="footer-wrapper">
                 <div class="footer-section f-section-1">
 
-                    <p class="">Copyright ©
-                    <script>document.write(new Date().getFullYear())</script>  ADVANCED INFO SERVICE PLC. ALL RIGHTS RESERVED.</p>
+                    <p class="">
+                        Copyright ©
+                        <script>document.write(new Date().getFullYear())</script>  ADVANCED INFO SERVICE PLC. ALL RIGHTS RESERVED.
+                    </p>
                 </div>
                 <div class="footer-section f-section-2">
 
@@ -320,7 +322,7 @@
         checkall('todoAll', 'todochkbox');
         $('[data-toggle="tooltip"]').tooltip()
     </script>
-
+    @RenderSection("Scripts", required: false)
 
 </body>
 
