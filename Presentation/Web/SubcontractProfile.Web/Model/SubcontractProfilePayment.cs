@@ -7,6 +7,7 @@ namespace SubcontractProfile.Web.Model
 {
     public class SubcontractProfilePayment
     {
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string PaymentId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
@@ -15,19 +16,38 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string PaymentChannal { get; set; }
 
-        public System.DateTime? PaymentDatetime { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.DateTime PaymentDatetime { get; set; }
 
-        public decimal? AmountTransfer { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
+        public decimal AmountTransfer { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
+        [System.ComponentModel.DataAnnotations.Required]
         public string BankTransfer { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string BankBranch { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
         public string SlipAttachFile { get; set; }
 
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public string ContactName { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public string ContactPhoneNo { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string ContactEmail { get; set; }
+
         public string Remark { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(50)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Status { get; set; }
 
         public System.DateTime? CreateDate { get; set; }
 
@@ -39,8 +59,18 @@ namespace SubcontractProfile.Web.Model
 
         public System.DateTime? ModifiedDate { get; set; }
 
+
+        [System.ComponentModel.DataAnnotations.Required]
         public System.Guid TrainingId { get; set; }
 
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Guid CompanyId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string Request_no { get; set; }
+
+        public System.DateTime? Request_date { get; set; }
 
         public object Clone()
         {
