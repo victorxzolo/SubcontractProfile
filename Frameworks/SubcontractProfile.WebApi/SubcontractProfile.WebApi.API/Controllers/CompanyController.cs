@@ -112,6 +112,11 @@ namespace SubcontractProfile.WebApi.API.Controllers
                 company_alias = string.Empty;
             }
 
+            if (company_code.ToUpper() == "NULL")
+            {
+                company_code = string.Empty;
+            }
+
             if (distibution_channel.ToUpper() == "NULL")
             {
                 distibution_channel = string.Empty;
