@@ -2,12 +2,224 @@
     //ViewData["Title"] = "CompanyIndex";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
-<div class="form-group my-4">
-    <div class="card-header bg-white">
-        <p class="font-weight-bolder lead">Search Company Verify</p>
+
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+        <div class="widget widget-chart-one">
+            <div class="widget-heading">
+                <h5 class="">ข้อมูลบริษัท</h5>
+
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+                    <div class="form-group col-md-12">
+                        <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline1">New Subcontract</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline2">Dealer</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">ชื่อบริษัท (ไทย)</label>
+                        <input type="text" class="form-control" id="txtCompanyNameT" placeholder="Company Name (TH)">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ชื่อบริษัท (อังกฤษ)</label>
+                        <input type="text" class="form-control" id="txtCompanyNameE" placeholder="Company Name (EN)">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Company Ailas</label>
+                        <input type="text" class="form-control" id="txtCompanyAlias" placeholder="Company Ailas">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Company Code</label>
+                        <input type="text" class="form-control" id="txtCompanyCode" placeholder="Company Code">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Distribution Channel</label>
+                        <select class="placeholder js-states form-control" id="ddlDistribution">
+                            <option>Choose...</option>
+                            <option value="one">First</option>
+                            <option value="two">Second</option>
+                            <option value="three">Third</option>
+                            <option value="four">Fourth</option>
+                            <option value="five">Fifth</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Channel Sale Group</label>
+                        <select class="placeholder js-states form-control">
+                            <option>Choose...</option>
+                            <option value="one">First</option>
+                            <option value="two">Second</option>
+                            <option value="three">Third</option>
+                            <option value="four">Fourth</option>
+                            <option value="five">Fifth</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+
+                <div style="text-align:center">
+
+                    <button class="btn btn-dark mb-2" type="button" id="btnclear">
+                        <i class="fa fa-refresh icon"></i><span>ล้างข้อมูล</span>
+                    </button>
+                    <button class="btn btn-success mb-2" type="button" id="btnSearch" onclick="SearchCompany()">
+                        <i class="fa fa-search icon"></i><span>ค้นหาข้อมูล</span>
+                    </button>
+                    @*<button class="btn btn-dark mb-2">ล้างข้อมูล</button>
+                    <button class="btn btn-success mb-2">ค้นหาข้อมูล</button>*@
+
+                </div>
+
+
+            </div>
+
+
+            <br />
+            <div class="widget-heading">
+                <h5 class="">ผลการค้นหา</h5>
+
+            </div>
+            <div class="col-md-12 text-right mb-1">
+                <button id="add-work-platforms" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>เพิ่ม</button>
+
+            </div>
+
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                    <thead>
+                        <tr>
+                            <th class="checkbox-column">
+                                <label class="new-control new-checkbox checkbox-primary" style="height: 18px; margin: 0 auto;">
+                                    <input type="checkbox" class="new-control-input todochkbox" id="todoAll">
+                                    <span class="new-control-indicator"></span>
+                                </label>
+                            </th>
+                            <th>ประเภทผู้สมัคร</th>
+                            <th>รหัสบริษทั</th>
+                            <th>ชื่อบริษัท</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="checkbox-column">
+                                <label class="new-control new-checkbox checkbox-primary" style="height: 18px; margin: 0 auto;">
+                                    <input type="checkbox" class="new-control-input todochkbox" id="todo-1">
+                                    <span class="new-control-indicator"></span>
+                                </label>
+                            </td>
+                            <td>
+                                <p class="mb-0">New Subcontract </p>
+                            </td>
+                            <td>0001</td>
+                            <td>บริษัท XXXX จำกัด</td>
+                            <td class="text-center">
+                                <ul class="table-controls">
+                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
+                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-danger"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="checkbox-column">
+                                <label class="new-control new-checkbox checkbox-primary" style="height: 18px; margin: 0 auto;">
+                                    <input type="checkbox" class="new-control-input todochkbox" id="todo-2">
+                                    <span class="new-control-indicator"></span>
+                                </label>
+                            </td>
+                            <td>
+                                <p class="mb-0">Alma Clarke</p>
+                            </td>
+                            <td>11/08/2019</td>
+                            <td>420</td>
+                            <td class="text-center">
+                                <ul class="table-controls">
+                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
+                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-danger"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="checkbox-column">
+                                <label class="new-control new-checkbox checkbox-primary" style="height: 18px; margin: 0 auto;">
+                                    <input type="checkbox" class="new-control-input todochkbox" id="todo-3">
+                                    <span class="new-control-indicator"></span>
+                                </label>
+                            </td>
+                            <td>
+                                <p class="mb-0">Kelly Young</p>
+                            </td>
+                            <td>12/08/2019</td>
+                            <td>130</td>
+                            <td class="text-center">
+                                <ul class="table-controls">
+                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
+                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-danger"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="checkbox-column">
+                                <label class="new-control new-checkbox checkbox-primary" style="height: 18px; margin: 0 auto;">
+                                    <input type="checkbox" class="new-control-input todochkbox" id="todo-4">
+                                    <span class="new-control-indicator"></span>
+                                </label>
+                            </td>
+                            <td>
+                                <p class="mb-0">Vincent Carpenter</p>
+                            </td>
+                            <td>13/08/2019</td>
+                            <td>260</td>
+                            <td class="text-center">
+                                <ul class="table-controls">
+                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
+                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-danger"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="checkbox-column">
+                                <label class="new-control new-checkbox checkbox-primary" style="height: 18px; margin: 0 auto;">
+                                    <input type="checkbox" class="new-control-input todochkbox" id="todo-5">
+                                    <span class="new-control-indicator"></span>
+                                </label>
+                            </td>
+                            <td>
+                                <p class="mb-0">Andy King</p>
+                            </td>
+                            <td>14/08/2019</td>
+                            <td>180</td>
+                            <td class="text-center">
+                                <ul class="table-controls">
+                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
+                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-danger"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
     </div>
-</div>
-<div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+@*////////////////////////////////////////////////////////////////////////////////////////*@
+
+@*<div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -134,12 +346,10 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                     <div class="d-flex align-items-center justify-content-center h-100" role="group">
-                        @*<button class="btn btn-secondary mr-2" id="btnclear" type="button">Clear</button>
-                            <button class="btn btn-success" id="btnSearch" type="button">Search</button>*@
                         <button class="btn-border btn-black mr-2" type="button" id="btnclear">
                             <i class="fa fa-refresh icon"></i><span>Clear</span>
                         </button>
-                        <button class="btn-border btn-green" type="button" id="btnSearch" onclick="SearchCompany()">
+                        <button class="btn-border btn-green" type="button" id="btnSearch" onclick="getAllCompany()">
                             <i class="fa fa-search icon"></i><span>Search</span>
                         </button>
                     </div>
@@ -151,13 +361,6 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                     <div class="d-flex align-items-center justify-content-center h-100 float-right" role="group">
-                        @*<button class="btn-border btn-black mr-2 float-right" type="button" id="btnDelete">
-                            <i class="fa fa-trash-o icon"></i><span>Delete</span>
-                        </button>*@
-                        @*<button class="btn-border btn-green float-right" type="button" id="btnNewcompany"
-                                    onclick="location.href='@Url.Action("CompanyVerify", "Registration" ,new {id=1 })'">
-                                <i class="fa fa-check icon"></i><span>New Company</span>
-                            </button>*@
                         <button class="btn-border btn-green float-right" type="button" id="btnNewcompany"
                                 onclick="location.href='@Url.Action("_PartialCompany", "Profile")'">
                             <i class="fa fa-check icon"></i><span>New Company</span>
@@ -183,7 +386,6 @@
                         <table class="table table-bordered table-hover" id="SearchCompanyResult">
                             <thead class="thead-light">
                                 <tr>
-                                    @*<th>Select</th>*@
                                     <th>ID</th>
                                     <th>Register Type</th>
                                     <th>Company Code</th>
@@ -203,70 +405,6 @@
 
                 </div>
 
-            @*<div class="row">
-                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover" id="Searcht">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Select</th>
-                                    <th>Status</th>
-                                    <th>Register Type</th>
-                                    <th>Tax ID</th>
-                                    <th>Company Name (TH)</th>
-                                    <th>Cpmpaby Name (EN)</th>
-                                    <th>Vender Code</th>
-                                    <th>Distribution Channel</th>
-                                    <th>Channel Sale Group</th>
-                                    <th>Register Date</th>
-                                    <th>Verify Date</th>
-                                    <th>Verify By</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-center">
-
-                                        <input type="radio" class="form-check-input position-static" name="optionsRadios" id="chktype" value="1" checked>
-
-                                    </td>
-                                    <td>Waiting</td>
-                                    <td>New Sub</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-
-                                        <input type="radio" class="form-check-input position-static" name="optionsRadios" id="chktype" value="2" checked>
-
-                                    </td>
-                                    <td>Approve</td>
-                                    <td>Dealer</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>*@
 
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
@@ -297,7 +435,7 @@
 
         </div>
     </div>
-</div>
+</div>*@
 
 
 
@@ -410,24 +548,24 @@
         function SearchCompany() {
             var data = {
                 //"CompanyId": " ",
-                "RegisterType": $("#chktype").val(),
-                "LocationCode": $("#ddlLocationCode").val(),
-                "VenderCode": $("#txtVenderCode").val(),
-                "CompanyNameT": $("#txtCompanyNameT").val(),
-                "CompanyNameE": $("#txtCompanyNameE").val(),
-                "CompanyAlias": $("#txtCompanyAlias").val(),
-                "CompanyCode": $("#txtCompanyCode").val(),
-                "Distribution": $("#ddldistribution").val(),
-                "Channel": $("#ddlchannelsalegroup").val()
+                "ProfileType": "N",//$("#chktype").val(),
+                "LocationCode": " ", //$("#ddlLocationCode").val(),
+                "VendorCode": " ",//$("#txtVenderCode").val(),
+                "CompanyNameTh": $("#txtCompanyNameT").val(),
+                "CompanyNameEn": " ",//$("#txtCompanyNameE").val(),
+                "CompanyAlias": " ",//$("#txtCompanyAlias").val(),
+                "CompanyCode": " ",//$("#txtCompanyCode").val(),
+                "DistibutionCchannel": " ",//$("#ddldistribution").val(),
+                "ChannelGroup": " "//$("#ddlchannelsalegroup").val()
             };
 
             $.ajax({
                 type: "POST",
-                url: "/Profile/SearchConpamy",
+                url: "/Profile/SearchCompany",
                 data: { Company: data },
                 //dataType: "json",
                 success: function (data) {
-                    BindTableData(data);
+                   // BindTableData(data);
                 },
                 error: function (xhr, status, error) {
                     //Loading(0);
@@ -480,8 +618,8 @@
                     {
                         "targets": -2,
                         "data": null,
-                        orderable: false,
-                        "defaultContent": "<button class='btn-border btn-green edit_btn' onclick='location.href=" + @Url.Action("_PartialCompany", "Profile") + "'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button>"
+                        orderable: false
+                        //"defaultContent": "<button class='btn-border btn-green edit_btn' onclick='location.href=" + @Url.Action("_PartialCompany", "Profile") + "'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button>"
                         //"defaultContent": "<button class='btn-border btn-green edit_btn'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button>"
                     },
                     {
@@ -508,8 +646,8 @@
             });
         }
 
-        function DelCompany(comId) {
-            //var comId = '0';
+        function DelCompany() {
+            var comId = 'a8bf8003-22dc-4e22-add6-7564e41f312c';
             $.ajax({
                 url: "/Profile/DeleteCompany",
                 dataType: 'JSON',

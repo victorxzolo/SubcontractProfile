@@ -29,6 +29,7 @@ namespace SubcontractProfile.Web.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly string strpathAPI;
+        private string strpathASCProfile;
 
         public ProfileController(IConfiguration configuration)
         {
@@ -37,6 +38,8 @@ namespace SubcontractProfile.Web.Controllers
 
             //เรียก appsetting.json path api
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
+
+            strpathASCProfile = _configuration.GetValue<string>("PathASCProfile:DEV").ToString();
         }
 
         public IActionResult CompanyIndex()
@@ -60,91 +63,40 @@ namespace SubcontractProfile.Web.Controllers
         #region Company
 
         [HttpPost]
-        public IActionResult SearchCompany(SubcontractProfileCompanyModel Company)
+        public IActionResult SearchCompany(SubcontractSearchCompanyModel Company)
         {
             int filteredResultsCount;
             int totalResultsCount;
             var output = new List<SubcontractProfileCompanyModel>();
             //var resultZipCode = new List<SubcontractProfileCompanyModel>();
-            var tbModel = new List<DataTableAjaxModel>();
-            var model = new List<SubcontractProfileCompanyModel>();
-
+            var model = new List<SubcontractSearchCompanyModel>();
+           //string aaavvvv = "/ / / /ร้านกิ่วลมไอที/ / / / /";
             if (Company != null)
             {
+                Company.ProfileType = null;
+                Company.LocationCode = null;
+                Company.VendorCode = null;
+                Company.CompanyNameEn = null;
+                Company.CompanyAlias = null;
+                Company.CompanyCode = null;
+                Company.DistibutionChannel = null;
+                Company.ChannelGroup = null;
 
-                model.Add(new SubcontractProfileCompanyModel
-                {
-                    CompanyId = Guid.NewGuid(),
-                    CompanyCode = " ",
-                    CompanyName = " ",
-                    CompanyNameTh = Company.CompanyNameTh,
-                    CompanyNameEn = Company.CompanyNameEn,
-                    CompanyAlias = Company.CompanyAlias,
-                    DistributionChannel = " ",
-                    ChannelSaleGroup = " ",
-                    VendorCode = " ",
-                    CustomerCode = " ",
-                    AreaId = " ",
-                    TaxId = " ",
-                    WtName = " ",
-                    VatType = " ",
-                    CompanyCertifiedFile = " ",
-                    CommercialRegistrationFile = " ",
-                    VatRegistrationCertificateFile = " ",
-                    ContractAgreementFile = " ",
-                    DepositAuthorizationLevel = " ",
-                    DepositPaymentType = " ",
-                    ContractStartDate = DateTime.Now,  //Company.ContractStartDate,
-                    ContractEndDate = DateTime.Now,
-                    OverDraftDeposit = " ",
-                    BalanceDeposit = 1,
-                    CompanyStatus = " ",
-                    CompanyAddress = " ",
-                    VatAddress = " ",
-                    CreateBy = " ",
-                    CreateDate = DateTime.Now,
-                    UpdateBy = " ",
-                    UpdateDate = DateTime.Now,
-                    CompanyEmail = " ",
-                    ContractName = " ",
-                    ContractPhone = " ",
-                    ContractEmail = " ",
-                    BankCode = " ",
-                    BankName = " ",
-                    AccountNumber = " ",
-                    AccountName = " ",
-                    AttachFile = " ",
-                    BranchCode = " ",
-                    BranchName = " ",
-                    DeptOfInstallName = " ",
-                    DeptOfMaintenName = " ",
-                    DeptOfAccountName = " ",
-                    DeptOfInstallPhone = " ",
-                    DeptOfMaintenPhone = " ",
-                    DeptOfAccountPhone = " ",
-                    DeptOfInstallEmail = " ",
-                    DeptOfMaintenEmail = " ",
-                    DeptOfAccountEmail = " ",
-                    LocationCode = " ",
-                    LocationNameTh = " ",
-                    LocationNameEn = " ",
-                    BankAccountTypeId = " ",
-                    SubcontractProfileType = " ",
-                    CompanyTitleThId = " ",
-                    CompanyTitleEnId = " ",
-                    Status = " ",
-                    ActivateDate = DateTime.Now
-
-                });
 
                 //Command.Handle(model)
                 //output ret_code,ret
                 //ret_msg
                 HttpClient client = new HttpClient();
+                
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-
-                string uriString = string.Format("{0}/{1}", strpathAPI + "CompanyController/Search", model);
+                
+                //string uriString = string.Format( strpathAPI + "Company/SearchCompany", Company.ProfileType,
+                //   Company.LocationCode, Company.VendorCode, Company.CompanyNameTh, Company.CompanyNameEn, Company.CompanyAlias, Company.CompanyCode,
+                //   Company.DistibutionChannel, Company.ChannelGroup);
+                string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}", strpathAPI + "Company/SearchCompany", Company.ProfileType,
+                    Company.LocationCode, Company.VendorCode, Company.CompanyNameTh, Company.CompanyNameEn, Company.CompanyAlias, Company.CompanyCode,
+                    Company.DistibutionChannel, Company.ChannelGroup);
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -183,7 +135,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "CompanyController/GetByCompanyId", CompanyID);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "Company/GetByCompanyId", CompanyID);
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -198,7 +150,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}", strpathAPI + "CompanyController/GetALL");
+                string uriString = string.Format("{0}", strpathAPI + "Company/GetALL");
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -360,7 +312,7 @@ namespace SubcontractProfile.Web.Controllers
                         client.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
 
-                        string uriString = string.Format("{0}/{1}", strpathAPI + "CompanyController/GetByCompanyId", model);
+                        string uriString = string.Format("{0}/{1}", strpathAPI + "Company/GetByCompanyId", model);
                         HttpResponseMessage response = client.GetAsync(uriString).Result;
                         if (response.IsSuccessStatusCode)
                         {
@@ -412,7 +364,7 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}", strpathAPI + "CompanyController/Update");
+            string uriString = string.Format("{0}", strpathAPI + "Company/Update");
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -427,12 +379,13 @@ namespace SubcontractProfile.Web.Controllers
         public IActionResult DeleteCompany(string CompanyId)
         {
             var output = new List<SubcontractProfileCompanyModel>();
+
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "CompanyController/Delete", CompanyId);
-            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Company/Delete", CompanyId);
+            HttpResponseMessage response = client.DeleteAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
                 var v = response.Content.ReadAsStringAsync().Result;
@@ -457,7 +410,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "EngineerController/GetByEngineerId", EngineerId);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "Engineer/GetByEngineerId", EngineerId);
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -472,7 +425,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}", strpathAPI + "EngineerController/GetALL");
+                string uriString = string.Format("{0}", strpathAPI + "Engineer/GetALL");
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -592,7 +545,7 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}", strpathAPI + "EngineerController/Update");
+            string uriString = string.Format("{0}", strpathAPI + "Engineer/Update");
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -611,7 +564,7 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "EngineerController/Delete", EngineerId);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Engineer/Delete", EngineerId);
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -636,7 +589,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "LocationController/GetByLocationId", LocationId);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "Location/GetByLocationId", LocationId);
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -651,7 +604,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}", strpathAPI + "LocationController/GetALL");
+                string uriString = string.Format("{0}", strpathAPI + "Location/GetALL");
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -779,7 +732,7 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}", strpathAPI + "LocationController/Update");
+            string uriString = string.Format("{0}", strpathAPI + "Location/Update");
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -798,7 +751,7 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "LocationController/Delete", LocationId);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Location/Delete", LocationId);
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -825,7 +778,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "TeamController/GetByTeamId", TeamId);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "Team/GetByTeamId", TeamId);
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -840,7 +793,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}", strpathAPI + "TeamController/GetALL");
+                string uriString = string.Format("{0}", strpathAPI + "Team/GetALL");
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -968,7 +921,7 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}", strpathAPI + "TeamController/Update");
+            string uriString = string.Format("{0}", strpathAPI + "Team/Update");
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -987,7 +940,7 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "TeamController/Delete", TeamId);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Team/Delete", TeamId);
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -1012,7 +965,6 @@ namespace SubcontractProfile.Web.Controllers
         {
             return PartialView("_PartialEngineerEdit");
         }
-
         #region DDL
         [HttpPost]
         public IActionResult DDLTitle()
@@ -1022,7 +974,7 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}", strpathAPI + "TitleController/GetALL");
+            string uriString = string.Format("{0}", strpathAPI + "Title/GetALL");
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -1044,7 +996,7 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}", strpathAPI + "ProvinceController/GetALL");
+            string uriString = string.Format("{0}", strpathAPI + "Province/GetALL");
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -1064,7 +1016,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "DistrictController/GetDistrictByProvinceId", province_id);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "District/GetDistrictByProvinceId", province_id);
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -1078,7 +1030,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}", strpathAPI + "DistrictController/GetAll");
+                string uriString = string.Format("{0}", strpathAPI + "District/GetAll");
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -1103,7 +1055,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "SubDistrictController/GetSubDistrictByDistrict", district_id);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "SubDistrict/GetSubDistrictByDistrict", district_id);
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -1118,7 +1070,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}", strpathAPI + "SubDistrictController/GetAll");
+                string uriString = string.Format("{0}", strpathAPI + "SubDistrict/GetAll");
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
