@@ -82,6 +82,46 @@ namespace SubcontractProfile.WebApi.API.Controllers
             _logger.LogInformation($"Start CompanyController::SearchCompany", subcontract_profile_type, location_code, vendor_code, company_th
                 , company_en, company_alias, company_code, distibution_channel, channel_sale_group);
 
+            if(subcontract_profile_type.ToUpper()=="NULL")
+            {
+                subcontract_profile_type = string.Empty;
+            }
+
+            if (location_code.ToUpper() == "NULL")
+            {
+                location_code = string.Empty;
+            }
+
+            if (vendor_code.ToUpper() == "NULL")
+            {
+                vendor_code = string.Empty;
+            }
+
+            if (company_th.ToUpper() == "NULL")
+            {
+                company_th = string.Empty;
+            }
+
+            if (company_en.ToUpper() == "NULL")
+            {
+                company_en = string.Empty;
+            }
+
+            if (company_alias.ToUpper() == "NULL")
+            {
+                company_alias = string.Empty;
+            }
+
+            if (distibution_channel.ToUpper() == "NULL")
+            {
+                distibution_channel = string.Empty;
+            }
+
+            if (channel_sale_group.ToUpper() == "NULL")
+            {
+                channel_sale_group = string.Empty;
+            }
+
             var entities = _service.SearchCompany(subcontract_profile_type, location_code, vendor_code, company_th
                 , company_en, company_alias, company_code, distibution_channel, channel_sale_group);
 
