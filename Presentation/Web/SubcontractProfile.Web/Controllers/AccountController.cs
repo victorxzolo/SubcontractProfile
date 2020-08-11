@@ -524,6 +524,107 @@ namespace SubcontractProfile.Web.Controllers
 
             return Json(new { responseregion = getAllRegionList });
         }
+
+        [HttpPost]
+        public IActionResult DDLBank()
+        {
+            var output = new List<SubcontractProfileBankingModel>();
+            List<SelectListItem> getAllBankList = new List<SelectListItem>();
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "Banking/GetALL");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                output = JsonConvert.DeserializeObject<List<SubcontractProfileBankingModel>>(v);
+            }
+
+            if (Lang == "TH")
+            {
+                output.Add(new SubcontractProfileBankingModel
+                {
+                    BankCode = "0",
+                    BankName = "กรุณาเลือกชื่อธนาคาร"
+                });
+
+                getAllBankList = output.Select(a => new SelectListItem
+                {
+                    Text = a.BankName,
+                    Value = a.BankCode
+                }).OrderBy(c => c.Value).ToList();
+            }
+            else
+            {
+                output.Add(new SubcontractProfileBankingModel
+                {
+                    BankCode = "0",
+                    BankName = "Select Bank"
+                });
+                getAllBankList = output.Select(a => new SelectListItem
+                {
+                    Text = a.BankName,
+                    Value = a.BankCode
+                }).OrderBy(c => c.Value).ToList();
+
+            }
+
+            return Json(new { responsebank = getAllBankList });
+        }
+
+
+        [HttpPost]
+        public IActionResult DDLCompanyType()
+        {
+            var output = new List<SubcontractProfileCompanyTypeModel>();
+            List<SelectListItem> getAllCompanyTypeList = new List<SelectListItem>();
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "CompanyType/GetALL");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                output = JsonConvert.DeserializeObject<List<SubcontractProfileCompanyTypeModel>>(v);
+            }
+
+            if (Lang == "TH")
+            {
+                output.Add(new SubcontractProfileCompanyTypeModel
+                {
+                    CompanyTypeId = "0",
+                    CompanyTypeNameTh = "กรุณาเลือกประเภทธุรกิจ"
+                });
+
+                getAllCompanyTypeList = output.Select(a => new SelectListItem
+                {
+                    Text = a.CompanyTypeNameTh,
+                    Value = a.CompanyTypeId
+                }).OrderBy(c => c.Value).ToList();
+            }
+            else
+            {
+                output.Add(new SubcontractProfileCompanyTypeModel
+                {
+                    CompanyTypeId = "0",
+                    CompanyTypeNameEn = "Select Bank"
+                });
+                getAllCompanyTypeList = output.Select(a => new SelectListItem
+                {
+                    Text = a.CompanyTypeNameEn,
+                    Value = a.CompanyTypeId
+                }).OrderBy(c => c.Value).ToList();
+
+            }
+
+            return Json(new { responsecompanytype = getAllCompanyTypeList });
+        }
         #endregion
 
 
@@ -778,11 +879,11 @@ namespace SubcontractProfile.Web.Controllers
                     {
                         if(e.AddressId ==null)
                         {
-                            if(e.location_code!="")//มาจาก dealer
+                            if (e.location_code != "")//มาจาก dealer
                             {
-                                data.RemoveAll(x => x.location_code == e.location_code && x.AddressTypeId==e.AddressTypeId);
+                                data.RemoveAll(x => x.location_code == e.location_code && x.AddressTypeId == e.AddressTypeId);
                             }
-                                List<SubcontractProfileAddressModel> newaddr = new List<SubcontractProfileAddressModel>();
+                            List<SubcontractProfileAddressModel> newaddr = new List<SubcontractProfileAddressModel>();
                                 newaddr.Add(new SubcontractProfileAddressModel {
                                       AddressTypeId=e.AddressTypeId,
                                       address_type_name=e.address_type_name,

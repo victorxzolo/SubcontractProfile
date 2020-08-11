@@ -1,7 +1,10 @@
 ﻿$(document).ready(function () {
 
+    var step = "";
+
     $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
         //alert("You are on step "+stepNumber+" now");
+        step = stepNumber+1;
         if (stepPosition === 'first') {
             $("#prev-btn").addClass('disabled');
         } else if (stepPosition === 'final') {
@@ -57,8 +60,55 @@
 
     $("#next-btn").on("click", function () {
         // Navigate next
-        $('#smartwizard').smartWizard("next");
-        return true;
+
+        if (step == 1) {
+            if ($('#chktypeN').is(":checked")) {
+                if (!Validate(".form-control.inputValidation", ".custom-control-input.inputValidation")) {
+                    $('#smartwizard').smartWizard("next");
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else if ($('#chktypeD').is(":checked")) {
+                if (!Validate(".form-control.inputValidationdealer", ".custom-control-input.inputValidationdealer")) {
+                    $('#smartwizard').smartWizard("next");
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        }
+        else if (step == 2) {
+            $('#smartwizard').smartWizard("next");
+            return true;
+        }
+        else if (step == 3) {
+
+            if (!Validate(".form-control.inputValidationContract", ".custom-control-input.inputValidationContract")) {
+                $('#smartwizard').smartWizard("next");
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else if (step == 4) {
+            if (!Validate(".form-control.inputValidationBank", ".custom-control-input.inputValidationBank")) {
+                $('#smartwizard').smartWizard("next");
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        
+        
+        
+       
     });
 
 
@@ -208,43 +258,43 @@
                         $('#chkvat_typeE_dealer').prop('checked', true);
                     }
 
-                    if (data.locationListModel[0].addressLocationList != null) {
-                        var stuff = [];
-                        jQuery.each(data.locationListModel[0].addressLocationList, function (i, val) {
-                            var address_type_name = "";
-                            $(':checkbox').each(function (i) {
+                    //if (data.locationListModel[0].addressLocationList != null) {
+                    //    var stuff = [];
+                    //    jQuery.each(data.locationListModel[0].addressLocationList, function (i, val) {
+                    //        var address_type_name = "";
+                    //        $(':checkbox').each(function (i) {
 
-                                if (val.outAddressType == $(this).val()) {
-                                    address_type_name = $(this).parent().text().trim();
-                                }
-                            });
-                            var data = {
-                                AddressTypeId: val.outAddressType,
-                                address_type_name: address_type_name,
-                                Country: val.outCountry,
-                                ZipCode: val.outZipcode,
-                                HouseNo: val.outHouseNo,
-                                Moo: val.outMoo,
-                                VillageName: val.outMooban,
-                                Building: val.outBuilding,
-                                Floor: val.outFloor,
-                                RoomNo: val.outRoom,
-                                Soi: val.outSoi,
-                                Road: val.outStreet,
-                                SubDistrictId: 0,
-                                sub_district_name: val.outTumbol,
-                                DistrictId: 0,
-                                district_name: val.outAmphur,
-                                ProvinceId: 0,
-                                province_name: val.outProvince,
-                                RegionId: 0,
-                                outFullAddress: val.outFullAddress,
-                                location_code: $('#txtlocationcode').val()
-                            }
-                            stuff.push(data);
-                        });
-                        SaveDaftAddress(stuff);
-                    }
+                    //            if (val.outAddressType == $(this).val()) {
+                    //                address_type_name = $(this).parent().text().trim();
+                    //            }
+                    //        });
+                    //        var data = {
+                    //            AddressTypeId: val.outAddressType,
+                    //            address_type_name: address_type_name,
+                    //            Country: val.outCountry,
+                    //            ZipCode: val.outZipcode,
+                    //            HouseNo: val.outHouseNo,
+                    //            Moo: val.outMoo,
+                    //            VillageName: val.outMooban,
+                    //            Building: val.outBuilding,
+                    //            Floor: val.outFloor,
+                    //            RoomNo: val.outRoom,
+                    //            Soi: val.outSoi,
+                    //            Road: val.outStreet,
+                    //            SubDistrictId: 0,
+                    //            sub_district_name: val.outTumbol,
+                    //            DistrictId: 0,
+                    //            district_name: val.outAmphur,
+                    //            ProvinceId: 0,
+                    //            province_name: val.outProvince,
+                    //            RegionId: 0,
+                    //            outFullAddress: val.outFullAddress,
+                    //            location_code: $('#txtlocationcode').val()
+                    //        }
+                    //        stuff.push(data);
+                    //    });
+                    //    SaveDaftAddress(stuff);
+                    //}
                 }
 
             },
@@ -272,8 +322,11 @@
     });
 
     $('#btn_search_modal').click(function () {
+
+        if (!Validate(".form-control.inputValidationlocationModal", ".custom-control-input.inputValidationlocationModal")) {
+            tbLocation.ajax.reload();
+        }
         
-        tbLocation.ajax.reload();
         //$.ajax({
         //    type: "POST",
         //    url: "/Account/SearchLocation",
@@ -389,9 +442,10 @@
     $('#btnaddaddress').click(function () {
        
         var stuff = [];
+        var countchk = [];
 
         $(':checkbox:checked').each(function (i) {
-            //val[i] = $(this).val();
+           
             //val[i] = $(this).parent().text().trim();
 
             var data = {
@@ -417,9 +471,21 @@
                  location_code: $('#txtlocationcode').val()
             }
             stuff.push(data);
+            countchk.push($(this).val());
             
         });
-        SaveDaftAddress(stuff);
+        //if (countchk.length == 0) {
+        //    $('#idmsaddrAlert').toast('show');
+        //}
+        //else {
+            if (!Validate(".form-control.inputValidationAddress", ".custom-control-input.inputValidationAddress")) {
+                SaveDaftAddress(stuff);
+            }
+       // }
+        
+
+        
+       
     });
 
     $('#ddlzone').change(function(){
@@ -648,7 +714,9 @@
 /*************************************/
 
 
-/*Step3*/
+/*Step4*/
+    BindDDLBank();
+    BindDDLCompanyType();
 
     $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
@@ -666,6 +734,11 @@
 
     $('#vat_registration_certificate_file').change(function () {
         uploadFiles('vat_registration_certificate_file')
+    });
+
+    $('#ddlBankname').change(function () {
+        var v_bankcode = $('#ddldistrict option').filter(':selected').val();
+        $('#txtbank_Code').val(v_bankcode);
     });
 
     function uploadFiles(inputId) {
@@ -1216,30 +1289,219 @@ function BindRegion() {
     });
 }
 
+function BindDDLBank() {
+    $.ajax({
+        type: "POST",
+        url: "/Account/DDLBank",
+        //data: { province_id: province },
+        dataType: "json",
+        success: function (data) {
+            if (data != null) {
+                $('#ddlBankname').empty();
 
-function Validate() {
-    var errorMessage = $("#idmsAlert");
+                $.each(data.responsebank, function () {
+                    $('#ddlBankname').append($("<option></option>").val(this.value).text(this.text));
+                });
+            }
+
+
+        },
+        error: function (xhr, status, error) {
+            //Loading(0);
+            //clearForEdit();
+            console.log(status);
+            showFeedback("error", xhr.responseText, "System Information",
+                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+        }
+    });
+}
+
+function BindDDLCompanyType() {
+    $.ajax({
+        type: "POST",
+        url: "/Account/DDLCompanyType",
+        //data: { province_id: province },
+        dataType: "json",
+        success: function (data) {
+            if (data != null) {
+                $('#ddlbusiness_type').empty();
+
+                $.each(data.responsecompanytype, function () {
+                    $('#ddlbusiness_type').append($("<option></option>").val(this.value).text(this.text));
+                });
+            }
+
+
+        },
+        error: function (xhr, status, error) {
+            //Loading(0);
+            //clearForEdit();
+            console.log(status);
+            showFeedback("error", xhr.responseText, "System Information",
+                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+        }
+    });
+}
+
+function Validate(formcontrol, custom) {
+    //$('.toast').toast('hide');
+    $('#idmsAlert').hide();
+
     var hasError = false;
-    $(".form-control.inputValidation").each(function () {
+
+    $(formcontrol).each(function () {
         var $this = $(this);
         var fieldvalue = $this.val();
+        var type = $this.attr("type");
+        var tag = $this[0].tagName;
+        
+        if (tag == "INPUT" && type=="text") {
+            if (fieldvalue == "") {
 
-        if (!fieldvalue) {
+                hasError = true;
+                $this.addClass("inputError");
+                $($this).focusout(function () {
+                    $(this).addClass('desired');
+                });
+                //$('.toast').toast('show');
+                $('#idmsAlert').show();
 
-            hasError = true;
-            $this.addClass("inputError");
-            $($this).focusout(function () {
-                $(this).addClass('desired');
-            });
-            errorMessage.show();
-            //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
+                //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
+            }
+            if ($this.val() != "") {
+                $this.removeClass("inputError");
+            } else {
+                return true;
+            }
         }
-        if ($this.val() != "") {
-            $this.removeClass("inputError");
-        } else {
-            return true;
+        else if (tag == "INPUT" && type == "password") {
+            if (fieldvalue == "") {
+
+                hasError = true;
+                $this.addClass("inputError");
+                $($this).focusout(function () {
+                    $(this).addClass('desired');
+                });
+                //$('.toast').toast('show');
+
+                $('#idmsAlert').show();
+
+                //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
+            }
+            if ($this.val() != "") {
+                $this.removeClass("inputError");
+            } else {
+                return true;
+            }
+        }
+        else if ($this.is('select')) {
+            if (fieldvalue == "0") {
+
+                hasError = true;
+                $this.addClass("inputError");
+                $($this).focusout(function () {
+                    $(this).addClass('desired');
+                });
+                //$('.toast').toast('show');
+
+                $('#idmsAlert').show();
+
+                //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
+            }
+            if ($this.val() != "0") {
+                $this.removeClass("inputError");
+            } else {
+                return true;
+            }
+        }
+        else if (tag == "INPUT" && type=='radio') {
+            if (!fieldvalue) {
+
+                hasError = true;
+                $this.addClass("inputError");
+                $($this).focusout(function () {
+                    $(this).addClass('desired');
+                });
+                //$('.toast').toast('show');
+
+                $('#idmsAlert').show();
+
+                //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
+            }
+            if (fieldvalue) {
+                $this.removeClass("inputError");
+            } else {
+                return true;
+            }
+        }
+        else if (tag == "INPUT" && type=='checkbox') {
+            if (!fieldvalue) {
+
+                hasError = true;
+                $this.addClass("inputErrorCheckbox");
+                $($this).focusout(function () {
+                    $(this).addClass('desired');
+                });
+                //$('.toast').toast('show');
+
+                $('#idmsAlert').show();
+
+                //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
+            }
+            if (fieldvalue) {
+                $this.removeClass("inputErrorCheckbox");
+            } else {
+                return true;
+            }
         }
     }); //Input
+    $(custom).each(function () {
+        var $this = $(this);
+        var fieldvalue = $this.is(":checked");
+        var type = $this.attr("type");
+        var tag = $this[0].tagName;
 
-    return hasError; 
+        if (tag == "INPUT" && type=='radio') {
+            if (!fieldvalue) {
+
+                hasError = true;
+                $this.addClass("inputError");
+                $($this).focusout(function () {
+                    $(this).addClass('desired');
+                });
+                //$('.toast').toast('show');
+
+                $('#idmsAlert').show();
+
+                //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
+            }
+            if (fieldvalue) {
+                $this.removeClass("inputError");
+            } else {
+                return true;
+            }
+        }
+        else if (tag == "INPUT" &&type=='checkbox') {
+            if (!fieldvalue) {
+
+                hasError = true;
+                $this.addClass("inputErrorCheckbox");
+                $($this).focusout(function () {
+                    $(this).addClass('desired');
+                });
+                //$('.toast').toast('show');
+
+                $('#idmsAlert').show();
+
+                //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
+            }
+            if (fieldvalue) {
+                $this.removeClass("inputErrorCheckbox");
+            } else {
+                return true;
+            }
+        }
+    });//radio,check box
+
+    return hasError;
 }

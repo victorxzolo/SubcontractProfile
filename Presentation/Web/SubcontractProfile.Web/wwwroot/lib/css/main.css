@@ -3785,3 +3785,9 @@ td, th {
     .inputError::-webkit-input-placeholder {
         color: #d03e3e;
     }
+
+.inputErrorCheckbox {
+    outline: 2px solid #d03e3e;
+    background: #f4bfbf;
+}
+
