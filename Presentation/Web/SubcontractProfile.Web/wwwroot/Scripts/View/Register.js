@@ -68,6 +68,7 @@
                     return true;
                 }
                 else {
+                    $('.toast').toast('show');
                     return false;
                 }
             }
@@ -77,6 +78,7 @@
                     return true;
                 }
                 else {
+                    $('.toast').toast('show');
                     return false;
                 }
             }
@@ -92,6 +94,7 @@
                 return true;
             }
             else {
+                $('.toast').toast('show');
                 return false;
             }
         }
@@ -101,6 +104,7 @@
                 return true;
             }
             else {
+                $('.toast').toast('show');
                 return false;
             }
         }
@@ -374,6 +378,7 @@
     BindDDLdistrict();
     BindDDLsubdistrict();
     BindRegion();
+    BindAddressType();
     var tbaddressstep2 = $('#tbaddressstep2').DataTable({
         ordering: true,
         order: [[1, "asc"]],
@@ -1343,6 +1348,38 @@ function BindDDLCompanyType() {
     });
 }
 
+function BindAddressType() {
+    $.ajax({
+        type: "POST",
+        url: "/Account/GetAddressType",
+        //data: { province_id: province },
+        dataType: "json",
+        success: function (data) {
+   
+            if (data != null) {
+                $.each(data.responseaddresstype, function () {
+                    $('#chkAddressType input[type=checkbox]').each(function () {
+                        if ($(this).val() == this.value) {
+                            var id = $(this).attr("id");
+                            $('label[for=' + id + ']').text(this.text);
+                        }
+                    });
+                    
+                });
+            }
+
+
+        },
+        error: function (xhr, status, error) {
+            //Loading(0);
+            //clearForEdit();
+            console.log(status);
+            showFeedback("error", xhr.responseText, "System Information",
+                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+        }
+    });
+}
+
 function Validate(formcontrol, custom) {
     //$('.toast').toast('hide');
     $('#idmsAlert').hide();
@@ -1364,7 +1401,7 @@ function Validate(formcontrol, custom) {
                     $(this).addClass('desired');
                 });
                 //$('.toast').toast('show');
-                $('#idmsAlert').show();
+                //$('#idmsAlert').show();
 
                 //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
             }
@@ -1384,7 +1421,7 @@ function Validate(formcontrol, custom) {
                 });
                 //$('.toast').toast('show');
 
-                $('#idmsAlert').show();
+                //$('#idmsAlert').show();
 
                 //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
             }
@@ -1404,7 +1441,7 @@ function Validate(formcontrol, custom) {
                 });
                 //$('.toast').toast('show');
 
-                $('#idmsAlert').show();
+                //$('#idmsAlert').show();
 
                 //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
             }
@@ -1424,7 +1461,7 @@ function Validate(formcontrol, custom) {
                 });
                 //$('.toast').toast('show');
 
-                $('#idmsAlert').show();
+                //$('#idmsAlert').show();
 
                 //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
             }
@@ -1444,7 +1481,7 @@ function Validate(formcontrol, custom) {
                 });
                 //$('.toast').toast('show');
 
-                $('#idmsAlert').show();
+                //$('#idmsAlert').show();
 
                 //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
             }
@@ -1471,7 +1508,7 @@ function Validate(formcontrol, custom) {
                 });
                 //$('.toast').toast('show');
 
-                $('#idmsAlert').show();
+                //$('#idmsAlert').show();
 
                 //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
             }
@@ -1491,7 +1528,7 @@ function Validate(formcontrol, custom) {
                 });
                 //$('.toast').toast('show');
 
-                $('#idmsAlert').show();
+                //$('#idmsAlert').show();
 
                 //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
             }

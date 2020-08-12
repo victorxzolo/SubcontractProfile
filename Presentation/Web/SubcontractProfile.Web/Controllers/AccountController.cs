@@ -575,7 +575,6 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { responsebank = getAllBankList });
         }
 
-
         [HttpPost]
         public IActionResult DDLCompanyType()
         {
@@ -625,7 +624,47 @@ namespace SubcontractProfile.Web.Controllers
 
             return Json(new { responsecompanytype = getAllCompanyTypeList });
         }
+
+        //Checkbox
+        [HttpPost]
+        public IActionResult GetAddressType()
+        {
+            var output = new List<SubcontractProfileAddressTypeModel>();
+            List<SelectListItem> getAllAddressTypeList = new List<SelectListItem>();
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "AddressType/GetALL");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                output = JsonConvert.DeserializeObject<List<SubcontractProfileAddressTypeModel>>(v);
+            }
+
+            if (Lang == "TH")
+            {
+                getAllAddressTypeList = output.Select(a => new SelectListItem
+                {
+                    Text = a.AddressTypeNameTh,
+                    Value = a.AddressTypeId
+                }).OrderBy(c => c.Value).ToList();
+            }
+            else
+            {
+                getAllAddressTypeList = output.Select(a => new SelectListItem
+                {
+                    Text = a.AddressTypeNameEn,
+                    Value = a.AddressTypeId
+                }).OrderBy(c => c.Value).ToList();
+            }
+            return Json(new { responseaddresstype = getAllAddressTypeList });
+        }
+
         #endregion
+
 
 
         #region Comment
