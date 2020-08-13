@@ -3777,7 +3777,7 @@ td, th {
 }*/
 
 .inputError {
-    background-color: #f4bfbf;
+    /*background-color: #f4bfbf;*/
     border: 1px solid #d03e3e;
     color: #d03e3e;
 }
