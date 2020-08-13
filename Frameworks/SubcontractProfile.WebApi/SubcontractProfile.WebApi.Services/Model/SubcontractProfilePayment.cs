@@ -100,15 +100,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(5000)]
         public string companyAddress { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(250)]
-        public string contractName { get; set; }
-
-        [System.ComponentModel.DataAnnotations.StringLength(250)]
-        public string contract_email { get; set; }
-
-        [System.ComponentModel.DataAnnotations.StringLength(250)]
-        public string contract_phone { get; set; }
-
+      
 
         public object Clone()
         {
