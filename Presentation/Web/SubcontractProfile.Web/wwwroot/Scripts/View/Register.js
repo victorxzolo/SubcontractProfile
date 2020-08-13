@@ -351,6 +351,13 @@
         //});
     });
 
+    $('#txtcreatepass, #txtconfirmpass').on('keyup', function () {
+        if ($('#txtcreatepass').val() == $('#txtconfirmpass').val()) {
+            $('#message').html('Matching').css('color', 'green');
+        } else
+            $('#message').html('Not Matching').css('color', 'red');
+    });
+
     function BindDatatable(table, datamodel) {
         //console.log("BindDatatable");
         //console.log(datamodel);
@@ -1355,13 +1362,17 @@ function BindAddressType() {
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
-   
+            console.log(data.responseaddresstype)
             if (data != null) {
                 $.each(data.responseaddresstype, function () {
+                    var strtext = this.text;
+                    var strvalue = this.value;
                     $('#chkAddressType input[type=checkbox]').each(function () {
-                        if ($(this).val() == this.value) {
+                        
+                        if ($(this).val() == strvalue) {
                             var id = $(this).attr("id");
-                            $('label[for=' + id + ']').text(this.text);
+                            
+                            $('label[for=' + id + ']').text(strtext);
                         }
                     });
                     
