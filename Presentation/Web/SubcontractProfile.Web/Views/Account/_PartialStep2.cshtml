@@ -12,79 +12,84 @@
 <div class="row">
     <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">ประเภทที่อยู่</label>
 </div>
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-        <div class="form-group row">
-            <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
-            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrbranch" value="LOCATION_ADDR">
+<div id="chkAddressType">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+            <div class="form-group row">
+                <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrbranch" value="01">
                         <label class="custom-control-label" for="chkaddrbranch">
-                            ที่อยู่ตามที่ตั้งสาขา
+                           
                         </label>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <div class="custom-control custom-checkbox">
-                    
-                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrtax" value="TAX_ADDR">
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <div class="custom-control custom-checkbox">
+
+                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrtax" value="06">
                         <label class="custom-control-label" for="chkaddrtax">
-                            ที่อยู่ตามใบกำกับภาษี
+                          
                         </label>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <div class="custom-control custom-checkbox">
-                    
-                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrwt" value="WT_ADDR">
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <div class="custom-control custom-checkbox">
+
+                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrwt" value="04">
                         <label class="custom-control-label" for="chkaddrwt">
-                            ที่อยู่ตาม W/T
+                            
                         </label>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-        <div class="form-group row">
-            <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
-            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <div class="custom-control custom-checkbox">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+            <div class="form-group row">
+                <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <div class="custom-control custom-checkbox">
 
-                    <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrdoc" value="DOC_ADDR">
-                    <label class="custom-control-label" for="chkaddrdoc">
-                        ที่อยู่จัดส่งเอกสาร
-                    </label>
+                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrdoc" value="02">
+                        <label class="custom-control-label" for="chkaddrdoc">
+                           
+                        </label>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <div class="custom-control custom-checkbox">
-                    
-                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrshipping" value="SHIPTO_ADDR">
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <div class="custom-control custom-checkbox">
+
+                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrshipping" value="03">
                         <label class="custom-control-label" for="chkaddrshipping">
-                            ที่อยู่จัดส่งสินค้า
+                          
                         </label>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <div class="custom-control custom-checkbox">
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <div class="custom-control custom-checkbox">
 
-                    <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrpop" value="POP_ADDR">
-                    <label class="custom-control-label" for="chkaddrpop">
-                        ที่อยู่จัดส่ง POP
-                    </label>
+                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrpop" value="05">
+                        <label class="custom-control-label" for="chkaddrpop">
+                            
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
 <div class="row">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
             <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเทศ :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control form-control-sm" id="ddlcountry">
+                <select class="form-control inputValidationAddress form-control-sm" id="ddlcountry">
                     <option>Thailand</option>
                 </select>
             </div>
@@ -94,7 +99,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">รหัสไปรษณีย์ :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control form-control-sm" id="ddlzipcode">
+                <select class="form-control inputValidationAddress form-control-sm" id="ddlzipcode">
                    
                 </select>
             </div>
@@ -106,11 +111,11 @@
         <div class="form-group row">
             <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เลขที่ :</label>
             <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                <input type="text" class="form-control form-control-sm" id="txthomenumber" />
+                <input type="text" class="form-control inputValidationAddress form-control-sm" id="txthomenumber" />
             </div>
             <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">หมู่ที่ :</label>
             <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                <input type="text" class="form-control form-control-sm" id="txtVillageNo" />
+                <input type="text" class="form-control inputValidationAddress form-control-sm" id="txtVillageNo" />
             </div>
         </div>
     </div>
@@ -118,7 +123,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">หมู่บ้าน :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <input type="text" class="form-control form-control-sm" id="txtvillage" />
+                <input type="text" class="form-control inputValidationAddress form-control-sm" id="txtvillage" />
             </div>
         </div>
     </div>
@@ -168,7 +173,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ตำบล/แขวง :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control form-control-sm" id="ddlsubdistrict">
+                <select class="form-control inputValidationAddress form-control-sm" id="ddlsubdistrict">
                    
                 </select>
             </div>
@@ -178,7 +183,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อำเภอ/เขต :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control form-control-sm" id="ddldistrict">
+                <select class="form-control inputValidationAddress form-control-sm" id="ddldistrict">
                   
                 </select>
             </div>
@@ -190,7 +195,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">จังหวัด :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control form-control-sm" id="ddlprovince">
+                <select class="form-control inputValidationAddress form-control-sm" id="ddlprovince">
                    
                 </select>
             </div>
@@ -200,7 +205,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ภาค :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control form-control-sm" id="ddlzone">
+                <select class="form-control inputValidationAddress form-control-sm" id="ddlzone">
                     <option></option>
                 </select>
             </div>

@@ -156,7 +156,7 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
     width: 17px;
 }
 .page-item.active .page-link {
-    background-color: #1b55e2;
+    background-color: #8dbf42;
 }
 #alter_pagination_next a, #alter_pagination_previous a {
     border-radius: 50%;

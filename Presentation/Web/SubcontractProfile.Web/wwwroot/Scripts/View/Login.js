@@ -47,6 +47,7 @@
 
 function check() {
     var errorMessage = $("#idmsAlert");
+    $('.toast').toast('hide');
         var hasError = false;
 
         $(".form-control.inputValidation").each(function () {
@@ -60,12 +61,14 @@ function check() {
                 $($this).focusout(function () {
                     $(this).addClass('desired');
                 });
-                errorMessage.show();
+                //errorMessage.show();
+                $('.toast').toast('show');
                 //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
             }
-            if ($this.val() != "") {
+            if ($this.val() != "" || $this.val() !=0) {
                 $this.removeClass("inputError");
-            } else {
+            }
+            else {
                 return true;
             }
         }); //Input
