@@ -71,6 +71,10 @@
                         event.stopPropagation();
                         
                     }
+                    else if (!Comparepassword())
+                    {
+                        return false;
+                    }
                     else {
                         $('#smartwizard').smartWizard("next");
                         return true;
@@ -394,6 +398,15 @@
         $('#txtsapcodemodal').val('')
         $('#txtuseridmodal').val('')
         tbLocation.ajax.reload();
+    }
+
+    function Comparepassword() {
+        if (($('#txtcreatepass').val() != "" && $('#txtconfirmpass').val() !="")&&($('#txtcreatepass').val() == $('#txtconfirmpass').val())) {
+            return true
+        } else {
+            return false
+        }
+        
     }
 
 /*************************************/
