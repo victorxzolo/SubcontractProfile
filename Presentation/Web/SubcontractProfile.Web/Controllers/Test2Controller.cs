@@ -74,30 +74,25 @@ namespace SubcontractProfile.Web.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var result = response.Content.ReadAsStringAsync().Result;
+                    
+                    //data
                     output = JsonConvert.DeserializeObject<List<SubcontractProfileCompanyModel>>(result);
-                    //resultZipCode = output.GroupBy(c => c.ZipCode).Select(g => g.First()).ToList();
+     
+                    ////Sorting  
+                    //if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
+                    //{
+                       
+                    //    output = output.OrderBy(order => order.CompanyNameEn).ThenBy(order => order.CreateDate).ToList(); 
+                    //}
 
-                    recordsTotal = result.Length;
+                    //total number of rows count   
+                    recordsTotal = output.Count;
                 }
 
-
-                ////Sorting  
-                //if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
-                //{
-                //    output = customerData.OrderBy(sortColumn + " " + sortColumnDirection);
-                //}
-                ////Search  
-                //if (!string.IsNullOrEmpty(searchValue))
-                //{
-                //    customerData = customerData.Where(m => m.Name == searchValue);
-                //}
-
-                //total number of rows count   
-
                 //Paging   
-                //var data = customerData.Skip(skip).Take(pageSize).ToList();
+                var data = output.Skip(skip).Take(pageSize).ToList();
                 //Returning Json Data  
-                return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = output });
+                return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
 
             }
             catch (Exception)
