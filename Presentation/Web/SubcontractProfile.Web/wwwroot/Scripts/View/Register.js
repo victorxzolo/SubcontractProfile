@@ -64,28 +64,37 @@
         if (step == 1) {
             if ($('#chktypeN').is(":checked")) {
                 var forms = document.getElementsByClassName('needs-validation-newregister');
-                // Loop over them and prevent submission
                 var validation = Array.prototype.filter.call(forms, function (form) {
-                    // form.addEventListener('submit', function (event) {
-                    if (Validate(".form-control.inputValidation", ".custom-control-input.inputValidation")) {
+                    if (Validate(".form-control.inputValidation", ".custom-control-input.inputValidation"
+                        , ".custom-select.inputValidation", ".custom-file-input.inputValidation")) {
                         event.preventDefault();
                         event.stopPropagation();
+                        
                     }
                     else {
-                        return false;
+                        $('#smartwizard').smartWizard("next");
+                        return true;
+                       
                     }
                     form.classList.add('was-validated');
                 });
             }
             else if ($('#chktypeD').is(":checked")) {
-                if (!Validate(".form-control.inputValidationdealer", ".custom-control-input.inputValidationdealer")) {
-                    $('#smartwizard').smartWizard("next");
-                    return true;
-                }
-                else {
-                    $('.toast').toast('show');
-                    return false;
-                }
+                var forms = document.getElementsByClassName('needs-validation-dealer');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    if (Validate(".form-control.inputValidationdealer", ".custom-control-input.inputValidationdealer"
+                        , ".custom-select.inputValidationdealer", ".custom-file-input.inputValidationdealer")) {
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                    }
+                    else {
+                        $('#smartwizard').smartWizard("next");
+                        return true;
+
+                    }
+                    form.classList.add('was-validated');
+                });
             }
         }
         else if (step == 2) {
@@ -93,25 +102,39 @@
             return true;
         }
         else if (step == 3) {
+            var forms = document.getElementsByClassName('needs-validation-step3');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                if (Validate(".form-control.inputValidationContract", ".custom-control-input.inputValidationContract"
+                    , ".custom-select.inputValidationContract", ".custom-file-input.inputValidationContract")) {
+                    event.preventDefault();
+                    event.stopPropagation();
 
-            if (!Validate(".form-control.inputValidationContract", ".custom-control-input.inputValidationContract")) {
-                $('#smartwizard').smartWizard("next");
-                return true;
-            }
-            else {
-                $('.toast').toast('show');
-                return false;
-            }
+                }
+                else {
+                    $('#smartwizard').smartWizard("next");
+                    return true;
+
+                }
+                form.classList.add('was-validated');
+            });
         }
         else if (step == 4) {
-            if (!Validate(".form-control.inputValidationBank", ".custom-control-input.inputValidationBank")) {
-                $('#smartwizard').smartWizard("next");
-                return true;
-            }
-            else {
-                $('.toast').toast('show');
-                return false;
-            }
+
+            var forms = document.getElementsByClassName('needs-validation-step4');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                if (Validate(".form-control.inputValidationBank", ".custom-control-input.inputValidationBank"
+                           , ".custom-select.inputValidationAddress",".custom-file-input.inputValidationBank")) {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                }
+                else {
+                    $('#smartwizard').smartWizard("next");
+                    return true;
+
+                }
+                form.classList.add('was-validated');
+            });
         }
 
         
@@ -333,28 +356,18 @@
 
     $('#btn_search_modal').click(function () {
 
-        if (!Validate(".form-control.inputValidationlocationModal", ".custom-control-input.inputValidationlocationModal")) {
-            tbLocation.ajax.reload();
-        }
-        
-        //$.ajax({
-        //    type: "POST",
-        //    url: "/Account/SearchLocation",
-        //    data: { model: GetValueSerachLocation() },
-        //    dataType: "json",
-        //    success: function (data) {
-        //        tbLocation.clear().draw();
-        //        BindDatatable(tbLocation, data.response)
+        var forms = document.getElementsByClassName('needs-validation-modalLocation');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            if (Validate(".form-control.inputValidationlocationModal", ".custom-control-input.inputValidationlocationModal")) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            else {
+                tbLocation.ajax.reload();
 
-        //    },
-        //    error: function (xhr, status, error) {
-        //        //Loading(0);
-        //        //clearForEdit();
-        //        console.log(status);
-        //        showFeedback("error", xhr.responseText, "System Information",
-        //            "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-        //    }
-        //});
+            }
+            form.classList.add('was-validated');
+        });
     });
 
     $('#txtcreatepass, #txtconfirmpass').on('keyup', function () {
@@ -493,14 +506,23 @@
             countchk.push($(this).val());
             
         });
-        //if (countchk.length == 0) {
-        //    $('#idmsaddrAlert').toast('show');
-        //}
-        //else {
-            if (!Validate(".form-control.inputValidationAddress", ".custom-control-input.inputValidationAddress")) {
-                SaveDaftAddress(stuff);
+
+
+        var forms = document.getElementsByClassName('needs-validation-step2');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            if (Validate(".form-control.inputValidationAddress", ".custom-control-input.inputValidationAddress"
+                       , ".custom-select.inputValidationAddress", ".custom-file-input.inputValidationAddress")) {
+                event.preventDefault();
+                event.stopPropagation();
             }
-       // }
+            else {
+                SaveDaftAddress(stuff);
+
+            }
+            form.classList.add('was-validated');
+        });
+
+
         
 
         
@@ -1006,12 +1028,13 @@
             success: function (data) {
                 Loading(0);
                 console.log(data)
-                if (data.Response.Status) {
-                    showFeedback("success", data.Response.Message, "System Information",
+                if (data.response.status) {
+                    showFeedback("success", data.response.message, "System Information",
                         "<button type='button' class='btn-border btn-green' data-dismiss='modal' id='btnOKpopup'><i class='fa fa-check icon'></i><span>OK</span></button >");
+                    window.location.href = data.redirecturl;
                 }
                 else {
-                    showFeedback("error", data.Response.Message, "System Information",
+                    showFeedback("error", data.response.message, "System Information",
                         "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
                 }
             },
@@ -1167,7 +1190,7 @@ function BindDDLprovince(regionid) {
             if (data != null) {
                 $('#ddlprovince').empty();
                 $.each(data.responseprovince, function () {
-                    $('#ddlprovince').append($('<option></option>').val(this.value).text(this.text));
+                    $('#ddlprovince').append($('<option></option>').val(this.value == "0" ? "" : this.value).text(this.text));
                 });
             }
            
@@ -1196,7 +1219,7 @@ function BindDDLdistrict(province) {
                 $('#ddldistrict').empty();
 
                 $.each(data.responsedistricrt, function () {
-                    $('#ddldistrict').append($("<option></option>").val(this.value).text(this.text));
+                    $('#ddldistrict').append($("<option></option>").val(this.value == "0" ? "" : this.value).text(this.text));
                 });
             }
           
@@ -1227,14 +1250,14 @@ function BindDDLsubdistrict(district) {
 
                 $.each(data.responsesubdistrict, function () {
 
-                    $('#ddlsubdistrict').append($("<option></option>").val(this.value).text(this.text));
+                    $('#ddlsubdistrict').append($("<option></option>").val(this.value == "0" ? "" : this.value).text(this.text));
                 });
                 $.each(data.responsezipcode, function () {
 
-                    $('#ddlzipcode').append($("<option></option>").val(this.value).text(this.text));
+                    $('#ddlzipcode').append($("<option></option>").val(this.value == "0" ? "" : this.value).text(this.text));
                 })
 
-                $('#ddlzipcode').val("0")
+                $('#ddlzipcode').val("")
             }
           
 
@@ -1265,18 +1288,18 @@ function BindDDLTitle() {
                 $('#ddlprefixcompany_name_th_dealer').empty();
                 $('#ddlprefixcompany_name_en_dealer').empty();
 
-                $('#ddlprefixcompany_name_th').append($('<option></option>').val(0).text('Select Title'));
-                $('#ddlprefixcompany_name_en').append($('<option></option>').val(0).text('Select Title'));
+                $('#ddlprefixcompany_name_th').append($('<option></option>').val("").text('Select Title'));
+                $('#ddlprefixcompany_name_en').append($('<option></option>').val("").text('Select Title'));
 
-                $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val(0).text('Select Title'));
-                $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val(0).text('Select Title'));
+                $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val("").text('Select Title'));
+                $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val("").text('Select Title'));
 
                 $.each(data.responsetitle, function () {
-                    $('#ddlprefixcompany_name_th').append($('<option></option>').val(this.titleId).text(this.titleNameTh));
-                    $('#ddlprefixcompany_name_en').append($('<option></option>').val(this.titleId).text(this.TitleNameEn));
+                    $('#ddlprefixcompany_name_th').append($('<option></option>').val(this.titleId == "0" ? "" : this.titleId).text(this.titleNameTh));
+                    $('#ddlprefixcompany_name_en').append($('<option></option>').val(this.titleId == "0" ? "" : this.titleId).text(this.TitleNameEn));
 
-                    $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val(this.titleId).text(this.titleNameTh));
-                    $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val(this.titleId).text(this.titleNameEn));
+                    $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val(this.titleId == "0" ? "" : this.titleId).text(this.titleNameTh));
+                    $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val(this.titleId == "0" ? "" : this.titleId).text(this.titleNameEn));
                 });
             }
 
@@ -1305,7 +1328,7 @@ function BindRegion() {
                 $('#ddlzone').empty();
 
                 $.each(data.responseregion, function () {
-                    $('#ddlzone').append($("<option></option>").val(this.value).text(this.text));
+                    $('#ddlzone').append($("<option></option>").val(this.value == "0" ? "" : this.value).text(this.text));
                 });
             }
 
@@ -1334,7 +1357,7 @@ function BindDDLBank() {
                 $('#ddlBankname').empty();
 
                 $.each(data.responsebank, function () {
-                    $('#ddlBankname').append($("<option></option>").val(this.value).text(this.text));
+                    $('#ddlBankname').append($("<option></option>").val(this.value == "0" ? "" : this.value).text(this.text));
                 });
             }
 
@@ -1363,7 +1386,7 @@ function BindDDLCompanyType() {
                 $('#ddlbusiness_type').empty();
 
                 $.each(data.responsecompanytype, function () {
-                    $('#ddlbusiness_type').append($("<option></option>").val(this.value).text(this.text));
+                    $('#ddlbusiness_type').append($("<option></option>").val(this.value == "0" ? "" : this.value).text(this.text));
                 });
             }
 
@@ -1417,9 +1440,7 @@ function BindAddressType() {
     });
 }
 
-function Validate(formcontrol, custom) {
-    //$('.toast').toast('hide');
-    $('#idmsAlert').hide();
+function Validate(formcontrol, custom,customselect,cutomupload) {
 
     var hasError = false;
 
@@ -1433,150 +1454,80 @@ function Validate(formcontrol, custom) {
             if (fieldvalue == "") {
 
                 hasError = true;
-                $this.addClass("inputError");
-                $($this).focusout(function () {
-                    $(this).addClass('desired');
-                });
-                //$('.toast').toast('show');
-                //$('#idmsAlert').show();
-
-                //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
-            }
-            if ($this.val() != "") {
-                $this.removeClass("inputError");
-            } else {
-                return true;
             }
         }
         else if (tag == "INPUT" && type == "password") {
             if (fieldvalue == "") {
 
                 hasError = true;
-                $this.addClass("inputError");
-                $($this).focusout(function () {
-                    $(this).addClass('desired');
-                });
-                //$('.toast').toast('show');
-
-                //$('#idmsAlert').show();
-
-                //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
-            }
-            if ($this.val() != "") {
-                $this.removeClass("inputError");
-            } else {
-                return true;
             }
         }
         else if ($this.is('select')) {
             if (fieldvalue == "0") {
 
                 hasError = true;
-                $this.addClass("inputError");
-                $($this).focusout(function () {
-                    $(this).addClass('desired');
-                });
-                //$('.toast').toast('show');
-
-                //$('#idmsAlert').show();
-
-                //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
-            }
-            if ($this.val() != "0") {
-                $this.removeClass("inputError");
-            } else {
-                return true;
             }
         }
         else if (tag == "INPUT" && type=='radio') {
             if (!fieldvalue) {
 
                 hasError = true;
-                $this.addClass("inputError");
-                $($this).focusout(function () {
-                    $(this).addClass('desired');
-                });
-                //$('.toast').toast('show');
-
-                //$('#idmsAlert').show();
-
-                //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
-            }
-            if (fieldvalue) {
-                $this.removeClass("inputError");
-            } else {
-                return true;
             }
         }
         else if (tag == "INPUT" && type=='checkbox') {
             if (!fieldvalue) {
 
                 hasError = true;
-                $this.addClass("inputErrorCheckbox");
-                $($this).focusout(function () {
-                    $(this).addClass('desired');
-                });
-                //$('.toast').toast('show');
 
-                //$('#idmsAlert').show();
-
-                //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
-            }
-            if (fieldvalue) {
-                $this.removeClass("inputErrorCheckbox");
-            } else {
-                return true;
             }
         }
     }); //Input
     $(custom).each(function () {
         var $this = $(this);
-        var fieldvalue = $this.is(":checked");
+       
         var type = $this.attr("type");
         var tag = $this[0].tagName;
+        var fieldvalue = $this.is(":checked");
 
-        if (tag == "INPUT" && type=='radio') {
+        if (tag == "INPUT" && type == 'radio') {
             if (!fieldvalue) {
 
                 hasError = true;
-                $this.addClass("inputError");
-                $($this).focusout(function () {
-                    $(this).addClass('desired');
-                });
-                //$('.toast').toast('show');
 
-                //$('#idmsAlert').show();
-
-                //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
-            }
-            if (fieldvalue) {
-                $this.removeClass("inputError");
-            } else {
-                return true;
             }
         }
-        else if (tag == "INPUT" &&type=='checkbox') {
+        else if (tag == "INPUT" && type == 'checkbox') {
             if (!fieldvalue) {
 
                 hasError = true;
-                $this.addClass("inputErrorCheckbox");
-                $($this).focusout(function () {
-                    $(this).addClass('desired');
-                });
-                //$('.toast').toast('show');
 
-                //$('#idmsAlert').show();
-
-                //errorMessage.html("<p>กรุณาระบุข้อมูลให้ครบถ้วน</p>").show();
-            }
-            if (fieldvalue) {
-                $this.removeClass("inputErrorCheckbox");
-            } else {
-                return true;
             }
         }
     });//radio,check box
+    $(customselect).each(function () {
+        var $this = $(this);
 
+        var type = $this.attr("type");
+        var tag = $this[0].tagName;
+        var fieldvalue = $this.val();
+
+        if ($this.is('select')) {
+            if (fieldvalue == "") {
+
+                hasError = true;
+            }
+        }
+    });//custom selete
+    $(cutomupload).each(function () {
+        var $this = $(this);
+        var fieldvalue = $this.val();
+        if ($this.is('input')) {
+            if (fieldvalue == "") {
+
+                hasError = true;
+            }
+        }
+    });//customupload
     return hasError;
 }
 
