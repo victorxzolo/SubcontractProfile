@@ -63,14 +63,19 @@
 
         if (step == 1) {
             if ($('#chktypeN').is(":checked")) {
-                if (!Validate(".form-control.inputValidation", ".custom-control-input.inputValidation")) {
-                    $('#smartwizard').smartWizard("next");
-                    return true;
-                }
-                else {
-                    $('.toast').toast('show');
-                    return false;
-                }
+                var forms = document.getElementsByClassName('needs-validation-newregister');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    // form.addEventListener('submit', function (event) {
+                    if (Validate(".form-control.inputValidation", ".custom-control-input.inputValidation")) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    else {
+                        return false;
+                    }
+                    form.classList.add('was-validated');
+                });
             }
             else if ($('#chktypeD').is(":checked")) {
                 if (!Validate(".form-control.inputValidationdealer", ".custom-control-input.inputValidationdealer")) {
@@ -161,7 +166,7 @@
             },
             dataType: "json",
             error: function (xhr, status, error) {
-                //Loading(0);
+                Loading(0);
                 //clearForEdit();
                 console.log(status);
                 showFeedback("error", xhr.responseText, "System Information",
@@ -225,6 +230,7 @@
     });
 
     $('#btn_select_location').click(function () {
+        Loading();
         var value = tbLocation.rows('.selected').data();
         var lo_id = value[0].location_id;
         $.ajax({
@@ -233,7 +239,7 @@
             dataType: "json",
             data: { location_id: lo_id},
             success: function (data) {
-                console.log(data)
+                Loading(0);
                 if (data.response.status) {
                     $('#txtlocationcode').val(data.locationListModel[0].outLocationCode);
                     $('#txtlocationname').val(data.locationListModel[0].outLocationName);
@@ -303,7 +309,7 @@
 
             },
             error: function (xhr, status, error) {
-                //Loading(0);
+                Loading(0);
                 //clearForEdit();
                 console.log(status);
                 showFeedback("error", xhr.responseText, "System Information",
@@ -403,13 +409,14 @@
             type: "POST",
             url: "/Account/SearchAddress",
             dataSrc: function (data) {
+                Loading(0);
                 var val = []
                 val = ConcatstrAddress(data.data);
                 data.data = val;
                 return data.data;
             },
             error: function (xhr, status, error) {
-                //Loading(0);
+                Loading(0);
                 //clearForEdit();
                 console.log(status);
                 showFeedback("error", xhr.responseText, "System Information",
@@ -691,13 +698,14 @@
     }
 
     function SaveDaftAddress(stuff) {
-
+        Loading();
         $.ajax({
             type: "POST",
             url: "/Account/SaveDaftAddress",
             data: { daftdata: stuff },
             dataType: "json",
             success: function (data) {
+                Loading(0);
                 if (data.status) {
 
                     //var val = []
@@ -714,7 +722,7 @@
 
             },
             error: function (xhr, status, error) {
-                //Loading(0);
+                Loading(0);
                 //clearForEdit();
                 console.log(status);
                 showFeedback("error", xhr.responseText, "System Information",
@@ -754,6 +762,7 @@
     });
 
     function uploadFiles(inputId) {
+        Loading();
         var input = document.getElementById(inputId);
         var files = input.files;
         var formData = new FormData();
@@ -786,6 +795,7 @@
                 dataType: "json",
                 data: formData,
                 success: function (data) {
+                    Loading(0);
                     console.log(data);
                     if (data.status) {
                         switch (inputId) {
@@ -803,7 +813,7 @@
                    
                 },
                 error: function (xhr, status, error) {
-                    //Loading(0);
+                    Loading(0);
                     //clearForEdit();
                     console.log(status);
                     showFeedback("error", xhr.responseText, "System Information",
@@ -847,7 +857,7 @@
 
 
     $('#btnregis').click(function (){
-
+        Loading();
         var chksubcontract_type = null;
         var distribution_channel = null;
         var channel_sale_group = null;
@@ -994,6 +1004,7 @@
             data: { model: data },
             dataType: "json",
             success: function (data) {
+                Loading(0);
                 console.log(data)
                 if (data.Response.Status) {
                     showFeedback("success", data.Response.Message, "System Information",
@@ -1005,7 +1016,7 @@
                 }
             },
             error: function (xhr, status, error) {
-                //Loading(0);
+                Loading(0);
                 //clearForEdit();
                 console.log(status);
                 showFeedback("error", xhr.responseText, "System Information",
@@ -1015,14 +1026,14 @@
     });
 
     function BindDataAddress() {
+        Loading();
         $.ajax({
             type: "POST",
             url: "/Account/GetDaftAddress",
             data: { address_type_id: null },
             dataType: "json",
             success: function (data) {
-                console.log(data)
-
+                Loading(0);
                 if (data.status) {
                     var val = []
                     val = ConcatstrAddress(data.response);
@@ -1036,7 +1047,7 @@
                 }
             },
             error: function (xhr, status, error) {
-                //Loading(0);
+                Loading(0);
                 //clearForEdit();
                 console.log(status);
                 showFeedback("error", xhr.responseText, "System Information",
@@ -1145,13 +1156,14 @@
 });
 
 function BindDDLprovince(regionid) {
-
+    Loading();
     $.ajax({
         type: "POST",
         url: "/Account/DDLsubcontract_profile_province",
         data: { region_id: regionid },
         dataType: "json",
         success: function (data) {
+            Loading(0);
             if (data != null) {
                 $('#ddlprovince').empty();
                 $.each(data.responseprovince, function () {
@@ -1162,7 +1174,7 @@ function BindDDLprovince(regionid) {
 
         },
         error: function (xhr, status, error) {
-            //Loading(0);
+            Loading(0);
             //clearForEdit();
             console.log(status);
             showFeedback("error", xhr.responseText, "System Information",
@@ -1172,12 +1184,14 @@ function BindDDLprovince(regionid) {
 }
 
 function BindDDLdistrict(province) {
+   Loading();
     $.ajax({
         type: "POST",
         url: "/Account/DDLsubcontract_profile_district",
         data: { province_id: province },
         dataType: "json",
         success: function (data) {
+            Loading(0);
             if (data != null) {
                 $('#ddldistrict').empty();
 
@@ -1189,7 +1203,7 @@ function BindDDLdistrict(province) {
 
         },
         error: function (xhr, status, error) {
-            //Loading(0);
+            Loading(0);
             //clearForEdit();
             console.log(status);
             showFeedback("error", xhr.responseText, "System Information",
@@ -1199,12 +1213,14 @@ function BindDDLdistrict(province) {
 }
 
 function BindDDLsubdistrict(district) {
+    Loading();
     $.ajax({
         type: "POST",
         url: "/Account/DDLsubcontract_profile_sub_district",
         data: { district_id: district},
         dataType: "json",
         success: function (data) {
+            Loading(0);
             if (data != null) {
                 $('#ddlsubdistrict').empty();
                 $('#ddlzipcode').empty();
@@ -1224,7 +1240,7 @@ function BindDDLsubdistrict(district) {
 
         },
         error: function (xhr, status, error) {
-            //Loading(0);
+            Loading(0);
             //clearForEdit();
             console.log(status);
             showFeedback("error", xhr.responseText, "System Information",
@@ -1234,11 +1250,13 @@ function BindDDLsubdistrict(district) {
 }
 
 function BindDDLTitle() {
+    Loading();
     $.ajax({
         type: "POST",
-        url: "/Account/DDLTitle",
+        url: "/Account/",
         dataType: "json",
         success: function (data) {
+            Loading(0);
             if (data != null) {
 
                 $('#ddlprefixcompany_name_th').empty();
@@ -1265,7 +1283,7 @@ function BindDDLTitle() {
 
         },
         error: function (xhr, status, error) {
-            //Loading(0);
+            Loading(0);
             //clearForEdit();
             console.log(status);
             showFeedback("error", xhr.responseText, "System Information",
@@ -1275,12 +1293,14 @@ function BindDDLTitle() {
 }
 
 function BindRegion() {
+   Loading();
     $.ajax({
         type: "POST",
         url: "/Account/DDLsubcontract_profile_Region",
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
+            Loading(0);
             if (data != null) {
                 $('#ddlzone').empty();
 
@@ -1292,7 +1312,7 @@ function BindRegion() {
 
         },
         error: function (xhr, status, error) {
-            //Loading(0);
+            Loading(0);
             //clearForEdit();
             console.log(status);
             showFeedback("error", xhr.responseText, "System Information",
@@ -1302,12 +1322,14 @@ function BindRegion() {
 }
 
 function BindDDLBank() {
+   Loading();
     $.ajax({
         type: "POST",
         url: "/Account/DDLBank",
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
+            Loading(0);
             if (data != null) {
                 $('#ddlBankname').empty();
 
@@ -1319,7 +1341,7 @@ function BindDDLBank() {
 
         },
         error: function (xhr, status, error) {
-            //Loading(0);
+            Loading(0);
             //clearForEdit();
             console.log(status);
             showFeedback("error", xhr.responseText, "System Information",
@@ -1329,12 +1351,14 @@ function BindDDLBank() {
 }
 
 function BindDDLCompanyType() {
+    Loading();
     $.ajax({
         type: "POST",
         url: "/Account/DDLCompanyType",
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
+            Loading(0);
             if (data != null) {
                 $('#ddlbusiness_type').empty();
 
@@ -1346,7 +1370,7 @@ function BindDDLCompanyType() {
 
         },
         error: function (xhr, status, error) {
-            //Loading(0);
+            Loading(0);
             //clearForEdit();
             console.log(status);
             showFeedback("error", xhr.responseText, "System Information",
@@ -1356,13 +1380,15 @@ function BindDDLCompanyType() {
 }
 
 function BindAddressType() {
+    Loading();
     $.ajax({
         type: "POST",
         url: "/Account/GetAddressType",
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
-            console.log(data.responseaddresstype)
+            Loading(0);
+
             if (data != null) {
                 $.each(data.responseaddresstype, function () {
                     var strtext = this.text;
@@ -1382,7 +1408,7 @@ function BindAddressType() {
 
         },
         error: function (xhr, status, error) {
-            //Loading(0);
+            Loading(0);
             //clearForEdit();
             console.log(status);
             showFeedback("error", xhr.responseText, "System Information",
@@ -1552,4 +1578,16 @@ function Validate(formcontrol, custom) {
     });//radio,check box
 
     return hasError;
+}
+
+
+
+function Loading(x) {
+    //if (x == 0) {
+    //    $("#MyPopupLoading").modal('hide');
+    //}
+    //else {
+    //    $("#MyPopupLoading").modal('show');
+    //   // $("#PopupLoading").data("kendoWindow").center();
+    //}
 }

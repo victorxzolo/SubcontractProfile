@@ -41,43 +41,36 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                             </div>
                         </div>
                     </div>
-                    @*<div style="display:none" class="alert alert-danger alert-dismissible fade show" role="alert" id="idmsAlert">
-            <p>กรุณาระบุข้อมูลให้ครบถ้วน</p>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>*@
 
-                    <div class="alert alert-danger toast" data-autohide="false" id="idmsAlert">
-                        <div class="alert-danger">
-                            <strong class="mr-auto text-primary"></strong>
-                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
-                        </div>
-                        <div class="toast-body">
-                            <strong>กรุณาระบุข้อมูลให้ครบถ้วน</strong>
-                        </div>
-                    </div>
 
-                    <div id="formValidation">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                                <div class="form-group">
-                                    <input type="text" id="txtusername" class="form-control inputValidation" placeholder="User ID" value="" maxlength="50" />
-                                </div>
+                    <form  class="needs-validation" novalidate>
+                        <div class="form-row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12 mb-3">
+    
+                                    @*<label for="validationTooltip01">Username</label>*@
+                                    <input type="text" id="txtusername" class="form-control inputValidation" placeholder="User ID" value="" maxlength="50" required />
+                                    <div class="invalid-tooltip">
+                                        Please provide a valid username.
+                                    </div>
+                             
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                                <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12 mb-3">
+                              
+                                    @*<label for="validationTooltip01">Password</label>*@
                                     <div class="input-group p-0 ">
-                                        <input type="password" id="txtpassword" class="form-control inputValidation" name="password" autocomplete="new-password" placeholder="Password" maxlength="50">
+                                        <input type="password" id="txtpassword" class="form-control inputValidation" name="password" autocomplete="new-password" placeholder="Password" maxlength="50" required>
                                         @*<div class="input-group-append input-group-addon ">
-                                <span class="input-group-text px-4 toggle-password"><i class="fa fa-eye-slash"></i></span>
-                            </div>*@
+                <span class="input-group-text px-4 toggle-password"><i class="fa fa-eye-slash"></i></span>
+            </div>*@
 
+                                    <div class="invalid-tooltip">
+                                        Please provide a valid password.
+                                    </div>
 
                                     </div>
-                                </div>
+                         
 
                             </div>
 
@@ -88,8 +81,8 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                                 <div class="form-group">
                                     <select class="form-control" id="ddlLanguage">
                                         <option value="">Select Language</option>
-                                        <option value="1">Thai</option>
-                                        <option value="2">English</option>
+                                        <option value="TH">Thai</option>
+                                        <option value="EN">English</option>
                                     </select>
                                 </div>
                             </div>
@@ -162,7 +155,7 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                         <div class="form-group">
                             <button type="button" class="btn btn-secondary btn-block" id="btnnewregis" onclick="window.location.href = '/Account/Register';">Create new register subcontract profile</button>
                         </div>
-                    </div>
+                    </form>
 
 
 

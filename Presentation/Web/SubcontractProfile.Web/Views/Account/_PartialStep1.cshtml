@@ -39,7 +39,7 @@
     </div>
 </div>
 
-<div id="divnewsubcontract">
+<div id="divnewsubcontract" class="needs-validation-newregister" novalidate>
     <div class="form-group" style="display:none;">
         <div class="">
             <p class="font-weight-bolder lead">
@@ -92,9 +92,13 @@
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">เลขทะเบียนนิติบุคคล :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <div class="input-group">
-                        <input type="text" class="form-control inputValidation form-control-sm" id="txttax_id" placeholder="เลขทะเบียนนิติบุคคล" aria-label="เลขทะเบียนนิติบุคคล" maxlength="100">
+                        <input type="text" class="form-control inputValidation form-control-sm" id="txttax_id" 
+                               placeholder="เลขทะเบียนนิติบุคคล" aria-label="เลขทะเบียนนิติบุคคล" maxlength="100" required>
                         <div class="input-group-append">
                             <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                        </div>
+                        <div class="invalid-tooltip">
+                            Please provide a valid username.
                         </div>
                     </div>
                 </div>
@@ -105,7 +109,10 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อย่อบริษัท :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control inputValidation form-control-sm" id="txtcompany_alias" maxlength="100" />
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtcompany_alias" maxlength="100" required/>
+                    <div class="invalid-tooltip">
+                        Please provide a valid username.
+                    </div>
                 </div>
             </div>
         </div>
@@ -118,7 +125,10 @@
                     <select class="form-control  form-control-sm" id="ddlprefixcompany_name_th" maxlength="100"></select>
                 </div>
                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                    <input type="text" class="form-control inputValidation form-control-sm" id="txtcompany_name_th" />
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtcompany_name_th" required />
+                    <div class="invalid-tooltip">
+                        Please provide a valid username.
+                    </div>
                 </div>
             </div>
         </div>
@@ -129,7 +139,10 @@
                     <select class="form-control  form-control-sm" id="ddlprefixcompany_name_en" maxlength="100"></select>
                 </div>
                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                    <input type="text" class="form-control inputValidation form-control-sm" id="txtcompany_name_en" />
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtcompany_name_en" required />
+                    <div class="invalid-tooltip">
+                        Please provide a valid username.
+                    </div>
                 </div>
             </div>
         </div>
@@ -139,7 +152,10 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อภาษีหัก ณ ที่จ่าย :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control inputValidation form-control-sm" id="txtwt_name" maxlength="100">
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtwt_name" maxlength="100" required />
+                    <div class="invalid-tooltip">
+                        Please provide a valid username.
+                    </div>
                 </div>
 
             </div>
@@ -186,7 +202,10 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">User Name :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control inputValidation form-control-sm" id="txtcreateuser" maxlength="50" />
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtcreateuser" maxlength="50" required />
+                    <div class="invalid-tooltip">
+                        Please provide a valid username.
+                    </div>
                 </div>
             </div>
         </div>
@@ -197,7 +216,10 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Password :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="password" class="form-control inputValidation form-control-sm" id="txtcreatepass" maxlength="50" />
+                    <input type="password" class="form-control inputValidation form-control-sm" id="txtcreatepass" maxlength="50" required />
+                    <div class="invalid-tooltip">
+                        Please provide a valid username.
+                    </div>
                 </div>
             </div>
         </div>
@@ -205,7 +227,10 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Confirm Password :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="password" class="form-control inputValidation form-control-sm" id="txtconfirmpass" maxlength="50" />
+                    <input type="password" class="form-control inputValidation form-control-sm" id="txtconfirmpass" maxlength="50" required />
+                    <div class="invalid-tooltip">
+                        Please provide a valid username.
+                    </div>
                     <span id='message'></span>
                 </div>
             </div>

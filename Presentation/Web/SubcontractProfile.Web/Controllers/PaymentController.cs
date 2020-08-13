@@ -64,16 +64,16 @@ namespace SubcontractProfile.Web.Controllers
 
 
 
-            var data = new List<SubcontractProfilePayment>();
+            var datapayment = new List<SubcontractProfilePayment>();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Payment/SearchPayment", searchPayment.Paymentno, searchPayment.Paymentrequesttraningno, searchPayment.Paymantrequestdatefrom, searchPayment.Paymentrequestdateto, searchPayment.Paymentdatefrom, searchPayment.Paymentdateto, searchPayment.Paymentstatus);
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
                 var dataresponse = response.Content.ReadAsStringAsync().Result;
-                data = JsonConvert.DeserializeObject<List<SubcontractProfilePayment>>(dataresponse);
+                datapayment = JsonConvert.DeserializeObject<List<SubcontractProfilePayment>>(dataresponse);
             }
-            return Json(new { Data = data });
+            return Json(new { data = datapayment });
         }
         [HttpGet]
         public IActionResult GetByPaymentId(string id)
