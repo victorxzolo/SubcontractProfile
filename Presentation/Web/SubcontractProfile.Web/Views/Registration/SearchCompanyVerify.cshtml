@@ -4,6 +4,9 @@
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 
 }
+<link rel="stylesheet" type="text/css" href="plugins/table/datatable/datatables.css">
+<link rel="stylesheet" type="text/css" href="plugins/table/datatable/dt-global_style.css">
+<link rel="stylesheet" type="text/css" href="plugins/table/datatable/custom_dt_multiple_tables.css">
 <div class="form-group my-4">
     <div class="card-header bg-white">
         <p class="font-weight-bolder lead">Search Company Verify</p>
@@ -160,7 +163,7 @@
                 <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                     <div class="d-flex align-items-center justify-content-center h-100" role="group">
                         @*<button class="btn btn-secondary mr-2" id="btnclear" type="button">Clear</button>
-        <button class="btn btn-success" id="btnSearch" type="button">Search</button>*@
+                            <button class="btn btn-success" id="btnSearch" type="button">Search</button>*@
                         <button class="btn-border btn-black mr-2" type="button" id="btnclear">
                             <i class="fa fa-trash-o icon"></i><span>Clear</span>
                         </button>
@@ -176,9 +179,9 @@
                 <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                     <div class="" role="group">
                         @*<button class="btn btn-success float-right" id="btnverifycompany" type="button"
-                                onclick="location.href='@Url.Action("CompanyVerify", "Registration" ,new {id=1 })'">Verify Company</button>*@
+                            onclick="location.href='@Url.Action("CompanyVerify", "Registration" ,new {id=1 })'">Verify Company</button>*@
                         <button class="btn-border btn-green float-right" type="button" id="btnverifycompany"
-                                 onclick="location.href='@Url.Action("CompanyVerify", "Registration" ,new {id=1 })'">
+                                onclick="location.href='@Url.Action("CompanyVerify", "Registration" ,new {id=1 })'">
                             <i class="fa fa-check icon"></i><span>Verify Company</span>
                         </button>
                     </div>
@@ -219,9 +222,9 @@
                             <tbody>
                                 <tr>
                                     <td class="text-center">
-                                
-                                            <input type="radio" class="form-check-input position-static" name="optionsRadios" id="chktype" value="1" checked>
-                                       
+
+                                        <input type="radio" class="form-check-input position-static" name="optionsRadios" id="chktype" value="1" checked>
+
                                     </td>
                                     <td>Waiting</td>
                                     <td>New Sub</td>
@@ -237,9 +240,9 @@
                                 </tr>
                                 <tr>
                                     <td class="text-center">
-                                        
-                                            <input type="radio" class="form-check-input position-static" name="optionsRadios" id="chktype" value="2" checked>
-                                        
+
+                                        <input type="radio" class="form-check-input position-static" name="optionsRadios" id="chktype" value="2" checked>
+
                                     </td>
                                     <td>Approve</td>
                                     <td>Dealer</td>
@@ -326,7 +329,7 @@
             //        dataType: "json",
             //        async: false,
             //        success: function (response) {
-                       
+
 
             //        },
             //        error: function (response) {
