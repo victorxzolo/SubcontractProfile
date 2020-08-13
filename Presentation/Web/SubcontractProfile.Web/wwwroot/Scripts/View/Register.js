@@ -257,7 +257,7 @@
     });
 
     $('#btn_select_location').click(function () {
-        Loading();
+       // Loading();
         var value = tbLocation.rows('.selected').data();
         var lo_id = value[0].location_id;
         $.ajax({
