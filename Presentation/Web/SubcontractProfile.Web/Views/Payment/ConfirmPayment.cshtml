@@ -118,7 +118,7 @@
             </div>
             <div class="btn2 mt-5" style="text-align: center;">
                 <button class="btn btn-dark" onclick="clearSearchpayment()" style="width:120px;color:white;">Clear</button>
-                <button class="btn btn-success" onclick="Searchconfirmpayment();" style="width:120px">Search</button>
+                <button class="btn btn-success" id="btnSearchconfirmpayment" style="width:120px">Search</button>
             </div>
         </div>
         <div class="container">
@@ -422,6 +422,7 @@
     </div>
 
 </div>
+
 @section scripts
 {
 
@@ -438,13 +439,8 @@
 
 
 
-        $(function () {
+        $(document).ready(function () {
 
-            // $('#tbSearchconfirmpayment').DataTable({
-            //     "scrollX": true,
-            //     "searching": false,
-
-            //});
 
             $(".custom-file-input").on("change", function () {
                 var fileName = $(this).val().split("\\").pop();
@@ -475,7 +471,7 @@
                 defaultDate: "today",
 
             });
-
+           
             //$('#payment_date').datepicker({
             //    format: 'dd/mm/yyyy',
             //    daysOfWeekHighlighted: "6,0",
@@ -483,16 +479,14 @@
             //    todayHighlight: true,
             //    clearBtn: true,
             //});
-
-
-
+            $("#btnSearchconfirmpayment").click(function () {
+                Searchconfirmpayment();
+            });
+           
 
 
         });
-
-
         function Searchconfirmpayment() {
-
             const paymentrequestdatefrom = document.querySelector("#paymentrequestdatefrom")._flatpickr;
             const paymentrequestdateto = document.querySelector("#paymentrequestdateto")._flatpickr;
             const paymentdatefrom = document.querySelector("#paymentdatefrom")._flatpickr;
@@ -508,8 +502,8 @@
             var strpaymentdatefrom = Datedatefrom.getFullYear() + "-" + (Datedatefrom.getMonth() + 1) + "-" + Datedatefrom.getDate();
             var strpaymentdateto = Datedateto.getFullYear() + "-" + (Datedateto.getMonth() + 1) + "-" + Datedateto.getDate();
 
-          
-           var tbpayment = $('#tbSearchconfirmpayment').DataTable({
+
+            $('#tbSearchconfirmpayment').DataTable({
                 scrollX: true,
                 ordering: true,
                 select: true,
@@ -533,10 +527,13 @@
 
                     },
                     dataSrc: function (data) {
-                        var val = []
-                        val = paymentstr(data.data);
-                        data.data = val;
-                        return data.data;
+                        if (data.data != null) {
+                            var val = []
+                            val = paymentstr(data.data);
+                            data.data = val;
+                            return data.data;
+                        }
+
                     },
                     dataType: "json",
                     error: function (xhr, status, error) {
@@ -604,12 +601,14 @@
                         first: "|<"
                     }
                 }
-           });
-           
-           
-          
+            });
 
+            
+            $('#tbSearchconfirmpayment').ajax.reload()
+          
         }
+
+      
         function confirmpayment() {
 
 
