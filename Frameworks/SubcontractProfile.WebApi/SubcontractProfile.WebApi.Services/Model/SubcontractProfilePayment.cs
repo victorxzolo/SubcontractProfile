@@ -89,6 +89,15 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Request_no { get; set; }
 
+        [System.ComponentModel.DataAnnotations.StringLength(500)]
+        public string company_name_th { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string tax_id { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(5000)]
+        public string company_address { get; set; }
+
         public System.DateTime? Request_date { get; set; }
  
 
