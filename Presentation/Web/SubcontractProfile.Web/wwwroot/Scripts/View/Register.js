@@ -1546,12 +1546,3 @@ function Validate(formcontrol, custom,customselect,cutomupload) {
 
 
 
-function Loading(x) {
-    //if (x == 0) {
-    //    $("#MyPopupLoading").modal('hide');
-    //}
-    //else {
-    //    $("#MyPopupLoading").modal('show');
-    //   // $("#PopupLoading").data("kendoWindow").center();
-    //}
-}

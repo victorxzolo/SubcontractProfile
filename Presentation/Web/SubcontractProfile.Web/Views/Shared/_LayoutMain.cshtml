@@ -170,7 +170,17 @@
         </div>
     </div>
 
-    
+    <div class="modal fade bd-example-modal-lg" id="MyPopupLoading" data-backdrop="static" data-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" style="width: 48px">
+                <div class="text-center">
+                    <span class="spinner-border text-light" role="status" aria-hidden="true" style="width: 3rem; height: 3rem;"></span>
+                    <span class="text-uppercase font-weight-bolder text-monospace" style="color:white;">Loading...</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <script>
         $(document).ready(function () {
@@ -275,7 +285,20 @@
             //}
         }
 
-     
+        function Loading(x) {
+            if (x == 0) {
+                $("#MyPopupLoading").modal('hide');
+            }
+            else {
+                $("#MyPopupLoading").modal('show');
+            }
+
+             //$('#MyPopupLoading').modal('show');
+            //setTimeout(function () {
+            //    console.log('hejsan');
+            //    $('#MyPopupLoading').modal('hide');
+            //}, 30000);
+        }
     </script>
 
     @RenderSection("Scripts", required: false)
