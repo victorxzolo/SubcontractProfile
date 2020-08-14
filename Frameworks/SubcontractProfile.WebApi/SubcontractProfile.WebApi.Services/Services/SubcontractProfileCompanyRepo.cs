@@ -120,6 +120,9 @@ namespace SubcontractProfile.WebApi.Services
             p.Add("@company_title_en_id", subcontractProfileCompany.CompanyTitleEnId);
             p.Add("@status", subcontractProfileCompany.Status);
             p.Add("@activate_date", subcontractProfileCompany.ActivateDate);
+            p.Add("@user_name", subcontractProfileCompany.User_name);
+            p.Add("@password", subcontractProfileCompany.Password);
+           
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileCompany_Insert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -359,7 +362,7 @@ namespace SubcontractProfile.WebApi.Services
                     row["company_title_en_id"] = new SqlString(curObj.CompanyTitleEnId);
                     row["status"] = new SqlString(curObj.Status);
                     row["activate_date"] = curObj.ActivateDate == null ? SqlDateTime.Null : new SqlDateTime(curObj.ActivateDate.Value);
-
+                   
                     dt.Rows.Add(row);
                 }
 
