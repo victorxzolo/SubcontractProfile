@@ -3792,14 +3792,15 @@ td, th {
 }
 
 
-.bd-example-modal-lg .modal-dialog {
+/*.bd-example-modal-lg .modal-dialog-loading {
     display: table;
     position: relative;
     margin: 0 auto;
     top: calc(50% - 24px);
 }
 
-    .bd-example-modal-lg .modal-dialog .modal-content {
+    .bd-example-modal-lg .modal-dialog-loading .modal-content-loading {
         background-color: transparent;
         border: none;
     }
+*/

@@ -170,9 +170,9 @@
         </div>
     </div>
 
-    <div class="modal fade bd-example-modal-lg" id="MyPopupLoading" data-backdrop="static" data-keyboard="false" tabindex="-1">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content" style="width: 48px">
+    <div class="modal fade bd-example-modal-lg" id="MyPopupLoading" tabindex="-1" >
+        <div class="modal-dialog modal-sm" style=" display: table; position: relative; margin: 0 auto; top: calc(50% - 24px);">
+            <div class="modal-content" style="width: 48px;background-color: transparent;border: none;">
                 <div class="text-center">
                     <span class="spinner-border text-light" role="status" aria-hidden="true" style="width: 3rem; height: 3rem;"></span>
                     <span class="text-uppercase font-weight-bolder text-monospace" style="color:white;">Loading...</span>
@@ -284,21 +284,24 @@
             $("#MessageFeedbackPopUp").modal('show');
             //}
         }
-
         function Loading(x) {
             if (x == 0) {
-                $("#MyPopupLoading").modal('hide');
+                $('#MyPopupLoading').on('shown.bs.modal', function (e) {
+                    $("#MyPopupLoading").modal('hide');
+                })
+                //$("#MyPopupLoading").modal('hide');
             }
             else {
                 $("#MyPopupLoading").modal('show');
             }
 
-             //$('#MyPopupLoading').modal('show');
+            //$('#MyPopupLoading').modal('show');
             //setTimeout(function () {
             //    console.log('hejsan');
             //    $('#MyPopupLoading').modal('hide');
             //}, 30000);
         }
+        
     </script>
 
     @RenderSection("Scripts", required: false)

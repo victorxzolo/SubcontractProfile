@@ -23,6 +23,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="5.0.0" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.4.*" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +38,10 @@
     <ProjectReference Include="..\SubcontractProfile.WebApi.API.DataContracts\SubcontractProfile.WebApi.API.DataContracts.csproj" />
     <ProjectReference Include="..\SubcontractProfile.WebApi.Services\SubcontractProfile.WebApi.Services.csproj" />
     <ProjectReference Include="..\SubcontractProfile.WebApi.IoC.Configuration\SubcontractProfile.WebApi.IoC.Configuration.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>
