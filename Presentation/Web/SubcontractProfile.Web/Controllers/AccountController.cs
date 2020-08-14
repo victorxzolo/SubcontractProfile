@@ -1210,6 +1210,7 @@ namespace SubcontractProfile.Web.Controllers
         {
             bool resultGetFile = true;
             ResponseModel res = new ResponseModel();
+           string strredirecturl = "/Account/Login";
             try
             {
                 if (ModelState.IsValid)
@@ -1300,7 +1301,7 @@ namespace SubcontractProfile.Web.Controllers
                                     {
                                         res.Status = true;
                                         res.Message = "Register Success";
-                                        res.StatusError = "-1";
+                                        res.StatusError = "0";
                                     }
                                     else
                                     {
@@ -1353,7 +1354,7 @@ namespace SubcontractProfile.Web.Controllers
                 throw;
             }
 
-            return Json(new { Response=res });
+            return Json(new { Response=res, redirecturl=strredirecturl });
         }
 
 

@@ -12,202 +12,228 @@
 <div class="row">
     <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">ประเภทที่อยู่</label>
 </div>
-<div id="chkAddressType">
+
+<div class="needs-validation-step2" novalidate>
+    <div id="chkAddressType">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                <div class="form-group row">
+                    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrbranch" value="01" required>
+                            <label class="custom-control-label" for="chkaddrbranch"></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                        <div class="custom-control custom-checkbox">
+
+                            <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrtax" value="06" required>
+                            <label class="custom-control-label" for="chkaddrtax"></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                        <div class="custom-control custom-checkbox">
+
+                            <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrwt" value="04" required>
+                            <label class="custom-control-label" for="chkaddrwt"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                <div class="form-group row">
+                    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                        <div class="custom-control custom-checkbox">
+
+                            <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrdoc" value="02" required>
+                            <label class="custom-control-label" for="chkaddrdoc"></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                        <div class="custom-control custom-checkbox">
+
+                            <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrshipping" value="03" required>
+                            <label class="custom-control-label" for="chkaddrshipping"></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                        <div class="custom-control custom-checkbox">
+
+                            <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrpop" value="05" required>
+                            <label class="custom-control-label" for="chkaddrpop"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="invalid-tooltip">Please choose valid address type.</div>
+        </div>
+        
+    </div>
+
+    @*<div class="row">
+        <div class="form-group">
+            <select class="custom-select" required>
+                <option value="">Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+            <div class="invalid-tooltip">Example invalid custom select feedback</div>
+        </div>
+    </div>*@
+
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
-                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrbranch" value="01">
-                        <label class="custom-control-label" for="chkaddrbranch">
-                           
-                        </label>
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเทศ :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <select class="custom-select inputValidationAddress custom-select-sm" id="ddlcountry" required>
+                        <option value="">Select Country</option>
+                        <option value="THA">Thailand</option>
+                    </select>
+                    <div class="invalid-tooltip">Please choose a valid country.</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">รหัสไปรษณีย์ :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <select class="custom-select inputValidationAddress custom-select-sm" id="ddlzipcode" required>
+                    </select>
+                    <div class="invalid-tooltip">Please choose a valid zip code.</div>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เลขที่ :</label>
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <input type="text" class="form-control inputValidationAddress form-control-sm" id="txthomenumber" required />
+                    <div class="invalid-tooltip">
+                        Please provide a valid house no.
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                    <div class="custom-control custom-checkbox">
-
-                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrtax" value="06">
-                        <label class="custom-control-label" for="chkaddrtax">
-                          
-                        </label>
+                <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">หมู่ที่ :</label>
+                <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                    <input type="text" class="form-control inputValidationAddress form-control-sm" id="txtVillageNo" required />
+                    <div class="invalid-tooltip">
+                        Please provide a valid moo.
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                    <div class="custom-control custom-checkbox">
-
-                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrwt" value="04">
-                        <label class="custom-control-label" for="chkaddrwt">
-                            
-                        </label>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">หมู่บ้าน :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control inputValidationAddress form-control-sm" id="txtvillage" required />
+                    <div class="invalid-tooltip">
+                        Please provide a valid village name.
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
-                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                    <div class="custom-control custom-checkbox">
-
-                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrdoc" value="02">
-                        <label class="custom-control-label" for="chkaddrdoc">
-                           
-                        </label>
-                    </div>
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อาคาร :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txtbuilding" />
                 </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชั้น :</label>
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                    <div class="custom-control custom-checkbox">
-
-                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrshipping" value="03">
-                        <label class="custom-control-label" for="chkaddrshipping">
-                          
-                        </label>
-                    </div>
+                    <input type="text" class="form-control form-control-sm" id="txtfloor" />
                 </div>
+                <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">ห้อง :</label>
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                    <div class="custom-control custom-checkbox">
-
-                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrpop" value="05">
-                        <label class="custom-control-label" for="chkaddrpop">
-                            
-                        </label>
-                    </div>
+                    <input type="text" class="form-control form-control-sm" id="txtroom" />
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-
-
-<div class="row">
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเทศ :</label>
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control inputValidationAddress form-control-sm" id="ddlcountry">
-                    <option>Thailand</option>
-                </select>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ซอย :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txtsoi" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ถนน :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txtroad" />
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">รหัสไปรษณีย์ :</label>
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control inputValidationAddress form-control-sm" id="ddlzipcode">
-                   
-                </select>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ตำบล/แขวง :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <select class="custom-select inputValidationAddress custom-select-sm" id="ddlsubdistrict" required>
+                    </select>
+                    <div class="invalid-tooltip">
+                        Please choose a valid sub district.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อำเภอ/เขต :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <select class="custom-select inputValidationAddress custom-select-sm" id="ddldistrict" required>
+                    </select>
+                    <div class="invalid-tooltip">
+                        Please choose a valid district.
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เลขที่ :</label>
-            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                <input type="text" class="form-control inputValidationAddress form-control-sm" id="txthomenumber" />
-            </div>
-            <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">หมู่ที่ :</label>
-            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                <input type="text" class="form-control inputValidationAddress form-control-sm" id="txtVillageNo" />
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">หมู่บ้าน :</label>
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <input type="text" class="form-control inputValidationAddress form-control-sm" id="txtvillage" />
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">จังหวัด :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <select class="custom-select inputValidationAddress custom-select-sm" id="ddlprovince" required>
+                    </select>
+                    <div class="invalid-tooltip">
+                        Please choose a valid province.
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อาคาร :</label>
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <input type="text" class="form-control form-control-sm" id="txtbuilding" />
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชั้น :</label>
-            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <input type="text" class="form-control form-control-sm" id="txtfloor" />
-            </div>
-            <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">ห้อง :</label>
-            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <input type="text" class="form-control form-control-sm" id="txtroom" />
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ซอย :</label>
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <input type="text" class="form-control form-control-sm" id="txtsoi" />
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ถนน :</label>
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <input type="text" class="form-control form-control-sm" id="txtroad" />
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ตำบล/แขวง :</label>
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control inputValidationAddress form-control-sm" id="ddlsubdistrict">
-                   
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อำเภอ/เขต :</label>
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control inputValidationAddress form-control-sm" id="ddldistrict">
-                  
-                </select>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">จังหวัด :</label>
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control inputValidationAddress form-control-sm" id="ddlprovince">
-                   
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ภาค :</label>
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control inputValidationAddress form-control-sm" id="ddlzone">
-                    <option></option>
-                </select>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ภาค :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <select class="custom-select inputValidationAddress custom-select-sm" id="ddlzone" required>
+                        <option></option>
+                    </select>
+                    <div class="invalid-tooltip">
+                        Please choose a valid region.
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -216,11 +242,13 @@
     <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
         <div class="d-flex align-items-center justify-content-center h-100" role="group">
             @*<button class="btn btn-secondary mr-2" id="rbtnresetlocationmodal" type="button">รีเช็ต</button>
-        <button class="btn btn-secondary" id="btnsearchlocationmodal" type="button">เพิ่มที่อยู่</button>*@
+                <button class="btn btn-secondary" id="btnsearchlocationmodal" type="button">เพิ่มที่อยู่</button>*@
             <button class="btn-border btn-black mr-2" id="btnresetaddress" type="button">
-            <i class="fa fa-refresh icon"></i><span>รีเช็ต</span></button>
+                <i class="fa fa-refresh icon"></i><span>รีเช็ต</span>
+            </button>
             <button class="btn-border btn-green" id="btnaddaddress" type="button">
-            <i class="fa fa-plus-circle icon"></i><span>เพิ่มที่อยู่</span></button>
+                <i class="fa fa-plus-circle icon"></i><span>เพิ่มที่อยู่</span>
+            </button>
         </div>
 
     </div>
@@ -230,60 +258,60 @@
 <div class="row">
     @*<div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>*@
     @*<div class="col-md-10 col-sm-10 col-xl-10 col-lg-10">*@
-        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-            <div class="table-responsive pt-3">
-                <table class="table table-bordered table-hover" id="tbaddressstep2" width="100%">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col">ประเภทที่อยู่</th>
-                            <th scope="col">ที่อยู่</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
+    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <div class="table-responsive pt-3">
+            <table class="table table-bordered table-hover" id="tbaddressstep2" width="100%">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">ประเภทที่อยู่</th>
+                        <th scope="col">ที่อยู่</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
 
+                    </tr>
+                </thead>
+                <tbody>
+                    @*<tr>
+                            <td>ที่อยู่ตามใบกำกับภาษี</td>
+                            <td>34/203 หมู่บ้านภัสสร ต.คลองสาม อ.คลองหวงง จ.ปทุมธานี 12120</td>
+                            <td><button class="btn-border btn-green"><i class="fa fa-edit icon"></i><span>แก้ไข</span></button></td>
+                            <td><button class="btn-border btn-black"><i class="fa fa-trash icon"></i><span>ลบ</span></button></td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @*<tr>
-                                <td>ที่อยู่ตามใบกำกับภาษี</td>
-                                <td>34/203 หมู่บ้านภัสสร ต.คลองสาม อ.คลองหวงง จ.ปทุมธานี 12120</td>
-                                <td><button class="btn-border btn-green"><i class="fa fa-edit icon"></i><span>แก้ไข</span></button></td>
-                                <td><button class="btn-border btn-black"><i class="fa fa-trash icon"></i><span>ลบ</span></button></td>
-                            </tr>
-                            <tr>
-                                <td>ที่อยู่จัดส่งเอกสาร</td>
-                                <td>34/203 หมู่บ้านภัสสร ต.คลองสาม อ.คลองหวงง จ.ปทุมธานี 12120</td>
-                                <td><button class="btn-border btn-green"><i class="fa fa-edit icon"></i><span>แก้ไข</span></button></td>
-                                <td><button class="btn-border btn-black"><i class="fa fa-trash icon"></i><span>ลบ</span></button></td>
-                            </tr>*@
-                    </tbody>
-                </table>
-            </div>
+                        <tr>
+                            <td>ที่อยู่จัดส่งเอกสาร</td>
+                            <td>34/203 หมู่บ้านภัสสร ต.คลองสาม อ.คลองหวงง จ.ปทุมธานี 12120</td>
+                            <td><button class="btn-border btn-green"><i class="fa fa-edit icon"></i><span>แก้ไข</span></button></td>
+                            <td><button class="btn-border btn-black"><i class="fa fa-trash icon"></i><span>ลบ</span></button></td>
+                        </tr>*@
+                </tbody>
+            </table>
         </div>
-        @*<div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>*@
     </div>
-    @*<div class="row">
-            <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
-            <div class="col-md-10 col-sm-10 col-xl-10 col-lg-10">
-                <nav aria-label="...">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <span class="page-link">Previous</span>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active">
-                            <span class="page-link">
-                                2
-                                <span class="sr-only">(current)</span>
-                            </span>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+    @*<div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>*@
+</div>
+@*<div class="row">
+        <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+        <div class="col-md-10 col-sm-10 col-xl-10 col-lg-10">
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <span class="page-link">Previous</span>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item active">
+                        <span class="page-link">
+                            2
+                            <span class="sr-only">(current)</span>
+                        </span>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
-        </div>*@
+    </div>*@

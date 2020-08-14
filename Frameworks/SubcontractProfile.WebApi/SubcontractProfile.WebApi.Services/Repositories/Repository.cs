@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Dapper;
 using Microsoft.Extensions.Configuration;
+using SubcontractProfile.WebApi.Services.Contracts;
 
 /// =================================================================
 /// Author: AIS Fibre
@@ -50,6 +51,8 @@ namespace Repository
         SubcontractProfile.WebApi.Services.Contracts.ISubcontractProfileVerhicleSeriseRepo SubcontractProfileVerhicleSeriseRepo { get; }
         SubcontractProfile.WebApi.Services.Contracts.ISubcontractProfileVerhicleTypeRepo SubcontractProfileVerhicleTypeRepo { get; }
         SubcontractProfile.WebApi.Services.Contracts.ISubcontractProfileWarrantyRepo SubcontractProfileWarrantyRepo { get; }
+
+        SubcontractProfile.WebApi.Services.Contracts.ISubcontractDropdownRepo SubcontractDropdownRepo { get; }
 
     }
 
@@ -350,6 +353,16 @@ namespace Repository
             }
         }
 
+        protected SubcontractProfile.WebApi.Services.Contracts.ISubcontractDropdownRepo _subcontractDropdownRepo;
+        public SubcontractProfile.WebApi.Services.Contracts.ISubcontractDropdownRepo SubcontractDropdownRepo
+        {
+            get
+            {
+                if (_subcontractDropdownRepo == null)
+                    _subcontractDropdownRepo = new SubcontractProfile.WebApi.Services.Services.SubcontractDropdownRepo(this);
+                return _subcontractDropdownRepo;
+            }
+        }
 
 
         /// <summary>

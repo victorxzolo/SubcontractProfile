@@ -42,7 +42,9 @@ namespace SubcontractProfile.WebApi.IoC.Configuration.DI
 
                 services.AddScoped<ISubcontractProfileRegionRepo, SubcontractProfileRegionRepo>();
                 services.AddScoped<ISubcontractProfileCompanyTypeRepo, SubcontractProfileCompanyTypeRepo>();
-                
+
+                services.AddScoped<ISubcontractDropdownRepo, SubcontractDropdownRepo>();
+
             }
 
         }
