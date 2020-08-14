@@ -37,7 +37,7 @@ namespace SubcontractProfile.Web.Controllers
         [HttpGet]
         public IActionResult GetDataselect()
         {
-            var data = new List<SubcontractProfilePayment>();
+            var data = new List<SubcontractProfilePaymentModel>();
 
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -46,7 +46,7 @@ namespace SubcontractProfile.Web.Controllers
             if (response.IsSuccessStatusCode)
             {
                 var dataresponse = response.Content.ReadAsStringAsync().Result;
-                data = JsonConvert.DeserializeObject<List<SubcontractProfilePayment>>(dataresponse);
+                data = JsonConvert.DeserializeObject<List<SubcontractProfilePaymentModel>>(dataresponse);
             }
 
             return Json(new { Data = data });
@@ -54,7 +54,7 @@ namespace SubcontractProfile.Web.Controllers
         [HttpGet]
         public IActionResult Searchconfirmpayment(SubcontractProfileSearchPayment searchPayment)
         {
-            var datapayment = new List<SubcontractProfilePayment>();
+            var datapayment = new List<SubcontractProfilePaymentModel>();
             try
             {
                 searchPayment.Paymentno = (string.IsNullOrEmpty(searchPayment.Paymentno)) ? "null" : searchPayment.Paymentno;
@@ -73,7 +73,7 @@ namespace SubcontractProfile.Web.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var dataresponse = response.Content.ReadAsStringAsync().Result;
-                    datapayment = JsonConvert.DeserializeObject<List<SubcontractProfilePayment>>(dataresponse);
+                    datapayment = JsonConvert.DeserializeObject<List<SubcontractProfilePaymentModel>>(dataresponse);
                     
                 }
                 return Json(new { data = datapayment });
@@ -87,20 +87,35 @@ namespace SubcontractProfile.Web.Controllers
         [HttpGet]
         public IActionResult GetByPaymentId(string id)
         {
-            var data = new SubcontractProfilePayment();
+            var data = new SubcontractProfilePaymentModel();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             string uriString = string.Format("{0}/{1}", strpathAPI + "Payment/GetByPaymentId",id);
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
                 var dataresponse = response.Content.ReadAsStringAsync().Result;
-                data = JsonConvert.DeserializeObject<SubcontractProfilePayment>(dataresponse);
+                data = JsonConvert.DeserializeObject<SubcontractProfilePaymentModel>(dataresponse);
+            }
+            return Json(new { Data = data });
+
+        }
+        [HttpGet]
+        public IActionResult paymentchannal()
+        {
+            var data = new List<SubcontractProfileBankingModel>();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string uriString = string.Format("{0}", strpathAPI + "Banking/GetAll");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var dataresponse = response.Content.ReadAsStringAsync().Result;
+                data = JsonConvert.DeserializeObject<List<SubcontractProfileBankingModel>>(dataresponse);
             }
             return Json(new { Data = data });
 
         }
         [HttpPost]
-        public IActionResult Inserpayment(SubcontractProfilePayment Payment)
+        public IActionResult Updatepayment(SubcontractProfilePaymentModel Payment)
         {            
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));            
             string uriString = string.Format("{0}", strpathAPI + "Payment/Insert");
