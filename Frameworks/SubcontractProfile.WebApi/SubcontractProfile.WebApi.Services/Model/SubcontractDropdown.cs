@@ -4,9 +4,7 @@ using System.Text;
 
 namespace SubcontractProfile.WebApi.Services.Model
 {
-    public class SubcontractDropdown
-    {
-
+  
         /// =================================================================
         /// Author: AIS Fibre
         /// Description: PK class for the table [dbo].[SubcontractDropdown] 
@@ -16,7 +14,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         public class SubcontractDropdown_PK
         {
 
-            public System.Guid id { get; set; }
+            public int? id { get; set; }
 
         }
         /// =================================================================
@@ -24,10 +22,10 @@ namespace SubcontractProfile.WebApi.Services.Model
         /// Description: Entity class for the table [dbo].[SubcontractDropdown] 
         /// =================================================================
 
-        public class SubcontractProfileAddress : System.ICloneable
+        public class SubcontractDropdown : System.ICloneable
         {
 
-            public System.Guid id { get; set; }
+            public int? id { get; set; }
 
             [System.ComponentModel.DataAnnotations.StringLength(100)]
             public string dropdown_name { get; set; }
@@ -56,4 +54,4 @@ namespace SubcontractProfile.WebApi.Services.Model
 
         }
     }
-}
+
