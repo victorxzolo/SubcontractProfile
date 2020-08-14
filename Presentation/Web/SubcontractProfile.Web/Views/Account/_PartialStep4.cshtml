@@ -1,135 +1,149 @@
 ﻿
-<div class="row my-3">
-    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-        <p class="font-weight-bolder lead">
-            ข้อมูล บัญชีธนาคาร
-        </p>
-        <hr />
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อธนาคาร :</label>
-            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <input type="text" class="form-control inputValidationBank form-control-sm" id="txtbank_Code" placeholder="รหัสธนาคาร" disabled />
-            </div>
-            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                <select class="form-control inputValidationBank form-control-sm" id="ddlBankname">
-                </select>
+
+    <div class="needs-validation-step4" novalidate>
+
+
+        <div class="row my-3">
+            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                <p class="font-weight-bolder lead">
+                    ข้อมูล บัญชีธนาคาร
+                </p>
+                <hr />
             </div>
         </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อสาขา :</label>
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <input type="text" class="form-control inputValidationBank form-control-sm" id="txtbranch_Name" placeholder="ชื่อสาขา" />
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อธนาคาร :</label>
+                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                        <input type="text" class="form-control inputValidationBank form-control-sm" id="txtbank_Code" placeholder="รหัสธนาคาร" disabled />
+                    </div>
+                    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <select class="custom-select inputValidationBank custom-select-sm" id="ddlBankname" required>
+                        </select>
+                        <div class="invalid-tooltip">Please choose a bank name.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อสาขา :</label>
+                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                        <input type="text" class="form-control inputValidationBank form-control-sm" id="txtbranch_Name" placeholder="ชื่อสาขา" required />
+                        <div class="invalid-tooltip">Please provide a branch name.</div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเภทบัญชี :</label>
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control inputValidationBank form-control-sm" id="ddlbank_account_type">
-                    <option>ออมทรัพย์</option>
-                </select>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเภทบัญชี :</label>
+                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                        <select class="custom-select inputValidationBank custom-select-sm" id="ddlbank_account_type" required>
+                            <option>ออมทรัพย์</option>
+                        </select>
+                        <div class="invalid-tooltip">Please choose a bank account type.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เลขที่บัญชี :</label>
+                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                        <input type="text" class="form-control inputValidationBank form-control-sm" id="txtaccount_Number" required />
+                        <div class="invalid-tooltip">Please provide a account id.</div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เลขที่บัญชี :</label>
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <input type="text" class="form-control inputValidationBank form-control-sm" id="txtaccount_Number" />
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อบัญชี :</label>
+                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                        <select class="custom-select inputValidationBank custom-select-sm" id="ddlaccount_Name">
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <input type="text" class="form-control inputValidationBank form-control-sm" id="txtaccount_Name" required />
+                        <div class="invalid-tooltip">Please provide a account name.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเภทธุรกิจ :</label>
+                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                        <select class="custom-select custom-select-sm" id="ddlbusiness_type">
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อบัญชี :</label>
-            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <select class="form-control inputValidationBank form-control-sm" id="ddlaccount_Name">
-                    <option></option>
-                </select>
-            </div>
-            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                <input type="text" class="form-control inputValidationBank form-control-sm" id="txtaccount_Name" />
+        <div class="row my-3">
+            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                <p class="font-weight-bolder lead">
+                    ข้อมูล เอกสารบริษัท
+                </p>
+                <hr />
             </div>
         </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเภทธุรกิจ :</label>
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control form-control-sm" id="ddlbusiness_type">
-                    <option></option>
-                </select>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                <div class="form-group row">
+                    <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือรับรองบริษัท :</label>
+
+                    <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
+                        <input type="hidden" id="hdupfilecompany_certified" />
+                        <input type="file" class="custom-file-input inputValidationBank" id="company_certified_file" required />
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                        <div class="invalid-tooltip">Please upload a company certified file.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                <div class="form-group row">
+                    <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือทะเบียนพานิช :</label>
+                    @*<input type="file" name="img[]" class="file-upload-default">
+                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
+                        <input type="text" class="form-control file-upload-info form-control-sm" disabled>
+                        <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
+                        </span>
+                    </div>*@
+
+                    <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
+                        <input type="hidden" id="hdupfilecommercial_registration" />
+                        <input type="file" class="custom-file-input inputValidationBank" id="commercial_registration_file" required />
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                        <div class="invalid-tooltip">Please upload a commercial registration file.</div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="row my-3">
-    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-        <p class="font-weight-bolder lead">
-            ข้อมูล เอกสารบริษัท
-        </p>
-        <hr />
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือรับรองบริษัท :</label>
-            
-            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
-                <input type="hidden" id="hdupfilecompany_certified" />
-                <input type="file" class="custom-file-input" id="company_certified_file">
-                <label class="custom-file-label" for="customFile">Choose file</label>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                <div class="form-group row">
+                    <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือ ภ.พ. 20 :</label>
+                    @*<input type="file" name="img[]" class="file-upload-default">
+                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
+                        <input type="text" class="form-control file-upload-info form-control-sm" disabled>
+                        <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
+                        </span>
+                    </div>*@
+
+                    <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
+                        <input type="hidden" id="hdupfilevat_registration_certificate" />
+                        <input type="file" class="custom-file-input inputValidationBank" id="vat_registration_certificate_file" required />
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                        <div class="invalid-tooltip">Please upload a vat registration certificate file.</div>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือทะเบียนพานิช :</label>
-            @*<input type="file" name="img[]" class="file-upload-default">
-        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
-            <input type="text" class="form-control file-upload-info form-control-sm" disabled>
-            <span class="input-group-append">
-                <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
-            </span>
-        </div>*@
-           
-        <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
-            <input type="hidden" id="hdupfilecommercial_registration" />
-            <input type="file" class="custom-file-input" id="commercial_registration_file">
-            <label class="custom-file-label" for="customFile">Choose file</label>
-        </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือ ภ.พ. 20 :</label>
-            @*<input type="file" name="img[]" class="file-upload-default">
-        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
-            <input type="text" class="form-control file-upload-info form-control-sm" disabled>
-            <span class="input-group-append">
-                <button class="file-upload-browse btn btn-secondary btn-sm" type="button">Browse</button>
-            </span>
-        </div>*@
-            
-        <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
-            <input type="hidden" id="hdupfilevat_registration_certificate" />
-            <input type="file" class="custom-file-input" id="vat_registration_certificate_file">
-            <label class="custom-file-label" for="customFile">Choose file</label>
-        </div>
-        </div>
-    </div>
-</div>
