@@ -24,16 +24,14 @@
                         event.stopPropagation();
                     }
                     else {
-                        var model = {
+                        var modelpass = {
                             username: $('#txtusername').val(),
                             password: $('#txtpassword').val()
                         }
                         $.ajax({
                             type: "POST",
                             url: "/Account/Login",
-                            data: {
-                                model: JSON.stringify(model)
-                            },
+                            data: {model: modelpass},
                             dataType: "json",
                             async: false,
                             success: function (data) {

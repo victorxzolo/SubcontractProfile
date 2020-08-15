@@ -180,6 +180,7 @@
         //pageLength: 10,
         proccessing: true,
         serverSide: true,
+        dom: 'rt<"float-left"p><"float-left"l><"float-right"i>',
         ajax: {
             type: "POST",
             url: "/Account/SearchLocation",
@@ -228,6 +229,60 @@
         }
     });
 
+    var tbRevenue = $('#tbrevenueModal').DataTable({
+        ordering: true,
+        select: true,
+        retrieve: true,
+        paging: true,
+        pagingType: "full_numbers",
+        destroy: true,
+        searching: false,
+        //pageLength: 10,
+        proccessing: true,
+        serverSide: true,
+        dom: 'rt<"float-left"p><"float-left"l><"float-right"i>',
+        ajax: {
+            type: "POST",
+            url: "/Account/GetRevenue",
+            data: {
+                tIN: function () { return $('#txtsearchrevenue').val() }
+            },
+            dataType: "json",
+            error: function (xhr, status, error) {
+                Loading(0);
+                //clearForEdit();
+                console.log(status);
+                showFeedback("error", xhr.responseText, "System Information",
+                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            }
+
+        },
+        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        //lengthChange: false,
+        columns: [
+         
+            { "data": "vNID" },
+            { "data": "vName" },
+            { "data": "vBranchName" },
+            { "data": "outConcataddr" },
+            { "data": "vtitleName", "visible": false}
+           
+        ],
+        language: {
+            infoEmpty: "No items to display",
+            lengthMenu: "_MENU_ items per page",
+            zeroRecords: "Nothing found",
+            info: "_START_ - _END_  of _TOTAL_  items",
+            infoFiltered: "",
+            paginate: {
+                previous: "<",
+                next: ">",
+                last: ">|",
+                first: "|<"
+            }
+        }
+    });
+
     $('#btnsearchlocation').click(function () {
         $('#Searchlocation').modal('show');
         $('#txtlocationcodemodal').val($('#txtlocationcode').val());
@@ -257,7 +312,7 @@
     });
 
     $('#btn_select_location').click(function () {
-       // Loading();
+      Loading();
         var value = tbLocation.rows('.selected').data();
         var lo_id = value[0].location_id;
         $.ajax({
@@ -380,6 +435,46 @@
         } else
             $('#message').html('Not Matching').css('color', 'red');
     });
+
+    $('#btnsearchrevenue').click(function () {
+        $('#SearchRevenue').modal('show');
+        $('#txtsearchrevenue').val($('#txttax_id').val());
+        $("#btn_search_revenue_modal").trigger("click");
+    });
+    $('#btn_reset_revenue_modal').click(function () {
+        ClearDataModalRevenue()
+    });
+    $('#btn_search_revenue_modal').click(function () {
+        tbRevenue.ajax.reload();
+    });
+    $('#tbrevenueModal tbody').on('click', 'tr', function () {
+        // $(this).toggleClass('selected');
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        }
+        else {
+            tbLocation.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
+    $('#btn_select_revenue').click(function () {
+        var value = tbRevenue.rows('.selected').data();
+        var titlename = value[0].vtitleName;
+        var companyname = value[0].vName;
+
+        $('#txtcompany_name_th').val(companyname);
+        if ($('#ddlprefixcompany_name_th option:selected').text() == titlename) {
+            $('#ddlprefixcompany_name_th').text(titlename).change();
+        } 
+        ClearDataModalRevenue();
+        $('#SearchRevenue').modal('hide');
+    });
+
+
+    function ClearDataModalRevenue() {
+        $('#txtsearchrevenue').val('');
+        tbRevenue.ajax.reload();
+    }
 
     function BindDatatable(table, datamodel) {
         //console.log("BindDatatable");
@@ -904,6 +999,8 @@
         var company_name_en = null;
         var wt_name = null;
         var vat_type = null;
+        var username = null;
+        var password = null;
 
 
 
@@ -918,7 +1015,9 @@
             company_title_name_en = $('#ddlprefixcompany_name_en option').filter(':selected').val();
             company_name_en = $('#txtcompany_name_en').val();
             wt_name = $('#txtwt_name').val();
-            vat_type= $('#chkvat_typeT').is(':checked') ? $('#chkvat_typeT').val() : $('#chkvat_typeE').val();
+            vat_type = $('#chkvat_typeT').is(':checked') ? $('#chkvat_typeT').val() : $('#chkvat_typeE').val();
+            username = $('#txtcreateuser').val();
+            password = $('#txtconfirmpass').val();
         }
         else if ($("#chktypeD").is(":checked")) {
             chksubcontract_type = $("#chktypeD").val();
@@ -995,6 +1094,8 @@
             SubcontractProfileType: chksubcontract_type,
             CompanyTitleThId: company_title_name_th,
             CompanyTitleEnId: company_title_name_en,
+            User_name: username,
+            Password: password,
             //Status
             
             //subcontract_profile_type: chksubcontract_type,
@@ -1192,14 +1293,14 @@
 });
 
 function BindDDLprovince(regionid) {
-    Loading();
+  
     $.ajax({
         type: "POST",
         url: "/Account/DDLsubcontract_profile_province",
         data: { region_id: regionid },
         dataType: "json",
         success: function (data) {
-            Loading(0);
+           
             if (data != null) {
                 $('#ddlprovince').empty();
                 $.each(data.responseprovince, function () {
@@ -1210,7 +1311,7 @@ function BindDDLprovince(regionid) {
 
         },
         error: function (xhr, status, error) {
-            Loading(0);
+           
             //clearForEdit();
             console.log(status);
             showFeedback("error", xhr.responseText, "System Information",
@@ -1220,14 +1321,14 @@ function BindDDLprovince(regionid) {
 }
 
 function BindDDLdistrict(province) {
-   Loading();
+
     $.ajax({
         type: "POST",
         url: "/Account/DDLsubcontract_profile_district",
         data: { province_id: province },
         dataType: "json",
         success: function (data) {
-            Loading(0);
+            
             if (data != null) {
                 $('#ddldistrict').empty();
 
@@ -1239,7 +1340,7 @@ function BindDDLdistrict(province) {
 
         },
         error: function (xhr, status, error) {
-            Loading(0);
+         
             //clearForEdit();
             console.log(status);
             showFeedback("error", xhr.responseText, "System Information",
@@ -1249,14 +1350,14 @@ function BindDDLdistrict(province) {
 }
 
 function BindDDLsubdistrict(district) {
-    Loading();
+    
     $.ajax({
         type: "POST",
         url: "/Account/DDLsubcontract_profile_sub_district",
         data: { district_id: district},
         dataType: "json",
         success: function (data) {
-            Loading(0);
+           
             if (data != null) {
                 $('#ddlsubdistrict').empty();
                 $('#ddlzipcode').empty();
@@ -1276,7 +1377,7 @@ function BindDDLsubdistrict(district) {
 
         },
         error: function (xhr, status, error) {
-            Loading(0);
+           
             //clearForEdit();
             console.log(status);
             showFeedback("error", xhr.responseText, "System Information",
@@ -1286,13 +1387,13 @@ function BindDDLsubdistrict(district) {
 }
 
 function BindDDLTitle() {
-    Loading();
+   
     $.ajax({
         type: "POST",
         url: "/Account/",
         dataType: "json",
         success: function (data) {
-            Loading(0);
+         
             if (data != null) {
 
                 $('#ddlprefixcompany_name_th').empty();
@@ -1319,7 +1420,7 @@ function BindDDLTitle() {
 
         },
         error: function (xhr, status, error) {
-            Loading(0);
+          
             //clearForEdit();
             console.log(status);
             showFeedback("error", xhr.responseText, "System Information",
@@ -1329,14 +1430,14 @@ function BindDDLTitle() {
 }
 
 function BindRegion() {
-   Loading();
+  
     $.ajax({
         type: "POST",
         url: "/Account/DDLsubcontract_profile_Region",
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
-            Loading(0);
+           
             if (data != null) {
                 $('#ddlzone').empty();
 
@@ -1348,7 +1449,7 @@ function BindRegion() {
 
         },
         error: function (xhr, status, error) {
-            Loading(0);
+          
             //clearForEdit();
             console.log(status);
             showFeedback("error", xhr.responseText, "System Information",
@@ -1358,14 +1459,14 @@ function BindRegion() {
 }
 
 function BindDDLBank() {
-   Loading();
+
     $.ajax({
         type: "POST",
         url: "/Account/DDLBank",
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
-            Loading(0);
+        
             if (data != null) {
                 $('#ddlBankname').empty();
 
@@ -1377,7 +1478,7 @@ function BindDDLBank() {
 
         },
         error: function (xhr, status, error) {
-            Loading(0);
+          
             //clearForEdit();
             console.log(status);
             showFeedback("error", xhr.responseText, "System Information",
@@ -1387,14 +1488,14 @@ function BindDDLBank() {
 }
 
 function BindDDLCompanyType() {
-    Loading();
+   
     $.ajax({
         type: "POST",
         url: "/Account/DDLCompanyType",
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
-            Loading(0);
+          
             if (data != null) {
                 $('#ddlbusiness_type').empty();
 
@@ -1406,7 +1507,7 @@ function BindDDLCompanyType() {
 
         },
         error: function (xhr, status, error) {
-            Loading(0);
+         
             //clearForEdit();
             console.log(status);
             showFeedback("error", xhr.responseText, "System Information",
@@ -1416,14 +1517,14 @@ function BindDDLCompanyType() {
 }
 
 function BindAddressType() {
-    Loading();
+  
     $.ajax({
         type: "POST",
         url: "/Account/GetAddressType",
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
-            Loading(0);
+         
 
             if (data != null) {
                 $.each(data.responseaddresstype, function () {
@@ -1444,7 +1545,7 @@ function BindAddressType() {
 
         },
         error: function (xhr, status, error) {
-            Loading(0);
+         
             //clearForEdit();
             console.log(status);
             showFeedback("error", xhr.responseText, "System Information",
