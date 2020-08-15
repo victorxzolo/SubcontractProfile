@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-
+using Newtonsoft.Json.Serialization;
 using System;
 
 
@@ -42,13 +42,15 @@ namespace SubcontractProfile.Web
             services.AddRazorPages();
             // Add framework services.
             services.AddMvc()
-                    .AddControllersAsServices();  // <---- Super important
-          //  services.AddTransient<IDbContext, SubContractProfile.Infrastructure.DbContext>();
+                    .AddControllersAsServices();
 
-            //BusinessLayer
-           // services.AddScoped<ISubcontractProfileCompanyBLL, SubcontractProfileCompanyBLL>();
-            //services.AddScoped<ISubcontractProfileCompanyRepo, SubcontractProfileCompanyBLL>();
-            //services.AddScoped<ISubcontractProfileCompanyRepo, SubcontractProfileCompanyRepo>();
+            // Pascal casing
+            services.AddControllersWithViews().
+            AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
+            });
 
         }
 
