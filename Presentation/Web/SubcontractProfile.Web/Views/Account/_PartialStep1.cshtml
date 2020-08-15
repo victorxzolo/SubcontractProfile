@@ -95,7 +95,7 @@
                         <input type="text" class="form-control inputValidation form-control-sm" id="txttax_id"
                                placeholder="เลขทะเบียนนิติบุคคล" aria-label="เลขทะเบียนนิติบุคคล" maxlength="100" required>
                         <div class="input-group-append">
-                            <button class="btn btn-sm btn-secondary" type="button" id="btnsearchevenue"><i class="fa fa-search"></i></button>
+                            <button class="btn btn-sm btn-secondary" type="button" id="btnsearchrevenue"><i class="fa fa-search"></i></button>
                         </div>
                         <div class="invalid-tooltip">
                             Please provide a valid juristic id.
@@ -599,15 +599,16 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                             <div class="table-responsive pt-3">
-                                <table class="table table-bordered table-hover" id="tbrevenueModal">
+                                <table class="table table-bordered table-hover" id="tbrevenueModal" style="width:100%;">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th></th>
+                                            @*<th></th>*@
                                             <th>เลขผู้เสียภาษี</th>
                                             <th>ชื่อบริษัท</th>
                                             <th>สาขา</th>
                                             <th>ที่อยู่</th>
-                                            <th>ตัวเลือก</th>
+                                            <th></th>
+                                            @*<th>ตัวเลือก</th>*@
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -630,7 +631,7 @@
                 <button type="button" class="btn-border btn-orange" data-dismiss="modal">
                     <i class="fa fa-times icon"></i><span>ปิด</span>
                 </button>
-                <button type="button" class="btn-border btn-green" id="btn_select_location">
+                <button type="button" class="btn-border btn-green" id="btn_select_revenue">
                     <i class="fa fa-check icon"></i><span>ตกลง</span>
                 </button>
 

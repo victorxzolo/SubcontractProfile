@@ -180,6 +180,7 @@
         //pageLength: 10,
         proccessing: true,
         serverSide: true,
+        dom: 'rt<"float-left"p><"float-left"l><"float-right"i>',
         ajax: {
             type: "POST",
             url: "/Account/SearchLocation",
@@ -212,6 +213,60 @@
             { "data": "outDistChn" },
             { "data": "outChnSales" },
             { "data": "location_id", "visible": false }
+        ],
+        language: {
+            infoEmpty: "No items to display",
+            lengthMenu: "_MENU_ items per page",
+            zeroRecords: "Nothing found",
+            info: "_START_ - _END_  of _TOTAL_  items",
+            infoFiltered: "",
+            paginate: {
+                previous: "<",
+                next: ">",
+                last: ">|",
+                first: "|<"
+            }
+        }
+    });
+
+    var tbRevenue = $('#tbrevenueModal').DataTable({
+        ordering: true,
+        select: true,
+        retrieve: true,
+        paging: true,
+        pagingType: "full_numbers",
+        destroy: true,
+        searching: false,
+        //pageLength: 10,
+        proccessing: true,
+        serverSide: true,
+        dom: 'rt<"float-left"p><"float-left"l><"float-right"i>',
+        ajax: {
+            type: "POST",
+            url: "/Account/GetRevenue",
+            data: {
+                tIN: function () { return $('#txtsearchrevenue').val() }
+            },
+            dataType: "json",
+            error: function (xhr, status, error) {
+                Loading(0);
+                //clearForEdit();
+                console.log(status);
+                showFeedback("error", xhr.responseText, "System Information",
+                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            }
+
+        },
+        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        //lengthChange: false,
+        columns: [
+         
+            { "data": "vNID" },
+            { "data": "vName" },
+            { "data": "vBranchName" },
+            { "data": "outConcataddr" },
+            { "data": "vtitleName", "visible": false}
+           
         ],
         language: {
             infoEmpty: "No items to display",
@@ -381,12 +436,45 @@
             $('#message').html('Not Matching').css('color', 'red');
     });
 
-    $('#btnsearchevenue').click(function () {
+    $('#btnsearchrevenue').click(function () {
         $('#SearchRevenue').modal('show');
+        $('#txtsearchrevenue').val($('#txttax_id').val());
+        $("#btn_search_revenue_modal").trigger("click");
     });
     $('#btn_reset_revenue_modal').click(function () {
-        $('#txtsearchrevenue').val('');
+        ClearDataModalRevenue()
     });
+    $('#btn_search_revenue_modal').click(function () {
+        tbRevenue.ajax.reload();
+    });
+    $('#tbrevenueModal tbody').on('click', 'tr', function () {
+        // $(this).toggleClass('selected');
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        }
+        else {
+            tbLocation.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
+    $('#btn_select_revenue').click(function () {
+        var value = tbRevenue.rows('.selected').data();
+        var titlename = value[0].vtitleName;
+        var companyname = value[0].vName;
+
+        $('#txtcompany_name_th').val(companyname);
+        if ($('#ddlprefixcompany_name_th option:selected').text() == titlename) {
+            $('#ddlprefixcompany_name_th').text(titlename).change();
+        } 
+        ClearDataModalRevenue();
+        $('#SearchRevenue').modal('hide');
+    });
+
+
+    function ClearDataModalRevenue() {
+        $('#txtsearchrevenue').val('');
+        tbRevenue.ajax.reload();
+    }
 
     function BindDatatable(table, datamodel) {
         //console.log("BindDatatable");

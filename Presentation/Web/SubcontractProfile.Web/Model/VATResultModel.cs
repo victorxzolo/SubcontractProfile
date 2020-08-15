@@ -1,11 +1,27 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.WebUtilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace SubcontractProfile.Web.Model
 {
-    public class VATModel
+    public class VATResultModel
+    {
+        public VATResultModel()
+        {
+            Title = "";
+            Message = "";
+            StatusCode = "400";
+            Value = null;
+        }
+        public string Title { get; set; }
+        public string Message { get; set; }
+        public string StatusCode { get; set; }
+        public VATModal Value { get; set; }
+    }
+    public class VATModal
     {
         public string vNID { get; set; }
         public string vtin { get; set; }
@@ -29,5 +45,17 @@ namespace SubcontractProfile.Web.Model
         public string vPostCode { get; set; }
         public string vBusinessFirstDate { get; set; }
         public string vmsgerr { get; set; }
+        public string outConcataddr { get; set; }
     }
+
+    public class SearchVATModel: DataTableAjaxModel
+    {
+        public string tIN { get; set; }
+        public int page_index { get; set; }
+        public int page_size { get; set; }
+
+        public string sort_col { get; set; }
+        public string sort_dir { get; set; }
+    }
+
 }
