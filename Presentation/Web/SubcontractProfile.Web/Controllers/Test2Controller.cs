@@ -10,9 +10,15 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
+using System.Text;
+using System.Collections.Immutable;
+using DataTables.AspNetCore.Mvc;
+using SubcontractProfile.Web.Extension;
+using DataTables.AspNetCore.Mvc.Binder;
 
 namespace SubcontractProfile.Web.Controllers
 {
+
 
     public class Test2Controller : Controller
     {
@@ -29,6 +35,15 @@ namespace SubcontractProfile.Web.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult SaveComments(int id, string comments)
+        {
+            //var actions = new Actions(User.Identity.Name);
+            var status = comments;
+            return Content(status);
+        }
+
+
         public IActionResult Login()
         {
             // this.Session.SetString("TransId", "x001");
@@ -40,13 +55,32 @@ namespace SubcontractProfile.Web.Controllers
 
             return View();
         }
+        [HttpPost]
+        public JsonResult searchCompany(string asc_code)
+        {
+            var companyname_th = asc_code;
+            return Json(companyname_th);
+        }
 
-        public IActionResult LoadData()
+        //[HttpPost]
+        //public JsonResult AjaxPostCall(Employee employeeData)
+        //{
+        //    Employee employee = new Employee
+        //    {
+        //        Name = employeeData.Name,
+        //        Designation = employeeData.Designation,
+        //        Location = employeeData.Location
+        //    };
+        //    return Json(employee);
+        //}
+
+   
+        public ActionResult LoadData([DataTablesRequest] DataTablesRequest dataRequest)
         {
             try
             {
-                var output = new List<SubcontractProfileCompanyModel>();
-
+                var companyResult = new List<SubcontractProfileCompanyModel>();
+        
                 var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
                 // Skiping number of Rows count  
                 var start = Request.Form["start"].FirstOrDefault();
@@ -71,36 +105,51 @@ namespace SubcontractProfile.Web.Controllers
 
                 string uriString = string.Format("{0}", strpathAPI + "Company/GetAll");
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
+
                 if (response.IsSuccessStatusCode)
                 {
                     var result = response.Content.ReadAsStringAsync().Result;
-                    
                     //data
-                    output = JsonConvert.DeserializeObject<List<SubcontractProfileCompanyModel>>(result);
-     
-                    ////Sorting  
-                    //if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
-                    //{
-                       
-                    //    output = output.OrderBy(order => order.CompanyNameEn).ThenBy(order => order.CreateDate).ToList(); 
-                    //}
+                    companyResult = JsonConvert.DeserializeObject<List<SubcontractProfileCompanyModel>>(result);
 
-                    //total number of rows count   
-                    recordsTotal = output.Count;
                 }
 
-                //Paging   
-                var data = output.Skip(skip).Take(pageSize).ToList();
-                //Returning Json Data  
-                return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
 
+                //total number of rows count   
+                recordsTotal = companyResult.Count();
+
+                //Paging   
+                var data = companyResult.Skip(skip).Take(pageSize).ToList();
+
+                //  var sa = new JsonSerializerSettings();
+                //var countries = new List<SubcontractProfileCompanySearchModel>
+                //{
+                //    new SubcontractProfileCompanySearchModel {CompanyNameTh = "US", CompanyCode = "United States"},
+                //    new SubcontractProfileCompanySearchModel {CompanyNameTh = "CA", CompanyCode = "Canada"}
+                //};
+
+       
+                // Returning Json Data
+                return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data });
+
+                //return Json(countries
+                //  .Select(e => new
+                //  {
+                //      CompanyCode = e.CompanyCode,
+                //      // CompanyId = e.CompanyId,
+                //      CompanyNameTh = e.CompanyNameTh,
+
+                //  })
+                //  .ToDataTablesResponse(dataRequest, recordsTotal, recordsTotal));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
         }
 
     }
+
+ 
 }
