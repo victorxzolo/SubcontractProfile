@@ -10,6 +10,7 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
 using System.Net;
+using System.ServiceModel.Security;
 
 namespace SubcontractProfile.WebApi.API.Controllers
 {
@@ -29,6 +30,12 @@ namespace SubcontractProfile.WebApi.API.Controllers
                 if (!string.IsNullOrWhiteSpace(tIN))
                 {
                     VATSoapService.vatserviceRD3SoapClient service = new VATSoapService.vatserviceRD3SoapClient();
+                    service.ClientCredentials.ServiceCertificate.SslCertificateAuthentication =
+       new X509ServiceCertificateAuthentication()
+       {
+           CertificateValidationMode = X509CertificateValidationMode.None,
+           RevocationMode = System.Security.Cryptography.X509Certificates.X509RevocationMode.NoCheck
+       };
                     ChannelFactory<VATSoapService.vatserviceRD3Soap> channelFactory = service.ChannelFactory;
                     // Must set certificates before CreateChannel()
                     //string certificatepath1= Path.GetFullPath(Path.Combine("Resources", "adhq1.cer"));
@@ -40,7 +47,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
                     //channelFactory.Credentials.ClientCertificate.Certificate = certificate1;
                     //channelFactory.Credentials.ServiceCertificate.DefaultCertificate = certificate2;
 
-                   
+                  
 
                     VATSoapService.vatserviceRD3Soap channel = channelFactory.CreateChannel();
                     VATSoapService.ServiceRequest serviceRequest = new VATSoapService.ServiceRequest
@@ -56,7 +63,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
                             AmphurCode = 0,
                         }
                     };
-                    ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+                    //ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
                     VATSoapService.ServiceResponse responseMessage = await channel.ServiceAsync(serviceRequest);
                     VATSoapService.vat soapResult = responseMessage?.Body.ServiceResult;
                     VAT vat = new VAT(soapResult);
