@@ -98,6 +98,7 @@
             <table id="tbSearchResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
                 <thead>
                     <tr>
+                        <th>แก้ไข</th>
                         <th>ชื่อบริษัท(ไทย)</th>
                         <th>ชื่อบริษัท(อังกฤษ)</th>
                         @*<th>รหัสผู้ขาย</th>*@
@@ -115,7 +116,7 @@
                 <tbody></tbody>
 
             </table>
-
+           
 
         </div>
 
@@ -214,11 +215,11 @@
                     },
                     columns: [
 
-                        //{
-                        //    data: null, render: function (data, type, row) {
-                        //        return "<button type='button' class='btn btn-primary btn-outline-primary' data-toggle='modal' onclick=openLabDetailModal('edit','" + row.CompanyCode + "');><i class='fa fa-pencil'></i></button> &nbsp <button type='button'  class='btn btn-danger btn-outline-danger' onclick=deleteData('" + row.CompanyCode + "'); ><i class='fa fa-trash-o'></i></button>";
-                        //    }
-                        //},
+                        {
+                            data: null, render: function (data, type, row) {
+                                return "<a href='javascript:openLabDetailModal('edit','" + row.CompanyId + "');' data-placement='top' title='Edit' data-toggle='modal' ><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a>";
+                            }
+                        },
                         { "data": "CompanyNameTh", "width": "50%"  },
                         { "data": "CompanyNameEn", "width": "50%"  },
                         //{ "data": "VendorCode", "width": "50%" },
