@@ -27,13 +27,13 @@ namespace SubcontractProfile.WebApi.Services.Services
 
 
         /// <summary>
-        /// Get by PK
+        /// Get by name
         /// </summary>
         public async Task<IEnumerable<SubcontractDropdown>> GetByDropDownName(string dropdownName) { 
             var p = new DynamicParameters();
             p.Add("@dropdown_name", dropdownName);
 
-            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractDropdown>
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractDropdown>
             ("uspSubcontractDropdown_selectByDropDownName", p, commandType: CommandType.StoredProcedure);
 
             return entity;

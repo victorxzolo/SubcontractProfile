@@ -27,6 +27,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.EntityFrameworkCore.Update.Internal;
+using System.Security.Cryptography;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -36,6 +37,7 @@ namespace SubcontractProfile.Web.Controllers
         private readonly string strpathAPI;
         private string strpathASCProfile;
         private string Lang = "";
+        private Utilities Util = new Utilities();
         public AccountController(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -103,6 +105,22 @@ namespace SubcontractProfile.Web.Controllers
                 {
                     // bypass authen
                     var authenticatedUser = GetUser(model.username);
+
+                    string encrypted = Util.EncryptText(model.password);
+                    string decrypted = Util.DecryptText(encrypted);
+                    //using (RijndaelManaged myRijndael = new RijndaelManaged())
+                    //{
+
+                    //    myRijndael.GenerateKey();
+                    //    myRijndael.GenerateIV();
+                    //    // Encrypt the string to an array of bytes.
+                    //    byte[] encrypted = Util.EncryptStringToBytes(model.password, myRijndael.Key, myRijndael.IV);
+
+                    //    // Decrypt the bytes to a string.
+                    //    string roundtrip = Util.DecryptStringFromBytes(encrypted, myRijndael.Key, myRijndael.IV);
+
+                    //}
+
                     //if (null != authenticatedUser && authenticatedUser.ProgramModel != null)
                     //{
                     //    authenticatedUser.AuthenticateType = AuthenticateType.LDAP;
@@ -905,6 +923,133 @@ namespace SubcontractProfile.Web.Controllers
             });
         }
 
+        [HttpPost]
+        public IActionResult GetRevenue(SearchVATModel model)
+        {
+            List<VATModal> ListResult = new List<VATModal>();
+            VATModal Vmodel = new VATModal();
+
+
+            int filteredResultsCount=0;
+            int totalResultsCount=0;
+            var take = model.length;
+            var skip = model.start; 
+            string sortBy = "";
+            bool sortDir = true;
+
+            try
+            {
+
+                if (model.order != null)
+                {
+                    // in this example we just default sort on the 1st column
+                    sortBy = model.columns[model.order[0].column].data;
+                    sortDir = model.order[0].dir.ToLower() == "asc";
+                }
+
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+                string uriString = string.Format("{0}/{1}", strpathAPI + "VATService/Get", model.tIN);
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var v = response.Content.ReadAsStringAsync().Result;
+                    var outputresponse = JsonConvert.DeserializeObject<VATResultModel>(v);
+                    if(outputresponse.StatusCode=="200")
+                    {
+                        if(outputresponse.Value !=null)
+                        {
+                            string straddr = "";
+                             straddr= string.Concat( outputresponse.Value.vHouseNumber != "-" ? outputresponse.Value.vHouseNumber : "" , " " ,
+                                                       outputresponse.Value.vBuildingName != "-" ? "อาคาร " + outputresponse.Value.vBuildingName : "" , " " ,
+                                                       outputresponse.Value.vFloorNumber != "-" ? "ชั้นที่ " + outputresponse.Value.vFloorNumber : "" , " " ,
+                                                       outputresponse.Value.vRoomNumber != "-" ? "ห้องที่ " + outputresponse.Value.vRoomNumber : "" , " " ,
+                                                       outputresponse.Value.vVillageName != "-" ? "หมู่บ้าน " + outputresponse.Value.vVillageName : "" , " " ,
+                                                       outputresponse.Value.vMooNumber != "-" ? "หมู่ที่ " + outputresponse.Value.vMooNumber : "" , " " ,
+                                                       outputresponse.Value.vSoiName != "-" ? "ซอย " + outputresponse.Value.vSoiName : "" , " " ,
+                                                       outputresponse.Value.vStreetName != "-" ? "ถนน " + outputresponse.Value.vStreetName : "" , " " ,
+                                                       outputresponse.Value.vThambol != "-" ? "ตำบล/แขวง " + outputresponse.Value.vThambol : "" , " " ,
+                                                       outputresponse.Value.vAmphur != "-" ? "อำเภอ/เขต " + outputresponse.Value.vAmphur : "" ," " ,
+                                                       outputresponse.Value.vProvince != "-" ? "จังหวัด " + outputresponse.Value.vProvince : "" , " " ,
+                                                       outputresponse.Value.vPostCode != "-" ? outputresponse.Value.vPostCode : "");
+                            ListResult.Add(new VATModal {
+                                vAmphur = outputresponse.Value.vAmphur,
+                                vBranchName = outputresponse.Value.vBranchName,
+                                vBranchNumber = outputresponse.Value.vBranchNumber,
+                                vBranchTitleName = outputresponse.Value.vBranchTitleName,
+                                vBuildingName = outputresponse.Value.vBuildingName,
+                                vBusinessFirstDate = outputresponse.Value.vBusinessFirstDate,
+                                vFloorNumber = outputresponse.Value.vFloorNumber,
+                                vHouseNumber = outputresponse.Value.vHouseNumber,
+                                vMooNumber = outputresponse.Value.vMooNumber,
+                                vmsgerr = outputresponse.Value.vmsgerr,
+                                vName = outputresponse.Value.vName,
+                                vNID = outputresponse.Value.vNID,
+                                vPostCode = outputresponse.Value.vPostCode,
+                                vProvince = outputresponse.Value.vProvince,
+                                vRoomNumber = outputresponse.Value.vRoomNumber,
+                                vSoiName = outputresponse.Value.vSoiName,
+                                vStreetName = outputresponse.Value.vStreetName,
+                                vSurname = outputresponse.Value.vSurname,
+                                vThambol = outputresponse.Value.vThambol,
+                                vtin = outputresponse.Value.vtin,
+                                vtitleName = outputresponse.Value.vtitleName,
+                                vVillageName = outputresponse.Value.vVillageName,
+                                outConcataddr=straddr
+                            });
+
+
+                            if (sortDir) //asc
+                            {
+                                if (sortBy == "vBranchName")
+                                {
+                                    ListResult = ListResult.OrderBy(c => c.vBranchName).ToList();
+                                }
+                                else if (sortBy == "vBranchNumber")
+                                {
+                                    ListResult = ListResult.OrderBy(c => c.vBranchNumber).ToList();
+                                }
+                            }
+                            else //desc
+                            {
+                                if (sortBy == "vBranchName")
+                                {
+                                    ListResult = ListResult.OrderByDescending(c => c.vBranchName).ToList();
+                                }
+                                else if (sortBy == "vBranchNumber")
+                                {
+                                    ListResult = ListResult.OrderByDescending(c => c.vBranchNumber).ToList();
+                                }
+                            }
+
+                            filteredResultsCount = ListResult.Count();
+                            totalResultsCount = ListResult.Count();
+                        }
+                    }
+                    
+                }
+               
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
+            return Json(new
+            {
+                draw = model.draw,
+                recordsTotal = totalResultsCount,
+                recordsFiltered = filteredResultsCount,
+                data = ListResult
+            });
+        }
+
+
+
+
+
+
         #region DaftAddress Register
         [HttpPost]
         public IActionResult SaveDaftAddress(List<SubcontractProfileAddressModel> daftdata)
@@ -1252,6 +1397,10 @@ namespace SubcontractProfile.Web.Controllers
                     if (resultGetFile)
                     {
                         #region Insert Company
+
+                        string encrypted = Util.EncryptText(model.Password);
+                        model.Password = encrypted;
+
                         var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
                         HttpClient clientCompany = new HttpClient();
                         clientCompany.DefaultRequestHeaders.Accept.Add(

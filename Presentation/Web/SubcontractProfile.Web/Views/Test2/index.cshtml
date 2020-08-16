@@ -1,5 +1,7 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using DataTables.AspNetCore.Mvc
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; ViewBag.Title = "Company Profile";
 }
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
@@ -25,11 +27,11 @@
 
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">ชื่อบริษัท (ไทย)</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="Company Name (TH)">
+                    <input type="text" class="form-control" id="inputCompanynameTh" placeholder="Company Name (TH)">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputPassword4">ชื่อบริษัท (อังกฤษ)</label>
-                    <input type="text" class="form-control" id="inputPassword4" placeholder="Company Name (EN)">
+                    <input type="text" class="form-control" id="inputCompanynameEn" placeholder="Company Name (EN)">
                 </div>
 
                 <div class="form-group col-md-6">
@@ -72,8 +74,8 @@
 
 
 
-                <button class="btn btn-dark mb-2">ล้างข้อมูล</button>
-                <button class="btn btn-success mb-2">ค้นหาข้อมูล</button>
+                <button id="btnClear" class="btn btn-dark mb-2">ล้างข้อมูล</button>
+                <button id="btnSearch" class="btn btn-success mb-2">ค้นหาข้อมูล</button>
 
             </div>
 
@@ -93,180 +95,362 @@
 
 
         <div class="table-responsive">
-            <table id="dataCompany" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+            <table id="tbSearchResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
                 <thead>
                     <tr>
-                        @*<th class="checkbox-column">
-                                <label class="new-control new-checkbox checkbox-primary" style="height: 18px; margin: 0 auto;">
-                                    <input type="checkbox" class="new-control-input todochkbox" id="todoAll">
-                                    <span class="new-control-indicator"></span>
-                                </label>
-                            </th>*@
+                        <th style="text-align:center">แก้ไข</th>
+                        <th>ชื่อบริษัท(ไทย)</th>
+                        <th>ชื่อบริษัท(อังกฤษ)</th>
+                        @*<th>รหัสผู้ขาย</th>*@
+                        <th>Tax ID</th>
+                        @*<th>ชื่อผู้ติดต่อ</th>
+                            <th>เบอร์โทรศัพท์</th>
+                            <th>อีเมล์</th>
+                            <th>สถานะ</th>
+                            <th>วันที่สมัคร</th>
+                            <th>วันที่อนุมัติ</th>
+                            <th>ที่อยู่</th>*@
 
-                        <th>ชื่อบริษัท (ไทย)</th>
-                        <th>ชื่อบริษัท (อังกฤษ)</th>
-                        <th class="text-center">Edit</th>
                     </tr>
                 </thead>
-                @*<tbody>
-                        <tr>
-                            <td class="checkbox-column">
-                                <label class="new-control new-checkbox checkbox-primary" style="height: 18px; margin: 0 auto;">
-                                    <input type="checkbox" class="new-control-input todochkbox" id="todo-1">
-                                    <span class="new-control-indicator"></span>
-                                </label>
-                            </td>
-                            <td>
-                                <p class="mb-0">New Subcontract </p>
-                            </td>
-                            <td>0001</td>
-                            <td>บริษัท XXXX จำกัด</td>
-                            <td class="text-center">
-                                <ul class="table-controls">
-                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
-                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-danger"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="checkbox-column">
-                                <label class="new-control new-checkbox checkbox-primary" style="height: 18px; margin: 0 auto;">
-                                    <input type="checkbox" class="new-control-input todochkbox" id="todo-2">
-                                    <span class="new-control-indicator"></span>
-                                </label>
-                            </td>
-                            <td>
-                                <p class="mb-0">Alma Clarke</p>
-                            </td>
-                            <td>11/08/2019</td>
-                            <td>420</td>
-                            <td class="text-center">
-                                <ul class="table-controls">
-                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
-                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-danger"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="checkbox-column">
-                                <label class="new-control new-checkbox checkbox-primary" style="height: 18px; margin: 0 auto;">
-                                    <input type="checkbox" class="new-control-input todochkbox" id="todo-3">
-                                    <span class="new-control-indicator"></span>
-                                </label>
-                            </td>
-                            <td>
-                                <p class="mb-0">Kelly Young</p>
-                            </td>
-                            <td>12/08/2019</td>
-                            <td>130</td>
-                            <td class="text-center">
-                                <ul class="table-controls">
-                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
-                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-danger"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="checkbox-column">
-                                <label class="new-control new-checkbox checkbox-primary" style="height: 18px; margin: 0 auto;">
-                                    <input type="checkbox" class="new-control-input todochkbox" id="todo-4">
-                                    <span class="new-control-indicator"></span>
-                                </label>
-                            </td>
-                            <td>
-                                <p class="mb-0">Vincent Carpenter</p>
-                            </td>
-                            <td>13/08/2019</td>
-                            <td>260</td>
-                            <td class="text-center">
-                                <ul class="table-controls">
-                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
-                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-danger"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="checkbox-column">
-                                <label class="new-control new-checkbox checkbox-primary" style="height: 18px; margin: 0 auto;">
-                                    <input type="checkbox" class="new-control-input todochkbox" id="todo-5">
-                                    <span class="new-control-indicator"></span>
-                                </label>
-                            </td>
-                            <td>
-                                <p class="mb-0">Andy King</p>
-                            </td>
-                            <td>14/08/2019</td>
-                            <td>180</td>
-                            <td class="text-center">
-                                <ul class="table-controls">
-                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
-                                    <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-danger"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>*@
+                <tbody></tbody>
+
             </table>
+
+
         </div>
+
 
     </div>
 
-
 </div>
 
-@section Scripts {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#dataCompany").DataTable({
-                "processing": true, // for show progress bar
-                "serverSide": true, // for process server side
-                "filter": true, // this is for disable filter (search box)
-                "orderMulti": false, // for disable multiple column at once
-                "ajax": {
-                    "url": "/Test2/LoadData",
-                    "type": "POST",
-                    "datatype": "json"
-                },
-                "columnDefs": [{
-                    // "targets": [0],
-                    "visible": false,
-                    "searchable": false
-                }],
-                "columns": [
-                    //{
-                    //    "render": function (data, type, full, meta) { return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">'; }
-                    //},
-                    //{ "data": "SubcontractProfileType", "name": "SubcontractProfileType", "autoWidth": true },
-                    { "data": "companyNameTh", "name": "companyNameTh", "autoWidth": true },
-                    { "data": "companyNameEn", "name": "companyNameEn", "autoWidth": true },
-                    {
-                        "render": function (data, type, full, meta) { return '<a class="btn btn-info" href="/DemoGrid/Edit/' + full.companyId + '">Edit</a>'; }
-                    },
+@section modalpanel {
 
-                    //{
-                    //    data: null,
-                    //    render: function (data, type, row) {
-                    //        return "<a href='#' class='btn btn-danger' onclick=DeleteData('" + row.CustomerCode + "'); >Delete</a>";
-                    //    }
-                    //},
-                ]
+    <div id="AddEditModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="hTitleEdit" class="modal-title">เพิ่มข้อมูลบริษัท</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="frNew" class="needs-validation" novalidate>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="txtCompanyCode">รหัสบริษัท <span style="color:red">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="text" id="txtCompanyCode" maxlength="4" class="form-control" placeholder="รหัสบริษัท" required>
+
+                                <div class="invalid-feedback">
+                                    กรุณากรอกรหัสบริษัท
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="txtCompanyName">ชื่อบริษัท <span style="color:red">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="text" id="txtCompanyName" maxlength="255" class="form-control" placeholder="ชื่อบริษัท" required>
+                                <div class="invalid-feedback">
+                                    กรุณากรอกชื่อบริษัท
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="txtRegisNum">ทะเบียนเลขที่ <span style="color:red">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="text" id="txtRegisNum" maxlength="15" class="form-control" placeholder="ทะเบียนเลขที่" required>
+                                <div class="invalid-feedback">
+                                    กรุณากรอกทะเบียนเลขที่
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2">Active</label>
+                            <div class="col-sm-10">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="rdoActiveTrue" name="rdoActive" value="true" class="custom-control-input" checked>
+                                    <label class="custom-control-label" for="rdoActiveTrue">
+                                        Yes
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="rdoActiveFalse" name="rdoActive" value="false" class="custom-control-input">
+                                    <label class="custom-control-label" for="rdoActiveFalse">
+                                        No
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <input type="hidden" id="hdMode">
+                        <input type="hidden" id="hdCompanyCode">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                                ปิด
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                บันทึก
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts {
+    <script type="text/javascript">
+            var oTable;
+            $(document).ready(function () {
+                inittbSearchResult();
+                $("#btnSearch").click(function (e) {
+                    searchdata();
+                });
+            });
+
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        } else {
+                           // onSave();
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+
+           function inittbSearchResult() {
+          var oTable = $('#tbSearchResult').DataTable({
+                processing: true, // for show progress bar
+                serverSide: true, // for process server side
+                filter: false, // this is for disable filter (search box)
+                orderMulti: false, // for disable multiple column at once
+                pageLength: 10,
+                order: [],
+                autoWidth: false,
+                searching: false,
+                destroy: true,
+                lengthChange: false,
+                "oLanguage": {
+                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                    "sSearch": false,
+                    "sLengthMenu": "Results :  _MENU_",
+                },
+                 "scrollX": true,
+                  "language": {
+                  "zeroRecords": "No data found.",
+                   "decimal": ",",
+                  "thousands": "."
+                    },
+                    ajax: {
+                        url: '@Url.Action("LoadData", "Test2")',
+                        type: "POST",
+                        datatype: "JSON",
+                        //dataSrc:"",
+                        data: function (d) {
+                            d.p_companyName = $("#inputCompanynameTh").val()
+                        }
+                    },
+                    columns: [
+
+                        {
+                            data: null,width:"10%", render: function (data, type, row) {
+                                return "<a href='#' onclick=openModal('edit','" + row.companyId +"');return false;  data-toggle='modal' data-target='.bd-addedit-modal-xl' ><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a>";
+                            },
+                           // orderable: false,
+                            //className: 'text-center'
+                        },
+                        { "data": "CompanyNameTh", "width": "30%"  },
+                        { "data": "CompanyNameEn", "width": "30%"  },
+                        //{ "data": "VendorCode", "width": "50%" },
+                        { "data": "TaxId", "width": "30%" },
+
+                        //{ "data": "ContractName", "width": "30%" },
+                        //{ "data": "ContractPhone", "width": "30%" },
+                        //{ "data": "ContractEmail", "width": "30%" },
+                        //{ "data": "Status", "width": "30%" },
+                        //{ "data": "ActivateDate", "width": "30%" },
+                        //{ "data": "CreateDate", "width": "30%" },
+                        //{ "data": "CompanyAddress", "width": "100%" },
+                ],
+                "order": [[0, "desc"]],
+                "stripeClasses": [],
+                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+                });
+
+        }
+
+        function searchdata() {
+            oTable.ajax.reload();
+        }
+
+        function openModal(mode, companyId) {
+
+           // clearData();
+            $('#hdMode').val(mode);
+            $('#hdCompanyCode').val(companyId);
+
+            if (mode == "edit") {
+                $("#txtCompanyCode").prop("disabled", true);
+                $("#hTitleEdit").text('แก้ไขรายการ');
+                getDataById(companyId);
+            }
+            else {
+                $("#hTitleEdit").text('เพิ่มรายการ');
+                $("#txtCompanyCode").prop("disabled", false);
+
+                // let form = $('#frNew');
+                $("#frNew")[0].reset();
+                //form.find('button').on('click', (event) => {
+                //    form.find('input, select, textarea').val('');
+                //});
+            }
+
+            $('#AddEditModal').modal('show');
+
+        }
+
+        function clearData() {
+            $("#txtCompanyCode").val('');
+            $("#txtCompanyName").val('');
+            //$("#txtRegisNum").val('');
+            //$('#hdMode').val('');
+            //$('#hdCompanyCode').val('');
+            //$("[name=rdoActive]").filter("[value='true']").prop("checked", true);
+        }
+
+          function getDataById(companyId) {
+          $.ajax({
+                   url: '@Url.Action("GetDataById", "Company")',
+                   type: 'POST',
+                   data: JSON.stringify({
+                       "p_companyCode": companyId
+                   }),
+                   dataType: "json",
+                 //  contentType: "application/json; charset=utf-8",
+                  success: function (result) {
+
+                       $("#txtCompanyCode").val(result.companyCode);
+                       $("#txtCompanyName").val(result.companyName);
+                      $("#txtRegisNum").val(result.reqisNumber);
+
+                      if (result.isActive == true) {
+                          $("[name=rdoActive]").filter("[value='true']").prop("checked", true);
+                      } else {
+                          $("[name=rdoActive]").filter("[value='false']").prop("checked", true);
+                      }
+
+                  },
+                  error: function (result) {
+
+                  }
 
             });
-        });
+    }
+
+    function onSave() {
+                $.ajax({
+                   url: '@Url.Action("OnSave", "Company")',
+                   type: 'POST',
+                   data: JSON.stringify({
+                       "p_companyCode": $('#txtCompanyCode').val()
+                       , "p_companyName": $('#txtCompanyName').val()
+                       , "p_regisNum": $("#txtRegisNum").val()
+                       , "p_isActive": $('input[name="rdoActive"]:checked').val()
+                       , "p_mode": $('#hdMode').val()
+                   }),
+                   dataType: "json",
+                   contentType: "application/json; charset=utf-8",
+                   success: function (result) {
+                       if (result.Status == true) {
+                           if ($('#hdMode').val() == 'edit') {
+                               $('#AddEditModal').modal('hide');
+                           } else {
+                               bootbox.alert(result.Message);
+                               clearData();
+                           }
+
+                           searchdata();
+
+                            }
+                            else {
+                           bootbox.alert(result.Message);
+
+                            }
+                  },
+                  error: function (result) {
+                      bootbox.alert(result.Message);
+                  }
+
+            });
+
+        }
+            //$('#btnSearch').click(function () {
+            //    var comments = $('#inputCompanynameTh').val();
+            //    var selectedId = '1';// $('#hdnSelectedId').val();
+
+            //    //$.ajax({
+            //    //    url: "/Test2/SaveComments",
+            //    //    data: { 'id': selectedId, 'comments': comments },
+            //    //    type: "post",
+            //    //    cache: false,
+            //    //    dataType: "json",
+
+            //    //    success: function (savingStatus) {
+            //    //        //$("#hdnOrigComments").val($('#txtComments').val());
+            //    //        //$('#lblCommentsNotification').text(savingStatus);
+            //    //    },
+            //    //    error: function (xhr, ajaxOptions, thrownError) {
+            //    //        // $('#lblCommentsNotification').text("Error encountered while saving the comments.");
+            //    //    }
+            //    //});
+            //});
 
     </script>
 }
 
-@*@section Scripts{
-        <script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
 
-        <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
-    }
-    @section Styles {
-        <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
-        <link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
-    }*@
+@*@(Html.Ext().Grid<SubcontractProfile.Web.Model.SubcontractProfileCompanyModel>().Name("tbSearchResult1").RowId("CompanyId")
+        .Columns(cols =>
+        {
+            cols.Add(c => c.CompanyId).Data("CompanyId").Title("").Render(() => "onRender").Click("onClick");
+            cols.Add(c => c.CompanyNameTh).Title("CompanyNameTh");
+            cols.Add(c => c.CompanyNameEn).Title("CompanyNameEn");
+            cols.Add(c => c.TaxId).Title("TaxId");
+            //cols.Add(c => c.Position).Title("Position");
+            //cols.Add(c => c.Salary).Visible(false).Title("Salary");
+            //cols.Add(c => c.Created).Title("Date");
+            //cols.Add(c => c.Id).Data("id").Title("").Render(() => "onRender").Click("onClick");
+        })
+        .ServerSide(true)
+        .DataSource(c =>
+            c.Ajax().Url("/Test2/LoadData").Method("POST")
+        )
+    )*@
+
+
+
+
+
+
+
 
 

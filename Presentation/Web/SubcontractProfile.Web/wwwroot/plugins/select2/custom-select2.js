@@ -2,8 +2,8 @@ $(".basic").select2({
 	tags: true,
 });
 
-var formSmall = $(".form-small").select2({ tags: true });
-formSmall.data('select2').$container.addClass('form-control-sm')
+//var formSmall = $(".form-small").select2({ tags: true });
+//formSmall.data('select2').$container.addClass('form-control-sm')
 
 $(".nested").select2({
 	tags: true

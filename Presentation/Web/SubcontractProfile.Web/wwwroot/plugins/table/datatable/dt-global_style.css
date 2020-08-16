@@ -42,8 +42,9 @@ table.dataTable {
     border-bottom: 1px solid #e0e6ed;
 }
 .table > thead > tr > th {
-    /* color: #1b55e2;*/
-    color: #000;
+    /*background-color: #040c95;*/
+    color: #1b55e2;
+    /* color: #fff;*/
     font-weight: 600;
     font-size: 22px;
     border: none;
@@ -74,8 +75,9 @@ table.dataTable {
     -webkit-transform: none; 
     transform: none; 
 }
+
 div.dataTables_wrapper div.dataTables_info {
-    padding-top: 0.85em;
+   /* padding-top: 0.85em;*/
     white-space: normal;
     color: #1b55e2;
     font-weight: 600;
@@ -84,6 +86,7 @@ div.dataTables_wrapper div.dataTables_info {
     padding: 10px 16px;
     border-radius: 6px;
     font-size: 13px;
+    margin-top: 20px;
 }
 div.dataTables_wrapper div.dataTables_filter label {
     position: relative;
@@ -116,10 +119,11 @@ div.dataTables_wrapper div.dataTables_filter input {
     background: #fff url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23d3d3d3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-chevron-down'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") 49px 12px no-repeat;
 }
 div.dataTables_wrapper div.dataTables_paginate {
-    margin: 0;
+   /* margin: 0;*/
     white-space: nowrap;
     text-align: right;
     display: inline-block;
+    margin-top: 20px;
 }
 .page-link {
     margin-right: 5px;

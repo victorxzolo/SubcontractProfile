@@ -1,15 +1,15 @@
 ﻿
 
 
-    <div class="alert alert-danger toast" data-autohide="false" id="idmsAlert">
-        <div class="alert-danger">
-            <strong class="mr-auto text-primary"></strong>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
-        </div>
-        <div class="toast-body">
-            <strong>กรุณาระบุข้อมูลให้ครบถ้วน</strong>
-        </div>
+<div class="alert alert-danger toast" data-autohide="false" id="idmsAlert">
+    <div class="alert-danger">
+        <strong class="mr-auto text-primary"></strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
     </div>
+    <div class="toast-body">
+        <strong>กรุณาระบุข้อมูลให้ครบถ้วน</strong>
+    </div>
+</div>
 
 
 
@@ -92,10 +92,10 @@
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">เลขทะเบียนนิติบุคคล :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <div class="input-group">
-                        <input type="text" class="form-control inputValidation form-control-sm" id="txttax_id" 
+                        <input type="text" class="form-control inputValidation form-control-sm" id="txttax_id"
                                placeholder="เลขทะเบียนนิติบุคคล" aria-label="เลขทะเบียนนิติบุคคล" maxlength="100" required>
                         <div class="input-group-append">
-                            <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                            <button class="btn btn-sm btn-secondary" type="button" id="btnsearchrevenue"><i class="fa fa-search"></i></button>
                         </div>
                         <div class="invalid-tooltip">
                             Please provide a valid juristic id.
@@ -109,10 +109,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อย่อบริษัท :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control inputValidation form-control-sm" id="txtcompany_alias" maxlength="100" required/>
-                    <div class="invalid-tooltip">
-                        Please provide a valid company alias.
-                    </div>
+                    <input type="text" class="form-control form-control-sm" id="txtcompany_alias" maxlength="100" />
                 </div>
             </div>
         </div>
@@ -239,7 +236,7 @@
 </div>
 
 
-<div id="divdealer" class="needs-validation-dealer" novalidate  style="display:none;">
+<div id="divdealer" class="needs-validation-dealer" novalidate style="display:none;">
     <div class="form-group">
         <div class="">
             <p class="font-weight-bolder lead">
@@ -254,7 +251,7 @@
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Location Code :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <div class="input-group">
-                        <input type="text" class="form-control inputValidationdealer form-control-sm" 
+                        <input type="text" class="form-control inputValidationdealer form-control-sm"
                                aria-label="Location Code" id="txtlocationcode" maxlength="100" required />
                         <div class="input-group-append">
                             <button class="btn btn-sm btn-secondary" id="btnsearchlocation" type="button">
@@ -330,10 +327,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อย่อบริษัท :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control inputValidationdealer form-control-sm" id="txtcompany_alias_dealer" disabled maxlength="100" required />
-                    <div class="invalid-tooltip">
-                        Please provide a valid company alias.
-                    </div>
+                    <input type="text" class="form-control form-control-sm" id="txtcompany_alias_dealer" maxlength="100" />
                 </div>
             </div>
         </div>
@@ -343,10 +337,10 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(ไทย) :</label>
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                    <select class="custom-select inputValidationdealer custom-select-sm" id="ddlprefixcompany_name_th_dealer"></select>
+                    <select class="custom-select custom-select-sm" id="ddlprefixcompany_name_th_dealer"></select>
                 </div>
                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                    <input type="text" class="form-control inputValidationdealer form-control-sm" 
+                    <input type="text" class="form-control inputValidationdealer form-control-sm"
                            placeholder="ชื่อนิติบุคคล(ไทย)" id="txtcompany_name_th_dealer" disabled maxlength="100" required />
                     <div class="invalid-tooltip">
                         Please provide a valid company name thai.
@@ -358,14 +352,14 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(อังกฤษ) :</label>
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                    <select class="custom-select inputValidationdealer custom-select-sm" id="ddlprefixcompany_name_en_dealer"></select>
+                    <select class="custom-select custom-select-sm" id="ddlprefixcompany_name_en_dealer"></select>
                 </div>
                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                    <input type="text" class="form-control inputValidationdealer form-control-sm" 
-                           placeholder="ชื่อนิติบุคคล(อังกฤษ)" id="txtcompany_name_en_dealer" disabled maxlength="100" required />
-                    <div class="invalid-tooltip">
-                        Please provide a valid company name english.
-                    </div>
+                    <input type="text" class="form-control form-control-sm"
+                           placeholder="ชื่อนิติบุคคล(อังกฤษ)" id="txtcompany_name_en_dealer" maxlength="100" />
+                    @*<div class="invalid-tooltip">
+                            Please provide a valid company name english.
+                        </div>*@
                 </div>
             </div>
         </div>
@@ -431,8 +425,8 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">ASC Code :</label>
                                 <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
-                                    <input type="text" class="form-control  form-control-sm" id="txtasccodemodal"  />
-                                    
+                                    <input type="text" class="form-control  form-control-sm" id="txtasccodemodal" />
+
                                 </div>
                             </div>
                         </div>
@@ -441,7 +435,7 @@
                                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Mobile No :</label>
                                 <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                     <input type="text" class="form-control form-control-sm" id="txtmobilenomodal" />
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -553,6 +547,91 @@
                     <i class="fa fa-times icon"></i><span>ปิด</span>
                 </button>
                 <button type="button" class="btn-border btn-green" id="btn_select_location">
+                    <i class="fa fa-check icon"></i><span>ตกลง</span>
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" id="SearchRevenue" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">ค้นหาข้อมูลบริษัทจากฐานข้อมูลกรมสรรพากร</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12 needs-validation-modalLocation" novalidate>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                            <div class="form-group">
+                                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">ข้อมูลจากสรรพากร อาจจะไมาตรงกับกรมพัฒนาธุรกิจ</label>
+                                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                    <input type="text" class="form-control  form-control-sm" id="txtsearchrevenue" />
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                            <div class="d-flex align-items-center justify-content-center h-100" role="group">
+                                <button class="btn-border btn-black mr-2" id="btn_reset_revenue_modal" type="button">
+                                    <i class="fa fa-refresh icon"></i><span>รีเช็ต</span>
+                                </button>
+                                <button class="btn-border btn-blue" id="btn_search_revenue_modal" type="button">
+                                    <i class="fa fa-search icon"></i><span>ค้นหา</span>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                            <div class="table-responsive pt-3">
+                                <table class="table table-bordered table-hover" id="tbrevenueModal" style="width:100%;">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            @*<th></th>*@
+                                            <th>เลขผู้เสียภาษี</th>
+                                            <th>ชื่อบริษัท</th>
+                                            <th>สาขา</th>
+                                            <th>ที่อยู่</th>
+                                            <th></th>
+                                            @*<th>ตัวเลือก</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">ตกลง</button>*@
+
+                <button type="button" class="btn-border btn-orange" data-dismiss="modal">
+                    <i class="fa fa-times icon"></i><span>ปิด</span>
+                </button>
+                <button type="button" class="btn-border btn-green" id="btn_select_revenue">
                     <i class="fa fa-check icon"></i><span>ตกลง</span>
                 </button>
 

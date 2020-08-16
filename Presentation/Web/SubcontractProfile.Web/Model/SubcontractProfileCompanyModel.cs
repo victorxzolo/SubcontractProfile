@@ -173,5 +173,12 @@ namespace SubcontractProfile.Web.Model
 
         public System.DateTime? ActivateDate { get; set; }
 
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string User_name { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string Password { get; set; }
+
     }
 }
