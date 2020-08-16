@@ -39,10 +39,10 @@
  box-sizing:border-box
 }
 html {
- font-family:sans-serif;
- line-height:1.15;
- -webkit-text-size-adjust:100%;
- -webkit-tap-highlight-color:transparent
+    font-family: 'db_helvethaica_x55_regular', sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent
 }
 article,
 aside,
@@ -5555,8 +5555,11 @@ a.close.disabled {
  margin:-1rem -1rem -1rem auto
 }
 .modal-title {
- margin-bottom:0;
- line-height:1.5
+    font-family: 'db_helvethaica_x55_regular', sans-serif;
+    font-size: 24px;
+    font-weight:500;
+    margin-bottom: 0;
+    line-height: 1.5
 }
 .modal-body {
  position:relative;

@@ -19,7 +19,6 @@ using DataTables.AspNetCore.Mvc.Binder;
 namespace SubcontractProfile.Web.Controllers
 {
 
-
     public class Test2Controller : Controller
     {
         private readonly string strpathAPI;
@@ -132,12 +131,13 @@ namespace SubcontractProfile.Web.Controllers
                 // Returning Json Data
                 return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data });
 
-                //return Json(countries
+                //return Json(data
                 //  .Select(e => new
                 //  {
-                //      CompanyCode = e.CompanyCode,
-                //      // CompanyId = e.CompanyId,
+                //      CompanyId = e.CompanyId,
                 //      CompanyNameTh = e.CompanyNameTh,
+                //      CompanyNameEn = e.CompanyNameEn,   
+                //      TaxId = e.TaxId,
 
                 //  })
                 //  .ToDataTablesResponse(dataRequest, recordsTotal, recordsTotal));

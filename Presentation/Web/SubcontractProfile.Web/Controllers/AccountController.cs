@@ -104,7 +104,7 @@ namespace SubcontractProfile.Web.Controllers
                 {
                     // bypass authen
                     var authenticatedUser = GetUser(model.username);
-                    string encrypt = Util.Encrypt(model.password);
+                 //   string encrypt = Util.Encrypt(model.password);
                    // string decrypt = Util.Decrypt(encrypt);
                     //if (null != authenticatedUser && authenticatedUser.ProgramModel != null)
                     //{
@@ -1383,7 +1383,7 @@ namespace SubcontractProfile.Web.Controllers
                     {
                         #region Insert Company
 
-                        string encrypt = Util.Encrypt(model.Password);
+                        string encrypt = "";//Util.Encrypt(model.Password);
                         model.Password = encrypt;
 
                         var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));

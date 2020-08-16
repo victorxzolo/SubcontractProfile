@@ -98,66 +98,122 @@
             <table id="tbSearchResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
                 <thead>
                     <tr>
-                        <th>แก้ไข</th>
+                        <th style="text-align:center">แก้ไข</th>
                         <th>ชื่อบริษัท(ไทย)</th>
                         <th>ชื่อบริษัท(อังกฤษ)</th>
                         @*<th>รหัสผู้ขาย</th>*@
                         <th>Tax ID</th>
                         @*<th>ชื่อผู้ติดต่อ</th>
-                        <th>เบอร์โทรศัพท์</th>
-                        <th>อีเมล์</th>
-                        <th>สถานะ</th>
-                        <th>วันที่สมัคร</th>
-                        <th>วันที่อนุมัติ</th>
-                        <th>ที่อยู่</th>*@
+                            <th>เบอร์โทรศัพท์</th>
+                            <th>อีเมล์</th>
+                            <th>สถานะ</th>
+                            <th>วันที่สมัคร</th>
+                            <th>วันที่อนุมัติ</th>
+                            <th>ที่อยู่</th>*@
 
                     </tr>
                 </thead>
                 <tbody></tbody>
 
             </table>
-           
+
 
         </div>
 
 
     </div>
 
-
 </div>
 
-@*@(Html.Ext().Grid<SubcontractProfile.Web.Model.SubcontractProfileCompanySearchModel>().Name("tbSearchResult").RowId("id")
-        .Columns(cols =>
-        {
-            cols.Add(c => c.CompanyCode).Title("Id");
-            cols.Add(c => c.CompanyNameTh).Title("Name");
-            //cols.Add(c => c.Office).Title("Office");
-            //cols.Add(c => c.Position).Title("Position");
-            //cols.Add(c => c.Salary).Visible(false).Title("Salary");
-            //cols.Add(c => c.Created).Title("Date");
-            //cols.Add(c => c.Id).Data("id").Title("").Render(() => "onRender").Click("onClick");
-        })
-        .ServerSide(true)
-        .DataSource(c =>
-            c.Ajax().Url("/Test2/LoadData").Method("POST")
-        )
-    )*@
+@section modalpanel {
+
+    <div id="AddEditModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="hTitleEdit" class="modal-title">เพิ่มข้อมูลบริษัท</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="frNew" class="needs-validation" novalidate>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="txtCompanyCode">รหัสบริษัท <span style="color:red">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="text" id="txtCompanyCode" maxlength="4" class="form-control" placeholder="รหัสบริษัท" required>
+
+                                <div class="invalid-feedback">
+                                    กรุณากรอกรหัสบริษัท
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="txtCompanyName">ชื่อบริษัท <span style="color:red">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="text" id="txtCompanyName" maxlength="255" class="form-control" placeholder="ชื่อบริษัท" required>
+                                <div class="invalid-feedback">
+                                    กรุณากรอกชื่อบริษัท
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="txtRegisNum">ทะเบียนเลขที่ <span style="color:red">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="text" id="txtRegisNum" maxlength="15" class="form-control" placeholder="ทะเบียนเลขที่" required>
+                                <div class="invalid-feedback">
+                                    กรุณากรอกทะเบียนเลขที่
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2">Active</label>
+                            <div class="col-sm-10">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="rdoActiveTrue" name="rdoActive" value="true" class="custom-control-input" checked>
+                                    <label class="custom-control-label" for="rdoActiveTrue">
+                                        Yes
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="rdoActiveFalse" name="rdoActive" value="false" class="custom-control-input">
+                                    <label class="custom-control-label" for="rdoActiveFalse">
+                                        No
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <input type="hidden" id="hdMode">
+                        <input type="hidden" id="hdCompanyCode">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                                ปิด
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                บันทึก
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
 
 @section scripts {
-<script type="text/javascript">
+    <script type="text/javascript">
             var oTable;
-            //$(document).ready(function () {
-            //    inittbSearchResult();
-            //    $("#btnSearch").click(function (e) {
-
-            //        searchdata();
-            //    });
-            //});
-
-        $(document).ready(function () {
-
-            searchdata();
-        });
+            $(document).ready(function () {
+                inittbSearchResult();
+                $("#btnSearch").click(function (e) {
+                    searchdata();
+                });
+            });
 
             'use strict';
             window.addEventListener('load', function () {
@@ -179,9 +235,8 @@
                 });
             }, false);
 
-
-        function searchdata() {
-            var oTable = $('#tbSearchResult').DataTable({
+           function inittbSearchResult() {
+          var oTable = $('#tbSearchResult').DataTable({
                 processing: true, // for show progress bar
                 serverSide: true, // for process server side
                 filter: false, // this is for disable filter (search box)
@@ -216,15 +271,17 @@
                     columns: [
 
                         {
-                            data: null, render: function (data, type, row) {
-                                return "<a href='javascript:openLabDetailModal('edit','" + row.CompanyId + "');' data-placement='top' title='Edit' data-toggle='modal' ><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a>";
-                            }
+                            data: null,width:"10%", render: function (data, type, row) {
+                                return "<a href='#' onclick=openModal('edit','" + row.companyId +"');return false;  data-toggle='modal' data-target='.bd-addedit-modal-xl' ><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a>";
+                            },
+                           // orderable: false,
+                            //className: 'text-center'
                         },
-                        { "data": "CompanyNameTh", "width": "50%"  },
-                        { "data": "CompanyNameEn", "width": "50%"  },
+                        { "data": "CompanyNameTh", "width": "30%"  },
+                        { "data": "CompanyNameEn", "width": "30%"  },
                         //{ "data": "VendorCode", "width": "50%" },
                         { "data": "TaxId", "width": "30%" },
-                       
+
                         //{ "data": "ContractName", "width": "30%" },
                         //{ "data": "ContractPhone", "width": "30%" },
                         //{ "data": "ContractEmail", "width": "30%" },
@@ -236,12 +293,116 @@
                 "order": [[0, "desc"]],
                 "stripeClasses": [],
                 drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
-                    
+
                 });
+
+        }
+
+        function searchdata() {
+            oTable.ajax.reload();
+        }
+
+        function openModal(mode, companyId) {
+
+           // clearData();
+            $('#hdMode').val(mode);
+            $('#hdCompanyCode').val(companyId);
+
+            if (mode == "edit") {
+                $("#txtCompanyCode").prop("disabled", true);
+                $("#hTitleEdit").text('แก้ไขรายการ');
+                getDataById(companyId);
+            }
+            else {
+                $("#hTitleEdit").text('เพิ่มรายการ');
+                $("#txtCompanyCode").prop("disabled", false);
+
+                // let form = $('#frNew');
+                $("#frNew")[0].reset();
+                //form.find('button').on('click', (event) => {
+                //    form.find('input, select, textarea').val('');
+                //});
             }
 
-    
+            $('#AddEditModal').modal('show');
 
+        }
+
+        function clearData() {
+            $("#txtCompanyCode").val('');
+            $("#txtCompanyName").val('');
+            //$("#txtRegisNum").val('');
+            //$('#hdMode').val('');
+            //$('#hdCompanyCode').val('');
+            //$("[name=rdoActive]").filter("[value='true']").prop("checked", true);
+        }
+
+          function getDataById(companyId) {
+          $.ajax({
+                   url: '@Url.Action("GetDataById", "Company")',
+                   type: 'POST',
+                   data: JSON.stringify({
+                       "p_companyCode": companyId
+                   }),
+                   dataType: "json",
+                 //  contentType: "application/json; charset=utf-8",
+                  success: function (result) {
+
+                       $("#txtCompanyCode").val(result.companyCode);
+                       $("#txtCompanyName").val(result.companyName);
+                      $("#txtRegisNum").val(result.reqisNumber);
+
+                      if (result.isActive == true) {
+                          $("[name=rdoActive]").filter("[value='true']").prop("checked", true);
+                      } else {
+                          $("[name=rdoActive]").filter("[value='false']").prop("checked", true);
+                      }
+
+                  },
+                  error: function (result) {
+
+                  }
+
+            });
+    }
+
+    function onSave() {
+                $.ajax({
+                   url: '@Url.Action("OnSave", "Company")',
+                   type: 'POST',
+                   data: JSON.stringify({
+                       "p_companyCode": $('#txtCompanyCode').val()
+                       , "p_companyName": $('#txtCompanyName').val()
+                       , "p_regisNum": $("#txtRegisNum").val()
+                       , "p_isActive": $('input[name="rdoActive"]:checked').val()
+                       , "p_mode": $('#hdMode').val()
+                   }),
+                   dataType: "json",
+                   contentType: "application/json; charset=utf-8",
+                   success: function (result) {
+                       if (result.Status == true) {
+                           if ($('#hdMode').val() == 'edit') {
+                               $('#AddEditModal').modal('hide');
+                           } else {
+                               bootbox.alert(result.Message);
+                               clearData();
+                           }
+
+                           searchdata();
+
+                            }
+                            else {
+                           bootbox.alert(result.Message);
+
+                            }
+                  },
+                  error: function (result) {
+                      bootbox.alert(result.Message);
+                  }
+
+            });
+
+        }
             //$('#btnSearch').click(function () {
             //    var comments = $('#inputCompanynameTh').val();
             //    var selectedId = '1';// $('#hdnSelectedId').val();
@@ -266,6 +427,24 @@
     </script>
 }
 
+
+@*@(Html.Ext().Grid<SubcontractProfile.Web.Model.SubcontractProfileCompanyModel>().Name("tbSearchResult1").RowId("CompanyId")
+        .Columns(cols =>
+        {
+            cols.Add(c => c.CompanyId).Data("CompanyId").Title("").Render(() => "onRender").Click("onClick");
+            cols.Add(c => c.CompanyNameTh).Title("CompanyNameTh");
+            cols.Add(c => c.CompanyNameEn).Title("CompanyNameEn");
+            cols.Add(c => c.TaxId).Title("TaxId");
+            //cols.Add(c => c.Position).Title("Position");
+            //cols.Add(c => c.Salary).Visible(false).Title("Salary");
+            //cols.Add(c => c.Created).Title("Date");
+            //cols.Add(c => c.Id).Data("id").Title("").Render(() => "onRender").Click("onClick");
+        })
+        .ServerSide(true)
+        .DataSource(c =>
+            c.Ajax().Url("/Test2/LoadData").Method("POST")
+        )
+    )*@
 
 
 
