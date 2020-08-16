@@ -10,9 +10,6 @@ namespace SubcontractProfile.Web.Extension
 {
     public class Utilities
     {
-        //private readonly string PasswordHash = "P@@Sw0rd";
-        //private static readonly string SaltKey = "S@LT&KEY";
-        //private static readonly string VIKey = "@1B2c3D4e5F6g7H8";
         #region ENCRYPT / DECRYPT
         public byte[] AES_Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
         {
