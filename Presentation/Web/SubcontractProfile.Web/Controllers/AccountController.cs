@@ -27,6 +27,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.EntityFrameworkCore.Update.Internal;
+using System.Security.Cryptography;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -104,8 +105,22 @@ namespace SubcontractProfile.Web.Controllers
                 {
                     // bypass authen
                     var authenticatedUser = GetUser(model.username);
-                 //   string encrypt = Util.Encrypt(model.password);
-                   // string decrypt = Util.Decrypt(encrypt);
+
+                    string encrypted = Util.EncryptText(model.password);
+                    string decrypted = Util.DecryptText(encrypted);
+                    //using (RijndaelManaged myRijndael = new RijndaelManaged())
+                    //{
+
+                    //    myRijndael.GenerateKey();
+                    //    myRijndael.GenerateIV();
+                    //    // Encrypt the string to an array of bytes.
+                    //    byte[] encrypted = Util.EncryptStringToBytes(model.password, myRijndael.Key, myRijndael.IV);
+
+                    //    // Decrypt the bytes to a string.
+                    //    string roundtrip = Util.DecryptStringFromBytes(encrypted, myRijndael.Key, myRijndael.IV);
+
+                    //}
+
                     //if (null != authenticatedUser && authenticatedUser.ProgramModel != null)
                     //{
                     //    authenticatedUser.AuthenticateType = AuthenticateType.LDAP;
@@ -1383,8 +1398,8 @@ namespace SubcontractProfile.Web.Controllers
                     {
                         #region Insert Company
 
-                        string encrypt = "";//Util.Encrypt(model.Password);
-                        model.Password = encrypt;
+                        string encrypted = Util.EncryptText(model.Password);
+                        model.Password = encrypted;
 
                         var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
                         HttpClient clientCompany = new HttpClient();
