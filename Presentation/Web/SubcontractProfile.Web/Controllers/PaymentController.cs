@@ -102,14 +102,14 @@ namespace SubcontractProfile.Web.Controllers
         [HttpGet]
         public IActionResult paymentchannal()
         {
-            var data = new List<SubcontractProfileBankingModel>();
+            var data = new List<SubcontractDropdownModel>();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string uriString = string.Format("{0}", strpathAPI + "Banking/GetAll");
+            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/payment_type");
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
                 var dataresponse = response.Content.ReadAsStringAsync().Result;
-                data = JsonConvert.DeserializeObject<List<SubcontractProfileBankingModel>>(dataresponse);
+                data = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(dataresponse);
             }
             return Json(new { Data = data });
 

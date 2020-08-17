@@ -36,10 +36,22 @@ h1, h2, h3, h4, h5, h6 { color: #3b3f5c; }
   background: transparent;
 }
 p { margin-top: 0; margin-bottom: 0.625rem; color: #515365 }
+
+hr.style-two {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc);
+    background-image: -moz-linear-gradient(left, #ccc, #333, #ccc);
+    background-image: -ms-linear-gradient(left, #ccc, #333, #ccc);
+    background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
+}
+
 hr {
     margin-top: 20px;
     margin-bottom: 20px;
-    border-top: 1px solid #f1f2f3;
+     border-top: 1px solid #f1f2f3;
+  
 }
 strong { font-weight: 600; }
 code { color: #e7515a; }
@@ -431,11 +443,11 @@ select.form-control.form-custom {
     transition: all 0.3s ease-out;
     -webkit-transition: all 0.3s ease-out;
 }
-.btn svg {
-    width: 20px;
-    height: 20px;
-    vertical-align: bottom;
-}
+    .btn svg {
+        width: 22px;
+        height: 24px;
+        vertical-align: middle;
+    }
 .btn.rounded-circle {
     height: 40px;
     width: 40px;
@@ -1118,10 +1130,9 @@ select.form-control.form-custom {
 .data-marker-dark { background-color: #e7515a; }
 .badge {
     font-weight: 600;
-    line-height: 1.4;
+    line-height: 1.6;
     padding: 3px 6px;
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 18px;
     transition: all 0.3s ease-out;
     -webkit-transition: all 0.3s ease-out;
 }

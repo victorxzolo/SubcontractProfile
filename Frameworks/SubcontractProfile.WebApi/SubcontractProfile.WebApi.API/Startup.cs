@@ -25,6 +25,7 @@ using System.Reflection;
 using System.Text.Json;
 using Repository;
 using AutoMapper;
+using System.Threading.Tasks;
 
 
 #pragma warning disable CS1591
@@ -108,8 +109,17 @@ namespace SubcontractProfile.WebApi.API
                         });
                     }
 
-      
+
+              
+
                     services.AddMvc().AddControllersAsServices();
+
+                    services.AddCors(o => o.AddPolicy("AllowedHosts", builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    }));
 
                     //Mappings
                     services.ConfigureMappings();
@@ -130,6 +140,8 @@ namespace SubcontractProfile.WebApi.API
                     //{
                     //    options.AutomaticAuthentication = false;
                     //});
+
+                  
 
                     _logger.LogDebug("Startup::ConfigureServices::ApiVersioning, Swagger and DI settings");
                 }
@@ -188,7 +200,11 @@ namespace SubcontractProfile.WebApi.API
 
                 app.UseHttpsRedirection();
                 app.UseRouting();
+
+                app.UseCors("AllowedHosts");
+
                 app.UseAuthorization();
+
                 app.UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();
@@ -227,5 +243,8 @@ namespace SubcontractProfile.WebApi.API
                 return Path.Combine(basePath, fileName);
             }
         }
+
+
+       
     }
 }

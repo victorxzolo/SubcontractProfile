@@ -1,5 +1,5 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@using DataTables.AspNetCore.Mvc
+﻿@*@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using DataTables.AspNetCore.Mvc*@
 
 @{ Layout = "~/Views/Shared/_Layout.cshtml"; ViewBag.Title = "Company Profile";
 }
@@ -74,8 +74,8 @@
 
 
 
-                <button id="btnClear" class="btn btn-dark mb-2">ล้างข้อมูล</button>
-                <button id="btnSearch" class="btn btn-success mb-2">ค้นหาข้อมูล</button>
+                <button id="btnClear" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
+                <button id="btnSearch" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
 
             </div>
 
@@ -89,7 +89,7 @@
 
         </div>
         <div class="col-md-12 text-right mb-1">
-            <button id="add-work-platforms" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>เพิ่ม</button>
+            <button id="add-work-platforms" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg> เพิ่ม</button>
 
         </div>
 
@@ -98,7 +98,7 @@
             <table id="tbSearchResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
                 <thead>
                     <tr>
-                        <th style="text-align:center">แก้ไข</th>
+                        <th style="text-align:left">แก้ไข</th>
                         <th>ชื่อบริษัท(ไทย)</th>
                         <th>ชื่อบริษัท(อังกฤษ)</th>
                         @*<th>รหัสผู้ขาย</th>*@
@@ -189,11 +189,11 @@
                         <input type="hidden" id="hdCompanyCode">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
                                 ปิด
                             </button>
                             <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
                                 บันทึก
                             </button>
                         </div>
@@ -299,7 +299,8 @@
         }
 
         function searchdata() {
-            oTable.ajax.reload();
+          //  oTable.ajax.reload();
+            inittbSearchResult();
         }
 
         function openModal(mode, companyId) {

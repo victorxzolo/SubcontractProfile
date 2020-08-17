@@ -54,11 +54,13 @@ namespace SubcontractProfile.WebApi.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileAddress))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileAddress))]
         [HttpGet("GetByCompanyId/{companyId}")] // GET /api/GetByAddressId/addressId/787413D6-AA0B-4F20-A638-94FBFBF634C9
-        public Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany> GetByCompanyId(System.Guid companyId)
+        public Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany> GetByCompanyId(string companyId)
         {
             _logger.LogInformation($"Start CompanyController::GetByCompanyId", companyId);
 
-            var entities = _service.GetByCompanyId(companyId);
+            System.Guid company_id = new Guid(companyId);
+
+            var entities = _service.GetByCompanyId(company_id);
 
             if (entities == null)
             {
@@ -73,29 +75,28 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileAddress))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileAddress))]
-        [HttpGet("SearchCompany/{subcontract_profile_type}/{location_code}/{vendor_code}/{company_th}/{company_en}/{company_alias}/{company_code}/{distibution_channel}/{channel_sale_group}")]
-        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchCompany(string subcontract_profile_type,
-            string location_code, string vendor_code, string company_th,
-            string company_en, string company_alias, string company_code,
-            string distibution_channel, string channel_sale_group)
+        [HttpGet("SearchCompany/{companyId}/{company_th}/{company_en}/{company_alias}/{tax_id}")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchCompany(string companyId
+            , string company_th, string company_en, string company_alias, string tax_id)
         {
-            _logger.LogInformation($"Start CompanyController::SearchCompany", subcontract_profile_type, location_code, vendor_code, company_th
-                , company_en, company_alias, company_code, distibution_channel, channel_sale_group);
+            _logger.LogInformation($"Start CompanyController::SearchCompany", companyId, company_th, company_en, company_alias
+                , tax_id);
 
-            if(subcontract_profile_type.ToUpper()=="NULL")
-            {
-                subcontract_profile_type = string.Empty;
-            }
+            //if(subcontract_profile_type.ToUpper()=="NULL")
+            //{
+            //    subcontract_profile_type = string.Empty;
+            //}
 
-            if (location_code.ToUpper() == "NULL")
-            {
-                location_code = string.Empty;
-            }
+            //if (location_code.ToUpper() == "NULL")
+            //{
+            //    location_code = string.Empty;
+            //}
 
-            if (vendor_code.ToUpper() == "NULL")
-            {
-                vendor_code = string.Empty;
-            }
+            //if (vendor_code.ToUpper() == "NULL")
+            //{
+            //    vendor_code = string.Empty;
+            //}
+            
 
             if (company_th.ToUpper() == "NULL")
             {
@@ -112,28 +113,34 @@ namespace SubcontractProfile.WebApi.API.Controllers
                 company_alias = string.Empty;
             }
 
-            if (company_code.ToUpper() == "NULL")
+            if (tax_id.ToUpper() == "NULL")
             {
-                company_code = string.Empty;
+                tax_id = string.Empty;
             }
 
-            if (distibution_channel.ToUpper() == "NULL")
-            {
-                distibution_channel = string.Empty;
-            }
+            //if (company_code.ToUpper() == "NULL")
+            //{
+            //    company_code = string.Empty;
+            //}
 
-            if (channel_sale_group.ToUpper() == "NULL")
-            {
-                channel_sale_group = string.Empty;
-            }
+            //if (distibution_channel.ToUpper() == "NULL")
+            //{
+            //    distibution_channel = string.Empty;
+            //}
 
-            var entities = _service.SearchCompany(subcontract_profile_type, location_code, vendor_code, company_th
-                , company_en, company_alias, company_code, distibution_channel, channel_sale_group);
+            //if (channel_sale_group.ToUpper() == "NULL")
+            //{
+            //    channel_sale_group = string.Empty;
+            //}
+
+            System.Guid strCompanyId = new Guid(companyId);
+
+            var entities = _service.SearchCompany(strCompanyId, company_th, company_en, company_alias, tax_id);
 
             if (entities == null)
             {
-                _logger.LogWarning($"CompanyController::", "SearchCompany NOT FOUND", subcontract_profile_type, location_code, vendor_code, company_th
-                , company_en, company_alias, company_code, distibution_channel, channel_sale_group);
+                _logger.LogWarning($"CompanyController::", "SearchCompany NOT FOUND", companyId, company_th, company_en, company_alias
+                , tax_id);
                 return null;
             }
 

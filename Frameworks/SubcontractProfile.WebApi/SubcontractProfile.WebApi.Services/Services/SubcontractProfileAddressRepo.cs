@@ -68,6 +68,15 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@sub_district_id", subcontractProfileAddress.SubDistrictId);
             p.Add("@district_id", subcontractProfileAddress.DistrictId);
             p.Add("@province_id", subcontractProfileAddress.ProvinceId);
+            p.Add("@region_id", subcontractProfileAddress.RegionId);
+            p.Add("@address_type_id", subcontractProfileAddress.AddressTypeId);
+            p.Add("@zip_code", subcontractProfileAddress.ZipCode);
+            p.Add("@country", subcontractProfileAddress.Country);
+            p.Add("@village_name", subcontractProfileAddress.VillageName);
+            p.Add("@room_no", subcontractProfileAddress.RoomNo);
+            p.Add("@company_id", subcontractProfileAddress. CompanyId);
+            p.Add("@create_date", subcontractProfileAddress.CreateDate);
+            p.Add("@create_by", subcontractProfileAddress.CreateBy);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileAddress_Insert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -91,6 +100,15 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@sub_district_id", subcontractProfileAddress.SubDistrictId);
             p.Add("@district_id", subcontractProfileAddress.DistrictId);
             p.Add("@province_id", subcontractProfileAddress.ProvinceId);
+            p.Add("@region_id", subcontractProfileAddress.RegionId);
+            p.Add("@address_type_id", subcontractProfileAddress.AddressTypeId);
+            p.Add("@zip_code", subcontractProfileAddress.ZipCode);
+            p.Add("@country", subcontractProfileAddress.Country);
+            p.Add("@village_name", subcontractProfileAddress.VillageName);
+            p.Add("@room_no", subcontractProfileAddress.RoomNo);
+            p.Add("@company_id", subcontractProfileAddress.CompanyId);
+            p.Add("@modified_date", subcontractProfileAddress.ModifiedDate);
+            p.Add("@modified_by", subcontractProfileAddress.ModifiedBy);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileAddress_Update", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -142,6 +160,15 @@ namespace SubcontractProfile.WebApi.Services.Services
             dt.Columns.Add("sub_district_id", typeof(SqlInt32));
             dt.Columns.Add("district_id", typeof(SqlInt32));
             dt.Columns.Add("province_id", typeof(SqlInt32));
+            dt.Columns.Add("region_id", typeof(SqlInt32));
+            dt.Columns.Add("address_type_id", typeof(SqlString));
+            dt.Columns.Add("zip_code", typeof(SqlString));
+            dt.Columns.Add("country", typeof(SqlString));
+            dt.Columns.Add("village_name", typeof(SqlString));
+            dt.Columns.Add("room_no", typeof(SqlString));
+            dt.Columns.Add("company_id", typeof(SqlString));
+            dt.Columns.Add("create_date", typeof(SqlDateTime));
+            dt.Columns.Add("create_by", typeof(SqlString));
 
             if (SubcontractProfileAddressList != null)
                 foreach (var curObj in SubcontractProfileAddressList)
@@ -157,6 +184,15 @@ namespace SubcontractProfile.WebApi.Services.Services
                     row["sub_district_id"] = curObj.SubDistrictId == null ? SqlInt32.Null : new SqlInt32((int)curObj.SubDistrictId.Value);
                     row["district_id"] = curObj.DistrictId == null ? SqlInt32.Null : new SqlInt32((int)curObj.DistrictId.Value);
                     row["province_id"] = curObj.ProvinceId == null ? SqlInt32.Null : new SqlInt32((int)curObj.ProvinceId.Value);
+                    row["region_id"]= curObj.RegionId == null ? SqlInt32.Null : new SqlInt32((int)curObj.RegionId.Value);
+                    row["address_type_id"] = new SqlString(curObj.AddressTypeId);
+                    row["zip_code"]= new SqlString(curObj.ZipCode);
+                    row["country"]= new SqlString(curObj.Country);
+                    row["village_name"]= new SqlString(curObj.VillageName);
+                    row["room_no"]= new SqlString(curObj.RoomNo);
+                    row["company_id"]= new SqlString(curObj.CompanyId);
+                    row["create_date"] = DateTime.Now;
+                    row["create_by"]= new SqlString(curObj.CreateBy);
 
                     dt.Rows.Add(row);
                 }

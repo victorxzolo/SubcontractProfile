@@ -31,6 +31,30 @@ code { color: #e7515a; }
 
 /*Page title*/
 
+h5.title_index :before {
+    position: absolute;
+    top: 5px;
+    left: -5px;
+    content: "";
+    height: 20px;
+    width: 5px;
+    background-color: #b2d234;
+}
+
+h5.title_index {
+    position: relative;
+    margin: 0 0 0 25px;
+    margin-bottom: 0px;
+   /* font-size: 30px;*/
+    line-height: 30px;
+    color: #000;
+    font-family: 'db_helvethaica_x55_regular', sans-serif;
+}
+
+.mgb30 {
+    margin-bottom: 20px !important;
+}
+
 .page-header {
     border: 0;
     margin: 0;

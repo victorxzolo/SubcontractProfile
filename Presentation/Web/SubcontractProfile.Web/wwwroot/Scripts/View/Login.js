@@ -24,9 +24,11 @@
                         event.stopPropagation();
                     }
                     else {
+                        Loading();
                         var modelpass = {
                             username: $('#txtusername').val(),
-                            password: $('#txtpassword').val()
+                            password: $('#txtpassword').val(),
+                            keepme: $('#chkkeep').is(':checked') ? true : false
                         }
                         $.ajax({
                             type: "POST",
@@ -35,11 +37,18 @@
                             dataType: "json",
                             async: false,
                             success: function (data) {
-                                window.location.href = data.redirecturl;
+
+                                if (data.Response.Status) {
+                                    window.location.href = data.redirecturl;
+                                }
+                                else {
+                                    showFeedback("success", data.Response.Message, "System Information",
+                                        "<button type='button' class='btn-border btn-green' data-dismiss='modal' id='btnOKpopup'><i class='fa fa-check icon'></i><span>OK</span></button >");
+                                }
 
                             },
                             error: function (response) {
-                                //Loading(0);
+                                Loading(0);
                                 //clearForEdit();
                                 showFeedback("error", "This action is not available.", "System Information",
                                     "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");

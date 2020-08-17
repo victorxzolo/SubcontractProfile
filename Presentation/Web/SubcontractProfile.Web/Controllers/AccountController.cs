@@ -80,47 +80,50 @@ namespace SubcontractProfile.Web.Controllers
         [HttpPost]
         public IActionResult Login(LoginModel model)
         {
+            ResponseModel res = new ResponseModel();
             string Url = "";
 
             if (ModelState.IsValid)
             {
-                if (Configurations.UseLDAP)
-                {
-                    var authenResultMessage = "";
-                    if (AuthenLDAP(model.username, model.password, out authenResultMessage))
-                    {
-                        var authenticatedUser = GetUser(model.username);
-                        //authenticatedUser.AuthenticateType = AuthenticateType.LDAP;
-                        //Response.AppendCookie(CreateAuthenticatedCookie(authenticatedUser.username));
-                        //base.CurrentUser = authenticatedUser;
+                //if (Configurations.UseLDAP)
+                //{
+                //    var authenResultMessage = "";
+                //    if (AuthenLDAP(model.username, model.password, out authenResultMessage))
+                //    {
+                //        var authenticatedUser = GetUser(model.username);
+                //        //authenticatedUser.AuthenticateType = AuthenticateType.LDAP;
+                //        //Response.AppendCookie(CreateAuthenticatedCookie(authenticatedUser.username));
+                //        //base.CurrentUser = authenticatedUser;
 
-                        Url = "/Test/Dashboard";
+                //        Url = "/Test/Dashboard";
+                //    }
+                //    else
+                //    {
+                //        ModelState.AddModelError("", "Invalid UserName or Password.");
+                //    }
+                //}
+                //else
+                //{
+                    // bypass authen
+                if(model.username !=null && model.password !=null)
+                {
+                    string encryptedPassword = Util.EncryptText(model.password);
+                    var authenticatedUser = GetUser(model.username, encryptedPassword);
+                    if(authenticatedUser !=null)
+                    {
+                        res.Status = true;
+                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userLogin", authenticatedUser);
+                        Url = "/CompanyProfile/Index";
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Invalid UserName or Password.");
+                        res.Status = false;
+                        res.Message = "Login failed";
                     }
+                    
+                    // string decrypted = Util.DecryptText(encrypted);
                 }
-                else
-                {
-                    // bypass authen
-                    var authenticatedUser = GetUser(model.username);
-
-                    string encrypted = Util.EncryptText(model.password);
-                    string decrypted = Util.DecryptText(encrypted);
-                    //using (RijndaelManaged myRijndael = new RijndaelManaged())
-                    //{
-
-                    //    myRijndael.GenerateKey();
-                    //    myRijndael.GenerateIV();
-                    //    // Encrypt the string to an array of bytes.
-                    //    byte[] encrypted = Util.EncryptStringToBytes(model.password, myRijndael.Key, myRijndael.IV);
-
-                    //    // Decrypt the bytes to a string.
-                    //    string roundtrip = Util.DecryptStringFromBytes(encrypted, myRijndael.Key, myRijndael.IV);
-
-                    //}
-
+                   
                     //if (null != authenticatedUser && authenticatedUser.ProgramModel != null)
                     //{
                     //    authenticatedUser.AuthenticateType = AuthenticateType.LDAP;
@@ -134,39 +137,56 @@ namespace SubcontractProfile.Web.Controllers
                     //    ModelState.AddModelError("", model.username + " not found.");
                     //}
 
-                    Url = "/Test/Dashboard";
-                }
+                   
+                //}
             }
 
-            return Json(new { redirecturl = Url });
+            return Json(new { redirecturl = Url ,Response= res });
         }
 
 
-        public ProfileUserModel GetUser(string userName)
+        public SubcontractProfileUserModel GetUser(string userName,string password)
         {
-            var userQuery = new subcontract_profile_user
-            {
-                p_username = userName
-            };
+            SubcontractProfileUserModel authenticatedUser = new SubcontractProfileUserModel();
 
-            // var authenticatedUser = _QueryProcessor.Execute(userQuery);
-            var authenticatedUser = new ProfileUserModel();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //string uriString = string.Format("{0}/{1}/{2}", strpathAPI + "User/LoginUser", userName, password);
+            //HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            var uriUser = new Uri(Path.Combine(strpathAPI, "User", "LoginUser"));
+
+            var input = new SubcontractProfileUserModel();
+            input.Username = userName;
+            input.password = password;
+
+            var httpContentUser = new StringContent(JsonConvert.SerializeObject(input), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PostAsync(uriUser, httpContentUser).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                authenticatedUser = JsonConvert.DeserializeObject<SubcontractProfileUserModel>(v);
+            }
+
             return authenticatedUser;
         }
 
-        public bool AuthenLDAP(string userName, string password, out string authenMessage)
-        {
-            var authLDAPQuery = new LoginModel
-            {
-                username = userName,
-                password = password,
-            };
+        //public bool AuthenLDAP(string userName, string password, out string authenMessage)
+        //{
+        //    var authLDAPQuery = new LoginModel
+        //    {
+        //        username = userName,
+        //        password = password,
+        //    };
 
-            //var authenLDAPResult = _QueryProcessor.Execute(authLDAPQuery);
-            var authenLDAPResult = true;
-            authenMessage = "";
-            return authenLDAPResult;
-        }
+        //    //var authenLDAPResult = _QueryProcessor.Execute(authLDAPQuery);
+        //    var authenLDAPResult = true;
+        //    authenMessage = "";
+        //    return authenLDAPResult;
+        //}
 
         public IActionResult Logout()
         {
@@ -453,19 +473,20 @@ namespace SubcontractProfile.Web.Controllers
         [HttpPost]
         public IActionResult DDLTitle()
         {
-            var output = new List<SubcontractProfileTitleModel>();
+            var output = new List<SubcontractProfileCompanyTypeModel>();
 
 
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}", strpathAPI + "Title/GetALL");
+            //string uriString = string.Format("{0}", strpathAPI + "Title/GetALL");
+            string uriString = string.Format("{0}", strpathAPI + "CompanyType/GetALL");
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
                 var v = response.Content.ReadAsStringAsync().Result;
-                output = JsonConvert.DeserializeObject<List<SubcontractProfileTitleModel>>(v);
+                output = JsonConvert.DeserializeObject<List<SubcontractProfileCompanyTypeModel>>(v);
             }
 
 
@@ -1368,12 +1389,12 @@ namespace SubcontractProfile.Web.Controllers
 
                     var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
 
-                    if(dataUploadfile !=null && dataUploadfile.Count!=0)
+                    if (dataUploadfile != null && dataUploadfile.Count != 0)
                     {
                         #region Copy File to server
                         foreach (var e in dataUploadfile)
                         {
-                            resultGetFile = await GetFile(e,model.CompanyId.ToString());
+                            resultGetFile = await GetFile(e, model.CompanyId.ToString());
 
                             string filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
                             filename = EnsureCorrectFilename(filename);
@@ -1401,16 +1422,16 @@ namespace SubcontractProfile.Web.Controllers
                         string encrypted = Util.EncryptText(model.Password);
                         model.Password = encrypted;
 
-                        var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
-                        HttpClient clientCompany = new HttpClient();
-                        clientCompany.DefaultRequestHeaders.Accept.Add(
-                        new MediaTypeWithQualityHeaderValue("application/json"));
-                        var httpContentCompany = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                        HttpResponseMessage responseCompany = clientCompany.PostAsync(uriCompany, httpContentCompany).Result;
-                        if(responseCompany.IsSuccessStatusCode)
-                        {
-                            #region Insert Address
-                            var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
+                    var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
+                    HttpClient clientCompany = new HttpClient();
+                    clientCompany.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                    var httpContentCompany = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                    HttpResponseMessage responseCompany = clientCompany.PostAsync(uriCompany, httpContentCompany).Result;
+                    if (responseCompany.IsSuccessStatusCode)
+                    {
+                        #region Insert Address
+                        var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
 
                             if (dataaddr != null && dataaddr.Count != 0)
                             {
@@ -1444,22 +1465,15 @@ namespace SubcontractProfile.Web.Controllers
                                     clientAddress.DefaultRequestHeaders.Accept.Add(
                                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                                    var httpContent = new StringContent(JsonConvert.SerializeObject(addr), Encoding.UTF8, "application/json");
-                                    HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
-                                    if (responseAddress.IsSuccessStatusCode)
-                                    {
-                                        res.Status = true;
-                                        res.Message = "Register Success";
-                                        res.StatusError = "0";
-                                    }
-                                    else
-                                    {
-                                        res.Status = false;
-                                        res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
-                                        res.StatusError = "-1";
-                                    }
-                                }
+                               // string rr = JsonConvert.SerializeObject(addr);
 
+                                    var httpContent = new StringContent(JsonConvert.SerializeObject(addr), Encoding.UTF8, "application/json");
+                            HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
+                            if (responseAddress.IsSuccessStatusCode)
+                            {
+                                res.Status = true;
+                                res.Message = "Register Success";
+                                res.StatusError = "0";
                             }
                             else
                             {
@@ -1467,14 +1481,15 @@ namespace SubcontractProfile.Web.Controllers
                                 res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
                                 res.StatusError = "-1";
                             }
-                            #endregion
+                            }
                         }
-                        else
-                        {
-                            res.Status = false;
-                            res.Message = "Data is not correct, Please Check Data or Contact System Admin";
-                            res.StatusError = "-1";
-                        }
+                            else
+                            {
+                                res.Status = false;
+                                res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                res.StatusError = "-1";
+                            }
+                        #endregion
                     }
                     else
                     {
@@ -1482,11 +1497,18 @@ namespace SubcontractProfile.Web.Controllers
                         res.Message = "Data is not correct, Please Check Data or Contact System Admin";
                         res.StatusError = "-1";
                     }
-
-
-                    #endregion
                 }
                 else
+                {
+                    res.Status = false;
+                    res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                    res.StatusError = "-1";
+                }
+
+
+                #endregion
+            }
+                    else
                 {
                     res.Status = false;
                     res.Message = "Data is not correct, Please Check Data or Contact System Admin";
@@ -1633,31 +1655,9 @@ namespace SubcontractProfile.Web.Controllers
     }
 
     #region Login
-    public class LoginModel
-    {
-        public string username { get; set; }
-        public string password { get; set; }
-    }
 
-    public class ProfileUserModel
-    {
-        public string ret_code { get; set; }
-        public List<subcontract_profile_user_model> cur { get; set; }
-    }
-    public class subcontract_profile_user_model
-    {
-        public string username { get; set; }
-        public string sub_module_name { get; set; }
-        public string sso_first_name { get; set; }
-        public string sso_last_name { get; set; }
-        public string staff_name { get; set; }
-        public string staff_role { get; set; }
-    }
-    public class subcontract_profile_user
-    {
-        public string p_username { get; set; }
-        public string p_password { get; set; }
-    }
+
+   
 
     public class SiteSession
     {
@@ -1695,39 +1695,6 @@ namespace SubcontractProfile.Web.Controllers
         }
 
         public static int LatestUICulture { get; set; }
-    }
-
-    #endregion
-
-
-
-    #region Register 
-    public class subcontract_profile_locationQuery //ส่งเข้าDatabase
-    {
-        public string p_company_name_th { get; set; }
-        public string p_company_name_en { get; set; }
-        public string p_company_alias { get; set; }
-        public string p_company_code { get; set; }
-        public string p_location_name_th { get; set; }
-        public string p_location_name_en { get; set; }
-        public string p_location_code { get; set; }
-        public string p_distribution_channel { get; set; }
-        public string p_channel_sale_group { get; set; }
-        public int PAGE_INDEX { get; set; }
-        public int PAGE_SIZE { get; set; }
-        public string ret_code { get; set; }
-        public string cur { get; set; }
-    }
-
-    public class subcontract_profile_locationModel //รับจากDatabase
-    {
-        public string company_name_th { get; set; }
-        public string location_name_th { get; set; }
-        public string distribution_channel { get; set; }
-        public string channel_sale_group { get; set; }
-        public string location_code { get; set; }
-        //public decimal RowNumber { get; set; }
-        //public decimal CNT { get; set; }
     }
 
     #endregion

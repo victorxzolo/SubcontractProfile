@@ -400,10 +400,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="container  mt-5 mb-3" style="background-color:#E0E0E0;text-align: center; width:100%" id="btnconfirmpayment">
+                <div class="container  mt-5 mb-3" style="background-color:#E0E0E0;text-align: center; width:inherit" id="btnconfirmpayment">
                     <div class="row">
-
-
                         <div class="col-xs-12 col-sm-6 col-md-7 ">
                         </div>
                         <div class="ccol-xs-6 col-md-5 mt-2 mb-2">
@@ -415,8 +413,6 @@
 
                             <button class="btn btn-dark" id="btnclosepayment" onclick="closepayment()" style="color:white; width:90px;margin-left:2%" type="button">ปิด</button>
                         </div>
-
-
 
                     </div>
 
@@ -438,10 +434,11 @@
     <script type="text/javascript">
 
 
-
-
+       
+       
 
         $(document).ready(function () {
+           
 
             $("#ConfirmPayment").hide();
             $("#btnconfirmpayment").hide();
@@ -527,10 +524,12 @@
 
                     },
                     dataSrc: function (data) {
+                        console.log(data)                   
                         if (data.data != null) {
-                            var val = []
+                            var val = [];
                             val = paymentstr(data.data);
-                            data.data = val;
+                            data.data = val;  
+                            console.log(data.data);
                             return data.data;
                         }
 
@@ -550,7 +549,7 @@
                         "render": function (data, type, row, meta) {
                             var action = '';
                             var status = '';
-                            if (data.status == "Y") {
+                            if (data.Status == "Y") {
                                 action = "View";
                                 status = "Y";
                             }
@@ -558,7 +557,7 @@
                                 action = "Confrim";
                                 status = "N";
                             }
-                            return '<a href="javascript:void(0);" onclick="GetIdpayment(\'' + data.paymentId + '\',\'' + status + '\')"><u>' + action + '</u></a>';
+                            return '<a href="javascript:void(0);" onclick="GetIdpayment(\'' + data.PaymentId + '\',\'' + status + '\')"><u>' + action + '</u></a>';
                         },
                         "orderable": false,
                     },
@@ -567,15 +566,15 @@
                             return meta.row + 1;
                         }
                     },
-                    { "data": "paymentId" },
-                    { "data": "request_no" },
-                    { "data": "request_date" },
-                    { "data": "paymentDatetime" },
-                    { "data": "paymentChannal" },
-                    { "data": "bankTransfer" },
-                    { "data": "amountTransfer" },
-                    { "data": "contactName" },
-                    { "data": "contactPhoneNo" },
+                    { "data": "PaymentId" },
+                    { "data": "Request_no" },
+                    { "data": "Request_date" },
+                    { "data": "PaymentDatetime" },
+                    { "data": "PaymentChannal" },
+                    { "data": "BankTransfer" },
+                    { "data": "AmountTransfer" },
+                    { "data": "ContactName" },
+                    { "data": "ContactPhoneNo" },
                     {
                         "data": null, render: function (data, type, row) {
                             if (data.status == "Y") {
@@ -620,134 +619,29 @@
                 strpaymentdatefrom = Datedatefrom.getFullYear() + "-" + (Datedatefrom.getMonth() + 1) + "-" + Datedatefrom.getDate();
                 strpaymentdateto = Datedateto.getFullYear() + "-" + (Datedateto.getMonth() + 1) + "-" + Datedateto.getDate();
 
+   
+
+
                 tbSearchconfirmpayment.ajax.reload();
             });
 
 
 
         });
-        //function Searchconfirmpayment() {
-
-        //    const paymentrequestdatefrom = document.querySelector("#paymentrequestdatefrom")._flatpickr;
-        //    const paymentrequestdateto = document.querySelector("#paymentrequestdateto")._flatpickr;
-        //    const paymentdatefrom = document.querySelector("#paymentdatefrom")._flatpickr;
-        //    const paymentdateto = document.querySelector("#paymentdateto")._flatpickr;
-
-        //    var Daterequestdatefrom = new Date(paymentrequestdatefrom.selectedDates);
-        //    var Daterequestdateto = new Date(paymentrequestdateto.selectedDates);
-        //    var Datedatefrom = new Date(paymentdatefrom.selectedDates);
-        //    var Datedateto = new Date(paymentdateto.selectedDates);
-
-        //    var strpaymentrequestdatefrom = Daterequestdatefrom.getFullYear() + "-" + (Daterequestdatefrom.getMonth() + 1) + "-" + Daterequestdatefrom.getDate();
-        //    var strpaymentrequestdateto = Daterequestdateto.getFullYear() + "-" + (Daterequestdateto.getMonth() + 1) + "-" + Daterequestdateto.getDate();
-        //    var strpaymentdatefrom = Datedatefrom.getFullYear() + "-" + (Datedatefrom.getMonth() + 1) + "-" + Datedatefrom.getDate();
-        //    var strpaymentdateto = Datedateto.getFullYear() + "-" + (Datedateto.getMonth() + 1) + "-" + Datedateto.getDate();
-
-
-        //    $('#tbSearchconfirmpayment').DataTable({
-        //        scrollX: true,
-        //        ordering: true,
-        //        select: true,
-        //        retrieve: true,
-        //        paging: true,
-        //        pagingType: "full_numbers",
-        //        destroy: true,
-        //        searching: false,
-        //        proccessing: true,
-        //        ajax: {
-        //            type: "GET",
-        //            url: "/Payment/Searchconfirmpayment",
-        //            data: {
-        //                Paymentno: function () { return $('#paymentno').val() },
-        //                Paymentrequesttraningno: function () { return $('#paymentrequesttraningno').val() },
-        //                Paymantrequestdatefrom: function () { return strpaymentrequestdatefrom; },
-        //                Paymentrequestdateto: function () { return strpaymentrequestdateto; },
-        //                Paymentdatefrom: function () { return strpaymentdatefrom; },
-        //                Paymentdateto: function () { return strpaymentdateto; },
-        //                Paymentstatus: function () { return $('#paymentstatus').val() }
-
-        //            },
-        //            dataSrc: function (data) {
-        //                if (data.data != null) {
-        //                    var val = []
-        //                    val = paymentstr(data.data);
-        //                    data.data = val;
-        //                    return data.data;
-        //                }
-
-        //            },
-        //            dataType: "json",
-        //            error: function (xhr, status, error) {
-        //                console.log(error);
-        //                showFeedback("error", xhr.responseText, "System Information",
-        //                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-        //            }
-
-        //        },
-        //        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        //        columns: [
-        //            {
-        //                "targets": -11,
-        //                "data": null,
-        //                "render": function (data, type, row, meta) {
-        //                    var action = '';
-        //                    var status = '';
-        //                    if (data.status == "Y") {
-        //                        action = "View";
-        //                        status = "Y";
-        //                    }
-        //                    else {
-        //                        action = "Confrim";
-        //                        status = "N";
-        //                    }
-        //                    return '<a href="javascript:void(0);" onclick="GetIdpayment(\'' + data.paymentId + '\',\'' + status + '\')"><u>' + action + '</u></a>';
-        //                },
-        //                "orderable": false,
-        //            },
-        //            {
-        //                "data": null, render: function (data, type, row, meta) {
-        //                    return meta.row + 1;
-        //                }
-        //            },
-        //            { "data": "paymentId" },
-        //            { "data": "request_no" },
-        //            { "data": "request_date" },
-        //            { "data": "paymentDatetime" },
-        //            { "data": "paymentChannal" },
-        //            { "data": "bankTransfer" },
-        //            { "data": "amountTransfer" },
-        //            { "data": "contactName" },
-        //            { "data": "contactPhoneNo" },
-        //            {
-        //                "data": null, render: function (data, type, row) {
-        //                    if (data.status == "Y") {
-        //                        return "Paid";
-        //                    }
-        //                    else {
-        //                        return "No Paid";
-        //                    }
-        //                }
-        //            }
-        //        ],
-        //        language: {
-        //            infoEmpty: "No items to display",
-        //            lengthMenu: "_MENU_ items per page",
-        //            zeroRecords: "Nothing found",
-        //            info: "_START_ - _END_  of _TOTAL_  items",
-        //            infoFiltered: "",
-        //            paginate: {
-        //                previous: "<",
-        //                next: ">",
-        //                last: ">|",
-        //                first: "|<"
-        //            }
-        //        }
-        //    });
-
-
-        //    $('#tbSearchconfirmpayment').ajax.reload()
-
-        //}
+        function getDropDownPaymentChannal() {
+            $.ajax({
+                type: "GET",
+                url: "/Payment/paymentchannal",
+                processData: false,
+                contentType: false,
+                async: false,
+                success: function (response) {
+                    datapayment = response.data;
+                },
+                failure: function (msg) {
+                }
+            });
+        }
 
 
         function confirmpayment() {
@@ -834,7 +728,7 @@
                 contentType: false,
                 async: false,
                 success: function (response) {
-                    datapayment = response.data;
+                    datapayment = response.Data;
                 },
                 failure: function (msg) {
                 }
@@ -854,24 +748,34 @@
 
 
         function SetTextStatusN(data) {
+            var textbutton = '';
+            textbutton = '<div class="row">' +
+                '<div class="col-xs-12 col-sm-6 col-md-7 ">' +
+                '</div>' +
+                '<div class="ccol-xs-6 col-md-5 mt-2 mb-2">' +
+                '<button id="btninsertpayment" class="btn btn-success" onclick="InsertPayment()" type="button" style="width: 100px;margin-left:13%">แจ้งโอนเงิน</button>'+
+                '<button id="btnclearpayment" class="btn btn-dark" onclick="clearpayment()" style="color:white;width:110px;margin-left:2%" type="button">ล้างข้อมูล</button>'+
+                '<button class="btn btn-dark" id="btnclosepayment" onclick="closepayment()" style="color:white; width:90px;margin-left:2%" type="button">ปิด</button>' +
+                '</div>' +
+                '</div>';
+            $('#btnconfirmpayment').append(textbutton);
+
             $("#ConfirmPayment").show('slow');
             $("#btnconfirmpayment").show('slow');
-            $("#btninsertpayment").show('slow');
-            $("#btnclearpayment").show('slow');
-            $("#btnclosepayment").show('slow');
+        
 
-            var strpaymentDate = data.paymentDatetime.substring(0, 10).split("-");
-            var strpaymentTime = data.paymentDatetime.substring(11, 16);
+            var strpaymentDate = data.PaymentDatetime.substring(0, 10).split("-");
+            var strpaymentTime = data.PaymentDatetime.substring(11, 16);
             var Datapayment = new Date(strpaymentDate[0], strpaymentDate[1] - 1, strpaymentDate[2])
-            $("#Request_no").text(data.request_no);
-            $("#Payment_no").text(data.paymentNo);
-            $("#Company_name").text(data.company_name_th);
-            $("#address").text(data.company_address);
-            $("#Tax_id").text(data.tax_id);
-            $("#Contact_name").val(data.contactName);
-            $("#Contact_email").val(data.contactEmail);
-            $("#Contact_phone_no").val(data.contactPhoneNo);
-            $("#payment_channal").val(data.paymentChannal);
+            $("#Request_no").text(data.Request_no);
+            $("#Payment_no").text(data.PaymentNo);
+            $("#Company_name").text(data.companyNameTh);
+            $("#address").text(data.companyAddress);
+            $("#Tax_id").text(data.taxId);
+            $("#Contact_name").val(data.ContactName);
+            $("#Contact_email").val(data.ContactEmail);
+            $("#Contact_phone_no").val(data.ContactPhoneNo);
+            $("#payment_channal").val(data.PaymentChannal);
             $("#textpayment_channal").val("0001");
             $('#payment_date').datepicker('setDate', Datapayment);
             $('#payment_datetime').val(strpaymentTime);
@@ -882,28 +786,59 @@
             $("#remark").val(data.remark);
             Getpaymentchannal();
 
+
+            var data = {
+                Request_no: channel_sale_group,
+                PaymentNo: company_name_en,
+                PaymentId: company_name_th,
+                companyNameTh: channel_sale_group,
+                companyAddress: company_alias,
+                taxId: distribution_channel,
+                ContactName: channel_sale_group,
+                ContactEmail: channel_sale_group,
+                ContactPhoneNo: channel_sale_group,
+                PaymentChannal: channel_sale_group,
+                PaymentDatetime: channel_sale_group,
+                AmountTransfer: channel_sale_group,
+                BankTransfer: channel_sale_group,
+                BankBranch: channel_sale_group,
+                SlipAttachFile: channel_sale_group,
+                Remark: channel_sale_group,
+                Status: 'Y',
+                CompanyId: channel_sale_group,
+                
+                
+                
+            }
+
         }
 
         function SetTextStatusY(data) {
-
-            $("#ConfirmPayment").show('slow');
-            $("#btnconfirmpayment").show('slow');
-            $("#btnclosepayment").show('slow');
-            var textpaymentchannal = '<option value="' + data.paymentChannal + '">' + data.paymentChannal + '</option>';
-            var strpaymentDate = data.paymentDatetime.substring(0, 10).split("-");
-            var strpaymentTime = data.paymentDatetime.substring(11, 16);
+            var textbutton = '';
+            textbutton = '<div class="row">' +
+                '<div class="col-xs-12 col-sm-6 col-md-7 ">' +
+                '</div>' +
+                '<div class="ccol-xs-6 col-md-5 mt-2 mb-2">' +
+                '<button class="btn btn-dark" id="btnclosepayment" onclick="closepayment()" style="color:white; width:90px;margin-left:2%" type="button">ปิด</button>' +
+                '</div>' +
+                '</div>';
+            $('#btnconfirmpayment').append(textbutton);
+            $("#ConfirmPayment").show('slow');         
+            var textpaymentchannal = '<option value="' + data.PaymentChannal + '">' + data.PaymentChannal + '</option>';
+            var strpaymentDate = data.PaymentDatetime.substring(0, 10).split("-");
+            var strpaymentTime = data.PaymentDatetime.substring(11, 16);
             //var Datapayment = new Date(strpaymentDate[0], strpaymentDate[1] - 1, strpaymentDate[2])
             var covertstrDate = strpaymentDate[2] + '/' + (strpaymentDate[1]) + '/' + strpaymentDate[0]
 
-            $("#Request_no").text(data.request_no);
-            $("#Payment_no").text(data.paymentNo);
+            $("#Request_no").text(data.Request_no);
+            $("#Payment_no").text(data.PaymentNo);
             $("#Company_name").text(data.companyNameTh);
             $("#address").text(data.companyAddress);
             $("#Tax_id").text(data.taxId);
 
-            $("#Contact_name").val(data.contactName);
-            $("#Contact_email").val(data.contactEmail);
-            $("#Contact_phone_no").val(data.contactPhoneNo);
+            $("#Contact_name").val(data.ContactName);
+            $("#Contact_email").val(data.ContactEmail);
+            $("#Contact_phone_no").val(data.ContactPhoneNo);
             $("#payment_channal option").remove();
             $('#payment_channal').append(textpaymentchannal);
             $("#textpayment_channal").val("0001");
@@ -918,11 +853,11 @@
                 dateFormat: "H:i",
                 defaultDate: strpaymentTime
             });
-            $("#amount_transfer").val(data.amountTransfer);
-            $('#bank_transfer').append('<option value="' + data.bankTransfer + '">' + data.bankTransfer + ' </option>');
-            $("#bank_branch").val(data.bankBranch);
-            $("#nameslip_attach_file").html(data.slipAttachFile);
-            $("#remark").val(data.remark);
+            $("#amount_transfer").val(data.AmountTransfer);
+            $('#bank_transfer').append('<option value="' + data.BankTransfer + '">' + data.BankTransfer + ' </option>');
+            $("#bank_branch").val(data.BankBranch);
+            $("#nameslip_attach_file").html(data.SlipAttachFile);
+            $("#remark").val(data.Remark);
 
 
             $("#Contact_name").attr('disabled', 'disabled');
@@ -939,7 +874,7 @@
             $("#remark").attr('disabled', 'disabled');
         }
 
-        function InsertPayment() {
+        function UpdatePayment() {
             var date = $('#textpayment_date').val()
             var time = $('#payment_datetime').val()
 
@@ -1008,7 +943,8 @@
         }
 
         function closepayment() {
-            alert("xxxxx");
+            $("#ConfirmPayment").hide('slow');
+            $("#btnconfirmpayment").hide('slow');
 
         }
         function Getpaymentchannal() {
@@ -1035,15 +971,15 @@
             $.each(data, function () {
 
                 var strdata = {
-                    paymentId: this.paymentId,
-                    request_no: this.request_no,
-                    request_date: this.request_date,
-                    paymentDatetime: this.paymentDatetime,
-                    paymentChannal: this.paymentChannal,
-                    bankTransfer: this.bankTransfer,
-                    amountTransfer: this.amountTransfer,
-                    contactName: this.contactName,
-                    contactPhoneNo: this.contactPhoneNo,
+                    PaymentId: this.PaymentId,
+                    Request_no: this.Request_no,
+                    Request_date: this.Request_date,
+                    PaymentDatetime: this.PaymentDatetime,
+                    PaymentChannal: this.PaymentChannal,
+                    BankTransfer: this.BankTransfer,
+                    AmountTransfer: this.AmountTransfer,
+                    ContactName: this.ContactName,
+                    ContactPhoneNo: this.ContactPhoneNo,
 
                 };
 
