@@ -81,8 +81,6 @@
     <script src="~/bootbox/bootbox.min.js"></script>
     <script src="~/bootbox/bootbox.locales.js"></script>
 
-
-
     @RenderSection("Scripts", required: false)
     @RenderSection("modalpanel", required: false)
 </head>
@@ -221,10 +219,10 @@
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Registration" data-parent="#accordionExample">
                             <li>
-                                <a href="#"> Company </a>
+                                <a  href="@Url.Action("Index", "CompanyProfile")"> Company </a>
                             </li>
                             <li>
-                                <a href="#"> Location  </a>
+                                <a href="@Url.Action("LocationProfile", "Location")"> Location  </a>
                             </li>
                             <li>
                                 <a href="#"> Team </a>

@@ -158,8 +158,8 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string ContractMail { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string CompanyId { get; set; }
+
+        public System.Guid CompanyId { get; set; }
 
 
         public object Clone()

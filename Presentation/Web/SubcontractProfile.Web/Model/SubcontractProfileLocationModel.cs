@@ -138,8 +138,8 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string ContractMail { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string CompanyId { get; set; }
+       
+        public System.Guid CompanyId { get; set; }
 
         public string company_name_th { get; set; }
         public string distribution_channel { get; set; }
