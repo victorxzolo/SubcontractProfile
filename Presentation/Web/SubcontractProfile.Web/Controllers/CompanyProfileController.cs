@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using SubcontractProfile.Web.Extension;
 using SubcontractProfile.Web.Model;
 
 namespace SubcontractProfile.Web.Controllers
@@ -16,12 +17,14 @@ namespace SubcontractProfile.Web.Controllers
     {
         private readonly string strpathAPI;
         private readonly IConfiguration _configuration;
-
+  
         public CompanyProfileController(IConfiguration configuration)
         {
             _configuration = configuration;
 
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
+           
+            //Session["UserID"] = "";
             //Lang = "TH";
             //strpathASCProfile = _configuration.GetValue<string>("PathASCProfile:DEV").ToString();
         }
@@ -29,6 +32,11 @@ namespace SubcontractProfile.Web.Controllers
         // GET: CompanyProfileController
         public ActionResult Index()
         {
+            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+            if(userProfile ==null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
 
@@ -36,6 +44,7 @@ namespace SubcontractProfile.Web.Controllers
         public ActionResult Search(string companyNameTh, string companyNameEn, string companyAilas
             ,string taxId)
         {
+
             var companyResult = new List<SubcontractProfileCompanyModel>();
 
             var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
@@ -60,10 +69,9 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            ///{subcontract_profile_type}/{location_code}/{vendor_code}/{company_th}/{company_en}/{company_alias}/{company_code}/{distibution_channel}/{channel_sale_group}
+            var userProfile =SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
 
-            //    System.Guid strCompanyId = new Guid("3A37A238-1CDF-4AF8-980F-00C86822F903");
-            string strCompanyId = "3A37A238-1CDF-4AF8-980F-00C86822F903";
+            Guid strCompanyId = userProfile.companyid;
 
 
             if (companyNameTh ==null)
