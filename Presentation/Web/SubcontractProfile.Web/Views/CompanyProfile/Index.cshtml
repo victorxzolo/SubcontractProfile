@@ -1,0 +1,882 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; ViewBag.Title = "Company Profile";
+}
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+
+    <div class="skills layout-spacing ">
+        <div class="widget-content widget-content-area">
+            <h3 class="">ข้อมูลบริษัท</h3>
+
+            <div class="widget-content1">
+
+                <div class="form-row mb-4">
+                    <div class="form-group col-md-12">
+                        <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline1">New Subcontract</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline2">Dealer</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">ชื่อบริษัท (ไทย)</label>
+                        <input type="text" class="form-control" id="inputCompanynameTh" placeholder="ชื่อบริษัท (ไทย)">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ชื่อบริษัท (อังกฤษ)</label>
+                        <input type="text" class="form-control" id="inputCompanynameEn" placeholder="ชื่อบริษัท (อังกฤษ)">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">ชื่อย่อบริษัท</label>
+                        <input type="text" class="form-control" id="inputCompanyAilas" placeholder="อย่อบริษัท">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Tax ID</label>
+                        <input type="text" class="form-control" maxlength="13" id="inputTaxId" placeholder="Tax ID">
+                    </div>
+
+                </div>
+
+                <div style="text-align:center">
+
+                    <button id="btnMainClear" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
+                    <button id="btnSearch" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+
+                </div>
+
+
+            </div>
+
+
+            <br />
+            <div class="widget-heading">
+                <h3 class="">ผลการค้นหา</h3>
+
+            </div>
+            @*<div class="col-md-12 text-right mb-1">
+                    <button id="add-work-platforms" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg> เพิ่ม</button>
+
+                </div>*@
+
+
+            <div class="table-responsive">
+                <table id="tbSearchResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                    <thead>
+                        <tr>
+                            <th style="text-align:left">แก้ไข</th>
+                            <th>ชื่อบริษัท(ไทย)</th>
+                            <th>ชื่อบริษัท(อังกฤษ)</th>
+                            <th>Tax ID</th>
+                            <th style="width:15%">วันที่สมัคร</th>
+                            <th style="width:15%">วันที่อนุมัติ</th>
+                            <th style="width:10%">สถานะ</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+@section modalpanel {
+
+    <div id="AddEditModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="hTitleEdit" class="modal-title">แก้ไขข้อมูลบริษัท</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="frNew" class="needs-validation" novalidate>
+                        <div class="row mb-4">
+                            <div class="form-group col-md-12">
+                                <label>ประเภทผู้สมัคร </label>  <span style="color:red">*</span><br />
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="rdoCompanyType1" name="customRadioInline1" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioInline1">New Subcontract</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="rdoCompanyType2" name="customRadioInline1" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioInline2">Dealer</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>เลขทะเบียนนิติบุคล</label> <span style="color:red">*</span>
+                                <div class="input-group mb-4">
+                                    <input type="text" class="form-control" placeholder="เลขทะเบียนนิติบุคล" aria-label="Recipient's username" maxlength="13" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success" type="button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>ชื่อย่อบริษัท</label>
+                                <input type="text" placeholder="ชื่อย่อบริษัท" class="form-control" id="inputCompanynameEn_e" placeholder="ชื่อย่อบริษัท">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>ชื่อนิติบุคคล(ไทย)</label> <span style="color:red">*</span>
+                                <div class="form-row mb-4">
+                                    <div class="col-4">
+                                        <select class="form-control form-control" id="ddlprefixcompany_name_th"></select>
+
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" placeholder="ชื่อนิติบุคคล(ไทย)" class="form-control" id="txtcompany_name_th" maxlength="100" required />
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>ชื่อนิติบุคคล(อังกฤษ)</label> <span style="color:red">*</span>
+                                <div class="form-row mb-4">
+                                    <div class="col-4">
+                                        <select class="form-control form-control" id="ddlprefixcompany_name_en"></select>
+
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" placeholder="ชื่อนิติบุคคล(อังกฤษ)" class="form-control" id="txtcompany_name_en" maxlength="100" required />
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>ชื่อภาษีหัก ณ ที่จ่าย</label>
+                                <input type="text" class="form-control" placeholder="ชื่อภาษีหัก ณ ที่จ่าย" aria-label="Recipient's username" maxlength="13" required>
+
+
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>ชื่อภาษีมูลค่าเพิ่ม</label><br />
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" name="vat_type" id="chkvat_typeT" value="T" checked class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioInline1"> ภาษีมูลค่าเพิ่ม</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" name="vat_type" id="chkvat_typeE" value="E" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioInline2"> ไม่มีภาษีมูลค่าเพิ่ม</label>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <h4 class="">ข้อมูลที่อยู่บริษัท</h4>
+                        <hr>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>ประเภทที่อยู่</label>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-1">
+
+                                </div>
+
+
+                                <div class="col-sm-3">
+                                    <div class="n-chk">
+                                        <label class="new-control new-checkbox checkbox-primary">
+                                            <input id="chkLocationBranch" type="checkbox" class="new-control-input">
+                                            <span class="new-control-indicator"></span>ที่อยู่ตามที่ตั้งสาขา
+                                        </label>
+                                    </div>
+
+                                    <div class="n-chk">
+                                        <label class="new-control new-checkbox checkbox-primary">
+                                            <input id="chkLocationDoc" type="checkbox" class="new-control-input">
+                                            <span class="new-control-indicator"></span>ที่อยู่จัดส่งเอกสาร
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="n-chk">
+                                        <label class="new-control new-checkbox checkbox-primary">
+                                            <input id="chkLocationTax" type="checkbox" class="new-control-input">
+                                            <span class="new-control-indicator"></span>ที่อยู่ตามใบกำกับภาษี
+                                        </label>
+                                    </div>
+                                    <div class="n-chk">
+                                        <label class="new-control new-checkbox checkbox-primary">
+                                            <input id="chkLocationShip" type="checkbox" class="new-control-input">
+                                            <span class="new-control-indicator"></span>ที่อยู่จัดส่งสินค้า
+                                        </label>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="n-chk">
+                                        <label class="new-control new-checkbox checkbox-primary">
+                                            <input id="chkLocationWT" type="checkbox" class="new-control-input">
+                                            <span class="new-control-indicator"></span>ที่อยู่ตาม W/T
+                                        </label>
+                                    </div>
+                                    <div class="n-chk">
+                                        <label class="new-control new-checkbox checkbox-primary">
+                                            <input id="chkLocationShipPOP" type="checkbox" class="new-control-input">
+                                            <span class="new-control-indicator"></span>ที่อยู่จัดส่ง POP
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>เลขที่ :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="row col-sm-12">
+                                        <input type="text" id="6" style="width:120px" class="form-control">
+                                        <label>&nbsp;&nbsp;&nbsp;&nbsp;หมู่ที่ :</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="text" id="7" style="width:110px" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>หมู่บ้าน :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="8" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>อาคาร :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="9" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>ชั้น :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="row col-sm-12">
+                                        <input type="text" id="10" style="width:120px" class="form-control">
+                                        <label>&nbsp;&nbsp;&nbsp;&nbsp;ห้อง :</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="text" id="11" style="width:110px" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>ซอย :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="12" style="width:300px" class="form-control">
+                                </div>
+
+
+                                <div class="col-sm-2">
+                                    <label>ถนน :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="13" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>ประเทศ :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select id="country" name="country" class="form-control form-control" style="width:300px">
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label>ภาค :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select id="8" name="8" class="form-control form-control" style="width:300px">
+                                    </select>
+                                </div>
+
+
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>จังหวัด :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select id="7" name="7" class="form-control form-control" style="width:300px">
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label>อำเภอ/เขต :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select id="6" name="6" class="form-control form-control" style="width:300px">
+                                    </select>
+                                </div>
+
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>ตำบล/แขวง :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select id="5" name="5" class="form-control form-control" style="width:300px">
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label>รหัสไปรษณีย์ :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select id="portcode" name="portcode" class="form-control form-control" style="width:300px">
+                                    </select>
+                                </div>
+                            </div>
+
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-6" style="text-align:right; ">
+                                    <input type="button" id="btnClear" value="รีเซ็ต" style="width:20%" class="btn btn-dark mb-2" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="button" id="btnAdd" value="เพิ่มที่อยู่" style="width:20%" class="btn btn-success mb-2" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row col-sm-12">
+                                <div class="table-responsive">
+                                    <table id="tbAddressResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                                        <thead>
+                                            <tr>
+                                                <th width="30%">ประเภทที่อยู่</th>
+                                                <th width="50%">ที่อยู่</th>
+                                                <th width="10%">แก้ไข</th>
+                                                <th width="10%">ลบ</th>
+
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <br />
+
+               
+                        <h4>ข้อมูลติดต่อบริษัท</h4>
+                        <hr >
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>อีเมลล์ บริษัท :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="mailCompany" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>ชื่อผู้ติดต่อ :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="nameContract" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>อีเมลล์ :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="mailContract" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>เบอร์โทร :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="telContract" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <h4>ข้อมูลติดต่อแผนก</h4>
+                        <hr >
+                        <div class="container">
+                            <div class="row col-sm-2">
+                                <label>แผนกติดตั้ง</label>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>ชื่อผู้ติดต่อ :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="name1" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>เบอร์โทร :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="tel1" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>อีเมลล์ :</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input type="text" id="mail1" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row col-sm-2">
+                                <label>แผนกซ่อมบำรุง</label>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>ชื่อผู้ติดต่อ :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="name2" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>เบอร์โทร :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="tel2" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>อีเมลล์ :</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input type="text" id="mail2" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row col-sm-2">
+                                <label>แผนกบัญชี</label>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>ชื่อผู้ติดต่อ :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="name3" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>เบอร์โทร :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="tel3" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>อีเมลล์ :</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input type="text" id="mail3" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <h4>ข้อมูลบัญชีธนาคาร</h4>
+                        <hr>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>ชื่อธนาคาร :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="row col-sm-12">
+                                        <select id="selBankName" class="form-control form-control">
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>ชื่อสาขา :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="row col-sm-12">
+                                        <input type="text" id="nameBranch" class="form-control">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>ประเภทบัญชี :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="row col-sm-12">
+                                        <select id="AccType" name="AccType" class="form-control form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>ชื่อบัญชี :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="row col-sm-12">
+
+                                        <input type="text" id="busiName" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>เลขบัญชี :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="row col-sm-12">
+                                        <input type="text" id="codeNumber" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>อัพโหลดหน้าบัญชีธนาคาร:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="row col-sm-12">
+                                        <input type="text" id="busiName"  class="form-control">
+
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label>ประเภทธุรกิจ :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="row col-sm-12">
+                                        <select id="businessType" name="businessType" class="form-control form-control" style="width:300px">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <h4>ข้อมูลเอกสารบริษัท</h4>
+                        <hr >
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>หนังสือรับรองบริษัท :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="row col-sm-12">
+                                        <input type="text" id="ensureBook" style="width:220px" class="form-control">
+                                        <input type="button" id="btnBook1" value="Browse" width="50" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>หนังสือทะเบียนพานิชย์:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="row col-sm-12">
+                                        <input type="text" id="commerceName" style="width:220px" class="form-control">
+                                        <input type="button" id="btnBook2" value="Browse" width="50" />
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>หนังสือ ก.พ. 20 :</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="row col-sm-12">
+                                        <input type="text" id="20Name" style="width:220px" class="form-control">
+                                        <input type="button" id="btnBook3" value="Browse" width="50" />
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                           
+                        </div>
+
+
+                        <input type="hidden" id="hdMode">
+                        <input type="hidden" id="hdCompanyId">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                                ปิด
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                บันทึก
+                            </button>
+                        </div>
+                    </form>
+            </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section scripts {
+    <script type="text/javascript">
+            var oTable;
+            $(document).ready(function () {
+                inittbSearchResult();
+                $("#btnSearch").click(function (e) {
+                    searchdata();
+                });
+
+                $("#btnMainClear").click(function (e) {
+                    clearMainData();
+                });
+
+
+            });
+
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        } else {
+                           // onSave();
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+
+           function inittbSearchResult() {
+          var oTable = $('#tbSearchResult').DataTable({
+                processing: true, // for show progress bar
+                serverSide: true, // for process server side
+                filter: false, // this is for disable filter (search box)
+                orderMulti: false, // for disable multiple column at once
+                pageLength: 10,
+                order: [],
+                autoWidth: false,
+                searching: false,
+                destroy: true,
+                lengthChange: false,
+                "oLanguage": {
+                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                    "sSearch": false,
+                    "sLengthMenu": "Results :  _MENU_",
+                },
+                 "scrollX": true,
+                  "language": {
+                  "zeroRecords": "No data found.",
+                   "decimal": ",",
+                  "thousands": "."
+                    },
+                    ajax: {
+                        url: '@Url.Action("Search", "CompanyProfile")',
+                        type: "POST",
+                        datatype: "JSON",
+                        //dataSrc:"",
+                        data: function (d) {
+                            d.companyNameTh = $("#inputCompanynameTh").val(),
+                                d.companyNameEn = $("#inputCompanynameEn").val(),
+                                d.companyAilas = $("#inputCompanyAilas").val(),
+                                d.taxId = $("#inputTaxId").val()
+
+                        }
+                    },
+                    columns: [
+
+                        {
+                            data: null,width:"10%", render: function (data, type, row) {
+                                return "<a href='#' onclick=openModal('edit','" + row.companyId + "');return false;  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='แก้ไข'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a>";
+                            }
+                           // orderable: false,
+                            //className: 'text-center'
+                        },
+                        { "data": "CompanyNameTh", "width": "20%"  },
+                        { "data": "CompanyNameEn", "width": "20%"  },
+                        { "data": "TaxId", "width": "15%" },
+                        { "data": "CreateDate", "width": "15%" },
+                        { "data": "ActivateDate", "width": "15%" },
+                        {
+                            data: null, width: "10%", render: function (data, type, row) {
+                                return "<span class='badge outline-badge-secondary shadow-none'>" + row.Status + "</span>";
+                            }
+                            // orderable: false,
+                           // className: 'text-center'
+                        }
+                        //{ "data": "Status", "width": "10%" },
+
+                ],
+                "order": [[0, "desc"]],
+                "stripeClasses": [],
+                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+                });
+
+        }
+
+        function searchdata() {
+          //  oTable.ajax.reload();
+            inittbSearchResult();
+        }
+
+        function openModal(mode, companyId) {
+
+           // clearData();
+            $('#hdMode').val(mode);
+            $('#hdCompanyCode').val(companyId);
+
+            if (mode == "edit") {
+                $("#txtCompanyCode").prop("disabled", true);
+                $("#hTitleEdit").text('แก้ไข ข้อมูลบริษัท');
+                getDataById(companyId);
+            }
+            else {
+                $("#hTitleEdit").text('เพิ่มรายการ');
+                $("#txtCompanyCode").prop("disabled", false);
+
+                // let form = $('#frNew');
+                $("#frNew")[0].reset();
+                //form.find('button').on('click', (event) => {
+                //    form.find('input, select, textarea').val('');
+                //});
+            }
+
+            $('#AddEditModal').modal('show');
+
+        }
+
+        function clearMainData() {
+            $("#inputCompanynameTh").val('');
+            $("#inputCompanynameEn").val('');
+            $("#inputCompanyAilas").val('');
+            $("#inputTaxId").val('');
+        }
+
+        function clearData() {
+            $("#txtCompanyCode").val('');
+            $("#txtCompanyName").val('');
+            //$("#txtRegisNum").val('');
+            //$('#hdMode').val('');
+            //$('#hdCompanyCode').val('');
+            //$("[name=rdoActive]").filter("[value='true']").prop("checked", true);
+        }
+
+          function getDataById(companyId) {
+          $.ajax({
+                   url: '@Url.Action("GetDataById", "Company")',
+                   type: 'POST',
+                   data: JSON.stringify({
+                       "p_companyCode": companyId
+                   }),
+                   dataType: "json",
+                 //  contentType: "application/json; charset=utf-8",
+                  success: function (result) {
+
+                       $("#txtCompanyCode").val(result.companyCode);
+                       $("#txtCompanyName").val(result.companyName);
+                      $("#txtRegisNum").val(result.reqisNumber);
+
+                      if (result.isActive == true) {
+                          $("[name=rdoActive]").filter("[value='true']").prop("checked", true);
+                      } else {
+                          $("[name=rdoActive]").filter("[value='false']").prop("checked", true);
+                      }
+
+                  },
+                  error: function (result) {
+
+                  }
+
+            });
+    }
+
+    function onSave() {
+                $.ajax({
+                   url: '@Url.Action("OnSave", "Company")',
+                   type: 'POST',
+                   data: JSON.stringify({
+                       "p_companyCode": $('#txtCompanyCode').val()
+                       , "p_companyName": $('#txtCompanyName').val()
+                       , "p_regisNum": $("#txtRegisNum").val()
+                       , "p_isActive": $('input[name="rdoActive"]:checked').val()
+                       , "p_mode": $('#hdMode').val()
+                   }),
+                   dataType: "json",
+                   contentType: "application/json; charset=utf-8",
+                   success: function (result) {
+                       if (result.Status == true) {
+                           if ($('#hdMode').val() == 'edit') {
+                               $('#AddEditModal').modal('hide');
+                           } else {
+                               bootbox.alert(result.Message);
+                               clearData();
+                           }
+
+                           searchdata();
+
+                            }
+                            else {
+                           bootbox.alert(result.Message);
+
+                            }
+                  },
+                  error: function (result) {
+                      bootbox.alert(result.Message);
+                  }
+
+            });
+
+        }
+
+    </script>
+}

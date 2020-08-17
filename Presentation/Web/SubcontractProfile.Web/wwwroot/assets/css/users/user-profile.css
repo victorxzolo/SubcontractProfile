@@ -111,21 +111,21 @@
 .skills .widget-content-area { border-radius: 6px; }
 .skills .widget-content-area h3 {
     position: relative;
-    font-size: 21px;
+    font-size: 26px;
     font-weight: 600;
     color: #3b3f5c;
     margin: 6px 0px 40px 0;
 }
-.skills .widget-content-area h3:after {
-    position: absolute;
-    content: "";
-    height: 2px;
-    width: 47px;
-    background: #1b55e2;
-    border-radius: 50%;
-    bottom: -2px;
-    left: 15px;
-}
+    .skills .widget-content-area h3:after {
+        position: absolute;
+        content: "";
+        height: 2px;
+        width: 47px;
+        background: #a1d221;
+        border-radius: 50%;
+        bottom: -2px;
+        left: 15px;
+    }
 .skills .widget-content-area p.skill-item {
     margin-bottom: 5px;
     font-size: 15px;
