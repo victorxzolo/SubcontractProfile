@@ -444,19 +444,20 @@ namespace SubcontractProfile.Web.Controllers
         [HttpPost]
         public IActionResult DDLTitle()
         {
-            var output = new List<SubcontractProfileTitleModel>();
+            var output = new List<SubcontractProfileCompanyTypeModel>();
 
 
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}", strpathAPI + "Title/GetALL");
+            //string uriString = string.Format("{0}", strpathAPI + "Title/GetALL");
+            string uriString = string.Format("{0}", strpathAPI + "CompanyType/GetALL");
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
                 var v = response.Content.ReadAsStringAsync().Result;
-                output = JsonConvert.DeserializeObject<List<SubcontractProfileTitleModel>>(v);
+                output = JsonConvert.DeserializeObject<List<SubcontractProfileCompanyTypeModel>>(v);
             }
 
 
@@ -1359,12 +1360,12 @@ namespace SubcontractProfile.Web.Controllers
 
                     var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
 
-                    if(dataUploadfile !=null && dataUploadfile.Count!=0)
+                    if (dataUploadfile != null && dataUploadfile.Count != 0)
                     {
                         #region Copy File to server
                         foreach (var e in dataUploadfile)
                         {
-                            resultGetFile = await GetFile(e,model.CompanyId.ToString());
+                            resultGetFile = await GetFile(e, model.CompanyId.ToString());
 
                             string filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
                             filename = EnsureCorrectFilename(filename);
@@ -1392,16 +1393,16 @@ namespace SubcontractProfile.Web.Controllers
                         string encrypted = Util.EncryptText(model.Password);
                         model.Password = encrypted;
 
-                        var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
-                        HttpClient clientCompany = new HttpClient();
-                        clientCompany.DefaultRequestHeaders.Accept.Add(
-                        new MediaTypeWithQualityHeaderValue("application/json"));
-                        var httpContentCompany = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                        HttpResponseMessage responseCompany = clientCompany.PostAsync(uriCompany, httpContentCompany).Result;
-                        if(responseCompany.IsSuccessStatusCode)
-                        {
-                            #region Insert Address
-                            var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
+                    var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
+                    HttpClient clientCompany = new HttpClient();
+                    clientCompany.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                    var httpContentCompany = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                    HttpResponseMessage responseCompany = clientCompany.PostAsync(uriCompany, httpContentCompany).Result;
+                    if (responseCompany.IsSuccessStatusCode)
+                    {
+                        #region Insert Address
+                        var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
 
                             if (dataaddr != null && dataaddr.Count != 0)
                             {
@@ -1435,22 +1436,15 @@ namespace SubcontractProfile.Web.Controllers
                                     clientAddress.DefaultRequestHeaders.Accept.Add(
                                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                                    var httpContent = new StringContent(JsonConvert.SerializeObject(addr), Encoding.UTF8, "application/json");
-                                    HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
-                                    if (responseAddress.IsSuccessStatusCode)
-                                    {
-                                        res.Status = true;
-                                        res.Message = "Register Success";
-                                        res.StatusError = "0";
-                                    }
-                                    else
-                                    {
-                                        res.Status = false;
-                                        res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
-                                        res.StatusError = "-1";
-                                    }
-                                }
+                               // string rr = JsonConvert.SerializeObject(addr);
 
+                                    var httpContent = new StringContent(JsonConvert.SerializeObject(addr), Encoding.UTF8, "application/json");
+                            HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
+                            if (responseAddress.IsSuccessStatusCode)
+                            {
+                                res.Status = true;
+                                res.Message = "Register Success";
+                                res.StatusError = "0";
                             }
                             else
                             {
@@ -1458,14 +1452,15 @@ namespace SubcontractProfile.Web.Controllers
                                 res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
                                 res.StatusError = "-1";
                             }
-                            #endregion
+                            }
                         }
-                        else
-                        {
-                            res.Status = false;
-                            res.Message = "Data is not correct, Please Check Data or Contact System Admin";
-                            res.StatusError = "-1";
-                        }
+                            else
+                            {
+                                res.Status = false;
+                                res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                res.StatusError = "-1";
+                            }
+                        #endregion
                     }
                     else
                     {
@@ -1473,11 +1468,18 @@ namespace SubcontractProfile.Web.Controllers
                         res.Message = "Data is not correct, Please Check Data or Contact System Admin";
                         res.StatusError = "-1";
                     }
-
-
-                    #endregion
                 }
                 else
+                {
+                    res.Status = false;
+                    res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                    res.StatusError = "-1";
+                }
+
+
+                #endregion
+            }
+                    else
                 {
                     res.Status = false;
                     res.Message = "Data is not correct, Please Check Data or Contact System Admin";
@@ -1686,39 +1688,6 @@ namespace SubcontractProfile.Web.Controllers
         }
 
         public static int LatestUICulture { get; set; }
-    }
-
-    #endregion
-
-
-
-    #region Register 
-    public class subcontract_profile_locationQuery //ส่งเข้าDatabase
-    {
-        public string p_company_name_th { get; set; }
-        public string p_company_name_en { get; set; }
-        public string p_company_alias { get; set; }
-        public string p_company_code { get; set; }
-        public string p_location_name_th { get; set; }
-        public string p_location_name_en { get; set; }
-        public string p_location_code { get; set; }
-        public string p_distribution_channel { get; set; }
-        public string p_channel_sale_group { get; set; }
-        public int PAGE_INDEX { get; set; }
-        public int PAGE_SIZE { get; set; }
-        public string ret_code { get; set; }
-        public string cur { get; set; }
-    }
-
-    public class subcontract_profile_locationModel //รับจากDatabase
-    {
-        public string company_name_th { get; set; }
-        public string location_name_th { get; set; }
-        public string distribution_channel { get; set; }
-        public string channel_sale_group { get; set; }
-        public string location_code { get; set; }
-        //public decimal RowNumber { get; set; }
-        //public decimal CNT { get; set; }
     }
 
     #endregion
