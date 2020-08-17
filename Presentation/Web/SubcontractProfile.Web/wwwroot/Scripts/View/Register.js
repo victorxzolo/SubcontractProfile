@@ -78,6 +78,9 @@
                     else {
                         BindRegion();
                         BindAddressType();
+                        BindDDLprovince();
+                        BindDDLdistrict();
+                        BindDDLsubdistrict();
                         $('#smartwizard').smartWizard("next");
                        
                         return true;
@@ -98,6 +101,9 @@
                     else {
                         BindRegion();
                         BindAddressType();
+                        BindDDLprovince();
+                        BindDDLdistrict();
+                        BindDDLsubdistrict();
                         $('#smartwizard').smartWizard("next");
                        
                         return true;
