@@ -1155,13 +1155,13 @@
             success: function (data) {
                 Loading(0);
                 console.log(data)
-                if (data.response.status) {
-                    showFeedback("success", data.response.message, "System Information",
+                if (data.Response.Status) {
+                    showFeedback("success", data.Response.Message, "System Information",
                         "<button type='button' class='btn-border btn-green' data-dismiss='modal' id='btnOKpopup'><i class='fa fa-check icon'></i><span>OK</span></button >");
                     window.location.href = data.redirecturl;
                 }
                 else {
-                    showFeedback("error", data.response.message, "System Information",
+                    showFeedback("error", data.Response.Message, "System Information",
                         "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
                 }
             },
@@ -1403,7 +1403,7 @@ function BindDDLTitle() {
     Loading();
     $.ajax({
         type: "POST",
-        url: "/Account/",
+        url: "/Account/DDLTitle",
         dataType: "json",
         success: function (data) {
             Loading(0);
@@ -1422,11 +1422,17 @@ function BindDDLTitle() {
                 $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val("").text('Select Title'));
 
                 $.each(data.responsetitle, function () {
-                    $('#ddlprefixcompany_name_th').append($('<option></option>').val(this.titleId == "0" ? "" : this.titleId).text(this.titleNameTh));
-                    $('#ddlprefixcompany_name_en').append($('<option></option>').val(this.titleId == "0" ? "" : this.titleId).text(this.TitleNameEn));
+                    //$('#ddlprefixcompany_name_th').append($('<option></option>').val(this.titleId == "0" ? "" : this.titleId).text(this.titleNameTh));
+                    //$('#ddlprefixcompany_name_en').append($('<option></option>').val(this.titleId == "0" ? "" : this.titleId).text(this.TitleNameEn));
 
-                    $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val(this.titleId == "0" ? "" : this.titleId).text(this.titleNameTh));
-                    $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val(this.titleId == "0" ? "" : this.titleId).text(this.titleNameEn));
+                    //$('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val(this.titleId == "0" ? "" : this.titleId).text(this.titleNameTh));
+                    //$('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val(this.titleId == "0" ? "" : this.titleId).text(this.titleNameEn));
+
+                    $('#ddlprefixcompany_name_th').append($('<option></option>').val(this.CompanyTypeId == "0" ? "" : this.CompanyTypeId).text(this.CompanyTypeNameTh));
+                    $('#ddlprefixcompany_name_en').append($('<option></option>').val(this.CompanyTypeId == "0" ? "" : this.CompanyTypeId).text(this.CompanyTypeNameEn));
+
+                    $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val(this.CompanyTypeId == "0" ? "" : this.CompanyTypeId).text(this.CompanyTypeNameTh));
+                    $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val(this.CompanyTypeId == "0" ? "" : this.CompanyTypeId).text(this.CompanyTypeNameEn));
                 });
             }
 
