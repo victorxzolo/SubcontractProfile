@@ -71,9 +71,9 @@
                             <th>ชื่อบริษัท(ไทย)</th>
                             <th>ชื่อบริษัท(อังกฤษ)</th>
                             <th>Tax ID</th>
-                            <th style="width:15%">วันที่สมัคร</th>
-                            <th style="width:15%">วันที่อนุมัติ</th>
-                            <th style="width:10%">สถานะ</th>
+                            <th >วันที่สมัคร</th>
+                            <th >วันที่อนุมัติ</th>
+                            <th >สถานะ</th>
 
 
                         </tr>
@@ -103,7 +103,7 @@
 
                 <div class="modal-body">
                     <form id="frNew" class="needs-validation" novalidate>
-
+                        <input type="hidden" id="hdCompanyId" name="hdCompanyId" value="">
                         <div class="row mb-4">
                             <div class="form-group col-md-12">
                                 <label>ประเภทผู้สมัคร </label>  <span style="color:red">*</span><br />
@@ -142,7 +142,7 @@
 
                                     </div>
                                     <div class="col-8">
-                                        <input id="inputCompany_name_th" type="text" placeholder="ชื่อนิติบุคคล(ไทย)" class="form-control"  maxlength="100" required />
+                                        <input id="inputCompany_name_th" type="text" placeholder="ชื่อนิติบุคคล(ไทย)" class="form-control" maxlength="100" required />
 
                                     </div>
 
@@ -158,7 +158,7 @@
 
                                     </div>
                                     <div class="col-8">
-                                        <input  id="inputCompany_name_en" type="text" placeholder="ชื่อนิติบุคคล(อังกฤษ)" class="form-control"  maxlength="100" required />
+                                        <input id="inputCompany_name_en" type="text" placeholder="ชื่อนิติบุคคล(อังกฤษ)" class="form-control" maxlength="100" required />
 
                                     </div>
 
@@ -797,7 +797,7 @@
 
             clearData();
             $('#hdMode').val(mode);
-            $('#hdCompanyCode').val(companyId);
+            $('#hdCompanyId').val(companyId);
 
             if (mode == "edit") {
                 $("#txtCompanyCode").prop("disabled", true);
@@ -866,10 +866,15 @@
     }
 
         function onSave() {
+            var company = new Object();
+            company.CompanyId = $('#hdCompanyId').val();
+            company.CompanyNameTh = $('#inputCompany_name_th').val();
+            company.CompanyNameEn = $('#inputCompany_name_en').val();  
            
-                $.ajax({
-                   url: '@Url.Action("OnSave", "CompanyProfile")',
-                   type: 'POST',
+            $.ajax({
+                url: '@Url.Action("OnSave", "CompanyProfile")',
+                type: 'POST',
+                data: { 'model': company },
                    //data: JSON.stringify({
                    //    "p_companyCode": $('#txtCompanyCode').val()
                    //    , "p_companyName": $('#txtCompanyName').val()

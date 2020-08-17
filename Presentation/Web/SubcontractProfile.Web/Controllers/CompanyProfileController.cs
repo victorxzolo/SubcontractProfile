@@ -144,10 +144,11 @@ namespace SubcontractProfile.Web.Controllers
         }
 
       
-        public ActionResult OnSave(SubcontractProfileCompanyModel mpdel)
+        public ActionResult OnSave(SubcontractProfileCompanyModel model)
         {
             try
             {
+                var companyId = model.CompanyId;
 
                 return RedirectToAction(nameof(Index));
             }
