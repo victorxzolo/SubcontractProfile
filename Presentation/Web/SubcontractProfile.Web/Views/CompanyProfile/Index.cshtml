@@ -845,10 +845,38 @@
                   type: 'POST',
                   data: { 'companyId': companyId},
                   dataType: "json",
-                  success: function (result) {
-
+              success: function (result) {
+                  console.log(result)
+                  if (result != null) {
                       $("#inputCompany_alias").val(result.CompanyAlias);
                       $("#inputCompany_name_th").val(result.CompanyNameTh);
+
+                      if (result.SubcontractProfileType == "NewSubContract") {
+                          $('#rdoCompanyType1').prop('checked', true);
+                          
+                      }
+                      else if (result.SubcontractProfileType == "Dealer") {
+                          $('#rdoCompanyType2').prop('checked', true);
+                      }
+
+                      $('#inputTax_id').val(result.TaxId);
+                      $('#inputCompany_alias').val(result.CompanyAlias);
+                      $('#ddlprefixcompany_name_th option').filter(': selected').val(this.CompanyTitleThId);
+                      $('#inputCompany_name_th').val(result.CompanyNameTh);
+                      $('#ddlprefixcompany_name_en option').filter(': selected').val(this.CompanyTitleEnId);
+                      $('#inputCompany_name_en').val(result.CompanyNameEn);
+                      $('#inputTax_id').val(result.WtName);
+
+                      if (result.VatType == "VAT") {
+                          $('#chkvat_typeT').prop('checked', true);
+                      }
+                      else if (result.VatType == "NON_VAT") {
+                          $('#chkvat_typeE').prop('checked', true);
+                      }
+
+                  }
+                     
+
                       //$("#txtRegisNum").val(result.reqisNumber);
 
                       //if (result.isActive == true) {

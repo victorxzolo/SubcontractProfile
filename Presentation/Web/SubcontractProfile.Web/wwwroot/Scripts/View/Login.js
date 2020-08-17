@@ -42,8 +42,8 @@
                                     window.location.href = data.redirecturl;
                                 }
                                 else {
-                                    showFeedback("success", data.Response.Message, "System Information",
-                                        "<button type='button' class='btn-border btn-green' data-dismiss='modal' id='btnOKpopup'><i class='fa fa-check icon'></i><span>OK</span></button >");
+                                    showFeedback("error", data.Response.Message, "System Information",
+                                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
                                 }
 
                             },
