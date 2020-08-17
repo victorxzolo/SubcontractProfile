@@ -54,11 +54,13 @@ namespace SubcontractProfile.WebApi.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileAddress))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileAddress))]
         [HttpGet("GetByCompanyId/{companyId}")] // GET /api/GetByAddressId/addressId/787413D6-AA0B-4F20-A638-94FBFBF634C9
-        public Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany> GetByCompanyId(System.Guid companyId)
+        public Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany> GetByCompanyId(string companyId)
         {
             _logger.LogInformation($"Start CompanyController::GetByCompanyId", companyId);
 
-            var entities = _service.GetByCompanyId(companyId);
+            System.Guid company_id = new Guid(companyId);
+
+            var entities = _service.GetByCompanyId(company_id);
 
             if (entities == null)
             {

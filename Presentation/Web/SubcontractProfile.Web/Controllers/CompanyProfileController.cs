@@ -112,10 +112,29 @@ namespace SubcontractProfile.Web.Controllers
         }
 
 
-        // GET: CompanyProfileController/Details/5
-        public ActionResult Details(int id)
+        // GET: CompanyProfileController/GetDataById/5
+        public JsonResult GetDataById(string companyId)
         {
-            return View();
+            var companyResult = new SubcontractProfileCompanyModel();
+   
+            // Getting all company data  
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Company/GetByCompanyId", companyId);
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                //data
+                companyResult = JsonConvert.DeserializeObject<SubcontractProfileCompanyModel>(result);
+
+            }
+
+            return Json(companyResult);
         }
 
         // GET: CompanyProfileController/Create
@@ -124,13 +143,12 @@ namespace SubcontractProfile.Web.Controllers
             return View();
         }
 
-        // POST: CompanyProfileController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+      
+        public ActionResult OnSave(SubcontractProfileCompanyModel mpdel)
         {
             try
             {
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -139,46 +157,5 @@ namespace SubcontractProfile.Web.Controllers
             }
         }
 
-        // GET: CompanyProfileController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: CompanyProfileController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CompanyProfileController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CompanyProfileController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

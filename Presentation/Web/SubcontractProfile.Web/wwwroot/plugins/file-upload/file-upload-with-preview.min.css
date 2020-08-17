@@ -41,7 +41,7 @@
         user-select: none;
         background-clip: padding-box;
         border-radius: .25rem;
-        height: auto;
+        height: 40px;
         border: 1px solid #f1f2f3;
         color: #3b3f5c;
         font-size: 15px;
