@@ -104,23 +104,14 @@ namespace SubcontractProfile.Web.Controllers
                 else
                 {
                     // bypass authen
-                    var authenticatedUser = GetUser(model.username);
+                    if(model.username !=null && model.password !=null)
+                    {
+                        var authenticatedUser = GetUser(model.username);
 
-                    string encrypted = Util.EncryptText(model.password);
-                    string decrypted = Util.DecryptText(encrypted);
-                    //using (RijndaelManaged myRijndael = new RijndaelManaged())
-                    //{
-
-                    //    myRijndael.GenerateKey();
-                    //    myRijndael.GenerateIV();
-                    //    // Encrypt the string to an array of bytes.
-                    //    byte[] encrypted = Util.EncryptStringToBytes(model.password, myRijndael.Key, myRijndael.IV);
-
-                    //    // Decrypt the bytes to a string.
-                    //    string roundtrip = Util.DecryptStringFromBytes(encrypted, myRijndael.Key, myRijndael.IV);
-
-                    //}
-
+                        string encrypted = Util.EncryptText(model.password);
+                        string decrypted = Util.DecryptText(encrypted);
+                    }
+                   
                     //if (null != authenticatedUser && authenticatedUser.ProgramModel != null)
                     //{
                     //    authenticatedUser.AuthenticateType = AuthenticateType.LDAP;
