@@ -31,5 +31,21 @@ namespace SubcontractProfile.Web.Model
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string CreateBy { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string password { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string companyid { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string region { get; set; }
+    }
+
+    public class LoginModel
+    {
+        public string username { get; set; }
+        public string password { get; set; }
+        public bool keepme { get; set; }
     }
 }

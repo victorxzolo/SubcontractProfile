@@ -69,16 +69,16 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileUser))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileUser))]
-        [HttpGet("LoginUser/{username}/{password}")]
-        public Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileUser> LoginUser(string username, string password)
+        [HttpPost("LoginUser")]
+        public Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileUser> LoginUser(SubcontractProfile.WebApi.Services.Model.SubcontractProfileUser user)
         {
-            _logger.LogInformation($"Start UserController::LoginUser", username, password);
+            _logger.LogInformation($"Start UserController::LoginUser", user.Username, user.password);
 
-            var entities = _service.LoginUser(username, password);
+            var entities = _service.LoginUser(user.Username, user.password);
 
             if (entities == null)
             {
-                _logger.LogWarning($"UserController::", "LoginUser NOT FOUND", username, password);
+                _logger.LogWarning($"UserController::", "LoginUser NOT FOUND", user.Username, user.password);
                 return null;
             }
 
