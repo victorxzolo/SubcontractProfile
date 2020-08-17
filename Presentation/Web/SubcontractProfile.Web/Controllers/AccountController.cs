@@ -114,6 +114,8 @@ namespace SubcontractProfile.Web.Controllers
                         res.Status = true;
                         SessionHelper.SetObjectAsJson(HttpContext.Session, "userLogin", authenticatedUser);
                         Url = "/CompanyProfile/Index";
+
+                       var datauser= SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
                     }
                     else
                     {
