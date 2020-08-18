@@ -156,7 +156,7 @@ namespace SubcontractProfile.Web.Controllers
 
         public ActionResult OnSave(SubcontractProfileLocationModel model)
         {
-            ResponseModel res = new ResponseModel();
+            ResponseModel result = new ResponseModel();
             HttpClient clientLocation = new HttpClient();
 
             try
@@ -175,13 +175,15 @@ namespace SubcontractProfile.Web.Controllers
                     HttpResponseMessage responseCompany = clientLocation.PostAsync(uriLocation, httpContent).Result;
                     if (responseCompany.IsSuccessStatusCode)
                     {
-
+                        result.Status = true;
+                        result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                        result.StatusError = "0";
                     }
                     else
                     {
-                        res.Status = false;
-                        res.Message = "Data is not correct, Please Check Data or Contact System Admin";
-                        res.StatusError = "-1";
+                        result.Status = false;
+                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        result.StatusError = "-1";
                     }
                 }
                 else //update
@@ -191,29 +193,68 @@ namespace SubcontractProfile.Web.Controllers
                     clientLocation.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
                     var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                    HttpResponseMessage responseCompany = clientLocation.PutAsync(uriLocation, httpContent).Result;
+                    HttpResponseMessage responseResult = clientLocation.PutAsync(uriLocation, httpContent).Result;
 
-                    if (responseCompany.IsSuccessStatusCode)
+                    if (responseResult.IsSuccessStatusCode)
                     {
-                        res.Status = true;
-                        res.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                        result.Status = true;
+                        result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                        result.StatusError = "0";
                     }
                     else
                     {
-                        res.Status = false;
-                        res.Message = "Data is not correct, Please Check Data or Contact System Admin";
-                        res.StatusError = "-1";
+                        result.Status = false;
+                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        result.StatusError = "-1";
                     }
                 }
             }
 
             catch (Exception ex)
             {
-                res.Message = "Cannot SaveChange.";
-                res.Status = false;
+                result.Message = "ไม่สามารถบันทึกข้อมูลได้ กรุณาติดต่อ Administrator.";
+                result.Status = false;
+                result.StatusError = "0";
             }
-            return Json(res);
+            return Json(result);
         }
+
+        public JsonResult OnDelete(string locationId)
+        {
+            var result = new ResponseModel();
+            HttpClient clientLocation = new HttpClient();
+            try
+            {
+                string uriString = string.Format("{0}/{1}", strpathAPI + "Location/Delete", locationId);
+              //  var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Delete"));
+
+                clientLocation.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+                // var httpContent = new StringContent(JsonConvert.SerializeObject(locationId), Encoding.UTF8, "application/json");
+                HttpResponseMessage responseResult = clientLocation.DeleteAsync(uriString).Result;
+                if (responseResult.IsSuccessStatusCode)
+                {
+                    result.Message = "ลบข้อมูลเรียบร้อย";
+                    result.Status = true;
+                    result.StatusError = "0";
+                }
+                else
+                {
+                    result.Status = false;
+                    result.Message = "ลบข้อมูลไม่สำเร็จ กรุณาติดต่อ Administrator.";
+                    result.StatusError = "-1";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result.Message = "ลบข้อมูลไม่สำเร็จ กรุณาติดต่อ Administrator.";
+                result.StatusError = "-1";
+            }
+            return Json(result);
+        }
+
+       
 
     }
 }

@@ -181,7 +181,7 @@ namespace SubcontractProfile.WebApi.Services.Services
         /// <summary>
         /// Delete
         /// </summary>
-        public async Task<bool> Delete(string locationId)
+        public async Task<bool> Delete(System.Guid locationId)
         {
             var p = new DynamicParameters();
             p.Add("@location_id", locationId);

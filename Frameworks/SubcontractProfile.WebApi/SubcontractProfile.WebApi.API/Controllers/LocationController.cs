@@ -229,11 +229,11 @@ namespace SubcontractProfile.WebApi.API.Controllers
         /// <response code="200">Boolean notifying if the user has been deleted properly.</response>
         [HttpDelete("Delete/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
-        public Task<bool> Delete(string id)
+        public Task<bool> Delete(Guid id)
         {
             _logger.LogInformation($"Start LocationController::Delete", id);
 
-            if (id == "")
+            if (id == Guid.Empty)
                 _logger.LogWarning($"Start LocationController::Delete", id);
 
             return _service.Delete(id);
