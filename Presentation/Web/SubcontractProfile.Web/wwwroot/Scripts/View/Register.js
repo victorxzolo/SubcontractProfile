@@ -900,7 +900,7 @@
     });
 
     $('#ddlBankname').change(function () {
-        var v_bankcode = $('#ddldistrict option').filter(':selected').val();
+        var v_bankcode = $('#ddlBankname option').filter(':selected').val();
         $('#txtbank_Code').val(v_bankcode);
     });
 
@@ -1081,7 +1081,7 @@
 
             BankCode: $('#txtbank_Code').val(),
             BankName: $('#txtbank_Name').val(),
-            AccountNumber: $('#txtaccount_Number').val(),
+            AccountNumber: $('#ddlaccount_Name option').filter(':selected').val() != "" ? $('#ddlaccount_Name option').filter(':selected').val() + $('#txtaccount_Number').val() : $('#txtaccount_Number').val(),
             AccountName:$('#ddlaccount_Name option').filter(':selected').val(),
            // AttachFile
             BranchCode: $('#txtbranch_Code').val(),
@@ -1516,10 +1516,10 @@ function BindDDLCompanyType() {
         success: function (data) {
             Loading(0);
             if (data != null) {
-                $('#ddlbusiness_type').empty();
+                $('#ddlaccount_Name').empty();
 
                 $.each(data.responsecompanytype, function () {
-                    $('#ddlbusiness_type').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
+                    $('#ddlaccount_Name').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
                 });
             }
 

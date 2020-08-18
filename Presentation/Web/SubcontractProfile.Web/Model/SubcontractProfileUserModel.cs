@@ -47,5 +47,6 @@ namespace SubcontractProfile.Web.Model
         public string username { get; set; }
         public string password { get; set; }
         public bool keepme { get; set; }
+        public string Language { get; set; }
     }
 }

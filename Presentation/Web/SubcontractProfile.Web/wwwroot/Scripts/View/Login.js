@@ -28,7 +28,8 @@
                         var modelpass = {
                             username: $('#txtusername').val(),
                             password: $('#txtpassword').val(),
-                            keepme: $('#chkkeep').is(':checked') ? true : false
+                            keepme: $('#chkkeep').is(':checked') ? true : false,
+                            Language: $('#ddlLanguage option').filter(':selected').val()
                         }
                         $.ajax({
                             type: "POST",

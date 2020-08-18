@@ -71,6 +71,30 @@ namespace SubcontractProfile.WebApi.API.Controllers
         }
 
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileAddress))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileAddress))]
+        [HttpPost("GetByCompanyId")]
+        public async Task<IEnumerable<SubcontractProfileAddress>> GetByCompanyId(SubcontractProfileAddress modal)
+        {
+            _logger.LogInformation($"Start AddressController::GetByCompanyId", modal.CompanyId);
+
+            var entities = await _service.GetAll();
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"AddressController::", "GetByCompanyId NOT FOUND", modal.CompanyId);
+                return null;
+            }
+            else
+            {
+               var returnentities = entities.Where(x => x.CompanyId == modal.CompanyId).ToList();
+                return returnentities;
+            }
+
+ 
+
+        }
+
         #endregion
 
         #region POST

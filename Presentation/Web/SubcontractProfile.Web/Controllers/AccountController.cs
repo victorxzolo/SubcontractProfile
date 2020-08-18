@@ -45,7 +45,8 @@ namespace SubcontractProfile.Web.Controllers
 
             //เรียก appsetting.json path api
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
-            Lang = "TH";
+       
+
             strpathASCProfile = _configuration.GetValue<string>("PathASCProfile:DEV").ToString();
         }
 
@@ -115,7 +116,10 @@ namespace SubcontractProfile.Web.Controllers
                         SessionHelper.SetObjectAsJson(HttpContext.Session, "userLogin", authenticatedUser);
                         Url = "/CompanyProfile/Index";
 
-                       var datauser= SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+                        SessionHelper.SetObjectAsJson(HttpContext.Session, "language", model.Language);
+                        Lang = model.Language;
+                        //var str_L= SessionHelper.GetObjectFromJson<string>(HttpContext.Session, "language");
+                        //var datauser= SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
                     }
                     else
                     {
@@ -290,7 +294,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}", strpathAPI + "SubDistrictController/GetAll");
+                string uriString = string.Format("{0}", strpathAPI + "SubDistrict/GetAll");
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -383,7 +387,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}", strpathAPI + "DistrictController/GetAll");
+                string uriString = string.Format("{0}", strpathAPI + "District/GetAll");
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
