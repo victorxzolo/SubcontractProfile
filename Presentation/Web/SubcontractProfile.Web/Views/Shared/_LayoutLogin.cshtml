@@ -120,6 +120,23 @@
             $("#MessageFeedbackPopUp").modal('show');
             //}
         }
+        function Loading(x) {
+            if (x == 0) {
+                $('#MyPopupLoading').on('shown.bs.modal', function (e) {
+                    $("#MyPopupLoading").modal('hide');
+                })
+                //$("#MyPopupLoading").modal('hide');
+            }
+            else {
+                $("#MyPopupLoading").modal('show');
+            }
+
+            //$('#MyPopupLoading').modal('show');
+            //setTimeout(function () {
+            //    console.log('hejsan');
+            //    $('#MyPopupLoading').modal('hide');
+            //}, 30000);
+        }
     </script>
 </body>
 </html>

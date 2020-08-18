@@ -1,0 +1,360 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; ViewBag.Title = "Location Profile";
+}
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+
+    <div class="skills layout-spacing ">
+        <div class="widget-content widget-content-area">
+            <h3 class="">Location</h3>
+
+            <div class="widget-content1">
+
+                <div class="form-row mb-4">
+                    @*<div class="form-group col-md-12">
+                        <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="rdoCustomerTypeSub" name="customRadioSucRegis" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline1">New Subcontract</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="rdoCustomerTypeDealer" name="customRadioSucRegis" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline2">Dealer</label>
+                        </div>
+                    </div>*@
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Location Code</label>
+                        <input type="text" class="form-control" id="inputLocationCode" placeholder="Location Code">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Location Name Ailas</label>
+                        <input type="text" class="form-control" id="inputLocationNameAilas" placeholder="Location Name Ailas">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Location Name (TH)</label>
+                        <input type="text" class="form-control" id="inputLocationNameTh" placeholder="Location Name (TH)">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Location Name (EN)</label>
+                        <input type="text" class="form-control" maxlength="13" id="inputLocationNameEn" placeholder="Location Name (EN)">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Storage Location</label>
+                        <input type="text" class="form-control" id="inputStorageLocation" placeholder="Storage Location">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Phone No</label>
+                        <input type="text" class="form-control" maxlength="13" id="inputPhoneNo" placeholder="Phone No">
+                    </div>
+
+                </div>
+
+                <div style="text-align:center">
+
+                    <button id="btnMainClear" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
+                    <button id="btnSearch" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+
+                </div>
+
+
+            </div>
+
+
+            <br />
+            <div class="widget-heading">
+                <h3 class="">ผลการค้นหา</h3>
+
+            </div>
+            <div class="col-md-12 text-right mb-1">
+                <button id="add-work-platforms" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg> เพิ่ม</button>
+
+            </div>
+
+
+            <div class="table-responsive">
+                <table id="tbSearchResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                    <thead>
+                        <tr>
+                            <th style="text-align:left">แก้ไข</th>
+                            <th>Location Code</th>
+                            <th>Location Name (Th)</th>
+                            <th>Location Name (En)</th>
+                            <th>Location Name Alias</th>
+                            <th>Storage</th>
+                            <th>Address</th>
+                            <th>Phone No</th>
+
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts {
+
+    <script type="text/javascript">
+            var oTable;
+            $(document).ready(function () {
+                inittbSearchResult();
+                $("#btnSearch").click(function (e) {
+                    searchdata();
+                });
+
+                $("#btnMainClear").click(function (e) {
+                    clearMainData();
+                });
+
+
+            });
+
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        } else {
+                            onSave();
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+
+           function inittbSearchResult() {
+          var oTable = $('#tbSearchResult').DataTable({
+                processing: true, // for show progress bar
+                serverSide: true, // for process server side
+                filter: false, // this is for disable filter (search box)
+                orderMulti: false, // for disable multiple column at once
+                pageLength: 10,
+                order: [],
+                autoWidth: false,
+                searching: false,
+                destroy: true,
+                lengthChange: false,
+                "oLanguage": {
+                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                    "sSearch": false,
+                    "sLengthMenu": "Results :  _MENU_",
+                },
+                 "scrollX": true,
+                  "language": {
+                  "zeroRecords": "No data found.",
+                   "decimal": ",",
+                  "thousands": "."
+                    },
+                    ajax: {
+                        url: '@Url.Action("Search", "Location")',
+                        type: "POST",
+                        datatype: "JSON",
+                        //dataSrc:"",
+                        data: function (d) {
+                                d.companyNameTh = $("#inputLocationCode").val(),
+                                d.companyNameEn = $("#inputCompanynameEn").val(),
+                                d.companyAilas = $("#inputLocationNameTh").val(),
+                                d.taxId = $("#inputLocationNameEn").val()
+                                d.taxId = $("#inputStorageLocation").val()
+                                d.taxId = $("#inputPhoneNo").val()
+
+                        }
+                    },
+                    columns: [
+
+                        {
+                            data: null,width:"10%", render: function (data, type, row) {
+                                return "<a href='#' onclick=openModal('edit','" + row.CompanyId + "');return false;  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='แก้ไข'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a>";
+                            }
+                           // orderable: false,
+                            //className: 'text-center'
+                        },
+                        { "data": "CompanyNameTh", "width": "20%"  },
+                        { "data": "CompanyNameEn", "width": "20%"  },
+                        { "data": "TaxId", "width": "15%" },
+                        { "data": "CreateDate", "width": "15%" },
+                        { "data": "ActivateDate", "width": "15%" },
+                        {
+                            data: null, width: "10%", render: function (data, type, row) {
+                                return "<span class='badge outline-badge-secondary shadow-none'>" + row.Status + "</span>";
+                            }
+                            // orderable: false,
+                           // className: 'text-center'
+                        }
+                        //{ "data": "Status", "width": "10%" },
+
+                ],
+                "order": [[0, "desc"]],
+                "stripeClasses": [],
+                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+                });
+
+        }
+
+        function searchdata() {
+          //  oTable.ajax.reload();
+            inittbSearchResult();
+        }
+
+        function openModal(mode, companyId) {
+
+            clearData();
+            $('#hdMode').val(mode);
+            $('#hdCompanyId').val(companyId);
+
+            if (mode == "edit") {
+                $("#txtCompanyCode").prop("disabled", true);
+                $("#hTitleEdit").text('แก้ไข ข้อมูลบริษัท');
+
+                getDataById(companyId);
+            }
+            else {
+                $("#hTitleEdit").text('เพิ่ม ข้อมูลบริษัท');
+                $("#txtCompanyCode").prop("disabled", false);
+
+                // let form = $('#frNew');
+                $("#frNew")[0].reset();
+                //form.find('button').on('click', (event) => {
+                //    form.find('input, select, textarea').val('');
+                //});
+            }
+
+            $('#AddEditModal').modal('show');
+
+        }
+
+        function clearMainData() {
+            $("#inputCompanynameTh").val('');
+            $("#inputCompanynameEn").val('');
+            $("#inputCompanyAilas").val('');
+            $("#inputTaxId").val('');
+        }
+
+        function clearData() {
+
+            $("[name=customRadioSucRegisEdit]").filter("[value='true']").prop("checked", false);
+            $("#inputTax_id").val('');
+            $("#inputCompany_alias").val('');
+            $("#inputCompany_name_th").val('');
+            $('#inputCompany_name_en').val('');
+            $('#inputTax_id').val('');
+            $("[name=vat_type]").filter("[value='true']").prop("checked", false);
+
+        }
+
+        function getDataById(companyId) {
+          $.ajax({
+                  url: '@Url.Action("GetDataById", "CompanyProfile")',
+                  type: 'POST',
+                  data: { 'companyId': companyId},
+                  dataType: "json",
+              success: function (result) {
+                  console.log(result)
+                  if (result != null) {
+                      $("#inputCompany_alias").val(result.CompanyAlias);
+                      $("#inputCompany_name_th").val(result.CompanyNameTh);
+
+                      if (result.SubcontractProfileType == "NewSubContract") {
+                          $('#rdoCompanyType1').prop('checked', true);
+
+                      }
+                      else if (result.SubcontractProfileType == "Dealer") {
+                          $('#rdoCompanyType2').prop('checked', true);
+                      }
+
+                      $('#inputTax_id').val(result.TaxId);
+                      $('#inputCompany_alias').val(result.CompanyAlias);
+                      $('#ddlprefixcompany_name_th option').filter(': selected').val(this.CompanyTitleThId);
+                      $('#inputCompany_name_th').val(result.CompanyNameTh);
+                      $('#ddlprefixcompany_name_en option').filter(': selected').val(this.CompanyTitleEnId);
+                      $('#inputCompany_name_en').val(result.CompanyNameEn);
+                      $('#inputTax_id').val(result.WtName);
+
+                      if (result.VatType == "VAT") {
+                          $('#chkvat_typeT').prop('checked', true);
+                      }
+                      else if (result.VatType == "NON_VAT") {
+                          $('#chkvat_typeE').prop('checked', true);
+                      }
+
+                  }
+
+
+                      //$("#txtRegisNum").val(result.reqisNumber);
+
+                      //if (result.isActive == true) {
+                      //    $("[name=rdoActive]").filter("[value='true']").prop("checked", true);
+                      //} else {
+                      //    $("[name=rdoActive]").filter("[value='false']").prop("checked", true);
+                      //}
+
+                  },
+                  error: function (result) {
+
+                  }
+
+            });
+    }
+
+        function onSave() {
+            var company = new Object();
+            company.CompanyId = $('#hdCompanyId').val();
+            company.CompanyNameTh = $('#inputCompany_name_th').val();
+            company.CompanyNameEn = $('#inputCompany_name_en').val();
+
+            $.ajax({
+                url: '@Url.Action("OnSave", "CompanyProfile")',
+                type: 'POST',
+                data: { 'model': company },
+                   //data: JSON.stringify({
+                   //    "p_companyCode": $('#txtCompanyCode').val()
+                   //    , "p_companyName": $('#txtCompanyName').val()
+                   //    , "p_regisNum": $("#txtRegisNum").val()
+                   //    , "p_isActive": $('input[name="rdoActive"]:checked').val()
+                   //    , "p_mode": $('#hdMode').val()
+                   //}),
+                   dataType: "json",
+                  // contentType: "application/json; charset=utf-8",
+                   success: function (result) {
+                       if (result.Status == true) {
+                           if ($('#hdMode').val() == 'edit') {
+                               $('#AddEditModal').modal('hide');
+                           } else {
+                               bootbox.alert(result.Message);
+                               clearData();
+                           }
+
+                           searchdata();
+
+                            }
+                            else {
+                           bootbox.alert(result.Message);
+
+                            }
+                  },
+                  error: function (result) {
+                      bootbox.alert(result.Message);
+                  }
+
+            });
+
+        }
+
+    </script>
+
+}

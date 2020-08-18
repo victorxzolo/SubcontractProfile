@@ -316,7 +316,7 @@ namespace SubcontractProfile.WebApi.Services.Services
                     row["penalty_contract_mail"] = new SqlString(curObj.PenaltyContractMail);
                     row["contract_phone"] = new SqlString(curObj.ContractPhone);
                     row["contract_mail"] = new SqlString(curObj.ContractMail);
-                    row["company_id"] = new SqlString(curObj.CompanyId);
+                    row["company_id"] = new SqlGuid(curObj.CompanyId);
 
                     dt.Rows.Add(row);
                 }
@@ -359,17 +359,18 @@ namespace SubcontractProfile.WebApi.Services.Services
 
         }
 
-        public async Task<SubcontractProfileLocation> SearchLocation(Guid company_id, string location_code,
-            string location_name, string location_name_en, string phone)
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>> SearchLocation(Guid company_id, string location_code,
+            string location_name, string location_name_en, string storage_location, string phone)
         {
             var p = new DynamicParameters();
             p.Add("@company_id", company_id);
             p.Add("@location_code", location_code);
             p.Add("@location_name", location_name);
             p.Add("@location_name_en", location_name_en);
+            p.Add("@storage_location", storage_location);
             p.Add("@phone", phone);
 
-            var entity = await _dbContext.Connection.QuerySingleOrDefaultAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>
             ("uspSubcontractProfileLocation_searchLocation", p, commandType: CommandType.StoredProcedure);
 
             return entity;

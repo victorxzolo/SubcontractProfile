@@ -70,13 +70,13 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileLocation))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileLocation))]
-        [HttpGet("SearchLocation/{company_id}/{location_code}/{location_name}/{location_name_en}/{phone}")]
-        public Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation> SearchLocation(Guid company_id, string location_code,
-                 string location_name, string location_name_en, string phone)
+        [HttpGet("SearchLocation/{company_id}/{location_code}/{location_name}/{location_name_en}/{storage_location}/{phone}")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>> SearchLocation(Guid company_id, string location_code,
+                 string location_name, string location_name_en, string storage_location, string phone)
         {
             _logger.LogInformation($"Start LocationController::SearchLocation", company_id, location_name, location_name_en, phone);
 
-            var entities = _service.SearchLocation(company_id, location_code, location_name, location_name_en, phone);
+            var entities = _service.SearchLocation(company_id, location_code, location_name, location_name_en, storage_location, phone);
 
             if (entities == null)
             {
