@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -81,7 +82,7 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(5000)]
         public string companyAddress { get; set; }
 
-
+        public IFormFile FileSilp { get; set; }
 
         public object Clone()
         {

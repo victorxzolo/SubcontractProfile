@@ -114,20 +114,71 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { Data = data });
 
         }
-        [HttpPost]
-        public IActionResult Updatepayment(SubcontractProfilePaymentModel Payment)
-        {            
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));            
-            string uriString = string.Format("{0}", strpathAPI + "Payment/Insert");
-            var httpContent = new StringContent(JsonConvert.SerializeObject(Payment), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PostAsync(uriString, httpContent).Result;
+        [HttpGet]
+        public IActionResult paymentchannalById(string id)
+        {
+            var data = new List<SubcontractDropdownModel>();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/payment_type");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
                 var dataresponse = response.Content.ReadAsStringAsync().Result;
-                
+                data = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(dataresponse);
+            }
+            return Json(new { Data = data });
+
+        }
+        [HttpGet]
+        public IActionResult Detailpaymentchannal()
+        {
+            var data = new List<SubcontractDropdownModel>();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/bank_payment");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var dataresponse = response.Content.ReadAsStringAsync().Result;
+                data = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(dataresponse);
+            }
+            return Json(new { Data = data });
+
+        }
+        [HttpGet]
+        public IActionResult BankTransfer()
+        {
+            var data = new List<SubcontractProfileBankingModel>();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string uriString = string.Format("{0}", strpathAPI + "Banking/GetAll");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var dataresponse = response.Content.ReadAsStringAsync().Result;
+                data = JsonConvert.DeserializeObject<List<SubcontractProfileBankingModel>>(dataresponse);
+            }
+            return Json(new { Data = data });
+
+        }
+        [HttpPut]
+        public IActionResult Updatepayment(SubcontractProfilePaymentModel Payment)
+        {
+            string dataresponse ="" ; 
+            if (Payment.FileSilp != null)
+            {
+                Payment.SlipAttachFile = Payment.FileSilp.FileName;
+            }
+            Payment.ModifiedDate = DateTime.Now;
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string uriString = string.Format("{0}", strpathAPI + "Payment/Update");
+            var httpContent = new StringContent(JsonConvert.SerializeObject(Payment), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PutAsync(uriString, httpContent).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                dataresponse = response.Content.ReadAsStringAsync().Result;               
+
             }
 
-            return Json(new { Date = "" });
+            return Json(new { Date = dataresponse });
         }
     }
 }
