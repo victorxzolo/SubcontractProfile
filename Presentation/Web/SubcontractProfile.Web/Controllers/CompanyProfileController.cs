@@ -215,7 +215,7 @@ namespace SubcontractProfile.Web.Controllers
 
                 string uriString = string.Format("{0}", strpathAPI + "Address/GetByCompanyId");
 
-                string jj = JsonConvert.SerializeObject(input);
+                //string jj = JsonConvert.SerializeObject(input);
 
                 var httpContentCompany = new StringContent(JsonConvert.SerializeObject(input), Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(uriString, httpContentCompany).Result;
@@ -242,7 +242,7 @@ namespace SubcontractProfile.Web.Controllers
                         var p = response.Content.ReadAsStringAsync().Result;
                         var L_province = JsonConvert.DeserializeObject<List<SubcontractProfileProvinceModel>>(p);
 
-                        response = client.GetAsync(uriStringProvince).Result;
+                        response = client.GetAsync(uriStringAddresstype).Result;
                         var a = response.Content.ReadAsStringAsync().Result;
                         var L_addresstype = JsonConvert.DeserializeObject<List<SubcontractProfileAddressTypeModel>>(a);
 
@@ -283,6 +283,36 @@ namespace SubcontractProfile.Web.Controllers
                 throw;
             }
            
+        }
+
+        [HttpPost]
+        public IActionResult GetAddressById(string addressID)
+        {
+            var result = new SubcontractProfileAddressModel();
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string uriString = string.Format("{0}/{1}", strpathAPI + "Address/GetByAddressId", addressID);
+
+                //string jj = JsonConvert.SerializeObject(input);
+
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var v = response.Content.ReadAsStringAsync().Result;
+                    result = JsonConvert.DeserializeObject<SubcontractProfileAddressModel>(v);
+                }
+                return Json(new { response = result, status = true, message= response.StatusCode });
+            }
+            catch (Exception e)
+            {
+                return Json(new { message = e.Message, status = false });
+                throw;
+            }
+          
         }
 
     }

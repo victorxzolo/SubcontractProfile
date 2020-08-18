@@ -674,17 +674,18 @@
             data: { AddressId: data_row.addressId },
             dataType: "json",
             success: function (data) {
-                $('#ddlcountry option').filter(':selected').val('')
+                $('#ddlcountry').val('')
 
-                $('#ddlprovince option').filter(':selected').val(0)
+                $('#ddlprovince').val('')
 
-                $('#ddldistrict option').filter(':selected').val(0)
+                $('#ddldistrict').val('')
 
-                $('#ddlsubdistrict option').filter(':selected').val(0)
+                $('#ddlsubdistrict').val('')
 
-                $('#ddlzipcode option').filter(':selected').val('')
+                $('#ddlzipcode').val('')
 
-                $('#ddlzone option').filter(':selected').val('')
+                $('#ddlzone').val('')
+
 
                 $('#txthomenumber').val('')
                 $('#txtVillageNo').val('')
@@ -705,30 +706,30 @@
                     console.log(data.response);
 
                     $.each(data.response, function () {
-                        $('#ddlcountry option').filter(':selected').val(this.country)
+                        $('#ddlcountry').val(this.Country)
 
-                        $('#ddlprovince option').filter(':selected').val(this.provinceId)
+                        $('#ddlprovince').val(this.ProvinceId)
                         $('#ddlprovince').trigger('change');
 
-                        $('#ddldistrict option').filter(':selected').val(this.districtId)
+                        $('#ddldistrict').val(this.DistrictId)
                         $('#ddldistrict').trigger('change');
 
-                        $('#ddlsubdistrict option').filter(':selected').val(this.subDistrictId)
+                        $('#ddlsubdistrict').val(this.SubDistrictId)
 
-                        $('#ddlzipcode option').filter(':selected').val(this.zipCode)
+                        $('#ddlzipcode').val(this.ZipCode)
 
-                        $('#ddlzone option').filter(':selected').val(this.regionId)
+                        $('#ddlzone').val(this.RegionId)
 
-                        $('#txthomenumber').val(this.houseNo)
-                        $('#txtVillageNo').val(this.moo)
-                        $('#txtvillage').val(this.villageName)
-                        $('#txtbuilding').val(this.building)
-                        $('#txtfloor').val(this.floor)
-                        $('#txtroom').val(this.roomNo)
-                        $('#txtsoi').val(this.soi)
-                        $('#txtroad').val(this.road)
+                        $('#txthomenumber').val(this.HouseNo)
+                        $('#txtVillageNo').val(this.Moo)
+                        $('#txtvillage').val(this.VillageName)
+                        $('#txtbuilding').val(this.Building)
+                        $('#txtfloor').val(this.Floor)
+                        $('#txtroom').val(this.RoomNo)
+                        $('#txtsoi').val(this.Soi)
+                        $('#txtroad').val(this.Road)
 
-                        var addr_type_id = this.addressTypeId
+                        var addr_type_id = this.AddressTypeId
                         $(':checkbox').each(function (i) {
                            
                             if (addr_type_id == $(this).val()) {
@@ -1381,7 +1382,13 @@ function BindDDLsubdistrict(district) {
                 });
                 $.each(data.responsezipcode, function () {
 
-                    $('#ddlzipcode').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
+                    if (this.Text == "กรุณาเลือกรหัสไปรษณีย์") {
+
+                        $('#ddlzipcode').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
+                    }
+                    else {
+                        $('#ddlzipcode').append($("<option></option>").val(this.Value).text(this.Text));
+                    }
                 })
 
                 $('#ddlzipcode').val("")

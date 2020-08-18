@@ -87,8 +87,16 @@ namespace SubcontractProfile.WebApi.API.Controllers
             }
             else
             {
-               var returnentities = entities.Where(x => x.CompanyId == modal.CompanyId).ToList();
-                return returnentities;
+                if(modal.CompanyId !=null)
+                {
+                    var returnentities = entities.Where(x => x.CompanyId == modal.CompanyId).ToList();
+                    return returnentities;
+                }
+                else
+                {
+                    return null;
+                }
+              
             }
 
  

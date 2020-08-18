@@ -34,14 +34,16 @@ namespace SubcontractProfile.Web.Controllers
     public class AccountController : Controller
     {
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly string strpathAPI;
         private string strpathASCProfile;
         private string Lang = "";
         private Utilities Util = new Utilities();
-        public AccountController(IConfiguration configuration)
+        private SubcontractProfileUserModel dataUser = new SubcontractProfileUserModel();
+        public AccountController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
-
+            _httpContextAccessor = httpContextAccessor;
 
             //เรียก appsetting.json path api
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
@@ -116,8 +118,9 @@ namespace SubcontractProfile.Web.Controllers
                         SessionHelper.SetObjectAsJson(HttpContext.Session, "userLogin", authenticatedUser);
                         Url = "/CompanyProfile/Index";
 
-                        SessionHelper.SetObjectAsJson(HttpContext.Session, "language", model.Language);
-                        Lang = model.Language;
+
+                        Lang = model.Language != null ? model.Language : "TH";
+                        SessionHelper.SetObjectAsJson(HttpContext.Session, "language", Lang);
                         //var str_L= SessionHelper.GetObjectFromJson<string>(HttpContext.Session, "language");
                         //var datauser= SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
                     }
@@ -259,9 +262,21 @@ namespace SubcontractProfile.Web.Controllers
             //HttpResponseMessage response = client.DeleteAsync(uriString).Result;
             #endregion
 
+
+            #region GET SESSION
+
+            getsession();
+
+            #endregion
+
             return View();
         }
 
+        private void getsession()
+        {
+            Lang = SessionHelper.GetObjectFromJson<string>(_httpContextAccessor.HttpContext.Session, "language");
+            dataUser = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(_httpContextAccessor.HttpContext.Session, "userLogin");
+        }
 
         #region DDL And Checkbox
         [HttpPost]
@@ -303,7 +318,10 @@ namespace SubcontractProfile.Web.Controllers
                     resultZipCode = output.GroupBy(c => c.ZipCode).Select(g => g.First()).ToList();
                 }
             }
-
+            if (Lang == "")
+            {
+                getsession();
+            }
             if (Lang == "TH")
             {
 
@@ -319,7 +337,7 @@ namespace SubcontractProfile.Web.Controllers
                     Value = a.SubDistrictId.ToString()
                 }).OrderBy(c => c.Value).ToList();
 
-
+               
                 getAllZipcodeList = resultZipCode.Select(c => new SelectListItem
                 {
                     Text = c.ZipCode,
@@ -395,7 +413,10 @@ namespace SubcontractProfile.Web.Controllers
                     output = JsonConvert.DeserializeObject<List<SubcontractProfileDistrictModel>>(v);
                 }
             }
-
+            if (Lang == "")
+            {
+                getsession();
+            }
             if (Lang == "TH")
             {
                 output.Add(new SubcontractProfileDistrictModel
@@ -436,12 +457,16 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Province/GetProvinceByRegionId", region_id);
+            string uriString = region_id==0 ? string.Format("{0}", strpathAPI + "Province/GetAll"): string.Format("{0}/{1}", strpathAPI + "Province/GetProvinceByRegionId", region_id);
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileProvinceModel>>(v);
+            }
+            if(Lang =="")
+            {
+                getsession();
             }
 
             if (Lang == "TH")
@@ -537,7 +562,10 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileRegionModel>>(v);
             }
-
+            if (Lang == "")
+            {
+                getsession();
+            }
             if (Lang == "TH")
             {
                 output.Add(new SubcontractProfileRegionModel
@@ -587,7 +615,10 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileBankingModel>>(v);
             }
-
+            if (Lang == "")
+            {
+                getsession();
+            }
             if (Lang == "TH")
             {
                 output.Add(new SubcontractProfileBankingModel
@@ -637,7 +668,10 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileCompanyTypeModel>>(v);
             }
-
+            if (Lang == "")
+            {
+                getsession();
+            }
             if (Lang == "TH")
             {
                 output.Add(new SubcontractProfileCompanyTypeModel
@@ -688,7 +722,10 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileAddressTypeModel>>(v);
             }
-
+            if (Lang == "")
+            {
+                getsession();
+            }
             if (Lang == "TH")
             {
                 getAllAddressTypeList = output.Select(a => new SelectListItem
