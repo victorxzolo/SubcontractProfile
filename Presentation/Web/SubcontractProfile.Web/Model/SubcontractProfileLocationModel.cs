@@ -7,6 +7,7 @@ namespace SubcontractProfile.Web.Model
 {
     public class SubcontractProfileLocationModel
     {
+
         public System.Guid LocationId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
@@ -138,8 +139,10 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string ContractMail { get; set; }
 
-       
         public System.Guid CompanyId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string CompanyNameTh { get; set; }
 
         public string company_name_th { get; set; }
         public string distribution_channel { get; set; }

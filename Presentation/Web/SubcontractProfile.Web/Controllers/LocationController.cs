@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Policy;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -41,11 +44,11 @@ namespace SubcontractProfile.Web.Controllers
         }
 
     
-        public ActionResult Search(string locationCode, string companynameEn, string locationNameTh
+        public ActionResult Search(string locationCode, string locationNameAilas, string locationNameTh
             , string locationNameEn, string storageLocation, string phoneNo)
         {
 
-            var companyResult = new List<SubcontractProfileLocationModel>();
+            var Result = new List<SubcontractProfileLocationModel>();
 
             var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
             // Skiping number of Rows count  
@@ -79,9 +82,9 @@ namespace SubcontractProfile.Web.Controllers
                 locationCode = "null";
             }
 
-            if (companynameEn == null)
+            if (locationNameAilas == null)
             {
-                companynameEn = "null";
+                locationNameAilas = "null";
             }
 
             if (locationNameTh == null)
@@ -104,8 +107,8 @@ namespace SubcontractProfile.Web.Controllers
                 phoneNo = "null";
             }
 
-            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", strpathAPI + "Location/SearchLocation", strCompanyId
-                , locationCode, locationNameTh, locationNameEn, storageLocation, phoneNo);
+            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Location/SearchLocation", strCompanyId
+               , locationCode, locationNameTh, locationNameEn, storageLocation, phoneNo, locationNameAilas);
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -113,22 +116,104 @@ namespace SubcontractProfile.Web.Controllers
             {
                 var result = response.Content.ReadAsStringAsync().Result;
                 //data
-                companyResult = JsonConvert.DeserializeObject<List<SubcontractProfileLocationModel>>(result);
+                Result = JsonConvert.DeserializeObject<List<SubcontractProfileLocationModel>>(result);
 
             }
 
 
             //total number of rows count   
-            recordsTotal = companyResult.Count();
+            recordsTotal = Result.Count();
 
             //Paging   
-            var data = companyResult.Skip(skip).Take(pageSize).ToList();
+            var data = Result.Skip(skip).Take(pageSize).ToList();
 
 
             // Returning Json Data
             return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data });
         }
 
+        public JsonResult GetDataById(string locationId)
+        {
+            var locationResult = new SubcontractProfileLocationModel();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Location/GetByLocationId", locationId);
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                //data
+                locationResult = JsonConvert.DeserializeObject<SubcontractProfileLocationModel>(result);
+
+            }
+
+            return Json(locationResult);
+        }
+
+        public ActionResult OnSave(SubcontractProfileLocationModel model)
+        {
+            ResponseModel res = new ResponseModel();
+            HttpClient clientLocation = new HttpClient();
+
+            try
+            {
+                var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+
+                //insert
+                if (model.LocationId == Guid.Empty)
+                {
+                    model.CompanyId = userProfile.companyid;
+                    var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Insert"));
+
+                    clientLocation.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                    var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                    HttpResponseMessage responseCompany = clientLocation.PostAsync(uriLocation, httpContent).Result;
+                    if (responseCompany.IsSuccessStatusCode)
+                    {
+
+                    }
+                    else
+                    {
+                        res.Status = false;
+                        res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        res.StatusError = "-1";
+                    }
+                }
+                else //update
+                {
+                    var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Update"));
+
+                    clientLocation.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                    var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                    HttpResponseMessage responseCompany = clientLocation.PutAsync(uriLocation, httpContent).Result;
+
+                    if (responseCompany.IsSuccessStatusCode)
+                    {
+                        res.Status = true;
+                        res.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                    }
+                    else
+                    {
+                        res.Status = false;
+                        res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        res.StatusError = "-1";
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                res.Message = "Cannot SaveChange.";
+                res.Status = false;
+            }
+            return Json(res);
+        }
 
     }
 }

@@ -70,17 +70,48 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileLocation))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileLocation))]
-        [HttpGet("SearchLocation/{company_id}/{location_code}/{location_name}/{location_name_en}/{storage_location}/{phone}")]
+        [HttpGet("SearchLocation/{company_id}/{location_code}/{location_name}/{location_name_en}/{storage_location}/{phone}/{location_name_alias}")]
         public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>> SearchLocation(Guid company_id, string location_code,
-                 string location_name, string location_name_en, string storage_location, string phone)
+                 string location_name, string location_name_en, string storage_location, string phone
+            , string location_name_alias)
         {
-            _logger.LogInformation($"Start LocationController::SearchLocation", company_id, location_name, location_name_en, phone);
+            _logger.LogInformation($"Start LocationController::SearchLocation", company_id, location_name, location_name_en, phone, location_name_alias);
 
-            var entities = _service.SearchLocation(company_id, location_code, location_name, location_name_en, storage_location, phone);
+            if (location_code.ToUpper() == "NULL")
+            {
+                location_code = string.Empty;
+            }
+
+            if (location_name.ToUpper() == "NULL")
+            {
+                location_name = string.Empty;
+            }
+
+            if (location_name_en.ToUpper() == "NULL")
+            {
+                location_name_en = string.Empty;
+            }
+
+            if (storage_location.ToUpper() == "NULL")
+            {
+                storage_location = string.Empty;
+            }
+
+            if (phone.ToUpper() == "NULL")
+            {
+                phone = string.Empty;
+            }
+
+            if (location_name_alias.ToUpper() == "NULL")
+            {
+                location_name_alias = string.Empty;
+            }
+
+            var entities = _service.SearchLocation(company_id, location_code, location_name, location_name_en, storage_location, phone, location_name_alias);
 
             if (entities == null)
             {
-                _logger.LogWarning($"LocationController::", "SearchLocation NOT FOUND", company_id, company_id, location_name, location_name_en, phone);
+                _logger.LogWarning($"LocationController::", "SearchLocation NOT FOUND", company_id, company_id, location_name, location_name_en, phone, location_name_alias);
                 return null;
             }
 

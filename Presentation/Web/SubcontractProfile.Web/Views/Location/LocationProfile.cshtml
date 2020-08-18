@@ -10,20 +10,20 @@
 
                 <div class="form-row mb-4">
                     @*<div class="form-group col-md-12">
-                        <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="rdoCustomerTypeSub" name="customRadioSucRegis" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadioInline1">New Subcontract</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="rdoCustomerTypeDealer" name="customRadioSucRegis" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadioInline2">Dealer</label>
-                        </div>
-                    </div>*@
+                            <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoCustomerTypeSub" name="customRadioSucRegis" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline1">New Subcontract</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoCustomerTypeDealer" name="customRadioSucRegis" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline2">Dealer</label>
+                            </div>
+                        </div>*@
 
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">Location Code</label>
-                        <input type="text" class="form-control" id="inputLocationCode" placeholder="Location Code">
+                        <input type="text" class="form-control" id="inputLocationCodeMain" placeholder="Location Code">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">Location Name Ailas</label>
@@ -45,15 +45,15 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">Phone No</label>
-                        <input type="text" class="form-control" maxlength="13" id="inputPhoneNo" placeholder="Phone No">
+                        <input type="text" class="form-control" maxlength="13" id="inputPhoneNoMain" placeholder="Phone No">
                     </div>
 
                 </div>
 
                 <div style="text-align:center">
 
-                    <button id="btnMainClear" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
-                    <button id="btnSearch" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+                    <button id="btnMainClearLoc" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
+                    <button id="btnSearchLoc" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
 
                 </div>
 
@@ -67,28 +67,24 @@
 
             </div>
             <div class="col-md-12 text-right mb-1">
-                <button id="add-work-platforms" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg> เพิ่ม</button>
+                <button id="btnAdd" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg> เพิ่ม</button>
 
             </div>
 
 
             <div class="table-responsive">
-                <table id="tbSearchResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                <table id="tbSearchLocationResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
                     <thead>
                         <tr>
-                            <th style="text-align:left">แก้ไข</th>
-                            <th>Location Code</th>
-                            <th>Location Name (Th)</th>
-                            <th>Location Name (En)</th>
-                            <th>Location Name Alias</th>
-                            <th>Storage</th>
-                            <th>Address</th>
-                            <th>Phone No</th>
-
+                            <th class="text-center" >แก้ไข</th>
+                            <th>Location Code </th>
+                            <th>Location Name (Th) </th>
+                            <th>Location Name (En) </th>
+                            @*<th>Location Name Alias </th>*@
+                            <th>Storage </th>
+                            @*<th>Address </th>*@
                         </tr>
                     </thead>
-                    <tbody></tbody>
-
                 </table>
             </div>
 
@@ -98,20 +94,417 @@
 </div>
 
 
+@section modalpanel {
+
+    <div id="AddEditModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="hTitleEdit" class="modal-title">แก้ไขข้อมูล Location</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="frNew" class="needs-validation" novalidate>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Company Name:</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <label id="lblcompanyName"></label>
+                                </div>
+                            </div>
+                            @*<br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>Register Type:</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="radio" id="rdoCompanyTypeNew" name="CompType" value="newsub">
+                    <label for="new">New Subcontract</label>&nbsp;&nbsp;
+                    <input type="radio" id="rdoCompanyTypeDealer" name="CompType" value="dealer">
+                    <label for="deal">Dealer</label>
+                </div>
+            </div>*@
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Location Code:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputLocationCode" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label><span style="color:red">*</span> Location Name Alias:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputLocationAlias" style="width:300px" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกข้อมูล Location Name Alias.
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label><span style="color:red">*</span> Location Name(TH):</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputLocationNameT" style="width:300px" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกข้อมูล  Location Name(TH).
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Location Name(EN):</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputLocationNameE" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Storage Location:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputStorage" style="width:300px" class="form-control" >
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Ship To:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputShip" style="width:300px" class="form-control" >
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Out of Service Storage location:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inoutOutStorage" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Vat branch Number:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputVat" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+
+                            <h5>Contract Phone</h5>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label><span style="color:red">*</span> Phone No :</label> 
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputPhoneNo" style="width:300px" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกข้อมูล Phone No.
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label><span style="color:red">*</span>  Company main contract phone:</label> 
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputMainPhone" style="width:300px" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกข้อมูล Company main contract phone.
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label><span style="color:red">*</span> Installations contract phone:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputInstallationsPhone" style="width:300px" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกข้อมูล Installations contract phone.
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label><span style="color:red">*</span>  Maintenence contract phone:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputMaintenencePhone" style="width:300px" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกข้อมูล Maintenence contract phone.
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Inventory contract phone:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputInventoryPhone" style="width:300px" class="form-control" >
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Payment contract phone:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputPaymentPhone" style="width:300px" class="form-control" >
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Etc contract phone:</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input type="text" id="inputEtcPhone" style="width:300px" class="form-control" >
+                                </div>
+                            </div>
+                            <br />
+
+                            <h5>Contract Email</h5>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Company group mail:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputCompanyMail" style="width:300px" class="form-control" >
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Installation contract mail:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputInstallationMail" style="width:300px" class="form-control" >
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Maintanence contract mail:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputMaintanenceMail" style="width:300px" class="form-control" >
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Inventory contract mail:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputInventoryMail" style="width:300px" class="form-control" >
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Payment contract mail:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputPaymentMail" style="width:300px" class="form-control" >
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Etc contract mail:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputEtcMail" style="width:300px" class="form-control" >
+                                </div>
+                            </div>
+                            <br />
+
+                            <h5>Address</h5>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Location Address:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <textarea id="inputLocationAddress" rows="2" style="width:300px;"></textarea>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Post Address:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <textarea id="inputPostAddress" rows="2" style="width:300px;"></textarea>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Tax Address:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <textarea id="inputTaxAddress" rows="2" style="width:300px;"></textarea>
+                                </div><br />
+                                <div class="col-sm-2">
+                                    <label>WT Address:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <textarea id="inputWTAddress" rows="2" style="width:300px;"></textarea>
+                                </div>
+                            </div>
+                            <br />
+
+                            <h5>Bank </h5>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Bank code:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputBankCode" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label><span style="color:red">*</span> Bank Name:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="row col-sm-12">
+                                        <input type="text" id="inputBankName" style="width:280px" class="form-control" required>
+                                        <div class="invalid-feedback">
+                                            กรุณากรอกข้อมูล Bank Name.
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label><span style="color:red">*</span> Bank Account No:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputBankAccountNo" style="width:300px" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกข้อมูล Bank Account No.
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label><span style="color:red">*</span> Bank Account Name:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputBankAccountName" style="width:300px" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกข้อมูล Bank Account Name.
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Bank Branch No:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputBankBranchNo" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label><span style="color:red">*</span> Bank Branch Name:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputBankBranchName" style="width:300px" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกข้อมูล Bank Branch Name.
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label><span style="color:red">*</span> Bank Attach File:</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="row col-sm-5">
+
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="inputBankAttach"
+                                                   aria-describedby="uploadlHelp1" style="width:190px">
+                                            <label class="custom-file-label" for="inputGroupFile01">เลือกไฟล์</label>
+                                            <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Panalty contract phone:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputPanaltyPhone" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Panalty contract mail:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputPanaltyMail" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label> Contract phone:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputContractPhone" style="width:300px" class="form-control" >
+                                </div>
+                                <div class="col-sm-2">
+                                    <label> Contract email:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="inputContractMail" style="width:300px" class="form-control" >
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <br />
+
+                        <input type="hidden" id="hdMode">
+                        <input type="hidden" id="hdLocationId">
+                        <input type="hidden" id="hdCompanyId">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                                ปิด
+                            </button>
+                            <button id="btnSave" type="submit" class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                บันทึก
+                            </button>
+                        </div>
+                    </form>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+}
+
 @section scripts {
 
     <script type="text/javascript">
             var oTable;
             $(document).ready(function () {
-                inittbSearchResult();
-                $("#btnSearch").click(function (e) {
-                    searchdata();
+                inittbSearchResultLoc();
+                $("#btnSearchLoc").click(function (e) {
+
+                    inittbSearchResultLoc();
                 });
 
-                $("#btnMainClear").click(function (e) {
+                $("#btnMainClearLoc").click(function (e) {
                     clearMainData();
                 });
 
+                $("#btnAdd").click(function (e) {
+                    openModal("new","");
+                });
+
+                              
 
             });
 
@@ -122,6 +515,7 @@
                 // Loop over them and prevent submission
                 var validation = Array.prototype.filter.call(forms, function (form) {
                     form.addEventListener('submit', function (event) {
+                       
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
@@ -135,8 +529,8 @@
                 });
             }, false);
 
-           function inittbSearchResult() {
-          var oTable = $('#tbSearchResult').DataTable({
+           function inittbSearchResultLoc() {
+               var oTable = $('#tbSearchLocationResult').DataTable({
                 processing: true, // for show progress bar
                 serverSide: true, // for process server side
                 filter: false, // this is for disable filter (search box)
@@ -165,12 +559,12 @@
                         datatype: "JSON",
                         //dataSrc:"",
                         data: function (d) {
-                                d.companyNameTh = $("#inputLocationCode").val(),
-                                d.companyNameEn = $("#inputCompanynameEn").val(),
-                                d.companyAilas = $("#inputLocationNameTh").val(),
-                                d.taxId = $("#inputLocationNameEn").val()
-                                d.taxId = $("#inputStorageLocation").val()
-                                d.taxId = $("#inputPhoneNo").val()
+                            d.locationCode = $("#inputLocationCodeMain").val(),
+                            d.locationNameAilas = $("#inputLocationNameAilas").val(),
+                            d.locationNameTh = $("#inputLocationNameTh").val(),
+                            d.locationNameEn = $("#inputLocationNameEn").val(),
+                            d.storageLocation = $("#inputStorageLocation").val(),
+                            d.phoneNo = $("#inputPhoneNoMain").val()
 
                         }
                     },
@@ -178,24 +572,19 @@
 
                         {
                             data: null,width:"10%", render: function (data, type, row) {
-                                return "<a href='#' onclick=openModal('edit','" + row.CompanyId + "');return false;  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='แก้ไข'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a>";
+                                return "  <ul class='table-controls'><li> <a href='#' onclick=openModal('edit','" + row.LocationId + "');return false;  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='แก้ไข'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a></li> <li> <a href='javascript:void(0);' data-toggle='tooltip' data-placement='top' title='Delete'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-trash-2'><polyline points='3 6 5 6 21 6'></polyline><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'></path><line x1='10' y1='11' x2='10' y2='17'></line><line x1='14' y1='11' x2='14' y2='17'></line></svg></a>";
+                                    
                             }
                            // orderable: false,
                             //className: 'text-center'
                         },
-                        { "data": "CompanyNameTh", "width": "20%"  },
-                        { "data": "CompanyNameEn", "width": "20%"  },
-                        { "data": "TaxId", "width": "15%" },
-                        { "data": "CreateDate", "width": "15%" },
-                        { "data": "ActivateDate", "width": "15%" },
-                        {
-                            data: null, width: "10%", render: function (data, type, row) {
-                                return "<span class='badge outline-badge-secondary shadow-none'>" + row.Status + "</span>";
-                            }
-                            // orderable: false,
-                           // className: 'text-center'
-                        }
-                        //{ "data": "Status", "width": "10%" },
+                        { "data": "LocationCode", "width": "20%"  },
+                        { "data": "LocationNameTh", "width": "30%" },
+                        { "data": "LocationNameEn", "width": "30%" },
+                        //{ "data": "LocationNameAlias", "width": "20%" },
+                        { "data": "StorageLocation", "width": "15%" },
+                        //{ "data": "LocationAddress", "width": "30%" }
+
 
                 ],
                 "order": [[0, "desc"]],
@@ -209,23 +598,25 @@
         function searchdata() {
           //  oTable.ajax.reload();
             inittbSearchResult();
+
         }
 
-        function openModal(mode, companyId) {
+        function openModal(mode, locationId) {
 
             clearData();
+
             $('#hdMode').val(mode);
-            $('#hdCompanyId').val(companyId);
+            $('#hdLocationId').val(locationId);
 
             if (mode == "edit") {
-                $("#txtCompanyCode").prop("disabled", true);
-                $("#hTitleEdit").text('แก้ไข ข้อมูลบริษัท');
+                //$("#txtCompanyCode").prop("disabled", true);
+                $("#hTitleEdit").text('แก้ไข Location');
 
-                getDataById(companyId);
+                getDataById(locationId);
             }
             else {
-                $("#hTitleEdit").text('เพิ่ม ข้อมูลบริษัท');
-                $("#txtCompanyCode").prop("disabled", false);
+                $("#hTitleEdit").text('เพิ่ม Location');
+              //  $("#txtCompanyCode").prop("disabled", false);
 
                 // let form = $('#frNew');
                 $("#frNew")[0].reset();
@@ -239,70 +630,103 @@
         }
 
         function clearMainData() {
-            $("#inputCompanynameTh").val('');
-            $("#inputCompanynameEn").val('');
-            $("#inputCompanyAilas").val('');
-            $("#inputTaxId").val('');
+            $("#inputLocationCodeMain").val(''),
+                $("#inputLocationNameAilas").val(''),
+                $("#inputLocationNameTh").val(''),
+                $("#inputLocationNameEn").val(''),
+                $("#inputStorageLocation").val(''),
+                $("#inputPhoneNoMain").val('')
         }
 
         function clearData() {
 
-            $("[name=customRadioSucRegisEdit]").filter("[value='true']").prop("checked", false);
-            $("#inputTax_id").val('');
-            $("#inputCompany_alias").val('');
-            $("#inputCompany_name_th").val('');
-            $('#inputCompany_name_en').val('');
-            $('#inputTax_id').val('');
-            $("[name=vat_type]").filter("[value='true']").prop("checked", false);
+            $("[name=CompType]").filter("[value='true']").prop("checked", false);
+            $("#inputLocationCode").val('');
+            $("#inputLocationAlias").val('');
+            $("#LocationNameT").val('');
+            $('#LocationNameE').val('');
+            $('#hdCompanyId').val('');
+            //$('#inputTax_id').val('');
+            //$("[name=vat_type]").filter("[value='true']").prop("checked", false);
 
         }
 
-        function getDataById(companyId) {
-          $.ajax({
-                  url: '@Url.Action("GetDataById", "CompanyProfile")',
+        function getDataById(locationId) {
+              $.ajax({
+                  url: '@Url.Action("GetDataById", "Location")',
                   type: 'POST',
-                  data: { 'companyId': companyId},
+                  data: { 'locationId': locationId},
                   dataType: "json",
               success: function (result) {
                   console.log(result)
                   if (result != null) {
-                      $("#inputCompany_alias").val(result.CompanyAlias);
-                      $("#inputCompany_name_th").val(result.CompanyNameTh);
 
-                      if (result.SubcontractProfileType == "NewSubContract") {
-                          $('#rdoCompanyType1').prop('checked', true);
+                      $("#lblcompanyName").text(result.CompanyNameTh);
 
-                      }
-                      else if (result.SubcontractProfileType == "Dealer") {
-                          $('#rdoCompanyType2').prop('checked', true);
-                      }
+                      //if (result.SubcontractProfileType == "newsub") {
+                      //    $('#rdoCompanyTypeNew').prop('checked', true);
 
-                      $('#inputTax_id').val(result.TaxId);
-                      $('#inputCompany_alias').val(result.CompanyAlias);
-                      $('#ddlprefixcompany_name_th option').filter(': selected').val(this.CompanyTitleThId);
-                      $('#inputCompany_name_th').val(result.CompanyNameTh);
-                      $('#ddlprefixcompany_name_en option').filter(': selected').val(this.CompanyTitleEnId);
-                      $('#inputCompany_name_en').val(result.CompanyNameEn);
-                      $('#inputTax_id').val(result.WtName);
+                      //}
+                      //else if (result.SubcontractProfileType == "dealer") {
+                      //    $('#rdoCompanyTypeDealer').prop('checked', true);
+                      //}
 
-                      if (result.VatType == "VAT") {
-                          $('#chkvat_typeT').prop('checked', true);
-                      }
-                      else if (result.VatType == "NON_VAT") {
-                          $('#chkvat_typeE').prop('checked', true);
-                      }
+                      $('#inputLocationCode').val(result.LocationCode);
 
-                  }
+                      $('#inputLocationAlias').val(result.LocationNameAlias);
+                      $('#inputLocationNameT').val(result.LocationNameTh);
+                      $('#inputLocationNameE').val(result.LocationNameEn);
+                      $('#inputStorage').val(result.StorageLocation);
+                      $('#inputShip').val(result.ShipTo);
+                      $('#inoutOutStorage').val(result.OutOfServiceStorageLocation);
+                      $('#inputVat').val(result.VatBranchNumber);
+                      $('#inputPhoneNo').val(result.Phone);
+                      $('#inputMainPhone').val(result.CompanyMainContractPhone);
+                      $('#inputInstallationsPhone').val(result.InstallationsContractPhone);
+                      $('#inputMaintenencePhone').val(result.MaintenanceContractPhone);
+                      $('#inputInventoryPhone').val(result.InventoryContractPhone);
+                      $('#inputPaymentPhone').val(result.PaymentContractPhone);
+                      $('#inputEtcPhone').val(result.EtcContractPhone);
+                      $('#inputCompanyMail').val(result.CompanyGroupMail);
+                      $('#inputInstallationMail').val(result.InstallationsContractMail);
+                      $('#inputMaintanenceMail').val(result.MaintenanceContractMail);
+                      $('#inputInventoryMail').val(result.InventoryContractMail);
+                      $('#inputPaymentMail').val(result.PaymentContractMail);
+                      $('#inputEtcMail').val(result.EtcContractMail);
+
+                      $('#inputLocationAddress').val(result.LocationAddress);
+
+                      $("#inputPostAddress").val(result.PostAddress)
+                      $("#inputTaxAddress").val(result.TaxAddress)
+                      $("#inputWTAddress").val(result.WtAddress)
+
+                      $('#inputBankCode').val(result.BankCode);
+                      $('#inputBankName').val(result.BankName);
+                      $('#inputBankAccountNo').val(result.BankAccountNo);
+                      $('#inputBankAccountName').val(result.BankAccountName);
+                      $('#inputBankBranchNo').val(result.BankBranchCode);
+                      $('#inputBankBranchName').val(result.BankBranchName);
+                      $('#inputPanaltyPhone').val(result.PenaltyContractPhone);
+                      $('#inputPanaltyMail').val(result.PenaltyContractMail);
+                      $('#inputContractPhone').val(result.ContractPhone);
+                      $('#inputContractMail').val(result.ContractMail);
+                      $('#hdCompanyId').val(result.CompanyId);
+                      
 
 
-                      //$("#txtRegisNum").val(result.reqisNumber);
+                      //if (result.VatType == "VAT") {
+                      //    $('#chkvat_typeT').prop('checked', true);
+                      //}
+                      //else if (result.VatType == "NON_VAT") {
+                      //    $('#chkvat_typeE').prop('checked', true);
+                      //}
 
                       //if (result.isActive == true) {
                       //    $("[name=rdoActive]").filter("[value='true']").prop("checked", true);
                       //} else {
                       //    $("[name=rdoActive]").filter("[value='false']").prop("checked", true);
                       //}
-
+                  }
                   },
                   error: function (result) {
 
@@ -312,25 +736,56 @@
     }
 
         function onSave() {
-            var company = new Object();
-            company.CompanyId = $('#hdCompanyId').val();
-            company.CompanyNameTh = $('#inputCompany_name_th').val();
-            company.CompanyNameEn = $('#inputCompany_name_en').val();
+            var location = new Object();
+            location.LocationId = $('#hdLocationId').val();
+            location.LocationCode = $('#inputLocationCode').val();
+            location.LocationNameAlias =  $('#inputLocationAlias').val();
+            location.LocationNameTh = $('#inputLocationNameT').val();
+            location.LocationNameEn =$('#inputLocationNameE').val();
+            location.StorageLocation =$('#inputStorage').val();
+            location.ShipTo =$('#inputShip').val();
+            location.OutOfServiceStorageLocation =$('#inoutOutStorage').val();
+            location.VatBranchNumber =$('#inputVat').val();
+            location.Phone =$('#inputPhoneNo').val();
+            location.CompanyMainContractPhone =$('#inputMainPhone').val();
+            location.InstallationsContractPhone =$('#inputInstallationsPhone').val();
+            location.MaintenanceContractPhone =$('#inputMaintenencePhone').val();
+            location.InventoryContractPhone =$('#inputInventoryPhone').val();
+            location.PaymentContractPhone =$('#inputPaymentPhone').val();
+            location.EtcContractPhone =$('#inputEtcPhone').val();
+            location.CompanyGroupMail = $('#inputCompanyMail').val();
+            location.InstallationsContractMail =$('#inputInstallationMail').val();
+            location.MaintenanceContractMail =$('#inputMaintanenceMail').val();
+            location.InventoryContractMail =$('#inputInventoryMail').val();
+            location.PaymentContractMail = $('#inputPaymentMail').val();
+            location.EtcContractMail = $('#inputEtcMail').val();
+
+            location.LocationAddress =$('#inputLocationAddress').val();
+
+            location.PostAddress = $("#inputPostAddress").val()
+            location.TaxAddress =$("#inputTaxAddress").val()
+            location.WtAddress =$("#inputWTAddress").val()
+
+            location.BankCode = $('#inputBankCode').val();
+            location.BankName =$('#inputBankName').val();
+            location.BankAccountNo =$('#inputBankAccountNo').val();
+            location.BankAccountName =$('#inputBankAccountName').val();
+            location.BankBranchCode =$('#inputBankBranchNo').val();
+            location.BankBranchName =$('#inputBankBranchName').val();
+            location.PenaltyContractPhone =$('#inputPanaltyPhone').val();
+            location.PenaltyContractMail =$('#inputPanaltyMail').val();
+            location.ContractPhone = $('#inputContractPhone').val();
+            location.ContractMail = $('#inputContractMail').val();
+            location.CompanyId = $('#hdCompanyId').val();
 
             $.ajax({
-                url: '@Url.Action("OnSave", "CompanyProfile")',
-                type: 'POST',
-                data: { 'model': company },
-                   //data: JSON.stringify({
-                   //    "p_companyCode": $('#txtCompanyCode').val()
-                   //    , "p_companyName": $('#txtCompanyName').val()
-                   //    , "p_regisNum": $("#txtRegisNum").val()
-                   //    , "p_isActive": $('input[name="rdoActive"]:checked').val()
-                   //    , "p_mode": $('#hdMode').val()
-                   //}),
+                   url: '@Url.Action("OnSave", "Location")',
+                   type: 'POST',
+                   data: { 'model': location }, 
                    dataType: "json",
                   // contentType: "application/json; charset=utf-8",
-                   success: function (result) {
+                success: function (result) {
+                    bootbox.alert(result.Message);
                        if (result.Status == true) {
                            if ($('#hdMode').val() == 'edit') {
                                $('#AddEditModal').modal('hide');
