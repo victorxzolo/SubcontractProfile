@@ -1,0 +1,334 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; ViewBag.Title = "Team Profile";
+}
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+
+    <div class="skills layout-spacing ">
+        <div class="widget-content widget-content-area">
+            <h3 class="">Team</h3>
+
+            <div class="widget-content1">
+
+                <div class="form-row mb-4">
+
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Location Code</label>
+                        <input type="text" class="form-control" id="inputLocationCodeMain" placeholder="Location Code">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Team Code</label>
+                        <input type="text" class="form-control" id="inputLocationNameAilas" placeholder="Team Code">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Team Name (TH)</label>
+                        <input type="text" class="form-control" id="inputLocationNameTh" placeholder="Team Name (TH)">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Team Name (EN)</label>
+                        <input type="text" class="form-control" maxlength="13" id="inputLocationNameEn" placeholder="Team Name (EN)">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Storage Location</label>
+                        <input type="text" class="form-control" id="inputStorageLocation" placeholder="Storage Location">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Ship To</label>
+                        <input type="text" class="form-control" maxlength="13" id="inputPhoneNoMain" placeholder="Ship To">
+                    </div>
+
+                </div>
+
+                <div style="text-align:center">
+
+                    <button id="btnMainClearLoc" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
+                    <button id="btnSearchLoc" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+
+                </div>
+
+
+            </div>
+
+
+            <br />
+            <div class="widget-heading">
+                <h3 class="">ผลการค้นหา</h3>
+
+            </div>
+            <div class="col-md-12 text-right mb-1">
+                <button id="btnAdd" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg> เพิ่ม</button>
+
+            </div>
+
+
+            <div class="table-responsive">
+                <table id="tbSearchResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                    <thead>
+                        <tr>
+                            <th class="text-center">แก้ไข</th>
+                            <th>Location Name </th>
+                            <th>Team Name (Th) </th>
+                            <th>Team Name (En) </th>
+                            <th>Storage Location </th>
+                            <th>Ship To </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+@section modalpanel {
+
+    <div id="AddEditModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="hTitleEdit" class="modal-title">แก้ไขข้อมูล Team</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="frNew" class="needs-validation" novalidate>
+                        <div class="container">
+                            @*<div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Register Type</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input type="radio" id="1" name="type" value="new">
+                                        <label for="new">New Subcontract</label>&nbsp;&nbsp;
+                                        <input type="radio" id="2" name="type" value="deal">
+                                        <label for="deal">Dealer</label>
+                                    </div>
+                                </div>
+                                <br />*@
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Location Code :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select id="location" name="location" style="width:300px">
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Team Code :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="TeamCode" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Vendor Code :</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input type="text" id="VendorCode" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Team Name(TH) :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="TeamNameT" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Team Name(EH) :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="TeamNameE" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Storage Location :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="Storage" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Ship To :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="Ship" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Out of service storage Location:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="OutStorage" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Warranty MA :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select id="WarrantyMA" name="Warranty" style="width:300px">
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Warranty Install :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select id="WarrantyInstall" name="WarrantyInstall" style="width:300px">
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Service skill :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <textarea name="ServiceSkill" rows="2" style="width:300px;"></textarea>
+                                </div>
+                            </div>
+                            <br />
+
+                            <h4><label style="color:#8DC63F">Contract Phone</label></h4>
+                            <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+                            <div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Installations contract phone:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="InstallationPhone" style="width:300px" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Maintenance contract phone:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="MaintenancePhone" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Etc contract phone:</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input type="text" id="EtcPhone" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <h4><label style="color:#8DC63F">Contract Mail</label></h4>
+                            <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+                            <div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Installations contract Mail:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="InstallationMail" style="width:300px" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Maintenance contract Mail:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="MaintenanceMail" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Etc contract Mail:</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input type="text" id="EtcMail" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <input type="hidden" id="hdMode">
+                                <input type="hidden" id="hdTeamId">
+                                <input type="hidden" id="hdCompanyId">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                                        ปิด
+                                    </button>
+                                    <button id="btnSave" type="submit" class="btn btn-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                        บันทึก
+                                    </button>
+                                </div>
+
+                            </div>
+                            <br />
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section scripts {
+
+    <script type="text/javascript">
+        var oTable;
+        $(document).ready(function () {
+            // inittbSearchResult();
+            $("#btnSearchLoc").click(function (e) {
+
+                // inittbSearchResult();
+            });
+
+            $("#btnMainClearLoc").click(function (e) {
+                //  clearMainData();
+            });
+
+            $("#btnAdd").click(function (e) {
+                openModal("new", "");
+            });
+
+
+
+        });
+
+        function openModal(mode, teamId) {
+            // clearData();
+
+            $('#hdMode').val(mode);
+            $('#hdTeamId').val(teamId);
+
+            if (mode == "edit") {
+                //$("#txtCompanyCode").prop("disabled", true);
+                $("#hTitleEdit").text('แก้ไข Team');
+
+               // getDataById(locationId);
+            }
+            else {
+                $("#hTitleEdit").text('เพิ่ม Team');
+                //  $("#txtCompanyCode").prop("disabled", false);
+
+                // let form = $('#frNew');
+                $("#frNew")[0].reset();
+                //form.find('button').on('click', (event) => {
+                //    form.find('input, select, textarea').val('');
+                //});
+            }
+
+            $('#AddEditModal').modal('show');
+
+        }
+
+    </script>
+}
