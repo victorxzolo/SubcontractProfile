@@ -1019,8 +1019,8 @@
 
 
         if ($("#chktypeN").is(":checked")) {
-            chksubcontract_type = $("#chktypeN").val();
-            distribution_channel = $('#ddldistribution option').filter(':selected').val();
+            //chksubcontract_type = $("#chktypeN").val();
+           // distribution_channel = $('#ddldistribution option').filter(':selected').val();
             channel_sale_group = $('#ddlchannelsalegroup option').filter(':selected').val();
             tax_id = $('#txttax_id').val();
             company_alias = $('#txtcompany_alias').val();

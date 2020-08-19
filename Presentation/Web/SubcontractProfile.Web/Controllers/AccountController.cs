@@ -1460,6 +1460,8 @@ namespace SubcontractProfile.Web.Controllers
                     }
                     if (resultGetFile)
                     {
+                        SessionHelper.RemoveSession(HttpContext.Session, "userUploadfileDaft");
+
                         #region Insert Company
 
                         string encrypted = Util.EncryptText(model.Password);
@@ -1514,7 +1516,8 @@ namespace SubcontractProfile.Web.Controllers
                             HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
                             if (responseAddress.IsSuccessStatusCode)
                             {
-                                res.Status = true;
+                                        SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaft");
+                                        res.Status = true;
                                 res.Message = "Register Success";
                                 res.StatusError = "0";
                             }
