@@ -112,13 +112,13 @@ namespace SubcontractProfile.Web.Controllers
                 {
                     string encryptedPassword = Util.EncryptText(model.password);
                     var authenticatedUser = GetUser(model.username, encryptedPassword);
-                    if(authenticatedUser !=null)
+                    if(!string.IsNullOrEmpty(authenticatedUser.Username))
                     {
                         res.Status = true;
                         SessionHelper.SetObjectAsJson(HttpContext.Session, "userLogin", authenticatedUser);
                         Url = "/CompanyProfile/Index";
 
-
+                        res.Status = true;
                         Lang = model.Language != null ? model.Language : "TH";
                         SessionHelper.SetObjectAsJson(HttpContext.Session, "language", Lang);
                         //var str_L= SessionHelper.GetObjectFromJson<string>(HttpContext.Session, "language");
@@ -127,7 +127,7 @@ namespace SubcontractProfile.Web.Controllers
                     else
                     {
                         res.Status = false;
-                        res.Message = "Login failed";
+                        res.Message = "ชื่อผู้ใช้หรือรหัสผ่านไม่ตรงกันกับในระบบ กรุณาสมัครเพื่อใช้งาน";
                     }
                     
                     // string decrypted = Util.DecryptText(encrypted);
