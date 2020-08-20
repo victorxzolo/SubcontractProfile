@@ -119,76 +119,108 @@
                             <div id="divnewsubcontract">
                         
                                 <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label>เลขทะเบียนนิติบุคล</label> <span style="color:red">*</span>
-                                        <div class="input-group mb-4">
-                                            <input id="inputTax_id" type="text" class="form-control" placeholder="เลขทะเบียนนิติบุคล" aria-label="Recipient's username" maxlength="13" required/>
-                                            <div class="input-group-append">
-                                                <button class="btn btn-success" id="btnsearchrevenue" type="button">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                                </button>
+                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                        <div class="form-row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                <label>เลขทะเบียนนิติบุคล :</label> <span style="color:red">*</span>
+                                            </div>
+                                            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                                <div class="input-group">
+                                                    <input id="inputTax_id" type="text" class="form-control" placeholder="เลขทะเบียนนิติบุคล"
+                                                           aria-label="Recipient's username" maxlength="13" required  style="width:100px" />
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-success" id="btnsearchrevenue" type="button">
+                                                            <i class="fa fa-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+                                        
 
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label>ชื่อย่อบริษัท</label>
-                                        <input id="inputCompany_alias" type="text" placeholder="ชื่อย่อบริษัท" class="form-control" />
+                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                        <div class="form-row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                <label>ชื่อย่อบริษัท :</label>
+                                            </div>
+                                            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                                <input id="inputCompany_alias" type="text" placeholder="ชื่อย่อบริษัท" class="form-control"  style="width:300px"/>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             
-                                <div class=" row">
-                                    <div class="form-group col-md-6">
-                                        <label>ชื่อนิติบุคคล(ไทย)</label> <span style="color:red">*</span>
-                                        <div class="form-row mb-4">
-                                            <div class="col-4">
-                                                <select class="form-control form-control" id="ddlprefixcompany_name_th"></select>
-
+                                <div class=" row  my-3">
+                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                        <div class="form-row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                <label>ชื่อนิติบุคคล(ไทย) :</label> <span style="color:red">*</span>
                                             </div>
-                                            <div class="col-8">
-                                                <input id="inputCompany_name_th" type="text" placeholder="ชื่อนิติบุคคล(ไทย)" class="form-control" maxlength="100" required />
+                                                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                                    <select class="form-control form-control" id="ddlprefixcompany_name_th"></select>
 
-                                            </div>
+                                                </div>
+                                                <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                                    <input id="inputCompany_name_th" type="text" placeholder="ชื่อนิติบุคคล(ไทย)" class="form-control" \
+                                                           maxlength="100" required style="width:165px" />
 
+                                                </div>
                                         </div>
-
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label>ชื่อนิติบุคคล(อังกฤษ)</label> <span style="color:red">*</span>
-                                        <div class="form-row mb-4">
-                                            <div class="col-4">
-                                                <select class="form-control form-control" id="ddlprefixcompany_name_en"></select>
-
-                                            </div>
-                                            <div class="col-8">
-                                                <input id="inputCompany_name_en" type="text" placeholder="ชื่อนิติบุคคล(อังกฤษ)" class="form-control" maxlength="100" required />
-
+                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                        <div class="form-row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                <label>ชื่อนิติบุคคล(อังกฤษ) :</label> <span style="color:red">*</span>
                                             </div>
 
+                                          
+                                                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                                    <select class="form-control form-control" id="ddlprefixcompany_name_en"></select>
+
+                                                </div>
+                                                <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                                    <input id="inputCompany_name_en" type="text" placeholder="ชื่อนิติบุคคล(อังกฤษ)" class="form-control" 
+                                                           maxlength="100" required style="width:165px" />
+
+                                                </div>
+
+                                            
                                         </div>
+                                        
 
                                     </div>
                                 </div>
                             
                                 <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label>ชื่อภาษีหัก ณ ที่จ่าย</label>
-                                        <input id="inputWT_name" type="text" class="form-control" placeholder="ชื่อภาษีหัก ณ ที่จ่าย" aria-label="Recipient's username" maxlength="13" required>
-
-
+                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                        <div class="form-row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                <label>ชื่อภาษีหัก ณ ที่จ่าย :</label>
+                                            </div>
+                                            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                                <input id="inputWT_name" type="text" class="form-control" placeholder="ชื่อภาษีหัก ณ ที่จ่าย" 
+                                                       aria-label="Recipient's username" maxlength="13" required style="width:300px" >
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label>ชื่อภาษีมูลค่าเพิ่ม</label><br />
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" name="vat_type" id="chkvat_typeT" value="VAT" checked class="custom-control-input">
-                                            <label class="custom-control-label" for="chkvat_typeT"> ภาษีมูลค่าเพิ่ม</label>
+                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                        <div class="form-row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                <label>ชื่อภาษีมูลค่าเพิ่ม :</label>
+                                            </div>
+                                            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" name="vat_type" id="chkvat_typeT" value="VAT" checked class="custom-control-input">
+                                                    <label class="custom-control-label" for="chkvat_typeT"> ภาษีมูลค่าเพิ่ม</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" name="vat_type" id="chkvat_typeE" value="NON_VAT" class="custom-control-input">
+                                                    <label class="custom-control-label" for="chkvat_typeE"> ไม่มีภาษีมูลค่าเพิ่ม</label>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" name="vat_type" id="chkvat_typeE" value="NON_VAT" class="custom-control-input">
-                                            <label class="custom-control-label" for="chkvat_typeE"> ไม่มีภาษีมูลค่าเพิ่ม</label>
-                                        </div>
-
                                     </div>
                                 </div>
 
@@ -326,7 +358,7 @@
                                                 </div>
 
                                                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                                                    <select class="custom-select" id="ddlprefixcompany_name_th_dealer"></select>
+                                                    <select class="form-control" id="ddlprefixcompany_name_th_dealer"></select>
                                                 </div>
                                                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
                                                     <input type="text" class="form-control inputValidationdealer"
