@@ -40,6 +40,8 @@ namespace SubcontractProfile.Web.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
+
+           // ViewBag.Pageitem = "Location";
             return View();
         }
 

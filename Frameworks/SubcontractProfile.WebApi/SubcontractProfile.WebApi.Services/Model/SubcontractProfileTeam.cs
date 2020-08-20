@@ -102,6 +102,11 @@ namespace SubcontractProfile.WebApi.Services.Model
 
         public System.DateTime? UpdateDate { get; set; }
 
+        [System.ComponentModel.DataAnnotations.StringLength(1000)]
+        public string LocationNameTh { get; set; }
+
+        public System.Guid CompanyId { get; set; }
+        public System.Guid LocationId { get; set; }
 
         public object Clone()
         {

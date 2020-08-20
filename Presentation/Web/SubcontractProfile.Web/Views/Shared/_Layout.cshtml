@@ -39,7 +39,8 @@
 
     <link href="~/assets/css/users/user-profile.css" rel="stylesheet" type="text/css" />
     <link href="~/plugins/file-upload/file-upload-with-preview.min.css" rel="stylesheet" type="text/css" />
-      <link href="~/plugins/select2/select2.min.css" rel="stylesheet" />
+    <link href="~/plugins/select2/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/bootstrap-select/bootstrap-select.min.css">
 
     <!-- END MAIN CONTAINER -->
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
@@ -88,7 +89,8 @@
 
     <script src="~/plugins/select2/select2.min.js"></script>
     <script src="~/plugins/select2/custom-select2.js"></script>
-  
+    <script src="~/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+
 
     @RenderSection("Scripts", required: false)
     @RenderSection("modalpanel", required: false)
@@ -238,7 +240,7 @@
                                 <a href="@Url.Action("TeamProfile", "Team")"> Team </a>
                             </li>
                             <li>
-                                <a href="#"> Engineer </a>
+                                <a href="@Url.Action("EngineerProfile", "Engineer")"> Engineer </a>
                             </li>
 
                         </ul>

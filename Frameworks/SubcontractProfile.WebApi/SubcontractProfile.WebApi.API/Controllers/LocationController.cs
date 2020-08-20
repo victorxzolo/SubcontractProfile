@@ -70,6 +70,24 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileLocation))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileLocation))]
+        [HttpGet("GetLocationByCompany/{company_id}")]
+
+        public Task<IEnumerable<SubcontractProfileLocation>> GetLocationByCompany(Guid company_id)
+        {
+            _logger.LogInformation($"Start LocationController::GetLocationByCompany", company_id);
+            var entities = _service.GetLocationByCompany(company_id);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"LocationController::", "GetLocationByCompany NOT FOUND", company_id);
+                return null;
+            }
+
+            return entities;
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileLocation))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileLocation))]
         [HttpGet("SearchLocation/{company_id}/{location_code}/{location_name}/{location_name_en}/{storage_location}/{phone}/{location_name_alias}")]
         public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>> SearchLocation(Guid company_id, string location_code,
                  string location_name, string location_name_en, string storage_location, string phone

@@ -59,7 +59,6 @@ namespace SubcontractProfile.WebApi.Services.Services
         {
             var p = new DynamicParameters();
 
-            p.Add("@team_id", subcontractProfileTeam.TeamId);
             p.Add("@team_code", subcontractProfileTeam.TeamCode);
             p.Add("@team_name", subcontractProfileTeam.TeamName);
             p.Add("@team_name_th", subcontractProfileTeam.TeamNameTh);
@@ -82,10 +81,10 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@maintenance_contract_email", subcontractProfileTeam.MaintenanceContractEmail);
             p.Add("@etc_contract_email", subcontractProfileTeam.EtcContractEmail);
             p.Add("@status", subcontractProfileTeam.Status);
-            p.Add("@create_date", subcontractProfileTeam.CreateDate);
             p.Add("@create_by", subcontractProfileTeam.CreateBy);
-            p.Add("@update_by", subcontractProfileTeam.UpdateBy);
-            p.Add("@update_date", subcontractProfileTeam.UpdateDate);
+          
+            p.Add("@company_id", subcontractProfileTeam.CompanyId);
+            p.Add("@location_id", subcontractProfileTeam.LocationId);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTeam_Insert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -122,10 +121,8 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@maintenance_contract_email", subcontractProfileTeam.MaintenanceContractEmail);
             p.Add("@etc_contract_email", subcontractProfileTeam.EtcContractEmail);
             p.Add("@status", subcontractProfileTeam.Status);
-            p.Add("@create_date", subcontractProfileTeam.CreateDate);
-            p.Add("@create_by", subcontractProfileTeam.CreateBy);
             p.Add("@update_by", subcontractProfileTeam.UpdateBy);
-            p.Add("@update_date", subcontractProfileTeam.UpdateDate);
+            p.Add("@location_id", subcontractProfileTeam.LocationId);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTeam_Update", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -268,6 +265,37 @@ namespace SubcontractProfile.WebApi.Services.Services
 
         }
 
+        public async Task<IEnumerable<SubcontractProfileTeam>> SearchTeam(Guid companyId, System.Guid locationId
+            , string teamcode, string teamNameTh, string teamNameEn,
+            string storageLocation, string shipto)
+        {
+            var p = new DynamicParameters();
+            p.Add("@company_id", companyId);
+            p.Add("@location_id", locationId);
+            p.Add("@team_code", teamcode);
+            p.Add("@team_name_th ", teamNameTh);
+            p.Add("@team_name_en", teamNameEn);
+            p.Add("@storage_location", storageLocation);
+            p.Add("@ship_to", shipto);
+         
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam>
+            ("uspSubcontractProfileTeam_searchTeam", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
+
+        public async Task<IEnumerable<SubcontractProfileTeam>> GetByLocationId(Guid companyId, Guid locationId)
+        {
+            var p = new DynamicParameters();
+            p.Add("@company_id", companyId);
+            p.Add("@location_id", locationId);
+          
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam>
+            ("uspSubcontractProfileTeam_selectByLocationId", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
     }
 
 }

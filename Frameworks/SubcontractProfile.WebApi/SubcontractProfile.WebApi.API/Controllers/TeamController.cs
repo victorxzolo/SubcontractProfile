@@ -15,15 +15,78 @@ namespace SubcontractProfile.WebApi.API.Controllers
     public class TeamController : ControllerBase
     {
         private readonly ISubcontractProfileTeamRepo _service;
+        private readonly ISubcontractProfileLocationRepo _serviceLoc;
         private readonly ILogger<TeamController> _logger;
 
-        public TeamController(ISubcontractProfileTeamRepo service,
+        public TeamController(ISubcontractProfileTeamRepo service, ISubcontractProfileLocationRepo serviceLoc,
             ILogger<TeamController> logger)
         {
             _service = service;
+            _serviceLoc = serviceLoc;
             _logger = logger;
         }
         #region GET
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TeamController))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(TeamController))]
+        [HttpGet("SearchTeam/{companyId}/{locationId}/{teamcode}/{teamNameTh}/{teamNameEn}/{storageLocation}/{shipto}")]
+        public  Task<IEnumerable<SubcontractProfileTeam>> SearchTeam(Guid companyId, string locationId
+          , string teamcode, string teamNameTh, string teamNameEn,
+          string storageLocation, string shipto)
+        {
+            _logger.LogInformation($"Start TeamController::SearchTeam", companyId, locationId,
+                teamcode, teamNameEn, storageLocation, shipto);
+
+            Guid gLocationId;
+            if (locationId.ToUpper() == "-1")
+            {
+                gLocationId = Guid.Empty;
+            }
+            else
+            {
+                gLocationId = new Guid(locationId);
+            }
+
+            if (teamcode.ToUpper() == "NULL")
+            {
+                teamcode = string.Empty;
+            }
+
+
+            if (teamNameTh.ToUpper() == "NULL")
+            {
+                teamNameTh = string.Empty;
+            }
+
+            if (teamNameEn.ToUpper() == "NULL")
+            {
+                teamNameEn = string.Empty;
+            }
+
+            if (storageLocation.ToUpper() == "NULL")
+            {
+                storageLocation = string.Empty;
+            }
+
+            if (shipto.ToUpper() == "NULL")
+            {
+                shipto = string.Empty;
+            }
+       
+
+            var entities = _service.SearchTeam(companyId, gLocationId, teamcode, 
+                teamNameTh, teamNameEn, storageLocation, shipto);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"TeamController::", "SearchTeam NOT FOUND", companyId, locationId,
+                teamcode, teamNameEn, storageLocation, shipto);
+                return null;
+            }
+
+            return entities;
+
+        }
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TeamController))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(TeamController))]
@@ -65,11 +128,47 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileLocation))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileLocation))]
+        [HttpGet("GetLocationByCompany/{companyId}")]
+        public Task<IEnumerable<SubcontractProfileLocation>> GetLocationByCompany(System.Guid companyId)
+        {
+            _logger.LogInformation($"Start TeamController::GetLocationByCompany");
 
-        #endregion
+            var entities = _serviceLoc.GetLocationByCompany(companyId);
 
-        #region POST
-        [HttpPost("Insert")]
+            if (entities == null)
+            {
+                _logger.LogWarning($"TeamController::", "GetLocationByCompany NOT FOUND");
+                return null;
+            }
+
+            return entities;
+
+        }
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileLocation))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileLocation))]
+        [HttpGet("GetByLocationId/{companyId}/{locationId}")]
+        public  Task<IEnumerable<SubcontractProfileTeam>> GetByLocationId(Guid companyId, Guid locationId)
+        {
+            _logger.LogInformation($"Start TeamController::GetByLocationId");
+
+            var entities = _service.GetByLocationId(companyId, locationId);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"TeamController::", "GetByLocationId NOT FOUND");
+                return null;
+            }
+
+            return entities;
+        }
+
+
+            #endregion
+
+            #region POST
+            [HttpPost("Insert")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileTeam))]
         public Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam subcontractProfileTeam)
         {

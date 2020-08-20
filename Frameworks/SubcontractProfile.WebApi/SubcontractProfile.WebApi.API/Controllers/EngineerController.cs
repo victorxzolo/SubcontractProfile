@@ -30,6 +30,45 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EngineerController))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(EngineerController))]
+        [HttpGet("SearchEngineer/{companyId}/{locationId}/{teamId}/{staffName}/{citizenId}/{position}")]
+        public  Task<IEnumerable<SubcontractProfileEngineer>> SearchEngineer(Guid companyId, Guid locationId,
+           Guid teamId, string staffName, string citizenId, string position)
+        {
+            _logger.LogInformation($"Start EngineerController::SearchEngineer", companyId, locationId,
+                teamId, staffName, citizenId, position);
+
+
+            if (staffName.ToUpper() == "NULL")
+            {
+                staffName = string.Empty;
+            }
+
+            if (citizenId.ToUpper() == "NULL")
+            {
+                citizenId = string.Empty;
+            }
+
+            if (position.ToUpper() == "NULL")
+            {
+                position = string.Empty;
+            }
+
+
+            var entities = _service.SearchEngineer(companyId, locationId, teamId,
+                staffName, citizenId, position);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"EngineerController::", "SearchEngineer NOT FOUND", companyId, locationId,
+                teamId, staffName, citizenId, position);
+                return null;
+            }
+
+            return entities;
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EngineerController))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(EngineerController))]
         [HttpGet("GetAll")]
         public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>> GetAll()
         {

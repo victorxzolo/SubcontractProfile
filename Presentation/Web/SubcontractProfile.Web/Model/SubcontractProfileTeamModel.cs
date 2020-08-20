@@ -81,5 +81,11 @@ namespace SubcontractProfile.Web.Model
         public string UpdateBy { get; set; }
 
         public System.DateTime? UpdateDate { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(1000)]
+        public string LocationNameTh { get; set; }
+
+        public System.Guid CompanyId { get; set; }
+        public System.Guid LocationId { get; set; }
     }
 }

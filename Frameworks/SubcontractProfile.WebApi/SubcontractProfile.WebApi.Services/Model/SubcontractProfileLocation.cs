@@ -164,8 +164,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string CompanyNameTh { get; set; }
 
-        
-
+     
 
         public object Clone()
         {

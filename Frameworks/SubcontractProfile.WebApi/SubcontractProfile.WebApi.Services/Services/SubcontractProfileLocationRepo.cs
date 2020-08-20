@@ -400,6 +400,19 @@ namespace SubcontractProfile.WebApi.Services.Services
 
             return entity;
         }
+
+        public async Task<IEnumerable<SubcontractProfileLocation>> GetLocationByCompany(Guid company_id)
+        {
+            var p = new DynamicParameters();
+            p.Add("@company_id", company_id);
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>
+            ("uspSubcontractProfileLocation_selectByCompanyId", p, commandType: CommandType.StoredProcedure);
+           
+            return entity;
+        }
+
+
     }
 
 }

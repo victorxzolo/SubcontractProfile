@@ -20,5 +20,8 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<bool> Delete(string id);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>> GetByPKList(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer_PK> pkList);
 
+        Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>> SearchEngineer(Guid companyId, Guid locationId,
+            Guid teamId,string staffName, string citizenId, string position);
+
     }
 }
