@@ -180,5 +180,11 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Password { get; set; }
 
+
+        public Guid file_id_CompanyCertifiedFile { get; set; }
+        public Guid file_id_CommercialRegistrationFile { get; set; }
+        public Guid file_id_VatRegistrationCertificateFile { get; set; }
+        public Guid file_id_bookbank { get; set; }
+
     }
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,8 +24,8 @@ namespace SubcontractProfile.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDistributedMemoryCache();
-
+            services.AddHttpContextAccessor();
+            services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(60);
@@ -32,10 +33,9 @@ namespace SubcontractProfile.Web
                 options.Cookie.IsEssential = true;
             });
 
-            //services.AddDbContext<DBContext>(options =>
-            //{
-            //    options.UseSqlServer(Configuration.GetConnectionString("Context"));
-            //});
+            // Redis implementation of IDistributedCache.
+            // This will override any previously registered IDistributedCache service.
+          //  services.AddSingleton<IDistributedCache, RedisCache>();
 
 
             services.AddControllersWithViews();
@@ -51,6 +51,7 @@ namespace SubcontractProfile.Web
                 options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
             });
+
 
         }
 

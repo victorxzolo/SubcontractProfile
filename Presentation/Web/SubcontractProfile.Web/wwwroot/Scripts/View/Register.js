@@ -478,9 +478,10 @@
         var companyname = value[0].vName;
 
         $('#txtcompany_name_th').val(companyname);
-        if ($('#ddlprefixcompany_name_th option:selected').text() == titlename) {
-            $('#ddlprefixcompany_name_th').text(titlename).change();
-        } 
+        $("#ddlprefixcompany_name_th option").filter(function () {
+            //may want to use $.trim in here
+            return $(this).text() == titlename;
+        }).prop('selected', true);
         ClearDataModalRevenue();
         $('#SearchRevenue').modal('hide');
     });
@@ -674,17 +675,18 @@
             data: { AddressId: data_row.addressId },
             dataType: "json",
             success: function (data) {
-                $('#ddlcountry option').filter(':selected').val('')
+                $('#ddlcountry').val('')
 
-                $('#ddlprovince option').filter(':selected').val(0)
+                $('#ddlprovince').val('')
 
-                $('#ddldistrict option').filter(':selected').val(0)
+                $('#ddldistrict').val('')
 
-                $('#ddlsubdistrict option').filter(':selected').val(0)
+                $('#ddlsubdistrict').val('')
 
-                $('#ddlzipcode option').filter(':selected').val('')
+                $('#ddlzipcode').val('')
 
-                $('#ddlzone option').filter(':selected').val('')
+                $('#ddlzone').val('')
+
 
                 $('#txthomenumber').val('')
                 $('#txtVillageNo').val('')
@@ -705,30 +707,30 @@
                     console.log(data.response);
 
                     $.each(data.response, function () {
-                        $('#ddlcountry option').filter(':selected').val(this.country)
+                        $('#ddlcountry').val(this.Country)
 
-                        $('#ddlprovince option').filter(':selected').val(this.provinceId)
+                        $('#ddlprovince').val(this.ProvinceId)
                         $('#ddlprovince').trigger('change');
 
-                        $('#ddldistrict option').filter(':selected').val(this.districtId)
+                        $('#ddldistrict').val(this.DistrictId)
                         $('#ddldistrict').trigger('change');
 
-                        $('#ddlsubdistrict option').filter(':selected').val(this.subDistrictId)
+                        $('#ddlsubdistrict').val(this.SubDistrictId)
 
-                        $('#ddlzipcode option').filter(':selected').val(this.zipCode)
+                        $('#ddlzipcode').val(this.ZipCode)
 
-                        $('#ddlzone option').filter(':selected').val(this.regionId)
+                        $('#ddlzone').val(this.RegionId)
 
-                        $('#txthomenumber').val(this.houseNo)
-                        $('#txtVillageNo').val(this.moo)
-                        $('#txtvillage').val(this.villageName)
-                        $('#txtbuilding').val(this.building)
-                        $('#txtfloor').val(this.floor)
-                        $('#txtroom').val(this.roomNo)
-                        $('#txtsoi').val(this.soi)
-                        $('#txtroad').val(this.road)
+                        $('#txthomenumber').val(this.HouseNo)
+                        $('#txtVillageNo').val(this.Moo)
+                        $('#txtvillage').val(this.VillageName)
+                        $('#txtbuilding').val(this.Building)
+                        $('#txtfloor').val(this.Floor)
+                        $('#txtroom').val(this.RoomNo)
+                        $('#txtsoi').val(this.Soi)
+                        $('#txtroad').val(this.Road)
 
-                        var addr_type_id = this.addressTypeId
+                        var addr_type_id = this.AddressTypeId
                         $(':checkbox').each(function (i) {
                            
                             if (addr_type_id == $(this).val()) {
@@ -900,7 +902,7 @@
     });
 
     $('#ddlBankname').change(function () {
-        var v_bankcode = $('#ddldistrict option').filter(':selected').val();
+        var v_bankcode = $('#ddlBankname option').filter(':selected').val();
         $('#txtbank_Code').val(v_bankcode);
     });
 
@@ -1018,8 +1020,8 @@
 
 
         if ($("#chktypeN").is(":checked")) {
-            chksubcontract_type = $("#chktypeN").val();
-            distribution_channel = $('#ddldistribution option').filter(':selected').val();
+            //chksubcontract_type = $("#chktypeN").val();
+           // distribution_channel = $('#ddldistribution option').filter(':selected').val();
             channel_sale_group = $('#ddlchannelsalegroup option').filter(':selected').val();
             tax_id = $('#txttax_id').val();
             company_alias = $('#txtcompany_alias').val();
@@ -1081,7 +1083,7 @@
 
             BankCode: $('#txtbank_Code').val(),
             BankName: $('#txtbank_Name').val(),
-            AccountNumber: $('#txtaccount_Number').val(),
+            AccountNumber: $('#ddlaccount_Name option').filter(':selected').val() != "" ? $('#ddlaccount_Name option').filter(':selected').val() + $('#txtaccount_Number').val() : $('#txtaccount_Number').val(),
             AccountName:$('#ddlaccount_Name option').filter(':selected').val(),
            // AttachFile
             BranchCode: $('#txtbranch_Code').val(),
@@ -1381,7 +1383,13 @@ function BindDDLsubdistrict(district) {
                 });
                 $.each(data.responsezipcode, function () {
 
-                    $('#ddlzipcode').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
+                    if (this.Text == "กรุณาเลือกรหัสไปรษณีย์") {
+
+                        $('#ddlzipcode').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
+                    }
+                    else {
+                        $('#ddlzipcode').append($("<option></option>").val(this.Value).text(this.Text));
+                    }
                 })
 
                 $('#ddlzipcode').val("")
@@ -1516,10 +1524,10 @@ function BindDDLCompanyType() {
         success: function (data) {
             Loading(0);
             if (data != null) {
-                $('#ddlbusiness_type').empty();
+                $('#ddlaccount_Name').empty();
 
                 $.each(data.responsecompanytype, function () {
-                    $('#ddlbusiness_type').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
+                    $('#ddlaccount_Name').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
                 });
             }
 

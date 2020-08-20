@@ -17,10 +17,10 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation subcontractProfileLocation);
         Task<bool> BulkInsert(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation> subcontractProfileLocationList);
         Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation subcontractProfileLocation);
-        Task<bool> Delete(string id);
+        Task<bool> Delete(System.Guid id);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>> GetByPKList(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation_PK> pkList);
-        Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation> SearchLocation(System.Guid company_id,string location_code,
-            string location_name, string location_name_en, string phone);
+        Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>> SearchLocation(System.Guid company_id,string location_code,
+            string location_name, string location_name_en, string storage_location, string phone, string location_name_alias);
 
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocationList>> SearchListLocation(SubcontractProfile.WebApi.Services.Model.SearchSubcontractProfileLocationQuery data);
     }

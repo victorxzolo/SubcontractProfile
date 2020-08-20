@@ -103,12 +103,12 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@contact_email", subcontractProfilePayment.ContactEmail);
             p.Add("@remark", subcontractProfilePayment.Remark);
             p.Add("@status", subcontractProfilePayment.Status);
-            p.Add("@create_date", subcontractProfilePayment.CreateDate);
-            p.Add("@create_by", subcontractProfilePayment.CreateBy);
-            p.Add("@modified_by", subcontractProfilePayment.ModifiedBy);
+            //p.Add("@create_date", subcontractProfilePayment.CreateDate);
+            //p.Add("@create_by", subcontractProfilePayment.CreateBy);
+            //p.Add("@modified_by", subcontractProfilePayment.ModifiedBy);
             p.Add("@modified_date", subcontractProfilePayment.ModifiedDate);
-            p.Add("@training_id", subcontractProfilePayment.TrainingId);
-            p.Add("@company_id", subcontractProfilePayment.CompanyId);
+            //p.Add("@training_id", subcontractProfilePayment.TrainingId);
+            //p.Add("@company_id", subcontractProfilePayment.CompanyId);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfilePayment_Update", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);

@@ -55,8 +55,8 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string password { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string companyid { get; set; }
+   
+        public System.Guid companyid { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string region { get; set; }

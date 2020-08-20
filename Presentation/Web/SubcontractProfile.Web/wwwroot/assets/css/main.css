@@ -394,9 +394,10 @@ select.form-control.form-custom {
 
 .invalid-feedback {
     color: #e7515a;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 18px;
+    /*font-weight: 700;*/
     letter-spacing: 1px;
+    font-family: 'db_helvethaica_x55_regular';
 }
 .valid-feedback {
     color: #8dbf42;
@@ -427,9 +428,10 @@ select.form-control.form-custom {
     vertical-align: middle;
 }
 .btn {
+    font-family: 'db_helvethaica_x55_regular';
     padding: 0.4375rem 1.25rem;
     text-shadow: none;
-    font-size: 14px;
+    font-size: 18px;
     color: #3b3f5c;
     font-weight: normal;
     white-space: normal;

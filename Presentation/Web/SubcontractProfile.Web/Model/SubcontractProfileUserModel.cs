@@ -35,8 +35,8 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string password { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string companyid { get; set; }
+   
+        public Guid companyid { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string region { get; set; }
@@ -47,5 +47,6 @@ namespace SubcontractProfile.Web.Model
         public string username { get; set; }
         public string password { get; set; }
         public bool keepme { get; set; }
+        public string Language { get; set; }
     }
 }

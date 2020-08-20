@@ -58,7 +58,7 @@ namespace SubcontractProfile.WebApi.Services.Services
         {
             var p = new DynamicParameters();
 
-            p.Add("@location_id", subcontractProfileLocation.LocationId);
+           // p.Add("@location_id", subcontractProfileLocation.LocationId);
             p.Add("@location_code", subcontractProfileLocation.LocationCode);
             p.Add("@location_name", subcontractProfileLocation.LocationName);
             p.Add("@location_name_th", subcontractProfileLocation.LocationNameTh);
@@ -97,10 +97,10 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@bank_account_name", subcontractProfileLocation.BankAccountName);
             p.Add("@bank_attach_file", subcontractProfileLocation.BankAttachFile);
             p.Add("@status", subcontractProfileLocation.Status);
-            p.Add("@create_date", subcontractProfileLocation.CreateDate);
+            //p.Add("@create_date", subcontractProfileLocation.CreateDate);
             p.Add("@create_by", subcontractProfileLocation.CreateBy);
-            p.Add("@update_by", subcontractProfileLocation.UpdateBy);
-            p.Add("@update_date", subcontractProfileLocation.UpdateDate);
+            //p.Add("@update_by", subcontractProfileLocation.UpdateBy);
+            //p.Add("@update_date", subcontractProfileLocation.UpdateDate);
             p.Add("@bank_branch_code", subcontractProfileLocation.BankBranchCode);
             p.Add("@bank_branch_name", subcontractProfileLocation.BankBranchName);
             p.Add("@penalty_contract_phone", subcontractProfileLocation.PenaltyContractPhone);
@@ -160,8 +160,8 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@bank_account_name", subcontractProfileLocation.BankAccountName);
             p.Add("@bank_attach_file", subcontractProfileLocation.BankAttachFile);
             p.Add("@status", subcontractProfileLocation.Status);
-            p.Add("@create_date", subcontractProfileLocation.CreateDate);
-            p.Add("@create_by", subcontractProfileLocation.CreateBy);
+            //p.Add("@create_date", subcontractProfileLocation.CreateDate);
+            //p.Add("@create_by", subcontractProfileLocation.CreateBy);
             p.Add("@update_by", subcontractProfileLocation.UpdateBy);
             p.Add("@update_date", subcontractProfileLocation.UpdateDate);
             p.Add("@bank_branch_code", subcontractProfileLocation.BankBranchCode);
@@ -170,7 +170,7 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@penalty_contract_mail", subcontractProfileLocation.PenaltyContractMail);
             p.Add("@contract_phone", subcontractProfileLocation.ContractPhone);
             p.Add("@contract_mail", subcontractProfileLocation.ContractMail);
-            p.Add("@company_id", subcontractProfileLocation.CompanyId);
+          //  p.Add("@company_id", subcontractProfileLocation.CompanyId);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileLocation_Update", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -181,7 +181,7 @@ namespace SubcontractProfile.WebApi.Services.Services
         /// <summary>
         /// Delete
         /// </summary>
-        public async Task<bool> Delete(string locationId)
+        public async Task<bool> Delete(System.Guid locationId)
         {
             var p = new DynamicParameters();
             p.Add("@location_id", locationId);
@@ -316,7 +316,7 @@ namespace SubcontractProfile.WebApi.Services.Services
                     row["penalty_contract_mail"] = new SqlString(curObj.PenaltyContractMail);
                     row["contract_phone"] = new SqlString(curObj.ContractPhone);
                     row["contract_mail"] = new SqlString(curObj.ContractMail);
-                    row["company_id"] = new SqlString(curObj.CompanyId);
+                    row["company_id"] = new SqlGuid(curObj.CompanyId);
 
                     dt.Rows.Add(row);
                 }
@@ -359,17 +359,19 @@ namespace SubcontractProfile.WebApi.Services.Services
 
         }
 
-        public async Task<SubcontractProfileLocation> SearchLocation(Guid company_id, string location_code,
-            string location_name, string location_name_en, string phone)
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>> SearchLocation(Guid company_id, string location_code,
+            string location_name, string location_name_en, string storage_location, string phone, string location_name_alias)
         {
             var p = new DynamicParameters();
             p.Add("@company_id", company_id);
             p.Add("@location_code", location_code);
             p.Add("@location_name", location_name);
             p.Add("@location_name_en", location_name_en);
+            p.Add("@storage_location", storage_location);
             p.Add("@phone", phone);
+            p.Add("@location_name_alias", location_name_alias);
 
-            var entity = await _dbContext.Connection.QuerySingleOrDefaultAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>
             ("uspSubcontractProfileLocation_searchLocation", p, commandType: CommandType.StoredProcedure);
 
             return entity;

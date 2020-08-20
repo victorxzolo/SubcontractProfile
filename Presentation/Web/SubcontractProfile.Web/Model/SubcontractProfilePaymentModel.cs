@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace SubcontractProfile.Web.Model
 {
-    public class SubcontractProfilePayment
+    public class SubcontractProfilePaymentModel
     {
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string PaymentId { get; set; }
@@ -71,6 +72,17 @@ namespace SubcontractProfile.Web.Model
         public string Request_no { get; set; }
 
         public System.DateTime? Request_date { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(500)]
+        public string companyNameTh { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string taxId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(5000)]
+        public string companyAddress { get; set; }
+
+        public IFormFile FileSilp { get; set; }
 
         public object Clone()
         {
