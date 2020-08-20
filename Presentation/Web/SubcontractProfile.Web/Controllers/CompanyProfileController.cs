@@ -144,7 +144,7 @@ namespace SubcontractProfile.Web.Controllers
 
 
         // GET: CompanyProfileController/GetDataById/5
-        public JsonResult GetDataById(string companyId)
+        public async Task<JsonResult> GetDataById(string companyId)
         {
             var companyResult = new SubcontractProfileCompanyModel();
 
@@ -166,50 +166,76 @@ namespace SubcontractProfile.Web.Controllers
                 List<FileUploadModal> L_File = new List<FileUploadModal>();
 
 
-                L_File.Add(new FileUploadModal {
-                    file_id = Guid.NewGuid(),
-                    //Fileupload = fileBytes,
-                    //typefile = type_file,
-                    //ContentDisposition = source.ContentDisposition,
-                    //ContentType = source.ContentType,
-                    Filename = companyResult.CompanyCertifiedFile,
-                    CompanyId = companyId
-
-                });
-                L_File.Add(new FileUploadModal
+                if(companyResult.CompanyCertifiedFile !=null)
                 {
-                    file_id = Guid.NewGuid(),
-                    //Fileupload = fileBytes,
-                    //typefile = type_file,
-                    //ContentDisposition = source.ContentDisposition,
-                    //ContentType = source.ContentType,
-                    Filename = companyResult.CommercialRegistrationFile,
-                    CompanyId = companyId
+                    Guid file_id_Company = Guid.NewGuid();
+                    L_File.Add(new FileUploadModal
+                    {
+                        file_id = file_id_Company,
+                        //Fileupload = fileBytes,
+                        typefile = "CompanyCertifiedFile",
+                        //ContentDisposition = source.ContentDisposition,
+                        //ContentType = source.ContentType,
+                        Filename = companyResult.CompanyCertifiedFile,
+                        CompanyId = companyId
 
-                });
-                L_File.Add(new FileUploadModal
+                    });
+                    companyResult.file_id_CompanyCertifiedFile = file_id_Company;
+                }
+                if(companyResult.CommercialRegistrationFile !=null)
                 {
-                    file_id = Guid.NewGuid(),
-                    //Fileupload = fileBytes,
-                    //typefile = type_file,
-                    //ContentDisposition = source.ContentDisposition,
-                    //ContentType = source.ContentType,
-                    Filename = companyResult.VatRegistrationCertificateFile,
-                    CompanyId = companyId
+                    Guid file_id_Commercial = Guid.NewGuid();
+                    L_File.Add(new FileUploadModal
+                    {
+                        file_id = file_id_Commercial,
+                        //Fileupload = fileBytes,
+                        typefile = "CommercialRegistrationFile",
+                        //ContentDisposition = source.ContentDisposition,
+                        //ContentType = source.ContentType,
+                        Filename = companyResult.CommercialRegistrationFile,
+                        CompanyId = companyId
 
-                });
-                L_File.Add(new FileUploadModal
+                    });
+                    companyResult.file_id_CommercialRegistrationFile = file_id_Commercial;
+                }
+                if(companyResult.VatRegistrationCertificateFile !=null)
                 {
-                    file_id = Guid.NewGuid(),
-                    //Fileupload = fileBytes,
-                    //typefile = type_file,
-                    //ContentDisposition = source.ContentDisposition,
-                    //ContentType = source.ContentType,
-                    Filename = companyResult.AttachFile,
-                    CompanyId = companyId
+                    Guid file_id_Vat = Guid.NewGuid();
+                    L_File.Add(new FileUploadModal
+                    {
+                        file_id = file_id_Vat,
+                        //Fileupload = fileBytes,
+                        typefile = "VatRegistrationCertificateFile",
+                        //ContentDisposition = source.ContentDisposition,
+                        //ContentType = source.ContentType,
+                        Filename = companyResult.VatRegistrationCertificateFile,
+                        CompanyId = companyId
 
-                });
-                SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompany", L_File);
+                    });
+                    companyResult.file_id_VatRegistrationCertificateFile = file_id_Vat;
+                }
+                if(companyResult.AttachFile !=null)
+                {
+                    Guid file_id_bookbank = Guid.NewGuid();
+                    L_File.Add(new FileUploadModal
+                    {
+                        file_id = file_id_bookbank,
+                        //Fileupload = fileBytes,
+                        typefile = "bookbankfile",
+                        //ContentDisposition = source.ContentDisposition,
+                        //ContentType = source.ContentType,
+                        Filename = companyResult.AttachFile,
+                        CompanyId = companyId
+
+                    });
+                    companyResult.file_id_bookbank = file_id_bookbank;
+                }
+                if(L_File.Count != 0)
+                {
+                    GetFile(companyId,ref L_File);
+                    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompany", L_File);
+                }
+            
 
             }
 
@@ -237,31 +263,40 @@ namespace SubcontractProfile.Web.Controllers
                 var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompany");
                 if (dataUploadfile != null && dataUploadfile.Count != 0)
                 {
-                    //#region Copy File to server
-                    //foreach (var e in dataUploadfile)
-                    //{
-                    //    //resultGetFile = await GetFile(e, model.CompanyId.ToString());
+                    #region Copy File to server
 
-                    //    string filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
-                    //    filename = EnsureCorrectFilename(filename);
+                    System.IO.DirectoryInfo di = new DirectoryInfo(Path.Combine(strpathUpload, model.CompanyId.ToString()));
 
-                    //    switch (e.typefile)
-                    //    {
-                    //        case "CompanyCertifiedFile":
-                    //            model.CompanyCertifiedFile = filename;
-                    //            break;
-                    //        case "CommercialRegistrationFile":
-                    //            model.CommercialRegistrationFile = filename;
-                    //            break;
-                    //        case "VatRegistrationCertificateFile":
-                    //            model.VatRegistrationCertificateFile = filename;
-                    //            break;
-                    //        case "bookbankfile":
-                    //            model.AttachFile = filename;
-                    //            break;
-                    //    }
-                    //}
-                    //#endregion
+                    foreach (FileInfo finfo in di.GetFiles())
+                    {
+                        finfo.Delete();
+                    }
+
+
+                    foreach (var e in dataUploadfile)
+                    {
+                        resultGetFile = await CopyFile(e, model.CompanyId.ToString());
+
+                        string filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
+                        filename = EnsureCorrectFilename(filename);
+
+                        switch (e.typefile)
+                        {
+                            case "CompanyCertifiedFile":
+                                model.CompanyCertifiedFile = filename;
+                                break;
+                            case "CommercialRegistrationFile":
+                                model.CommercialRegistrationFile = filename;
+                                break;
+                            case "VatRegistrationCertificateFile":
+                                model.VatRegistrationCertificateFile = filename;
+                                break;
+                            case "bookbankfile":
+                                model.AttachFile = filename;
+                                break;
+                        }
+                    }
+                    #endregion
                     if (resultGetFile)
                     {
                         SessionHelper.RemoveSession(HttpContext.Session, "userUploadfileDaftCompany");
@@ -353,12 +388,15 @@ namespace SubcontractProfile.Web.Controllers
                     }
                 }
 
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception e)
             {
-                return View();
+                res.Status = false;
+                res.Message = e.Message;
+                res.StatusError = "-1";
             }
+            return Json(new { Response = res });
         }
 
         [HttpPost]
@@ -743,7 +781,7 @@ namespace SubcontractProfile.Web.Controllers
 
 
                         }
-                        SessionHelper.SetObjectAsJson(HttpContext.Session, "LocationDealer", locate);
+                        SessionHelper.SetObjectAsJson(HttpContext.Session, "LocationDealerCompany", locate);
                     }
                     return Json(new
                     {
@@ -820,18 +858,18 @@ namespace SubcontractProfile.Web.Controllers
                         if (outputresponse.Value != null)
                         {
                             string straddr = "";
-                            straddr = string.Concat(outputresponse.Value.vHouseNumber != "-" ? outputresponse.Value.vHouseNumber : "", " ",
-                                                      outputresponse.Value.vBuildingName != "-" ? "อาคาร " + outputresponse.Value.vBuildingName : "", " ",
-                                                      outputresponse.Value.vFloorNumber != "-" ? "ชั้นที่ " + outputresponse.Value.vFloorNumber : "", " ",
-                                                      outputresponse.Value.vRoomNumber != "-" ? "ห้องที่ " + outputresponse.Value.vRoomNumber : "", " ",
-                                                      outputresponse.Value.vVillageName != "-" ? "หมู่บ้าน " + outputresponse.Value.vVillageName : "", " ",
-                                                      outputresponse.Value.vMooNumber != "-" ? "หมู่ที่ " + outputresponse.Value.vMooNumber : "", " ",
-                                                      outputresponse.Value.vSoiName != "-" ? "ซอย " + outputresponse.Value.vSoiName : "", " ",
-                                                      outputresponse.Value.vStreetName != "-" ? "ถนน " + outputresponse.Value.vStreetName : "", " ",
-                                                      outputresponse.Value.vThambol != "-" ? "ตำบล/แขวง " + outputresponse.Value.vThambol : "", " ",
-                                                      outputresponse.Value.vAmphur != "-" ? "อำเภอ/เขต " + outputresponse.Value.vAmphur : "", " ",
-                                                      outputresponse.Value.vProvince != "-" ? "จังหวัด " + outputresponse.Value.vProvince : "", " ",
-                                                      outputresponse.Value.vPostCode != "-" ? outputresponse.Value.vPostCode : "");
+                            straddr = string.Concat(outputresponse.Value.vHouseNumber != null && outputresponse.Value.vHouseNumber != "-" ? outputresponse.Value.vHouseNumber : "", " ",
+                                                      outputresponse.Value.vBuildingName != null && outputresponse.Value.vBuildingName != "-" ? "อาคาร " + outputresponse.Value.vBuildingName : "", " ",
+                                                      outputresponse.Value.vFloorNumber != null && outputresponse.Value.vFloorNumber != "-" ? "ชั้นที่ " + outputresponse.Value.vFloorNumber : "", " ",
+                                                      outputresponse.Value.vRoomNumber != null && outputresponse.Value.vRoomNumber != "-" ? "ห้องที่ " + outputresponse.Value.vRoomNumber : "", " ",
+                                                      outputresponse.Value.vVillageName != null && outputresponse.Value.vVillageName != "-" ? "หมู่บ้าน " + outputresponse.Value.vVillageName : "", " ",
+                                                      outputresponse.Value.vMooNumber != null && outputresponse.Value.vMooNumber != "-" ? "หมู่ที่ " + outputresponse.Value.vMooNumber : "", " ",
+                                                      outputresponse.Value.vSoiName != null && outputresponse.Value.vSoiName != "-" ? "ซอย " + outputresponse.Value.vSoiName : "", " ",
+                                                      outputresponse.Value.vStreetName != null && outputresponse.Value.vStreetName != "-" ? "ถนน " + outputresponse.Value.vStreetName : "", " ",
+                                                      outputresponse.Value.vThambol != null && outputresponse.Value.vThambol != "-" ? "ตำบล/แขวง " + outputresponse.Value.vThambol : "", " ",
+                                                      outputresponse.Value.vAmphur != null && outputresponse.Value.vAmphur != "-" ? "อำเภอ/เขต " + outputresponse.Value.vAmphur : "", " ",
+                                                      outputresponse.Value.vProvince != null && outputresponse.Value.vProvince != "-" ? "จังหวัด " + outputresponse.Value.vProvince : "", " ",
+                                                      outputresponse.Value.vPostCode != null && outputresponse.Value.vPostCode != "-" ? outputresponse.Value.vPostCode : "");
                             ListResult.Add(new VATModal
                             {
                                 vAmphur = outputresponse.Value.vAmphur,
@@ -901,7 +939,7 @@ namespace SubcontractProfile.Web.Controllers
                 draw = model.draw,
                 recordsTotal = totalResultsCount,
                 recordsFiltered = filteredResultsCount,
-                data = ListResult
+                data = ListResult[0].vHouseNumber !=null? ListResult: new List<VATModal>()
             });
         }
 
@@ -1004,7 +1042,52 @@ namespace SubcontractProfile.Web.Controllers
             }
             return result;
         }
-        private async Task<bool> GetFile(FileUploadModal file, string guid)
+
+        private bool GetFile(string companyid,ref List<FileUploadModal> L_File)
+        {
+            bool result = true;
+            try
+            {
+                string pathdir = Path.Combine(strpathUpload, companyid);
+
+                string[] filePaths = Directory.GetFiles(pathdir, "*.*", SearchOption.AllDirectories);
+
+
+
+                foreach (string file in filePaths)
+                {
+
+
+                    using (var ms = new MemoryStream(System.IO.File.ReadAllBytes(file)))
+                    {
+
+                        foreach (var e in L_File)
+                        {
+                            string filename = Path.GetFileName(file);
+                            filename = EnsureCorrectFilename(filename);
+                            var fileBytes = ms.ToArray();
+                  
+
+                            if (e.Filename == filename)
+                            {
+                                e.Fileupload = fileBytes;
+                                e.ContentType = Path.GetExtension(Path.GetExtension(file));
+                                e.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "files", FileName = filename }.ToString();
+                            }
+                        }
+                       
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                result = false;
+                throw;
+            }
+            return result;
+        }
+        private async Task<bool> CopyFile(FileUploadModal file,string companyid)
         {
             FileStream output;
             try
@@ -1013,13 +1096,12 @@ namespace SubcontractProfile.Web.Controllers
                 FormFile files = new FormFile(stream, 0, file.Fileupload.Length, "name", "fileName");
 
                 string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                //if(DeleteFile(guid, filename))
-                //{
 
-                //}
-                filename = EnsureCorrectFilename(file.Filename);
-                using (output = System.IO.File.Create(this.GetPathAndFilename(guid, filename)))
-                    await files.CopyToAsync(output);
+                    filename = EnsureCorrectFilename(file.Filename);
+                    using (output = System.IO.File.Create(this.GetPathAndFilename(companyid, filename)))
+                        await files.CopyToAsync(output);
+               
+               
             }
             catch (Exception e)
             {
