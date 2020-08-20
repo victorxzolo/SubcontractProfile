@@ -956,6 +956,10 @@ namespace SubcontractProfile.Web.Controllers
             List<FileUploadModal> L_File = new List<FileUploadModal>();
             //FileStream output;
             string strmess = "";
+
+            string[] arr = { "application/pdf", "image/png", "image/jpeg", "image/jpeg", "image/bmp", "image/gif", "image/tif", "image/tiff" };
+
+
             try
             {
                 foreach (FormFile source in files)
@@ -967,48 +971,65 @@ namespace SubcontractProfile.Web.Controllers
                         //using (output = System.IO.File.Create(this.GetPathAndFilename(filename)))
                         //    await source.CopyToAsync(output);
 
-
-                        Guid id = Guid.NewGuid();
-                        using (var ms = new MemoryStream())
+                        if (source.ContentType.ToLower() != "image/jpg" &&
+                            source.ContentType.ToLower() != "image/jpeg" &&
+                            source.ContentType.ToLower() != "image/pjpeg" &&
+                            source.ContentType.ToLower() != "image/gif" &&
+                            source.ContentType.ToLower() != "image/x-png" &&
+                            source.ContentType.ToLower() != "image/png" &&
+                            source.ContentType.ToLower() != "application/pdf"
+                            )
                         {
-                            source.CopyTo(ms);
-                            var fileBytes = ms.ToArray();
-                            L_File.Add(new FileUploadModal
-                            {
-                                file_id = id,
-                                Fileupload = fileBytes,
-                                typefile = type_file,
-                                ContentDisposition = source.ContentDisposition,
-                                ContentType = source.ContentType,
-                                Filename = filename,
-                                CompanyId= Company
-                            });
+                            statusupload = false;
+                            strmess = "Upload type file miss match.";
                         }
+                        else
+                        {
+                            Guid id = Guid.NewGuid();
+                            using (var ms = new MemoryStream())
+                            {
+                                source.CopyTo(ms);
+                                var fileBytes = ms.ToArray();
+                                L_File.Add(new FileUploadModal
+                                {
+                                    file_id = id,
+                                    Fileupload = fileBytes,
+                                    typefile = type_file,
+                                    ContentDisposition = source.ContentDisposition,
+                                    ContentType = source.ContentType,
+                                    Filename = filename,
+                                    CompanyId = Company
+                                });
+                            }
+                            var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompany");
+                            //byte[] byteArrayValue = HttpContext.Session.Get("userUploadfileDaft");
+                            //var data = FromByteArray<List<FileUploadModal>>(byteArrayValue);
+
+                            //var objComplex = HttpContext.Session.GetObject("userUploadfileDaft");
+
+                            if (data != null)
+                            {
+
+                                data.RemoveAll(x => x.file_id.ToString() == fid);
+                                data.Add(L_File[0]);
+                                SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompany", data);
+
+                            }
+                            else
+                            {
+                                // HttpContext.Session.Set("userUploadfileDaft", ToByteArray<List<FileUploadModal>>(L_File));
+
+                                SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompany", L_File);
+                            }
+                            strmess = "Upload file success";
+                        }
+                        
+
                     }
-                    var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompany");
-                    //byte[] byteArrayValue = HttpContext.Session.Get("userUploadfileDaft");
-                    //var data = FromByteArray<List<FileUploadModal>>(byteArrayValue);
-
-                    //var objComplex = HttpContext.Session.GetObject("userUploadfileDaft");
-
-                    if (data != null)
-                    {
-
-                        data.RemoveAll(x => x.file_id.ToString() == fid);
-                        data.Add(L_File[0]);
-                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompany", data);
-
-                    }
-                    else
-                    {
-                        // HttpContext.Session.Set("userUploadfileDaft", ToByteArray<List<FileUploadModal>>(L_File));
-
-                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompany", L_File);
-                    }
-
-
+              
                 }
-                strmess = "Upload file success";
+
+                      
             }
             catch (Exception e)
             {
@@ -1018,7 +1039,7 @@ namespace SubcontractProfile.Web.Controllers
             }
 
 
-            return Json(new { status = statusupload, message = strmess, response = L_File[0].file_id });
+            return Json(new { status = statusupload, message = strmess, response = (statusupload? L_File[0].file_id.ToString():"") });
 
             // return Json(new { status = statusupload, message = strmess });
         }

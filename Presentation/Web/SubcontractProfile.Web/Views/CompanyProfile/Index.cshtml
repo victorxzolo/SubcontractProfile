@@ -88,7 +88,6 @@
 
 </div>
 
-
 @section modalpanel {
 
     <div id="AddEditModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -842,7 +841,7 @@
                                 <div class="custom-file">
                                     <input type="hidden" id="hduploadbookbank" />
                                     <input type="file" class="custom-file-input" id="inputuploadbookbank"
-                                           aria-describedby="uploadlHelp1">
+                                           aria-describedby="uploadlHelp1"  accept="image/jpeg,image/gif,image/png,application/pdf">
                                     <label class="custom-file-label" for="inputuploadbookbank" id="lbuploadbookbank">เลือกไฟล์</label>
                                     <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
@@ -886,7 +885,7 @@
                             <div class="row col-sm-12">
                                 @*<div class="custom-file">*@
                                     <input type="hidden" id="hdupfilecompany_certified" />
-                                    <input type="file" class="custom-file-input" id="inputUploadcertificate">
+                                    <input type="file" class="custom-file-input" id="inputUploadcertificate" accept="image/jpeg,image/gif,image/png,application/pdf">
                                     <label class="custom-file-label" for="inputUploadcertificate" id="lbuploadcertificate">เลือกไฟล์</label>
                                 @*</div>*@
                                 <small id="uploadlHelp2" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
@@ -900,7 +899,7 @@
                             <div class="row col-sm-12">
                                 @*<div class="custom-file">*@
                                     <input type="hidden" id="hdupfilecommercial_registration" />
-                                    <input type="file" class="custom-file-input" id="inputUploadComRegis">
+                                    <input type="file" class="custom-file-input" id="inputUploadComRegis" accept="image/jpeg,image/gif,image/png,application/pdf">
                                     <label class="custom-file-label" for="inputUploadComRegis" id="lbuploadComRegis">เลือกไฟล์</label>
                                 @*</div>*@
                                 <small id="uploadlHelp3" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
@@ -917,7 +916,7 @@
                             <div class="row col-sm-6">
                                 @*<div class="custom-file">*@
                                     <input type="hidden" id="hdupfilevat_registration_certificate" />
-                                    <input type="file" class="custom-file-input" id="inputUpload20"style="width:170px">
+                                    <input type="file" class="custom-file-input" id="inputUpload20"style="width:170px" accept="image/jpeg,image/gif,image/png,application/pdf">
                                     <label class="custom-file-label" for="inputUpload20" id="lbupload20">เลือกไฟล์</label>
                                 @*</div>*@
                                 <small id="uploadlHelp4" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
@@ -1743,12 +1742,16 @@ transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 
 
 
 
-                $(document).on('show.bs.modal', '.modal', function (event) {
+                $(document).on('show.bs.modal', '.modal', function () {
                     var zIndex = 1040 + (10 * $('.modal:visible').length);
                     $(this).css('z-index', zIndex);
                     setTimeout(function () {
                         $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
                     }, 0);
+                });
+
+                $(document).on('hidden.bs.modal', '.modal', function () {
+                    $('.modal:visible').length && $(document.body).addClass('modal-open');
                 });
             });
 
@@ -2573,7 +2576,7 @@ transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 
                     data: formData,
                     success: function (data) {
 
-                        console.log(data);
+           
                         if (data.status) {
                             switch (inputId) {
                                 case "company_certified_file": $('#hdupfilecompany_certified').val(data.response); break;
@@ -2581,18 +2584,18 @@ transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 
                                 case "vat_registration_certificate_file": $('#hdupfilevat_registration_certificate').val(data.response); break;
                                 case "bookbank_file": $('#hduploadbookbank').val(data.response); break;
                             }
-                            //bootbox.confirm({
-                            //    title: "System Information",
-                            //    message: data.message,
-                            //    buttons: {
-                            //        cancel: {
-                            //            label: '<i class="fa fa-times"></i> Cancel'
-                            //        }
-                            //    },
-                            //    callback: function (result) {
-                            //        console.log('This was logged in the callback: ' + result);
-                            //    }
-                            //});
+                            bootbox.confirm({
+                                title: "System Information",
+                                message: data.message,
+                                buttons: {
+                                    cancel: {
+                                        label: '<i class="fa fa-times"></i> Cancel'
+                                    }
+                                },
+                                callback: function (result) {
+                                    console.log('This was logged in the callback: ' + result);
+                                }
+                            });
                         }
                         else {
                             bootbox.confirm({
