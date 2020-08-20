@@ -71,9 +71,9 @@
                             <th>ชื่อบริษัท(ไทย)</th>
                             <th>ชื่อบริษัท(อังกฤษ)</th>
                             <th>Tax ID</th>
-                            <th >วันที่สมัคร</th>
-                            <th >วันที่อนุมัติ</th>
-                            <th >สถานะ</th>
+                            <th>วันที่สมัคร</th>
+                            <th>วันที่อนุมัติ</th>
+                            <th>สถานะ</th>
 
 
                         </tr>
@@ -87,7 +87,6 @@
     </div>
 
 </div>
-
 
 @section modalpanel {
 
@@ -108,575 +107,1099 @@
                             <div class="form-group col-md-12">
                                 <label>ประเภทผู้สมัคร </label>  <span style="color:red">*</span><br />
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="rdoCompanyType1" name="customRadioSucRegisEdit" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadioInline1">New Subcontract</label>
+                                    <input type="radio" id="rdoCompanyType1" name="customRadioSucRegisEdit" class="custom-control-input" value="NewSubContract">
+                                    <label class="custom-control-label" for="rdoCompanyType1">New Subcontract</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="rdoCompanyType2" name="customRadioSucRegisEdit" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadioInline2">Dealer</label>
+                                    <input type="radio" id="rdoCompanyType2" name="customRadioSucRegisEdit" class="custom-control-input" value="Dealer">
+                                    <label class="custom-control-label" for="rdoCompanyType2">Dealer</label>
                                 </div>
                             </div>
+                            <div id="divnewsubcontract">
+                        
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                        <div class="form-row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                <label>เลขทะเบียนนิติบุคล :</label> <span style="color:red">*</span>
+                                            </div>
+                                            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                                <div class="input-group">
+                                                    <input id="inputTax_id" type="text" class="form-control" placeholder="เลขทะเบียนนิติบุคล"
+                                                           aria-label="Recipient's username" maxlength="13" required  style="width:100px" />
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-success" id="btnsearchrevenue" type="button">
+                                                            <i class="fa fa-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
 
-                            <div class="form-group col-md-6">
-                                <label>เลขทะเบียนนิติบุคล</label> <span style="color:red">*</span>
-                                <div class="input-group mb-4">
-                                    <input id="inputTax_id" type="text" class="form-control" placeholder="เลขทะเบียนนิติบุคล" aria-label="Recipient's username" maxlength="13" required>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-success" type="button">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                        </button>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                        <div class="form-row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                <label>ชื่อย่อบริษัท :</label>
+                                            </div>
+                                            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                                <input id="inputCompany_alias" type="text" placeholder="ชื่อย่อบริษัท" class="form-control"  style="width:300px"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class=" row  my-3">
+                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                        <div class="form-row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                <label>ชื่อนิติบุคคล(ไทย) :</label> <span style="color:red">*</span>
+                                            </div>
+                                                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                                    <select class="form-control form-control" id="ddlprefixcompany_name_th"></select>
+
+                                                </div>
+                                                <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                                    <input id="inputCompany_name_th" type="text" placeholder="ชื่อนิติบุคคล(ไทย)" class="form-control" \
+                                                           maxlength="100" required style="width:165px" />
+
+                                                </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                        <div class="form-row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                <label>ชื่อนิติบุคคล(อังกฤษ) :</label> <span style="color:red">*</span>
+                                            </div>
+
+                                          
+                                                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                                    <select class="form-control form-control" id="ddlprefixcompany_name_en"></select>
+
+                                                </div>
+                                                <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                                    <input id="inputCompany_name_en" type="text" placeholder="ชื่อนิติบุคคล(อังกฤษ)" class="form-control" 
+                                                           maxlength="100" required style="width:165px" />
+
+                                                </div>
+
+                                            
+                                        </div>
+                                        
+
+                                    </div>
+                                </div>
+                            
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                        <div class="form-row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                <label>ชื่อภาษีหัก ณ ที่จ่าย :</label>
+                                            </div>
+                                            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                                <input id="inputWT_name" type="text" class="form-control" placeholder="ชื่อภาษีหัก ณ ที่จ่าย" 
+                                                       aria-label="Recipient's username" maxlength="13" required style="width:300px" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                        <div class="form-row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                <label>ชื่อภาษีมูลค่าเพิ่ม :</label>
+                                            </div>
+                                            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" name="vat_type" id="chkvat_typeT" value="VAT" checked class="custom-control-input">
+                                                    <label class="custom-control-label" for="chkvat_typeT"> ภาษีมูลค่าเพิ่ม</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" name="vat_type" id="chkvat_typeE" value="NON_VAT" class="custom-control-input">
+                                                    <label class="custom-control-label" for="chkvat_typeE"> ไม่มีภาษีมูลค่าเพิ่ม</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>ชื่อย่อบริษัท</label>
-                                <input id="inputCompany_alias" type="text" placeholder="ชื่อย่อบริษัท" class="form-control" />
+                   
+
                             </div>
 
-                            <div class="form-group col-md-6">
-                                <label>ชื่อนิติบุคคล(ไทย)</label> <span style="color:red">*</span>
-                                <div class="form-row mb-4">
-                                    <div class="col-4">
-                                        <select class="form-control form-control" id="ddlprefixcompany_name_th"></select>
+                            <div id="divdealer" style="display:none;">
+
+
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                        <div class="form-row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                <label>Location Code :</label>
+                                            </div>
+                                            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control inputValidationdealer"
+                                                           aria-label="Location Code" id="txtlocationcode" maxlength="100" required style="width:175px" />
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-success" id="btnsearchlocation" type="button">
+                                                            <i class="fa fa-search"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="invalid-tooltip">
+                                                        Please provide a valid location Code.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                     </div>
-                                    <div class="col-8">
-                                        <input id="inputCompany_name_th" type="text" placeholder="ชื่อนิติบุคคล(ไทย)" class="form-control" maxlength="100" required />
+                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                        <div class="form-row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                <label>Distribution Channel :</label>
+                                            </div>
+
+                                            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                                <input type="hidden" id="hddistribution" />
+                                                <input type="text" class="form-control inputValidationdealer" id="txtdistribution" disabled maxlength="250" required style="width:300px" />
+                                                <div class="invalid-tooltip">
+                                                    Please provide a valid distribution Channel.
+                                                </div>
+                                            </div>
+                                        </div>
 
                                     </div>
+
+
+
+
+                                </div>
+
+
+                                    <div class="row my-3">
+                                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                            <div class="form-row">
+                                                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                    <label>Location Name :</label>
+                                                </div>
+
+                                                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                                    <input type="text" class="form-control inputValidationdealer" id="txtlocationname" disabled 
+                                                           maxlength="250" required style="width:300px" />
+                                                    <div class="invalid-tooltip">
+                                                        Please provide a valid location Name.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                            <div class=" form-row">
+                                                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                    <label>Channel Sale Group :</label>
+                                                </div>
+
+                                                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                                    <input type="hidden" id="hdchannelsalegroup" />
+                                                    <input type="text" class="form-control" id="txtchannelsalegroup" disabled style="width:300px" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row my-3">
+                                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                            <div class="form-row">
+                                                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                    <label>เลขทะเบียนนิติบุคคล :</label>
+                                                </div>
+
+                                                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                                    <input type="text" class="form-control inputValidationdealer" id="txttax_id_dealer" disabled 
+                                                           maxlength="100" required style="width:300px"/>
+                                                    <div class="invalid-tooltip">
+                                                        Please provide a valid juristic id.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                            <div class="form-row">
+                                                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                    <label>ชื่อย่อบริษัท :</label>
+                                                </div>
+
+
+                                                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                                    <input type="text" class="form-control" id="txtcompany_alias_dealer" maxlength="100" style="width:300px"/>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+
+                                    </div>
+
+                                    <div class="row my-3">
+
+                                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                            <div class="form-row">
+                                                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                    <label>ชื่อนิติบุคคล(ไทย) :</label>
+                                                </div>
+
+                                                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                                    <select class="form-control" id="ddlprefixcompany_name_th_dealer"></select>
+                                                </div>
+                                                <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                                    <input type="text" class="form-control inputValidationdealer"
+                                                           placeholder="ชื่อนิติบุคคล(ไทย)" id="txtcompany_name_th_dealer" disabled maxlength="100" required 
+                                                           style="width:165px"/>
+                                                    <div class="invalid-tooltip">
+                                                        Please provide a valid company name thai.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+
+                                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                            <div class="form-row">
+                                                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                    <label>ชื่อนิติบุคคล(อังกฤษ) :</label>
+                                                </div>
+
+                                                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                                    <select class="custom-select" id="ddlprefixcompany_name_en_dealer"></select>
+                                                </div>
+                                                <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                                    <input type="text" class="form-control"
+                                                           placeholder="ชื่อนิติบุคคล(อังกฤษ)" id="txtcompany_name_en_dealer" maxlength="100" style="width:165px" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                            <div class="form-row">
+                                                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                    <label>ชื่อภาษีหัก ณ ที่จ่าย :</label>
+                                                </div>
+
+                                                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                                    <input type="text" class="form-control inputValidationdealer" id="txtwt_name_dealer" 
+                                                           maxlength="100" disabled required style="width:300px" />
+                                                    <div class="invalid-tooltip">
+                                                        Please provide a valid tax name.
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                            <div class="form-row">
+                                                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                                                    <label>ภาษีมูลค่าเพิ่ม :</label>
+                                                </div>
+
+                                                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                                    <div class="form-group row">
+                                                        <div class="custom-control custom-radio">
+
+                                                            <input type="radio" class="custom-control-input" name="rdtaxJ" id="chkvat_typeT_dealer" value="VAT" checked>
+                                                            <label class="custom-control-label" for="chktaxdealer">
+                                                                ภาษีมูลค่าเพิ่ม
+                                                            </label>
+                                                        </div>
+
+
+                                                        <div class="custom-control custom-radio ml-4">
+
+                                                            <input type="radio" class="custom-control-input" name="rdtaxJ" id="chkvat_typeE_dealer" value="NON_VAT">
+                                                            <label class="custom-control-label" for="chknottaxdealer">
+                                                                ไม่มีภาษีมูลค่าเพิ่ม
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+
+                </div>
+
+                <h4 class="">ข้อมูลที่อยู่บริษัท</h4>
+                <hr>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>ประเภทที่อยู่</label>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-1">
+
+                        </div>
+
+
+                        <div class="col-sm-3">
+                            <div class="n-chk">
+                                <label class="new-control new-checkbox checkbox-primary">
+                                    <input id="chkLocationBranch" type="checkbox" class="new-control-input" value="01">
+                                    <span class="new-control-indicator"></span>ที่อยู่ตามที่ตั้งสาขา
+                                </label>
+                            </div>
+
+                            <div class="n-chk">
+                                <label class="new-control new-checkbox checkbox-primary">
+                                    <input id="chkLocationDoc" type="checkbox" class="new-control-input" value="02">
+                                    <span class="new-control-indicator"></span>ที่อยู่จัดส่งเอกสาร
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="n-chk">
+                                <label class="new-control new-checkbox checkbox-primary">
+                                    <input id="chkLocationTax" type="checkbox" class="new-control-input" value="06">
+                                    <span class="new-control-indicator"></span>ที่อยู่ตามใบกำกับภาษี
+                                </label>
+                            </div>
+                            <div class="n-chk">
+                                <label class="new-control new-checkbox checkbox-primary">
+                                    <input id="chkLocationShip" type="checkbox" class="new-control-input" value="03">
+                                    <span class="new-control-indicator"></span>ที่อยู่จัดส่งสินค้า
+                                </label>
+                            </div>
+
+
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="n-chk">
+                                <label class="new-control new-checkbox checkbox-primary">
+                                    <input id="chkLocationWT" type="checkbox" class="new-control-input" value="04">
+                                    <span class="new-control-indicator"></span>ที่อยู่ตาม W/T
+                                </label>
+                            </div>
+                            <div class="n-chk">
+                                <label class="new-control new-checkbox checkbox-primary">
+                                    <input id="chkLocationShipPOP" type="checkbox" class="new-control-input" value="05">
+                                    <span class="new-control-indicator"></span>ที่อยู่จัดส่ง POP
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>เลขที่ :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+                                <input type="text" id="txthomenumber" style="width:120px" class="form-control">
+                                <label>&nbsp;&nbsp;&nbsp;&nbsp;หมู่ที่ :</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="text" id="txtVillageNo" style="width:110px" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>หมู่บ้าน :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="txtvillage" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>อาคาร :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="txtbuilding" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>ชั้น :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+                                <input type="text" id="txtfloor" style="width:120px" class="form-control">
+                                <label>&nbsp;&nbsp;&nbsp;&nbsp;ห้อง :</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="text" id="txtroom" style="width:110px" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>ซอย :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="txtsoi" style="width:300px" class="form-control">
+                        </div>
+
+
+                        <div class="col-sm-2">
+                            <label>ถนน :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="txtroad" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>ประเทศ :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="country" name="country" class="form-control form-control" style="width:300px">
+                                <option value="">Select Country</option>
+                                <option value="THA">Thailand</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label>ภาค :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="ddlzone" name="ddlzone" class="form-control form-control" style="width:300px">
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>จังหวัด :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="ddlprovince" name="ddlprovince" class="form-control form-control" style="width:300px">
+                            </select>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label>อำเภอ/เขต :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="ddldistrict" name="ddldistrict" class="form-control form-control" style="width:300px">
+                            </select>
+                        </div>
+
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>ตำบล/แขวง :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="ddlsubdistrict" name="ddlsubdistrict" class="form-control form-control" style="width:300px">
+                            </select>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label>รหัสไปรษณีย์ :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="ddlzipcode" name="ddlzipcode" class="form-control form-control" style="width:300px">
+                            </select>
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-6" style="text-align:right; ">
+                            <input type="button" id="btnClear" value="รีเซ็ต" style="width:20%" class="btn btn-dark mb-2" />
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="button" id="btnAdd" value="เพิ่มที่อยู่" style="width:20%" class="btn btn-success mb-2" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-sm-12">
+                        <div class="table-responsive">
+                            <table id="tbAddressResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th width="30%">ประเภทที่อยู่</th>
+                                        <th width="50%">ที่อยู่</th>
+                                        <th width="10%">แก้ไข</th>
+                                        <th width="10%">ลบ</th>
+
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                <br />
+
+
+                <h4>ข้อมูลติดต่อบริษัท</h4>
+                <hr>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>อีเมลล์ บริษัท :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="mailCompany" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>ชื่อผู้ติดต่อ :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="nameContract" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>อีเมลล์ :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="mailContract" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>เบอร์โทร :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="telContract" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <h4>ข้อมูลติดต่อแผนก</h4>
+                <hr>
+                <div class="container">
+                    <div class="row col-sm-2">
+                        <label>แผนกติดตั้ง</label>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>ชื่อผู้ติดต่อ :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="name1" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>เบอร์โทร :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="tel1" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>อีเมลล์ :</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" id="mail1" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-sm-2">
+                        <label>แผนกซ่อมบำรุง</label>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>ชื่อผู้ติดต่อ :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="name2" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>เบอร์โทร :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="tel2" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>อีเมลล์ :</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" id="mail2" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-sm-2">
+                        <label>แผนกบัญชี</label>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>ชื่อผู้ติดต่อ :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="name3" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>เบอร์โทร :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="tel3" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>อีเมลล์ :</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" id="mail3" style="width:300px" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <h4>ข้อมูลบัญชีธนาคาร</h4>
+                <hr>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>ชื่อธนาคาร :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+                                <select id="selBankName" class="form-control form-control">
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>ชื่อสาขา :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+                                <input type="text" id="nameBranch" class="form-control">
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>ประเภทบัญชี :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+                                <select id="AccType" name="AccType" class="form-control form-control">
+                                    <option value="Saving">ออมทรัพย์</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>ชื่อบัญชี :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+
+                                <input type="text" id="busiName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>เลขบัญชี :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+                                <input type="text" id="codeNumber" style="width:300px" class="form-control">
+                            </div>
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>อัพโหลดหน้าบัญชีธนาคาร:</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+                                <div class="custom-file">
+                                    <input type="hidden" id="hduploadbookbank" />
+                                    <input type="file" class="custom-file-input" id="inputuploadbookbank"
+                                           aria-describedby="uploadlHelp1"  accept="image/jpeg,image/gif,image/png,application/pdf">
+                                    <label class="custom-file-label" for="inputuploadbookbank" id="lbuploadbookbank">เลือกไฟล์</label>
+                                    <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
                                 </div>
 
                             </div>
+                        </div>
 
-                            <div class="form-group col-md-6">
-                                <label>ชื่อนิติบุคคล(อังกฤษ)</label> <span style="color:red">*</span>
-                                <div class="form-row mb-4">
-                                    <div class="col-4">
-                                        <select class="form-control form-control" id="ddlprefixcompany_name_en"></select>
+                        <div class="col-sm-2">
+                            <label>ประเภทธุรกิจ :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+                                <select id="businessType" name="businessType" class="form-control form-control" style="width:300px">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
 
-                                    </div>
-                                    <div class="col-8">
-                                        <input id="inputCompany_name_en" type="text" placeholder="ชื่อนิติบุคคล(อังกฤษ)" class="form-control" maxlength="100" required />
+                <h4>ข้อมูลเอกสารบริษัท</h4>
+                <hr>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>หนังสือรับรองบริษัท :</label>
+                        </div>
 
-                                    </div>
 
-                                </div>
+
+                        @*<div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
+                            <input type="hidden" id="hdupfilecompany_certified" />
+                            <input type="file" class="custom-file-input inputValidationBank" id="company_certified_file" required />
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                            <div class="invalid-tooltip">Please upload a company certified file.</div>
+                        </div>*@
+
+
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+                                @*<div class="custom-file">*@
+                                    <input type="hidden" id="hdupfilecompany_certified" />
+                                    <input type="file" class="custom-file-input" id="inputUploadcertificate" accept="image/jpeg,image/gif,image/png,application/pdf">
+                                    <label class="custom-file-label" for="inputUploadcertificate" id="lbuploadcertificate">เลือกไฟล์</label>
+                                @*</div>*@
+                                <small id="uploadlHelp2" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
                             </div>
-
-                            <div class="form-group col-md-6">
-                                <label>ชื่อภาษีหัก ณ ที่จ่าย</label>
-                                <input id="inputTax_id" type="text" class="form-control" placeholder="ชื่อภาษีหัก ณ ที่จ่าย" aria-label="Recipient's username" maxlength="13" required>
-
+                        </div>
+                        <div class="col-sm-2">
+                            <label>หนังสือทะเบียนพานิชย์:</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row col-sm-12">
+                                @*<div class="custom-file">*@
+                                    <input type="hidden" id="hdupfilecommercial_registration" />
+                                    <input type="file" class="custom-file-input" id="inputUploadComRegis" accept="image/jpeg,image/gif,image/png,application/pdf">
+                                    <label class="custom-file-label" for="inputUploadComRegis" id="lbuploadComRegis">เลือกไฟล์</label>
+                                @*</div>*@
+                                <small id="uploadlHelp3" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
                             </div>
-                            <div class="form-group col-md-6">
-                                <label>ชื่อภาษีมูลค่าเพิ่ม</label><br />
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" name="vat_type" id="chkvat_typeT" value="T" checked class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadioInline1"> ภาษีมูลค่าเพิ่ม</label>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>หนังสือ ก.พ. 20 :</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="row col-sm-6">
+                                @*<div class="custom-file">*@
+                                    <input type="hidden" id="hdupfilevat_registration_certificate" />
+                                    <input type="file" class="custom-file-input" id="inputUpload20"style="width:170px" accept="image/jpeg,image/gif,image/png,application/pdf">
+                                    <label class="custom-file-label" for="inputUpload20" id="lbupload20">เลือกไฟล์</label>
+                                @*</div>*@
+                                <small id="uploadlHelp4" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+
+                </div>
+
+
+                <input type="hidden" id="hdMode">
+                @*<input type="hidden" id="hdCompanyId">*@
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                        ปิด
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                        บันทึก
+                    </button>
+                </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <div class="modal fade bd-example-modal-lg" id="Searchlocation" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Location Search</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12 needs-validation-modalLocation" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">ASC Code :</label>
+                                    <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                        <input type="text" class="form-control" id="txtasccodemodal" />
+
+                                    </div>
                                 </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" name="vat_type" id="chkvat_typeE" value="E" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadioInline2"> ไม่มีภาษีมูลค่าเพิ่ม</label>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Mobile No :</label>
+                                    <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                        <input type="text" class="form-control" id="txtmobilenomodal" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">Location Code :</label>
+                                    <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                        <input type="text" class="form-control inputValidationlocationModal" id="txtlocationcodemodal" required />
+                                        <div class="invalid-tooltip">
+                                            Please provide a valid location code.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">ID Number :</label>
+                                    <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                        <input type="text" class="form-control" id="txtidnumbermodal" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">Sap Code :</label>
+                                    <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                        <input type="text" class="form-control" id="txtsapcodemodal" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">User Id :</label>
+                                    <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                        <input type="text" class="form-control" id="txtuseridmodal" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                                <div class="d-flex align-items-center justify-content-center h-100" role="group">
+                                    @*<button class="btn btn-secondary mr-2" id="rbtnresetlocationmodal" type="button">รีเช็ต</button>
+                                        <button class="btn btn-info" id="btnsearchlocationmodal" type="button">ค้นหา</button>*@
+                                    <button class="btn btn-dark mb-2 mr-2" id="btn_reset_modal" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                                        </svg>
+                                        ล้างข้อมูล
+                                    </button>
+                                    <button class="btn btn-success mb-2" id="btn_search_modal" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        </svg>
+                                        ค้นหาข้อมูล
+                                    </button>
                                 </div>
 
                             </div>
 
                         </div>
 
-                        <h4 class="">ข้อมูลที่อยู่บริษัท</h4>
-                        <hr>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <label>ประเภทที่อยู่</label>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-1">
-
-                                </div>
-
-
-                                <div class="col-sm-3">
-                                    <div class="n-chk">
-                                        <label class="new-control new-checkbox checkbox-primary">
-                                            <input id="chkLocationBranch" type="checkbox" class="new-control-input" value="01">
-                                            <span class="new-control-indicator"></span>ที่อยู่ตามที่ตั้งสาขา
-                                        </label>
-                                    </div>
-
-                                    <div class="n-chk">
-                                        <label class="new-control new-checkbox checkbox-primary">
-                                            <input id="chkLocationDoc" type="checkbox" class="new-control-input" value="02">
-                                            <span class="new-control-indicator"></span>ที่อยู่จัดส่งเอกสาร
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="n-chk">
-                                        <label class="new-control new-checkbox checkbox-primary">
-                                            <input id="chkLocationTax" type="checkbox" class="new-control-input" value="06">
-                                            <span class="new-control-indicator"></span>ที่อยู่ตามใบกำกับภาษี
-                                        </label>
-                                    </div>
-                                    <div class="n-chk">
-                                        <label class="new-control new-checkbox checkbox-primary">
-                                            <input id="chkLocationShip" type="checkbox" class="new-control-input" value="03">
-                                            <span class="new-control-indicator"></span>ที่อยู่จัดส่งสินค้า
-                                        </label>
-                                    </div>
-
-
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="n-chk">
-                                        <label class="new-control new-checkbox checkbox-primary">
-                                            <input id="chkLocationWT" type="checkbox" class="new-control-input" value="04">
-                                            <span class="new-control-indicator"></span>ที่อยู่ตาม W/T
-                                        </label>
-                                    </div>
-                                    <div class="n-chk">
-                                        <label class="new-control new-checkbox checkbox-primary">
-                                            <input id="chkLocationShipPOP" type="checkbox" class="new-control-input" value="05">
-                                            <span class="new-control-indicator"></span>ที่อยู่จัดส่ง POP
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>เลขที่ :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="row col-sm-12">
-                                        <input type="text" id="txthomenumber" style="width:120px" class="form-control">
-                                        <label>&nbsp;&nbsp;&nbsp;&nbsp;หมู่ที่ :</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="text" id="txtVillageNo" style="width:110px" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>หมู่บ้าน :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="txtvillage" style="width:300px" class="form-control">
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>อาคาร :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="txtbuilding" style="width:300px" class="form-control">
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>ชั้น :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="row col-sm-12">
-                                        <input type="text" id="txtfloor" style="width:120px" class="form-control">
-                                        <label>&nbsp;&nbsp;&nbsp;&nbsp;ห้อง :</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="text" id="txtroom" style="width:110px" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>ซอย :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="txtsoi" style="width:300px" class="form-control">
-                                </div>
-
-
-                                <div class="col-sm-2">
-                                    <label>ถนน :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="txtroad" style="width:300px" class="form-control">
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>ประเทศ :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <select id="country" name="country" class="form-control form-control" style="width:300px">
-                                        <option value="">Select Country</option>
-                                        <option value="THA">Thailand</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-sm-2">
-                                    <label>ภาค :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <select id="ddlzone" name="ddlzone" class="form-control form-control" style="width:300px">
-                                    </select>
-                                </div>
-
-
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>จังหวัด :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <select id="ddlprovince" name="ddlprovince" class="form-control form-control" style="width:300px">
-                                    </select>
-                                </div>
-
-                                <div class="col-sm-2">
-                                    <label>อำเภอ/เขต :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <select id="ddldistrict" name="ddldistrict" class="form-control form-control" style="width:300px">
-                                    </select>
-                                </div>
-
-                            </div>
-                            <br />
-
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>ตำบล/แขวง :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <select id="ddlsubdistrict" name="ddlsubdistrict" class="form-control form-control" style="width:300px">
-                                    </select>
-                                </div>
-
-                                <div class="col-sm-2">
-                                    <label>รหัสไปรษณีย์ :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <select id="ddlzipcode" name="ddlzipcode" class="form-control form-control" style="width:300px">
-                                    </select>
-                                </div>
-                            </div>
-
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-6" style="text-align:right; ">
-                                    <input type="button" id="btnClear" value="รีเซ็ต" style="width:20%" class="btn btn-dark mb-2" />
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="button" id="btnAdd" value="เพิ่มที่อยู่" style="width:20%" class="btn btn-success mb-2" />
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row col-sm-12">
-                                <div class="table-responsive">
-                                    <table id="tbAddressResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
-                                        <thead>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                                <div class="table-responsive pt-3">
+                                    <table class="table table-bordered table-hover" id="tblocationModal">
+                                        <thead class="thead-light">
                                             <tr>
-                                                <th scope="col"></th>
-                                                <th scope="col"></th>
-                                                <th width="30%">ประเภทที่อยู่</th>
-                                                <th width="50%">ที่อยู่</th>
-                                                <th width="10%">แก้ไข</th>
-                                                <th width="10%">ลบ</th>
-
+                                                <th>ชื่อบริษัท</th>
+                                                <th>ชื่อย่อบริษัท</th>
+                                                <th>เลขนิติบุคคล</th>
+                                                <th>Location Code</th>
+                                                <th>Location Name</th>
+                                                <th>Distribution Channel</th>
+                                                <th>Channel Sale Group</th>
+                                                <th></th>
+                                                <th>ตัวเลือก</th>
                                             </tr>
                                         </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                  
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power">
+                            <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                            <line x1="12" y1="2" x2="12" y2="12"></line>
+                        </svg>
+                        ปิด
+                    </button>
+                    @*<button type="button" class="btn btn-success" id="btn_select_location">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg);
+transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                            <g fill="none" stroke="#626262" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 6L9 17l-5-5" />
+                            </g>
+                        </svg>
+                        ตกลง
+                    </button>*@
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade bd-example-modal-lg" id="SearchRevenue" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">ค้นหาข้อมูลบริษัทจากฐานข้อมูลกรมสรรพากร</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12 needs-validation-modalLocation" novalidate>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">ข้อมูลจากสรรพากร อาจจะไม่ตรงกับกรมพัฒนาธุรกิจ</label>
+                                    <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                        <input type="text" class="form-control" id="txtsearchrevenue" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                                <div class="d-flex align-items-center justify-content-center h-100" role="group">
+                                    <button class="btn btn-dark mb-2 mr-2" id="btn_reset_revenue_modal" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                                        <circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line>
+                                        <line x1="9" y1="9" x2="15" y2="15"></line></svg> 
+                                        ล้างข้อมูล
+                                    </button>
+                                    <button class="btn btn-success mb-2" id="btn_search_revenue_modal" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        </svg>
+                                        ค้นหาข้อมูล
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                                <div class="table-responsive pt-3">
+                                    <table class="table table-bordered table-hover" id="tbrevenueModal" style="width:100%;">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                @*<th></th>*@
+                                                <th>เลขผู้เสียภาษี</th>
+                                                <th>ชื่อบริษัท</th>
+                                                <th>สาขา</th>
+                                                <th>ที่อยู่</th>
+                                                <th></th>
+                                                <th>ตัวเลือก</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
                                     </table>
                                 </div>
-
                             </div>
-                        </div>
-                        <br />
-
-
-                        <h4>ข้อมูลติดต่อบริษัท</h4>
-                        <hr>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>อีเมลล์ บริษัท :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="mailCompany" style="width:300px" class="form-control">
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>ชื่อผู้ติดต่อ :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="nameContract" style="width:300px" class="form-control">
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>อีเมลล์ :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="mailContract" style="width:300px" class="form-control">
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>เบอร์โทร :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="telContract" style="width:300px" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-
-                        <h4>ข้อมูลติดต่อแผนก</h4>
-                        <hr>
-                        <div class="container">
-                            <div class="row col-sm-2">
-                                <label>แผนกติดตั้ง</label>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>ชื่อผู้ติดต่อ :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="name1" style="width:300px" class="form-control">
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>เบอร์โทร :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="tel1" style="width:300px" class="form-control">
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>อีเมลล์ :</label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <input type="text" id="mail1" style="width:300px" class="form-control">
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row col-sm-2">
-                                <label>แผนกซ่อมบำรุง</label>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>ชื่อผู้ติดต่อ :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="name2" style="width:300px" class="form-control">
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>เบอร์โทร :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="tel2" style="width:300px" class="form-control">
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>อีเมลล์ :</label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <input type="text" id="mail2" style="width:300px" class="form-control">
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row col-sm-2">
-                                <label>แผนกบัญชี</label>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>ชื่อผู้ติดต่อ :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="name3" style="width:300px" class="form-control">
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>เบอร์โทร :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="tel3" style="width:300px" class="form-control">
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>อีเมลล์ :</label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <input type="text" id="mail3" style="width:300px" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-
-                        <h4>ข้อมูลบัญชีธนาคาร</h4>
-                        <hr>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>ชื่อธนาคาร :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="row col-sm-12">
-                                        <select id="selBankName" class="form-control form-control">
-                                        </select>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>ชื่อสาขา :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="row col-sm-12">
-                                        <input type="text" id="nameBranch" class="form-control">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>ประเภทบัญชี :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="row col-sm-12">
-                                        <select id="AccType" name="AccType" class="form-control form-control">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>ชื่อบัญชี :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="row col-sm-12">
-
-                                        <input type="text" id="busiName" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>เลขบัญชี :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="row col-sm-12">
-                                        <input type="text" id="codeNumber" style="width:300px" class="form-control">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>อัพโหลดหน้าบัญชีธนาคาร:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="row col-sm-12">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                                   aria-describedby="uploadlHelp1">
-                                            <label class="custom-file-label" for="inputGroupFile01" id="lbuploadbookbank">เลือกไฟล์</label>
-                                            <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-2">
-                                    <label>ประเภทธุรกิจ :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="row col-sm-12">
-                                        <select id="businessType" name="businessType" class="form-control form-control" style="width:300px">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-
-                        <h4>ข้อมูลเอกสารบริษัท</h4>
-                        <hr>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>หนังสือรับรองบริษัท :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="row col-sm-12">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="inputUploadcertificate"
-                                                   aria-describedby="inputGroupFileAddon01">
-                                            <label class="custom-file-label" for="inputGroupFile01" id="lbuploadcertificate">เลือกไฟล์</label>
-                                        </div>
-                                        <small id="uploadlHelp2" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>หนังสือทะเบียนพานิชย์:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="row col-sm-12">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="inputUploadComRegis"
-                                                   aria-describedby="inputGroupFileAddon01">
-                                            <label class="custom-file-label" for="inputGroupFile01"  id="lbuploadComRegis">เลือกไฟล์</label>
-                                        </div>
-                                        <small id="uploadlHelp3" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>หนังสือ ก.พ. 20 :</label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <div class="row col-sm-6">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="inputUpload20"
-                                                   aria-describedby="inputGroupFileAddon01" style="width:170px">
-                                            <label class="custom-file-label" for="inputGroupFile01"  id="lbupload20">เลือกไฟล์</label>
-                                        </div>
-                                        <small id="uploadlHelp4" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
 
                         </div>
 
+                    </div>
 
-                        <input type="hidden" id="hdMode">
-                        <input type="hidden" id="hdCompanyId">
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
-                                ปิด
-                            </button>
-                            <button type="submit" class="btn btn-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                                บันทึก
-                            </button>
-                        </div>
-                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    @*<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal">ตกลง</button>*@
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power">
+                        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                        ปิด
+                    </button>
+                    @*<button type="button" class="btn btn-success" id="btn_select_revenue">
+                        <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg);transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                        <g fill="none" stroke="#626262" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 6L9 17l-5-5" /></g></svg>
+                        ตกลง
+                    </button>*@
+
                 </div>
 
             </div>
@@ -687,13 +1210,17 @@
 
 
 @section scripts {
- 
+
     <script type="text/javascript">
         var oTable;
         var oTableAddress;
+        var tbRevenue;
+        var tbLocation;
             $(document).ready(function () {
                 inittbSearchResult();
                 inittbAddressResult();
+                inittbRevenue();
+                inittblocation();
                 $("#btnSearch").click(function (e) {
                     searchdata();
                 });
@@ -702,10 +1229,7 @@
                     clearMainData();
                 });
 
-                $(".custom-file-input").on("change", function () {
-                    var fileName = $(this).val().split("\\").pop();
-                    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-                });
+
 
                 $('#ddlzone').change(function () {
 
@@ -722,7 +1246,7 @@
 
                 $('#tbAddressResult').on('click', 'tbody .edit_btn', function () {
                     var data_row = oTableAddress.row($(this).closest('tr')).data();
-                    oTableAddress.row($(this).closest('tr')).remove().draw();//เดี๋ยวกลับมาทำ 
+                    oTableAddress.row($(this).closest('tr')).remove().draw();//เดี๋ยวกลับมาทำ
 
                     $.ajax({
                         type: "POST",
@@ -760,7 +1284,7 @@
                             if (data.status) {
                                 console.log(data.response);
 
-                              
+
                                 $('#ddlcountry').val(data.response.Country)
 
                                 $('#ddlprovince').val(data.response.ProvinceId)
@@ -791,11 +1315,6 @@
                                             $(this).prop('checked', true);
                                         }
                                     });
-
-
-                               
-
-
                             }
                             else {
                                 bootbox.confirm({
@@ -810,7 +1329,7 @@
                                         console.log('This was logged in the callback: ' + result);
                                     }
                                 });
-                                
+
                             }
                         },
                         error: function (xhr, status, error) {
@@ -831,6 +1350,408 @@
                             });
                         }
                     });
+                });
+
+                $('#tbAddressResult').on('click', 'tbody .delete_btn', function () {
+                    var data_row = oTableAddress.row($(this).closest('tr')).data();
+                    $.ajax({
+                        type: "POST",
+                        url: "/CompanyProfile/DeleteDaftAddress",
+                        data: { AddressId: data_row.addressId },
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.status) {
+                                var val = []
+                                val = ConcatstrAddress(data.response);
+                                oTableAddress.clear();
+                                BindDatatable(oTableAddress, val);
+                            }
+                            else {
+                                bootbox.confirm({
+                                    title: "System Information",
+                                    message: data.message,
+                                    buttons: {
+                                        cancel: {
+                                            label: '<i class="fa fa-times"></i> Cancel'
+                                        }
+                                    },
+                                    callback: function (result) {
+                                        console.log('This was logged in the callback: ' + result);
+                                    }
+                                });
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            //Loading(0);
+                            //clearForEdit();
+                            console.log(status);
+                            bootbox.confirm({
+                                title: "System Information",
+                                message: xhr.responseText,
+                                buttons: {
+                                    cancel: {
+                                        label: '<i class="fa fa-times"></i> Cancel'
+                                    }
+                                },
+                                callback: function (result) {
+                                    console.log('This was logged in the callback: ' + result);
+                                }
+                            });
+                        }
+                    });
+                });
+
+                $('#btnAdd').click(function () {
+                    var stuff = [];
+
+
+                    $(':checkbox:checked').each(function (i) {
+
+                        //val[i] = $(this).parent().text().trim();
+
+                        var data = {
+                            AddressTypeId: $(this).val(),
+                            address_type_name: $(this).parent().text().trim(),
+                            Country: $('#country option').filter(':selected').val(),
+                            ZipCode: $('#ddlzipcode option').filter(':selected').val(),
+                            HouseNo: $('#txthomenumber').val(),
+                            Moo: $('#txtVillageNo').val(),
+                            VillageName: $('#txtvillage').val(),
+                            Building: $('#txtbuilding').val(),
+                            Floor: $('#txtfloor').val(),
+                            RoomNo: $('#txtroom').val(),
+                            Soi: $('#txtsoi').val(),
+                            Road: $('#txtroad').val(),
+                            SubDistrictId: $('#ddlsubdistrict option').filter(':selected').val(),
+                            sub_district_name: $('#ddlsubdistrict option').filter(':selected').text(),
+                            DistrictId: $('#ddldistrict option').filter(':selected').val(),
+                            district_name: $('#ddldistrict option').filter(':selected').text(),
+                            ProvinceId: $('#ddlprovince option').filter(':selected').val(),
+                            province_name: $('#ddlprovince option').filter(':selected').text(),
+                            RegionId: $('#ddlzone option').filter(':selected').val(),
+                            location_code: $('#txtlocationcode').val(),
+                            CompanyId: $('#hdCompanyId').val()
+                        }
+                        stuff.push(data);
+
+
+                    });
+
+                    SaveDaftAddress(stuff);
+                });
+
+
+                $(".custom-file-input").on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                });
+
+                $('#inputUploadcertificate').change(function () {
+
+                    uploadFiles('inputUploadcertificate')
+                });
+
+                $('#inputUploadComRegis').change(function () {
+                    uploadFiles('inputUploadComRegis')
+                });
+
+                $('#inputUpload20').change(function () {
+                    uploadFiles('inputUpload20')
+                });
+                $('#inputuploadbookbank').change(function () {
+                    uploadFiles('inputuploadbookbank')
+                });
+
+                $('#rdoCompanyType1').on("change", function () {
+                    if ($(this).attr("value") == "NewSubContract") {
+                        $("#divdealer").hide('slow');
+                        $('#divnewsubcontract').show('slow');
+                    }
+                });
+
+                $('#rdoCompanyType2').on("change", function () {
+                    if ($(this).attr("value") == "Dealer") {
+                        $("#divnewsubcontract").hide('slow');
+                        $("#divdealer").show('slow');
+                    }
+                });
+
+
+                $('#btnsearchlocation').click(function () {
+                    $('#Searchlocation').modal('show');
+                    $('#txtlocationcodemodal').val($('#txtlocationcode').val());
+                    $("#btn_search_modal").trigger("click");
+                });
+                $('#btn_search_modal').click(function () {
+
+                    //var forms = document.getElementsByClassName('needs-validation-modalLocation');
+                   // var validation = Array.prototype.filter.call(forms, function (form) {
+                        //if (Validate(".form-control.inputValidationlocationModal", ".custom-control-input.inputValidationlocationModal")) {
+                        //    event.preventDefault();
+                        //    event.stopPropagation();
+                       // }
+                        //else {
+                            //tbLocation.ajax.reload();
+                    //inittblocation();
+
+
+                       // }
+                      //  form.classList.add('was-validated');
+                   // });
+
+
+
+                    $.ajax({
+                        url: "/CompanyProfile/SearchLocation",
+                        type: "POST",
+                        data: {
+                            asc_code: function () { return $('#txtasccodemodal').val() },
+                            asc_mobile_no: function () { return $('#txtmobilenomodal').val() },
+                            id_Number: function () { return $('#txtidnumbermodal').val() },
+                            location_code: function () { return $('#txtlocationcodemodal').val() },
+                            sap_code: function () { return $('#txtsapcodemodal').val() },
+                            user_id: function () { return $('#txtuseridmodal').val() }
+                        },
+                        datatype: "JSON",
+                    }).done(function (data) {
+                        tbLocation.clear().draw();
+                        tbLocation.rows.add(data.data).draw();
+                    }).fail(function (xhr, status, error) {
+                        bootbox.confirm({
+                            title: "System Information",
+                            message: xhr.responseText,
+                            buttons: {
+                                cancel: {
+                                    label: '<i class="fa fa-times"></i> Cancel'
+                                }
+                            },
+                            callback: function (result) {
+                                console.log('This was logged in the callback: ' + result);
+                            }
+                        });
+                    });
+
+                });
+                $('#btn_reset_modal').click(function () {
+                    ClearDataModalLocation();
+                });
+                $('#tblocationModal').on('click', 'tbody .select_btn', function () {
+
+                    var value = tbLocation.row($(this).closest('tr')).data();
+                    var lo_id = value.location_id;
+                    $.ajax({
+                        type: "POST",
+                        url: "/CompanyProfile/GetLocationSession",
+                        dataType: "json",
+                        data: { location_id: lo_id },
+                        success: function (data) {
+
+                            if (data.Response.Status) {
+                                $('#txtlocationcode').val(data.LocationListModel[0].outLocationCode);
+                                $('#txtlocationname').val(data.LocationListModel[0].outLocationName);
+                                $('#txtdistribution').val(data.LocationListModel[0].outDistChn);
+                                $('#txtchannelsalegroup').val(data.LocationListModel[0].outChnSales);
+                                $('#txttax_id_dealer').val(data.LocationListModel[0].outTaxId);
+                                $('#txtcompany_alias_dealer').val(data.LocationListModel[0].outCompanyShortName);
+
+
+                                $("#ddlprefixcompany_name_th_dealer option").filter(function () {
+                                    return $(this).text() == data.LocationListModel[0].outTitle;
+                                 }).prop('selected', true);
+
+                               
+                                $('#txtcompany_name_th_dealer').val(data.LocationListModel[0].outCompanyName);
+
+
+
+                                $("#ddlprefixcompany_name_en_dealer option").filter(function () {
+                                    return $(this).text() == data.LocationListModel[0].outTitle;
+                                }).prop('selected', true);
+
+
+                                $('#txtcompany_name_en_dealer').val();
+                                $('#txtwt_name_dealer').val(data.LocationListModel[0].outWTName);
+
+                                if (data.LocationListModel[0].outVatType == "VAT") {
+                                    $('#chkvat_typeT_dealer').prop('checked', true);
+                                }
+                                else if (data.LocationListModel[0].outVatType == "NON_VAT") {
+                                    $('#chkvat_typeE_dealer').prop('checked', true);
+                                }
+                            }
+
+                        },
+                        error: function (xhr, status, error) {
+
+                            //clearForEdit();
+                            console.log(status);
+                            showFeedback("error", xhr.responseText, "System Information",
+                                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                        }
+                    });
+
+
+
+                    ClearDataModalLocation();
+                    $('#Searchlocation').modal('hide');
+
+                });
+                //$('#tblocationModal tbody').on('click', 'tr', function () {
+                //    // $(this).toggleClass('selected');
+                //    if ($(this).hasClass('selected')) {
+                //        $(this).removeClass('selected');
+                //    }
+                //    else {
+                //        tbLocation.$('tr.selected').removeClass('selected');
+                //        $(this).addClass('selected');
+                //    }
+                //});
+                $('#btn_select_location').click(function () {
+
+                    //var value = tbLocation.rows('.selected').data();
+                    //var lo_id = value[0].location_id;
+                    //$.ajax({
+                    //    type: "POST",
+                    //    url: "/CompanyProfile/GetLocationSession",
+                    //    dataType: "json",
+                    //    data: { location_id: lo_id },
+                    //    success: function (data) {
+
+                    //        if (data.Response.Status) {
+                    //            $('#txtlocationcode').val(data.LocationListModel[0].outLocationCode);
+                    //            $('#txtlocationname').val(data.LocationListModel[0].outLocationName);
+                    //            $('#txtdistribution').val(data.LocationListModel[0].outDistChn);
+                    //            $('#txtchannelsalegroup').val(data.LocationListModel[0].outChnSales);
+                    //            $('#txttax_id_dealer').val(data.LocationListModel[0].outTaxId);
+                    //            $('#txtcompany_alias_dealer').val(data.LocationListModel[0].outCompanyShortName);
+
+                    //            if ($('#ddlprefixcompany_name_th_dealer option:selected').text() == data.LocationListModel[0].outTitle) {
+                    //                $('#ddlprefixcompany_name_th_dealer').text(data.LocationListModel[0].outTitle).change();
+                    //            }
+
+                    //            $('#txtcompany_name_th_dealer').val(data.LocationListModel[0].outCompanyName);
+
+                    //            if ($('#ddlprefixcompany_name_en_dealer option:selected').text() == data.LocationListModel[0].outTitle) {
+                    //                $('#ddlprefixcompany_name_en_dealer').text(data.LocationListModel[0].outTitle).change();
+                    //            }
+
+                    //            $('#txtcompany_name_en_dealer').val();
+                    //            $('#txtwt_name_dealer').val(data.LocationListModel[0].outWTName);
+
+                    //            if (data.LocationListModel[0].outVatType == "VAT") {
+                    //                $('#chkvat_typeT_dealer').prop('checked', true);
+                    //            }
+                    //            else if (data.LocationListModel[0].outVatType == "NON_VAT") {
+                    //                $('#chkvat_typeE_dealer').prop('checked', true);
+                    //            }
+                    //        }
+
+                    //    },
+                    //    error: function (xhr, status, error) {
+
+                    //        //clearForEdit();
+                    //        console.log(status);
+                    //        showFeedback("error", xhr.responseText, "System Information",
+                    //            "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    //    }
+                    //});
+
+
+
+                    //ClearDataModalLocation();
+                    //$('#Searchlocation').modal('hide');
+
+                });
+
+                $('#btnsearchrevenue').click(function () {
+                    $('#SearchRevenue').modal('show');
+                    $('#txtsearchrevenue').val($('#inputTax_id').val());
+                    $("#btn_search_revenue_modal").trigger("click");
+                });
+                $('#btn_reset_revenue_modal').click(function () {
+                    ClearDataModalRevenue()
+                });
+                $('#btn_search_revenue_modal').click(function () {
+                    //tbRevenue.ajax.reload();
+                    $.ajax({
+                        url: "/CompanyProfile/GetRevenue",
+                        type: "POST",
+                        data: {
+                            tIN: function () {
+                                return $('#txtsearchrevenue').val()
+                            }
+                        },
+                        datatype: "JSON",
+                    }).done(function (data) {
+                        tbRevenue.clear().draw();
+                        tbRevenue.rows.add(data.data).draw();
+                    }).fail(function (xhr, status, error) {
+                        bootbox.confirm({
+                            title: "System Information",
+                            message: xhr.responseText,
+                            buttons: {
+                                cancel: {
+                                    label: '<i class="fa fa-times"></i> Cancel'
+                                }
+                            },
+                            callback: function (result) {
+                                console.log('This was logged in the callback: ' + result);
+                            }
+                        });
+                    });
+
+                });
+
+                //$('#tbrevenueModal tbody').on('click', 'tr', function () {
+                //    // $(this).toggleClass('selected');
+                //    if ($(this).hasClass('selected')) {
+                //        $(this).removeClass('selected');
+                //    }
+                //    else {
+                //        tbLocation.$('tr.selected').removeClass('selected');
+                //        $(this).addClass('selected');
+                //    }
+                //});
+
+                $('#tbrevenueModal').on('click', 'tbody .select_btn', function () {
+                    var value = tbRevenue.row($(this).closest('tr')).data();
+                    var titlename = value.vtitleName;
+                    var companyname = value.vName;
+
+                    $('#inputCompany_name_th').val(companyname);
+                    $("#ddlprefixcompany_name_th option").filter(function () {
+                        //may want to use $.trim in here
+                        return $(this).text() == titlename;
+                    }).prop('selected', true);
+                    ClearDataModalRevenue();
+                    $('#SearchRevenue').modal('hide');
+                });
+
+                $('#btn_select_revenue').click(function () {
+                    //var value = tbRevenue.rows('.selected').data();
+                    //var titlename = value[0].vtitleName;
+                    //var companyname = value[0].vName;
+
+                    //$('#txtcompany_name_th').val(companyname);
+                    //if ($('#ddlprefixcompany_name_th option:selected').text() == titlename) {
+                    //    $('#ddlprefixcompany_name_th').text(titlename).change();
+                    //}
+                    //ClearDataModalRevenue();
+                    //$('#SearchRevenue').modal('hide');
+                });
+
+
+
+                $(document).on('show.bs.modal', '.modal', function () {
+                    var zIndex = 1040 + (10 * $('.modal:visible').length);
+                    $(this).css('z-index', zIndex);
+                    setTimeout(function () {
+                        $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+                    }, 0);
+                });
+
+                $(document).on('hidden.bs.modal', '.modal', function () {
+                    $('.modal:visible').length && $(document.body).addClass('modal-open');
                 });
             });
 
@@ -855,10 +1776,34 @@
             }, false);
 
 
+        function ClearDataModalLocation() {
+            $('#txtasccodemodal').val('')
+            $('#txtmobilenomodal').val('')
+            $('#txtlocationcodemodal').val('')
+            $('#txtidnumbermodal').val('')
+            $('#txtsapcodemodal').val('')
+            $('#txtuseridmodal').val('')
+            tbLocation.clear().draw();
+        }
+
+        function ClearDataModalRevenue() {
+            $('#txtsearchrevenue').val('');
+            tbRevenue.clear().draw();
+        }
+
+        function BindDatatable(table, datamodel) {
+            //console.log("BindDatatable");
+            //console.log(datamodel);
+            //table.data(datamodel);
+
+            table.rows.add(datamodel).draw();
+
+        }
+
         function inittbAddressResult(companyId) {
             oTableAddress = $('#tbAddressResult').DataTable({
                 processing: true, // for show progress bar
-                serverSide: true, // for process server side
+                //serverSide: true, // for process server side
                 filter: false, // this is for disable filter (search box)
                 orderMulti: false, // for disable multiple column at once
                 pageLength: 10,
@@ -879,38 +1824,38 @@
                    "decimal": ",",
                   "thousands": "."
                     },
-                    ajax: {
-                        url: "/CompanyProfile/GetAddress",
-                        type: "POST",
-                        datatype: "JSON",
-                        data:{
-                            company :function () { return $('#hdCompanyId').val() }
-                        },
-                        dataSrc: function (data) {
-                            var val = []
-                            val = ConcatstrAddress(data.data);
-                            data.data = val;
-                            return data.data;
-                        },
-                        error: function (xhr, status, error) {
-                            console.log(status);
-                            bootbox.confirm({
-                                title: "System Information",
-                                message: xhr.responseText,
-                                buttons: {
-                                    cancel: {
-                                        label: '<i class="fa fa-times"></i> Cancel'
-                                    }
-                                },
-                                callback: function (result) {
-                                    console.log('This was logged in the callback: ' + result);
-                                }
-                            });
-                        }
-                    },
+                    //ajax: {
+                    //    url: "/CompanyProfile/GetAddress",
+                    //    type: "POST",
+                    //    datatype: "JSON",
+                    //    data:{
+                    //        company :function () { return $('#hdCompanyId').val() }
+                    //    },
+                    //    dataSrc: function (data) {
+                    //        var val = []
+                    //        val = ConcatstrAddress(data.data);
+                    //        data.data = val;
+                    //        return data.data;
+                    //    },
+                    //    error: function (xhr, status, error) {
+                    //        console.log(status);
+                    //        bootbox.confirm({
+                    //            title: "System Information",
+                    //            message: xhr.responseText,
+                    //            buttons: {
+                    //                cancel: {
+                    //                    label: '<i class="fa fa-times"></i> Cancel'
+                    //                }
+                    //            },
+                    //            callback: function (result) {
+                    //                console.log('This was logged in the callback: ' + result);
+                    //            }
+                    //        });
+                    //    }
+                    //},
                     columns: [
 
-                       
+
                         { "data": "addressId", "visible": false },
                         { "data": "address_type_id", "visible": false },
                         { "data": "address_type", orderable: true, },
@@ -922,7 +1867,7 @@
                         },
                         {
                             data: null, width: "10%", render: function (data, type, row) {
-                                return "<a href='#' class='delete_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='ลบ'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-delete'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a>";
+                                return "<a href='#' class='delete_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='ลบ'><svg xmlns='http://www.w3.org/2000/svg'width='24' height='24' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'><g fill='none' stroke='#626262' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 6h18'/><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'/></g></svg></a>";
                             }
                         },
                 ],
@@ -932,7 +1877,144 @@
 
                 });
         }
-           function inittbSearchResult() {
+
+        function inittblocation() {
+             tbLocation = $('#tblocationModal').DataTable({
+                 processing: true, // for show progress bar
+                 //serverSide: true, // for process server side
+                 filter: false, // this is for disable filter (search box)
+                 orderMulti: false, // for disable multiple column at once
+                 pageLength: 10,
+                 order: [],
+                 autoWidth: false,
+                 searching: false,
+                 destroy: true,
+                 lengthChange: false,
+                 "oLanguage": {
+                     "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                     "sInfo": "Showing page _PAGE_ of _PAGES_",
+                     "sSearch": false,
+                     "sLengthMenu": "Results :  _MENU_",
+                 },
+                 "scrollX": true,
+                 "language": {
+                     "zeroRecords": "No data found.",
+                     "decimal": ",",
+                     "thousands": "."
+                 },
+                 data: [],
+                //ajax: {
+                //    type: "POST",
+                //    url: "/CompanyProfile/SearchLocation",
+                //    data: {
+                //        asc_code: function () { return $('#txtasccodemodal').val() },
+                //        asc_mobile_no: function () { return $('#txtmobilenomodal').val() },
+                //        id_Number: function () { return $('#txtidnumbermodal').val() },
+                //        location_code: function () { return $('#txtlocationcodemodal').val() },
+                //        sap_code: function () { return $('#txtsapcodemodal').val() },
+                //        user_id: function () { return $('#txtuseridmodal').val() }
+                //    },
+                //    dataType: "json",
+                //    error: function (xhr, status, error) {
+                //        Loading(0);
+                //        //clearForEdit();
+                //        console.log(status);
+                //        showFeedback("error", xhr.responseText, "System Information",
+                //            "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                //    }
+
+                //},
+                columns: [
+                    { "data": "outCompanyName" },
+                    { "data": "outCompanyShortName" },
+                    { "data": "outTaxId" },
+                    { "data": "outLocationCode" },
+                    { "data": "outLocationName" },
+                    { "data": "outDistChn" },
+                    { "data": "outChnSales" },
+                    { "data": "location_id", "visible": false },
+                     {
+                        data: null, width: "10%", render: function (data, type, row) {
+                             return "<a href='#'class='select_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='เลือก'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg);\
+                             transform: rotate(360deg); 'preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'>\
+                                 <g fill = 'none' stroke = '#626262' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20 6L9 17l-5-5' /></g></svg></a>";
+                        }
+                    }
+                ],
+                 "order": [[1, "desc"]],
+                 "stripeClasses": [],
+                 drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+            });
+        }
+
+        function inittbRevenue() {
+           tbRevenue = $('#tbrevenueModal').DataTable({
+               processing: true, // for show progress bar
+               //serverSide: true, // for process server side
+               filter: false, // this is for disable filter (search box)
+               orderMulti: false, // for disable multiple column at once
+               pageLength: 10,
+               order: [],
+               autoWidth: false,
+               searching: false,
+               destroy: true,
+               lengthChange: false,
+               "oLanguage": {
+                   "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                   "sInfo": "Showing page _PAGE_ of _PAGES_",
+                   "sSearch": false,
+                   "sLengthMenu": "Results :  _MENU_",
+               },
+               "scrollX": true,
+               "language": {
+                   "zeroRecords": "No data found.",
+                   "decimal": ",",
+                   "thousands": "."
+               },
+               data:[],
+                //ajax: {
+                //    type: "POST",
+                //    url: "/CompanyProfile/GetRevenue",
+                //    data: {
+                //        tIN: function () { return $('#txtsearchrevenue').val() }
+                //    },
+                //    dataType: "json",
+                //    error: function (xhr, status, error) {
+                //        Loading(0);
+                //        //clearForEdit();
+                //        console.log(status);
+                //        showFeedback("error", xhr.responseText, "System Information",
+                //            "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                //    }
+
+                //},
+                columns: [
+
+                    { "data": "vNID" },
+                    { "data": "vName" },
+                    { "data": "vBranchName" },
+                    { "data": "outConcataddr" },
+                    { "data": "vtitleName", "visible": false },
+                    {
+                        data: null, width: "10%", render: function (data, type, row) {
+                            return "<a href='#'class='select_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='เลือก'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg);\
+                             transform: rotate(360deg); 'preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'>\
+                                 <g fill = 'none' stroke = '#626262' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20 6L9 17l-5-5' /></g></svg></a>";
+                        }
+                    }
+
+               ],
+               "order": [[1, "desc"]],
+               "stripeClasses": [],
+               drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+            });
+        }
+
+
+
+
+
+        function inittbSearchResult() {
            oTable = $('#tbSearchResult').DataTable({
                 processing: true, // for show progress bar
                 serverSide: true, // for process server side
@@ -1069,6 +2151,7 @@
               success: function (result) {
                   console.log(result)
                   if (result != null) {
+                      $('#hdCompanyId').val(result.CompanyId);
                       $("#inputCompany_alias").val(result.CompanyAlias);
                       $("#inputCompany_name_th").val(result.CompanyNameTh);
 
@@ -1089,7 +2172,7 @@
                       $('#ddlprefixcompany_name_en').val(result.CompanyTitleEnId);
                       $('#inputCompany_name_en').val(result.CompanyNameEn);
 
-                      $('#inputTax_id').val(result.WtName);
+                      $('#inputWT_name').val(result.WtName);
 
                       if (result.VatType == "VAT") {
                           $('#chkvat_typeT').prop('checked', true);
@@ -1124,6 +2207,7 @@
 
                       if (result.AttachFile != null) {
                           $('#lbuploadbookbank').html(result.AttachFile);
+                          $('#hduploadbookbank').val(result.file_id_bookbank);
                       }
 
 
@@ -1131,12 +2215,15 @@
 
                       if (result.CompanyCertifiedFile != null) {
                           $('#lbuploadcertificate').html(result.CompanyCertifiedFile);
+                          $('#hdupfilecompany_certified').val(result.file_id_CompanyCertifiedFile);
                       }
                       if (result.CommercialRegistrationFile != null) {
                           $('#lbuploadComRegis').html(result.CommercialRegistrationFile);
+                          $('#hdupfilecommercial_registration').val(result.file_id_CommercialRegistrationFile);
                       }
                       if (result.VatRegistrationCertificateFile != null) {
                           $('#lbupload20').html(result.VatRegistrationCertificateFile);
+                          $('#hdupfilevat_registration_certificate').val(result.file_id_VatRegistrationCertificateFile);
                       }
 
                       GetAddress(companyId);
@@ -1160,7 +2247,37 @@
         }
 
         function GetAddress(companyId) {
-            inittbAddressResult(companyId);
+           // inittbAddressResult(companyId);
+
+            $.ajax({
+                url: "/CompanyProfile/GetAddress",
+                type: "POST",
+                data: {
+                    company: function () {
+                        return $('#hdCompanyId').val()
+                    }
+                },
+                datatype: "JSON",
+            }).done(function (data) {
+                var val = []
+                val = ConcatstrAddress(data.data);
+                data.data = val;
+                oTableAddress.clear().draw();
+                oTableAddress.rows.add(data.data).draw();
+            }).fail(function (xhr, status, error) {
+                        bootbox.confirm({
+                                title: "System Information",
+                                message: xhr.responseText,
+                                buttons: {
+                                    cancel: {
+                                        label: '<i class="fa fa-times"></i> Cancel'
+                                    }
+                                },
+                                callback: function (result) {
+                                    console.log('This was logged in the callback: ' + result);
+                                }
+                            });
+            });
         }
 
         function ConcatstrAddress(data) {
@@ -1217,48 +2334,302 @@
             return val;
         }
 
-        function onSave() {
-            var company = new Object();
-            company.CompanyId = $('#hdCompanyId').val();
-            company.CompanyNameTh = $('#inputCompany_name_th').val();
-            company.CompanyNameEn = $('#inputCompany_name_en').val();
+        function GetDaftAddress() {
+            $.ajax({
+                url: "/CompanyProfile/SearchDaftAddress",
+                type: "POST",
+                data: {
+                    company: function () {
+                        return $('#hdCompanyId').val()
+                    }
+                },
+                datatype: "JSON",
+            }).done(function (data) {
+                var val = []
+                val = ConcatstrAddress(data.data);
+                data.data = val;
+                oTableAddress.clear().draw();
+                oTableAddress.rows.add(data.data).draw();
+            }).fail(function (xhr, status, error) {
+                bootbox.confirm({
+                    title: "System Information",
+                    message: xhr.responseText,
+                    buttons: {
+                        cancel: {
+                            label: '<i class="fa fa-times"></i> Cancel'
+                        }
+                    },
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
+            });
+        }
 
+        function SaveDaftAddress(stuff) {
+            $.ajax({
+                type: "POST",
+                url: "/CompanyProfile/SaveDaftAddress",
+                data: { daftdata: stuff },
+                dataType: "json",
+                success: function (data) {
+
+                    if (data.status) {
+                        var val = []
+                        val = ConcatstrAddress(data.response);
+                        data.data = val;
+                        oTableAddress.clear().draw();
+                        oTableAddress.rows.add(data.data).draw();
+                    }
+                    else {
+                        bootbox.confirm({
+                            title: "System Information",
+                            message: data.message,
+                            buttons: {
+                                cancel: {
+                                    label: '<i class="fa fa-times"></i> Cancel'
+                                }
+                            },
+                            callback: function (result) {
+                                console.log('This was logged in the callback: ' + result);
+                            }
+                        });
+                    }
+
+                },
+                error: function (xhr, status, error) {
+
+                    console.log(status);
+                    bootbox.confirm({
+                        title: "System Information",
+                        message: xhr.responseText,
+                        buttons: {
+                            cancel: {
+                                label: '<i class="fa fa-times"></i> Cancel'
+                            }
+                        },
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
+                }
+            });
+        }
+
+        function onSave() {
+            var chksubcontract_type = null;
+            var distribution_channel = null;
+            var channel_sale_group = null;
+            var tax_id = null;
+            var company_alias = null;
+            var company_title_name_th = null;
+            var company_title_name_en = null;
+            var company_name_th = null;
+            var company_name_en = null;
+            var wt_name = null;
+            var vat_type = null;
+            var company = new Object();
+
+            if ($("#rdoCompanyType1").is(":checked")) {
+                chksubcontract_type = $("#rdoCompanyType1").val();
+                //distribution_channel = $('#ddldistribution option').filter(':selected').val();
+                //channel_sale_group = $('#ddlchannelsalegroup option').filter(':selected').val();
+
+                tax_id = $('#inputTax_id').val();
+                company_alias = $('#inputCompany_alias').val();
+
+                company_title_name_th = $('#ddlprefixcompany_name_th option').filter(':selected').val();
+                company_name_th = $('#inputCompany_name_th').val();
+
+                company_title_name_en = $('#ddlprefixcompany_name_en option').filter(':selected').val();
+                company_name_en = $('#inputCompany_name_en').val();
+
+                wt_name = $('#inputWT_name').val();
+                vat_type = $('#chkvat_typeT').is(':checked') ? $('#chkvat_typeT').val() : $('#chkvat_typeE').val();
+
+            }
+            else if ($("#rdoCompanyType2").is(":checked")) {
+                chksubcontract_type = $("#rdoCompanyType2").val();
+                distribution_channel = $('#txtdistribution').val();
+                channel_sale_group = $('#txtchannelsalegroup').val();
+                tax_id = $('#txttax_id_dealer').val();
+                company_alias = $('#txtcompany_alias_dealer').val();
+                company_title_name_th = $('#ddlprefixcompany_name_th_dealer option').filter(':selected').val();
+                company_name_th = $('#txtcompany_name_th_dealer').val();
+                company_title_name_en = $('#ddlprefixcompany_name_en_dealer option').filter(':selected').val();
+                company_name_en = $('#txtcompany_name_en_dealer').val();
+                wt_name = $('#txtwt_name_dealer').val();
+                vat_type = $('#chkvat_typeT_dealer').is(':checked') ? $('#chkvat_typeT_dealer').val() : $('#chkvat_typeE_dealer').val();
+            }
+
+            company.CompanyNameTh = company_name_th;
+            company.CompanyNameEn = company_name_en;
+            company.CompanyAlias = company_alias;
+            company.DistributionChannel = distribution_channel;
+            company.ChannelSaleGroup = channel_sale_group;
+            company.TaxId = tax_id;
+            company.WtName = wt_name;
+            company.VatType = vat_type;
+            company.CompanyEmail = $('#mailCompany').val();
+            company.ContractName = $('#nameContract').val();
+            company.ContractPhone = $('#telContract').val();
+            company.ContractEmail = $('#mailContract').val();
+
+            company.BankCode = $('#selBankName option').filter(':selected').val()
+            company.BankName = $('#txtbank_Name').val();
+            company.AccountNumber = $('#codeNumber').val();
+            company.AccountName = $('#busiName').val();
+
+            //company.BranchCode= $('#txtbranch_Code').val();
+            company.BranchName = $('#nameBranch').val();
+
+            company.DeptOfInstallName = $('#name1').val();
+            company.DeptOfMaintenName = $('#name2').val();
+            company.DeptOfAccountName = $('#name3').val();
+
+            company.DeptOfInstallPhone = $('#tel1').val();
+            company.DeptOfMaintenPhone = $('#tel2').val();
+            company.DeptOfAccountPhone = $('#tel3').val();
+
+            company.DeptOfInstallEmail = $('#mail1').val();
+            company.DeptOfMaintenEmail = $('#mail2').val();
+            company.DeptOfAccountEmail = $('#mail3').val();
+
+            company.LocationCode= $('#txtlocationcode').val();
+            company.LocationNameTh= $('#txtlocationname').val();
+            company.LocationNameEn= $('#txtlocationname').val();
+
+            company.BankAccountTypeId= $('#AccType option').filter(':selected').val();
+            company.SubcontractProfileType= chksubcontract_type;
+            company.CompanyTitleThId= company_title_name_th;
+            company.CompanyTitleEnId= company_title_name_en;
+            company.CompanyId = $('#hdCompanyId').val();
+
+            console.log(company);
             $.ajax({
                 url: '@Url.Action("OnSave", "CompanyProfile")',
                 type: 'POST',
                 data: { 'model': company },
-                   //data: JSON.stringify({
-                   //    "p_companyCode": $('#txtCompanyCode').val()
-                   //    , "p_companyName": $('#txtCompanyName').val()
-                   //    , "p_regisNum": $("#txtRegisNum").val()
-                   //    , "p_isActive": $('input[name="rdoActive"]:checked').val()
-                   //    , "p_mode": $('#hdMode').val()
-                   //}),
                    dataType: "json",
-                  // contentType: "application/json; charset=utf-8",
                    success: function (result) {
-                       if (result.Status == true) {
+                       if (result.Response.Status) {
                            if ($('#hdMode').val() == 'edit') {
                                $('#AddEditModal').modal('hide');
-                           } else {
-                               bootbox.alert(result.Message);
+                           }
+                           else {
                                clearData();
                            }
 
                            searchdata();
-
-                            }
+                       }
                             else {
-                           bootbox.alert(result.Message);
+                           bootbox.alert(result.Response.Message);
 
-                            }
+                       }
                   },
-                  error: function (result) {
-                      bootbox.alert(result.Message);
+                error: function (xhr, status, error) {
+                    bootbox.alert(xhr.responseText);
                   }
 
             });
 
+        }
+
+        function uploadFiles(inputId) {
+
+
+            var input = document.getElementById(inputId);
+            var files = input.files;
+            var formData = new FormData();
+            var id = "";
+            var typefile = "";
+            var companyid = $('#hdCompanyId').val();
+            switch (inputId) {
+                case "inputUploadcertificate": id = $('#hdupfilecompany_certified').val();
+                    typefile = "CompanyCertifiedFile";
+                    break;
+                case "inputUploadComRegis": id = $('#hdupfilecommercial_registration').val();
+                    typefile = "CommercialRegistrationFile";
+                    break;
+                case "inputUpload20": id = $('#hdupfilevat_registration_certificate').val();
+                    typefile = "VatRegistrationCertificateFile";
+                    break;
+                case "inputuploadbookbank": id = $('#hduploadbookbank').val();
+                    typefile = "bookbankfile";
+                    break;
+            }
+            for (var i = 0; i != files.length; i++) {
+                formData.append("files", files[i]);
+                formData.append("fid", id);
+                formData.append("type_file", typefile);
+                formData.append("Company", companyid);
+            }
+
+
+            $.ajax(
+                {
+                    type: "POST",
+                    url: "/CompanyProfile/UploadFile",
+                    processData: false,
+                    contentType: false,
+                    dataType: "json",
+                    data: formData,
+                    success: function (data) {
+
+           
+                        if (data.status) {
+                            switch (inputId) {
+                                case "company_certified_file": $('#hdupfilecompany_certified').val(data.response); break;
+                                case "commercial_registration_file": $('#hdupfilecommercial_registration').val(data.response); break;
+                                case "vat_registration_certificate_file": $('#hdupfilevat_registration_certificate').val(data.response); break;
+                                case "bookbank_file": $('#hduploadbookbank').val(data.response); break;
+                            }
+                            bootbox.confirm({
+                                title: "System Information",
+                                message: data.message,
+                                buttons: {
+                                    cancel: {
+                                        label: '<i class="fa fa-times"></i> Cancel'
+                                    }
+                                },
+                                callback: function (result) {
+                                    console.log('This was logged in the callback: ' + result);
+                                }
+                            });
+                        }
+                        else {
+                            bootbox.confirm({
+                                title: "System Information",
+                                message: data.message,
+                                buttons: {
+                                    cancel: {
+                                        label: '<i class="fa fa-times"></i> Cancel'
+                                    }
+                                },
+                                callback: function (result) {
+                                    console.log('This was logged in the callback: ' + result);
+                                }
+                            });
+
+                        }
+
+                    },
+                    error: function (xhr, status, error) {
+                        bootbox.confirm({
+                            title: "System Information",
+                            message: xhr.responseText,
+                            buttons: {
+                                cancel: {
+                                    label: '<i class="fa fa-times"></i> Cancel'
+                                }
+                            },
+                            callback: function (result) {
+                                console.log('This was logged in the callback: ' + result);
+                            }
+                        });
+                    }
+                }
+            );
         }
 
 
@@ -1358,14 +2729,14 @@
                         });
                         $.each(data.responsezipcode, function () {
                             if (this.Text == "กรุณาเลือกรหัสไปรษณีย์") {
-                               
+
                                 $('#ddlzipcode').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
                             }
                             else {
                                 $('#ddlzipcode').append($("<option></option>").val(this.Value).text(this.Text));
                             }
 
-                   
+
                         })
 
                         $('#ddlzipcode').val("")

@@ -1,0 +1,1376 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+        <div class="widget widget-chart-one">
+            <div class="widget-heading">
+                <h5 class="">แก้ไขบริษัท</h5>
+
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+                    <div class="form-group col-md-12">
+                        <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline1" name="customRadioInline1" value="N" class="custom-control-input" checked="checked">
+                            <label class="custom-control-label" for="customRadioInline1">New Subcontract</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline2" name="customRadioInline1" value="D" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline2">Dealer</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Distribution Channel</label>
+                        <select class="placeholder js-states form-control" id="ddlDistribution">
+                            <option>Choose...</option>
+                            <option value="one">First</option>
+                            <option value="two">Second</option>
+                            <option value="three">Third</option>
+                            <option value="four">Fourth</option>
+                            <option value="five">Fifth</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Channel Sale Group</label>
+                        <select class="placeholder js-states form-control" id="ddlchannelsalegroup">
+                            <option>Choose...</option>
+                            <option value="one">First</option>
+                            <option value="two">Second</option>
+                            <option value="three">Third</option>
+                            <option value="four">Fourth</option>
+                            <option value="five">Fifth</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget-heading">
+                <h5 class="">ข้อมูลบริษัท</h5>
+
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">เลขทะเบียนนิติบุคคล</label>
+                        <input type="text" class="form-control" id="txtCompanyCode">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">ชื่อย่อบริษัท</label>
+                        <input type="text" class="form-control" id="txtCompanyAlias">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ชื่อนิติบุคคล(ไทย)</label>
+                        <div class="form-group row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <select class="form-control" id="ddlprefixnewT">
+                                </select>
+                            </div>
+                            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                <input type="text" class="form-control" id="txtCompanyNameT" />
+                            </div>
+                         </div>
+                        </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ชื่อนิติบุคคล(อังกฤษ) </label>
+                        <div class="form-group row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <select class="form-control" id="ddlprefixnewE">
+                                </select>
+                            </div>
+                            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                <input type="text" class="form-control" id="txtCompanyNameE" />
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">ชื่อภาษีหัก ณ ที่จ่าย</label>
+                            <input type="text" class="form-control" id="txttaxnew">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">ภาษีมูลค่าเพิ่ม</label><br/>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="chlTax1" name="customRadioTax" value="Y" class="custom-control-input" checked="checked">
+                                <label class="custom-control-label" for="chlTax1">ภาษีมูลค่าเพิ่ม</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="chlTax2" name="customRadioTax" value="N" class="custom-control-input">
+                                <label class="custom-control-label" for="chlTax2">ไม่มีภาษีมูลค่าเพิ่ม</label>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+
+            <div class="widget-heading">
+                <h5 class="">ข้อมูลที่อยู่บริษัท</h5>
+
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+
+                    <div class="form-group col-md-12">
+                        <label for="inputtext">ประเภทที่อยู่</label>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" id="chkTax1" name="optionsRadios" value="01">
+                                                ที่อยู่ตามที่ตั้งสาขา
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" id="chkTax2" name="optionsRadios" value="02">
+                                                ที่อยู่ตามใบกำกับภาษี
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="optionsRadios" value="03">
+                                                ที่อยู่ตาม W/T
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                        @*<button class="btn btn-secondary btn-sm" id="btndeleteaddress" type="button">ลบ</button>*@
+                                        <button class="btn-border btn-black" id="btndeleteaddress" type="button" onclick="test1()">
+                                            <i class="fa fa-trash icon"></i><span>ลบ</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="optionsRadios" value="04">
+                                                ที่อยู่จัดส่งเอกสาร
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="optionsRadios" value="05">
+                                                ที่อยู่จัดส่งสินค้า
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="optionsRadios" value="06">
+                                                ที่อยู่จัดส่ง POP
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">ประเทศ </label>
+                        <select class="placeholder js-states form-control" id="ddlcountry">
+                            <option>Choose...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">รหัสไปรษณีย์ </label>
+                        <select class="placeholder js-states form-control" id="ddlzipcode">
+                            <option>Choose...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">เลขที่</label>
+                        <div class="form-group row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <input type="text" class="form-control" id="txthomenumber">
+                            </div>
+                            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <label for="inputText">หมู่ที่</label>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <input type="text" class="form-control" id="txtvillageNo" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">หมู่บ้าน </label>
+                        <input type="text" class="form-control" id="txtvillage">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">อาคาร </label>
+                        <input type="text" class="form-control" id="txtbuilding">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ชั้น </label>
+                        <div class="form-group row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <input type="text" class="form-control" id="txtfloor">
+                            </div>
+                            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <label for="inputText">ห้อง</label>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <input type="text" class="form-control" id="txtroom" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ซอย </label>
+                        <input type="text" class="form-control" id="txtsoi">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ถนน </label>
+                        <input type="text" class="form-control" id="txtroad">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">ตำบล/แขวง </label>
+                        <select class="placeholder js-states form-control" id="ddlsubdistrict">
+                            <option>Choose...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">อำเภอ/เขต </label>
+                        <select class="placeholder js-states form-control" id="ddldistrict">
+                            <option>Choose...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">จังหวัด</label>
+                        <select class="placeholder js-states form-control" id="ddlprovince">
+                            <option>Choose...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">ภาค </label>
+                        <select class="placeholder js-states form-control" id="ddlzone">
+                            <option>Choose...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="text-align:center">
+
+                    <button class="btn btn-dark mb-2" type="button" id="btnclearAddress" onclick="clearAddress()">
+                        <i class="fa fa-refresh icon"></i><span>ล้างข้อมูล</span>
+                    </button>
+                    <button class="btn btn-success mb-2" type="button" id="btnAddAddress" onclick="editAddress()">
+                        <i class="fa fa-search icon"></i><span>เพิ่มที่อยู่</span>
+                    </button>
+
+                </div>
+                <br />
+
+                <div class="table-responsive form-group col-md-12">
+                    <table class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4" id="SearchAddressResult">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>AddressID</th>
+                                <th>ประเภทที่อยู่</th>
+                                <th>ที่อยู่</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+            <div class="widget-heading">
+                <h5 class="">ข้อมูลติดต่อบริษัท</h5>
+
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">อีเมล์ บริษัท</label>
+                        <input type="text" class="form-control" id="txtCompanyEmail">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ชื่อผู้ติดต่อ </label>
+                        <input type="text" class="form-control" id="txtContractName">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">อีเมล์</label>
+                        <input type="text" class="form-control" id="txtContractEmail">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ชื่อผู้ติดต่อ </label>
+                        <input type="text" class="form-control" id="txtContractPhone">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="widget-heading">
+                <h5 class="">แผนกติดตั้ง</h5>
+
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ชื่อผู้ติดต่อ</label>
+                        <input type="text" class="form-control" id="txtInstallName">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">เบอร์ไทร </label>
+                        <input type="text" class="form-control" id="txtInstallPhone">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">อีเมล์</label>
+                        <input type="text" class="form-control" id="txtInstallEmail">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="widget-heading">
+                <h5 class="">แผนกซ่อมบำรุง</h5>
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ชื่อผู้ติดต่อ</label>
+                        <input type="text" class="form-control" id="txtMaintenName">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">เบอร์ไทร </label>
+                        <input type="text" class="form-control" id="txtMaintenPhone">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">อีเมล์</label>
+                        <input type="text" class="form-control" id="txtMaintenEmail">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="widget-heading">
+                <h5 class="">แผนกบัญชี</h5>
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ชื่อผู้ติดต่อ</label>
+                        <input type="text" class="form-control" id="txtAccountName">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">เบอร์ไทร </label>
+                        <input type="text" class="form-control" id="txtAccountPhone">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">อีเมล์</label>
+                        <input type="text" class="form-control" id="txtAccountEmail">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="widget-heading">
+                <h5 class="">ข้อมูล บัญชีธนาคาร</h5>
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ชื่อธนาคาร</label>
+                        <div class="form-group row">
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <input type="text" class="form-control" id="txtbankcode" placeholder="รหัสธนาคาร" />
+                            </div>
+                            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                <div class="input-group">
+                                    @*<input type="text" class="form-control" id="txtbankname" placeholder="ชื่อธนาคาร">*@
+                                    <select class="placeholder js-states form-control" id="ddlBankName">
+                                        <option>Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ชื่อสาขา </label>
+                        <div class="form-group row">
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <input type="text" class="form-control" id="txtbranchcode" placeholder="รหัสสาขา" />
+                            </div>
+                            <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="txtbranchname" placeholder="ชื่อสาขา">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                    
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ประเภทบัญชี</label>
+                        <select class="placeholder js-states form-control" id="ddlaccounttype">
+                            <option>Choose...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">เลขที่บัญชี</label>
+                        <input type="text" class="form-control" id="txtaccountnumber">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ชื่อบัญชี </label>
+                        <div class="form-group row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <select class="form-control" id="ddlaccountname">
+                                    <option></option>
+                                </select>
+                            </div>
+                            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                <input type="text" class="form-control" id="txtaccountname" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ประเภทธุรกิจ</label>
+                        <select class="placeholder js-states form-control" id="txtbusinesstype">
+                            <option>Choose...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Bookbank attach File</label>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Upload :</label>
+                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file">
+                                <input type="hidden" id="hdupfileBookbank" />
+                                <input type="file" class="custom-file-input inputValidationBank" id="Bookbank_file" required />
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="widget-heading">
+                <h5 class="">ข้อมูล เอกสารบริษัท</h5>
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">หนังสือรับรองบริษัท</label>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Upload :</label>
+                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file">
+                                <input type="hidden" id="hdupfileCompany_certified" />
+                                <input type="file" class="custom-file-input inputValidationBank" id="Company_Certified_file" required />
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">หนังสือทะเบียนพานิช</label>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Upload :</label>
+                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file">
+                                <input type="hidden" id="hdupfileCommercial_registration" />
+                                <input type="file" class="custom-file-input inputValidationBank" id="Commercial_Registration_file" required />
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">หนังสือ ภ.พ. 20</label>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Upload :</label>
+                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file">
+                                <input type="hidden" id="hdupfileRegistration_Certificate" />
+                                <input type="file" class="custom-file-input inputValidationBank" id="Registration_Certificate_file" required />
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div style="text-align:center">
+
+                    <button class="btn btn-dark mb-2" id="btnBack" type="button" onclick="location.href='@Url.Action("CompanyIndex", "Profile")'">
+                        <i class="fa fa-undo icon"></i><span>กลับ</span>
+                    </button>
+
+                    <button class="btn btn-dark mb-2" type="button" id="btnclear" onclick="clearDataPartial()">
+                        <i class="fa fa-refresh icon"></i><span>ล้างข้อมูล</span>
+                    </button>
+
+                    <button class="btn btn-success mb-2" type="button" id="btnSearch" onclick="editCompany()">
+                        <i class="fa fa-search icon"></i><span>บันทึก</span>
+                    </button>
+
+                </div>
+                <div style="visibility:hidden">
+                    <input type="hidden" id="txtAddressID" name="txtAddressID">
+                    <input type="hidden" id="txtTypeUpdate" name="txtTypeUpdate">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+@section scripts
+{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var addressType;
+            document.getElementById("txtTypeUpdate").value = 'insert';
+            BindDDLTitle();
+            BindDDLprovince();
+            BindDDLregion();
+            var comId = JSON.parse(localStorage.getItem('comID'));
+            var a = comId[0].companyID;
+            getAllAddress();
+            BindDDLbank();
+            getCompany(a);
+
+            $('#ddlprovince').change(function () {
+
+                BindDDLdistrict($('#ddlprovince option').filter(':selected').val());
+            });
+
+            $('#ddldistrict').change(function () {
+
+                BindDDLsubdistrict($('#ddldistrict option').filter(':selected').val());
+            });
+
+            $('#ddlBankName').change(function () {
+                //alert(document.getElementById('ddlBankName').options[document.getElementById('ddlBankName').selectedIndex].text);
+                //var bId = $('#ddlBankName option').filter(':selected').val();
+                //$.ajax({
+                //    type: "POST",
+                //    url: "/Profile/getCodeBank",
+                //    data: { bank_id: bId },
+                //    dataType: "json",
+                //    success: function (data) {
+                //        
+                //        //$('#txtbankcode').val(data.response.BankCode);
+                //    },
+                //    error: function (xhr, status, error) {
+                //        //Loading(0);
+                //        //clearForEdit();
+                //        console.log(status);
+                //        showFeedback("error", xhr.responseText, "System Information",
+                //            "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                //    }
+                //});
+            });
+
+            $(':checkbox').change(function () {
+                var liste2 = $(':checkbox:checked').map(function () {
+                    return this.value;
+                }).get();
+                addressType = liste2;
+            });
+
+            $('#Bookbank_file').change(function () {
+                uploadFiles('Bookbank_file')
+            });
+            $('#Company_Certified_file').change(function () {
+                uploadFiles('Company_Certified_file')
+            });
+            $('#Commercial_Registration_file').change(function () {
+                uploadFiles('Commercial_Registration_file')
+            });
+            $('#Registration_Certificate_file').change(function () {
+                uploadFiles('Registration_Certificate_file')
+            });
+        });
+
+       
+        //$('#regisdatefrom').datepicker({
+        //    format: 'dd/mm/yyyy',
+        //    daysOfWeekHighlighted: "6,0",
+        //    autoclose: true,
+        //    todayHighlight: true,
+        //    clearBtn: true,
+        //});
+        //$('#regisdateto').datepicker({
+        //    format: 'dd/mm/yyyy',
+        //    daysOfWeekHighlighted: "6,0",
+        //    autoclose: true,
+        //    todayHighlight: true,
+        //    clearBtn: true,
+
+        //});
+        function test1() {
+            checkboxes = document.getElementsByName('optionsRadios');
+            for (var i = 0, n = checkboxes.length; i < n; i++) {
+                checkboxes[i].checked = false;
+            }
+        }
+        function chkUpdate() {
+            var comId = JSON.parse(localStorage.getItem('comID'));
+            var a = comId[0].companyID;
+            if (a == '0') {
+                document.getElementById("txtTypeUpdate").value = 'insert';
+            }
+            else {
+                document.getElementById("txtTypeUpdate").value = 'update';
+            }
+        }
+
+        function editAddress() {
+            var addressType = $(':checkbox:checked').map(function () {
+                return this.value;
+            }).get();
+            if (!addressType) { addressType = '01'; }
+            var chk = document.getElementById("txtTypeUpdate").value;
+            if (chk === 'insert') {
+                var comId = JSON.parse(localStorage.getItem('comID'));
+                var a = comId[0].companyID;
+                var data = {
+                    "AddressId": "",
+                    "HouseNo": $("#txthomenumber").val(),
+                    "Building": $("#txtbuilding").val(),
+                    "Floor": $("#txtfloor").val(),
+                    "Moo": $("#txtvillageNo").val(),
+                    "Soi": $("#txtsoi").val(),
+                    "Road": $("#txtroad").val(),
+                    "SubDistrictId": document.getElementById("ddlsubdistrict").value,
+                    "DistrictId": document.getElementById("ddldistrict").value,
+                    "ProvinceId": document.getElementById("ddlprovince").value,
+                    "RegionId": document.getElementById("ddlzone").value,
+                    "AddressTypeId": addressType,
+                    "ZipCode": document.getElementById("ddlzipcode").value,
+                    "Country": " ",
+                    "VillageName": $("#txtvillage").val(),
+                    "RoomNo": $("#txtroom").val(),
+                    "CompanyId": a,
+                    "CreateDate": "",
+                    "CreateBy": " ",
+                    "ModifiedDate": "",
+                    "ModifiedBy": " ",
+                    "address_type_name": " ",
+                    "sub_district_name": " ",
+                    "district_name": " ",
+                    "province_name": " ",
+                    "City": " ",
+                    "outFullAddress": " ",
+                    "location_code": " ",
+
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Profile/AddAddress",
+                    data: { model: data },
+                    //dataType: "json",
+                    success: function (data) {
+                        console.log(data)
+
+                    },
+                    error: function (xhr, status, error) {
+                        //console.log(status);
+                        //showFeedback("error", xhr.responseText, "System Information",
+                        //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+                });
+            }
+            else {
+                var comId = JSON.parse(localStorage.getItem('comID'));
+                var a = comId[0].companyID;
+                var data = {
+                    "AddressId": document.getElementById("txtAddressID").value,
+                    "HouseNo": $("#txthomenumber").val(),
+                    "Building": $("#txtbuilding").val(),
+                    "Floor": $("#txtfloor").val(),
+                    "Moo": $("#txtvillageNo").val(),
+                    "Soi": $("#txtsoi").val(),
+                    "Road": $("#txtroad").val(),
+                    "SubDistrictId": document.getElementById("ddlsubdistrict").value,
+                    "DistrictId": document.getElementById("ddldistrict").value,
+                    "ProvinceId": document.getElementById("ddlprovince").value,
+                    "RegionId": document.getElementById("ddlzone").value,
+                    "AddressTypeId": addressType,
+                    "ZipCode": document.getElementById("ddlzipcode").value,
+                    "Country": " ",
+                    "VillageName": $("#txtvillage").val(),
+                    "RoomNo": $("#txtroom").val(),
+                    "CompanyId": a,
+                    "CreateDate": "",
+                    "CreateBy": " ",
+                    "ModifiedDate": "",
+                    "ModifiedBy": " ",
+                    "address_type_name": " ",
+                    "sub_district_name": " ",
+                    "district_name": " ",
+                    "province_name": " ",
+                    "City": " ",
+                    "outFullAddress": " ",
+                    "location_code": " ",
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Profile/UpdateAddress",
+                    data: { model: data },
+                    //dataType: "json",
+                    success: function (data) {
+                        console.log(data)
+
+                    },
+                    error: function (xhr, status, error) {
+                        //console.log(status);
+                        //showFeedback("error", xhr.responseText, "System Information",
+                        //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+                });
+            }
+            
+        }
+
+        function getAllAddress() {
+            var groupId = '0';
+            document.getElementById("txtTypeUpdate").value = 'insert';
+            var tbCompany = $('#SearchAddressResult').DataTable({
+                ajax: {
+                    type: "POST",
+                    dataType: 'JSON',
+                    url: "/Profile/GetAddress",
+                    data: { 'AddressId': groupId },
+                    dataSrc: function (data) {
+                        return data.data;
+                    },
+                    error: function (xhr, status, error) {
+                        //console.log(status);
+                        //showFeedback("error", xhr.responseText, "System Information",
+                            //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+                },
+                columns: [
+                    { "data": "AddressId", "visible": false  },
+                    //{ "data": "vendorCode" },
+                    { "data": "AddressTypeId" },
+                    { "data": "Building" },
+                    {
+                        "data": null,
+                        orderable: false,
+                        "defaultContent": "<button id='btnEdit' class='btn-border btn-green edit_btn'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button><button id='btnDel' class='btn-border btn-black delete_btn'><i class='fa fa-trash icon'></i><span>ลบ</span></button>"
+
+                    }
+                ],
+            });
+
+            $('#SearchAddressResult tbody').on('click', 'button', function () {
+                var table = $('#SearchAddressResult').DataTable();
+                var id = this.id;
+                var data = table.row($(this).parents('tr')).data();
+                //var data = table.row(this).data();
+                var val = data['AddressId'];
+                if (id == 'btnEdit') {
+                    $.ajax({
+                        url: "/Profile/GetAddress",
+                        dataType: 'JSON',
+                        data: { 'AddressId': val },
+                        type: 'POST',
+                        success: function (data) {
+                            $('#txthomenumber').val(data.response.HouseNo);
+                            $('#txtvillageNo').val(data.response.Moo);
+                            $('#txtvillage').val(data.response.VillageName);
+                            $('#txtbuilding').val(data.response.Building);
+                            $('#txtfloor').val(data.response.Floor);
+                            $('#txtroom').val(data.response.RoomNo);
+                            $('#txtsoi').val(data.response.Soi);
+                            $('#txtroad').val(data.response.Road);
+                            document.getElementById("txtAddressID").value = data.response.AddressId;
+                            document.getElementById("txtTypeUpdate").value = 'update';
+                            //BindDDLprovince();
+                            //document.getElementById("ddlprovince").selectedIndex = data.response.ProvinceId;
+                            //BindDDLdistrict(data.response.ProvinceId);
+                            //document.getElementById("ddldistrict").selectedIndex = data.response.DistrictId;
+                            //BindDDLsubdistrict(data.response.DistrictId);
+                            //document.getElementById("ddlsubdistrict").selectedIndex = data.response.SubDistrictId;
+                            //document.getElementById("ddlzipcode").selectedIndex = data.response.ZipCode;
+                            //BindDDLregion();
+                            //document.getElementById("ddlzone").selectedIndex = data.response.RegionId;
+                    },
+                    error: function (result) {
+
+                    }
+                });
+                }
+                if (id == 'btnDel')
+                    DelAddress(val);
+            });
+        }
+
+        function DelAddress(addID) {
+            $.ajax({
+                url: "/Profile/DeleteAddress",
+                dataType: 'JSON',
+                data: { 'AddressId': addID },
+                type: 'POST',
+                success: function (result) {
+                    //alert("success");
+                },
+                error: function (result) {
+                    //alert("error");
+                }
+            });
+        }
+
+        function clearDataPartial() {
+            $('#txtCompanyCode').val(" ");
+            $('#txtCompanyAlias').val(" ");
+            $('#txtCompanyNameT').val(" ");
+            $('#txtCompanyNameE').val(" ");
+            $('#txttaxnew').val(" ");
+            $('#txthomenumber').val(" ");
+            $('#txtVillageNo').val(" ");
+            $('#txtvillage').val(" ");
+            $('#txtbuilding').val(" ");
+            $('#txtfloor').val(" ");
+            $('#txtroom').val(" ");
+            $('#txtsoi').val(" ");
+            $('#txtroad').val(" ");
+            $('#txtCompanyEmail').val(" ");
+            $('#txtContractName').val(" ");
+            $('#txtContractEmail').val(" ");
+            $('#txtContractPhone').val(" ");
+            $('#txtInstallName').val(" ");
+            $('#txtInstallPhone').val(" ");
+            $('#txtInstallEmail').val(" ");
+            $('#txtMaintenName').val(" ");
+            $('#txtMaintenPhone').val(" ");
+            $('#txtMaintenEmail').val(" ");
+            $('#txtAccountName').val(" ");
+            $('#txtAccountPhone').val(" ");
+            $('#txtAccountEmail').val(" ");
+            $('#txtbankcode').val(" ");
+            //$('#txtbankname').val(" ");
+            $('#txtbranchcode').val(" ");
+            $('#txtbranchname').val(" ");
+            $('#txtaccountnumber').val(" ");
+            $('#txtbusinesstype').val(" ");
+            $('#txtActive').val(" ");
+            $('#txtTaxID').val(" ");
+            $('#txtCompanyStatus').val(" ");
+
+        }
+
+        function clearAddress() {
+            document.getElementById("ddlprovince").selectedIndex = 0;
+            document.getElementById("ddldistrict").selectedIndex = 0;
+            document.getElementById("ddlsubdistrict").selectedIndex = 0;
+            document.getElementById("ddlzipcode").selectedIndex = 0;
+            document.getElementById("ddlzone").selectedIndex = 0;
+            //BindDDLprovince();
+            //BindDDLregion();
+            $('#txthomenumber').val(" ");
+            $('#txtvillage').val(" ");
+            $('#txtbuilding').val(" ");
+            $('#txtfloor').val(" ");
+            $('#txtsoi').val(" ");
+            $('#txtroad').val(" ");
+
+        }
+
+        function getCompany(comId) {
+            //var groupId = '0';
+            $.ajax({
+                url: "/Profile/GetCompany",
+                dataType: 'JSON',
+                data: { 'CompanyID': comId },
+                type: 'POST',
+                success: function (data) {
+                    //alert(data.response.companyNameTh);
+                    $('#txtCompanyAlias').val(data.response.CompanyAlias);
+                    $('#txtCompanyNameT').val(data.response.CompanyNameTh);
+                    $('#txtCompanyNameE').val(data.response.CompanyNameEn);
+                    //$('#ddlprefixnewT').val(data.CompanyTitleThId);
+                    //$('#ddlprefixnewE').val(data.CompanyTitleEnId);
+                    $('#txttaxnew').val(data.response.wtName);
+                    $('#txtCompanyEmail').val(data.response.CompanyEmail);
+                    $('#txtContractName').val(data.response.ContractName);
+                    $('#txtContractEmail').val(data.response.ContractEmail);
+                    $('#txtContractPhone').val(data.response.ContractPhone);
+                    $('#txtInstallName').val(data.response.CeptOfInstallName);
+                    $('#txtInstallPhone').val(data.response.CeptOfInstallPhone);
+                    $('#txtInstallEmail').val(data.response.CeptOfInstallEmail);
+                    $('#txtMaintenName').val(data.response.CeptOfMaintenName);
+                    $('#txtMaintenPhone').val(data.response.CeptOfMaintenPhone);
+                    $('#txtMaintenEmail').val(data.response.CeptOfMaintenEmail);
+                    $('#txtAccountName').val(data.response.CeptOfAccountName);
+                    $('#txtAccountPhone').val(data.response.CeptOfAccountPhone);
+                    $('#txtAccountEmail').val(data.response.CeptOfAccountEmail);
+                    $('#txtbankcode').val(data.response.CankCode);
+                    //$('#txtbankname').val(data.response.CankName);
+                    $('#txtbranchcode').val(data.response.CranchCode);
+                    $('#txtbranchname').val(data.response.CranchName);
+                    $('#txtaccountnumber').val(data.response.CccountNumber);
+                    $('#txtaccountname').val(data.response.CccountName);
+                    //$('#txtActive').val(data.response.accountName);
+                    $('#txtTaxID').val(data.response.CaxId);
+                    $('#txtCompanyStatus').val(data.response.CompanyStatus);
+
+                },
+                error: function (result) {
+
+                }
+            });
+        }
+
+        function addCompany() {
+            var data = {
+                //"CompanyId": " ",
+                "CompanyCode" : $("#txtCompanyCode").val(),
+                "CompanyName" : " ",
+                "CompanyNameTh" : $("#txtCompanyNameT").val(),
+                "CompanyNameEn" :  $("#txtCompanyNameE").val(),
+                "CompanyAlias" :  $("#txtCompanyAlias").val(),
+                "DistributionChannel" : " ",
+                "ChannelSaleGroup" : " ",
+                "VendorCode" : " ",
+                "CustomerCode" : " ",
+                "AreaId" : " ",
+                "TaxId" : " ",
+                "WtName" : $("#txttaxnew").val(),
+                "VatType" : " ",
+                "CompanyCertifiedFile" : " ",
+                "CommercialRegistrationFile" : " ",
+                "VatRegistrationCertificateFile" : " ",
+                "ContractAgreementFile" : " ",
+                "DepositAuthorizationLevel" : " ",
+                "DepositPaymentType" : " ",
+                "ContractStartDate" : " ",
+                "ContractEndDate" : " ",
+                "OverDraftDeposit" : " ",
+                "BalanceDeposit" : " ",
+                "CompanyStatus" : " ",
+                "CompanyAddress" : " ",
+                "VatAddress" : " ",
+                "CreateBy" : " ",
+                "CreateDate" : " ",
+                "UpdateBy" : " ",
+                "UpdateDate" : " ",
+                "CompanyEmail" : $("#txtCompanyEmail").val(),
+                "ContractName" : $("#txtContractName").val(),
+                "ContractPhone" : $("#txtContractPhone").val(),
+                "ContractEmail" : $("#txtContractEmail").val(),
+                "BankCode" : $("#txtbankcode").val(),
+                "BankName": " ",//$("#txtbankname").val(),
+                "AccountNumber" : $("#txtaccountname").val(),
+                "AccountName" : $("#ddlaccountname").val(),
+                "AttachFile" : " ",
+                "BranchCode" : $("#txtbranchcode").val(),
+                "BranchName" : $("#txtbranchname").val(),
+                "DeptOfInstallName" : $("#txtInstallName").val(),
+                "DeptOfMaintenName" : $("#txtMaintenName").val(),
+                "DeptOfAccountName" : $("#txtAccountName").val(),
+                "DeptOfInstallPhone" : $("#txtInstallPhone").val(),
+                "DeptOfMaintenPhone" : $("#txtMaintenPhone").val(),
+                "DeptOfAccountPhone" : $("#txtAccountPhone").val(),
+                "DeptOfInstallEmail" : $("#txtInstallEmail").val(),
+                "DeptOfMaintenEmail" : $("#txtMaintenEmail").val(),
+                "DeptOfAccountEmail" : $("#txtAccountEmail").val(),
+                "LocationCode" : " ",
+                "LocationNameTh" : " ",
+                "LocationNameEn" : " ",
+                "BankAccountTypeId" : " ",
+                "SubcontractProfileType" : " ",
+                "CompanyTitleThId" : $("#ddlprefixnewT").val(),
+                "CompanyTitleEnId" : $("#ddlprefixnewE").val(),
+                "Status" : " ",
+                "ActivateDate" : " ",
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Profile/AddCompany",
+                data: { model: data },
+                //dataType: "json",
+                success: function (data) {
+                    console.log(data)
+
+                },
+                error: function (xhr, status, error) {
+                    //console.log(status);
+                    //showFeedback("error", xhr.responseText, "System Information",
+                        //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function editCompany() {
+            var comId = JSON.parse(localStorage.getItem('comID'));
+            var a = comId[0].companyID;
+            var vat_type;
+            if (document.getElementById('chkTax1').checked) {
+                vat_type = document.getElementById('chkTax1').value;
+            }
+            else { vat_type = document.getElementById('chkTax2').value;}
+            var data = {
+                "CompanyId": a,
+                "CompanyCode": $("#txtCompanyCode").val(),
+                "CompanyName": " ",
+                "CompanyNameTh": $("#txtCompanyNameT").val(),
+                "CompanyNameEn": $("#txtCompanyNameE").val(),
+                "CompanyAlias": $("#txtCompanyAlias").val(),
+                "DistributionChannel": " ",
+                "ChannelSaleGroup": " ",
+                "VendorCode": " ",
+                "CustomerCode": " ",
+                "AreaId": " ",
+                "TaxId": $("#txtTaxID").val(),
+                "WtName": $("#txttaxnew").val(),
+                "VatType": vat_type,
+                "CompanyCertifiedFile": " ",
+                "CommercialRegistrationFile": " ",
+                "VatRegistrationCertificateFile": " ",
+                "ContractAgreementFile": " ",
+                "DepositAuthorizationLevel": " ",
+                "DepositPaymentType": " ",
+                "ContractStartDate": " ",
+                "ContractEndDate": " ",
+                "OverDraftDeposit": " ",
+                "BalanceDeposit": " ",
+                "CompanyStatus": $("#txtCompanyStatus").val(),
+                "CompanyAddress": " ",
+                "VatAddress": " ",
+                "CreateBy": " ",
+                "CreateDate": " ",
+                "UpdateBy": " ",
+                "UpdateDate": " ",
+                "CompanyEmail": $("#txtCompanyEmail").val(),
+                "ContractName": $("#txtContractName").val(),
+                "ContractPhone": $("#txtContractPhone").val(),
+                "ContractEmail": $("#txtContractEmail").val(),
+                "BankCode": $("#txtbankcode").val(),
+                "BankName": document.getElementById('ddlBankName').options[document.getElementById('ddlBankName').selectedIndex].text,
+                "AccountNumber": $("#txtaccountname").val(),
+                "AccountName": $("#ddlaccountname").val(),
+                "AttachFile": " ",
+                "BranchCode": $("#txtbranchcode").val(),
+                "BranchName": $("#txtbranchname").val(),
+                "DeptOfInstallName": $("#txtInstallName").val(),
+                "DeptOfMaintenName": $("#txtMaintenName").val(),
+                "DeptOfAccountName": $("#txtAccountName").val(),
+                "DeptOfInstallPhone": $("#txtInstallPhone").val(),
+                "DeptOfMaintenPhone": $("#txtMaintenPhone").val(),
+                "DeptOfAccountPhone": $("#txtAccountPhone").val(),
+                "DeptOfInstallEmail": $("#txtInstallEmail").val(),
+                "DeptOfMaintenEmail": $("#txtMaintenEmail").val(),
+                "DeptOfAccountEmail": $("#txtAccountEmail").val(),
+                "LocationCode": " ",
+                "LocationNameTh": " ",
+                "LocationNameEn": " ",
+                "BankAccountTypeId": " ",
+                "SubcontractProfileType": " ",
+                "CompanyTitleThId": $("#ddlprefixnewT").val(),
+                "CompanyTitleEnId": $("#ddlprefixnewE").val(),
+                "Status": " ",
+                "ActivateDate": " ",
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Profile/UpdateCompany",
+                data: { model: data },
+                //dataType: "json",
+                success: function (data) {
+                    console.log(data)
+
+                },
+                error: function (xhr, status, error) {
+                    //console.log(status);
+                    //showFeedback("error", xhr.responseText, "System Information",
+                    //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function BindDDLTitle() {
+            $.ajax({
+                type: "POST",
+                url: "/Profile/DDLTitle",
+                dataType: "json",
+                success: function (data) {
+                    //console.log(data);
+                    if (data != null) {
+
+                        $('#ddlprefixnewT').empty();
+                        $('#ddlprefixnewE').empty();
+
+                        $('#ddlprefixnewT').append($('<option></option>').val(0).text('Select Title'));
+                        $('#ddlprefixnewE').append($('<option></option>').val(0).text('Select Title'));
+
+                        $.each(data.response, function () {
+                            $('#ddlprefixnewT').append($('<option></option>').val(this.TitleId).text(this.TitleNameTh));
+                            $('#ddlprefixnewE').append($('<option></option>').val(this.TitleId).text(this.TitleNameEn));
+                        });
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    //Loading(0);
+                    //clearForEdit();
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function BindDDLprovince() {
+
+            $.ajax({
+                type: "POST",
+                url: "/Profile/DDLsubcontract_profile_province",
+                dataType: "json",
+                success: function (data) {
+                    //console.log(data);
+                    if (data != null) {
+                        $('#ddlprovince').empty();
+                        $('#ddlprovince').append($('<option></option>').val(0).text('Select Province'));
+                        $.each(data.response, function () {
+                            $('#ddlprovince').append($('<option></option>').val(this.ProvinceId).text(this.ProvinceNameTh));
+                        });
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function BindDDLdistrict(province) {
+            $.ajax({
+                type: "POST",
+                url: "/Profile/DDLsubcontract_profile_district",
+                data: { province_id: province },
+                dataType: "json",
+                success: function (data) {
+                    if (data != null) {
+                        $('#ddldistrict').empty();
+                        $('#ddldistrict').append($('<option></option>').val(0).text('Select District'));
+                        $.each(data.response, function () {
+                            $('#ddldistrict').append($("<option></option>").val(this.DistrictId).text(this.DistrictNameTh));
+                        });
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    //Loading(0);
+                    //clearForEdit();
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function BindDDLsubdistrict(district) {
+            $.ajax({
+                type: "POST",
+                url: "/Profile/DDLsubcontract_profile_sub_district",
+                data: { district_id: district },
+                dataType: "json",
+                success: function (data) {
+                    if (data != null) {
+                        $('#ddlsubdistrict').empty();
+                        $('#ddlzipcode').empty();
+                        $('#ddlzipcode').append($("<option></option>").val(0).text('Select Zip Code'));
+                        $('#ddlsubdistrict').append($("<option></option>").val(0).text('Select Sub District'));
+                        $.each(data.response, function () {
+
+                            $('#ddlsubdistrict').append($("<option></option>").val(this.SubDistrictId).text(this.SubDistrictNameTh));
+                        });
+                        $.each(data.responsezipcode, function () {
+
+                            $('#ddlzipcode').append($("<option></option>").val(this.ZipCode).text(this.ZipCode));
+                        })
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    //Loading(0);
+                    //clearForEdit();
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function BindDDLregion() {
+            $.ajax({
+                type: "POST",
+                url: "/Profile/DDLregion_profile_region",
+                //data: { province_id: province },
+                dataType: "json",
+                success: function (data) {
+                    if (data != null) {
+                        $('#ddlzone').empty();
+                        $('#ddlzone').append($('<option></option>').val(0).text('Select District'));
+                        $.each(data.response, function () {
+                            $('#ddlzone').append($("<option></option>").val(this.RegionId).text(this.RegionName));
+                        });
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    //Loading(0);
+                    //clearForEdit();
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function BindDDLbank() {
+            $.ajax({
+                type: "POST",
+                url: "/Profile/DDLbank_profile_bank",
+                //data: { province_id: province },
+                dataType: "json",
+                success: function (data) {
+                    if (data != null) {
+                        $('#ddlBankName').empty();
+                        $('#ddlBankName').append($('<option></option>').val(0).text('Select Bank'));
+                        $.each(data.response, function () {
+                            $('#ddlBankName').append($("<option></option>").val(this.BankId).text(this.BankName));
+                        });
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    //Loading(0);
+                    //clearForEdit();
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function uploadFiles(inputId) {
+            var input = document.getElementById(inputId);
+            var files = input.files;
+            var formData = new FormData();
+            var id = "";
+            var typefile = "";
+            switch (inputId) {
+                case "Bookbank_file": id = $('#hdupfileBookbank').val();
+                    typefile = "CompanyBookbankFile";
+                    break;
+                case "Company_Certified_file": id = $('#hdupfileCompany_certified').val();
+                    typefile = "CompanyCertifiedFile";
+                    break;
+                case "Commercial_Registration_file": id = $('#hdupfileCommercial_registration').val();
+                    typefile = "CommercialRegistrationFile";
+                    break;
+                case "Registration_Certificate_file": id = $('#hdupfileRegistration_Certificate').val();
+                    typefile = "RegistrationCertificateFile";
+                    break;
+            }
+            for (var i = 0; i != files.length; i++) {
+                formData.append("files", files[i]);
+                formData.append("fid", id);
+                formData.append("type_file", typefile);
+            }
+
+
+            $.ajax(
+                {
+                    type: "POST",
+                    url: "/Profile/UploadFile",
+                    processData: false,
+                    contentType: false,
+                    dataType: "json",
+                    data: formData,
+                    success: function (data) {
+                        //console.log(data);
+                        if (data.status) {
+                            switch (inputId) {
+                                case "Bookbank_file": $('#hdupfileBookbank').val(data.response); break;
+                                case "Company_Certified_file": $('#hdupfileCompany_certified').val(data.response); break;
+                                case "Commercial_Registration_file": $('#hdupfileCommercial_registration').val(data.response); break;
+                                case "Registration_Certificate_file": $('#hdupfileRegistration_Certificate').val(data.response); break;
+                            }
+                            //showFeedback("success", data.message, "System Information",
+                            //    "<button type='button' class='btn-border btn-green' data-dismiss='modal' id='btnOKpopup'><i class='fa fa-check icon'></i><span>OK</span></button >")
+                        }
+                        else {
+                            //showFeedback("error", data.message, "System Information",
+                            //    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                        }
+
+                    },
+                    error: function (xhr, status, error) {
+                        //clearForEdit();
+                        //console.log(status);
+                        //showFeedback("error", xhr.responseText, "System Information",
+                        //    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+                }
+            );
+        }
+    </script>
+
+}

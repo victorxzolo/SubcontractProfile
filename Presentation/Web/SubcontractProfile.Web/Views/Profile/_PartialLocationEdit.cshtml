@@ -1,0 +1,624 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+    <div class="widget widget-chart-one">
+        <div class="widget-heading">
+            <h5 class="">EditLocation</h5>
+
+        </div>
+        <div class="widget-content ">
+
+            <div class="form-row mb-4">
+                <div class="form-group col-md-12">
+                    <label for="inputEmail4">Company Name</label> <br />
+                    <label for="inputEmail4">xxxxxxxxxxxxxxx</label>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline1">New Subcontract</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline2">Dealer</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Location Code</label>
+                    <input type="text" class="form-control" id="txtLocationCode">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Location Name Alias</label>
+                    <input type="text" class="form-control" id="txtLocationAlias">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Location Name(TH)</label>
+                    <input type="text" class="form-control" id="txtLocationNameT">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Location Name(EN)</label>
+                    <input type="text" class="form-control" id="txtLocationNameE">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Storage Location</label>
+                    <input type="text" class="form-control" id="txtStorageLocation">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Ship To</label>
+                    <input type="text" class="form-control" id="txtShipTo">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Out of Service Storage location</label>
+                    <input type="text" class="form-control" id="txtOutService">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Vat branch Number</label>
+                    <input type="text" class="form-control" id="txtVatBranch">
+                </div>
+            </div>
+        </div>
+
+        <div class="widget-heading">
+            <h5 class="">Contract Phone</h5>
+
+        </div>
+        <div class="widget-content ">
+
+            <div class="form-row mb-4">
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Phone No</label>
+                    <input type="text" class="form-control" id="txtPhone">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Company main contract phone</label>
+                    <input type="text" class="form-control" id="txtCompanyContractPhone">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Installations contract phone</label>
+                    <input type="text" class="form-control" id="txtInstallationsPhone">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Maintenence contract phone</label>
+                    <input type="text" class="form-control" id="txtMaintenencePhone">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Inventory contract phone</label>
+                    <input type="text" class="form-control" id="txtInventoryPhone">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Payment contract phone</label>
+                    <input type="text" class="form-control" id="txtPaymentPhone">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Etc contract phone</label>
+                    <input type="text" class="form-control" id="txtEtcPhone">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="widget-heading">
+            <h5 class="">Contract Email</h5>
+
+        </div>
+        <div class="widget-content ">
+
+            <div class="form-row mb-4">
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Company group mail</label>
+                    <input type="text" class="form-control" id="txtCompanyMail">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Installation contract mail</label>
+                    <input type="text" class="form-control" id="txtInstallationMail">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Maintanence contract mail</label>
+                    <input type="text" class="form-control" id="txtMaintanenceMail">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Inventory contract mail</label>
+                    <input type="text" class="form-control" id="txtInventoryMail">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Payment contract mail</label>
+                    <input type="text" class="form-control" id="txtPaymentMail">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Etc contract mail</label>
+                    <input type="text" class="form-control" id="txtEtcMail">
+                </div>
+
+        </div>
+
+        <div class="widget-heading">
+            <h5 class="">Address</h5>
+
+        </div>
+        <div class="widget-content ">
+
+            <div class="form-row mb-4">
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Location Address</label>
+                    <textarea id="txtLocationAddress" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Post Address</label>
+                    <textarea id="txtPostAddress" class="form-control" rows="2"></textarea>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Tax Address</label>
+                    <textarea id="txtTaxAddress" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">WT Address</label>
+                    <textarea id="txtWTAddress" class="form-control" rows="2"></textarea>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="widget-heading">
+            <h5 class="">Bank</h5>
+
+        </div>
+        <div class="widget-content ">
+
+            <div class="form-row mb-4">
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Bank code</label>
+                    <input type="text" class="form-control" id="txtBankcode">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Bank Name</label>
+                    <select class="placeholder js-states form-control" id="ddlBankname">
+                        <option>Choose...</option>
+                    </select>
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="txtBankName">
+                                <div class="input-group-append">
+                                    <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Bank Account No</label>
+                    <input type="text" class="form-control" id="txtBankAccountNo">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Bank Account Name</label>
+                    <input type="text" class="form-control" id="txtBankAccountName">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Bank Branch No</label>
+                    <input type="text" class="form-control" id="txtBankBranchNo">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Bank Branch Name</label>
+                    <input type="text" class="form-control" id="txtBankBranchName">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Bank Attach File</label>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Upload :</label>
+                        <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file">
+                            <input type="hidden" id="hdupfileBank" />
+                            <input type="file" class="custom-file-input inputValidationBank" id="Bank_file" required />
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Panalty contract phone</label>
+                    <input type="text" class="form-control" id="txtPanaltyPhone">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Panalty contract mail</label>
+                    <input type="text" class="form-control" id="txtPanaltyMail">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Contract Phone</label>
+                    <input type="text" class="form-control" id="txtContractPhone">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Contract email</label>
+                    <input type="text" class="form-control" id="txtContractMail">
+                </div>
+            </div>
+
+            <div style="text-align:center">
+
+                <button class="btn btn-dark mb-2" id="btnBack" type="button" onclick="location.href='@Url.Action("LocationIndex", "Profile")'">
+                    <i class="fa fa-undo icon"></i><span>กลับ</span>
+                </button>
+
+                <button class="btn btn-dark mb-2" type="button" id="btnclear" onclick="clearDataPartial()">
+                    <i class="fa fa-refresh icon"></i><span>ล้างข้อมูล</span>
+                </button>
+
+                <button class="btn btn-success mb-2" type="button" id="btnSearch" onclick="editLocation()">
+                    <i class="fa fa-search icon"></i><span>บันทึก</span>
+                </button>
+
+            </div>
+            <div style="visibility:hidden">
+                <input type="hidden" id="txtLocationID" name="txtLocationID">
+                <input type="hidden" id="txtTypeUpdate" name="txtTypeUpdate">
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</div>
+
+
+
+
+
+@section scripts
+{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var loId = JSON.parse(localStorage.getItem('loID'));
+            var a = loId[0].locationId;
+            if (a = '0') {
+                document.getElementById("txtTypeUpdate").value = 'insert';
+            }
+            else {
+                document.getElementById("txtTypeUpdate").value = 'update';
+                getLocaion(a);
+            }
+            $('#Bank_file').change(function () {
+                uploadFiles('Bank_file')
+            });
+        });
+
+        //$('#regisdatefrom').datepicker({
+        //    format: 'dd/mm/yyyy',
+        //    daysOfWeekHighlighted: "6,0",
+        //    autoclose: true,
+        //    todayHighlight: true,
+        //    clearBtn: true,
+        //});
+        //$('#regisdateto').datepicker({
+        //    format: 'dd/mm/yyyy',
+        //    daysOfWeekHighlighted: "6,0",
+        //    autoclose: true,
+        //    todayHighlight: true,
+        //    clearBtn: true,
+
+        //});
+
+
+        function clearDataPartial() {
+            $('#txtLocationCode').val(" ");
+            $('#txtLocationAlias').val(" ");
+            $('#txtLocationNameT').val(" ");
+            $('#txtLocationNameE').val(" ");
+            $('#txtStorageLocation').val(" ");
+            $('#txtShipTo').val(" ");
+            $('#txtOutService').val(" ");
+            $('#txtVatBranch').val(" ");
+            $('#txtPhone').val(" ");
+            $('#txtCompanyContractPhone').val(" ");
+            $('#txtInstallationsPhone').val(" ");
+            $('#txtMaintenencePhone').val(" ");
+            $('#txtInventoryPhone').val(" ");
+            $('#txtPaymentPhone').val(" ");
+            $('#txtEtcPhone').val(" ");
+
+            $('#txtCompanyMail').val(" ");
+            $('#txtInstallationMail').val(" ");
+            $('#txtMaintanenceMail').val(" ");
+            $('#txtInventoryMail').val(" ");
+            $('#txtPaymentMail').val(" ");
+            $('#txtEtcMail').val(" ");
+            $('#txtLocationAddress').val(" ");
+            $('#txtPostAddress').val(" ");
+            $('#txtTaxAddress').val(" ");
+            $('#txtWTAddress').val(" ");
+            $('#txtBankcode').val(" ");
+            $('#txtBankName').val(" ");
+            $('#txtBankAccountNo').val(" ");
+            $('#txtBankAccountName').val(" ");
+            $('#txtBankBranchNo').val(" ");
+            $('#txtBankBranchName').val(" ");
+            $('#txtPanaltyPhone').val(" ");
+            $('#txtPanaltyMail').val(" ");
+            $('#txtContractName').val(" ");
+            $('#txtContractMail').val(" ");
+
+        }
+
+        function getLocaion(loId) {
+            //var groupId = '0';
+            $.ajax({
+                url: "/Profile/GetLocation",
+                dataType: 'JSON',
+                data: { 'LocationID': loId },
+                type: 'POST',
+                success: function (data) {
+                    //alert(data.response.companyNameTh);
+                    $('#txtLocationCode').val(data.response.LocationCode);
+                    $('#txtLocationAlias').val(data.response.LocationNameAlias);
+                    $('#txtLocationNameT').val(data.response.LocationNameTh);
+                    $('#txtLocationNameE').val(data.response.LocationNameEn);
+                    $('#txtStorageLocation').val(data.response.StorageLocation);
+                    $('#txtShipTo').val(data.response.ShipTo);
+                    $('#txtOutService').val(data.response.OutOfServiceStorageLocation);
+                    $('#txtVatBranch').val(data.response.VatBranchNumber);
+                    $('#txtPhone').val(data.response.Phone);
+                    $('#txtCompanyContractPhone').val(data.response.CompanyMainContractPhone);
+                    $('#txtInstallationsPhone').val(data.response.InstallationsContractPhone);
+                    $('#txtMaintenencePhone').val(data.response.MaintenanceContractPhone);
+                    $('#txtInventoryPhone').val(data.response.InventoryContractPhone);
+                    $('#txtPaymentPhone').val(data.response.PaymentContractPhone);
+                    $('#txtEtcPhone').val(data.response.EtcContractPhone);
+                    $('#txtCompanyMail').val(data.response.CompanyGroupMail);
+                    $('#txtInstallationMail').val(data.response.InstallationsContractMail);
+                    $('#txtMaintanenceMail').val(data.response.MaintenanceContractMail);
+                    $('#txtInventoryMail').val(data.response.InventoryContractMail);
+                    $('#txtPaymentMail').val(data.response.PaymentContractMail);
+                    $('#txtEtcMail').val(data.response.EtcContractMail);
+                    $('#txtLocationAddress').val(data.response.LocationAddress);
+                    $('#txtPostAddress').val(data.response.PostAddress);
+                    $('#txtTaxAddress').val(data.response.TaxAddress);
+                    $('#txtWTAddress').val(data.response.WtAddress);
+                    $('#txtBankcode').val(data.response.BankCode);
+                    $('#txtBankName').val(data.response.BankName);
+                    $('#txtBankAccountNo').val(data.response.BankAccountNo);
+                    $('#txtBankAccountName').val(data.response.BankAccountName);
+                    $('#txtBankBranchNo').val(data.response.BankBranchCode);
+                    $('#txtBankBranchName').val(data.response.BankBranchName);
+                    $('#txtPanaltyPhone').val(data.response.PenaltyContractPhone);
+                    $('#txtPanaltyMail').val(data.response.PenaltyContractMail);
+                    $('#txtContractName').val(data.response.CompanyStatus);
+                    $('#txtContractMail').val(data.response.ContractMail);
+
+                },
+                error: function (result) {
+
+                }
+            });
+        }
+
+        function editLocation() {
+           
+            var chk = document.getElementById("txtTypeUpdate").value;
+            if (chk === 'insert') {
+                var data = {
+                    "LocationId": "",
+                    "LocationCode": $("#txtLocationCode").val(),
+                    "LocationName": $("#txtLocationNameT").val(),
+                    "LocationNameTh": $("#txtLocationNameT").val(),
+                    "LocationNameEn": $("#txtLocationNameE").val(),
+                    "LocationNameAlias": $("#txtLocationAlias").val(),
+                    "VendorCode": " ",
+                    "StorageLocation": $("#txtStorageLocation").val(),
+                    "ShipTo": $("#txtShipTo").val(),
+                    "OutOfServiceStorageLocation": $("#txtOutService").val(),
+                    "SubPhase": " ",
+                    "EffectiveDate": " ",
+                    "ShopType": " ",
+                    "VatBranchNumber": $("#txtVatBranch").val(),
+                    "Phone": $("#txtPhone").val(),
+                    "CompanyMainContractPhone": $("#txtCompanyContractPhone").val(),
+                    "InstallationsContractPhone": $("#txtInstallationsPhone").val(),
+                    "MaintenanceContractPhone": $("#txtMaintenencePhone").val(),
+                    "InventoryContractPhone": $("#txtInventoryPhone").val(),
+                    "PaymentContractPhone": $("#txtPaymentPhone").val(),
+                    "EtcContractPhone": $("#txtEtcPhone").val(),
+                    "CompanyGroupMail": $("#txtCompanyMail").val(),
+                    "InstallationsContractMail": $("#txtInstallationMail").val(),
+                    "MaintenanceContractMail": $("#txtMaintanenceMail").val(),
+                    "InventoryContractMail": $("#txtInventoryMail").val(),
+                    "PaymentContractMail": $("#txtPaymentMail").val(),
+                    "EtcContractMail": $("#txtEtcMail").val(),
+                    "LocationAddress": $("#txtLocationAddress").val(),
+                    "PostAddress": $("#txtPostAddress").val(),
+                    "TaxAddress": $("#txtTaxAddress").val(),
+                    "WtAddress": $("#txtWTAddress").val(),
+                    "HouseNo": " ",
+                    "AreaCode": " ",
+                    "BankCode": $("#txtBankcode").val(),
+                    "BankName": $("#txtBankName").val(),
+                    "BankAccountNo": $("#txtBankAccountNo").val(),
+                    "BankAccountName": $("#txtBankAccountName").val(),
+                    "BankAttachFile": " ",
+                    "Status": " ",
+                    "CreateDate": " ",
+                    "CreateBy": " ",
+                    "UpdateBy": " ",
+                    "UpdateDate": " ",
+                    "BankBranchCode": $("#txtBankBranchNo").val(),
+                    "BankBranchName": $("#txtBankBranchName").val(),
+                    "PenaltyContractPhone": $("#txtPanaltyPhone").val(),
+                    "PenaltyContractMail": $("#txtPanaltyMail").val(),
+                    "ContractPhone": $("#txtContractPhone").val(),
+                    "ContractMail": $("#txtContractMail").val(),
+                    "CompanyId": " ",
+                    "company_name_th": " ",
+                    "distribution_channel": " ",
+                    "channel_sale_group": " "
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Profile/AddLocation",
+                    data: { model: data },
+                    //dataType: "json",
+                    success: function (data) {
+                        console.log(data)
+
+                    },
+                    error: function (xhr, status, error) {
+                        //console.log(status);
+                        //showFeedback("error", xhr.responseText, "System Information",
+                        //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+                });
+            }
+            else {
+                var loId = JSON.parse(localStorage.getItem('loID'));
+                var a = loId[0].locationId;
+                var data = {
+                    "LocationId": a,
+                    "LocationCode": $("#txtLocationCode").val(),
+                    "LocationName": $("#txtLocationNameT").val(),
+                    "LocationNameTh": $("#txtLocationNameT").val(),
+                    "LocationNameEn": $("#txtLocationNameE").val(),
+                    "LocationNameAlias": $("#txtLocationAlias").val(),
+                    "VendorCode": " ",
+                    "StorageLocation": $("#txtStorageLocation").val(),
+                    "ShipTo": $("#txtShipTo").val(),
+                    "OutOfServiceStorageLocation": $("#txtOutService").val(),
+                    "SubPhase": " ",
+                    "EffectiveDate": " ",
+                    "ShopType": " ",
+                    "VatBranchNumber": $("#txtVatBranch").val(),
+                    "Phone": $("#txtPhone").val(),
+                    "CompanyMainContractPhone": $("#txtCompanyContractPhone").val(),
+                    "InstallationsContractPhone": $("#txtInstallationsPhone").val(),
+                    "MaintenanceContractPhone": $("#txtMaintenencePhone").val(),
+                    "InventoryContractPhone": $("#txtInventoryPhone").val(),
+                    "PaymentContractPhone": $("#txtPaymentPhone").val(),
+                    "EtcContractPhone": $("#txtEtcPhone").val(),
+                    "CompanyGroupMail": $("#txtCompanyMail").val(),
+                    "InstallationsContractMail": $("#txtInstallationMail").val(),
+                    "MaintenanceContractMail": $("#txtMaintanenceMail").val(),
+                    "InventoryContractMail": $("#txtInventoryMail").val(),
+                    "PaymentContractMail": $("#txtPaymentMail").val(),
+                    "EtcContractMail": $("#txtEtcMail").val(),
+                    "LocationAddress": $("#txtLocationAddress").val(),
+                    "PostAddress": $("#txtPostAddress").val(),
+                    "TaxAddress": $("#txtTaxAddress").val(),
+                    "WtAddress": $("#txtWTAddress").val(),
+                    "HouseNo": " ",
+                    "AreaCode": " ",
+                    "BankCode": $("#txtBankcode").val(),
+                    "BankName": $("#txtBankName").val(),
+                    "BankAccountNo": $("#txtBankAccountNo").val(),
+                    "BankAccountName": $("#txtBankAccountName").val(),
+                    "BankAttachFile": " ",
+                    "Status": " ",
+                    "CreateDate": " ",
+                    "CreateBy": " ",
+                    "UpdateBy": " ",
+                    "UpdateDate": " ",
+                    "BankBranchCode": $("#txtBankBranchNo").val(),
+                    "BankBranchName": $("#txtBankBranchName").val(),
+                    "PenaltyContractPhone": $("#txtPanaltyPhone").val(),
+                    "PenaltyContractMail": $("#txtPanaltyMail").val(),
+                    "ContractPhone": $("#txtContractPhone").val(),
+                    "ContractMail": $("#txtContractMail").val(),
+                    "CompanyId": " ",
+                    "company_name_th": " ",
+                    "distribution_channel": " ",
+                    "channel_sale_group": " "
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Profile/UpdateLocation",
+                    data: { model: data },
+                    //dataType: "json",
+                    success: function (data) {
+                        console.log(data)
+
+                    },
+                    error: function (xhr, status, error) {
+                        //console.log(status);
+                        //showFeedback("error", xhr.responseText, "System Information",
+                        //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+                });
+            }
+
+        }
+
+        function uploadFiles(inputId) {
+            var input = document.getElementById(inputId);
+            var files = input.files;
+            var formData = new FormData();
+            var id = "";
+            var typefile = "";
+            switch (inputId) {
+                case "Bank_file": id = $('#hdupfileBank').val();
+                    typefile = "BankFile";
+                    break;
+            }
+            for (var i = 0; i != files.length; i++) {
+                formData.append("files", files[i]);
+                formData.append("fid", id);
+                formData.append("type_file", typefile);
+            }
+
+
+            $.ajax(
+                {
+                    type: "POST",
+                    url: "/Profile/UploadFile",
+                    processData: false,
+                    contentType: false,
+                    dataType: "json",
+                    data: formData,
+                    success: function (data) {
+                        //console.log(data);
+                        if (data.status) {
+                            switch (inputId) {
+                                case "Bank_file": $('#hdupfileBank').val(data.response); break;
+                            }
+                            //showFeedback("success", data.message, "System Information",
+                            //    "<button type='button' class='btn-border btn-green' data-dismiss='modal' id='btnOKpopup'><i class='fa fa-check icon'></i><span>OK</span></button >")
+                        }
+                        else {
+                            //showFeedback("error", data.message, "System Information",
+                            //    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                        }
+
+                    },
+                    error: function (xhr, status, error) {
+                        //clearForEdit();
+                        //console.log(status);
+                        //showFeedback("error", xhr.responseText, "System Information",
+                        //    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+                }
+            );
+        }
+    </script>
+
+}
