@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form id="frNew" class="needs-validation" novalidate>
+                    @*<form id="frNew" class="needs-validation" novalidate>*@
                         <input type="hidden" id="hdCompanyId" name="hdCompanyId" value="">
                         <div class="row mb-4">
                             <div class="form-group col-md-12">
@@ -115,7 +115,7 @@
                                     <label class="custom-control-label" for="rdoCompanyType2">Dealer</label>
                                 </div>
                             </div>
-                            <div id="divnewsubcontract">
+                            <div id="divnewsubcontract"class="needs-validation-newregister" novalidate>
                         
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
@@ -125,12 +125,15 @@
                                             </div>
                                             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                                                 <div class="input-group">
-                                                    <input id="inputTax_id" type="text" class="form-control" placeholder="เลขทะเบียนนิติบุคล"
-                                                           aria-label="Recipient's username" maxlength="13" required  style="width:100px" />
+                                                    <input id="inputTax_id" type="text" class="form-control inputValidation" placeholder="เลขทะเบียนนิติบุคล"
+                                                           aria-label="Recipient's username" maxlength="13" required style="width:100px" />
                                                     <div class="input-group-append">
                                                         <button class="btn btn-success" id="btnsearchrevenue" type="button">
                                                             <i class="fa fa-search"></i>
                                                         </button>
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Please provide a valid juristic id.
                                                     </div>
                                                 </div>
                                             </div>
@@ -161,9 +164,11 @@
 
                                                 </div>
                                                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                                                    <input id="inputCompany_name_th" type="text" placeholder="ชื่อนิติบุคคล(ไทย)" class="form-control" \
+                                                    <input id="inputCompany_name_th" type="text" placeholder="ชื่อนิติบุคคล(ไทย)" class="form-control inputValidation"
                                                            maxlength="100" required style="width:165px" />
-
+                                                    <div class="invalid-feedback">
+                                                        Please provide a valid company name thai.
+                                                    </div>
                                                 </div>
                                         </div>
                                     </div>
@@ -180,9 +185,11 @@
 
                                                 </div>
                                                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                                                    <input id="inputCompany_name_en" type="text" placeholder="ชื่อนิติบุคคล(อังกฤษ)" class="form-control" 
+                                                    <input id="inputCompany_name_en" type="text" placeholder="ชื่อนิติบุคคล(อังกฤษ)" class="form-control inputValidation"
                                                            maxlength="100" required style="width:165px" />
-
+                                                    <div class="invalid-feedback">
+                                                        Please provide a valid company name english.
+                                                    </div>
                                                 </div>
 
                                             
@@ -199,8 +206,11 @@
                                                 <label>ชื่อภาษีหัก ณ ที่จ่าย :</label>
                                             </div>
                                             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                                                <input id="inputWT_name" type="text" class="form-control" placeholder="ชื่อภาษีหัก ณ ที่จ่าย" 
-                                                       aria-label="Recipient's username" maxlength="13" required style="width:300px" >
+                                                <input id="inputWT_name" type="text" class="form-control inputValidation" placeholder="ชื่อภาษีหัก ณ ที่จ่าย"
+                                                       aria-label="Recipient's username" maxlength="13" required style="width:300px">
+                                                <div class="invalid-feedback">
+                                                    Please provide a valid tax name.
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -227,7 +237,7 @@
 
                             </div>
 
-                            <div id="divdealer" style="display:none;">
+                            <div id="divdealer" class="needs-validation-dealer" novalidate style="display:none;">
 
 
                                 <div class="row">
@@ -245,7 +255,7 @@
                                                             <i class="fa fa-search"></i>
                                                         </button>
                                                     </div>
-                                                    <div class="invalid-tooltip">
+                                                    <div class="invalid-feedback">
                                                         Please provide a valid location Code.
                                                     </div>
                                                 </div>
@@ -262,7 +272,7 @@
                                             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                                                 <input type="hidden" id="hddistribution" />
                                                 <input type="text" class="form-control inputValidationdealer" id="txtdistribution" disabled maxlength="250" required style="width:300px" />
-                                                <div class="invalid-tooltip">
+                                                <div class="invalid-feedback">
                                                     Please provide a valid distribution Channel.
                                                 </div>
                                             </div>
@@ -286,7 +296,7 @@
                                                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                                                     <input type="text" class="form-control inputValidationdealer" id="txtlocationname" disabled 
                                                            maxlength="250" required style="width:300px" />
-                                                    <div class="invalid-tooltip">
+                                                    <div class="invalid-feedback">
                                                         Please provide a valid location Name.
                                                     </div>
                                                 </div>
@@ -321,7 +331,7 @@
                                                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                                                     <input type="text" class="form-control inputValidationdealer" id="txttax_id_dealer" disabled 
                                                            maxlength="100" required style="width:300px"/>
-                                                    <div class="invalid-tooltip">
+                                                    <div class="invalid-feedback">
                                                         Please provide a valid juristic id.
                                                     </div>
                                                 </div>
@@ -363,7 +373,7 @@
                                                     <input type="text" class="form-control inputValidationdealer"
                                                            placeholder="ชื่อนิติบุคคล(ไทย)" id="txtcompany_name_th_dealer" disabled maxlength="100" required 
                                                            style="width:165px"/>
-                                                    <div class="invalid-tooltip">
+                                                    <div class="invalid-feedback">
                                                         Please provide a valid company name thai.
                                                     </div>
                                                 </div>
@@ -377,7 +387,7 @@
                                                 </div>
 
                                                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                                                    <select class="custom-select" id="ddlprefixcompany_name_en_dealer"></select>
+                                                    <select class="form-control" id="ddlprefixcompany_name_en_dealer"></select>
                                                 </div>
                                                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
                                                     <input type="text" class="form-control"
@@ -397,7 +407,7 @@
                                                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                                                     <input type="text" class="form-control inputValidationdealer" id="txtwt_name_dealer" 
                                                            maxlength="100" disabled required style="width:300px" />
-                                                    <div class="invalid-tooltip">
+                                                    <div class="invalid-feedback">
                                                         Please provide a valid tax name.
                                                     </div>
                                                 </div>
@@ -651,19 +661,21 @@
 
                 <h4>ข้อมูลติดต่อบริษัท</h4>
                 <hr>
-                <div class="container">
+                <div class="container needs-validation-contract" novalidate>
                     <div class="row">
                         <div class="col-sm-2">
                             <label>อีเมลล์ บริษัท :</label>
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" id="mailCompany" style="width:300px" class="form-control">
+                            <input type="text" id="mailCompany" style="width:300px" class="form-control inputValidationContract" required>
+                            <div class="invalid-feedback">Please provide a company email.</div>
                         </div>
                         <div class="col-sm-2">
                             <label>ชื่อผู้ติดต่อ :</label>
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" id="nameContract" style="width:300px" class="form-control">
+                            <input type="text" id="nameContract" style="width:300px" class="form-control inputValidationContract" required>
+                            <div class="invalid-feedback">Please provide a contract name.</div>
                         </div>
                     </div>
                     <br />
@@ -672,13 +684,15 @@
                             <label>อีเมลล์ :</label>
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" id="mailContract" style="width:300px" class="form-control">
+                            <input type="text" id="mailContract" style="width:300px" class="form-control inputValidationContract" required>
+                            <div class="invalid-feedback">Please provide a valid contract email.</div>
                         </div>
                         <div class="col-sm-2">
                             <label>เบอร์โทร :</label>
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" id="telContract" style="width:300px" class="form-control">
+                            <input type="text" id="telContract" style="width:300px" class="form-control inputValidationContract" required>
+                            <div class="invalid-feedback">Please provide a valid contract phone.</div>
                         </div>
                     </div>
                 </div>
@@ -686,7 +700,7 @@
 
                 <h4>ข้อมูลติดต่อแผนก</h4>
                 <hr>
-                <div class="container">
+                <div class="container needs-validation-contract" novalidate>
                     <div class="row col-sm-2">
                         <label>แผนกติดตั้ง</label>
                     </div>
@@ -696,13 +710,16 @@
                             <label>ชื่อผู้ติดต่อ :</label>
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" id="name1" style="width:300px" class="form-control">
+                            <input type="text" id="name1" style="width:300px" class="form-control inputValidationContract" required>
+                            <div class="invalid-feedback">Please provide a valid departmant of install name.</div>
                         </div>
                         <div class="col-sm-2">
                             <label>เบอร์โทร :</label>
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" id="tel1" style="width:300px" class="form-control">
+                            <input type="text" id="tel1" style="width:300px" class="form-control inputValidationContract" required>
+                            <div class="invalid-feedback">Please provide a valid of departmant install phone.</div>
+
                         </div>
                     </div>
                     <br />
@@ -711,7 +728,9 @@
                             <label>อีเมลล์ :</label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="text" id="mail1" style="width:300px" class="form-control">
+                            <input type="text" id="mail1" style="width:300px" class="form-control inputValidationContract" required>
+                            <div class="invalid-feedback">Please provide a valid of departmant install email.</div>
+
                         </div>
                     </div>
                     <br />
@@ -724,13 +743,17 @@
                             <label>ชื่อผู้ติดต่อ :</label>
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" id="name2" style="width:300px" class="form-control">
+                            <input type="text" id="name2" style="width:300px" class="form-control inputValidationContract" required>
+                            <div class="invalid-feedback">Please provide a valid departmant of maninten name.</div>
+
                         </div>
                         <div class="col-sm-2">
                             <label>เบอร์โทร :</label>
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" id="tel2" style="width:300px" class="form-control">
+                            <input type="text" id="tel2" style="width:300px" class="form-control inputValidationContract" required>
+                            <div class="invalid-feedback">Please provide a valid departmant of maninten phone.</div>
+
                         </div>
                     </div>
                     <br />
@@ -739,7 +762,9 @@
                             <label>อีเมลล์ :</label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="text" id="mail2" style="width:300px" class="form-control">
+                            <input type="text" id="mail2" style="width:300px" class="form-control inputValidationContract" required>
+                            <div class="invalid-feedback">Please provide a valid departmant of maninten email.</div>
+
                         </div>
                     </div>
                     <br />
@@ -752,13 +777,16 @@
                             <label>ชื่อผู้ติดต่อ :</label>
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" id="name3" style="width:300px" class="form-control">
+                            <input type="text" id="name3" style="width:300px" class="form-control inputValidationContract" required>
+                            <div class="invalid-feedback">Please provide a valid departmant of account name.</div>
                         </div>
                         <div class="col-sm-2">
                             <label>เบอร์โทร :</label>
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" id="tel3" style="width:300px" class="form-control">
+                            <input type="text" id="tel3" style="width:300px" class="form-control inputValidationContract" required>
+                            <div class="invalid-feedback">Please provide a valid departmant of account phone.</div>
+
                         </div>
                     </div>
                     <br />
@@ -767,7 +795,9 @@
                             <label>อีเมลล์ :</label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="text" id="mail3" style="width:300px" class="form-control">
+                            <input type="text" id="mail3" style="width:300px" class="form-control inputValidationContract" required>
+                            <div class="invalid-feedback">Please provide a valid departmant of account email.</div>
+
                         </div>
                     </div>
                 </div>
@@ -775,16 +805,16 @@
 
                 <h4>ข้อมูลบัญชีธนาคาร</h4>
                 <hr>
-                <div class="container">
+                <div class="container needs-validation-bank" novalidate>
                     <div class="row">
                         <div class="col-sm-2">
                             <label>ชื่อธนาคาร :</label>
                         </div>
                         <div class="col-sm-4">
                             <div class="row col-sm-12">
-                                <select id="selBankName" class="form-control form-control">
+                                <select id="selBankName" class="custom-select inputValidationBank form-control " required>
                                 </select>
-
+                                <div class="invalid-feedback">Please choose a bank name.</div>
                             </div>
                         </div>
                         <div class="col-sm-2">
@@ -792,8 +822,8 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="row col-sm-12">
-                                <input type="text" id="nameBranch" class="form-control">
-
+                                <input type="text" id="nameBranch" class="form-control inputValidationBank" required>
+                                <div class="invalid-feedback">Please provide a branch name.</div>
                             </div>
                         </div>
                     </div>
@@ -804,9 +834,10 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="row col-sm-12">
-                                <select id="AccType" name="AccType" class="form-control form-control">
+                                <select id="AccType" name="AccType" class="custom-select inputValidationBank form-control" required>
                                     <option value="Saving">ออมทรัพย์</option>
                                 </select>
+                                <div class="invalid-feedback">Please choose a bank account type.</div>
                             </div>
                         </div>
                     </div>
@@ -818,7 +849,8 @@
                         <div class="col-sm-4">
                             <div class="row col-sm-12">
 
-                                <input type="text" id="busiName" class="form-control">
+                                <input type="text" id="busiName" class="form-control inputValidationBank" required />
+                                <div class="invalid-feedback">Please provide a account name.</div>
                             </div>
                         </div>
                         <div class="col-sm-2">
@@ -826,7 +858,8 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="row col-sm-12">
-                                <input type="text" id="codeNumber" style="width:300px" class="form-control">
+                                <input type="text" id="codeNumber" style="width:300px" class="form-control inputValidationBank" required />
+                                <div class="invalid-feedback">Please provide a account id.</div>
                             </div>
                         </div>
 
@@ -839,10 +872,12 @@
                         <div class="col-sm-4">
                             <div class="row col-sm-12">
                                 <div class="custom-file">
-                                    <input type="hidden" id="hduploadbookbank" />
+                                    <input type="hidden" id="hduploadbookbank" class="form-control inputValidationBank " required/>
                                     <input type="file" class="custom-file-input" id="inputuploadbookbank"
-                                           aria-describedby="uploadlHelp1"  accept="image/jpeg,image/gif,image/png,application/pdf">
+                                           aria-describedby="uploadlHelp1" accept="image/jpeg,image/gif,image/png,application/pdf" >
                                     <label class="custom-file-label" for="inputuploadbookbank" id="lbuploadbookbank">เลือกไฟล์</label>
+                                    <div class="invalid-feedback">Please upload a book bank file.</div>
+
                                     <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
                                 </div>
@@ -855,7 +890,7 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="row col-sm-12">
-                                <select id="businessType" name="businessType" class="form-control form-control" style="width:300px">
+                                <select id="businessType" name="businessType" class="custom-select form-control" style="width:300px">
                                 </select>
                             </div>
                         </div>
@@ -865,7 +900,7 @@
 
                 <h4>ข้อมูลเอกสารบริษัท</h4>
                 <hr>
-                <div class="container">
+                <div class="container needs-validation-uploadfile" novalidate>
                     <div class="row">
                         <div class="col-sm-2">
                             <label>หนังสือรับรองบริษัท :</label>
@@ -884,12 +919,13 @@
                         <div class="col-sm-4">
                             <div class="row col-sm-12">
                                 @*<div class="custom-file">*@
-                                    <input type="hidden" id="hdupfilecompany_certified" />
-                                    <input type="file" class="custom-file-input" id="inputUploadcertificate" accept="image/jpeg,image/gif,image/png,application/pdf">
-                                    <label class="custom-file-label" for="inputUploadcertificate" id="lbuploadcertificate">เลือกไฟล์</label>
+                                <input type="hidden" id="hdupfilecompany_certified" class="form-control inputValidationUpload" required />
+                                <input type="file" class="custom-file-input " id="inputUploadcertificate"
+                                       accept="image/jpeg,image/gif,image/png,application/pdf" >
+                                <label class="custom-file-label" for="inputUploadcertificate" id="lbuploadcertificate">เลือกไฟล์</label>
                                 @*</div>*@
                                 <small id="uploadlHelp2" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
-
+                                <div class="invalid-feedback">Please upload a company certified file.</div>
                             </div>
                         </div>
                         <div class="col-sm-2">
@@ -898,12 +934,13 @@
                         <div class="col-sm-4">
                             <div class="row col-sm-12">
                                 @*<div class="custom-file">*@
-                                    <input type="hidden" id="hdupfilecommercial_registration" />
-                                    <input type="file" class="custom-file-input" id="inputUploadComRegis" accept="image/jpeg,image/gif,image/png,application/pdf">
-                                    <label class="custom-file-label" for="inputUploadComRegis" id="lbuploadComRegis">เลือกไฟล์</label>
+                                <input type="hidden" id="hdupfilecommercial_registration" class="form-control inputValidationUpload" required />
+                                <input type="file" class="custom-file-input " id="inputUploadComRegis"
+                                       accept="image/jpeg,image/gif,image/png,application/pdf" >
+                                <label class="custom-file-label" for="inputUploadComRegis" id="lbuploadComRegis">เลือกไฟล์</label>
                                 @*</div>*@
                                 <small id="uploadlHelp3" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
-
+                                <div class="invalid-feedback">Please upload a commercial registration file.</div>
                             </div>
                         </div>
                     </div>
@@ -915,12 +952,13 @@
                         <div class="col-sm-10">
                             <div class="row col-sm-6">
                                 @*<div class="custom-file">*@
-                                    <input type="hidden" id="hdupfilevat_registration_certificate" />
-                                    <input type="file" class="custom-file-input" id="inputUpload20"style="width:170px" accept="image/jpeg,image/gif,image/png,application/pdf">
-                                    <label class="custom-file-label" for="inputUpload20" id="lbupload20">เลือกไฟล์</label>
+                                <input type="hidden" id="hdupfilevat_registration_certificate" class="form-control inputValidationUpload" required/>
+                                <input type="file" class="custom-file-input" id="inputUpload20" style="width:170px"
+                                       accept="image/jpeg,image/gif,image/png,application/pdf" >
+                                <label class="custom-file-label" for="inputUpload20" id="lbupload20">เลือกไฟล์</label>
                                 @*</div>*@
                                 <small id="uploadlHelp4" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
-
+                                <div class="invalid-feedback">Please upload a vat registration certificate file.</div>
                             </div>
                         </div>
                     </div>
@@ -936,12 +974,12 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
                         ปิด
                     </button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" id="btn_OnSave_Modal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
                         บันทึก
                     </button>
                 </div>
-                </form>
+                @*</form>*@
             </div>
 
         </div>
@@ -1559,7 +1597,7 @@ transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 
                                     return $(this).text() == data.LocationListModel[0].outTitle;
                                  }).prop('selected', true);
 
-                               
+
                                 $('#txtcompany_name_th_dealer').val(data.LocationListModel[0].outCompanyName);
 
 
@@ -1741,6 +1779,119 @@ transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 
                 });
 
 
+                $('#btn_OnSave_Modal').click(function () {
+                    if ($('#rdoCompanyType1').is(":checked")) {
+                        var forms = document.getElementsByClassName('needs-validation-newregister');
+                        var validation = Array.prototype.filter.call(forms, function (form) {
+                            if (Validate(".form-control.inputValidation", ".custom-control-input.inputValidation"
+                                , ".custom-select.inputValidation", ".custom-file-input.inputValidation")) {
+                                event.preventDefault();
+                                event.stopPropagation();
+
+                            }
+                            else {
+                                var forms = document.getElementsByClassName('needs-validation-contract');
+                                var validation = Array.prototype.filter.call(forms, function (form) {
+                                    if (Validate(".form-control.inputValidationContract", ".custom-control-input.inputValidationContract"
+                                        , ".custom-select.inputValidationContract", ".custom-file-input.inputValidationContract")) {
+                                        event.preventDefault();
+                                        event.stopPropagation();
+
+                                    }
+                                    else {
+                                        var forms = document.getElementsByClassName('needs-validation-bank');
+                                        var validation = Array.prototype.filter.call(forms, function (form) {
+                                            if (Validate(".form-control.inputValidationBank", ".custom-control-input.inputValidationBank"
+                                                , ".custom-select.inputValidationBank", ".custom-file-input.inputValidationBank")) {
+                                                event.preventDefault();
+                                                event.stopPropagation();
+
+                                            }
+                                            else {
+                                                var forms = document.getElementsByClassName('needs-validation-uploadfile');
+                                                var validation = Array.prototype.filter.call(forms, function (form) {
+                                                    if (Validate(".form-control.inputValidationUpload", ".custom-control-input.inputValidationUpload"
+                                                        , ".custom-select.inputValidationUpload", ".custom-file-input.inputValidationUpload")) {
+                                                        event.preventDefault();
+                                                        event.stopPropagation();
+
+                                                    }
+                                                    else {
+                                                        onSave();
+
+                                                    }
+                                                    form.classList.add('was-validated');
+                                                });
+
+
+                                            }
+                                            form.classList.add('was-validated');
+                                        });
+
+                                    }
+                                    form.classList.add('was-validated');
+                                });
+                            }
+                            form.classList.add('was-validated');
+                        });
+                    }
+                    else if ($('#rdoCompanyType2').is(":checked")) {
+                        var forms = document.getElementsByClassName('needs-validation-dealer');
+                        var validation = Array.prototype.filter.call(forms, function (form) {
+                            if (Validate(".form-control.inputValidationdealer", ".custom-control-input.inputValidationdealer"
+                                , ".custom-select.inputValidationdealer", ".custom-file-input.inputValidationdealer")) {
+                                event.preventDefault();
+                                event.stopPropagation();
+
+                            }
+                            else {
+                                var forms = document.getElementsByClassName('needs-validation-contract');
+                                var validation = Array.prototype.filter.call(forms, function (form) {
+                                    if (Validate(".form-control.inputValidationContract", ".custom-control-input.inputValidationContract"
+                                        , ".custom-select.inputValidationContract", ".custom-file-input.inputValidationContract")) {
+                                        event.preventDefault();
+                                        event.stopPropagation();
+
+                                    }
+                                    else {
+                                        var forms = document.getElementsByClassName('needs-validation-bank');
+                                        var validation = Array.prototype.filter.call(forms, function (form) {
+                                            if (Validate(".form-control.inputValidationBank", ".custom-control-input.inputValidationBank"
+                                                , ".custom-select.inputValidationBank", ".custom-file-input.inputValidationBank")) {
+                                                event.preventDefault();
+                                                event.stopPropagation();
+
+                                            }
+                                            else {
+                                                var forms = document.getElementsByClassName('needs-validation-uploadfile');
+                                                var validation = Array.prototype.filter.call(forms, function (form) {
+                                                    if (Validate(".form-control.inputValidationUpload", ".custom-control-input.inputValidationUpload"
+                                                        , ".custom-select.inputValidationUpload", ".custom-file-input.inputValidationUpload")) {
+                                                        event.preventDefault();
+                                                        event.stopPropagation();
+
+                                                    }
+                                                    else {
+                                                        onSave();
+
+                                                    }
+                                                    form.classList.add('was-validated');
+                                                });
+
+
+                                            }
+                                            form.classList.add('was-validated');
+                                        });
+
+                                    }
+                                    form.classList.add('was-validated');
+                                });
+                            }
+                            form.classList.add('was-validated');
+                        });
+                    }
+                });
+
 
                 $(document).on('show.bs.modal', '.modal', function () {
                     var zIndex = 1040 + (10 * $('.modal:visible').length);
@@ -1755,25 +1906,25 @@ transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 
                 });
             });
 
-            'use strict';
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        } else {
-                            onSave();
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
+            //'use strict';
+            //window.addEventListener('load', function () {
+            //    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            //    var forms = document.getElementsByClassName('needs-validation');
+            //    // Loop over them and prevent submission
+            //    var validation = Array.prototype.filter.call(forms, function (form) {
+            //        form.addEventListener('submit', function (event) {
+            //            if (form.checkValidity() === false) {
+            //                event.preventDefault();
+            //                event.stopPropagation();
+            //            } else {
+            //                onSave();
+            //                event.preventDefault();
+            //                event.stopPropagation();
+            //            }
+            //            form.classList.add('was-validated');
+            //        }, false);
+            //    });
+            //}, false);
 
 
         function ClearDataModalLocation() {
@@ -2576,7 +2727,7 @@ transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 
                     data: formData,
                     success: function (data) {
 
-           
+
                         if (data.status) {
                             switch (inputId) {
                                 case "company_certified_file": $('#hdupfilecompany_certified').val(data.response); break;
@@ -2899,6 +3050,106 @@ transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 
                     });
                 }
             });
+        }
+
+
+
+
+        function Validate(formcontrol, custom, customselect, cutomupload) {
+
+            var hasError = false;
+
+            $(formcontrol).each(function () {
+                var $this = $(this);
+                var fieldvalue = $this.val();
+                var type = $this.attr("type");
+                var tag = $this[0].tagName;
+
+                if (tag == "INPUT" && type == "text") {
+                    if (fieldvalue == "") {
+
+                        hasError = true;
+                    }
+                }
+                else if (tag == "INPUT" && type == "password") {
+                    if (fieldvalue == "") {
+
+                        hasError = true;
+                    }
+                }
+                else if ($this.is('select')) {
+                    if (fieldvalue == "0") {
+
+                        hasError = true;
+                    }
+                }
+                else if (tag == "INPUT" && type == 'radio') {
+                    if (!fieldvalue) {
+
+                        hasError = true;
+                    }
+                }
+                else if (tag == "INPUT" && type == 'checkbox') {
+                    if (!fieldvalue) {
+
+                        hasError = true;
+
+                    }
+                }
+                else if (type == "hidden") {
+                    if (fieldvalue == "") {
+
+                        hasError = true;
+                    }
+                }
+            }); //Input
+            $(custom).each(function () {
+                var $this = $(this);
+
+                var type = $this.attr("type");
+                var tag = $this[0].tagName;
+                var fieldvalue = $this.is(":checked");
+
+                if (tag == "INPUT" && type == 'radio') {
+                    if (!fieldvalue) {
+
+                        hasError = true;
+
+                    }
+                }
+                else if (tag == "INPUT" && type == 'checkbox') {
+                    if (!fieldvalue) {
+
+                        hasError = true;
+
+                    }
+                }
+            });//radio,check box
+            $(customselect).each(function () {
+                var $this = $(this);
+
+                var type = $this.attr("type");
+                var tag = $this[0].tagName;
+                var fieldvalue = $this.val();
+
+                if ($this.is('select')) {
+                    if (fieldvalue == "") {
+
+                        hasError = true;
+                    }
+                }
+            });//custom selete
+            $(cutomupload).each(function () {
+                var $this = $(this);
+                var fieldvalue = $this.val();
+                if ($this.is('input')) {
+                    if (fieldvalue == "") {
+
+                        hasError = true;
+                    }
+                }
+            });//customupload
+            return hasError;
         }
 
     </script>

@@ -254,10 +254,10 @@ span.red {
     height: auto;
     border: 1px solid #f1f2f3;
     color: #3b3f5c;
-    font-size: 15px;
+    font-size: 22px;
     padding: 8px 10px;
     letter-spacing: 1px;
-    background-color: #f1f2f3;
+    background-color: #ffffff;
 }
 .custom-select.custom-select-lg {
     font-size: 18px;

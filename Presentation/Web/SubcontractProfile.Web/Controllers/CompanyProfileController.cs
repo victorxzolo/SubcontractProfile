@@ -939,7 +939,7 @@ namespace SubcontractProfile.Web.Controllers
                 draw = model.draw,
                 recordsTotal = totalResultsCount,
                 recordsFiltered = filteredResultsCount,
-                data = ListResult[0].vHouseNumber !=null? ListResult: new List<VATModal>()
+                data = ListResult.Count()!=0? (ListResult[0].vHouseNumber !=null? ListResult: new List<VATModal>()): new List<VATModal>()
             });
         }
 
