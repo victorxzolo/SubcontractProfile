@@ -1,0 +1,472 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+    <div class="widget widget-chart-one">
+        <div class="widget-heading">
+            <h5 class="">Location</h5>
+
+        </div>
+        <div class="widget-content ">
+
+            <div class="form-row mb-4">
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Company Name</label>
+                    <label for="inputPassword4" id="txtCompanyName">xxxxxxxxxxxxxxxx</label>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline1" name="customRadioInline1" value="N" class="custom-control-input" checked="checked">
+                        <label class="custom-control-label" for="customRadioInline1">New Subcontract</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline2" name="customRadioInline1" value="D" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline2">Dealer</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Location</label>
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="txtLocation">
+                                <div class="input-group-append">
+                                    <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Vendor Code</label>
+                    <input type="text" class="form-control" id="txtVendorCode">
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label for="inputEmail4">Team Code</label>
+                    <input type="text" class="form-control" id="txtTeamCode">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Team Name(TH)</label>
+                    <input type="text" class="form-control" id="txtTeamNameT">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Team Name(EN)</label>
+                    <input type="text" class="form-control" id="txtTeamNameE">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Storage Location</label>
+                    <input type="text" class="form-control" id="txtStorageLocation">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Ship To</label>
+                    <input type="text" class="form-control" id="txtShipTo">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Out of Service Storage Location</label>
+                    <input type="text" class="form-control" id="txtOutStorage">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Warranty MA</label>
+                    <select class="placeholder js-states form-control" id="ddlWarrantyMA">
+                        <option>Choose...</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Warranty Install</label>
+                    <select class="placeholder js-states form-control" id="ddlWarrantyInstall">
+                        <option>Choose...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Service Skill</label>
+                    <textarea id="txtServiceSkill" class="form-control" rows="2"></textarea>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="widget-heading">
+            <h5 class="">Contract Phone</h5>
+
+        </div>
+        <div class="widget-content ">
+
+            <div class="form-row mb-4">
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Installations Contract Phone</label>
+                    <input type="text" class="form-control" id="txtInstallationsPhone">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Maintenance Contract Phone</label>
+                    <input type="text" class="form-control" id="txtMaintenancePhone">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">ETC Contract Phone</label>
+                    <input type="text" class="form-control" id="txtETCPhone">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="widget-heading">
+            <h5 class="">Contract Mail</h5>
+
+        </div>
+        <div class="widget-content ">
+
+            <div class="form-row mb-4">
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Installations Contract Mail</label>
+                    <input type="text" class="form-control" id="txtInstallationsMail">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Maintenance Contract Mail</label>
+                    <input type="text" class="form-control" id="txtMaintenanceMail">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">ETC Contract Mail</label>
+                    <input type="text" class="form-control" id="txtETCMail">
+                </div>
+
+            </div>
+
+            <div style="text-align:center">
+
+                <button class="btn btn-dark mb-2" id="btnBack" type="button" onclick="location.href='@Url.Action("TeamIndex", "Profile")'">
+                    <i class="fa fa-undo icon"></i><span>กลับ</span>
+                </button>
+
+                <button class="btn btn-dark mb-2" type="button" id="btnclear" onclick="clearDataPartial()">
+                    <i class="fa fa-refresh icon"></i><span>ล้างข้อมูล</span>
+                </button>
+
+                <button class="btn btn-success mb-2" type="button" id="btnSearch" onclick="editTeam()">
+                    <i class="fa fa-search icon"></i><span>บันทึก</span>
+                </button>
+
+            </div>
+
+            <div style="visibility:hidden">
+                <input type="hidden" id="txtTeamID" name="txtTeamID">
+                <input type="hidden" id="txtTypeUpdate" name="txtTypeUpdate">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+@section scripts
+{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //document.getElementById("txtTypeUpdate").value = 'insert';
+            var teamId = JSON.parse(localStorage.getItem('teamID'));
+            var a = teamId[0].teamID;
+            if (a === '0') {
+                document.getElementById("txtTypeUpdate").value = 'insert';
+            }
+            else {
+                document.getElementById("txtTypeUpdate").value = 'update';
+                getTeam(a);
+            }
+            
+        });
+
+        //$('#regisdatefrom').datepicker({
+        //    format: 'dd/mm/yyyy',
+        //    daysOfWeekHighlighted: "6,0",
+        //    autoclose: true,
+        //    todayHighlight: true,
+        //    clearBtn: true,
+        //});
+        //$('#regisdateto').datepicker({
+        //    format: 'dd/mm/yyyy',
+        //    daysOfWeekHighlighted: "6,0",
+        //    autoclose: true,
+        //    todayHighlight: true,
+        //    clearBtn: true,
+
+        //});
+
+
+        function clearDataPartial() {
+            $('#txtLocation').val(" ");
+            $('#txtVendorCode').val(" ");
+            $('#txtTeamCode').val(" ");
+            $('#txtTeamNameT').val(" ");
+            $('#txtTeamNameE').val(" ");
+            $('#txtStorageLocation').val(" ");
+            $('#txtShipTo').val(" ");
+            $('#txtOutStorage').val(" ");
+            $('#txtServiceSkill').val(" ");
+            $('#txtInstallationsPhone').val(" ");
+            $('#txtMaintenancePhone').val(" ");
+            $('#txtETCPhone').val(" ");
+            $('#txtInstallationsMail').val(" ");
+            $('#txtMaintenanceMail').val(" ");
+            $('#txtETCMail').val(" ");
+
+        }
+
+        function getTeam(teamId) {
+            $.ajax({
+                url: "/Profile/GetTeam",
+                dataType: 'JSON',
+                data: { 'TeamId': teamId },
+                type: 'POST',
+                success: function (data) {
+                    //$('#txtLocation').val(data.response.companyAlias);
+                    $('#txtVendorCode').val(data.response.VendorCode);
+                    $('#txtTeamCode').val(data.response.TeamCode);
+                    $('#txtTeamNameT').val(data.response.TeamName);
+                    $('#txtTeamNameE').val(data.response.TeamNameEn);
+                    $('#txtStorageLocation').val(data.response.StageLocal);
+                    $('#txtShipTo').val(data.response.ShipTo);
+                    $('#txtOutStorage').val(data.response.OosStorageLocation);
+                    $('#txtServiceSkill').val(data.response.ServiceSkill);
+                    $('#txtInstallationsPhone').val(data.response.InstallationsContractPhone);
+                    $('#txtMaintenancePhone').val(data.response.MaintenanceContractPhone);
+                    $('#txtETCPhone').val(data.response.EtcContractPhone);
+                    $('#txtInstallationsMail').val(data.response.InstallationsContractEmail);
+                    $('#txtMaintenEmail').val(data.response.MaintenanceContractEmail);
+                    $('#txtMaintenanceMail').val(data.response.DeptOfAccountName);
+                    $('#txtETCMail').val(data.response.EtcContractEmail);
+
+                },
+                error: function (result) {
+
+                }
+            });
+        }
+
+        function addTeam() {
+            var data = {
+                //"CompanyId": " ",
+                "CompanyCode" : $("#txtCompanyCode").val(),
+                "CompanyName" : " ",
+                "CompanyNameTh" : $("#txtCompanyNameT").val(),
+                "CompanyNameEn" :  $("#txtCompanyNameE").val(),
+                "CompanyAlias" :  $("#txtCompanyAlias").val(),
+                "DistributionChannel" : " ",
+                "ChannelSaleGroup" : " ",
+                "VendorCode" : " ",
+                "CustomerCode" : " ",
+                "AreaId" : " ",
+                "TaxId" : " ",
+                "WtName" : $("#txttaxnew").val(),
+                "VatType" : " ",
+                "CompanyCertifiedFile" : " ",
+                "CommercialRegistrationFile" : " ",
+                "VatRegistrationCertificateFile" : " ",
+                "ContractAgreementFile" : " ",
+                "DepositAuthorizationLevel" : " ",
+                "DepositPaymentType" : " ",
+                "ContractStartDate" : " ",
+                "ContractEndDate" : " ",
+                "OverDraftDeposit" : " ",
+                "BalanceDeposit" : " ",
+                "CompanyStatus" : " ",
+                "CompanyAddress" : " ",
+                "VatAddress" : " ",
+                "CreateBy" : " ",
+                "CreateDate" : " ",
+                "UpdateBy" : " ",
+                "UpdateDate" : " ",
+                "CompanyEmail" : $("#txtCompanyEmail").val(),
+                "ContractName" : $("#txtContractName").val(),
+                "ContractPhone" : $("#txtContractPhone").val(),
+                "ContractEmail" : $("#txtContractEmail").val(),
+                "BankCode" : $("#txtbankcode").val(),
+                "BankName" : $("#txtbankname").val(),
+                "AccountNumber" : $("#txtaccountname").val(),
+                "AccountName" : $("#ddlaccountname").val(),
+                "AttachFile" : " ",
+                "BranchCode" : $("#txtbranchcode").val(),
+                "BranchName" : $("#txtbranchname").val(),
+                "DeptOfInstallName" : $("#txtInstallName").val(),
+                "DeptOfMaintenName" : $("#txtMaintenName").val(),
+                "DeptOfAccountName" : $("#txtAccountName").val(),
+                "DeptOfInstallPhone" : $("#txtInstallPhone").val(),
+                "DeptOfMaintenPhone" : $("#txtMaintenPhone").val(),
+                "DeptOfAccountPhone" : $("#txtAccountPhone").val(),
+                "DeptOfInstallEmail" : $("#txtInstallEmail").val(),
+                "DeptOfMaintenEmail" : $("#txtMaintenEmail").val(),
+                "DeptOfAccountEmail" : $("#txtAccountEmail").val(),
+                "LocationCode" : " ",
+                "LocationNameTh" : " ",
+                "LocationNameEn" : " ",
+                "BankAccountTypeId" : " ",
+                "SubcontractProfileType" : " ",
+                "CompanyTitleThId" : $("#ddlprefixnewT").val(),
+                "CompanyTitleEnId" : $("#ddlprefixnewE").val(),
+                "Status" : " ",
+                "ActivateDate" : " ",
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Profile/AddCompany",
+                data: { Company: data },
+                //dataType: "json",
+                success: function (data) {
+                    console.log(data)
+
+                },
+                error: function (xhr, status, error) {
+                    //console.log(status);
+                    //showFeedback("error", xhr.responseText, "System Information",
+                        //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function editTeam() {
+            var chk = document.getElementById("txtTypeUpdate").value;
+            if (chk === 'insert') {
+                var data = {
+                    "TeamId": "",
+                    "TeamCode": $("#txtTeamCode").val(),
+                    "TeamName": $("#txtTeamNameT").val(),
+                    "TeamNameTh": $("#txtTeamNameT").val(),
+                    "TeamNameEn": $("#txtTeamNameE").val(),
+                    "ShipTo": $("#txtShipTo").val(),
+                    "StageLocal": $("#txtStorageLocation").val(),
+                    "OosStorageLocation": $("#txtOutStorage").val(),
+                    "LocationCode": " ",
+                    "VendorCode": " ",
+                    "JobType": " ",
+                    "SubcontractType": " ",
+                    "SubcontractSubType": " ",
+                    "WarrantyMa": " ",
+                    "WarrantyInstall": " ",
+                    "ServiceSkill": $("#txtServiceSkill").val(),
+                    "InstallationsContractPhone": $("#txtInstallationsPhone").val(),
+                    "MaintenanceContractPhone": $("#txtMaintenancePhone").val(),
+                    "EtcContractPhone": $("#txtETCPhone").val(),
+                    "InstallationsContractEmail": $("#txtInstallationsMail").val(),
+                    "MaintenanceContractEmail": $("#txtMaintenanceMail").val(),
+                    "EtcContractEmail": $("#txtETCMail").val(),
+                    "Status": " ",
+                    "CreateDate": " ",
+                    "CreateBy": " ",
+                    "UpdateBy": " ",
+                    "UpdateDate": " "
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Profile/AddTeam",
+                    data: { model: data },
+                    //dataType: "json",
+                    success: function (data) {
+                        console.log(data)
+
+                    },
+                    error: function (xhr, status, error) {
+                        //console.log(status);
+                        //showFeedback("error", xhr.responseText, "System Information",
+                        //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+                });
+            }
+            else {
+                var teamId = JSON.parse(localStorage.getItem('teamID'));
+                var a = teamId[0].teamID;
+                var data = {
+                    "TeamId": a,
+                    "TeamCode": $("#txtTeamCode").val(),
+                    "TeamName": $("#txtTeamNameT").val(),
+                    "TeamNameTh": $("#txtTeamNameT").val(),
+                    "TeamNameEn": $("#txtTeamNameE").val(),
+                    "ShipTo": $("#txtShipTo").val(),
+                    "StageLocal": $("#txtStorageLocation").val(),
+                    "OosStorageLocation": $("#txtOutStorage").val(),
+                    "LocationCode": " ",
+                    "VendorCode": " ",
+                    "JobType": " ",
+                    "SubcontractType": " ",
+                    "SubcontractSubType": " ",
+                    "WarrantyMa": " ",
+                    "WarrantyInstall": " ",
+                    "ServiceSkill": $("#txtServiceSkill").val(),
+                    "InstallationsContractPhone": $("#txtInstallationsPhone").val(),
+                    "MaintenanceContractPhone": $("#txtMaintenancePhone").val(),
+                    "EtcContractPhone": $("#txtETCPhone").val(),
+                    "InstallationsContractEmail": $("#txtInstallationsMail").val(),
+                    "MaintenanceContractEmail": $("#txtMaintenanceMail").val(),
+                    "EtcContractEmail": $("#txtETCMail").val(),
+                    "Status": " ",
+                    "CreateDate": " ",
+                    "CreateBy": " ",
+                    "UpdateBy": " ",
+                    "UpdateDate": " "
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Profile/UpdateTeam",
+                    data: { model: data },
+                    //dataType: "json",
+                    success: function (data) {
+                        console.log(data)
+
+                    },
+                    error: function (xhr, status, error) {
+                        //console.log(status);
+                        //showFeedback("error", xhr.responseText, "System Information",
+                        //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+                });
+            }
+        }
+
+        function BindDDLreligion() {
+
+            $.ajax({
+                type: "POST",
+                url: "/Profile/DDLwarranty",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    if (data != null) {
+                        $('#ddlWarrantyMA').empty();
+                        $('#ddlWarrantyInstall').empty();
+                        $('#ddlWarrantyMA').append($('<option></option>').val(0).text('Select'));
+                        $('#ddlWarrantyInstall').append($('<option></option>').val(0).text('Select'));
+                        $.each(data.response, function () {
+                            $('#ddlWarrantyMA').append($('<option></option>').val(this.WarrantyId).text(this.WarrantyDesc));
+                            $('#ddlWarrantyInstall').append($('<option></option>').val(this.WarrantyId).text(this.WarrantyDesc));
+                        });
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+    </script>
+
+}

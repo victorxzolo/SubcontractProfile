@@ -1,0 +1,1411 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<button class="tablink" onclick="openPage('Engineer', this)" id="defaultOpen">Engineer</button>
+<button class="tablink" onclick="openPage('Personal', this)" >Personal</button>
+<div id="Engineer" class="tabcontent">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+    <div class="widget widget-chart-one">
+        <div class="widget-heading">
+            <h5 class="">Engineer</h5>
+
+        </div>
+        <div class="widget-content ">
+
+            <div class="form-row mb-4">
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Company Name</label><br/>
+                    <label id="txtCompanyName" for="inputText">xxxxxxxxxxxxx</label>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked="checked">
+                        <label class="custom-control-label" for="customRadioInline1">New Subcontract</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline2">Dealer</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Location Name</label>
+                    <select class="placeholder js-states form-control" id="ddlLocation">
+                        <option>Choose...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Team Name(TH)</label>
+                    <select class="placeholder js-states form-control" id="ddlStaffName">
+                        <option>Choose...</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputtext">Staff Name</label>
+                    <input type="text" class="form-control" id="txtStaffName">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputtext">Staff Name(TH)</label>
+                    <input type="text" class="form-control" id="txtStaffNameT">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputtext">Staff Name(EN)</label>
+                    <input type="text" class="form-control" id="txtStaffNameE">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Position</label>
+                    <select class="placeholder js-states form-control" id="ddlPosition">
+                        <option>Choose...</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Citizen ID</label>
+                    <input type="text" class="form-control" id="txtCitizenID">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Personal attach file</label>
+                    <div class="form-group row">
+                        <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                            <input type="text" class="form-control" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-secondary" type="button">Browse</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">T Shirt size</label>
+                    <select class="placeholder js-states form-control" id="ddlSize">
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="widget-heading">
+            <h5 class="">Contract Information</h5>
+
+        </div>
+        <div class="widget-content ">
+
+            <div class="form-row mb-4">
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Contract Phone1</label>
+                    <input type="text" class="form-control" id="txtContractPhone1">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Contract Phone2</label>
+                    <input type="text" class="form-control" id="txtContractPhone2">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Contract Email</label>
+                    <input type="text" class="form-control" id="txtContractMail">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="widget-heading">
+            <h5 class="">Work Experience Information</h5>
+
+        </div>
+        <div class="widget-content ">
+
+            <div class="form-row mb-4">
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Work Experience</label>
+                    <input type="text" class="form-control" id="txtWorkExperience">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Work Experience attach file</label>
+                    <div class="form-group row">
+                        <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                            <input type="text" class="form-control" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-secondary" type="button">Browse</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Work Type</label>
+                    <input type="text" class="form-control" id="txtWorkType">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Course Skill</label>
+                    <input type="text" class="form-control" id="txtCourseSkill">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="widget-heading">
+            <h5 class="">Vehicle Information</h5>
+
+        </div>
+        <div class="widget-content ">
+
+            <div class="form-row mb-4">
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Vehicle Type</label>
+                    <select class="placeholder js-states form-control" id="ddlVehicleType">
+                        <option>Select</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Vehicle Brand</label>
+                    <select class="placeholder js-states form-control" id="ddlVehicleBrand">
+                        <option>Select</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Vehicle Series</label>
+                    <select class="placeholder js-states form-control" id="ddlVehicleSerie">
+                        <option>Select</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Vehicle Color</label>
+                    <select class="placeholder js-states form-control" id="ddlVehicleColor">
+                        <option>Select</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Vehicle Year</label>
+                    <select class="placeholder js-states form-control" id="ddlVehicleYear">
+                        <option>Select</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Vehicle License plate</label>
+                    <input type="text" class="form-control" id="txtVehicleLicense">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Vehicle attach file</label>
+                    <div class="form-group row">
+                        <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                            <input type="text" class="form-control" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-secondary" type="button">Browse</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="widget-heading">
+            <h5 class="">Tool Information</h5>
+        </div>
+        <div class="widget-content ">
+
+            <div class="form-row mb-4">
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Tool otdr</label>
+                    <input type="text" class="form-control" id="txtToolotdr">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Tool Splicing</label>
+                    <input type="text" class="form-control" id="txtToolSplicing">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="widget-heading">
+            <h5 class="">Bank Information</h5>
+        </div>
+        <div class="widget-content ">
+
+            <div class="form-row mb-4">
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Bank Name</label>
+                    <select class="placeholder js-states form-control" id="ddlBankName">
+                        <option>Select</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Bank Code</label>
+                    <input type="text" class="form-control" id="txtBankCode">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Account No</label>
+                    <input type="text" class="form-control" id="txtAccountNo">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Account Name</label>
+                    <input type="text" class="form-control" id="txtAccountName">
+                </div>
+
+            </div>
+            <div style="text-align:center">
+
+                <button class="btn btn-dark mb-2" id="btnBack" type="button" onclick="location.href='@Url.Action("EngineerIndex", "Profile")'">
+                    <i class="fa fa-undo icon"></i><span>กลับ</span>
+                </button>
+
+                <button class="btn btn-dark mb-2" type="button" id="btnclear" onclick="clearDataPartialEn()">
+                    <i class="fa fa-refresh icon"></i><span>ล้างข้อมูล</span>
+                </button>
+
+                <button class="btn btn-success mb-2" type="button" id="btnSearch" onclick="editEngineer()">
+                    <i class="fa fa-search icon"></i><span>บันทึก</span>
+                </button>
+
+            </div>
+            <div style="visibility:hidden">
+                <input type="hidden" id="txtTeamID" name="txtTeamID">
+                <input type="hidden" id="txtTypeUpdate" name="txtTypeUpdate">
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+@*/////////////////////////////////////////////////////////////////////////////////////*@
+
+
+<div id="Personal" class="tabcontent">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+        <div class="widget widget-chart-one">
+            <div class="widget-heading">
+                <h5 class="">Personal</h5>
+
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+                    <div class="form-group col-md-6">
+                        <label for="inputText">CitizenID</label>
+                        <input type="text" class="form-control" id="txtCitizenIDp">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputText" style="display:none">CitizenID</label>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputText">Title Name</label>
+                        <select class="placeholder js-states form-control" id="ddlTitlep">
+                            <option>Choose...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputText">FullName(TH)</label>
+                        <input type="text" class="form-control" id="txtNameTp">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">FullName(EN)</label>
+                        <input type="text" class="form-control" id="txtNameEp">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Birth Date</label>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <div class='input-group p-0 date' id='BirthDatep'>
+                                <input type='text' class="form-control form-control-sm" />
+                                <div class="input-group-append input-group-addon">
+                                    <span class="input-group-text px-4">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputText">Gender</label><br />
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioP1" name="customRadioInline2" class="custom-control-input" checked="checked">
+                            <label class="custom-control-label" for="customRadioInline1">Male</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioP2" name="customRadioInline2" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline2">Female</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Race</label>
+                        <select class="placeholder js-states form-control" id="ddlRacep">
+                            <option>Choose...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Nationality</label>
+                        <select class="placeholder js-states form-control" id="ddlNationalityp">
+                            <option>Choose...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Religion</label>
+                        <select class="placeholder js-states form-control" id="ddlReligionp">
+                            <option>Choose...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputText">Identity by</label>
+                        <input type="text" class="form-control" id="txtIdentityByp">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputText">Contract Mail</label>
+                        <input type="text" class="form-control" id="txtIdentityMailp">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputText">Identity card address</label>
+                        <textarea id="txtIdentityaddressp" class="form-control" rows="2"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget-heading">
+                <h5 class="">Contract Infomation</h5>
+
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Contract Phone1</label>
+                        <input type="text" class="form-control" id="txtPhone1p">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Contract Phone2</label>
+                        <input type="text" class="form-control" id="txtPhone2p">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Contract Mail</label>
+                        <input type="text" class="form-control" id="txtContractMailp">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="widget-heading">
+                <h5 class="">Work Experience Information</h5>
+
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Work permit No</label>
+                        <input type="text" class="form-control" id="txtWorkPermitp">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Work Experience attach file</label>
+                        <div class="form-group row">
+                            <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                                <input type="text" class="form-control" disabled>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <span class="input-group-append">
+                                    <button class="file-upload-browse btn btn-secondary" type="button">Browse</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Work Experience attach file</label>
+                        <div class="form-group row">
+                            <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                                <input type="text" class="form-control" disabled>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <span class="input-group-append">
+                                    <button class="file-upload-browse btn btn-secondary" type="button">Browse</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Course Skill</label>
+                        <input type="text" class="form-control" id="txtCourseSkillp">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="widget-heading">
+                <h5 class="">Education Information</h5>
+
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+
+                    <div class="form-group col-md-12">
+                        <label for="inputPassword4">Education</label>
+                        <textarea id="txtEducationp" class="form-control" rows="2"></textarea>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="widget-heading">
+                <h5 class="">Languages Information</h5>
+
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+
+                    <div class="form-group col-md-8">
+                        <label for="inputtext">ประเภทที่อยู่</label>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                                    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="optionsRadios" id="chkth1" value="N">
+                                                Listening Thai
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="optionsRadios" id="chken1" value="D">
+                                                Listening Eng
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                                    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="optionsRadios" id="chkth2" value="N">
+                                                Speaking Thai
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="optionsRadios" id="chken2" value="D">
+                                                Speaking Eng
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                                    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="optionsRadios" id="chkth3" value="N">
+                                                Reading Thai
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="optionsRadios" id="chken3" value="D">
+                                                Reading Eng
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                                    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="optionsRadios" id="chkth4" value="N">
+                                                Writing Thai
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="optionsRadios" id="chken4" value="D">
+                                                Writing Eng
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="widget-heading">
+                <h5 class="">Certificate Information</h5>
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Certifcate Type</label>
+                        <select class="placeholder js-states form-control" id="ddlCertifcateTypep">
+                            <option>Choose...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Certifcate No</label>
+                        <input type="text" class="form-control" id="txtCertifcateNop">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Certifcate expire date</label>
+                        <input type="text" class="form-control" id="txtexpirep">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Certifcate Attach File</label>
+                        <div class="form-group row">
+                            <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                                <input type="text" class="form-control" disabled>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <span class="input-group-append">
+                                    <button class="file-upload-browse btn btn-secondary" type="button">Browse</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="widget-heading">
+                <h5 class="">Bank Information</h5>
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Bank Name</label>
+                        <select class="placeholder js-states form-control" id="ddlBanknamep">
+                            <option>Choose...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Bank Code </label>
+                        <input type="text" class="form-control" id="txtBankCodep">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Account No</label>
+                        <input type="text" class="form-control" id="txtAccountNop">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Account Name</label>
+                        <input type="text" class="form-control" id="txtAccountNamep">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Bank blanch Name</label>
+                        <input type="text" class="form-control" id="txtBlanchNamep">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Bank blanch Code</label>
+                        <input type="text" class="form-control" id="txtBlanchCodep">
+                    </div>
+                </div>
+                <div style="text-align:center">
+
+                    <button class="btn btn-dark mb-2" id="btnBackp" type="button" onclick="location.href='@Url.Action("EngineerIndex", "Profile")'">
+                        <i class="fa fa-undo icon"></i><span>กลับ</span>
+                    </button>
+
+                    <button class="btn btn-dark mb-2" type="button" id="btnclearp" onclick="clearDataPartialPer()">
+                        <i class="fa fa-refresh icon"></i><span>ล้างข้อมูล</span>
+                    </button>
+
+                    <button class="btn btn-success mb-2" type="button" id="btnSearchp" onclick="editPersonal()">
+                        <i class="fa fa-search icon"></i><span>บันทึก</span>
+                    </button>
+
+                </div>
+                <div style="visibility:hidden">
+                    <input type="hidden" id="txtPersonalID" name="txtPersonalID">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+@section scripts
+{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#BirthDatep').datepicker({
+                format: 'dd/mm/yyyy',
+                daysOfWeekHighlighted: "6,0",
+                autoclose: true,
+                todayHighlight: true,
+                clearBtn: true,
+            });
+            var enId = JSON.parse(localStorage.getItem('enID'));
+            var a = enId[0].engineerID;
+            if (a === '0') {
+                document.getElementById("txtTypeUpdate").value = 'insert';
+            }
+            else {
+                document.getElementById("txtTypeUpdate").value = 'update';
+                getEngineer(a);
+            }
+            //BindDDLverhicleBrand();
+            //BindDDLverhicleSerise();
+            //BindDDLverhicleType();
+            BindDDLbank();
+            ////BindDDLlocation();
+            //BindDDLTeam();
+            //BindDDLTitle();
+            //BindDDLrace();
+            //BindDDLnationality();
+            //BindDDLreligion();
+            document.getElementById("defaultOpen").click();
+            getPersonal(0);
+
+            
+        });
+        function openPage(pageName, elmnt) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].style.backgroundColor = "";
+            }
+            document.getElementById(pageName).style.display = "block";
+        }
+       
+        //$('#regisdateto').datepicker({
+        //    format: 'dd/mm/yyyy',
+        //    daysOfWeekHighlighted: "6,0",
+        //    autoclose: true,
+        //    todayHighlight: true,
+        //    clearBtn: true,
+
+        //});
+
+        function clearDataPartialEn() {
+            $('#txtStaffName').val(" ");
+            $('#txtStaffNameT').val(" ");
+            $('#txtStaffNameE').val(" ");
+            $('#txtCitizenID').val(" ");
+            $('#txtContractPhone1').val(" ");
+            $('#txtContractPhone2').val(" ");
+            $('#txtContractMail').val(" ");
+            $('#txtWorkExperience').val(" ");
+            $('#txtWorkType').val(" ");
+            $('#txtCourseSkill').val(" ");
+            $('#txtVehicleLicense').val(" ");
+            $('#txtToolotdr').val(" ");
+            $('#txtToolSplicing').val(" ");
+            $('#txtBankCode').val(" ");
+            $('#txtAccountNo').val(" ");
+            $('#txtAccountName').val(" ");
+
+            //document.getElementById("ddlLocation").selectedIndex = 0;
+            //document.getElementById("ddlStaffName").selectedIndex = 0;
+            //document.getElementById("ddlPosition").selectedIndex = 0;
+            document.getElementById("ddlSize").selectedIndex = 'S';
+            document.getElementById("ddlVehicleType").selectedIndex = 0;
+            document.getElementById("ddlVehicleBrand").selectedIndex = 0;
+            document.getElementById("ddlVehicleSerie").selectedIndex = 0;
+            document.getElementById("ddlVehicleColor").selectedIndex = 0;
+            document.getElementById("ddlVehicleYear").selectedIndex = 0;
+            document.getElementById("ddlBankName").selectedIndex = 0;
+        }
+        function clearDataPartialPer() {
+            $('#txtCitizenIDp').val(" ");
+            $('#txtNameTp').val(" ");
+            $('#txtNameEp').val(" ");
+            $('#txtBirthDatep').val(" ");
+            $('#txtIdentityByp').val(" ");
+            $('#txtIdentityaddressp').val(" ");
+            $('#txtPhone1p').val(" ");
+            $('#txtPhone2p').val(" ");
+            $('#txtContractMailp').val(" ");
+            $('#WorkPermitNo').val(" ");
+            $('#txtCourseSkillp').val(" ");
+            $('#txtEducationp').val(" ");
+            $('#txtCertifcateNop').val(" ");
+            $('#txtexpirep').val(" ");
+            $('#txtBankCodep').val(" ");
+            $('#txtAccountNop').val(" ");
+            $('#txtAccountNamep').val(" ");
+            $('#txtBlanchNamep').val(" ");
+            $('#txtBlanchCodep').val(" ");
+
+            document.getElementById("ddlTitlep").selectedIndex = 0;
+            //document.getElementById("ddlRacep").selectedIndex = 0;
+            //document.getElementById("ddlNationalityp").selectedIndex = 0;
+            //document.getElementById("ddlReligionp").selectedIndex = 0;
+            //document.getElementById("ddlCertifcateTypep").selectedIndex = 0;
+            //document.getElementById("ddlBanknamep").selectedIndex = 0;
+
+        }
+
+        function getEngineer(enId) {
+            //var groupId = '0';
+            $.ajax({
+                url: "/Profile/GetEngineer",
+                dataType: 'JSON',
+                data: { 'EngineerID': enId },
+                type: 'POST',
+                success: function (data) {
+                    //alert(data.response.companyNameTh);
+                    $('#txtStaffName').val(data.response.StaffName);
+                    $('#txtStaffNameT').val(data.response.StaffNameTh);
+                    $('#txtStaffNameE').val(data.response.StaffNameEn);
+                    $('#txtCitizenID').val(data.response.CitizenId);
+                    $('#txtContractPhone1').val(data.response.ContractPhone1);
+                    $('#txtContractPhone2').val(data.response.ContractPhone2);
+                    $('#txtContractMail').val(data.response.ContractEmail);
+                    $('#txtWorkExperience').val(data.response.WorkExperience);
+                    $('#txtWorkType').val(data.response.WorkType);
+                    $('#txtCourseSkill').val(data.response.CourseSkill);
+                    $('#txtVehicleLicense').val(data.response.VehicleLicensePlate);
+                    $('#txtToolotdr').val(data.response.ToolOtrd);
+                    $('#txtToolSplicing').val(data.response.ToolSplicing);
+                    $('#txtBankCode').val(data.response.BankCode);
+                    $('#txtAccountNo').val(data.response.AccountNo);
+                    $('#txtAccountName').val(data.response.AccountName);
+
+                },
+                error: function (result) {
+
+                }
+            });
+        }
+
+        function getPersonal(perId) {
+            perId = 'f004a592-4a3f-401e-972e-6030acf1d3f0';
+            $.ajax({
+                url: "/Profile/GetPersonal",
+                dataType: 'JSON',
+                data: { 'PersonalId': perId },
+                type: 'POST',
+                success: function (data) {
+                    document.getElementById("txtPersonalID").value = data.response.PersonalId;
+                    $('#txtCitizenIDp').val(data.response.CitizenId);
+                    $('#txtNameTp').val(data.response.FullNameTh);
+                    $('#txtNameEp').val(data.response.FullNameEn);
+                    //$('#txtBirthDatep').val(data.response.CitizenId);
+                    $('#txtIdentityByp').val(data.response.IdentityBy);
+                    //$('#txtIdentityMailp').val(data.response.ContractPhone2);
+                    $('#txtIdentityaddressp').val(data.response.IdentityCardAddress);
+                    $('#txtPhone1p').val(data.response.ContactPhone1);
+                    $('#txtPhone2p').val(data.response.ContactPhone2);
+                    $('#txtContractMailp').val(data.response.ContactEmail);
+                    $('#txtWorkPermitp').val(data.response.WorkPermitNo);
+                    //$('#txtCourseSkillp').val(data.response.ToolOtrd);
+                    $('#txtEducationp').val(data.response.Education);
+                    $('#txtCertifcateNop').val(data.response.CertificateNo);
+                    $('#txtBankCodep').val(data.response.BankCode);
+                    $('#txtAccountNop').val(data.response.AccountNumber);
+                    $('#txtAccountNamep').val(data.response.AccountName);
+                    //$('#txtBlanchNamep').val(data.response.AccountName);
+                    //$('#txtBlanchCodep').val(data.response.AccountName);
+
+                },
+                error: function (result) {
+
+                }
+            });
+        }
+
+        function editEngineer() {
+            var chk = document.getElementById("txtTypeUpdate").value;
+            if (chk === 'insert') {
+                var data = {
+                    "EngineerId": " ",
+                    "StaffCode": " ",//$("#txtCompanyCode").val(),
+                    "FoaCode": " ",
+                    "StaffName": $("#txtStaffName").val(),
+                    "StaffNameTh": $("#txtStaffNameT").val(),
+                    "StaffNameEn": $("#txtStaffNameE").val(),
+                    "AscCode": " ",
+                    "TshirtSize": document.getElementById("ddlSize").value,
+                    "ContractPhone1": $("#txtContractPhone1").val(),
+                    "ContractPhone2": $("#txtContractPhone2").val(),
+                    "ContractEmail": $("#txtContractMail").val(),
+                    "WorkExperience": $("#txtWorkExperience").val(),
+                    "WorkExperienceAttachFile": " ",
+                    "WorkType": $("#txtWorkType").val(),
+                    "CourseSkill": $("#txtCourseSkill").val(),
+                    "SkillLevel": " ",
+                    "VehicleType": "",//document.getElementById("ddlSize").value,
+                    "VehicleBrand": " ",//document.getElementById("ddlVehicleBrand").value,
+                    "VehicleSerise": " ",//document.getElementById("ddlVehicleSerie").value,
+                    "VehicleColor": " ",//document.getElementById("ddlVehicleColor").value,
+                    "VehicleYear": " ",//document.getElementById("ddlVehicleYear").value,
+                    "VehicleLicensePlate": $("#txtVehicleLicense").val(),
+                    "VehicleAttachFile": " ",
+                    "ToolOtrd": $("#txtToolotdr").val(),
+                    "ToolSplicing": $("#txtToolSplicing").val(),
+                    "Position": " ",//document.getElementById("ddlPosition").value,
+                    "LocationCode": " ",//document.getElementById("ddlLocation").value,
+                    "StaffId": " ",
+                    "TeamCode": " ",//document.getElementById("ddlStaffName").value,
+                    "CitizenId": $("#txtCitizenID").val(),
+                    "BankCode": $("#txtBankCode").val(),
+                    "BankName": document.getElementById("ddlBankName").value,
+                    "AccountNo": $("#txtAccountNo").val(),
+                    "AccountName": $("#txtAccountName").val(),
+                    "PersonalAttachFile": " ",
+                    "StaffStatus": " ",
+                    "CreateDate": " ",
+                    "CreateBy": " ",
+                    "UpdateBy": $("#txtCompanyEmail").val(),
+                    "UpdateDate": $("#txtContractName").val(),
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Profile/AddEngineer",
+                    data: { model: data },
+                    //dataType: "json",
+                    success: function (data) {
+                        console.log(data)
+
+                    },
+                    error: function (xhr, status, error) {
+                        //console.log(status);
+                        //showFeedback("error", xhr.responseText, "System Information",
+                        //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+                });
+            }
+            else {
+                var enId = JSON.parse(localStorage.getItem('enID'));
+                var a = enId[0].engineerID;
+                var data = {
+                    "EngineerId": a,
+                    "StaffCode": " ",//$("#txtCompanyCode").val(),
+                    "FoaCode": " ",
+                    "StaffName": $("#txtStaffName").val(),
+                    "StaffNameTh": $("#txtStaffNameT").val(),
+                    "StaffNameEn": $("#txtStaffNameE").val(),
+                    "AscCode": " ",
+                    "TshirtSize": document.getElementById("ddlSize").value,
+                    "ContractPhone1": $("#txtContractPhone1").val(),
+                    "ContractPhone2": $("#txtContractPhone2").val(),
+                    "ContractEmail": $("#txtContractMail").val(),
+                    "WorkExperience": $("#txtWorkExperience").val(),
+                    "WorkExperienceAttachFile": " ",
+                    "WorkType": $("#txtWorkType").val(),
+                    "CourseSkill": $("#txtCourseSkill").val(),
+                    "SkillLevel": " ",
+                    "VehicleType": "",//document.getElementById("ddlSize").value,
+                    "VehicleBrand": " ",//document.getElementById("ddlVehicleBrand").value,
+                    "VehicleSerise": " ",//document.getElementById("ddlVehicleSerie").value,
+                    "VehicleColor": " ",//document.getElementById("ddlVehicleColor").value,
+                    "VehicleYear": " ",//document.getElementById("ddlVehicleYear").value,
+                    "VehicleLicensePlate": $("#txtVehicleLicense").val(),
+                    "VehicleAttachFile": " ",
+                    "ToolOtrd": $("#txtToolotdr").val(),
+                    "ToolSplicing": $("#txtToolSplicing").val(),
+                    "Position": " ",//document.getElementById("ddlPosition").value,
+                    "LocationCode": " ",//document.getElementById("ddlLocation").value,
+                    "StaffId": " ",
+                    "TeamCode": " ",//document.getElementById("ddlStaffName").value,
+                    "CitizenId": $("#txtCitizenID").val(),
+                    "BankCode": $("#txtBankCode").val(),
+                    "BankName": " ",//document.getElementById("ddlBankName").value,
+                    "AccountNo": $("#txtAccountNo").val(),
+                    "AccountName": $("#txtAccountName").val(),
+                    "PersonalAttachFile": " ",
+                    "StaffStatus": " ",
+                    "CreateDate": " ",
+                    "CreateBy": " ",
+                    "UpdateBy": $("#txtCompanyEmail").val(),
+                    "UpdateDate": $("#txtContractName").val(),
+
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Profile/UpdateEngineer",
+                    data: { model: data },
+                    //dataType: "json",
+                    success: function (data) {
+                        console.log(data)
+
+                    },
+                    error: function (xhr, status, error) {
+                        //console.log(status);
+                        //showFeedback("error", xhr.responseText, "System Information",
+                        //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+                });
+            }
+        }
+
+        function editPersonal() {
+            var chk = "update";
+            var th1 = "N", en1 = "N", th2 = "N", en2 = "N", th3 = "N", en3 = "N", th4 = "N", en4 = "N";
+            if ($("#chkth1").is(":checked")) { th1 = "Y"; }
+            if ($("#chken1").is(":checked")) { en1 = "Y"; }
+            if ($("#chkth2").is(":checked")) { th2 = "Y"; }
+            if ($("#chken2").is(":checked")) { en2 = "Y"; }
+            if ($("#chkth3").is(":checked")) { th3 = "Y"; }
+            if ($("#chken3").is(":checked")) { en3 = "Y"; }
+            if ($("#chkth4").is(":checked")) { th4 = "Y"; }
+            if ($("#chken4").is(":checked")) { en4 = "Y"; }
+            if (chk === 'insert') {
+                var data = {
+                    "PersonalId": " ",
+                    "CitizenId": $("#txtCitizenIDp").val(),
+                    "TitleName": document.getElementById("ddlTitlep").value,
+                    "FullNameEn": $("#txtNameTp").val(),
+                    "FullNameTh": $("#txtNameEp").val(),
+                    "BirthDate": $("#txtBirthDatep").val(),
+                    "Gender": " ",
+                    "Race": document.getElementById("ddlRacep").value,
+                    "Nationality": document.getElementById("ddlNationalityp").value,
+                    "Religion": document.getElementById("ddlReligionp").value,
+                    "PassportAttachFile": "",
+                    "IdentityBy": $("#txtIdentityByp").val(),
+                    "AddressId": " ",
+                    "IdentityCardAddress": $("#txtIdentityaddressp").val(),
+                    "ContactPhone1": $("#txtPhone1p").val(),
+                    "ContactPhone2": $("#txtPhone2p").val(),
+                    "ContactEmail": $("#txtContractMailp").val(),
+                    "WorkPermitNo": $("#txtWorkPermitp").val(),
+                    "WorkPermitAttachFile": " ",
+                    "ProfileImgAttachFile": " ",
+                    "Education": $("#txtEducationp").val(),
+                    "ThListening": th1,
+                    "ThSpeaking": th2,
+                    "ThReading": th3,
+                    "ThWriting": th4,
+                    "EnListening": en1,
+                    "EnSpeaking": en2,
+                    "EnReading": en3,
+                    "EnWriting": en4,
+                    "CertificateType": " ",//document.getElementById("ddlTitlep").value,
+                    "CertificateNo": $("#txtCertifcateNop").val(),
+                    "CertificateExpireDate": $("#txtexpirep").val(),
+                    "CertificateAttachFile": "",
+                    "BankCode": $("#txtBankCodep").val(),
+                    "BankName": document.getElementById("ddlBanknamep").value,
+                    "AccountNumber": $("#txtAccountNop").val(),
+                    "AccountName": $("#txtAccountNamep").val(),
+                    "Status": " ",
+                    "CreateDate": "",
+                    "CreateBy": "",
+                    "UpdateBy": "",
+                    "UpdateDate": "",
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Profile/AddPersonal",
+                    data: { model: data },
+                    //dataType: "json",
+                    success: function (data) {
+                        console.log(data)
+
+                    },
+                    error: function (xhr, status, error) {
+                        //console.log(status);
+                        //showFeedback("error", xhr.responseText, "System Information",
+                        //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+                });
+            }
+            else {
+                var data = {
+                    "PersonalId": document.getElementById("txtPersonalID").value,
+                    "CitizenId": $("#txtCitizenIDp").val(),
+                    "TitleName": document.getElementById("ddlTitlep").value,
+                    "FullNameEn": $("#txtNameTp").val(),
+                    "FullNameTh": $("#txtNameEp").val(),
+                    "BirthDate": $("#txtBirthDatep").val(),
+                    "Gender": " ",
+                    "Race": document.getElementById("ddlRacep").value,
+                    "Nationality": document.getElementById("ddlNationalityp").value,
+                    "Religion": document.getElementById("ddlReligionp").value,
+                    "PassportAttachFile": "",
+                    "IdentityBy": $("#txtIdentityByp").val(),
+                    "AddressId": " ",
+                    "IdentityCardAddress": $("#txtIdentityaddressp").val(),
+                    "ContactPhone1": $("#txtPhone1p").val(),
+                    "ContactPhone2": $("#txtPhone2p").val(),
+                    "ContactEmail": $("#txtContractMailp").val(),
+                    "WorkPermitNo": $("#txtWorkPermitp").val(),
+                    "WorkPermitAttachFile": " ",
+                    "ProfileImgAttachFile": " ",
+                    "Education": $("#txtEducationp").val(),
+                    "ThListening": th1,
+                    "ThSpeaking": th2,
+                    "ThReading": th3,
+                    "ThWriting": th4,
+                    "EnListening": en1,
+                    "EnSpeaking": en2,
+                    "EnReading": en3,
+                    "EnWriting": en4,
+                    "CertificateType": " ",//document.getElementById("ddlTitlep").value,
+                    "CertificateNo": $("#txtCertifcateNop").val(),
+                    "CertificateExpireDate": $("#txtexpirep").val(),
+                    "CertificateAttachFile": "",
+                    "BankCode": $("#txtBankCodep").val(),
+                    "BankName": document.getElementById("ddlBanknamep").value,
+                    "AccountNumber": $("#txtAccountNop").val(),
+                    "AccountName": $("#txtAccountNamep").val(),
+                    "Status": " ",
+                    "CreateDate": "",
+                    "CreateBy": "",
+                    "UpdateBy": "",
+                    "UpdateDate": "",
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Profile/UpdatePersonal",
+                    data: { model: data },
+                    //dataType: "json",
+                    success: function (data) {
+                        console.log(data)
+
+                    },
+                    error: function (xhr, status, error) {
+                        //console.log(status);
+                        //showFeedback("error", xhr.responseText, "System Information",
+                        //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+                });
+            }
+        }
+
+        function BindDDLTitle() {
+            $.ajax({
+                type: "POST",
+                url: "/Profile/DDLTitle",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    if (data != null) {
+
+                        $('#ddlTitlep').empty();
+
+                        $('#ddlTitlep').append($('<option></option>').val(0).text('Select Title'));
+
+                        $.each(data.response, function () {
+                            $('#ddlTitlep').append($('<option></option>').val(this.TitleId).text(this.TitleNameTh));
+                        });
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    //Loading(0);
+                    //clearForEdit();
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function BindDDLverhicleBrand() {
+
+            $.ajax({
+                type: "POST",
+                url: "/Profile/DDLverhicleBrand",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    if (data != null) {
+                        $('#ddlVehicleBrand').empty();
+                        $('#ddlVehicleBrand').append($('<option></option>').val(0).text('Select'));
+                        $.each(data.response, function () {
+                            $('#ddlVehicleBrand').append($('<option></option>').val(this.VerhicleBrandId).text(this.VerhicleBrandName));
+                        });
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function BindDDLverhicleSerise() {
+
+            $.ajax({
+                type: "POST",
+                url: "/Profile/DDLverhicleSerise",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    if (data != null) {
+                        $('#ddlVehicleSerie').empty();
+                        $('#ddlVehicleSerie').append($('<option></option>').val(0).text('Select'));
+                        $.each(data.response, function () {
+                            $('#ddlVehicleSerie').append($('<option></option>').val(this.VerhicleSeriseId).text(this.VerhicleSeriseName));
+                        });
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function BindDDLverhicleType() {
+
+            $.ajax({
+                type: "POST",
+                url: "/Profile/DDLverhicleType",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    if (data != null) {
+                        $('#ddlVehicleType').empty();
+                        $('#ddlVehicleType').append($('<option></option>').val(0).text('Select'));
+                        $.each(data.response, function () {
+                            $('#ddlVehicleType').append($('<option></option>').val(this.VerhicleTypeId).text(this.VerhiclTypeName));
+                        });
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function BindDDLbank() {
+            $.ajax({
+                type: "POST",
+                url: "/Profile/DDLbank_profile_bank",
+                //data: { province_id: province },
+                dataType: "json",
+                success: function (data) {
+                    if (data != null) {
+                        $('#ddlBankName').empty();
+                        $('#ddlBanknamep').empty();
+                        $('#ddlBankName').append($('<option></option>').val(0).text('Select Bank'));
+                        $('#ddlBanknamep').append($('<option></option>').val(0).text('Select Bank'));
+                        $.each(data.response, function () {
+                            $('#ddlBankName').append($("<option></option>").val(this.BankId).text(this.BankName));
+                            $('#ddlBanknamep').append($("<option></option>").val(this.BankId).text(this.BankName));
+                        });
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    //Loading(0);
+                    //clearForEdit();
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function BindDDLlocation() {
+            $.ajax({
+                type: "POST",
+                url: "/Profile/GetLocation",
+                data: { LocationId: '0' },
+                dataType: "json",
+                success: function (data) {
+                    if (data != null) {
+                        $('#ddlLocation').empty();
+                        $('#ddlLocation').append($('<option></option>').val(0).text('Select Location'));
+                        $.each(data.response, function () {
+                            $('#ddlLocation').append($("<option></option>").val(this.LocationId).text(this.LocationName));
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    //Loading(0);
+                    //clearForEdit();
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function BindDDLTeam() {
+            $.ajax({
+                type: "POST",
+                url: "/Profile/GetTeam",
+                data: { TeamId: '0' },
+                dataType: "json",
+                success: function (data) {
+                    if (data != null) {
+                        $('#ddlLocation').empty();
+                        $('#ddlLocation').append($('<option></option>').val(0).text('Select Location'));
+                        $.each(data.response, function () {
+                            $('#ddlLocation').append($("<option></option>").val(this.LocationId).text(this.LocationName));
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    //Loading(0);
+                    //clearForEdit();
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function BindDDLrace() {
+
+            $.ajax({
+                type: "POST",
+                url: "/Profile/DDLrace",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    if (data != null) {
+                        $('#ddlRacep').empty();
+                        $('#ddlRacep').append($('<option></option>').val(0).text('Select'));
+                        $.each(data.response, function () {
+                            $('#ddlRacep').append($('<option></option>').val(this.RaceId).text(this.RaceNameTh));
+                        });
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function BindDDLnationality() {
+
+            $.ajax({
+                type: "POST",
+                url: "/Profile/DDLnationality",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    if (data != null) {
+                        $('#ddlNationalityp').empty();
+                        $('#ddlNationalityp').append($('<option></option>').val(0).text('Select'));
+                        $.each(data.response, function () {
+                            $('#ddlNationalityp').append($('<option></option>').val(this.NationalityId).text(this.NationalityTh));
+                        });
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+
+        function BindDDLreligion() {
+
+            $.ajax({
+                type: "POST",
+                url: "/Profile/DDLreligion",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    if (data != null) {
+                        $('#ddlReligionp').empty();
+                        $('#ddlReligionp').append($('<option></option>').val(0).text('Select'));
+                        $.each(data.response, function () {
+                            $('#ddlReligionp').append($('<option></option>').val(this.ReligionId).text(this.ReligionNameTh));
+                        });
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log(status);
+                    showFeedback("error", xhr.responseText, "System Information",
+                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                }
+            });
+        }
+    </script>
+
+}
