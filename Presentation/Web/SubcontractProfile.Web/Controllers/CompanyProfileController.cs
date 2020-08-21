@@ -466,17 +466,49 @@ namespace SubcontractProfile.Web.Controllers
                         {
                             if (Lang == "TH")
                             {
-                                f.address_type_name=L_addresstype.Where(x=>x.AddressTypeId==f.AddressTypeId).Select(x=>x.AddressTypeNameTh).FirstOrDefault().ToString();
-                                f.sub_district_name = L_subdistirct.Where(x => x.SubDistrictId == f.SubDistrictId).Select(x => x.SubDistrictNameTh).FirstOrDefault().ToString();
-                                f.district_name = L_distirct.Where(e => e.DistrictId == f.DistrictId).Select(x => x.DistrictNameTh).FirstOrDefault().ToString();
-                                f.province_name = L_province.Where(x => x.ProvinceId == f.ProvinceId).Select(x => x.ProvinceNameTh).FirstOrDefault().ToString();
+                                if(f.AddressTypeId != null)
+                                {
+                                    f.address_type_name = L_addresstype.Where(x => x.AddressTypeId == f.AddressTypeId).Select(x => x.AddressTypeNameTh).FirstOrDefault().ToString();
+
+                                }
+                                if(f.SubDistrictId !=null)
+                                {
+                                    f.sub_district_name = L_subdistirct.Where(x => x.SubDistrictId == f.SubDistrictId).Select(x => x.SubDistrictNameTh).FirstOrDefault().ToString();
+
+                                }
+                                if(f.DistrictId !=null)
+                                {
+                                    f.district_name = L_distirct.Where(e => e.DistrictId == f.DistrictId).Select(x => x.DistrictNameTh).FirstOrDefault().ToString();
+
+                                }
+                                if(f.ProvinceId !=null)
+                                {
+                                    f.province_name = L_province.Where(x => x.ProvinceId == f.ProvinceId).Select(x => x.ProvinceNameTh).FirstOrDefault().ToString();
+
+                                }
                             }
                             else
                             {
-                                f.address_type_name = L_addresstype.Where(x => x.AddressTypeId == f.AddressTypeId).Select(x => x.AddressTypeNameEn).FirstOrDefault().ToString();
-                                f.sub_district_name = L_subdistirct.Where(x => x.SubDistrictId == f.SubDistrictId).Select(x => x.SubDistrictNameEn).FirstOrDefault().ToString();
-                                f.district_name = L_distirct.Where(e => e.DistrictId == f.DistrictId).Select(x => x.DistrictNameEn).FirstOrDefault().ToString();
-                                f.province_name = L_province.Where(x => x.ProvinceId == f.ProvinceId).Select(x => x.ProvinceNameEn).FirstOrDefault().ToString();
+                                if(f.AddressTypeId != null)
+                                {
+                                    f.address_type_name = L_addresstype.Where(x => x.AddressTypeId == f.AddressTypeId && f.AddressTypeId != null).Select(x => x.AddressTypeNameEn).FirstOrDefault().ToString();
+
+                                }
+                                if(f.SubDistrictId != null)
+                                {
+                                    f.sub_district_name = L_subdistirct.Where(x => x.SubDistrictId == f.SubDistrictId).Select(x => x.SubDistrictNameEn).FirstOrDefault().ToString();
+
+                                }
+                                if(f.DistrictId != null)
+                                {
+                                    f.district_name = L_distirct.Where(e => e.DistrictId == f.DistrictId).Select(x => x.DistrictNameEn).FirstOrDefault().ToString();
+
+                                }
+                                if(f.ProvinceId != null)
+                                {
+                                    f.province_name = L_province.Where(x => x.ProvinceId == f.ProvinceId).Select(x => x.ProvinceNameEn).FirstOrDefault().ToString();
+
+                                }
                             }
 
                         }
