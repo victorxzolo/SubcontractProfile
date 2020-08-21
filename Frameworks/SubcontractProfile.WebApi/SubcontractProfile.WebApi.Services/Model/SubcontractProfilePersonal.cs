@@ -27,6 +27,7 @@ namespace SubcontractProfile.WebApi.Services.Model
     public class SubcontractProfilePersonal : System.ICloneable
     {
 
+        public System.Guid engineerId { get; set; }
         public System.Guid PersonalId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]

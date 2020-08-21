@@ -29,6 +29,7 @@ namespace SubcontractProfile.WebApi.Services.Model
 
         public System.Guid EngineerId { get; set; }
 
+
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string StaffCode { get; set; }
 
@@ -146,6 +147,8 @@ namespace SubcontractProfile.WebApi.Services.Model
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string TeamNameTh { get; set; }
+
+        public System.Guid PersonalId { get; set; }
 
         public object Clone()
         {

@@ -228,16 +228,13 @@ namespace SubcontractProfile.WebApi.Services.Services
 
         }
 
-        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTraining(string company_id, string location_code,
-            string team_id, string staff_name_th, string position_id, string status,
-            string date_from, string date_to)
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTraining(Guid company_id, Guid location_id,
+            Guid team_id, string status, string date_from, string date_to)
         {
             var p = new DynamicParameters();
             p.Add("@company_id", company_id);
-            p.Add("@location_code", location_code);
+            p.Add("@location_id", location_id);
             p.Add("@team_id", team_id);
-            p.Add("@staff_name_th", staff_name_th);
-            p.Add("@position_id", position_id);
             p.Add("@status", status);
             p.Add("@date_from", date_from);
             p.Add("@date_to", date_to);

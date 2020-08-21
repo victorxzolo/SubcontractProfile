@@ -185,7 +185,52 @@ namespace SubcontractProfile.Web.Controllers
             return Json(result);
         }
 
-        public ActionResult OnSave(SubcontractProfileEngineerModel model)
+        public JsonResult GetDataPersonalById(Guid personalId)
+        {
+            var result = new SubcontractProfilePersonalModel();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Personal/GetByPersonalId", personalId);
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<SubcontractProfilePersonalModel>(resultAsysc);
+
+            }
+
+            return Json(result);
+        }
+
+        public JsonResult GetTitleName()
+        {
+            var  result = new List<SubcontractDropdownModel>(); 
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "title_name");
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject <List<SubcontractDropdownModel>>(resultAsysc);
+
+            }
+
+            return Json(result);
+        }
+
+
+        public ActionResult OnSave(SubcontractProfileEngineerModel model, SubcontractProfilePersonalModel personal)
         {
             ResponseModel result = new ResponseModel();
             HttpClient clientLocation = new HttpClient();
@@ -200,7 +245,10 @@ namespace SubcontractProfile.Web.Controllers
                     model.CompanyId = userProfile.companyid;
                     model.CreateBy = userProfile.Username;
                     model.UpdateBy = userProfile.Username;
-                  
+                    model.StaffCode = DateTime.Now.ToString("yyyyMMddhhmmss");
+
+                    model.EngineerId = Guid.NewGuid();
+
                     var uriLocation = new Uri(Path.Combine(strpathAPI, "Engineer", "Insert"));
 
                     clientLocation.DefaultRequestHeaders.Accept.Add(
@@ -209,9 +257,26 @@ namespace SubcontractProfile.Web.Controllers
                     HttpResponseMessage responseCompany = clientLocation.PostAsync(uriLocation, httpContent).Result;
                     if (responseCompany.IsSuccessStatusCode)
                     {
-                        result.Status = true;
-                        result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
-                        result.StatusError = "0";
+                        personal.engineerId = model.EngineerId;
+                        //personal
+                        var uriLocationPersonal = new Uri(Path.Combine(strpathAPI, "Personal", "Insert"));
+
+                        clientLocation.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+                        var httpContentPersonal = new StringContent(JsonConvert.SerializeObject(personal), Encoding.UTF8, "application/json");
+                        HttpResponseMessage response = clientLocation.PostAsync(uriLocationPersonal, httpContentPersonal).Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            result.Status = true;
+                            result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                            result.StatusError = "0";
+                        }
+                        else
+                        {
+                            result.Status = false;
+                            result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                            result.StatusError = "-1";
+                        }
                     }
                     else
                     {
@@ -228,6 +293,8 @@ namespace SubcontractProfile.Web.Controllers
 
                     var uriLocation = new Uri(Path.Combine(strpathAPI, "Engineer", "Update"));
 
+                   
+
                     clientLocation.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
                     var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
@@ -235,9 +302,29 @@ namespace SubcontractProfile.Web.Controllers
 
                     if (responseResult.IsSuccessStatusCode)
                     {
-                        result.Status = true;
-                        result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
-                        result.StatusError = "0";
+                        var uriPersonal = new Uri(Path.Combine(strpathAPI, "Personal", "Update"));
+
+                        personal.UpdateBy = userProfile.Username;
+
+                        HttpClient clientPersonal = new HttpClient();
+
+                        clientPersonal.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+                        var httpContentPersonal = new StringContent(JsonConvert.SerializeObject(personal), Encoding.UTF8, "application/json");
+                        HttpResponseMessage responseResultPersonal = clientPersonal.PutAsync(uriPersonal, httpContentPersonal).Result;
+                        if (responseResultPersonal.IsSuccessStatusCode)
+                        {
+                            result.Status = true;
+                            result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                            result.StatusError = "0";
+                        }
+                        else
+                        {
+                            result.Status = false;
+                            result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                            result.StatusError = "-1";
+                        }
+
                     }
                     else
                     {
@@ -253,6 +340,39 @@ namespace SubcontractProfile.Web.Controllers
                 result.Message = "ไม่สามารถบันทึกข้อมูลได้ กรุณาติดต่อ Administrator.";
                 result.Status = false;
                 result.StatusError = "0";
+            }
+            return Json(result);
+        }
+
+        public JsonResult OnDelete(string engineerId)
+        {
+            var result = new ResponseModel();
+            HttpClient clientLocation = new HttpClient();
+            try
+            {
+                string uriString = string.Format("{0}/{1}", strpathAPI + "Engineer/Delete", engineerId);
+       
+                clientLocation.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage responseResult = clientLocation.DeleteAsync(uriString).Result;
+                if (responseResult.IsSuccessStatusCode)
+                {
+                    result.Message = "ลบข้อมูลเรียบร้อย";
+                    result.Status = true;
+                    result.StatusError = "0";
+                }
+                else
+                {
+                    result.Status = false;
+                    result.Message = "ลบข้อมูลไม่สำเร็จ กรุณาติดต่อ Administrator.";
+                    result.StatusError = "-1";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result.Message = "ลบข้อมูลไม่สำเร็จ กรุณาติดต่อ Administrator.";
+                result.StatusError = "-1";
             }
             return Json(result);
         }

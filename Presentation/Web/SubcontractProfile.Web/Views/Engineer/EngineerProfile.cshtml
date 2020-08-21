@@ -92,9 +92,9 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <form id="frNew" class="needs-validation" novalidate>
+                    <div class="modal-body">
 
-                <div class="modal-body">
-                    <form id="frNew" class="needs-validation" novalidate>
                         <ul class="nav nav-tabs  mb-3 mt-3" id="simpletab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="engineer-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Engineer</a>
@@ -144,19 +144,19 @@
                                         </div>
                                     </div>
                                     <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label><span style="color:red">*</span> Staff Code:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="StaffCode" style="width:300px" class="form-control" required>
-                                            <div class="invalid-feedback">
-                                                กรุณาเลือกข้อมูล Staff Code.
-                                            </div>
-                                        </div>
+                                    @*<div class="row">
+                        <div class="col-sm-2">
+                            <label><span style="color:red">*</span> Staff Code:</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="StaffCode" style="width:300px" class="form-control" required>
+                            <div class="invalid-feedback">
+                                กรุณาเลือกข้อมูล Staff Code.
+                            </div>
+                        </div>
 
-                                    </div>
-                                    <br />
+                    </div>
+                    <br />*@
                                     <div class="row">
                                         <div class="col-sm-2">
                                             <label>Staff Name:</label>
@@ -386,6 +386,329 @@
 
                             </div>
                             <div class="tab-pane fade" id="personal" role="tabpanel" aria-labelledby="profile-tab">
+                                <div id="Personal">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Citizen ID :</label>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="CitizenID2" style="width:300px" class="form-control">
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Title Name :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="Title" name="Title" style="width:300px" class="form-control">
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Full Name(TH) :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="FullNameT" style="width:300px" class="form-control">
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Full Name(EN) :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="FullNameE" style="width:300px" class="form-control">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Birth date :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="row col-sm-12">
+                                                <input type="text" id="BirthDate" style="width:280px" class="form-control">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Gender:</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="radio" id="rdoMale" name="Gender" value="M">
+                                            <label for="Male">ชาย</label>&nbsp;&nbsp;
+                                            <input type="radio" id="rdoFeMale" name="Gender" value="F">
+                                            <label for="FeMale">หญิง</label>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Race :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="Race" class="form-control" style="width:300px">
+
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Nationality :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="Nationality" class="form-control" style="width:300px">
+                                            @*<select id="Nationality" name="Nationality" style="width:300px" class="form-control">
+                            </select>*@
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Religion :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="Religion" class="form-control" style="width:300px">
+                                            @*<select id="Religion" name="Religion" style="width:300px" class="form-control">
+                            </select>*@
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Identity by :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="Identity" style="width:300px" class="form-control">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Contract email :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="ContractEmail2" style="width:300px" class="form-control">
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Identity card address :</label>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <textarea id="IdentiAddress" rows="2" style="width:300px;"></textarea>
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <h5>Contract Infomation</h5>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Contract phone1 :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="PersonalContractPhone1" style="width:300px" class="form-control">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Contract phone2 :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="PersonalContractPhone2" style="width:300px" class="form-control">
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Contract email :</label>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="ContractMail" style="width:300px" class="form-control">
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <h5>Work experience infomation</h5>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Work permit no :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="WorkPermit" style="width:300px" class="form-control">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Work permit attach file:</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="custom-file mb-4">
+
+                                                <input type="file" class="custom-file-input" id="fileWorkPermitAttach" aria-describedby="uploadlHelp1" style="width:220px">
+                                                <label class="custom-file-label" for="fileWorkPermitAttach">เลือกไฟล์</label>
+                                                <small id="uploadlHelpwork" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+
+                                            </div>
+                                            @*<div class="row col-sm-12">
+
+
+                            </div>*@
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Proflie img attach file :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="custom-file mb-4">
+
+                                                <input type="file" class="custom-file-input" id="fileProfileAttach" aria-describedby="uploadlHelp1" style="width:220px">
+                                                <label class="custom-file-label" for="fileProfileAttach">เลือกไฟล์</label>
+                                                <small id="uploadlHelpprofile" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+
+                                            </div>
+
+                                        </div>
+                                        @*<div class="col-sm-2">
+                            <label>Course skill :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="CourseSkill" style="width:300px" class="form-control">
+                        </div>*@
+                                    </div>
+                                    <br />
+
+                                    <h5>Education infomation</h5>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Education :</label>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <textarea id="Education" rows="2" style="width:880px;"></textarea>
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <h5>Languqges infomation</h5>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Languqges :</label>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input id="chkListenTH" type="checkbox" value="Y" />
+                                            <label>Listening Thai</label><br />
+                                            <input id="chkSpeakingTH" type="checkbox" value="Y" />
+                                            <label>Speaking Thai</label><br />
+                                            <input id="chkReadingTH" type="checkbox" value="Y" />
+                                            <label>Reading Thai</label><br />
+                                            <input id="chkWritingTH" type="checkbox" value="Y" />
+                                            <label>Writing Thai</label><br />
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input id="chkListenEN" type="checkbox" value="Y" />
+                                            <label>Listening Eng</label><br />
+                                            <input id="chkSpeakingEN" type="checkbox" value="Y" />
+                                            <label>Speaking Eng</label><br />
+                                            <input id="chkReadingEN" type="checkbox" value="Y" />
+                                            <label>Reading Eng</label><br />
+                                            <input id="chkWritingEN" type="checkbox" value="Y" />
+                                            <label>Writing Eng</label><br />
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <h5>Certificate infomation</h5>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Certificate type :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="CertificateType" style="width:300px" class="form-control">
+
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Certificate no :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="CertificateNo" style="width:300px" class="form-control">
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Certificate expire date :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="row col-sm-12">
+                                                <input type="text" id="dateCertificateDAte" style="width:280px" class="form-control">
+                                                @*  <input id="dateCertificateDate" style="width:220px" type="text" placeholder="Select Date.." data-provide="datepicker" >*@
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Certificate attach file :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="custom-file mb-4">
+
+                                                <input type="file" class="custom-file-input" id="fileCertificateAttach" aria-describedby="uploadlHelp1" style="width:220px">
+                                                <label class="custom-file-label" for="fileCertificateAttach">เลือกไฟล์</label>
+                                                <small id="uploadlHelpCertificateAttach" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <h5>Bank infomation</h5>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Bank Name :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="BankName2" name="BankName2" style="width:300px" class="form-control">
+                                            </select>
+                                        </div>
+                                        @*<div class="col-sm-2">
+                            <label>Bank Code :</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="BankCode2" style="width:300px" class="form-control">
+                        </div>*@
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Account no :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="AccNo2" style="width:300px" class="form-control">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Account Name :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="AccName2" style="width:300px" class="form-control">
+                                        </div>
+                                    </div>
+                                    <br />
+                                    @*<div class="row">
+                        <div class="col-sm-2">
+                            <label>Bank branch name:</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="BranchName" style="width:300px" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Bank Branch Code:</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="BranchCode" style="width:300px" class="form-control">
+                        </div>
+
+                    </div>
+
+                    <br />*@
+                                </div>
 
                             </div>
                         </div>
@@ -393,18 +716,21 @@
                         <input type="hidden" id="hdMode">
                         <input type="hidden" id="hdEngineerId">
                         <input type="hidden" id="hdCompanyId">
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
-                                ปิด
-                            </button>
-                            <button id="btnSave" type="submit" class="btn btn-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                                บันทึก
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                        <input type="hidden" id="hdPersonalId">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                            ปิด
+                        </button>
+                        <button id="btnSave" type="submit" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                            บันทึก
+                        </button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
@@ -419,6 +745,22 @@
             GetDropDownLocationSearch();
             GetDropDownLocationEdit();
             GetDropDownBank();
+            GetDropDownBankPersonal();
+            GetDropDownTitle();
+
+
+            //document.getElementById("dateCertificateDate").flatpickr({
+            //    enableTime: false,
+            //    dateFormat: "d/m/Y",
+            //    //defaultDate: "today",
+            //    defaultDate: "07/10/2020"
+            //});
+
+
+            //$('.datepicker').datepicker({
+            //    format: 'dd/mm/yyyy'
+            //});
+
 
             $('#ddlLocationName').change(function () {
                 getTeamByLocationId($(this).val());
@@ -539,7 +881,7 @@
 
 
         function openModal(mode, engineerId) {
-        
+
             $("#frNew")[0].reset();
 
             $('#hdMode').val(mode);
@@ -617,15 +959,15 @@
                           getTeamByLocationIdEdit(result.LocationId);
 
                           $("#Location").val(result.LocationId).change();
-                          $("#Team").val(result.TeamId).change();
+
 
                           //$('#Team option').prop('selected', function () {
                           //    return result.TeamId;
-                          //});  
+                          //});
 
                           $('#hdEngineerId').val(result.EngineerId);
-        
-                          $('#StaffCode').val(result.StaffCode);
+
+                         // $('#StaffCode').val(result.StaffCode);
                           $('#StaffName').val(result.StaffName);
                           $('#StaffNameT').val(result.StaffNameTh);
                           $('#StaffNameE').val(result.StaffNameEn);
@@ -643,12 +985,119 @@
                           $('#VehicleLicense').val(result.VehicleLicensePlate);
                           $('#Toolotdr').val(result.ToolOtrd);
                           $('#ToolSplicing').val(result.ToolSplicing);
-                   
+
                           $("#ddlBankName").val(result.BankName).change();
                           $('#AccNo').val(result.AccountNo);
                           $('#AccName').val(result.AccountName);
-        
+
                           $('#hdCompanyId').val(result.CompanyId);
+
+                          getDataPersonalById(result.PersonalId);
+
+                          $("#Team").val(result.TeamId).change();
+
+                    }
+                  },
+                  error: function (result) {
+
+                  }
+
+            });
+        }
+
+
+        function getDataPersonalById(id) {
+              $.ajax({
+                  url: '@Url.Action("GetDataPersonalById", "Engineer")',
+                  type: 'POST',
+                  data: { 'personalId': id},
+                  dataType: "json",
+                  success: function (result) {
+                   if (result != null) {
+                       //---personal name
+                       $('#hdPersonalId').val(id);
+                       $('#CitizenID2').val(result.CitizenId);
+                       $("#Title").val(result.TitleName).change();
+
+                      // $('#Title').val(result.TitleName);
+                       $('#FullNameT').val(result.FullNameEn);
+                       $('#FullNameE').val(result.FullNameTh);
+                       $('#BirthDate').val(result.BirthDate);
+
+                       //Gender
+                       if (result.Gender == "M") {
+                       //    $('#rdoMale').val(result.Gender);
+                           $("#rdoMale").prop("checked", true);
+                       } else {
+                          // $('#rdoFeMale').val(result.Gender);
+                           $("#rdoFeMale").prop("checked", true);
+                       }
+
+                       $('#Race').val(result.Race);
+                       $('#Nationality').val(result.Nationality);
+                       $('#Religion').val(result.Religion);
+                       $('#Identity').val(result.IdentityBy);
+                       $('#ContractEmail2').val(result.ContactEmail);
+                       $('#IdentiAddress').val(result.IdentityCardAddress);
+                       
+                       $('#PersonalContractPhone1').val(result.ContactPhone1);
+
+                       $('#PersonalContractPhone2').val(result.ContactPhone2);
+                       $('#ContractMail').val(result.ContactEmail);
+                       $('#WorkPermit').val(result.WorkPermitNo);
+                       $('#fileWorkPermitAttach').val(result.WorkPermitAttachFile);
+                       $('#fileProfileAttach').val(result.ProfileImgAttachFile);
+                      // $('#CourseSkill').val(result.CourseSkill);
+                       $('#Education').val(result.Education);
+
+                       if (result.ThListening == "Y") {
+                           $('#chkListenTH').prop('checked', true);
+                       }
+                       if (result.ThSpeaking == "Y") {
+                           $('#chkSpeakingTH').prop('checked', true);
+                       }
+
+                       if (result.ThReading == "Y") {
+                           $('#chkReadingTH').prop('checked', true);
+                       }
+
+                       if (result.ThWriting == "Y") {
+                           $('#chkWritingTH').prop('checked', true);
+                       }
+                       if (result.EnListening == "Y") {
+                           $('#chkListenEN').prop('checked', true);
+                       }
+                       if (result.EnSpeaking == "Y") {
+                           $('#chkSpeakingEN').prop('checked', true);
+                       }
+                       if (result.EnReading == "Y") {
+                           $('#chkReadingEN').prop('checked', true);
+                       }
+                       if (result.EnWriting == "Y") {
+                           $('#chkWritingEN').prop('checked', true);
+                       }
+
+ 
+                       //$('#chkListenTH').val(result.ThListening);
+                       //$('#chkSpeakingTH').val(result.ThSpeaking);
+                       //$('#chkReadingTH').val(result.ThReading);
+                       //$('#chkWritingTH').val(result.ThWriting);
+
+                       //$('#chkListenEN').val(result.EnListening);
+                       //$('#chkSpeakingEN').val(result.EnSpeaking);
+                       //$('#chkReadingEN').val(result.EnReading);
+                       //$('#chkWritingEN').val(result.EnWriting);
+
+                       $('#CertificateType').val(result.CertificateType);
+                       $('#CertificateNo').val(result.CertificateNo);
+                       $('#dateCertificateDate').val(result.CertificateExpireDate);
+                       $('#fileCertificateAttach').val(result.CertificateAttachFile);
+
+                       $("#BankName2").val(result.BankName).change();
+
+                       $('#AccNo2').val(result.AccountNumber);
+                       $('#AccName2').val(result.AccountName);
+
 
                     }
                   },
@@ -659,12 +1108,15 @@
             });
     }
 
-        function onSave() {;
+        function onSave()
+        {
+         
+            var modelPersonal = new Object();
             var model = new Object();
             model.EngineerId = $('#hdEngineerId').val();
             model.LocationId = $("select[id$=Location]").val();
             model.TeamId = $("select[id$=Team]").val();
-            model.StaffCode = $('#StaffCode').val();
+           // model.StaffCode = $('#StaffCode').val();
             model.StaffName = $('#StaffName').val();
             model.StaffNameTh = $('#StaffNameT').val();
             model.StaffNameEn = $('#StaffNameE').val();
@@ -683,16 +1135,125 @@
             model.ToolOtrd = $('#Toolotdr').val();
             model.ToolSplicing = $('#ToolSplicing').val();
             model.BankName = $('select[id$=ddlBankName]').val();
-          //  team.BankCode = $('#BankCode').val();
             model.AccountNo = $('#AccNo').val();
             model.AccountName = $('#AccName').val();
- 
+
             model.CompanyId = $('#hdCompanyId').val();
-       
+
+            //---personal name
+           
+            modelPersonal.PersonalId = $('#hdPersonalId').val();
+            modelPersonal.EngineerId = $('#hdEngineerId').val();
+            modelPersonal.CitizenId = $('#CitizenID2').val();
+            modelPersonal.TitleName = $('#Title').val();
+            modelPersonal.FullNameEn = $('#FullNameT').val();
+            modelPersonal.FullNameTh = $('#FullNameE').val();
+            modelPersonal.BirthDate = $('#BirthDate').val();
+
+            //Gender
+            if ($('#rdoMale').val() == "M") {
+                modelPersonal.Gender = "M";
+            } else {
+                modelPersonal.Gender = "F";
+            }
+
+            modelPersonal.Race = $('#Race').val();
+            modelPersonal.Nationality = $('#Nationality').val();
+            modelPersonal.Religion = $('#Religion').val();
+            modelPersonal.IdentityBy = $('#Identity').val();
+            modelPersonal.ContactEmail = $('#ContractEmail2').val();
+            modelPersonal.IdentityCardAddress = $('#IdentiAddress').val();
+
+            modelPersonal.ContactPhone1 = $('#PersonalContractPhone1').val();
+            modelPersonal.ContactPhone2 = $('#PersonalContractPhone2').val();
+            modelPersonal.ContactEmail = $('#ContractMail').val();
+            modelPersonal.WorkPermitNo = $('#WorkPermit').val();
+            modelPersonal.WorkPermitAttachFile = $('#fileWorkPermitAttach').val();
+            modelPersonal.ProfileImgAttachFile = $('#fileProfileAttach').val();
+         //   modelPersonal.CourseSkill = $('#CourseSkill').val();
+            modelPersonal.Education = $('#Education').val();
+
+
+            if ($("#chkListenTH").prop('checked') == true) {
+                modelPersonal.ThListening = "Y"
+            }
+            else {
+                modelPersonal.ThListening = "N"
+            }
+
+            if ($("#chkSpeakingTH").prop('checked') == true) {
+                modelPersonal.ThSpeaking = "Y"
+            }
+            else {
+                modelPersonal.ThSpeaking = "N"
+            }
+
+            if ($("#chkReadingTH").prop('checked') == true) {
+                modelPersonal.ThReading = "Y"
+            }
+            else {
+                modelPersonal.ThReading = "N"
+            }
+
+            if ($("#chkWritingTH").prop('checked') == true) {
+                modelPersonal.ThWriting = "Y"
+            }
+            else {
+                modelPersonal.ThWriting = "N"
+            }
+
+            if ($("#chkListenEN").prop('checked') == true) {
+                modelPersonal.EnListening = "Y"
+            }
+            else {
+                modelPersonal.EnListening = "N"
+            }
+
+            if ($("#chkSpeakingEN").prop('checked') == true) {
+                modelPersonal.EnSpeaking = "Y"
+            }
+            else {
+                modelPersonal.EnSpeaking = "N"
+            }
+
+            if ($("#chkReadingEN").prop('checked') == true) {
+                modelPersonal.EnReading = "Y"
+            }
+            else {
+                modelPersonal.EnReading = "N"
+            }
+
+            if ($("#chkWritingEN").prop('checked') == true) {
+                modelPersonal.EnWriting = "Y"
+            }
+            else {
+                modelPersonal.EnWriting = "N"
+            }
+
+            //modelPersonal.ThListening = $('#chkListenTH').val();
+            //modelPersonal.ThSpeaking = $('#chkSpeakingTH').val();
+            //modelPersonal.ThReading = $('#chkReadingTH').val();
+            //modelPersonal.ThWriting = $('#chkWritingTH').val();
+            //modelPersonal.EnListening = $('#chkListenEN').val();
+            //modelPersonal.EnSpeaking = $('#chkSpeakingEN').val();
+            //modelPersonal.EnReading = $('#chkReadingEN').val();
+            //modelPersonal.EnWriting = $('#chkWritingEN').val();
+
+            modelPersonal.CertificateType = $('#CertificateType').val();
+            modelPersonal.CertificateNo = $('#CertificateNo').val();
+            modelPersonal.CertificateExpireDate = $('#dateCertificateDate').val();
+            modelPersonal.CertificateAttachFile = $('#fileCertificateAttach').val();
+            modelPersonal.BankName = $('#BankName2').val();
+            modelPersonal.AccountNumber = $('#AccNo2').val();
+            modelPersonal.AccountName = $('#AccName2').val();
+            //model.BranchName = $('#BranchName').val();
+            //model.BranchCode = $('#BranchCode').val();
+
+
             $.ajax({
                    url: '@Url.Action("OnSave", "Engineer")',
                    type: 'POST',
-                data: { 'model': model },
+                data: { 'model': model, 'personal': modelPersonal },
                    dataType: "json",
                 success: function (result) {
                        if (result.Status == true) {
@@ -720,14 +1281,14 @@
 
         }
 
-         function deleteData(teamId) {
+         function deleteData(Id) {
            bootbox.confirm("คุณต้องการลบข้อมูล?"
             , function (result) {
             if (result == true) {
                  $.ajax({
-                   url: '@Url.Action("OnDelete", "Team")',
+                   url: '@Url.Action("OnDelete", "Engineer")',
                    type: 'POST',
-                     data: { 'teamId': teamId },
+                     data: { 'engineerId': Id },
                    dataType: "json",
                      success: function (result) {
                          if (result.Status == true) {
@@ -798,14 +1359,14 @@ function GetDropDownLocationSearch() {
             success: function (data) {
 
                 $("#Location").empty();
-                $("#Location").append('<option value="-1">--Please All--</option>');
+                $("#Location").append('<option value="">--Please All--</option>');
                 $.each(data, function (id, result) {
                     $("#Location").append('<option value="' + result.LocationId + '">' + result.LocationNameTh +'</option>');
                     });
                 },
                 failure: function () {
                     $("#Location").empty();
-                    $("#Location").append('<option value="-1">--Please All--</option>');
+                    $("#Location").append('<option value="">--Please All--</option>');
                 }
             });
     }
@@ -819,14 +1380,14 @@ function GetDropDownLocationSearch() {
                   dataType: "json",
                   success: function (data) {
                       $("#Team").empty();
-                      $("#Team").append('<option value="-1">--Please All--</option>');
+                      $("#Team").append('<option value="">--Please All--</option>');
                       $.each(data, function (id, result) {
                           $("#Team").append('<option value="' + result.TeamId + '">' + result.TeamNameTh + '</option>');
                       });
                   },
                   failure: function () {
                       $("#Team").empty();
-                      $("#Team").append('<option value="-1">--Please All--</option>');
+                      $("#Team").append('<option value="">--Please All--</option>');
                   }
               });
         }
@@ -851,8 +1412,52 @@ function GetDropDownLocationSearch() {
                     $("#ddlBankName").append('<option value="">--Please All--</option>');
                 }
             });
+        }
+
+
+     function GetDropDownBankPersonal() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetBankName", "Engineer")',
+           // data: {stateid:stateid},
+            dataType: 'json',
+            success: function (data) {
+
+                $("#BankName2").empty();
+                $("#BankName2").append('<option value="">--Please Select--</option>');
+                $.each(data, function (id, result) {
+                    $("#BankName2").append('<option value="' + result.BankName + '">' + result.BankName +'</option>');
+                    });
+                },
+                failure: function () {
+                    $("#BankName2").empty();
+                    $("#BankName2").append('<option value="">--Please All--</option>');
+                }
+            });
     }
 
+
+
+     function GetDropDownTitle() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetTitleName", "Engineer")',
+           // data: {stateid:stateid},
+            dataType: 'json',
+            success: function (data) {
+
+                $("#Title").empty();
+                $("#Title").append('<option value="">--Please Select--</option>');
+                $.each(data, function (id, result) {
+                    $("#Title").append('<option value="' + result.dropdown_text + '">' + result.dropdown_text +'</option>');
+                    });
+                },
+                failure: function () {
+                    $("#Title").empty();
+                    $("#Title").append('<option value="">--Please All--</option>');
+                }
+            });
+    }
 
     </script>
 }

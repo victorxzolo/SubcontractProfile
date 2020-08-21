@@ -57,7 +57,7 @@ namespace SubcontractProfile.WebApi.Services.Services
         public async Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer subcontractProfileEngineer)
         {
             var p = new DynamicParameters();
-
+            p.Add("@engineer_id", subcontractProfileEngineer.EngineerId);
             p.Add("@staff_code", subcontractProfileEngineer.StaffCode);
             p.Add("@foa_code", subcontractProfileEngineer.FoaCode);
             p.Add("@staff_name", subcontractProfileEngineer.StaffName);
