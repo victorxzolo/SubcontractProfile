@@ -124,10 +124,12 @@
                                                 <label>เลขทะเบียนนิติบุคล :</label> <span style="color:red">*</span>
                                             </div>
                                             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                                                <div class="input-group">
+                                                <input id="inputTax_id" type="text" class="form-control inputValidation" placeholder="เลขทะเบียนนิติบุคล"
+                                                       aria-label="Recipient's username" maxlength="13" required style="width:300px" />
+                                                <div class="input-group" style="display:none;">
                                                     <input id="inputTax_id" type="text" class="form-control inputValidation" placeholder="เลขทะเบียนนิติบุคล"
                                                            aria-label="Recipient's username" maxlength="13" required style="width:100px" />
-                                                    <div class="input-group-append">
+                                                    <div class="input-group-append" >
                                                         <button class="btn btn-success" id="btnsearchrevenue" type="button">
                                                             <i class="fa fa-search"></i>
                                                         </button>
@@ -247,10 +249,12 @@
                                                 <label>Location Code :</label>
                                             </div>
                                             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                                                <div class="input-group">
+                                                <input type="text" class="form-control inputValidationdealer"
+                                                       aria-label="Location Code" id="txtlocationcode" maxlength="100" required style="width:300px" />
+                                                <div class="input-group" style="display:none;">
                                                     <input type="text" class="form-control inputValidationdealer"
                                                            aria-label="Location Code" id="txtlocationcode" maxlength="100" required style="width:175px" />
-                                                    <div class="input-group-append">
+                                                    <div class="input-group-append" >
                                                         <button class="btn btn-success" id="btnsearchlocation" type="button">
                                                             <i class="fa fa-search"></i>
                                                         </button>
@@ -271,7 +275,7 @@
 
                                             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                                                 <input type="hidden" id="hddistribution" />
-                                                <input type="text" class="form-control inputValidationdealer" id="txtdistribution" disabled maxlength="250" required style="width:300px" />
+                                                <input type="text" class="form-control inputValidationdealer" id="txtdistribution"  maxlength="250" required style="width:300px" />
                                                 <div class="invalid-feedback">
                                                     Please provide a valid distribution Channel.
                                                 </div>
@@ -294,7 +298,7 @@
                                                 </div>
 
                                                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                                                    <input type="text" class="form-control inputValidationdealer" id="txtlocationname" disabled 
+                                                    <input type="text" class="form-control inputValidationdealer" id="txtlocationname"  
                                                            maxlength="250" required style="width:300px" />
                                                     <div class="invalid-feedback">
                                                         Please provide a valid location Name.
@@ -312,7 +316,7 @@
 
                                                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                                                     <input type="hidden" id="hdchannelsalegroup" />
-                                                    <input type="text" class="form-control" id="txtchannelsalegroup" disabled style="width:300px" />
+                                                    <input type="text" class="form-control" id="txtchannelsalegroup"  style="width:300px" />
                                                 </div>
                                             </div>
 
@@ -329,7 +333,7 @@
                                                 </div>
 
                                                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                                                    <input type="text" class="form-control inputValidationdealer" id="txttax_id_dealer" disabled 
+                                                    <input type="text" class="form-control inputValidationdealer" id="txttax_id_dealer"  
                                                            maxlength="100" required style="width:300px"/>
                                                     <div class="invalid-feedback">
                                                         Please provide a valid juristic id.
@@ -371,7 +375,7 @@
                                                 </div>
                                                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
                                                     <input type="text" class="form-control inputValidationdealer"
-                                                           placeholder="ชื่อนิติบุคคล(ไทย)" id="txtcompany_name_th_dealer" disabled maxlength="100" required 
+                                                           placeholder="ชื่อนิติบุคคล(ไทย)" id="txtcompany_name_th_dealer"  maxlength="100" required 
                                                            style="width:165px"/>
                                                     <div class="invalid-feedback">
                                                         Please provide a valid company name thai.
@@ -406,7 +410,7 @@
 
                                                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                                                     <input type="text" class="form-control inputValidationdealer" id="txtwt_name_dealer" 
-                                                           maxlength="100" disabled required style="width:300px" />
+                                                           maxlength="100"  required style="width:300px" />
                                                     <div class="invalid-feedback">
                                                         Please provide a valid tax name.
                                                     </div>
