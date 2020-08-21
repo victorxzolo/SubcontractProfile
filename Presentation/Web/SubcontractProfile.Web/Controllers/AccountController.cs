@@ -1424,7 +1424,10 @@ namespace SubcontractProfile.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                   
+                    #region Check Username Duplicate
+
+                    #endregion
+
                     Guid companyId = Guid.NewGuid();
                     model.CompanyId = companyId;
                     model.CreateDate = DateTime.Now;
@@ -1467,9 +1470,7 @@ namespace SubcontractProfile.Web.Controllers
                         string encrypted = Util.EncryptText(model.Password);
                         model.Password = encrypted;
 
-                        #region Check Username Duplicate
-
-                        #endregion
+                       
 
                         var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
                     HttpClient clientCompany = new HttpClient();
