@@ -1467,7 +1467,11 @@ namespace SubcontractProfile.Web.Controllers
                         string encrypted = Util.EncryptText(model.Password);
                         model.Password = encrypted;
 
-                    var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
+                        #region Check Username Duplicate
+
+                        #endregion
+
+                        var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
                     HttpClient clientCompany = new HttpClient();
                     clientCompany.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));

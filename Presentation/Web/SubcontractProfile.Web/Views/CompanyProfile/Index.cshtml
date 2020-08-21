@@ -105,18 +105,18 @@
                         <input type="hidden" id="hdCompanyId" name="hdCompanyId" value="">
                         <div class="row mb-4">
                             <div class="form-group col-md-12 need-validate-checktyperegister">
-                                
+
                                 <label>ประเภทผู้สมัคร </label>  <span style="color:red">*</span><br />
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="rdoCompanyType1" name="customRadioSucRegisEdit" class="custom-control-input" value="NewSubContract" required>
+                                    <input type="radio" id="rdoCompanyType1" name="customRadioSucRegisEdit" class="custom-control-input is-validate" value="NewSubContract" required>
                                     <label class="custom-control-label" for="rdoCompanyType1">New Subcontract</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="rdoCompanyType2" name="customRadioSucRegisEdit" class="custom-control-input" value="Dealer" required>
+                                    <input type="radio" id="rdoCompanyType2" name="customRadioSucRegisEdit" class="custom-control-input is-validate " value="Dealer" required>
                                     <label class="custom-control-label" for="rdoCompanyType2">Dealer</label>
                                     <div class="invalid-feedback">	&nbsp;	&nbsp;	&nbsp;Please select type.</div>
                                 </div>
-                                
+                                <input type="hidden" id="hdrdtype" class="form-control is-validate"required />
                             </div>
 
                             <div id="divnewsubcontract"class="needs-validation-newregister" novalidate>
@@ -1512,6 +1512,7 @@ transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 
                     if ($(this).attr("value") == "NewSubContract") {
                         $("#divdealer").hide('slow');
                         $('#divnewsubcontract').show('slow');
+                        $('#hdrdtype').val($(this).attr("value"));
                     }
                 });
 
@@ -1519,6 +1520,7 @@ transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 
                     if ($(this).attr("value") == "Dealer") {
                         $("#divnewsubcontract").hide('slow');
                         $("#divdealer").show('slow');
+                        $('#hdrdtype').val($(this).attr("value"));
                     }
                 });
 
@@ -1790,13 +1792,14 @@ transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 
                 $('#btn_OnSave_Modal').click(function () {
                     var forms = document.getElementsByClassName('need-validate-checktyperegister');
                     var validation = Array.prototype.filter.call(forms, function (form) {
-                        if (Validate(".form-control", ".custom-control-input"
-                            , ".custom-select", ".custom-file-input")) {
+                        //if (Validate(".form-control.is-validate", ".custom-control-input.is-validate"
+                        //    , ".custom-select.is-validate", ".custom-file-input.is-validate")) {
+                           
+                        //}
+                        if ($('#hdrdtype').val() == "")
+                        {
                             event.preventDefault();
                             event.stopPropagation();
-                            //var screenTop = $(document).scrollTop();
-
-                            //$('.need-validate-checktyperegister').css('top', screenTop);
                         }
                         else {
                             if ($('#rdoCompanyType1').is(":checked")) {
@@ -2332,10 +2335,12 @@ transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 
 
                       if (result.SubcontractProfileType == "NewSubContract") {
                           $('#rdoCompanyType1').prop('checked', true);
+                          $('#hdrdtype').val(result.SubcontractProfileType);
 
                       }
                       else if (result.SubcontractProfileType == "Dealer") {
                           $('#rdoCompanyType2').prop('checked', true);
+                          $('#hdrdtype').val(result.SubcontractProfileType);
                       }
 
                       $('#inputTax_id').val(result.TaxId);
