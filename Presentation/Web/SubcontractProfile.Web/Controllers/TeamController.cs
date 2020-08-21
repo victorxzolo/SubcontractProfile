@@ -150,7 +150,6 @@ namespace SubcontractProfile.Web.Controllers
                 gLocationId = new Guid(locationId);
             }
 
-
             string uriString = string.Format("{0}/{1}/{2}", strpathAPI + "Team/GetByLocationId", companyId, gLocationId);
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
@@ -160,7 +159,6 @@ namespace SubcontractProfile.Web.Controllers
                 var resultAsysc = response.Content.ReadAsStringAsync().Result;
                 //data
                 result = JsonConvert.DeserializeObject<List<SubcontractProfileTeamModel>>(resultAsysc);
-   
 
             }
 
