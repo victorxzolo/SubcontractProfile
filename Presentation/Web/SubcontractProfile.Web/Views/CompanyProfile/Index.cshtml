@@ -104,17 +104,21 @@
                     @*<form id="frNew" class="needs-validation" novalidate>*@
                         <input type="hidden" id="hdCompanyId" name="hdCompanyId" value="">
                         <div class="row mb-4">
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-12 need-validate-checktyperegister">
+                                
                                 <label>ประเภทผู้สมัคร </label>  <span style="color:red">*</span><br />
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="rdoCompanyType1" name="customRadioSucRegisEdit" class="custom-control-input" value="NewSubContract">
+                                    <input type="radio" id="rdoCompanyType1" name="customRadioSucRegisEdit" class="custom-control-input" value="NewSubContract" required>
                                     <label class="custom-control-label" for="rdoCompanyType1">New Subcontract</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="rdoCompanyType2" name="customRadioSucRegisEdit" class="custom-control-input" value="Dealer">
+                                    <input type="radio" id="rdoCompanyType2" name="customRadioSucRegisEdit" class="custom-control-input" value="Dealer" required>
                                     <label class="custom-control-label" for="rdoCompanyType2">Dealer</label>
+                                    <div class="invalid-feedback">	&nbsp;	&nbsp;	&nbsp;Please select type.</div>
                                 </div>
+                                
                             </div>
+
                             <div id="divnewsubcontract"class="needs-validation-newregister" novalidate>
                         
                                 <div class="row">
@@ -1784,116 +1788,132 @@ transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 
 
 
                 $('#btn_OnSave_Modal').click(function () {
-                    if ($('#rdoCompanyType1').is(":checked")) {
-                        var forms = document.getElementsByClassName('needs-validation-newregister');
-                        var validation = Array.prototype.filter.call(forms, function (form) {
-                            if (Validate(".form-control.inputValidation", ".custom-control-input.inputValidation"
-                                , ".custom-select.inputValidation", ".custom-file-input.inputValidation")) {
-                                event.preventDefault();
-                                event.stopPropagation();
+                    var forms = document.getElementsByClassName('need-validate-checktyperegister');
+                    var validation = Array.prototype.filter.call(forms, function (form) {
+                        if (Validate(".form-control", ".custom-control-input"
+                            , ".custom-select", ".custom-file-input")) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            //var screenTop = $(document).scrollTop();
 
-                            }
-                            else {
-                                var forms = document.getElementsByClassName('needs-validation-contract');
+                            //$('.need-validate-checktyperegister').css('top', screenTop);
+                        }
+                        else {
+                            if ($('#rdoCompanyType1').is(":checked")) {
+                                var forms = document.getElementsByClassName('needs-validation-newregister');
                                 var validation = Array.prototype.filter.call(forms, function (form) {
-                                    if (Validate(".form-control.inputValidationContract", ".custom-control-input.inputValidationContract"
-                                        , ".custom-select.inputValidationContract", ".custom-file-input.inputValidationContract")) {
+                                    if (Validate(".form-control.inputValidation", ".custom-control-input.inputValidation"
+                                        , ".custom-select.inputValidation", ".custom-file-input.inputValidation")) {
                                         event.preventDefault();
                                         event.stopPropagation();
 
                                     }
                                     else {
-                                        var forms = document.getElementsByClassName('needs-validation-bank');
+                                        var forms = document.getElementsByClassName('needs-validation-contract');
                                         var validation = Array.prototype.filter.call(forms, function (form) {
-                                            if (Validate(".form-control.inputValidationBank", ".custom-control-input.inputValidationBank"
-                                                , ".custom-select.inputValidationBank", ".custom-file-input.inputValidationBank")) {
+                                            if (Validate(".form-control.inputValidationContract", ".custom-control-input.inputValidationContract"
+                                                , ".custom-select.inputValidationContract", ".custom-file-input.inputValidationContract")) {
                                                 event.preventDefault();
                                                 event.stopPropagation();
 
                                             }
                                             else {
-                                                var forms = document.getElementsByClassName('needs-validation-uploadfile');
+                                                var forms = document.getElementsByClassName('needs-validation-bank');
                                                 var validation = Array.prototype.filter.call(forms, function (form) {
-                                                    if (Validate(".form-control.inputValidationUpload", ".custom-control-input.inputValidationUpload"
-                                                        , ".custom-select.inputValidationUpload", ".custom-file-input.inputValidationUpload")) {
+                                                    if (Validate(".form-control.inputValidationBank", ".custom-control-input.inputValidationBank"
+                                                        , ".custom-select.inputValidationBank", ".custom-file-input.inputValidationBank")) {
                                                         event.preventDefault();
                                                         event.stopPropagation();
 
                                                     }
                                                     else {
-                                                        onSave();
+                                                        var forms = document.getElementsByClassName('needs-validation-uploadfile');
+                                                        var validation = Array.prototype.filter.call(forms, function (form) {
+                                                            if (Validate(".form-control.inputValidationUpload", ".custom-control-input.inputValidationUpload"
+                                                                , ".custom-select.inputValidationUpload", ".custom-file-input.inputValidationUpload")) {
+                                                                event.preventDefault();
+                                                                event.stopPropagation();
+
+                                                            }
+                                                            else {
+                                                                onSave();
+
+                                                            }
+                                                            form.classList.add('was-validated');
+                                                        });
+
 
                                                     }
                                                     form.classList.add('was-validated');
                                                 });
 
-
                                             }
                                             form.classList.add('was-validated');
                                         });
-
                                     }
                                     form.classList.add('was-validated');
                                 });
                             }
-                            form.classList.add('was-validated');
-                        });
-                    }
-                    else if ($('#rdoCompanyType2').is(":checked")) {
-                        var forms = document.getElementsByClassName('needs-validation-dealer');
-                        var validation = Array.prototype.filter.call(forms, function (form) {
-                            if (Validate(".form-control.inputValidationdealer", ".custom-control-input.inputValidationdealer"
-                                , ".custom-select.inputValidationdealer", ".custom-file-input.inputValidationdealer")) {
-                                event.preventDefault();
-                                event.stopPropagation();
-
-                            }
-                            else {
-                                var forms = document.getElementsByClassName('needs-validation-contract');
+                            else if ($('#rdoCompanyType2').is(":checked")) {
+                                var forms = document.getElementsByClassName('needs-validation-dealer');
                                 var validation = Array.prototype.filter.call(forms, function (form) {
-                                    if (Validate(".form-control.inputValidationContract", ".custom-control-input.inputValidationContract"
-                                        , ".custom-select.inputValidationContract", ".custom-file-input.inputValidationContract")) {
+                                    if (Validate(".form-control.inputValidationdealer", ".custom-control-input.inputValidationdealer"
+                                        , ".custom-select.inputValidationdealer", ".custom-file-input.inputValidationdealer")) {
                                         event.preventDefault();
                                         event.stopPropagation();
 
                                     }
                                     else {
-                                        var forms = document.getElementsByClassName('needs-validation-bank');
+                                        var forms = document.getElementsByClassName('needs-validation-contract');
                                         var validation = Array.prototype.filter.call(forms, function (form) {
-                                            if (Validate(".form-control.inputValidationBank", ".custom-control-input.inputValidationBank"
-                                                , ".custom-select.inputValidationBank", ".custom-file-input.inputValidationBank")) {
+                                            if (Validate(".form-control.inputValidationContract", ".custom-control-input.inputValidationContract"
+                                                , ".custom-select.inputValidationContract", ".custom-file-input.inputValidationContract")) {
                                                 event.preventDefault();
                                                 event.stopPropagation();
 
                                             }
                                             else {
-                                                var forms = document.getElementsByClassName('needs-validation-uploadfile');
+                                                var forms = document.getElementsByClassName('needs-validation-bank');
                                                 var validation = Array.prototype.filter.call(forms, function (form) {
-                                                    if (Validate(".form-control.inputValidationUpload", ".custom-control-input.inputValidationUpload"
-                                                        , ".custom-select.inputValidationUpload", ".custom-file-input.inputValidationUpload")) {
+                                                    if (Validate(".form-control.inputValidationBank", ".custom-control-input.inputValidationBank"
+                                                        , ".custom-select.inputValidationBank", ".custom-file-input.inputValidationBank")) {
                                                         event.preventDefault();
                                                         event.stopPropagation();
 
                                                     }
                                                     else {
-                                                        onSave();
+                                                        var forms = document.getElementsByClassName('needs-validation-uploadfile');
+                                                        var validation = Array.prototype.filter.call(forms, function (form) {
+                                                            if (Validate(".form-control.inputValidationUpload", ".custom-control-input.inputValidationUpload"
+                                                                , ".custom-select.inputValidationUpload", ".custom-file-input.inputValidationUpload")) {
+                                                                event.preventDefault();
+                                                                event.stopPropagation();
+
+                                                            }
+                                                            else {
+                                                                onSave();
+
+                                                            }
+                                                            form.classList.add('was-validated');
+                                                        });
+
 
                                                     }
                                                     form.classList.add('was-validated');
                                                 });
 
-
                                             }
                                             form.classList.add('was-validated');
                                         });
-
                                     }
                                     form.classList.add('was-validated');
                                 });
                             }
-                            form.classList.add('was-validated');
-                        });
-                    }
+
+                        }
+                        form.classList.add('was-validated');
+                    });
+                    
                 });
 
 
