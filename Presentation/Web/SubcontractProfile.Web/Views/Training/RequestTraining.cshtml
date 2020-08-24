@@ -16,13 +16,13 @@
 
                     <div class="form-group col-md-6">
                         <label for="inputLocationCodeMain">Location Name</label>
-                        <select id="selLocationName" class="form-control" data-live-search="true" ></select>
+                        <select id="selLocationName" class="form-control" data-live-search="true"></select>
 
                     </div>
 
                     <div class="form-group col-md-6">
                         <label for="inputTeamNameTh">Team Name </label>
-                        <select id="selTeamName" class="form-control" data-live-search="true" ></select>
+                        <select id="selTeamName" class="form-control" data-live-search="true"></select>
 
                     </div>
                     <div class="form-group col-md-6">
@@ -44,9 +44,9 @@
                         </select>
 
                         @*<input type="radio" id="rdoStatusY" name="Status" value="Y" class="form-control" >
-        <label for="Status">Yes</label>&nbsp;&nbsp;
-        <input type="radio" id="rdoStatusN" name="Status" value="N" class="form-control" >
-        <label for="Status">No</label>*@
+                            <label for="Status">Yes</label>&nbsp;&nbsp;
+                            <input type="radio" id="rdoStatusN" name="Status" value="N" class="form-control" >
+                            <label for="Status">No</label>*@
                     </div>
 
 
@@ -96,28 +96,233 @@
 </div>
 
 
+@section modalpanel {
 
-@section scripts {
+    <div id="AddEditModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="hTitleEdit" class="modal-title">Request Training</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-    <script type="text/javascript">
+                <form id="frNew" class="needs-validation" novalidate>
+                    <div class="container">
+                        <div class="modal-body">
+
+                            <div class="row mt-4 ml-3 mr-1">
+
+                                <div class=" col-md-6 mt-3">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Company Name:</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <label></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-md-6 mt-3">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Tax ID : </label>
+</div>
+                                        <div class="col-md-7">
+                                            <label>1234567890111 </label>
+</div>
+                                    </div>
+                                </div>
+                                <div class=" col-md-6 mt-4">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Contact Phone:</label>
+</div>
+                                        <div class="col-md-7">
+                                            <input type='text' class="form-control"  />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-md-6 mt-4">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Email :</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <input type='text' class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-md-6 mt-4">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Course:</label>
+</div>
+                                        <div class="col-md-7 ">
+                                            <div class="row">
+                                                <div class="col-md-12 ml-4">
+                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                    <p class=""> xxxxxxxxxxxxxxxxxxxxxxxxx</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-md-6 mt-4">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Date range training:</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class='input-group date' id='datepicker1'>
+                                                <input type='text' class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="fa fa-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-md-12 mt-3">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label>Remark:</label>
+</div>
+                                        <div class="col-md-9 ">
+                                            <textarea id="w3review" name="w3review" style="width:inherit;border-color:#E0E0E0" rows="6"> </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container">
+                                <div class="row mt-5 ml-3 mr-3">
+                                    <div class="col-md-12 ">
+                                        <p5 ><strong>ผู้เข้าอบรม</strong></p5>
+                                        <hr>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                                                <thead >
+                                                    <tr>
+                                                        <th scope="col">No</th>
+                                                        <th scope="col">Location Name</th>
+                                                        <th scope="col">Team Name</th>
+                                                        <th scope="col">Engineer Name</th>
+                                                      
+                                                        <th scope="col">Position</th>
+                                                        <th scope="col">Contact Phone1</th>
+                                                        <th scope="col">Contact Email</th>
+                                                    </tr>
+                                                </thead>
+                                              
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-5">
+                                        <div class="row">
+                                            <div class="col-md-9 "></div>
+                                            <div class="col-md-3 col-sm-12">
+                                                <div class="row ">
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <p>ราคารวม</p>
+                                                            </div>
+                                                            <div class="col-md-6" style="text-align: left;">
+                                                                <p>10000</p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-12 mt-3">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <p>Vat7%</p>
+                                                            </div>
+                                                            <div class="col-md-6" style="text-align: left;">
+                                                                <p>700</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 mt-3">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <p>ราคาสุทธิ(บาท) </p>
+                                                            </div>
+                                                            <div class="col-md-6" style="text-align: left;">
+                                                                <p>10,700</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="container">
+                                <div class="row mt-5 ml-3 mr-3">
+                                    <div class="col-md-12 ">
+                                        <p class="h5"><strong>การชำระเงิน</strong></p>
+                                        <hr>
+                                    </div>
+                                    <div class="col-md-12 ml-5 mt-2 ">
+                                        <h5>ชำระเงินผ่านทางธนาคาร internet Banking หรือตู้ ATM โดยการโอนเงินเข้าบัญชี</h5>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p style="font-size:12px">ธนาคาร กรุงศรีอยุธยา จำกัดสาขา xxxxxxx</p>
+                                                <p style="font-size:12px">ชื่อบัญชี บริษัท xxxxxx </p>
+                                                <p style="font-size:12px">บัญชีออมทรัพย์ เลขที่บัญชี 111-1-1111-1</p>
+                                                <br><p style="font-size:12px">(ชำระเงินยอดรวมภาษี 7% ทุกยอด)</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p style="font-size:12px">ธนาคาร กสิกรไทย จำกัดสาขา xxxxxxx</p>
+                                                <p style="font-size:12px">ชื่อบัญชี บริษัท xxxxxx </p>
+                                                <p style="font-size:12px">บัญชีออมทรัพย์ เลขที่บัญชี 111-1-1111-1</p>
+                                                <br><p style="font-size:12px">(ชำระเงินยอดรวมภาษี 7% ทุกยอด)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                                ปิด
+                            </button>
+                            <button id="btnSave" type="submit" class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                บันทึก
+                            </button>
+                        </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+
+ @section scripts {
+     
+        <script type="text/javascript">
         var oTable;
         $(document).ready(function () {
 
             GetDropDownLocationSearch();
-          
-
-            //document.getElementById("dateCertificateDate").flatpickr({
-            //    enableTime: false,
-            //    dateFormat: "d/m/Y",
-            //    //defaultDate: "today",
-            //    defaultDate: "07/10/2020"
-            //});
-
-
-            //$('.datepicker').datepicker({
-            //    format: 'dd/mm/yyyy'
-            //});
-
 
             $('#selLocationName').change(function () {
                 getTeamByLocationId($(this).val());
@@ -171,7 +376,7 @@
             }, false);
 
         function inittbSearchResult() {
-           
+
             var oTable = $('#tbSearchResult').DataTable({
                 processing: true, // for show progress bar
                 serverSide: true, // for process server side
@@ -224,7 +429,7 @@
                         { "data": "team_name_th", "width": "30%" },
                         { "data": "RequestDate", "width": "30%" },
                         { "data": "Status", "width": "10%" }
-                      
+
 
 
                 ],
@@ -686,7 +891,7 @@
 
 
         function getTeamByLocationId(locationId) {
-          
+
             if (locationId == "") {
                 locationId ="-1"
             }
@@ -710,7 +915,7 @@
                       //}
                   },
                   failure: function () {
-                     
+
                       $("#selTeamName").empty();
                       $("#selTeamName").append('<option value="-1">--Please All--</option>');
                   }
@@ -718,8 +923,8 @@
          }
 //---------------------end
 
-    
-    </script>
-}
+
+        </script>
+    }
 
 
