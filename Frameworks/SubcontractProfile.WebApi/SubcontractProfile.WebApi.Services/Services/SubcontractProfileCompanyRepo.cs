@@ -427,5 +427,29 @@ namespace SubcontractProfile.WebApi.Services
 
           
         }
+
+
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchCompanyVerify(
+            SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany search)
+        {
+            var p = new DynamicParameters();
+            p.Add("@SubcontractProfileType",search.SubcontractProfileType);
+            p.Add("@TaxId", search.TaxId);
+            p.Add("@CompanyName", search.CompanyName);
+            p.Add("@DistributionChannel", search.DistributionChannel);
+            p.Add("@ChannelSaleGroup", search.ChannelSaleGroup);
+            p.Add("@CreateDateFrom", search.ContractStartDate);
+            p.Add("@CreateDateTo", search.ContractEndDate);
+            p.Add("@VendorCode", search.VendorCode);
+            p.Add("@Status", search.Status);
+
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>
+            ("uspSubcontractProfileCompany_SearchVerify", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+
+
+        }
     }
 }

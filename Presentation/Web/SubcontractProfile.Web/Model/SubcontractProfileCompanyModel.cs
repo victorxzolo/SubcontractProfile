@@ -179,12 +179,27 @@ namespace SubcontractProfile.Web.Model
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Password { get; set; }
-
+        public System.DateTime? RegisterDate { get; set; }
 
         public Guid file_id_CompanyCertifiedFile { get; set; }
         public Guid file_id_CommercialRegistrationFile { get; set; }
         public Guid file_id_VatRegistrationCertificateFile { get; set; }
         public Guid file_id_bookbank { get; set; }
 
+    }
+
+    public class SubcontractProfileCompanyViewModel
+    {
+        public string SubcontractProfileType { get; set; }
+        public string TaxId { get; set; }
+        public string CompanyName { get; set; }
+        public string DistributionChannel { get; set; }
+        public string ChannelSaleGroup { get; set; }
+       
+        public System.DateTime? RegisterDateFrom { get; set; }
+
+        public System.DateTime? RegisterDateTo { get; set; }
+        public string VendorCode { get; set; }
+        public string Status { get; set; }
     }
 }

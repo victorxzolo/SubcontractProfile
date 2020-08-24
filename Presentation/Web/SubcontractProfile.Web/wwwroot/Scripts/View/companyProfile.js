@@ -65,13 +65,14 @@ $(document).ready(function () {
                             $('#txtroad').val('')
 
 
-                            $(':checkbox:checked').each(function (i) {
-        $(this).prop('checked', false);
+                            $('#chkAddressType input[type=checkbox]').each(function () {
+                                $(this).prop('checked', false);
+
                             });
 
 
                             if (data.status) {
-        console.log(data.response);
+                                console.log(data.response);
 
 
                                 $('#ddlcountry').val(data.response.Country)
@@ -518,7 +519,27 @@ $(document).ready(function () {
             $('#SearchRevenue').modal('hide');
         });
 
-  
+    $('#btnClear').click(function () {
+        $('#txthomenumber').val('')
+        $('#txtVillageNo').val('')
+        $('#txtvillage').val('')
+        $('#txtbuilding').val('')
+        $('#txtfloor').val('')
+        $('#txtroom').val('')
+        $('#txtsoi').val('')
+        $('#txtroad').val('')
+        $('#ddlcountry').val('')
+        $('#ddlzone').val('')
+        $('#ddlprovince').val('')
+        $('#ddldistrict').val('')
+        $('#ddlsubdistrict').val('')
+        $('#ddlzipcode').val('');
+
+        $('#chkAddressType input[type=checkbox]').each(function () {
+            $(this).prop('checked', false);
+
+        });
+    });
 
     function validateform() {
         var hasError = true;
@@ -1160,37 +1181,6 @@ $(document).ready(function () {
             return val;
         }
 
-        function GetDaftAddress() {
-        $.ajax({
-            url: "/CompanyProfile/SearchDaftAddress",
-            type: "POST",
-            data: {
-                company: function () {
-                    return $('#hdCompanyId').val()
-                }
-            },
-            datatype: "JSON",
-        }).done(function (data) {
-            var val = []
-            val = ConcatstrAddress(data.data);
-            data.data = val;
-            oTableAddress.clear().draw();
-            oTableAddress.rows.add(data.data).draw();
-        }).fail(function (xhr, status, error) {
-            bootbox.confirm({
-                title: "System Information",
-                message: xhr.responseText,
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
-        });
-        }
 
         function SaveDaftAddress(stuff) {
         $.ajax({

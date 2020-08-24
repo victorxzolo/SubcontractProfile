@@ -275,6 +275,10 @@ namespace SubcontractProfile.Web.Controllers
         private void getsession()
         {
             Lang = SessionHelper.GetObjectFromJson<string>(_httpContextAccessor.HttpContext.Session, "language");
+            if(Lang==null || Lang=="")
+            {
+                Lang = "TH";
+            }
             dataUser = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(_httpContextAccessor.HttpContext.Session, "userLogin");
         }
 

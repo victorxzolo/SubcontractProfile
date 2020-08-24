@@ -1,296 +1,155 @@
 ﻿@{
-    //Layout = "~/Views/Shared/_LayoutRegister.cshtml";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
-    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Company Verify";
 
 }
-<link rel="stylesheet" type="text/css" href="plugins/table/datatable/datatables.css">
-<link rel="stylesheet" type="text/css" href="plugins/table/datatable/dt-global_style.css">
-<link rel="stylesheet" type="text/css" href="plugins/table/datatable/custom_dt_multiple_tables.css">
-<div class="form-group my-4">
-    <div class="card-header bg-white">
-        <p class="font-weight-bolder lead">Search Company Verify</p>
-    </div>
-</div>
-<div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label text-left">Register Type :</label>
-                        <div class="col-sm-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="N" checked>
-                                    ALL
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="D">
-                                    New Subcontract
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="optionsRadios" id="chktype" value="D">
-                                    Dealer
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+@*<link rel="stylesheet" type="text/css" href="plugins/table/datatable/datatables.css">
+    <link rel="stylesheet" type="text/css" href="plugins/table/datatable/dt-global_style.css">
+    <link rel="stylesheet" type="text/css" href="plugins/table/datatable/custom_dt_multiple_tables.css">*@
 
-            <div class="row">
-                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Tax ID :</label>
-                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                            <input type="text" class="form-control form-control-sm" id="txttaxid" />
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+    <div class="skills layout-spacing">
+
+
+        <div class="widget-content widget-content-area">
+            <h3 class="">Search Company Verify</h3>
+
+            <div class="widget-content1">
+                <div class="form-row mb-4">
+
+
+                    <div class="form-group col-md-12">
+                        <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="rdoCustomerTypeAll" name="customRadioSucRegis" class="custom-control-input" value="ALL">
+                            <label class="custom-control-label" for="rdoCustomerTypeAll">All</label>
                         </div>
-
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Company name :</label>
-                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                            <input type="text" class="form-control form-control-sm" id="txtcompanyname" />
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="rdoCustomerTypeSub" name="customRadioSucRegis" class="custom-control-input" value="NewSubContract">
+                            <label class="custom-control-label" for="rdoCustomerTypeSub">New Subcontract</label>
                         </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Distribution Channel :</label>
-                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                            <select class="form-control form-control-sm" id="ddldistribution">
-                                <option>Channel1</option>
-                                <option>Channel2</option>
-                                <option>Channel3</option>
-                                <option>Channel4</option>
-                            </select>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="rdoCustomerTypeDealer" name="customRadioSucRegis" class="custom-control-input" value="Dealer">
+                            <label class="custom-control-label" for="rdoCustomerTypeDealer">Dealer</label>
                         </div>
                     </div>
 
-                </div>
-                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Channel Sale Group :</label>
-                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                            <select class="form-control form-control-sm" id="ddlchannelsalegroup">
-                                <option>Group1</option>
-                                <option>Group2</option>
-                                <option>Group3</option>
-                                <option>Group4</option>
-                            </select>
-                        </div>
+                    <div class="form-group col-md-6">
+                        <label for="txttaxid">Tax ID</label>
+                        <input type="text" class="form-control" id="txttaxid" />
                     </div>
 
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Register Date From :</label>
-                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                            <div class='input-group p-0 date' id='regisdatefrom'>
-                                <input type='text' class="form-control form-control-sm" />
-                                <div class="input-group-append input-group-addon">
-                                    <span class="input-group-text px-4">
-                                        <i class="fa fa-calendar"></i>
-                                    </span>
-                                </div>
-
-                            </div>
-                        </div>
-
+                    <div class="form-group col-md-6">
+                        <label for="txtcompanyname">Company name</label>
+                        <input type="text" class="form-control" id="txtcompanyname" />
                     </div>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Register Date To :</label>
-                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                            <div class='input-group p-0 date' id='regisdateto'>
-                                <input type='text' class="form-control form-control-sm" />
-                                <div class="input-group-append input-group-addon">
-                                    <span class="input-group-text px-4">
-                                        <i class="fa fa-calendar"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
+                    <div class="form-group col-md-6">
+                        <label for="ddldistribution">Distribution Channel</label>
+                        <select class="form-control" id="ddldistribution">
+                            <option value="">Select Distribution Channel</option>
+                            <option>Channel1</option>
+                            <option>Channel2</option>
+                            <option>Channel3</option>
+                            <option>Channel4</option>
+                        </select>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Vender Code :</label>
-                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                            <input type="text" class="form-control form-control-sm" id="txtvendercode" />
-                        </div>
-
+                    <div class="form-group col-md-6">
+                        <label for="ddlchannelsalegroup">Channel Sale Group</label>
+                        <select class="form-control" id="ddlchannelsalegroup">
+                            <option value="">Select Channel Sale Group</option>
+                            <option>Group1</option>
+                            <option>Group2</option>
+                            <option>Group3</option>
+                            <option>Group4</option>
+                        </select>
                     </div>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Status :</label>
-                        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                            <select class="form-control form-control-sm" id="ddlStatus">
-                                <option>Waiting</option>
-                                <option>Approve</option>
-                                <option>Not Approve</option>
-                            </select>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                    <div class="d-flex align-items-center justify-content-center h-100" role="group">
-                        @*<button class="btn btn-secondary mr-2" id="btnclear" type="button">Clear</button>
-                            <button class="btn btn-success" id="btnSearch" type="button">Search</button>*@
-                        <button class="btn-border btn-black mr-2" type="button" id="btnclear">
-                            <i class="fa fa-trash-o icon"></i><span>Clear</span>
-                        </button>
-                        <button class="btn-border btn-green" type="button" id="btnSearch">
-                            <i class="fa fa-search icon"></i><span>Search</span>
-                        </button>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                    <div class="" role="group">
-                        @*<button class="btn btn-success float-right" id="btnverifycompany" type="button"
-                            onclick="location.href='@Url.Action("CompanyVerify", "Registration" ,new {id=1 })'">Verify Company</button>*@
-                        <button class="btn-border btn-green float-right" type="button" id="btnverifycompany"
-                                onclick="location.href='@Url.Action("CompanyVerify", "Registration" ,new {id=1 })'">
-                            <i class="fa fa-check icon"></i><span>Verify Company</span>
-                        </button>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                    <p class="font-weight-bolder lead">
-                        Search Result
-                    </p>
-                    <hr />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Select</th>
-                                    <th>Status</th>
-                                    <th>Register Type</th>
-                                    <th>Tax ID</th>
-                                    <th>Company Name (TH)</th>
-                                    <th>Cpmpaby Name (EN)</th>
-                                    <th>Vender Code</th>
-                                    <th>Distribution Channel</th>
-                                    <th>Channel Sale Group</th>
-                                    <th>Register Date</th>
-                                    <th>Verify Date</th>
-                                    <th>Verify By</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-center">
-
-                                        <input type="radio" class="form-check-input position-static" name="optionsRadios" id="chktype" value="1" checked>
-
-                                    </td>
-                                    <td>Waiting</td>
-                                    <td>New Sub</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-
-                                        <input type="radio" class="form-check-input position-static" name="optionsRadios" id="chktype" value="2" checked>
-
-                                    </td>
-                                    <td>Approve</td>
-                                    <td>Dealer</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                    <nav aria-label="...">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <span class="page-link">Previous</span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active">
-                                <span class="page-link">
-                                    2
-                                    <span class="sr-only">(current)</span>
+                    <div class="form-group col-md-6">
+                        <label for="txtcompanyname">Register Date From</label>
+                        <div class='input-group p-0 date' id='regisdatefrom'>
+                            <input type='text' class="form-control" />
+                            <div class="input-group-append input-group-addon">
+                                <span class="input-group-text px-4">
+                                    <i class="fa fa-calendar"></i>
                                 </span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+                            </div>
 
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="txtcompanyname">Register Date To</label>
+                        <div class='input-group p-0 date' id='regisdateto'>
+                            <input type='text' class="form-control" />
+                            <div class="input-group-append input-group-addon">
+                                <span class="input-group-text px-4">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="txtvendercode">Vender Code</label>
+                        <input type="text" class="form-control" id="txtvendercode" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="ddlStatus">Status</label>
+                        <select class="form-control" id="ddlStatus">
+                        </select>
+                    </div>
+
+                </div>
+                <div style="text-align:center">
+
+                    <button id="btnclear" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
+                    <button id="btnSearch" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                        <div class="" role="group">
+                            <button class="btn btn-success float-right" type="button" id="btnverifycompany">
+                                @*onclick="location.href='@Url.Action("CompanyVerify", "Registration" ,new {id=1 })'">*@
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em"
+                                     style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet"
+                                     viewBox="0 0 512 512">
+                                    <path fill="white" d="M199.066 456l-7.379-7.514l-3.94-3.9l-86.2-86.2l.053-.055l-83.664-83.666l97.614-97.613l83.565 83.565L398.388 61.344L496 158.958L296.729 358.229l-11.26 11.371zM146.6 358.183l52.459 52.46l.1-.1l.054.054l52.311-52.311l11.259-11.368l187.963-187.96l-52.358-52.358l-199.273 199.271l-83.565-83.565l-52.359 52.359l83.464 83.463z" />
+                                </svg> Verify Company
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
 
+            <br />
+            <div class="widget-heading">
+                <h3 class="">ผลการค้นหา</h3>
 
-
-
+            </div>
+            <div class="table-responsive">
+                <table id="tbSearchComVerifyResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th></th>
+                            <th>Status</th>
+                            <th>Register Type</th>
+                            <th>Tax ID</th>
+                            <th>Company Name (TH)</th>
+                            <th>Company Name (EN)</th>
+                            <th>Vender Code</th>
+                            <th>Distribution Channel</th>
+                            <th>Channel Sale Group</th>
+                            <th>Register Date</th>
+                            <th>Verify Date</th>
+                            <th>Verify By</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
     </div>
+
 </div>
 
 
@@ -301,43 +160,44 @@
 @section scripts
 {
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#regisdatefrom').datepicker({
-                format: 'dd/mm/yyyy',
-                daysOfWeekHighlighted: "6,0",
-                autoclose: true,
-                todayHighlight: true,
-                clearBtn: true,
+    <script src="~/Scripts/View/SearchCompanyVerify.js"></script>
+    @*<script type="text/javascript">
+            $(document).ready(function () {
+                $('#regisdatefrom').datepicker({
+                    format: 'dd/mm/yyyy',
+                    daysOfWeekHighlighted: "6,0",
+                    autoclose: true,
+                    todayHighlight: true,
+                    clearBtn: true,
+                });
+                $('#regisdateto').datepicker({
+                    format: 'dd/mm/yyyy',
+                    daysOfWeekHighlighted: "6,0",
+                    autoclose: true,
+                    todayHighlight: true,
+                    clearBtn: true,
+
+                });
+
+                //$('#btnverifycompany').click(function () {
+                //    $.ajax({
+                //        type: "POST",
+                //        url: "/Registration/CompanyVerify",
+                //        data: {
+                //            id: 1
+                //        },
+                //        dataType: "json",
+                //        async: false,
+                //        success: function (response) {
+
+
+                //        },
+                //        error: function (response) {
+                //            console.log(response)
+                //        }
+                //    });
+                //});
             });
-            $('#regisdateto').datepicker({
-                format: 'dd/mm/yyyy',
-                daysOfWeekHighlighted: "6,0",
-                autoclose: true,
-                todayHighlight: true,
-                clearBtn: true,
-
-            });
-
-            //$('#btnverifycompany').click(function () {
-            //    $.ajax({
-            //        type: "POST",
-            //        url: "/Registration/CompanyVerify",
-            //        data: {
-            //            id: 1
-            //        },
-            //        dataType: "json",
-            //        async: false,
-            //        success: function (response) {
-
-
-            //        },
-            //        error: function (response) {
-            //            console.log(response)
-            //        }
-            //    });
-            //});
-        });
-    </script>
+        </script>*@
 
 }

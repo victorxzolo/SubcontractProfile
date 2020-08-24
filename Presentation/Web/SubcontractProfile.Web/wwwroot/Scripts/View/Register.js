@@ -789,6 +789,27 @@
         });
     });
 
+    $('#btnresetaddress').click(function () {
+        $('#txthomenumber').val('')
+        $('#txtVillageNo').val('')
+        $('#txtvillage').val('')
+        $('#txtbuilding').val('')
+        $('#txtfloor').val('')
+        $('#txtroom').val('')
+        $('#txtsoi').val('')
+        $('#txtroad').val('')
+        $('#ddlcountry').val('')
+        $('#ddlzone').val('')
+        $('#ddlprovince').val('')
+        $('#ddldistrict').val('')
+        $('#ddlsubdistrict').val('')
+        $('#ddlzipcode').val('');
+
+        $('#chkAddressType input[type=checkbox]').each(function () {
+            $(this).prop('checked', false);
+            
+        });
+    });
     function ConcatstrAddress(data) {
         var val = [];
 
