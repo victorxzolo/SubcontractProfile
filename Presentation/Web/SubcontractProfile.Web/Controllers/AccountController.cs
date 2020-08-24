@@ -201,7 +201,7 @@ namespace SubcontractProfile.Web.Controllers
         {
             HttpContext.Session.Clear();
             HttpContext.SignOutAsync();
-            return View();
+            return RedirectToAction("Login", "Account");
         }
 
         //public  bool IsThaiCulture(this int currentCulture)
