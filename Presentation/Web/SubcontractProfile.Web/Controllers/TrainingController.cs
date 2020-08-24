@@ -16,12 +16,12 @@ using SubcontractProfile.Web.Model;
 
 namespace SubcontractProfile.Web.Controllers
 {
-    public class Training : Controller
+    public class TrainingController : Controller
     {
         private readonly string strpathAPI;
         private readonly IConfiguration _configuration;
 
-        public Training(IConfiguration configuration)
+        public TrainingController(IConfiguration configuration)
         {
             _configuration = configuration;
 
