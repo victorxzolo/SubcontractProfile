@@ -162,23 +162,31 @@ namespace SubcontractProfile.Web.Controllers
         [HttpPut]
         public IActionResult Updatepayment(SubcontractProfilePaymentModel Payment)
         {
-            string dataresponse ="" ; 
+            string dataresponse ="" ;
+            bool status =false;
             if (Payment.FileSilp != null)
             {
                 Payment.SlipAttachFile = Payment.FileSilp.FileName;
             }
             Payment.ModifiedDate = DateTime.Now;
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string uriString = string.Format("{0}", strpathAPI + "Payment/Update");
-            var httpContent = new StringContent(JsonConvert.SerializeObject(Payment), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PutAsync(uriString, httpContent).Result;
-            if (response.IsSuccessStatusCode)
+            try
             {
-                dataresponse = response.Content.ReadAsStringAsync().Result;               
-
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string uriString = string.Format("{0}", strpathAPI + "Payment/Update");
+                var httpContent = new StringContent(JsonConvert.SerializeObject(Payment), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = client.PutAsync(uriString, httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    dataresponse = response.Content.ReadAsStringAsync().Result;
+                    status = true;
+                }
             }
+            catch (Exception ex)
+            {
+                dataresponse = ex.Message;
+            }            
 
-            return Json(new { Date = dataresponse });
+            return Json(new { Date = dataresponse ,Status= status });
         }
     }
 }

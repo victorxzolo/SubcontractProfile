@@ -6,11 +6,7 @@
 
 
 
-@*<div class="form-group ">
-        <div class="card-header bg-white">
-            <p class="font-weight-bolder lead">Search Confirm Payment</p>
-        </div>
-    </div>*@
+
 <style>
     th, td {
         white-space: nowrap;
@@ -35,106 +31,62 @@
 
 
         <div class="container">
+            <form class="SearchPaymentvalidation" novalidate action="javascript:void(0);">
+                <div class="widget-content ">
+                    <div class="form-row mb-4">
+                        <div class=" form-group  col-md-6">
+                            <label class="col-form-label text-left">Payment No:</label>
+                            <input type="text" class="form-control " id="paymentno" maxlength="100" >                         
+                        </div>
+                        <div class=" form-group col-md-6">
+                            <label class="col-form-label text-left">Request Training no:</label>
+                            <input type="text" class="form-control " id="paymentrequesttraningno" maxlength="100" >
+                        </div>
 
-            <div class="widget-content ">
-                <div class="row mt-3  ">
-                    <div class=" col-md-6 mt-3">
-                        <div class="form-group row">
-                            <div class="col-md-4 ">
-                                <label class="col-form-label text-left">Payment No:</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control " id="paymentno" maxlength="100">
 
+                        <div class="form-group col-md-6">
+                            <label class="">Request Date From:</label>
+                            <input id="paymentrequestdatefrom" value="2019-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.." required>
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="">Request Date to:</label>
+                            <input id="paymentrequestdateto" value="2019-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.."required>
+
+                        </div>
+
+
+                        <div class="form-group col-md-6">
+                            <label class="">Payment Date From:</label>
+                            <input id="paymentdatefrom" value="2019-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.."required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="">Payment Date To:</label>
+                            <input id="paymentdateto" value="2019-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.."required>
+                        </div>
+
+
+                        <div class="form-group col-md-6">
+                            <label class="">Payment Status:</label>
+                            <select class="form-control" id="paymentstatus" required>
+                                <option value="">Please Select</option>
+                                <option value="Y">Paid</option>
+                                <option value="N">Not Paid</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please Select the Status
                             </div>
                         </div>
-                    </div>
-                    <div class=" col-md-6 mt-3">
-                        <div class="form-group row">
-                            <div class="col-md-4">
-                                <label class="col-form-label text-left">Request Training no:</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control " id="paymentrequesttraningno" maxlength="100">
-                            </div>
+                        <div class="form-group col-md-6">
+
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class=" col-md-6 mt-2">
-                        <div class="form-group row">
-                            <div class="col-md-4">
-                                <label class="">Request Date From:</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input id="paymentrequestdatefrom" value="2019-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date..">
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-6 mt-2">
-                        <div class="form-group row">
-                            <div class="col-md-4">
-                                <label class="">Request Date to:</label>
-
-                            </div>
-                            <div class="col-md-8">
-                                <input id="paymentrequestdateto" value="2019-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date..">
-
-                            </div>
-                        </div>
-                    </div>
+                <div class="mt-5" style="text-align: center;">
+                    <button id="btnClearSearchconfirmpayment" type="button" onclick="clearSearchpayment()" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" /></svg> ล้างข้อมูล</button>
+                    <button id="btnSearchconfirmpayment" type="submit" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>                   
                 </div>
-                <div class="row">
-                    <div class=" col-md-6 mt-2">
-                        <div class="form-group row">
-                            <div class="col-md-4">
-                                <label class="">Payment Date From:</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input id="paymentdatefrom" value="2019-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date..">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-6 mt-2">
-                        <div class="form-group row">
-                            <div class="col-md-4">
-                                <label class="">Payment Date To:</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input id="paymentdateto" value="2019-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date..">
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class=" col-md-6 mt-2">
-                        <div class="form-group row">
-                            <div class="col-md-4">
-                                <label class="">Payment Status:</label>
-                            </div>
-                            <div class="col-md-8">
-                                <select class="form-control" id="paymentstatus">
-                                    <option>Please Select</option>
-                                    <option value="Y">Paid</option>
-                                    <option value="N">Not Paid</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-6 mt-3">
-
-                    </div>
-                </div>
-            </div>
-            <div class="btn2 mt-5" style="text-align: center;">
-                <button id="btnMainClear" type="button" onclick="clearSearchpayment()" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
-                <button id="btnSearchconfirmpayment" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
-                @*<button class="btn btn-dark" onclick="clearSearchpayment()" style="width:120px;color:white;">Clear</button>
-                <button class="btn btn-success" id="btnSearchconfirmpayment" style="width:120px">Search</button>*@
-            </div>
+            </form>
         </div>
 
 
@@ -194,240 +146,240 @@
 
                 </div>
             </div>
-            <div class="row mt-2  mb-5">
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-8 ">
-                    <div class=" col-md-12 mt-3">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">Request Training No:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <label id="Request_no"></label>
-                            </div>
+
+
+
+
+
+
+            <form class="ConfirmPaymentvalidation" novalidate action="javascript:void(0);">
+                <div class="widget-content">
+                    <div class="form-row mt-2  mb-5">
+                        <div class="col-md-1">
                         </div>
-                    </div>
-                    <div class=" col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">Payment No:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <label id="Payment_no"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">ชื่อบริษัท:</label>
-                            </div>
-                            <div class="col-md-7" style="word-wrap: break-word">
-                                <label id="Company_name"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">ที่อยุ่:</label>
-                            </div>
-                            <div class="col-md-7" style="word-wrap: break-word">
-                                <label id="address"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">เลขประจำตัวผู้เสียภาษี:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <label id="Tax_id"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">ผู้ติดต่อ:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" id="Contact_name" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">อีเมล์:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" id="Contact_email" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">เบอร์โทรศัพท์:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" id="Contact_phone_no" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-12 mt-4 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">รูปแบบชำระเงิน*:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <select class="form-control" id="payment_channal">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                            </div>
-                            <div class="col-md-7">
+                        <div class="form-group col-md-8 ">
+                            <div class="col-md-12 mt-3">
                                 <div class="row">
-                                    <div class="col-md-12 ml-4" style="white-space: nowrap">
-                                        <div class="row" id="Detailpaymentchannal">
-                                            @*<input class="form-check-input" type="radio" name="exampleRadios" value="option1" checked>
-                                            <label style="color:#808080" id="textpayment_channal"> ธนาคารกรุงศรีอยุธยา ชื่อบัญชี xxxx สาขาลาดพร้าว99 เลขบีญชี 111-1-1111-11111111111111111111</label>*@
+                                    <div class="col-md-5">
+                                        <label class="">Request Training No:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <label id="Request_no"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-md-12 mt-3 ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="">Payment No:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <label id="Payment_no"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-md-12 mt-3 ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label>ชื่อบริษัท:</label>
+                                    </div>
+                                    <div class="col-md-7" style="word-wrap: break-word">
+                                        <label id="Company_name"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3 ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label>ที่อยุ่:</label>
+                                    </div>
+                                    <div class="col-md-7" style="word-wrap: break-word">
+                                        <label id="address"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3 ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="">เลขประจำตัวผู้เสียภาษี:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <label id="Tax_id"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3 ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label>ผู้ติดต่อ:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="Contact_name" value="" required>
+                                        <div class="invalid-feedback">Please fill the ContactName</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3 ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label>อีเมล์:</label>
+                                    </div>
+                                    <div class=" col-md-7">
+                                        <input type="text" class="form-control" id="Contact_email" value="" required>
+                                        <div class="invalid-feedback">Please fill the Email</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3 ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="">เบอร์โทรศัพท์:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="Contact_phone_no" required />
+                                        <div class="invalid-feedback">Please fill the Phoneno</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-4 ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="">รูปแบบชำระเงิน*:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <select class="form-control" id="payment_channal">
+                                        </select>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3 ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="row">
+                                            <div class="col-md-12 ml-4" style="white-space: nowrap">
+                                                <div class="row" id="Detailpaymentchannal">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-4  ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="">วันที่ชำระเงิน*:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input id="payment_date" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.." required>
+                                        <div class="invalid-feedback">Please fill the PaymentDate</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-4  ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="">เวลาชำระเงิน*:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input id="payment_datetime" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Time.." required>
+                                        <div class="invalid-feedback">Please fill the PaymentTime</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mt-2  ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="">ยอดเงินที่โอน (B)*:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type='text' id="amount_transfer" value="" class="form-control" required />
+                                        <div class="invalid-feedback">Please fill the Amounttransfer</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-4  ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="">ธนาคารต้นทางที่โอน*:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <select class="form-control" id="bank_transfer">
+                                        </select>                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-4 ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="">สาขา:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="text" id="bank_branch" class="form-control" placeholder="" required />
+                                        <div class="invalid-feedback">Please fill the BankBranch</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-4 ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="">หลักฐานการโอนเงิน*</label>
+                                    </div>
+                                    <div class="col-md-7 ">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="slip_attach_file" required>
+                                            <label id="nameslip_attach_file" class="custom-file-label" for="slip_attach_file">Choose file</label>
+                                            <div class="invalid-feedback mt-4">Please Upload the Silp</div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3 ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="row">
+                                            <div class="col-md-12 ml-0" style="word-wrap:break-word">
+                                                <label style="font-size: 14px;white-space: nowrap;">ขนาดไฟล์ไม่เกิน3Mbและไฟล์ประกอบประเภทPDFหรือ JPG,JPEG,PNG เท่านั้น</label>
+                                                <label style="color:red;font-size:14px;white-space: nowrap; ">การใช้หลักฐานปลอม มีความผิดตาม พรบ.คอมพิวเตอร์</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3 ">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label>หมายเหตุ :</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="row">
+                                            <div class="col-md-12 ml-0">
+                                                <textarea id="remark" name="w3review" rows="7" style="width:inherit;border-color:#E0E0E0;"> </textarea>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class=" col-md-12 mt-4  ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">วันที่ชำระเงิน*:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input id="payment_date" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date..">
-
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-12 mt-4  ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">เวลาชำระเงิน*:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input id="payment_datetime" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Time..">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=" col-md-12 mt-2  ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">ยอดเงินที่โอน (B)*:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input type='text' id="amount_transfer" value="" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-12 mt-4  ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">ธนาคารต้นทางที่โอน*:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <select class="form-control" id="bank_transfer">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-12 mt-4 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">สาขา:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input type="text" id="bank_branch" class="form-control" placeholder="" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-12 mt-4 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">หลักฐานการโอนเงิน*</label>
-                            </div>
-                            <div class="col-md-7 ">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="slip_attach_file">
-                                    <label id="nameslip_attach_file" class="custom-file-label" for="slip_attach_file">Choose file</label>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                            </div>
-                            <div class="col-md-7">
-                                <div class="row">
-                                    <div class="col-md-12 ml-0" style="word-wrap:break-word">
-                                        <label style="font-size: 14px;white-space: nowrap;">ขนาดไฟล์ไม่เกิน3Mbและไฟล์ประกอบประเภทPDFหรือ JPG,JPEG,PNG เท่านั้น</label>
-                                        <label style="color:red;font-size:14px;white-space: nowrap; ">การใช้หลักฐานปลอม มีความผิดตาม พรบ.คอมพิวเตอร์</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label>หมายเหตุ :</label>
-                            </div>
-                            <div class="col-md-7">
-                                <div class="row">
-                                    <div class="col-md-12 ml-0">
-                                        <textarea id="remark" name="w3review" rows="7" style="width:inherit;border-color:#E0E0E0;"> </textarea>
-
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-md-3">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="container mt-3" style="background-color:#E0E0E0;text-align: center; max-width:100%" id="btnconfirmpayment">                    
                 </div>
-            </div>
+            </form>
+
+
         </div>
 
 
-        <div class="container mt-3" style="background-color:#E0E0E0;text-align: center; max-width:100%" id="btnconfirmpayment">
-            @*<div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-7 ">
-                </div>
-                <div class="ccol-xs-6 col-md-5 mt-2 mb-2">
-
-                    <button id="btninsertpayment" class="btn btn-success" onclick="InsertPayment()" type="button" style="width: 100px;margin-left:13%">แจ้งโอนเงิน</button>
-
-                    <button id="btnclearpayment" class="btn btn-dark" onclick="clearpayment()" style="color:white;width:110px;margin-left:2%" type="button">ล้างข้อมูล</button>
-
-
-                    <button class="btn btn-dark" id="btnclosepayment" onclick="closepayment()" style="color:white; width:90px;margin-left:2%" type="button">ปิด</button>
-                </div>
-
-            </div>*@
-
-        </div>
-    </div>
-   
+           
+        </div>   
 </div>
 
 
@@ -447,44 +399,81 @@
 
         $(document).ready(function () {
 
-
             $("#ConfirmPayment").hide();
             $("#btnconfirmpayment").hide();
+
+            window.addEventListener('load', function () {
+            
+                var formsSearchPayment = document.getElementsByClassName('SearchPaymentvalidation');
+                var invalidSearch = $('.SearchPaymentvalidation .invalid-feedback');               
+                   Array.prototype.filter.call(formsSearchPayment, function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                invalidSearch.css('display', 'block');
+
+                            } else {
+
+                                invalidSearch.css('display', 'none');
+                                Searchpayment();
+                            }
+                        }, false);
+                   });    
+
+            }, false);      
+     
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('ConfirmPaymentvalidation');             
+                
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        var PaymentID = document.getElementById('btnupdatepayment');
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        else {
+                            UpdatePayment(PaymentID.value);
+                        }
+                      
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
 
             $(".custom-file-input").on("change", function () {
                 var fileName = $(this).val().split("\\").pop();
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-            });        
+            });
             document.getElementById("paymentrequestdatefrom").flatpickr({
                 enableTime: false,
                 dateFormat: "d/m/Y",
-                //defaultDate: "today",
-                defaultDate: "07/10/2020"
+                defaultDate: "today"              
             });
             document.getElementById("paymentrequestdateto").flatpickr({
                 enableTime: false,
                 dateFormat: "d/m/Y",
-                //defaultDate: "today",
-                defaultDate: "07/10/2020"
+                defaultDate: "today"             
 
             });
             document.getElementById("paymentdatefrom").flatpickr({
                 enableTime: false,
                 dateFormat: "d/m/Y",
-                //defaultDate: "today",
-                defaultDate: "07/12/2020"
+                defaultDate: "today"              
 
             });
             document.getElementById("paymentdateto").flatpickr({
                 enableTime: false,
-                dateFormat: "d/m/Y",
-                //defaultDate: "today",
-                defaultDate: "07/12/2020"
+                dateFormat: "d/m/Y",                
+                defaultDate: "today"
             });
             document.getElementById("payment_date").flatpickr({
                 enableTime: false,
                 dateFormat: "d/m/Y",
-                defaultDate: "today",
+                defaultDate: "today"
             });
             document.getElementById("payment_datetime").flatpickr({
                 enableTime: true,
@@ -510,8 +499,8 @@
             var strpaymentdateto = Datedateto.getFullYear() + "-" + (Datedateto.getMonth() + 1) + "-" + Datedateto.getDate();
 
 
-            var tbSearchconfirmpayment = $('#tbSearchconfirmpayment').DataTable({              
-                processing: true, // for show progress bar                
+            var tbSearchconfirmpayment = $('#tbSearchconfirmpayment').DataTable({
+                processing: true, // for show progress bar
                 filter: false, // this is for disable filter (search box)
                 orderMulti: false, // for disable multiple column at once
                 pageLength: 10,
@@ -553,7 +542,7 @@
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 columns: [
                     {
-                        "data": null,render: function (data, type, row, meta) {
+                        "data": null, render: function (data, type, row, meta) {
                             var action = '';
                             var status = '';
                             if (data.Status == 'Y') {
@@ -563,14 +552,14 @@
                             else {
                                 action = "Confrim";
                                 status = "N";
-                            }                         
+                            }
                             return '<a href="javascript:void(0);" onclick="GetIdpayment(\'' + data.PaymentId + '\',\'' + status + '\')"><u>' + action + '</u></a>';
                         },
-                       
+
                     },
                     {
                         "data": null, render: function (data, type, row, meta) {
-                            return meta.row + 1; 
+                            return meta.row + 1;
                         },
                     },
                     { "data": "PaymentId" },
@@ -580,7 +569,7 @@
                             var strRequest_date = data.Request_date.substring(0, 10);
                             return strRequest_date;
                         },
-                    },                  
+                    },
                     {
                         "data": null, render: function (data, type, row, meta) {
                             var strPaymentDatetime = data.PaymentDatetime.substring(0, 10);
@@ -589,7 +578,7 @@
                     },
                     {
                         "data": null, render: function (data, type, row, meta) {
-                            var datapaymentchannal = GetpaymentchannalById(data.PaymentChannal);                            
+                            var datapaymentchannal = GetpaymentchannalById(data.PaymentChannal);
                             return datapaymentchannal;
                         },
                     },
@@ -625,9 +614,7 @@
                 drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
             });
 
-
-            $("#btnSearchconfirmpayment").click(function () {
-
+            function Searchpayment() {
                 paymentrequestdatefrom = document.querySelector("#paymentrequestdatefrom")._flatpickr;
                 paymentrequestdateto = document.querySelector("#paymentrequestdateto")._flatpickr;
                 paymentdatefrom = document.querySelector("#paymentdatefrom")._flatpickr;
@@ -644,10 +631,8 @@
                 strpaymentdateto = Datedateto.getFullYear() + "-" + (Datedateto.getMonth() + 1) + "-" + Datedateto.getDate();
 
 
-
-
                 tbSearchconfirmpayment.ajax.reload();
-            });
+            }
 
 
 
@@ -774,21 +759,18 @@
             $("#btnconfirmpayment").show('slow');
             var textbutton = '';
             textbutton = '<div class="row">' +
-                '<div class="col-xs-12 col-sm-6 col-md-7 ">' +
+                '<div class="col-md-6 ">' +
                 '</div>' +
-                '<div class="ccol-xs-6 col-md-5 mt-2 mb-2">' +
-                '<button id="btninsertpayment" class="btn btn-success" onclick="UpdatePayment(\'' + data.PaymentId + '\')" type="button" style="width: 100px;margin-left:13%">แจ้งโอนเงิน</button>' +
-                '<button id="btnclearpayment" class="btn btn-dark" onclick="clearpayment()" style="color:white;width:110px;margin-left:2%" type="button">ล้างข้อมูล</button>' +
-                '<button class="btn btn-dark" id="btnclosepayment" onclick="closepayment()" style="color:white; width:90px;margin-left:2%" type="button">ปิด</button>' +
+                '<div class="col-xs-12 col-md-6 mt-2 mb-2">' +          
+                '<button id="btnupdatepayment" class="btn btn-success" type="submit" value="' + data.PaymentId+'" style="width:130px;margin-left:13%"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> แจ้งโอนเงิน</button>' +
+                //'<button id="btnupdatepayment" class="btn btn-success" type="submit" onclick="UpdatePayment(\'' + data.PaymentId + '\')"  style="width:130px;margin-left:13%"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> แจ้งโอนเงิน</button>' +
+                '<button id="btnclearpayment" type="button" onclick="clearpayment()" class="btn btn-dark " style="margin-left:2%"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" /></svg> ล้างข้อมูล</button>'+
+                '<button class="btn btn-danger" id="btnclosepayment" onclick="closepayment()" style="color:white; width:90px;margin-left:2%" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ปิด</button>' +
                 '</div>' +
                 '</div>';
             $("#btnconfirmpayment").empty();
             $('#btnconfirmpayment').append(textbutton);
-
-
-            //var strpaymentDate = data.PaymentDatetime.substring(0, 10).split("-");
-            //var strpaymentTime = data.PaymentDatetime.substring(11, 16);
-            //var Datapayment = new Date(strpaymentDate[0], strpaymentDate[1] - 1, strpaymentDate[2])
+        
             $("#Request_no").text(data.Request_no);
             $("#Payment_no").text(data.PaymentNo);
             $("#Company_name").text(data.companyNameTh);
@@ -797,25 +779,7 @@
             $("#Contact_name").val(data.ContactName);
             $("#Contact_email").val(data.ContactEmail);
             $("#Contact_phone_no").val(data.ContactPhoneNo);
-            document.getElementById("amount_transfer").style.backgroundColor = "white";
-            //background - color: #c1bdbd;
-            //$("#payment_channal").val(data.PaymentChannal);
-            //document.getElementById("payment_date").flatpickr({
-            //    enableTime: false,
-            //    dateFormat: "d/m/Y",
-            //    defaultDate: 'null',
-            //});
-            //document.getElementById("payment_datetime").flatpickr({
-            //    enableTime: true,
-            //    noCalendar: true,
-            //    dateFormat: "H:i",
-            //    defaultDate: 'null'
-            //});
-            //$("#amount_transfer").val(data.amountTransfer);
-            //$('#bank_transfer').append('<option value="">' + data.bankTransfer + ' </option>');
-            //$("#bank_branch").val(data.bankBranch);
-            //$("#nameslip_attach_file").html(data.slipAttachFile);
-            //$("#remark").val(data.remark);
+            document.getElementById("amount_transfer").style.backgroundColor = "white";        
             Getpaymentchannal();
             GetDetailpaymentchannal();
             GetBankTransfer();
@@ -854,6 +818,7 @@
             $("#Contact_phone_no").val(data.ContactPhoneNo);
             $("#payment_channal option").remove();
             $('#payment_channal').append(textpaymentchannal);
+            GetDetailpaymentchannal();
 
             //$("#textpayment_channal").val("0001");
             document.getElementById("payment_date").flatpickr({
@@ -879,7 +844,9 @@
             $("#Contact_email").attr('disabled', 'disabled');
             $("#Contact_phone_no").attr('disabled', 'disabled');
             $("#payment_channal").attr('disabled', 'disabled');
+
             $("#textpayment_channal").attr('disabled', 'disabled');
+            $("#Detailpaymentchannal input").attr('disabled', 'disabled');
             $('#payment_date').attr('disabled', 'disabled');
             $('#payment_datetime').prop('disabled', 'disabled');
             $("#amount_transfer").attr('disabled', 'disabled');
@@ -887,6 +854,7 @@
             $("#bank_branch").attr('disabled', 'disabled');;
             $("#slip_attach_file").attr('disabled', 'disabled');
             $("#remark").attr('disabled', 'disabled');
+
         }
 
         function UpdatePayment(PaymentId) {
@@ -926,20 +894,19 @@
                 contentType: false,
                 async: false,
                 success: function (response) {
-                    if (response) {
+                    if (response.Status) {
                         bootbox.alert({
-                            size: "small",
-                            title: "แจ้งเตือน",
                             message: "แจ้งโอนเงินสำเร็จ",
-                            callback: function () { /* your callback code */ }
+                            callback: function () {
+                                $("#ConfirmPayment").hide('fast');
+                                GetIdpayment(PaymentId, 'Y');
+                            }
                         })
                     }
                     else {
                         bootbox.alert({
-                            size: "small",
-                            title: "แจ้งเตือน",
-                            message: "แจ้งโอนเงินไม่สำเร็จ",
-                            callback: function () { /* your callback code */ }
+                            message: "แจ้งโอนเงินไม่สำเร็จ : " + response.Date,
+
                         })
 
                     }
@@ -947,6 +914,7 @@
                 failure: function (msg) {
                 }
             });
+            
         }
 
         function clearpayment() {
@@ -954,7 +922,7 @@
             $("#Contact_email").val('');
             $("#Contact_phone_no").val('');
             Getpaymentchannal();
-            GetDetailpaymentchannal();         
+            GetDetailpaymentchannal();
             document.getElementById("payment_date").flatpickr({
                 enableTime: false,
                 dateFormat: "d/m/Y",
@@ -968,20 +936,20 @@
             });
             $("#amount_transfer").val('');
             GetBankTransfer();
-            $("#bank_branch").val('');             
-           
+            $("#bank_branch").val('');
+
             var oldInput = document.getElementById("slip_attach_file");
             var newInput = document.createElement("input");
             newInput.type = "file";
             newInput.id = oldInput.id;
             newInput.name = oldInput.name;
             newInput.className = oldInput.className;
-            newInput.style.cssText = oldInput.style.cssText;           
-            oldInput.parentNode.replaceChild(newInput, oldInput); 
-            $("#nameslip_attach_file").html('Choose file');  
+            newInput.style.cssText = oldInput.style.cssText;
+            oldInput.parentNode.replaceChild(newInput, oldInput);
+            $("#nameslip_attach_file").html('Choose file');
 
             $("#remark").val('');
-           
+
         }
         function clearSearchpayment() {
             $("#paymentno").val('');
@@ -989,26 +957,26 @@
             document.getElementById("paymentrequestdatefrom").flatpickr({
                 enableTime: false,
                 dateFormat: "d/m/Y",
-                defaultDate: "today"                
+                defaultDate: "today"
             });
             document.getElementById("paymentrequestdateto").flatpickr({
                 enableTime: false,
                 dateFormat: "d/m/Y",
-                defaultDate: "today"             
+                defaultDate: "today"
 
             });
             document.getElementById("paymentdatefrom").flatpickr({
                 enableTime: false,
                 dateFormat: "d/m/Y",
-                defaultDate: "today"               
+                defaultDate: "today"
 
             });
             document.getElementById("paymentdateto").flatpickr({
                 enableTime: false,
                 dateFormat: "d/m/Y",
-                defaultDate: "today"               
+                defaultDate: "today"
             });
-            var textselect = '<option>Please Select</option>' +
+            var textselect = '<option value="">Please Select</option>' +
                 '<option value="Y">Paid</option>' +
                 '<option value="N">Not Paid</option>'
 
