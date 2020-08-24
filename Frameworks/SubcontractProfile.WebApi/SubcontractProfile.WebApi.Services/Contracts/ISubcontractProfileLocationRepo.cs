@@ -22,6 +22,9 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>> SearchLocation(System.Guid company_id,string location_code,
             string location_name, string location_name_en, string storage_location, string phone, string location_name_alias);
 
+        Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>> GetLocationByCompany(System.Guid company_id);
+
+
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocationList>> SearchListLocation(SubcontractProfile.WebApi.Services.Model.SearchSubcontractProfileLocationQuery data);
     }
 }

@@ -112,13 +112,13 @@ namespace SubcontractProfile.Web.Controllers
                 {
                     string encryptedPassword = Util.EncryptText(model.password);
                     var authenticatedUser = GetUser(model.username, encryptedPassword);
-                    if(authenticatedUser !=null)
+                    if(!string.IsNullOrEmpty(authenticatedUser.Username))
                     {
                         res.Status = true;
                         SessionHelper.SetObjectAsJson(HttpContext.Session, "userLogin", authenticatedUser);
                         Url = "/CompanyProfile/Index";
 
-
+                        res.Status = true;
                         Lang = model.Language != null ? model.Language : "TH";
                         SessionHelper.SetObjectAsJson(HttpContext.Session, "language", Lang);
                         //var str_L= SessionHelper.GetObjectFromJson<string>(HttpContext.Session, "language");
@@ -127,7 +127,7 @@ namespace SubcontractProfile.Web.Controllers
                     else
                     {
                         res.Status = false;
-                        res.Message = "Login failed";
+                        res.Message = "ชื่อผู้ใช้หรือรหัสผ่านไม่ตรงกันกับในระบบ กรุณาสมัครเพื่อใช้งาน";
                     }
                     
                     // string decrypted = Util.DecryptText(encrypted);
@@ -201,7 +201,7 @@ namespace SubcontractProfile.Web.Controllers
         {
             HttpContext.Session.Clear();
             HttpContext.SignOutAsync();
-            return View();
+            return RedirectToAction("Login", "Account");
         }
 
         //public  bool IsThaiCulture(this int currentCulture)
@@ -1424,7 +1424,10 @@ namespace SubcontractProfile.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                   
+                    #region Check Username Duplicate
+
+                    #endregion
+
                     Guid companyId = Guid.NewGuid();
                     model.CompanyId = companyId;
                     model.CreateDate = DateTime.Now;
@@ -1460,12 +1463,16 @@ namespace SubcontractProfile.Web.Controllers
                     }
                     if (resultGetFile)
                     {
+                        SessionHelper.RemoveSession(HttpContext.Session, "userUploadfileDaft");
+
                         #region Insert Company
 
                         string encrypted = Util.EncryptText(model.Password);
                         model.Password = encrypted;
 
-                    var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
+                       
+
+                        var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
                     HttpClient clientCompany = new HttpClient();
                     clientCompany.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
@@ -1514,7 +1521,8 @@ namespace SubcontractProfile.Web.Controllers
                             HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
                             if (responseAddress.IsSuccessStatusCode)
                             {
-                                res.Status = true;
+                                        SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaft");
+                                        res.Status = true;
                                 res.Message = "Register Success";
                                 res.StatusError = "0";
                             }
@@ -1594,47 +1602,65 @@ namespace SubcontractProfile.Web.Controllers
                         //using (output = System.IO.File.Create(this.GetPathAndFilename(filename)))
                         //    await source.CopyToAsync(output);
 
-
-                        Guid id = Guid.NewGuid();
-                        using (var ms = new MemoryStream())
+                        if (source.ContentType.ToLower() != "image/jpg" &&
+                            source.ContentType.ToLower() != "image/jpeg" &&
+                            source.ContentType.ToLower() != "image/pjpeg" &&
+                            source.ContentType.ToLower() != "image/gif" &&
+                            source.ContentType.ToLower() != "image/x-png" &&
+                            source.ContentType.ToLower() != "image/png" &&
+                            source.ContentType.ToLower() != "application/pdf"
+                            )
                         {
-                            source.CopyTo(ms);
-                            var fileBytes = ms.ToArray();
-                            L_File.Add(new FileUploadModal
-                            {
-                                file_id = id,
-                                Fileupload = fileBytes,
-                                typefile = type_file,
-                                ContentDisposition = source.ContentDisposition,
-                                ContentType = source.ContentType,
-                                Filename = filename
-                            });
+                            statusupload = false;
+                            strmess = "Upload type file miss match.";
                         }
+                        else
+                        {
+                            Guid id = Guid.NewGuid();
+                            using (var ms = new MemoryStream())
+                            {
+                                source.CopyTo(ms);
+                                var fileBytes = ms.ToArray();
+                                L_File.Add(new FileUploadModal
+                                {
+                                    file_id = id,
+                                    Fileupload = fileBytes,
+                                    typefile = type_file,
+                                    ContentDisposition = source.ContentDisposition,
+                                    ContentType = source.ContentType,
+                                    Filename = filename
+                                });
+                            }
+                            var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
+                            //byte[] byteArrayValue = HttpContext.Session.Get("userUploadfileDaft");
+                            //var data = FromByteArray<List<FileUploadModal>>(byteArrayValue);
+
+                            //var objComplex = HttpContext.Session.GetObject("userUploadfileDaft");
+
+                            if (data != null)
+                            {
+
+                                data.RemoveAll(x => x.file_id.ToString() == fid);
+                                data.Add(L_File[0]);
+                                SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", data);
+
+                            }
+                            else
+                            {
+                                // HttpContext.Session.Set("userUploadfileDaft", ToByteArray<List<FileUploadModal>>(L_File));
+
+                                SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", L_File);
+                            }
+
+                            strmess = "Upload file success";
+                        }
+                        
                     }
-                    var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
-                    //byte[] byteArrayValue = HttpContext.Session.Get("userUploadfileDaft");
-                    //var data = FromByteArray<List<FileUploadModal>>(byteArrayValue);
-
-                    //var objComplex = HttpContext.Session.GetObject("userUploadfileDaft");
-
-                    if (data != null)
-                    {
-
-                        data.RemoveAll(x => x.file_id.ToString() == fid);
-                        data.Add(L_File[0]);
-                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", data);
-
-                    }
-                    else
-                    {
-                        // HttpContext.Session.Set("userUploadfileDaft", ToByteArray<List<FileUploadModal>>(L_File));
-
-                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", L_File);
-                    }
+                   
 
 
                 }
-                strmess = "Upload file success";
+               
             }
             catch (Exception e)
             {
@@ -1644,7 +1670,7 @@ namespace SubcontractProfile.Web.Controllers
             }
 
 
-            return Json(new { status = statusupload, message = strmess, response = L_File[0].file_id });
+            return Json(new { status = statusupload, message = strmess, response = (statusupload ? L_File[0].file_id.ToString() : "") });
 
            // return Json(new { status = statusupload, message = strmess });
         }

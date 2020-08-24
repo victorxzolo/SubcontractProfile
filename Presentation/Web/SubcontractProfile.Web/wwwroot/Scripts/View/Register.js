@@ -478,9 +478,10 @@
         var companyname = value[0].vName;
 
         $('#txtcompany_name_th').val(companyname);
-        if ($('#ddlprefixcompany_name_th option:selected').text() == titlename) {
-            $('#ddlprefixcompany_name_th').text(titlename).change();
-        } 
+        $("#ddlprefixcompany_name_th option").filter(function () {
+            //may want to use $.trim in here
+            return $(this).text() == titlename;
+        }).prop('selected', true);
         ClearDataModalRevenue();
         $('#SearchRevenue').modal('hide');
     });
@@ -1019,8 +1020,8 @@
 
 
         if ($("#chktypeN").is(":checked")) {
-            chksubcontract_type = $("#chktypeN").val();
-            distribution_channel = $('#ddldistribution option').filter(':selected').val();
+            //chksubcontract_type = $("#chktypeN").val();
+           // distribution_channel = $('#ddldistribution option').filter(':selected').val();
             channel_sale_group = $('#ddlchannelsalegroup option').filter(':selected').val();
             tax_id = $('#txttax_id').val();
             company_alias = $('#txtcompany_alias').val();

@@ -1,158 +1,309 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <style>
-        .form-control {
-            display: block;
-            width: 100%;
-            height: 34px;
-            padding: 6px 12px;
-            font-size: 14px;
-            line-height: 1.42857143;
-            color: #555;
-            background-color: #fff;
-            background-image: none;
-            border: 1px solid #ccc;
-            border-radius: 0;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+    <div class="widget widget-chart-one">
+        <div class="widget-heading">
+            <h5 class="">ข้อมูลบริษัท</h5>
+
+        </div>
+        <div class="widget-content ">
+
+            <div class="form-row mb-4">
+                <div class="form-group col-md-12">
+                    <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline1" name="customRadioInline1" value="N" class="custom-control-input" checked="checked">
+                        <label class="custom-control-label" for="customRadioInline1">New Subcontract</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline2" name="customRadioInline1" value="D" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline2">Dealer</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Location Code</label>
+                    <input type="text" class="form-control" id="txtLocationCode" placeholder="Location Code">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Team Code</label>
+                    <input type="text" class="form-control" id="txtTeamCode" placeholder="Team Code">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Team Name(TH)</label>
+                    <input type="text" class="form-control" id="txtTeamNameT" placeholder="Team Name(TH)">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Team Name(EN)</label>
+                    <input type="text" class="form-control" id="txtTeamNameE" placeholder="Team Name(EN)">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Storage Location</label>
+                    <input type="text" class="form-control" id="txtStorageLocation" placeholder="Storage Location">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Ship To</label>
+                    <input type="text" class="form-control" id="txtShipTo" placeholder="Ship To">
+                </div>
+
+            </div>
+
+
+            <div style="text-align:center">
+
+                <button class="btn btn-dark mb-2" type="button" id="btnclear" onclick="clearData()">
+                    <i class="fa fa-refresh icon"></i><span>ล้างข้อมูล</span>
+                </button>
+                <button class="btn btn-success mb-2" type="button" id="btnSearch" onclick="SearchTeam()">
+                    <i class="fa fa-search icon"></i><span>ค้นหาข้อมูล</span>
+                </button>
+
+            </div>
+            <div style="text-align:right">
+
+                <button class="btn btn-success mb-2" type="button" id="btnNew" onclick="addNew()">
+                    <i class="fa fa-search icon"></i><span>New Team</span>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <br />
+        <div class="widget-heading">
+            <h5 class="">ผลการค้นหา</h5>
+        </div>
+        @*</div>
+            <div class="col-md-12 text-right mb-1">
+                <button id="add-work-platforms" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>เพิ่ม</button>
+
+            </div>*@
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4" id="SearchTeamResult">
+                <thead class="thead-light">
+                    <tr>
+                        @*<th class="checkbox-column">
+                                <label class="new-control new-checkbox checkbox-primary" style="height: 18px; margin: 0 auto;">
+                                    <input type="checkbox" class="new-control-input todochkbox" id="selectAll">
+                                    <span class="new-control-indicator"></span>
+                                </label>
+                            </th>*@
+                        <th>TeamID</th>
+                        @*<th>Location Name</th>*@
+                        <th>Team Code</th>
+                        <th>Team Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts
+{
+
+    <script type="text/javascript">
+
+
+        //$('#regisdatefrom').datepicker({
+        //    format: 'dd/mm/yyyy',
+        //    daysOfWeekHighlighted: "6,0",
+        //    autoclose: true,
+        //    todayHighlight: true,
+        //    clearBtn: true,
+        //});
+        //$('#regisdateto').datepicker({
+        //    format: 'dd/mm/yyyy',
+        //    daysOfWeekHighlighted: "6,0",
+        //    autoclose: true,
+        //    todayHighlight: true,
+        //    clearBtn: true,
+
+        //});
+         function addNew() {
+            localStorage.clear();
+            var getID = [{
+                teamId: '0'
+            }];
+            localStorage.setItem('teamID', JSON.stringify(getID));
+            location.href = '@Url.Action("_PartialTeam", "Profile")';
         }
 
-        .btn-default {
-            color: #8DC63F; /*before color #74a333*/
-            background-color: #DDE1E4;
-            border-color: #ccc;
+        function clearData() {
+            //$("#chktype").val(),
+            $("#txtLocationCode").val("");
+            $("#txtTeamCode").val("");
+            $("#txtTeamNameT").val("");
+            $("#txtTeamNameE").val("");
+            $("#txtStorageLocation").val("");
+            $("#txtShipTo").val("");
+            var table = $('#SearchTeamResult').DataTable();
+            table.destroy();
         }
-    </style>
 
-    <body>
-        <h3>Search Team</h3>
-        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-2">
-                    <label>Register Type</label>
-                </div>
-                <div class="col-sm-10">
-                    <input type="radio" id="1" name="type" value="new">
-                    <label for="new">New Subcontract</label>&nbsp;&nbsp;
-                    <input type="radio" id="2" name="type" value="deal">
-                    <label for="deal">Dealer</label>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-sm-2">
-                    <label>Location Code :</label>
-                </div>
-                <div class="col-sm-4">
-                    <select id="location" name="location" style="width:300px">
-                    </select>
-                </div>
-                <div class="col-sm-2">
-                    <label>Team Code :</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" id="TeamCode" style="width:300px" class="form-control">
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-sm-2">
-                    <label>Vendor Code :</label>
-                </div>
-                <div class="col-sm-10">
-                    <input type="text" id="VendorCode" style="width:300px" class="form-control">
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-sm-2">
-                    <label>Team Name(TH) :</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" id="TeamNameT" style="width:300px" class="form-control">
-                </div>
-                <div class="col-sm-2">
-                    <label>Team Name(EH) :</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" id="TeamNameE" style="width:300px" class="form-control">
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-sm-2">
-                    <label>Storage Location :</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" id="Storage" style="width:300px" class="form-control">
-                </div>
-                <div class="col-sm-2">
-                    <label>Ship To :</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" id="Ship" style="width:300px" class="form-control">
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-sm-6" style="text-align:right; ">
-                    <input type="button" id="btnClear" value="Clear" width="100" class="btn btn-default" />
-                </div>
-                <div class="col-sm-6">
-                    <input type="button" id="btnSearch" value="Search" width="100" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-        <br />
+        function getAllTeam() {
+            var groupId = '0';
+            var tbCompany = $('#SearchTeamResult').DataTable({
+                ajax: {
 
-        <div class="row" style="margin-left:5px;">
-            <h3>Search Result</h3>
-            <input type="button" id="btnDel" value="Delete" width="100" class="btn btn-default" style="position: absolute; right: 170px;" />
-            <input type="button" id="btnNew" value="New Team" width="100" class="btn btn-default" style="position: absolute; right: 10px;" />
-        </div>
-        <hr style="height:1px;border-width:0;color:gray;background-color:gray">
-        <br />
-        <table align="center" width="100%" border="1">
-            <tr style="line-height: 20px; background-color:lightgray;">
-                <td style="vertical-align: central;" width="5%" align="center">
-                    <input id="Checkbox1" type="checkbox" />
-                </td>
-                <td width="5%">
-                    <label>Edit</label>
-                </td>
-                <td width="5%">
-                    <label>Register Type</label>
-                </td>
-                <td width="10%">
-                    <label>Location Code</label>
-                </td>
-                <td width="15%">
-                    <label>Vendor Code</label>
-                </td>
-                <td width="25%">
-                    <label>Team Code</label>
-                </td>
-                <td width="10%">
-                    <label>Team Name(EH)</label>
-                </td>
-                <td width="10%">
-                    <label>Team Name(EH)</label>
-                </td>
-                <td width="10%">
-                    <label>Storage Location</label>
-                </td>
-                <td width="10%">
-                    <label>Ship To</label>
-                </td>
-            </tr>
-        </table>
+                    type: "POST",
+                    dataType: 'JSON',
+                    url: "/Profile/GetTeam",
+                    data: { 'TeamId': groupId },
+                    dataSrc: function (data) {
+                        //var val = []
+                        //val = ConcatstrAddress(data.data);
+                        //data.data = val;
+                        return data.data;
+                    },
+                    error: function (xhr, status, error) {
+                        //Loading(0);
+                        //clearForEdit();
+                        console.log(status);
+                        //showFeedback("error", xhr.responseText, "System Information",
+                            //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+                },
+                columns: [
+                    { "data": "TeamId", "visible": false  },
+                    //{ "data": "vendorCode" },
+                    { "data": "TeamCode" },
+                    { "data": "TeamName" },
+                    {
+                        "data": null,
+                        orderable: false,
+                        "defaultContent": "<button id='btnEdit' class='btn-border btn-green edit_btn'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button><button id='btnDel' class='btn-border btn-black delete_btn'><i class='fa fa-trash icon'></i><span>ลบ</span></button>"
 
+                    }
+                ],
+            });
 
-    </body>
+            $('#SearchTeamResult tbody').on('click', 'button', function () {
+                var table = $('#SearchTeamResult').DataTable();
+                var id = this.id;
+                var data = table.row($(this).parents('tr')).data();
+                //var data = table.row(this).data();
+                var val = data['TeamId'];
+                if (id == 'btnEdit') {
+                    localStorage.clear();
+                    var getID = [{
+                        teamID: val
+                    }];
+                    localStorage.setItem('teamID', JSON.stringify(getID));
+                    location.href = '@Url.Action("_PartialTeam", "Profile")';
+                }
+                if (id == 'btnDel')
+                    DelTeam(val);
+
+            });
+        }
+
+        function SearchTeam() {
+            var table = $('#SearchTeamResult').DataTable();
+            table.destroy();
+            if ($("#txtLocationCode").val() !== "" || $("#txtTeamCode").val() !== "" || $("#txtTeamNameT").val() !== "" || $("#txtTeamNameE").val() !== ""
+                || $("#txtStorageLocation").val() !== "" || $("#txtShipTo").val() !== "") {
+
+                var data = {
+                    //"ProfileType": " ",//$("#chktype").val(),
+                    //"LocationCode": " ", //$("#ddlLocationCode").val(),
+                    //"VendorCode": " ",//$("#txtVenderCode").val(),
+                    //"CompanyNameTh": $("#txtCompanyNameT").val(),
+                    //"CompanyNameEn": $("#txtCompanyNameE").val(),
+                    //"CompanyAlias": $("#txtCompanyAlias").val(),
+                    //"CompanyCode": $("#txtCompanyCode").val(),
+                    //"DistibutionCchannel": " ",//$("#ddldistribution").val(),
+                    //"ChannelGroup": " "//$("#ddlchannelsalegroup").val()
+                };
+
+                var tbCompany = $('#SearchTeamResult').DataTable({
+                    ajax: {
+
+                        type: "POST",
+                        //dataType: 'JSON',
+                        url: "/Profile/SearchTeam",
+                        data: { Team: data },
+                        dataSrc: function (data) {
+                            //var val = []
+                            //val = ConcatstrAddress(data.data);
+                            //data.data = val;
+                            return data.data;
+                        },
+                        error: function (xhr, status, error) {
+                            //Loading(0);
+                            //clearForEdit();
+                            console.log(status);
+                            //showFeedback("error", xhr.responseText, "System Information",
+                            //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                        }
+
+                    },
+                    columns: [
+                        { "data": "TeamId", "visible": false },
+                        //{ "data": "vendorCode" },
+                        { "data": "TeamCode" },
+                        { "data": "TeamName" },
+                        {
+                            "data": null,
+                            orderable: false,
+                            "defaultContent": "<button id='btnEdit' class='btn-border btn-green edit_btn'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button><button id='btnDel' class='btn-border btn-black delete_btn'><i class='fa fa-trash icon'></i><span>ลบ</span></button>"
+
+                        }
+                    ],
+                });
+
+                $('#SearchTeamResult tbody').on('click', 'button', function () {
+                    var table = $('#SearchTeamResult').DataTable();
+                    var id = this.id;
+                    var data = table.row($(this).parents('tr')).data();
+                    //var data = table.row(this).data();
+                    var val = data['teamId'];
+                    if (id == 'btnEdit') {
+                        localStorage.clear();
+                        var getID = [{
+                            teamID: val
+                        }];
+                        localStorage.setItem('teamID', JSON.stringify(getID));
+                        location.href = '@Url.Action("_PartialTeam", "Profile")';
+                    }
+
+                    if (id == 'btnDel') {
+                        DelTeam(val);
+                    }
+
+            });
+            }
+            else {
+                getAllTeam();
+            }
+        }
+
+        function DelTeam(teamId) {
+            //var comId = 'a8bf8003-22dc-4e22-add6-7564e41f312c';
+            $.ajax({
+                url: "/Profile/DeleteTeam",
+                dataType: 'JSON',
+                data: { 'TeamId': teamId },
+                type: 'POST',
+                success: function (result) {
+                    //alert("success");
+                },
+                error: function (result) {
+                    //alert("error");
+                }
+            });
+        }
+
+    </script>
+
+}

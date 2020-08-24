@@ -7,6 +7,7 @@ namespace SubcontractProfile.Web.Model
 {
     public class SubcontractProfilePersonalModel
     {
+        public System.Guid engineerId { get; set; }
         public System.Guid PersonalId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]

@@ -1,159 +1,396 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <style>
-        .form-control {
-            display: block;
-            width: 100%;
-            height: 34px;
-            padding: 6px 12px;
-            font-size: 14px;
-            line-height: 1.42857143;
-            color: #555;
-            background-color: #fff;
-            background-image: none;
-            border: 1px solid #ccc;
-            border-radius: 0;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-        }
 
-        .btn-default {
-            color: #8DC63F; /*before color #74a333*/
-            background-color: #DDE1E4;
-            border-color: #ccc;
-        }
-    </style>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+        <div class="widget widget-chart-one">
+            <div class="widget-heading">
+                <h5 class="">ข้อมูลบริษัท</h5>
 
-    <body>
-        <h3>Search Company</h3>
-        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-2">
-                    <label>Register Type</label>
+            </div>
+            <div class="widget-content ">
+
+                <div class="form-row mb-4">
+                    <div class="form-group col-md-12">
+                        <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline1" name="customRadioInline1" value="N" class="custom-control-input" checked="checked">
+                            <label class="custom-control-label" for="customRadioInline1">New Subcontract</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline2" name="customRadioInline1" value="D" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline2">Dealer</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6"> 
+                        <label for="inputEmail4">ชื่อบริษัท (ไทย)</label>
+                        <input type="text" class="form-control" id="txtCompanyNameT" placeholder="Company Name (TH)">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ชื่อบริษัท (อังกฤษ)</label>
+                        <input type="text" class="form-control" id="txtCompanyNameE" placeholder="Company Name (EN)">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Company Ailas</label>
+                        <input type="text" class="form-control" id="txtCompanyAlias" placeholder="Company Ailas">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Company Code</label>
+                        <input type="text" class="form-control" id="txtCompanyCode" placeholder="Company Code">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Distribution Channel</label>
+                        <select class="placeholder js-states form-control" id="ddlDistribution">
+                            <option value="Channel1">Channel1</option>
+                            <option value="Channel2">Channel2</option>
+                            <option value="Channel3">Channel3</option>
+                            <option value="Channel4">Channel4</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Channel Sale Group</label>
+                        <select class="placeholder js-states form-control" id="ddlChannel">
+                            <option value="Group1">Group1</option>
+                            <option value="Group2">Group2</option>
+                            <option value="Group3">Group3</option>
+                            <option value="Group4">Group4</option>
+                        </select>
+                    </div>
+
                 </div>
-                <div class="col-sm-10">
-                    <input type="radio" id="1" name="type" value="new">
-                    <label for="new">New Subcontract</label>&nbsp;&nbsp;
-                    <input type="radio" id="2" name="type" value="deal">
-                    <label for="deal">Dealer</label>
+
+
+                <div style="text-align:center">
+
+                    <button class="btn btn-dark mb-2" type="button" id="btnclear" onclick="clearData()">
+                        <i class="fa fa-refresh icon"></i><span>ล้างข้อมูล</span>
+                    </button>
+
+                    <button class="btn btn-success mb-2" type="button" id="btnSearch" onclick="SearchCompany()">
+                        <i class="fa fa-search icon"></i><span>ค้นหาข้อมูล</span>
+                    </button>
+                </div>
+                <div style="text-align:right">
+
+                    <button class="btn btn-dark mb-2" type="button" id="btnDel" onclick="getSelect()">
+                        <i class="fa fa-trash icon"></i><span>Delete</span>
+                    </button>
+
                 </div>
             </div>
+
+
             <br />
-            <div class="row">
-                <div class="col-sm-2">
-                    <label>Location Code :</label>
-                </div>
-                <div class="col-sm-4">
-                    <select id="location" name="location" style="width:300px">
-                    </select>
-                </div>
-                <div class="col-sm-2">
-                    <label>Vender Code :</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" id="VenderCode" style="width:300px" class="form-control">
-                </div>
+            <div class="widget-heading">
+                <h5 class="">ผลการค้นหา</h5>
             </div>
-            <br />
-            <div class="row">
-                <div class="col-sm-2">
-                    <label>Company Name(TH) :</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" id="CompanyNameT" style="width:300px" class="form-control">
-                </div>
-                <div class="col-sm-2">
-                    <label>Company Name(EH) :</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" id="CompanyNameE" style="width:300px" class="form-control">
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-sm-2">
-                    <label>Company alias :</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" id="Companyalias" style="width:300px" class="form-control">
-                </div>
-                <div class="col-sm-2">
-                    <label>Company Code :</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" id="CompanyCode" style="width:300px" class="form-control">
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-sm-2">
-                    <label>Distribution Channel :</label>
-                </div>
-                <div class="col-sm-4">
-                    <select id="Distribution" name="Distribution" style="width:300px">
-                    </select>
-                </div>
-                <div class="col-sm-2">
-                    <label>Channel Sale Group :</label>
-                </div>
-                <div class="col-sm-4">
-                    <select id="Channel" name="Channel" style="width:300px">
-                    </select>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-sm-6" style="text-align:right; ">
-                    <input type="button" id="btnClear" value="Clear" width="100" class="btn btn-default" />
-                </div>
-                <div class="col-sm-6">
-                    <input type="button" id="btnClear" value="Search" width="100" class="btn btn-default" />
-                </div>
+            @*</div>
+            <div class="col-md-12 text-right mb-1">
+                <button id="add-work-platforms" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>เพิ่ม</button>
+
+            </div>*@
+
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4" id="SearchCompanyResult">
+                    <thead class="thead-light">
+                        <tr>
+                            @*<th class="checkbox-column">
+                                <label class="new-control new-checkbox checkbox-primary" style="height: 18px; margin: 0 auto;">
+                                    <input type="checkbox" class="new-control-input todochkbox" id="selectAll">
+                                    <span class="new-control-indicator"></span>
+                                </label>
+                            </th>*@
+                            <th></th>
+                            <th>CompanyID</th>
+                            <th>ประเภทผู้สมัคร</th>
+                            <th>รหัสบริษทั</th>
+                            <th>ชื่อบริษัท</th>
+                            <th>status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
-        <br />
-
-        <h3>Search Result</h3>
-        <hr style="height:1px;border-width:0;color:gray;background-color:gray">
-        <br/>
-            <table align="center" width="100%" border="1">
-                <tr style="line-height: 20px; background-color:lightgray;">
-                    <td style="vertical-align: top;" width="10%">
-                        <label>&nbsp;&nbsp;</label>
-                    </td>
-                    <td width="10%">
-                        <label>Register Type</label>
-                    </td>
-                    <td width="10%">
-                        <label>Company Code</label>
-                    </td>
-                    <td width="10%">
-                        <label>Company Name(TH)</label>
-                    </td>
-                    <td width="10%">
-                        <label>Company Name(EH)</label>
-                    </td>
-                    <td width="10%">
-                        <label>Company Name(EH)</label>
-                    </td>
-                    <td width="10%">
-                        <label>Distribution Channel</label>
-                    </td>
-                    <td width="10%">
-                        <label>Channel Sale Group</label>
-                    </td>
-                    <td width="30%">
-                        <label>Address</label>
-                    </td>
-                </tr>
-            </table>
+    </div>
 
 
-    </body>
+
+@section scripts
+{
+
+        <script type="text/javascript">
+            //$(document).ready(function () {
+              
+            //    //document.getElementById("customRadioInline1").checked = true
+            //});
+        //$(document).ready(function () {
+        //});
+
+        //$('#regisdatefrom').datepicker({
+        //    format: 'dd/mm/yyyy',
+        //    daysOfWeekHighlighted: "6,0",
+        //    autoclose: true,
+        //    todayHighlight: true,
+        //    clearBtn: true,
+        //});
+        //$('#regisdateto').datepicker({
+        //    format: 'dd/mm/yyyy',
+        //    daysOfWeekHighlighted: "6,0",
+        //    autoclose: true,
+        //    todayHighlight: true,
+        //    clearBtn: true,
+
+        //});
+            function getSelect() {
+                var oTable = $('#SearchCompanyResult').DataTable();
+                var oAll = [];
+                $('#SearchCompanyResult tbody tr.selected').each(function () {
+                    var pos = oTable.row(this).index();
+                    var row = oTable.row(pos).data();
+                    oAll.push(row);
+                });
+                alert(oAll);
+            }
+
+            function test1() {
+                if (document.getElementById('customRadioInline2').checked) {
+                    var rate_value = document.getElementById('customRadioInline2').value;
+                    alert(rate_value);
+                }
+
+            }
+        function clearData() {
+            //$("#chktype").val(),
+            $("#ddlLocationCode").val("");
+            $("#txtVenderCode").val("");
+            $("#txtCompanyNameT").val("");
+            $("#txtCompanyNameE").val("");
+            $("#txtCompanyAlias").val("");
+            $("#txtCompanyCode").val("");
+            //document.getElementById('customRadioInline2').checked = true;
+            //$("#ddlchannelsalegroup").val();
+            var table = $('#SearchCompanyResult').DataTable();
+            table.destroy();
+        }
+
+        function getAllCompany() {
+            var groupId = '0';
+            var tbCompany = $('#SearchCompanyResult').DataTable({
+                ajax: {
+
+                    type: "POST",
+                    dataType: 'JSON',
+                    url: "/Profile/GetCompany",
+                    data: { 'CompanyID': groupId },
+                    dataSrc: function (data) {
+                        //var val = []
+                        //val = ConcatstrAddress(data.data);
+                        //data.data = val;
+                        return data.data;
+                    },
+                    error: function (xhr, status, error) {
+                        //Loading(0);
+                        //clearForEdit();
+                        console.log(status);
+                        //showFeedback("error", xhr.responseText, "System Information",
+                            //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    }
+                },
+                columns: [
+                    {
+                        'targets': 0,
+                        'render': function (data, type, row, meta) {
+                            data = '<input type="checkbox" class="dt-checkboxes">'
+                            return data;
+                        },
+                        'checkboxes': {
+                            'selectRow': true
+                        }
+                    },
+                    { "data": "CompanyId", "visible": false  },
+                    { "data": "VendorCode" },
+                    { "data": "CompanyCode" },
+                    { "data": "CompanyNameTh" },
+                    { "data": "CompanyStatus", "visible": false },
+                    {
+                        "data": null,
+                        orderable: false,
+                        "defaultContent": "<button id='btnEdit' class='btn-border btn-green edit_btn'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button><button id='btnDel' class='btn-border btn-black delete_btn'><i class='fa fa-trash icon'></i><span>ลบ</span></button>"
+
+                    }
+
+                ],
+                select: {
+                    'style': 'multi'
+                },
+                ordering: true,
+                order: [[1, "asc"]],
+                select: true,
+                retrieve: true,
+                paging: true,
+                pagingType: "full_numbers",
+                destroy: true,
+                searching: false,
+                proccessing: true,
+                serverSide: true,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            });
+
+            $('#SearchCompanyResult tbody').on('click', 'button', function () {
+                var table = $('#SearchCompanyResult').DataTable();
+                var id = this.id;
+                var data = table.row($(this).parents('tr')).data();
+                //var data = table.row(this).data();
+                var val = data['CompanyId'];
+                if (id == 'btnEdit') {
+                    localStorage.clear();
+                    var getID = [{
+                        companyID: val
+                    }];
+                    localStorage.setItem('comID', JSON.stringify(getID));
+                    location.href = '@Url.Action("_PartialCompany", "Profile")';
+                }
+                if (id == 'btnDel')
+                    DelCompany(val);
+
+            });
+
+            //$('#SearchCompanyResult tbody').on('change', '.chkView', function () {
+            //    var row = $(this).closest('tr');
+            //    if ($(this).is(':checked')) {
+            //        $(row).find('.chkEdit,.chkDelete').prop("disabled", false);
+            //    }
+            //    else {
+            //        $(row).find('.chkEdit,.chkDelete').prop("disabled", true);
+            //    }
+            //});
+        }
+
+
+        function SearchCompany() {
+            var table = $('#SearchCompanyResult').DataTable();
+            table.destroy();
+            var registerType;
+            if (document.getElementById('customRadioInline1').checked) {
+                var registerType = document.getElementById('customRadioInline1').value;
+            } else {
+                var registerType = document.getElementById('customRadioInline2').value;
+            }
+            //var e = document.getElementById("ddl");
+            //var ddlVal = e.options[e.selectedIndex].value;
+            if ($("#txtCompanyNameT").val() !== "" || $("#txtCompanyNameE").val() !== "" || $("#txtCompanyAlias").val() !== "" || $("#txtCompanyCode").val() !== "") {
+
+                var data = {
+                    "ProfileType": " ",//$("#chktype").val(),
+                    "LocationCode": " ", //$("#ddlLocationCode").val(),
+                    "VendorCode": " ",//$("#txtVenderCode").val(),
+                    "CompanyNameTh": $("#txtCompanyNameT").val(),
+                    "CompanyNameEn": $("#txtCompanyNameE").val(),
+                    "CompanyAlias": $("#txtCompanyAlias").val(),
+                    "CompanyCode": $("#txtCompanyCode").val(),
+                    "DistibutionCchannel": " ",//$("#ddldistribution").val(),
+                    "ChannelGroup": " "//$("#ddlchannelsalegroup").val()
+                };
+
+                var tbCompany = $('#SearchCompanyResult').DataTable({
+                    ajax: {
+
+                        type: "POST",
+                        //dataType: 'JSON',
+                        url: "/Profile/SearchCompany",
+                        data: { Company: data },
+                        dataSrc: function (data) {
+                            //var val = []
+                            //val = ConcatstrAddress(data.data);
+                            //data.data = val;
+                            return data.data;
+                        },
+                        error: function (xhr, status, error) {
+                            //Loading(0);
+                            //clearForEdit();
+                            console.log(status);
+                            //showFeedback("error", xhr.responseText, "System Information",
+                            //"<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                        }
+
+                    },
+                    columns: [
+                        { "data": "CompanyId", "visible": false },
+                        { "data": "VendorCode" },
+                        { "data": "CompanyCode" },
+                        { "data": "CompanyNameTh" },
+                        { "data": "CompanyStatus", "visible": false },
+                        {
+                            "data": null,
+                            orderable: false,
+                            "defaultContent": "<button id='btnEdit' class='btn-border btn-green edit_btn'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button><button id='btnDel' class='btn-border btn-black delete_btn'><i class='fa fa-trash icon'></i><span>ลบ</span></button>"
+
+                        }
+                    ],
+                    select: {
+                        'style': 'multi'
+                    },
+                    ordering: true,
+                    order: [[1, "asc"]],
+                    select: true,
+                    retrieve: true,
+                    paging: true,
+                    pagingType: "full_numbers",
+                    destroy: true,
+                    searching: false,
+                    proccessing: true,
+                    serverSide: true,
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                });
+
+                $('#SearchCompanyResult tbody').on('click', 'button', function () {
+                    var table = $('#SearchCompanyResult').DataTable();
+                    var id = this.id;
+                    var data = table.row($(this).parents('tr')).data();
+                    //var data = table.row(this).data();
+                    var val = data['CompanyId'];
+                    if (id == 'btnEdit') {
+                        localStorage.clear();
+                        var getID = [{
+                            companyID: val
+                        }];
+                        localStorage.setItem('comID', JSON.stringify(getID));
+                        location.href = '@Url.Action("_PartialCompany", "Profile")';
+                    }
+
+                    if (id == 'btnDel') { 
+                        DelCompany(val);
+                    }
+
+            });
+            }
+            else {
+                getAllCompany();
+            }
+        }
+
+
+        function DelAddress(comId) {
+            //var comId = 'a8bf8003-22dc-4e22-add6-7564e41f312c';
+            $.ajax({
+                url: "/Profile/DeleteCompany",
+                dataType: 'JSON',
+                data: { 'CompanyId': comId },
+                type: 'POST',
+                success: function (result) {
+                    //alert("success");
+                },
+                error: function (result) {
+                    //alert("error");
+                }
+            });
+        }
+
+        </script>
+
+}

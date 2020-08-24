@@ -254,10 +254,10 @@ span.red {
     height: auto;
     border: 1px solid #f1f2f3;
     color: #3b3f5c;
-    font-size: 15px;
+    font-size: 22px;
     padding: 8px 10px;
     letter-spacing: 1px;
-    background-color: #f1f2f3;
+    background-color: #ffffff;
 }
 .custom-select.custom-select-lg {
     font-size: 18px;
@@ -428,9 +428,10 @@ select.form-control.form-custom {
     vertical-align: middle;
 }
 .btn {
+    font-family: 'db_helvethaica_x55_regular';
     padding: 0.4375rem 1.25rem;
     text-shadow: none;
-    font-size: 14px;
+    font-size: 18px;
     color: #3b3f5c;
     font-weight: normal;
     white-space: normal;

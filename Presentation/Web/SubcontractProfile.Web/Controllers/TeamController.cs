@@ -16,41 +16,34 @@ using SubcontractProfile.Web.Model;
 
 namespace SubcontractProfile.Web.Controllers
 {
-    public class LocationController : Controller
+    public class TeamController : Controller
     {
         private readonly string strpathAPI;
         private readonly IConfiguration _configuration;
 
-        public LocationController(IConfiguration configuration)
+        public TeamController(IConfiguration configuration)
         {
             _configuration = configuration;
 
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
-            //Lang = "TH";
-            //strpathASCProfile = _configuration.GetValue<string>("PathASCProfile:DEV").ToString();
 
-           // HttpContext.Session.SetString("username", username);
         }
 
-        // GET: LocationController
-        public ActionResult LocationProfile()
+        public IActionResult TeamProfile()
         {
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
             if (userProfile == null)
             {
                 return RedirectToAction("Login", "Account");
             }
-
-           // ViewBag.Pageitem = "Location";
             return View();
         }
 
-    
-        public ActionResult Search(string locationCode, string locationNameAilas, string locationNameTh
-            , string locationNameEn, string storageLocation, string phoneNo)
+        public ActionResult Search(string locationId, string teamcode
+          , string teamNameTh, string teamNameEn, string storageLocation, string shipto)
         {
 
-            var Result = new List<SubcontractProfileLocationModel>();
+            var Result = new List<SubcontractProfileTeamModel>();
 
             var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
             // Skiping number of Rows count  
@@ -76,27 +69,28 @@ namespace SubcontractProfile.Web.Controllers
 
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
 
-            Guid strCompanyId = userProfile.companyid;
+            Guid companyId = userProfile.companyid;
 
 
-            if (locationCode == null)
+            if (locationId == "-1" || locationId==null)
             {
-                locationCode = "null";
+                locationId = "-1";
             }
 
-            if (locationNameAilas == null)
+            if (teamcode == null)
             {
-                locationNameAilas = "null";
+                teamcode = "null";
             }
 
-            if (locationNameTh == null)
+          
+            if (teamNameTh == null)
             {
-                locationNameTh = "null";
+                teamNameTh = "null";
             }
 
-            if (locationNameEn == null)
+            if (teamNameEn == null)
             {
-                locationNameEn = "null";
+                teamNameEn = "null";
             }
 
             if (storageLocation == null)
@@ -104,13 +98,13 @@ namespace SubcontractProfile.Web.Controllers
                 storageLocation = "null";
             }
 
-            if (phoneNo == null)
+            if (shipto == null)
             {
-                phoneNo = "null";
+                shipto = "null";
             }
 
-            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Location/SearchLocation", strCompanyId
-               , locationCode, locationNameTh, locationNameEn, storageLocation, phoneNo, locationNameAilas);
+            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Team/SearchTeam",companyId, locationId
+               , teamcode, teamNameTh, teamNameEn, storageLocation, shipto);
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -118,7 +112,7 @@ namespace SubcontractProfile.Web.Controllers
             {
                 var result = response.Content.ReadAsStringAsync().Result;
                 //data
-                Result = JsonConvert.DeserializeObject<List<SubcontractProfileLocationModel>>(result);
+                Result = JsonConvert.DeserializeObject<List<SubcontractProfileTeamModel>>(result);
 
             }
 
@@ -134,29 +128,94 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data });
         }
 
-        public JsonResult GetDataById(string locationId)
+        public JsonResult GetDataByLocationId(string locationId)
         {
-            var locationResult = new SubcontractProfileLocationModel();
+            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+
+            Guid companyId = userProfile.companyid;
+
+            var result = new List<SubcontractProfileTeamModel>();
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Location/GetByLocationId", locationId);
+            Guid gLocationId;
+
+            if (locationId == null || locationId == "-1")
+            {
+                gLocationId = Guid.Empty;
+            }
+            else
+            {
+                gLocationId = new Guid(locationId);
+            }
+
+            string uriString = string.Format("{0}/{1}/{2}", strpathAPI + "Team/GetByLocationId", companyId, gLocationId);
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
             if (response.IsSuccessStatusCode)
             {
-                var result = response.Content.ReadAsStringAsync().Result;
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
                 //data
-                locationResult = JsonConvert.DeserializeObject<SubcontractProfileLocationModel>(result);
+                result = JsonConvert.DeserializeObject<List<SubcontractProfileTeamModel>>(resultAsysc);
 
             }
 
-            return Json(locationResult);
+            return Json(result);
         }
 
-        public ActionResult OnSave(SubcontractProfileLocationModel model)
+        public JsonResult GetDataById(string teamId)
+        {
+            var result = new SubcontractProfileTeamModel();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Team/GetByTeamId", teamId);
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<SubcontractProfileTeamModel>(resultAsysc);
+
+            }
+
+            return Json(result);
+        }
+
+        public JsonResult GetLocationByCompany()
+        {
+            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+
+            var result = new List<SubcontractProfileLocationModel>();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var companyId = userProfile.companyid;
+
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Location/GetLocationByCompany", companyId);
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsync = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<List<SubcontractProfileLocationModel>>(resultAsync);
+
+            }
+
+
+            return Json(result);
+        }
+
+        public ActionResult OnSave(SubcontractProfileTeamModel model)
         {
             ResponseModel result = new ResponseModel();
             HttpClient clientLocation = new HttpClient();
@@ -166,10 +225,14 @@ namespace SubcontractProfile.Web.Controllers
                 var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
 
                 //insert
-                if (model.LocationId == Guid.Empty)
+                if (model.TeamId == Guid.Empty)
                 {
                     model.CompanyId = userProfile.companyid;
-                    var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Insert"));
+                    model.CreateBy = userProfile.Username;
+                    model.UpdateBy = userProfile.Username;
+                    model.Status = "N";
+
+                    var uriLocation = new Uri(Path.Combine(strpathAPI, "Team", "Insert"));
 
                     clientLocation.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
@@ -190,7 +253,11 @@ namespace SubcontractProfile.Web.Controllers
                 }
                 else //update
                 {
-                    var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Update"));
+                    model.CompanyId = userProfile.companyid;
+                    model.CreateBy = userProfile.Username;
+                    model.UpdateBy = userProfile.Username;
+                 
+                    var uriLocation = new Uri(Path.Combine(strpathAPI, "Team", "Update"));
 
                     clientLocation.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
@@ -221,14 +288,14 @@ namespace SubcontractProfile.Web.Controllers
             return Json(result);
         }
 
-        public JsonResult OnDelete(string locationId)
+        public JsonResult OnDelete(string teamId)
         {
             var result = new ResponseModel();
             HttpClient clientLocation = new HttpClient();
             try
             {
-                string uriString = string.Format("{0}/{1}", strpathAPI + "Location/Delete", locationId);
-              //  var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Delete"));
+                string uriString = string.Format("{0}/{1}", strpathAPI + "Team/Delete", teamId);
+                //  var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Delete"));
 
                 clientLocation.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -255,8 +322,6 @@ namespace SubcontractProfile.Web.Controllers
             }
             return Json(result);
         }
-
-       
 
     }
 }

@@ -58,7 +58,7 @@ namespace SubcontractProfile.WebApi.Services.Services
         {
             var p = new DynamicParameters();
 
-            p.Add("@personal_id", subcontractProfilePersonal.PersonalId);
+            p.Add("@engineer_id", subcontractProfilePersonal.engineerId);
             p.Add("@citizen_id", subcontractProfilePersonal.CitizenId);
             p.Add("@title_name", subcontractProfilePersonal.TitleName);
             p.Add("@full_name_en", subcontractProfilePersonal.FullNameEn);
@@ -96,10 +96,8 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@account_number", subcontractProfilePersonal.AccountNumber);
             p.Add("@account_name", subcontractProfilePersonal.AccountName);
             p.Add("@status", subcontractProfilePersonal.Status);
-            p.Add("@create_date", subcontractProfilePersonal.CreateDate);
             p.Add("@create_by", subcontractProfilePersonal.CreateBy);
-            p.Add("@update_by", subcontractProfilePersonal.UpdateBy);
-            p.Add("@update_date", subcontractProfilePersonal.UpdateDate);
+          
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfilePersonal_Insert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -151,11 +149,8 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@account_number", subcontractProfilePersonal.AccountNumber);
             p.Add("@account_name", subcontractProfilePersonal.AccountName);
             p.Add("@status", subcontractProfilePersonal.Status);
-            p.Add("@create_date", subcontractProfilePersonal.CreateDate);
-            p.Add("@create_by", subcontractProfilePersonal.CreateBy);
             p.Add("@update_by", subcontractProfilePersonal.UpdateBy);
-            p.Add("@update_date", subcontractProfilePersonal.UpdateDate);
-
+  
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfilePersonal_Update", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
 

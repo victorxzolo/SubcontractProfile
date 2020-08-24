@@ -29,8 +29,9 @@
     <link rel="stylesheet" type="text/css" href="~/plugins/select2/select2.min.css">
     <!--  END CUSTOM STYLE FILE  -->
 
-    <link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
-    <link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+   
+    @*<link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" />*@
+    @*<link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">*@
     <link rel="stylesheet" href="~/plugins/font-icons/fontawesome/css/regular.css">
     <link rel="stylesheet" href="~/plugins/font-icons/fontawesome/css/fontawesome.css">
 
@@ -39,7 +40,9 @@
 
     <link href="~/assets/css/users/user-profile.css" rel="stylesheet" type="text/css" />
     <link href="~/plugins/file-upload/file-upload-with-preview.min.css" rel="stylesheet" type="text/css" />
-      <link href="~/plugins/select2/select2.min.css" rel="stylesheet" />
+    <link href="~/plugins/select2/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/bootstrap-select/bootstrap-select.min.css">
+
 
     <!-- END MAIN CONTAINER -->
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
@@ -50,9 +53,6 @@
     <script src="~/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="~/assets/js/app.js"></script>
-
-    <script src="~/plugins/flatpickr/flatpickr.js"></script>
-    <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
 
 
     <script>
@@ -91,7 +91,11 @@
 
     <script src="~/plugins/select2/select2.min.js"></script>
     <script src="~/plugins/select2/custom-select2.js"></script>
-  
+    <script src="~/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+
+    @*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>*@
+
 
     @RenderSection("Scripts", required: false)
     @RenderSection("modalpanel", required: false)
@@ -238,10 +242,10 @@
                                 <a href="@Url.Action("LocationProfile", "Location")"> Location  </a>
                             </li>
                             <li>
-                                <a href="#"> Team </a>
+                                <a href="@Url.Action("TeamProfile", "Team")"> Team </a>
                             </li>
                             <li>
-                                <a href="#"> Engineer </a>
+                                <a href="@Url.Action("EngineerProfile", "Engineer")"> Engineer </a>
                             </li>
 
                         </ul>
@@ -286,7 +290,7 @@
 
 
                     <li class="menu">
-                        <a href="login" aria-expanded="false" class="dropdown-toggle">
+                        <a href="@Url.Action("Logout", "Account")" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
                                 <span>Sign Out</span>

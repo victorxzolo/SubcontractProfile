@@ -1,0 +1,661 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; ViewBag.Title = "Team Profile";
+}
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+
+    <div class="skills layout-spacing ">
+        <div class="widget-content widget-content-area">
+            <h3 class="">Team</h3>
+
+            <div class="widget-content1">
+
+                <div class="form-row mb-4">
+
+
+                    <div class="form-group col-md-6">
+                        <label for="inputLocationCodeMain">Location Name</label>
+                        <select id="inputLocationName" class="form-control" data-live-search="true" required></select>
+                      
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputTeamNameAilas">Team Code</label>
+                        <input type="text" class="form-control" id="inputTeamCode" placeholder="Team Code">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputTeamNameTh">Team Name (TH)</label>
+                        <input type="text" class="form-control" id="inputTeamNameTh" placeholder="Team Name (TH)">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputTeamNameEn">Team Name (EN)</label>
+                        <input type="text" class="form-control"  id="inputTeamNameEn" placeholder="Team Name (EN)">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputStorageLocation">Storage Location</label>
+                        <input type="text" class="form-control" id="inputStorageLocation" placeholder="Storage Location">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputShipto">Ship To</label>
+                        <input type="text" class="form-control" maxlength="13" id="inputShipto" placeholder="Ship To">
+                    </div>
+
+                </div>
+
+                <div style="text-align:center">
+
+                    <button id="btnMainClearLoc" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
+                    <button id="btnSearchLoc" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+
+                </div>
+
+
+            </div>
+
+
+            <br />
+            <div class="widget-heading">
+                <h3 class="">ผลการค้นหา</h3>
+
+            </div>
+            <div class="col-md-12 text-right mb-1">
+                <button id="btnAdd" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg> เพิ่ม</button>
+
+            </div>
+
+
+            <div class="table-responsive">
+                <table id="tbSearchResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                    <thead>
+                        <tr>
+                            <th class="text-center">แก้ไข</th>
+                            <th>Location Name </th>
+                            <th>Team Name (Th) </th>
+                            <th>Team Name (En) </th>
+                            <th>Storage Location </th>
+                            <th>Ship To </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+@section modalpanel {
+
+    <div id="AddEditModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="hTitleEdit" class="modal-title">แก้ไขข้อมูล Team</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="frNew" class="needs-validation" novalidate>
+                        <div class="container">
+                          
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <span style="color:red">*</span> <label> Location Name : </label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select id="locationName_Th" style="width:300px" class="form-control" required></select>
+                                    <div class="invalid-feedback">
+                                        กรุณาเลือกข้อมูล Location Name.
+                                    </div>
+                                </div>
+                              
+                                <div class="col-sm-2">
+                                     <label>Location Code :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="locationCode" style="width:300px" class="form-control" disabled />
+                                   
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <span style="color:red">*</span> <label>Team Code :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="TeamCode" style="width:300px" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกข้อมูล Team Code.
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label>Vendor Code :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="VendorCode" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <span style="color:red">*</span> <label>Team Name(TH) :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="TeamNameT" style="width:300px" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกข้อมูล Team Name(TH)
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Team Name(EN) :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="TeamNameE" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Storage Location :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="Storage" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Ship To :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="Ship" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Out of service storage Location:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="OutStorage" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Warranty MA :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="WarrantyMA" style="width:300px" class="form-control">
+                                  
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Warranty Install :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="WarrantyInstall" style="width:300px" class="form-control">
+                                   
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Service skill :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <textarea id="ServiceSkill" name="ServiceSkill" rows="2" style="width:300px;"></textarea>
+                                </div>
+                            </div>
+                            <br />
+
+                            <h5>Contract Phone</h5>
+                            <hr >
+                            <div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label> <span style="color:red">* </span> Installations contract phone:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="InstallationPhone" style="width:300px" class="form-control" required>
+                                        <div class="invalid-feedback">
+                                            กรุณากรอกข้อมูล Installations contract phone
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label> Maintenance contract phone:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                         <input type="text" id="MaintenancePhone" style="width:300px" class="form-control" >
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Etc contract phone:</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input type="text" id="EtcPhone" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <h5>Contract Mail</h5>
+                            <hr >
+                            <div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Installations contract Mail:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="email" id="InstallationMail" style="width:300px" class="form-control">
+                                        <div class="invalid-feedback">
+                                            กรุณากรอกข้อมูล Email ให้ถูกต้อง
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Maintenance contract Mail:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="email" id="MaintenanceMail" style="width:300px" class="form-control">
+                                        <div class="invalid-feedback">
+                                            กรุณากรอกข้อมูล Email ให้ถูกต้อง
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Etc contract Mail:</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input type="email" id="EtcMail" style="width:300px" class="form-control">
+                                        <div class="invalid-feedback">
+                                            กรุณากรอกข้อมูล Email ให้ถูกต้อง
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <input type="hidden" id="hdMode">
+                                <input type="hidden" id="hdTeamId">
+                                <input type="hidden" id="hdCompanyId">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                                        ปิด
+                                    </button>
+                                    <button id="btnSave" type="submit" class="btn btn-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                        บันทึก
+                                    </button>
+                                </div>
+
+                            </div>
+                          
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section scripts {
+
+    <script type="text/javascript">
+        var oTable;
+        $(document).ready(function () {
+
+               GetDropDownLocationSearch();
+
+                $('#locationName_Th').change(function () {
+                    getLocationCodeById($(this).val());
+                });
+
+                inittbSearchResult();
+                $("#btnSearchLoc").click(function (e) {
+
+                    inittbSearchResult();
+                });
+
+                $("#btnMainClearLoc").click(function (e) {
+                    clearMainData();
+                });
+
+                $("#btnAdd").click(function (e) {
+                    openModal("new","");
+                });
+
+            GetDropDownLocation();
+
+
+            });
+
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+              //  var forms = document.getElementsByClassName('select');
+                var invalid = $('.select .invalid-feedback');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            invalid.css('display', 'block');
+                        } else {
+                            onSave();
+                            event.preventDefault();
+                            event.stopPropagation();
+                            invalid.css('display', 'none');
+                        
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+
+        function inittbSearchResult() {
+
+            var oTable = $('#tbSearchResult').DataTable({
+                processing: true, // for show progress bar
+                serverSide: true, // for process server side
+                filter: false, // this is for disable filter (search box)
+                orderMulti: false, // for disable multiple column at once
+                pageLength: 10,
+                order: [],
+                autoWidth: false,
+                searching: false,
+                destroy: true,
+                lengthChange: false,
+                "oLanguage": {
+                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                    "sSearch": false,
+                    "sLengthMenu": "Results :  _MENU_",
+                },
+                 "scrollX": true,
+                  "language": {
+                  "zeroRecords": "No data found.",
+                   "decimal": ",",
+                  "thousands": "."
+                    },
+                    ajax: {
+                        url: '@Url.Action("Search", "Team")',
+                        type: "POST",
+                        datatype: "JSON",
+                        //dataSrc:"",
+                        data: function (d) {
+                                d.locationId = $("select[id$=inputLocationName]").val(),
+                                d.teamcode = $("#inputTeamCode").val(),
+                                d.teamNameTh = $("#inputTeamNameTh").val(),
+                                d.teamNameEn = $("#inputTeamNameEn").val(),
+                                d.storageLocation = $("#inputStorageLocation").val(),
+                                d.shipto = $("#inputShipto").val()
+
+                        }
+                    },
+                    columns: [
+
+                        {
+                            data: null,width:"10%", render: function (data, type, row) {
+                                return "  <ul class='table-controls'><li> <a href='#' onclick=openModal('edit','" + row.TeamId + "');return false;  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='แก้ไข'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a></li> <li> <a onclick=deleteData('" + row.TeamId +"');return false; href='#'  data-toggle='tooltip' data-placement='top' title='Delete'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-trash-2'><polyline points='3 6 5 6 21 6'></polyline><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'></path><line x1='10' y1='11' x2='10' y2='17'></line><line x1='14' y1='11' x2='14' y2='17'></line></svg></a>";
+
+                            }
+                           // orderable: false,
+                            //className: 'text-center'
+                        },
+                        { "data": "LocationNameTh", "width": "25%"  },
+                        { "data": "TeamNameTh", "width": "25%" },
+                        { "data": "TeamNameEn", "width": "25%" },
+                        { "data": "StageLocal", "width": "25%" },
+                        { "data": "ShipTo", "width": "20%" }
+
+
+                ],
+                "order": [[0, "desc"]],
+                "stripeClasses": [],
+                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+                });
+
+        }
+
+
+        function openModal(mode, teamId) {
+
+            $("#frNew")[0].reset();
+
+            $('#hdMode').val(mode);
+            $('#hdTeamId').val(teamId);
+
+            if (mode == "edit") {
+                //$("#txtCompanyCode").prop("disabled", true);
+                $("#hTitleEdit").text('แก้ไข Team');
+
+                getDataById(teamId);
+            }
+            else {
+                $("#hTitleEdit").text('เพิ่ม Team');
+
+              //  $("#txtCompanyCode").prop("disabled", false);
+
+              //  $("#frNew")[0].reset();
+                //form.find('button').on('click', (event) => {
+                //    form.find('input, select, textarea').val('');
+                //});
+            }
+
+            $('#AddEditModal').modal('show');
+
+        }
+
+        function clearMainData() {
+                $("#inputLocationName").val('-1'),
+                $("#inputTeamCode").val(''),
+                $("#inputTeamNameTh").val(''),
+                $("#inputTeamNameEn").val(''),
+                $("#inputStorageLocation").val(''),
+                $("#inputShipto").val('')
+        }
+
+        function clearData() {
+
+            $("#frNew")[0].reset();
+
+        }
+
+
+        function getLocationCodeById(locationId) {
+              $.ajax({
+                  url: '@Url.Action("GetDataById", "Location")',
+                  type: 'POST',
+                  data: { 'locationId': locationId},
+                  dataType: "json",
+                  success: function (result) {
+                //  console.log(result)
+                  if (result != null) {
+
+                      $('#locationCode').val(result.LocationCode);
+
+
+                    }
+                  },
+                  error: function (result) {
+
+                  }
+
+            });
+        }
+
+        function getDataById(teamId) {
+
+              $.ajax({
+                  url: '@Url.Action("GetDataById", "Team")',
+                  type: 'POST',
+                  data: { 'teamId': teamId},
+                  dataType: "json",
+                  success: function (result) {
+                //  console.log(result)
+                      if (result != null) {
+                        //  alert(result.LocationId);
+                    //  $('#locationName_Th option[value="' + result.LocationId+'"]').prop("selected", true);
+                      //    $('#locationName_Th').val(result.LocationId).prop('selected', true);
+
+                      $("#locationName_Th").val(result.LocationId).change();
+                      $('#locationCode').val(result.LocationCode);
+                      $('#TeamCode').val(result.TeamCode);
+                      $('#VendorCode').val(result.VendorCode);
+                      $('#TeamNameT').val(result.TeamNameTh);
+                      $('#TeamNameE').val(result.TeamNameEn);
+                      $('#Storage').val(result.StageLocal);
+                      $('#Ship').val(result.ShipTo);
+                      $('#OutStorage').val(result.OosStorageLocation);
+                      $('#WarrantyMA').val(result.WarrantyMa);
+                      $('#WarrantyInstall').val(result.WarrantyInstall);
+                      $('#ServiceSkill').val(result.ServiceSkill);
+                      $('#InstallationPhone').val(result.InstallationsContractPhone);
+                      $('#MaintenancePhone').val(result.MaintenanceContractPhone);
+                      $('#EtcPhone').val(result.EtcContractPhone);
+                      $('#InstallationMail').val(result.InstallationsContractEmail);
+                      $('#MaintenanceMail').val(result.MaintenanceContractEmail);
+                      $('#EtcMail').val(result.EtcContractEmail);
+                      $('#hdTeamId').val(result.TeamId);
+                      $('#hdCompanyId').val(result.CompanyId);
+
+                    }
+                  },
+                  error: function (result) {
+
+                  }
+
+            });
+    }
+
+        function onSave() {
+
+            var team = new Object();
+            team.TeamId = $('#hdTeamId').val();
+            team.LocationId = $("select[id$=locationName_Th]").val();
+            team.LocationCode = $('#locationCode').val();
+            team.TeamCode = $('#TeamCode').val();
+            team.VendorCode = $('#VendorCode').val();
+            team.TeamNameTh = $('#TeamNameT').val();
+            team.TeamNameEn = $('#TeamNameE').val();
+            team.StageLocal = $('#Storage').val();
+            team.ShipTo = $('#Ship').val();
+            team.OosStorageLocation = $('#OutStorage').val();
+            team.WarrantyMa = $('#WarrantyMA').val();
+            team.WarrantyInstall = $('#WarrantyInstall').val();
+            team.ServiceSkill = $('#ServiceSkill').val();
+            team.InstallationsContractPhone = $('#InstallationPhone').val();
+            team.MaintenanceContractPhone = $('#MaintenancePhone').val();
+            team.EtcContractPhone = $('#EtcPhone').val();
+            team.InstallationsContractEmail = $('#InstallationMail').val();
+            team.MaintenanceContractEmail = $('#MaintenanceMail').val();
+            team.EtcContractEmail = $('#EtcMail').val();
+            team.CompanyId = $('#hdCompanyId').val();
+
+            $.ajax({
+                   url: '@Url.Action("OnSave", "Team")',
+                   type: 'POST',
+                   data: { 'model': team },
+                   dataType: "json",
+                success: function (result) {
+                       if (result.Status == true) {
+                           if ($('#hdMode').val() == 'edit') {
+
+                           } else {
+                               bootbox.alert(result.Message);
+                               clearData();
+                           }
+
+                           inittbSearchResult();
+                           $('#AddEditModal').modal('hide');
+
+                          }
+                        else {
+                               bootbox.alert(result.Message);
+
+                            }
+                  },
+                  error: function (result) {
+                      bootbox.alert(result.Message);
+                  }
+
+            });
+
+        }
+
+         function deleteData(teamId) {
+           bootbox.confirm("คุณต้องการลบข้อมูล?"
+            , function (result) {
+            if (result == true) {
+                 $.ajax({
+                   url: '@Url.Action("OnDelete", "Team")',
+                   type: 'POST',
+                     data: { 'teamId': teamId },
+                   dataType: "json",
+                     success: function (result) {
+                         if (result.Status == true) {
+                             inittbSearchResult();
+                             bootbox.alert(result.Message);
+                         }
+                  },
+                  error: function (result) {
+                      bootbox.alert(result.Message);
+                  }
+
+            });
+            }
+        });
+    }
+
+function GetDropDownLocationSearch() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetLocationByCompany","Team")',
+           // data: {stateid:stateid},
+            dataType: 'json',
+            success: function (data) {
+             
+                $("#inputLocationName").empty();
+                $("#inputLocationName").append('<option value="-1">--Please All--</option>');
+                $.each(data, function (id, result) {
+                    $("#inputLocationName").append('<option value="' + result.LocationId + '">' + result.LocationNameTh +'</option>');
+                    });
+                },
+                failure: function () {
+                    $("#inputLocationName").empty();
+                    $("#inputLocationName").append('<option value="-1">--Please All--</option>');
+                }
+            });
+    }
+
+
+function GetDropDownLocation() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetLocationByCompany","Team")',
+           // data: {stateid:stateid},
+            dataType: 'json',
+            success: function(data)
+            {
+                $("#locationName_Th").empty();
+                $("#locationName_Th").append('<option value="">--Please Select--</option>');
+                $.each(data, function (id, result) {
+                    $("#locationName_Th").append('<option value="' + result.LocationId + '">' + result.LocationNameTh+'</option>');
+                    });
+                },
+                failure: function () {
+                    $("#locationName_Th").empty();
+                    $("#locationName_Th").append('<option value="">--Please Select--</option>');
+                }
+            });
+    }
+
+
+
+    </script>
+}
