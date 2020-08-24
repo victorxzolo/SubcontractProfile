@@ -112,7 +112,7 @@ namespace SubcontractProfile.Web.Controllers
                 {
                     string encryptedPassword = Util.EncryptText(model.password);
                     var authenticatedUser = GetUser(model.username, encryptedPassword);
-                    if(!string.IsNullOrEmpty(authenticatedUser.Username))
+                    if(authenticatedUser != null)
                     {
                         res.Status = true;
                         SessionHelper.SetObjectAsJson(HttpContext.Session, "userLogin", authenticatedUser);
