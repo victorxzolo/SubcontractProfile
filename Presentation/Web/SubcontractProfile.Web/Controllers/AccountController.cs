@@ -1473,8 +1473,10 @@ namespace SubcontractProfile.Web.Controllers
 
                         string encrypted = Util.EncryptText(model.Password);
                         model.Password = encrypted;
+                        model.Status = "Pending";
 
-                       
+
+
 
                         var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
                     HttpClient clientCompany = new HttpClient();

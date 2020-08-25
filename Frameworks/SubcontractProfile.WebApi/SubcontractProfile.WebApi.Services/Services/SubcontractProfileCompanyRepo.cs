@@ -163,8 +163,8 @@ namespace SubcontractProfile.WebApi.Services
             p.Add("@company_status", subcontractProfileCompany.CompanyStatus);
             p.Add("@company_address", subcontractProfileCompany.CompanyAddress);
             p.Add("@vat_address", subcontractProfileCompany.VatAddress);
-            p.Add("@create_by", subcontractProfileCompany.CreateBy);
-            p.Add("@create_date", subcontractProfileCompany.CreateDate);
+            //p.Add("@create_by", subcontractProfileCompany.CreateBy);
+            //p.Add("@create_date", subcontractProfileCompany.CreateDate);
             p.Add("@update_by", subcontractProfileCompany.UpdateBy);
             p.Add("@update_date", subcontractProfileCompany.UpdateDate);
             p.Add("@company_email", subcontractProfileCompany.CompanyEmail);
