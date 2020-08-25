@@ -1460,85 +1460,104 @@ function BindAddressType() {
 function validateform() {
     var hasError = true;
 
-    var forms = document.getElementsByClassName('need-validate-checktyperegister');
-    var validation = Array.prototype.filter.call(forms, function (form) {
-        if ($('#hdrdtype').val() == "") {
-            event.preventDefault();
-            event.stopPropagation();
+   // var forms = document.getElementsByClassName('need-validate-checktyperegister');
+    //var validation = Array.prototype.filter.call(forms, function (form) {
+    //    if ($('#hdrdtype').val() == "") {
+    //        event.preventDefault();
+    //        event.stopPropagation();
 
-        }
-        else {
-            if ($('#rdoCompanyType1').is(":checked")) {
-                var forms = document.getElementsByClassName('needs-validation-newregister');
+    //    }
+    //    else {
+    if ($('#rdoCompanyType1').is(":checked")) {
+        var forms = document.getElementsByClassName('needs-validation-newregister');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            if (Validate(".form-control.inputValidation", ".custom-control-input.inputValidation"
+                , ".custom-select.inputValidation", ".custom-file-input.inputValidation")) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            else {
+                var forms = document.getElementsByClassName('needs-isvalidate');
                 var validation = Array.prototype.filter.call(forms, function (form) {
-                    if (Validate(".form-control.inputValidation", ".custom-control-input.inputValidation"
-                        , ".custom-select.inputValidation", ".custom-file-input.inputValidation")) {
+                    if (Validate(".form-control.inputisvalidate", ".custom-control-input.inputisvalidate"
+                        , ".custom-select.inputisvalidate", ".custom-file-input.inputisvalidate")) {
                         event.preventDefault();
                         event.stopPropagation();
+                        if (ValidateUpload()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
                     }
                     else {
-                        var forms = document.getElementsByClassName('needs-isvalidate');
-                        var validation = Array.prototype.filter.call(forms, function (form) {
-                            if (Validate(".form-control.inputisvalidate", ".custom-control-input.inputisvalidate"
-                                , ".custom-select.inputisvalidate", ".custom-file-input.inputisvalidate")) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                                if (ValidateUpload()) {
-                                    event.preventDefault();
-                                    event.stopPropagation();
-                                }
-                            }
-                            else {
 
-                                hasError = false;
-                            }
-                            form.classList.add('was-validated');
-                        });
-
+                        hasError = false;
                     }
                     form.classList.add('was-validated');
                 });
 
             }
-            else if ($('#rdoCompanyType2').is(":checked")) {
+            form.classList.add('was-validated');
+        });
 
-                var forms = document.getElementsByClassName('needs-validation-dealer');
+    }
+    else if ($('#rdoCompanyType2').is(":checked")) {
+
+        var forms = document.getElementsByClassName('needs-validation-dealer');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            if (Validate(".form-control.inputValidationdealer", ".custom-control-input.inputValidationdealer"
+                , ".custom-select.inputValidationdealer", ".custom-file-input.inputValidationdealer")) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            else {
+                var forms = document.getElementsByClassName('needs-isvalidate');
                 var validation = Array.prototype.filter.call(forms, function (form) {
-                    if (Validate(".form-control.inputValidationdealer", ".custom-control-input.inputValidationdealer"
-                        , ".custom-select.inputValidationdealer", ".custom-file-input.inputValidationdealer")) {
+                    if (Validate(".form-control.inputisvalidate", ".custom-control-input.inputisvalidate"
+                        , ".custom-select.inputisvalidate", ".custom-file-input.inputisvalidate")) {
                         event.preventDefault();
                         event.stopPropagation();
+                        if (ValidateUpload()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
                     }
                     else {
-                        var forms = document.getElementsByClassName('needs-isvalidate');
-                        var validation = Array.prototype.filter.call(forms, function (form) {
-                            if (Validate(".form-control.inputisvalidate", ".custom-control-input.inputisvalidate"
-                                , ".custom-select.inputisvalidate", ".custom-file-input.inputisvalidate")) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                                if (ValidateUpload()) {
-                                    event.preventDefault();
-                                    event.stopPropagation();
-                                }
-                            }
-                            else {
 
-                                hasError = false;
-                            }
-                            form.classList.add('was-validated');
-                        });
-
+                        hasError = false;
                     }
                     form.classList.add('was-validated');
                 });
 
-
-
-
             }
-        }
-        form.classList.add('was-validated');
-    });
+            form.classList.add('was-validated');
+        });
+
+
+
+
+    }
+    else {
+        var forms = document.getElementsByClassName('needs-isvalidate');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            if (Validate(".form-control.inputisvalidate", ".custom-control-input.inputisvalidate"
+                , ".custom-select.inputisvalidate", ".custom-file-input.inputisvalidate")) {
+                event.preventDefault();
+                event.stopPropagation();
+                if (ValidateUpload()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+            }
+            else {
+
+                hasError = false;
+            }
+            form.classList.add('was-validated');
+        });
+    }
+        //}
+        //form.classList.add('was-validated');
+    //});
 
     return hasError;
 }
