@@ -5,11 +5,11 @@
 
         <label>ประเภทผู้สมัคร </label>  <span style="color:red">*</span><br />
         <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="rdoCompanyType1" name="customRadioSucRegisEdit" class="custom-control-input is-validate" value="NewSubContract" required>
+            <input type="radio" id="rdoCompanyType1" name="customRadioSucRegisEdit" class="custom-control-input is-validate" value="NewSubContract" disabled>
             <label class="custom-control-label" for="rdoCompanyType1">New Subcontract</label>
         </div>
         <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="rdoCompanyType2" name="customRadioSucRegisEdit" class="custom-control-input is-validate " value="Dealer" required>
+            <input type="radio" id="rdoCompanyType2" name="customRadioSucRegisEdit" class="custom-control-input is-validate " value="Dealer" disabled>
             <label class="custom-control-label" for="rdoCompanyType2">Dealer</label>
             <div class="invalid-feedback">	&nbsp;	&nbsp;	&nbsp;Please select type.</div>
         </div>
@@ -858,19 +858,21 @@
         <hr />
     </div>
 </div>
-<div class="row">
+<div class="row needs-isvalidate" novalidate>
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Contract Start Date :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                 <div class='input-group p-0 date' id='contractstartdate'>
-                    <input type='text' class="form-control" />
+                    <input type='text' class="form-control inputisvalidate" id="datecontractstart" required />
                     <div class="input-group-append input-group-addon">
                         <span class="input-group-text px-4">
                             <i class="fa fa-calendar"></i>
                         </span>
                     </div>
+                    <div class="invalid-feedback">Please provide a valid contract start date.</div>
                 </div>
+              
             </div>
 
         </div>
@@ -880,13 +882,15 @@
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Contract End Date :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                 <div class='input-group p-0 date' id='contractenddate'>
-                    <input type='text' class="form-control" />
+                    <input type='text' class="form-control inputisvalidate" id="datecontractend" required />
                     <div class="input-group-append input-group-addon">
                         <span class="input-group-text px-4">
                             <i class="fa fa-calendar"></i>
                         </span>
                     </div>
+                    <div class="invalid-feedback">Please provide a valid contract end date.</div>
                 </div>
+                
             </div>
 
         </div>

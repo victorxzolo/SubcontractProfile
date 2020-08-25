@@ -5,9 +5,25 @@
 $(document).ready(function () {
     BindDDLStatus();
     inittbSearchResult();
+    $('#regisdatefrom').datepicker({
+        format: 'dd/mm/yyyy',
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        todayHighlight: true,
+        clearBtn: true,
+    });
+    $('#regisdateto').datepicker({
+        format: 'dd/mm/yyyy',
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        todayHighlight: true,
+        clearBtn: true,
+
+    });
     $('#btnSearch').click(function () {
         inittbSearchResult();
-
+        //var dd = $("#dateregisfrom").val()
+        //console.log(dd);
     });
 
     $('#btnverifycompany').click(function () {
@@ -102,8 +118,8 @@ $(document).ready(function () {
                         d.CompanyName = $("#txtcompanyname").val(),
                         d.DistributionChannel = $('#ddldistribution option').filter(':selected').val(),
                         d.ChannelSaleGroup = $('#ddlchannelsalegroup option').filter(':selected').val(),
-                        d.RegisterDateFrom = $("#regisdatefrom").val(),
-                        d.RegisterDateTo = $("#regisdateto").val(),
+                        d.RegisterDateFrom = $("#dateregisfrom").val(),
+                        d.RegisterDateTo = $("#dateregisto").val(),
                         d.VendorCode = $("#txtvendercode").val(),
                         d.Status = $('#ddlStatus option').filter(':selected').val()
                 }

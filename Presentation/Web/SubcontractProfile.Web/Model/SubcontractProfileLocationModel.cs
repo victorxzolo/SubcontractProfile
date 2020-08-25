@@ -148,6 +148,8 @@ namespace SubcontractProfile.Web.Model
         public string distribution_channel { get; set; }
         public string channel_sale_group { get; set; }
 
+        public string SubcontractProfileType { get; set; }
+
     }
 
 

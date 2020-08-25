@@ -196,9 +196,9 @@ namespace SubcontractProfile.Web.Model
         public string DistributionChannel { get; set; }
         public string ChannelSaleGroup { get; set; }
        
-        public System.DateTime? RegisterDateFrom { get; set; }
+        public string RegisterDateFrom { get; set; }
 
-        public System.DateTime? RegisterDateTo { get; set; }
+        public string RegisterDateTo { get; set; }
         public string VendorCode { get; set; }
         public string Status { get; set; }
     }

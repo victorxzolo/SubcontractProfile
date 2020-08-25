@@ -315,6 +315,7 @@ namespace SubcontractProfile.Web.Controllers
 
                             if (dataaddr != null && dataaddr.Count != 0)
                             {
+                                SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftCompany");
 
                                 foreach (var d in dataaddr)
                                 {
@@ -331,7 +332,7 @@ namespace SubcontractProfile.Web.Controllers
                                     addr.ProvinceId = d.ProvinceId;
                                     addr.CompanyId = companyId.ToString();
                                     addr.ModifiedBy = datauser.UserId.ToString();
-                                    addr.CreateDate = DateTime.Now;
+                                    addr.ModifiedDate = DateTime.Now;
                                     addr.RegionId = d.RegionId;
                                     addr.Road = d.Road;
                                     addr.Soi = d.Soi;
@@ -351,7 +352,7 @@ namespace SubcontractProfile.Web.Controllers
                                     HttpResponseMessage responseAddress = clientAddress.PutAsync(uriAddress, httpContent).Result;
                                     if (responseAddress.IsSuccessStatusCode)
                                     {
-                                        SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftCompany");
+                                        
                                         res.Status = true;
                                         res.Message = "Register Success";
                                         res.StatusError = "0";

@@ -28,8 +28,6 @@
     <link href="~/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="~/plugins/select2/select2.min.css">
     <!--  END CUSTOM STYLE FILE  -->
-
-   
     @*<link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" />*@
     @*<link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">*@
     <link rel="stylesheet" href="~/plugins/font-icons/fontawesome/css/regular.css">
@@ -53,6 +51,11 @@
     <script src="~/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="~/assets/js/app.js"></script>
+
+
+    <link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <script src="~/lib/moment.js/moment.js"></script>
+    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 
 
     <script>
@@ -94,11 +97,22 @@
     <script src="~/plugins/bootstrap-select/bootstrap-select.min.js"></script>
 
     @*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>*@
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>*@
 
 
     @RenderSection("Scripts", required: false)
     @RenderSection("modalpanel", required: false)
+    <style type="text/css">
+
+        .datepicker {
+            font-size: 0.875em;
+        }
+
+            .datepicker td, .datepicker th {
+                width: 1.5em;
+                height: 1.5em;
+            }
+    </style>
 
 </head>
 <body>
@@ -236,7 +250,7 @@
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Registration" data-parent="#accordionExample">
                             <li>
-                                <a  href="#"> Registration </a>
+                                <a  href="@Url.Action("SearchCompanyVerify", "Registration")"> Company Verify </a>
                             </li>
                             <li>
                                 <a href="#"> Activate Profile  </a>

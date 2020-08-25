@@ -438,8 +438,8 @@ namespace SubcontractProfile.WebApi.Services
             p.Add("@CompanyName", search.CompanyName);
             p.Add("@DistributionChannel", search.DistributionChannel);
             p.Add("@ChannelSaleGroup", search.ChannelSaleGroup);
-            p.Add("@CreateDateFrom", search.ContractStartDate);
-            p.Add("@CreateDateTo", search.ContractEndDate);
+            p.Add("@RegisterDateFrom", search.ContractStartDate);
+            p.Add("@RegisterDateTo", search.ContractEndDate);
             p.Add("@VendorCode", search.VendorCode);
             p.Add("@Status", search.Status);
 

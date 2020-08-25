@@ -2,37 +2,30 @@
 <div class="row">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row mb-0">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Company Name :</label>
-            <label class="col-sm-8 col-md-8 col-lg-8 col-xl-8 col-form-label text-left">XXxxxxxxxxxx</label>
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Company Name :</label>
+            <label class="col-sm-8 col-md-8 col-lg-8 col-xl-8 col-form-label text-left" id="lbengineercompanyname"></label>
         </div>
     </div>
 </div>
 <div class="row">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row mb-0">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Location :</label>
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Location :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control form-control-sm" id="ddllocationteam">
-                    <option>Selete All</option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
+                <select class="form-control" id="ddllocationteamengineer">
                 </select>
             </div>
         </div>
 
     </div>
 </div>
+<br />
 <div class="row">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row mb-0">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Team :</label>
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Team :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <select class="form-control form-control-sm" id="ddlteam">
-                    <option>Selete All</option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
+                <select class="form-control" id="ddlteamengineer">
                 </select>
             </div>
         </div>
@@ -41,50 +34,28 @@
 </div>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-        <p class="font-weight-bolder lead">
-            Engineer
-        </p>
-        <hr />
+        <h4>Engineer</h4>
+        <hr>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
         <div class="table-responsive">
-            <table class="table table-bordered table-hover" id="tbengineer">
-                <thead class="thead-light">
+            <table class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4" id="tbtabengineer">
+                <thead>
                     <tr>
-                        <th>View</th>
-                        <th>Register Type</th>
-                        <th>Location Name</th>
-                        <th>Team Name</th>
-                        <th>Staff Name (TH)</th>
-                        <th>Staff Name (En)</th>
-                        <th>Position</th>
-                        <th>Contract Phone 1 </th>
+                        <th width="5%">View</th>
+                        <th width="10%">Register Type</th>
+                        <th  width="20%">Location Name</th>
+                        <th  width="10%">Team Name</th>
+                        <th width="15%">Staff Name (TH)</th>
+                        <th width= "15%">Staff Name (En)</th>
+                        <th width= "10%">Position</th>
+                        <th width="15%">Contract Phone 1 </th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="text-center"><a href="#"><i class="fa fa-search-plus"></i>View</a></td>
-                        <td>Dealer</td>
-                        <td>xxxx</td>
-                        <td>xxxx</td>
-                        <td>xxxxxxxxxxx</td>
-                        <td>xxxxxxxxxxxx</td>
-                        <td>xxxxxxxxxxxxxx</td>
-                        <td>xxxxxxxxxxxxxxxxxxxx</td>
-
-                    </tr>
-                    <tr>
-                        <td class="text-center"><a href="#"><i class="fa fa-search-plus"></i>View</a></td>
-                        <td>Dealer</td>
-                        <td>xxxx</td>
-                        <td>xxxx</td>
-                        <td>xxxxxxxxxxx</td>
-                        <td>xxxxxxxxxxxx</td>
-                        <td>xxxxxxxxxxxxxx</td>
-                        <td>xxxxxxxxxxxxxxxxxxxx</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
