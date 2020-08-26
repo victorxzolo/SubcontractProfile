@@ -1471,8 +1471,13 @@ namespace SubcontractProfile.Web.Controllers
 
                         #region Insert Company
 
-                        string encrypted = Util.EncryptText(model.Password);
-                        model.Password = encrypted;
+                        if(model.SubcontractProfileType== "NewSubContract")
+                        {
+                            string encrypted = Util.EncryptText(model.Password);
+                            model.Password = encrypted;
+                        }
+
+                        
                         model.Status = "Pending";
 
 
