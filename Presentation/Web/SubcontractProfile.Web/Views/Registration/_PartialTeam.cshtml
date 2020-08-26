@@ -48,3 +48,216 @@
     </div>
 
 </div>
+
+
+<div id="datateamModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="hTitleEdit" class="modal-title">ข้อมูล Team</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="frNew" class="needs-validation" novalidate>
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <span style="color:red">*</span> <label> Location Name : </label>
+                            </div>
+                            <div class="col-sm-4">
+                                <select id="ddllocationName_Th" style="width:300px" class="form-control" required></select>
+                                <div class="invalid-feedback">
+                                    กรุณาเลือกข้อมูล Location Name.
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label>Location Code :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="locationCode" style="width:300px" class="form-control" disabled />
+
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <span style="color:red">*</span> <label>Team Code :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="TeamCode" style="width:300px" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    กรุณากรอกข้อมูล Team Code.
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label>Vendor Code :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="VendorCode" style="width:300px" class="form-control">
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <span style="color:red">*</span> <label>Team Name(TH) :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="TeamNameT" style="width:300px" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    กรุณากรอกข้อมูล Team Name(TH)
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Team Name(EN) :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="TeamNameE" style="width:300px" class="form-control">
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>Storage Location :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="Storage" style="width:300px" class="form-control">
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Ship To :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="Ship" style="width:300px" class="form-control">
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>Out of service storage Location:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="OutStorage" style="width:300px" class="form-control">
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Warranty MA :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="WarrantyMA" style="width:300px" class="form-control">
+
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>Warranty Install :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="WarrantyInstall" style="width:300px" class="form-control">
+
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Service skill :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <textarea id="ServiceSkill" name="ServiceSkill" rows="2" style="width:300px;"></textarea>
+                            </div>
+                        </div>
+                        <br />
+
+                        <h5>Contract Phone</h5>
+                        <hr>
+                        <div>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label> <span style="color:red">* </span> Installations contract phone:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="InstallationPhone" style="width:300px" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกข้อมูล Installations contract phone
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label> Maintenance contract phone:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="MaintenancePhone" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Etc contract phone:</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input type="text" id="EtcPhone" style="width:300px" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <h5>Contract Mail</h5>
+                        <hr>
+                        <div>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Installations contract Mail:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="email" id="InstallationMail" style="width:300px" class="form-control">
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกข้อมูล Email ให้ถูกต้อง
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Maintenance contract Mail:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="email" id="MaintenanceMail" style="width:300px" class="form-control">
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกข้อมูล Email ให้ถูกต้อง
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Etc contract Mail:</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input type="email" id="EtcMail" style="width:300px" class="form-control">
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกข้อมูล Email ให้ถูกต้อง
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <input type="hidden" id="hdMode">
+                            <input type="hidden" id="hdTeamId">
+                            <input type="hidden" id="hdTeamCompanyId">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                                    ปิด
+                                </button>
+                                @*<button id="btnSave" type="submit" class="btn btn-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                    บันทึก
+                                </button>*@
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

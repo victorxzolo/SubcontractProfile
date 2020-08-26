@@ -46,11 +46,11 @@
                     <tr>
                         <th width="5%">View</th>
                         <th width="10%">Register Type</th>
-                        <th  width="20%">Location Name</th>
-                        <th  width="10%">Team Name</th>
+                        <th width="20%">Location Name</th>
+                        <th width="10%">Team Name</th>
                         <th width="15%">Staff Name (TH)</th>
-                        <th width= "15%">Staff Name (En)</th>
-                        <th width= "10%">Position</th>
+                        <th width="15%">Staff Name (En)</th>
+                        <th width="10%">Position</th>
                         <th width="15%">Contract Phone 1 </th>
                         <th></th>
                     </tr>
@@ -61,4 +61,657 @@
         </div>
     </div>
 
+</div>
+
+
+<div id="dataEngineerModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="hTitleEdit" class="modal-title">ข้อมูล Engineer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="frNew" class="needs-validation" novalidate>
+                <div class="modal-body">
+
+                    <ul class="nav nav-tabs  mb-3 mt-3" id="simpletab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="engineer-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Engineer</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" id="prosonal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="contact" aria-selected="false">Personal</a>
+                        </li>
+
+                    </ul>
+
+                    <div class="tab-content" id="simpletabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div id="Engineer">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Company Name:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label id="lblcompanyName"></label>
+                                    </div>
+
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label><span style="color:red">*</span>Location Name:</label>
+
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="Location" name="Location" style="width:300px" class="form-control" required>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            กรุณาเลือกข้อมูล Location Name.
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label><span style="color:red">*</span> Team Name:</label>
+
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="Team" name="Team" style="width:300px" class="form-control" required>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            กรุณาเลือกข้อมูล Team Name.
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                @*<div class="row">
+                                        <div class="col-sm-2">
+                                            <label><span style="color:red">*</span> Staff Code:</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="StaffCode" style="width:300px" class="form-control" required>
+                                            <div class="invalid-feedback">
+                                                กรุณาเลือกข้อมูล Staff Code.
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <br />*@
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Staff Name:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="StaffName" style="width:300px" class="form-control" required>
+                                        <div class="invalid-feedback">
+                                            กรุณาเลือกข้อมูล Staff Name.
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Staff Name (TH):</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="StaffNameT" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Staff Name(EN):</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="StaffNameE" style="width:300px" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Position:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="Position" style="width:300px" class="form-control">
+
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Citizen ID:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="CitizenID" style="width:300px" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Personal Attach file:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="row col-sm-12">
+                                            <div class="custom-file mb-4">
+
+                                                <input type="file" class="custom-file-input" id="personalAttahFile" aria-describedby="uploadlHelp1" style="width:190px">
+                                                <label class="custom-file-label" for="inputBankAttach">เลือกไฟล์</label>
+                                                <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>T-Shirt size:</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input type="text" id="tshirtsize" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <h5>Contract Infomation</h5>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Contract Phone1:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="ContractPhone1" style="width:300px" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Contract Phone2:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="ContractPhone2" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Contract email:</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input type="text" id="ContractEmail" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <h5>Vehicle Infomation</h5>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Vehicle Type:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                        <input type="text" id="VehicleType" style="width:300px" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Vehicle Brand:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                        <input type="text" id="VehicleBrand" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Vehicle Serise:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="VehicleSerise" style="width:300px" class="form-control">
+
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Vehicle Color:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                        <input type="text" id="VehicleColor" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Vehicle Year:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                        <input type="text" id="VehicleYear" style="width:300px" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Vehicle license plate:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="VehicleLicense" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Vehicle Attach File:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="custom-file mb-4">
+
+                                            <input type="file" class="custom-file-input" id="BankAttach" aria-describedby="uploadlHelp1" style="width:190px">
+                                            <label class="custom-file-label" for="inputBankAttach">เลือกไฟล์</label>
+                                            <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <h5>Tool Infomation</h5>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Tool otdr:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="Toolotdr" style="width:300px" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Tool splicing:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="ToolSplicing" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <h5>Bank Infomation</h5>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label><span style="color:red">*</span>Bank Name:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="ddlBankName" name="BankName" style="width:300px" class="form-control" required>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            กรุณาเลือกข้อมูล Bank Name.
+                                        </div>
+                                    </div>
+                                    @*<div class="col-sm-2">
+                                            <label>Bank Code:</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="BankCode" style="width:300px" class="form-control">
+                                        </div>*@
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Account No:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="AccNo" style="width:300px" class="form-control" required>
+                                        <div class="invalid-feedback">
+                                            กรุณาเลือกข้อมูล Bank Name.
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Account Name:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="AccName" style="width:300px" class="form-control" required>
+                                        <div class="invalid-feedback">
+                                            กรุณาเลือกข้อมูล Account Name.
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="personal" role="tabpanel" aria-labelledby="profile-tab">
+                            <div id="Personal">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Citizen ID :</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input type="text" id="CitizenID2" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Title Name :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="Title" name="Title" style="width:300px" class="form-control">
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Full Name(TH) :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="FullNameT" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Full Name(EN) :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="FullNameE" style="width:300px" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Birth date :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="row col-sm-12">
+                                            <input type="text" id="BirthDate" style="width:280px" class="form-control">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Gender:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="radio" id="rdoMale" name="Gender" value="M">
+                                        <label for="Male">ชาย</label>&nbsp;&nbsp;
+                                        <input type="radio" id="rdoFeMale" name="Gender" value="F">
+                                        <label for="FeMale">หญิง</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Race :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="Race" class="form-control" style="width:300px">
+
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Nationality :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="Nationality" class="form-control" style="width:300px">
+                                        @*<select id="Nationality" name="Nationality" style="width:300px" class="form-control">
+                                            </select>*@
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Religion :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="Religion" class="form-control" style="width:300px">
+                                        @*<select id="Religion" name="Religion" style="width:300px" class="form-control">
+                                            </select>*@
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Identity by :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="Identity" style="width:300px" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Contract email :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="ContractEmail2" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Identity card address :</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <textarea id="IdentiAddress" rows="2" style="width:300px;"></textarea>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <h5>Contract Infomation</h5>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Contract phone1 :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="PersonalContractPhone1" style="width:300px" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Contract phone2 :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="PersonalContractPhone2" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Contract email :</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input type="text" id="ContractMail" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <h5>Work experience infomation</h5>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Work permit no :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="WorkPermit" style="width:300px" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Work permit attach file:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="custom-file mb-4">
+
+                                            <input type="file" class="custom-file-input" id="fileWorkPermitAttach" aria-describedby="uploadlHelp1" style="width:220px">
+                                            <label class="custom-file-label" for="fileWorkPermitAttach">เลือกไฟล์</label>
+                                            <small id="uploadlHelpwork" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+
+                                        </div>
+                                        @*<div class="row col-sm-12">
+
+
+                                            </div>*@
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Proflie img attach file :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="custom-file mb-4">
+
+                                            <input type="file" class="custom-file-input" id="fileProfileAttach" aria-describedby="uploadlHelp1" style="width:220px">
+                                            <label class="custom-file-label" for="fileProfileAttach">เลือกไฟล์</label>
+                                            <small id="uploadlHelpprofile" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+
+                                        </div>
+
+                                    </div>
+                                    @*<div class="col-sm-2">
+                                            <label>Course skill :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="CourseSkill" style="width:300px" class="form-control">
+                                        </div>*@
+                                </div>
+                                <br />
+
+                                <h5>Education infomation</h5>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Education :</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <textarea id="Education" rows="2" style="width:880px;"></textarea>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <h5>Languqges infomation</h5>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Languqges :</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input id="chkListenTH" type="checkbox" value="Y" />
+                                        <label>Listening Thai</label><br />
+                                        <input id="chkSpeakingTH" type="checkbox" value="Y" />
+                                        <label>Speaking Thai</label><br />
+                                        <input id="chkReadingTH" type="checkbox" value="Y" />
+                                        <label>Reading Thai</label><br />
+                                        <input id="chkWritingTH" type="checkbox" value="Y" />
+                                        <label>Writing Thai</label><br />
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input id="chkListenEN" type="checkbox" value="Y" />
+                                        <label>Listening Eng</label><br />
+                                        <input id="chkSpeakingEN" type="checkbox" value="Y" />
+                                        <label>Speaking Eng</label><br />
+                                        <input id="chkReadingEN" type="checkbox" value="Y" />
+                                        <label>Reading Eng</label><br />
+                                        <input id="chkWritingEN" type="checkbox" value="Y" />
+                                        <label>Writing Eng</label><br />
+                                    </div>
+                                </div>
+                                <br />
+
+                                <h5>Certificate infomation</h5>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Certificate type :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="CertificateType" style="width:300px" class="form-control">
+
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Certificate no :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="CertificateNo" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Certificate expire date :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="row col-sm-12">
+                                            <input type="text" id="dateCertificateDAte" style="width:280px" class="form-control">
+                                            @*  <input id="dateCertificateDate" style="width:220px" type="text" placeholder="Select Date.." data-provide="datepicker" >*@
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Certificate attach file :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="custom-file mb-4">
+
+                                            <input type="file" class="custom-file-input" id="fileCertificateAttach" aria-describedby="uploadlHelp1" style="width:220px">
+                                            <label class="custom-file-label" for="fileCertificateAttach">เลือกไฟล์</label>
+                                            <small id="uploadlHelpCertificateAttach" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <br />
+
+                                <h5>Bank infomation</h5>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Bank Name :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="BankName2" name="BankName2" style="width:300px" class="form-control">
+                                        </select>
+                                    </div>
+                                    @*<div class="col-sm-2">
+                                            <label>Bank Code :</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="BankCode2" style="width:300px" class="form-control">
+                                        </div>*@
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Account no :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="AccNo2" style="width:300px" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Account Name :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="AccName2" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                @*<div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Bank branch name:</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="BranchName" style="width:300px" class="form-control">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Bank Branch Code:</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="BranchCode" style="width:300px" class="form-control">
+                                        </div>
+
+                                    </div>
+
+                                    <br />*@
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+                    <input type="hidden" id="hdMode">
+                    <input type="hidden" id="hdEngineerId">
+                    <input type="hidden" id="hdEngineerCompanyId">
+                    <input type="hidden" id="hdPersonalId">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                        ปิด
+                    </button>
+                    @*<button id="btnSave" type="submit" class="btn btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                        บันทึก
+                    </button>*@
+                </div>
+            </form>
+
+        </div>
+    </div>
 </div>

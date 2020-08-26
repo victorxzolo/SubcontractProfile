@@ -1395,7 +1395,7 @@ function GetDropDownLocationSearch() {
 
          function GetDropDownBank() {
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             url: '@Url.Action("GetBankName", "Engineer")',
            // data: {stateid:stateid},
             dataType: 'json',
@@ -1417,7 +1417,7 @@ function GetDropDownLocationSearch() {
 
      function GetDropDownBankPersonal() {
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             url: '@Url.Action("GetBankName", "Engineer")',
            // data: {stateid:stateid},
             dataType: 'json',

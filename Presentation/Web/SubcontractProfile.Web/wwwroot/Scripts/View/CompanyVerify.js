@@ -492,8 +492,17 @@ $(document).ready(function () {
     //    otbtablocation.ajax.reload();
     //});
 
+    $('#tbtablocation').on('click', 'tbody .view_btn', function () {
+        var value = otbtablocation.row($(this).closest('tr')).data();
+        var LocationId = value.LocationId;
 
-    BindDDLLocationTeam();
+        getDataLocationById(LocationId);
+
+        $('#dataLocationModal').modal('show');
+    });
+
+   
+    GetDropDownLocation();
     //Tab Team
     $('#team-tab').click(function () {
        // otbtabteam.ajax.reload();
@@ -502,12 +511,22 @@ $(document).ready(function () {
     $('#ddlteamlocation').change(function () {
         otbtabteam.ajax.reload();
     });
+    $('#tbtabteam').on('click', 'tbody .view_btn', function () {
+        var value = otbtabteam.row($(this).closest('tr')).data();
+        var TeamId = value.TeamId;
+
+        getDataTeamById(TeamId);
+
+        $('#datateamModal').modal('show');
+    });
 
     //Tab Engineer
     $('#engineer-tab').click(function () {
         $('#lbengineercompanyname').text($('#lbcompanyname').text());
     });
     BindDDLTeamEngineer();
+    GetDropDownBank();
+    GetDropDownTitle();
     $('#ddllocationteamengineer').change(function () {
       var data=  $('#ddllocationteamengineer option').filter(':selected').val()
         BindDDLTeamEngineer(data);
@@ -516,8 +535,19 @@ $(document).ready(function () {
     $('#ddlteamengineer').change(function () {
         otbtabengineer.ajax.reload();
     });
-});
 
+    $('#tbtabengineer').on('click', 'tbody .view_btn', function () {
+        var value = otbtabengineer.row($(this).closest('tr')).data();
+        var EngineerId = value.EngineerId;
+
+        getDataEngineerById(EngineerId);
+
+        $('#dataEngineerModal').modal("show");
+    });
+    $('#Location').change(function () {
+        getTeamByLocationIdEdit($(this).val());
+    });
+});
 
 function onSaveCompanyProfile(status) {
     var chksubcontract_type = null;
@@ -1753,7 +1783,7 @@ function inittbtablocation() {
         },
         columns: [
             {
-                data: null, "visible": false, orderable: false, width: "5%", className: "text-center", render: function (data, type, row) {
+                data: null, orderable: false, width: "5%", className: "text-center", render: function (data, type, row) {
                     return "<a href='#'class='view_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='View'>\
                             <svg xmlns='http://www.w3.org/2000/svg' aria-hidden='true' focusable='false' width='1em' height='1em' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);' preserveAspectRatio='xMidYMid meet' viewBox='0 0 26 26'><path d='M4 0C1.8 0 0 1.8 0 4v17c0 2.2 1.8 4 4 4h11c.4 0 .7-.094 1-.094c-1.4-.3-2.594-1.006-3.594-1.906H4c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h6.313c.7.2.687 1.1.687 2v3c0 .6.4 1 1 1h3c1 0 2 0 2 1v1h.5c.5 0 1 .088 1.5.188V8c0-1.1-.988-2.112-2.688-3.813c-.3-.2-.512-.487-.812-.687c-.2-.3-.488-.513-.688-.813C13.113.988 12.1 0 11 0H4zm13.5 12c-3 0-5.5 2.5-5.5 5.5s2.5 5.5 5.5 5.5c1.273 0 2.435-.471 3.375-1.219l.313.313a.955.955 0 0 0 .125 1.218l2.5 2.5c.4.4.975.4 1.375 0l.5-.5c.4-.4.4-1.006 0-1.406l-2.5-2.5a.935.935 0 0 0-1.157-.156l-.281-.313c.773-.948 1.25-2.14 1.25-3.437c0-3-2.5-5.5-5.5-5.5zm0 1.5c2.2 0 4 1.8 4 4s-1.8 4-4 4s-4-1.8-4-4s1.8-4 4-4z' fill='black'/>\
                             </svg></a>";
@@ -1771,6 +1801,90 @@ function inittbtablocation() {
         "order": [[2, "desc"]],
         "stripeClasses": [],
         drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+    });
+}
+
+function getDataLocationById(locationId) {
+    $.ajax({
+        url:'/Registration/GetDataLocationById',
+        type: 'POST',
+        data: { 'locationId': locationId },
+        dataType: "json",
+        success: function (result) {
+            console.log(result)
+            if (result != null) {
+
+                $("#lblcompanyName").text(result.CompanyNameTh);
+
+                //if (result.SubcontractProfileType == "newsub") {
+                //    $('#rdoCompanyTypeNew').prop('checked', true);
+
+                //}
+                //else if (result.SubcontractProfileType == "dealer") {
+                //    $('#rdoCompanyTypeDealer').prop('checked', true);
+                //}
+
+                $('#inputLocationCode').val(result.LocationCode);
+
+                $('#inputLocationAlias').val(result.LocationNameAlias);
+                $('#inputLocationNameT').val(result.LocationNameTh);
+                $('#inputLocationNameE').val(result.LocationNameEn);
+                $('#inputStorage').val(result.StorageLocation);
+                $('#inputShip').val(result.ShipTo);
+                $('#inoutOutStorage').val(result.OutOfServiceStorageLocation);
+                $('#inputVat').val(result.VatBranchNumber);
+                $('#inputPhoneNo').val(result.Phone);
+                $('#inputMainPhone').val(result.CompanyMainContractPhone);
+                $('#inputInstallationsPhone').val(result.InstallationsContractPhone);
+                $('#inputMaintenencePhone').val(result.MaintenanceContractPhone);
+                $('#inputInventoryPhone').val(result.InventoryContractPhone);
+                $('#inputPaymentPhone').val(result.PaymentContractPhone);
+                $('#inputEtcPhone').val(result.EtcContractPhone);
+                $('#inputCompanyMail').val(result.CompanyGroupMail);
+                $('#inputInstallationMail').val(result.InstallationsContractMail);
+                $('#inputMaintanenceMail').val(result.MaintenanceContractMail);
+                $('#inputInventoryMail').val(result.InventoryContractMail);
+                $('#inputPaymentMail').val(result.PaymentContractMail);
+                $('#inputEtcMail').val(result.EtcContractMail);
+
+                $('#inputLocationAddress').val(result.LocationAddress);
+
+                $("#inputPostAddress").val(result.PostAddress)
+                $("#inputTaxAddress").val(result.TaxAddress)
+                $("#inputWTAddress").val(result.WtAddress)
+
+                $('#inputBankCode').val(result.BankCode);
+                $('#inputBankName').val(result.BankName);
+                $('#inputBankAccountNo').val(result.BankAccountNo);
+                $('#inputBankAccountName').val(result.BankAccountName);
+                $('#inputBankBranchNo').val(result.BankBranchCode);
+                $('#inputBankBranchName').val(result.BankBranchName);
+                $('#inputPanaltyPhone').val(result.PenaltyContractPhone);
+                $('#inputPanaltyMail').val(result.PenaltyContractMail);
+                $('#inputContractPhone').val(result.ContractPhone);
+                $('#inputContractMail').val(result.ContractMail);
+                $('#hdCompanyId').val(result.CompanyId);
+
+
+
+                //if (result.VatType == "VAT") {
+                //    $('#chkvat_typeT').prop('checked', true);
+                //}
+                //else if (result.VatType == "NON_VAT") {
+                //    $('#chkvat_typeE').prop('checked', true);
+                //}
+
+                //if (result.isActive == true) {
+                //    $("[name=rdoActive]").filter("[value='true']").prop("checked", true);
+                //} else {
+                //    $("[name=rdoActive]").filter("[value='false']").prop("checked", true);
+                //}
+            }
+        },
+        error: function (result) {
+
+        }
 
     });
 }
@@ -1828,7 +1942,7 @@ function inittbtabTeam() {
         },
         columns: [
             {
-                data: null, "visible": false, width: "5%", orderable: false, className: "text-center", render: function (data, type, row) {
+                data: null, width: "5%", orderable: false, className: "text-center", render: function (data, type, row) {
                     return "<a href='#'class='view_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='View'>\
                             <svg xmlns='http://www.w3.org/2000/svg' aria-hidden='true' focusable='false' width='1em' height='1em' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);' preserveAspectRatio='xMidYMid meet' viewBox='0 0 26 26'><path d='M4 0C1.8 0 0 1.8 0 4v17c0 2.2 1.8 4 4 4h11c.4 0 .7-.094 1-.094c-1.4-.3-2.594-1.006-3.594-1.906H4c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h6.313c.7.2.687 1.1.687 2v3c0 .6.4 1 1 1h3c1 0 2 0 2 1v1h.5c.5 0 1 .088 1.5.188V8c0-1.1-.988-2.112-2.688-3.813c-.3-.2-.512-.487-.812-.687c-.2-.3-.488-.513-.688-.813C13.113.988 12.1 0 11 0H4zm13.5 12c-3 0-5.5 2.5-5.5 5.5s2.5 5.5 5.5 5.5c1.273 0 2.435-.471 3.375-1.219l.313.313a.955.955 0 0 0 .125 1.218l2.5 2.5c.4.4.975.4 1.375 0l.5-.5c.4-.4.4-1.006 0-1.406l-2.5-2.5a.935.935 0 0 0-1.157-.156l-.281-.313c.773-.948 1.25-2.14 1.25-3.437c0-3-2.5-5.5-5.5-5.5zm0 1.5c2.2 0 4 1.8 4 4s-1.8 4-4 4s-4-1.8-4-4s1.8-4 4-4z' fill='black'/>\
                             </svg></a>";
@@ -1850,43 +1964,79 @@ function inittbtabTeam() {
     });
 }
 
-function BindDDLLocationTeam() {
+function getDataTeamById(teamId) {
 
     $.ajax({
-        type: "POST",
-        url: "/Registration/DDLLocation",
-        data: { companyid: $('#hdCompanyId').val() },
+        url:'/Registration/GetDataTeamById',
+        type: 'POST',
+        data: { 'teamId': teamId },
         dataType: "json",
-        success: function (data) {
+        success: function (result) {
+            //  console.log(result)
+            if (result != null) {
+                //  alert(result.LocationId);
+                //  $('#locationName_Th option[value="' + result.LocationId+'"]').prop("selected", true);
+                //    $('#locationName_Th').val(result.LocationId).prop('selected', true);
 
-            if (data != null) {
-                $('#ddlteamlocation').empty();
-                $('#ddllocationteamengineer').empty();
+                $("#ddllocationName_Th").val(result.LocationId);
+                $('#locationCode').val(result.LocationCode);
+                $('#TeamCode').val(result.TeamCode);
+                $('#VendorCode').val(result.VendorCode);
+                $('#TeamNameT').val(result.TeamNameTh);
+                $('#TeamNameE').val(result.TeamNameEn);
+                $('#Storage').val(result.StageLocal);
+                $('#Ship').val(result.ShipTo);
+                $('#OutStorage').val(result.OosStorageLocation);
+                $('#WarrantyMA').val(result.WarrantyMa);
+                $('#WarrantyInstall').val(result.WarrantyInstall);
+                $('#ServiceSkill').val(result.ServiceSkill);
+                $('#InstallationPhone').val(result.InstallationsContractPhone);
+                $('#MaintenancePhone').val(result.MaintenanceContractPhone);
+                $('#EtcPhone').val(result.EtcContractPhone);
+                $('#InstallationMail').val(result.InstallationsContractEmail);
+                $('#MaintenanceMail').val(result.MaintenanceContractEmail);
+                $('#EtcMail').val(result.EtcContractEmail);
+                $('#hdTeamId').val(result.TeamId);
+                $('#hdTeamCompanyId').val(result.CompanyId);
 
-                $.each(data.response, function () {
-                    $('#ddlteamlocation').append($("<option></option>").val(this.Value).text(this.Text));
-                    $('#ddllocationteamengineer').append($("<option></option>").val(this.Value).text(this.Text));
-                });
             }
-
-
         },
-        error: function (xhr, status, error) {
+        error: function (result) {
 
-            //clearForEdit();
-            console.log(status);
-            bootbox.confirm({
-                title: "System Information",
-                message: "This action is not available.",
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
+        }
+
+    });
+}
+
+function GetDropDownLocation() {
+    $.ajax({
+        type: 'POST',
+        url:'/Registration/GetLocationByCompany',
+        data: { companyid: $('#hdCompanyId').val()},
+        dataType: 'json',
+        success: function (data) {
+            $("#ddllocationName_Th").empty();
+            $('#ddlteamlocation').empty();
+            $('#ddllocationteamengineer').empty();
+            $("#Location").empty();
+
+            //$("#ddllocationName_Th").append('<option value="">--Please Select--</option>');
+            $.each(data, function () {
+                //$("#ddllocationName_Th").append('<option value="' + result.LocationId + '">' + result.LocationNameTh + '</option>');
+                $("#ddllocationName_Th").append($("<option></option>").val(this.Value).text(this.Text));
+                $('#ddlteamlocation').append($("<option></option>").val(this.Value).text(this.Text));
+                $('#ddllocationteamengineer').append($("<option></option>").val(this.Value).text(this.Text));
+                $('#Location').append($("<option></option>").val(this.Value).text(this.Text));
             });
+
+            //$.each(data.response, function () {
+            //    $('#ddlteamlocation').append($("<option></option>").val(this.Value).text(this.Text));
+            //    $('#ddllocationteamengineer').append($("<option></option>").val(this.Value).text(this.Text));
+            //});
+        },
+        failure: function () {
+            //$("#ddllocationName_Th").empty();
+            //$("#ddllocationName_Th").append('<option value="">--Please Select--</option>');
         }
     });
 }
@@ -1945,7 +2095,7 @@ function inittbtabengineer() {
         },
         columns: [
             {
-                data: null, "visible": false, orderable: false, width: "5%", className: "text-center", render: function (data, type, row) {
+                data: null, orderable: false, width: "5%", className: "text-center", render: function (data, type, row) {
                     return "<a href='#'class='view_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='View'>\
                             <svg xmlns='http://www.w3.org/2000/svg' aria-hidden='true' focusable='false' width='1em' height='1em' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);' preserveAspectRatio='xMidYMid meet' viewBox='0 0 26 26'><path d='M4 0C1.8 0 0 1.8 0 4v17c0 2.2 1.8 4 4 4h11c.4 0 .7-.094 1-.094c-1.4-.3-2.594-1.006-3.594-1.906H4c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h6.313c.7.2.687 1.1.687 2v3c0 .6.4 1 1 1h3c1 0 2 0 2 1v1h.5c.5 0 1 .088 1.5.188V8c0-1.1-.988-2.112-2.688-3.813c-.3-.2-.512-.487-.812-.687c-.2-.3-.488-.513-.688-.813C13.113.988 12.1 0 11 0H4zm13.5 12c-3 0-5.5 2.5-5.5 5.5s2.5 5.5 5.5 5.5c1.273 0 2.435-.471 3.375-1.219l.313.313a.955.955 0 0 0 .125 1.218l2.5 2.5c.4.4.975.4 1.375 0l.5-.5c.4-.4.4-1.006 0-1.406l-2.5-2.5a.935.935 0 0 0-1.157-.156l-.281-.313c.773-.948 1.25-2.14 1.25-3.437c0-3-2.5-5.5-5.5-5.5zm0 1.5c2.2 0 4 1.8 4 4s-1.8 4-4 4s-4-1.8-4-4s1.8-4 4-4z' fill='black'/>\
                             </svg></a>";
@@ -2004,6 +2154,238 @@ function BindDDLTeamEngineer(location) {
                     console.log('This was logged in the callback: ' + result);
                 }
             });
+        }
+    });
+}
+
+function getDataEngineerById(id) {
+
+    $.ajax({
+        url:'/Registration/GetDataEngineerById',
+        type: 'POST',
+        data: { 'engineerId': id },
+        dataType: "json",
+        success: function (result) {
+            //  console.log(result)
+            if (result != null) {
+                getTeamByLocationIdEdit(result.LocationId);
+                getDataPersonalById(result.PersonalId);
+
+                $("#Location").val(result.LocationId)
+
+
+                //$('#Team option').prop('selected', function () {
+                //    return result.TeamId;
+                //});
+
+                $('#hdEngineerId').val(result.EngineerId);
+
+                // $('#StaffCode').val(result.StaffCode);
+                $('#StaffName').val(result.StaffName);
+                $('#StaffNameT').val(result.StaffNameTh);
+                $('#StaffNameE').val(result.StaffNameEn);
+                $('#Position').val(result.Position);
+                $('#CitizenID').val(result.CitizenId);
+                $('#tshirtsize').val(result.TshirtSize);
+                $('#ContractPhone1').val(result.ContractPhone1);
+                $('#ContractPhone2').val(result.ContractPhone2);
+                $('#ContractEmail').val(result.ContractEmail);
+                $('#VehicleType').val(result.VehicleType);
+                $('#VehicleBrand').val(result.VehicleBrand);
+                $('#VehicleSerise').val(result.VehicleSerise);
+                $('#VehicleColor').val(result.VehicleColor);
+                $('#VehicleYear').val(result.VehicleYear);
+                $('#VehicleLicense').val(result.VehicleLicensePlate);
+                $('#Toolotdr').val(result.ToolOtrd);
+                $('#ToolSplicing').val(result.ToolSplicing);
+
+                $("#ddlBankName").val(result.BankName);
+                $('#AccNo').val(result.AccountNo);
+                $('#AccName').val(result.AccountName);
+
+                $('#hdEngineerCompanyId').val(result.CompanyId);
+
+               
+
+                $("#Team").val(result.TeamId);
+
+            }
+        },
+        error: function (result) {
+
+        }
+
+    });
+}
+
+function getTeamByLocationIdEdit(locationId) {
+    $.ajax({
+        url:'/Registration/GetDataByLocationId',
+        type: 'POST',
+        data: {
+            'locationId': locationId,
+            'companyid': $('#hdCompanyId').val()},
+        dataType: "json",
+        success: function (data) {
+            $("#Team").empty();
+            $("#Team").append('<option value="">--Please All--</option>');
+            $.each(data, function (id, result) {
+                $("#Team").append('<option value="' + result.TeamId + '">' + result.TeamNameTh + '</option>');
+            });
+        },
+        failure: function () {
+            $("#Team").empty();
+            $("#Team").append('<option value="">--Please All--</option>');
+        }
+    });
+}
+
+function getDataPersonalById(id) {
+    $.ajax({
+        url:'/Registration/GetDataPersonalById',
+        type: 'POST',
+        data: { 'personalId': id },
+        dataType: "json",
+        success: function (result) {
+            if (result != null) {
+                //---personal name
+                $('#hdPersonalId').val(id);
+                $('#CitizenID2').val(result.CitizenId);
+                $("#Title").val(result.TitleName);
+
+                // $('#Title').val(result.TitleName);
+                $('#FullNameT').val(result.FullNameEn);
+                $('#FullNameE').val(result.FullNameTh);
+                $('#BirthDate').val(result.BirthDate);
+
+                //Gender
+                if (result.Gender == "M") {
+                    //    $('#rdoMale').val(result.Gender);
+                    $("#rdoMale").prop("checked", true);
+                } else {
+                    // $('#rdoFeMale').val(result.Gender);
+                    $("#rdoFeMale").prop("checked", true);
+                }
+
+                $('#Race').val(result.Race);
+                $('#Nationality').val(result.Nationality);
+                $('#Religion').val(result.Religion);
+                $('#Identity').val(result.IdentityBy);
+                $('#ContractEmail2').val(result.ContactEmail);
+                $('#IdentiAddress').val(result.IdentityCardAddress);
+
+                $('#PersonalContractPhone1').val(result.ContactPhone1);
+
+                $('#PersonalContractPhone2').val(result.ContactPhone2);
+                $('#ContractMail').val(result.ContactEmail);
+                $('#WorkPermit').val(result.WorkPermitNo);
+                $('#fileWorkPermitAttach').val(result.WorkPermitAttachFile);
+                $('#fileProfileAttach').val(result.ProfileImgAttachFile);
+                // $('#CourseSkill').val(result.CourseSkill);
+                $('#Education').val(result.Education);
+
+                if (result.ThListening == "Y") {
+                    $('#chkListenTH').prop('checked', true);
+                }
+                if (result.ThSpeaking == "Y") {
+                    $('#chkSpeakingTH').prop('checked', true);
+                }
+
+                if (result.ThReading == "Y") {
+                    $('#chkReadingTH').prop('checked', true);
+                }
+
+                if (result.ThWriting == "Y") {
+                    $('#chkWritingTH').prop('checked', true);
+                }
+                if (result.EnListening == "Y") {
+                    $('#chkListenEN').prop('checked', true);
+                }
+                if (result.EnSpeaking == "Y") {
+                    $('#chkSpeakingEN').prop('checked', true);
+                }
+                if (result.EnReading == "Y") {
+                    $('#chkReadingEN').prop('checked', true);
+                }
+                if (result.EnWriting == "Y") {
+                    $('#chkWritingEN').prop('checked', true);
+                }
+
+
+                //$('#chkListenTH').val(result.ThListening);
+                //$('#chkSpeakingTH').val(result.ThSpeaking);
+                //$('#chkReadingTH').val(result.ThReading);
+                //$('#chkWritingTH').val(result.ThWriting);
+
+                //$('#chkListenEN').val(result.EnListening);
+                //$('#chkSpeakingEN').val(result.EnSpeaking);
+                //$('#chkReadingEN').val(result.EnReading);
+                //$('#chkWritingEN').val(result.EnWriting);
+
+                $('#CertificateType').val(result.CertificateType);
+                $('#CertificateNo').val(result.CertificateNo);
+                $('#dateCertificateDate').val(result.CertificateExpireDate);
+                $('#fileCertificateAttach').val(result.CertificateAttachFile);
+
+                $("#BankName2").val(result.BankName).change();
+
+                $('#AccNo2').val(result.AccountNumber);
+                $('#AccName2').val(result.AccountName);
+
+
+            }
+        },
+        error: function (result) {
+
+        }
+
+    });
+}
+
+function GetDropDownBank() {
+    $.ajax({
+        type: 'POST',
+        url:'/Registration/GetBankName',
+        // data: {stateid:stateid},
+        dataType: 'json',
+        success: function (data) {
+
+            $("#ddlBankName").empty();
+            $("#ddlBankName").append('<option value="">--Please Select--</option>');
+            $("#BankName2").empty();
+            $("#BankName2").append('<option value="">--Please Select--</option>');
+
+            $.each(data, function (id, result) {
+                $("#ddlBankName").append('<option value="' + result.BankName + '">' + result.BankName + '</option>');
+                $("#BankName2").append('<option value="' + result.BankName + '">' + result.BankName + '</option>');
+            });
+        },
+        failure: function () {
+            $("#ddlBankName").empty();
+            $("#ddlBankName").append('<option value="">--Please All--</option>');
+            $("#BankName2").empty();
+            $("#BankName2").append('<option value="">--Please All--</option>');
+        }
+    });
+}
+
+function GetDropDownTitle() {
+    $.ajax({
+        type: 'POST',
+        url: '/Registration/GetTitleName',
+        // data: {stateid:stateid},
+        dataType: 'json',
+        success: function (data) {
+
+            $("#Title").empty();
+            $("#Title").append('<option value="">--Please Select--</option>');
+            $.each(data, function (id, result) {
+                $("#Title").append('<option value="' + result.dropdown_text + '">' + result.dropdown_text + '</option>');
+            });
+        },
+        failure: function () {
+            $("#Title").empty();
+            $("#Title").append('<option value="">--Please All--</option>');
         }
     });
 }

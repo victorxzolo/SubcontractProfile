@@ -1139,6 +1139,29 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data,companynameth=ResultCompany.CompanyNameTh });
         }
 
+        [HttpPost]
+        public JsonResult GetDataLocationById(string locationId)
+        {
+            var locationResult = new SubcontractProfileLocationModel();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Location/GetByLocationId", locationId);
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                //data
+                locationResult = JsonConvert.DeserializeObject<SubcontractProfileLocationModel>(result);
+
+            }
+
+            return Json(locationResult);
+        }
+
         #endregion
 
         #region Team
@@ -1204,10 +1227,117 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data });
         }
 
+        [HttpPost]
+        public JsonResult GetDataTeamById(string teamId)
+        {
+            var result = new SubcontractProfileTeamModel();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Team/GetByTeamId", teamId);
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<SubcontractProfileTeamModel>(resultAsysc);
+
+            }
+
+            return Json(result);
+        }
+
+        //[HttpPost]
+        //public IActionResult DDLLocation(string companyid)
+        //{
+        //    var output = new List<SubcontractProfileLocationModel>();
+        //    List<SelectListItem> getAllLocationList = new List<SelectListItem>();
+
+        //    HttpClient client = new HttpClient();
+        //    client.DefaultRequestHeaders.Accept.Add(
+        //    new MediaTypeWithQualityHeaderValue("application/json"));
+
+        //    string uriString = string.Format("{0}/{1}", strpathAPI + "Team/GetLocationByCompany", companyid);
+        //    HttpResponseMessage response = client.GetAsync(uriString).Result;
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var v = response.Content.ReadAsStringAsync().Result;
+        //        output = JsonConvert.DeserializeObject<List<SubcontractProfileLocationModel>>(v);
+        //    }
+        //    if (Lang == null || Lang == "")
+        //    {
+        //        getsession();
+        //    }
+        //    if (Lang == "TH")
+        //    {
+        //        output.Add(new SubcontractProfileLocationModel
+        //        {
+        //            LocationCode = ""
+
+        //        }); ;
+
+        //        foreach (var r in output)
+        //        {
+        //            if (r.LocationCode == "")
+        //            {
+        //                getAllLocationList.Add(new SelectListItem
+        //                {
+        //                    Text = "กรุณาเลือก Location",
+        //                    Value =""
+        //                }) ;
+        //            }
+        //            else
+        //            {
+        //                getAllLocationList.Add(new SelectListItem
+        //                {
+        //                    Text = r.LocationNameTh,
+        //                    Value = r.LocationId.ToString()
+        //                });
+        //            }
+        //        }
+
+        //    }
+        //    else
+        //    {
+        //        output.Add(new SubcontractProfileLocationModel
+        //        {
+        //            LocationCode = ""
+
+        //        });
+
+        //        foreach (var r in output)
+        //        {
+        //            if (r.LocationCode == "")
+        //            {
+        //                getAllLocationList.Add(new SelectListItem
+        //                {
+        //                    Text = "Select Location",
+        //                    Value = ""
+        //                });
+        //            }
+        //            else
+        //            {
+        //                getAllLocationList.Add(new SelectListItem
+        //                {
+        //                    Text = r.LocationNameEn,
+        //                    Value = r.LocationId.ToString()
+        //                });
+        //            }
+        //        }
+
+        //    }
+        //    var result = getAllLocationList.OrderBy(c => c.Value).ToList();
+
+        //    return Json(new { response = result });
+        //}
 
         [HttpPost]
-        public IActionResult DDLLocation(string companyid)
+        public JsonResult GetLocationByCompany(string companyid)
         {
+            //var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
             var output = new List<SubcontractProfileLocationModel>();
             List<SelectListItem> getAllLocationList = new List<SelectListItem>();
 
@@ -1215,12 +1345,19 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Team/GetLocationByCompany", companyid);
+           // var companyId = userProfile.companyid;
+
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Location/GetLocationByCompany", companyid);
+
             HttpResponseMessage response = client.GetAsync(uriString).Result;
+
             if (response.IsSuccessStatusCode)
             {
-                var v = response.Content.ReadAsStringAsync().Result;
-                output = JsonConvert.DeserializeObject<List<SubcontractProfileLocationModel>>(v);
+                var resultAsync = response.Content.ReadAsStringAsync().Result;
+                //data
+                output = JsonConvert.DeserializeObject<List<SubcontractProfileLocationModel>>(resultAsync);
+
             }
             if (Lang == null || Lang == "")
             {
@@ -1241,8 +1378,8 @@ namespace SubcontractProfile.Web.Controllers
                         getAllLocationList.Add(new SelectListItem
                         {
                             Text = "กรุณาเลือก Location",
-                            Value =""
-                        }) ;
+                            Value = ""
+                        });
                     }
                     else
                     {
@@ -1286,7 +1423,30 @@ namespace SubcontractProfile.Web.Controllers
             }
             var result = getAllLocationList.OrderBy(c => c.Value).ToList();
 
-            return Json(new { response = result });
+            return Json(result);
+        }
+
+        [HttpPost]
+        public JsonResult GetTitleName()
+        {
+            var result = new List<SubcontractDropdownModel>();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "title_name");
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(resultAsysc);
+
+            }
+
+            return Json(result);
         }
         #endregion
 
@@ -1372,6 +1532,114 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data });
         }
 
+        public JsonResult GetDataEngineerById(string engineerId)
+        {
+            var result = new SubcontractProfileEngineerModel();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Engineer/GetByEngineerId", engineerId);
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<SubcontractProfileEngineerModel>(resultAsysc);
+
+            }
+
+            return Json(result);
+        }
+
+        public JsonResult GetDataByLocationId(string locationId, string companyid)
+        {
+            //var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+
+            //Guid companyId = userProfile.companyid;
+
+            var result = new List<SubcontractProfileTeamModel>();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            Guid gLocationId;
+
+            if (locationId == null || locationId == "-1")
+            {
+                gLocationId = Guid.Empty;
+            }
+            else
+            {
+                gLocationId = new Guid(locationId);
+            }
+
+            string uriString = string.Format("{0}/{1}/{2}", strpathAPI + "Team/GetByLocationId", companyid, gLocationId);
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<List<SubcontractProfileTeamModel>>(resultAsysc);
+
+            }
+
+            return Json(result);
+        }
+
+        public JsonResult GetDataPersonalById(Guid personalId)
+        {
+            var result = new SubcontractProfilePersonalModel();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Personal/GetByPersonalId", personalId);
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<SubcontractProfilePersonalModel>(resultAsysc);
+
+            }
+
+            return Json(result);
+        }
+
+        public JsonResult GetBankName()
+        {
+            //var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+
+            var result = new List<SubcontractProfileBankingModel>();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //var companyId = userProfile.companyid;
+
+
+            string uriString = string.Format("{0}", strpathAPI + "Banking/GetAll");
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsync = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<List<SubcontractProfileBankingModel>>(resultAsync);
+
+            }
+
+
+            return Json(result);
+        }
 
         [HttpPost]
         public IActionResult DDLTeam(string companyid,string locationId)
