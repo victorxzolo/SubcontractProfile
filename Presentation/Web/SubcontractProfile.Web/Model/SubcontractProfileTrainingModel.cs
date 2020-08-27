@@ -73,5 +73,6 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string position { get; set; }
 
+    
     }
 }

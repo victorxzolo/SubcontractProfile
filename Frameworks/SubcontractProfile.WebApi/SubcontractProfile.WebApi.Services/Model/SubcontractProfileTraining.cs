@@ -110,6 +110,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         public DateTime BookingDate { get; set; }
         public string RemarkForAis { get; set; }
 
+       
         public object Clone()
         {
             return this.MemberwiseClone();
