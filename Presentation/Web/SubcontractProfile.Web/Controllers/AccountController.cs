@@ -112,7 +112,7 @@ namespace SubcontractProfile.Web.Controllers
                 {
                     string encryptedPassword = Util.EncryptText(model.password);
                     var authenticatedUser = GetUser(model.username, encryptedPassword);
-                    if(!string.IsNullOrEmpty(authenticatedUser.Username))
+                    if(authenticatedUser != null)
                     {
                         res.Status = true;
                         SessionHelper.SetObjectAsJson(HttpContext.Session, "userLogin", authenticatedUser);
@@ -275,6 +275,10 @@ namespace SubcontractProfile.Web.Controllers
         private void getsession()
         {
             Lang = SessionHelper.GetObjectFromJson<string>(_httpContextAccessor.HttpContext.Session, "language");
+            if(Lang==null || Lang=="")
+            {
+                Lang = "TH";
+            }
             dataUser = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(_httpContextAccessor.HttpContext.Session, "userLogin");
         }
 
@@ -1467,10 +1471,17 @@ namespace SubcontractProfile.Web.Controllers
 
                         #region Insert Company
 
-                        string encrypted = Util.EncryptText(model.Password);
-                        model.Password = encrypted;
+                        if(model.SubcontractProfileType== "NewSubContract")
+                        {
+                            string encrypted = Util.EncryptText(model.Password);
+                            model.Password = encrypted;
+                        }
 
-                       
+                        
+                        model.Status = "Pending";
+
+
+
 
                         var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
                     HttpClient clientCompany = new HttpClient();

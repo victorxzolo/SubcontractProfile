@@ -199,6 +199,8 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Password { get; set; }
 
+        public System.DateTime? RegisterDate { get; set; }
+
         public object Clone()
         {
             return this.MemberwiseClone();

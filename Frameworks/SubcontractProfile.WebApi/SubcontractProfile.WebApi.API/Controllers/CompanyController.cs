@@ -147,6 +147,30 @@ namespace SubcontractProfile.WebApi.API.Controllers
             return entities;
 
         }
+
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileAddress))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileAddress))]
+        [HttpPost("SearchCompanyVerify")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchCompanyVerify(SubcontractProfileCompany search)
+        {
+            _logger.LogInformation($"Start CompanyController::SearchCompanyVerify", search.SubcontractProfileType,search.TaxId,search.CompanyName
+                ,search.DistributionChannel,search.ChannelSaleGroup,search.ContractStartDate,search.ContractEndDate,search.VendorCode,search.Status);
+
+
+            var entities = _service.SearchCompanyVerify(search);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"CompanyController::", "SearchCompanyVerify NOT FOUND",  search.SubcontractProfileType, search.TaxId, search.CompanyName
+                , search.DistributionChannel, search.ChannelSaleGroup, search.ContractStartDate, search.ContractEndDate, search.VendorCode, search.Status);
+                return null;
+            }
+
+            return entities;
+        }
+
+
         #endregion
 
         #region POST

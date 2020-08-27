@@ -21,6 +21,6 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>> GetByPKList(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment_PK> pkList);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>> searchPayment(string payment_no,
            string request_training_no, string request_date_from, string request_date_to, string payment_date_from,
-           string payment_date_to, string payment_status);
+           string payment_date_to, string payment_status, string company_name, string tax_id);
     }
 }

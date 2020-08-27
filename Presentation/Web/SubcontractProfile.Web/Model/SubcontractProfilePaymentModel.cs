@@ -84,6 +84,11 @@ namespace SubcontractProfile.Web.Model
 
         public IFormFile FileSilp { get; set; }
 
+        public DateTime? verifiedDate { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(5000)]
+        public string remarkForSub { get; set; }
+
         public object Clone()
         {
             return this.MemberwiseClone();

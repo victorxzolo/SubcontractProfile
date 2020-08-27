@@ -315,6 +315,7 @@ namespace SubcontractProfile.Web.Controllers
 
                             if (dataaddr != null && dataaddr.Count != 0)
                             {
+                                SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftCompany");
 
                                 foreach (var d in dataaddr)
                                 {
@@ -331,7 +332,7 @@ namespace SubcontractProfile.Web.Controllers
                                     addr.ProvinceId = d.ProvinceId;
                                     addr.CompanyId = companyId.ToString();
                                     addr.ModifiedBy = datauser.UserId.ToString();
-                                    addr.CreateDate = DateTime.Now;
+                                    addr.ModifiedDate = DateTime.Now;
                                     addr.RegionId = d.RegionId;
                                     addr.Road = d.Road;
                                     addr.Soi = d.Soi;
@@ -351,7 +352,7 @@ namespace SubcontractProfile.Web.Controllers
                                     HttpResponseMessage responseAddress = clientAddress.PutAsync(uriAddress, httpContent).Result;
                                     if (responseAddress.IsSuccessStatusCode)
                                     {
-                                        SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftCompany");
+                                        
                                         res.Status = true;
                                         res.Message = "Register Success";
                                         res.StatusError = "0";
@@ -631,73 +632,51 @@ namespace SubcontractProfile.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult SearchDaftAddress(string company)
-        {
-            var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
-            // Skiping number of Rows count  
-            var start = Request.Form["start"].FirstOrDefault() == null ? "0" : Request.Form["start"].FirstOrDefault();
-            // Paging Length 10,20  
-            var length = Request.Form["length"].FirstOrDefault() == null ? "10" : Request.Form["length"].FirstOrDefault();
-            // Sort Column Name  
-            var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
-            // Sort Column Direction ( asc ,desc)  
-            var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
-            // Search Value from (Search box)  
-            var searchValue = Request.Form["search[value]"].FirstOrDefault();
-
-            //Paging Size (10,20,50,100)  
-            int pageSize = length != null ? Convert.ToInt32(length) : 0;
-            int skip = start != null ? Convert.ToInt32(start) : 0;
-            int recordsTotal = 0;
-            try
-            {
-                
-
-                List<SubcontractProfileAddressModel> result = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaftCompany");
-                result = result.Where(x => x.CompanyId == company).ToList();
-                     recordsTotal = result.Count();
-
-                    //Paging   
-                    var data = result.Skip(skip).Take(pageSize).ToList();
-
-                    return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data });
- 
-            }
-            catch (Exception e)
-            {
-                return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = new List<SubcontractProfileAddressModel>() });
-                throw;
-            }
-        }
-
-        [HttpPost]
         public IActionResult GetAddressById(string addressID)
         {
-            var result = new SubcontractProfileAddressModel();
             try
             {
-                HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-
-                string uriString = string.Format("{0}/{1}", strpathAPI + "Address/GetByAddressId", addressID);
-
-                //string jj = JsonConvert.SerializeObject(input);
-
-                HttpResponseMessage response = client.GetAsync(uriString).Result;
-                if (response.IsSuccessStatusCode)
+                if (addressID != null && addressID != "")
                 {
-                    var v = response.Content.ReadAsStringAsync().Result;
-                    result = JsonConvert.DeserializeObject<SubcontractProfileAddressModel>(v);
+                    var data = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaftCompany");
+                    var result = data.Where(x => x.AddressId.ToString() == addressID).FirstOrDefault();
+                    return Json(new { response = result, status = true });
                 }
-                return Json(new { response = result, status = true, message= response.StatusCode });
+                else
+                {
+                    var data = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaftCompany");
+                    return Json(new { response = data, status = true });
+                }
             }
             catch (Exception e)
             {
                 return Json(new { message = e.Message, status = false });
-                throw;
             }
-          
+            //var result = new SubcontractProfileAddressModel();
+            //try
+            //{
+            //    HttpClient client = new HttpClient();
+            //    client.DefaultRequestHeaders.Accept.Add(
+            //    new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //    string uriString = string.Format("{0}/{1}", strpathAPI + "Address/GetByAddressId", addressID);
+
+            //    //string jj = JsonConvert.SerializeObject(input);
+
+            //    HttpResponseMessage response = client.GetAsync(uriString).Result;
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        var v = response.Content.ReadAsStringAsync().Result;
+            //        result = JsonConvert.DeserializeObject<SubcontractProfileAddressModel>(v);
+            //    }
+            //    return Json(new { response = result, status = true, message= response.StatusCode });
+            //}
+            //catch (Exception e)
+            //{
+            //    return Json(new { message = e.Message, status = false });
+            //    throw;
+            //}
+
         }
 
         [HttpPost]

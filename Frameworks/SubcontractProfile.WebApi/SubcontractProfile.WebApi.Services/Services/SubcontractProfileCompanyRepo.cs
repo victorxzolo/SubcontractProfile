@@ -163,8 +163,8 @@ namespace SubcontractProfile.WebApi.Services
             p.Add("@company_status", subcontractProfileCompany.CompanyStatus);
             p.Add("@company_address", subcontractProfileCompany.CompanyAddress);
             p.Add("@vat_address", subcontractProfileCompany.VatAddress);
-            p.Add("@create_by", subcontractProfileCompany.CreateBy);
-            p.Add("@create_date", subcontractProfileCompany.CreateDate);
+            //p.Add("@create_by", subcontractProfileCompany.CreateBy);
+            //p.Add("@create_date", subcontractProfileCompany.CreateDate);
             p.Add("@update_by", subcontractProfileCompany.UpdateBy);
             p.Add("@update_date", subcontractProfileCompany.UpdateDate);
             p.Add("@company_email", subcontractProfileCompany.CompanyEmail);
@@ -426,6 +426,30 @@ namespace SubcontractProfile.WebApi.Services
             return entity;
 
           
+        }
+
+
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchCompanyVerify(
+            SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany search)
+        {
+            var p = new DynamicParameters();
+            p.Add("@SubcontractProfileType",search.SubcontractProfileType);
+            p.Add("@TaxId", search.TaxId);
+            p.Add("@CompanyName", search.CompanyName);
+            p.Add("@DistributionChannel", search.DistributionChannel);
+            p.Add("@ChannelSaleGroup", search.ChannelSaleGroup);
+            p.Add("@RegisterDateFrom", search.ContractStartDate);
+            p.Add("@RegisterDateTo", search.ContractEndDate);
+            p.Add("@VendorCode", search.VendorCode);
+            p.Add("@Status", search.Status);
+
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>
+            ("uspSubcontractProfileCompany_SearchVerify", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+
+
         }
     }
 }

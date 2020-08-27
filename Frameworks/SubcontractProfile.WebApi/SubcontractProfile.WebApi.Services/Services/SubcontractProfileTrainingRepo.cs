@@ -59,7 +59,7 @@ namespace SubcontractProfile.WebApi.Services.Services
         {
             var p = new DynamicParameters();
 
-            p.Add("@training_id", subcontractProfileTraining.TrainingId);
+          
             p.Add("@company_id", subcontractProfileTraining.CompanyId);
             p.Add("@course", subcontractProfileTraining.Course);
             p.Add("@request_date", subcontractProfileTraining.RequestDate);
@@ -69,13 +69,8 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@tax", subcontractProfileTraining.Tax);
             p.Add("@status", subcontractProfileTraining.Status);
             p.Add("@request_no", subcontractProfileTraining.RequestNo);
-            p.Add("@engineer_id", subcontractProfileTraining.EngineerId);
-            p.Add("@team_id", subcontractProfileTraining.TeamId);
-            p.Add("@location_id", subcontractProfileTraining.LocationId);
             p.Add("@create_by", subcontractProfileTraining.CreateBy);
-            p.Add("@create_date", subcontractProfileTraining.CreateDate);
-            p.Add("@modified_by", subcontractProfileTraining.ModifiedBy);
-            p.Add("@modified_date", subcontractProfileTraining.ModifiedDate);
+ 
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTraining_Insert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -99,13 +94,9 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@tax", subcontractProfileTraining.Tax);
             p.Add("@status", subcontractProfileTraining.Status);
             p.Add("@request_no", subcontractProfileTraining.RequestNo);
-            p.Add("@engineer_id", subcontractProfileTraining.EngineerId);
-            p.Add("@team_id", subcontractProfileTraining.TeamId);
-            p.Add("@location_id", subcontractProfileTraining.LocationId);
-            p.Add("@create_by", subcontractProfileTraining.CreateBy);
-            p.Add("@create_date", subcontractProfileTraining.CreateDate);
             p.Add("@modified_by", subcontractProfileTraining.ModifiedBy);
-            p.Add("@modified_date", subcontractProfileTraining.ModifiedDate);
+            p.Add("@booking_date", subcontractProfileTraining.BookingDate);
+            p.Add("@remark_for_ais", subcontractProfileTraining.RemarkForAis);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTraining_Update", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -157,9 +148,6 @@ namespace SubcontractProfile.WebApi.Services.Services
             dt.Columns.Add("tax", typeof(SqlDecimal));
             dt.Columns.Add("status", typeof(SqlString));
             dt.Columns.Add("request_no", typeof(SqlString));
-            dt.Columns.Add("engineer_id", typeof(SqlString));
-            dt.Columns.Add("team_id", typeof(SqlString));
-            dt.Columns.Add("location_id", typeof(SqlString));
             dt.Columns.Add("create_by", typeof(SqlString));
             dt.Columns.Add("create_date", typeof(SqlDateTime));
             dt.Columns.Add("modified_by", typeof(SqlString));
@@ -179,9 +167,7 @@ namespace SubcontractProfile.WebApi.Services.Services
                     row["tax"] = curObj.Tax == null ? SqlDecimal.Null : new SqlDecimal(curObj.Tax.Value);
                     row["status"] = new SqlString(curObj.Status);
                     row["request_no"] = new SqlString(curObj.RequestNo);
-                    row["engineer_id"] = new SqlString(curObj.EngineerId);
-                    row["team_id"] = new SqlString(curObj.TeamId);
-                    row["location_id"] = new SqlString(curObj.LocationId);
+                   
                     row["create_by"] = new SqlString(curObj.CreateBy);
                     row["create_date"] = curObj.CreateDate == null ? SqlDateTime.Null : new SqlDateTime(curObj.CreateDate.Value);
                     row["modified_by"] = new SqlString(curObj.ModifiedBy);
@@ -229,12 +215,14 @@ namespace SubcontractProfile.WebApi.Services.Services
         }
 
         public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTraining(Guid company_id, Guid location_id,
-            Guid team_id, string status, string date_from, string date_to)
+            Guid team_id, string status, string date_from, string date_to,string tax_id,string request_no)
         {
             var p = new DynamicParameters();
             p.Add("@company_id", company_id);
             p.Add("@location_id", location_id);
             p.Add("@team_id", team_id);
+            p.Add("@tax_id", tax_id);
+            p.Add("@request_no", request_no);
             p.Add("@status", status);
             p.Add("@date_from", date_from);
             p.Add("@date_to", date_to);

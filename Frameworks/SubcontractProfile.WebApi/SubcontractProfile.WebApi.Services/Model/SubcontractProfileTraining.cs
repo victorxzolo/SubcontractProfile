@@ -107,8 +107,8 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string position { get; set; }
 
-       
-
+        public DateTime BookingDate { get; set; }
+        public string RemarkForAis { get; set; }
 
         public object Clone()
         {

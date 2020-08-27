@@ -19,7 +19,7 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<bool> Delete(string id);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> GetByPKList(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining_PK> pkList);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTraining(Guid company_id, Guid location_id,
-            Guid team_id, string status, string date_from, string date_to);
+            Guid team_id, string status, string date_from, string date_to,string tax_id, string request_no);
 
     }
 }

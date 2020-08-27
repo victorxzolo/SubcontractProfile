@@ -28,8 +28,13 @@
     <link href="~/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="~/plugins/select2/select2.min.css">
     <!--  END CUSTOM STYLE FILE  -->
+<<<<<<< HEAD
     @*<link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" />
         <link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">*@
+=======
+    @*<link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" />*@
+    @*<link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">*@
+>>>>>>> 6f286affaf2904e2f9effc1fdef9199ee4f8e4dc
     <link rel="stylesheet" href="~/plugins/font-icons/fontawesome/css/regular.css">
     <link rel="stylesheet" href="~/plugins/font-icons/fontawesome/css/fontawesome.css">
     <link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
@@ -238,12 +243,17 @@
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Registration" data-parent="#accordionExample">
                             <li>
-                                <a  href="#"> Registration </a>
+                                <a href="@Url.Action("Index", "CompanyProfile")"> Company </a>
                             </li>
                             <li>
-                                <a href="#"> Activate Profile  </a>
+                                <a href="@Url.Action("LocationProfile", "Location")"> Location  </a>
                             </li>
-                           
+                            <li>
+                                <a href="@Url.Action("TeamProfile", "Team")"> Team </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("EngineerProfile", "Engineer")"> Engineer </a>
+                            </li>
 
                         </ul>
                     </li>
@@ -261,10 +271,14 @@
                         <ul class="collapse submenu list-unstyled" id="Training" data-parent="#accordionExample">
                             <li>
                                 <a href="@Url.Action("RequestTraining", "Training")"> Request Training </a>
+<<<<<<< HEAD
                             </li>
                             <li>
                                 <a href="#"> Report Test Result </a>
+=======
+>>>>>>> 6f286affaf2904e2f9effc1fdef9199ee4f8e4dc
                             </li>
+
                         </ul>
                     </li>
 
@@ -280,7 +294,7 @@
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Payment" data-parent="#accordionExample">
                             <li>
-                                <a href="#"> Verfified Payment </a>
+                                <a href="@Url.Action("ConfirmPayment", "payment")"> Confirm Payment </a>
                             </li>
 
                         </ul>

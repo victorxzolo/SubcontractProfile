@@ -149,6 +149,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         public string TeamNameTh { get; set; }
 
         public System.Guid PersonalId { get; set; }
+        public string SubcontractType { get; set; }
 
         public object Clone()
         {

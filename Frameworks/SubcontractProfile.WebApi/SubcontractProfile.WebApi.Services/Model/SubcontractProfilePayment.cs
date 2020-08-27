@@ -100,7 +100,12 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(5000)]
         public string companyAddress { get; set; }
 
-      
+
+        public DateTime? verifiedDate { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(5000)]
+        public string remarkForSub { get; set; }
+
 
         public object Clone()
         {

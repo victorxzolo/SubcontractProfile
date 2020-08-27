@@ -127,7 +127,7 @@ namespace SubcontractProfile.Web.Model
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string TeamNameTh { get; set; }
-
+        public string SubcontractType { get; set; }
         public System.Guid PersonalId { get; set; }
 
     }
