@@ -43,10 +43,6 @@
 
                         </select>
 
-                        @*<input type="radio" id="rdoStatusY" name="Status" value="Y" class="form-control" >
-                            <label for="Status">Yes</label>&nbsp;&nbsp;
-                            <input type="radio" id="rdoStatusN" name="Status" value="N" class="form-control" >
-                            <label for="Status">No</label>*@
                     </div>
 
 
@@ -98,162 +94,206 @@
 
 @section modalpanel {
 
-    <div id="AddEditModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div id="RequestModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 id="hTitleEdit" class="modal-title">Request Training</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="container">
+                    <div class="modal-header">
+                        <h5 id="hTitleEdit" class="modal-title">Request Training</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
 
-                <form id="frNew" class="needs-validation" novalidate>
-                    <div class="container">
-                        <div class="modal-body">
+                    <form id="frNew" class="needs-validation" novalidate>
+                        <div class="container">
+                            <div class="modal-body">
 
-                            <div class="row mt-4 ml-3 mr-1">
+                                <div class="row mt-4 ml-3 mr-1">
 
-                                <div class=" col-md-6 mt-3">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label>Company Name:</label>
+                                    <div class=" col-md-6 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Company Name:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <label id="lbCompanyName"></label>
+                                            </div>
                                         </div>
-                                        <div class="col-md-7">
-                                            <label></label>
+                                    </div>
+                                    <div class=" col-md-6 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Tax ID : </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <label id="lbTaxID"> </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-md-6 mt-4">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Contact Phone:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input type='text' id="txtContactPhone" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-md-6 mt-4">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Email :</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input type='text' id="txtEmail" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-md-6 mt-4">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Course:</label>
+                                            </div>
+                                            <div class="col-md-7 ">
+                                                <div class="row">
+                                                    <div class="col-md-12 ml-4">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                        <label id="lbCourse" class=""> อบรมการติดตั้งระดับสูง</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-md-6 mt-4">
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+                                                <label class="">Request Date:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <div class='input-group p-0 date'id='txtRequestDate' >
+                                                    <input type='text' class="form-control"  />
+                                                    <div class="input-group-append input-group-addon">
+                                                        <span class="input-group-text px-4">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-md-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label>Remark:</label>
+                                            </div>
+                                            <div class="col-md-9 ">
+                                                <textarea id="txtRemark" name="w3review" style="width:inherit;border-color:#E0E0E0" rows="6"> </textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class=" col-md-6 mt-3">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label>Tax ID : </label>
-</div>
-                                        <div class="col-md-7">
-                                            <label>1234567890111 </label>
-</div>
-                                    </div>
-                                </div>
-                                <div class=" col-md-6 mt-4">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label>Contact Phone:</label>
-</div>
-                                        <div class="col-md-7">
-                                            <input type='text' class="form-control"  />
+
+                               
+                                <div class="row mt-5 ml-3 mr-3">
+                                    <div class="col-md-12 ">
+                                        <div class="modal-header">
+                                            <h5 id="hTitleEdit" class="modal-title">เข้าอบรม</h5>
                                         </div>
+
                                     </div>
-                                </div>
-                                <div class=" col-md-6 mt-4">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label>Email :</label>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <input type='text' class="form-control" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class=" col-md-6 mt-4">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label>Course:</label>
-</div>
-                                        <div class="col-md-7 ">
+                                 <div class="container">
+                                        <div class="col-md-12 mt-3">
                                             <div class="row">
-                                                <div class="col-md-12 ml-4">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                                    <p class=""> xxxxxxxxxxxxxxxxxxxxxxxxx</p>
+                                                <div class="col-md-4">
+                                                    <label for="">Location Name :</label>
+                                                    <select id="selLocationNametraining" class="form-control" data-live-search="true"></select>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="">Team :</label>
+                                                    <select id="selTeamtraining" class="form-control" data-live-search="true"></select>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="">Engineer:</label>
+                                                    <select id="selEngineertraining" class="form-control" data-live-search="true"></select>
+
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class=" col-md-6 mt-4">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label>Date range training:</label>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <div class='input-group date' id='datepicker1'>
-                                                <input type='text' class="form-control" />
-                                                <span class="input-group-addon">
-                                                    <span class="fa fa-calendar"></span>
-                                                </span>
+                                        <div class="col-md-12 ">
+                                            <div class="mt-5" style="text-align:center">
+
+                                                <button id="btnclearTraining" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> Clear</button>
+                                                <button id="btnAddTraining"  type="button" onclick="Addtraining()"  class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> ADD</button>
+
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class=" col-md-12 mt-3">
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <label>Remark:</label>
-                                        </div>
-                                        <div class="col-md-9 ">
-                                            <textarea id="w3review" name="w3review" style="width:inherit;border-color:#E0E0E0" rows="6"> </textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                        <div class="col-md-12 ">
+                                            <div class="mt-3 text-right">
+                                                <button id="btnDeleteTraining" type="button" onclick="deleteTraining()" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Delete</button>
 
-                            <div class="container">
-                                <div class="row mt-5 ml-3 mr-3">
-                                    <div class="col-md-12 ">
-                                        <p5 ><strong>ผู้เข้าอบรม</strong></p5>
-                                        <hr>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
-                                                <thead >
-                                                    <tr>
-                                                        <th scope="col">No</th>
-                                                        <th scope="col">Location Name</th>
-                                                        <th scope="col">Team Name</th>
-                                                        <th scope="col">Engineer Name</th>
-                                                      
-                                                        <th scope="col">Position</th>
-                                                        <th scope="col">Contact Phone1</th>
-                                                        <th scope="col">Contact Email</th>
-                                                    </tr>
-                                                </thead>
-                                              
-                                            </table>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12 mt-5">
-                                        <div class="row">
-                                            <div class="col-md-9 "></div>
-                                            <div class="col-md-3 col-sm-12">
-                                                <div class="row ">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <p>ราคารวม</p>
+
+                                        <div class="col-md-12">
+                                            <div class="table-responsive">
+                                                <table id="showAddtraining"  class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                                                    <thead>
+                                                        <tr>
+                                                            <th >Action</th>
+                                                            <th >No</th>
+                                                            <th >Location Name</th>
+                                                            <th >Team Name</th>
+                                                            <th >Engineer Name</th>
+                                                            <th >Contact Phone1</th>
+                                                            <th >Contact Email</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mt-5">
+                                            <div class="row">
+                                                <div class="col-md-9 "></div>
+                                                <div class="col-md-3 col-sm-12">
+                                                    <div class="row ">
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <p>ราคารวม</p>
+                                                                </div>
+                                                                <div class="col-md-6" style="text-align: left;">
+                                                                    <p>10000</p>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-md-6" style="text-align: left;">
-                                                                <p>10000</p>
+
+                                                        </div>
+                                                        <div class="col-md-12 mt-3">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <p>Vat7%</p>
+                                                                </div>
+                                                                <div class="col-md-6" style="text-align: left;">
+                                                                    <p>700</p>
+                                                                </div>
                                                             </div>
                                                         </div>
-
-                                                    </div>
-                                                    <div class="col-md-12 mt-3">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <p>Vat7%</p>
-                                                            </div>
-                                                            <div class="col-md-6" style="text-align: left;">
-                                                                <p>700</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 mt-3">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <p>ราคาสุทธิ(บาท) </p>
-                                                            </div>
-                                                            <div class="col-md-6" style="text-align: left;">
-                                                                <p>10,700</p>
+                                                        <div class="col-md-12 mt-3">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <p>ราคาสุทธิ(บาท) </p>
+                                                                </div>
+                                                                <div class="col-md-6" style="text-align: left;">
+                                                                    <p>10,700</p>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -261,77 +301,96 @@
                                             </div>
                                         </div>
                                     </div>
+
+
                                 </div>
-
-
-                            </div>
-                            <div class="container">
-                                <div class="row mt-5 ml-3 mr-3">
-                                    <div class="col-md-12 ">
-                                        <p class="h5"><strong>การชำระเงิน</strong></p>
-                                        <hr>
-                                    </div>
-                                    <div class="col-md-12 ml-5 mt-2 ">
-                                        <h5>ชำระเงินผ่านทางธนาคาร internet Banking หรือตู้ ATM โดยการโอนเงินเข้าบัญชี</h5>
-                                    </div>
-                                    <div class="col-md-12 mt-3">
-                                        <div class="row">
-                                            <div class="col-md-1">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <p style="font-size:12px">ธนาคาร กรุงศรีอยุธยา จำกัดสาขา xxxxxxx</p>
-                                                <p style="font-size:12px">ชื่อบัญชี บริษัท xxxxxx </p>
-                                                <p style="font-size:12px">บัญชีออมทรัพย์ เลขที่บัญชี 111-1-1111-1</p>
-                                                <br><p style="font-size:12px">(ชำระเงินยอดรวมภาษี 7% ทุกยอด)</p>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <p style="font-size:12px">ธนาคาร กสิกรไทย จำกัดสาขา xxxxxxx</p>
-                                                <p style="font-size:12px">ชื่อบัญชี บริษัท xxxxxx </p>
-                                                <p style="font-size:12px">บัญชีออมทรัพย์ เลขที่บัญชี 111-1-1111-1</p>
-                                                <br><p style="font-size:12px">(ชำระเงินยอดรวมภาษี 7% ทุกยอด)</p>
+                                <div class="container">
+                                    <div class="row mt-5 ml-3 mr-3">
+                                        <div class="col-md-12 ">
+                                            <p class="h5"><strong>การชำระเงิน</strong></p>
+                                            <hr>
+                                        </div>
+                                        <div class="col-md-12 ml-5 mt-2 ">
+                                            <h5>ชำระเงินผ่านทางธนาคาร internet Banking หรือตู้ ATM โดยการโอนเงินเข้าบัญชี</h5>
+                                        </div>
+                                        <div class="col-md-12 mt-3">
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <p style="font-size:12px">ธนาคาร กรุงศรีอยุธยา จำกัดสาขา xxxxxxx</p>
+                                                    <p style="font-size:12px">ชื่อบัญชี บริษัท xxxxxx </p>
+                                                    <p style="font-size:12px">บัญชีออมทรัพย์ เลขที่บัญชี 111-1-1111-1</p>
+                                                    <br><p style="font-size:12px">(ชำระเงินยอดรวมภาษี 7% ทุกยอด)</p>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <p style="font-size:12px">ธนาคาร กสิกรไทย จำกัดสาขา xxxxxxx</p>
+                                                    <p style="font-size:12px">ชื่อบัญชี บริษัท xxxxxx </p>
+                                                    <p style="font-size:12px">บัญชีออมทรัพย์ เลขที่บัญชี 111-1-1111-1</p>
+                                                    <br><p style="font-size:12px">(ชำระเงินยอดรวมภาษี 7% ทุกยอด)</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
+                                    </div>
                                 </div>
+
                             </div>
 
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                                    ปิด
+                                </button>
+                                <button id="btnSave" type="button" onclick="RequestTraining()"   class="btn btn-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                    บันทึก
+                                </button>
+                            </div>
                         </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
-                                ปิด
-                            </button>
-                            <button id="btnSave" type="submit" class="btn btn-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                                บันทึก
-                            </button>
-                        </div>
-                        </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
     </div>
 }
 
 
  @section scripts {
      
-        <script type="text/javascript">
-        var oTable;
+     <script type="text/javascript">
+         var oTable;
+
         $(document).ready(function () {
 
             GetDropDownLocationSearch();
+            GetDropDownLocationtraining()         
+
+            $('#txtRequestDate').datetimepicker({
+                format: 'LT'
+            });
+            //$('#txtRequestDate').datepicker({
+            //    //format: 'yyyy-mm-dd hh:ii',
+            //    pickDate: false,
+            //    //format: 'dd/mm/yyyy',
+            //    //daysOfWeekHighlighted: "6,0",
+            //    //autoclose: true,    
+            //    //todayHighlight: true,
+            //    //clearBtn: true,
+            //});
+         
 
             $('#selLocationName').change(function () {
-                getTeamByLocationId($(this).val());
+
+                getTeamByLocationId();
             });
-
-            //$('#Location').change(function () {
-            //    getTeamByLocationIdEdit($(this).val());
-            //});
-
+            $('#selLocationNametraining').change(function () {
+                var splitval = $(this).val().split(',');
+                getTeamByLocationIdtraining(splitval[0]);
+            });
+            $('#selTeamtraining').change(function () {
+                var splitval = $(this).val().split(',');
+                getEngineerByTeamIdtraining(splitval[0]);
+            });
 
             inittbSearchResult();
             $("#btnSearchLoc").click(function (e) {
@@ -344,36 +403,36 @@
             });
 
             $("#btnAdd").click(function (e) {
-                openModal("new", "");
+                openModal();
             });
 
         });
 
-            'use strict';
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-              //  var forms = document.getElementsByClassName('select');
-                var invalid = $('.select .invalid-feedback');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
+            //'use strict';
+            //window.addEventListener('load', function () {
+            //    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            //    var forms = document.getElementsByClassName('needs-validation');
+            //  //  var forms = document.getElementsByClassName('select');
+            //    var invalid = $('.select .invalid-feedback');
+            //    // Loop over them and prevent submission
+            //    var validation = Array.prototype.filter.call(forms, function (form) {
+            //        form.addEventListener('submit', function (event) {
 
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            invalid.css('display', 'block');
-                        } else {
-                            onSave();
-                            event.preventDefault();
-                            event.stopPropagation();
-                            invalid.css('display', 'none');
+            //            if (form.checkValidity() === false) {
+            //                event.preventDefault();
+            //                event.stopPropagation();
+            //                invalid.css('display', 'block');
+            //            } else {
+            //                onSave();
+            //                event.preventDefault();
+            //                event.stopPropagation();
+            //                invalid.css('display', 'none');
 
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
+            //            }
+            //            form.classList.add('was-validated');
+            //        }, false);
+            //    });
+            //}, false);
 
         function inittbSearchResult() {
 
@@ -442,31 +501,11 @@
         }
 
 
-        function openModal(mode, engineerId) {
+        function openModal() {
 
             $("#frNew")[0].reset();
-
-            $('#hdMode').val(mode);
-            $('#hdEngineerId').val(engineerId);
-
-            if (mode == "edit") {
-                //$("#txtCompanyCode").prop("disabled", true);
-                $("#hTitleEdit").text('Request Training');
-
-                getDataById(engineerId);
-            }
-            else {
-                $("#hTitleEdit").text('Request Training');
-
-              //  $("#txtCompanyCode").prop("disabled", false);
-
-              //  $("#frNew")[0].reset();
-                //form.find('button').on('click', (event) => {
-                //    form.find('input, select, textarea').val('');
-                //});
-            }
-
-            $('#AddEditModal').modal('show');
+            getDataById();
+            $('#RequestModal').modal('show');
 
         }
 
@@ -508,56 +547,48 @@
         }
 
 
-        function getDataById(id) {
-
+        function getDataById() {
+            var data;
               $.ajax({
-                  url: '@Url.Action("GetDataById", "Engineer")',
-                  type: 'POST',
-                  data: { 'engineerId': id},
+                  url: '@Url.Action("GetByCompanyId", "Training")',
+                  type: 'GET',
                   dataType: "json",
                   success: function (result) {
-                //  console.log(result)
-                      if (result != null) {
-                          getTeamByLocationIdEdit(result.LocationId);
-
-                          $("#Location").val(result.LocationId).change();
 
 
-                          //$('#Team option').prop('selected', function () {
-                          //    return result.TeamId;
-                          //});
+                      if (result.Data != null) {
+                          Data = result.Data;
+                          $('#lbCompanyName').text(Data.CompanyNameTh);
+                          $('#lbTaxID').text(Data.TaxId);
+                          $('#txtContactPhone').val(Data.ContractPhone);
+                          $('#txtEmail').val(Data.ContractEmail);
 
-                          $('#hdEngineerId').val(result.EngineerId);
+                          //$('#txtRequestDate').val(result.CitizenId);
+                          //$('#txtRemark').val(result.CitizenId);
+                    }
+                  },
+                  error: function (result) {
 
-                         // $('#StaffCode').val(result.StaffCode);
-                          $('#StaffName').val(result.StaffName);
-                          $('#StaffNameT').val(result.StaffNameTh);
-                          $('#StaffNameE').val(result.StaffNameEn);
-                          $('#Position').val(result.Position);
-                          $('#CitizenID').val(result.CitizenId);
-                          $('#tshirtsize').val(result.TshirtSize);
-                          $('#ContractPhone1').val(result.ContractPhone1);
-                          $('#ContractPhone2').val(result.ContractPhone2);
-                          $('#ContractEmail').val(result.ContractEmail);
-                          $('#VehicleType').val(result.VehicleType);
-                          $('#VehicleBrand').val(result.VehicleBrand);
-                          $('#VehicleSerise').val(result.VehicleSerise);
-                          $('#VehicleColor').val(result.VehicleColor);
-                          $('#VehicleYear').val(result.VehicleYear);
-                          $('#VehicleLicense').val(result.VehicleLicensePlate);
-                          $('#Toolotdr').val(result.ToolOtrd);
-                          $('#ToolSplicing').val(result.ToolSplicing);
+                  }
 
-                          $("#ddlBankName").val(result.BankName).change();
-                          $('#AccNo').val(result.AccountNo);
-                          $('#AccName').val(result.AccountName);
+            });
+         }
+         function Addtraining() {
+             var model = new Object();
+             model.location_name_th = $('#selLocationNametraining').val();
+             model.team_name_th = $('#selTeamtraining').val();
+             model.Engineer_ID = $('#selEngineertraining').val();
+             model.contract_phone = $('#txtContactPhone').val();
+             model.contract_email = $('#txtEmail').val();
+              $.ajax({
+                  url: '@Url.Action("Addtraining", "Training")',
+                  type: 'POST',
+                  data: { 'model': model },
+                  dataType: "json",
+                  success: function (result) {
+                    if (result != null) {
 
-                          $('#hdCompanyId').val(result.CompanyId);
-
-                          getDataPersonalById(result.PersonalId);
-
-                          $("#Team").val(result.TeamId).change();
-
+                        showtraining(result)
                     }
                   },
                   error: function (result) {
@@ -566,7 +597,83 @@
 
             });
         }
+         function showtraining(data) {
+             console.log(data)
+             $("#showAddtraining tbody").empty();
+             var strtable = '';
+             $.each(data, function (id, result) {
+                 strtable += '<tr>' +
+                     '<td style="text-align:center" ><input type = "checkbox" value="' + result.TrainingId+'"></td>' +
+                     '<td>' + (id+1)+'</td>' +
+                     '<td>' + result.location_name_th +'</td>' +
+                     '<td>' + result.team_name_th +'</td>' +
+                     '<td>' + result.Engineer_name +'</td>' +
+                     '<td>' + result.contract_phone+'</td>' +
+                     '<td>' + result.contract_email +'</td>' +
+                     '</tr >';
+             });
+             console.log(strtable)
+             $("#showAddtraining tbody").append(strtable);
 
+         }
+         function deleteTraining() {
+
+
+
+             var val = [];
+             $(':checkbox:checked').each(function (i) {
+                 val[i] = $(this).val();
+             });
+             console.log(val);
+
+              $.ajax({
+                  url: '@Url.Action("Deletetraining", "Training")',
+                  type: 'PUT',
+                  data: { 'TrainingId': val },
+                  dataType: "json",
+                  success: function (result) {
+                    if (result != null) {
+
+                        showtraining(result)
+                    }
+                  },
+                  error: function (result) {
+
+                  }
+
+            });
+         }
+         function RequestTraining() {
+             var model = new Object();           
+             model.company_name_th = $('#lbCompanyName').text();
+             model.tax_id = $('#lbTaxID').text();
+             model.contract_phone = $('#txtContactPhone').val();
+             model.contract_email = $('#txtEmail').val();
+             model.Course = $('#lbCourse').text();
+             model.Remark = $('#txtRemark').val();
+             model.TotalPrice = "10000";
+             model.Vat="700"
+             model.Tax = "10700";
+             model.Status = "N";
+             model.RequestDate = $('#txtRequestDate').val();
+             console.log(model.RequestDate);
+            $.ajax({
+                  url: '@Url.Action("RequestTraining", "Training")',
+                  type: 'Post',
+                  data: { 'model': model},
+                  dataType: "json",
+                  success: function (result) {
+                    if (result != null) {
+
+                       
+                    }
+                  },
+                  error: function (result) {
+
+                  }
+
+            });
+         }
 
         function getDataPersonalById(id) {
               $.ajax({
@@ -887,7 +994,7 @@
                     $("#selLocationName").append('<option value="-1">--Please All--</option>');
                 }
             });
-    }
+        }
 
 
         function getTeamByLocationId(locationId) {
@@ -923,8 +1030,87 @@
          }
 //---------------------end
 
+//-------------training-------------------------
+        function GetDropDownLocationtraining() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetLocationByCompany","Team")',
+           // data: {stateid:stateid},
+            dataType: 'json',
+            success: function (data) {
 
-        </script>
+                $("#selLocationNametraining").empty();
+                $("#selLocationNametraining").append('<option value="-1">--Please All--</option>');
+                $.each(data, function (id, result) {
+                    $("#selLocationNametraining").append('<option value="' + result.LocationId + ',' + result.LocationNameTh+'">' + result.LocationNameTh +'</option>');
+                    });
+                },
+                failure: function () {
+                    $("#selLocationNametraining").empty();
+                    $("#selLocationNametraining").append('<option value="-1">--Please All--</option>');
+                }
+            });
+        }
+
+
+         function getTeamByLocationIdtraining(locationId) {
+             console.log(locationId);
+            if (locationId == "") {
+                locationId ="-1"
+            }
+
+              $.ajax({
+                  url: '@Url.Action("GetDataByLocationId", "Team")',
+                  type: 'POST',
+                  data: { 'locationId': locationId},
+                  dataType: "json",
+                  success: function (data) {
+                      $("#selTeamtraining").empty();
+                      $("#selTeamtraining").append('<option value="-1">--Please All--</option>');
+                      $.each(data, function (id, result) {
+                          $("#selTeamtraining").append('<option value="' + result.TeamId + ',' + result.TeamNameTh+'">' + result.TeamNameTh + '</option>');
+                      });
+
+
+                  },
+                  failure: function () {
+
+                      $("#selTeamtraining").empty();
+                      $("#selTeamtraining").append('<option value="-1">--Please All--</option>');
+                  }
+              });
+         }
+           function getEngineerByTeamIdtraining(Teamid) {
+               console.log(Teamid);
+               if (Teamid == "") {
+                   Teamid ="-1"
+                }
+
+              $.ajax({
+                  url: '@Url.Action("getEngineerByTeamId", "Engineer")',
+                  type: 'POST',
+                  data: { 'Teamid': Teamid},
+                  dataType: "json",
+                  success: function (data) {
+                      $("#selEngineertraining").empty();
+                      $("#selEngineertraining").append('<option value="-1">--Please All--</option>');
+                      $.each(data, function (id, result) {
+                          $("#selEngineertraining").append('<option value="' + result.EngineerId + ',' + result.StaffName+'">' + result.StaffName + '</option>');
+                      });
+
+
+                  },
+                  failure: function () {
+
+                      $("#selEngineertraining").empty();
+                      $("#selEngineertraining").append('<option value="-1">--Please All--</option>');
+                  }
+              });
+         }
+//---------------------end
+
+
+     </script>
     }
 
 

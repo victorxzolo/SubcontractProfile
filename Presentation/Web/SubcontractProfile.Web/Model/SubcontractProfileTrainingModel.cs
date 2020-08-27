@@ -72,6 +72,11 @@ namespace SubcontractProfile.Web.Model
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string position { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string Engineer_ID { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string Engineer_name { get; set; }
 
     
     }

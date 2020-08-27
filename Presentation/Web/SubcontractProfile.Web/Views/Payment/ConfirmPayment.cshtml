@@ -30,111 +30,107 @@
         </div>
 
 
-        <div class="container">
-            <form class="SearchPaymentvalidation" novalidate action="javascript:void(0);">
-                <div class="widget-content ">
-                    <div class="form-row mb-4">
-                        <div class=" form-group  col-md-6">
-                            <label class="col-form-label text-left">Payment No:</label>
-                            <input type="text" class="form-control " id="paymentno" maxlength="100" >                         
-                        </div>
-                        <div class=" form-group col-md-6">
-                            <label class="col-form-label text-left">Request Training no:</label>
-                            <input type="text" class="form-control " id="paymentrequesttraningno" maxlength="100" >
-                        </div>
+
+        <form class="SearchPaymentvalidation" novalidate action="javascript:void(0);">
+            <div class="widget-content ">
+                <div class="form-row mb-4">
+                    <div class=" form-group  col-md-6">
+                        <label class="col-form-label text-left">Payment No:</label>
+                        <input type="text" class="form-control " id="paymentno" maxlength="100">
+                    </div>
+                    <div class=" form-group col-md-6">
+                        <label class="col-form-label text-left">Request Training no:</label>
+                        <input type="text" class="form-control " id="paymentrequesttraningno" maxlength="100">
+                    </div>
 
 
-                        <div class="form-group col-md-6">
-                            <label class="">Request Date From:</label>
-                            <input id="paymentrequestdatefrom" value="2019-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.." required>
+                    <div class="form-group col-md-6">
+                        <label class="">Request Date From:</label>
+                        <input id="paymentrequestdatefrom" value="2019-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.." required>
 
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="">Request Date to:</label>
-                            <input id="paymentrequestdateto" value="2019-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.."required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="">Request Date to:</label>
+                        <input id="paymentrequestdateto" value="2019-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.." required>
 
-                        </div>
-
-
-                        <div class="form-group col-md-6">
-                            <label class="">Payment Date From:</label>
-                            <input id="paymentdatefrom" value="2019-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.."required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="">Payment Date To:</label>
-                            <input id="paymentdateto" value="2019-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.."required>
-                        </div>
+                    </div>
 
 
-                        <div class="form-group col-md-6">
-                            <label class="">Payment Status:</label>
-                            <select class="form-control" id="paymentstatus" required>
-                                <option value="">Please Select</option>
-                                <option value="Y">Paid</option>
-                                <option value="N">Not Paid</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please Select the Status
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
+                    <div class="form-group col-md-6">
+                        <label class="">Payment Date From:</label>
+                        <input id="paymentdatefrom" value="2019-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.." required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="">Payment Date To:</label>
+                        <input id="paymentdateto" value="2019-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.." required>
+                    </div>
 
+
+                    <div class="form-group col-md-6">
+                        <label class="">Payment Status:</label>
+                        <select class="form-control" id="paymentstatus" required>
+                            <option value="">Please Select</option>
+                            <option value="Y">Paid</option>
+                            <option value="N">Not Paid</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please Select the Status
                         </div>
                     </div>
+                    <div class="form-group col-md-6">
+
+                    </div>
                 </div>
-                <div class="mt-5" style="text-align: center;">
-                    <button id="btnClearSearchconfirmpayment" type="button" onclick="clearSearchpayment()" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" /></svg> ล้างข้อมูล</button>
-                    <button id="btnSearchconfirmpayment" type="submit" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>                   
-                </div>
-            </form>
+            </div>
+            <div class="mt-5" style="text-align: center;">
+                <button id="btnClearSearchconfirmpayment" type="button" onclick="clearSearchpayment()" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" /></svg> ล้างข้อมูล</button>
+                <button id="btnSearchconfirmpayment" type="submit" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+            </div>
+        </form>
+
+
+        <div class="form-group my-4">
+            <div class="card-header bg-white">
+                <p class="font-weight-bolder lead">Search Result</p>
+            </div>
         </div>
 
+        <div class="row mt-4 mb-3">     
+            <div class="col-md-12">
 
-        <div class="container">
-            <div class="row mt-4 mb-3">
-                <div class="col-md-12">
-                    <div class="widget-heading">
-                        <h5 class="">Serach Result</h5>
-                        <hr>
+                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                    <div class="table-responsive" style="overflow-x:auto;">
+                        <table class="table table-hover" id="tbSearchconfirmpayment">
+                            <thead>
+                                <tr>
+                                    <th>Action</th>
+                                    <th>No</th>
+                                    <th>Payment No</th>
+                                    <th>Request Training No</th>
+                                    <th>Request Date</th>
+                                    <th>วันที่ชำระเงิน</th>
+                                    <th>รูปแบบการชำระเงิน</th>
+                                    <th>ธนาคารต้นทาง</th>
+                                    <th>ยอดเงินโอน</th>
+                                    <th>ผู้ติดต่อ</th>
+                                    <th>เบอร์โทรศัพท์</th>
+                                    <th>สถานะ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+
                     </div>
-                    @*<p class="h5"><strong>Serach Result</strong></p>*@
-
                 </div>
-                <div class="col-md-12">
 
-                    <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                        <div class="table-responsive" style="overflow-x:auto;">
-                            <table class="table table-hover" id="tbSearchconfirmpayment">
-                                <thead>
-                                    <tr>
-                                        <th>Action</th>
-                                        <th>No</th>
-                                        <th>Payment No</th>
-                                        <th>Request Training No</th>
-                                        <th>Request Date</th>
-                                        <th>วันที่ชำระเงิน</th>
-                                        <th>รูปแบบการชำระเงิน</th>
-                                        <th>ธนาคารต้นทาง</th>
-                                        <th>ยอดเงินโอน</th>
-                                        <th>ผู้ติดต่อ</th>
-                                        <th>เบอร์โทรศัพท์</th>
-                                        <th>สถานะ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-
-
-
-                </div>
 
 
             </div>
+
+
         </div>
+
 
         <div class="container" id="ConfirmPayment">
             <div class="row mt-5">
@@ -146,8 +142,6 @@
 
                 </div>
             </div>
-
-
 
 
 
@@ -248,7 +242,7 @@
                                     </div>
                                     <div class="col-md-7">
                                         <select class="form-control" id="payment_channal">
-                                        </select>                                        
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -307,7 +301,7 @@
                                     </div>
                                     <div class="col-md-7">
                                         <select class="form-control" id="bank_transfer">
-                                        </select>                                      
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -332,7 +326,7 @@
                                             <input type="file" class="custom-file-input" id="slip_attach_file" required>
                                             <label id="nameslip_attach_file" class="custom-file-label" for="slip_attach_file">Choose file</label>
                                             <div class="invalid-feedback mt-4">Please Upload the Silp</div>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -370,7 +364,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="container mt-3" style="background-color:#E0E0E0;text-align: center; max-width:100%" id="btnconfirmpayment">                    
+                <div class="container mt-3" style="background-color:#E0E0E0;text-align: center; max-width:100%" id="btnconfirmpayment">
                 </div>
             </form>
 
@@ -378,8 +372,8 @@
         </div>
 
 
-           
-        </div>   
+
+    </div>   
 </div>
 
 
