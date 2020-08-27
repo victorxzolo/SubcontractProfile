@@ -184,6 +184,38 @@ namespace SubcontractProfile.Web.Controllers
 
             return Json(result);
         }
+        public JsonResult getEngineerByTeamId(string Teamid)
+        {
+            Guid gTeamid;
+            if (Teamid == null || Teamid == "-1")
+            {
+                gTeamid = Guid.Empty;
+            }
+            else
+            {
+                gTeamid = new Guid(Teamid);
+            }
+            var result = new List<SubcontractProfileEngineerModel>();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "Engineer/GetAll");
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<List<SubcontractProfileEngineerModel>>(resultAsysc);
+                result.Where(x => x.TeamId == gTeamid).ToList();
+               
+
+            }
+
+            return Json(result);
+        }
 
         public JsonResult GetDataPersonalById(Guid personalId)
         {
