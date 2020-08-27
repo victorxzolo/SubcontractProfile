@@ -59,7 +59,7 @@ namespace SubcontractProfile.WebApi.Services.Services
         {
             var p = new DynamicParameters();
 
-            p.Add("@training_id", subcontractProfileTraining.TrainingId);
+          
             p.Add("@company_id", subcontractProfileTraining.CompanyId);
             p.Add("@course", subcontractProfileTraining.Course);
             p.Add("@request_date", subcontractProfileTraining.RequestDate);
@@ -73,9 +73,7 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@team_id", subcontractProfileTraining.TeamId);
             p.Add("@location_id", subcontractProfileTraining.LocationId);
             p.Add("@create_by", subcontractProfileTraining.CreateBy);
-            p.Add("@create_date", subcontractProfileTraining.CreateDate);
-            p.Add("@modified_by", subcontractProfileTraining.ModifiedBy);
-            p.Add("@modified_date", subcontractProfileTraining.ModifiedDate);
+ 
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTraining_Insert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
