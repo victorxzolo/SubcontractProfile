@@ -69,13 +69,13 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileTraining))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileTraining))]
-        [HttpGet("SearchTraining/{company_Id}/{location_id}/{team_id}/{status}/{date_from}/{date_to}")]
+        [HttpGet("SearchTraining/{company_Id}/{location_id}/{team_id}/{status}/{date_from}/{date_to}/{tax_id}/{request_no}")]
         public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTraining(Guid company_id, Guid location_id,
-            Guid team_id, string status, string date_from, string date_to)
+            Guid team_id, string status, string date_from, string date_to,string tax_id, string request_no)
 
         {
             _logger.LogInformation($"Start TrainingController::SearchTraining", company_id, location_id,
-                team_id, status, date_from, date_to);
+                team_id, status, date_from, date_to, tax_id, request_no);
 
             if (status.ToUpper()== "NULL")
             {
@@ -92,13 +92,23 @@ namespace SubcontractProfile.WebApi.API.Controllers
                 date_to = string.Empty;
             }
 
+            if (tax_id.ToUpper() == "NULL")
+            {
+                tax_id = string.Empty;
+            }
+
+            if (request_no.ToUpper() == "NULL")
+            {
+                request_no = string.Empty;
+            }
+
             var entities = _service.SearchTraining(company_id, location_id, 
-                team_id,  status, date_from, date_to);
+                team_id,  status, date_from, date_to, tax_id, request_no);
 
             if (entities == null)
             {
                 _logger.LogWarning($"TrainingController::", "SearchTraining NOT FOUND", company_id, location_id,
-                team_id, status, date_from, date_to);
+                team_id, status, date_from, date_to, tax_id, request_no);
                 return null;
             }
 

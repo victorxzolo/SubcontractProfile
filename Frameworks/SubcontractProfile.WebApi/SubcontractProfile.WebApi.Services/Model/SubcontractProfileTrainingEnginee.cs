@@ -45,7 +45,18 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string CreateUser { get; set; }
 
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string LocationNameTh { get; set; }
 
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string TeamNameTh { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string StaffNameTh { get; set; }
+
+        public string Position { get; set; }
+
+ 
         public object Clone()
         {
             return this.MemberwiseClone();

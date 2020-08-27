@@ -103,10 +103,13 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@contact_email", subcontractProfilePayment.ContactEmail);
             p.Add("@remark", subcontractProfilePayment.Remark);
             p.Add("@status", subcontractProfilePayment.Status);
+            p.Add("@modified_by", subcontractProfilePayment.ModifiedBy);
+            p.Add("@verified_date", subcontractProfilePayment.verifiedDate);
+            p.Add("@remark_for_sub", subcontractProfilePayment.remarkForSub);
             //p.Add("@create_date", subcontractProfilePayment.CreateDate);
             //p.Add("@create_by", subcontractProfilePayment.CreateBy);
             //p.Add("@modified_by", subcontractProfilePayment.ModifiedBy);
-            p.Add("@modified_date", subcontractProfilePayment.ModifiedDate);
+            // p.Add("@modified_date", subcontractProfilePayment.ModifiedDate);
             //p.Add("@training_id", subcontractProfilePayment.TrainingId);
             //p.Add("@company_id", subcontractProfilePayment.CompanyId);
 
@@ -237,7 +240,7 @@ namespace SubcontractProfile.WebApi.Services.Services
 
         public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>> searchPayment(string payment_no, string request_training_no,
             string request_date_from, string request_date_to, string payment_date_from, string payment_date_to,
-            string payment_status)
+            string payment_status,string company_name, string tax_id)
         {
             var p = new DynamicParameters();
             p.Add("@payment_no", payment_no.Trim());
@@ -247,6 +250,8 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@payment_date_from", payment_date_from.Trim());
             p.Add("@payment_date_to", payment_date_to.Trim());
             p.Add("@payment_status", payment_status.Trim());
+            p.Add("@company_name", company_name.Trim());
+            p.Add("@tax_id", tax_id.Trim());
 
             var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>
             ("uspSubcontractProfilePayment_searchPayment", p, commandType: CommandType.StoredProcedure);
