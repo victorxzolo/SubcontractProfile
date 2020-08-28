@@ -442,7 +442,6 @@ namespace SubcontractProfile.Web.Controllers
 
         public async Task<IActionResult> GetDataById(string paymentId)
         {
-            ViewBag["PaymentID"] = paymentId;
             var PaymentResult = new SubcontractProfilePaymentModel();
 
             // Getting all company data  
