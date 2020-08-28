@@ -233,6 +233,25 @@ namespace SubcontractProfile.WebApi.Services.Services
 
             return entity;
         }
+
+        public async Task<IEnumerable<SubcontractProfileTraining>> SearchTrainingForApprove(string company_name_th, 
+            string tax_id, 
+            string request_no, string status, string date_from, string date_to)
+        {
+            var p = new DynamicParameters();
+            p.Add("@company_name_th", company_name_th);
+            p.Add("@tax_id", tax_id);
+            p.Add("@request_no", request_no);
+            p.Add("@status", status);
+            p.Add("@date_from", date_from);
+            p.Add("@date_to", date_to);
+
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>
+            ("uspSubcontractProfileTraining_searchTrainingForApprove", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
     }
 
 

@@ -21,5 +21,8 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTraining(Guid company_id, Guid location_id,
             Guid team_id, string status, string date_from, string date_to,string tax_id, string request_no);
 
+        Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTrainingForApprove(string company_name_th,
+         string tax_id, string request_no, string status, string date_from, string date_to);
+
     }
 }

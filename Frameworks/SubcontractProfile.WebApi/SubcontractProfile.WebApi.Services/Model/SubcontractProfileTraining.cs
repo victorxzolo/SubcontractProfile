@@ -56,13 +56,13 @@ namespace SubcontractProfile.WebApi.Services.Model
         public string RequestNo { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string EngineerId { get; set; }
+        public System.Guid EngineerId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string TeamId { get; set; }
+        public System.Guid TeamId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string LocationId { get; set; }
+        public System.Guid LocationId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string CreateBy { get; set; }

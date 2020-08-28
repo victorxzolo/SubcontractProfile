@@ -115,6 +115,62 @@ namespace SubcontractProfile.WebApi.API.Controllers
             return entities;
 
         }
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileTraining))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileTraining))]
+        [HttpGet("SearchTrainingForApprove/{company_name_th}/{tax_id}/{request_no}/{status}/{date_from}/{date_to}")]
+
+        public  Task<IEnumerable<SubcontractProfileTraining>> SearchTrainingForApprove(string company_name_th,
+           string tax_id,
+           string request_no, string status, string date_from, string date_to)
+        {
+
+            _logger.LogInformation($"Start TrainingController::SearchTraining", company_name_th, tax_id,
+                request_no, status, date_from, date_to);
+
+            if (company_name_th.ToUpper() == "NULL")
+            {
+                company_name_th = string.Empty;
+            }
+
+            if (tax_id.ToUpper() == "NULL")
+            {
+                tax_id = string.Empty;
+            }
+
+            if (request_no.ToUpper() == "NULL")
+            {
+                request_no = string.Empty;
+            }
+
+            if (status.ToUpper() == "NULL")
+            {
+                status = string.Empty;
+            }
+
+            if (date_from.ToUpper() == "NULL")
+            {
+                date_from = string.Empty;
+            }
+
+            if (date_to.ToUpper() == "NULL")
+            {
+                date_to = string.Empty;
+            }
+
+       
+            var entities = _service.SearchTrainingForApprove(company_name_th, tax_id,
+                request_no, status, date_from, date_to);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"TrainingController::", "SearchTraining NOT FOUND", company_name_th, tax_id,
+                request_no, status, date_from, date_to);
+                return null;
+            }
+
+            return entities;
+        }
         #endregion
 
         #region POST

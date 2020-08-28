@@ -25,5 +25,9 @@ namespace SubcontractProfile.WebApi.Services.Contracts
 
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchCompanyVerify(SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany search);
 
+        Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchActivateProfile(string subcontract_profile_type
+           , string company_name_th, string tax_id, string activate_date_fr, string activate_date_to, string activate_status
+          );
+
     }
 }

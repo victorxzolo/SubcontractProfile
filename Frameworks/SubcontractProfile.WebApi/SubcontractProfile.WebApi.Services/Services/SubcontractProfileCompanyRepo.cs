@@ -451,5 +451,24 @@ namespace SubcontractProfile.WebApi.Services
 
 
         }
+
+        public async Task<IEnumerable<SubcontractProfileCompany>> SearchActivateProfile(string subcontract_profile_type,
+            string company_name_th, string tax_id, string activate_date_fr, 
+            string activate_date_to, string activate_status)
+        {
+            var p = new DynamicParameters();
+            p.Add("@subcontract_profile_type", subcontract_profile_type);
+            p.Add("@company_name_th", company_name_th);
+            p.Add("@tax_id", tax_id);
+            p.Add("@activate_date_fr", activate_date_fr);
+            p.Add("@activate_date_to", activate_date_to);
+            p.Add("@activate_status", activate_status);
+
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>
+            ("uspSubcontractProfileCompany_SearchActivateProfile", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
     }
 }
