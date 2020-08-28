@@ -89,9 +89,31 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(5000)]
         public string remarkForSub { get; set; }
 
+
+        public System.DateTime? RequestDateFrom { get; set; }
+
+        public System.DateTime? RequestDateTo { get; set; }
+        public System.DateTime? PaymentDatetimeFrom { get; set; }
+        public System.DateTime? PaymentDatetimeTo { get; set; }
+
         public object Clone()
         {
             return this.MemberwiseClone();
         }
+    }
+
+    public class SubcontractProfilePaymentViewModel
+    {
+        public string PaymentNo { get; set; }
+        public string RequestNo { get; set; }
+        public string RequestDateFrom { get; set; }
+        public string RequestDateTo { get; set; }
+        public string PaymentDatetimeFrom { get; set; }
+
+        public string PaymentDatetimeTo { get; set; }
+
+        public string Status { get; set; }
+        public string companyNameTh { get; set; }
+        public string taxId { get; set; }
     }
 }

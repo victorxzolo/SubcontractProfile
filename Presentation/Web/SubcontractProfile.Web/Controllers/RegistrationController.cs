@@ -198,6 +198,8 @@ namespace SubcontractProfile.Web.Controllers
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
+            
+
             var httpContentCompany = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PostAsync(uriCompany, httpContentCompany).Result;
 

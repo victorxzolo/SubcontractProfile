@@ -1,184 +1,107 @@
 ﻿@{
     ViewData["Title"] = "VerifyPayment";
-    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<div class="container">
-
-    <p class="h5" style="margin-top: 30px"><strong>Search Verify Payment</strong></p>
-    <hr>
-    <div class="row mt-3 ml-2">
-
-        <div class=" col-md-6 mt-3">
-            <div class="row">
-                <div class="col-md-4">
-                    <p class="">Company Name:</p>
-                </div>
-                <div class="col-md-7">
-                    <div class='input-group date' id='datepicker1'>
-                        <input type='text' class="form-control" placeholder="Search" />
-                        <span class="input-group-addon">
-                            <span class="fa fa-search"></span>
-                        </span>
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+    <div class="skills layout-spacing">
+        <div class="widget-content widget-content-area">
+            <h3 class="">Search Payment Verify</h3>
+            <div class="widget-content1">
+                <div class="form-row mb-4">
+                    <div class="form-group col-md-6">
+                        <label for="txtcompanyname">Company name</label>
+                        <input type="text" class="form-control" id="txtcompanyname" />
                     </div>
-                 
-                </div>
-            </div>
-        </div>
-        <div class=" col-md-6 mt-3">
-            <div class="row">
-                <div class="col-md-4">
-                    <p class="">Tax ID:</p>
-                </div>
-                <div class="col-md-7">
-                    <input type="text" class="form-control" placeholder="" />
-                </div>
-            </div>
-        </div>
-        <div class=" col-md-6 mt-4">
-            <div class="row">
-                <div class="col-md-4">
-                    <p class="">Location Name:</p>
-                </div>
-                <div class="col-md-7">
-                    <select class="form-control" id="exampleSelectGender">
-                        <option>Please Select</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class=" col-md-6 mt-4">
-            <div class="row">
-                <div class="col-md-4">
-                    <p class="">Team Name:</p>
-                </div>
-                <div class="col-md-7">
-                    <select class="form-control" id="exampleSelectGender">
-                        <option>Select ALL</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class=" col-md-6 mt-4">
-            <div class="row">
-                <div class="col-md-4">
-                    <p class="">Payment:</p>
-                </div>
-                <div class="col-md-7">                   
-                        <input type="text" class="form-control" placeholder="" />                    
-                </div>
-            </div>
-        </div>
-        <div class=" col-md-6 mt-4">
-            <div class="row">
-                <div class="col-md-4">
-                    <p class="">Status:</p>
-                </div>
-                <div class="col-md-7">
-                    <select class="form-control" id="exampleSelectGender">
-                        <option>Select ALL</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class=" col-md-6 mt-3">
-            <div class="row">
-                <div class="col-md-4">
-                    <p class="">Payment Date From:</p>
-                </div>
-                <div class="col-md-7">
-                    <div class='input-group date' id='datepicker1'>
-                        <input type='text' class="form-control" />
-                        <span class="input-group-addon">
-                            <span class="fa fa-calendar"></span>
-                        </span>
+                    <div class="form-group col-md-6">
+                        <label for="txttaxid">Tax ID</label>
+                        <input type="text" class="form-control" id="txttaxid" />
+                    </div>
+                    @*<div class="form-group col-md-6">
+                        <label for="txttaxid">Location Name</label>
+                        <select class="form-control" id="ddlLocation"></select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="txttaxid">Team Name</label>
+                        <select class="form-control" id="ddlTeam"></select>
+                    </div>*@
+                    <div class="form-group col-md-6">
+                        <label for="txttaxid">Payment No</label>
+                        <input type="text" class="form-control" id="txtpayment" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="txttaxid">Status</label>
+                        <select class="form-control" id="ddlStatus">
+                            <option value="">Please Select</option>
+                            <option value="Y">Paid</option>
+                            <option value="N">Not Paid</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="txttaxid">Payment Date From</label>
+                        <div class='input-group p-0 date' id='paymentdatefrom'>
+                            <input type='text' class="form-control" id="datepaymentfrom" />
+                            <div class="input-group-append input-group-addon">
+                                <span class="input-group-text px-4">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="txttaxid">Payment Date To</label>
+                        <div class='input-group p-0 date' id='paymentdatefto'>
+                            <input type='text' class="form-control" id="datepaymentto" />
+                            <div class="input-group-append input-group-addon">
+                                <span class="input-group-text px-4">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class=" col-md-6 mt-3">
-            <div class="row">
-                <div class="col-md-4">
-                    <p class="">Payment Date To:</p>
-                </div>
-                <div class="col-md-7">
-                    <div class='input-group date' id='datepicker2'>
-                        <input type='text' class="form-control" />
-                        <span class="input-group-addon">
-                            <span class="fa fa-calendar"></span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="btn2 mt-5" style="text-align: center;">
-        <button class="btn btn-secondary" style="width:120px;color:white;">Clear</button>
-        <button class="btn btn-success" style="width:120px">Search</button>
-    </div>
-</div>
-<div class="container">
-    <div class="row mt-4">
-        <div class="col-md-12">
-            <p class="h5"><strong>Serach Result</strong></p>
+                <div style="text-align:center">
 
-            <hr />
-        </div>
-        <div class="col-md-12">
+                    <button id="btnclear" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
+                    <button id="btnSearch" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+
+                </div>
+            </div>
+            <br />
+            <div class="widget-heading">
+                <h3 class="">ผลการค้นหา</h3>
+
+            </div>
             <div class="table-responsive">
-                <table class="table table-bordered table-hover ">
-                    <thead class="thead-light text-center">
+                <table class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4" id="tbSearchResult">
+                    <thead>
                         <tr>
-                            <th scope="col">No</th>
                             <th scope="col">Action</th>
                             <th scope="col">Payment No</th>
                             <th scope="col">Company Name</th>
                             <th scope="col">Tax ID</th>
-                            <th scope="col">Location Name</th>
+                            @*<th scope="col">Location Name</th>
                             <th scope="col">Team Name </th>
-                            <th scope="col">Engineer Name</th>
+                            <th scope="col">Engineer Name</th>*@
                             <th scope="col">Paid Date Time</th>
                             <th scope="col">Payment Status</th>
                             <th scope="col">ยอดโอน(บาท)</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td><p><ins>Edit</ins></p></td>
-                            <td>xxxxxx</td>
-                            <td>xxxxxx</td>
-                            <td>xxxxxx</td>
-                            <td>xxxxx</td>
-                            <td>xxxxx</td>
-                            <td>xxxxxxx</td>
-                            <td></td>
-                            <td>Walting</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>2</th>
-                            <td><p><ins>Edit</ins></p></td>
-                            <td>xxxxx</td>
-                            <td>xxxxxx</td>
-                            <td>xxxxxx</td>
-                            <td>xxxxx</td>
-                            <td>xxxxx</td>
-                            <td>xxxxx</td>
-                            <td>10/06/2020 10:10</td>
-                            <td>Paid</td>
-                            <td>10,000</td>
-                        </tr>
-
                     </tbody>
                 </table>
-            </div>           
-
+            </div>
         </div>
-
-
     </div>
 </div>
+
+
+    <script src="~/Scripts/View/VerifyPayment.js"></script>
+
+
 <div class="container">
     <div class="row mt-5">
         <div class="col-md-12">

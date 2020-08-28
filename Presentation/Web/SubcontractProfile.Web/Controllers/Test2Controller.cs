@@ -15,6 +15,8 @@ using System.Collections.Immutable;
 using DataTables.AspNetCore.Mvc;
 using SubcontractProfile.Web.Extension;
 using DataTables.AspNetCore.Mvc.Binder;
+using System.Data.Entity.Core.Common.EntitySql;
+using System.Security.Principal;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -52,8 +54,37 @@ namespace SubcontractProfile.Web.Controllers
         public IActionResult Index()
         {
 
-            return View();
+            testUser();
+                return View();
         }
+
+     public string testUser()
+        {
+            //using (WindowsIdentity user = WindowsIdentity.GetCurrent())
+            //using (Impersonator wi = new Impersonator("nas_fixedbb", "Fixe1012@Ais", "10.138.47.98", false))
+            //{
+            //    WindowsIdentity.RunImpersonated(wi.Identity.AccessToken, () =>
+            //    {
+            //        WindowsIdentity useri = WindowsIdentity.GetCurrent();
+            //        System.Console.WriteLine(useri.Name);
+            //    }
+
+            // );
+            try
+            {
+                using (new Impersonator("nas_fixedbb", "Fixe1012@Ais", "10.138.47.98", false))
+                {
+
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+           
+            return "";
+        }
+
         [HttpPost]
         public JsonResult searchCompany(string asc_code)
         {
