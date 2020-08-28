@@ -180,7 +180,7 @@ namespace SubcontractProfile.WebApi.Services.Services
                     row["payment_id"] = new SqlString(curObj.PaymentId);
                     row["payment_no"] = new SqlString(curObj.PaymentNo);
                     row["payment_channal"] = new SqlString(curObj.PaymentChannal);
-                    row["payment_datetime"] = new SqlDateTime(curObj.PaymentDatetime);
+                    row["payment_datetime"] = new SqlDateTime(curObj.PaymentDatetime.Value);
                     row["amount_transfer"] = new SqlDecimal(curObj.AmountTransfer);
                     row["bank_transfer"] = new SqlString(curObj.BankTransfer);
                     row["bank_branch"] = new SqlString(curObj.BankBranch);
@@ -238,20 +238,18 @@ namespace SubcontractProfile.WebApi.Services.Services
 
         }
 
-        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>> searchPayment(string payment_no, string request_training_no,
-            string request_date_from, string request_date_to, string payment_date_from, string payment_date_to,
-            string payment_status,string company_name, string tax_id)
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>> searchPayment(SubcontractProfilePayment search)
         {
             var p = new DynamicParameters();
-            p.Add("@payment_no", payment_no.Trim());
-            p.Add("@request_training_no", request_training_no.Trim());
-            p.Add("@request_date_from", request_date_from.Trim());
-            p.Add("@request_date_to", request_date_to.Trim());
-            p.Add("@payment_date_from", payment_date_from.Trim());
-            p.Add("@payment_date_to", payment_date_to.Trim());
-            p.Add("@payment_status", payment_status.Trim());
-            p.Add("@company_name", company_name.Trim());
-            p.Add("@tax_id", tax_id.Trim());
+            p.Add("@payment_no", search.PaymentNo);
+            p.Add("@request_training_no", search.Request_no);
+            p.Add("@request_date_from", search.RequestDateFrom);
+            p.Add("@request_date_to", search.RequestDateTo);
+            p.Add("@payment_date_from", search.PaymentDatetimeFrom);
+            p.Add("@payment_date_to", search.PaymentDatetimeTo);
+            p.Add("@payment_status", search.Status);
+            p.Add("@company_name", search.companyNameTh);
+            p.Add("@tax_id", search.taxId);
 
             var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>
             ("uspSubcontractProfilePayment_searchPayment", p, commandType: CommandType.StoredProcedure);
