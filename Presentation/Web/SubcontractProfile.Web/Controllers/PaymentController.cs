@@ -25,6 +25,7 @@ namespace SubcontractProfile.Web.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private string Lang = "";
         private SubcontractProfileUserModel dataUser = new SubcontractProfileUserModel();
+        private readonly string strpathUpload;
         public PaymentController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
@@ -33,6 +34,7 @@ namespace SubcontractProfile.Web.Controllers
             client = new HttpClient();
             _configuration = configuration;
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
+            strpathUpload = _configuration.GetValue<string>("PathUploadfile:Local").ToString();
             getsession();
         }
         public IActionResult ConfirmPayment()
@@ -235,10 +237,6 @@ namespace SubcontractProfile.Web.Controllers
 
         #region VerifyPayment
         [HttpPost]
-        //public IActionResult SearchVerify(string? companyname,string? taxid,
-        //                                  //string locationid,string teamid,
-        //                                  string? paymentno,string paystatus,
-        //                                  string? paymentdatefrom,string? paymentdateto)
         public IActionResult SearchVerify(SubcontractProfilePaymentViewModel searchmodel)
         {
             var paymentResult = new List<SubcontractProfilePaymentModel>();
@@ -316,6 +314,363 @@ namespace SubcontractProfile.Web.Controllers
             
         }
 
+        [HttpPost]
+        public IActionResult BindDataTypeTransfer() {
+            var output = new List<SubcontractDropdownModel>();
+            List<SelectListItem> getAllPaymenttypeList = new List<SelectListItem>();
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/payment_type");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+            }
+            if (Lang == "")
+            {
+                getsession();
+            }
+            if (Lang == "TH")
+            {
+                output.Add(new SubcontractDropdownModel
+                {
+                    dropdown_text="กรุณาเลือกช่องทางการชำระเงิน",
+                    dropdown_value=""
+                    
+                });
+
+                getAllPaymenttypeList = output.Select(a => new SelectListItem
+                {
+                    Text = a.dropdown_text,
+                    Value = a.dropdown_value
+                }).OrderBy(c => c.Value).ToList();
+            }
+            else
+            {
+                output.Add(new SubcontractDropdownModel
+                {
+                    dropdown_text = "Select Payment Transfer",
+                    dropdown_value = ""
+                });
+                getAllPaymenttypeList = output.Select(a => new SelectListItem
+                {
+                    Text = a.dropdown_text,
+                    Value = a.dropdown_value
+                }).OrderBy(c => c.Value).ToList();
+
+            }
+
+            return Json(new { response = getAllPaymenttypeList });
+        }
+
+        [HttpPost]
+        public IActionResult GetDataBankPayment() {
+            var output = new List<SubcontractDropdownModel>();
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/bank_payment");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+            }
+            return Json(new { response = output });
+        }
+
+
+        [HttpPost]
+        public IActionResult DDLBank()
+        {
+            var output = new List<SubcontractProfileBankingModel>();
+            List<SelectListItem> getAllBankList = new List<SelectListItem>();
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "Banking/GetALL");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                output = JsonConvert.DeserializeObject<List<SubcontractProfileBankingModel>>(v);
+            }
+            if (Lang == "")
+            {
+                getsession();
+            }
+            if (Lang == "TH")
+            {
+                output.Add(new SubcontractProfileBankingModel
+                {
+                    BankCode = "0",
+                    BankName = "กรุณาเลือกชื่อธนาคาร"
+                });
+
+                getAllBankList = output.Select(a => new SelectListItem
+                {
+                    Text = a.BankName,
+                    Value = a.BankCode
+                }).OrderBy(c => c.Value).ToList();
+            }
+            else
+            {
+                output.Add(new SubcontractProfileBankingModel
+                {
+                    BankCode = "0",
+                    BankName = "Select Bank"
+                });
+                getAllBankList = output.Select(a => new SelectListItem
+                {
+                    Text = a.BankName,
+                    Value = a.BankCode
+                }).OrderBy(c => c.Value).ToList();
+
+            }
+
+            return Json(new { responsebank = getAllBankList });
+        }
+
+
+        public async Task<IActionResult> GetDataById(string paymentId)
+        {
+            var PaymentResult = new SubcontractProfilePaymentModel();
+
+            // Getting all company data  
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Payment/GetByPaymentId", paymentId);
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                //data
+                PaymentResult = JsonConvert.DeserializeObject<SubcontractProfilePaymentModel>(result);
+
+                List<FileUploadModal> L_File = new List<FileUploadModal>();
+
+
+                if (PaymentResult.SlipAttachFile != null)
+                {
+                    Guid file_id = Guid.NewGuid();
+                    L_File.Add(new FileUploadModal
+                    {
+                        file_id = file_id,
+                        //Fileupload = fileBytes,
+                        typefile = "SlipAttachFile",
+                        //ContentDisposition = source.ContentDisposition,
+                        //ContentType = source.ContentType,
+                        Filename = PaymentResult.SlipAttachFile
+
+                    });
+                    PaymentResult.file_id_Slip = file_id;
+                }
+                if (L_File.Count != 0)
+                {
+                    GetFile(paymentId, ref L_File);
+                    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftPaymentSSO", L_File);
+                }
+
+
+            }
+
+            return Json(PaymentResult);
+        }
+
+        public IActionResult SaveVerify(string paymentId,string status,string verifydate,string remark_for_sub)
+        {
+            bool result = true;
+            string mess = "";
+            try
+            {
+                SubcontractProfilePaymentModel model = new SubcontractProfilePaymentModel();
+                model.PaymentId = paymentId;
+                model.Status = status;
+                DateTime dateverify = DateTime.ParseExact(verifydate, "dd/MM/yyyy", null);
+                model.verifiedDate = dateverify;
+                model.remarkForSub = remark_for_sub;
+                model.ModifiedBy = "SYSTEM";//Get Session from SSO********
+                model.ModifiedDate = DateTime.Now;
+
+                var uriPayment = new Uri(Path.Combine(strpathAPI, "Payment", "UpdateByVerified"));
+                HttpClient clientCompany = new HttpClient();
+                clientCompany.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string jj = JsonConvert.SerializeObject(model);
+
+                var httpContentPayment = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = clientCompany.PutAsync(uriPayment, httpContentPayment).Result;
+                if(response.IsSuccessStatusCode)
+                {
+                  var res=  response.Content.ReadAsStringAsync().Result;
+                    result= JsonConvert.DeserializeObject<bool>(res);
+                }
+                if(result)
+                {
+                    mess = "Update Success";
+                }
+                else
+                {
+                    mess = "Update not Success";
+                }
+            }
+            catch (Exception e)
+            {
+                result = false;
+                mess = e.Message;
+                throw;
+            }
+            return Json(new { Status = result, Message = mess });
+        }
+
+
+        public async Task< IActionResult> GetBlobDownload(string paymentid)
+        {
+            var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftPaymentSSO");
+            string filename="";
+            foreach (var e in dataUploadfile)
+            {
+                // await CopyFile(e, model.CompanyId.ToString());
+
+                 filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
+                filename = EnsureCorrectFilename(filename);
+            }
+            if (filename == null)
+                return Content("filename not present");
+
+            var path = this.GetPathAndFilename(paymentid, filename);
+
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(path, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(path), Path.GetFileName(path));
+
+        }
+        private string GetContentType(string path)
+        {
+            var types = GetMimeTypes();
+            var ext = Path.GetExtension(path).ToLowerInvariant();
+            return types[ext];
+        }
+        private Dictionary<string, string> GetMimeTypes()
+        {
+            return new Dictionary<string, string>
+            {
+                {".pdf", "application/pdf"},
+                {".png", "image/png"},
+                {".jpg", "image/jpeg"},
+                {".jpeg", "image/jpeg"},
+                {".gif", "image/gif"}
+            };
+        }
+
+        #region UploadFile
+        private bool GetFile(string companyid, ref List<FileUploadModal> L_File)
+        {
+            bool result = true;
+            try
+            {
+                string pathdir = Path.Combine(strpathUpload, companyid);
+
+                string[] filePaths = Directory.GetFiles(pathdir, "*.*", SearchOption.AllDirectories);
+
+
+
+                foreach (string file in filePaths)
+                {
+
+
+                    using (var ms = new MemoryStream(System.IO.File.ReadAllBytes(file)))
+                    {
+
+                        foreach (var e in L_File)
+                        {
+                            string filename = Path.GetFileName(file);
+                            filename = EnsureCorrectFilename(filename);
+                            var fileBytes = ms.ToArray();
+
+
+                            if (e.Filename == filename)
+                            {
+                                e.Fileupload = fileBytes;
+                                e.ContentType = Path.GetExtension(Path.GetExtension(file));
+                                e.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "files", FileName = filename }.ToString();
+                            }
+                        }
+
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                result = false;
+                throw;
+            }
+            return result;
+        }
+
+        private async Task<bool> CopyFile(FileUploadModal file, string companyid)
+        {
+            FileStream output;
+            try
+            {
+                var stream = new MemoryStream(file.Fileupload);
+                FormFile files = new FormFile(stream, 0, file.Fileupload.Length, "name", "fileName");
+
+                string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                filename = EnsureCorrectFilename(file.Filename);
+                using (output = System.IO.File.Create(this.GetPathAndFilename(companyid, filename)))
+                    await files.CopyToAsync(output);
+
+
+            }
+            catch (Exception e)
+            {
+                return false;
+                throw;
+            }
+            return true;
+        }
+        private string EnsureCorrectFilename(string filename)
+        {
+            if (filename.Contains("\\"))
+                filename = filename.Substring(filename.LastIndexOf("\\") + 1);
+
+            return filename;
+        }
+        private string GetPathAndFilename(string guid, string filename)
+        {
+            //return this.hostingEnvironment.WebRootPath + "\\uploads\\" + filename;
+            string pathdir = Path.Combine(strpathUpload, guid);
+            string PathOutput = "";
+            if (!Directory.Exists(pathdir))
+            {
+                Directory.CreateDirectory(pathdir);
+            }
+            PathOutput = Path.Combine(pathdir, filename);
+            return PathOutput;
+        }
+        #endregion
+
+        #region Comment
         //[HttpPost]
         //public IActionResult GetLocationByCompany(string companyid)
         //{
@@ -325,7 +680,7 @@ namespace SubcontractProfile.Web.Controllers
         //    client.DefaultRequestHeaders.Accept.Add(
         //    new MediaTypeWithQualityHeaderValue("application/json"));
 
-        //    string uriString = companyid == "" ? string.Format("{0}", strpathAPI + "Location/GetAll") : 
+        //    string uriString = companyid == "" ? string.Format("{0}", strpathAPI + "Location/GetAll") :
         //                                         string.Format("{0}/{1}", strpathAPI + "Province/GetLocationByCompany", companyid);
         //    HttpResponseMessage response = client.GetAsync(uriString).Result;
         //    if (response.IsSuccessStatusCode)
@@ -343,7 +698,7 @@ namespace SubcontractProfile.Web.Controllers
         //        {
         //            LocationCode = "",
         //            LocationNameTh = "กรุณาเลือก Location"
-        //        }) ;
+        //        });
 
         //        foreach (var r in output)
         //        {
@@ -487,6 +842,8 @@ namespace SubcontractProfile.Web.Controllers
 
         //    return Json(new { response = result });
         //}
+        #endregion
+
 
         #endregion
 
