@@ -184,9 +184,13 @@ namespace SubcontractProfile.Web.Controllers
 
             return Json(result);
         }
-        public JsonResult getEngineerByTeamId(string Teamid)
+        public JsonResult getEngineerByTeamId(string Teamid,string Locationid)
         {
+            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+            Guid companyId = userProfile.companyid;
+
             Guid gTeamid;
+            Guid gLocationid;
             if (Teamid == null || Teamid == "-1")
             {
                 gTeamid = Guid.Empty;
@@ -195,6 +199,15 @@ namespace SubcontractProfile.Web.Controllers
             {
                 gTeamid = new Guid(Teamid);
             }
+            if (Locationid == null || Locationid == "-1")
+            {
+                gLocationid = Guid.Empty;
+            }
+            else
+            {
+                gLocationid = new Guid(Locationid);
+            }
+          
             var result = new List<SubcontractProfileEngineerModel>();
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(
@@ -209,8 +222,7 @@ namespace SubcontractProfile.Web.Controllers
                 var resultAsysc = response.Content.ReadAsStringAsync().Result;
                 //data
                 result = JsonConvert.DeserializeObject<List<SubcontractProfileEngineerModel>>(resultAsysc);
-                result.Where(x => x.TeamId == gTeamid).ToList();
-               
+                result.Where(x => x.TeamId == gTeamid && x.CompanyId == companyId && x.LocationId == gLocationid).ToList();               
 
             }
 

@@ -157,12 +157,13 @@
                                             <div class="col-md-4">
                                                 <label>Course:</label>
                                             </div>
-                                            <div class="col-md-7 ">
+                                            <div class="col-md-7">
                                                 <div class="row">
-                                                    <div class="col-md-12 ml-4">
-                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                                        <label id="lbCourse" class=""> อบรมการติดตั้งระดับสูง</label>
-                                                    </div>
+                                                    <div id="btnCourse"></div>
+                                                    @*<div class="col-md-12 ml-4" >*@
+                                                        @*<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                        <label id="lbCourse" class=""> อบรมการติดตั้งระดับสูง</label>*@
+                                                    @*</div>*@
                                                 </div>
                                             </div>
                                         </div>
@@ -268,10 +269,10 @@
                                                         <div class="col-md-12">
                                                             <div class="row">
                                                                 <div class="col-md-6">
-                                                                    <p>ราคารวม</p>
+                                                                    <label>ราคารวม</label>
                                                                 </div>
                                                                 <div class="col-md-6" style="text-align: left;">
-                                                                    <p>10000</p>
+                                                                    <label id="total_price"></label>
                                                                 </div>
                                                             </div>
 
@@ -279,20 +280,20 @@
                                                         <div class="col-md-12 mt-3">
                                                             <div class="row">
                                                                 <div class="col-md-6">
-                                                                    <p>Vat7%</p>
+                                                                    <label>Vat7%</label>
                                                                 </div>
                                                                 <div class="col-md-6" style="text-align: left;">
-                                                                    <p>700</p>
+                                                                    <label>700</label>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12 mt-3">
                                                             <div class="row">
                                                                 <div class="col-md-6">
-                                                                    <p>ราคาสุทธิ(บาท) </p>
+                                                                    <label>ราคาสุทธิ(บาท) </label>
                                                                 </div>
                                                                 <div class="col-md-6" style="text-align: left;">
-                                                                    <p>10,700</p>
+                                                                    <label>10,700</label>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -363,21 +364,30 @@
         $(document).ready(function () {
 
             GetDropDownLocationSearch();
-            GetDropDownLocationtraining()         
+            GetDropDownLocationtraining();
 
-            $('#txtRequestDate').datetimepicker({
-                format: 'LT'
+        
+            $('input[type=radio][name=exampleRadios]').change(function () {
+                var splitval = $(this).val().split(',');
+                alert(splitval[1]);
+                console.log(splitval[1]);
+                $("#total_price").text(splitval[1]);
+                console.log(e.currentTarget.value);
             });
-            //$('#txtRequestDate').datepicker({
-            //    //format: 'yyyy-mm-dd hh:ii',
-            //    pickDate: false,
-            //    //format: 'dd/mm/yyyy',
-            //    //daysOfWeekHighlighted: "6,0",
-            //    //autoclose: true,    
-            //    //todayHighlight: true,
-            //    //clearBtn: true,
+        
+            //$('#txtRequestDate').datetimepicker({
+            //    format: 'LT'
             //});
-         
+            $('#txtRequestDate').datepicker({
+                format: 'dd/mm/yyyy',
+                daysOfWeekHighlighted: "6,0",
+                autoclose: true,
+                todayHighlight: true,
+                clearBtn: true,
+                
+          
+            });
+
 
             $('#selLocationName').change(function () {
 
@@ -388,8 +398,9 @@
                 getTeamByLocationIdtraining(splitval[0]);
             });
             $('#selTeamtraining').change(function () {
+                var locationid = $('#selLocationName').val();
                 var splitval = $(this).val().split(',');
-                getEngineerByTeamIdtraining(splitval[0]);
+                getEngineerByTeamIdtraining(splitval[0], locationid);
             });
 
             inittbSearchResult();
@@ -565,7 +576,8 @@
 
                           //$('#txtRequestDate').val(result.CitizenId);
                           //$('#txtRemark').val(result.CitizenId);
-                    }
+                      }
+                      getcourse();
                   },
                   error: function (result) {
 
@@ -644,311 +656,79 @@
             });
          }
          function RequestTraining() {
-             var model = new Object();           
+             var couse;
+             $('input[type="radio"]:checked').each(function () {
+                 couse = $(this).val();
+             });             
+             var model = new Object();
              model.company_name_th = $('#lbCompanyName').text();
              model.tax_id = $('#lbTaxID').text();
              model.contract_phone = $('#txtContactPhone').val();
              model.contract_email = $('#txtEmail').val();
-             model.Course = $('#lbCourse').text();
+             model.Course = couse;
+             //model.Course = $('#lbCourse').text();
              model.Remark = $('#txtRemark').val();
-             model.TotalPrice = "10000";
-             model.Vat="700"
-             model.Tax = "10700";
-             model.Status = "N";
+             //model.TotalPrice = couse ;
+             //model.Vat="700"
+             //model.Tax = "10700";
+             //model.Status = "N";
              model.RequestDate = $('#txtRequestDate').val();
-             console.log(model.RequestDate);
+            
             $.ajax({
                   url: '@Url.Action("RequestTraining", "Training")',
                   type: 'Post',
                   data: { 'model': model},
                   dataType: "json",
                   success: function (result) {
-                    if (result != null) {
+                      if (result.Status) {
+                          bootbox.alert(result.Message);
 
-                       
-                    }
-                  },
-                  error: function (result) {
-
-                  }
-
-            });
-         }
-
-        function getDataPersonalById(id) {
-              $.ajax({
-                  url: '@Url.Action("GetDataPersonalById", "Engineer")',
-                  type: 'POST',
-                  data: { 'personalId': id},
-                  dataType: "json",
-                  success: function (result) {
-                   if (result != null) {
-                       //---personal name
-                       $('#hdPersonalId').val(id);
-                       $('#CitizenID2').val(result.CitizenId);
-                       $("#Title").val(result.TitleName).change();
-
-                      // $('#Title').val(result.TitleName);
-                       $('#FullNameT').val(result.FullNameEn);
-                       $('#FullNameE').val(result.FullNameTh);
-                       $('#BirthDate').val(result.BirthDate);
-
-                       //Gender
-                       if (result.Gender == "M") {
-                       //    $('#rdoMale').val(result.Gender);
-                           $("#rdoMale").prop("checked", true);
-                       } else {
-                          // $('#rdoFeMale').val(result.Gender);
-                           $("#rdoFeMale").prop("checked", true);
-                       }
-
-                       $('#Race').val(result.Race);
-                       $('#Nationality').val(result.Nationality);
-                       $('#Religion').val(result.Religion);
-                       $('#Identity').val(result.IdentityBy);
-                       $('#ContractEmail2').val(result.ContactEmail);
-                       $('#IdentiAddress').val(result.IdentityCardAddress);
-
-                       $('#PersonalContractPhone1').val(result.ContactPhone1);
-
-                       $('#PersonalContractPhone2').val(result.ContactPhone2);
-                       $('#ContractMail').val(result.ContactEmail);
-                       $('#WorkPermit').val(result.WorkPermitNo);
-                       $('#fileWorkPermitAttach').val(result.WorkPermitAttachFile);
-                       $('#fileProfileAttach').val(result.ProfileImgAttachFile);
-                      // $('#CourseSkill').val(result.CourseSkill);
-                       $('#Education').val(result.Education);
-
-                       if (result.ThListening == "Y") {
-                           $('#chkListenTH').prop('checked', true);
-                       }
-                       if (result.ThSpeaking == "Y") {
-                           $('#chkSpeakingTH').prop('checked', true);
-                       }
-
-                       if (result.ThReading == "Y") {
-                           $('#chkReadingTH').prop('checked', true);
-                       }
-
-                       if (result.ThWriting == "Y") {
-                           $('#chkWritingTH').prop('checked', true);
-                       }
-                       if (result.EnListening == "Y") {
-                           $('#chkListenEN').prop('checked', true);
-                       }
-                       if (result.EnSpeaking == "Y") {
-                           $('#chkSpeakingEN').prop('checked', true);
-                       }
-                       if (result.EnReading == "Y") {
-                           $('#chkReadingEN').prop('checked', true);
-                       }
-                       if (result.EnWriting == "Y") {
-                           $('#chkWritingEN').prop('checked', true);
-                       }
-
-
-                       //$('#chkListenTH').val(result.ThListening);
-                       //$('#chkSpeakingTH').val(result.ThSpeaking);
-                       //$('#chkReadingTH').val(result.ThReading);
-                       //$('#chkWritingTH').val(result.ThWriting);
-
-                       //$('#chkListenEN').val(result.EnListening);
-                       //$('#chkSpeakingEN').val(result.EnSpeaking);
-                       //$('#chkReadingEN').val(result.EnReading);
-                       //$('#chkWritingEN').val(result.EnWriting);
-
-                       $('#CertificateType').val(result.CertificateType);
-                       $('#CertificateNo').val(result.CertificateNo);
-                       $('#dateCertificateDate').val(result.CertificateExpireDate);
-                       $('#fileCertificateAttach').val(result.CertificateAttachFile);
-
-                       $("#BankName2").val(result.BankName).change();
-
-                       $('#AccNo2').val(result.AccountNumber);
-                       $('#AccName2').val(result.AccountName);
-
-
-                    }
-                  },
-                  error: function (result) {
-
-                  }
-
-            });
-    }
-
-        function onSave()
-        {
-
-            var modelPersonal = new Object();
-            var model = new Object();
-            model.EngineerId = $('#hdEngineerId').val();
-            model.LocationId = $("select[id$=Location]").val();
-            model.TeamId = $("select[id$=Team]").val();
-           // model.StaffCode = $('#StaffCode').val();
-            model.StaffName = $('#StaffName').val();
-            model.StaffNameTh = $('#StaffNameT').val();
-            model.StaffNameEn = $('#StaffNameE').val();
-            model.Position = $('#Position').val();
-            model.CitizenId = $('#CitizenID').val();
-            model.TshirtSize = $('#tshirtsize').val();
-            model.ContractPhone1 = $('#ContractPhone1').val();
-            model.ContractPhone2 = $('#ContractPhone2').val();
-            model.ContractEmail = $('#ContractEmail').val();
-            model.VehicleType = $('#VehicleType').val();
-            model.VehicleBrand = $('#VehicleBrand').val();
-            model.VehicleSerise = $('#VehicleSerise').val();
-            model.VehicleColor = $('#VehicleColor').val();
-            model.VehicleYear = $('#VehicleYear').val();
-            model.VehicleLicensePlate = $('#VehicleLicense').val();
-            model.ToolOtrd = $('#Toolotdr').val();
-            model.ToolSplicing = $('#ToolSplicing').val();
-            model.BankName = $('select[id$=ddlBankName]').val();
-            model.AccountNo = $('#AccNo').val();
-            model.AccountName = $('#AccName').val();
-
-            model.CompanyId = $('#hdCompanyId').val();
-
-            //---personal name
-
-            modelPersonal.PersonalId = $('#hdPersonalId').val();
-            modelPersonal.EngineerId = $('#hdEngineerId').val();
-            modelPersonal.CitizenId = $('#CitizenID2').val();
-            modelPersonal.TitleName = $('#Title').val();
-            modelPersonal.FullNameEn = $('#FullNameT').val();
-            modelPersonal.FullNameTh = $('#FullNameE').val();
-            modelPersonal.BirthDate = $('#BirthDate').val();
-
-            //Gender
-            if ($('#rdoMale').val() == "M") {
-                modelPersonal.Gender = "M";
-            } else {
-                modelPersonal.Gender = "F";
-            }
-
-            modelPersonal.Race = $('#Race').val();
-            modelPersonal.Nationality = $('#Nationality').val();
-            modelPersonal.Religion = $('#Religion').val();
-            modelPersonal.IdentityBy = $('#Identity').val();
-            modelPersonal.ContactEmail = $('#ContractEmail2').val();
-            modelPersonal.IdentityCardAddress = $('#IdentiAddress').val();
-
-            modelPersonal.ContactPhone1 = $('#PersonalContractPhone1').val();
-            modelPersonal.ContactPhone2 = $('#PersonalContractPhone2').val();
-            modelPersonal.ContactEmail = $('#ContractMail').val();
-            modelPersonal.WorkPermitNo = $('#WorkPermit').val();
-            modelPersonal.WorkPermitAttachFile = $('#fileWorkPermitAttach').val();
-            modelPersonal.ProfileImgAttachFile = $('#fileProfileAttach').val();
-         //   modelPersonal.CourseSkill = $('#CourseSkill').val();
-            modelPersonal.Education = $('#Education').val();
-
-
-            if ($("#chkListenTH").prop('checked') == true) {
-                modelPersonal.ThListening = "Y"
-            }
-            else {
-                modelPersonal.ThListening = "N"
-            }
-
-            if ($("#chkSpeakingTH").prop('checked') == true) {
-                modelPersonal.ThSpeaking = "Y"
-            }
-            else {
-                modelPersonal.ThSpeaking = "N"
-            }
-
-            if ($("#chkReadingTH").prop('checked') == true) {
-                modelPersonal.ThReading = "Y"
-            }
-            else {
-                modelPersonal.ThReading = "N"
-            }
-
-            if ($("#chkWritingTH").prop('checked') == true) {
-                modelPersonal.ThWriting = "Y"
-            }
-            else {
-                modelPersonal.ThWriting = "N"
-            }
-
-            if ($("#chkListenEN").prop('checked') == true) {
-                modelPersonal.EnListening = "Y"
-            }
-            else {
-                modelPersonal.EnListening = "N"
-            }
-
-            if ($("#chkSpeakingEN").prop('checked') == true) {
-                modelPersonal.EnSpeaking = "Y"
-            }
-            else {
-                modelPersonal.EnSpeaking = "N"
-            }
-
-            if ($("#chkReadingEN").prop('checked') == true) {
-                modelPersonal.EnReading = "Y"
-            }
-            else {
-                modelPersonal.EnReading = "N"
-            }
-
-            if ($("#chkWritingEN").prop('checked') == true) {
-                modelPersonal.EnWriting = "Y"
-            }
-            else {
-                modelPersonal.EnWriting = "N"
-            }
-
-            //modelPersonal.ThListening = $('#chkListenTH').val();
-            //modelPersonal.ThSpeaking = $('#chkSpeakingTH').val();
-            //modelPersonal.ThReading = $('#chkReadingTH').val();
-            //modelPersonal.ThWriting = $('#chkWritingTH').val();
-            //modelPersonal.EnListening = $('#chkListenEN').val();
-            //modelPersonal.EnSpeaking = $('#chkSpeakingEN').val();
-            //modelPersonal.EnReading = $('#chkReadingEN').val();
-            //modelPersonal.EnWriting = $('#chkWritingEN').val();
-
-            modelPersonal.CertificateType = $('#CertificateType').val();
-            modelPersonal.CertificateNo = $('#CertificateNo').val();
-            modelPersonal.CertificateExpireDate = $('#dateCertificateDate').val();
-            modelPersonal.CertificateAttachFile = $('#fileCertificateAttach').val();
-            modelPersonal.BankName = $('#BankName2').val();
-            modelPersonal.AccountNumber = $('#AccNo2').val();
-            modelPersonal.AccountName = $('#AccName2').val();
-            //model.BranchName = $('#BranchName').val();
-            //model.BranchCode = $('#BranchCode').val();
-
-
-            $.ajax({
-                   url: '@Url.Action("OnSave", "Engineer")',
-                   type: 'POST',
-                data: { 'model': model, 'personal': modelPersonal },
-                   dataType: "json",
-                success: function (result) {
-                       if (result.Status == true) {
-                           if ($('#hdMode').val() == 'edit') {
-
-                           } else {
-                               bootbox.alert(result.Message);
-                               clearData();
-                           }
-
-                           inittbSearchResult();
-                           $('#AddEditModal').modal('hide');
-
-                          }
-                        else {
-                               bootbox.alert(result.Message);
-
-                            }
+                      }
+                      else {
+                          bootbox.alert(result.Message);
+                      }
                   },
                   error: function (result) {
                       bootbox.alert(result.Message);
                   }
 
             });
+         }
 
-        }
+         function getcourse() {
+             var strcourse = '';
+              $.ajax({
+                  url: '@Url.Action("Getcourse", "Training")',
+                  type: 'GET',                 
+                  dataType: "json",
+                  success: function (data) {
+                      console.log(data);
+                      if (data != null) {
+                          $.each(data, function (id, result) {
+                              strcourse +='<div class="col-md-12 ml-4" >' +
+                                          '<input class="form-check-input" type="radio" class="radio" name="exampleRadios"  value="' + result.dropdown_value + ',' + result.value1 + '">' +
+                                          '<label class="">' + result.dropdown_text + '</label>' +
+                                          '</div>';
+                          });
+                          $("#btnCourse").empty();
+                          $("#btnCourse").append(strcourse);
+                    }
+                  },
+                  error: function (result) {
+                      strcourse += '<input class="form-check-input" type="radio" name="exampleRadios"  value="">' +
+                          '<label class=""></label>';     
+                      $("#btnCourse").empty();
+                      $("#btnCourse").append(strcourse);
+                  }                 
+
+              });    
+            
+           
+         }
+
+     
+
+       
 
          function deleteData(Id) {
            bootbox.confirm("คุณต้องการลบข้อมูล?"
@@ -1080,16 +860,19 @@
                   }
               });
          }
-           function getEngineerByTeamIdtraining(Teamid) {
+           function getEngineerByTeamIdtraining(Teamid,locationid) {
                console.log(Teamid);
                if (Teamid == "") {
                    Teamid ="-1"
-                }
+               }
+               if (locationid == "") {
+                   locationid = "-1"
+               }
 
               $.ajax({
                   url: '@Url.Action("getEngineerByTeamId", "Engineer")',
                   type: 'POST',
-                  data: { 'Teamid': Teamid},
+                  data: { 'Teamid': Teamid, 'Locationid': locationid},
                   dataType: "json",
                   success: function (data) {
                       $("#selEngineertraining").empty();

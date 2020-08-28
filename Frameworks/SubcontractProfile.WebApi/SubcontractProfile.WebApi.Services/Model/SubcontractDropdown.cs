@@ -45,9 +45,13 @@ namespace SubcontractProfile.WebApi.Services.Model
 
             [System.ComponentModel.DataAnnotations.StringLength(50)]
             public string CreateBy { get; set; }
+            [System.ComponentModel.DataAnnotations.StringLength(50)]
+            public string value1 { get; set; }
+            [System.ComponentModel.DataAnnotations.StringLength(50)]
+            public string value2 { get; set; }
 
-          
-            public object Clone()
+
+        public object Clone()
             {
                 return this.MemberwiseClone();
             }

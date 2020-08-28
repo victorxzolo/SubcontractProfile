@@ -159,41 +159,87 @@ namespace SubcontractProfile.Web.Controllers
             }
             return Json(new { Data = data });
         }
+        [HttpGet]
+        public IActionResult Getcourse()
+        {          
+
+            var data = new List<SubcontractDropdownModel>();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string uriString = string.Format("{0}", strpathAPI +"Dropdown/GetByDropDownName/training_couse");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var dataresponse = response.Content.ReadAsStringAsync().Result;
+                data = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(dataresponse);
+            }
+            return Json(data);
+        }
         [HttpPost]
         public IActionResult Addtraining(SubcontractProfileTrainingModel model)    
         {
-            var data = new List<SubcontractProfileTrainingModel>();
+            var dataScreen = new List<SubcontractProfileTrainingModel>();
+            var listdataTrainingEngineer = new List<SubcontractProfileTrainingEngineerModel>();
+            var dataTrainingEngineer = new SubcontractProfileTrainingEngineerModel();
+
             var splitlocation = model.location_name_th.Split(',');
             var splitteam = model.team_name_th.Split(',');
             var splitEngineer = model.Engineer_ID.Split(',');
             Guid trainingId = Guid.NewGuid();
-            var trainingObject = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingModel>>("Datatraining");
-            if (trainingObject == null)        
+
+            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+            var ScreenObject = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingModel>>("ScreenDatatraining");
+            var trainingObject = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingEngineerModel>>("DataInsertTrainingEngineer");
+
+            if (ScreenObject == null && trainingObject ==null)        
             {
-                
+                dataTrainingEngineer.TrainingId = trainingId;
+                dataTrainingEngineer.LocationId = new Guid(splitlocation[0]);
+                dataTrainingEngineer.LocationNameTh = splitlocation[1];
+                dataTrainingEngineer.TeamId = new Guid(splitteam[0]);
+                dataTrainingEngineer.TeamNameTh = splitteam[1];
+                dataTrainingEngineer.EngineerId = new Guid(splitEngineer[0]);
+                dataTrainingEngineer.StaffNameTh = splitEngineer[1];
+                dataTrainingEngineer.CreateDate = DateTime.Now;
+                dataTrainingEngineer.CreateUser = userProfile.Username;
+                listdataTrainingEngineer.Add(dataTrainingEngineer);
+
                 model.TrainingId = trainingId;
-                model.location_name_th = splitlocation[1];
+                model.location_name_th = splitlocation[1];           
                 model.team_name_th = splitteam[1];
                 model.Engineer_name = splitEngineer[1];
-                model.Engineer_ID = splitEngineer[0];                
-                data.Add(model);
-                HttpContext.Session.SetObjectAsJson("Datatraining", data);
+                model.Engineer_ID = splitEngineer[0];
+                dataScreen.Add(model);
+                HttpContext.Session.SetObjectAsJson("ScreenDatatraining", dataScreen);
+                HttpContext.Session.SetObjectAsJson("DataInsertTrainingEngineer",listdataTrainingEngineer);
 
             }
             else
             {
-                data = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingModel>>("Datatraining");             
-               
+                dataScreen = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingModel>>("ScreenDatatraining");
+                listdataTrainingEngineer = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingEngineerModel>>("DataInsertTrainingEngineer");
+
+                dataTrainingEngineer.TrainingId = trainingId;
+                dataTrainingEngineer.LocationId = new Guid(splitlocation[0]);
+                dataTrainingEngineer.LocationNameTh = splitlocation[1];
+                dataTrainingEngineer.TeamId = new Guid(splitteam[0]);
+                dataTrainingEngineer.TeamNameTh = splitteam[1];
+                dataTrainingEngineer.EngineerId = new Guid(splitEngineer[0]);
+                dataTrainingEngineer.StaffNameTh = splitEngineer[1];
+                dataTrainingEngineer.CreateDate = DateTime.Now;
+                dataTrainingEngineer.CreateUser = userProfile.Username;
+                listdataTrainingEngineer.Add(dataTrainingEngineer);
+
                 model.TrainingId = trainingId;
                 model.location_name_th = splitlocation[1];
                 model.team_name_th = splitteam[1];
                 model.Engineer_name = splitEngineer[1];
                 model.Engineer_ID = splitEngineer[0];
-                data.Add(model);
+                dataScreen.Add(model);
 
-                HttpContext.Session.SetObjectAsJson("Datatraining", data);
+                HttpContext.Session.SetObjectAsJson("ScreenDatatraining", dataScreen);
+                HttpContext.Session.SetObjectAsJson("DataInsertTrainingEngineer", listdataTrainingEngineer);
             }
-            var training = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingModel>>("Datatraining");
+            var training = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingModel>>("ScreenDatatraining");
 
             return Json(training);
         }
@@ -201,39 +247,91 @@ namespace SubcontractProfile.Web.Controllers
         [HttpPut]
         public IActionResult Deletetraining(string[] TrainingId)
         {
-            var training = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingModel>>("Datatraining");
+            var dataScreen = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingModel>>("ScreenDatatraining");
+            var dataTrainingEngineer = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingEngineerModel>>("DataInsertTrainingEngineer");
 
             foreach (var item in TrainingId)
             {
-                training.RemoveAll(x => x.TrainingId == new Guid(item));
+                dataScreen.RemoveAll(x => x.TrainingId == new Guid(item));
+                dataTrainingEngineer.RemoveAll(x => x.TrainingId == new Guid(item));
             }
-            HttpContext.Session.SetObjectAsJson("Datatraining", training);
-            var deltraining = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingModel>>("Datatraining");
+            HttpContext.Session.SetObjectAsJson("ScreenDatatraining", dataScreen);
+            HttpContext.Session.SetObjectAsJson("DataInsertTrainingEngineer", dataTrainingEngineer);
+            var deltraining = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingModel>>("ScreenDatatraining");
 
             return Json(deltraining);
         }
         [HttpPost]
         public IActionResult RequestTraining(SubcontractProfileTrainingModel model)
         {
-            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
-            var training = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingModel>>("Datatraining");
-           
-            model.TrainingId = Guid.NewGuid();
-            model.CompanyId = userProfile.companyid;
-            model.CreateDate = DateTime.Now;
-            model.CreateBy = userProfile.Username;
-            
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string uriString = string.Format("{0}", strpathAPI + "Training/Insert");
-            var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PostAsync(uriString, httpContent).Result;
-            if (response.IsSuccessStatusCode)
+            ResponseModel result = new ResponseModel();
+            try
             {
-                var dataresponse = response.Content.ReadAsStringAsync().Result;
-                
-            }
+                var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+                var training = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingEngineerModel>>("DataInsertTrainingEngineer");
 
-            return Json(response);
+                var totalengineer = (training == null) ? 1 : training.Count();
+                var spitcouse = model.Course.Split(',');
+                var convertprice = Convert.ToInt32(spitcouse[1]);
+
+                DateTime now = DateTime.Now;
+                string DateString = now.ToString("yyyyMMdd");
+
+                model.CompanyId = userProfile.companyid;
+                model.Course = spitcouse[0];
+                model.course_price = convertprice;
+                model.TotalPrice = convertprice * totalengineer;
+                model.Vat = (model.TotalPrice * 7) / 100;
+                model.RequestNo = string.Format("{0}{1}", DateString, "000001");
+                model.CreateDate = DateTime.Now;
+                model.CreateBy = userProfile.Username;
+                //model.TrainingId = Guid.NewGuid();
+
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string uriStringTraining = string.Format("{0}", strpathAPI + "Training/Insert");
+                var httpContentTraining = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                HttpResponseMessage responseTraining = client.PostAsync(uriStringTraining, httpContentTraining).Result;
+
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string uriStringTrainingEngineer = string.Format("{0}", strpathAPI + "TrainingEngineer/Insert");
+
+
+                //if (responseTraining.IsSuccessStatusCode)
+                //{
+                //    result.Status = true;
+                //    result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                //    result.StatusError = "0";
+
+                //}
+                //else
+                //{
+                //    result.Message = "ไม่สามารถบันทึกข้อมูลได้ กรุณาติดต่อ Administrator.";
+                //    result.Status = false;
+                //    result.StatusError = "-1";
+                //}
+                if (training != null)
+                {
+                    foreach(var i in training)
+                    {
+                        var httpContentTrainingEngineer = new StringContent(JsonConvert.SerializeObject(i), Encoding.UTF8, "application/json");
+                        HttpResponseMessage responseTrainingEngineer = client.PostAsync(uriStringTrainingEngineer, httpContentTrainingEngineer).Result;
+
+                    }
+                    
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result.Message = "ไม่สามารถบันทึกข้อมูลได้ กรุณาติดต่อ Administrator.";
+                result.Status = false;
+                result.StatusError = "0";
+
+            }
+           
+
+            return Json(result);
         }
      
     }

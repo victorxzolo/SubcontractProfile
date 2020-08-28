@@ -62,6 +62,7 @@ namespace SubcontractProfile.WebApi.Services.Services
           
             p.Add("@company_id", subcontractProfileTraining.CompanyId);
             p.Add("@course", subcontractProfileTraining.Course);
+            p.Add("@course_price", subcontractProfileTraining.cource_price);
             p.Add("@request_date", subcontractProfileTraining.RequestDate);
             p.Add("@remark", subcontractProfileTraining.Remark);
             p.Add("@total_price", subcontractProfileTraining.TotalPrice);
