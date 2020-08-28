@@ -68,7 +68,8 @@ $(document).ready(function () {
         }
     });
     $('#timepicker').datetimepicker({
-        format: 'LT',
+        format: 'HH:mm',
+        locale: 'th',
         showClear: true,
         showClose: true,
         icons: {
@@ -301,10 +302,13 @@ function getDataById(id) {
                 var month = d.getMonth();
                 var day = d.getDate();
                 var year = d.getFullYear();
+                var HH = d.getHours();
+                var MM = d.getMinutes();
 
-                $('#dateverify').val(result.PaymentDatetime);
+                $('#datetimepicker').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
 
-                $('#timepayverify').val(result.PaymentDatetime);
+                $('#timepicker').data("DateTimePicker").date(moment(new Date(year, month, day, HH, MM), 'HH:MM'));
+
                 $('#txtBalance').val(result.AmountTransfer);
                 $('#ddlbank').val(result.BankTransfer);
                 $('#txtbranch').val(result.BankBranch);
