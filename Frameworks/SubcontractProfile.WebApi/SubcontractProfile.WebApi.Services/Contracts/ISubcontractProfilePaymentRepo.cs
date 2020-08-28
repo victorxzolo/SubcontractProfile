@@ -17,6 +17,8 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment subcontractProfilePayment);
         Task<bool> BulkInsert(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment> subcontractProfilePaymentList);
         Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment subcontractProfilePayment);
+        Task<bool> UpdateByVerified(SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment subcontractProfilePayment);
+
         Task<bool> Delete(string id);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>> GetByPKList(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment_PK> pkList);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>> searchPayment(SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment search);

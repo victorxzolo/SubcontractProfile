@@ -256,5 +256,21 @@ namespace SubcontractProfile.WebApi.Services.Services
 
             return entity;
         }
+
+        public async Task<bool> UpdateByVerified(SubcontractProfilePayment subcontractProfilePayment)
+        {
+
+            var p = new DynamicParameters();
+            p.Add("@payment_id", subcontractProfilePayment.PaymentId);     
+            p.Add("@status", subcontractProfilePayment.Status);
+            p.Add("@modified_by", subcontractProfilePayment.ModifiedBy);
+            p.Add("@verified_date", subcontractProfilePayment.verifiedDate);
+            p.Add("@remark_for_sub", subcontractProfilePayment.remarkForSub);
+            
+            var ok = await _dbContext.Connection.ExecuteAsync
+                ("uspSubcontractProfilePayment_updateByVerified", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+
+            return true;
+        }
     }
 }
