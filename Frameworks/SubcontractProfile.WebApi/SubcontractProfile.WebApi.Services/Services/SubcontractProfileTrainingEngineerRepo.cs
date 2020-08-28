@@ -59,12 +59,12 @@ namespace SubcontractProfile.WebApi.Services.Services
         {
             var p = new DynamicParameters();
 
-            p.Add("@training_engineer_id", subcontractProfileTrainingEngineer.TrainingEngineerId);
+            //p.Add("@training_engineer_id", subcontractProfileTrainingEngineer.TrainingEngineerId);
             p.Add("@training_id", subcontractProfileTrainingEngineer.TrainingId);
             p.Add("@location_id", subcontractProfileTrainingEngineer.LocationId);
             p.Add("@team_id", subcontractProfileTrainingEngineer.TeamId);
             p.Add("@engineer_id", subcontractProfileTrainingEngineer.EngineerId);
-            p.Add("@create_date", subcontractProfileTrainingEngineer.CreateDate);
+            //p.Add("@create_date", subcontractProfileTrainingEngineer.CreateDate);
             p.Add("@create_user", subcontractProfileTrainingEngineer.CreateUser);
 
             var ok = await _dbContext.Connection.ExecuteAsync

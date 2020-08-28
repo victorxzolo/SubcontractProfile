@@ -36,6 +36,10 @@ namespace SubcontractProfile.WebApi.Services.Model
         public string Course { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        public decimal? cource_price { get; set; }
+
+
+        [System.ComponentModel.DataAnnotations.Required]
         public System.DateTime RequestDate { get; set; }
 
         public string Remark { get; set; }

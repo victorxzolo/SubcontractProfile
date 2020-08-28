@@ -14,6 +14,9 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string Course { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
+        public decimal? course_price { get; set; }
+
         public System.DateTime? RequestDate { get; set; }
 
         public string Remark { get; set; }

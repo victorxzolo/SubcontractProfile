@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SubcontractProfile.WebApi.Services.Model
+namespace SubcontractProfile.Web.Model
 {
     /// =================================================================
 

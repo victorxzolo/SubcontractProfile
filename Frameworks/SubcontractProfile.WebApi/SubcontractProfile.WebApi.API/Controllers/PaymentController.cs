@@ -72,47 +72,18 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfilePayment))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfilePayment))]
-        [HttpGet("SearchPayment/{payment_no}/{request_training_no}/{request_date_from}/{request_date_to}/{payment_date_from}/{payment_date_to}/{payment_status}/{company_name}/{tax_id}")]
-        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>> SearchPayment(string payment_no,
-           string request_training_no , string request_date_from, string request_date_to, string payment_date_from,
-           string payment_date_to, string payment_status, string company_name, string tax_id)
+        [HttpPost("SearchPayment")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>> SearchPayment(SubcontractProfilePayment search)
         {
-            _logger.LogInformation($"Start PaymentController::SearchPayment", payment_no, request_training_no, request_date_from,
-                request_date_to, payment_date_from, payment_date_to, payment_status, company_name, tax_id);
-        
-            if(payment_no.ToUpper() == "NULL")
-            {
-                payment_no = "";
-            }
+            _logger.LogInformation($"Start PaymentController::SearchPayment", search.PaymentNo, search.Request_no, search.RequestDateFrom,
+                search.RequestDateTo, search.PaymentDatetimeFrom, search.PaymentDatetimeTo, search.Status, search.companyNameTh, search.taxId);
 
-            if (request_training_no.ToUpper() == "NULL")
-            {
-                request_training_no = "";
-            }
-
-            if (payment_status.ToUpper() == "NULL")
-            {
-                payment_status = "";
-            }
-
-            if (company_name.ToUpper() == "NULL")
-            {
-                company_name = "";
-            }
-
-            if (tax_id.ToUpper() == "NULL")
-            {
-                tax_id = "";
-            }
-
-            var entities = _service.searchPayment(payment_no, request_training_no, request_date_from,
-                request_date_to, payment_date_from,
-                payment_date_to, payment_status, company_name, tax_id);
+            var entities = _service.searchPayment(search);
 
             if (entities == null)
             {
-                _logger.LogWarning($"PaymentController::", "GetByPaymentId NOT FOUND", payment_no, request_training_no, request_date_from,
-                request_date_to, payment_date_from, payment_date_to, payment_status, company_name, tax_id);
+                _logger.LogWarning($"PaymentController::", "GetByPaymentId NOT FOUND", search.PaymentNo, search.Request_no, search.RequestDateFrom,
+                search.RequestDateTo, search.PaymentDatetimeFrom, search.PaymentDatetimeTo, search.Status, search.companyNameTh, search.taxId);
                 return null;
             }
 
