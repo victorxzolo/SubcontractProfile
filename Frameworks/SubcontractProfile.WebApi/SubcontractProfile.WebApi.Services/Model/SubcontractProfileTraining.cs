@@ -36,7 +36,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         public string Course { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        public decimal? cource_price { get; set; }
+        public decimal? CoursePrice { get; set; }
 
 
         [System.ComponentModel.DataAnnotations.Required]
@@ -79,37 +79,37 @@ namespace SubcontractProfile.WebApi.Services.Model
         public System.DateTime? ModifiedDate { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string company_name_th { get; set; }
+        public string CompanyNameTh { get; set; }
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string tax_id { get; set; }
+        public string TaxId { get; set; }
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string contract_name { get; set; }
+        public string ContractName { get; set; }
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string contract_email { get; set; }
+        public string ContractEmail { get; set; }
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string contract_phone { get; set; }
+        public string ContractPhone { get; set; }
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string location_name_th { get; set; }
+        public string LocationNameTh { get; set; }
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string location_name_en { get; set; }
+        public string LocationNameEn { get; set; }
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string team_name_th { get; set; }
+        public string TeamNameTh { get; set; }
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string team_name_en { get; set; }
+        public string TeamNameEn { get; set; }
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string staff_name_th { get; set; }
+        public string StaffNameTh { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string staff_name_en { get; set; }
+        public string StaffNameEn { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string contract_phone1 { get; set; }
+        public string ContractPhone1 { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string contract_email_en { get; set; }
+        public string ContractEmailEn { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string position { get; set; }
+        public string Position { get; set; }
 
         public DateTime BookingDate { get; set; }
         public string RemarkForAis { get; set; }
