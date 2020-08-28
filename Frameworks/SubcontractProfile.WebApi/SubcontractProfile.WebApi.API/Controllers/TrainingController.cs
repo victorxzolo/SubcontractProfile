@@ -53,7 +53,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         public Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining> GetByTrainingId(System.Guid trainingId)
         {
             _logger.LogInformation($"Start TrainingController::GetByTrainingId", trainingId);
-
+                
             var entities = _service.GetByTrainingId(trainingId);
 
             if (entities == null)
