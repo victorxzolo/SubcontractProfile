@@ -265,7 +265,7 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@remark_for_ais", subcontractProfileTraining.RemarkForAis);
 
             var ok = await _dbContext.Connection.ExecuteAsync
-                ("uspSubcontractProfileTraining_Update", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+                ("uspSubcontractProfileTraining_updateByVerified", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
 
             return true;
         }
