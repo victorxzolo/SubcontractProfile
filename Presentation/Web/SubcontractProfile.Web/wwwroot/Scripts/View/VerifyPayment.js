@@ -290,7 +290,7 @@ function getDataById(id) {
         data: { 'paymentId': id },
         dataType: "json",
         success: function (result) {
-            console.log(result)
+
             if (result != null) {
                 $('#hdpaymentId').val(id);
 
@@ -317,6 +317,7 @@ function getDataById(id) {
                     $('#lbuploadslip').html(result.SlipAttachFile);
                     $('#hdupfiletransfer').val(result.file_id_Slip);
                     $('#linkdownload').text(result.SlipAttachFile);
+                   
                 }
                 $('#txtremark').val(result.Remark);
 
@@ -327,7 +328,7 @@ function getDataById(id) {
                         $(this).prop('checked', true);
                     }
                 });
- 
+               DownloadFileSlip();
             }
 
 
@@ -396,33 +397,8 @@ function OnSave() {
 }
 
 function DownloadFileSlip() {
-    $.ajax({
-        url: '/Payment/GetBlobDownload',
-        type: 'POST',
-        data: {
-            'paymentid': $('#hdpaymentId').val()
-        },
-        dataType: "json",
-        contentType: "application/download",
-        success: function (result) {
 
-        },
-        error: function (xhr, status, error) {
-            bootbox.confirm({
-                title: "System Information",
-                message: "This action is not available.",
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
-        }
-
-    });
+    $('#ItemPreview').attr('src', '/Payment/DownloadCSV?paymentid=' + $('#hdpaymentId').val());
 }
 
 //function GetDropDownLocation() {
