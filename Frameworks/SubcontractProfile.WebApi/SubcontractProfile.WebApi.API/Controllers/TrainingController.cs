@@ -171,6 +171,60 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
             return entities;
         }
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileTraining))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileTraining))]
+        [HttpGet("SearchTrainingForTest/{company_name_th}/{tax_id}/{training_date_fr}/{training_date_to}/{test_date_fr}/{test_date_to}")]
+
+        public Task<IEnumerable<SubcontractProfileTraining>> SearchTrainingForTest(string company_name_th,
+           string tax_id, string training_date_fr, string training_date_to, string test_date_fr, string test_date_to)
+        {
+            _logger.LogInformation($"Start TrainingController::SearchTrainingForTest", company_name_th, tax_id,
+            training_date_fr, training_date_to, test_date_fr, test_date_to);
+
+            if (company_name_th.ToUpper() == "NULL")
+            {
+                company_name_th = string.Empty;
+            }
+
+            if (tax_id.ToUpper() == "NULL")
+            {
+                tax_id = string.Empty;
+            }
+
+            if (training_date_fr.ToUpper() == "NULL")
+            {
+                training_date_fr = string.Empty;
+            }
+
+            if (training_date_to.ToUpper() == "NULL")
+            {
+                training_date_to = string.Empty;
+            }
+
+            if (test_date_fr.ToUpper() == "NULL")
+            {
+                test_date_fr = string.Empty;
+            }
+
+            if (test_date_to.ToUpper() == "NULL")
+            {
+                test_date_to = string.Empty;
+            }
+
+
+            var entities = _service.SearchTrainingForTest(company_name_th, tax_id,
+                training_date_fr, training_date_to, test_date_fr, test_date_to);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"TrainingController::", "SearchTrainingForTest NOT FOUND", company_name_th, tax_id,
+            training_date_fr, training_date_to, test_date_fr, test_date_to);
+                return null;
+            }
+
+            return entities;
+        }
         #endregion
 
         #region POST

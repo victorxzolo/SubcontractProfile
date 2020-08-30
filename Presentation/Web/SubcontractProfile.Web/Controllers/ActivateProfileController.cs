@@ -85,10 +85,18 @@ namespace SubcontractProfile.Web.Controllers
             {
                 activate_date_fr = "null";
             }
+            else
+            {
+                activate_date_fr = Common.ConvertToDateTimeYYYYMMDD(activate_date_fr);
+            }
 
             if (activate_date_to == null)
             {
                 activate_date_to = "null";
+            }
+            else
+            {
+                activate_date_to = Common.ConvertToDateTimeYYYYMMDD(activate_date_to);
             }
 
             if (activate_status == null)

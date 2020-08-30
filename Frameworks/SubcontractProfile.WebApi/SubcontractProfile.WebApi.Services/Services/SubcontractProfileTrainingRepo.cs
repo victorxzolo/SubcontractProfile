@@ -287,6 +287,23 @@ namespace SubcontractProfile.WebApi.Services.Services
             return true;
         }
 
+        public async Task<IEnumerable<SubcontractProfileTraining>> SearchTrainingForTest(string company_name_th,
+            string tax_id, string training_date_fr, string training_date_to, string test_date_fr, string test_date_to)
+        {
+            var p = new DynamicParameters();
+            p.Add("@company_name_th", company_name_th);
+            p.Add("@tax_id", tax_id);
+            p.Add("@training_date_fr", training_date_fr);
+            p.Add("@trainig_date_to", training_date_to);
+            p.Add("@test_date_fr", test_date_fr);
+            p.Add("@test_date_to", test_date_to);
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>
+            ("uspSubcontractProfileTraining_searchTrainingForTest", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+
+        }
     }
 
 

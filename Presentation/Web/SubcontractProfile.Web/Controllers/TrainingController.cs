@@ -181,9 +181,9 @@ namespace SubcontractProfile.Web.Controllers
             var listdataTrainingEngineer = new List<SubcontractProfileTrainingEngineerModel>();
             var dataTrainingEngineer = new SubcontractProfileTrainingEngineerModel();
 
-            var splitlocation = model.location_name_th.Split(',');
-            var splitteam = model.team_name_th.Split(',');
-            var splitEngineer = model.Engineer_ID.Split(',');
+            var splitlocation = model.LocationNameTh.Split(',');
+            var splitteam = model.TeamNameTh.Split(',');
+            var splitEngineer = model.EngineerId.Split(',');
             Guid trainingId = Guid.NewGuid();
 
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
@@ -204,10 +204,10 @@ namespace SubcontractProfile.Web.Controllers
                 listdataTrainingEngineer.Add(dataTrainingEngineer);
 
                 model.TrainingId = trainingId;
-                model.location_name_th = splitlocation[1];           
-                model.team_name_th = splitteam[1];
-                model.Engineer_name = splitEngineer[1];
-                model.Engineer_ID = splitEngineer[0];
+                model.LocationNameTh = splitlocation[1];           
+                model.TeamNameTh = splitteam[1];
+                model.EngineerName = splitEngineer[1];
+                model.EngineerId = splitEngineer[0];
                 dataScreen.Add(model);
                 HttpContext.Session.SetObjectAsJson("ScreenDatatraining", dataScreen);
                 HttpContext.Session.SetObjectAsJson("DataInsertTrainingEngineer",listdataTrainingEngineer);
@@ -230,10 +230,10 @@ namespace SubcontractProfile.Web.Controllers
                 listdataTrainingEngineer.Add(dataTrainingEngineer);
 
                 model.TrainingId = trainingId;
-                model.location_name_th = splitlocation[1];
-                model.team_name_th = splitteam[1];
-                model.Engineer_name = splitEngineer[1];
-                model.Engineer_ID = splitEngineer[0];
+                model.LocationNameTh = splitlocation[1];
+                model.TeamNameTh = splitteam[1];
+                model.EngineerName= splitEngineer[1];
+                model.EngineerId = splitEngineer[0];
                 dataScreen.Add(model);
 
                 HttpContext.Session.SetObjectAsJson("ScreenDatatraining", dataScreen);
