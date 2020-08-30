@@ -38,8 +38,9 @@ namespace SubcontractProfile.Web.Model
 
         public string Position { get; set; }
 
-     
-
+        public string TestStatus { get; set; }
+        public string UpdateUser { get; set; }
+        
 
     }
 }

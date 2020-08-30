@@ -269,6 +269,24 @@ namespace SubcontractProfile.WebApi.Services.Services
 
             return true;
         }
+
+        public async Task<bool> UpdateTestResult(SubcontractProfileTraining subcontractProfileTraining)
+        {
+
+            var p = new DynamicParameters();
+            p.Add("@training_id", subcontractProfileTraining.TrainingId);
+            p.Add("@status", subcontractProfileTraining.Status);
+            p.Add("@modified_by", subcontractProfileTraining.ModifiedBy);
+            p.Add("@test_date", subcontractProfileTraining.BookingDate);
+            p.Add("@skill", subcontractProfileTraining.RemarkForAis);
+            p.Add("@grade", subcontractProfileTraining.RemarkForAis);
+
+            var ok = await _dbContext.Connection.ExecuteAsync
+                ("uspSubcontractProfileTraining_updateByVerified", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+
+            return true;
+        }
+
     }
 
 

@@ -81,6 +81,13 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Engineer_name { get; set; }
 
-    
+        public DateTime? BookingDate { get; set; }
+        public string RemarkForAis { get; set; }
+
+        public DateTime? TestDate { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string Skill { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string Grade { get; set; }
     }
 }

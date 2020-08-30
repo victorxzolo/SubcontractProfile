@@ -56,7 +56,9 @@ namespace SubcontractProfile.WebApi.Services.Model
 
         public string Position { get; set; }
 
- 
+        public string TestStatus { get; set; }
+        public string UpdateUser { get; set; }
+
         public object Clone()
         {
             return this.MemberwiseClone();
