@@ -54,7 +54,6 @@
 
 
 
-
     <script>
         $(document).ready(function () {
             App.init();
@@ -102,6 +101,8 @@
     <script src="~/lib/moment.js/moment.js"></script>
     <script src="~/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 
+
+    <link href="~/assets/css/forms/theme-checkbox-radio.css" rel="stylesheet" />
 
     @RenderSection("Scripts", required: false)
     @RenderSection("modalpanel", required: false)
@@ -245,7 +246,7 @@
                                         <a  href="@Url.Action("SearchCompanyVerify", "Registration")"> Company Verify </a>
                                     </li>
                                     <li>
-                                        <a href="#"> Activate Profile  </a>
+                                        <a href="@Url.Action("index", "ActivateProfile")"> Activate Profile  </a>
                                     </li>
 
 

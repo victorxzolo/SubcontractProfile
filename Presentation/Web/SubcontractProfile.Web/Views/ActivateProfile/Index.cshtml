@@ -1,0 +1,440 @@
+﻿@{ Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; ViewBag.Title = "Location Profile";
+}
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+
+    <div class="skills layout-spacing ">
+        <div class="widget-content widget-content-area">
+            <h3 class="">Activate Profile</h3>
+
+            <div class="widget-content1">
+
+                <div class="form-row mb-4">
+                    <div class="form-group col-md-12">
+                        <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
+                       
+                        <div class="n-chk">
+                            <label class="new-control new-checkbox new-checkbox-rounded new-checkbox-text checkbox-outline-success">
+                                <input id="rdoCustomerTypeALL" type="radio" class="new-control-input" name="radioSubcontractType" value="ALL" checked>
+                                <span class="new-control-indicator"></span><span class="new-chk-content">ALL</span>
+                            </label>
+
+                            <label class="new-control new-checkbox new-checkbox-rounded new-checkbox-text checkbox-outline-success">
+                                <input id="rdoCustomerTypeSub" type="radio" class="new-control-input" name="radioSubcontractType" value="Subcontract">
+                                <span class="new-control-indicator"></span><span class="new-chk-content">New Subcontract</span>
+                            </label>
+
+                            <label class="new-control new-checkbox new-checkbox-rounded new-checkbox-text checkbox-outline-success">
+                                <input id="rdoCustomerTypeDealer" type="radio" class="new-control-input" name="radioSubcontractType" value="Dealer">
+                                <span class="new-control-indicator"></span><span class="new-chk-content">Dealer</span>
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Company Name</label>
+                        <input type="text" class="form-control" id="inputCompanyName" placeholder="Location Code">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Tax Id</label>
+                        <input type="text" class="form-control" id="inputTaxId" placeholder="Location Name Ailas">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Register Date From</label>
+                        <div class='input-group date p-0' id="register_date_fr">
+                            <input type='text' class="form-control" id="inputRegister_date_fr" />
+                            <div class="input-group-append input-group-addon">
+                                <span class="input-group-text px-4">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Register Date To</label>
+                        <div class='input-group date p-0' id="register_date_to">
+                            <input type='text' class="form-control" id="inputRegister_date_to" />
+                            <div class="input-group-append input-group-addon">
+                                <span class="input-group-text px-4">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Activate Date From</label>
+                        <div class='input-group date p-0' id="activate_date_fr">
+                            <input type='text' class="form-control" id="inputActivate_date_fr" />
+                            <div class="input-group-append input-group-addon">
+                                <span class="input-group-text px-4">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Activate Date To</label>
+                        <div class='input-group date p-0' id="activate_date_to">
+                            <input type='text' class="form-control" id="inputActivate_date_to" />
+                            <div class="input-group-append input-group-addon">
+                                <span class="input-group-text px-4">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Activate Status</label>
+                        <select id="ddlActivateStatus" class="form-control " required></select>
+                    </div>
+
+                </div>
+
+                <div style="text-align:center">
+
+                    <button id="btnMainClear" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
+                    <button id="btnSearch" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+
+                </div>
+
+
+            </div>
+
+
+            <br />
+            <div class="widget-heading">
+                <h3 class="">ผลการค้นหา</h3>
+
+            </div>
+            <div class="col-md-12 text-right mb-1">
+                <button id="btnActivate" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg> Activate Profile</button>
+
+            </div>
+
+
+            <div class="table-responsive mb-4 mt-4">
+                <table id="tbSearchResult" class="table table-hover" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th ><input type="checkbox" name="select_all" value="ALL" id="checkBoxAll" /></th>
+                            <th>Company Name </th>
+                            <th>Tax Id </th>
+                            <th>Company Status</th>
+                            <th>Traning Status </th>
+                            <th>Payment Status </th>
+                            <th>Register Date </th>
+                            <th>Training Date </th>
+                            <th>Payment Date </th>
+                            <th>Activate Date </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts {
+    <script type="text/javascript">
+
+        var oTable;
+        $(document).ready(function () {
+            $('#tbSearchResult').DataTable();
+            $('#checkBoxAll').click(function () {
+                if ($(this).is(":checked")) {
+                    $(".chkCheckBoxId").prop("checked", true)
+                }
+                else {
+                    $(".chkCheckBoxId").prop("checked", false)
+                }
+            });
+
+            $('#register_date_fr').datetimepicker({
+                format: "DD/MM/YYYY",
+                showClear: true,
+                showClose: true,
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'icon-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-time'
+                }
+            });
+
+            $('#register_date_to').datetimepicker({
+                format: "DD/MM/YYYY",
+                showClear: true,
+                showClose: true,
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'icon-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-time'
+                }
+            });
+
+            $('#activate_date_fr').datetimepicker({
+                format: "DD/MM/YYYY",
+                showClear: true,
+                showClose: true,
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'icon-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-time'
+                }
+            });
+
+            $('#activate_date_to').datetimepicker({
+                format: "DD/MM/YYYY",
+                showClear: true,
+                showClose: true,
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'icon-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-time'
+                }
+            });
+
+            inittbSearchResult();
+            $("#btnSearch").click(function (e) {
+                inittbSearchResult();
+            });
+
+            $("#btnMainClear").click(function (e) {
+                 clearMainData();
+            });
+
+            $("#btnActivate").click(function (e)
+            {
+                var table = $('#tbSearchResult').DataTable();
+                var activateids_arr = [];
+                if (table.data().count()) {
+                    $('[name="chkBox"]:checked').each(function (data) {
+                        activateids_arr.push($(this).val());
+                        // alert($('.chkCheckBoxId:checked').val());
+                    });
+
+                }
+
+                if (activateids_arr.length > 0) {
+
+                    bootbox.confirm({
+                        message: "Do you really want to Activate Profile records?",
+                        buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-success'
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-danger'
+                            }
+                        },
+                        callback: function (result) {
+                            if (result == true) {
+                  
+                                for (j = 0; j < activateids_arr.length; j++) {
+                                    onSave(activateids_arr[j]);
+                                }
+
+                               
+                            }
+                        }
+                    });
+
+                } else {
+                    bootbox.alert({
+                        message: "กรุณาเลือกข้อมูลสำหรับ Activate Profile.",
+                        callback: function () {
+
+                        }
+                    });
+                }
+
+
+            });
+
+        });
+
+
+         function inittbSearchResult() {
+
+              var oTable = $('#tbSearchResult').DataTable({
+                processing: true, // for show progress bar
+                serverSide: true, // for process server side
+                filter: false, // this is for disable filter (search box)
+                orderMulti: false, // for disable multiple column at once
+                pageLength: 10,
+                order: [],
+                autoWidth: false,
+                searching: false,
+                destroy: true,
+                lengthChange: false,
+                "oLanguage": {
+                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                    "sSearch": false,
+                    "sLengthMenu": "Results :  _MENU_",
+                },
+                 "scrollX": true,
+                  "language": {
+                  "zeroRecords": "No data found.",
+                   "decimal": ",",
+                  "thousands": "."
+                    },
+                    ajax: {
+                        url: '@Url.Action("Search", "ActivateProfile")',
+                        type: "POST",
+                        datatype: "JSON",
+                        //dataSrc:"",
+                        data: function (d) {
+                            d.subcontract_profile_type = $("input:radio[name ='radioSubcontractType']:checked").val(),
+                            d.company_name_th = $("#inputCompanyName").val(),
+                            d.tax_id = $("#inputTaxId").val(),
+                            d.activate_date_fr = $("#inputActivate_date_fr").val(),
+                            d.activate_date_to = $("#inputActivate_date_to").val(),
+                            d.activate_status = $("select[id$=ddlActivateStatus]").val()
+
+                        }
+                  },
+                    columns: [
+                        {
+                            data: null, orderable: false, render: function (data, type, row) {
+                                return '<input class="custom-checkbox chkCheckBoxId" type="checkbox" id="' + row.CompanyId + '" name="chkBox" value="' + row.CompanyId + '">';
+
+                            }
+                        },
+                        { "data": "CompanyNameTh"  },
+                        { "data": "TaxId"},
+                        { "data": "CompanyStatus" },
+                        { "data": "TrainingStatus" },
+                        { "data": "PaymentStatus" },
+                        {
+                            "data": "CompanyRegisterDate", "render": function (data, type, row) {
+                                if (type === "sort" || type === "type") {
+                                    return data;
+                                }
+                                if (moment(data).format("DD/MM/YYYY") != 'Invalid date') {
+                                    return moment(data).format("DD/MM/YYYY");
+                                }
+                                else {
+                                    return data;
+                                }
+
+                            } },
+                        {
+                            "data": "TriningDate", "render": function (data, type, row) {
+                                if (type === "sort" || type === "type") {
+                                    return data;
+                                }
+                                if (moment(data).format("DD/MM/YYYY") != 'Invalid date') {
+                                    return moment(data).format("DD/MM/YYYY");
+                                }
+                                else {
+                                    return data;
+                                }
+                            } },
+                        {
+                            "data": "PaymentDatetime", "render": function (data, type, row) {
+                                if (type === "sort" || type === "type") {
+                                    return data;
+                                }
+                                if (moment(data).format("DD/MM/YYYY") != 'Invalid date') {
+                                    return moment(data).format("DD/MM/YYYY");
+                                }
+                                else {
+                                    return data;
+                                }
+                            } },
+                        {
+                            "data": "ActivateDate", "render": function (data, type, row) {
+                                if (type === "sort" || type === "type") {
+                                    return data;
+                                }
+                                if (moment(data).format("DD/MM/YYYY") != 'Invalid date') {
+                                    return moment(data).format("DD/MM/YYYY");
+                                }
+                                else {
+                                    return data;
+                                }
+                            }
+                        }
+
+                ],
+                  "order": [[0, "desc"]],
+
+                "stripeClasses": [],
+                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+                });
+
+        }
+
+         function onSave(companyId) {
+            var company = new Object();
+             company.CompanyId = companyId;
+           
+            $.ajax({
+                   url: '@Url.Action("OnSave", "ActivateProfile")',
+                   type: 'POST',
+                   data: { 'model': company },
+                   dataType: "json",
+                success: function (result) {
+                       if (result.Status == true) {
+                           if ($('#hdMode').val() == 'edit') {
+
+                           } else {
+                               bootbox.alert(result.Message);
+                           }
+
+                           inittbSearchResult();
+
+                          }
+                        else {
+                               bootbox.alert(result.Message);
+
+                            }
+                  },
+                  error: function (result) {
+                      bootbox.alert(result.Message);
+                  }
+
+            });
+
+        }
+
+
+    </script>
+}

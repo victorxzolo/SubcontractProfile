@@ -45,8 +45,8 @@ table.dataTable {
     /*background-color: #040c95;*/
     color: #1b55e2;
     /* color: #fff;*/
-    font-weight: 600;
-    font-size: 21px;
+   /* font-weight: 600;*/
+    font-size: 18px;
     border: none;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -77,7 +77,7 @@ table.dataTable {
 }
 
 div.dataTables_wrapper div.dataTables_info {
-   /* padding-top: 0.85em;*/
+    /* padding-top: 0.85em;*/
     white-space: normal;
     color: #1b55e2;
     font-weight: 600;
@@ -87,6 +87,7 @@ div.dataTables_wrapper div.dataTables_info {
     border-radius: 6px;
     font-size: 13px;
     margin-top: 20px;
+    font-family: 'Nunito', sans-serif;
 }
 div.dataTables_wrapper div.dataTables_filter label {
     position: relative;
@@ -132,6 +133,8 @@ div.dataTables_wrapper div.dataTables_paginate {
     background: rgba(0, 23, 55, 0.08);
     border: none;
     color: #888ea8;
+    font-size:13px;
+    font-family: 'Nunito', sans-serif;
 }
 .page-link:focus {
     box-shadow: none;

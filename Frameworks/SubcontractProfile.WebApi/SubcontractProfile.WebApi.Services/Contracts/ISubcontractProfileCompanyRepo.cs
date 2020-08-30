@@ -17,6 +17,8 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany subcontractProfileCompany);
         Task<bool> BulkInsert(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany> subcontractProfileCompanyList);
         Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany subcontractProfileCompany);
+        Task<bool> UpdateByActivate(SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany subcontractProfileCompany);
+
         Task<bool> Delete(string id);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> GetByPKList(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany_PK> pkList);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchCompany(Guid companyId

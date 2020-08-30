@@ -203,6 +203,23 @@ namespace SubcontractProfile.WebApi.Services
             return true;
         }
 
+
+        /// <summary>
+        /// Update
+        /// </summary>
+        public async Task<bool> UpdateByActivate(SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany subcontractProfileCompany)
+        {
+            var p = new DynamicParameters();
+            p.Add("@company_id", subcontractProfileCompany.CompanyId);
+            p.Add("@update_by", subcontractProfileCompany.UpdateBy);
+            p.Add("@status", subcontractProfileCompany.Status);
+
+            var ok = await _dbContext.Connection.ExecuteAsync
+                ("uspSubcontractProfileCompany_updateByActivate", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+
+            return true;
+        }
+
         /// <summary>
         /// Delete
         /// </summary>

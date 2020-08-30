@@ -290,6 +290,24 @@ namespace SubcontractProfile.WebApi.API.Controllers
             }
             return result;
         }
+        [HttpPut("UpdateByActivate")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        public Task<bool> UpdateByActivate(SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany subcontractProfileCompany)
+        {
+            _logger.LogInformation($"Start CompanyController::Update", subcontractProfileCompany);
+
+            if (subcontractProfileCompany == null)
+                _logger.LogWarning($"Start CompanyController::Update", subcontractProfileCompany);
+
+            var result = _service.UpdateByActivate(subcontractProfileCompany);
+
+            if (result == null)
+            {
+                _logger.LogWarning($"CompanyController::", "Update NOT FOUND", subcontractProfileCompany);
+
+            }
+            return result;
+        }
         #endregion
 
         #region DELETE
