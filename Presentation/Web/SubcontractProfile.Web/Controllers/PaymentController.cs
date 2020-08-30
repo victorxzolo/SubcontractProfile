@@ -537,30 +537,81 @@ namespace SubcontractProfile.Web.Controllers
         }
 
 
-        public async Task< IActionResult> GetBlobDownload(string paymentid)
+        private async Task< bool> GetBlobDownload(string paymentid)
         {
+            try
+            {
+                var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftPaymentSSO");
+                string filename = "";
+                foreach (var e in dataUploadfile)
+                {
+                    // await CopyFile(e, model.CompanyId.ToString());
+
+                    filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
+                    filename = EnsureCorrectFilename(filename);
+                }
+              
+
+                var path = this.GetPathAndFilename(paymentid, filename);
+
+                var memory = new MemoryStream();
+                using (var stream = new FileStream(path, FileMode.Open))
+                {
+                    await stream.CopyToAsync(memory);
+                    //using (var img = Image.FromStream(stream))
+                    //{
+                    //    // TODO: ResizeImage(img, 100, 100);
+                    //}
+
+                }
+                
+                memory.Position = 0;
+
+                TempData["Output"] = memory.ToArray();
+                //return File(path, content);
+                //return File(memory, GetContentType(path), Path.GetFileName(path));
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                return false;
+                throw;
+            }
+            
+
+        }
+        public async Task<ActionResult> DownloadCSV(string paymentid)
+        {
+            // retrieve byte array here
+            var array = TempData["Output"] as byte[];
+            if (array == null)
+            {
+               await GetBlobDownload(paymentid);
+              array = TempData["Output"] as byte[];
+            }
+
             var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftPaymentSSO");
-            string filename="";
+            string filename = "";
             foreach (var e in dataUploadfile)
             {
                 // await CopyFile(e, model.CompanyId.ToString());
 
-                 filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
+                filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
                 filename = EnsureCorrectFilename(filename);
             }
-            if (filename == null)
-                return Content("filename not present");
 
             var path = this.GetPathAndFilename(paymentid, filename);
+            string content = GetContentType(path);
 
-            var memory = new MemoryStream();
-            using (var stream = new FileStream(path, FileMode.Open))
+            if (array != null)
             {
-                await stream.CopyToAsync(memory);
+                return File(array, content, Path.GetFileName(path));
             }
-            memory.Position = 0;
-            return File(memory, GetContentType(path), Path.GetFileName(path));
-
+            else
+            {
+                return new EmptyResult();
+            }
         }
         private string GetContentType(string path)
         {

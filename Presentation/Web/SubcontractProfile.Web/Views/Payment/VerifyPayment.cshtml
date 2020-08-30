@@ -218,8 +218,10 @@
                                        accept="image/jpeg,image/gif,image/png,application/pdf" />
                                 <label class="custom-file-label" for="customFile" id="lbuploadslip">Choose file</label>
 
-                                <a  href="#" onclick="DownloadFileSlip()" id="linkdownload"></a>
-                                @*<a href="@Url.Action("GetBlobDownload", "Payment", new { paymentid = ViewBag["PaymentID"]})" id="linkdownload"></a>*@
+                                <div id="targetDiv">
+                                    <img id="ItemPreview" src="" class="img-thumbnail" style="width: 300px; height: 300px;"/>
+                                </div>
+                              
 
                                 <small id="uploadlHelp1" class="form-text text-muted">
                                     ขนาดไฟล์ไม่เกิน 3 Mb และไฟล์ประกอบประเภท PDF หรือ JPG,JPEG,PNG เท่านั้น
