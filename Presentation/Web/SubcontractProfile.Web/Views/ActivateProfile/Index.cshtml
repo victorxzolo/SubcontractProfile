@@ -33,11 +33,11 @@
 
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">Company Name</label>
-                        <input type="text" class="form-control" id="inputCompanyName" placeholder="Location Code">
+                        <input type="text" class="form-control" id="inputCompanyName" placeholder="Company Name">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">Tax Id</label>
-                        <input type="text" class="form-control" id="inputTaxId" placeholder="Location Name Ailas">
+                        <input type="text" class="form-control" id="inputTaxId" placeholder="Tax Id">
                     </div>
 
                     <div class="form-group col-md-6">
@@ -288,7 +288,14 @@
 
         });
 
-
+        function clearMainData() {
+            $("input:radio[name ='radioSubcontractType']:checked").val('ALL')
+            $("#inputCompanyName").val('');
+            $("#inputTaxId").val('');
+            $("#inputActivate_date_fr").val('');
+            $("#inputActivate_date_to").val('');
+            //$("select[id$=ddlActivateStatus]").val()
+        }
          function inittbSearchResult() {
 
               var oTable = $('#tbSearchResult').DataTable({
