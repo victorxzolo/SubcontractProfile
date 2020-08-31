@@ -439,6 +439,39 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { responsebank = getAllBankList });
         }
 
+        [HttpPost]
+        public IActionResult GetCompany(string companyname)
+        {
+            var output = new List<SubcontractProfileCompanyModel>();
+
+
+            SubcontractProfileCompanyModel model = new SubcontractProfileCompanyModel();
+
+            model.CompanyName = companyname;
+
+
+            var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "SearchCompanyVerify"));
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+            var httpContentCompany = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PostAsync(uriCompany, httpContentCompany).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                //data
+                output = JsonConvert.DeserializeObject<List<SubcontractProfileCompanyModel>>(result);
+
+            }
+
+
+            return Json(new { response = output });
+        }
+
+
 
         public async Task<IActionResult> GetDataById(string paymentId)
         {
@@ -581,7 +614,7 @@ namespace SubcontractProfile.Web.Controllers
             
 
         }
-        public async Task<ActionResult> DownloadCSV(string paymentid)
+        public async Task<ActionResult> Downloadfile(string paymentid)
         {
             // retrieve byte array here
             var array = TempData["Output"] as byte[];

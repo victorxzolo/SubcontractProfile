@@ -109,6 +109,10 @@ $(document).ready(function () {
         OnSave();
     });
 
+    $('#btnClearModal').click(function () {
+        ClearDataModal();
+    });
+    
     $(document).on('show.bs.modal', '.modal', function () {
         var zIndex = 1040 + (10 * $('.modal:visible').length);
         $(this).css('z-index', zIndex);
@@ -121,6 +125,40 @@ $(document).ready(function () {
         $('.modal:visible').length && $(document.body).addClass('modal-open');
     });
 
+
+    $('#txtcompanyname').autocomplete({
+        lookup: function (query, done) {
+            $.ajax({
+                type: "POST",
+                url: "/Payment/GetCompany",
+                data: { companyname: query},
+                dataType: "json",
+                success: function (data) {
+                    var suggestions = [];
+                        $.each(data.response, function () {
+                            var d = {
+                                "value": this.CompanyNameTh , "data": this.CompanyId 
+                            }
+                            suggestions.push(d);
+                        });
+                    var result = { suggestions };
+
+                    done(result);
+
+
+                },
+                error: function (xhr, status, error) {
+
+                }
+            });
+        },
+        minChars: 1,
+        onSelect: function (suggestion) {
+            $('#selection').html('You selected: ' + suggestion.value);
+        },
+        showNoSuggestionNotice: true,
+        noSuggestionNotice: 'Sorry, no matching results',
+    });
 });
 
 function inittbSearchResult() {
@@ -202,6 +240,34 @@ function openModal(paymentid) {
 
     $('#VerifyPaymentModal').modal('show');
 
+}
+
+function ClearDataModal() {
+    $('#lblcompanyName').text('');
+    $('#hdpaymentId').val('');
+    $('#lbpaymentno').text('');
+    $('#ddlpaymenttransfer').val('');
+    $('#dateverify').val('');
+    $('#datetimepicker').data("DateTimePicker").date(moment(new Date(), 'DD/MM/YYYY'));
+    $('#timepayverify').val('');
+    $('#timepicker').data("DateTimePicker").date(moment(new Date(), 'HH:MM'));
+
+    $('#txtBalance').val('');
+    $('#ddlbank').val('');
+    $('#txtbranch').val('');
+
+    $('#lbuploadslip').text('Choose file');
+    $('#hdupfiletransfer').val('');
+    $('#linkdownload').text('');
+
+    $('#txtremark').val('');
+
+    $(':radio').each(function (i) {
+
+        //if (channel == $(this).val()) {
+            $(this).prop('checked', false);
+        //}
+    });
 }
 
 function BindDataTypeTransfer() {
@@ -290,7 +356,7 @@ function getDataById(id) {
         data: { 'paymentId': id },
         dataType: "json",
         success: function (result) {
-
+            ClearDataModal();
             if (result != null) {
                 $('#hdpaymentId').val(id);
 
@@ -317,7 +383,6 @@ function getDataById(id) {
                     $('#lbuploadslip').html(result.SlipAttachFile);
                     $('#hdupfiletransfer').val(result.file_id_Slip);
                     $('#linkdownload').text(result.SlipAttachFile);
-                   
                 }
                 $('#txtremark').val(result.Remark);
 
@@ -398,7 +463,10 @@ function OnSave() {
 
 function DownloadFileSlip() {
 
-    $('#ItemPreview').attr('src', '/Payment/DownloadCSV?paymentid=' + $('#hdpaymentId').val());
+    // $('#ItemPreview').attr('src', '/Payment/DownloadCSV?paymentid=' + $('#hdpaymentId').val());
+    
+    $('#linkdownload').attr("href", '/Payment/Downloadfile?paymentid=' + $('#hdpaymentId').val());
+
 }
 
 //function GetDropDownLocation() {
