@@ -448,6 +448,7 @@ namespace SubcontractProfile.Web.Controllers
             SubcontractProfileCompanyModel model = new SubcontractProfileCompanyModel();
 
             model.CompanyName = companyname;
+            model.SubcontractProfileType = "All";
 
 
             var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "SearchCompanyVerify"));

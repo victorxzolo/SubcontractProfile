@@ -28,20 +28,38 @@ $(document).ready(function () {
     inittbtabengineer();
 
 
-    $('#contractstartdate').datepicker({
-            format: 'dd/mm/yyyy',
-            daysOfWeekHighlighted: "6,0",
-            autoclose: true,
-            todayHighlight: true,
-            clearBtn: true,
-        });
-    $('#contractenddate').datepicker({
-            format: 'dd/mm/yyyy',
-            daysOfWeekHighlighted: "6,0",
-            autoclose: true,
-            todayHighlight: true,
-            clearBtn: true,
-        });
+    $('#contractstartdate').datetimepicker({
+        format: "DD/MM/YYYY",
+        showClear: true,
+        showClose: true,
+        icons: {
+            time: 'fa fa-clock-o',
+            date: 'fa fa-calendar',
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down',
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'icon-screenshot',
+            clear: 'fa fa-trash',
+            close: 'fa fa-time'
+        }
+    });
+    $('#contractenddate').datetimepicker({
+        format: "DD/MM/YYYY",
+        showClear: true,
+        showClose: true,
+        icons: {
+            time: 'fa fa-clock-o',
+            date: 'fa fa-calendar',
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down',
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'icon-screenshot',
+            clear: 'fa fa-trash',
+            close: 'fa fa-time'
+        }
+    });
 
     $('#rdoCompanyType1').on("change", function () {
         if ($(this).attr("value") == "NewSubContract") {
