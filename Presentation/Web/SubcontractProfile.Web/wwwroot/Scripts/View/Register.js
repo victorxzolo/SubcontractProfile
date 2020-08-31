@@ -1444,11 +1444,11 @@ function BindDDLTitle() {
                 $('#ddlprefixcompany_name_th_dealer').empty();
                 $('#ddlprefixcompany_name_en_dealer').empty();
 
-                $('#ddlprefixcompany_name_th').append($('<option></option>').val("").text('Select Title'));
-                $('#ddlprefixcompany_name_en').append($('<option></option>').val("").text('Select Title'));
+                $('#ddlprefixcompany_name_th').append($('<option></option>').val("").text('กรุณาเลือก'));
+                $('#ddlprefixcompany_name_en').append($('<option></option>').val("").text('กรุณาเลือก'));
 
-                $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val("").text('Select Title'));
-                $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val("").text('Select Title'));
+                $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val("").text('กรุณาเลือก'));
+                $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val("").text('กรุณาเลือก'));
 
                 $.each(data.responsetitle, function () {
                     //$('#ddlprefixcompany_name_th').append($('<option></option>').val(this.titleId == "0" ? "" : this.titleId).text(this.titleNameTh));
