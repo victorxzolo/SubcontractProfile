@@ -57,7 +57,7 @@ namespace SubcontractProfile.Web.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-
+            
 
 
             return View();

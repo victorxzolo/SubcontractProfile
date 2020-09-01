@@ -8,8 +8,9 @@ $(document).ready(function () {
         inittbSearchResult();
         inittbAddressResult();
         inittbRevenue();
-    inittblocation();
-
+        inittblocation();
+   
+ 
     $("#btnSearch").click(function (e) {
         searchdata();
     });
@@ -930,7 +931,10 @@ $(document).ready(function () {
 
         function searchdata() {
         //  oTable.ajax.reload();
-        inittbSearchResult();
+            inittbSearchResult();
+
+            //var subcontract_type = $('#' + '@(ViewBag.subcontract_type)').val();
+            //alert(subcontract_type);
         }
 
         function openModal(mode, companyId) {
