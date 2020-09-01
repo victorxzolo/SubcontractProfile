@@ -17,7 +17,7 @@ namespace SubcontractProfile.Web.Model
         public string Course { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        public decimal? cource_price { get; set; }
+        public decimal? CourcePrice { get; set; }
 
 
         [System.ComponentModel.DataAnnotations.Required]
@@ -90,38 +90,27 @@ namespace SubcontractProfile.Web.Model
         public string ContractEmailEn { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-<<<<<<< HEAD
-        public string position { get; set; }
+
+        public string Position { get; set; }
 
         public DateTime BookingDate { get; set; }
         public string RemarkForAis { get; set; }
         public string Engineer_name { get; set; }
-        public string Engineer_ID { get; set; }
-
-
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
-
-=======
-        public string Position { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string EngineerId { get; set; }
+        public string EngineerID { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string EngineerName { get; set; }
-
-        public DateTime? BookingDate { get; set; }
-        public string RemarkForAis { get; set; }
 
         public DateTime? TestDate { get; set; }
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Skill { get; set; }
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Grade { get; set; }
-        
-        
->>>>>>> dfc031cd73765c5f90d793c2cee34f8513a4ca0c
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+
     }
 }
