@@ -218,7 +218,7 @@ namespace SubcontractProfile.Web.Controllers
                 //model.location_name_th = splitlocation[1];           
                 //model.team_name_th = splitteam[1];
                 model.Engineer_name = splitEngineer[1];
-                model.EngineerID = splitEngineer[0];
+                model.EngineerId = splitEngineer[0];
                 model.ContractPhone = dataEngineer.ContractPhone1;
                 model.ContractEmail = dataEngineer.ContractEmail;
 
@@ -253,7 +253,7 @@ namespace SubcontractProfile.Web.Controllers
                 model.LocationNameTh = splitlocation[1];
                 //model.team_name_th = splitteam[1];
                 model.Engineer_name = splitEngineer[1];
-                model.EngineerID = splitEngineer[0];
+                model.EngineerId = splitEngineer[0];
                 model.ContractPhone = dataEngineer.ContractPhone1;
                 model.ContractEmail = dataEngineer.ContractEmail;
                 //=======

@@ -93,10 +93,10 @@ namespace SubcontractProfile.Web.Model
 
         public string Position { get; set; }
 
-        public DateTime BookingDate { get; set; }
+        public System.DateTime? bookingDate { get; set; }
         public string RemarkForAis { get; set; }
         public string Engineer_name { get; set; }
-        public string EngineerID { get; set; }
+      //  public string EngineerID { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string EngineerName { get; set; }
@@ -106,6 +106,13 @@ namespace SubcontractProfile.Web.Model
         public string Skill { get; set; }
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Grade { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string PaymentStatus { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
+        public decimal? CoursePrice { get; set; }
+
+        public string _bookingDate { get; set; }
 
         public object Clone()
         {
