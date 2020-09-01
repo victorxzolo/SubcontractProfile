@@ -97,9 +97,6 @@
                         <div class="form-group col-md-6">
                             <label class="">Payment Status:</label>
                             <select class="form-control" id="paymentstatus" required>
-                                <option value="">Please Select</option>
-                                <option value="Y">Paid</option>
-                                <option value="N">Not Paid</option>
                             </select>
                             <div class="invalid-feedback">
                                 Please Select the Status
@@ -114,7 +111,7 @@
                     <button id="btnClearSearchconfirmpayment" type="button" onclick="clearSearchpayment()" class="btn btn-dark mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล
                     </button>
-                    <button id="btnSearchconfirmpayment" type="submit" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+                    <button id="btnSearchconfirmpayment" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
                 </div>
             </form>
 
@@ -252,16 +249,10 @@
                         </div>
                         <br />
                         <div class="row">
-                            <div class="col-sm-3 text-right">
-
+                            <div class="col-sm-3">
                             </div>
-                            <div class="col-sm-7">
-                                <div class="row">
-                                    <div class="col-md-12 ml-4" style="white-space: nowrap">
-                                        <div class="row" id="Detailpaymentchannal">
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="col-sm-7 Detailpaymentchannal">
+
                             </div>
                         </div>
                         <br />
@@ -292,7 +283,7 @@
                                     <input type='text' class="form-control" id="payment_datetime" />
                                     <div class="input-group-append input-group-addon">
                                         <span class="input-group-text px-4">
-                                            <i class="fa fa-calendar"></i>
+                                            <i class="fa fa-clock-o"></i>
                                         </span>
                                     </div>
 
@@ -340,6 +331,9 @@
                                 <input type="file" class="custom-file-input inputValidation" id="slip_attach_file" required
                                        accept="image/jpeg,image/gif,image/png,application/pdf" />
                                 <label class="custom-file-label" for="slip_attach_file" id="lbuploadslip">Choose file</label>
+                                <div id="targetDiv">
+                                    <a id="linkdownload" href="#" target="_blank"></a>
+                                </div>
                                 <small id="uploadlHelp1" class="form-text text-muted">
                                     ขนาดไฟล์ไม่เกิน 3 Mb และไฟล์ประกอบประเภท PDF หรือ JPG,JPEG,PNG เท่านั้น
                                 </small>
