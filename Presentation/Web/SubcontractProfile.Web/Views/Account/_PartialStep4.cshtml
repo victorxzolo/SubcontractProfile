@@ -29,7 +29,7 @@
                 <div class="form-group row">
                     <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อสาขา :</label>
                     <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <input type="text" class="form-control inputValidationBank form-control-sm" id="txtbranch_Name" placeholder="ชื่อสาขา" />
+                        <input type="text" class="form-control form-control-sm" id="txtbranch_Name" placeholder="ชื่อสาขา" />
                    
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                 <div class="form-group row">
                     <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อบัญชี :<span style="color:red">*</span></label>
                     <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                        <select class="custom-select inputValidationBank custom-select-sm" id="ddlaccount_Name">
+                        <select class="custom-select custom-select-sm" id="ddlaccount_Name">
                             <option></option>
                         </select>
                     </div>
@@ -98,9 +98,11 @@
 
                     <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
                         <input type="hidden" id="hdupfilecompany_certified" />
-                        <input type="file" class="custom-file-input inputValidationBank" id="company_certified_file" required   
-                               accept="image/jpeg,image/gif,image/png,application/pdf"/>
+                        <input type="file" class="custom-file-input inputValidationBank" id="company_certified_file" required
+                               accept="application/pdf" />
                         <label class="custom-file-label" for="customFile" id="lbcompany_certified_file">Choose file</label>
+                        <small id="uploadlHelp1" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb
+                        </small>
                         <div class="invalid-tooltip">กรุณาอัพโหลดไฟล์ หนังสือรับรองบริษัท</div>
                     </div>
                 </div>
@@ -116,13 +118,16 @@
                         </span>
                     </div>*@
 
-                    <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
-                        <input type="hidden" id="hdupfilecommercial_registration" />
-                        <input type="file" class="custom-file-input inputValidationBank" id="commercial_registration_file" required 
-                                accept="image/jpeg,image/gif,image/png,application/pdf"/>
-                        <label class="custom-file-label" for="customFile" id="lbcommercial_registration_file">Choose file</label>
-                        <div class="invalid-tooltip">กรุณาอัพโหลดไฟล์ หนังสือทะเบียนพานิช</div>
-                    </div>
+                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
+                    <input type="hidden" id="hdupfilecommercial_registration" />
+                    <input type="file" class="custom-file-input inputValidationBank" id="commercial_registration_file" required
+                           accept="application/pdf" />
+                    <label class="custom-file-label" for="customFile" id="lbcommercial_registration_file">Choose file</label>
+                    <small id="uploadlHelp1" class="form-text text-muted">
+                        ***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb
+                    </small>
+                    <div class="invalid-tooltip">กรุณาอัพโหลดไฟล์ หนังสือทะเบียนพานิช</div>
+                </div>
                 </div>
             </div>
         </div>
@@ -138,13 +143,16 @@
                         </span>
                     </div>*@
 
-                    <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
-                        <input type="hidden" id="hdupfilevat_registration_certificate" />
-                        <input type="file" class="custom-file-input inputValidationBank" id="vat_registration_certificate_file" required 
-                                accept="image/jpeg,image/gif,image/png,application/pdf"/>
-                        <label class="custom-file-label" for="customFile" id="lbvat_registration_certificate_file">Choose file</label>
-                        <div class="invalid-tooltip">กรุณาอัพโหลดไฟล์ หนังสือ ภ.พ. 20</div>
-                    </div>
+                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
+                    <input type="hidden" id="hdupfilevat_registration_certificate" />
+                    <input type="file" class="custom-file-input inputValidationBank" id="vat_registration_certificate_file" required
+                           accept="application/pdf" />
+                    <label class="custom-file-label" for="customFile" id="lbvat_registration_certificate_file">Choose file</label>
+                    <small id="uploadlHelp1" class="form-text text-muted">
+                        ***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb
+                    </small>
+                    <div class="invalid-tooltip">กรุณาอัพโหลดไฟล์ หนังสือ ภ.พ. 20</div>
+                </div>
                 </div>
             </div>
         </div>

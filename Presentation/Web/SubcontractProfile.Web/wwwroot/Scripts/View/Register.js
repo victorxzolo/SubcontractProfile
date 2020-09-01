@@ -1274,7 +1274,7 @@
                 if (data.Response.Status) {
                     bootbox.alert({
                         title: "System Information",
-                        message: daa.Response.Message,
+                        message: data.Response.Message,
                         size: "small",
                         callback: function (result) {
                             console.log('This was logged in the callback: ' + result);
@@ -1434,12 +1434,12 @@
         $('#lbaccount_Name').text($('#ddlaccount_Name option').filter(':selected').text() + ' ' + $('#txtaccount_Name').val());
         $('#lbbusiness_type').text($('#ddlbank_account_type option').filter(':selected').text());
 
-
-        $('#lbcompany_certified_file').text($('#company_certified_file').val().split("\\").pop());
-        
-        $('#lbcommercial_registration_file').text($('#commercial_registration_file').val().split("\\").pop());
-       
-        $('#lbvat_registration_certificate_file').text($('#vat_registration_certificate_file').val().split("\\").pop());
+        var strcer = $('#lbcompany_certified_file').text();
+        $('#lbcompany_certified_file_5').text(strcer);
+        var strreg = $('#lbcommercial_registration_file').text();
+        $('#lbcommercial_registration_file_5').text(strreg);
+        var strvat = $('#lbvat_registration_certificate_file').text();
+        $('#lbvat_registration_certificate_file_5').text(strvat);
 
 
         BindDataAddress();
