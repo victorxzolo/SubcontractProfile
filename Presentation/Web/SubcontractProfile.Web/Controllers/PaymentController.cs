@@ -64,40 +64,57 @@ namespace SubcontractProfile.Web.Controllers
 
             return Json(new { Data = data });
         }
-        [HttpGet]
+
+        [HttpPost]
         public IActionResult Searchconfirmpayment(SubcontractProfileSearchPayment searchPayment)
         {
             var datapayment = new List<SubcontractProfilePaymentModel>();
+            var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
+            // Skiping number of Rows count  
+            var start = Request.Form["start"].FirstOrDefault();
+            // Paging Length 10,20  
+            var length = Request.Form["length"].FirstOrDefault();
+            // Sort Column Name  
+            var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+            // Sort Column Direction ( asc ,desc)  
+            var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+            // Search Value from (Search box)  
+            var searchValue = Request.Form["search[value]"].FirstOrDefault();
+
+            //Paging Size (10,20,50,100)  
+            int pageSize = length != null ? Convert.ToInt32(length) : 0;
+            int skip = start != null ? Convert.ToInt32(start) : 0;
+            int recordsTotal = 0;
             try
             {
-                searchPayment.Paymentno = (string.IsNullOrEmpty(searchPayment.Paymentno)) ? "null" : searchPayment.Paymentno;
-                searchPayment.Paymentrequesttraningno = (string.IsNullOrEmpty(searchPayment.Paymentrequesttraningno)) ? "null" : searchPayment.Paymentrequesttraningno;
-                searchPayment.Paymantrequestdatefrom = (string.IsNullOrEmpty(searchPayment.Paymantrequestdatefrom)) ? "null" : searchPayment.Paymantrequestdatefrom;
-                searchPayment.Paymentrequestdateto = (string.IsNullOrEmpty(searchPayment.Paymentrequestdateto)) ? "null" : searchPayment.Paymentrequestdateto;
-                searchPayment.Paymentdatefrom = (string.IsNullOrEmpty(searchPayment.Paymentdatefrom)) ? "null" : searchPayment.Paymentdatefrom;
-                searchPayment.Paymentdateto = (string.IsNullOrEmpty(searchPayment.Paymentdateto)) ? "null" : searchPayment.Paymentdateto;
+                //searchPayment.Paymentno = (string.IsNullOrEmpty(searchPayment.Paymentno)) ? "null" : searchPayment.Paymentno;
+                //searchPayment.Paymentrequesttraningno = (string.IsNullOrEmpty(searchPayment.Paymentrequesttraningno)) ? "null" : searchPayment.Paymentrequesttraningno;
+                //searchPayment.Paymantrequestdatefrom = (string.IsNullOrEmpty(searchPayment.Paymantrequestdatefrom)) ? "null" : searchPayment.Paymantrequestdatefrom;
+                //searchPayment.Paymentrequestdateto = (string.IsNullOrEmpty(searchPayment.Paymentrequestdateto)) ? "null" : searchPayment.Paymentrequestdateto;
+                //searchPayment.Paymentdatefrom = (string.IsNullOrEmpty(searchPayment.Paymentdatefrom)) ? "null" : searchPayment.Paymentdatefrom;
+                //searchPayment.Paymentdateto = (string.IsNullOrEmpty(searchPayment.Paymentdateto)) ? "null" : searchPayment.Paymentdateto;
 
 
                 SubcontractProfilePaymentModel model = new SubcontractProfilePaymentModel();
                 if (searchPayment.Paymentdatefrom != null)
                 {
-                    DateTime datefrom = DateTime.ParseExact(searchPayment.Paymentdatefrom, "yyyy-MM-dd", null);
+                    DateTime datefrom = DateTime.ParseExact(searchPayment.Paymentdatefrom, "dd/MM/yyyy", null);
                     model.PaymentDatetimeFrom = datefrom;
                 }
                 if (searchPayment.Paymentdateto != null)
                 {
-                    DateTime dateto = DateTime.ParseExact(searchPayment.Paymentdateto, "yyyy-MM-dd", null);
+                    DateTime dateto = DateTime.ParseExact(searchPayment.Paymentdateto, "dd/MM/yyyy", null);
                     model.PaymentDatetimeTo = dateto;
                 }
 
                 if (searchPayment.Paymantrequestdatefrom != null)
                 {
-                    DateTime datefrom = DateTime.ParseExact(searchPayment.Paymantrequestdatefrom, "yyyy-MM-dd", null);
+                    DateTime datefrom = DateTime.ParseExact(searchPayment.Paymantrequestdatefrom, "dd/MM/yyyy", null);
                     model.RequestDateFrom = datefrom;
                 }
                 if (searchPayment.Paymentrequestdateto != null)
                 {
-                    DateTime dateto = DateTime.ParseExact(searchPayment.Paymentrequestdateto, "yyyy-MM-dd", null);
+                    DateTime dateto = DateTime.ParseExact(searchPayment.Paymentrequestdateto, "dd/MM/yyyy", null);
                     model.RequestDateTo = dateto;
                 }
 
@@ -122,11 +139,21 @@ namespace SubcontractProfile.Web.Controllers
                     datapayment = JsonConvert.DeserializeObject<List<SubcontractProfilePaymentModel>>(dataresponse);
 
                 }
-                return Json(new { data = datapayment });
+                recordsTotal = datapayment.Count();
+                //Paging   
+                datapayment.Add(new SubcontractProfilePaymentModel
+                {
+                    PaymentNo = "0001",
+                    PaymentId = "00001",
+                    Status = "N"
+                });
+                var data = datapayment.Skip(skip).Take(pageSize).ToList();
+
+                return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data });
             }
             catch (Exception ex)
             {
-                return Json(new { data = datapayment });
+                return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = datapayment });
             }
 
         }
@@ -145,21 +172,21 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { Data = data });
 
         }
-        [HttpGet]
-        public IActionResult paymentchannal()
-        {
-            var data = new List<SubcontractDropdownModel>();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/payment_type");
-            HttpResponseMessage response = client.GetAsync(uriString).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var dataresponse = response.Content.ReadAsStringAsync().Result;
-                data = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(dataresponse);
-            }
-            return Json(new { Data = data });
+        //[HttpGet]
+        //public IActionResult paymentchannal()
+        //{
+        //    var data = new List<SubcontractDropdownModel>();
+        //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //    string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/payment_type");
+        //    HttpResponseMessage response = client.GetAsync(uriString).Result;
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var dataresponse = response.Content.ReadAsStringAsync().Result;
+        //        data = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(dataresponse);
+        //    }
+        //    return Json(new { Data = data });
 
-        }
+        //}
         [HttpGet]
         public IActionResult paymentchannalById(string id)
         {
@@ -190,21 +217,21 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { Data = data });
 
         }
-        [HttpGet]
-        public IActionResult BankTransfer()
-        {
-            var data = new List<SubcontractProfileBankingModel>();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string uriString = string.Format("{0}", strpathAPI + "Banking/GetAll");
-            HttpResponseMessage response = client.GetAsync(uriString).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var dataresponse = response.Content.ReadAsStringAsync().Result;
-                data = JsonConvert.DeserializeObject<List<SubcontractProfileBankingModel>>(dataresponse);
-            }
-            return Json(new { Data = data });
+        //[HttpGet]
+        //public IActionResult BankTransfer()
+        //{
+        //    var data = new List<SubcontractProfileBankingModel>();
+        //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //    string uriString = string.Format("{0}", strpathAPI + "Banking/GetAll");
+        //    HttpResponseMessage response = client.GetAsync(uriString).Result;
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var dataresponse = response.Content.ReadAsStringAsync().Result;
+        //        data = JsonConvert.DeserializeObject<List<SubcontractProfileBankingModel>>(dataresponse);
+        //    }
+        //    return Json(new { Data = data });
 
-        }
+        //}
         [HttpPut]
         public IActionResult Updatepayment(SubcontractProfilePaymentModel Payment)
         {
