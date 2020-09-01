@@ -111,7 +111,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Position { get; set; }
 
-        public DateTime? BookingDate { get; set; }
+        public string BookingDate { get; set; }
         public string RemarkForAis { get; set; }
 
         public DateTime? TestDate { get; set; }
@@ -120,6 +120,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Grade { get; set; }
 
+        public string PaymentStatus { get; set; }
 
         public object Clone()
         {

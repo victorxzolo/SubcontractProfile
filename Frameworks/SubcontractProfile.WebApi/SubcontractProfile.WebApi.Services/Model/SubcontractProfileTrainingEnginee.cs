@@ -59,6 +59,10 @@ namespace SubcontractProfile.WebApi.Services.Model
         public string TestStatus { get; set; }
         public string UpdateUser { get; set; }
 
+        public string ContractEmail { get; set; }
+
+        public string ContractPhone1 { get; set; }
+
         public object Clone()
         {
             return this.MemberwiseClone();

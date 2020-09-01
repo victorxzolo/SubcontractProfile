@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
+
 using Newtonsoft.Json;
 using SubcontractProfile.Web.Extension;
 using SubcontractProfile.Web.Model;
@@ -264,65 +265,87 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { response = output });
         }
 
+        public  String ConvertToDateTimeYYYYMMDD(string strDateTime)
+        {
+            string sDateTime;
+            string[] sDate = strDateTime.Split('/');
+            sDateTime = sDate[2] + '-' + sDate[1] + '-' + sDate[0];
 
-        public IActionResult onSaveTraining(SubcontractProfileTrainingModel model)
+            return sDateTime;
+        }
+      
+        public ActionResult onSaveTraining(SubcontractProfileTrainingModel model)
         {
 
-
+            ResponseModel result = new ResponseModel();
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
-
-            ResponseModel res = new ResponseModel();
-            try { 
+         //   HttpClient clientLocation = new HttpClient();
+         
+            try {
+                
             if (model != null)
-            {     
-                    model.ModifiedBy = userProfile.Username.ToString();
-                    model.bookingDate = Convert.ToDateTime(model._bookingDate);
+            {
+
+
+                   // model.TrainingId = model.TrainingId;
+                   // model.CompanyId = model.CompanyId;
+                 
                     model.Status = "A";
-                    //model.Course = "0001";
+                  
+                    model.ModifiedBy = userProfile.Username.ToString();
+                    if (model._bookingDate != "" || model._bookingDate != null)
+                    {
+                        model.BookingDate = ConvertToDateTimeYYYYMMDD(model._bookingDate);
+                    }
+                    
+                    model.RemarkForAis = model.RemarkForAis;
+                    //model.Remark = "01";
+                    //model.Course = "01";
+                    //model.CourcePrice = 0;
                     //model.RequestDate = DateTime.Now;
-                    //model.Remark = "TTT";
                     //model.TotalPrice = 0;
-                    //model.Vat  = 0;
-                    //model.Tax  = 0;
+                    //model.Vat = 0;
+                    //model.Tax = 0;
 
-                    //model.RequestNo = "0001";
-                    //model.ModifiedDate = DateTime.Now;
-                    ////Path 
+                    //model.RequestNo = "1231234";
+                    //model.CoursePrice = 0;
+
                     HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var uri = new Uri(Path.Combine(strpathAPI, "Training", "UpdateByVerified"));
+                    var uri = new Uri(Path.Combine(strpathAPI, "Training", "UpdateByVerified"));
 
-                //string str = JsonConvert.SerializeObject(Company);
+                    //string str = JsonConvert.SerializeObject(Company);
 
-                var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                HttpResponseMessage response = client.PutAsync(uri, httpContent).Result;
+                    var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = client.PutAsync(uri, httpContent).Result;
 
 
-                //HttpResponseMessage response = client.PutAsync(uriString).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    res.Status = true;
-                    res.Message = "Success";
-                    res.StatusError = "-1";
+                    //HttpResponseMessage response = client.PutAsync(uriString).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        result.Status = true;
+                        result.Message = "Success";
+                        result.StatusError = "1";
+                    }
+                    else
+                    {
+                        result.Status = false;
+                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        result.StatusError = "-1";
+                    }
                 }
-                else
-                {
-                    res.Status = false;
-                    res.Message = "Data is not correct, Please Check Data or Contact System Admin";
-                    res.StatusError = "-1";
-                }
-            }
-            return Json(new { Response = res });
-        }
+
+            return Json(new { Response = result });
+             }
             catch(Exception e)
             {
-               
-                res.Status = false;
-                res.Message = e.Message.ToString();
-                res.StatusError = "-1";
-                return Json(new { Response = res });
+
+                result.Status = false;
+                result.Message = e.Message.ToString();
+                result.StatusError = "-1";
+                return Json(new { Response = result });
             }
         }
 

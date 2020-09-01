@@ -13,22 +13,22 @@ namespace SubcontractProfile.Web.Model
         public System.Guid CompanyId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
-        [System.ComponentModel.DataAnnotations.Required]
+      [System.ComponentModel.DataAnnotations.Required]
         public string Course { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+       [System.ComponentModel.DataAnnotations.Required]
         public decimal? CourcePrice { get; set; }
 
 
-        [System.ComponentModel.DataAnnotations.Required]
+       [System.ComponentModel.DataAnnotations.Required]
         public System.DateTime RequestDate { get; set; }
 
         public string Remark { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+       [System.ComponentModel.DataAnnotations.Required]
         public decimal TotalPrice { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+       [System.ComponentModel.DataAnnotations.Required]
         public decimal Vat { get; set; }
 
         public decimal? Tax { get; set; }
@@ -93,7 +93,7 @@ namespace SubcontractProfile.Web.Model
 
         public string Position { get; set; }
 
-        public System.DateTime? bookingDate { get; set; }
+        public string BookingDate { get; set; }
         public string RemarkForAis { get; set; }
         public string Engineer_name { get; set; }
       //  public string EngineerID { get; set; }

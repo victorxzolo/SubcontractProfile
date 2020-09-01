@@ -490,12 +490,12 @@
                                           'model': model,
                                       },
                                       dataType: "json",
-                                     success: function (response) {
-                                         console.log(response)
-                                         if (response != null) {
+                                     success: function (result) {
+                                         console.log(result)
+                                         if (result != null) {
                                              //console.log()
                                              /// alert(result.ret_msg);
-                                           
+                                             bootbox.alert(result.Message);
                                              $('#trnid').val('');
                                              $('#compid').val('');
                                              $('#bookingDate').val('');
@@ -503,13 +503,13 @@
 
                                          }
                                          else {
-                                             bootbox.alert(response.ret_msg);
+                                             bootbox.alert(result.Message);
                                          }
 
 
                                       },
-                                     failure: function (response) {
-                                          bootbox.alert(response.ret_msg);
+                                     error: function (result) {
+                                         bootbox.alert(result.Message);
                                       }
                                  });
 
@@ -835,7 +835,7 @@
                                     { data: "TeamNameTh", width: "20%" },
                                     { data: "Position", width: "10%" },
                                     { data: "StaffNameTh", width: "15%" },
-                                    { data: "ContractPhone", width: "20%" },
+                                    { data: "ContractPhone1", width: "20%" },
                                     { data: "ContractEmail", width: "15%" }
 
 
