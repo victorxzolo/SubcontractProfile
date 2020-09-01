@@ -96,6 +96,8 @@ namespace SubcontractProfile.Web.Model
         public System.DateTime? PaymentDatetimeFrom { get; set; }
         public System.DateTime? PaymentDatetimeTo { get; set; }
 
+        public string? datetimepayment { get; set; }
+
 
         public Guid file_id_Slip { get; set; }
 

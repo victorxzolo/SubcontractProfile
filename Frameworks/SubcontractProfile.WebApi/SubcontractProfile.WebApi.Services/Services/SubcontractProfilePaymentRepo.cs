@@ -250,6 +250,7 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@payment_status", search.Status);
             p.Add("@company_name", search.companyNameTh);
             p.Add("@tax_id", search.taxId);
+            p.Add("@company_id", search.CompanyId);
 
             var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>
             ("uspSubcontractProfilePayment_searchPayment", p, commandType: CommandType.StoredProcedure);
