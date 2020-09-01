@@ -87,6 +87,7 @@ namespace SubcontractProfile.Web.Controllers
             int recordsTotal = 0;
             try
             {
+<<<<<<< HEAD
                 //searchPayment.Paymentno = (string.IsNullOrEmpty(searchPayment.Paymentno)) ? "null" : searchPayment.Paymentno;
                 //searchPayment.Paymentrequesttraningno = (string.IsNullOrEmpty(searchPayment.Paymentrequesttraningno)) ? "null" : searchPayment.Paymentrequesttraningno;
                 //searchPayment.Paymantrequestdatefrom = (string.IsNullOrEmpty(searchPayment.Paymantrequestdatefrom)) ? "null" : searchPayment.Paymantrequestdatefrom;
@@ -95,6 +96,8 @@ namespace SubcontractProfile.Web.Controllers
                 //searchPayment.Paymentdateto = (string.IsNullOrEmpty(searchPayment.Paymentdateto)) ? "null" : searchPayment.Paymentdateto;
 
 
+=======
+>>>>>>> d76a1942c954efd6c66d9ea2822e9bbaa08f991e
                 SubcontractProfilePaymentModel model = new SubcontractProfilePaymentModel();
                 if (searchPayment.Paymentdatefrom != null)
                 {

@@ -138,7 +138,8 @@
                                                 <label>Contact Phone:</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type='text' id="txtContactPhone" class="form-control" />
+                                                <input type='text' id="txtContactPhone" class="form-control" required />
+                                                <div class="invalid-feedback">Please fill the ContactPhone</div>
                                             </div>
                                         </div>
                                     </div>
@@ -148,7 +149,8 @@
                                                 <label>Email :</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type='text' id="txtEmail" class="form-control" />
+                                                <input type='text' id="txtEmail" class="form-control" required />
+                                                <div class="invalid-feedback">Please fill the Email</div>
                                             </div>
                                         </div>
                                     </div>
@@ -164,6 +166,7 @@
                                                         @*<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
                                                         <label id="lbCourse" class=""> อบรมการติดตั้งระดับสูง</label>*@
                                                     @*</div>*@
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -175,14 +178,16 @@
                                                 <label class="">Request Date:</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <div class='input-group p-0 date'id='txtRequestDate' >
-                                                    <input type='text' class="form-control"  />
+                                                <div class='input-group p-0 date' id='RequestDate'>
+                                                    <input type='text' class="form-control" required />
                                                     <div class="input-group-append input-group-addon">
                                                         <span class="input-group-text px-4">
                                                             <i class="fa fa-calendar"></i>
                                                         </span>
                                                     </div>
+                                                    <div class="invalid-feedback">Please fill the RequestDate</div>
                                                 </div>
+                                              
                                             </div>
                                         </div>
                                     </div>
@@ -211,17 +216,18 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label for="">Location Name :</label>
-                                                    <select id="selLocationNametraining" class="form-control" data-live-search="true"></select>
-
+                                                    <select id="selLocationNametraining" class="form-control" data-live-search="true" required></select>
+                                                    <div class="invalid-feedback">Please Select the LocationName</div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="">Team :</label>
-                                                    <select id="selTeamtraining" class="form-control" data-live-search="true"></select>
-
+                                                    <select id="selTeamtraining" class="form-control" data-live-search="true" required></select>
+                                                    <div class="invalid-feedback">Please Select the Team</div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="">Engineer:</label>
-                                                    <select id="selEngineertraining" class="form-control" data-live-search="true"></select>
+                                                    <select id="selEngineertraining" class="form-control" data-live-search="true" required></select>
+                                                    <div class="invalid-feedback">Please Select the Engineer</div>
 
                                                 </div>
                                             </div>
@@ -229,14 +235,14 @@
                                         <div class="col-md-12 ">
                                             <div class="mt-5" style="text-align:center">
 
-                                                <button id="btnclearTraining" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> Clear</button>
-                                                <button id="btnAddTraining"  type="button" onclick="Addtraining()"  class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> ADD</button>
+                                                <button id="btnclearTraining" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
+                                                <button id="btnAddTraining"  type="button" onclick="Addtraining()"  class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> เพิ่มข้อมูล </button>
 
                                             </div>
                                         </div>
                                         <div class="col-md-12 ">
                                             <div class="mt-3 text-right">
-                                                <button id="btnDeleteTraining" type="button" onclick="deleteTraining()" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Delete</button>
+                                                <button id="btnDeleteTraining" type="button" onclick="deleteTraining()" class="btn btn-danger mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg> ลบข้อมูล</button>
 
                                             </div>
                                         </div>
@@ -263,37 +269,37 @@
                                         </div>
                                         <div class="col-md-12 mt-5">
                                             <div class="row">
-                                                <div class="col-md-9 "></div>
-                                                <div class="col-md-3 col-sm-12">
+                                                <div class="col-md-8 "></div>
+                                                <div class="col-md-4 col-sm-12">
                                                     <div class="row ">
                                                         <div class="col-md-12">
                                                             <div class="row">
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-7">
                                                                     <label>ราคารวม</label>
                                                                 </div>
-                                                                <div class="col-md-6" style="text-align: left;">
-                                                                    <label id="total_price"></label>
+                                                                <div class="col-md-5" style="text-align: left;">
+                                                                    <label id="lbtotal_price"></label>
                                                                 </div>
                                                             </div>
 
                                                         </div>
                                                         <div class="col-md-12 mt-3">
                                                             <div class="row">
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-7">
                                                                     <label>Vat7%</label>
                                                                 </div>
-                                                                <div class="col-md-6" style="text-align: left;">
-                                                                    <label>700</label>
+                                                                <div class="col-md-5" style="text-align: left;">
+                                                                    <label id="lbvat"></label>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12 mt-3">
                                                             <div class="row">
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-7">
                                                                     <label>ราคาสุทธิ(บาท) </label>
                                                                 </div>
-                                                                <div class="col-md-6" style="text-align: left;">
-                                                                    <label>10,700</label>
+                                                                <div class="col-md-5" style="text-align: left;">
+                                                                    <label id="lbNetprice"></label>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -343,7 +349,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
                                     ปิด
                                 </button>
-                                <button id="btnSave" type="button" onclick="RequestTraining()"   class="btn btn-primary">
+                                <button id="btnSave" type="submit" @*onclick="RequestTraining()"*@   class="btn btn-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
                                     บันทึก
                                 </button>
@@ -366,19 +372,22 @@
             GetDropDownLocationSearch();
             GetDropDownLocationtraining();
 
+            //$('.btnCourse input[type=radio][name=exampleRadios]').change(function () {               
+            //        alert(this.value);             
+            //});
         
-            $('input[type=radio][name=exampleRadios]').change(function () {
-                var splitval = $(this).val().split(',');
-                alert(splitval[1]);
-                console.log(splitval[1]);
-                $("#total_price").text(splitval[1]);
-                console.log(e.currentTarget.value);
-            });
+            //$('input[type=radio][name=exampleRadios]').change(function () {
+            //    var splitval = $(this).val().split(',');
+            //    alert(splitval[1]);
+            //    console.log(splitval[1]);
+            //    $("#total_price").text(splitval[1]);
+            //    console.log(e.currentTarget.value);
+            //});
         
             //$('#txtRequestDate').datetimepicker({
             //    format: 'LT'
             //});
-            $('#txtRequestDate').datepicker({
+            $('#RequestDate').datepicker({
                 format: 'dd/mm/yyyy',
                 daysOfWeekHighlighted: "6,0",
                 autoclose: true,
@@ -420,30 +429,30 @@
         });
 
             //'use strict';
-            //window.addEventListener('load', function () {
-            //    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            //    var forms = document.getElementsByClassName('needs-validation');
-            //  //  var forms = document.getElementsByClassName('select');
-            //    var invalid = $('.select .invalid-feedback');
-            //    // Loop over them and prevent submission
-            //    var validation = Array.prototype.filter.call(forms, function (form) {
-            //        form.addEventListener('submit', function (event) {
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+              //  var forms = document.getElementsByClassName('select');
+                var invalid = $('.select .invalid-feedback');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
 
-            //            if (form.checkValidity() === false) {
-            //                event.preventDefault();
-            //                event.stopPropagation();
-            //                invalid.css('display', 'block');
-            //            } else {
-            //                onSave();
-            //                event.preventDefault();
-            //                event.stopPropagation();
-            //                invalid.css('display', 'none');
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            invalid.css('display', 'block');
+                        } else {
+                            RequestTraining();
+                            event.preventDefault();
+                            event.stopPropagation();
+                            invalid.css('display', 'none');
 
-            //            }
-            //            form.classList.add('was-validated');
-            //        }, false);
-            //    });
-            //}, false);
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
 
         function inittbSearchResult() {
 
@@ -611,6 +620,11 @@
         }
          function showtraining(data) {
              console.log(data)
+             var couse = '';            
+             $('input[type="radio"]:checked').each(function () {
+                 couse = $(this).val().split(',');
+             });                    
+
              $("#showAddtraining tbody").empty();
              var strtable = '';
              $.each(data, function (id, result) {
@@ -623,9 +637,17 @@
                      '<td>' + result.contract_phone+'</td>' +
                      '<td>' + result.contract_email +'</td>' +
                      '</tr >';
-             });
-             console.log(strtable)
+
+             });             
+              
              $("#showAddtraining tbody").append(strtable);
+
+             var total_price = parseInt(couse[1]) * data.length;
+             var vat = (total_price * 7) / 100;
+             var Netprice = total_price + vat;
+             $("#lbtotal_price").text(total_price);
+             $("#lbvat").text(vat);
+             $("#lbNetprice").text(Netprice);       
 
          }
          function deleteTraining() {
@@ -657,6 +679,7 @@
          }
          function RequestTraining() {
              var couse;
+             var daterequest = $('#RequestDate').datepicker('getDate');
              $('input[type="radio"]:checked').each(function () {
                  couse = $(this).val();
              });             
@@ -672,7 +695,7 @@
              //model.Vat="700"
              //model.Tax = "10700";
              //model.Status = "N";
-             model.RequestDate = $('#txtRequestDate').val();
+             model.RequestDate = daterequest.toISOString();
             
             $.ajax({
                   url: '@Url.Action("RequestTraining", "Training")',
@@ -681,15 +704,38 @@
                   dataType: "json",
                   success: function (result) {
                       if (result.Status) {
-                          bootbox.alert(result.Message);
+                          bootbox.alert({
+                              message: result.Message ,
+                              callback: function () {
+                                  $('#RequestModal').modal('hide');
+                              }
+                          })
+                         
 
                       }
                       else {
-                          bootbox.alert(result.Message);
+                          if (result.StatusError == "-2") {
+                              bootbox.alert({
+                                  message: result.Message                             
+                              })
+                          } else {
+                              bootbox.alert({
+                                  message: result.Message,
+                                  callback: function () {
+                                      $('#RequestModal').modal('hide');
+                                  }
+                              })
+                          }
+                         
                       }
                   },
                   error: function (result) {
-                      bootbox.alert(result.Message);
+                      bootbox.alert({
+                          message: result.Message,
+                          callback: function () {
+                              $('#RequestModal').modal('hide');
+                          }
+                      })
                   }
 
             });
@@ -705,10 +751,16 @@
                       console.log(data);
                       if (data != null) {
                           $.each(data, function (id, result) {
+                              if (id == 0) {
+                                  strcourse += '<div class="col-md-12 ml-4" >' +
+                                      '<input class="form-check-input" type="radio" class="radio" name="exampleRadios"  value="' + result.dropdown_value + ',' + result.value1 + '" checked="checked">' +
+                                      '<label class="">' + result.dropdown_text + '</label>' +                                     
+                                      '</div>';
+                              }
                               strcourse +='<div class="col-md-12 ml-4" >' +
-                                          '<input class="form-check-input" type="radio" class="radio" name="exampleRadios"  value="' + result.dropdown_value + ',' + result.value1 + '">' +
-                                          '<label class="">' + result.dropdown_text + '</label>' +
-                                          '</div>';
+                                  '<input class="form-check-input" type="radio" class="radio" name="exampleRadios"  value="' + result.dropdown_value + ',' + result.value1 + '" >' +
+                                  '<label class="">' + result.dropdown_text + '</label>' +                                  
+                                  '</div>';
                           });
                           $("#btnCourse").empty();
                           $("#btnCourse").append(strcourse);
@@ -820,7 +872,7 @@
             success: function (data) {
 
                 $("#selLocationNametraining").empty();
-                $("#selLocationNametraining").append('<option value="-1">--Please All--</option>');
+                $("#selLocationNametraining").append('<option value="">--Please All--</option>');
                 $.each(data, function (id, result) {
                     $("#selLocationNametraining").append('<option value="' + result.LocationId + ',' + result.LocationNameTh+'">' + result.LocationNameTh +'</option>');
                     });

@@ -21,12 +21,16 @@ namespace SubcontractProfile.Web.Controllers
         private readonly string strpathAPI;
         private readonly IConfiguration _configuration;
         private HttpClient client;
+        private SubcontractProfileUserModel userProfile = new SubcontractProfileUserModel();
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public TrainingController(IConfiguration configuration)
+        public TrainingController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
-            _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
+             _configuration = configuration;
              client = new HttpClient();
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
+            userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(_httpContextAccessor.HttpContext.Session, "userLogin"); 
 
         }
 
@@ -74,7 +78,7 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+         
 
             Guid gCompanyId = userProfile.companyid;
             Guid gLocationId;
@@ -143,9 +147,7 @@ namespace SubcontractProfile.Web.Controllers
 
         [HttpGet]
         public IActionResult GetByCompanyId()
-        {
-            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
-            //Guid companyId = new Guid("3a37a238-1cdf-4af8-980f-00c86822f903");
+        {           
             Guid companyId = userProfile.companyid;
 
             var data = new SubcontractProfileCompanyModel();
@@ -178,6 +180,7 @@ namespace SubcontractProfile.Web.Controllers
         public IActionResult Addtraining(SubcontractProfileTrainingModel model)    
         {
             var dataScreen = new List<SubcontractProfileTrainingModel>();
+            var dataEngineer = new SubcontractProfileEngineerModel();
             var listdataTrainingEngineer = new List<SubcontractProfileTrainingEngineerModel>();
             var dataTrainingEngineer = new SubcontractProfileTrainingEngineerModel();
 
@@ -186,10 +189,17 @@ namespace SubcontractProfile.Web.Controllers
             var splitEngineer = model.EngineerId.Split(',');
             Guid trainingId = Guid.NewGuid();
 
-            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
             var ScreenObject = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingModel>>("ScreenDatatraining");
             var trainingObject = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingEngineerModel>>("DataInsertTrainingEngineer");
 
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Engineer/GetByEngineerId",splitEngineer[0]);
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var dataresponse = response.Content.ReadAsStringAsync().Result;
+                dataEngineer = JsonConvert.DeserializeObject<SubcontractProfileEngineerModel> (dataresponse);
+            }
             if (ScreenObject == null && trainingObject ==null)        
             {
                 dataTrainingEngineer.TrainingId = trainingId;
@@ -204,10 +214,19 @@ namespace SubcontractProfile.Web.Controllers
                 listdataTrainingEngineer.Add(dataTrainingEngineer);
 
                 model.TrainingId = trainingId;
+<<<<<<< HEAD
+                model.location_name_th = splitlocation[1];           
+                model.team_name_th = splitteam[1];
+                model.Engineer_name = splitEngineer[1];
+                model.Engineer_ID = splitEngineer[0];
+                model.contract_phone = dataEngineer.ContractPhone1;
+                model.contract_email = dataEngineer.ContractEmail;
+=======
                 model.LocationNameTh = splitlocation[1];           
                 model.TeamNameTh = splitteam[1];
                 model.EngineerName = splitEngineer[1];
                 model.EngineerId = splitEngineer[0];
+>>>>>>> dfc031cd73765c5f90d793c2cee34f8513a4ca0c
                 dataScreen.Add(model);
                 HttpContext.Session.SetObjectAsJson("ScreenDatatraining", dataScreen);
                 HttpContext.Session.SetObjectAsJson("DataInsertTrainingEngineer",listdataTrainingEngineer);
@@ -230,10 +249,19 @@ namespace SubcontractProfile.Web.Controllers
                 listdataTrainingEngineer.Add(dataTrainingEngineer);
 
                 model.TrainingId = trainingId;
+<<<<<<< HEAD
+                model.location_name_th = splitlocation[1];
+                model.team_name_th = splitteam[1];
+                model.Engineer_name = splitEngineer[1];
+                model.Engineer_ID = splitEngineer[0];
+                model.contract_phone = dataEngineer.ContractPhone1;
+                model.contract_email = dataEngineer.ContractEmail;
+=======
                 model.LocationNameTh = splitlocation[1];
                 model.TeamNameTh = splitteam[1];
                 model.EngineerName= splitEngineer[1];
                 model.EngineerId = splitEngineer[0];
+>>>>>>> dfc031cd73765c5f90d793c2cee34f8513a4ca0c
                 dataScreen.Add(model);
 
                 HttpContext.Session.SetObjectAsJson("ScreenDatatraining", dataScreen);
@@ -266,9 +294,16 @@ namespace SubcontractProfile.Web.Controllers
         {
             ResponseModel result = new ResponseModel();
             try
-            {
-                var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+            {               
                 var training = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingEngineerModel>>("DataInsertTrainingEngineer");
+
+                if (training == null)
+                {
+                    result.Status = false;
+                    result.Message = "กรุณาเพิ่มผู้เข้าอบรม";
+                    result.StatusError = "-2";
+                    return Json(result);
+                }
 
                 var totalengineer = (training == null) ? 1 : training.Count();
                 var spitcouse = model.Course.Split(',');
@@ -279,14 +314,12 @@ namespace SubcontractProfile.Web.Controllers
 
                 model.CompanyId = userProfile.companyid;
                 model.Course = spitcouse[0];
-                model.course_price = convertprice;
+                model.cource_price = convertprice;
                 model.TotalPrice = convertprice * totalengineer;
                 model.Vat = (model.TotalPrice * 7) / 100;
-                model.RequestNo = string.Format("{0}{1}", DateString, "000001");
-                model.CreateDate = DateTime.Now;
-                model.CreateBy = userProfile.Username;
-                //model.TrainingId = Guid.NewGuid();
-
+                model.RequestNo = GenRequestno();
+                model.CreateBy = userProfile.Username;              
+                model.Status = "N";
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 string uriStringTraining = string.Format("{0}", strpathAPI + "Training/Insert");
                 var httpContentTraining = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
@@ -296,30 +329,33 @@ namespace SubcontractProfile.Web.Controllers
                 string uriStringTrainingEngineer = string.Format("{0}", strpathAPI + "TrainingEngineer/Insert");
 
 
-                //if (responseTraining.IsSuccessStatusCode)
-                //{
-                //    result.Status = true;
-                //    result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
-                //    result.StatusError = "0";
-
-                //}
-                //else
-                //{
-                //    result.Message = "ไม่สามารถบันทึกข้อมูลได้ กรุณาติดต่อ Administrator.";
-                //    result.Status = false;
-                //    result.StatusError = "-1";
-                //}
-                if (training != null)
+                if (responseTraining.IsSuccessStatusCode)
                 {
-                    foreach(var i in training)
+                    result.Status = true;
+                    result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                    result.StatusError = "0";
+
+                    if (training != null)
                     {
-                        var httpContentTrainingEngineer = new StringContent(JsonConvert.SerializeObject(i), Encoding.UTF8, "application/json");
-                        HttpResponseMessage responseTrainingEngineer = client.PostAsync(uriStringTrainingEngineer, httpContentTrainingEngineer).Result;
+                        foreach (var i in training)
+                        {
+                            var httpContentTrainingEngineer = new StringContent(JsonConvert.SerializeObject(i), Encoding.UTF8, "application/json");
+                            HttpResponseMessage responseTrainingEngineer = client.PostAsync(uriStringTrainingEngineer, httpContentTrainingEngineer).Result;
+
+                        }
+
 
                     }
-                    
 
                 }
+                else
+                {
+                    result.Message = "ไม่สามารถบันทึกข้อมูลได้ กรุณาติดต่อ Administrator.";
+                    result.Status = false;
+                    result.StatusError = "-1";
+                }
+                HttpContext.Session.SetObjectAsJson("ScreenDatatraining", new List<SubcontractProfileTrainingModel>());
+                HttpContext.Session.SetObjectAsJson("DataInsertTrainingEngineer",new List<SubcontractProfileTrainingEngineerModel>());
 
             }
             catch (Exception ex)
@@ -332,6 +368,68 @@ namespace SubcontractProfile.Web.Controllers
            
 
             return Json(result);
+        }
+        public string GenRequestno()
+        {
+            string Genrequest = string.Empty;
+            var dateTimeNow = DateTime.Now;
+            var MonthNow = dateTimeNow.Month;
+            var data = new List<SubcontractProfileTrainingModel>();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string uriString = string.Format("{0}", strpathAPI + "Training/GetAll");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var dataresponse = response.Content.ReadAsStringAsync().Result;
+                data = JsonConvert.DeserializeObject<List<SubcontractProfileTrainingModel>>(dataresponse);
+            }
+            var lastdata =  data.Last();
+
+             var requetno = lastdata.RequestNo;
+             var requestnumber= requetno.Substring(8, 6);
+             var date = requetno.Substring(0, 8);
+
+             DateTime daterequest = DateTime.ParseExact(date, "yyyyMMdd", null);
+             var DateGen = dateTimeNow.ToString("yyyyMMdd");
+             var Mouthrequest = daterequest.Month;
+             var number = int.Parse(requestnumber) + 1;
+           
+            if (MonthNow == Mouthrequest)
+            {               
+                if(number.ToString().Length == 1)
+                {
+                    Genrequest = DateGen+"00000" + number.ToString();
+                }
+                else if (number.ToString().Length == 2)
+                {
+                    Genrequest = DateGen+"0000" + number.ToString();
+                }
+                else if (number.ToString().Length == 3)
+                {
+                    Genrequest = DateGen + "000" + number.ToString();
+                }
+                else if (number.ToString().Length == 4)
+                {
+                    Genrequest = DateGen + "00" + number.ToString();
+                }
+                else if (number.ToString().Length == 5)
+                {
+                    Genrequest = DateGen + "0" + number.ToString();
+                }
+                else if (number.ToString().Length == 6)
+                {
+                    Genrequest = DateGen + number.ToString();
+                }
+
+            }
+            else
+            {
+                Genrequest = DateGen + "000001";
+            }
+
+
+
+            return Genrequest;
         }
      
     }
