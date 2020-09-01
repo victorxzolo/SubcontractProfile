@@ -1,7 +1,12 @@
 /* /////////////// Media Query /////////////// */
-@media(max-width: 1440px){
-
-	.content_card {width: calc(100% - 250px); max-width: 1140px; margin: 0 auto; float: left; }
+@media(max-width: 1920px){
+	/*1440px*/
+	.content_card {
+		width: calc(100% - 250px);
+		max-width: 1140px;
+		margin: 0 auto;
+		float: left;
+	}
 	.txthead_main_left {width: 255px;}
 	.txthead_main_right {width: calc(100% - 255px);}
 

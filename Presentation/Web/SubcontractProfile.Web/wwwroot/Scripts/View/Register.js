@@ -1041,9 +1041,9 @@
 
 
         if ($("#chktypeN").is(":checked")) {
-            //chksubcontract_type = $("#chktypeN").val();
+            chksubcontract_type = $("#chktypeN").val();
            // distribution_channel = $('#ddldistribution option').filter(':selected').val();
-            channel_sale_group = $('#ddlchannelsalegroup option').filter(':selected').val();
+            //channel_sale_group = $('#ddlchannelsalegroup option').filter(':selected').val();
             tax_id = $('#txttax_id').val();
             company_alias = $('#txtcompany_alias').val();
             company_title_name_th = $('#ddlprefixcompany_name_th option').filter(':selected').val();
@@ -1444,11 +1444,11 @@ function BindDDLTitle() {
                 $('#ddlprefixcompany_name_th_dealer').empty();
                 $('#ddlprefixcompany_name_en_dealer').empty();
 
-                $('#ddlprefixcompany_name_th').append($('<option></option>').val("").text('Select Title'));
-                $('#ddlprefixcompany_name_en').append($('<option></option>').val("").text('Select Title'));
+                $('#ddlprefixcompany_name_th').append($('<option></option>').val("").text('กรุณาเลือก'));
+                $('#ddlprefixcompany_name_en').append($('<option></option>').val("").text('กรุณาเลือก'));
 
-                $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val("").text('Select Title'));
-                $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val("").text('Select Title'));
+                $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val("").text('กรุณาเลือก'));
+                $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val("").text('กรุณาเลือก'));
 
                 $.each(data.responsetitle, function () {
                     //$('#ddlprefixcompany_name_th').append($('<option></option>').val(this.titleId == "0" ? "" : this.titleId).text(this.titleNameTh));

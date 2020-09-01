@@ -5,20 +5,37 @@
 $(document).ready(function () {
     BindDDLStatus();
     inittbSearchResult();
-    $('#regisdatefrom').datepicker({
-        format: 'dd/mm/yyyy',
-        daysOfWeekHighlighted: "6,0",
-        autoclose: true,
-        todayHighlight: true,
-        clearBtn: true,
+    $('#regisdatefrom').datetimepicker({
+        format: "DD/MM/YYYY",
+        showClear: true,
+        showClose: true,
+        icons: {
+            time: 'fa fa-clock-o',
+            date: 'fa fa-calendar',
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down',
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'icon-screenshot',
+            clear: 'fa fa-trash',
+            close: 'fa fa-time'
+        }
     });
-    $('#regisdateto').datepicker({
-        format: 'dd/mm/yyyy',
-        daysOfWeekHighlighted: "6,0",
-        autoclose: true,
-        todayHighlight: true,
-        clearBtn: true,
-
+    $('#regisdateto').datetimepicker({
+        format: "DD/MM/YYYY",
+        showClear: true,
+        showClose: true,
+        icons: {
+            time: 'fa fa-clock-o',
+            date: 'fa fa-calendar',
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down',
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'icon-screenshot',
+            clear: 'fa fa-trash',
+            close: 'fa fa-time'
+        }
     });
     $('#btnSearch').click(function () {
         inittbSearchResult();
@@ -113,7 +130,17 @@ $(document).ready(function () {
                 datatype: "JSON",
                 //dataSrc:"",
                 data: function (d) {
-                    d.SubcontractProfileType = $("#inputLocationCodeMain").val(),
+                    var type = "";
+                    if ($('#rdoCustomerTypeAll').is(":checked")) {
+                        type = "All";
+                    }
+                    else if ($('#rdoCustomerTypeSub').is(":checked")) {
+                        type = $("#rdoCustomerTypeSub").val();
+                    }
+                    else if ($('#rdoCustomerTypeDealer').is(":checked")) {
+                        type = $('#rdoCustomerTypeDealer').val();
+                    }
+                    d.SubcontractProfileType = type,
                         d.TaxId = $("#txttaxid").val(),
                         d.CompanyName = $("#txtcompanyname").val(),
                         d.DistributionChannel = $('#ddldistribution option').filter(':selected').val(),

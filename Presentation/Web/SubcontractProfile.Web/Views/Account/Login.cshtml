@@ -33,11 +33,13 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                            <p class="font-weight-bolder lead">Sign in</p>
+                            <p class="font-weight-bolder lead">เข้าสู่ระบบ สำหรับผู้รับสิทธิ์บริหารจัดการระบบ</p>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6" align="right">
                             <div class="form-group">
-                                <a href="#" class="font-weight-bolder lead">Forget Password?</a>
+                                <a href="#" class="font-weight-bolder lead">
+                                    ลืมรหัสผ่าน?
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -48,9 +50,9 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                             <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12 mb-3">
     
                                     @*<label for="validationTooltip01">Username</label>*@
-                                    <input type="text" id="txtusername" class="form-control inputValidation" placeholder="User ID" value="" maxlength="50" required />
+                                    <input type="text" id="txtusername" class="form-control inputValidation" placeholder="ชื่อผู้ใช้งาน" value="" maxlength="50" required />
                                     <div class="invalid-tooltip">
-                                        Please provide a valid username.
+                                        กรุณาระบุชื่อผู้ใช้งาน
                                     </div>
                              
                             </div>
@@ -60,13 +62,13 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                               
                                     @*<label for="validationTooltip01">Password</label>*@
                                     <div class="input-group p-0 ">
-                                        <input type="password" id="txtpassword" class="form-control inputValidation" name="password" autocomplete="new-password" placeholder="Password" maxlength="50" required>
+                                        <input type="password" id="txtpassword" class="form-control inputValidation" name="password" autocomplete="new-password" placeholder="รหัสผ่าน" maxlength="50" required>
                                         @*<div class="input-group-append input-group-addon ">
                 <span class="input-group-text px-4 toggle-password"><i class="fa fa-eye-slash"></i></span>
             </div>*@
 
                                     <div class="invalid-tooltip">
-                                        Please provide a valid password.
+                                        กรุณาระบุรหัสผ่าน
                                     </div>
 
                                     </div>
@@ -75,7 +77,7 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                             </div>
 
                         </div>
-                        <div class="row">
+                        @*<div class="row">
 
                             <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                                 <div class="form-group">
@@ -88,7 +90,7 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                             </div>
 
 
-                        </div>
+                        </div>*@
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                                 <div class="form-group row">
@@ -100,16 +102,7 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" name="optionsRadios" id="chktypeW" value="W" checked>
-                                            <label class="custom-control-label" for="chktypeW">
-                                                Waiting Activate
-                                            </label>
-                                        </div>
-
-                                    </div>
+                                   
                                 </div>
                             </div>
 
@@ -117,12 +110,22 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                                 <div class="form-group row">
-                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                    @*<div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
 
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="chkkeep">
-                                            <label class="custom-control-label" for="chkkeep">
-                                                Keep me sign in
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="chkkeep">
+                <label class="custom-control-label" for="chkkeep">
+                    Keep me sign in
+                </label>
+            </div>
+
+        </div>*@
+                                    @*<div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" name="optionsRadios" id="chktypeW" value="W" checked>
+                                            <label class="custom-control-label" for="chktypeW">
+                                                Waiting Activate
                                             </label>
                                         </div>
 
@@ -136,7 +139,7 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                                             </label>
                                         </div>
 
-                                    </div>
+                                    </div>*@
                                 </div>
                             </div>
 
@@ -145,15 +148,15 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 
 
                         <div class="form-group">
-                            <button type="button" class="btn btn-secondary btn-block" id="btnsignin">Sign in</button>
+                            <button type="button" class="btn btn-secondary btn-block" id="btnsignin">เข้าสู่ระบบ</button>
                         </div>
 
                         <div class="form-group">
-                            <div class="hr-sect">New Account</div>
+                            <div class="hr-sect">ยังไม่มีบัญชี?</div>
                         </div>
 
                         <div class="form-group">
-                            <button type="button" class="btn btn-secondary btn-block" id="btnnewregis" onclick="window.location.href = '/Account/Register';">Create new register subcontract profile</button>
+                            <button type="button" class="btn btn-secondary btn-block" id="btnnewregis" onclick="window.location.href = '/Account/Register';"> สมัครใช้บริการ Subcontract profile</button>
                         </div>
                     </form>
 

@@ -62,9 +62,13 @@ namespace SubcontractProfile.WebApi.Services.Services
           
             p.Add("@company_id", subcontractProfileTraining.CompanyId);
             p.Add("@course", subcontractProfileTraining.Course);
+<<<<<<< HEAD
             p.Add("@contract_phone", subcontractProfileTraining.contract_phone);
             p.Add("@contract_email", subcontractProfileTraining.contract_email);
             p.Add("@course_price", subcontractProfileTraining.cource_price);
+=======
+            p.Add("@course_price", subcontractProfileTraining.CoursePrice);
+>>>>>>> dfc031cd73765c5f90d793c2cee34f8513a4ca0c
             p.Add("@request_date", subcontractProfileTraining.RequestDate);
             p.Add("@remark", subcontractProfileTraining.Remark);
             p.Add("@total_price", subcontractProfileTraining.TotalPrice);
@@ -235,6 +239,76 @@ namespace SubcontractProfile.WebApi.Services.Services
             ("uspSubcontractProfileTraining_searchTraining", p, commandType: CommandType.StoredProcedure);
 
             return entity;
+        }
+
+        public async Task<IEnumerable<SubcontractProfileTraining>> SearchTrainingForApprove(string company_name_th, 
+            string tax_id, 
+            string request_no, string status, string date_from, string date_to)
+        {
+            var p = new DynamicParameters();
+            p.Add("@company_name_th", company_name_th);
+            p.Add("@tax_id", tax_id);
+            p.Add("@request_no", request_no);
+            p.Add("@status", status);
+            p.Add("@date_from", date_from);
+            p.Add("@date_to", date_to);
+
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>
+            ("uspSubcontractProfileTraining_searchTrainingForApprove", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
+
+        public async Task<bool> UpdateByVerified(SubcontractProfileTraining subcontractProfileTraining)
+        {
+
+            var p = new DynamicParameters();
+            p.Add("@training_id", subcontractProfileTraining.TrainingId);
+            p.Add("@status", subcontractProfileTraining.Status);
+            p.Add("@modified_by", subcontractProfileTraining.ModifiedBy);
+            p.Add("@booking_date", subcontractProfileTraining.BookingDate);
+            p.Add("@remark_for_ais", subcontractProfileTraining.RemarkForAis);
+
+            var ok = await _dbContext.Connection.ExecuteAsync
+                ("uspSubcontractProfileTraining_updateByVerified", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+
+            return true;
+        }
+
+        public async Task<bool> UpdateTestResult(SubcontractProfileTraining subcontractProfileTraining)
+        {
+
+            var p = new DynamicParameters();
+            p.Add("@training_id", subcontractProfileTraining.TrainingId);
+            p.Add("@status", subcontractProfileTraining.Status);
+            p.Add("@modified_by", subcontractProfileTraining.ModifiedBy);
+            p.Add("@test_date", subcontractProfileTraining.BookingDate);
+            p.Add("@skill", subcontractProfileTraining.RemarkForAis);
+            p.Add("@grade", subcontractProfileTraining.RemarkForAis);
+
+            var ok = await _dbContext.Connection.ExecuteAsync
+                ("uspSubcontractProfileTraining_updateByVerified", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+
+            return true;
+        }
+
+        public async Task<IEnumerable<SubcontractProfileTraining>> SearchTrainingForTest(string company_name_th,
+            string tax_id, string training_date_fr, string training_date_to, string test_date_fr, string test_date_to)
+        {
+            var p = new DynamicParameters();
+            p.Add("@company_name_th", company_name_th);
+            p.Add("@tax_id", tax_id);
+            p.Add("@training_date_fr", training_date_fr);
+            p.Add("@trainig_date_to", training_date_to);
+            p.Add("@test_date_fr", test_date_fr);
+            p.Add("@test_date_to", test_date_to);
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>
+            ("uspSubcontractProfileTraining_searchTrainingForTest", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+
         }
     }
 

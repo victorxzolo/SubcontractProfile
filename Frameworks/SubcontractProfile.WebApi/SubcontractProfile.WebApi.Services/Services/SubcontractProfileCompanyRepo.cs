@@ -203,6 +203,23 @@ namespace SubcontractProfile.WebApi.Services
             return true;
         }
 
+
+        /// <summary>
+        /// Update
+        /// </summary>
+        public async Task<bool> UpdateByActivate(SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany subcontractProfileCompany)
+        {
+            var p = new DynamicParameters();
+            p.Add("@company_id", subcontractProfileCompany.CompanyId);
+            p.Add("@update_by", subcontractProfileCompany.UpdateBy);
+            p.Add("@status", subcontractProfileCompany.Status);
+
+            var ok = await _dbContext.Connection.ExecuteAsync
+                ("uspSubcontractProfileCompany_updateByActivate", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+
+            return true;
+        }
+
         /// <summary>
         /// Delete
         /// </summary>
@@ -450,6 +467,25 @@ namespace SubcontractProfile.WebApi.Services
             return entity;
 
 
+        }
+
+        public async Task<IEnumerable<SubcontractProfileCompany>> SearchActivateProfile(string subcontract_profile_type,
+            string company_name_th, string tax_id, string activate_date_fr, 
+            string activate_date_to, string activate_status)
+        {
+            var p = new DynamicParameters();
+            p.Add("@subcontract_profile_type", subcontract_profile_type);
+            p.Add("@company_name_th", company_name_th);
+            p.Add("@tax_id", tax_id);
+            p.Add("@activate_date_fr", activate_date_fr);
+            p.Add("@activate_date_to", activate_date_to);
+            p.Add("@activate_status", activate_status);
+
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>
+            ("uspSubcontractProfileCompany_SearchActivateProfile", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
         }
     }
 }

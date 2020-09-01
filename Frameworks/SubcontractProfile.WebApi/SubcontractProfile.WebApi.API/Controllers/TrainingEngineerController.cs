@@ -68,6 +68,30 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TrainingEngineerController))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(TrainingEngineerController))]
+        [HttpGet("GetTrainingEngineerByTrainingId/{training_Id}")]
+
+        public  Task<IEnumerable<SubcontractProfileTrainingEngineer>> GetTrainingEngineerByTrainingId(Guid training_Id)
+        {
+
+            _logger.LogInformation($"Start TrainingEngineerController::GetTrainingEngineerByTrainingId", training_Id);
+
+            if (training_Id == Guid.Empty)
+            {
+                training_Id = Guid.Empty;
+            }
+
+            var entities = _service.GetTrainingEngineerByTrainingId(training_Id);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"TrainingEngineerController::", "GetTrainingEngineerByTrainingId NOT FOUND", training_Id);
+                return null;
+            }
+
+            return entities;
+        }
 
         #endregion
 

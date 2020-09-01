@@ -186,6 +186,13 @@ namespace SubcontractProfile.Web.Model
         public Guid file_id_VatRegistrationCertificateFile { get; set; }
         public Guid file_id_bookbank { get; set; }
 
+
+        public string TrainingStatus { get; set; }
+        public string PaymentStatus { get; set; }
+        public DateTime? CompanyRegisterDate { get; set; }
+        public DateTime? TriningDate { get; set; }
+        public DateTime? PaymentDatetime { get; set; }
+
     }
 
     public class SubcontractProfileCompanyViewModel

@@ -72,6 +72,60 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CompanyController))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(CompanyController))]
+        [HttpGet("SearchActivateProfile/{subcontract_profile_type}/{company_name_th}/{tax_id}/{activate_date_fr}/{activate_date_to}/{activate_status}")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchActivateProfile(string subcontract_profile_type
+           , string company_name_th, string tax_id, string activate_date_fr, string activate_date_to, 
+            string activate_status
+          )
+        {
+
+            _logger.LogInformation($"Start CompanyController::SearchActivateProfile", subcontract_profile_type, company_name_th, tax_id, activate_date_fr
+                , activate_date_to, activate_status);
+
+           
+            if (subcontract_profile_type.ToUpper() == "NULL")
+            {
+                subcontract_profile_type = string.Empty;
+            }
+
+            if (company_name_th.ToUpper() == "NULL")
+            {
+                company_name_th = string.Empty;
+            }
+
+            if (tax_id.ToUpper() == "NULL")
+            {
+                tax_id = string.Empty;
+            }
+
+            if (activate_date_fr.ToUpper() == "NULL")
+            {
+                activate_date_fr = string.Empty;
+            }
+
+            if (activate_date_to.ToUpper() == "NULL")
+            {
+                activate_date_to = string.Empty;
+            }
+
+            if (activate_status.ToUpper() == "NULL")
+            {
+                activate_status = string.Empty;
+            }
+
+            var entities = _service.SearchActivateProfile(subcontract_profile_type, company_name_th, tax_id, activate_date_fr, activate_date_to, activate_status);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"CompanyController::", "SearchActivateProfile NOT FOUND", subcontract_profile_type, company_name_th, tax_id, activate_date_fr
+                , activate_date_to, activate_status);
+                return null;
+            }
+
+            return entities;
+        }
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileAddress))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileAddress))]
@@ -228,6 +282,24 @@ namespace SubcontractProfile.WebApi.API.Controllers
                 _logger.LogWarning($"Start CompanyController::Update", subcontractProfileCompany);
 
             var result = _service.Update(subcontractProfileCompany);
+
+            if (result == null)
+            {
+                _logger.LogWarning($"CompanyController::", "Update NOT FOUND", subcontractProfileCompany);
+
+            }
+            return result;
+        }
+        [HttpPut("UpdateByActivate")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        public Task<bool> UpdateByActivate(SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany subcontractProfileCompany)
+        {
+            _logger.LogInformation($"Start CompanyController::Update", subcontractProfileCompany);
+
+            if (subcontractProfileCompany == null)
+                _logger.LogWarning($"Start CompanyController::Update", subcontractProfileCompany);
+
+            var result = _service.UpdateByActivate(subcontractProfileCompany);
 
             if (result == null)
             {

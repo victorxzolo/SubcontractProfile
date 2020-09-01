@@ -136,12 +136,16 @@ namespace SubcontractProfile.WebApi.API
 
                     services.ConfigureBusinessServices(Configuration);
 
-                    //services.Configure<IISServerOptions>(options =>
-                    //{
-                    //    options.AutomaticAuthentication = false;
-                    //});
+                    services.Configure<IISServerOptions>(options =>
+                    {
+                        options.AutomaticAuthentication = false;
+                    });
 
-                  
+                    services.Configure<IISOptions>(options =>
+                    {
+                        options.ForwardClientCertificate = false;
+                    });
+
 
                     _logger.LogDebug("Startup::ConfigureServices::ApiVersioning, Swagger and DI settings");
                 }

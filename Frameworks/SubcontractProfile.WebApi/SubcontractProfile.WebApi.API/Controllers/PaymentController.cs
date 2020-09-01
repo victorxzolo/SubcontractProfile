@@ -156,6 +156,25 @@ namespace SubcontractProfile.WebApi.API.Controllers
             }
             return result;
         }
+
+        [HttpPut("UpdateByVerified")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        public Task<bool> UpdateByVerified(SubcontractProfilePayment subcontractProfilePayment)
+        {
+            _logger.LogInformation($"Start PaymentController::Update", subcontractProfilePayment);
+
+            if (subcontractProfilePayment == null)
+                _logger.LogWarning($"Start PaymentController::Update", subcontractProfilePayment);
+
+            var result = _service.UpdateByVerified(subcontractProfilePayment);
+
+            if (result == null)
+            {
+                _logger.LogWarning($"PaymentController::", "Update NOT FOUND", subcontractProfilePayment);
+
+            }
+            return result;
+        }
         #endregion
 
         #region DELETE

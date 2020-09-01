@@ -188,5 +188,15 @@ namespace SubcontractProfile.WebApi.Services.Services
 
         }
 
+        public async Task<IEnumerable<SubcontractProfileTrainingEngineer>> GetTrainingEngineerByTrainingId(Guid training_Id)
+        {
+            var p = new DynamicParameters();
+            p.Add("@training_id", training_Id);
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingEngineer>
+            ("uspSubcontractProfileTrainingEngineer_selectTrainingEngineerByTrainingId", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
     }
 }

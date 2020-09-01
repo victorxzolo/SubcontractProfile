@@ -21,5 +21,8 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<bool> Delete(System.Guid id);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingEngineer>> GetByPKList(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingEngineer_PK> pkList);
 
+        Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingEngineer>> GetTrainingEngineerByTrainingId(System.Guid training_Id);
+
+  
     }
 }

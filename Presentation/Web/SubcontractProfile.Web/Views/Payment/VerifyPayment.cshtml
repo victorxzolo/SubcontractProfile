@@ -39,7 +39,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="txttaxid">Payment Date From</label>
-                        <div class='input-group p-0 date' id='paymentdatefrom'>
+                        <div class='input-group date p-0' id='paymentdatefrom'>
                             <input type='text' class="form-control" id="datepaymentfrom" />
                             <div class="input-group-append input-group-addon">
                                 <span class="input-group-text px-4">
@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="txttaxid">Payment Date To</label>
-                        <div class='input-group p-0 date' id='paymentdatefto'>
+                        <div class='input-group date p-0' id='paymentdatefto'>
                             <input type='text' class="form-control" id="datepaymentto" />
                             <div class="input-group-append input-group-addon">
                                 <span class="input-group-text px-4">
@@ -98,260 +98,214 @@
     </div>
 </div>
 
+<div id="VerifyPaymentModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="hTitleEdit" class="modal-title">Confirm Payment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="frNew" class="needs-validation" novalidate>
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                <label>Company Name:</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <label id="lblcompanyName"></label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                <label>Payment No:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label id="lbpaymentno"></label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                <label>ช่องทางการชำระเงิน </label>  <span style="color:red">*</span>
+                            </div>
+                            <div class="col-sm-7">
+                                <select class="form-control" id="ddlpaymenttransfer"></select>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3">
+                            </div>
+                            <div class="col-sm-7 rdbank_payment">
+
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                <label>วันที่ชำระเงิน </label>  <span style="color:red">*</span>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class='input-group date p-0' id='datetimepicker'>
+                                    <input type='text' class="form-control" id="dateverify" />
+                                    <div class="input-group-append input-group-addon">
+                                        <span class="input-group-text px-4">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                <label>เวลาชำระเงิน </label>  <span style="color:red">*</span>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class='input-group date p-0 ' id='timepicker'>
+                                    <input type='text' class="form-control" id="timepayverify" />
+                                    <div class="input-group-append input-group-addon">
+                                        <span class="input-group-text px-4">
+                                            <i class="fa fa-clock-o"></i>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                <label>ยอดเงินที่โอน (B) </label>  <span style="color:red">*</span>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type='text' id="txtBalance" value="1000" class="form-control" disabled />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                <label>ธนาคารต้นทางที่โอน </label>  <span style="color:red">*</span>
+                            </div>
+                            <div class="col-sm-7">
+                                <select class="form-control" id="ddlbank"></select>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                <label>สาขา </label>  <span style="color:red">*</span>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="txtbranch" placeholder="" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                <label>หลักฐานการโอนเงิน </label>  <span style="color:red">*</span>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="hidden" id="hdupfiletransfer" />
+                                <input type="file" class="custom-file-input inputValidation" id="transfer_file" required
+                                       accept="image/jpeg,image/gif,image/png,application/pdf" />
+                                <label class="custom-file-label" for="customFile" id="lbuploadslip">Choose file</label>
+
+                                <div id="targetDiv">
+                                    @*<img id="ItemPreview" src="" class="img-thumbnail" style="width: 300px; height: 300px;"/>*@
+                                    <a id="linkdownload" href="#" target="_blank"></a>
+                                </div>
+                              
+
+                                <small id="uploadlHelp1" class="form-text text-muted">
+                                    ขนาดไฟล์ไม่เกิน 3 Mb และไฟล์ประกอบประเภท PDF หรือ JPG,JPEG,PNG เท่านั้น
+                                </small>
+                                <small id="uploadlHelp1" style="color:red">การใช้หลักฐานปลอม มีความผิดตาม พรบ.คอมพิวเตอร์</small>
+                                <div class="invalid-tooltip">Please upload a commercial registration file.</div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                <label>หมายเหตุ </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <textarea id="txtremark" name="remark" rows="3" class="form-control"> </textarea>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="container">
+                        <h4>สำหรับเจ้าหน้าที่ AIS</h4>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                <label>Payment Status</label>
+                            </div>
+                            <div class="col-md-7">
+                                <select class="form-control" id="ddlpaymentstatusais">
+                                    <option value="">Please Select</option>
+                                    <option value="Y">Paid</option>
+                                    <option value="N">Not Paid</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                <label>Verify Date</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class='input-group date p-0' id='datetimepickerais'>
+                                    <input type='text' class="form-control" id="dateverifyais" />
+                                    <div class="input-group-append input-group-addon">
+                                        <span class="input-group-text px-4">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                <label>Remark </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <textarea id="txtremarkais" name="remark" rows="3" class="form-control"> </textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+
+                    <input type="hidden" id="hdpaymentId">
+                    <input type="hidden" id="hdCompanyId">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnClearModal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                            ปิด
+                        </button>
+                        <button id="btnSave" type="button" class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                บันทึก
+                         </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
     <script src="~/Scripts/View/VerifyPayment.js"></script>
-
-
-<div class="container">
-    <div class="row mt-5">
-        <div class="col-md-12">
-            <p class="h5"><strong>Confirm Payment</strong></p>
-
-        </div>
-    </div>
-    <div class="row mt-3  mb-5">
-        <div class="col-md-1">
-        </div>
-        <div class="col-md-8">
-            <div class=" col-md-12 mt-3 ">
-                <div class="row">
-                    <div class="col-md-5">
-                        <p class="">Company Name:</p>
-                    </div>
-                    <div class="col-md-7">
-                        <p class="">xxxxxxxxxxxxxxxxxxxxxxxx</p>
-                    </div>
-                </div>
-            </div>
-            <div class=" col-md-12 mt-4 ">
-                <div class="row">
-                    <div class="col-md-5">
-                        <p class="">Payment No:</p>
-                    </div>
-                    <div class="col-md-7">
-                        <p class="">000001</p>
-                    </div>
-                </div>
-            </div>
-            <div class=" col-md-12 mt-4 ">
-                <div class="row">
-                    <div class="col-md-5">
-                        <p class="">ช่องทางการชำระเงิน*:</p>
-                    </div>
-                    <div class="col-md-7">
-                        <select class="form-control" id="exampleSelectGender">
-                            <option>โอนเงินผ่านบัญชีธนาคาร</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class=" col-md-12 mt-3 ">
-                <div class="row">
-                    <div class="col-md-5">
-                    </div>
-                    <div class="col-md-7">
-                        <div class="row">
-                            <div class="col-md-12 ml-4">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                <p class=""> ธนาคารกรุงศรีอยุธยา ชื่อบัญชี xxxx สาขาลาดพร้าว99 เลขบีญชี 111-1-1111-1</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class=" col-md-12 mt-4  ">
-                <div class="row">
-                    <div class="col-md-5">
-                        <p class="">วันที่ชำระเงิน*:</p>
-                    </div>
-                    <div class="col-md-7">
-                        <div class='input-group date' id='datepicker3'>
-                            <input type='text' class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="fa fa-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class=" col-md-12 mt-4  ">
-                <div class="row">
-                    <div class="col-md-5">
-                        <p class="">เวลาชำระเงิน*:</p>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepicker3'>
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="fa fa-clock-o"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class=" col-md-12 mt-2  ">
-                <div class="row">
-                    <div class="col-md-5">
-                        <p class="">ยอดเงินที่โอน (B)*:</p>
-                    </div>
-                    <div class="col-md-7">
-                        <input type='text' style="background-color: #c1bdbd ;" value="1000" class="form-control" />
-                    </div>
-                </div>
-            </div>
-            <div class=" col-md-12 mt-4  ">
-                <div class="row">
-                    <div class="col-md-5">
-                        <p class="">ธนาคารต้นทางที่โอน*:</p>
-                    </div>
-                    <div class="col-md-7">
-                        <select class="form-control" id="exampleSelectGender">
-                            <option>SCB</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class=" col-md-12 mt-4 ">
-                <div class="row">
-                    <div class="col-md-5">
-                        <p class="">สาขา:</p>
-                    </div>
-                    <div class="col-md-7">
-                        <input type="text" class="form-control" placeholder="" />
-                    </div>
-                </div>
-            </div>
-            <div class=" col-md-12 mt-4 ">
-                <div class="row">
-                    <div class="col-md-5">
-                        <p class="">หลักฐานการโอนเงิน*</p>
-                    </div>
-                    <div class="col-md-7 ">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-                            <label class="custom-file-label" for="validatedCustomFile"></label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class=" col-md-12 mt-3 ">
-                <div class="row">
-                    <div class="col-md-5">
-                    </div>
-                    <div class="col-md-7">
-                        <div class="row">
-                            <div class="col-md-12 ml-0">
-                                <p class="">ขนาดไฟล์ไม่เกิน 3 Mb และไฟล์ประกอบประเภท PDF หรือ JPG,JPEG,PNG เท่านั้น</p>
-                                <p style="color:red">การใช้หลักฐานปลอม มีความผิดตาม พรบ.คอมพิวเตอร์</p>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class=" col-md-12 mt-3 ">
-                <div class="row">
-                    <div class="col-md-5">
-                        <p>หมายเหตุ :</p>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="row">
-                            <div class="col-md-12 ml-0">
-                                <textarea id="w3review" name="w3review" rows="7" style="width:inherit;border-color:#E0E0E0"> </textarea>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row mt-5">
-        <div class="col-md-12">
-            <p class="h5"><strong>สำหรับเจ้าหน้าที่ AIS</strong></p>
-            <hr />
-        </div>
-    </div>
-    <div class="row mt-3  mb-5">
-        <div class="col-md-1">
-        </div>
-        <div class="col-md-8">
-            <div class=" col-md-12 mt-3 ">
-                <div class="row">
-                    <div class="col-md-5">
-                        <p class="">Payment Status:</p>
-                    </div>
-                    <div class="col-md-7">
-                        <select class="form-control" id="exampleSelectGender">
-                            <option>Paid</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class=" col-md-12 mt-4 ">
-                <div class="row">
-                    <div class="col-md-5">
-                        <p class="">Verify Date</p>
-                    </div>
-                    <div class="col-md-7">
-                        <div class='input-group date' id='datepicker3'>
-                            <input type='text' class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="fa fa-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>    
-            <div class=" col-md-12 mt-4 ">
-                <div class="row">
-                    <div class="col-md-5">
-                        <p>Remark :</p>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="row">
-                            <div class="col-md-12 ml-0">
-                                <textarea id="w3review" name="w3review" rows="3" style="width:inherit;border-color:#E0E0E0"> </textarea>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-        </div>
-    </div>
-</div>
-<div class="container btn2 mt-5 mb-3" style="background-color:#E0E0E0; text-align:center">
-    <div class="row">
-
-        <div class="col-md-7 ">
-
-        </div>
-
-        <div class="col-md-5 col-sm-12 mt-2 mb-2">
-            <div class="row">
-                <div class="col-md-3  ">
-                    
-                </div>
-                <div class="col-md-3  ml-3">
-                    <button class="btn btn-secondary" style="width:120px;color:white">Close</button>
-                </div>
-                <div class="col-md-3  ml-3">
-                    <button class="btn btn-success" style="width:120px">Submit</button>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-
-</div>
