@@ -1,7 +1,7 @@
 ﻿
 
 
-<div class="alert alert-danger toast" data-autohide="false" id="idmsAlert">
+@*<div class="alert alert-danger toast" data-autohide="false" id="idmsAlert">
     <div class="alert-danger">
         <strong class="mr-auto text-primary"></strong>
         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
@@ -9,8 +9,38 @@
     <div class="toast-body">
         <strong>กรุณาระบุข้อมูลให้ครบถ้วน</strong>
     </div>
-</div>
+</div>*@
+<div class="row my-3">
+    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ประเภทผู้สมัคร :<span style="color:red">*</span></label>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <div class="input-group">
+                    <div class="col-sm-7">
+                        <div class="custom-control custom-radio">
 
+                            <input type="radio" class="custom-control-input inputValidation" name="optionsRadios" id="chktypeN" value="NewSubContract" checked required>
+                            <label class="custom-control-label" for="chktypeN">
+                                New Subcontract
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="custom-control custom-radio">
+
+                            <input type="radio" class="custom-control-input inputValidationdealer" name="optionsRadios" id="chktypeD" value="Dealer" required>
+                            <label class="custom-control-label" for="chktypeD">
+                                Dealer
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
 
 <div id="divnewsubcontract" class="needs-validation-newregister" novalidate>
     <div class="form-group" style="display:none;">
@@ -86,37 +116,7 @@
         </div>
     </div>*@
 
-    <div class="row my-3">
-        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-            <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ประเภทผู้สมัคร :<span style="color:red">*</span></label>
-                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <div class="input-group">
-                        <div class="col-sm-7">
-                            <div class="custom-control custom-radio">
-
-                                <input type="radio" class="custom-control-input inputValidation" name="optionsRadios" id="chktypeN" value="NewSubContract" checked required>
-                                <label class="custom-control-label" for="chktypeN">
-                                    New Subcontract
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="custom-control custom-radio">
-
-                                <input type="radio" class="custom-control-input inputValidationdealer" name="optionsRadios" id="chktypeD" value="Dealer" required>
-                                <label class="custom-control-label" for="chktypeD">
-                                    Dealer
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-       
-    </div>
+    
 
     <div class="row my-3">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
@@ -625,13 +625,19 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                            <div class="d-flex align-items-center justify-content-center h-100" role="group">
-                                <button class="btn-border btn-black mr-2" id="btn_reset_revenue_modal" type="button">
+                            <div class="text-center">
+                                @*<button class="btn btn-dark" id="btn_reset_revenue_modal" type="button">
                                     <i class="fa fa-refresh icon"></i><span>รีเช็ต</span>
                                 </button>
-                                <button class="btn-border btn-blue" id="btn_search_revenue_modal" type="button">
+                                <button class="btn btn-success" id="btn_search_revenue_modal" type="button">
                                     <i class="fa fa-search icon"></i><span>ค้นหา</span>
-                                </button>
+                                </button>*@
+                                <button class="btn-border btn-black mr-2" id="btn_reset_revenue_modal" type="button">
+            <i class="fa fa-refresh icon"></i><span>รีเช็ต</span>
+        </button>
+        <button class="btn-border btn-blue" id="btn_search_revenue_modal" type="button">
+            <i class="fa fa-search icon"></i><span>ค้นหา</span>
+        </button>
                             </div>
 
                         </div>

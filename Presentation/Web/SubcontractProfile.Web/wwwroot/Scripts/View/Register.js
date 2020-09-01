@@ -114,8 +114,28 @@
             }
         }
         else if (step == 2) {
-            $('#smartwizard').smartWizard("next");
-            return true;
+            //var forms = document.getElementsByClassName('needs-validation-step2-table');
+            //var validation = Array.prototype.filter.call(forms, function (form) {
+                if (tbaddressstep2.data().count()==0) {
+                    //event.preventDefault();
+                    //event.stopPropagation();
+                    bootbox.alert({
+                        title: "System Information",
+                        message: "กรุณาเพิ่มข้อมูลที่อยู่",
+                        size: "small",
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
+                }
+                else {
+                    $('#smartwizard').smartWizard("next");
+
+                    return true;
+
+                }
+                //form.classList.add('was-validated');
+            //});
         }
         else if (step == 3) {
             var forms = document.getElementsByClassName('needs-validation-step3');
@@ -129,6 +149,7 @@
                 else {
                     BindDDLBank();
                     BindDDLCompanyType();
+                    BindDDlBankAccountType();
                     $('#smartwizard').smartWizard("next");
                     
                     return true;
@@ -142,7 +163,7 @@
             var forms = document.getElementsByClassName('needs-validation-step4');
             var validation = Array.prototype.filter.call(forms, function (form) {
                 if (Validate(".form-control.inputValidationBank", ".custom-control-input.inputValidationBank"
-                           , ".custom-select.inputValidationAddress",".custom-file-input.inputValidationBank")) {
+                    , ".custom-select.inputValidationBank",".custom-file-input.inputValidationBank")) {
                     event.preventDefault();
                     event.stopPropagation();
 
@@ -210,11 +231,15 @@
             dataType: "json",
             error: function (xhr, status, error) {
                 Loading(0);
-                //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-            }
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
+              }
 
         },
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -265,11 +290,15 @@
             dataType: "json",
             error: function (xhr, status, error) {
                 Loading(0);
-                //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-            }
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
+               }
 
         },
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -331,6 +360,7 @@
         var value = tbLocation.rows('.selected').data();
         var lo_id = value[0].location_id;
         $.ajax({
+            async: true,
             type: "POST",
             url: "/Account/GetLocationSession",
             dataType: "json",
@@ -407,11 +437,15 @@
             },
             error: function (xhr, status, error) {
                 Loading(0);
-                //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-            }
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
+             }
         });
 
       
@@ -553,10 +587,14 @@
             },
             error: function (xhr, status, error) {
                 Loading(0);
-                //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
 
         },
@@ -744,17 +782,27 @@
                   
                 }
                 else {
-                    showFeedback("error", data.message, "System Information",
-                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-
+                    bootbox.alert({
+                        title: "System Information",
+                        message: data.message,
+                        size: "small",
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
                 }
             },
             error: function (xhr, status, error) {
                 //Loading(0);
                 //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
         });
     });
@@ -774,18 +822,27 @@
                     BindDatatable(tbaddressstep2, val);
                 }
                 else {
-                    showFeedback("error", data.message, "System Information",
-                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-
+                    bootbox.alert({
+                        title: "System Information",
+                        message: data.message,
+                        size: "small",
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
                 }
             },
             error: function (xhr, status, error) {
                 //Loading(0);
-                //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-            }
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
+               }
         });
     });
 
@@ -882,18 +939,28 @@
                     tbaddressstep2.ajax.reload();
                 }
                 else {
-                    showFeedback("error", data.message, "System Information",
-                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    bootbox.alert({
+                        title: "System Information",
+                        message: data.message,
+                        size: "small",
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
 
                 }
 
             },
             error: function (xhr, status, error) {
                 Loading(0);
-                //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
         });
     }
@@ -969,21 +1036,47 @@
                             case "commercial_registration_file": $('#hdupfilecommercial_registration').val(data.response); break;
                             case "vat_registration_certificate_file": $('#hdupfilevat_registration_certificate').val(data.response); break;
                         }
-                        showFeedback("success", data.message, "System Information",
-                            "<button type='button' class='btn-border btn-green' data-dismiss='modal' id='btnOKpopup'><i class='fa fa-check icon'></i><span>OK</span></button >")
+                        bootbox.alert({
+                            title: "System Information",
+                            message: data.message,
+                            size: "small",
+                            callback: function (result) {
+                                console.log('This was logged in the callback: ' + result);
+                            }
+                        });
                     }
                     else {
-                        showFeedback("error", data.message, "System Information",
-                            "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+
+                        bootbox.alert({
+                            title: "System Information",
+                            message: data.message,
+                            size: "small",
+                            callback: function (result) {
+                                console.log('This was logged in the callback: ' + result);
+                            }
+                        });
+                        switch (inputId) {
+                            case "company_certified_file": $('#company_certified_file').val('');
+                                $('#lbcompany_certified_file').text('Choose file'); break;
+                            case "commercial_registration_file": $('#commercial_registration_file').val('');
+                                $('#lbcommercial_registration_file').text('Choose file');break;
+                            case "vat_registration_certificate_file": $('#vat_registration_certificate_file').val('');
+                                $('#lbvat_registration_certificate_file').text('Choose file');break;
+                        }
                     }
                    
                 },
                 error: function (xhr, status, error) {
                     Loading(0);
-                    //clearForEdit();
-                    console.log(status);
-                    showFeedback("error", xhr.responseText, "System Information",
-                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+
+                    bootbox.alert({
+                        title: "System Information",
+                        message: "This action is not available.",
+                        size: "small",
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
                 }
             }
         );
@@ -1179,21 +1272,38 @@
                 Loading(0);
                 console.log(data)
                 if (data.Response.Status) {
-                    showFeedback("success", data.Response.Message, "System Information",
-                        "<button type='button' class='btn-border btn-green' data-dismiss='modal' id='btnOKpopup'><i class='fa fa-check icon'></i><span>OK</span></button >");
+                    bootbox.alert({
+                        title: "System Information",
+                        message: daa.Response.Message,
+                        size: "small",
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
                     window.location.href = data.redirecturl;
                 }
                 else {
-                    showFeedback("error", data.Response.Message, "System Information",
-                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    bootbox.alert({
+                        title: "System Information",
+                        message: data.Response.Message,
+                        size: "small",
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
                 }
             },
             error: function (xhr, status, error) {
                 Loading(0);
                 //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
         });
     });
@@ -1214,17 +1324,27 @@
                     BindDatatable(tbaddressstep5, val);
                 }
                 else {
-                    showFeedback("error", data.message, "System Information",
-                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-
+                    bootbox.alert({
+                        title: "System Information",
+                        message: data.message,
+                        size: "small",
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
                 }
             },
             error: function (xhr, status, error) {
                 Loading(0);
                 //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
         });
     }
@@ -1348,10 +1468,14 @@ function BindDDLprovince(regionid) {
         },
         error: function (xhr, status, error) {
             Loading(0);
-            //clearForEdit();
-            console.log(status);
-            showFeedback("error", xhr.responseText, "System Information",
-                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1376,11 +1500,14 @@ function BindDDLdistrict(province) {
 
         },
         error: function (xhr, status, error) {
-         
-            //clearForEdit();
-            console.log(status);
-            showFeedback("error", xhr.responseText, "System Information",
-                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1421,9 +1548,14 @@ function BindDDLsubdistrict(district) {
         error: function (xhr, status, error) {
            
             //clearForEdit();
-            console.log(status);
-            showFeedback("error", xhr.responseText, "System Information",
-                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1470,9 +1602,14 @@ function BindDDLTitle() {
         error: function (xhr, status, error) {
             Loading();
             //clearForEdit();
-            console.log(status);
-            showFeedback("error", xhr.responseText, "System Information",
-                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1499,9 +1636,14 @@ function BindRegion() {
         error: function (xhr, status, error) {
             Loading(0);
             //clearForEdit();
-            console.log(status);
-            showFeedback("error", xhr.responseText, "System Information",
-                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1528,9 +1670,14 @@ function BindDDLBank() {
         error: function (xhr, status, error) {
             Loading(0);
             //clearForEdit();
-            console.log(status);
-            showFeedback("error", xhr.responseText, "System Information",
-                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1557,9 +1704,14 @@ function BindDDLCompanyType() {
         error: function (xhr, status, error) {
             Loading(0);
             //clearForEdit();
-            console.log(status);
-            showFeedback("error", xhr.responseText, "System Information",
-                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1596,8 +1748,48 @@ function BindAddressType() {
             Loading(0);
             //clearForEdit();
             console.log(status);
-            showFeedback("error", xhr.responseText, "System Information",
-                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
+        }
+    });
+}
+
+function BindDDlBankAccountType() {
+    Loading();
+    $.ajax({
+        type: "POST",
+        url: "/Account/GetDataBankAccountType",
+        //data: { province_id: province },
+        dataType: "json",
+        success: function (data) {
+            Loading(0);
+            if (data != null) {
+                $('#ddlbank_account_type').empty();
+
+                $.each(data.response, function () {
+                    $('#ddlbank_account_type').append($("<option></option>").val(this.Value).text(this.Text));
+                });
+            }
+
+
+        },
+        error: function (xhr, status, error) {
+            Loading(0);
+            //clearForEdit();
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }

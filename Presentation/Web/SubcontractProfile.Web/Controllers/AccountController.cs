@@ -749,6 +749,59 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { responseaddresstype = getAllAddressTypeList });
         }
 
+        [HttpPost]
+        public IActionResult GetDataBankAccountType()
+        {
+            var output = new List<SubcontractDropdownModel>();
+            List<SelectListItem> getAllBankAccList = new List<SelectListItem>();
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/bank_account_type");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+            }
+            if (Lang == "")
+            {
+                getsession();
+            }
+            if (Lang == "TH")
+            {
+                output.Add(new SubcontractDropdownModel
+                {
+                    dropdown_text = "กรุณาเลือกประเภทบัญชี",
+                    dropdown_value = ""
+
+                });
+
+                getAllBankAccList = output.Select(a => new SelectListItem
+                {
+                    Text = a.dropdown_text,
+                    Value = a.dropdown_value
+                }).OrderBy(c => c.Value).ToList();
+            }
+            else
+            {
+                output.Add(new SubcontractDropdownModel
+                {
+                    dropdown_text = "Select Acount Type",
+                    dropdown_value = ""
+                });
+                getAllBankAccList = output.Select(a => new SelectListItem
+                {
+                    Text = a.dropdown_text,
+                    Value = a.dropdown_value
+                }).OrderBy(c => c.Value).ToList();
+
+            }
+            return Json(new { response = getAllBankAccList });
+        }
+
         #endregion
 
 
