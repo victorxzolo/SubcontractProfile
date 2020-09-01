@@ -68,14 +68,6 @@ namespace SubcontractProfile.Web.Controllers
             var datapayment = new List<SubcontractProfilePaymentModel>();
             try
             {
-                searchPayment.Paymentno = (string.IsNullOrEmpty(searchPayment.Paymentno)) ? "null" : searchPayment.Paymentno;
-                searchPayment.Paymentrequesttraningno = (string.IsNullOrEmpty(searchPayment.Paymentrequesttraningno)) ? "null" : searchPayment.Paymentrequesttraningno;
-                searchPayment.Paymantrequestdatefrom = (string.IsNullOrEmpty(searchPayment.Paymantrequestdatefrom)) ? "null" : searchPayment.Paymantrequestdatefrom;
-                searchPayment.Paymentrequestdateto = (string.IsNullOrEmpty(searchPayment.Paymentrequestdateto)) ? "null" : searchPayment.Paymentrequestdateto;
-                searchPayment.Paymentdatefrom = (string.IsNullOrEmpty(searchPayment.Paymentdatefrom)) ? "null" : searchPayment.Paymentdatefrom;
-                searchPayment.Paymentdateto = (string.IsNullOrEmpty(searchPayment.Paymentdateto)) ? "null" : searchPayment.Paymentdateto;
-
-
                 SubcontractProfilePaymentModel model = new SubcontractProfilePaymentModel();
                 if (searchPayment.Paymentdatefrom != null)
                 {
