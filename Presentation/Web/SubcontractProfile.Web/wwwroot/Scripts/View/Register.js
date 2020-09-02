@@ -146,7 +146,9 @@
             var forms = document.getElementsByClassName('needs-validation-step3');
             var validation = Array.prototype.filter.call(forms, function (form) {
                 if (Validate(".form-control.inputValidationContract", ".custom-control-input.inputValidationContract"
-                    , ".custom-select.inputValidationContract", ".custom-file-input.inputValidationContract")) {
+                    , ".custom-select.inputValidationContract", ".custom-file-input.inputValidationContract") ||
+                    (isEmail($('#txtcompany_Email').val()) || isEmail($('#txtcontract_email').val()))
+                ) {
                     event.preventDefault();
                     event.stopPropagation();
 
@@ -525,6 +527,14 @@
         $('#SearchRevenue').modal('hide');
     });
 
+    $('#txtcreateEmail').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#erroremail').show();
+        }
+        else {
+            $('#erroremail').hide();
+        }
+    });
 
     function ClearDataModalRevenue() {
         $('#txtsearchrevenue').val('');
@@ -576,14 +586,14 @@
         order: [[1, "asc"]],
         select: true,
         retrieve: true,
-        paging: true,
-        pagingType: "full_numbers",
+        //pagingType: "full_numbers",
         destroy: true,
         searching: false,
         proccessing: true,
         serverSide: true,
-        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        dom: 'rt<"float-left"p><"float-left"l><"float-right"i>',
+        paging: false,
+        //lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        dom: 'rt<"float-right"i>',
         ajax: {
             type: "POST",
             url: "/Account/SearchAddress",
@@ -627,16 +637,16 @@
         ],
         language: {
             infoEmpty: "No items to display",
-            lengthMenu: "_MENU_ items per page",
+            //lengthMenu: "_MENU_ items per page",
             zeroRecords: "Nothing found",
             info: "_START_ - _END_  of _TOTAL_  items",
-            infoFiltered: "",
-            paginate: {
-                previous: "<",
-                next: ">",
-                last: ">|",
-                first: "|<"
-            }
+            //infoFiltered: "",
+            //paginate: {
+            //    previous: "<",
+            //    next: ">",
+            //    last: ">|",
+            //    first: "|<"
+            //}
             
         }
     });
@@ -976,6 +986,50 @@
 
 /*************************************/
 
+/*Step3*/
+    $('#txtcompany_Email').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#errorcompany_Email').show();
+        }
+        else {
+            $('#errorcompany_Email').hide();
+        }
+    });
+    $('#txtcontract_email').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#errorcontract_email').show();
+        }
+        else {
+            $('#errorcontract_email').hide();
+        }
+    });
+    $('#txtdept_of_install_email').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#errorinstall_email').show();
+        }
+        else {
+            $('#errorinstall_email').hide();
+        }
+    });
+    $('#txtdept_of_mainten_email').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#errormainten_email').show();
+        }
+        else {
+            $('#errormainten_email').hide();
+        }
+    });
+    $('#txtdept_of_Account_email').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#errorAccount_email').show();
+        }
+        else {
+            $('#errorAccount_email').hide();
+        }
+    });
+
+
+/*************************************/
 
 /*Step4*/
     
@@ -1102,12 +1156,13 @@
         order: [[1, "asc"]],
         select: true,
         retrieve: true,
-        paging: true,
+        paging: false,
         destroy: true,
         searching: false,
         //scrollY: 400,
-        //processing: true,
-        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        processing: true,
+        //scrollY: false,
+        //lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         columns: [
             { "data": "address_type_id", "visible": false },
             { "data": "address_type", orderable: true, },
@@ -1115,10 +1170,17 @@
         ],
         language: {
             infoEmpty: "No items to display",
-            lengthMenu: "_MENU_ items per page",
+            //lengthMenu: "_MENU_ items per page",
             zeroRecords: "Nothing found",
             info: "_START_ - _END_  of _TOTAL_  items",
-            infoFiltered: ""
+            //infoFiltered: "",
+            //paginate: {
+            //    previous: "<",
+            //    next: ">",
+            //    last: ">|",
+            //    first: "|<"
+            //}
+
         }
     });
 
@@ -1543,17 +1605,10 @@ function BindDDLsubdistrict(district) {
                     $('#ddlsubdistrict').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
                 });
                 $.each(data.responsezipcode, function () {
-
-                    if (this.Text == "กรุณาเลือกรหัสไปรษณีย์") {
-
-                        $('#ddlzipcode').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
-                    }
-                    else {
-                        $('#ddlzipcode').append($("<option></option>").val(this.Value).text(this.Text));
-                    }
+                    $('#ddlzipcode').append($("<option></option>").val(this.Value).text(this.Text));
                 })
 
-                $('#ddlzipcode').val("")
+                $('#ddlzipcode').val('')
             }
           
 
@@ -1807,6 +1862,19 @@ function BindDDlBankAccountType() {
     });
 }
 
+function isEmail(email) {
+    var haserror = false;
+    var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{2,4}/.test(email);
+    if (!re) {
+        haserror = true;
+       
+    } else {
+        haserror = false;
+       
+    }
+    return haserror;
+}
+
 function Validate(formcontrol, custom,customselect,cutomupload) {
 
     var hasError = false;
@@ -1902,7 +1970,7 @@ function ValidateUser() {
     var hasError = false;
     var forms = document.getElementsByClassName('needs-validation-user');
     var validation = Array.prototype.filter.call(forms, function (form) {
-        if ($('#txtcreateuser').val() == "" || $('#txtcreateEmail').val() == "" || $('#txtcreatepass').val() == "" || $('#txtconfirmpass').val() == "")
+        if ($('#txtcreateuser').val() == "" || isEmail($('#txtcreateEmail').val()) || $('#txtcreatepass').val() == "" || $('#txtconfirmpass').val() == "")
         {
             event.preventDefault();
             event.stopPropagation();

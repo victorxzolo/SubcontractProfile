@@ -343,18 +343,20 @@ namespace SubcontractProfile.Web.Controllers
                     Value = a.SubDistrictId.ToString()
                 }).OrderBy(c => c.Value).ToList();
 
-               
-                getAllZipcodeList = resultZipCode.Select(c => new SelectListItem
-                {
-                    Text = c.ZipCode,
-                    Value = c.ZipCode
-                }).ToList();
+
+
                 getAllZipcodeList.Add(new SelectListItem
                 {
                     Text = "กรุณาเลือกรหัสไปรษณีย์",
-                    Value = "0"
+                    Value = ""
                 });
-                getAllZipcodeList.OrderBy(d => d.Value).ToList();
+                getAllZipcodeList.AddRange(resultZipCode.Select(c => new SelectListItem
+                {
+                    Text = c.ZipCode,
+                    Value = c.ZipCode
+                }).ToList());
+                
+               
             }
             else
             {
@@ -370,18 +372,18 @@ namespace SubcontractProfile.Web.Controllers
                     Value = a.SubDistrictId.ToString()
                 }).OrderBy(c => c.Value).ToList();
 
-                
-                getAllZipcodeList = resultZipCode.Select(c => new SelectListItem
-                {
-                    Text = c.ZipCode,
-                    Value = c.ZipCode
-                }).ToList();
                 getAllZipcodeList.Add(new SelectListItem
                 {
                     Text = "Select Zip Code",
-                    Value = "0"
+                    Value = ""
                 });
-                getAllZipcodeList.OrderBy(d => d.Value).ToList();
+                getAllZipcodeList.AddRange(resultZipCode.Select(c => new SelectListItem
+                {
+                    Text = c.ZipCode,
+                    Value = c.ZipCode
+                }).ToList());
+
+
             }
 
             return Json(new { responsesubdistrict = getAllSubDistrictList, responsezipcode = getAllZipcodeList });
@@ -1425,6 +1427,23 @@ namespace SubcontractProfile.Web.Controllers
                 List<SubcontractProfileAddressModel> result = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
                 if (result != null && result.Count != 0)
                 {
+                    foreach(var a in result)
+                    {
+                        string straddr = "";
+                        straddr = string.Concat(a.HouseNo != "" ? a.HouseNo : "", " ",
+                                                  a.Building != "" ? "อาคาร " + a.Building : "", " ",
+                                                  a.Floor != "" ? "ชั้นที่ " + a.Floor : "", " ",
+                                                  a.RoomNo != "" ? "ห้องที่ " + a.RoomNo : "", " ",
+                                                  a.VillageName != "" ? "หมู่บ้าน " + a.VillageName : "", " ",
+                                                  a.Moo != null ? "หมู่ที่ " + a.Moo : "", " ",
+                                                  a.Soi != "" ? "ซอย " + a.Soi : "", " ",
+                                                  a.Road != "" ? "ถนน " + a.Road : "", " ",
+                                                  a.SubDistrictId != 0 ? "ตำบล/แขวง " + a.sub_district_name : "", " ",
+                                                  a.DistrictId != 0 ? "อำเภอ/เขต " + a.district_name : "", " ",
+                                                  a.ProvinceId != 0 ? "จังหวัด " + a.province_name : "", " ",
+                                                  a.ZipCode != "" ? a.ZipCode : "");
+                        a.outFullAddress = straddr;
+                    }
                     if (sortDir) //asc
                     {
                         if (sortBy == "address_type")
@@ -1551,6 +1570,7 @@ namespace SubcontractProfile.Web.Controllers
 
                             if (dataaddr != null && dataaddr.Count != 0)
                             {
+                                SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaft");
 
                                 foreach (var d in dataaddr)
                                 {
@@ -1587,8 +1607,8 @@ namespace SubcontractProfile.Web.Controllers
                             HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
                             if (responseAddress.IsSuccessStatusCode)
                             {
-                                        SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaft");
-                                        res.Status = true;
+                                       
+                                res.Status = true;
                                 res.Message = "Register Success";
                                 res.StatusError = "0";
                             }
