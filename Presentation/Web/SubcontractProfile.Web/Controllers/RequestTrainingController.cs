@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.EntitySql;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace SubcontractProfile.Web.Controllers
         public ActionResult Search(string companyName,  string TaxId , string RequestNo ,  string Status, string reqDateFrom ,string reqDateTo)
         {
 
-            var Result = new List<SubcontractProfileTrainingModel>();
+            var Result = new List<RequestTraininigModel>();
 
             var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
             // Skiping number of Rows count  
@@ -146,7 +147,7 @@ namespace SubcontractProfile.Web.Controllers
             {
                 var result = response.Content.ReadAsStringAsync().Result;
                 //data
-                Result = JsonConvert.DeserializeObject<List<SubcontractProfileTrainingModel>>(result);
+                Result = JsonConvert.DeserializeObject<List<RequestTraininigModel>>(result);
 
             }
 
@@ -166,7 +167,7 @@ namespace SubcontractProfile.Web.Controllers
         public ActionResult SearchEngineer(string Trainingid)
         {
 
-            var Result = new List<SubcontractProfileTrainingModel>();
+            var Result = new List<RequestTraininigModel>();
 
             var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
             // Skiping number of Rows count  
@@ -216,7 +217,7 @@ namespace SubcontractProfile.Web.Controllers
             {
                 var result = response.Content.ReadAsStringAsync().Result;
                 //data
-                Result = JsonConvert.DeserializeObject<List<SubcontractProfileTrainingModel>>(result);
+                Result = JsonConvert.DeserializeObject<List<RequestTraininigModel>>(result);
 
             }
 
@@ -273,81 +274,130 @@ namespace SubcontractProfile.Web.Controllers
 
             return sDateTime;
         }
-      
-        public ActionResult onSaveTraining(SubcontractProfileTrainingModel model)
-        {
 
+        public ActionResult onSave(string trainingId ,string companyId, string teamId, string engineerId, string locationId, string bookingDate ,string RemarkForAis)
+        {
             ResponseModel result = new ResponseModel();
-            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
-         //   HttpClient clientLocation = new HttpClient();
-         
-            try {
-                
-            if (model != null)
+            try
             {
 
+                HttpClient clientLocation = new HttpClient();
+                var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+                RequestTraininigModel model = new RequestTraininigModel();
+                model.TrainingId = new Guid(trainingId);
+                model.CompanyId = new Guid(companyId);
+                model.TeamId = new Guid(teamId);
+                model.LocationId = new Guid(locationId);
+                model.EngineerId = new Guid(engineerId);
+                model.BookingDate = ConvertToDateTimeYYYYMMDD(bookingDate);
+                model.RemarkForAis = RemarkForAis;
+            
+                model.Status = "A";
+                var uriLocation = new Uri(Path.Combine(strpathAPI, "Training", "UpdateByVerified"));
 
-                   // model.TrainingId = model.TrainingId;
-                   // model.CompanyId = model.CompanyId;
-                 
-                    model.Status = "A";
-                  
-                    model.ModifiedBy = userProfile.Username.ToString();
-                    if (model._bookingDate != "" || model._bookingDate != null)
-                    {
-                        model.BookingDate = ConvertToDateTimeYYYYMMDD(model._bookingDate);
-                    }
-                    
-                    model.RemarkForAis = model.RemarkForAis;
-                    //model.Remark = "01";
-                    //model.Course = "01";
-                    //model.CourcePrice = 0;
-                    //model.RequestDate = DateTime.Now;
-                    //model.TotalPrice = 0;
-                    //model.Vat = 0;
-                    //model.Tax = 0;
+                clientLocation.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+                var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                HttpResponseMessage responseResult = clientLocation.PutAsync(uriLocation, httpContent).Result;
 
-                    //model.RequestNo = "1231234";
-                    //model.CoursePrice = 0;
-
-                    HttpClient client = new HttpClient();
-                    client.DefaultRequestHeaders.Accept.Add(
-                    new MediaTypeWithQualityHeaderValue("application/json"));
-
-                    var uri = new Uri(Path.Combine(strpathAPI, "Training", "UpdateByVerified"));
-
-                    //string str = JsonConvert.SerializeObject(Company);
-
-                    var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = client.PutAsync(uri, httpContent).Result;
-
-
-                    //HttpResponseMessage response = client.PutAsync(uriString).Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        result.Status = true;
-                        result.Message = "Success";
-                        result.StatusError = "1";
-                    }
-                    else
-                    {
-                        result.Status = false;
-                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
-                        result.StatusError = "-1";
-                    }
+                if (responseResult.IsSuccessStatusCode)
+                {
+                    result.Status = true;
+                    result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                    result.StatusError = "0";
+                }
+                else
+                {
+                    result.Status = false;
+                    result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                    result.StatusError = "-1";
                 }
 
-            return Json(new { Response = result });
-             }
-            catch(Exception e)
-            {
 
-                result.Status = false;
-                result.Message = e.Message.ToString();
-                result.StatusError = "-1";
-                return Json(new { Response = result });
             }
+            catch (Exception ex) 
+            {
+                result.Status = false;
+                result.Message = "Fail"+ex.Message;
+                result.StatusError = "-1";
+               
+            }
+            return Json(new { Response = result });
         }
+        //public ActionResult onSaveTraining(SubcontractProfileTrainingModel model)
+        //{
+
+        //    ResponseModel result = new ResponseModel();
+        //    var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+        // //   HttpClient clientLocation = new HttpClient();
+         
+        //    try {
+                
+        //    if (model != null)
+        //    {
+
+
+        //           // model.TrainingId = model.TrainingId;
+        //           // model.CompanyId = model.CompanyId;
+                 
+        //            model.Status = "A";
+                  
+        //            model.ModifiedBy = userProfile.Username.ToString();
+        //            if (model._bookingDate != "" || model._bookingDate != null)
+        //            {
+        //                model.BookingDate = ConvertToDateTimeYYYYMMDD(model._bookingDate);
+        //            }
+                    
+        //            model.RemarkForAis = model.RemarkForAis;
+        //            //model.Remark = "01";
+        //            //model.Course = "01";
+        //            //model.CourcePrice = 0;
+        //            //model.RequestDate = DateTime.Now;
+        //            //model.TotalPrice = 0;
+        //            //model.Vat = 0;
+        //            //model.Tax = 0;
+
+        //            //model.RequestNo = "1231234";
+        //            //model.CoursePrice = 0;
+
+        //            HttpClient client = new HttpClient();
+        //            client.DefaultRequestHeaders.Accept.Add(
+        //            new MediaTypeWithQualityHeaderValue("application/json"));
+
+        //            var uri = new Uri(Path.Combine(strpathAPI, "Training", "UpdateByVerified"));
+
+        //            //string str = JsonConvert.SerializeObject(Company);
+
+        //            var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+        //            HttpResponseMessage response = client.PutAsync(uri, httpContent).Result;
+
+
+        //            //HttpResponseMessage response = client.PutAsync(uriString).Result;
+        //            if (response.IsSuccessStatusCode)
+        //            {
+        //                result.Status = true;
+        //                result.Message = "Success";
+        //                result.StatusError = "1";
+        //            }
+        //            else
+        //            {
+        //                result.Status = false;
+        //                result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+        //                result.StatusError = "-1";
+        //            }
+        //        }
+
+        //    return Json(new { Response = result });
+        //     }
+        //    catch(Exception e)
+        //    {
+
+        //        result.Status = false;
+        //        result.Message = e.Message.ToString();
+        //        result.StatusError = "-1";
+        //        return Json(new { Response = result });
+        //    }
+        //}
 
         public JsonResult GetTraining(string TrainingID)
         {
@@ -366,7 +416,7 @@ namespace SubcontractProfile.Web.Controllers
             }
 
 
-            var locationResult = new SubcontractProfileTrainingModel();
+            var locationResult = new RequestTraininigModel();
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -379,7 +429,7 @@ namespace SubcontractProfile.Web.Controllers
                 {
                     var result = response.Content.ReadAsStringAsync().Result;
                     //data
-                    locationResult = JsonConvert.DeserializeObject<SubcontractProfileTrainingModel>(result);
+                    locationResult = JsonConvert.DeserializeObject<RequestTraininigModel>(result);
 
                 }
 
