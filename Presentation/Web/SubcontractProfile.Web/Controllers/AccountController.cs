@@ -1526,11 +1526,11 @@ namespace SubcontractProfile.Web.Controllers
 
                         #region Insert Company
 
-                        if(model.SubcontractProfileType== "NewSubContract")
-                        {
+                        //if(model.SubcontractProfileType== "NewSubContract")
+                        //{
                             string encrypted = Util.EncryptText(model.Password);
                             model.Password = encrypted;
-                        }
+                        //}
 
                         
                         model.Status = "Pending";
