@@ -91,6 +91,27 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfilePayment))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfilePayment))]
+        [HttpPost("SearchVerifyPayment")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePayment>> SearchVerifyPayment(SubcontractProfilePayment search)
+        {
+            _logger.LogInformation($"Start PaymentController::SearchPayment", search.PaymentNo, search.Request_no, search.RequestDateFrom,
+                search.RequestDateTo, search.PaymentDatetimeFrom, search.PaymentDatetimeTo, search.Status, search.companyNameTh, search.taxId);
+
+            var entities = _service.searchPayment(search);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"PaymentController::", "GetByPaymentId NOT FOUND", search.PaymentNo, search.Request_no, search.RequestDateFrom,
+                search.RequestDateTo, search.PaymentDatetimeFrom, search.PaymentDatetimeTo, search.Status, search.companyNameTh, search.taxId);
+                return null;
+            }
+
+            return entities;
+
+        }
+
         #endregion
 
         #region POST

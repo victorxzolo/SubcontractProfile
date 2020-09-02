@@ -195,7 +195,7 @@ namespace SubcontractProfile.WebApi.Services.Services
                     row["modified_by"] = new SqlString(curObj.ModifiedBy);
                     row["modified_date"] = curObj.ModifiedDate == null ? SqlDateTime.Null : new SqlDateTime(curObj.ModifiedDate.Value);
                     row["training_id"] = new SqlGuid(curObj.TrainingId);
-                    row["company_id"] = new SqlGuid(curObj.CompanyId);
+                    row["company_id"] = curObj.CompanyId==null? SqlGuid.Null: new SqlGuid(curObj.CompanyId.Value);
 
                     dt.Rows.Add(row);
                 }

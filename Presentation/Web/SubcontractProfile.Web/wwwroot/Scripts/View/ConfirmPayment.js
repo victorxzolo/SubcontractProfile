@@ -183,22 +183,27 @@ $(document).ready(function () {
 
     $('#btnconfirmpayment').click(function () {
         var paymentid = $('#hdpaymentId').val();
-        UpdatePayment(paymentid);
-        //var forms = document.getElementsByClassName('needs-validation-confirmpayment"');
-        //     var validation = Array.prototype.filter.call(forms, function (form) {
-        //    form.addEventListener('submit', function (event) {
-        //        var PaymentID = document.getElementById('btnupdatepayment');
-        //        if (form.checkValidity() === false) {
-        //            event.preventDefault();
-        //            event.stopPropagation();
-        //        }
-        //        else {
-        //            UpdatePayment(PaymentID.value);
-        //        }
+       
+        var forms = document.getElementsByClassName('needs-validation-confirmpayment');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            if ($('#Contact_name').val() == "" || $('#Contact_email').val() == "" || $('#Contact_phone_no').val() == "" || 
+                $('#payment_channal option').filter(':selected').val() == "" || $('#payment_date').val() == "" ||$('#payment_datetime').val() == "" ||
+                $('#amount_transfer').val() == "" || $('#bank_transfer').val() == "" || $('#lbuploadslip').text() == "")
+            {
+                event.preventDefault();
+                event.stopPropagation();
 
-        //        form.classList.add('was-validated');
-        //    }, false);
-        //});
+            }
+
+            else {
+                //UpdatePayment(paymentid);
+                alert('true')
+
+                return true;
+
+            }
+            form.classList.add('was-validated');
+        });
     });
 
     $('#btnSearchconfirmpayment').click(function () {
@@ -460,6 +465,7 @@ function SetTextStatusN(data) {
     $('#bank_transfer').val(data.BankTransfer);
     $('#bank_branch').val(data.BankBranch);
     $('#payment_channal').val(data.PaymentChannal);
+    $("#remark").val(data.Remark);
 
     var d = new Date(data.PaymentDatetime);
     var month = d.getMonth();

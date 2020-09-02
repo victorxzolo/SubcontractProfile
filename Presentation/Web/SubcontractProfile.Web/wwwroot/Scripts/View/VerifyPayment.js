@@ -478,16 +478,16 @@ function GetStatus() {
         success: function (data) {
             if (data != null) {
 
-                $('#ddlStatus').empty();
+                $('#ddlpaymentstatusais').empty();
 
 
                 $.each(data.response, function () {
-                    $('#ddlStatus').append($("<option></option>").val(this.Value).text(this.Text));
+                    $('#ddlpaymentstatusais').append($("<option></option>").val(this.Value).text(this.Text));
                 });
             }
             else {
-                $('#ddlStatus').empty();
-                $('#ddlStatus').append($("<option></option>").val("").text("Select Status"));
+                $('#ddlpaymentstatusais').empty();
+                $('#ddlpaymentstatusais').append($("<option></option>").val("").text("Select Status"));
             }
         },
         failure: function (msg) {

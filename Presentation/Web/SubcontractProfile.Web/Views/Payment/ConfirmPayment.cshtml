@@ -160,7 +160,7 @@
             </div>
 
             <div class="modal-body">
-                <form id="frNew" class="needs-validation-confirmpayment" novalidate>
+                <div class="needs-validation-confirmpayment" novalidate>
                     <div class="container">
 
                         <div class="row">
@@ -214,7 +214,7 @@
                             </div>
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" id="Contact_name" value="" required>
-                                <div class="invalid-feedback">Please fill the ContactName</div>
+                                <div class="invalid-feedback">กรุณาระบุชื่อผู้ติดต่อ</div>
                             </div>
                         </div>
                         <br />
@@ -224,7 +224,7 @@
                             </div>
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" id="Contact_email" value="" required>
-                                <div class="invalid-feedback">Please fill the Email</div>
+                                <div class="invalid-feedback">กรุณาระบุ Email</div>
                             </div>
                         </div>
                         <br />
@@ -234,7 +234,7 @@
                             </div>
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" id="Contact_phone_no" required />
-                                <div class="invalid-feedback">Please fill the Phoneno</div>
+                                <div class="invalid-feedback">กรุณาระบุเบอร์โทรศัพท์</div>
                             </div>
                         </div>
                         <br />
@@ -243,8 +243,9 @@
                                 <label class="">รูปแบบชำระเงิน<span style="color:red">*</span>:</label>
                             </div>
                             <div class="col-sm-7">
-                                <select class="form-control" id="payment_channal">
+                                <select class="form-control" id="payment_channal" required>
                                 </select>
+                                <div class="invalid-feedback">กรุณาเลือกรูปแบบการชำระเงิน</div>
                             </div>
                         </div>
                         <br />
@@ -262,15 +263,15 @@
                             </div>
                             <div class="col-sm-7">
                                 <div class='input-group date p-0' id='datepayment'>
-                                    <input type='text' class="form-control" id="payment_date" />
+                                    <input type='text' class="form-control" id="payment_date" required />
                                     <div class="input-group-append input-group-addon">
                                         <span class="input-group-text px-4">
                                             <i class="fa fa-calendar"></i>
                                         </span>
                                     </div>
-
+                                    <div class="invalid-feedback">กรุณาระบุวันที่ชำระเงิน</div>
                                 </div>
-                                <div class="invalid-feedback">Please fill the PaymentDate</div>
+                                
                             </div>
                         </div>
                         <br />
@@ -280,15 +281,14 @@
                             </div>
                             <div class="col-sm-7">
                                 <div class='input-group date p-0' id='timepayment'>
-                                    <input type='text' class="form-control" id="payment_datetime" />
+                                    <input type='text' class="form-control" id="payment_datetime" required />
                                     <div class="input-group-append input-group-addon">
                                         <span class="input-group-text px-4">
                                             <i class="fa fa-clock-o"></i>
                                         </span>
                                     </div>
-
+                                    <div class="invalid-feedback">กรุณาระบุเวลาชำระเงิน</div>
                                 </div>
-                                <div class="invalid-feedback">Please fill the PaymentTime</div>
                             </div>
                         </div>
                         <br />
@@ -298,7 +298,7 @@
                             </div>
                             <div class="col-sm-7">
                                 <input type='text' id="amount_transfer" value="" class="form-control" required />
-                                <div class="invalid-feedback">Please fill the Amounttransfer</div>
+                                <div class="invalid-feedback">กรุณาระบุยอดเงินที่โอน</div>
                             </div>
                         </div>
                         <br />
@@ -307,8 +307,9 @@
                                 <label class="">ธนาคารต้นทางที่โอน<span style="color:red">*</span>:</label>
                             </div>
                             <div class="col-sm-7">
-                                <select class="form-control" id="bank_transfer">
+                                <select class="form-control" id="bank_transfer" required>
                                 </select>
+                                <div class="invalid-feedback">กรุณาเลือกธนาคารต้นทางที่โอน</div>
                             </div>
                         </div>
                         <br />
@@ -317,7 +318,7 @@
                                 <label class="">สาขา:</label>
                             </div>
                             <div class="col-sm-7">
-                                <input type="text" id="bank_branch" class="form-control" placeholder="" required />
+                                <input type="text" id="bank_branch" class="form-control" placeholder="" />
                                 <div class="invalid-feedback">Please fill the BankBranch</div>
                             </div>
                         </div>
@@ -338,7 +339,7 @@
                                     ขนาดไฟล์ไม่เกิน 3 Mb และไฟล์ประกอบประเภท PDF หรือ JPG,JPEG,PNG เท่านั้น
                                 </small>
                                 <small id="uploadlHelp1" style="color:red">การใช้หลักฐานปลอม มีความผิดตาม พรบ.คอมพิวเตอร์</small>
-                                <div class="invalid-tooltip">Please Upload the Silp</div>
+                                <div class="invalid-tooltip">กรุณา Upload สลิปการโอนเงิน</div>
                             </div>
                         </div>
                         <br />
@@ -367,7 +368,7 @@
                             บันทึก
                         </button>
                     </div>
-                </form>
+                </div>
             </div>
 
         </div>

@@ -1427,11 +1427,15 @@
         $('#lbdept_of_Account_phone').text($('#txtdept_of_Account_phone').val());
         $('#lbdept_of_Account_email').text($('#txtdept_of_Account_email').val());
 
-        $('#lbbank_Name').text($('#txtbank_Name').val());
+        $('#lbbank_Name').text($('#ddlBankname option').filter(':selected').text());
         $('#lbbranch_Name').text($('#txtbranch_Name').val());
         $('#lbbank_account_type_id').text($('#ddlbank_account_type option').filter(':selected').text());
         $('#lbaccount_Number').text($('#txtaccount_Number').val());
-        $('#lbaccount_Name').text($('#ddlaccount_Name option').filter(':selected').text() + ' ' + $('#txtaccount_Name').val());
+
+        var straccname = $('#ddlaccount_Name option').filter(':selected').val() != '' ?
+            $('#ddlaccount_Name option').filter(':selected').text() + ' ' + $('#txtaccount_Name').val() : $('#txtaccount_Name').val()
+
+        $('#lbaccount_Name').text(straccname);
         $('#lbbusiness_type').text($('#ddlbank_account_type option').filter(':selected').text());
 
         var strcer = $('#lbcompany_certified_file').text();
