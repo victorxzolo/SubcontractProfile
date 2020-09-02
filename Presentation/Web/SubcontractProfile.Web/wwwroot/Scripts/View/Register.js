@@ -66,7 +66,8 @@
                 var forms = document.getElementsByClassName('needs-validation-newregister');
                 var validation = Array.prototype.filter.call(forms, function (form) {
                     if (Validate(".form-control.inputValidation", ".custom-control-input.inputValidation"
-                        , ".custom-select.inputValidation", ".custom-file-input.inputValidation")) {
+                        , ".custom-select.inputValidation", ".custom-file-input.inputValidation") || ValidateUser()
+                    ) {
                         event.preventDefault();
                         event.stopPropagation();
                         
@@ -93,10 +94,14 @@
                 var forms = document.getElementsByClassName('needs-validation-dealer');
                 var validation = Array.prototype.filter.call(forms, function (form) {
                     if (Validate(".form-control.inputValidationdealer", ".custom-control-input.inputValidationdealer"
-                        , ".custom-select.inputValidationdealer", ".custom-file-input.inputValidationdealer")) {
+                        , ".custom-select.inputValidationdealer", ".custom-file-input.inputValidationdealer") ||  ValidateUser()
+                    ) {
                         event.preventDefault();
                         event.stopPropagation();
 
+                    }
+                    else if (!Comparepassword()) {
+                        return false;
                     }
                     else {
                         BindRegion();
@@ -552,6 +557,10 @@
             return false
         }
         
+    }
+
+    function CheckUsername() {
+        var user = $('#txtcreateuser').val();
     }
 
 /*************************************/
@@ -1886,6 +1895,26 @@ function Validate(formcontrol, custom,customselect,cutomupload) {
             }
         }
     });//customupload
+    return hasError;
+}
+
+function ValidateUser() {
+    var hasError = false;
+    var forms = document.getElementsByClassName('needs-validation-user');
+    var validation = Array.prototype.filter.call(forms, function (form) {
+        if ($('#txtcreateuser').val() == "" || $('#txtcreateEmail').val() == "" || $('#txtcreatepass').val() == "" || $('#txtconfirmpass').val() == "")
+        {
+            event.preventDefault();
+            event.stopPropagation();
+            hasError = true;
+        }
+        else {
+            hasError = false;
+
+        }
+        form.classList.add('was-validated');
+    });
+
     return hasError;
 }
 

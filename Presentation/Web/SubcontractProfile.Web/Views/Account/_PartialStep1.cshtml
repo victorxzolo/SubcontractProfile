@@ -218,63 +218,6 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-            <p class="font-weight-bolder lead">
-                กำหนดข้อมูลการใช้บริการ
-            </p>
-            <hr />
-        </div>
-    </div>
-    <div class="row my-3">
-        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-            <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ระบุชื่อผู้ใช้งาน :<span style="color:red">*</span> </label>
-                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control inputValidation form-control-sm" id="txtcreateuser" maxlength="50" placeholder="ระบุชื่อผู้ใช้งาน" required />
-                    <div class="invalid-tooltip">
-                        กรุณาระบุชื่อผู้ใช้งาน
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-            <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">อีเมลของผู้ใช้งานนี้  :<span style="color:red">*</span></label>
-                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="email" class="form-control inputValidation form-control-sm" id="txtcreateEmail" maxlength="50" placeholder="อีเมลของผู้ใช้งานนี้" required />
-                    <div class="invalid-tooltip">
-                        กรุณาระบุอีเมลของผู้ใช้งานนี้
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-            <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">รหัสผ่าน :<span style="color:red">*</span></label>
-                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="password" class="form-control inputValidation form-control-sm" id="txtcreatepass" maxlength="50" placeholder="รหัสผ่าน" required />
-                    <div class="invalid-tooltip">
-                        กรุณาระบุรหัสผ่าน
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-            <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ยืนยันรหัสผ่าน :<span style="color:red">*</span></label>
-                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="password" class="form-control inputValidation form-control-sm" id="txtconfirmpass" maxlength="50" placeholder="ยืนยันรหัสผ่าน" required />
-                    <div class="invalid-tooltip">
-                        กรุณาระบุยืนยันรหัสผ่าน
-                    </div>
-                    <span id='message'></span>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 
@@ -441,6 +384,66 @@
                             </label>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="needs-validation-user" id="divuser" novalidate>
+    <div class="row" >
+        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+            <p class="font-weight-bolder lead">
+                กำหนดข้อมูลการใช้บริการ
+            </p>
+            <hr />
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ระบุชื่อผู้ใช้งาน :<span style="color:red">*</span> </label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control  form-control-sm" id="txtcreateuser" maxlength="50" placeholder="ระบุชื่อผู้ใช้งาน" required />
+                    <div class="invalid-tooltip">
+                        กรุณาระบุชื่อผู้ใช้งาน
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">อีเมลของผู้ใช้งานนี้  :<span style="color:red">*</span></label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="email" class="form-control  form-control-sm" id="txtcreateEmail" maxlength="50" placeholder="อีเมลของผู้ใช้งานนี้" required />
+                    <div class="invalid-tooltip">
+                        กรุณาระบุอีเมลของผู้ใช้งานนี้
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">รหัสผ่าน :<span style="color:red">*</span></label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="password" class="form-control  form-control-sm" id="txtcreatepass" maxlength="50" placeholder="รหัสผ่าน" required />
+                    <div class="invalid-tooltip">
+                        กรุณาระบุรหัสผ่าน
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ยืนยันรหัสผ่าน :<span style="color:red">*</span></label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="password" class="form-control  form-control-sm" id="txtconfirmpass" maxlength="50" placeholder="ยืนยันรหัสผ่าน" required />
+                    <div class="invalid-tooltip">
+                        กรุณาระบุยืนยันรหัสผ่าน
+                    </div>
+                    <span id='message'></span>
                 </div>
             </div>
         </div>
