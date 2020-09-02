@@ -188,7 +188,7 @@ $(document).ready(function () {
         var validation = Array.prototype.filter.call(forms, function (form) {
             if ($('#Contact_name').val() == "" || $('#Contact_email').val() == "" || $('#Contact_phone_no').val() == "" || 
                 $('#payment_channal option').filter(':selected').val() == "" || $('#payment_date').val() == "" ||$('#payment_datetime').val() == "" ||
-                $('#amount_transfer').val() == "" || $('#bank_transfer').val() == "" || $('#lbuploadslip').text() == "")
+                $('#amount_transfer').val() == "" || $('#bank_transfer').val() == "" || ValidateUpload())
             {
                 event.preventDefault();
                 event.stopPropagation();
@@ -196,9 +196,7 @@ $(document).ready(function () {
             }
 
             else {
-                //UpdatePayment(paymentid);
-                alert('true')
-
+                UpdatePayment(paymentid);
                 return true;
 
             }
@@ -211,6 +209,20 @@ $(document).ready(function () {
     });
 
 });
+
+
+function ValidateUpload() {
+    var hasError = false;
+    if ($('#hdupfileslip').val() == "") {
+        hasError = true;
+        $("#slip_attach_file").attr('required', 'required');
+    }
+    else {
+        $("#slip_attach_file").removeAttr('required');
+    }
+
+    return hasError;
+}
 
 function CheckFileUpload(inputId) {
 
@@ -232,7 +244,10 @@ function CheckFileUpload(inputId) {
             dataType: "json",
             data: formData,
             success: function (data) {
-
+                if (data.status) {
+                    $('#hdupfileslip').val(data.file_id);
+                }
+               
                     bootbox.alert({
                         title: "System Information",
                         message: data.message,

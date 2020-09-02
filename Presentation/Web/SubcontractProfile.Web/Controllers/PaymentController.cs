@@ -161,7 +161,29 @@ namespace SubcontractProfile.Web.Controllers
             {
                 var dataresponse = response.Content.ReadAsStringAsync().Result;
                 data = JsonConvert.DeserializeObject<SubcontractProfilePaymentModel>(dataresponse);
+                List<FileUploadModal> L_File = new List<FileUploadModal>();
 
+
+                if (data.SlipAttachFile != null)
+                {
+                    Guid file_id = Guid.NewGuid();
+                    L_File.Add(new FileUploadModal
+                    {
+                        file_id = file_id,
+                        //Fileupload = fileBytes,
+                        typefile = "SlipAttachFile",
+                        //ContentDisposition = source.ContentDisposition,
+                        //ContentType = source.ContentType,
+                        Filename = data.SlipAttachFile
+
+                    });
+                    data.file_id_Slip = file_id;
+                    //if (L_File.Count != 0)
+                    //{
+                    //    GetFile(paymentId, ref L_File);
+                    //    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftPaymentSSO", L_File);
+                    //}
+                }
             }
             return Json(new { Data = data });
 
@@ -234,6 +256,7 @@ namespace SubcontractProfile.Web.Controllers
                     Payment.PaymentDatetime = datefrom;
                 }
 
+                
                 if (await Uploadfile(Payment.FileSilp, Payment.PaymentId))
                 {
                     Payment.SlipAttachFile = Payment.FileSilp.FileName;
@@ -777,6 +800,7 @@ namespace SubcontractProfile.Web.Controllers
         {
             bool statusupload = true;
             string strmess = "";
+            Guid? fid=null;
             try
             {
                 foreach (FormFile source in files)
@@ -807,7 +831,7 @@ namespace SubcontractProfile.Web.Controllers
                             }
                             else
                             {
-                                statusupload = false;
+                                fid = Guid.NewGuid();
                                 strmess = "Upload file success.";
                             }
                         }
@@ -819,7 +843,7 @@ namespace SubcontractProfile.Web.Controllers
                 statusupload = false;
                 strmess = e.Message.ToString();
             }
-            return Json(new { status = statusupload, message = strmess });
+            return Json(new { status = statusupload, message = strmess,file_id= fid });
         }
         private async Task<bool> Uploadfile(IFormFile files,string paymentid)
         {
@@ -830,13 +854,22 @@ namespace SubcontractProfile.Web.Controllers
             try
             {
                
-                    if (files.Length > 0)
+                if (files !=null && files.Length > 0)
+                {
+                    if (files != null)
                     {
-                        string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
+                        System.IO.DirectoryInfo di = new DirectoryInfo(Path.Combine(strpathUpload, paymentid));
+
+                        foreach (FileInfo finfo in di.GetFiles())
+                        {
+                            finfo.Delete();
+                        }
+                    }
+                    string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
                         filename = EnsureCorrectFilename(filename);
                         using (output = System.IO.File.Create(this.GetPathAndFilename(paymentid,filename)))
                             await files.CopyToAsync(output);
-                    }
+                }
 
             }
             catch (Exception e)
