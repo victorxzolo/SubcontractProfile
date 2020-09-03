@@ -565,7 +565,9 @@ $(document).ready(function () {
                                 var forms = document.getElementsByClassName('needs-isvalidate');
                                 var validation = Array.prototype.filter.call(forms, function (form) {
                                     if (Validate(".form-control.inputisvalidate", ".custom-control-input.inputisvalidate"
-                                        , ".custom-select.inputisvalidate", ".custom-file-input.inputisvalidate")) {
+                                        , ".custom-select.inputisvalidate", ".custom-file-input.inputisvalidate") ||
+                                        (isEmail($('#txtcompany_Email').val()) || isEmail($('#txtcontract_email').val()))
+                                    ) {
                                         event.preventDefault();
                                         event.stopPropagation();
                                         if (ValidateUpload()) {
@@ -598,7 +600,9 @@ $(document).ready(function () {
                                 var forms = document.getElementsByClassName('needs-isvalidate');
                                 var validation = Array.prototype.filter.call(forms, function (form) {
                                     if (Validate(".form-control.inputisvalidate", ".custom-control-input.inputisvalidate"
-                                        , ".custom-select.inputisvalidate", ".custom-file-input.inputisvalidate")) {
+                                        , ".custom-select.inputisvalidate", ".custom-file-input.inputisvalidate") ||
+                                        (isEmail($('#txtcompany_Email').val()) || isEmail($('#txtcontract_email').val()))
+                                    ) {
                                         event.preventDefault();
                                         event.stopPropagation();
                                         if (ValidateUpload()) {
@@ -665,6 +669,48 @@ $(document).ready(function () {
                 $(document).on('hidden.bs.modal', '.modal', function () {
         $('.modal:visible').length && $(document.body).addClass('modal-open');
                 });
+
+
+    $('#mailCompany').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#errorcompany_Email').show();
+        }
+        else {
+            $('#errorcompany_Email').hide();
+        }
+    });
+    $('#mailContract').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#errorcontract_email').show();
+        }
+        else {
+            $('#errorcontract_email').hide();
+        }
+    });
+    $('#mail1').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#errorinstall_email').show();
+        }
+        else {
+            $('#errorinstall_email').hide();
+        }
+    });
+    $('#mail2').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#errormainten_email').show();
+        }
+        else {
+            $('#errormainten_email').hide();
+        }
+    });
+    $('#mail3').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#errorAccount_email').show();
+        }
+        else {
+            $('#errorAccount_email').hide();
+        }
+    });
             });
 
             //'use strict';
@@ -1779,6 +1825,18 @@ function BindDDlBankAccountType() {
     });
 }
 
+function isEmail(email) {
+    var haserror = false;
+    var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{2,4}/.test(email);
+    if (!re) {
+        haserror = true;
+
+    } else {
+        haserror = false;
+
+    }
+    return haserror;
+}
 
 function ValidateUpload() {
     var hasError = false;

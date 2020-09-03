@@ -800,7 +800,8 @@ $(document).ready(function () {
             username = $('#txtcreateuser').val();
             password = $('#txtconfirmpass').val();
         }
-
+        var straccname = $('#ddlaccount_Name option').filter(':selected').val() != '' ?
+            $('#ddlaccount_Name option').filter(':selected').text() + ' ' + $('#txtaccount_Name').val() : $('#txtaccount_Name').val()
         var data = {
             //CompanyId
             //CompanyCode
@@ -837,7 +838,7 @@ $(document).ready(function () {
             BankCode: $('#txtbank_Code').val(),
             BankName: $('#txtbank_Name').val(),
             AccountNumber: $('#ddlaccount_Name option').filter(':selected').val() != "" ? $('#ddlaccount_Name option').filter(':selected').val() + $('#txtaccount_Number').val() : $('#txtaccount_Number').val(),
-            AccountName:$('#ddlaccount_Name option').filter(':selected').val(),
+            AccountName: straccname,//$('#ddlaccount_Name option').filter(':selected').val(),
            // AttachFile
             BranchCode: $('#txtbranch_Code').val(),
             BranchName: $('#txtbranch_Name').val(),

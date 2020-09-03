@@ -696,6 +696,7 @@
                             <div class="col-sm-4">
                                 <input type="text" id="mailCompany" style="width:300px" class="form-control inputisvalidate" required>
                                 <div class="invalid-feedback">Please provide a company email.</div>
+                                <span id='errorcompany_Email' style="color:red;display:none;">This email is not valid</span>
                             </div>
                             <div class="col-sm-2">
                                 <label>ชื่อผู้ติดต่อ :</label>
@@ -713,6 +714,7 @@
                             <div class="col-sm-4">
                                 <input type="text" id="mailContract" style="width:300px" class="form-control inputisvalidate" required>
                                 <div class="invalid-feedback">Please provide a valid contract email.</div>
+                                <span id='errorcontract_email' style="color:red;display:none;">This email is not valid</span>
                             </div>
                             <div class="col-sm-2">
                                 <label>เบอร์โทร :</label>
@@ -755,8 +757,9 @@
                                 <label>อีเมลล์ :</label>
                             </div>
                             <div class="col-sm-10">
-                                <input type="text" id="mail1" style="width:300px" class="form-control inputisvalidate" required>
+                                <input type="text" id="mail1" style="width:300px" class="form-control">
                                 <div class="invalid-feedback">Please provide a valid of departmant install email.</div>
+                                <span id='errorinstall_email' style="color:red;display:none;">This email is not valid</span>
 
                             </div>
                         </div>
@@ -789,9 +792,9 @@
                                 <label>อีเมลล์ :</label>
                             </div>
                             <div class="col-sm-10">
-                                <input type="text" id="mail2" style="width:300px" class="form-control inputisvalidate" required>
+                                <input type="text" id="mail2" style="width:300px" class="form-control">
                                 <div class="invalid-feedback">Please provide a valid departmant of maninten email.</div>
-
+                                <span id='errormainten_email' style="color:red;display:none;">This email is not valid</span>
                             </div>
                         </div>
                         <br />
@@ -822,9 +825,9 @@
                                 <label>อีเมลล์ :</label>
                             </div>
                             <div class="col-sm-10">
-                                <input type="text" id="mail3" style="width:300px" class="form-control inputisvalidate" required>
+                                <input type="text" id="mail3" style="width:300px" class="form-control">
                                 <div class="invalid-feedback">Please provide a valid departmant of account email.</div>
-
+                                <span id='errorAccount_email' style="color:red;display:none;">This email is not valid</span>
                             </div>
                         </div>
                     </div>
@@ -849,7 +852,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="row col-sm-12">
-                                    <input type="text" id="nameBranch" class="form-control inputisvalidate" required>
+                                    <input type="text" id="nameBranch" class="form-control">
                                     <div class="invalid-feedback">Please provide a branch name.</div>
                                 </div>
                             </div>
