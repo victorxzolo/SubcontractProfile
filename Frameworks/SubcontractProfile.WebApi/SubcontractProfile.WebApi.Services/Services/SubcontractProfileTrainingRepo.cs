@@ -307,6 +307,11 @@ namespace SubcontractProfile.WebApi.Services.Services
             return entity;
 
         }
+
+        public Task<IEnumerable<SubcontractProfileTraining>> SearchTraining(Guid company_id, Guid location_id, Guid team_id, string status, string date_from, string date_to, string tax_id, string request_no)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 

@@ -92,11 +92,10 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
 
 
-<<<<<<< HEAD
-=======
+
         public string position { get; set; }
 
->>>>>>> fff5e8d57c43aa266d10d99c9499d63ea52b30ed
+
         public DateTime? BookingDate { get; set; }
         public string RemarkForAis { get; set; }
         public string Engineer_name { get; set; }
