@@ -108,19 +108,10 @@ namespace SubcontractProfile.Web.Model
 
 
         public string Position { get; set; }
-
-        public string BookingDate { get; set; }
-        public string RemarkForAis { get; set; }
-        public string Engineer_name { get; set; }
-      //  public string EngineerID { get; set; }
-
-
-        public string Position { get; set; }
+          
         [System.ComponentModel.DataAnnotations.StringLength(100)]
 
-        public string EngineerName { get; set; }   
-
-        public string EngineerName { get; set; }
+        public string EngineerName { get; set; }     
 
 
         public DateTime? TestDate { get; set; }
@@ -140,10 +131,7 @@ namespace SubcontractProfile.Web.Model
 
         public string _bookingDate { get; set; }
 
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
+     
 
 
     }
