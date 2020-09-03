@@ -994,11 +994,11 @@ namespace SubcontractProfile.Web.Controllers
 
                         if(status=="Approve")
                         {
-                            model.Status = "Approve";
+                            model.Status = "A";
                         }
                         else if(status=="NotApprove")
                         {
-                            model.Status = "Pending";
+                            model.Status = "N";
                         }
 
                         var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Update"));
