@@ -1006,6 +1006,9 @@ $(document).ready(function () {
 
                     if (result.SubcontractProfileType == "NewSubContract") {
                         $('#rdoCompanyType1').prop('checked', true);
+
+                        $('#rdoCompanyType1').trigger('change');
+
                         $('#hdrdtype').val(result.SubcontractProfileType);
                         $("#inputCompany_alias").val(result.CompanyAlias);
                         $("#inputCompany_name_th").val(result.CompanyNameTh);
@@ -1029,6 +1032,9 @@ $(document).ready(function () {
                     }
                     else if (result.SubcontractProfileType == "Dealer") {
                         $('#rdoCompanyType2').prop('checked', true);
+
+                        $('#rdoCompanyType2').trigger('change');
+
                         $('#hdrdtype').val(result.SubcontractProfileType);
                         $('#txtlocationcode').val(result.LocationCode);
                         $('#txtdistribution').val(result.DistributionChannel);
