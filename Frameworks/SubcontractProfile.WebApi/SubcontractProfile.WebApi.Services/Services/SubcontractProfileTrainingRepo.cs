@@ -62,13 +62,13 @@ namespace SubcontractProfile.WebApi.Services.Services
           
             p.Add("@company_id", subcontractProfileTraining.CompanyId);
             p.Add("@course", subcontractProfileTraining.Course);
-<<<<<<< HEAD
-            p.Add("@contract_phone", subcontractProfileTraining.contract_phone);
-            p.Add("@contract_email", subcontractProfileTraining.contract_email);
-            p.Add("@course_price", subcontractProfileTraining.cource_price);
-=======
+
+            p.Add("@contract_phone", subcontractProfileTraining.ContractPhone);
+            p.Add("@contract_email", subcontractProfileTraining.ContractEmail);
             p.Add("@course_price", subcontractProfileTraining.CoursePrice);
->>>>>>> dfc031cd73765c5f90d793c2cee34f8513a4ca0c
+
+            p.Add("@course_price", subcontractProfileTraining.CoursePrice);
+
             p.Add("@request_date", subcontractProfileTraining.RequestDate);
             p.Add("@remark", subcontractProfileTraining.Remark);
             p.Add("@total_price", subcontractProfileTraining.TotalPrice);

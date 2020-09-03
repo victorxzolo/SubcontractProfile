@@ -43,6 +43,40 @@ $(document).ready(function () {
         //console.log(dd);
     });
 
+    $('#txtcompanyname').autocomplete({
+        lookup: function (query, done) {
+            $.ajax({
+                type: "POST",
+                url: "/Registration/GetCompany",
+                data: { companyname: query },
+                dataType: "json",
+                success: function (data) {
+                    var suggestions = [];
+                    $.each(data.response, function () {
+                        var d = {
+                            "value": this.CompanyNameTh, "data": this.CompanyId
+                        }
+                        suggestions.push(d);
+                    });
+                    var result = { suggestions };
+
+                    done(result);
+
+
+                },
+                error: function (xhr, status, error) {
+
+                }
+            });
+        },
+        minChars: 1,
+        onSelect: function (suggestion) {
+            $('#selection').html('You selected: ' + suggestion.value);
+        },
+        showNoSuggestionNotice: true,
+        noSuggestionNotice: 'Sorry, no matching results',
+    });
+
     $('#btnverifycompany').click(function () {
         var company = $('#tbSearchComVerifyResult tr input:radio[name="optionsRadios"]:checked').val();
         if (company != "") {

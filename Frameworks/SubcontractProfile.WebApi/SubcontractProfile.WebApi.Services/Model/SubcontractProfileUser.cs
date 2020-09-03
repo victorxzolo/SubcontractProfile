@@ -61,6 +61,8 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string region { get; set; }
 
+        public string SubcontractProfileType { get; set; }
+
         public object Clone()
         {
             return this.MemberwiseClone();

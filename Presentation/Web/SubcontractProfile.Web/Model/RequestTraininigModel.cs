@@ -5,49 +5,49 @@ using System.Threading.Tasks;
 
 namespace SubcontractProfile.Web.Model
 {
-    public class SubcontractProfileTrainingModel
+    public class RequestTraininigModel
     {
         public System.Guid TrainingId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+        //  [System.ComponentModel.DataAnnotations.Required]
         public System.Guid CompanyId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
-      [System.ComponentModel.DataAnnotations.Required]
+        //  [System.ComponentModel.DataAnnotations.Required]
         public string Course { get; set; }
 
-       [System.ComponentModel.DataAnnotations.Required]
-        public decimal? CourcePrice { get; set; }
+        // [System.ComponentModel.DataAnnotations.Required]
+        public decimal? CoursePrice { get; set; }
 
 
-       [System.ComponentModel.DataAnnotations.Required]
+        // [System.ComponentModel.DataAnnotations.Required]
         public System.DateTime RequestDate { get; set; }
 
         public string Remark { get; set; }
 
-       [System.ComponentModel.DataAnnotations.Required]
+        //  [System.ComponentModel.DataAnnotations.Required]
         public decimal TotalPrice { get; set; }
 
-       [System.ComponentModel.DataAnnotations.Required]
+        //  [System.ComponentModel.DataAnnotations.Required]
         public decimal Vat { get; set; }
 
         public decimal? Tax { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(10)]
-        [System.ComponentModel.DataAnnotations.Required]
+        //  [System.ComponentModel.DataAnnotations.Required]
         public string Status { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string RequestNo { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string EngineerId { get; set; }
+        public System.Guid EngineerId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string TeamId { get; set; }
+        public System.Guid TeamId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string LocationId { get; set; }
+        public System.Guid LocationId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string CreateBy { get; set; }
@@ -90,38 +90,10 @@ namespace SubcontractProfile.Web.Model
         public string ContractEmailEn { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-
-
-        public string position { get; set; }
-
-        public DateTime? BookingDate { get; set; }
-        public string RemarkForAis { get; set; }
-        public string Engineer_name { get; set; }
-        public string Engineer_ID { get; set; }
-
-
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
-
-
-
         public string Position { get; set; }
 
         public string BookingDate { get; set; }
         public string RemarkForAis { get; set; }
-        public string Engineer_name { get; set; }
-      //  public string EngineerID { get; set; }
-
-
-        public string Position { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-
-        public string EngineerName { get; set; }   
-
-        public string EngineerName { get; set; }
-
 
         public DateTime? TestDate { get; set; }
         [System.ComponentModel.DataAnnotations.StringLength(100)]
@@ -129,22 +101,11 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Grade { get; set; }
 
-        
-        
-
-
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string PaymentStatus { get; set; }
-        [System.ComponentModel.DataAnnotations.Required]
-        public decimal? CoursePrice { get; set; }
-
-        public string _bookingDate { get; set; }
 
         public object Clone()
         {
             return this.MemberwiseClone();
         }
-
-
     }
 }

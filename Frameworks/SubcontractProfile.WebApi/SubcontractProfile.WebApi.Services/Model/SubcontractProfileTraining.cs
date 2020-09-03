@@ -28,32 +28,32 @@ namespace SubcontractProfile.WebApi.Services.Model
 
         public System.Guid TrainingId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+      //  [System.ComponentModel.DataAnnotations.Required]
         public System.Guid CompanyId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
-        [System.ComponentModel.DataAnnotations.Required]
+      //  [System.ComponentModel.DataAnnotations.Required]
         public string Course { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+       // [System.ComponentModel.DataAnnotations.Required]
         public decimal? CoursePrice { get; set; }
 
 
-        [System.ComponentModel.DataAnnotations.Required]
+       // [System.ComponentModel.DataAnnotations.Required]
         public System.DateTime RequestDate { get; set; }
 
         public string Remark { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+      //  [System.ComponentModel.DataAnnotations.Required]
         public decimal TotalPrice { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+      //  [System.ComponentModel.DataAnnotations.Required]
         public decimal Vat { get; set; }
 
         public decimal? Tax { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(10)]
-        [System.ComponentModel.DataAnnotations.Required]
+      //  [System.ComponentModel.DataAnnotations.Required]
         public string Status { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
@@ -111,7 +111,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Position { get; set; }
 
-        public DateTime? BookingDate { get; set; }
+        public string BookingDate { get; set; }
         public string RemarkForAis { get; set; }
 
         public DateTime? TestDate { get; set; }
@@ -120,6 +120,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Grade { get; set; }
 
+        public string PaymentStatus { get; set; }
 
         public object Clone()
         {

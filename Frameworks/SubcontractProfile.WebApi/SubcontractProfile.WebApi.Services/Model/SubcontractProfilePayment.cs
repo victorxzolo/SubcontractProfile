@@ -83,8 +83,8 @@ namespace SubcontractProfile.WebApi.Services.Model
         public System.Guid TrainingId { get; set; }
 
      
-        [System.ComponentModel.DataAnnotations.Required]
-        public System.Guid CompanyId { get; set; }
+        //[System.ComponentModel.DataAnnotations.Required]
+        public System.Guid? CompanyId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Request_no { get; set; }

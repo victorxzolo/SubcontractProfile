@@ -89,6 +89,7 @@ $(document).ready(function () {
     BindDataTypeTransfer();
     BindBankPayment();
     BindDDLBank();
+    GetStatus();
     //GetDropDownLocation();
     //BindDDLTeam();
 
@@ -466,6 +467,32 @@ function DownloadFileSlip() {
     // $('#ItemPreview').attr('src', '/Payment/DownloadCSV?paymentid=' + $('#hdpaymentId').val());
     
     $('#linkdownload').attr("href", '/Payment/Downloadfile?paymentid=' + $('#hdpaymentId').val());
+
+}
+
+function GetStatus() {
+
+    $.ajax({
+        type: "POST",
+        url: "/Payment/GetDataStatus",
+        success: function (data) {
+            if (data != null) {
+
+                $('#ddlpaymentstatusais').empty();
+
+
+                $.each(data.response, function () {
+                    $('#ddlpaymentstatusais').append($("<option></option>").val(this.Value).text(this.Text));
+                });
+            }
+            else {
+                $('#ddlpaymentstatusais').empty();
+                $('#ddlpaymentstatusais').append($("<option></option>").val("").text("Select Status"));
+            }
+        },
+        failure: function (msg) {
+        }
+    });
 
 }
 

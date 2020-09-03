@@ -86,7 +86,7 @@
                 </div>
                 <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">หมู่ที่ :</label>
                 <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                    <input type="text" class="form-control inputValidationAddress form-control-sm" id="txtVillageNo" required />
+                    <input type="text" class="form-control form-control-sm" id="txtVillageNo" />
                     <div class="invalid-tooltip">
                         Please provide a valid moo.
                     </div>
@@ -97,7 +97,7 @@
             <div class="form-group row">
                 <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">หมู่บ้าน :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control inputValidationAddress form-control-sm" id="txtvillage" required />
+                    <input type="text" class="form-control form-control-sm" id="txtvillage" />
                     <div class="invalid-tooltip">
                         Please provide a valid village name.
                     </div>
@@ -245,10 +245,10 @@
 
 </div>
 
-<div class="row">
+<div class="row needs-validation-step2-table" novalidate>
     <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-        <div class="table-responsive pt-3">
-            <table class="table table-bordered table-hover" id="tbaddressstep2" width="100%">
+        <div class="table-responsive pt-3" style="overflow-y:hidden;">
+            <table class="table table-bordered table-hover inputValidationAddress" id="tbaddressstep2" width="100%" required>
                 <thead class="thead-light">
                     <tr>
                         <th scope="col"></th>

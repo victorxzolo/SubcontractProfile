@@ -66,7 +66,8 @@
                 var forms = document.getElementsByClassName('needs-validation-newregister');
                 var validation = Array.prototype.filter.call(forms, function (form) {
                     if (Validate(".form-control.inputValidation", ".custom-control-input.inputValidation"
-                        , ".custom-select.inputValidation", ".custom-file-input.inputValidation")) {
+                        , ".custom-select.inputValidation", ".custom-file-input.inputValidation") || ValidateUser()
+                    ) {
                         event.preventDefault();
                         event.stopPropagation();
                         
@@ -93,10 +94,14 @@
                 var forms = document.getElementsByClassName('needs-validation-dealer');
                 var validation = Array.prototype.filter.call(forms, function (form) {
                     if (Validate(".form-control.inputValidationdealer", ".custom-control-input.inputValidationdealer"
-                        , ".custom-select.inputValidationdealer", ".custom-file-input.inputValidationdealer")) {
+                        , ".custom-select.inputValidationdealer", ".custom-file-input.inputValidationdealer") ||  ValidateUser()
+                    ) {
                         event.preventDefault();
                         event.stopPropagation();
 
+                    }
+                    else if (!Comparepassword()) {
+                        return false;
                     }
                     else {
                         BindRegion();
@@ -114,14 +119,36 @@
             }
         }
         else if (step == 2) {
-            $('#smartwizard').smartWizard("next");
-            return true;
+            //var forms = document.getElementsByClassName('needs-validation-step2-table');
+            //var validation = Array.prototype.filter.call(forms, function (form) {
+                if (tbaddressstep2.data().count()==0) {
+                    //event.preventDefault();
+                    //event.stopPropagation();
+                    bootbox.alert({
+                        title: "System Information",
+                        message: "กรุณาเพิ่มข้อมูลที่อยู่",
+                        size: "small",
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
+                }
+                else {
+                    $('#smartwizard').smartWizard("next");
+
+                    return true;
+
+                }
+                //form.classList.add('was-validated');
+            //});
         }
         else if (step == 3) {
             var forms = document.getElementsByClassName('needs-validation-step3');
             var validation = Array.prototype.filter.call(forms, function (form) {
                 if (Validate(".form-control.inputValidationContract", ".custom-control-input.inputValidationContract"
-                    , ".custom-select.inputValidationContract", ".custom-file-input.inputValidationContract")) {
+                    , ".custom-select.inputValidationContract", ".custom-file-input.inputValidationContract") ||
+                    (isEmail($('#txtcompany_Email').val()) || isEmail($('#txtcontract_email').val()))
+                ) {
                     event.preventDefault();
                     event.stopPropagation();
 
@@ -129,6 +156,7 @@
                 else {
                     BindDDLBank();
                     BindDDLCompanyType();
+                    BindDDlBankAccountType();
                     $('#smartwizard').smartWizard("next");
                     
                     return true;
@@ -142,7 +170,7 @@
             var forms = document.getElementsByClassName('needs-validation-step4');
             var validation = Array.prototype.filter.call(forms, function (form) {
                 if (Validate(".form-control.inputValidationBank", ".custom-control-input.inputValidationBank"
-                           , ".custom-select.inputValidationAddress",".custom-file-input.inputValidationBank")) {
+                    , ".custom-select.inputValidationBank",".custom-file-input.inputValidationBank")) {
                     event.preventDefault();
                     event.stopPropagation();
 
@@ -210,11 +238,15 @@
             dataType: "json",
             error: function (xhr, status, error) {
                 Loading(0);
-                //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-            }
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
+              }
 
         },
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -265,11 +297,15 @@
             dataType: "json",
             error: function (xhr, status, error) {
                 Loading(0);
-                //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-            }
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
+               }
 
         },
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -331,6 +367,7 @@
         var value = tbLocation.rows('.selected').data();
         var lo_id = value[0].location_id;
         $.ajax({
+            async: true,
             type: "POST",
             url: "/Account/GetLocationSession",
             dataType: "json",
@@ -407,11 +444,15 @@
             },
             error: function (xhr, status, error) {
                 Loading(0);
-                //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-            }
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
+             }
         });
 
       
@@ -486,6 +527,14 @@
         $('#SearchRevenue').modal('hide');
     });
 
+    $('#txtcreateEmail').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#erroremail').show();
+        }
+        else {
+            $('#erroremail').hide();
+        }
+    });
 
     function ClearDataModalRevenue() {
         $('#txtsearchrevenue').val('');
@@ -520,6 +569,10 @@
         
     }
 
+    function CheckUsername() {
+        var user = $('#txtcreateuser').val();
+    }
+
 /*************************************/
 
 
@@ -533,14 +586,14 @@
         order: [[1, "asc"]],
         select: true,
         retrieve: true,
-        paging: true,
-        pagingType: "full_numbers",
+        //pagingType: "full_numbers",
         destroy: true,
         searching: false,
         proccessing: true,
         serverSide: true,
-        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        dom: 'rt<"float-left"p><"float-left"l><"float-right"i>',
+        paging: false,
+        //lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        dom: 'rt<"float-right"i>',
         ajax: {
             type: "POST",
             url: "/Account/SearchAddress",
@@ -553,10 +606,14 @@
             },
             error: function (xhr, status, error) {
                 Loading(0);
-                //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
 
         },
@@ -580,16 +637,16 @@
         ],
         language: {
             infoEmpty: "No items to display",
-            lengthMenu: "_MENU_ items per page",
+            //lengthMenu: "_MENU_ items per page",
             zeroRecords: "Nothing found",
             info: "_START_ - _END_  of _TOTAL_  items",
-            infoFiltered: "",
-            paginate: {
-                previous: "<",
-                next: ">",
-                last: ">|",
-                first: "|<"
-            }
+            //infoFiltered: "",
+            //paginate: {
+            //    previous: "<",
+            //    next: ">",
+            //    last: ">|",
+            //    first: "|<"
+            //}
             
         }
     });
@@ -744,17 +801,27 @@
                   
                 }
                 else {
-                    showFeedback("error", data.message, "System Information",
-                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-
+                    bootbox.alert({
+                        title: "System Information",
+                        message: data.message,
+                        size: "small",
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
                 }
             },
             error: function (xhr, status, error) {
                 //Loading(0);
                 //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
         });
     });
@@ -774,18 +841,27 @@
                     BindDatatable(tbaddressstep2, val);
                 }
                 else {
-                    showFeedback("error", data.message, "System Information",
-                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-
+                    bootbox.alert({
+                        title: "System Information",
+                        message: data.message,
+                        size: "small",
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
                 }
             },
             error: function (xhr, status, error) {
                 //Loading(0);
-                //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-            }
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
+               }
         });
     });
 
@@ -882,24 +958,78 @@
                     tbaddressstep2.ajax.reload();
                 }
                 else {
-                    showFeedback("error", data.message, "System Information",
-                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    bootbox.alert({
+                        title: "System Information",
+                        message: data.message,
+                        size: "small",
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
 
                 }
 
             },
             error: function (xhr, status, error) {
                 Loading(0);
-                //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
         });
     }
 
 /*************************************/
 
+/*Step3*/
+    $('#txtcompany_Email').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#errorcompany_Email').show();
+        }
+        else {
+            $('#errorcompany_Email').hide();
+        }
+    });
+    $('#txtcontract_email').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#errorcontract_email').show();
+        }
+        else {
+            $('#errorcontract_email').hide();
+        }
+    });
+    $('#txtdept_of_install_email').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#errorinstall_email').show();
+        }
+        else {
+            $('#errorinstall_email').hide();
+        }
+    });
+    $('#txtdept_of_mainten_email').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#errormainten_email').show();
+        }
+        else {
+            $('#errormainten_email').hide();
+        }
+    });
+    $('#txtdept_of_Account_email').on('keypress', function () {
+        if (isEmail(this.value)) {
+            $('#errorAccount_email').show();
+        }
+        else {
+            $('#errorAccount_email').hide();
+        }
+    });
+
+
+/*************************************/
 
 /*Step4*/
     
@@ -969,21 +1099,47 @@
                             case "commercial_registration_file": $('#hdupfilecommercial_registration').val(data.response); break;
                             case "vat_registration_certificate_file": $('#hdupfilevat_registration_certificate').val(data.response); break;
                         }
-                        showFeedback("success", data.message, "System Information",
-                            "<button type='button' class='btn-border btn-green' data-dismiss='modal' id='btnOKpopup'><i class='fa fa-check icon'></i><span>OK</span></button >")
+                        bootbox.alert({
+                            title: "System Information",
+                            message: data.message,
+                            size: "small",
+                            callback: function (result) {
+                                console.log('This was logged in the callback: ' + result);
+                            }
+                        });
                     }
                     else {
-                        showFeedback("error", data.message, "System Information",
-                            "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+
+                        bootbox.alert({
+                            title: "System Information",
+                            message: data.message,
+                            size: "small",
+                            callback: function (result) {
+                                console.log('This was logged in the callback: ' + result);
+                            }
+                        });
+                        switch (inputId) {
+                            case "company_certified_file": $('#company_certified_file').val('');
+                                $('#lbcompany_certified_file').text('Choose file'); break;
+                            case "commercial_registration_file": $('#commercial_registration_file').val('');
+                                $('#lbcommercial_registration_file').text('Choose file');break;
+                            case "vat_registration_certificate_file": $('#vat_registration_certificate_file').val('');
+                                $('#lbvat_registration_certificate_file').text('Choose file');break;
+                        }
                     }
                    
                 },
                 error: function (xhr, status, error) {
                     Loading(0);
-                    //clearForEdit();
-                    console.log(status);
-                    showFeedback("error", xhr.responseText, "System Information",
-                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+
+                    bootbox.alert({
+                        title: "System Information",
+                        message: "This action is not available.",
+                        size: "small",
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
                 }
             }
         );
@@ -1000,12 +1156,13 @@
         order: [[1, "asc"]],
         select: true,
         retrieve: true,
-        paging: true,
+        paging: false,
         destroy: true,
         searching: false,
         //scrollY: 400,
-        //processing: true,
-        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        processing: true,
+        //scrollY: false,
+        //lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         columns: [
             { "data": "address_type_id", "visible": false },
             { "data": "address_type", orderable: true, },
@@ -1013,10 +1170,17 @@
         ],
         language: {
             infoEmpty: "No items to display",
-            lengthMenu: "_MENU_ items per page",
+            //lengthMenu: "_MENU_ items per page",
             zeroRecords: "Nothing found",
             info: "_START_ - _END_  of _TOTAL_  items",
-            infoFiltered: ""
+            //infoFiltered: "",
+            //paginate: {
+            //    previous: "<",
+            //    next: ">",
+            //    last: ">|",
+            //    first: "|<"
+            //}
+
         }
     });
 
@@ -1179,21 +1343,38 @@
                 Loading(0);
                 console.log(data)
                 if (data.Response.Status) {
-                    showFeedback("success", data.Response.Message, "System Information",
-                        "<button type='button' class='btn-border btn-green' data-dismiss='modal' id='btnOKpopup'><i class='fa fa-check icon'></i><span>OK</span></button >");
+                    bootbox.alert({
+                        title: "System Information",
+                        message: data.Response.Message,
+                        size: "small",
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
                     window.location.href = data.redirecturl;
                 }
                 else {
-                    showFeedback("error", data.Response.Message, "System Information",
-                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                    bootbox.alert({
+                        title: "System Information",
+                        message: data.Response.Message,
+                        size: "small",
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
                 }
             },
             error: function (xhr, status, error) {
                 Loading(0);
                 //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
         });
     });
@@ -1214,17 +1395,27 @@
                     BindDatatable(tbaddressstep5, val);
                 }
                 else {
-                    showFeedback("error", data.message, "System Information",
-                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
-
+                    bootbox.alert({
+                        title: "System Information",
+                        message: data.message,
+                        size: "small",
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
                 }
             },
             error: function (xhr, status, error) {
                 Loading(0);
                 //clearForEdit();
-                console.log(status);
-                showFeedback("error", xhr.responseText, "System Information",
-                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                bootbox.alert({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    size: "small",
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
         });
     }
@@ -1307,19 +1498,23 @@
         $('#lbdept_of_Account_phone').text($('#txtdept_of_Account_phone').val());
         $('#lbdept_of_Account_email').text($('#txtdept_of_Account_email').val());
 
-        $('#lbbank_Name').text($('#txtbank_Name').val());
+        $('#lbbank_Name').text($('#ddlBankname option').filter(':selected').text());
         $('#lbbranch_Name').text($('#txtbranch_Name').val());
         $('#lbbank_account_type_id').text($('#ddlbank_account_type option').filter(':selected').text());
         $('#lbaccount_Number').text($('#txtaccount_Number').val());
-        $('#lbaccount_Name').text($('#ddlaccount_Name option').filter(':selected').text() + ' ' + $('#txtaccount_Name').val());
+
+        var straccname = $('#ddlaccount_Name option').filter(':selected').val() != '' ?
+            $('#ddlaccount_Name option').filter(':selected').text() + ' ' + $('#txtaccount_Name').val() : $('#txtaccount_Name').val()
+
+        $('#lbaccount_Name').text(straccname);
         $('#lbbusiness_type').text($('#ddlbank_account_type option').filter(':selected').text());
 
-
-        $('#lbcompany_certified_file').text($('#company_certified_file').val().split("\\").pop());
-        
-        $('#lbcommercial_registration_file').text($('#commercial_registration_file').val().split("\\").pop());
-       
-        $('#lbvat_registration_certificate_file').text($('#vat_registration_certificate_file').val().split("\\").pop());
+        var strcer = $('#lbcompany_certified_file').text();
+        $('#lbcompany_certified_file_5').text(strcer);
+        var strreg = $('#lbcommercial_registration_file').text();
+        $('#lbcommercial_registration_file_5').text(strreg);
+        var strvat = $('#lbvat_registration_certificate_file').text();
+        $('#lbvat_registration_certificate_file_5').text(strvat);
 
 
         BindDataAddress();
@@ -1348,10 +1543,14 @@ function BindDDLprovince(regionid) {
         },
         error: function (xhr, status, error) {
             Loading(0);
-            //clearForEdit();
-            console.log(status);
-            showFeedback("error", xhr.responseText, "System Information",
-                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1376,11 +1575,14 @@ function BindDDLdistrict(province) {
 
         },
         error: function (xhr, status, error) {
-         
-            //clearForEdit();
-            console.log(status);
-            showFeedback("error", xhr.responseText, "System Information",
-                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1403,17 +1605,10 @@ function BindDDLsubdistrict(district) {
                     $('#ddlsubdistrict').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
                 });
                 $.each(data.responsezipcode, function () {
-
-                    if (this.Text == "กรุณาเลือกรหัสไปรษณีย์") {
-
-                        $('#ddlzipcode').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
-                    }
-                    else {
-                        $('#ddlzipcode').append($("<option></option>").val(this.Value).text(this.Text));
-                    }
+                    $('#ddlzipcode').append($("<option></option>").val(this.Value).text(this.Text));
                 })
 
-                $('#ddlzipcode').val("")
+                $('#ddlzipcode').val('')
             }
           
 
@@ -1421,9 +1616,14 @@ function BindDDLsubdistrict(district) {
         error: function (xhr, status, error) {
            
             //clearForEdit();
-            console.log(status);
-            showFeedback("error", xhr.responseText, "System Information",
-                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1470,9 +1670,14 @@ function BindDDLTitle() {
         error: function (xhr, status, error) {
             Loading();
             //clearForEdit();
-            console.log(status);
-            showFeedback("error", xhr.responseText, "System Information",
-                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1499,9 +1704,14 @@ function BindRegion() {
         error: function (xhr, status, error) {
             Loading(0);
             //clearForEdit();
-            console.log(status);
-            showFeedback("error", xhr.responseText, "System Information",
-                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1528,9 +1738,14 @@ function BindDDLBank() {
         error: function (xhr, status, error) {
             Loading(0);
             //clearForEdit();
-            console.log(status);
-            showFeedback("error", xhr.responseText, "System Information",
-                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1557,9 +1772,14 @@ function BindDDLCompanyType() {
         error: function (xhr, status, error) {
             Loading(0);
             //clearForEdit();
-            console.log(status);
-            showFeedback("error", xhr.responseText, "System Information",
-                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1596,10 +1816,63 @@ function BindAddressType() {
             Loading(0);
             //clearForEdit();
             console.log(status);
-            showFeedback("error", xhr.responseText, "System Information",
-                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
+}
+
+function BindDDlBankAccountType() {
+    Loading();
+    $.ajax({
+        type: "POST",
+        url: "/Account/GetDataBankAccountType",
+        //data: { province_id: province },
+        dataType: "json",
+        success: function (data) {
+            Loading(0);
+            if (data != null) {
+                $('#ddlbank_account_type').empty();
+
+                $.each(data.response, function () {
+                    $('#ddlbank_account_type').append($("<option></option>").val(this.Value).text(this.Text));
+                });
+            }
+
+
+        },
+        error: function (xhr, status, error) {
+            Loading(0);
+            //clearForEdit();
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
+        }
+    });
+}
+
+function isEmail(email) {
+    var haserror = false;
+    var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{2,4}/.test(email);
+    if (!re) {
+        haserror = true;
+       
+    } else {
+        haserror = false;
+       
+    }
+    return haserror;
 }
 
 function Validate(formcontrol, custom,customselect,cutomupload) {
@@ -1690,6 +1963,26 @@ function Validate(formcontrol, custom,customselect,cutomupload) {
             }
         }
     });//customupload
+    return hasError;
+}
+
+function ValidateUser() {
+    var hasError = false;
+    var forms = document.getElementsByClassName('needs-validation-user');
+    var validation = Array.prototype.filter.call(forms, function (form) {
+        if ($('#txtcreateuser').val() == "" || isEmail($('#txtcreateEmail').val()) || $('#txtcreatepass').val() == "" || $('#txtconfirmpass').val() == "")
+        {
+            event.preventDefault();
+            event.stopPropagation();
+            hasError = true;
+        }
+        else {
+            hasError = false;
+
+        }
+        form.classList.add('was-validated');
+    });
+
     return hasError;
 }
 

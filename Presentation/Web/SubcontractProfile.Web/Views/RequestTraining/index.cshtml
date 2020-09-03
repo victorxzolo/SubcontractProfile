@@ -1,0 +1,966 @@
+﻿
+@{
+    ViewData["Title"] = "RequestTraining";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+
+
+                    <div class="skills layout-spacing ">
+                        <div class="widget-content widget-content-area">
+                            <h3 class="">Search Request Training</h3>
+                            <div class="widget-content1">
+
+                                <div class="form-row mb-4">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputLocationCodeMain">Company Name</label>
+
+
+                                        <div class='input-group'>
+                                            <input type="text" class="form-control" id="txtCompNo" placeholder="Company Name" />
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="">Tax ID</label>
+                                        <input type="text" class="form-control" id="txttaxID" placeholder="TaxID">
+
+                                    </div>
+
+              
+                                    <div class="form-group col-md-6">
+                                        <label for="inputLocationCodeMain">Request No.</label>
+                                        <input type="text" class="form-control" id="txtReqNo" placeholder="Request No.">
+
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="inputStatus">Status Training</label>
+                 
+
+                                        <select id="inputStatus" class="form-control" data-live-search="true"></select>
+
+
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="txttaxid">Request Date From</label>
+                                        <div class='input-group date p-0' id='regisdatefrom'>
+                                            <input type='text' class="form-control" id="reqdateFrom" />
+                                            <div class="input-group-append input-group-addon">
+                                                <span class="input-group-text px-4">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="txttaxid">Request Date To</label>
+                                        <div class='input-group date p-0' id='regisdateTo'>
+                                            <input type='text' class="form-control" id="reqdateTo" />
+                                            <div class="input-group-append input-group-addon">
+                                                <span class="input-group-text px-4">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+
+                                <div style="text-align:center">
+
+                                    <button id="btnMainClear" type="button" onclick="clearField();" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
+                                    <button id="btnSearchRqt" type="button" onclick="inittbSearchResult();" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+                                  
+
+                                </div>
+
+                             
+                            </div>
+
+
+                            <br />
+                            <div class="widget-heading">
+                                <h3 class="">Search Result</h3>
+
+                            </div>
+                    
+                            <div class="table-responsive">
+                                <table id="tbSearchResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-2">
+                                    <thead>
+                                        <tr>
+                                            @**@
+                                            <th>Action</th>
+                                            <th>Request No.</th>
+                                            <th>Company Name</th>
+                                            <th>TaxID </th>
+                                            <th>Request Date </th>
+                                            <th>Request Status </th>
+                                            <th>Payment Status </th>
+                                            <th>Course Name</th>
+                                            <th>Course Price</th>
+                                            <th>Vat</th>
+                                            <th>Total Price</th>
+                                        </tr>
+
+                                    </thead>
+
+                                </table>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                @section modalpanel {
+
+                    <div id="AdjustReqTraining" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 id="hTitleEdit" class="modal-title">Request Training</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <form id="frNew" class="needs-validation" novalidate>
+                                    <div class="container">
+                                        <div class="modal-body">
+
+                                                            <div class="row mt-4 ml-3 mr-1">
+
+                                                                <div class=" col-md-6 mt-3">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <label>Company Name:</label>
+                                                                        </div>
+                                                                        <div class="col-md-7">
+                                                                            <label id="lblcompname"></label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class=" col-md-6 mt-3">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <label>Tax ID : </label>
+                                                                        </div>
+                                                                        <div class="col-md-7">
+                                                                            <label id="lbltaxid"></label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                @*<div class=" col-md-6 mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Contact name:</label>
+                </div>
+                <div class="col-md-7">
+                    <label id="lblcontname"></label>
+                </div>
+            </div>
+        </div>*@
+                                                                <div class=" col-md-6 mt-4">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <label>Contact Phone:</label>
+                                                                        </div>
+                                                                        <div class="col-md-7">
+                                                                            <label id="lblcontphone"></label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class=" col-md-6 mt-4">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <label>Email :</label>
+                                                                        </div>
+                                                                        <div class="col-md-7">
+                                                                            <label id="lblemail"></label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class=" col-md-6 mt-4">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <label>Course:</label>
+                                                                        </div>
+                                                                        <div class="col-md-7 training_couse">
+                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class=" col-md-6 mt-4">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <label>Course Price:</label>
+                                                                        </div>
+                                                                        <div class="col-md-7">
+                                                                            <label id="lblcourseprice"></label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                               
+                                                                <div class=" col-md-12 mt-3">
+                                                                    <div class="row">
+                                                                        <div class="col-md-2">
+                                                                            <label>Remark:</label>
+                                                                        </div>
+                                                                        <div class="col-md-9 ">
+                                                                            <textarea id="lblRemark" name="w3review" style="width:inherit;border-color:#E0E0E0" disabled="disabled" rows="6"> </textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                            <div class="container">
+                                                <div class="row mt-5 ml-3 mr-3">
+                                                    <div class="col-md-12 ">
+                                                        <p5><strong>ผู้เข้าอบรม</strong></p5>
+                                                        <hr>
+                                                    </div>
+                                                    <div class="row col-sm-12">
+                                                        <div class="table-responsive">
+                                                            <table id="tbSearchEngineer" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                                                                <thead>
+                                                                    <tr>
+
+                                                                        <th width="20%">LocationName</th>
+                                                                        <th width="20%">TeamName</th>
+                                                                        <th width="15%">Position</th>
+                                                                        <th width="15%">Engineer</th>
+                                                                        <th width="15%">ContactPhone</th>
+                                                                        <th width="15%">Email</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
+
+                                                        <input type="hidden" id="Coursecost" />
+                                                        <input type="hidden" id="rowCount" />
+                                                        <input type="hidden" id="trnid" />
+                                                        <input type="hidden" id="compid" />
+
+                                                        <input type="hidden" id="teamid" />
+                                                        <input type="hidden" id="engid" />
+                                                        
+                                                        <input type="hidden" id="locid" />
+                                                    </div>
+                                                    <div class="col-md-12 mt-5">
+                                                        <div class="row">
+                                                            <div class="col-md-9 "></div>
+                                                            <div class="col-md-3 col-sm-12">
+                                                                <div class="row ">
+                                                                    <div class="col-md-12">
+                                                                        <div class="row">
+                                                                            <div class="col-md-6">
+                                                                                <p>ราคารวม</p>
+                                                                            </div>
+                                                                            <div class="col-md-6" style="text-align: left;">
+                                                                                <label id="lblttcost"></label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-md-12 mt-3">
+                                                                        <div class="row">
+                                                                            <div class="col-md-6">
+                                                                                <p>Vat7%</p>
+                                                                            </div>
+                                                                            <div class="col-md-6" style="text-align: left;">
+                                                                                <label id="lblvat7"></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12 mt-3">
+                                                                        <div class="row">
+                                                                            <div class="col-md-6">
+                                                                                <p>ราคาสุทธิ(บาท) </p>
+                                                                            </div>
+                                                                            <div class="col-md-6" style="text-align: left;">
+                                                                                <label id="lblCousetotal"></label> 
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="container">
+                                                <div class="row mt-5 ml-3 mr-3">
+                                                    <div class="col-md-12 ">
+                                                        <p class="h5"><strong>สำหรับเจ้าหน้าที่ AIS ( เลือกวัน Training)</strong></p>
+                                                        <hr>
+                                                    </div>
+                                                    <div class=" col-md-6 mt-3">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> booking Training Date:</label>
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                <div class='input-group date p-0' id='bookdatefrom'>
+                                                                    <input type='text' class="form-control" id="bookingDate" />
+                                                                    <div class="input-group-append input-group-addon">
+                                                                        <span class="input-group-text px-4">
+                                                                            <i class="fa fa-calendar"></i>
+                                                                        </span>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class=" col-md-6 mt-3">
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <label>Remark:</label>
+                                                            </div>
+                                                            <div class="col-md-9 ">
+                                                                <textarea id="txtaisremark" name="w3review" style="width:inherit;border-color:#E0E0E0" rows="6"> </textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                                                Close
+                                            </button>
+                                            <button id="btnSave" onclick="onSave();"  class="btn btn-primary">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                                Booking
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                   
+
+                 
+
+                }
+                @section scripts{ 
+                     
+
+                    <script type="text/javascript">
+                        var oTable;
+                        var oTableEngineer;
+                        var compname =  $("#txtCompNo").val();
+
+
+
+
+                        $(document).ready(function () {
+
+                            getRadioCourse();
+                            // GetDropDownByNameTrainigCourse();
+                            GetDropDownByNameTrainigStatus();
+
+
+                            $('#txtCompNo').autocomplete({
+                                lookup: function (query, done) {
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "/RequestTraining/GetCompany",
+                                        data: { companyname: query },
+                                        dataType: "json",
+                                        success: function (data) {
+                                            var suggestions = [];
+                                            $.each(data.response, function () {
+                                                var d = {
+                                                    "value": this.CompanyNameTh, "data": this.CompanyId
+                                                }
+                                                suggestions.push(d);
+                                            });
+                                            var result = { suggestions };
+
+                                            done(result);
+
+
+                                        },
+                                        error: function (xhr, status, error) {
+
+                                        }
+                                    });
+                                },
+                                minChars: 1,
+                                onSelect: function (suggestion) {
+                                    $('#selection').html('You selected: ' + suggestion.value);
+                                },
+                                showNoSuggestionNotice: true,
+                                noSuggestionNotice: 'Sorry, no matching results',
+                            });
+
+
+                            $('#regisdatefrom').datetimepicker({
+                                format: "DD/MM/YYYY",
+                                showClear: true,
+                                showClose: true,
+                                icons: {
+                                    time: 'fa fa-clock-o',
+                                    date: 'fa fa-calendar',
+                                    up: 'fa fa-chevron-up',
+                                    down: 'fa fa-chevron-down',
+                                    previous: 'fa fa-chevron-left',
+                                    next: 'fa fa-chevron-right',
+                                    today: 'icon-screenshot',
+                                    clear: 'fa fa-trash',
+                                    close: 'fa fa-time'
+                                }
+                            });
+
+
+
+                            $('#regisdateTo').datetimepicker({
+                                format: "DD/MM/YYYY",
+                                showClear: true,
+                                showClose: true,
+                                icons: {
+                                    time: 'fa fa-clock-o',
+                                    date: 'fa fa-calendar',
+                                    up: 'fa fa-chevron-up',
+                                    down: 'fa fa-chevron-down',
+                                    previous: 'fa fa-chevron-left',
+                                    next: 'fa fa-chevron-right',
+                                    today: 'icon-screenshot',
+                                    clear: 'fa fa-trash',
+                                    close: 'fa fa-time'
+                                }
+                            });
+
+
+                            $('#bookdatefrom').datetimepicker({
+                                format: "DD/MM/YYYY",
+                                showClear: true,
+                                showClose: true,
+                                icons: {
+                                    time: 'fa fa-clock-o',
+                                    date: 'fa fa-calendar',
+                                    up: 'fa fa-chevron-up',
+                                    down: 'fa fa-chevron-down',
+                                    previous: 'fa fa-chevron-left',
+                                    next: 'fa fa-chevron-right',
+                                    today: 'icon-screenshot',
+                                    clear: 'fa fa-trash',
+                                    close: 'fa fa-time'
+                                }
+                            });
+
+
+                        });
+
+                        //txtCompNo
+
+
+
+                        function onSaveTraining() {
+
+                            var model = new Object();
+                            model.TrainingId = $('#trnid').val();
+                            model.CompanyId = $('#compid').val();
+                            model._bookingDate = $('#bookingDate').val();
+                            // model.StaffCode = $('#StaffCode').val();
+                            model.RemarkForAis = $('#txtaisremark').val();
+
+                             //  console.log("TTID" + trainingID);
+                                 $.ajax({
+                                      url: '@Url.Action("onSaveTraining", "RequestTraining")',
+                                      type: 'POST',
+                                      data: {
+                                          'model': model,
+                                      },
+                                      dataType: "json",
+                                     success: function (result) {
+                                         console.log(result)
+                                         if (result != null) {
+                                             //console.log()
+                                             /// alert(result.ret_msg);
+                                             bootbox.alert(result.Message);
+                                             $('#trnid').val('');
+                                             $('#compid').val('');
+                                             $('#bookingDate').val('');
+                                             $('#txtaisremark').val('');
+
+                                         }
+                                         else {
+                                             bootbox.alert(result.Message);
+                                         }
+
+
+                                      },
+                                     error: function (result) {
+                                         bootbox.alert(result.Message);
+                                      }
+                                 });
+
+
+                        }
+
+
+                        function onSave() {
+
+                           // var model = new Object();
+                            var TrainingId = $('#trnid').val();
+                            var CompanyId = $('#compid').val();
+                            var TeamId = $('#teamid').val();
+                            var EngineerId = $('#engid').val();
+                            var LocationId = $('#locid').val();
+                            var _bookingDate = $('#bookingDate').val();
+
+                            var RemarkForAis = $('#txtaisremark').val();
+                            if (_bookingDate == "" || _bookingDate == null || _bookingDate == " ") {
+
+                                alert("Please Confirm Booking Date !!!");
+                            }
+                            else {
+                                if (!($("#bookingDate").val(), "dd/MM/yyyy")) {
+                                    alert("Date is not a format !!!");
+                                }
+                                else {
+                                           $.ajax({
+                                      url: '@Url.Action("onSave", "RequestTraining")',
+                                      type: 'POST',
+                                      data: {
+                                          'trainingId': TrainingId,
+                                          'companyId': CompanyId,
+                                          'teamId': TeamId,
+                                          'engineerId': EngineerId,
+                                          'locationId': LocationId,
+                                          'bookingDate': _bookingDate,
+                                          'RemarkForAis': RemarkForAis,
+                                      },
+                                     dataType: "json",
+
+                                     success: function (result) {
+                                        
+                                         // console.log(result);
+                                       //  alert("Update Success.");
+                                         if (result != null) {
+                                           //  alert('success');
+                                            
+                                             /// alert(result.ret_msg);
+                                             alert("Update Success.");
+                                            // alert(result.Message);
+                                             $('#trnid').val('');
+                                             $('#compid').val('');
+                                             $('#bookingDate').val('');
+                                             $('#txtaisremark').val('');
+
+                                         }
+                                         else {
+                                             // alert(result.Message);
+                                             alert("Update Success..");
+                                          //  alert('success error');
+                                         }
+
+
+                                      },
+                                 });
+                                }
+                               
+
+                            }
+
+                        }
+
+
+
+
+
+
+              function GetDropDownByNameTrainigStatus() {
+                //  alert('T');
+                    $.ajax({
+                        type: 'GET',
+                        url: '@Url.Action("GetDropDownList", "RequestTraining")',
+                        data: { '_ddlType': 'training_status' },
+                        dataType: 'json',
+                        success: function (data) {
+
+                            $("#inputStatus").empty();
+                            $("#inputStatus").append('<option value="ALL">--Please All--</option>');
+                            $.each(data, function (id, result) {
+                                $("#inputStatus").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text +'</option>');
+                                });
+                            },
+                            failure: function () {
+                                $("#inputStatus").empty();
+                                $("#inputStatus").append('<option value="-1">--Please All--</option>');
+                            }
+                        });
+                        }
+
+                        function getRadioCourse() {
+                            $('.training_couse').empty();
+                            //$('.training_couse').append('');
+                            $.ajax({
+                                type: "POST",
+                                url: "/RequestTraining/GetDataCourse",
+                                data: { '_ddlType': 'training_couse' },
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data != null) {
+                                        $.each(data.response, function () {
+                                            var strtext = this.dropdown_text;
+                                            var strvalue = this.dropdown_value;
+                                            var value = this.value1;
+                                            var str = "<div class='custom-control custom-radio custom-control-inline'>\
+                        <input type='radio' class='custom-control-input inputValidation' name='optionsRadios' id='rd"+ strvalue + "' value='" + strvalue + "' />\
+                        <label class='custom-control-label' for='rd"+ strvalue + "'>" + strtext + "</label></div >"
+                                            $('.training_couse').append(str);
+
+                                          //  alert(value);
+                                            $('#lblcourseprice').html(value);
+
+                                            $('#Coursecost').val(value);
+                                           //  alert(value);
+                                        });
+
+                                    }
+
+
+                                },
+                                error: function (xhr, status, error) {
+
+                                }
+                            });
+
+
+                        }
+
+
+    function getTeamByLocationId(locationId) {
+        var compnanyid = $("#txtCompNo").val();
+        var locationId = $("#selLocationName").val();
+              $.ajax({
+                  url: '@Url.Action("GetTeam", "RequestTraining")',
+                  type: 'POST',
+                  data: {
+                      'companyId': compnanyid,
+                      'locationId': locationId
+                  },
+                  dataType: "json",
+                  success: function (data) {
+                      $("#selTeamName").empty();
+                      $("#selTeamName").append('<option value="-1">--Please All--</option>');
+                      $.each(data, function (id, result) {
+                          $("#selTeamName").append('<option value="' + result.TeamId + '">' + result.TeamNameTh + '</option>');
+                      });
+                  },
+                  failure: function () {
+                      $("#selTeamName").empty();
+                      $("#selTeamName").append('<option value="-1">--Please All--</option>');
+                  }
+              });
+         }
+
+
+
+          function GetDropDownLocationByCompany() {
+                  var compnanyid = $("#txtCompNo").val();
+                    $.ajax({
+                        type: 'GET',
+                        url: '@Url.Action("GetLocation","RequestTraining")',
+                        data: { 'companyId': compnanyid },
+                        dataType: 'json',
+                        success: function (data) {
+
+                            $("#selLocationName").empty();
+                            $("#selLocationName").append('<option value="-1">--Please All--</option>');
+                            $.each(data, function (id, result) {
+                                $("#selLocationName").append('<option value="' + result.LocationId + '">' + result.LocationNameTh +'</option>');
+                                });
+                            },
+                            failure: function () {
+                                $("#selLocationName").empty();
+                                $("#selLocationName").append('<option value="-1">--Please All--</option>');
+                            }
+                        });
+                }
+
+                        function clearField() {
+
+                            $("#txtCompNo").val('');
+                            $("#txttaxid").val('');
+
+                            $("#txtReqNo").val('');
+                            $('#inputStatus').val('ALL');
+                            $("#reqdateFrom").val('');
+                            $("#reqdateTo").val('');
+
+                        }
+
+
+
+
+
+                        function inittbSearchResult() {
+
+                            oTable = $('#tbSearchResult').DataTable({
+                                processing: true, // for show progress bar
+                                serverSide: true, // for process server side
+                                filter: false, // this is for disable filter (search box)
+                                orderMulti: false, // for disable multiple column at once
+                                pageLength: 10,
+                                order: [],
+                                autoWidth: false,
+                                searching: false,
+                                destroy: true,
+                                lengthChange: false,
+                                "oLanguage": {
+                                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                                    "sSearch": false,
+                                    "sLengthMenu": "Results :  _MENU_",
+                                },
+                                "scrollX": true,
+                                "language": {
+                                    "zeroRecords": "No data found.",
+                                    "decimal": ",",
+                                    "thousands": "."
+                                },
+                                ajax: {
+                                    url: '/RequestTraining/Search',
+                                    type: "POST",
+                                    datatype: "JSON",
+                                    //dataSrc:"",
+                                    data: function (d) {
+
+                                        d.companyName = $("#txtCompNo").val(),
+
+                                            d.Status = $("select[id$=inputStatus]").val(),
+                                            d.RequestNo = $("#txtReqNo").val(),
+                                            d.TaxId = $("#txttaxID").val(),
+                                            d.reqDateFrom = $("#reqdateFrom").val(),
+                                            d.reqDateTo = $("#reqdateTo").val()
+
+                                    }
+                                },
+                                columns: [
+
+                                    {
+                                        data: null, width: "10%", render: function (data, type, row) {
+                                            return "  <ul class='table-controls'><li> <a href='#' onclick=openModal('edit','" + row.TrainingId + "');return false;  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='แก้ไข'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a></li> ";
+
+                                        }
+                                        // orderable: false,
+                                        //className: 'text-center'
+                                    },
+
+                                    { "data": "RequestNo", "width": "20%" },
+
+                                    { "data": "CompanyNameTh", "width": "20%" },
+                                    { "data": "TaxId", "width": "20%" },
+                                    { "data": "RequestDate", "width": "20%" },
+                                    { "data": "Status", "width": "20%" },
+                                    { "data": "PaymentStatus", "width": "20%" },
+                                    { "data": "Course", "width": "20%" },
+                                    { "data": "CoursePrice", "width": "20%" },
+                                    { "data": "Vat", "width": "20%" },
+                                    { "data": "TotalPrice", "width": "20%" }
+
+                                ],
+                                "order": [[0, "desc"]],
+                                "stripeClasses": [],
+                                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+                            });
+
+                        }
+
+                        function openModal(mode, CompanyId) {
+                           //
+                           // oTableEngineer.clear().draw();
+                            $('#AdjustReqTraining').modal('show');
+                            $('input[name="optionsRadios"][value="01"]').attr('checked', true);
+                            callTrainingDetail(CompanyId);
+                        }
+                        function callTrainingDetail(trainingID) {
+                          //  console.log("TTID" + trainingID);
+                                 $.ajax({
+                                      url: '@Url.Action("GetTraining", "RequestTraining")',
+                                      type: 'POST',
+                                      data: {
+                                          'TrainingID': trainingID,
+
+                                      },
+                                      dataType: "json",
+                                     success: function (result) {
+
+                                         if (result != null) {
+                                             console.log(result);
+                                             $('#lblcompname').html(result.CompanyNameTh);
+                                             $('#lbltaxid').html(result.TaxId);
+
+
+                                             $('#lblemail').html(result.ContractEmail);
+                                             $('#lblcontphone').html(result.ContractPhone);
+
+                                             $('#lblRemark').html(result.Remark);
+                                             //course
+                                             $('#lblcourseprice').html(result.CoursePrice);
+                                             $('#Coursecost').val(result.CoursePrice);
+
+                                             inittbEngineer(result.TrainingId);
+                                             $('#trnid').val(result.TrainingId);
+                                             $('#compid').val(result.CompanyId);
+                                             $('#teamid').val(result.TeamId);
+                                             $('#engid').val(result.EngineerId);
+                                             $('#locid').val(result.LocationId);
+
+                                             $('input[name="optionsRadios"][value="' + result.Course + '"]').attr('checked',true);
+                                         }
+                                         else {
+
+                                         }
+
+
+                                      },
+                                      failure: function () {
+
+                                      }
+                                 });
+
+
+                        }
+
+                        function calculateCost(cost,count) {
+
+                            var totalcost = 0;
+                            totalcost = cost * count;
+                            return totalcost;
+                        }
+                        function vat7(cost)
+                        {
+                            const formatter = new Intl.NumberFormat('en-US', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                            });
+
+                            var incvat = 0;
+                            incvat = cost * (7 / 100);
+                            incvat = formatter.format(incvat);
+                           // alert(incvat);
+                            return incvat;
+                        }
+
+
+                        function inittbEngineer(Trainingid) {
+                           var i = 0;
+                            oTableEngineer = $('#tbSearchEngineer').DataTable({
+                                processing: true, // for show progress bar
+                                serverSide: true, // for process server side
+                                filter: false, // this is for disable filter (search box)
+                                orderMulti: false, // for disable multiple column at once
+                                pageLength: 10,
+                                order: [],
+                                autoWidth: false,
+                                searching: false,
+                                destroy: true,
+                                lengthChange: false,
+                                "oLanguage": {
+                                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                                    "sSearch": false,
+                                    "sLengthMenu": "Results :  _MENU_",
+                                },
+                                "scrollX": true,
+                                "language": {
+                                    "zeroRecords": "No data found.",
+                                    "decimal": ",",
+                                    "thousands": "."
+                                },
+                                ajax: {
+                                    url: '/RequestTraining/SearchEngineer',
+                                    type: "POST",
+                                    datatype: "JSON",
+                                    //dataSrc:"",
+                                    data: function (d) {
+
+                                        d.Trainingid = Trainingid
+
+
+                                    }
+                                },
+                                columns: [
+
+                                    { data: "LocationNameTh", width: "20%"},
+                                    { data: "TeamNameTh", width: "20%" },
+                                    { data: "Position", width: "10%" },
+                                    { data: "StaffNameTh", width: "15%" },
+                                    { data: "ContractPhone1", width: "20%" },
+                                    { data: "ContractEmail", width: "15%" }
+
+
+
+                                ],
+                                "order": [[0, "desc"]],
+                                "stripeClasses": [],
+                                "initComplete": function (settings, json) {//here is the tricky part
+                                    var count = $('#tbSearchEngineer tr').length - 1
+                                  //  alert(count);
+
+                                    $('#rowCount').val(count);
+                                    var count = $('#rowCount').val();
+                                    var cost = $('#Coursecost').val();
+                                    // alert(cost);
+                                    //alert(count);
+                                    var ttcost = calculateCost(cost, count);
+
+
+                                    var incvat = vat7(ttcost);
+                                    $('#lblttcost').html(ttcost);
+                                    $('#lblvat7').html(incvat);
+
+                                    var _incvat = parseInt(incvat);
+                                    var _ttcost = parseInt(ttcost);
+                                    var CoursetotalCost = _incvat + _ttcost;
+                                   // console.log(_incvat);
+                                   // console.log(_ttcost);
+                                   // console.log(CoursetotalCost);
+
+                                    $('#lblCousetotal').html(CoursetotalCost);
+                                },
+                                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+                            });
+
+
+                        }
+
+
+
+
+
+
+
+                    </script>
+
+}
+ 
+

@@ -84,8 +84,9 @@ namespace SubcontractProfile.Web
                 endpoints.MapControllerRoute(
                     name: "default",
                      //pattern: "{controller=Home}/{action=Index}/{id?}");
-                    pattern: "{controller=Account}/{action=Login}/{id?}");
-            });
+                      pattern: "{controller=Account}/{action=Login}/{id?}"); //สำหรับ subcontract portal
+                    //pattern: "{controller=Registration}/{action=CompanyVerify}/{id?}"); //สำหรับ fbbportal
+        });
 
             loggerFactory.AddFile("Logs/SubcontractProfileLog-{Date}.txt");
         }

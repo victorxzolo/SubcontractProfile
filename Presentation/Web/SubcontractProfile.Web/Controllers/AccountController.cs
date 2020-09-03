@@ -40,6 +40,8 @@ namespace SubcontractProfile.Web.Controllers
         private string Lang = "";
         private Utilities Util = new Utilities();
         private SubcontractProfileUserModel dataUser = new SubcontractProfileUserModel();
+
+        private const int MegaBytes = 1024 * 1024;
         public AccountController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
@@ -341,18 +343,20 @@ namespace SubcontractProfile.Web.Controllers
                     Value = a.SubDistrictId.ToString()
                 }).OrderBy(c => c.Value).ToList();
 
-               
-                getAllZipcodeList = resultZipCode.Select(c => new SelectListItem
-                {
-                    Text = c.ZipCode,
-                    Value = c.ZipCode
-                }).ToList();
+
+
                 getAllZipcodeList.Add(new SelectListItem
                 {
                     Text = "กรุณาเลือกรหัสไปรษณีย์",
-                    Value = "0"
+                    Value = ""
                 });
-                getAllZipcodeList.OrderBy(d => d.Value).ToList();
+                getAllZipcodeList.AddRange(resultZipCode.Select(c => new SelectListItem
+                {
+                    Text = c.ZipCode,
+                    Value = c.ZipCode
+                }).ToList());
+                
+               
             }
             else
             {
@@ -368,18 +372,18 @@ namespace SubcontractProfile.Web.Controllers
                     Value = a.SubDistrictId.ToString()
                 }).OrderBy(c => c.Value).ToList();
 
-                
-                getAllZipcodeList = resultZipCode.Select(c => new SelectListItem
-                {
-                    Text = c.ZipCode,
-                    Value = c.ZipCode
-                }).ToList();
                 getAllZipcodeList.Add(new SelectListItem
                 {
                     Text = "Select Zip Code",
-                    Value = "0"
+                    Value = ""
                 });
-                getAllZipcodeList.OrderBy(d => d.Value).ToList();
+                getAllZipcodeList.AddRange(resultZipCode.Select(c => new SelectListItem
+                {
+                    Text = c.ZipCode,
+                    Value = c.ZipCode
+                }).ToList());
+
+
             }
 
             return Json(new { responsesubdistrict = getAllSubDistrictList, responsezipcode = getAllZipcodeList });
@@ -747,6 +751,59 @@ namespace SubcontractProfile.Web.Controllers
                 }).OrderBy(c => c.Value).ToList();
             }
             return Json(new { responseaddresstype = getAllAddressTypeList });
+        }
+
+        [HttpPost]
+        public IActionResult GetDataBankAccountType()
+        {
+            var output = new List<SubcontractDropdownModel>();
+            List<SelectListItem> getAllBankAccList = new List<SelectListItem>();
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/bank_account_type");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+            }
+            if (Lang == "")
+            {
+                getsession();
+            }
+            if (Lang == "TH")
+            {
+                output.Add(new SubcontractDropdownModel
+                {
+                    dropdown_text = "กรุณาเลือกประเภทบัญชี",
+                    dropdown_value = ""
+
+                });
+
+                getAllBankAccList = output.Select(a => new SelectListItem
+                {
+                    Text = a.dropdown_text,
+                    Value = a.dropdown_value
+                }).OrderBy(c => c.Value).ToList();
+            }
+            else
+            {
+                output.Add(new SubcontractDropdownModel
+                {
+                    dropdown_text = "Select Acount Type",
+                    dropdown_value = ""
+                });
+                getAllBankAccList = output.Select(a => new SelectListItem
+                {
+                    Text = a.dropdown_text,
+                    Value = a.dropdown_value
+                }).OrderBy(c => c.Value).ToList();
+
+            }
+            return Json(new { response = getAllBankAccList });
         }
 
         #endregion
@@ -1370,6 +1427,23 @@ namespace SubcontractProfile.Web.Controllers
                 List<SubcontractProfileAddressModel> result = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
                 if (result != null && result.Count != 0)
                 {
+                    foreach(var a in result)
+                    {
+                        string straddr = "";
+                        straddr = string.Concat(a.HouseNo != "" ? a.HouseNo : "", " ",
+                                                  a.Building != "" ? "อาคาร " + a.Building : "", " ",
+                                                  a.Floor != "" ? "ชั้นที่ " + a.Floor : "", " ",
+                                                  a.RoomNo != "" ? "ห้องที่ " + a.RoomNo : "", " ",
+                                                  a.VillageName != "" ? "หมู่บ้าน " + a.VillageName : "", " ",
+                                                  a.Moo != null ? "หมู่ที่ " + a.Moo : "", " ",
+                                                  a.Soi != "" ? "ซอย " + a.Soi : "", " ",
+                                                  a.Road != "" ? "ถนน " + a.Road : "", " ",
+                                                  a.SubDistrictId != 0 ? "ตำบล/แขวง " + a.sub_district_name : "", " ",
+                                                  a.DistrictId != 0 ? "อำเภอ/เขต " + a.district_name : "", " ",
+                                                  a.ProvinceId != 0 ? "จังหวัด " + a.province_name : "", " ",
+                                                  a.ZipCode != "" ? a.ZipCode : "");
+                        a.outFullAddress = straddr;
+                    }
                     if (sortDir) //asc
                     {
                         if (sortBy == "address_type")
@@ -1471,11 +1545,11 @@ namespace SubcontractProfile.Web.Controllers
 
                         #region Insert Company
 
-                        if(model.SubcontractProfileType== "NewSubContract")
-                        {
+                        //if(model.SubcontractProfileType== "NewSubContract")
+                        //{
                             string encrypted = Util.EncryptText(model.Password);
                             model.Password = encrypted;
-                        }
+                        //}
 
                         
                         model.Status = "Pending";
@@ -1496,6 +1570,7 @@ namespace SubcontractProfile.Web.Controllers
 
                             if (dataaddr != null && dataaddr.Count != 0)
                             {
+                                SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaft");
 
                                 foreach (var d in dataaddr)
                                 {
@@ -1532,8 +1607,8 @@ namespace SubcontractProfile.Web.Controllers
                             HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
                             if (responseAddress.IsSuccessStatusCode)
                             {
-                                        SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaft");
-                                        res.Status = true;
+                                       
+                                res.Status = true;
                                 res.Message = "Register Success";
                                 res.StatusError = "0";
                             }
@@ -1613,12 +1688,13 @@ namespace SubcontractProfile.Web.Controllers
                         //using (output = System.IO.File.Create(this.GetPathAndFilename(filename)))
                         //    await source.CopyToAsync(output);
 
-                        if (source.ContentType.ToLower() != "image/jpg" &&
-                            source.ContentType.ToLower() != "image/jpeg" &&
-                            source.ContentType.ToLower() != "image/pjpeg" &&
-                            source.ContentType.ToLower() != "image/gif" &&
-                            source.ContentType.ToLower() != "image/x-png" &&
-                            source.ContentType.ToLower() != "image/png" &&
+                        if (
+                            //source.ContentType.ToLower() != "image/jpg" &&
+                            //source.ContentType.ToLower() != "image/jpeg" &&
+                            //source.ContentType.ToLower() != "image/pjpeg" &&
+                            //source.ContentType.ToLower() != "image/gif" &&
+                            //source.ContentType.ToLower() != "image/x-png" &&
+                            //source.ContentType.ToLower() != "image/png" &&
                             source.ContentType.ToLower() != "application/pdf"
                             )
                         {
@@ -1627,43 +1703,53 @@ namespace SubcontractProfile.Web.Controllers
                         }
                         else
                         {
-                            Guid id = Guid.NewGuid();
-                            using (var ms = new MemoryStream())
+                            var fileSize = source.Length;
+                            if (fileSize > MegaBytes)
                             {
-                                source.CopyTo(ms);
-                                var fileBytes = ms.ToArray();
-                                L_File.Add(new FileUploadModal
-                                {
-                                    file_id = id,
-                                    Fileupload = fileBytes,
-                                    typefile = type_file,
-                                    ContentDisposition = source.ContentDisposition,
-                                    ContentType = source.ContentType,
-                                    Filename = filename
-                                });
-                            }
-                            var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
-                            //byte[] byteArrayValue = HttpContext.Session.Get("userUploadfileDaft");
-                            //var data = FromByteArray<List<FileUploadModal>>(byteArrayValue);
-
-                            //var objComplex = HttpContext.Session.GetObject("userUploadfileDaft");
-
-                            if (data != null)
-                            {
-
-                                data.RemoveAll(x => x.file_id.ToString() == fid);
-                                data.Add(L_File[0]);
-                                SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", data);
-
+                                statusupload = false;
+                                strmess = "Upload file is too large.";
                             }
                             else
                             {
-                                // HttpContext.Session.Set("userUploadfileDaft", ToByteArray<List<FileUploadModal>>(L_File));
+                                Guid id = Guid.NewGuid();
+                                using (var ms = new MemoryStream())
+                                {
+                                    source.CopyTo(ms);
+                                    var fileBytes = ms.ToArray();
+                                    L_File.Add(new FileUploadModal
+                                    {
+                                        file_id = id,
+                                        Fileupload = fileBytes,
+                                        typefile = type_file,
+                                        ContentDisposition = source.ContentDisposition,
+                                        ContentType = source.ContentType,
+                                        Filename = filename
+                                    });
+                                }
+                                var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
+                                //byte[] byteArrayValue = HttpContext.Session.Get("userUploadfileDaft");
+                                //var data = FromByteArray<List<FileUploadModal>>(byteArrayValue);
 
-                                SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", L_File);
+                                //var objComplex = HttpContext.Session.GetObject("userUploadfileDaft");
+
+                                if (data != null)
+                                {
+
+                                    data.RemoveAll(x => x.file_id.ToString() == fid);
+                                    data.Add(L_File[0]);
+                                    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", data);
+
+                                }
+                                else
+                                {
+                                    // HttpContext.Session.Set("userUploadfileDaft", ToByteArray<List<FileUploadModal>>(L_File));
+
+                                    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", L_File);
+                                }
+
+                                strmess = "Upload file success";
                             }
-
-                            strmess = "Upload file success";
+                            
                         }
                         
                     }

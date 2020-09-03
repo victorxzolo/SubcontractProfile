@@ -40,6 +40,8 @@ namespace SubcontractProfile.Web.Model
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string region { get; set; }
+
+        public string SubcontractProfileType { get; set; }
     }
 
     public class LoginModel

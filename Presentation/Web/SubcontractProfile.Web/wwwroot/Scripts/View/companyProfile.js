@@ -8,8 +8,9 @@ $(document).ready(function () {
         inittbSearchResult();
         inittbAddressResult();
         inittbRevenue();
-    inittblocation();
-
+        inittblocation();
+   
+ 
     $("#btnSearch").click(function (e) {
         searchdata();
     });
@@ -930,7 +931,10 @@ $(document).ready(function () {
 
         function searchdata() {
         //  oTable.ajax.reload();
-        inittbSearchResult();
+            inittbSearchResult();
+
+            //var subcontract_type = $('#' + '@(ViewBag.subcontract_type)').val();
+            //alert(subcontract_type);
         }
 
         function openModal(mode, companyId) {
@@ -942,6 +946,7 @@ $(document).ready(function () {
             BindDDLTitle();
             BindRegion();
             BindDDLBank();
+            BindDDlBankAccountType();
             BindDDLprovince();
             BindDDLdistrict();
             BindDDLsubdistrict();
@@ -1716,7 +1721,41 @@ function onSaveCompanyProfile() {
                 });
             }
         });
+}
+
+function BindDDlBankAccountType() {
+    
+    $.ajax({
+        type: "POST",
+        url: "/CompanyProfile/GetDataBankAccountType",
+        //data: { province_id: province },
+        dataType: "json",
+        success: function (data) {
+     
+            if (data != null) {
+                $('#AccType').empty();
+
+                $.each(data.response, function () {
+                    $('#AccType').append($("<option></option>").val(this.Value).text(this.Text));
+                });
+            }
+
+
+        },
+        error: function (xhr, status, error) {
+   
+            //clearForEdit();
+            bootbox.alert({
+                title: "System Information",
+                message: "This action is not available.",
+                size: "small",
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
+    });
+}
 
 
 function ValidateUpload() {
