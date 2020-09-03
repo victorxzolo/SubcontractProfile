@@ -303,6 +303,9 @@ namespace SubcontractProfile.Web.Controllers
                         SessionHelper.RemoveSession(HttpContext.Session, "userUploadfileDaftCompany");
 
                         #region Insert Company
+
+                        model.Status = "W";// Waiting
+
                         var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Update"));
                         HttpClient clientCompany = new HttpClient();
                         clientCompany.DefaultRequestHeaders.Accept.Add(
@@ -512,6 +515,21 @@ namespace SubcontractProfile.Web.Controllers
 
                                 }
                             }
+
+                            string straddr = "";
+                            straddr = string.Concat(f.HouseNo != "" ? f.HouseNo : "", " ",
+                                                      f.Building != "" ? "อาคาร " + f.Building : "", " ",
+                                                      f.Floor != "" ? "ชั้นที่ " + f.Floor : "", " ",
+                                                      f.RoomNo != "" ? "ห้องที่ " + f.RoomNo : "", " ",
+                                                      f.VillageName != "" ? "หมู่บ้าน " + f.VillageName : "", " ",
+                                                      f.Moo != null ? "หมู่ที่ " + f.Moo : "", " ",
+                                                      f.Soi != "" ? "ซอย " + f.Soi : "", " ",
+                                                      f.Road != "" ? "ถนน " + f.Road : "", " ",
+                                                      f.SubDistrictId != 0 ? "ตำบล/แขวง " + f.sub_district_name : "", " ",
+                                                      f.DistrictId != 0 ? "อำเภอ/เขต " + f.district_name : "", " ",
+                                                      f.ProvinceId != 0 ? "จังหวัด " + f.province_name : "", " ",
+                                                      f.ZipCode != "" ? f.ZipCode : "");
+                            f.outFullAddress = straddr;
 
                         }
                     }

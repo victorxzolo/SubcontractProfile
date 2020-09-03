@@ -274,6 +274,51 @@ namespace SubcontractProfile.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult CheckUsername(string username)
+        {
+            bool status = true;
+            string message = "";
+            List<SubcontractProfileUserModel> L_user = new List<SubcontractProfileUserModel>();
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string uriString = string.Format("{0}/{1}", strpathAPI + "User/CheckUsername", username);
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var v = response.Content.ReadAsStringAsync().Result;
+                    L_user = JsonConvert.DeserializeObject<List<SubcontractProfileUserModel>>(v);
+                }
+                if (L_user !=null && L_user.Count >0)
+                {
+                    if (Lang == "")
+                    {
+                        getsession();
+                    }
+                    if (Lang == "TH")
+                    {
+                        status = false;
+                        message = "Username นี้มีในระบบแล้ว";
+                    }
+                     else
+                    {
+                        status = false;
+                        message = "Username duplicate";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                status = false;
+                message = e.Message;
+                throw;
+            }
+            return Json(new { Status = status, Message = message });
+        }
         private void getsession()
         {
             Lang = SessionHelper.GetObjectFromJson<string>(_httpContextAccessor.HttpContext.Session, "language");

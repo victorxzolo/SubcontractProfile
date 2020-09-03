@@ -1550,13 +1550,8 @@ function onSaveCompanyProfile() {
                         $('#ddlsubdistrict').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
                     });
                     $.each(data.responsezipcode, function () {
-                        if (this.Text == "กรุณาเลือกรหัสไปรษณีย์") {
 
-                            $('#ddlzipcode').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
-                        }
-                        else {
                             $('#ddlzipcode').append($("<option></option>").val(this.Value).text(this.Text));
-                        }
 
 
                     })

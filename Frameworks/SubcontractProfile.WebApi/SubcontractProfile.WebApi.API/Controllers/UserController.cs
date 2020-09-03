@@ -105,7 +105,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
             }
             else
             {
-                var result = entities.Where(x => x.Username.Contains(username)).ToList();
+                var result = entities.Where(x => x.Username !=null && x.Username.Contains(username)).ToList();
             
                 return result;
 
