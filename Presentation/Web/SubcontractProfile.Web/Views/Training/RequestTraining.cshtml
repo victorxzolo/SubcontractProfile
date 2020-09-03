@@ -504,8 +504,8 @@
                         //   // orderable: false,
                         //    //className: 'text-center'
                         //},
-                        { "data": "location_name_th", "width": "30%" },
-                        { "data": "team_name_th", "width": "30%" },
+                        { "data": "LocationNameTh", "width": "30%" },
+                        { "data": "TeamNameTh", "width": "30%" },
                         { "data": "RequestDate", "width": "30%" },
                         { "data": "Status", "width": "10%" }
 
@@ -596,11 +596,11 @@
          }
          function Addtraining() {
              var model = new Object();
-             model.location_name_th = $('#selLocationNametraining').val();
-             model.team_name_th = $('#selTeamtraining').val();
+             model.LocationNameTh = $('#selLocationNametraining').val();
+             model.TeamNameTh = $('#selTeamtraining').val();
              model.Engineer_ID = $('#selEngineertraining').val();
-             model.contract_phone = $('#txtContactPhone').val();
-             model.contract_email = $('#txtEmail').val();
+             model.ContractPhone = $('#txtContactPhone').val();
+             model.ContractEmail = $('#txtEmail').val();
               $.ajax({
                   url: '@Url.Action("Addtraining", "Training")',
                   type: 'POST',
@@ -631,11 +631,11 @@
                  strtable += '<tr>' +
                      '<td style="text-align:center" ><input type = "checkbox" value="' + result.TrainingId+'"></td>' +
                      '<td>' + (id+1)+'</td>' +
-                     '<td>' + result.location_name_th +'</td>' +
-                     '<td>' + result.team_name_th +'</td>' +
-                     '<td>' + result.Engineer_name +'</td>' +
-                     '<td>' + result.contract_phone+'</td>' +
-                     '<td>' + result.contract_email +'</td>' +
+                     '<td>' + result.LocationNameTh +'</td>' +
+                     '<td>' + result.TeamNameTh +'</td>' +
+                     '<td>' + result.EngineerName +'</td>' +
+                     '<td>' + result.ContractPhone+'</td>' +
+                     '<td>' + result.ContractEmail +'</td>' +
                      '</tr >';
 
              });             

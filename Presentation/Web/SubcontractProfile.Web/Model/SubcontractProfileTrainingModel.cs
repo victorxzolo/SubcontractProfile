@@ -91,21 +91,41 @@ namespace SubcontractProfile.Web.Model
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
 
-        public string Position { get; set; }
 
+<<<<<<< HEAD
+=======
+        public string position { get; set; }
+
+>>>>>>> fff5e8d57c43aa266d10d99c9499d63ea52b30ed
         public DateTime? BookingDate { get; set; }
         public string RemarkForAis { get; set; }
         public string Engineer_name { get; set; }
-      //  public string EngineerID { get; set; }
+        public string Engineer_ID { get; set; }
 
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+
+
+
+        public string Position { get; set; }
+          
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string EngineerName { get; set; }
+
+        public string EngineerName { get; set; }     
+
 
         public DateTime? TestDate { get; set; }
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Skill { get; set; }
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Grade { get; set; }
+
+        
+        
+
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string PaymentStatus { get; set; }
@@ -114,10 +134,8 @@ namespace SubcontractProfile.Web.Model
 
         public string _bookingDate { get; set; }
 
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
+     
+
 
     }
 }

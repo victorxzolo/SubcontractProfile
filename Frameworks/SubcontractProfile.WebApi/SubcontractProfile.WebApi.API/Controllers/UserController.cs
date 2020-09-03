@@ -86,6 +86,33 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         }
 
+
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserController))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(UserController))]
+        [HttpGet("CheckUsername/{username}")]
+        public List<SubcontractProfile.WebApi.Services.Model.SubcontractProfileUser> CheckUsername(string username)
+        {
+
+            _logger.LogInformation($"UserController::CheckUsername");
+
+            var entities = _service.GetAll().Result;
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"UserController::", "CheckUsername NOT FOUND");
+                return null;
+            }
+            else
+            {
+                var result = entities.Where(x => x.Username !=null && x.Username.Contains(username)).ToList();
+            
+                return result;
+
+            }
+            
+
+        }
         #endregion
 
         #region POST
