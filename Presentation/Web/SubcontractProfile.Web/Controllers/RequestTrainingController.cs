@@ -275,30 +275,54 @@ namespace SubcontractProfile.Web.Controllers
             return sDateTime;
         }
 
-        public ActionResult onSave(string trainingId ,string companyId, string teamId, string engineerId, string locationId, string bookingDate ,string RemarkForAis)
+        public ActionResult onSave(SubcontractProfileTrainingRequestModel model)
         {
             ResponseModel result = new ResponseModel();
             try
             {
 
-                HttpClient clientLocation = new HttpClient();
-                var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
-                RequestTraininigModel model = new RequestTraininigModel();
-                model.TrainingId = new Guid(trainingId);
-                model.CompanyId = new Guid(companyId);
-                model.TeamId = new Guid(teamId);
-                model.LocationId = new Guid(locationId);
-                model.EngineerId = new Guid(engineerId);
-                model.BookingDate = ConvertToDateTimeYYYYMMDD(bookingDate);
-                model.RemarkForAis = RemarkForAis;
-            
-                model.Status = "A";
-                var uriLocation = new Uri(Path.Combine(strpathAPI, "Training", "UpdateByVerified"));
+                HttpClient clientRequest = new HttpClient();
+                //    var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+                //RequestTraininigModel model = new RequestTraininigModel();
+                //model.TrainingId = new Guid(trainingId);
+                //model.CompanyId = new Guid(companyId);
+                //model.TeamId = new Guid(teamId);
+                //model.LocationId = new Guid(locationId);
+                //model.EngineerId = new Guid(engineerId);
+                //model.BookingDate = ConvertToDateTimeYYYYMMDD(bookingDate);
+                //model.RemarkForAis = RemarkForAis;
 
-                clientLocation.DefaultRequestHeaders.Accept.Add(
+                //  model.Status = "A";
+
+                //var uriLocation = new Uri(Path.Combine(strpathAPI, "Training", "UpdateByVerified"));
+
+
+                //clientLocation.DefaultRequestHeaders.Accept.Add(
+                //new MediaTypeWithQualityHeaderValue("application/json"));
+                //var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                //HttpResponseMessage responseResult = clientLocation.PutAsync(uriLocation, httpContent).Result;
+
+
+                //if (responseResult.IsSuccessStatusCode)
+                //{
+                //    result.Status = true;
+                //    result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                //    result.StatusError = "0";
+                //}
+                //else
+                //{
+                //    result.Status = false;
+                //    result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                //    result.StatusError = "-1";
+                //}
+
+
+                var uri = new Uri(Path.Combine(strpathAPI, "Training", "UpdateByVerified"));
+
+                clientRequest.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
                 var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                HttpResponseMessage responseResult = clientLocation.PutAsync(uriLocation, httpContent).Result;
+                HttpResponseMessage responseResult = clientRequest.PutAsync(uri, httpContent).Result;
 
                 if (responseResult.IsSuccessStatusCode)
                 {
@@ -322,7 +346,7 @@ namespace SubcontractProfile.Web.Controllers
                 result.StatusError = "-1";
                
             }
-            return Json(new { Response = result });
+            return Json(result);
         }
         //public ActionResult onSaveTraining(SubcontractProfileTrainingModel model)
         //{

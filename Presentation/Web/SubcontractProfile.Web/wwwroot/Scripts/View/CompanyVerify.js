@@ -100,18 +100,18 @@ $(document).ready(function () {
             tbLocation.clear().draw();
             tbLocation.rows.add(data.data).draw();
         }).fail(function (xhr, status, error) {
-            bootbox.confirm({
-                title: "System Information",
-                message: "This action is not available.",
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.confirm({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    buttons: {
+            //        cancel: {
+            //            label: '<i class="fa fa-times"></i> Cancel'
+            //        }
+            //    },
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         });
 
     });
@@ -165,18 +165,18 @@ $(document).ready(function () {
 
             },
             error: function (xhr, status, error) {
-                bootbox.confirm({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.confirm({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    buttons: {
+                //        cancel: {
+                //            label: '<i class="fa fa-times"></i> Cancel'
+                //        }
+                //    },
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
             }
         });
 
@@ -211,18 +211,18 @@ $(document).ready(function () {
             tbRevenue.clear().draw();
             tbRevenue.rows.add(data.data).draw();
         }).fail(function (xhr, status, error) {
-            bootbox.confirm({
-                title: "System Information",
-                message: "This action is not available.",
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.confirm({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    buttons: {
+            //        cancel: {
+            //            label: '<i class="fa fa-times"></i> Cancel'
+            //        }
+            //    },
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         });
 
     });
@@ -332,18 +332,18 @@ $(document).ready(function () {
                 //Loading(0);
                 //clearForEdit();
                 console.log(status);
-                bootbox.confirm({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.confirm({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    buttons: {
+                //        cancel: {
+                //            label: '<i class="fa fa-times"></i> Cancel'
+                //        }
+                //    },
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
             }
         });
     });
@@ -381,18 +381,18 @@ $(document).ready(function () {
                 //Loading(0);
                 //clearForEdit();
                 console.log(status);
-                bootbox.confirm({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.confirm({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    buttons: {
+                //        cancel: {
+                //            label: '<i class="fa fa-times"></i> Cancel'
+                //        }
+                //    },
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
             }
         });
     });
@@ -996,18 +996,18 @@ function GetAddress(companyId) {
         oTableAddress.clear().draw();
         oTableAddress.rows.add(data.data).draw();
     }).fail(function (xhr, status, error) {
-        bootbox.confirm({
-            title: "System Information",
-            message: "This action is not available.",
-            buttons: {
-                cancel: {
-                    label: '<i class="fa fa-times"></i> Cancel'
-                }
-            },
-            callback: function (result) {
-                console.log('This was logged in the callback: ' + result);
-            }
-        });
+        //bootbox.confirm({
+        //    title: "System Information",
+        //    message: "This action is not available.",
+        //    buttons: {
+        //        cancel: {
+        //            label: '<i class="fa fa-times"></i> Cancel'
+        //        }
+        //    },
+        //    callback: function (result) {
+        //        console.log('This was logged in the callback: ' + result);
+        //    }
+        //});
     });
 }
 
@@ -1099,18 +1099,18 @@ function SaveDaftAddress(stuff) {
         error: function (xhr, status, error) {
 
             console.log(status);
-            bootbox.confirm({
-                title: "System Information",
-                message: "This action is not available.",
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.confirm({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    buttons: {
+            //        cancel: {
+            //            label: '<i class="fa fa-times"></i> Cancel'
+            //        }
+            //    },
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
@@ -1194,18 +1194,18 @@ function uploadFiles(inputId) {
 
             },
             error: function (xhr, status, error) {
-                bootbox.confirm({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.confirm({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    buttons: {
+                //        cancel: {
+                //            label: '<i class="fa fa-times"></i> Cancel'
+                //        }
+                //    },
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
             }
         }
     );
@@ -1234,18 +1234,18 @@ function BindDDLprovince(regionid) {
 
             //clearForEdit();
             console.log(status);
-            bootbox.confirm({
-                title: "System Information",
-                message: "This action is not available.",
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.confirm({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    buttons: {
+            //        cancel: {
+            //            label: '<i class="fa fa-times"></i> Cancel'
+            //        }
+            //    },
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
@@ -1273,18 +1273,18 @@ function BindDDLdistrict(province) {
 
             //clearForEdit();
             console.log(status);
-            bootbox.confirm({
-                title: "System Information",
-                message: "This action is not available.",
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.confirm({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    buttons: {
+            //        cancel: {
+            //            label: '<i class="fa fa-times"></i> Cancel'
+            //        }
+            //    },
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
@@ -1327,18 +1327,18 @@ function BindDDLsubdistrict(district) {
 
             //clearForEdit();
             console.log(status);
-            bootbox.confirm({
-                title: "System Information",
-                message: "This action is not available.",
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.confirm({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    buttons: {
+            //        cancel: {
+            //            label: '<i class="fa fa-times"></i> Cancel'
+            //        }
+            //    },
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
@@ -1386,18 +1386,18 @@ function BindDDLTitle() {
 
             //clearForEdit();
             console.log(status);
-            bootbox.confirm({
-                title: "System Information",
-                message: "This action is not available.",
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.confirm({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    buttons: {
+            //        cancel: {
+            //            label: '<i class="fa fa-times"></i> Cancel'
+            //        }
+            //    },
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
@@ -1425,18 +1425,18 @@ function BindRegion() {
 
             //clearForEdit();
             console.log(status);
-            bootbox.confirm({
-                title: "System Information",
-                message: "This action is not available.",
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.confirm({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    buttons: {
+            //        cancel: {
+            //            label: '<i class="fa fa-times"></i> Cancel'
+            //        }
+            //    },
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
@@ -1464,18 +1464,18 @@ function BindDDLBank() {
 
             //clearForEdit();
             console.log(status);
-            bootbox.confirm({
-                title: "System Information",
-                message: "This action is not available.",
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.confirm({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    buttons: {
+            //        cancel: {
+            //            label: '<i class="fa fa-times"></i> Cancel'
+            //        }
+            //    },
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
@@ -1512,18 +1512,18 @@ function BindAddressType() {
 
             //clearForEdit();
             console.log(status);
-            bootbox.confirm({
-                title: "System Information",
-                message: "This action is not available.",
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.confirm({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    buttons: {
+            //        cancel: {
+            //            label: '<i class="fa fa-times"></i> Cancel'
+            //        }
+            //    },
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
@@ -1808,18 +1808,18 @@ function inittbtablocation() {
                 return data.data;
             },
             error: function (xhr, status, error) {
-                bootbox.confirm({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.confirm({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    buttons: {
+                //        cancel: {
+                //            label: '<i class="fa fa-times"></i> Cancel'
+                //        }
+                //    },
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
             }
         },
         columns: [
@@ -1967,18 +1967,18 @@ function inittbtabTeam() {
                 return data.data;
             },
             error: function (xhr, status, error) {
-                bootbox.confirm({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.confirm({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    buttons: {
+                //        cancel: {
+                //            label: '<i class="fa fa-times"></i> Cancel'
+                //        }
+                //    },
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
             }
         },
         columns: [
@@ -2120,18 +2120,18 @@ function inittbtabengineer() {
                 return data.data;
             },
             error: function (xhr, status, error) {
-                bootbox.confirm({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.confirm({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    buttons: {
+                //        cancel: {
+                //            label: '<i class="fa fa-times"></i> Cancel'
+                //        }
+                //    },
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
             }
         },
         columns: [
@@ -2183,18 +2183,18 @@ function BindDDLTeamEngineer(location) {
 
             //clearForEdit();
             console.log(status);
-            bootbox.confirm({
-                title: "System Information",
-                message: "This action is not available.",
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.confirm({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    buttons: {
+            //        cancel: {
+            //            label: '<i class="fa fa-times"></i> Cancel'
+            //        }
+            //    },
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
