@@ -213,7 +213,8 @@ $(document).ready(function () {
 
 /*Step1*/
     BindDDLTitle();
-
+    inttbRevenue();
+    inittaLocation();
     $('#btnsearchlocation').click(function () {
         $('#Searchlocation').modal('show');
         $('#txtlocationcodemodal').val($('#txtlocationcode').val());
@@ -358,7 +359,8 @@ $(document).ready(function () {
                 event.stopPropagation();
             }
             else {
-                inittaLocation();
+                //inittaLocation();
+                tbLocation.ajax.reload();
 
             }
             form.classList.add('was-validated');
@@ -381,8 +383,8 @@ $(document).ready(function () {
         ClearDataModalRevenue()
     });
     $('#btn_search_revenue_modal').click(function () {
-        //tbRevenue.ajax.reload();
-        inttbRevenue();
+        tbRevenue.ajax.reload();
+        //inttbRevenue();
     });
     $('#tbrevenueModal tbody').on('click', 'tr', function () {
         // $(this).toggleClass('selected');
@@ -398,8 +400,10 @@ $(document).ready(function () {
         var value = tbRevenue.rows('.selected').data();
         var titlename = value[0].vtitleName;
         var companyname = value[0].vName;
+        var tax_id = value[0].vNID;
 
-        $('#txtcompany_name_th').val(companyname);
+            $('#txtcompany_name_th').val(companyname);
+        $('#txttax_id').val(tax_id);
         $("#ddlprefixcompany_name_th option").filter(function () {
             //may want to use $.trim in here
             return $(this).text() == titlename;
