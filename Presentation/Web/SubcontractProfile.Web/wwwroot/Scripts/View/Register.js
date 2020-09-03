@@ -213,130 +213,6 @@ $(document).ready(function () {
 
 /*Step1*/
     BindDDLTitle();
-<<<<<<< HEAD
-    var tbLocation = $('#tblocationModal').DataTable({
-        ordering: true,
-        select: true,
-        retrieve: true,
-        paging: true,
-        pagingType: "full_numbers",
-        destroy: true,
-        searching: false,
-        //pageLength: 10,
-        proccessing: true,
-        serverSide: true,
-        dom: 'rt<"float-left"p><"float-left"l><"float-right"i>',
-        ajax: {
-            type: "POST",
-            url: "/Account/SearchLocation",
-            data: {
-                asc_code: function () { return $('#txtasccodemodal').val() },
-                asc_mobile_no: function () { return $('#txtmobilenomodal').val() },
-                id_Number: function () { return $('#txtidnumbermodal').val()},
-                location_code: function () { return $('#txtlocationcodemodal').val()},
-                sap_code: function () { return $('#txtsapcodemodal').val()},
-                user_id: function () { return $('#txtuseridmodal').val()}
-            },
-            dataType: "json",
-            error: function (xhr, status, error) {
-                Loading(0);
-                //bootbox.alert({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    size: "small",
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
-              }
-
-        },
-        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        //lengthChange: false,
-        columns: [
-            { "data": "outCompanyName" },
-            { "data": "outCompanyShortName" },
-            { "data": "outTaxId" },
-            { "data":"outLocationCode"},
-            { "data": "outLocationName" },
-            { "data": "outDistChn" },
-            { "data": "outChnSales" },
-            { "data": "location_id", "visible": false }
-        ],
-        language: {
-            infoEmpty: "No items to display",
-            lengthMenu: "_MENU_ items per page",
-            zeroRecords: "Nothing found",
-            info: "_START_ - _END_  of _TOTAL_  items",
-            infoFiltered: "",
-            paginate: {
-                previous: "<",
-                next: ">",
-                last: ">|",
-                first: "|<"
-            }
-        }
-    });
-
-    var tbRevenue = $('#tbrevenueModal').DataTable({
-        ordering: true,
-        select: true,
-        retrieve: true,
-        paging: true,
-        pagingType: "full_numbers",
-        destroy: true,
-        searching: false,
-        //pageLength: 10,
-        proccessing: true,
-        serverSide: true,
-        dom: 'rt<"float-left"p><"float-left"l><"float-right"i>',
-        ajax: {
-            type: "POST",
-            url: "/Account/GetRevenue",
-            data: {
-                tIN: function () { return $('#txtsearchrevenue').val() }
-            },
-            dataType: "json",
-            error: function (xhr, status, error) {
-                Loading(0);
-                //bootbox.alert({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    size: "small",
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
-               }
-
-        },
-        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        //lengthChange: false,
-        columns: [
-         
-            { "data": "vNID" },
-            { "data": "vName" },
-            { "data": "vBranchName" },
-            { "data": "outConcataddr" },
-            { "data": "vtitleName", "visible": false}
-           
-        ],
-        language: {
-            infoEmpty: "No items to display",
-            lengthMenu: "_MENU_ items per page",
-            zeroRecords: "Nothing found",
-            info: "_START_ - _END_  of _TOTAL_  items",
-            infoFiltered: "",
-            paginate: {
-                previous: "<",
-                next: ">",
-                last: ">|",
-                first: "|<"
-            }
-        }
-    });
-=======
->>>>>>> fff5e8d57c43aa266d10d99c9499d63ea52b30ed
 
     $('#btnsearchlocation').click(function () {
         $('#Searchlocation').modal('show');
@@ -553,79 +429,7 @@ $(document).ready(function () {
     //BindDDLdistrict();
     //BindDDLsubdistrict();
 
-<<<<<<< HEAD
-    var tbaddressstep2 = $('#tbaddressstep2').DataTable({
-        ordering: true,
-        order: [[1, "asc"]],
-        select: true,
-        retrieve: true,
-        //pagingType: "full_numbers",
-        destroy: true,
-        searching: false,
-        proccessing: true,
-        serverSide: true,
-        paging: false,
-        //lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        dom: 'rt<"float-right"i>',
-        ajax: {
-            type: "POST",
-            url: "/Account/SearchAddress",
-            dataSrc: function (data) {
-                Loading(0);
-                var val = []
-                val = ConcatstrAddress(data.data);
-                data.data = val;
-                return data.data;
-            },
-            error: function (xhr, status, error) {
-                Loading(0);
-                //bootbox.alert({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    size: "small",
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
-            }
 
-        },
-        columns: [
-            { "data": "addressId", "visible": false },
-            { "data": "address_type_id", "visible": false},
-            { "data": "address_type", orderable: true,},
-            { "data": "address", orderable: true,},
-            {
-                "targets": -2,
-                "data": null,
-                orderable: false,
-                "defaultContent": "<button class='btn-border btn-green edit_btn'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button>"
-            },
-            {
-                "targets": -1,
-                "data": null,
-                orderable: false,
-                "defaultContent": "<button class='btn-border btn-black delete_btn'><i class='fa fa-trash icon'></i><span>ลบ</span></button>"
-            }
-        ],
-        language: {
-            infoEmpty: "No items to display",
-            //lengthMenu: "_MENU_ items per page",
-            zeroRecords: "Nothing found",
-            info: "_START_ - _END_  of _TOTAL_  items",
-            //infoFiltered: "",
-            //paginate: {
-            //    previous: "<",
-            //    next: ">",
-            //    last: ">|",
-            //    first: "|<"
-            //}
-            
-        }
-    });
-
-=======
->>>>>>> fff5e8d57c43aa266d10d99c9499d63ea52b30ed
     $('#btnaddaddress').click(function () {
        
         var stuff = [];
@@ -864,23 +668,6 @@ $(document).ready(function () {
         });
     });
 
-<<<<<<< HEAD
-            },
-            error: function (xhr, status, error) {
-                Loading(0);
-                //bootbox.alert({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    size: "small",
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
-            }
-        });
-    }
-=======
->>>>>>> fff5e8d57c43aa266d10d99c9499d63ea52b30ed
 
 /*************************************/
 
@@ -956,76 +743,6 @@ $(document).ready(function () {
     });
 
   
-
-<<<<<<< HEAD
-        $.ajax(
-            {
-                type: "POST",
-                url: "/Account/UploadFile",
-                processData: false,
-                contentType: false,
-                dataType: "json",
-                data: formData,
-                success: function (data) {
-                    Loading(0);
-                    console.log(data);
-                    if (data.status) {
-                        switch (inputId) {
-                            case "company_certified_file": $('#hdupfilecompany_certified').val(data.response); break;
-                            case "commercial_registration_file": $('#hdupfilecommercial_registration').val(data.response); break;
-                            case "vat_registration_certificate_file": $('#hdupfilevat_registration_certificate').val(data.response); break;
-                        }
-                        bootbox.alert({
-                            title: "System Information",
-                            message: data.message,
-                            size: "small",
-                            callback: function (result) {
-                                console.log('This was logged in the callback: ' + result);
-                            }
-                        });
-                    }
-                    else {
-
-                        bootbox.alert({
-                            title: "System Information",
-                            message: data.message,
-                            size: "small",
-                            callback: function (result) {
-                                console.log('This was logged in the callback: ' + result);
-                            }
-                        });
-                        switch (inputId) {
-                            case "company_certified_file": $('#company_certified_file').val('');
-                                $('#lbcompany_certified_file').text('Choose file'); break;
-                            case "commercial_registration_file": $('#commercial_registration_file').val('');
-                                $('#lbcommercial_registration_file').text('Choose file');break;
-                            case "vat_registration_certificate_file": $('#vat_registration_certificate_file').val('');
-                                $('#lbvat_registration_certificate_file').text('Choose file');break;
-                        }
-                    }
-                   
-                },
-                error: function (xhr, status, error) {
-                    Loading(0);
-
-                    //bootbox.alert({
-                    //    title: "System Information",
-                    //    message: "This action is not available.",
-                    //    size: "small",
-                    //    callback: function (result) {
-                    //        console.log('This was logged in the callback: ' + result);
-                    //    }
-                    //});
-                }
-            }
-        );
-    }
-
-=======
->>>>>>> fff5e8d57c43aa266d10d99c9499d63ea52b30ed
-/*************************************/
-
-
 
 /*Step5*/
 
@@ -1543,27 +1260,7 @@ function uploadFiles(inputId) {
             },
             error: function (xhr, status, error) {
                 Loading(0);
-<<<<<<< HEAD
-                //clearForEdit();
-                //bootbox.alert({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    size: "small",
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
-=======
 
-                bootbox.alert({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    size: "small",
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
->>>>>>> fff5e8d57c43aa266d10d99c9499d63ea52b30ed
             }
         }
     );
@@ -1894,18 +1591,7 @@ function BindDDLdistrict(province) {
 
         },
         error: function (xhr, status, error) {
-<<<<<<< HEAD
-            //bootbox.alert({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    size: "small",
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
-=======
 
->>>>>>> fff5e8d57c43aa266d10d99c9499d63ea52b30ed
         }
     });
 }
@@ -1938,20 +1624,7 @@ function BindDDLsubdistrict(district) {
 
         },
         error: function (xhr, status, error) {
-<<<<<<< HEAD
-           
-            //clearForEdit();
-            //bootbox.alert({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    size: "small",
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
-=======
-          
->>>>>>> fff5e8d57c43aa266d10d99c9499d63ea52b30ed
+
         }
     });
 }
@@ -1997,21 +1670,7 @@ function BindDDLTitle() {
 
         },
         error: function (xhr, status, error) {
-<<<<<<< HEAD
-            Loading();
-            //clearForEdit();
-            //bootbox.alert({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    size: "small",
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
-=======
-            //Loading(0);
 
->>>>>>> fff5e8d57c43aa266d10d99c9499d63ea52b30ed
         }
     });
 }
@@ -2038,18 +1697,7 @@ function BindRegion() {
         },
         error: function (xhr, status, error) {
             Loading(0);
-<<<<<<< HEAD
-            //clearForEdit();
-            //bootbox.alert({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    size: "small",
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
-=======
->>>>>>> fff5e8d57c43aa266d10d99c9499d63ea52b30ed
+
         }
     });
 }
@@ -2076,18 +1724,7 @@ function BindDDLBank() {
         },
         error: function (xhr, status, error) {
             Loading(0);
-<<<<<<< HEAD
-            //clearForEdit();
-            //bootbox.alert({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    size: "small",
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
-=======
->>>>>>> fff5e8d57c43aa266d10d99c9499d63ea52b30ed
+
         }
     });
 }
@@ -2114,18 +1751,7 @@ function BindDDLCompanyType() {
         },
         error: function (xhr, status, error) {
             Loading(0);
-<<<<<<< HEAD
-            //clearForEdit();
-            //bootbox.alert({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    size: "small",
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
-=======
->>>>>>> fff5e8d57c43aa266d10d99c9499d63ea52b30ed
+
         }
     });
 }
@@ -2161,19 +1787,7 @@ function BindAddressType() {
         },
         error: function (xhr, status, error) {
             Loading(0);
-            //clearForEdit();
-<<<<<<< HEAD
-            console.log(status);
-            //bootbox.alert({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    size: "small",
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
-=======
->>>>>>> fff5e8d57c43aa266d10d99c9499d63ea52b30ed
+
         }
     });
 }
@@ -2200,18 +1814,7 @@ function BindDDlBankAccountType() {
         },
         error: function (xhr, status, error) {
             Loading(0);
-<<<<<<< HEAD
-            //clearForEdit();
-            //bootbox.alert({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    size: "small",
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
-=======
->>>>>>> fff5e8d57c43aa266d10d99c9499d63ea52b30ed
+
         }
     });
 }

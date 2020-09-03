@@ -9,8 +9,8 @@ var otbtabteam;
 var otbtabengineer;
 
 $(document).ready(function () {
- 
-   
+
+
     inittbAddressResult();
     inittbRevenue();
     inittblocation();
@@ -100,18 +100,18 @@ $(document).ready(function () {
             tbLocation.clear().draw();
             tbLocation.rows.add(data.data).draw();
         }).fail(function (xhr, status, error) {
-            //bootbox.confirm({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    buttons: {
-            //        cancel: {
-            //            label: '<i class="fa fa-times"></i> Cancel'
-            //        }
-            //    },
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
+            bootbox.confirm({
+                title: "System Information",
+                message: "This action is not available.",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel'
+                    }
+                },
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         });
 
     });
@@ -165,18 +165,18 @@ $(document).ready(function () {
 
             },
             error: function (xhr, status, error) {
-                //bootbox.confirm({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    buttons: {
-                //        cancel: {
-                //            label: '<i class="fa fa-times"></i> Cancel'
-                //        }
-                //    },
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
+                bootbox.confirm({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    buttons: {
+                        cancel: {
+                            label: '<i class="fa fa-times"></i> Cancel'
+                        }
+                    },
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
         });
 
@@ -211,18 +211,18 @@ $(document).ready(function () {
             tbRevenue.clear().draw();
             tbRevenue.rows.add(data.data).draw();
         }).fail(function (xhr, status, error) {
-            //bootbox.confirm({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    buttons: {
-            //        cancel: {
-            //            label: '<i class="fa fa-times"></i> Cancel'
-            //        }
-            //    },
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
+            bootbox.confirm({
+                title: "System Information",
+                message: "This action is not available.",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel'
+                    }
+                },
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         });
 
     });
@@ -332,18 +332,18 @@ $(document).ready(function () {
                 //Loading(0);
                 //clearForEdit();
                 console.log(status);
-                //bootbox.confirm({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    buttons: {
-                //        cancel: {
-                //            label: '<i class="fa fa-times"></i> Cancel'
-                //        }
-                //    },
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
+                bootbox.confirm({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    buttons: {
+                        cancel: {
+                            label: '<i class="fa fa-times"></i> Cancel'
+                        }
+                    },
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
         });
     });
@@ -381,18 +381,18 @@ $(document).ready(function () {
                 //Loading(0);
                 //clearForEdit();
                 console.log(status);
-                //bootbox.confirm({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    buttons: {
-                //        cancel: {
-                //            label: '<i class="fa fa-times"></i> Cancel'
-                //        }
-                //    },
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
+                bootbox.confirm({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    buttons: {
+                        cancel: {
+                            label: '<i class="fa fa-times"></i> Cancel'
+                        }
+                    },
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
         });
     });
@@ -490,7 +490,7 @@ $(document).ready(function () {
             onSaveCompanyProfile("NotApprove");
         }
 
-        
+
 
     });
     $('#btnapprove').click(function () {
@@ -500,7 +500,7 @@ $(document).ready(function () {
             onSaveCompanyProfile("Approve");
         }
 
-        
+
 
     });
 
@@ -519,11 +519,11 @@ $(document).ready(function () {
         $('#dataLocationModal').modal('show');
     });
 
-   
+
     GetDropDownLocation();
     //Tab Team
     $('#team-tab').click(function () {
-       // otbtabteam.ajax.reload();
+        // otbtabteam.ajax.reload();
         $('#lbteamcompanyname').text($('#lbcompanyname').text());
     });
     $('#ddlteamlocation').change(function () {
@@ -546,7 +546,7 @@ $(document).ready(function () {
     GetDropDownBank();
     GetDropDownTitle();
     $('#ddllocationteamengineer').change(function () {
-      var data=  $('#ddllocationteamengineer option').filter(':selected').val()
+        var data = $('#ddllocationteamengineer option').filter(':selected').val()
         BindDDLTeamEngineer(data);
         otbtabengineer.ajax.reload();
     });
@@ -865,7 +865,7 @@ function getDataById(companyId) {
             console.log(result)
             if (result != null) {
                 $('#hdCompanyId').val(result.CompanyId);
-                
+
 
                 if (result.SubcontractProfileType == "NewSubContract") {
                     $('#rdoCompanyType1').prop('checked', true);
@@ -918,7 +918,7 @@ function getDataById(companyId) {
                     }
                 }
 
-                
+
 
                 //contract
                 $('#mailCompany').val(result.CompanyEmail);
@@ -996,18 +996,18 @@ function GetAddress(companyId) {
         oTableAddress.clear().draw();
         oTableAddress.rows.add(data.data).draw();
     }).fail(function (xhr, status, error) {
-        //bootbox.confirm({
-        //    title: "System Information",
-        //    message: "This action is not available.",
-        //    buttons: {
-        //        cancel: {
-        //            label: '<i class="fa fa-times"></i> Cancel'
-        //        }
-        //    },
-        //    callback: function (result) {
-        //        console.log('This was logged in the callback: ' + result);
-        //    }
-        //});
+        bootbox.confirm({
+            title: "System Information",
+            message: "This action is not available.",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Cancel'
+                }
+            },
+            callback: function (result) {
+                console.log('This was logged in the callback: ' + result);
+            }
+        });
     });
 }
 
@@ -1099,18 +1099,18 @@ function SaveDaftAddress(stuff) {
         error: function (xhr, status, error) {
 
             console.log(status);
-            //bootbox.confirm({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    buttons: {
-            //        cancel: {
-            //            label: '<i class="fa fa-times"></i> Cancel'
-            //        }
-            //    },
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
+            bootbox.confirm({
+                title: "System Information",
+                message: "This action is not available.",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel'
+                    }
+                },
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1194,18 +1194,18 @@ function uploadFiles(inputId) {
 
             },
             error: function (xhr, status, error) {
-                //bootbox.confirm({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    buttons: {
-                //        cancel: {
-                //            label: '<i class="fa fa-times"></i> Cancel'
-                //        }
-                //    },
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
+                bootbox.confirm({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    buttons: {
+                        cancel: {
+                            label: '<i class="fa fa-times"></i> Cancel'
+                        }
+                    },
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
         }
     );
@@ -1234,18 +1234,18 @@ function BindDDLprovince(regionid) {
 
             //clearForEdit();
             console.log(status);
-            //bootbox.confirm({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    buttons: {
-            //        cancel: {
-            //            label: '<i class="fa fa-times"></i> Cancel'
-            //        }
-            //    },
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
+            bootbox.confirm({
+                title: "System Information",
+                message: "This action is not available.",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel'
+                    }
+                },
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1273,18 +1273,18 @@ function BindDDLdistrict(province) {
 
             //clearForEdit();
             console.log(status);
-            //bootbox.confirm({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    buttons: {
-            //        cancel: {
-            //            label: '<i class="fa fa-times"></i> Cancel'
-            //        }
-            //    },
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
+            bootbox.confirm({
+                title: "System Information",
+                message: "This action is not available.",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel'
+                    }
+                },
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1327,18 +1327,18 @@ function BindDDLsubdistrict(district) {
 
             //clearForEdit();
             console.log(status);
-            //bootbox.confirm({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    buttons: {
-            //        cancel: {
-            //            label: '<i class="fa fa-times"></i> Cancel'
-            //        }
-            //    },
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
+            bootbox.confirm({
+                title: "System Information",
+                message: "This action is not available.",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel'
+                    }
+                },
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1386,18 +1386,18 @@ function BindDDLTitle() {
 
             //clearForEdit();
             console.log(status);
-            //bootbox.confirm({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    buttons: {
-            //        cancel: {
-            //            label: '<i class="fa fa-times"></i> Cancel'
-            //        }
-            //    },
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
+            bootbox.confirm({
+                title: "System Information",
+                message: "This action is not available.",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel'
+                    }
+                },
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1425,18 +1425,18 @@ function BindRegion() {
 
             //clearForEdit();
             console.log(status);
-            //bootbox.confirm({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    buttons: {
-            //        cancel: {
-            //            label: '<i class="fa fa-times"></i> Cancel'
-            //        }
-            //    },
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
+            bootbox.confirm({
+                title: "System Information",
+                message: "This action is not available.",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel'
+                    }
+                },
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1464,18 +1464,18 @@ function BindDDLBank() {
 
             //clearForEdit();
             console.log(status);
-            //bootbox.confirm({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    buttons: {
-            //        cancel: {
-            //            label: '<i class="fa fa-times"></i> Cancel'
-            //        }
-            //    },
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
+            bootbox.confirm({
+                title: "System Information",
+                message: "This action is not available.",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel'
+                    }
+                },
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1512,18 +1512,18 @@ function BindAddressType() {
 
             //clearForEdit();
             console.log(status);
-            //bootbox.confirm({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    buttons: {
-            //        cancel: {
-            //            label: '<i class="fa fa-times"></i> Cancel'
-            //        }
-            //    },
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
+            bootbox.confirm({
+                title: "System Information",
+                message: "This action is not available.",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel'
+                    }
+                },
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -1531,7 +1531,7 @@ function BindAddressType() {
 function validateform() {
     var hasError = true;
 
-   // var forms = document.getElementsByClassName('need-validate-checktyperegister');
+    // var forms = document.getElementsByClassName('need-validate-checktyperegister');
     //var validation = Array.prototype.filter.call(forms, function (form) {
     //    if ($('#hdrdtype').val() == "") {
     //        event.preventDefault();
@@ -1626,8 +1626,8 @@ function validateform() {
             form.classList.add('was-validated');
         });
     }
-        //}
-        //form.classList.add('was-validated');
+    //}
+    //form.classList.add('was-validated');
     //});
 
     return hasError;
@@ -1794,7 +1794,7 @@ function inittbtablocation() {
             "decimal": ",",
             "thousands": "."
         },
-        ajax:{
+        ajax: {
             url: "/Registration/SearchListLocation",
             type: "POST",
             data: {
@@ -1808,18 +1808,18 @@ function inittbtablocation() {
                 return data.data;
             },
             error: function (xhr, status, error) {
-                //bootbox.confirm({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    buttons: {
-                //        cancel: {
-                //            label: '<i class="fa fa-times"></i> Cancel'
-                //        }
-                //    },
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
+                bootbox.confirm({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    buttons: {
+                        cancel: {
+                            label: '<i class="fa fa-times"></i> Cancel'
+                        }
+                    },
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
         },
         columns: [
@@ -1830,13 +1830,13 @@ function inittbtablocation() {
                             </svg></a>";
                 }
             },
-            { "data": "SubcontractProfileType", width: "10%"},
-            { "data": "LocationCode", width: "10%"},
-            { "data": "LocationNameTh", width: "20%"},
-            { "data": "LocationNameEn", width: "20%"},
+            { "data": "SubcontractProfileType", width: "10%" },
+            { "data": "LocationCode", width: "10%" },
+            { "data": "LocationNameTh", width: "20%" },
+            { "data": "LocationNameEn", width: "20%" },
             { "data": "LocationNameAlias", width: "15%" },
-            { "data": "StorageLocation", width: "10%"},
-            { "data": "LocationAddress", width: "10%"},
+            { "data": "StorageLocation", width: "10%" },
+            { "data": "LocationAddress", width: "10%" },
             { "data": "LocationId", "visible": false }
         ],
         "order": [[2, "desc"]],
@@ -1848,7 +1848,7 @@ function inittbtablocation() {
 
 function getDataLocationById(locationId) {
     $.ajax({
-        url:'/Registration/GetDataLocationById',
+        url: '/Registration/GetDataLocationById',
         type: 'POST',
         data: { 'locationId': locationId },
         dataType: "json",
@@ -1959,26 +1959,26 @@ function inittbtabTeam() {
             type: "POST",
             data: {
                 locationId: function () { return $('#ddlteamlocation option').filter(':selected').val(); },
-                companyid: function () {return $('#hdCompanyId').val();}
+                companyid: function () { return $('#hdCompanyId').val(); }
             },
             datatype: "JSON",
             dataSrc: function (data) {
-              
+
                 return data.data;
             },
             error: function (xhr, status, error) {
-                //bootbox.confirm({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    buttons: {
-                //        cancel: {
-                //            label: '<i class="fa fa-times"></i> Cancel'
-                //        }
-                //    },
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
+                bootbox.confirm({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    buttons: {
+                        cancel: {
+                            label: '<i class="fa fa-times"></i> Cancel'
+                        }
+                    },
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
         },
         columns: [
@@ -1990,11 +1990,11 @@ function inittbtabTeam() {
                 }
             },
             { "data": "SubcontractType", width: "10%" },
-            { "data": "LocationNameTh", width: "20%"},
-            { "data": "TeamCode", width: "10%"},
-            { "data": "TeamNameTh", width: "15%"},
-            { "data": "TeamNameEn", width: "15%"},
-            { "data": "StageLocal", width: "15%"},
+            { "data": "LocationNameTh", width: "20%" },
+            { "data": "TeamCode", width: "10%" },
+            { "data": "TeamNameTh", width: "15%" },
+            { "data": "TeamNameEn", width: "15%" },
+            { "data": "StageLocal", width: "15%" },
             { "data": "ShipTo", width: "10%" },
             { "data": "TeamId", "visible": false }
         ],
@@ -2008,7 +2008,7 @@ function inittbtabTeam() {
 function getDataTeamById(teamId) {
 
     $.ajax({
-        url:'/Registration/GetDataTeamById',
+        url: '/Registration/GetDataTeamById',
         type: 'POST',
         data: { 'teamId': teamId },
         dataType: "json",
@@ -2052,8 +2052,8 @@ function getDataTeamById(teamId) {
 function GetDropDownLocation() {
     $.ajax({
         type: 'POST',
-        url:'/Registration/GetLocationByCompany',
-        data: { companyid: $('#hdCompanyId').val()},
+        url: '/Registration/GetLocationByCompany',
+        data: { companyid: $('#hdCompanyId').val() },
         dataType: 'json',
         success: function (data) {
             $("#ddllocationName_Th").empty();
@@ -2116,22 +2116,22 @@ function inittbtabengineer() {
             },
             datatype: "JSON",
             dataSrc: function (data) {
-               
+
                 return data.data;
             },
             error: function (xhr, status, error) {
-                //bootbox.confirm({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    buttons: {
-                //        cancel: {
-                //            label: '<i class="fa fa-times"></i> Cancel'
-                //        }
-                //    },
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
+                bootbox.confirm({
+                    title: "System Information",
+                    message: "This action is not available.",
+                    buttons: {
+                        cancel: {
+                            label: '<i class="fa fa-times"></i> Cancel'
+                        }
+                    },
+                    callback: function (result) {
+                        console.log('This was logged in the callback: ' + result);
+                    }
+                });
             }
         },
         columns: [
@@ -2145,10 +2145,10 @@ function inittbtabengineer() {
             { "data": "SubcontractType", width: "10%" },
             { "data": "LocationNameTh", width: "20%" },
             { "data": "TeamNameTh", width: "10%" },
-            { "data": "StaffNameTh", width: "15%"},
+            { "data": "StaffNameTh", width: "15%" },
             { "data": "StaffNameEn", width: "15%" },
             { "data": "Position", width: "10%" },
-            { "data": "ContractPhone1", width: "15%"},
+            { "data": "ContractPhone1", width: "15%" },
             { "data": "EngineerId", "visible": false }
         ],
         "order": [[2, "desc"]],
@@ -2165,7 +2165,8 @@ function BindDDLTeamEngineer(location) {
         url: "/Registration/DDLTeam",
         data: {
             companyid: $('#hdCompanyId').val(),
-            locationId: location},
+            locationId: location
+        },
         dataType: "json",
         success: function (data) {
 
@@ -2183,18 +2184,18 @@ function BindDDLTeamEngineer(location) {
 
             //clearForEdit();
             console.log(status);
-            //bootbox.confirm({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    buttons: {
-            //        cancel: {
-            //            label: '<i class="fa fa-times"></i> Cancel'
-            //        }
-            //    },
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
+            bootbox.confirm({
+                title: "System Information",
+                message: "This action is not available.",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel'
+                    }
+                },
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                }
+            });
         }
     });
 }
@@ -2202,7 +2203,7 @@ function BindDDLTeamEngineer(location) {
 function getDataEngineerById(id) {
 
     $.ajax({
-        url:'/Registration/GetDataEngineerById',
+        url: '/Registration/GetDataEngineerById',
         type: 'POST',
         data: { 'engineerId': id },
         dataType: "json",
@@ -2246,7 +2247,7 @@ function getDataEngineerById(id) {
 
                 $('#hdEngineerCompanyId').val(result.CompanyId);
 
-               
+
 
                 $("#Team").val(result.TeamId);
 
@@ -2261,11 +2262,12 @@ function getDataEngineerById(id) {
 
 function getTeamByLocationIdEdit(locationId) {
     $.ajax({
-        url:'/Registration/GetDataByLocationId',
+        url: '/Registration/GetDataByLocationId',
         type: 'POST',
         data: {
             'locationId': locationId,
-            'companyid': $('#hdCompanyId').val()},
+            'companyid': $('#hdCompanyId').val()
+        },
         dataType: "json",
         success: function (data) {
             $("#Team").empty();
@@ -2283,7 +2285,7 @@ function getTeamByLocationIdEdit(locationId) {
 
 function getDataPersonalById(id) {
     $.ajax({
-        url:'/Registration/GetDataPersonalById',
+        url: '/Registration/GetDataPersonalById',
         type: 'POST',
         data: { 'personalId': id },
         dataType: "json",
@@ -2386,7 +2388,7 @@ function getDataPersonalById(id) {
 function GetDropDownBank() {
     $.ajax({
         type: 'POST',
-        url:'/Registration/GetBankName',
+        url: '/Registration/GetBankName',
         // data: {stateid:stateid},
         dataType: 'json',
         success: function (data) {
