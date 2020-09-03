@@ -487,5 +487,20 @@ namespace SubcontractProfile.WebApi.Services
 
             return entity;
         }
+
+        public async Task<bool> UpdateVerify(SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany subcontractProfileCompany)
+        {
+            var p = new DynamicParameters();
+            p.Add("@company_id", subcontractProfileCompany.CompanyId);
+            p.Add("@contract_start_date", subcontractProfileCompany.ContractStartDate);
+            p.Add("@contract_end_date", subcontractProfileCompany.ContractEndDate);
+            p.Add("@update_by", subcontractProfileCompany.UpdateBy);
+            p.Add("@status", subcontractProfileCompany.Status);
+
+            var ok = await _dbContext.Connection.ExecuteAsync
+                ("uspSubcontractProfileCompany_updateVerify", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+
+            return true;
+        }
     }
 }

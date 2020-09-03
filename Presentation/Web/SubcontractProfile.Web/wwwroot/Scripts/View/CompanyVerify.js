@@ -568,105 +568,103 @@ $(document).ready(function () {
 });
 
 function onSaveCompanyProfile(status) {
-    var chksubcontract_type = null;
-    var distribution_channel = null;
-    var channel_sale_group = null;
-    var tax_id = null;
-    var company_alias = null;
-    var company_title_name_th = null;
-    var company_title_name_en = null;
-    var company_name_th = null;
-    var company_name_en = null;
-    var wt_name = null;
-    var vat_type = null;
-    var company = new Object();
+    //var chksubcontract_type = null;
+    //var distribution_channel = null;
+    //var channel_sale_group = null;
+    //var tax_id = null;
+    //var company_alias = null;
+    //var company_title_name_th = null;
+    //var company_title_name_en = null;
+    //var company_name_th = null;
+    //var company_name_en = null;
+    //var wt_name = null;
+    //var vat_type = null;
+    //var company = new Object();
 
-    if ($("#rdoCompanyType1").is(":checked")) {
-        chksubcontract_type = $("#rdoCompanyType1").val();
-        //distribution_channel = $('#ddldistribution option').filter(':selected').val();
-        //channel_sale_group = $('#ddlchannelsalegroup option').filter(':selected').val();
+    //if ($("#rdoCompanyType1").is(":checked")) {
+    //    chksubcontract_type = $("#rdoCompanyType1").val();
+    //    //distribution_channel = $('#ddldistribution option').filter(':selected').val();
+    //    //channel_sale_group = $('#ddlchannelsalegroup option').filter(':selected').val();
 
-        tax_id = $('#inputTax_id').val();
-        company_alias = $('#inputCompany_alias').val();
+    //    tax_id = $('#inputTax_id').val();
+    //    company_alias = $('#inputCompany_alias').val();
 
-        company_title_name_th = $('#ddlprefixcompany_name_th option').filter(':selected').val();
-        company_name_th = $('#inputCompany_name_th').val();
+    //    company_title_name_th = $('#ddlprefixcompany_name_th option').filter(':selected').val();
+    //    company_name_th = $('#inputCompany_name_th').val();
 
-        company_title_name_en = $('#ddlprefixcompany_name_en option').filter(':selected').val();
-        company_name_en = $('#inputCompany_name_en').val();
+    //    company_title_name_en = $('#ddlprefixcompany_name_en option').filter(':selected').val();
+    //    company_name_en = $('#inputCompany_name_en').val();
 
-        wt_name = $('#inputWT_name').val();
-        vat_type = $('#chkvat_typeT').is(':checked') ? $('#chkvat_typeT').val() : $('#chkvat_typeE').val();
+    //    wt_name = $('#inputWT_name').val();
+    //    vat_type = $('#chkvat_typeT').is(':checked') ? $('#chkvat_typeT').val() : $('#chkvat_typeE').val();
 
-    }
-    else if ($("#rdoCompanyType2").is(":checked")) {
-        chksubcontract_type = $("#rdoCompanyType2").val();
-        distribution_channel = $('#txtdistribution').val();
-        channel_sale_group = $('#txtchannelsalegroup').val();
-        tax_id = $('#txttax_id_dealer').val();
-        company_alias = $('#txtcompany_alias_dealer').val();
-        company_title_name_th = $('#ddlprefixcompany_name_th_dealer option').filter(':selected').val();
-        company_name_th = $('#txtcompany_name_th_dealer').val();
-        company_title_name_en = $('#ddlprefixcompany_name_en_dealer option').filter(':selected').val();
-        company_name_en = $('#txtcompany_name_en_dealer').val();
-        wt_name = $('#txtwt_name_dealer').val();
-        vat_type = $('#chkvat_typeT_dealer').is(':checked') ? $('#chkvat_typeT_dealer').val() : $('#chkvat_typeE_dealer').val();
-    }
+    //}
+    //else if ($("#rdoCompanyType2").is(":checked")) {
+    //    chksubcontract_type = $("#rdoCompanyType2").val();
+    //    distribution_channel = $('#txtdistribution').val();
+    //    channel_sale_group = $('#txtchannelsalegroup').val();
+    //    tax_id = $('#txttax_id_dealer').val();
+    //    company_alias = $('#txtcompany_alias_dealer').val();
+    //    company_title_name_th = $('#ddlprefixcompany_name_th_dealer option').filter(':selected').val();
+    //    company_name_th = $('#txtcompany_name_th_dealer').val();
+    //    company_title_name_en = $('#ddlprefixcompany_name_en_dealer option').filter(':selected').val();
+    //    company_name_en = $('#txtcompany_name_en_dealer').val();
+    //    wt_name = $('#txtwt_name_dealer').val();
+    //    vat_type = $('#chkvat_typeT_dealer').is(':checked') ? $('#chkvat_typeT_dealer').val() : $('#chkvat_typeE_dealer').val();
+    //}
 
-    company.CompanyNameTh = company_name_th;
-    company.CompanyNameEn = company_name_en;
-    company.CompanyAlias = company_alias;
-    company.DistributionChannel = distribution_channel;
-    company.ChannelSaleGroup = channel_sale_group;
-    company.TaxId = tax_id;
-    company.WtName = wt_name;
-    company.VatType = vat_type;
-    company.CompanyEmail = $('#mailCompany').val();
-    company.ContractName = $('#nameContract').val();
-    company.ContractPhone = $('#telContract').val();
-    company.ContractEmail = $('#mailContract').val();
+    //company.CompanyNameTh = company_name_th;
+    //company.CompanyNameEn = company_name_en;
+    //company.CompanyAlias = company_alias;
+    //company.DistributionChannel = distribution_channel;
+    //company.ChannelSaleGroup = channel_sale_group;
+    //company.TaxId = tax_id;
+    //company.WtName = wt_name;
+    //company.VatType = vat_type;
+    //company.CompanyEmail = $('#mailCompany').val();
+    //company.ContractName = $('#nameContract').val();
+    //company.ContractPhone = $('#telContract').val();
+    //company.ContractEmail = $('#mailContract').val();
 
-    company.BankCode = $('#selBankName option').filter(':selected').val()
-    company.BankName = $('#txtbank_Name').val();
-    company.AccountNumber = $('#codeNumber').val();
-    company.AccountName = $('#busiName').val();
+    //company.BankCode = $('#selBankName option').filter(':selected').val()
+    //company.BankName = $('#txtbank_Name').val();
+    //company.AccountNumber = $('#codeNumber').val();
+    //company.AccountName = $('#busiName').val();
 
-    //company.BranchCode= $('#txtbranch_Code').val();
-    company.BranchName = $('#nameBranch').val();
+    ////company.BranchCode= $('#txtbranch_Code').val();
+    //company.BranchName = $('#nameBranch').val();
 
-    company.DeptOfInstallName = $('#name1').val();
-    company.DeptOfMaintenName = $('#name2').val();
-    company.DeptOfAccountName = $('#name3').val();
+    //company.DeptOfInstallName = $('#name1').val();
+    //company.DeptOfMaintenName = $('#name2').val();
+    //company.DeptOfAccountName = $('#name3').val();
 
-    company.DeptOfInstallPhone = $('#tel1').val();
-    company.DeptOfMaintenPhone = $('#tel2').val();
-    company.DeptOfAccountPhone = $('#tel3').val();
+    //company.DeptOfInstallPhone = $('#tel1').val();
+    //company.DeptOfMaintenPhone = $('#tel2').val();
+    //company.DeptOfAccountPhone = $('#tel3').val();
 
-    company.DeptOfInstallEmail = $('#mail1').val();
-    company.DeptOfMaintenEmail = $('#mail2').val();
-    company.DeptOfAccountEmail = $('#mail3').val();
+    //company.DeptOfInstallEmail = $('#mail1').val();
+    //company.DeptOfMaintenEmail = $('#mail2').val();
+    //company.DeptOfAccountEmail = $('#mail3').val();
 
-    company.LocationCode = $('#txtlocationcode').val();
-    company.LocationNameTh = $('#txtlocationname').val();
-    company.LocationNameEn = $('#txtlocationname').val();
+    //company.LocationCode = $('#txtlocationcode').val();
+    //company.LocationNameTh = $('#txtlocationname').val();
+    //company.LocationNameEn = $('#txtlocationname').val();
 
-    company.BankAccountTypeId = $('#AccType option').filter(':selected').val();
-    company.SubcontractProfileType = chksubcontract_type;
-    company.CompanyTitleThId = company_title_name_th;
-    company.CompanyTitleEnId = company_title_name_en;
-    company.CompanyId = $('#hdCompanyId').val();
-    //company.ContractStartDate = $('#datecontractstart').val();
-    //company.ContractEndDate = $('#datecontractend').val();
-
-    console.log(company);
+    //company.BankAccountTypeId = $('#AccType option').filter(':selected').val();
+    //company.SubcontractProfileType = chksubcontract_type;
+    //company.CompanyTitleThId = company_title_name_th;
+    //company.CompanyTitleEnId = company_title_name_en;
+    //company.CompanyId = $('#hdCompanyId').val();
+    ////company.ContractStartDate = $('#datecontractstart').val();
+    ////company.ContractEndDate = $('#datecontractend').val();
     $.ajax({
         url: '/Registration/OnSave',
         type: 'POST',
         data: {
-            'model': company,
             'status': status,
             'contractstart': $('#datecontractstart').val(),
-            'contractend': $('#datecontractend').val()
+            'contractend': $('#datecontractend').val(),
+            companyId: $('#hdCompanyId').val()
         },
         dataType: "json",
         success: function (result) {
@@ -742,16 +740,16 @@ function inittbAddressResult(companyId) {
             { "data": "address_type_id", "visible": false },
             { "data": "address_type", orderable: true, },
             { "data": "address", orderable: true, },
-            {
-                data: null, width: "10%", render: function (data, type, row) {
-                    return "<a href='#'class='edit_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='แก้ไข'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a>";
-                }
-            },
-            {
-                data: null, width: "10%", render: function (data, type, row) {
-                    return "<a href='#' class='delete_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='ลบ'><svg xmlns='http://www.w3.org/2000/svg'width='24' height='24' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'><g fill='none' stroke='#626262' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 6h18'/><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'/></g></svg></a>";
-                }
-            },
+            //{
+            //    data: null, width: "10%", render: function (data, type, row) {
+            //        return "<a href='#'class='edit_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='แก้ไข'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a>";
+            //    }
+            //},
+            //{
+            //    data: null, width: "10%", render: function (data, type, row) {
+            //        return "<a href='#' class='delete_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='ลบ'><svg xmlns='http://www.w3.org/2000/svg'width='24' height='24' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'><g fill='none' stroke='#626262' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 6h18'/><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'/></g></svg></a>";
+            //    }
+            //},
         ],
         "order": [[1, "desc"]],
         "stripeClasses": [],
@@ -1530,94 +1528,12 @@ function BindAddressType() {
 
 function validateform() {
     var hasError = true;
-
-    // var forms = document.getElementsByClassName('need-validate-checktyperegister');
-    //var validation = Array.prototype.filter.call(forms, function (form) {
-    //    if ($('#hdrdtype').val() == "") {
-    //        event.preventDefault();
-    //        event.stopPropagation();
-
-    //    }
-    //    else {
-    if ($('#rdoCompanyType1').is(":checked")) {
-        var forms = document.getElementsByClassName('needs-validation-newregister');
+    var forms = document.getElementsByClassName('needs-isvalidate-Verify');
         var validation = Array.prototype.filter.call(forms, function (form) {
-            if (Validate(".form-control.inputValidation", ".custom-control-input.inputValidation"
-                , ".custom-select.inputValidation", ".custom-file-input.inputValidation")) {
+            if (Validate(".form-control.inputisvalidate-Verify", ".custom-control-input.inputisvalidate-Verify"
+                , ".custom-select.inputisvalidate-Verify", ".custom-file-input.inputisvalidate-Verify")) {
                 event.preventDefault();
                 event.stopPropagation();
-            }
-            else {
-                var forms = document.getElementsByClassName('needs-isvalidate');
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    if (Validate(".form-control.inputisvalidate", ".custom-control-input.inputisvalidate"
-                        , ".custom-select.inputisvalidate", ".custom-file-input.inputisvalidate")) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        if (ValidateUpload()) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                    }
-                    else {
-
-                        hasError = false;
-                    }
-                    form.classList.add('was-validated');
-                });
-
-            }
-            form.classList.add('was-validated');
-        });
-
-    }
-    else if ($('#rdoCompanyType2').is(":checked")) {
-
-        var forms = document.getElementsByClassName('needs-validation-dealer');
-        var validation = Array.prototype.filter.call(forms, function (form) {
-            if (Validate(".form-control.inputValidationdealer", ".custom-control-input.inputValidationdealer"
-                , ".custom-select.inputValidationdealer", ".custom-file-input.inputValidationdealer")) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            else {
-                var forms = document.getElementsByClassName('needs-isvalidate');
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    if (Validate(".form-control.inputisvalidate", ".custom-control-input.inputisvalidate"
-                        , ".custom-select.inputisvalidate", ".custom-file-input.inputisvalidate")) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        if (ValidateUpload()) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                    }
-                    else {
-
-                        hasError = false;
-                    }
-                    form.classList.add('was-validated');
-                });
-
-            }
-            form.classList.add('was-validated');
-        });
-
-
-
-
-    }
-    else {
-        var forms = document.getElementsByClassName('needs-isvalidate');
-        var validation = Array.prototype.filter.call(forms, function (form) {
-            if (Validate(".form-control.inputisvalidate", ".custom-control-input.inputisvalidate"
-                , ".custom-select.inputisvalidate", ".custom-file-input.inputisvalidate")) {
-                event.preventDefault();
-                event.stopPropagation();
-                if (ValidateUpload()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
             }
             else {
 
@@ -1625,10 +1541,7 @@ function validateform() {
             }
             form.classList.add('was-validated');
         });
-    }
-    //}
-    //form.classList.add('was-validated');
-    //});
+
 
     return hasError;
 }

@@ -308,6 +308,25 @@ namespace SubcontractProfile.WebApi.API.Controllers
             }
             return result;
         }
+
+        [HttpPut("UpdateVerify")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        public Task<bool> UpdateVerify(SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany subcontractProfileCompany)
+        {
+            _logger.LogInformation($"Start CompanyController::UpdateVerify", subcontractProfileCompany);
+
+            if (subcontractProfileCompany == null)
+                _logger.LogWarning($"Start CompanyController::UpdateVerify", subcontractProfileCompany);
+
+            var result = _service.UpdateVerify(subcontractProfileCompany);
+
+            if (result == null)
+            {
+                _logger.LogWarning($"CompanyController::", "UpdateVerify NOT FOUND", subcontractProfileCompany);
+
+            }
+            return result;
+        }
         #endregion
 
         #region DELETE
