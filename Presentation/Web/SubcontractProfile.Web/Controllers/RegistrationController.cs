@@ -932,8 +932,8 @@ namespace SubcontractProfile.Web.Controllers
 
                 #region Verify
 
-                model.CreateDate = DateTime.Now;
-                model.CreateBy = user;
+                model.UpdateDate = DateTime.Now;
+                model.UpdateBy = user;
 
                 #endregion
 
