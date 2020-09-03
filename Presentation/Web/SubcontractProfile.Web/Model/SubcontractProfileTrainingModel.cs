@@ -93,7 +93,7 @@ namespace SubcontractProfile.Web.Model
 
         public string Position { get; set; }
 
-        public string BookingDate { get; set; }
+        public DateTime? BookingDate { get; set; }
         public string RemarkForAis { get; set; }
         public string Engineer_name { get; set; }
       //  public string EngineerID { get; set; }

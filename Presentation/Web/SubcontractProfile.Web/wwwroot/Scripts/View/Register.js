@@ -238,14 +238,14 @@
             dataType: "json",
             error: function (xhr, status, error) {
                 Loading(0);
-                bootbox.alert({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    size: "small",
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.alert({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    size: "small",
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
               }
 
         },
@@ -297,14 +297,14 @@
             dataType: "json",
             error: function (xhr, status, error) {
                 Loading(0);
-                bootbox.alert({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    size: "small",
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.alert({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    size: "small",
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
                }
 
         },
@@ -444,14 +444,14 @@
             },
             error: function (xhr, status, error) {
                 Loading(0);
-                bootbox.alert({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    size: "small",
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.alert({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    size: "small",
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
              }
         });
 
@@ -606,14 +606,14 @@
             },
             error: function (xhr, status, error) {
                 Loading(0);
-                bootbox.alert({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    size: "small",
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.alert({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    size: "small",
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
             }
 
         },
@@ -814,14 +814,14 @@
             error: function (xhr, status, error) {
                 //Loading(0);
                 //clearForEdit();
-                bootbox.alert({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    size: "small",
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.alert({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    size: "small",
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
             }
         });
     });
@@ -853,14 +853,14 @@
             },
             error: function (xhr, status, error) {
                 //Loading(0);
-                bootbox.alert({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    size: "small",
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.alert({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    size: "small",
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
                }
         });
     });
@@ -972,14 +972,14 @@
             },
             error: function (xhr, status, error) {
                 Loading(0);
-                bootbox.alert({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    size: "small",
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.alert({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    size: "small",
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
             }
         });
     }
@@ -1132,14 +1132,14 @@
                 error: function (xhr, status, error) {
                     Loading(0);
 
-                    bootbox.alert({
-                        title: "System Information",
-                        message: "This action is not available.",
-                        size: "small",
-                        callback: function (result) {
-                            console.log('This was logged in the callback: ' + result);
-                        }
-                    });
+                    //bootbox.alert({
+                    //    title: "System Information",
+                    //    message: "This action is not available.",
+                    //    size: "small",
+                    //    callback: function (result) {
+                    //        console.log('This was logged in the callback: ' + result);
+                    //    }
+                    //});
                 }
             }
         );
@@ -1367,14 +1367,14 @@
             error: function (xhr, status, error) {
                 Loading(0);
                 //clearForEdit();
-                bootbox.alert({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    size: "small",
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.alert({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    size: "small",
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
             }
         });
     });
@@ -1408,14 +1408,14 @@
             error: function (xhr, status, error) {
                 Loading(0);
                 //clearForEdit();
-                bootbox.alert({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    size: "small",
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.alert({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    size: "small",
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
             }
         });
     }
@@ -1543,14 +1543,14 @@ function BindDDLprovince(regionid) {
         },
         error: function (xhr, status, error) {
             Loading(0);
-            bootbox.alert({
-                title: "System Information",
-                message: "This action is not available.",
-                size: "small",
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.alert({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    size: "small",
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
@@ -1575,14 +1575,14 @@ function BindDDLdistrict(province) {
 
         },
         error: function (xhr, status, error) {
-            bootbox.alert({
-                title: "System Information",
-                message: "This action is not available.",
-                size: "small",
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.alert({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    size: "small",
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
@@ -1616,14 +1616,14 @@ function BindDDLsubdistrict(district) {
         error: function (xhr, status, error) {
            
             //clearForEdit();
-            bootbox.alert({
-                title: "System Information",
-                message: "This action is not available.",
-                size: "small",
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.alert({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    size: "small",
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
@@ -1670,14 +1670,14 @@ function BindDDLTitle() {
         error: function (xhr, status, error) {
             Loading();
             //clearForEdit();
-            bootbox.alert({
-                title: "System Information",
-                message: "This action is not available.",
-                size: "small",
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.alert({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    size: "small",
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
@@ -1704,14 +1704,14 @@ function BindRegion() {
         error: function (xhr, status, error) {
             Loading(0);
             //clearForEdit();
-            bootbox.alert({
-                title: "System Information",
-                message: "This action is not available.",
-                size: "small",
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.alert({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    size: "small",
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
@@ -1738,14 +1738,14 @@ function BindDDLBank() {
         error: function (xhr, status, error) {
             Loading(0);
             //clearForEdit();
-            bootbox.alert({
-                title: "System Information",
-                message: "This action is not available.",
-                size: "small",
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.alert({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    size: "small",
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
@@ -1772,14 +1772,14 @@ function BindDDLCompanyType() {
         error: function (xhr, status, error) {
             Loading(0);
             //clearForEdit();
-            bootbox.alert({
-                title: "System Information",
-                message: "This action is not available.",
-                size: "small",
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.alert({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    size: "small",
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
@@ -1816,14 +1816,14 @@ function BindAddressType() {
             Loading(0);
             //clearForEdit();
             console.log(status);
-            bootbox.alert({
-                title: "System Information",
-                message: "This action is not available.",
-                size: "small",
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.alert({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    size: "small",
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }
@@ -1850,14 +1850,14 @@ function BindDDlBankAccountType() {
         error: function (xhr, status, error) {
             Loading(0);
             //clearForEdit();
-            bootbox.alert({
-                title: "System Information",
-                message: "This action is not available.",
-                size: "small",
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.alert({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    size: "small",
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
     });
 }

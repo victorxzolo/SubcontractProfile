@@ -85,7 +85,7 @@ namespace SubcontractProfile.Web
                     name: "default",
                      //pattern: "{controller=Home}/{action=Index}/{id?}");
                       pattern: "{controller=Account}/{action=Login}/{id?}"); //สำหรับ subcontract portal
-                    //pattern: "{controller=Registration}/{action=CompanyVerify}/{id?}"); //สำหรับ fbbportal
+                   // pattern: "{controller=Registration}/{action=CompanyVerify}/{id?}"); //สำหรับ fbbportal
         });
 
             loggerFactory.AddFile("Logs/SubcontractProfileLog-{Date}.txt");

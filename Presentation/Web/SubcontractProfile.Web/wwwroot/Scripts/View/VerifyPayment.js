@@ -445,18 +445,18 @@ function OnSave() {
             });
         },
         error: function (xhr, status, error) {
-            bootbox.confirm({
-                title: "System Information",
-                message: "This action is not available.",
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            //bootbox.confirm({
+            //    title: "System Information",
+            //    message: "This action is not available.",
+            //    buttons: {
+            //        cancel: {
+            //            label: '<i class="fa fa-times"></i> Cancel'
+            //        }
+            //    },
+            //    callback: function (result) {
+            //        console.log('This was logged in the callback: ' + result);
+            //    }
+            //});
         }
 
     });

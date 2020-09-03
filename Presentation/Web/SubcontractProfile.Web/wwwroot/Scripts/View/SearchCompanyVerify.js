@@ -118,18 +118,18 @@ $(document).ready(function () {
             },
             error: function (xhr, status, error) {
                 console.log(xhr);
-                bootbox.confirm({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.confirm({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    buttons: {
+                //        cancel: {
+                //            label: '<i class="fa fa-times"></i> Cancel'
+                //        }
+                //    },
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
             }
         });
     }

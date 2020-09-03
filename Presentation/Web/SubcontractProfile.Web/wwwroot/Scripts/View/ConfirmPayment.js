@@ -261,14 +261,14 @@ function CheckFileUpload(inputId) {
             error: function (xhr, status, error) {
 
 
-                bootbox.alert({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    size: "small",
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                //bootbox.alert({
+                //    title: "System Information",
+                //    message: "This action is not available.",
+                //    size: "small",
+                //    callback: function (result) {
+                //        console.log('This was logged in the callback: ' + result);
+                //    }
+                //});
             }
         }
     );

@@ -59,68 +59,72 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string RequestNo { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public System.Guid EngineerId { get; set; }
+        //[System.ComponentModel.DataAnnotations.StringLength(100)]
+        //public System.Guid EngineerId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public System.Guid TeamId { get; set; }
+        //[System.ComponentModel.DataAnnotations.StringLength(100)]
+        //public System.Guid TeamId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public System.Guid LocationId { get; set; }
+        //[System.ComponentModel.DataAnnotations.StringLength(100)]
+        //public System.Guid LocationId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(50)]
+
         public string CreateBy { get; set; }
 
         public System.DateTime? CreateDate { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(50)]
+
         public string ModifiedBy { get; set; }
 
         public System.DateTime? ModifiedDate { get; set; }
+        public DateTime? BookingDate { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string CompanyNameTh { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string TaxId { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string ContractName { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string ContractEmail { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string ContractPhone { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string LocationNameTh { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string LocationNameEn { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string TeamNameTh { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string TeamNameEn { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string StaffNameTh { get; set; }
-
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string StaffNameEn { get; set; }
-
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string ContractPhone1 { get; set; }
-
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string ContractEmailEn { get; set; }
-
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string Position { get; set; }
-
-        public string BookingDate { get; set; }
         public string RemarkForAis { get; set; }
 
         public DateTime? TestDate { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
+
         public string Skill { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
+
         public string Grade { get; set; }
 
         public string PaymentStatus { get; set; }
+
+
+        //public string CompanyNameTh { get; set; }
+
+        //public string TaxId { get; set; }
+
+        public string ContractName { get; set; }
+
+        public string ContractEmail { get; set; }
+
+        public string ContractPhone { get; set; }
+
+        public decimal CourseName { get; set; }
+        public decimal GrandTotal { get; set; }
+
+        //public string LocationNameTh { get; set; }
+
+        //public string LocationNameEn { get; set; }
+
+        //public string TeamNameTh { get; set; }
+
+        //public string TeamNameEn { get; set; }
+
+        //public string StaffNameTh { get; set; }
+
+
+        //public string StaffNameEn { get; set; }
+
+
+        //public string ContractPhone1 { get; set; }
+
+
+        //public string ContractEmailEn { get; set; }
+
+        //public string Position { get; set; }
+
+
 
         public object Clone()
         {

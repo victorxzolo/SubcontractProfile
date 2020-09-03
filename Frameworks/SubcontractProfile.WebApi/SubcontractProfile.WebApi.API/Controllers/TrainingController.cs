@@ -293,9 +293,10 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [HttpPut("UpdateByVerified")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
-        public  Task<bool> UpdateByVerified(SubcontractProfileTraining subcontractProfileTraining)
+        public  Task<bool> UpdateByVerified(SubcontractProfileTrainingRequest subcontractProfileTraining)
         {
             _logger.LogInformation($"Start TrainingController::UpdateByVerified", subcontractProfileTraining);
+
 
             if (subcontractProfileTraining == null)
                 _logger.LogWarning($"Start TrainingController::UpdateByVerified", subcontractProfileTraining);
@@ -307,6 +308,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
                 _logger.LogWarning($"TrainingController::", "UpdateByVerified NOT FOUND", subcontractProfileTraining);
 
             }
+
             return result;
         }
         #endregion

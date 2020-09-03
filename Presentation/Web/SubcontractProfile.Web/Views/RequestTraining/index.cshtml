@@ -6,374 +6,373 @@
 
 
 
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
 
 
-                    <div class="skills layout-spacing ">
-                        <div class="widget-content widget-content-area">
-                            <h3 class="">Search Request Training</h3>
-                            <div class="widget-content1">
+    <div class="skills layout-spacing ">
+        <div class="widget-content widget-content-area">
+            <h3 class="">Search Request Training</h3>
+            <div class="widget-content1">
 
-                                <div class="form-row mb-4">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputLocationCodeMain">Company Name</label>
-
-
-                                        <div class='input-group'>
-                                            <input type="text" class="form-control" id="txtCompNo" placeholder="Company Name" />
-
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-md-6">
-                                        <label for="">Tax ID</label>
-                                        <input type="text" class="form-control" id="txttaxID" placeholder="TaxID">
-
-                                    </div>
-
-              
-                                    <div class="form-group col-md-6">
-                                        <label for="inputLocationCodeMain">Request No.</label>
-                                        <input type="text" class="form-control" id="txtReqNo" placeholder="Request No.">
-
-                                    </div>
-
-                                    <div class="form-group col-md-6">
-                                        <label for="inputStatus">Status Training</label>
-                 
-
-                                        <select id="inputStatus" class="form-control" data-live-search="true"></select>
+                <div class="form-row mb-4">
+                    <div class="form-group col-md-6">
+                        <label for="inputLocationCodeMain">Company Name</label>
 
 
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="txttaxid">Request Date From</label>
-                                        <div class='input-group date p-0' id='regisdatefrom'>
-                                            <input type='text' class="form-control" id="reqdateFrom" />
-                                            <div class="input-group-append input-group-addon">
-                                                <span class="input-group-text px-4">
-                                                    <i class="fa fa-calendar"></i>
-                                                </span>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="txttaxid">Request Date To</label>
-                                        <div class='input-group date p-0' id='regisdateTo'>
-                                            <input type='text' class="form-control" id="reqdateTo" />
-                                            <div class="input-group-append input-group-addon">
-                                                <span class="input-group-text px-4">
-                                                    <i class="fa fa-calendar"></i>
-                                                </span>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-
-
-
-                                </div>
-
-                                <div style="text-align:center">
-
-                                    <button id="btnMainClear" type="button" onclick="clearField();" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
-                                    <button id="btnSearchRqt" type="button" onclick="inittbSearchResult();" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
-                                  
-
-                                </div>
-
-                             
-                            </div>
-
-
-                            <br />
-                            <div class="widget-heading">
-                                <h3 class="">Search Result</h3>
-
-                            </div>
-                    
-                            <div class="table-responsive">
-                                <table id="tbSearchResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-2">
-                                    <thead>
-                                        <tr>
-                                            @**@
-                                            <th>Action</th>
-                                            <th>Request No.</th>
-                                            <th>Company Name</th>
-                                            <th>TaxID </th>
-                                            <th>Request Date </th>
-                                            <th>Request Status </th>
-                                            <th>Payment Status </th>
-                                            <th>Course Name</th>
-                                            <th>Course Price</th>
-                                            <th>Vat</th>
-                                            <th>Total Price</th>
-                                        </tr>
-
-                                    </thead>
-
-                                </table>
-                            </div>
-
+                        <div class='input-group'>
+                            <input type="text" class="form-control" id="txtCompNo" placeholder="Company Name" />
 
                         </div>
                     </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="">Tax ID</label>
+                        <input type="text" class="form-control" id="txttaxID" placeholder="TaxID">
+
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label for="inputLocationCodeMain">Request No.</label>
+                        <input type="text" class="form-control" id="txtReqNo" placeholder="Request No.">
+
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputStatus">Status Training</label>
+
+
+                        <select id="inputStatus" class="form-control" data-live-search="true"></select>
+
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="txttaxid">Request Date From</label>
+                        <div class='input-group date p-0' id='regisdatefrom'>
+                            <input type='text' class="form-control" id="reqdateFrom" />
+                            <div class="input-group-append input-group-addon">
+                                <span class="input-group-text px-4">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="txttaxid">Request Date To</label>
+                        <div class='input-group date p-0' id='regisdateTo'>
+                            <input type='text' class="form-control" id="reqdateTo" />
+                            <div class="input-group-append input-group-addon">
+                                <span class="input-group-text px-4">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+                <div style="text-align:center">
+
+                    <button id="btnMainClear" type="button" onclick="clearField();" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
+                    <button id="btnSearchRqt" type="button" onclick="inittbSearchResult();" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+
+
                 </div>
 
 
-
-                @section modalpanel {
-
-                    <div id="AdjustReqTraining" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 id="hTitleEdit" class="modal-title">Request Training</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-
-                                <form id="frNew" class="needs-validation" novalidate>
-                                    <div class="container">
-                                        <div class="modal-body">
-
-                                                            <div class="row mt-4 ml-3 mr-1">
-
-                                                                <div class=" col-md-6 mt-3">
-                                                                    <div class="row">
-                                                                        <div class="col-md-4">
-                                                                            <label>Company Name:</label>
-                                                                        </div>
-                                                                        <div class="col-md-7">
-                                                                            <label id="lblcompname"></label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class=" col-md-6 mt-3">
-                                                                    <div class="row">
-                                                                        <div class="col-md-4">
-                                                                            <label>Tax ID : </label>
-                                                                        </div>
-                                                                        <div class="col-md-7">
-                                                                            <label id="lbltaxid"></label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                @*<div class=" col-md-6 mt-4">
-            <div class="row">
-                <div class="col-md-4">
-                    <label>Contact name:</label>
-                </div>
-                <div class="col-md-7">
-                    <label id="lblcontname"></label>
-                </div>
             </div>
-        </div>*@
-                                                                <div class=" col-md-6 mt-4">
-                                                                    <div class="row">
-                                                                        <div class="col-md-4">
-                                                                            <label>Contact Phone:</label>
-                                                                        </div>
-                                                                        <div class="col-md-7">
-                                                                            <label id="lblcontphone"></label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class=" col-md-6 mt-4">
-                                                                    <div class="row">
-                                                                        <div class="col-md-4">
-                                                                            <label>Email :</label>
-                                                                        </div>
-                                                                        <div class="col-md-7">
-                                                                            <label id="lblemail"></label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class=" col-md-6 mt-4">
-                                                                    <div class="row">
-                                                                        <div class="col-md-4">
-                                                                            <label>Course:</label>
-                                                                        </div>
-                                                                        <div class="col-md-7 training_couse">
-                                                            
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class=" col-md-6 mt-4">
-                                                                    <div class="row">
-                                                                        <div class="col-md-4">
-                                                                            <label>Course Price:</label>
-                                                                        </div>
-                                                                        <div class="col-md-7">
-                                                                            <label id="lblcourseprice"></label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                               
-                                                                <div class=" col-md-12 mt-3">
-                                                                    <div class="row">
-                                                                        <div class="col-md-2">
-                                                                            <label>Remark:</label>
-                                                                        </div>
-                                                                        <div class="col-md-9 ">
-                                                                            <textarea id="lblRemark" name="w3review" style="width:inherit;border-color:#E0E0E0" disabled="disabled" rows="6"> </textarea>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                            <div class="container">
-                                                <div class="row mt-5 ml-3 mr-3">
-                                                    <div class="col-md-12 ">
-                                                        <p5><strong>ผู้เข้าอบรม</strong></p5>
-                                                        <hr>
-                                                    </div>
-                                                    <div class="row col-sm-12">
-                                                        <div class="table-responsive">
-                                                            <table id="tbSearchEngineer" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
-                                                                <thead>
-                                                                    <tr>
-
-                                                                        <th width="20%">LocationName</th>
-                                                                        <th width="20%">TeamName</th>
-                                                                        <th width="15%">Position</th>
-                                                                        <th width="15%">Engineer</th>
-                                                                        <th width="15%">ContactPhone</th>
-                                                                        <th width="15%">Email</th>
-
-                                                                    </tr>
-                                                                </thead>
-                                                            </table>
-                                                        </div>
-
-                                                        <input type="hidden" id="Coursecost" />
-                                                        <input type="hidden" id="rowCount" />
-                                                        <input type="hidden" id="trnid" />
-                                                        <input type="hidden" id="compid" />
-
-                                                        <input type="hidden" id="teamid" />
-                                                        <input type="hidden" id="engid" />
-                                                        
-                                                        <input type="hidden" id="locid" />
-                                                    </div>
-                                                    <div class="col-md-12 mt-5">
-                                                        <div class="row">
-                                                            <div class="col-md-9 "></div>
-                                                            <div class="col-md-3 col-sm-12">
-                                                                <div class="row ">
-                                                                    <div class="col-md-12">
-                                                                        <div class="row">
-                                                                            <div class="col-md-6">
-                                                                                <p>ราคารวม</p>
-                                                                            </div>
-                                                                            <div class="col-md-6" style="text-align: left;">
-                                                                                <label id="lblttcost"></label>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="col-md-12 mt-3">
-                                                                        <div class="row">
-                                                                            <div class="col-md-6">
-                                                                                <p>Vat7%</p>
-                                                                            </div>
-                                                                            <div class="col-md-6" style="text-align: left;">
-                                                                                <label id="lblvat7"></label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-12 mt-3">
-                                                                        <div class="row">
-                                                                            <div class="col-md-6">
-                                                                                <p>ราคาสุทธิ(บาท) </p>
-                                                                            </div>
-                                                                            <div class="col-md-6" style="text-align: left;">
-                                                                                <label id="lblCousetotal"></label> 
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
 
+            <br />
+            <div class="widget-heading">
+                <h3 class="">Search Result</h3>
+
+            </div>
+
+            <div class="table-responsive">
+                <table id="tbSearchResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-2">
+                    <thead>
+                        <tr>
+                            @**@
+                            <th>Action</th>
+                            <th>Request No.</th>
+                            <th>Company Name</th>
+                            <th>TaxID </th>
+                            <th>Request Date </th>
+                            <th>Request Status </th>
+                            <th>Payment Status </th>
+                            <th>Course Name</th>
+                            <th>Course Price</th>
+                            <th>Vat</th>
+                            <th>Total Price</th>
+                        </tr>
+
+                    </thead>
+
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+@section modalpanel {
+
+    <div id="AdjustReqTraining" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="hTitleEdit" class="modal-title">Request Training</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="frNew" class="needs-validation" novalidate>
+                    <div class="modal-body">
+
+                        <div class="container">
+                            <div class="modal-body">
+
+                                <div class="row mt-4 ml-3 mr-1">
+
+                                    <div class=" col-md-6 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Company Name:</label>
                                             </div>
-                                            <div class="container">
-                                                <div class="row mt-5 ml-3 mr-3">
-                                                    <div class="col-md-12 ">
-                                                        <p class="h5"><strong>สำหรับเจ้าหน้าที่ AIS ( เลือกวัน Training)</strong></p>
-                                                        <hr>
-                                                    </div>
-                                                    <div class=" col-md-6 mt-3">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <label> booking Training Date:</label>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                <div class='input-group date p-0' id='bookdatefrom'>
-                                                                    <input type='text' class="form-control" id="bookingDate" />
-                                                                    <div class="input-group-append input-group-addon">
-                                                                        <span class="input-group-text px-4">
-                                                                            <i class="fa fa-calendar"></i>
-                                                                        </span>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class=" col-md-6 mt-3">
-                                                        <div class="row">
-                                                            <div class="col-md-2">
-                                                                <label>Remark:</label>
-                                                            </div>
-                                                            <div class="col-md-9 ">
-                                                                <textarea id="txtaisremark" name="w3review" style="width:inherit;border-color:#E0E0E0" rows="6"> </textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
+                                            <div class="col-md-7">
+                                                <label id="lblcompname"></label>
                                             </div>
-
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
-                                                Close
-                                            </button>
-                                            <button id="btnSave" onclick="onSave();"  class="btn btn-primary">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                                                Booking
-                                            </button>
                                         </div>
                                     </div>
-                                </form>
+                                    <div class=" col-md-6 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Tax ID : </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <label id="lbltaxid"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class=" col-md-6 mt-4">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Contact name:</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <label id="lblcontname"></label>
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                    <div class=" col-md-6 mt-4">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Contact Phone:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <label id="lblcontphone"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-md-6 mt-4">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Email :</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <label id="lblemail"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class=" col-md-6 mt-4">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Course:</label>
+                                            </div>
+                                            <div class="col-md-7 training_couse">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-md-6 mt-4">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Course Price:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <label id="lblcourseprice"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class=" col-md-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label>Remark:</label>
+                                            </div>
+                                            <div class="col-md-9 ">
+                                                <textarea id="lblRemark" name="w3review" style="width:inherit;border-color:#E0E0E0" disabled="disabled" rows="6"> </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container">
+                                    <div class="row mt-5 ml-3 mr-3">
+                                        <div class="col-md-12 ">
+                                            <p5><strong>ผู้เข้าอบรม</strong></p5>
+                                            <hr>
+                                        </div>
+                                        <div class="row col-sm-12">
+                                            <div class="table-responsive">
+                                                <table id="tbSearchEngineer" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th width="20%">LocationName</th>
+                                                            <th width="20%">TeamName</th>
+                                                            <th width="15%">Position</th>
+                                                            <th width="15%">Engineer</th>
+                                                            <th width="15%">ContactPhone</th>
+                                                            <th width="15%">Email</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+
+                                            <input type="hidden" id="Coursecost" />
+                                            <input type="hidden" id="rowCount" />
+                                            <input type="hidden" id="trnid" />
+                                            <input type="hidden" id="compid" />
+
+                                            <input type="hidden" id="teamid" />
+                                            <input type="hidden" id="engid" />
+
+                                            <input type="hidden" id="locid" />
+                                        </div>
+                                        <div class="col-md-12 mt-5">
+                                            <div class="row">
+                                                <div class="col-md-9 "></div>
+                                                <div class="col-md-3 col-sm-12">
+                                                    <div class="row ">
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <p>ราคารวม</p>
+                                                                </div>
+                                                                <div class="col-md-6" style="text-align: left;">
+                                                                    <label id="lblttcost"></label>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-12 mt-3">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <p>Vat7%</p>
+                                                                </div>
+                                                                <div class="col-md-6" style="text-align: left;">
+                                                                    <label id="lblvat7"></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 mt-3">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <p>ราคาสุทธิ(บาท) </p>
+                                                                </div>
+                                                                <div class="col-md-6" style="text-align: left;">
+                                                                    <label id="lblCousetotal"></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="container">
+                                    <div class="row mt-5 ml-3 mr-3">
+                                        <div class="col-md-12 ">
+                                            <p class="h5"><strong>สำหรับเจ้าหน้าที่ AIS ( เลือกวัน Training)</strong></p>
+                                            <hr>
+                                        </div>
+                                        <div class=" col-md-6 mt-3">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label> booking Training Date:</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class='input-group date p-0' id='bookdatefrom'>
+                                                        <input type='text' class="form-control" id="bookingDate" />
+                                                        <div class="input-group-append input-group-addon">
+                                                            <span class="input-group-text px-4">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class=" col-md-6 mt-3">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <label>Remark:</label>
+                                                </div>
+                                                <div class="col-md-9 ">
+                                                    <textarea id="txtaisremark" name="w3review" style="width:inherit;border-color:#E0E0E0" rows="6"> </textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
                             </div>
+
+
                         </div>
+
                     </div>
-                   
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                            Close
+                        </button>
+                        <button id="btnSave" type="submit" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                            Booking
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-                 
+}
 
-                }
-                @section scripts{ 
-                     
+@section scripts{
 
-                    <script type="text/javascript">
+
+    <script type="text/javascript">
                         var oTable;
                         var oTableEngineer;
                         var compname =  $("#txtCompNo").val();
-
-
-
 
                         $(document).ready(function () {
 
@@ -435,7 +434,6 @@
                             });
 
 
-
                             $('#regisdateTo').datetimepicker({
                                 format: "DD/MM/YYYY",
                                 showClear: true,
@@ -470,32 +468,44 @@
                                     close: 'fa fa-time'
                                 }
                             });
-
-
                         });
 
-                        //txtCompNo
+                        'use strict';
+                        window.addEventListener('load', function () {
+                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                            var forms = document.getElementsByClassName('needs-validation');
+                            // Loop over them and prevent submission
+                            var validation = Array.prototype.filter.call(forms, function (form) {
+                                form.addEventListener('submit', function (event) {
 
+                                    if (form.checkValidity() === false) {
+                                        event.preventDefault();
+                                        event.stopPropagation();
+                                       
+                                    } else {
+                                        onSave();
+                                        event.preventDefault();
+                                        event.stopPropagation();
+                                    }
+                                    form.classList.add('was-validated');
+                                }, false);
+                            });
+                        }, false);
 
+                        function onSave() {
+                           
+                            var trainingModel = new Object();
+                            trainingModel.TrainingId = $('#trnid').val();
+                            trainingModel.CompanyId = $('#compid').val();
+                            trainingModel.BookingDate = $('#bookingDate').val();
+                            trainingModel.RemarkForAis = $('#txtaisremark').val();
 
-                        function onSaveTraining() {
-
-                            var model = new Object();
-                            model.TrainingId = $('#trnid').val();
-                            model.CompanyId = $('#compid').val();
-                            model._bookingDate = $('#bookingDate').val();
-                            // model.StaffCode = $('#StaffCode').val();
-                            model.RemarkForAis = $('#txtaisremark').val();
-
-                             //  console.log("TTID" + trainingID);
                                  $.ajax({
-                                      url: '@Url.Action("onSaveTraining", "RequestTraining")',
+                                      url: '@Url.Action("onSave", "RequestTraining")',
                                       type: 'POST',
-                                      data: {
-                                          'model': model,
-                                      },
+                                     data: { 'model': trainingModel },
                                       dataType: "json",
-                                     success: function (result) {
+                                      success: function (result) {
                                          console.log(result)
                                          if (result != null) {
                                              //console.log()
@@ -522,7 +532,7 @@
                         }
 
 
-                        function onSave() {
+                        function onSave1() {
 
                            // var model = new Object();
                             var TrainingId = $('#trnid').val();
@@ -557,12 +567,12 @@
                                      dataType: "json",
 
                                      success: function (result) {
-                                        
+
                                          // console.log(result);
                                        //  alert("Update Success.");
                                          if (result != null) {
                                            //  alert('success');
-                                            
+
                                              /// alert(result.ret_msg);
                                              alert("Update Success.");
                                             // alert(result.Message);
@@ -582,7 +592,7 @@
                                       },
                                  });
                                 }
-                               
+
 
                             }
 
@@ -954,13 +964,8 @@
                         }
 
 
-
-
-
-
-
-                    </script>
+    </script>
 
 }
- 
+
 

@@ -221,15 +221,12 @@ namespace SubcontractProfile.WebApi.Services.Services
 
         }
 
-        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTraining(Guid company_id, Guid location_id,
-            Guid team_id, string status, string date_from, string date_to,string tax_id,string request_no)
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTraining(Guid company_id,
+           string tax_id,  string status, string date_from, string date_to)
         {
             var p = new DynamicParameters();
             p.Add("@company_id", company_id);
-            p.Add("@location_id", location_id);
-            p.Add("@team_id", team_id);
             p.Add("@tax_id", tax_id);
-            p.Add("@request_no", request_no);
             p.Add("@status", status);
             p.Add("@date_from", date_from);
             p.Add("@date_to", date_to);
@@ -260,15 +257,15 @@ namespace SubcontractProfile.WebApi.Services.Services
             return entity;
         }
 
-        public async Task<bool> UpdateByVerified(SubcontractProfileTraining subcontractProfileTraining)
+        public async Task<bool> UpdateByVerified(SubcontractProfileTrainingRequest subcontractProfileTraining)
         {
 
             var p = new DynamicParameters();
             p.Add("@training_id", subcontractProfileTraining.TrainingId);
-            p.Add("@status", subcontractProfileTraining.Status);
-            p.Add("@modified_by", subcontractProfileTraining.ModifiedBy);
-            p.Add("@booking_date", subcontractProfileTraining.BookingDate);
-            p.Add("@remark_for_ais", subcontractProfileTraining.RemarkForAis);
+            //p.Add("@status", subcontractProfileTraining.Status);
+            //p.Add("@modified_by", subcontractProfileTraining.ModifiedBy);
+            //p.Add("@booking_date", subcontractProfileTraining.BookingDate);
+            //p.Add("@remark_for_ais", subcontractProfileTraining.RemarkForAis);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTraining_updateByVerified", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -276,7 +273,7 @@ namespace SubcontractProfile.WebApi.Services.Services
             return true;
         }
 
-        public async Task<bool> UpdateTestResult(SubcontractProfileTraining subcontractProfileTraining)
+        public async Task<bool> UpdateTestResult(SubcontractProfileTrainingRequest subcontractProfileTraining)
         {
 
             var p = new DynamicParameters();
