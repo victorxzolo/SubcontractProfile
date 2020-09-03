@@ -1002,36 +1002,57 @@ $(document).ready(function () {
                 console.log(result)
                 if (result != null) {
                     $('#hdCompanyId').val(result.CompanyId);
-                    $("#inputCompany_alias").val(result.CompanyAlias);
-                    $("#inputCompany_name_th").val(result.CompanyNameTh);
+                   
 
                     if (result.SubcontractProfileType == "NewSubContract") {
                         $('#rdoCompanyType1').prop('checked', true);
                         $('#hdrdtype').val(result.SubcontractProfileType);
+                        $("#inputCompany_alias").val(result.CompanyAlias);
+                        $("#inputCompany_name_th").val(result.CompanyNameTh);
+                        $('#inputTax_id').val(result.TaxId);
+                        $('#inputCompany_alias').val(result.CompanyAlias);
+                        $('#ddlprefixcompany_name_th').val(result.CompanyTitleThId);
+                        $('#inputCompany_name_th').val(result.CompanyNameTh);
+
+                        $('#ddlprefixcompany_name_en').val(result.CompanyTitleEnId);
+                        $('#inputCompany_name_en').val(result.CompanyNameEn);
+
+                        $('#inputWT_name').val(result.WtName);
+
+                        if (result.VatType == "VAT") {
+                            $('#chkvat_typeT').prop('checked', true);
+                        }
+                        else if (result.VatType == "NON_VAT") {
+                            $('#chkvat_typeE').prop('checked', true);
+                        }
 
                     }
                     else if (result.SubcontractProfileType == "Dealer") {
                         $('#rdoCompanyType2').prop('checked', true);
                         $('#hdrdtype').val(result.SubcontractProfileType);
+                        $('#txtlocationcode').val(result.LocationCode);
+                        $('#txtdistribution').val(result.DistributionChannel);
+                        $('#txtlocationname').val(result.LocationNameTh);
+                        $('#txtchannelsalegroup').val(result.ChannelSaleGroup);
+                        $('#txttax_id_dealer').val(result.TaxId);
+                        $('#txtcompany_alias_dealer').val(result.CompanyAlias);
+                        $('#txtcompany_name_th_dealer').val(result.CompanyNameTh);
+                        $('#ddlprefixcompany_name_th_dealer').val(result.CompanyTitleThId);
+                        $('#txtcompany_name_en_dealer').val(result.CompanyNameEn);
+                        $('#ddlprefixcompany_name_en_dealer').val(result.CompanyTitleEnId);
+                        $('#txtwt_name_dealer').val(result.WtName);
+                        if (result.VatType == "VAT") {
+                            $('#chkvat_typeT_dealer').prop('checked', true);
+                        }
+                        else if (result.VatType == "NON_VAT") {
+                            $('#chkvat_typeE_dealer').prop('checked', true);
+                        }
                     }
 
-                    $('#inputTax_id').val(result.TaxId);
-                    $('#inputCompany_alias').val(result.CompanyAlias);
+                   
+                   
 
-                    $('#ddlprefixcompany_name_th').val(result.CompanyTitleThId);
-                    $('#inputCompany_name_th').val(result.CompanyNameTh);
-
-                    $('#ddlprefixcompany_name_en').val(result.CompanyTitleEnId);
-                    $('#inputCompany_name_en').val(result.CompanyNameEn);
-
-                    $('#inputWT_name').val(result.WtName);
-
-                    if (result.VatType == "VAT") {
-                        $('#chkvat_typeT').prop('checked', true);
-                    }
-                    else if (result.VatType == "NON_VAT") {
-                        $('#chkvat_typeE').prop('checked', true);
-                    }
+                    
 
                     //contract
                     $('#mailCompany').val(result.CompanyEmail);
