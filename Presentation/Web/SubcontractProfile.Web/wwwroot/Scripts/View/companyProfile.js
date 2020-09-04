@@ -228,7 +228,44 @@ $(document).ready(function () {
 
                     });
 
-                    SaveDaftAddress(stuff);
+                    var forms = document.getElementsByClassName('needs-validation-step2');
+                    var validation = Array.prototype.filter.call(forms, function (form) {
+                        var failed = false;
+
+                        if ($("[name='address_type_id']:checked").length == 0) {
+                            $("[name='address_type_id']").attr('required', true);
+                            failed = true;
+                            $("[name='address_type_id']").parent().css({ color: '#e7515a' });
+                        }
+                        else {
+                            $("[name='address_type_id']").attr('required', false);
+                            $("[name='address_type_id']").parent().removeAttr('style');
+                        }
+
+                        if (Validate(".form-control.inputValidationAddress", ".custom-control-input.inputValidationAddress"
+                            , ".custom-select.inputValidationAddress", ".custom-file-input.inputValidationAddress")) {
+                            failed = true;
+                        }
+
+                        if (failed == true) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        else {
+                            SaveDaftAddress(stuff);
+                        }
+                        //if (Validate(".form-control.inputValidationAddress", ".custom-control-input.inputValidationAddress"
+                        //           , ".custom-select.inputValidationAddress", ".custom-file-input.inputValidationAddress")) {
+                        //    event.preventDefault();
+                        //    event.stopPropagation();
+                        //}
+                        //else {
+                        //    SaveDaftAddress(stuff);
+
+                        //}
+                        form.classList.add('was-validated');
+                    });
+
                 });
 
 
@@ -566,7 +603,7 @@ $(document).ready(function () {
                                 var validation = Array.prototype.filter.call(forms, function (form) {
                                     if (Validate(".form-control.inputisvalidate", ".custom-control-input.inputisvalidate"
                                         , ".custom-select.inputisvalidate", ".custom-file-input.inputisvalidate") ||
-                                        (isEmail($('#txtcompany_Email').val()) || isEmail($('#txtcontract_email').val()))
+                                        (isEmail($('#mailCompany').val()) || isEmail($('#mailContract').val()))
                                     ) {
                                         event.preventDefault();
                                         event.stopPropagation();
@@ -601,7 +638,7 @@ $(document).ready(function () {
                                 var validation = Array.prototype.filter.call(forms, function (form) {
                                     if (Validate(".form-control.inputisvalidate", ".custom-control-input.inputisvalidate"
                                         , ".custom-select.inputisvalidate", ".custom-file-input.inputisvalidate") ||
-                                        (isEmail($('#txtcompany_Email').val()) || isEmail($('#txtcontract_email').val()))
+                                        (isEmail($('#mailCompany').val()) || isEmail($('#mailContract').val()))
                                     ) {
                                         event.preventDefault();
                                         event.stopPropagation();
@@ -770,9 +807,10 @@ $(document).ready(function () {
             searching: false,
             destroy: true,
             lengthChange: false,
+            paging: false,
             "oLanguage": {
-                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
-                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                //"oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                //"sInfo": "Showing page _PAGE_ of _PAGES_",
                 "sSearch": false,
                 "sLengthMenu": "Results :  _MENU_",
             },
@@ -790,19 +828,19 @@ $(document).ready(function () {
                 { "data": "address_type", orderable: true, },
                 { "data": "address", orderable: true, },
                 {
-                    data: null, width: "10%", render: function (data, type, row) {
+                    data: null, width: "10%", orderable: false, render: function (data, type, row) {
                         return "<a href='#'class='edit_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='แก้ไข'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a>";
                     }
                 },
                 {
-                    data: null, width: "10%", render: function (data, type, row) {
+                    data: null, width: "10%", orderable: false, render: function (data, type, row) {
                         return "<a href='#' class='delete_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='ลบ'><svg xmlns='http://www.w3.org/2000/svg'width='24' height='24' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'><g fill='none' stroke='#626262' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 6h18'/><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'/></g></svg></a>";
                     }
                 },
             ],
             "order": [[1, "desc"]],
             "stripeClasses": [],
-            drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+           // drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
 
         });
         }

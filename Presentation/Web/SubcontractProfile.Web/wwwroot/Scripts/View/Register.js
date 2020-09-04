@@ -473,15 +473,37 @@ $(document).ready(function () {
 
         var forms = document.getElementsByClassName('needs-validation-step2');
         var validation = Array.prototype.filter.call(forms, function (form) {
+            var failed = false;
+
+            if ($("[name='address_type_id']:checked").length == 0) {
+                $("[name='address_type_id']").attr('required', true);
+                failed = true;
+            }
+            else {
+                $("[name='address_type_id']").attr('required', false);
+            }
+
             if (Validate(".form-control.inputValidationAddress", ".custom-control-input.inputValidationAddress"
-                       , ".custom-select.inputValidationAddress", ".custom-file-input.inputValidationAddress")) {
+                , ".custom-select.inputValidationAddress", ".custom-file-input.inputValidationAddress")) {
+                failed = true;
+            }
+
+            if (failed == true) {
                 event.preventDefault();
                 event.stopPropagation();
             }
             else {
                 SaveDaftAddress(stuff);
-
             }
+            //if (Validate(".form-control.inputValidationAddress", ".custom-control-input.inputValidationAddress"
+            //           , ".custom-select.inputValidationAddress", ".custom-file-input.inputValidationAddress")) {
+            //    event.preventDefault();
+            //    event.stopPropagation();
+            //}
+            //else {
+            //    SaveDaftAddress(stuff);
+
+            //}
             form.classList.add('was-validated');
         });
 

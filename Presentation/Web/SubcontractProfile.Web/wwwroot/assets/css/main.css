@@ -418,6 +418,9 @@ select.form-control.form-custom {
 }
 .custom-control-input.is-invalid~.custom-control-label, .was-validated .custom-control-input:invalid~.custom-control-label {
     color: #e7515a; }
+
+
+
 .dropdown-toggle:after { display: none; }
 .dropup .dropdown-toggle::after { display: none; }
 .dropright .dropdown-toggle::after { display: none; }

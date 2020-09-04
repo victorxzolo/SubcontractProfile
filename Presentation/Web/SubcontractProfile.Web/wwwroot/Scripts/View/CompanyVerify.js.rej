@@ -1,0 +1,7 @@
+diff a/Presentation/Web/SubcontractProfile.Web/wwwroot/Scripts/View/CompanyVerify.js b/Presentation/Web/SubcontractProfile.Web/wwwroot/Scripts/View/CompanyVerify.js	(rejected hunks)
+@@ -1530,5 +1530,4 @@
+     var hasError = true;
+-    //    else {
+     var forms = document.getElementsByClassName('needs-isvalidate-Verify');
+         var validation = Array.prototype.filter.call(forms, function (form) {
+             if (Validate(".form-control.inputisvalidate-Verify", ".custom-control-input.inputisvalidate-Verify"

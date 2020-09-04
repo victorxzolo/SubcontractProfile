@@ -309,11 +309,11 @@ namespace SubcontractProfile.Web.Controllers
                     });
                     companyResult.file_id_bookbank = file_id_bookbank;
                 }
-                //if (L_File.Count != 0)
-                //{
-                //    GetFile(companyId, ref L_File);
-                //    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
-                //}
+                if (L_File.Count != 0)
+                {
+                    GetFile(companyId, ref L_File);
+                    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
+                }
 
 
             }
@@ -914,12 +914,12 @@ namespace SubcontractProfile.Web.Controllers
 
 
         [HttpPost]
-        public IActionResult OnSave(string status,string? contractstart,string? contractend,string companyId)
+        public async Task<IActionResult> OnSave(SubcontractProfileCompanyModel model,string status,string? contractstart,string? contractend)
         {
-            //bool resultGetFile = true;
+            bool resultGetFile = true;
             ResponseModel res = new ResponseModel();
             string user = "";
-            SubcontractProfileCompanyModel model = new SubcontractProfileCompanyModel();
+            //SubcontractProfileCompanyModel model = new SubcontractProfileCompanyModel();
             if (dataUser == null)
             {
                 getsession();
@@ -929,7 +929,7 @@ namespace SubcontractProfile.Web.Controllers
             try
             {
 
-                model.CompanyId= new Guid(companyId);
+               // model.CompanyId= new Guid(companyId);
 
                 #region Verify
                 user = dataUser.UserId.ToString();
@@ -949,47 +949,47 @@ namespace SubcontractProfile.Web.Controllers
                 }
 
 
-                //var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompanySSO");
-                //if (dataUploadfile != null && dataUploadfile.Count != 0)
-                //{
+                var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompanySSO");
+                if (dataUploadfile != null && dataUploadfile.Count != 0)
+                {
                     #region Copy File to server
 
-                    //System.IO.DirectoryInfo di = new DirectoryInfo(Path.Combine(strpathUpload, model.CompanyId.ToString()));
+                    System.IO.DirectoryInfo di = new DirectoryInfo(Path.Combine(strpathUpload, model.CompanyId.ToString()));
 
-                    //foreach (FileInfo finfo in di.GetFiles())
-                    //{
-                    //    finfo.Delete();
-                    //}
+                foreach (FileInfo finfo in di.GetFiles())
+                {
+                    finfo.Delete();
+                }
 
 
-                    //foreach (var e in dataUploadfile)
-                    //{
-                    //    resultGetFile = await CopyFile(e, model.CompanyId.ToString());
+                foreach (var e in dataUploadfile)
+                {
+                    resultGetFile = await CopyFile(e, model.CompanyId.ToString());
 
-                    //    string filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
-                    //    filename = EnsureCorrectFilename(filename);
+                    string filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
+                    filename = EnsureCorrectFilename(filename);
 
-                    //    switch (e.typefile)
-                    //    {
-                    //        case "CompanyCertifiedFile":
-                    //            model.CompanyCertifiedFile = filename;
-                    //            break;
-                    //        case "CommercialRegistrationFile":
-                    //            model.CommercialRegistrationFile = filename;
-                    //            break;
-                    //        case "VatRegistrationCertificateFile":
-                    //            model.VatRegistrationCertificateFile = filename;
-                    //            break;
-                    //        case "bookbankfile":
-                    //            model.AttachFile = filename;
-                    //            break;
-                    //    }
-                    //}
-                    #endregion
-                    //if (resultGetFile)
-                    //{
-                SessionHelper.RemoveSession(HttpContext.Session, "userUploadfileDaftCompanySSO");
-                SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftCompanySSO");
+                    switch (e.typefile)
+                    {
+                        case "CompanyCertifiedFile":
+                            model.CompanyCertifiedFile = filename;
+                            break;
+                        case "CommercialRegistrationFile":
+                            model.CommercialRegistrationFile = filename;
+                            break;
+                        case "VatRegistrationCertificateFile":
+                            model.VatRegistrationCertificateFile = filename;
+                            break;
+                        case "bookbankfile":
+                            model.AttachFile = filename;
+                            break;
+                    }
+                }
+                #endregion
+                if (resultGetFile)
+                {
+                    SessionHelper.RemoveSession(HttpContext.Session, "userUploadfileDaftCompanySSO");
+                //SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftCompanySSO");
 
                 #region Update Company for AIS
 
@@ -1002,7 +1002,8 @@ namespace SubcontractProfile.Web.Controllers
                     model.Status = "N";
                 }
 
-                var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "UpdateVerify"));
+                        //var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "UpdateVerify"));
+                        var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Update"));
 
                 HttpClient clientCompany = new HttpClient();
                 clientCompany.DefaultRequestHeaders.Accept.Add(
@@ -1018,100 +1019,109 @@ namespace SubcontractProfile.Web.Controllers
                     var result = responseCompany.Content.ReadAsStringAsync().Result;
                     //data
                    var output = JsonConvert.DeserializeObject<bool>(result);
-                    if(output)
-                    {
-                        res.Status = true;
-                        res.Message = "Update Success";
-                        res.StatusError = "0";
-                    }
-                    else
-                    {
-                        res.Status = false;
-                        res.Message = "Update not sccess";
-                        res.StatusError = "0";
-                    }
-
-                    #region Insert Address
-                    //var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaftCompanySSO");
-
-                    //if (dataaddr != null && dataaddr.Count != 0)
+                    //if(output)
                     //{
-
-
-                    //    foreach (var d in dataaddr)
-                    //    {
-                    //        SubcontractProfileAddressModel addr = new SubcontractProfileAddressModel();
-                    //        addr.AddressId = d.AddressId;
-                    //        addr.AddressTypeId = d.AddressTypeId;
-                    //        addr.Building = d.Building;
-                    //        addr.City = d.City;
-                    //        addr.Country = d.Country;
-                    //        addr.DistrictId = d.DistrictId;
-                    //        addr.Floor = d.Floor;
-                    //        addr.HouseNo = d.HouseNo;
-                    //        addr.Moo = d.Moo;
-                    //        addr.ProvinceId = d.ProvinceId;
-                    //        addr.CompanyId = companyId.ToString();
-                    //        addr.ModifiedBy = user;
-                    //        addr.ModifiedDate = DateTime.Now;
-                    //        addr.RegionId = d.RegionId;
-                    //        addr.Road = d.Road;
-                    //        addr.Soi = d.Soi;
-                    //        addr.RoomNo = d.RoomNo;
-                    //        addr.SubDistrictId = d.SubDistrictId;
-                    //        addr.VillageName = d.VillageName;
-                    //        addr.ZipCode = d.ZipCode;
-
-                    //        var uriAddress = new Uri(Path.Combine(strpathAPI, "Address", "Update"));
-                    //        HttpClient clientAddress = new HttpClient();
-                    //        clientAddress.DefaultRequestHeaders.Accept.Add(
-                    //        new MediaTypeWithQualityHeaderValue("application/json"));
-
-                    //        // string rr = JsonConvert.SerializeObject(addr);
-
-                    //        var httpContent = new StringContent(JsonConvert.SerializeObject(addr), Encoding.UTF8, "application/json");
-                    //        HttpResponseMessage responseAddress = clientAddress.PutAsync(uriAddress, httpContent).Result;
-                    //        if (responseAddress.IsSuccessStatusCode)
-                    //        {
-
-                    //            res.Status = true;
-                    //            res.Message = "Register Success";
-                    //            res.StatusError = "0";
-                    //        }
-                    //        else
-                    //        {
-                    //            res.Status = false;
-                    //            res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
-                    //            res.StatusError = "-1";
-                    //        }
-                    //    }
+                    //    res.Status = true;
+                    //    res.Message = "Update Success";
+                    //    res.StatusError = "0";
                     //}
                     //else
                     //{
                     //    res.Status = false;
-                    //    res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
-                    //    res.StatusError = "-1";
+                    //    res.Message = "Update not sccess";
+                    //    res.StatusError = "0";
                     //}
-                    #endregion
+                    if(output)
+                            {
+                                #region Insert Address
 
-                  
-                }
+                                var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaftCompanySSO");
+
+                                if (dataaddr != null && dataaddr.Count != 0)
+                                {
+                                    SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftCompanySSO");
+
+
+                                    foreach (var d in dataaddr)
+                                    {
+                                        SubcontractProfileAddressModel addr = new SubcontractProfileAddressModel();
+                                        addr.AddressId = d.AddressId;
+                                        addr.AddressTypeId = d.AddressTypeId;
+                                        addr.Building = d.Building;
+                                        addr.City = d.City;
+                                        addr.Country = d.Country;
+                                        addr.DistrictId = d.DistrictId;
+                                        addr.Floor = d.Floor;
+                                        addr.HouseNo = d.HouseNo;
+                                        addr.Moo = d.Moo;
+                                        addr.ProvinceId = d.ProvinceId;
+                                        //addr.CompanyId = companyId.ToString();
+                                        addr.CompanyId = model.CompanyId.ToString();
+                                        addr.ModifiedBy = user;
+                                        addr.ModifiedDate = DateTime.Now;
+                                        addr.RegionId = d.RegionId;
+                                        addr.Road = d.Road;
+                                        addr.Soi = d.Soi;
+                                        addr.RoomNo = d.RoomNo;
+                                        addr.SubDistrictId = d.SubDistrictId;
+                                        addr.VillageName = d.VillageName;
+                                        addr.ZipCode = d.ZipCode;
+
+                                        var uriAddress = new Uri(Path.Combine(strpathAPI, "Address", "Update"));
+                                        HttpClient clientAddress = new HttpClient();
+                                        clientAddress.DefaultRequestHeaders.Accept.Add(
+                                        new MediaTypeWithQualityHeaderValue("application/json"));
+
+                                        // string rr = JsonConvert.SerializeObject(addr);
+
+                                        var httpContent = new StringContent(JsonConvert.SerializeObject(addr), Encoding.UTF8, "application/json");
+                                        HttpResponseMessage responseAddress = clientAddress.PutAsync(uriAddress, httpContent).Result;
+                                        if (responseAddress.IsSuccessStatusCode)
+                                        {
+
+                                            res.Status = true;
+                                            res.Message = "Update Success";
+                                            res.StatusError = "0";
+                                        }
+                                        else
+                                        {
+                                            res.Status = false;
+                                            res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                            res.StatusError = "-1";
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    res.Status = false;
+                                    res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                    res.StatusError = "-1";
+                                }
+                                #endregion
+                            }
+                            else
+                            {
+                                res.Status = false;
+                                res.Message = "Company Data is not correct, Please Check Data or Contact System Admin";
+                                res.StatusError = "-1";
+                            }
+                        }
                 else
                 {
                      res.Status = false;
-                     res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                     res.Message = "Company is not correct, Please Check Data or Contact System Admin";
                      res.StatusError = "-1";
                 }
                 #endregion
-                    //}
-                    //else
-                    //{
-                    //    res.Status = false;
-                    //    res.Message = "Data is not correct, Please Check Data or Contact System Admin";
-                    //    res.StatusError = "-1";
-                    //}
-                //}
             }
+                else
+            {
+                res.Status = false;
+                res.Message = "Upload file is not correct, Please Check Data or Contact System Admin";
+                res.StatusError = "-1";
+            }
+        }
+    }
             catch (Exception e)
             {
                 res.Status = false;

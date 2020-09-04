@@ -3,7 +3,7 @@
 
 
 $(document).ready(function () {
-    BindDDLStatus();
+   // BindDDLStatus();
     inittbSearchResult();
     $('#regisdatefrom').datetimepicker({
         format: "DD/MM/YYYY",

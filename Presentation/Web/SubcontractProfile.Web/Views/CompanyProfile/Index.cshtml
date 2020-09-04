@@ -150,7 +150,7 @@
                                             <input id="inputTax_id" type="text" class="form-control inputValidation" placeholder="เลขทะเบียนนิติบุคล"
                                                    aria-label="Recipient's username" maxlength="13" required style="width:300px" />
                                             <div class="invalid-feedback">
-                                                Please provide a valid juristic id.
+                                                กรุณาระบุเลขทะเบียนนิติบุคคล
                                             </div>
                                             <div class="input-group" style="display:none;">
                                                 <input id="inputTax_id" type="text" class="form-control" placeholder="เลขทะเบียนนิติบุคล"
@@ -193,7 +193,7 @@
                                             <input id="inputCompany_name_th" type="text" placeholder="ชื่อนิติบุคคล(ไทย)" class="form-control inputValidation"
                                                    maxlength="100" required style="width:165px" />
                                             <div class="invalid-feedback">
-                                                Please provide a valid company name thai.
+                                                กรุณาระบุชื่อนิติบุคคล(ไทย)
                                             </div>
                                         </div>
                                     </div>
@@ -214,7 +214,7 @@
                                             <input id="inputCompany_name_en" type="text" placeholder="ชื่อนิติบุคคล(อังกฤษ)" class="form-control inputValidation"
                                                    maxlength="100" required style="width:165px" />
                                             <div class="invalid-feedback">
-                                                Please provide a valid company name english.
+                                                กรุณาระบุชื่อนิติบุคคล(อังกฤษ)
                                             </div>
                                         </div>
 
@@ -235,7 +235,7 @@
                                             <input id="inputWT_name" type="text" class="form-control inputValidation" placeholder="ชื่อภาษีหัก ณ ที่จ่าย"
                                                    aria-label="Recipient's username" maxlength="13" required style="width:300px">
                                             <div class="invalid-feedback">
-                                                Please provide a valid tax name.
+                                                กรุณาระบุชื่อภาษีหัก ณ ที่จ่าย
                                             </div>
                                         </div>
                                     </div>
@@ -276,7 +276,7 @@
                                             <input type="text" class="form-control inputValidationdealer"
                                                    aria-label="Location Code" id="txtlocationcode" maxlength="100" required style="width:300px" />
                                             <div class="invalid-feedback">
-                                                Please provide a valid location Code.
+                                                กรุณาระบุ Location Code
                                             </div>
                                             <div class="input-group" style="display:none;">
                                                 <input type="text" class="form-control"
@@ -302,7 +302,7 @@
                                             <input type="hidden" id="hddistribution" />
                                             <input type="text" class="form-control inputValidationdealer" id="txtdistribution" maxlength="250" required style="width:300px" />
                                             <div class="invalid-feedback">
-                                                Please provide a valid distribution Channel.
+                                                กรุณาระบุ Distribution Channel
                                             </div>
                                         </div>
                                     </div>
@@ -326,7 +326,7 @@
                                             <input type="text" class="form-control inputValidationdealer" id="txtlocationname"
                                                    maxlength="250" required style="width:300px" />
                                             <div class="invalid-feedback">
-                                                Please provide a valid location Name.
+                                                กรุณาระบุ Location Name
                                             </div>
                                         </div>
                                     </div>
@@ -361,7 +361,7 @@
                                             <input type="text" class="form-control inputValidationdealer" id="txttax_id_dealer"
                                                    maxlength="100" required style="width:300px" />
                                             <div class="invalid-feedback">
-                                                Please provide a valid juristic id.
+                                                กรุณาระบุเลขทะเบียนนิติบุคคล
                                             </div>
                                         </div>
                                     </div>
@@ -403,7 +403,7 @@
                                                    placeholder="ชื่อนิติบุคคล(ไทย)" id="txtcompany_name_th_dealer" maxlength="100" required
                                                    style="width:165px" />
                                             <div class="invalid-feedback">
-                                                Please provide a valid company name thai.
+                                                กรุณาระบุชื่อนิติบุคคล(ไทย)
                                             </div>
                                         </div>
                                     </div>
@@ -437,7 +437,7 @@
                                             <input type="text" class="form-control inputValidationdealer" id="txtwt_name_dealer"
                                                    maxlength="100" required style="width:300px" />
                                             <div class="invalid-feedback">
-                                                Please provide a valid tax name.
+                                                กรุณาระบุชื่อภาษีหัก ณ ที่จ่าย
                                             </div>
                                         </div>
 
@@ -478,7 +478,7 @@
 
                     <h4 class="">ข้อมูลที่อยู่บริษัท</h4>
                     <hr>
-                    <div class="container">
+                    <div class="container needs-validation-step2" novalidate>
                         <div class="row">
                             <div class="col-sm-12">
                                 <label>ประเภทที่อยู่</label>
@@ -492,30 +492,36 @@
 
 
                             <div class="col-sm-3">
+                                @*<div class="n-chk">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrbranch" value="01" required>
+                                        <label class="custom-control-label" for="chkaddrbranch">TEST</label>
+                                    </div>
+                                </div>*@
                                 <div class="n-chk">
                                     <label class="new-control new-checkbox checkbox-primary">
-                                        <input id="chkLocationBranch" type="checkbox" class="new-control-input" value="01">
+                                        <input id="chkLocationBranch" type="checkbox" name="address_type_id" class="new-control-input" value="01" required >
                                         <span class="new-control-indicator"></span>ที่อยู่ตามที่ตั้งสาขา
                                     </label>
                                 </div>
 
                                 <div class="n-chk">
                                     <label class="new-control new-checkbox checkbox-primary">
-                                        <input id="chkLocationDoc" type="checkbox" class="new-control-input" value="02">
+                                        <input id="chkLocationDoc" type="checkbox" name="address_type_id" class="new-control-input" value="02" required>
                                         <span class="new-control-indicator"></span>ที่อยู่จัดส่งเอกสาร
                                     </label>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="n-chk">
-                                    <label class="new-control new-checkbox checkbox-primary">
-                                        <input id="chkLocationTax" type="checkbox" class="new-control-input" value="06">
+                                    <label class="new-control new-checkbox checkbox-primary"> 
+                                        <input id="chkLocationTax" type="checkbox"name="address_type_id" class="new-control-input" value="06" required>
                                         <span class="new-control-indicator"></span>ที่อยู่ตามใบกำกับภาษี
                                     </label>
                                 </div>
                                 <div class="n-chk">
                                     <label class="new-control new-checkbox checkbox-primary">
-                                        <input id="chkLocationShip" type="checkbox" class="new-control-input" value="03">
+                                        <input id="chkLocationShip" type="checkbox"name="address_type_id" class="new-control-input" value="03" required>
                                         <span class="new-control-indicator"></span>ที่อยู่จัดส่งสินค้า
                                     </label>
                                 </div>
@@ -525,13 +531,13 @@
                             <div class="col-sm-3">
                                 <div class="n-chk">
                                     <label class="new-control new-checkbox checkbox-primary">
-                                        <input id="chkLocationWT" type="checkbox" class="new-control-input" value="04">
+                                        <input id="chkLocationWT" type="checkbox"name="address_type_id" class="new-control-input" value="04" required>
                                         <span class="new-control-indicator"></span>ที่อยู่ตาม W/T
                                     </label>
                                 </div>
                                 <div class="n-chk">
                                     <label class="new-control new-checkbox checkbox-primary">
-                                        <input id="chkLocationShipPOP" type="checkbox" class="new-control-input" value="05">
+                                        <input id="chkLocationShipPOP" type="checkbox"name="address_type_id" class="new-control-input" value="05" required> 
                                         <span class="new-control-indicator"></span>ที่อยู่จัดส่ง POP
                                     </label>
                                 </div>
@@ -545,9 +551,13 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="row col-sm-12">
-                                    <input type="text" id="txthomenumber" style="width:120px" class="form-control">
+                                    <input type="text" id="txthomenumber" style="width:120px" class="form-control inputValidationAddress" required>
+
                                     <label>&nbsp;&nbsp;&nbsp;&nbsp;หมู่ที่ :</label>&nbsp;&nbsp;&nbsp;&nbsp;
                                     <input type="text" id="txtVillageNo" style="width:110px" class="form-control">
+                                    <div class="invalid-feedback">
+                                        กรุณาระบุเลขที่
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-2">
@@ -599,18 +609,22 @@
                                 <label>ประเทศ :</label>
                             </div>
                             <div class="col-sm-4">
-                                <select id="country" name="country" class="form-control form-control" style="width:300px">
+                                <select id="country" name="country" class="custom-select inputValidationAddress" style="width:300px" required>
                                     <option value="">Select Country</option>
                                     <option value="THA">Thailand</option>
                                 </select>
+                                <div class="invalid-feedback">กรุณาระบุประเทศ</div>
                             </div>
 
                             <div class="col-sm-2">
                                 <label>ภาค :</label>
                             </div>
                             <div class="col-sm-4">
-                                <select id="ddlzone" name="ddlzone" class="form-control form-control" style="width:300px">
+                                <select id="ddlzone" name="ddlzone" class="custom-select inputValidationAddress" style="width:300px" required>
                                 </select>
+                                <div class="invalid-feedback">
+                                    กรุณาระบุภาค
+                                </div>
                             </div>
 
 
@@ -621,16 +635,22 @@
                                 <label>จังหวัด :</label>
                             </div>
                             <div class="col-sm-4">
-                                <select id="ddlprovince" name="ddlprovince" class="form-control form-control" style="width:300px">
+                                <select id="ddlprovince" name="ddlprovince" class="custom-select inputValidationAddress" style="width:300px" required>
                                 </select>
+                                <div class="invalid-feedback">
+                                    กรุณาระบุจังหวัด
+                                </div>
                             </div>
 
                             <div class="col-sm-2">
                                 <label>อำเภอ/เขต :</label>
                             </div>
                             <div class="col-sm-4">
-                                <select id="ddldistrict" name="ddldistrict" class="form-control form-control" style="width:300px">
+                                <select id="ddldistrict" name="ddldistrict" class="custom-select inputValidationAddress" style="width:300px" required>
                                 </select>
+                                <div class="invalid-feedback">
+                                    กรุณาระบุอำเภอ/เขต
+                                </div>
                             </div>
 
                         </div>
@@ -641,16 +661,20 @@
                                 <label>ตำบล/แขวง :</label>
                             </div>
                             <div class="col-sm-4">
-                                <select id="ddlsubdistrict" name="ddlsubdistrict" class="form-control form-control" style="width:300px">
+                                <select id="ddlsubdistrict" name="ddlsubdistrict" class="custom-select inputValidationAddress" style="width:300px" required>
                                 </select>
+                                <div class="invalid-feedback">
+                                    กรุณาระบุตำบล/แขวง
+                                </div>
                             </div>
 
                             <div class="col-sm-2">
                                 <label>รหัสไปรษณีย์ :</label>
                             </div>
                             <div class="col-sm-4">
-                                <select id="ddlzipcode" name="ddlzipcode" class="form-control form-control" style="width:300px">
+                                <select id="ddlzipcode" name="ddlzipcode" class="custom-select inputValidationAddress" style="width:300px" required>
                                 </select>
+                                <div class="invalid-feedback">กรุณาระบุรหัสไปรษณีย์</div>
                             </div>
                         </div>
 
@@ -695,15 +719,15 @@
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" id="mailCompany" style="width:300px" class="form-control inputisvalidate" required>
-                                <div class="invalid-feedback">Please provide a company email.</div>
-                                <span id='errorcompany_Email' style="color:red;display:none;">This email is not valid</span>
+                                <div class="invalid-feedback">กรุณาระบุอีเมล์ บริษัท</div>
+                                <span id='errorcompany_Email' style="color:red;display:none;">รูปแบบอีเมล์ไม่ถูกต้อง</span>
                             </div>
                             <div class="col-sm-2">
                                 <label>ชื่อผู้ติดต่อ :</label>
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" id="nameContract" style="width:300px" class="form-control inputisvalidate" required>
-                                <div class="invalid-feedback">Please provide a contract name.</div>
+                                <div class="invalid-feedback">กรุณาระบุชื่อผู้ติดต่อ</div>
                             </div>
                         </div>
                         <br />
@@ -713,15 +737,15 @@
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" id="mailContract" style="width:300px" class="form-control inputisvalidate" required>
-                                <div class="invalid-feedback">Please provide a valid contract email.</div>
-                                <span id='errorcontract_email' style="color:red;display:none;">This email is not valid</span>
+                                <div class="invalid-feedback">กรุณาระบุอีเมล์</div>
+                                <span id='errorcontract_email' style="color:red;display:none;">รูปแบบอีเมล์ไม่ถูกต้อง</span>
                             </div>
                             <div class="col-sm-2">
                                 <label>เบอร์โทร :</label>
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" id="telContract" style="width:300px" class="form-control inputisvalidate" required>
-                                <div class="invalid-feedback">Please provide a valid contract phone.</div>
+                                <div class="invalid-feedback">กรุณาระบุเบอร์ไทร</div>
                             </div>
                         </div>
                     </div>
@@ -740,14 +764,14 @@
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" id="name1" style="width:300px" class="form-control inputisvalidate" required>
-                                <div class="invalid-feedback">Please provide a valid departmant of install name.</div>
+                                <div class="invalid-feedback">กรุณาระบุชื่อผู้ติดต่อ</div>
                             </div>
                             <div class="col-sm-2">
                                 <label>เบอร์โทร :</label>
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" id="tel1" style="width:300px" class="form-control inputisvalidate" required>
-                                <div class="invalid-feedback">Please provide a valid of departmant install phone.</div>
+                                <div class="invalid-feedback">กรุณาระบุเบอร์ไทร</div>
 
                             </div>
                         </div>
@@ -758,8 +782,7 @@
                             </div>
                             <div class="col-sm-10">
                                 <input type="text" id="mail1" style="width:300px" class="form-control">
-                                <div class="invalid-feedback">Please provide a valid of departmant install email.</div>
-                                <span id='errorinstall_email' style="color:red;display:none;">This email is not valid</span>
+                                <span id='errorinstall_email' style="color:red;display:none;">รูปแบบอีเมล์ไม่ถูกต้อง</span>
 
                             </div>
                         </div>
@@ -774,7 +797,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" id="name2" style="width:300px" class="form-control inputisvalidate" required>
-                                <div class="invalid-feedback">Please provide a valid departmant of maninten name.</div>
+                                <div class="invalid-feedback">กรุณาระบุชื่อผู้ติดต่อ</div>
 
                             </div>
                             <div class="col-sm-2">
@@ -782,7 +805,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" id="tel2" style="width:300px" class="form-control inputisvalidate" required>
-                                <div class="invalid-feedback">Please provide a valid departmant of maninten phone.</div>
+                                <div class="invalid-feedback">กรุณาระบุเบอร์ไทร</div>
 
                             </div>
                         </div>
@@ -793,8 +816,7 @@
                             </div>
                             <div class="col-sm-10">
                                 <input type="text" id="mail2" style="width:300px" class="form-control">
-                                <div class="invalid-feedback">Please provide a valid departmant of maninten email.</div>
-                                <span id='errormainten_email' style="color:red;display:none;">This email is not valid</span>
+                                <span id='errormainten_email' style="color:red;display:none;">รูปแบบอีเมล์ไม่ถูกต้อง</span>
                             </div>
                         </div>
                         <br />
@@ -808,14 +830,14 @@
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" id="name3" style="width:300px" class="form-control inputisvalidate" required>
-                                <div class="invalid-feedback">Please provide a valid departmant of account name.</div>
+                                <div class="invalid-feedback">กรุณาระบุชื่อผู้ติดต่อ</div>
                             </div>
                             <div class="col-sm-2">
                                 <label>เบอร์โทร :</label>
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" id="tel3" style="width:300px" class="form-control inputisvalidate" required>
-                                <div class="invalid-feedback">Please provide a valid departmant of account phone.</div>
+                                <div class="invalid-feedback">กรุณาระบุเบอร์ไทร</div>
 
                             </div>
                         </div>
@@ -826,8 +848,7 @@
                             </div>
                             <div class="col-sm-10">
                                 <input type="text" id="mail3" style="width:300px" class="form-control">
-                                <div class="invalid-feedback">Please provide a valid departmant of account email.</div>
-                                <span id='errorAccount_email' style="color:red;display:none;">This email is not valid</span>
+                                <span id='errorAccount_email' style="color:red;display:none;">รูปแบบอีเมล์ไม่ถูกต้อง</span>
                             </div>
                         </div>
                     </div>
@@ -844,7 +865,7 @@
                                 <div class="row col-sm-12">
                                     <select id="selBankName" class="custom-select inputisvalidate form-control " required>
                                     </select>
-                                    <div class="invalid-feedback">Please choose a bank name.</div>
+                                    <div class="invalid-feedback">กรุณาระบุชื่อธนาคาร</div>
                                 </div>
                             </div>
                             <div class="col-sm-2">
@@ -853,7 +874,6 @@
                             <div class="col-sm-4">
                                 <div class="row col-sm-12">
                                     <input type="text" id="nameBranch" class="form-control">
-                                    <div class="invalid-feedback">Please provide a branch name.</div>
                                 </div>
                             </div>
                         </div>
@@ -865,9 +885,8 @@
                             <div class="col-sm-4">
                                 <div class="row col-sm-12">
                                     <select id="AccType" name="AccType" class="custom-select inputisvalidate form-control" required>
-                                        <option value="Saving">ออมทรัพย์</option>
                                     </select>
-                                    <div class="invalid-feedback">Please choose a bank account type.</div>
+                                    <div class="invalid-feedback">กรุณาระบุประเภทบัญชี</div>
                                 </div>
                             </div>
                         </div>
@@ -880,7 +899,7 @@
                                 <div class="row col-sm-12">
 
                                     <input type="text" id="busiName" class="form-control inputisvalidate" required />
-                                    <div class="invalid-feedback">Please provide a account name.</div>
+                                    <div class="invalid-feedback">กรุณาระบุชื่อบัญชี</div>
                                 </div>
                             </div>
                             <div class="col-sm-2">
@@ -889,7 +908,7 @@
                             <div class="col-sm-4">
                                 <div class="row col-sm-12">
                                     <input type="text" id="codeNumber" style="width:300px" class="form-control inputisvalidate" required />
-                                    <div class="invalid-feedback">Please provide a account id.</div>
+                                    <div class="invalid-feedback">กรุณาระบุเลขที่บัญชี</div>
                                 </div>
                             </div>
 
@@ -907,7 +926,7 @@
                                                aria-describedby="uploadlHelp1" accept="image/jpeg,image/gif,image/png,application/pdf" />
                                         <label class="custom-file-label " for="inputuploadbookbank" id="lbuploadbookbank">เลือกไฟล์</label>
                                         <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
-                                        <div class="invalid-feedback">Please upload a book bank file.</div>
+                                        <div class="invalid-feedback">กรุณาอัพโหลดไฟล์ หน้าบัญชีธนาคาร</div>
                                     </div>
 
                                 </div>
@@ -953,7 +972,7 @@
                                     <label class="custom-file-label " for="inputUploadcertificate" id="lbuploadcertificate">เลือกไฟล์</label>
                                     @*</div>*@
                                     <small id="uploadlHelp2" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
-                                    <div class="invalid-feedback">Please upload a company certified file.</div>
+                                    <div class="invalid-feedback">กรุณาอัพโหลดไฟล์ หนังสือรับรองบริษัท</div>
                                 </div>
                             </div>
                             <div class="col-sm-2">
@@ -968,7 +987,7 @@
                                     <label class="custom-file-label " for="inputUploadComRegis" id="lbuploadComRegis">เลือกไฟล์</label>
                                     @*</div>*@
                                     <small id="uploadlHelp3" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
-                                    <div class="invalid-feedback">Please upload a commercial registration file.</div>
+                                    <div class="invalid-feedback">กรุณาอัพโหลดไฟล์ หนังสือทะเบียนพานิช</div>
                                 </div>
                             </div>
                         </div>
@@ -986,7 +1005,7 @@
                                     <label class="custom-file-label" for="inputUpload20" id="lbupload20">เลือกไฟล์</label>
                                     @*</div>*@
                                     <small id="uploadlHelp4" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
-                                    <div class="invalid-feedback">Please upload a vat registration certificate file.</div>
+                                    <div class="invalid-feedback">กรุณาอัพโหลดไฟล์ หนังสือ ภ.พ. 20</div>
                                 </div>
                             </div>
                         </div>
