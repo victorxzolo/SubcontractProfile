@@ -25,6 +25,8 @@ namespace SubcontractProfile.Web.Controllers
         private string Lang = "";
         private string strpathASCProfile;
         private readonly string strpathUpload;
+        private const int MegaBytes = 1024 * 1024;
+        private const int TMegaBytes = 1024 *1024;
         public RegistrationController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
@@ -1811,7 +1813,7 @@ namespace SubcontractProfile.Web.Controllers
             //FileStream output;
             string strmess = "";
 
-            string[] arr = { "application/pdf", "image/png", "image/jpeg", "image/jpeg", "image/bmp", "image/gif", "image/tif", "image/tiff" };
+            //string[] arr = { "application/pdf", "image/png", "image/jpeg", "image/jpeg", "image/bmp", "image/gif", "image/tif", "image/tiff" };
 
 
             try
@@ -1822,61 +1824,123 @@ namespace SubcontractProfile.Web.Controllers
                     {
                         string filename = ContentDispositionHeaderValue.Parse(source.ContentDisposition).FileName.Trim('"');
                         filename = EnsureCorrectFilename(filename);
-                        //using (output = System.IO.File.Create(this.GetPathAndFilename(filename)))
-                        //    await source.CopyToAsync(output);
 
-                        if (source.ContentType.ToLower() != "image/jpg" &&
-                            source.ContentType.ToLower() != "image/jpeg" &&
-                            source.ContentType.ToLower() != "image/pjpeg" &&
-                            source.ContentType.ToLower() != "image/gif" &&
-                            source.ContentType.ToLower() != "image/x-png" &&
-                            source.ContentType.ToLower() != "image/png" &&
-                            source.ContentType.ToLower() != "application/pdf"
-                            )
+                        if(type_file== "bookbankfile")
                         {
-                            statusupload = false;
-                            strmess = "Upload type file miss match.";
-                        }
-                        else
-                        {
-                            Guid id = Guid.NewGuid();
-                            using (var ms = new MemoryStream())
+
+                            if (source.ContentType.ToLower() != "image/jpg" &&
+                                source.ContentType.ToLower() != "image/jpeg" &&
+                                source.ContentType.ToLower() != "image/pjpeg" &&
+                                source.ContentType.ToLower() != "image/gif" &&
+                                source.ContentType.ToLower() != "image/x-png" &&
+                                source.ContentType.ToLower() != "image/png" &&
+                                source.ContentType.ToLower() != "application/pdf"
+                                )
                             {
-                                source.CopyTo(ms);
-                                var fileBytes = ms.ToArray();
-                                L_File.Add(new FileUploadModal
-                                {
-                                    file_id = id,
-                                    Fileupload = fileBytes,
-                                    typefile = type_file,
-                                    ContentDisposition = source.ContentDisposition,
-                                    ContentType = source.ContentType,
-                                    Filename = filename,
-                                    CompanyId = Company
-                                });
-                            }
-                            var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompanySSO");
-                            //byte[] byteArrayValue = HttpContext.Session.Get("userUploadfileDaft");
-                            //var data = FromByteArray<List<FileUploadModal>>(byteArrayValue);
-
-                            //var objComplex = HttpContext.Session.GetObject("userUploadfileDaft");
-
-                            if (data != null)
-                            {
-
-                                data.RemoveAll(x => x.file_id.ToString() == fid);
-                                data.Add(L_File[0]);
-                                SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", data);
-
+                                statusupload = false;
+                                strmess = "Upload type file miss match.";
                             }
                             else
                             {
-                                // HttpContext.Session.Set("userUploadfileDaft", ToByteArray<List<FileUploadModal>>(L_File));
+                                var fileSize = source.Length;
+                                if (fileSize > TMegaBytes)
+                                {
+                                    statusupload = false;
+                                    strmess = "Upload file is too large.";
+                                }
+                                else
+                                {
+                                    Guid id = Guid.NewGuid();
+                                    using (var ms = new MemoryStream())
+                                    {
+                                        source.CopyTo(ms);
+                                        var fileBytes = ms.ToArray();
+                                        L_File.Add(new FileUploadModal
+                                        {
+                                            file_id = id,
+                                            Fileupload = fileBytes,
+                                            typefile = type_file,
+                                            ContentDisposition = source.ContentDisposition,
+                                            ContentType = source.ContentType,
+                                            Filename = filename,
+                                            CompanyId = Company
+                                        });
+                                    }
+                                    var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompanySSO");
 
-                                SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
+                                    if (data != null)
+                                    {
+
+                                        data.RemoveAll(x => x.file_id.ToString() == fid);
+                                        data.Add(L_File[0]);
+                                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", data);
+
+                                    }
+                                    else
+                                    {
+
+                                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
+                                    }
+                                    strmess = "Upload file success";
+                                }
+
+                                
                             }
-                            strmess = "Upload file success";
                         }
+                        else
+                        {
+                            if (source.ContentType.ToLower() != "application/pdf")
+                            {
+                                statusupload = false;
+                                strmess = "Upload type file miss match.";
+                            }
+                            else
+                            {
+                                var fileSize = source.Length;
+                                if (fileSize > MegaBytes)
+                                {
+                                    statusupload = false;
+                                    strmess = "Upload file is too large.";
+                                }
+                                else
+                                {
+                                    Guid id = Guid.NewGuid();
+                                    using (var ms = new MemoryStream())
+                                    {
+                                        source.CopyTo(ms);
+                                        var fileBytes = ms.ToArray();
+                                        L_File.Add(new FileUploadModal
+                                        {
+                                            file_id = id,
+                                            Fileupload = fileBytes,
+                                            typefile = type_file,
+                                            ContentDisposition = source.ContentDisposition,
+                                            ContentType = source.ContentType,
+                                            Filename = filename,
+                                            CompanyId = Company
+                                        });
+                                    }
+                                    var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompanySSO");
+
+                                    if (data != null)
+                                    {
+
+                                        data.RemoveAll(x => x.file_id.ToString() == fid);
+                                        data.Add(L_File[0]);
+                                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", data);
+
+                                    }
+                                    else
+                                    {
+
+                                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
+                                    }
+                                    strmess = "Upload file success";
+                                }
+                                
+                            }
+                        }
+
 
 
                     }
