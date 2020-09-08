@@ -69,6 +69,28 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EngineerController))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(EngineerController))]
+        [HttpGet("GetEngineerByTeam/{companyId}/{locationId}/{teamId}")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>> GetEngineerByTeam(System.Guid companyId,
+            System.Guid locationId, System.Guid teamId)
+        {
+            _logger.LogInformation($"Start EngineerController::GetEngineerByTeam", companyId, locationId,
+               teamId);
+
+          
+            var entities = _service.GetEngineerByTeam(companyId, locationId, teamId);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"EngineerController::", "GetEngineerByTeam NOT FOUND", companyId, locationId,
+                teamId);
+                return null;
+            }
+
+            return entities;
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EngineerController))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(EngineerController))]
         [HttpGet("GetAll")]
         public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>> GetAll()
         {

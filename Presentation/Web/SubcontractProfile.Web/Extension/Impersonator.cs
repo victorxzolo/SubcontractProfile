@@ -76,9 +76,9 @@ namespace SubcontractProfile.Web.Extension
                 }
                 Identity = new WindowsIdentity(this.m_accessToken);
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw ex;
             }
 
         } // End Sub Login 

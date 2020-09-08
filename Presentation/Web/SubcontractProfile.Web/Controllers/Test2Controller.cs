@@ -72,7 +72,7 @@ namespace SubcontractProfile.Web.Controllers
             // );
             try
             {
-                using (new Impersonator("nas_fixedbb", "Fixe1012@Ais", "10.138.47.98", false))
+                using (new Impersonator("Administrator", "P@ssw0rd", "10.104.240.92", false))
                 {
 
                 }

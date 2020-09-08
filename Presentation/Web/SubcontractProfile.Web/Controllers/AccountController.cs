@@ -365,8 +365,11 @@ namespace SubcontractProfile.Web.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var v = response.Content.ReadAsStringAsync().Result;
-                    output = JsonConvert.DeserializeObject<List<SubcontractProfileSubDistrictModel>>(v);
-                    resultZipCode = output.GroupBy(c => c.ZipCode).Select(g => g.First()).ToList();
+                    if (v != null)
+                    {
+                        output = JsonConvert.DeserializeObject<List<SubcontractProfileSubDistrictModel>>(v);
+                        resultZipCode = output.GroupBy(c => c.ZipCode).Select(g => g.First()).ToList();
+                    }
                 }
             }
             if (Lang == "")

@@ -7,133 +7,87 @@ namespace SubcontractProfile.Web.Model
 {
     public class SubcontractProfileTrainingModel
     {
+
+
         public System.Guid TrainingId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+
         public System.Guid CompanyId { get; set; }
 
+        public string ContractName { get; set; }
+
         [System.ComponentModel.DataAnnotations.StringLength(50)]
-      [System.ComponentModel.DataAnnotations.Required]
+
+        public string ContractPhone { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(50)]
+
+        public string ContractEmail { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(50)]
+
         public string Course { get; set; }
 
-       [System.ComponentModel.DataAnnotations.Required]
-        public decimal? CourcePrice { get; set; }
+
+        public decimal? CoursePrice { get; set; }
 
 
-       [System.ComponentModel.DataAnnotations.Required]
-        public System.DateTime RequestDate { get; set; }
+        public System.DateTime? RequestDate { get; set; }
 
         public string Remark { get; set; }
 
-       [System.ComponentModel.DataAnnotations.Required]
+
         public decimal TotalPrice { get; set; }
 
-       [System.ComponentModel.DataAnnotations.Required]
-        public decimal Vat { get; set; }
+
+        public Int32 Vat { get; set; }
 
         public decimal? Tax { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(10)]
-        [System.ComponentModel.DataAnnotations.Required]
+
         public string Status { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string RequestNo { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string EngineerId { get; set; }
+        public DateTime? BookingDate { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string TeamId { get; set; }
+        public string RemarkForAis { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string LocationId { get; set; }
+        public DateTime? TestDate { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(50)]
+        public string Skill { get; set; }
+
+        public string Grade { get; set; }
+
+
         public string CreateBy { get; set; }
 
         public System.DateTime? CreateDate { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(50)]
+
         public string ModifiedBy { get; set; }
 
         public System.DateTime? ModifiedDate { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
+
         public string CompanyNameTh { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string TaxId { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string ContractName { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string ContractEmail { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string ContractPhone { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string LocationNameTh { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string LocationNameEn { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string TeamNameTh { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string TeamNameEn { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string StaffNameTh { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string StaffNameEn { get; set; }
+        public string PaymentStatus { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string ContractPhone1 { get; set; }
+        public Decimal? TotalAmount { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string ContractEmailEn { get; set; }
+   
+        public string BookingDateStr { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-
-
-
-        public string position { get; set; }
-
-
-        public DateTime? BookingDate { get; set; }
-        public string RemarkForAis { get; set; }
-        public string Engineer_name { get; set; }
-        public string Engineer_ID { get; set; }
-
+        public string RequestDateStr { get; set; }
 
         public object Clone()
         {
             return this.MemberwiseClone();
         }
-
-
-
-        public string Position { get; set; }
-          
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-
-        public string EngineerName { get; set; }     
-
-
-        public DateTime? TestDate { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string Skill { get; set; }
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string Grade { get; set; }
-
-        
-        
-
-
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public string PaymentStatus { get; set; }
-        [System.ComponentModel.DataAnnotations.Required]
-        public decimal? CoursePrice { get; set; }
-
-        public string _bookingDate { get; set; }
-
-     
 
 
     }

@@ -1,0 +1,1195 @@
+﻿
+@{
+    ViewData["Title"] = "ขอรับการฝึกอบรม";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+
+
+    <div class="skills layout-spacing ">
+        <div class="widget-content widget-content-area">
+            <h3 class="">ค้นหา ขอรับการฝึกอบรม</h3>
+            <div class="widget-content1">
+
+                <div class="form-row mb-4">
+
+
+                    <div class="form-group col-md-6">
+                        <label for="txttaxid">จากวันที่</label>
+                        <div class='input-group date p-0' id='regisdatefrom'>
+                            <input type='text' class="form-control" id="reqdateFrom" />
+                            <div class="input-group-append input-group-addon">
+                                <span class="input-group-text px-4">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="txttaxid">ถึงวันที่</label>
+                        <div class='input-group date p-0' id='regisdateTo'>
+                            <input type='text' class="form-control" id="reqdateTo" />
+                            <div class="input-group-append input-group-addon">
+                                <span class="input-group-text px-4">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputStatus">สถานะ</label>
+                        <select id="inputStatus" class="form-control" data-live-search="true"></select>
+                    </div>
+
+                </div>
+
+                <div style="text-align:center">
+
+                    <button id="btnMainClear" type="button" onclick="clearField();" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
+                    <button id="btnSearchRqt" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+
+
+                </div>
+
+
+            </div>
+
+
+            <br />
+
+            <div class="widget-heading">
+                <h3 class="">Search Result</h3>
+
+            </div>
+            <div class="col-md-12 text-right mb-1">
+                <button id="btnAdd" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg> Request Training</button>
+
+            </div>
+            <div class="table-responsive">
+                <table id="tbSearchResult" style="width:100%" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-2">
+                    <thead>
+                        <tr>
+
+                            <th>Action</th>
+                            <th>Status </th>
+                            <th>Request Date </th>
+                            <th>Booking Date </th>
+                            <th>Course Name</th>
+                            <th>Total Price</th>
+                            <th>Vat (7%)</th>
+                            <th>Total Amount</th>
+                        </tr>
+
+                    </thead>
+
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+@section modalpanel {
+
+    <div id="AdjustReqTraining" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"  >
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="hTitleEdit" class="modal-title">Request Training</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="frNew" class="needs-validation" novalidate>
+                    <div class="modal-body">
+
+                        <div class="container">
+
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Company Name :</label>
+                                </div>
+                                <div class="col-sm-4">
+
+                                    <label id="lblcompname"></label>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label>Tax ID :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label id="lbltaxid"></label>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Contact Phone :</label>
+                                </div>
+                                <div class="col-sm-4">
+
+                                    <input type="text" id="inputContactPhone"  class="form-control">
+
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label>Email :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="email" id="inputContactEmail" style="width:300px" class="form-control">
+                                    <div class="invalid-feedback">Invalid email.</div>
+                                </div>
+
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label> Course : <span style="color:red">*</span></label>
+                                </div>
+                                <div class="col-sm-4">
+                                   
+                                    <select id="selCourse" class="form-control" data-live-search="true" required></select>
+                                    <div class="invalid-feedback">Please Select Course</div>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label> Request Date : <span style="color:red">*</span></label>
+                                </div>
+                                <div class="col-sm-4">
+
+                                    <div class='input-group date p-0' id='requestdateTo'>
+                                        <input type='text' class="form-control" id="inputRequestdateTo" required />
+                                        <div class="input-group-append input-group-addon">
+                                            <span class="input-group-text px-4">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-sm-2">
+                                    <label>Course Price :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label id="lblcourseprice"></label>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Remark :</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <textarea id="txtRemark" class="form-control" rows="3"> </textarea>
+                                </div>
+
+                            </div>
+                            <br />
+
+                            <h4>เพิ่ม ผู้เข้าอบรม </h4>
+                            <hr>
+                            
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Location : <span style="color:red">*</span></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="selLocationNametraining" class="form-control" data-live-search="true" ></select>
+                                            <div class="invalid-feedback">Please Select the LocationName</div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <label>Team : <span style="color:red">*</span></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="selTeamtraining" class="form-control" data-live-search="true" ></select>
+                                            <div class="invalid-feedback">Please Select the Team</div>
+                                        </div>
+
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Engineer : <span style="color:red">*</span></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="selEngineertraining" class="form-control" data-live-search="true" ></select>
+                                            <div class="invalid-feedback">Please Select the Engineer</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-12 ">
+                                    <div class="mt-5" style="text-align:center">
+
+                                        <button id="btnclearTraining" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
+                                        <button id="btnAddTraining" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> เพิ่มข้อมูล </button>
+
+                                    </div>
+                                </div>
+                           
+
+                            <br />
+                            <div class="table-responsive mb-4 mt-4">
+                                <table id="tbSearchEngineer"  class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Delete</th>
+                                            <th>Location Name</th>
+                                            <th>Team Name</th>
+                                            <th>Engineer</th>
+
+
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-9 "></div>
+                                <div class="col-md-3 col-sm-12">
+                                    <div class="row ">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <p>ราคารวม (บาท) :</p>
+                                                </div>
+                                                <div class="col-md-5" style="text-align: left;">
+                                                    <label id="lblttcost"></label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-12 mt-3">
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <p>Vat 7% :</p>
+                                                </div>
+                                                <div class="col-md-5" style="text-align: left;">
+                                                    <label id="lblvat7"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mt-3">
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <p>ราคาสุทธิ (บาท) :</p>
+                                                </div>
+                                                <div class="col-md-5" style="text-align: left;">
+                                                    <label id="lblCousetotal"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <input type="hidden" id="Coursecost" />
+                            <input type="hidden" id="rowCount" />
+                            <input type="hidden" id="trnid" />
+                            <input type="hidden" id="compid" />
+
+                            <input type="hidden" id="teamid" />
+                            <input type="hidden" id="engid" />
+
+                            <input type="hidden" id="locid" />
+
+                            <h4>การชำระเงิน</h4>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>ชำระเงินผ่านธนาคาร</label>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                            Close
+                        </button>
+                        <button id="btnSave" type="submit" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                            Booking
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section scripts{
+
+
+    <script type="text/javascript">
+        var oTable;
+        var oTableEngineer;
+        var compname = $("#txtCompNo").val();
+
+        $(document).ready(function () {
+
+            $(document).on('show.bs.modal', '.modal', function () {
+                var zIndex = 1040 + (10 * $('.modal:visible').length);
+                $(this).css('z-index', zIndex);
+                setTimeout(function () {
+                    $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+                }, 0);
+            });
+
+            $(document).on('hidden.bs.modal', '.modal', function () {
+                $('.modal:visible').length && $(document.body).addClass('modal-open');
+            });
+
+       
+            GetDropDownByNameCourse();
+
+            GetDropDownByNameTrainigStatus();
+            GetDropDownLocation();
+
+            $('#selLocationNametraining').change(function () {
+                getTeamByLocationId($(this).val());
+            });
+
+            $('#selTeamtraining').change(function () {
+                getEngineerByTeam($("select[id$=selLocationNametraining]").val(),$(this).val());
+            });
+
+            $('#selCourse').change(function () {
+
+            });
+
+
+            inittbSearchResult();
+            $("#btnSearchRqt").click(function (e) {
+
+                inittbSearchResult();
+            });
+
+            $("#btnAdd").click(function (e) {
+                openModal("new", "");
+            });
+
+            $("#btnAddTraining").click(function (e) {
+                onAddEngineer();
+               
+            });
+
+            $("#btnclearTraining").click(function (e) {
+                clearAddLocation();
+            });
+
+
+            $('#regisdatefrom').datetimepicker({
+                format: "DD/MM/YYYY",
+                showClear: true,
+                showClose: true,
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'icon-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-time'
+                }
+            });
+
+
+            $('#regisdateTo').datetimepicker({
+                format: "DD/MM/YYYY",
+                showClear: true,
+                showClose: true,
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'icon-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-time'
+                }
+            });
+
+
+            $('#requestdateTo').datetimepicker({
+                format: "DD/MM/YYYY",
+                showClear: true,
+                showClose: true,
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'icon-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-time'
+                }
+            });
+
+        });
+
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                    } else {
+                        onSave();
+          
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+
+        function clearAddLocation() {
+            $("select[id$=selLocationNametraining]").val('');
+            $("select[id$=selTeamtraining]").val('');
+            $("select[id$=selEngineertraining]").val('');
+        }
+
+        function onAddEngineer() {
+
+             if ($("select[id$=selLocationNametraining]").val() == "") {
+                 bootbox.alert("กรุณาเลือก Location");
+                 return;
+             }
+
+             if ($("select[id$=selTeamtraining]").val() == "") {
+                 bootbox.alert("กรุณาเลือก Team");
+                 return;
+             }
+
+             if ($("select[id$=selEngineertraining]").val() == "") {
+                 bootbox.alert("กรุณาเลือก Engineer");
+                 return;
+             }
+
+             var model = new Object();
+             model.LocationId = $("select[id$=selLocationNametraining]").val();
+             model.TeamId = $("select[id$=selTeamtraining]").val();
+             model.EngineerId = $("select[id$=selEngineertraining]").val();
+             model.LocationNameTh = $("#selLocationNametraining option:selected").text();
+             model.TeamNameTh = $("#selTeamtraining option:selected").text();
+             model.StaffNameTh = $("#selEngineertraining option:selected").text();
+
+             var i = 0;
+             oTableEngineer = $('#tbSearchEngineer').DataTable({
+                 processing: true, // for show progress bar
+                 serverSide: true, // for process server side
+                 filter: false, // this is for disable filter (search box)
+                 orderMulti: false, // for disable multiple column at once
+                 pageLength: 10,
+                 order: [],
+                 autoWidth: false,
+                 searching: false,
+                 destroy: true,
+                 lengthChange: false,
+                 "oLanguage": {
+                     "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                     "sInfo": "Showing page _PAGE_ of _PAGES_",
+                     "sSearch": false,
+                     "sLengthMenu": "Results :  _MENU_",
+                 },
+                 "scrollX": true,
+                 "language": {
+                     "zeroRecords": "No data found.",
+                     "decimal": ",",
+                     "thousands": "."
+                 },
+                 ajax: {
+                     url: '@Url.Action("AddEngineer", "RequestTraining")',
+                     type: "POST",
+                     datatype: "JSON",
+                     data: {
+                         'model': model,
+
+                     },
+                 },
+                 columns: [
+                     {
+                         data: null,width:'10%', render: function (data, type, row) {
+                             return "  <a onclick=deleteData('" + row.LocationId + "','" + row.TeamId + "','" + row.EngineerId + "');return false; href='#'  data-toggle='tooltip' data-placement='top' title='Delete'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-trash-2'><polyline points='3 6 5 6 21 6'></polyline><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'></path><line x1='10' y1='11' x2='10' y2='17'></line><line x1='14' y1='11' x2='14' y2='17'></line></svg></a>";
+                         }
+                     },
+                     { data: "LocationNameTh" },
+                     { data: "TeamNameTh" },
+                     { data: "StaffNameTh" }
+
+                 ],
+                 "order": [[0, "desc"]],
+                 "stripeClasses": [],
+                 "initComplete": function (settings, json) {//here is the tricky part
+                     var count = $('#tbSearchEngineer tr').length - 1
+                     //  alert(count);
+
+                     $('#rowCount').val(count);
+                     var count = $('#rowCount').val();
+                     var cost = $('#lblcourseprice').text();
+
+                     var ttcost = calculateCost(cost, count);
+
+
+                     var incvat = vat7(ttcost);
+                     $('#lblttcost').html(FormatNumber(ttcost));
+                     $('#lblvat7').html(parseInt(incvat));
+
+                     var _incvat = parseInt(incvat);
+                     var _ttcost = parseFloat(ttcost);
+                     var CoursetotalCost = _incvat + _ttcost;
+
+                     CoursetotalCost = FormatNumber(CoursetotalCost);
+
+
+                     $('#lblCousetotal').html(CoursetotalCost);
+                 },
+                 drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+             });
+
+            clearAddLocation();
+         }
+
+         function deleteData(locationId,teamId,engineerId) {
+           bootbox.confirm("คุณต้องการลบข้อมูล?"
+            , function (result) {
+            if (result == true) {
+
+             var i = 0;
+             oTableEngineer = $('#tbSearchEngineer').DataTable({
+                 processing: true, // for show progress bar
+                 serverSide: true, // for process server side
+                 filter: false, // this is for disable filter (search box)
+                 orderMulti: false, // for disable multiple column at once
+                 pageLength: 10,
+                 order: [],
+                 autoWidth: false,
+                 searching: false,
+                 destroy: true,
+                 lengthChange: false,
+                 "oLanguage": {
+                     "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                     "sInfo": "Showing page _PAGE_ of _PAGES_",
+                     "sSearch": false,
+                     "sLengthMenu": "Results :  _MENU_",
+                 },
+                 "scrollX": true,
+                 "language": {
+                     "zeroRecords": "No data found.",
+                     "decimal": ",",
+                     "thousands": "."
+                 },
+                 ajax: {
+                     url: '@Url.Action("OnDeleteEngineer", "RequestTraining")',
+                     type: "POST",
+                     datatype: "JSON",
+                     data: {
+                         'locationId': locationId,
+                         'teamId': teamId,
+                         'engineerId': engineerId
+                     },
+                 },
+                 columns: [
+                     {
+                         data: null,width:'10%', render: function (data, type, row) {
+                             return "  <a onclick=deleteData('" + row.LocationId + "','" + row.TeamId + "','" + row.EngineerId + "');return false; href='#'  data-toggle='tooltip' data-placement='top' title='Delete'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-trash-2'><polyline points='3 6 5 6 21 6'></polyline><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'></path><line x1='10' y1='11' x2='10' y2='17'></line><line x1='14' y1='11' x2='14' y2='17'></line></svg></a>";
+                         }
+                     },
+                     { data: "LocationNameTh" },
+                     { data: "TeamNameTh" },
+                     { data: "StaffNameTh" }
+
+                 ],
+                 "order": [[0, "desc"]],
+                 "stripeClasses": [],
+                 "initComplete": function (settings, json) {//here is the tricky part
+                     var count = $('#tbSearchEngineer tr').length - 1
+                     //  alert(count);
+
+                     $('#rowCount').val(count);
+                     var count = $('#rowCount').val();
+                     var cost = $('#lblcourseprice').text();
+
+                     var ttcost = calculateCost(cost, count);
+
+
+                     var incvat = vat7(ttcost);
+                     $('#lblttcost').html(FormatNumber(ttcost));
+                     $('#lblvat7').html(parseInt(incvat));
+
+                     var _incvat = parseInt(incvat);
+                     var _ttcost = parseFloat(ttcost);
+                     var CoursetotalCost = _incvat + _ttcost;
+
+                     CoursetotalCost = FormatNumber(CoursetotalCost);
+
+
+                     $('#lblCousetotal').html(CoursetotalCost);
+                 },
+                 drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+             });
+
+            }
+        });
+    }
+
+        function onSave() {
+
+                            var trainingModel = new Object();
+                                trainingModel.ContractPhone = $('#inputContactPhone').val();
+                                trainingModel.ContractEmail = $('#inputContactEmail').val();
+                                trainingModel.Course = $("select[id$=selCourse]").val();
+                                trainingModel.CoursePrice = $('#lblcourseprice').text();
+                                trainingModel.RequestDateStr = $('#inputRequestdateTo').val();
+                                trainingModel.Remark = $('#txtRemark').val();
+                                trainingModel.TotalPrice = $('#lblttcost').text();
+                                trainingModel.Vat = $('#lblvat7').text();
+
+                                 $.ajax({
+                                      url: '@Url.Action("onSaveRequestTraining", "RequestTraining")',
+                                      type: 'POST',
+                                     data: { 'model': trainingModel },
+                                      dataType: "json",
+                                      success: function (result) {
+                                         console.log(result)
+                                         if (result != null) {
+
+                                             bootbox.alert(result.Message);
+
+
+                                         }
+                                         else {
+                                             bootbox.alert(result.Message);
+                                         }
+
+
+                                      },
+                                     error: function (result) {
+                                         bootbox.alert(result.Message);
+                                      }
+                                 });
+
+
+                        }
+
+        function GetDropDownLocation() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetLocationByCompany","Team")',
+           // data: {stateid:stateid},
+            dataType: 'json',
+            success: function (data) {
+
+                $("#selLocationNametraining").empty();
+                $("#selLocationNametraining").append('<option value="">--Please select--</option>');
+                $.each(data, function (id, result) {
+                    $("#selLocationNametraining").append('<option value="' + result.LocationId + '">' + result.LocationNameTh +'</option>');
+                    });
+                },
+                failure: function () {
+                    $("#selLocationNametraining").empty();
+                    $("#selLocationNametraining").append('<option value="">--Please select--</option>');
+                }
+            });
+    }
+
+        function getTeamByLocationId(locationId) {
+              $.ajax({
+                  url: '@Url.Action("GetDataByLocationId", "Team")',
+                  type: 'POST',
+                  data: { 'locationId': locationId},
+                  dataType: "json",
+                  success: function (data) {
+                      $("#selTeamtraining").empty();
+                      $("#selTeamtraining").append('<option value="">--Please select--</option>');
+                      $.each(data, function (id, result) {
+                         // $("#selTeamtraining").append('<option value="' + result.TeamId + '">' + result.TeamNameTh + '</option>');
+                          $("#selTeamtraining").append($("<option></option>").val(result.TeamId).html(result.TeamNameTh));
+                      });
+                  },
+                  failure: function () {
+                      $("#selTeamtraining").empty();
+                      $("#selTeamtraining").append('<option value="">--Please select--</option>');
+                  }
+              });
+         }
+
+        function getEngineerByTeam(locationId,teamId) {
+              $.ajax({
+                  url: '@Url.Action("GetEngineerByTeam", "Engineer")',
+                  type: 'POST',
+                  data: {
+                      'locationId': locationId,
+                      'teamId': teamId,
+                  },
+                  dataType: "json",
+                  success: function (data) {
+                      $("#selEngineertraining").empty();
+                      $("#selEngineertraining").append('<option value="">--Please select--</option>');
+                      $.each(data, function (id, result) {
+                          $("#selEngineertraining").append('<option value="' + result.EngineerId + '">' + result.StaffName + '</option>');
+                      });
+                  },
+                  failure: function () {
+                      $("#selEngineertraining").empty();
+                      $("#selEngineertraining").append('<option value="">--Please select--</option>');
+                  }
+              });
+         }
+
+         function GetDropDownByNameTrainigStatus() {
+
+                    $.ajax({
+                        type: 'GET',
+                        url: '@Url.Action("GetDropDownList", "RequestTraining")',
+                        data: { '_ddlType': 'training_status' },
+                        dataType: 'json',
+                        success: function (data) {
+
+                            $("#inputStatus").empty();
+                            $("#inputStatus").append('<option value="ALL">--Please All--</option>');
+                            $.each(data, function (id, result) {
+                                $("#inputStatus").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text +'</option>');
+                                });
+                            },
+                            failure: function () {
+                                $("#inputStatus").empty();
+                                $("#inputStatus").append('<option value="-1">--Please All--</option>');
+                            }
+                        });
+                        }
+
+
+         function GetDropDownByNameCourse() {
+
+                    $.ajax({
+                        type: 'GET',
+                        url: '@Url.Action("GetDropDownList", "RequestTraining")',
+                        data: { '_ddlType': 'training_couse' },
+                        dataType: 'json',
+                        success: function (data) {
+
+                            $("#selCourse").empty();
+                            $("#selCourse").append('<option value="">--Please select course--</option>');
+                            $.each(data, function (id, result) {
+                                $("#selCourse").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text  +'</option>');
+                                $("#lblcourseprice").html(result.value1);
+                            });
+
+
+                            },
+                            failure: function () {
+                                $("#selCourse").empty();
+                                $("#selCourse").append('<option value="">--Please select course--</option>');
+                            }
+                        });
+                  }
+
+
+         function clearField() {
+
+                            $("#txtCompNo").val('');
+                            $("#txttaxid").val('');
+
+                            $("#txtReqNo").val('');
+                            $('#inputStatus').val('ALL');
+                            $("#reqdateFrom").val('');
+                            $("#reqdateTo").val('');
+
+                        }
+
+
+          function inittbSearchResult() {
+
+                            oTable = $('#tbSearchResult').DataTable({
+                                processing: true, // for show progress bar
+                                serverSide: true, // for process server side
+                                filter: false, // this is for disable filter (search box)
+                                orderMulti: false, // for disable multiple column at once
+                                pageLength: 10,
+                                order: [],
+                                autoWidth: false,
+                                searching: false,
+                                destroy: true,
+                                lengthChange: false,
+                                "oLanguage": {
+                                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                                    "sSearch": false,
+                                    "sLengthMenu": "Results :  _MENU_",
+                                },
+                                "scrollX": true,
+                                "language": {
+                                    "zeroRecords": "No data found.",
+                                    "decimal": ",",
+                                    "thousands": "."
+                                },
+                                ajax: {
+                                    url:  '@Url.Action("SearchRequest", "RequestTraining")',
+                                    type: "POST",
+                                    datatype: "JSON",
+                                    //dataSrc:"",
+                                    data: function (d) {
+                                            d.Status = $("select[id$=inputStatus]").val(),
+                                            d.reqDateFrom = $("#reqdateFrom").val(),
+                                            d.reqDateTo = $("#reqdateTo").val()
+
+                                    }
+                                },
+                                columns: [
+
+                                    {
+                                        data: null, render: function (data, type, row) {
+                                            return "  <ul class='table-controls'><li> <a href='#' onclick=openModal('edit','" + row.TrainingId + "');return false;  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='แก้ไข'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a></li></ul> ";
+
+                                        },
+                                        // orderable: false,
+                                        className: 'text-center'
+                                    },
+
+                                    {
+                                        data: null, render: function (data, type, row) {
+                                            return "<span class='badge outline-badge-secondary shadow-none'>" + row.Status + "</span>";
+                                        }
+
+                                    },
+                                    {
+                                        "data": "RequestDate", "render": function (data, type, row) {
+                                            if (type === "sort" || type === "type") {
+                                                return data;
+                                            }
+                                            if (moment(data).format("DD/MM/YYYY") != 'Invalid date') {
+                                                return moment(data).format("DD/MM/YYYY");
+                                            }
+                                            else {
+                                                return data;
+                                            }
+
+                                        }
+                                    },
+                                    {
+                                        "data": "BookingDate", "render": function (data, type, row) {
+                                            if (type === "sort" || type === "type") {
+                                                return data;
+                                            }
+                                            if (moment(data).format("DD/MM/YYYY") != 'Invalid date') {
+                                                return moment(data).format("DD/MM/YYYY");
+                                            }
+                                            else {
+                                                return data;
+                                            }
+
+                                        }
+                                    },
+                                    { "data": "Course" },
+                                    { "data": "CoursePrice", render: $.fn.dataTable.render.number(',', '.', 2, '') },
+                                    { "data": "Vat" },
+                                    { "data": "TotalAmount", render: $.fn.dataTable.render.number(',', '.', 2, '') }
+
+                                ],
+                                "order": [[0, "desc"]],
+                                "stripeClasses": [],
+                                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+                            });
+
+                        }
+
+        function openModal(mode, trainingId) {
+            $("#frNew")[0].reset();
+
+            $('input[name="optionsRadios"][value="01"]').attr('checked', true);
+
+            $('#hdMode').val(mode);
+
+            if (mode == "edit") {
+                $("#hTitleEdit").text('แก้ไข ขอรับการฝึกอบรม');
+                callTrainingDetail(trainingId);
+              
+            }
+            else {
+                $("#hTitleEdit").text('ขอรับการฝึกอบรม');
+                callTrainingDetailAdd();
+              
+            }
+
+            $('#AdjustReqTraining').modal('show');
+        }
+
+
+          function callTrainingDetailAdd() {
+
+                                 $.ajax({
+                                      url: '@Url.Action("GetTrainingAdd", "RequestTraining")',
+                                      type: 'POST',
+                                      //data: {
+                                      //    'TrainingID': trainingID,
+
+                                      //},
+                                      dataType: "json",
+                                     success: function (result) {
+
+                                         if (result != null) {
+
+                                             $('#lblcompname').html(result.CompanyNameTh);
+                                             $('#lbltaxid').html(result.TaxId);
+
+                                             $('#lblemail').html(result.ContractEmail);
+                                             $('#lblcontphone').html(result.ContractPhone);
+
+                                             var count = $('#tbSearchEngineer tr').length - 1
+
+                                             $('#rowCount').val(count);
+                                             var count = $('#rowCount').val();
+                                             var cost = $('#lblcourseprice').text();
+
+                                             var ttcost = calculateCost(cost, count);
+
+
+                                             var incvat = vat7(ttcost);
+                                             $('#lblttcost').html(FormatNumber(ttcost));
+                                             $('#lblvat7').html(parseInt(incvat));
+
+                                             var _incvat = parseInt(incvat);
+                                             var _ttcost = parseFloat(ttcost);
+                                             var CoursetotalCost = _incvat + _ttcost;
+
+                                             CoursetotalCost = FormatNumber(CoursetotalCost);
+
+
+                                             $('#lblCousetotal').html(CoursetotalCost);
+                                         }
+                                         else {
+
+                                         }
+
+
+                                      },
+                                      failure: function () {
+
+                                      }
+                                 });
+
+
+                        }
+
+        function callTrainingDetail(trainingID) {
+
+                                 $.ajax({
+                                      url: '@Url.Action("GetTraining", "RequestTraining")',
+                                      type: 'POST',
+                                      data: {
+                                          'TrainingID': trainingID,
+
+                                      },
+                                      dataType: "json",
+                                     success: function (result) {
+
+                                         if (result != null) {
+                                             console.log(result);
+                                             $('#lblcompname').html(result.CompanyNameTh);
+                                             $('#lbltaxid').html(result.TaxId);
+
+
+                                             $('#inputContactEmail').val(result.ContractEmail);
+                                             $('#inputContactPhone').val(result.ContractPhone);
+                                             $('#selCourse').val(result.Course);
+                                             $('#inputRequestdateTo').val(result.RequestDateStr);
+                                             
+                                             $('#txtRemark').val(result.Remark);
+                                         
+                                             $('#Coursecost').val(result.CoursePrice);
+
+                                             inittbEngineer(result.TrainingId);
+
+                                             $('#trnid').val(result.TrainingId);
+                                             $('#compid').val(result.CompanyId);
+                                             $('#teamid').val(result.TeamId);
+                                             $('#engid').val(result.EngineerId);
+                                             $('#locid').val(result.LocationId);
+
+                                           //  $('#bookingDate').val(result.BookingDateStr);
+                                             $('#txtaisremark').val(result.RemarkForAis);
+
+                                         }
+                                         else {
+
+                                         }
+
+
+                                      },
+                                      failure: function () {
+
+                                      }
+                                 });
+
+
+                        }
+
+
+        function getFormattedDate(date) {
+
+                            let year = date.getFullYear();
+                            let month = (1 + date.getMonth()).toString().padStart(2, '0');
+                            let day = date.getDate().toString().padStart(2, '0');
+
+
+                            return day + '/' + month + '/' + year;
+                        }
+
+                        function calculateCost(cost,count) {
+
+                            var totalcost = 0;
+                            totalcost = parseFloat(cost) * parseFloat(count);
+
+
+                            return totalcost;
+                        }
+                        function vat7(cost)
+                        {
+                            const formatter = new Intl.NumberFormat('en-US', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                            });
+
+                            var incvat = 0;
+                            incvat = cost * (7 / 100);
+                            incvat = formatter.format(incvat);
+                           // alert(incvat);
+                            return incvat;
+                        }
+
+
+        function inittbEngineer(Trainingid) {
+            var i = 0;
+            oTableEngineer = $('#tbSearchEngineer').DataTable({
+                processing: true, // for show progress bar
+                serverSide: true, // for process server side
+                filter: false, // this is for disable filter (search box)
+                orderMulti: false, // for disable multiple column at once
+                pageLength: 10,
+                order: [],
+                autoWidth: false,
+                searching: false,
+                destroy: true,
+                lengthChange: false,
+                "oLanguage": {
+                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                    "sSearch": false,
+                    "sLengthMenu": "Results :  _MENU_",
+                },
+                "scrollX": true,
+                "language": {
+                    "zeroRecords": "No data found.",
+                    "decimal": ",",
+                    "thousands": "."
+                },
+                ajax: {
+                    url: '/RequestTraining/SearchEngineer',
+                    type: "POST",
+                    datatype: "JSON",
+                    //dataSrc:"",
+                    data: function (d) {
+                        d.Trainingid = Trainingid
+                    }
+                },
+                columns: [
+                    {
+                        data: null, width: '10%', render: function (data, type, row) {
+                            return "  <a onclick=deleteData('" + row.LocationId + "','" + row.TeamId + "','" + row.EngineerId + "');return false; href='#'  data-toggle='tooltip' data-placement='top' title='Delete'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-trash-2'><polyline points='3 6 5 6 21 6'></polyline><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'></path><line x1='10' y1='11' x2='10' y2='17'></line><line x1='14' y1='11' x2='14' y2='17'></line></svg></a>";
+                        }
+                    },
+                    { data: "LocationNameTh" },
+                    { data: "TeamNameTh" },
+                    { data: "StaffNameTh" }
+
+                ],
+                "order": [[0, "desc"]],
+                "stripeClasses": [],
+                "initComplete": function (settings, json) {//here is the tricky part
+                    var count = $('#tbSearchEngineer tr').length - 1
+                   
+                    $('#rowCount').val(count);
+                    var count = $('#rowCount').val();
+                    var cost = $('#Coursecost').val();
+                   
+                    var ttcost = calculateCost(cost, count);
+
+                    var incvat = vat7(ttcost);
+                    $('#lblttcost').html(FormatNumber(ttcost));
+                    $('#lblvat7').html(parseInt(incvat));
+
+                    var _incvat = parseInt(incvat);
+                    var _ttcost = parseFloat(ttcost);
+                    var CoursetotalCost = _incvat + _ttcost;
+
+                    CoursetotalCost = FormatNumber(CoursetotalCost);
+
+                    $('#lblCousetotal').html(CoursetotalCost);
+                },
+                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+            });
+
+
+        }
+
+        function FormatNumber(number, numberOfDigits) {
+            try {
+                return new Intl.NumberFormat('en-US').format(parseFloat(number).toFixed(2));
+            } catch (error) {
+                return 0;
+            }
+        }
+    </script>
+
+}
+
+

@@ -184,16 +184,16 @@ namespace SubcontractProfile.Web.Controllers
             var listdataTrainingEngineer = new List<SubcontractProfileTrainingEngineerModel>();
             var dataTrainingEngineer = new SubcontractProfileTrainingEngineerModel();
 
-            var splitlocation = model.LocationNameTh.Split(',');
-            var splitteam = model.TeamNameTh.Split(',');
-            var splitEngineer = model.Engineer_ID.Split(',');
+            //var splitlocation = model.LocationNameTh.Split(',');
+            //var splitteam = model.TeamNameTh.Split(',');
+            //var splitEngineer = model.Engineer_ID.Split(',');
             Guid trainingId = Guid.NewGuid();
 
             var ScreenObject = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingModel>>("ScreenDatatraining");
             var trainingObject = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingEngineerModel>>("DataInsertTrainingEngineer");
 
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Engineer/GetByEngineerId",splitEngineer[0]);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Engineer/GetByEngineerId","");
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -203,12 +203,12 @@ namespace SubcontractProfile.Web.Controllers
             if (ScreenObject == null && trainingObject ==null)        
             {
                 dataTrainingEngineer.TrainingId = trainingId;
-                dataTrainingEngineer.LocationId = new Guid(splitlocation[0]);
-                dataTrainingEngineer.LocationNameTh = splitlocation[1];
-                dataTrainingEngineer.TeamId = new Guid(splitteam[0]);
-                dataTrainingEngineer.TeamNameTh = splitteam[1];
-                dataTrainingEngineer.EngineerId = new Guid(splitEngineer[0]);
-                dataTrainingEngineer.StaffNameTh = splitEngineer[1];
+                //dataTrainingEngineer.LocationId = new Guid(splitlocation[0]);
+                //dataTrainingEngineer.LocationNameTh = splitlocation[1];
+                //dataTrainingEngineer.TeamId = new Guid(splitteam[0]);
+                //dataTrainingEngineer.TeamNameTh = splitteam[1];
+                //dataTrainingEngineer.EngineerId = new Guid(splitEngineer[0]);
+                //dataTrainingEngineer.StaffNameTh = splitEngineer[1];
                 dataTrainingEngineer.CreateDate = DateTime.Now;
                 dataTrainingEngineer.CreateUser = userProfile.Username;
                 listdataTrainingEngineer.Add(dataTrainingEngineer);
@@ -216,22 +216,22 @@ namespace SubcontractProfile.Web.Controllers
                 model.TrainingId = trainingId;
 
 
-                model.LocationNameTh = splitlocation[1];           
-                model.TeamNameTh = splitteam[1];
-                model.Engineer_name = splitEngineer[1];
-                model.Engineer_ID = splitEngineer[0];
-                //model.location_name_th = splitlocation[1];           
-                //model.team_name_th = splitteam[1];
-                model.Engineer_name = splitEngineer[1];
-                model.EngineerId = splitEngineer[0];
+                //model.LocationNameTh = splitlocation[1];           
+                //model.TeamNameTh = splitteam[1];
+                //model.Engineer_name = splitEngineer[1];
+                //model.Engineer_ID = splitEngineer[0];
+                ////model.location_name_th = splitlocation[1];           
+                ////model.team_name_th = splitteam[1];
+                //model.Engineer_name = splitEngineer[1];
+                //model.EngineerId = splitEngineer[0];
 
-                model.ContractPhone = dataEngineer.ContractPhone1;
-                model.ContractEmail = dataEngineer.ContractEmail;
+                //model.ContractPhone = dataEngineer.ContractPhone1;
+                //model.ContractEmail = dataEngineer.ContractEmail;
 
-                model.LocationNameTh = splitlocation[1];           
-                model.TeamNameTh = splitteam[1];
-                model.Engineer_name = splitEngineer[1];
-                model.EngineerId = splitEngineer[0];
+                //model.LocationNameTh = splitlocation[1];           
+                //model.TeamNameTh = splitteam[1];
+                //model.Engineer_name = splitEngineer[1];
+                //model.EngineerId = splitEngineer[0];
 
                 dataScreen.Add(model);
                 HttpContext.Session.SetObjectAsJson("ScreenDatatraining", dataScreen);
@@ -244,38 +244,38 @@ namespace SubcontractProfile.Web.Controllers
                 listdataTrainingEngineer = HttpContext.Session.GetObjectFromJson<List<SubcontractProfileTrainingEngineerModel>>("DataInsertTrainingEngineer");
 
                 dataTrainingEngineer.TrainingId = trainingId;
-                dataTrainingEngineer.LocationId = new Guid(splitlocation[0]);
-                dataTrainingEngineer.LocationNameTh = splitlocation[1];
-                dataTrainingEngineer.TeamId = new Guid(splitteam[0]);
-                dataTrainingEngineer.TeamNameTh = splitteam[1];
-                dataTrainingEngineer.EngineerId = new Guid(splitEngineer[0]);
-                dataTrainingEngineer.StaffNameTh = splitEngineer[1];
+                //dataTrainingEngineer.LocationId = new Guid(splitlocation[0]);
+                //dataTrainingEngineer.LocationNameTh = splitlocation[1];
+                //dataTrainingEngineer.TeamId = new Guid(splitteam[0]);
+                //dataTrainingEngineer.TeamNameTh = splitteam[1];
+                //dataTrainingEngineer.EngineerId = new Guid(splitEngineer[0]);
+                //dataTrainingEngineer.StaffNameTh = splitEngineer[1];
                 dataTrainingEngineer.CreateDate = DateTime.Now;
                 dataTrainingEngineer.CreateUser = userProfile.Username;
                 listdataTrainingEngineer.Add(dataTrainingEngineer);
 
                 model.TrainingId = trainingId;
 
-                model.LocationNameTh = splitlocation[1];
+                //model.LocationNameTh = splitlocation[1];
 
-                model.TeamNameTh = splitteam[1];
-                model.Engineer_name = splitEngineer[1];
-                model.Engineer_ID = splitEngineer[0];
-                model.ContractPhone = dataEngineer.ContractPhone1;
-                model.ContractEmail = dataEngineer.ContractEmail;
+                //model.TeamNameTh = splitteam[1];
+                //model.Engineer_name = splitEngineer[1];
+                //model.Engineer_ID = splitEngineer[0];
+                //model.ContractPhone = dataEngineer.ContractPhone1;
+                //model.ContractEmail = dataEngineer.ContractEmail;
 
 
-                //model.team_name_th = splitteam[1];
-                model.Engineer_name = splitEngineer[1];
-                model.EngineerId = splitEngineer[0];
-                model.ContractPhone = dataEngineer.ContractPhone1;
-                model.ContractEmail = dataEngineer.ContractEmail;
+                ////model.team_name_th = splitteam[1];
+                //model.Engineer_name = splitEngineer[1];
+                //model.EngineerId = splitEngineer[0];
+                //model.ContractPhone = dataEngineer.ContractPhone1;
+                //model.ContractEmail = dataEngineer.ContractEmail;
                 
 
-                model.LocationNameTh = splitlocation[1];
-                model.TeamNameTh = splitteam[1];
-                model.EngineerName= splitEngineer[1];
-                model.EngineerId = splitEngineer[0];
+                //model.LocationNameTh = splitlocation[1];
+                //model.TeamNameTh = splitteam[1];
+                //model.EngineerName= splitEngineer[1];
+                //model.EngineerId = splitEngineer[0];
 
                 dataScreen.Add(model);
 
@@ -329,9 +329,9 @@ namespace SubcontractProfile.Web.Controllers
 
                 model.CompanyId = userProfile.companyid;
                 model.Course = spitcouse[0];
-                model.CourcePrice = convertprice;
+               // model.CourcePrice = convertprice;
                 model.TotalPrice = convertprice * totalengineer;
-                model.Vat = (model.TotalPrice * 7) / 100;
+             //   model.Vat = (model.TotalPrice * 7) / 100;
                 model.RequestNo = GenRequestno();
                 model.CreateBy = userProfile.Username;              
                 model.Status = "N";

@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "RequestTraining";
+    ViewData["Title"] = "Booking";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -32,20 +32,13 @@
                     </div>
 
 
-                    <div class="form-group col-md-6">
+                    @*<div class="form-group col-md-6">
                         <label for="inputLocationCodeMain">Request No.</label>
                         <input type="text" class="form-control" id="txtReqNo" placeholder="Request No.">
 
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="inputStatus">Status Training</label>
+                    </div>*@
 
 
-                        <select id="inputStatus" class="form-control" data-live-search="true"></select>
-
-
-                    </div>
                     <div class="form-group col-md-6">
                         <label for="txttaxid">Request Date From</label>
                         <div class='input-group date p-0' id='regisdatefrom'>
@@ -71,8 +64,34 @@
                         </div>
                     </div>
 
+                    <div class="form-group col-md-6">
+                        <label for="lblbookingDatefrom">Booking Date From</label>
+                        <div class='input-group date p-0' id='bookingdatefrom'>
+                            <input type='text' class="form-control" id="inpbookingdateFrom" />
+                            <div class="input-group-append input-group-addon">
+                                <span class="input-group-text px-4">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
 
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="lblbookingDateTo">Booking Date To</label>
+                        <div class='input-group date p-0' id='bookingdateTo'>
+                            <input type='text' class="form-control" id="inpbookingdateTo" />
+                            <div class="input-group-append input-group-addon">
+                                <span class="input-group-text px-4">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
 
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputStatus">Status</label>
+                        <select id="inputStatus" class="form-control" data-live-search="true"></select>
+                    </div>
 
                 </div>
 
@@ -95,21 +114,20 @@
             </div>
 
             <div class="table-responsive">
-                <table id="tbSearchResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-2">
+                <table id="tbSearchResult" style="width:100%" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-2">
                     <thead>
                         <tr>
-                            @**@
+
                             <th>Action</th>
-                            <th>Request No.</th>
+                            <th>Status </th>
                             <th>Company Name</th>
                             <th>TaxID </th>
                             <th>Request Date </th>
-                            <th>Request Status </th>
-                            <th>Payment Status </th>
+                            <th>Booking Date </th>
                             <th>Course Name</th>
-                            <th>Course Price</th>
-                            <th>Vat</th>
                             <th>Total Price</th>
+                            <th>Vat (7%)</th>
+                            <th>Total Amount</th>
                         </tr>
 
                     </thead>
@@ -139,205 +157,162 @@
                     <div class="modal-body">
 
                         <div class="container">
-                            <div class="modal-body">
 
-                                <div class="row mt-4 ml-3 mr-1">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Company Name :</label>
+                                </div>
+                                <div class="col-sm-4">
 
-                                    <div class=" col-md-6 mt-3">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label>Company Name:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <label id="lblcompname"></label>
-                                            </div>
-                                        </div>
+                                    <label id="lblcompname"></label>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label>Tax ID :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label id="lbltaxid"></label>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Contact Phone :</label>
+                                </div>
+                                <div class="col-sm-4">
+
+                                    <label id="lblcontphone"></label>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label>Email :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label id="lblemail"></label>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Course :</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="col-md-10 training_couse">
+
                                     </div>
-                                    <div class=" col-md-6 mt-3">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label>Tax ID : </label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <label id="lbltaxid"></label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @*<div class=" col-md-6 mt-4">
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-sm-2">
+                                    <label>Course Price :</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <label id="lblcourseprice"></label>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Remark :</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <label id="lblRemark" > </label>
+                                </div>
+
+                            </div>
+                            <br />
+
+                            <h4>ผู้เข้าอบรม </h4>
+                            <hr>
+                            <div class="table-responsive">
+                                <table id="tbSearchEngineer" style="width:100%" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                                    <thead>
+                                        <tr>
+
+                                            <th>LocationName</th>
+                                            <th>TeamName</th>
+                                            <th>Position</th>
+                                            <th>Engineer</th>
+                                            <th>ContactPhone</th>
+                                            <th>Email</th>
+
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-9 "></div>
+                                <div class="col-md-3 col-sm-12">
+                                    <div class="row ">
+                                        <div class="col-md-12">
                                             <div class="row">
-                                                <div class="col-md-4">
-                                                    <label>Contact name:</label>
+                                                <div class="col-md-6">
+                                                    <p>ราคารวม(บาท) :</p>
                                                 </div>
-                                                <div class="col-md-7">
-                                                    <label id="lblcontname"></label>
+                                                <div class="col-md-6" style="text-align: left;">
+                                                    <label id="lblttcost"></label>
                                                 </div>
                                             </div>
-                                        </div>*@
-                                    <div class=" col-md-6 mt-4">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label>Contact Phone:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <label id="lblcontphone"></label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class=" col-md-6 mt-4">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label>Email :</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <label id="lblemail"></label>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class=" col-md-6 mt-4">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label>Course:</label>
-                                            </div>
-                                            <div class="col-md-7 training_couse">
-
+                                        </div>
+                                        <div class="col-md-12 mt-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p>Vat 7% :</p>
+                                                </div>
+                                                <div class="col-md-6" style="text-align: left;">
+                                                    <label id="lblvat7"></label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class=" col-md-6 mt-4">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label>Course Price:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <label id="lblcourseprice"></label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class=" col-md-12 mt-3">
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <label>Remark:</label>
-                                            </div>
-                                            <div class="col-md-9 ">
-                                                <textarea id="lblRemark" name="w3review" style="width:inherit;border-color:#E0E0E0" disabled="disabled" rows="6"> </textarea>
+                                        <div class="col-md-12 mt-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p>ราคาสุทธิ(บาท) :</p>
+                                                </div>
+                                                <div class="col-md-6" style="text-align: left;">
+                                                    <label id="lblCousetotal"></label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="container">
-                                    <div class="row mt-5 ml-3 mr-3">
-                                        <div class="col-md-12 ">
-                                            <p5><strong>ผู้เข้าอบรม</strong></p5>
-                                            <hr>
-                                        </div>
-                                        <div class="row col-sm-12">
-                                            <div class="table-responsive">
-                                                <table id="tbSearchEngineer" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
-                                                    <thead>
-                                                        <tr>
-
-                                                            <th width="20%">LocationName</th>
-                                                            <th width="20%">TeamName</th>
-                                                            <th width="15%">Position</th>
-                                                            <th width="15%">Engineer</th>
-                                                            <th width="15%">ContactPhone</th>
-                                                            <th width="15%">Email</th>
-
-                                                        </tr>
-                                                    </thead>
-                                                </table>
-                                            </div>
-
-                                            <input type="hidden" id="Coursecost" />
-                                            <input type="hidden" id="rowCount" />
-                                            <input type="hidden" id="trnid" />
-                                            <input type="hidden" id="compid" />
-
-                                            <input type="hidden" id="teamid" />
-                                            <input type="hidden" id="engid" />
-
-                                            <input type="hidden" id="locid" />
-                                        </div>
-                                        <div class="col-md-12 mt-5">
-                                            <div class="row">
-                                                <div class="col-md-9 "></div>
-                                                <div class="col-md-3 col-sm-12">
-                                                    <div class="row ">
-                                                        <div class="col-md-12">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <p>ราคารวม</p>
-                                                                </div>
-                                                                <div class="col-md-6" style="text-align: left;">
-                                                                    <label id="lblttcost"></label>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="col-md-12 mt-3">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <p>Vat7%</p>
-                                                                </div>
-                                                                <div class="col-md-6" style="text-align: left;">
-                                                                    <label id="lblvat7"></label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-12 mt-3">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <p>ราคาสุทธิ(บาท) </p>
-                                                                </div>
-                                                                <div class="col-md-6" style="text-align: left;">
-                                                                    <label id="lblCousetotal"></label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            </div>
 
 
+
+                            <input type="hidden" id="Coursecost" />
+                            <input type="hidden" id="rowCount" />
+                            <input type="hidden" id="trnid" />
+                            <input type="hidden" id="compid" />
+
+                            <input type="hidden" id="teamid" />
+                            <input type="hidden" id="engid" />
+
+                            <input type="hidden" id="locid" />
+
+                            <h4>สำหรับเจ้าหน้าที่ AIS (เลือกวัน Training)</h4>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Booking Training Date</label>
                                 </div>
-                                <div class="container">
-                                    <div class="row mt-5 ml-3 mr-3">
-                                        <div class="col-md-12 ">
-                                            <p class="h5"><strong>สำหรับเจ้าหน้าที่ AIS ( เลือกวัน Training)</strong></p>
-                                            <hr>
-                                        </div>
-                                        <div class=" col-md-6 mt-3">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <label> booking Training Date:</label>
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <div class='input-group date p-0' id='bookdatefrom'>
-                                                        <input type='text' class="form-control" id="bookingDate" />
-                                                        <div class="input-group-append input-group-addon">
-                                                            <span class="input-group-text px-4">
-                                                                <i class="fa fa-calendar"></i>
-                                                            </span>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=" col-md-6 mt-3">
-                                            <div class="row">
-                                                <div class="col-md-2">
-                                                    <label>Remark:</label>
-                                                </div>
-                                                <div class="col-md-9 ">
-                                                    <textarea id="txtaisremark" name="w3review" style="width:inherit;border-color:#E0E0E0" rows="6"> </textarea>
-                                                </div>
-                                            </div>
+                                <div class="col-sm-4">
+                                    <div class='input-group date p-0' id='bookdatefrom'>
+                                        <input type='text' class="form-control" id="bookingDate" />
+                                        <div class="input-group-append input-group-addon">
+                                            <span class="input-group-text px-4">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
                                         </div>
 
                                     </div>
@@ -345,10 +320,20 @@
 
                             </div>
 
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Remark :</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <textarea id="txtaisremark" class="form-control" rows="3"> </textarea>
 
+                                </div>
+
+                            </div>
                         </div>
 
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
@@ -451,6 +436,40 @@
                                 }
                             });
 
+                            $('#bookingdatefrom').datetimepicker({
+                                format: "DD/MM/YYYY",
+                                showClear: true,
+                                showClose: true,
+                                icons: {
+                                    time: 'fa fa-clock-o',
+                                    date: 'fa fa-calendar',
+                                    up: 'fa fa-chevron-up',
+                                    down: 'fa fa-chevron-down',
+                                    previous: 'fa fa-chevron-left',
+                                    next: 'fa fa-chevron-right',
+                                    today: 'icon-screenshot',
+                                    clear: 'fa fa-trash',
+                                    close: 'fa fa-time'
+                                }
+                            });
+
+                            $('#bookingdateTo').datetimepicker({
+                                format: "DD/MM/YYYY",
+                                showClear: true,
+                                showClose: true,
+                                icons: {
+                                    time: 'fa fa-clock-o',
+                                    date: 'fa fa-calendar',
+                                    up: 'fa fa-chevron-up',
+                                    down: 'fa fa-chevron-down',
+                                    previous: 'fa fa-chevron-left',
+                                    next: 'fa fa-chevron-right',
+                                    today: 'icon-screenshot',
+                                    clear: 'fa fa-trash',
+                                    close: 'fa fa-time'
+                                }
+                            });
+
 
                             $('#bookdatefrom').datetimepicker({
                                 format: "DD/MM/YYYY",
@@ -481,7 +500,7 @@
                                     if (form.checkValidity() === false) {
                                         event.preventDefault();
                                         event.stopPropagation();
-                                       
+
                                     } else {
                                         onSave();
                                         event.preventDefault();
@@ -493,11 +512,11 @@
                         }, false);
 
                         function onSave() {
-                           
+
                             var trainingModel = new Object();
                             trainingModel.TrainingId = $('#trnid').val();
                             trainingModel.CompanyId = $('#compid').val();
-                            trainingModel.BookingDate = $('#bookingDate').val();
+                            trainingModel.BookingDateStr = $('#bookingDate').val();
                             trainingModel.RemarkForAis = $('#txtaisremark').val();
 
                                  $.ajax({
@@ -511,10 +530,9 @@
                                              //console.log()
                                              /// alert(result.ret_msg);
                                              bootbox.alert(result.Message);
-                                             $('#trnid').val('');
-                                             $('#compid').val('');
-                                             $('#bookingDate').val('');
-                                             $('#txtaisremark').val('');
+                                             //$('#trnid').val('');
+                                             //$('#compid').val('');
+                                            
 
                                          }
                                          else {
@@ -530,77 +548,6 @@
 
 
                         }
-
-
-                        function onSave1() {
-
-                           // var model = new Object();
-                            var TrainingId = $('#trnid').val();
-                            var CompanyId = $('#compid').val();
-                            var TeamId = $('#teamid').val();
-                            var EngineerId = $('#engid').val();
-                            var LocationId = $('#locid').val();
-                            var _bookingDate = $('#bookingDate').val();
-
-                            var RemarkForAis = $('#txtaisremark').val();
-                            if (_bookingDate == "" || _bookingDate == null || _bookingDate == " ") {
-
-                                alert("Please Confirm Booking Date !!!");
-                            }
-                            else {
-                                if (!($("#bookingDate").val(), "dd/MM/yyyy")) {
-                                    alert("Date is not a format !!!");
-                                }
-                                else {
-                                           $.ajax({
-                                      url: '@Url.Action("onSave", "RequestTraining")',
-                                      type: 'POST',
-                                      data: {
-                                          'trainingId': TrainingId,
-                                          'companyId': CompanyId,
-                                          'teamId': TeamId,
-                                          'engineerId': EngineerId,
-                                          'locationId': LocationId,
-                                          'bookingDate': _bookingDate,
-                                          'RemarkForAis': RemarkForAis,
-                                      },
-                                     dataType: "json",
-
-                                     success: function (result) {
-
-                                         // console.log(result);
-                                       //  alert("Update Success.");
-                                         if (result != null) {
-                                           //  alert('success');
-
-                                             /// alert(result.ret_msg);
-                                             alert("Update Success.");
-                                            // alert(result.Message);
-                                             $('#trnid').val('');
-                                             $('#compid').val('');
-                                             $('#bookingDate').val('');
-                                             $('#txtaisremark').val('');
-
-                                         }
-                                         else {
-                                             // alert(result.Message);
-                                             alert("Update Success..");
-                                          //  alert('success error');
-                                         }
-
-
-                                      },
-                                 });
-                                }
-
-
-                            }
-
-                        }
-
-
-
-
 
 
               function GetDropDownByNameTrainigStatus() {
@@ -726,9 +673,6 @@
                         }
 
 
-
-
-
                         function inittbSearchResult() {
 
                             oTable = $('#tbSearchResult').DataTable({
@@ -760,39 +704,77 @@
                                     datatype: "JSON",
                                     //dataSrc:"",
                                     data: function (d) {
-
-                                        d.companyName = $("#txtCompNo").val(),
-
-                                            d.Status = $("select[id$=inputStatus]").val(),
-                                            d.RequestNo = $("#txtReqNo").val(),
+                                            d.companyName = $("#txtCompNo").val(),
+                                            d.Status = $("select[id$=inputStatus]").val(),     
                                             d.TaxId = $("#txttaxID").val(),
                                             d.reqDateFrom = $("#reqdateFrom").val(),
-                                            d.reqDateTo = $("#reqdateTo").val()
+                                            d.reqDateTo = $("#reqdateTo").val(),
+                                            d.bookingDateFrom = $("#inpbookingdateFrom").val(),
+                                            d.bookingDateTo = $("#inpbookingdateTo").val()
 
                                     }
                                 },
                                 columns: [
 
                                     {
-                                        data: null, width: "10%", render: function (data, type, row) {
+                                        data: null, render: function (data, type, row) {
                                             return "  <ul class='table-controls'><li> <a href='#' onclick=openModal('edit','" + row.TrainingId + "');return false;  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='แก้ไข'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a></li> ";
 
-                                        }
+                                        },
                                         // orderable: false,
-                                        //className: 'text-center'
+                                        className: 'text-center'
                                     },
+                                    //{ "data": "Status" },
+                                    //  { "data": "PaymentStatus" },
+                                    //{ "data": "RequestNo"},
 
-                                    { "data": "RequestNo", "width": "20%" },
+                                    {
+                                        data: null, render: function (data, type, row) {
+                                            return "<span class='badge outline-badge-secondary shadow-none'>" + row.Status + "</span>";
+                                        }
+                                      
+                                    },
+                                    //{
+                                    //    data: null, width: "10%", render: function (data, type, row) {
+                                    //        return "<span class='badge outline-badge-secondary shadow-none'>" + row.PaymentStatus + "</span>";
+                                    //    }
 
-                                    { "data": "CompanyNameTh", "width": "20%" },
-                                    { "data": "TaxId", "width": "20%" },
-                                    { "data": "RequestDate", "width": "20%" },
-                                    { "data": "Status", "width": "20%" },
-                                    { "data": "PaymentStatus", "width": "20%" },
-                                    { "data": "Course", "width": "20%" },
-                                    { "data": "CoursePrice", "width": "20%" },
-                                    { "data": "Vat", "width": "20%" },
-                                    { "data": "TotalPrice", "width": "20%" }
+                                    //},
+                                  
+                                    { "data": "CompanyNameTh"},
+                                    { "data": "TaxId" },    
+                                    {
+                                        "data": "RequestDate", "render": function (data, type, row) {
+                                            if (type === "sort" || type === "type") {
+                                                return data;
+                                            }
+                                            if (moment(data).format("DD/MM/YYYY") != 'Invalid date') {
+                                                return moment(data).format("DD/MM/YYYY");
+                                            }
+                                            else {
+                                                return data;
+                                            }
+
+                                        }
+                                    },
+                                    {
+                                        "data": "BookingDate", "render": function (data, type, row) {
+                                            if (type === "sort" || type === "type") {
+                                                return data;
+                                            }
+                                            if (moment(data).format("DD/MM/YYYY") != 'Invalid date') {
+                                                return moment(data).format("DD/MM/YYYY");
+                                            }
+                                            else {
+                                                return data;
+                                            }
+
+                                        }
+                                    },
+                                    { "data": "Course" },
+                                    { "data": "CoursePrice", render: $.fn.dataTable.render.number(',', '.', 2, '') },
+                                    { "data": "Vat" },
+                                    { "data": "TotalAmount", render: $.fn.dataTable.render.number(',', '.', 2, '') }
 
                                 ],
                                 "order": [[0, "desc"]],
@@ -803,15 +785,15 @@
 
                         }
 
-                        function openModal(mode, CompanyId) {
-                           //
-                           // oTableEngineer.clear().draw();
+                        function openModal(mode, trainingId) {
+                            $("#frNew")[0].reset();
                             $('#AdjustReqTraining').modal('show');
                             $('input[name="optionsRadios"][value="01"]').attr('checked', true);
-                            callTrainingDetail(CompanyId);
+
+                            callTrainingDetail(trainingId);
                         }
                         function callTrainingDetail(trainingID) {
-                          //  console.log("TTID" + trainingID);
+                       
                                  $.ajax({
                                       url: '@Url.Action("GetTraining", "RequestTraining")',
                                       type: 'POST',
@@ -833,7 +815,7 @@
 
                                              $('#lblRemark').html(result.Remark);
                                              //course
-                                             $('#lblcourseprice').html(result.CoursePrice);
+                                            // $('#lblcourseprice').html(result.CoursePrice);
                                              $('#Coursecost').val(result.CoursePrice);
 
                                              inittbEngineer(result.TrainingId);
@@ -842,6 +824,9 @@
                                              $('#teamid').val(result.TeamId);
                                              $('#engid').val(result.EngineerId);
                                              $('#locid').val(result.LocationId);
+
+                                             $('#bookingDate').val(result.BookingDateStr);
+                                             $('#txtaisremark').val(result.RemarkForAis);
 
                                              $('input[name="optionsRadios"][value="' + result.Course + '"]').attr('checked',true);
                                          }
@@ -857,6 +842,17 @@
                                  });
 
 
+                        }
+
+
+                    function getFormattedDate(date) {
+                       
+                            let year = date.getFullYear();
+                            let month = (1 + date.getMonth()).toString().padStart(2, '0');
+                            let day = date.getDate().toString().padStart(2, '0');
+
+                           
+                            return day + '/' + month + '/' + year;
                         }
 
                         function calculateCost(cost,count) {
@@ -880,7 +876,7 @@
                         }
 
 
-                        function inittbEngineer(Trainingid) {
+                   function inittbEngineer(Trainingid) {
                            var i = 0;
                             oTableEngineer = $('#tbSearchEngineer').DataTable({
                                 processing: true, // for show progress bar
@@ -919,12 +915,12 @@
                                 },
                                 columns: [
 
-                                    { data: "LocationNameTh", width: "20%"},
-                                    { data: "TeamNameTh", width: "20%" },
-                                    { data: "Position", width: "10%" },
-                                    { data: "StaffNameTh", width: "15%" },
-                                    { data: "ContractPhone1", width: "20%" },
-                                    { data: "ContractEmail", width: "15%" }
+                                    { data: "LocationNameTh"},
+                                    { data: "TeamNameTh"},
+                                    { data: "Position" },
+                                    { data: "StaffNameTh" },
+                                    { data: "ContractPhone1" },
+                                    { data: "ContractEmail" }
 
 
 
@@ -944,15 +940,15 @@
 
 
                                     var incvat = vat7(ttcost);
-                                    $('#lblttcost').html(ttcost);
-                                    $('#lblvat7').html(incvat);
+                                    $('#lblttcost').html(FormatNumber(ttcost));
+                                    $('#lblvat7').html(parseInt(incvat));
 
                                     var _incvat = parseInt(incvat);
-                                    var _ttcost = parseInt(ttcost);
+                                    var _ttcost = parseFloat(ttcost);
                                     var CoursetotalCost = _incvat + _ttcost;
-                                   // console.log(_incvat);
-                                   // console.log(_ttcost);
-                                   // console.log(CoursetotalCost);
+
+                                    CoursetotalCost = FormatNumber(CoursetotalCost);
+
 
                                     $('#lblCousetotal').html(CoursetotalCost);
                                 },
@@ -963,7 +959,13 @@
 
                         }
 
-
+        function FormatNumber(number, numberOfDigits) {
+            try {
+                return new Intl.NumberFormat('en-US').format(parseFloat(number).toFixed(2));
+            } catch (error) {
+                return 0;
+            }
+        }
     </script>
 
 }

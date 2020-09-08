@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SubcontractProfile.Web.Extension
+namespace SubcontractProfile.WebApi.API.Common
 {
     public class Common
     {
 
-        public static DateTime ConvertToDateTime(string strDateTime)
+        private DateTime ConvertToDateTime(string strDateTime)
         {
             DateTime dtFinaldate; string sDateTime;
             try { dtFinaldate = Convert.ToDateTime(strDateTime); }
@@ -27,15 +27,6 @@ namespace SubcontractProfile.Web.Extension
             string[] sDate = strDateTime.Split('/');
             sDateTime = sDate[2] + '-' + sDate[1] + '-' + sDate[0];
           
-            return sDateTime;
-        }
-
-        public static String ConvertToDateTimeDDMMYYYY(string strDateTime)
-        {
-            string sDateTime;
-            string[] sDate = strDateTime.Split('/');
-            sDateTime = sDate[1] + '/' + sDate[0] + '/' + sDate[2];
-
             return sDateTime;
         }
     }

@@ -8,7 +8,7 @@ using System.Data;
 using System.Data.SqlTypes;
 using System.Text;
 using System.Threading.Tasks;
-
+using SubcontractProfile.WebApi.API.Common;
 namespace SubcontractProfile.WebApi.Services.Services
 {
     /// =================================================================
@@ -41,12 +41,12 @@ namespace SubcontractProfile.WebApi.Services.Services
         /// <summary>
         /// Get by PK
         /// </summary>
-        public async Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining> GetByTrainingId(System.Guid trainingId)
+        public async Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingRequest> GetByTrainingId(System.Guid trainingId)
         {
             var p = new DynamicParameters();
             p.Add("@training_id", trainingId);
 
-            var entity = await _dbContext.Connection.QuerySingleOrDefaultAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>
+            var entity = await _dbContext.Connection.QuerySingleOrDefaultAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingRequest>
             ("uspSubcontractProfileTraining_selectByTrainingId", p, commandType: CommandType.StoredProcedure);
 
             return entity;
@@ -55,27 +55,21 @@ namespace SubcontractProfile.WebApi.Services.Services
         /// <summary>
         /// Insert
         /// </summary>
-        public async Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining subcontractProfileTraining)
+        public async Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingRequest subcontractProfileTraining)
         {
             var p = new DynamicParameters();
 
-          
+            p.Add("@training_id", subcontractProfileTraining.TrainingId);
             p.Add("@company_id", subcontractProfileTraining.CompanyId);
             p.Add("@course", subcontractProfileTraining.Course);
-
             p.Add("@contract_phone", subcontractProfileTraining.ContractPhone);
             p.Add("@contract_email", subcontractProfileTraining.ContractEmail);
             p.Add("@course_price", subcontractProfileTraining.CoursePrice);
-
-            p.Add("@course_price", subcontractProfileTraining.CoursePrice);
-
-            p.Add("@request_date", subcontractProfileTraining.RequestDate);
+            p.Add("@request_date", subcontractProfileTraining.RequestDateStr);
             p.Add("@remark", subcontractProfileTraining.Remark);
             p.Add("@total_price", subcontractProfileTraining.TotalPrice);
             p.Add("@vat", subcontractProfileTraining.Vat);
             //p.Add("@tax", subcontractProfileTraining.Tax);
-            p.Add("@status", subcontractProfileTraining.Status);
-            p.Add("@request_no", subcontractProfileTraining.RequestNo);
             p.Add("@create_by", subcontractProfileTraining.CreateBy);
  
 
@@ -222,11 +216,10 @@ namespace SubcontractProfile.WebApi.Services.Services
         }
 
         public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTraining(Guid company_id,
-           string tax_id,  string status, string date_from, string date_to)
+            string status, string date_from, string date_to)
         {
             var p = new DynamicParameters();
             p.Add("@company_id", company_id);
-            p.Add("@tax_id", tax_id);
             p.Add("@status", status);
             p.Add("@date_from", date_from);
             p.Add("@date_to", date_to);
@@ -239,17 +232,16 @@ namespace SubcontractProfile.WebApi.Services.Services
         }
 
         public async Task<IEnumerable<SubcontractProfileTraining>> SearchTrainingForApprove(string company_name_th, 
-            string tax_id, 
-            string request_no, string status, string date_from, string date_to)
+            string tax_id, string status, string date_from, string date_to, string bookingdate_from, string bookingdate_to)
         {
             var p = new DynamicParameters();
             p.Add("@company_name_th", company_name_th);
-            p.Add("@tax_id", tax_id);
-            p.Add("@request_no", request_no);
+            p.Add("@tax_id", tax_id); 
             p.Add("@status", status);
             p.Add("@date_from", date_from);
             p.Add("@date_to", date_to);
-
+            p.Add("@bookingdate_from", bookingdate_from);
+            p.Add("@bookingdate_to", bookingdate_to);
 
             var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>
             ("uspSubcontractProfileTraining_searchTrainingForApprove", p, commandType: CommandType.StoredProcedure);
@@ -262,10 +254,9 @@ namespace SubcontractProfile.WebApi.Services.Services
 
             var p = new DynamicParameters();
             p.Add("@training_id", subcontractProfileTraining.TrainingId);
-            //p.Add("@status", subcontractProfileTraining.Status);
-            //p.Add("@modified_by", subcontractProfileTraining.ModifiedBy);
-            //p.Add("@booking_date", subcontractProfileTraining.BookingDate);
-            //p.Add("@remark_for_ais", subcontractProfileTraining.RemarkForAis);
+            p.Add("@modified_by", subcontractProfileTraining.ModifiedBy);
+            p.Add("@booking_date", subcontractProfileTraining.BookingDateStr);
+            p.Add("@remark_for_ais", subcontractProfileTraining.RemarkForAis);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTraining_updateByVerified", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -308,10 +299,7 @@ namespace SubcontractProfile.WebApi.Services.Services
 
         }
 
-        public Task<IEnumerable<SubcontractProfileTraining>> SearchTraining(Guid company_id, Guid location_id, Guid team_id, string status, string date_from, string date_to, string tax_id, string request_no)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 
 

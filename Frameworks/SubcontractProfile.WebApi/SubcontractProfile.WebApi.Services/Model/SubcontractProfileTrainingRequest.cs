@@ -70,6 +70,12 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Grade { get; set; }
 
+        public string BookingDateStr { get; set; }
+
+        public string RequestDateStr { get; set; }
+
+        public string CompanyNameTh { get; set; }
+        public string TaxId { get; set; }
 
         public object Clone()
         {

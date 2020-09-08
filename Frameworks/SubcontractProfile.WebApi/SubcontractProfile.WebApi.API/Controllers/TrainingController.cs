@@ -47,10 +47,10 @@ namespace SubcontractProfile.WebApi.API.Controllers
         }
 
 
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileTraining))]
-        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileTraining))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileTrainingRequest))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileTrainingRequest))]
         [HttpGet("GetByTrainingId/{trainingId}")]
-        public Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining> GetByTrainingId(System.Guid trainingId)
+        public Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingRequest> GetByTrainingId(System.Guid trainingId)
         {
             _logger.LogInformation($"Start TrainingController::GetByTrainingId", trainingId);
                 
@@ -69,14 +69,14 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileTraining))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileTraining))]
-        [HttpGet("SearchTraining/{company_Id}/{location_id}/{team_id}/{status}/{date_from}/{date_to}/{tax_id}/{request_no}")]
-        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTraining(Guid company_id, Guid location_id,
-            Guid team_id, string status, string date_from, string date_to,string tax_id, string request_no)
+        [HttpGet("SearchTraining/{company_Id}/{status}/{date_from}/{date_to}")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTraining(Guid company_id,
+            string status, string date_from, string date_to)
 
         {
-            _logger.LogInformation($"Start TrainingController::SearchTraining", company_id, location_id,
-                team_id, status, date_from, date_to, tax_id, request_no);
+            _logger.LogInformation($"Start TrainingController::SearchTraining", company_id, status, date_from, date_to);
 
+          
             if (status.ToUpper()== "NULL")
             {
                 status = string.Empty;
@@ -92,23 +92,12 @@ namespace SubcontractProfile.WebApi.API.Controllers
                 date_to = string.Empty;
             }
 
-            if (tax_id.ToUpper() == "NULL")
-            {
-                tax_id = string.Empty;
-            }
-
-            if (request_no.ToUpper() == "NULL")
-            {
-                request_no = string.Empty;
-            }
-
-            var entities = _service.SearchTraining(company_id, location_id, 
-                team_id,  status, date_from, date_to, tax_id, request_no);
+           
+            var entities = _service.SearchTraining(company_id, status, date_from, date_to);
 
             if (entities == null)
             {
-                _logger.LogWarning($"TrainingController::", "SearchTraining NOT FOUND", company_id, location_id,
-                team_id, status, date_from, date_to, tax_id, request_no);
+                _logger.LogWarning($"TrainingController::", "SearchTraining NOT FOUND", company_id,status, date_from, date_to);
                 return null;
             }
 
@@ -118,15 +107,15 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileTraining))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileTraining))]
-        [HttpGet("SearchTrainingForApprove/{company_name_th}/{tax_id}/{request_no}/{status}/{date_from}/{date_to}")]
+        [HttpGet("SearchTrainingForApprove/{company_name_th}/{tax_id}/{status}/{date_from}/{date_to}/{bookingdate_from}/{bookingdate_to}")]
 
         public  Task<IEnumerable<SubcontractProfileTraining>> SearchTrainingForApprove(string company_name_th,
-           string tax_id,
-           string request_no, string status, string date_from, string date_to)
+           string tax_id, string status, string date_from, string date_to,
+           string bookingdate_from, string bookingdate_to)
         {
 
-            _logger.LogInformation($"Start TrainingController::SearchTraining", company_name_th, tax_id,
-                request_no, status, date_from, date_to);
+            _logger.LogInformation($"Start TrainingController::SearchTrainingForApprove", company_name_th, tax_id,
+                 status, date_from, date_to, bookingdate_from, bookingdate_to);
 
             if (company_name_th.ToUpper() == "NULL")
             {
@@ -136,11 +125,6 @@ namespace SubcontractProfile.WebApi.API.Controllers
             if (tax_id.ToUpper() == "NULL")
             {
                 tax_id = string.Empty;
-            }
-
-            if (request_no.ToUpper() == "NULL")
-            {
-                request_no = string.Empty;
             }
 
             if (status.ToUpper() == "NULL")
@@ -158,14 +142,23 @@ namespace SubcontractProfile.WebApi.API.Controllers
                 date_to = string.Empty;
             }
 
-       
+            if (bookingdate_from.ToUpper() == "NULL")
+            {
+                bookingdate_from = string.Empty;
+            }
+
+            if (bookingdate_to.ToUpper() == "NULL")
+            {
+                bookingdate_to = string.Empty;
+            }
+
             var entities = _service.SearchTrainingForApprove(company_name_th, tax_id,
-                request_no, status, date_from, date_to);
+                 status, date_from, date_to, bookingdate_from, bookingdate_to);
 
             if (entities == null)
             {
-                _logger.LogWarning($"TrainingController::", "SearchTraining NOT FOUND", company_name_th, tax_id,
-                request_no, status, date_from, date_to);
+                _logger.LogWarning($"TrainingController::", "SearchTrainingForApprove NOT FOUND", company_name_th, tax_id,
+                 status, date_from, date_to, bookingdate_from, bookingdate_to);
                 return null;
             }
 
@@ -229,8 +222,8 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         #region POST
         [HttpPost("Insert")]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileTraining))]
-        public Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining subcontractProfileTraining)
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileTrainingRequest))]
+        public Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingRequest subcontractProfileTraining)
         {
             _logger.LogInformation($"Start TrainingController::Insert", subcontractProfileTraining);
 

@@ -103,6 +103,10 @@ namespace SubcontractProfile.Web.Model
 
         public string PaymentStatus { get; set; }
 
+        public Decimal? TotalAmount { get; set; }
+
+        public string BookingDateStr { get; set; }
+
         public object Clone()
         {
             return this.MemberwiseClone();

@@ -61,6 +61,10 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Grade { get; set; }
 
+        public string BookingDateStr { get; set; }
+
+        public string RequestDateStr { get; set; }
+
         //  [System.ComponentModel.DataAnnotations.StringLength(100)]
         //  public string CompanyNameTh { get; set; }
         //  [System.ComponentModel.DataAnnotations.StringLength(100)]

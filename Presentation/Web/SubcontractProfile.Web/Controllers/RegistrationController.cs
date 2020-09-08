@@ -208,9 +208,11 @@ namespace SubcontractProfile.Web.Controllers
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
-                //data
-                companyResult = JsonConvert.DeserializeObject<List<SubcontractProfileCompanyModel>>(result);
-
+                if (result != null)
+                {
+                    //data
+                    companyResult = JsonConvert.DeserializeObject<List<SubcontractProfileCompanyModel>>(result);
+                }
             }
 
 

@@ -23,5 +23,7 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>> SearchEngineer(Guid companyId, Guid locationId,
             Guid teamId,string staffName, string citizenId, string position);
 
+        Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>> GetEngineerByTeam(System.Guid companyId, System.Guid locationId, System.Guid teamId);
+
     }
 }

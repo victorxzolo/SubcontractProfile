@@ -184,6 +184,51 @@ namespace SubcontractProfile.Web.Controllers
 
             return Json(result);
         }
+
+        public JsonResult GetEngineerByTeam(string locationid,string teamid )
+        {
+            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+            Guid companyId = userProfile.companyid;
+
+            Guid gTeamid;
+            Guid gLocationid;
+            if (teamid == null || teamid == "-1")
+            {
+                gTeamid = Guid.Empty;
+            }
+            else
+            {
+                gTeamid = new Guid(teamid);
+            }
+            if (locationid == null || locationid == "-1")
+            {
+                gLocationid = Guid.Empty;
+            }
+            else
+            {
+                gLocationid = new Guid(locationid);
+            }
+
+            var result = new List<SubcontractProfileEngineerModel>();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}/{2}/{3}", strpathAPI + "Engineer/GetEngineerByTeam", companyId, gLocationid, gTeamid);
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<List<SubcontractProfileEngineerModel>>(resultAsysc);
+
+            }
+
+            return Json(result);
+        }
+
         public JsonResult getEngineerByTeamId(string Teamid,string Locationid)
         {
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
