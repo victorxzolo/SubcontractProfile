@@ -208,7 +208,23 @@ $(document).ready(function () {
     });
 
 
+    $('#btnTestNas').click(function () {
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "/CompanyProfile/TestNAS",
+            dataType: "json",
+            //data: { location_id: lo_id },
+            success: function (data) {
 
+                console.log(data);
+            },
+            error: function (xhr, status, error) {
+                Loading(0);
+                console.log(status);
+            }
+        });
+    });
 
 
 /*Step1*/
