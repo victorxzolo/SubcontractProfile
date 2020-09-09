@@ -42,6 +42,10 @@ namespace SubcontractProfile.Web.Model
         public string region { get; set; }
 
         public string SubcontractProfileType { get; set; }
+
+        public AuthenticateType AuthenticateType { get; set; }
+        public SSOFields SSOFields { get; set; }
+        public bool ForceLogOut { get; set; }
     }
 
     public class LoginModel
@@ -51,4 +55,39 @@ namespace SubcontractProfile.Web.Model
         public bool keepme { get; set; }
         public string Language { get; set; }
     }
+
+    public enum AuthenticateType
+    {
+        NotLoggedOn = 0,
+        SSO = 1,
+        SSOPartner = 2,
+        LDAP = 3
+    }
+
+
+    public class SSOFields
+    {
+        public string Token { get; set; }
+        public string SessionID { get; set; }
+        public string UserName { get; set; }
+        public string GroupID { get; set; }
+        public string SubModuleIDInToken { get; set; }
+        public string ClientIP { get; set; }
+        public string RoleID { get; set; }
+        public string SubModuleID { get; set; }
+        public string RoleName { get; set; }
+        public string SubModuleName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string ThemeName { get; set; }
+        public string TemplateName { get; set; }
+        public string EmployeeServiceWebRootUrl { get; set; }
+        public string LocationCode { get; set; }
+        public string GroupLocation { get; set; }
+        public string DepartmentCode { get; set; }
+        public string SectionCode { get; set; }
+        public string PositionByJob { get; set; }
+    }
 }
+
+

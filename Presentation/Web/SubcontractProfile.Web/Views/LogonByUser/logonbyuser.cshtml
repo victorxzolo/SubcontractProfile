@@ -1,0 +1,276 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+
+}
+<style>
+    .hr-sect {
+        display: flex;
+        flex-basis: 100%;
+        align-items: center;
+        color: rgba(0, 0, 0, 0.35);
+        margin: 8px 0px;
+    }
+
+        .hr-sect::before,
+        .hr-sect::after {
+            content: "";
+            flex-grow: 1;
+            background: rgba(0, 0, 0, 0.35);
+            height: 1px;
+            font-size: 0px;
+            line-height: 0px;
+            margin: 0px 8px;
+        }
+</style>
+<div class="login-container">
+    <div class="row justify-content-center">
+        <div class="grid-margin stretch-card col-md-6 ">
+
+            <div class="card shadow p-3 mb-5 bg-white rounded">
+                <div class="card-header bg-white">
+                    <img src="~/img/ais.png" style="height:39px;width:104px;" class="mr-2" alt="logo" />
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                            <p class="font-weight-bolder lead">เข้าสู่ระบบ  </p>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6" align="right" style="display:none;">
+                            <div class="form-group">
+                                <a href="#" class="font-weight-bolder lead" onclick="forgotpassword();">
+                                    ลืมรหัสผ่าน?
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <form class="needs-validation" novalidate>
+                        <div class="form-row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12 mb-3">
+
+                                @*<label for="validationTooltip01">Username</label>*@
+                                <input type="text" id="txtusername" class="form-control inputValidation" placeholder="ชื่อผู้ใช้งาน" value="" maxlength="50" required />
+                                <div class="invalid-tooltip">
+                                    กรุณาระบุชื่อผู้ใช้งาน
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12 mb-3">
+
+                                @*<label for="validationTooltip01">Password</label>*@
+                                <div class="input-group p-0 ">
+                                    <input type="password" id="txtpassword" class="form-control inputValidation" name="password" autocomplete="new-password" placeholder="รหัสผ่าน" maxlength="50" required>
+                                    @*<div class="input-group-append input-group-addon ">
+                                            <span class="input-group-text px-4 toggle-password"><i class="fa fa-eye-slash"></i></span>
+                                        </div>*@
+
+                                    <div class="invalid-tooltip">
+                                        กรุณาระบุรหัสผ่าน
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        @*<div class="row">
+
+                                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                                    <div class="form-group">
+                                        <select class="custom-select" id="ddlLanguage">
+                                            <option value="">Select Language</option>
+                                            <option value="TH">Thai</option>
+                                            <option value="EN">English</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            </div>*@
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                                <div class="form-group row">
+                                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="chkshowpass">
+                                            <label class="custom-control-label" for="chkshowpass">
+                                                Show password
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                                <div class="form-group row">
+                                    @*<div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="chkkeep">
+                                                <label class="custom-control-label" for="chkkeep">
+                                                    Keep me sign in
+                                                </label>
+                                            </div>
+
+                                        </div>*@
+                                    @*<div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" name="optionsRadios" id="chktypeW" value="W" checked>
+                                                <label class="custom-control-label" for="chktypeW">
+                                                    Waiting Activate
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                            <div class="custom-control custom-radio">
+
+                                                <input type="radio" class="custom-control-input" name="optionsRadios" id="chktypeP" value="P">
+                                                <label class="custom-control-label" for="chktypeP">
+                                                    Profile Activate
+                                                </label>
+                                            </div>
+
+                                        </div>*@
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <button type="button" class="btn btn-secondary btn-block" id="btnsignin">เข้าสู่ระบบ</button>
+                        </div>
+
+                        @*<div class="form-group">
+                            <div class="hr-sect">ยังไม่มีบัญชี?</div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="button" class="btn btn-secondary btn-block" id="btnnewregis" onclick="window.location.href = '/Account/Register';"> สมัครใช้บริการ Subcontract profile</button>
+                        </div>*@
+                    </form>
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+</div>
+@section scripts{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            //$('.toggle-password').click(function () {
+            //    $(this).children().toggleClass('fa-eye-slash fa-eye');
+            //    let input = $(this).prev();
+            //    $('#txtpassword').attr('type', $('#txtpassword').attr('type') === 'password' ? 'text' : 'password');
+
+            //});
+            $("#chkshowpass").change(function () {
+                $(this).is(':checked') ? $('#txtpassword').attr('type', 'text') : $('#txtpassword').attr('type', 'password');
+
+            });
+
+
+            $('#btnsignin').click(function (event) {
+
+
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    // form.addEventListener('submit', function (event) {
+                    if (check()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    else {
+                        Loading();
+                        var modelpass = {
+                            username: $('#txtusername').val(),
+                            password: $('#txtpassword').val(),
+                            keepme: $('#chkkeep').is(':checked') ? true : false,
+                            Language: $('#ddlLanguage option').filter(':selected').val()
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: "/LogonByUser/Login",
+                            data: { model: modelpass },
+                            dataType: "json",
+                            async: false,
+                            success: function (data) {
+
+                                if (data.Response.Status) {
+                                    window.location.href = data.redirecturl;
+                                }
+                                else {
+                                    showFeedback("error", data.Response.Message, "System Information",
+                                        "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button>");
+                                }
+
+                            },
+                            error: function (response) {
+                                Loading(0);
+                                //clearForEdit();
+                                showFeedback("error", "This action is not available.", "System Information",
+                                    "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button>");
+
+
+                            }
+                        });
+                    }
+                    //else {
+                    form.classList.add('was-validated');
+                    //}
+
+                    // }, false);
+                });
+
+            });
+        });
+
+        function check() {
+            var errorMessage = $("#idmsAlert");
+            $('.toast').toast('hide');
+            var hasError = false;
+
+            $(".form-control.inputValidation").each(function () {
+                var $this = $(this);
+                var fieldvalue = $this.val();
+
+                if (fieldvalue == "") {
+
+                    hasError = true;
+
+                }
+            }); //Input
+
+            return hasError;
+
+        }
+
+        function forgotpassword() {
+
+        }
+        </script>
+}

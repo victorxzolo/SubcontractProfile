@@ -20,10 +20,10 @@ namespace SubcontractProfile.WebApi.API.Controllers
     { /// <summary>
       ///  <add key="ProjectCodeLdapFBB" value="FBBWENGAUTH" />
       /// </summary>
-        public string projectCode = "FBBWENGAUTH";
+       // public string projectCode = "FBBWENGAUTH";
         //[HttpGet("Get/{username}")]
-        [HttpGet("Get/{username,password,projectCode}")]
-        public async Task<HttpResultModel> GetById(string usernname, string password, string projectCode)
+        [HttpGet("GetAuthen/{username}/{password}/{projectCode}")]
+        public async Task<HttpResultModel> GetAuthen(string usernname, string password, string projectCode)
         {
             HttpResultModel httpResult = new HttpResultModel();
            
@@ -43,8 +43,8 @@ namespace SubcontractProfile.WebApi.API.Controllers
                     {
                         Body = new AuthenLDAP.WS_GEN_AuthenLDAPRequestBody
                         {
-                            userName = "",
-                            passWd = "",
+                            userName = usernname,
+                            passWd = password,
                             projectCode = projectCode,
                         }
                     };
