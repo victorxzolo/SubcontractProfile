@@ -1475,17 +1475,17 @@ namespace SubcontractProfile.Web.Controllers
                 List<SubcontractProfileAddressModel> result = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
                 if (result != null && result.Count != 0)
                 {
-                    foreach(var a in result)
+                    foreach (var a in result)
                     {
                         string straddr = "";
-                        straddr = string.Concat(a.HouseNo != "" ? a.HouseNo : "", " ",
-                                                  a.Building != "" ? "อาคาร " + a.Building : "", " ",
-                                                  a.Floor != "" ? "ชั้นที่ " + a.Floor : "", " ",
-                                                  a.RoomNo != "" ? "ห้องที่ " + a.RoomNo : "", " ",
-                                                  a.VillageName != "" ? "หมู่บ้าน " + a.VillageName : "", " ",
+                        straddr = string.Concat(a.HouseNo != null && a.HouseNo != "" ? a.HouseNo : "", " ",
+                                                  a.Building != null && a.Building != "" ? "อาคาร " + a.Building : "", " ",
+                                                  a.Floor != null && a.Floor != "" ? "ชั้นที่ " + a.Floor : "", " ",
+                                                  a.RoomNo != null && a.RoomNo != "" ? "ห้องที่ " + a.RoomNo : "", " ",
+                                                  a.VillageName != null && a.VillageName != "" ? "หมู่บ้าน " + a.VillageName : "", " ",
                                                   a.Moo != null ? "หมู่ที่ " + a.Moo : "", " ",
-                                                  a.Soi != "" ? "ซอย " + a.Soi : "", " ",
-                                                  a.Road != "" ? "ถนน " + a.Road : "", " ",
+                                                  a.Soi != null && a.Soi != "" ? "ซอย " + a.Soi : "", " ",
+                                                  a.Road != null && a.Road != "" ? "ถนน " + a.Road : "", " ",
                                                   a.SubDistrictId != 0 ? "ตำบล/แขวง " + a.sub_district_name : "", " ",
                                                   a.DistrictId != 0 ? "อำเภอ/เขต " + a.district_name : "", " ",
                                                   a.ProvinceId != 0 ? "จังหวัด " + a.province_name : "", " ",
@@ -1716,6 +1716,23 @@ namespace SubcontractProfile.Web.Controllers
 
         #region Upload File
 
+        [HttpPost]
+        public IActionResult TestNAS()
+        {
+            string str = "";
+            try
+            {
+                using (var impersonator = new Impersonator("nas_fixedbb", "Ais2018fixedbb", "\\10.137.32.9\fbb_idcard_ndev001b", true))
+                {
+                    str = "Connect";
+                }
+            }
+            catch (Exception e)
+            {
+                str = e.Message;
+            }
+            return Json(str);
+        }
 
         [HttpPost]
         [DisableRequestSizeLimit]
