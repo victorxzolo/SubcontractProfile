@@ -87,3 +87,7 @@ function check() {
     return hasError; 
   
 }
+
+function forgotpassword() {
+
+}
