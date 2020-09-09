@@ -346,16 +346,16 @@ namespace SubcontractProfile.Web.Controllers
 
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = response.Content.ReadAsStringAsync().Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
                 //data
                 resultModel = JsonConvert.DeserializeObject<SubcontractProfileTrainingModel>(result);
-           
 
-                }
 
-                return Json(resultModel);
+            }
+
+            return Json(resultModel);
             }
 
 
@@ -700,8 +700,11 @@ namespace SubcontractProfile.Web.Controllers
          
             if(data !=null)
             {
-                data.Clear();
-                SessionHelper.SetObjectAsJson(HttpContext.Session, "EngineerData", data);
+                if (data.Rows.Count > 0)
+                {
+                    data.Clear();
+                    SessionHelper.SetObjectAsJson(HttpContext.Session, "EngineerData", data);
+                }
             }
 
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
@@ -744,7 +747,7 @@ namespace SubcontractProfile.Web.Controllers
             try
             {
                 var data = SessionHelper.GetObjectFromJson<DataTable>(HttpContext.Session, "EngineerData");
-                if(data ==null)
+                if(data.Rows.Count ==0)
                 {
                     result.Status = false;
                     result.Message = "กรุณาเพิ่มข้อมูลผู้เข้าอบรม";
@@ -756,63 +759,136 @@ namespace SubcontractProfile.Web.Controllers
                 HttpClient clientRequest = new HttpClient();
                 var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
 
-                model.RequestDateStr = ConvertToDateTimeYYYYMMDD(model.RequestDateStr);
-                model.CompanyId = userProfile.companyid;
-                model.CreateBy = userProfile.Username;
-                model.TrainingId = Guid.NewGuid();
-
-                var uriLocation = new Uri(Path.Combine(strpathAPI, "Training", "Insert"));
-
-                client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-                var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                HttpResponseMessage response = client.PostAsync(uriLocation, httpContent).Result;
-
-
-                if (response.IsSuccessStatusCode)
+                if (model.TrainingId == Guid.Empty)
                 {
-                    //insert engineer
-                  
-                    if (data != null)
+
+                    model.RequestDateStr = ConvertToDateTimeYYYYMMDD(model.RequestDateStr);
+                    model.CompanyId = userProfile.companyid;
+                    model.CreateBy = userProfile.Username;
+                    model.TrainingId = Guid.NewGuid();
+
+                    var uriLocation = new Uri(Path.Combine(strpathAPI, "Training", "Insert"));
+
+                    client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                    var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = client.PostAsync(uriLocation, httpContent).Result;
+
+
+                    if (response.IsSuccessStatusCode)
                     {
-                        if (data.Rows.Count > 0)
+                        //insert engineer
+
+                        if (data != null)
                         {
-
-                            foreach (DataRow dr in data.Rows)
+                            if (data.Rows.Count > 0)
                             {
-                                engineerModel.TrainingId = model.TrainingId;
-                                engineerModel.LocationId = Guid.Parse(dr["LocationId"].ToString());
-                                engineerModel.TeamId = Guid.Parse(dr["TeamId"].ToString());
-                                engineerModel.EngineerId = Guid.Parse(dr["EngineerId"].ToString());
-                                engineerModel.CreateUser = userProfile.Username;
 
-                                var uriengineer = new Uri(Path.Combine(strpathAPI, "TrainingEngineer", "Insert"));
-
-                                client.DefaultRequestHeaders.Accept.Add(
-                                new MediaTypeWithQualityHeaderValue("application/json"));
-                                var httpContenten = new StringContent(JsonConvert.SerializeObject(engineerModel), Encoding.UTF8, "application/json");
-                                HttpResponseMessage responseEn = client.PostAsync(uriengineer, httpContenten).Result;
-
-                                if (responseEn.IsSuccessStatusCode)
+                                foreach (DataRow dr in data.Rows)
                                 {
+                                    engineerModel.TrainingId = model.TrainingId;
+                                    engineerModel.LocationId = Guid.Parse(dr["LocationId"].ToString());
+                                    engineerModel.TeamId = Guid.Parse(dr["TeamId"].ToString());
+                                    engineerModel.EngineerId = Guid.Parse(dr["EngineerId"].ToString());
+                                    engineerModel.CreateUser = userProfile.Username;
+
+                                    var uriengineer = new Uri(Path.Combine(strpathAPI, "TrainingEngineer", "Insert"));
+
+                                    client.DefaultRequestHeaders.Accept.Add(
+                                    new MediaTypeWithQualityHeaderValue("application/json"));
+                                    var httpContenten = new StringContent(JsonConvert.SerializeObject(engineerModel), Encoding.UTF8, "application/json");
+                                    HttpResponseMessage responseEn = client.PostAsync(uriengineer, httpContenten).Result;
+
+                                    if (responseEn.IsSuccessStatusCode)
+                                    {
+
+                                    }
 
                                 }
-
                             }
                         }
+
+                        result.Status = true;
+                        result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                        result.StatusError = "0";
+                    }
+                    else
+                    {
+                        result.Status = false;
+                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        result.StatusError = "-1";
                     }
 
-
-
-                    result.Status = true;
-                    result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
-                    result.StatusError = "0";
                 }
-                else
+                else //edit
                 {
-                    result.Status = false;
-                    result.Message = "Data is not correct, Please Check Data or Contact System Admin";
-                    result.StatusError = "-1";
+                    var uri = new Uri(Path.Combine(strpathAPI, "Training", "Update"));
+
+                    model.RequestDateStr = ConvertToDateTimeYYYYMMDD(model.RequestDateStr);
+                    model.ModifiedBy = userProfile.Username;
+                    model.Status = "Y";
+
+                    clientRequest.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                    var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                    HttpResponseMessage responseResult = clientRequest.PutAsync(uri, httpContent).Result;
+
+                    if (responseResult.IsSuccessStatusCode)
+                    {
+                        //delete
+                        string uriString = string.Format("{0}/{1}", strpathAPI + "TrainingEngineer/DeleteByTriningId", model.TrainingId);
+
+                        client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+
+                        HttpResponseMessage responseResultDel = client.DeleteAsync(uriString).Result;
+                        if (responseResult.IsSuccessStatusCode)
+                        {
+                            result.Message = "ลบข้อมูลเรียบร้อย";
+                            result.Status = true;
+                            result.StatusError = "0";
+                        }
+
+                        //insert engineer
+                        if (data != null)
+                        {
+                            if (data.Rows.Count > 0)
+                            {
+
+                                foreach (DataRow dr in data.Rows)
+                                {
+                                    engineerModel.TrainingId = model.TrainingId;
+                                    engineerModel.LocationId = Guid.Parse(dr["LocationId"].ToString());
+                                    engineerModel.TeamId = Guid.Parse(dr["TeamId"].ToString());
+                                    engineerModel.EngineerId = Guid.Parse(dr["EngineerId"].ToString());
+                                    engineerModel.CreateUser = userProfile.Username;
+
+                                    var uriengineer = new Uri(Path.Combine(strpathAPI, "TrainingEngineer", "Insert"));
+
+                                    client.DefaultRequestHeaders.Accept.Add(
+                                    new MediaTypeWithQualityHeaderValue("application/json"));
+                                    var httpContenten = new StringContent(JsonConvert.SerializeObject(engineerModel), Encoding.UTF8, "application/json");
+                                    HttpResponseMessage responseEn = client.PostAsync(uriengineer, httpContenten).Result;
+
+                                    if (responseEn.IsSuccessStatusCode)
+                                    {
+
+                                    }
+
+                                }
+                            }
+                        }
+
+                        result.Status = true;
+                        result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                        result.StatusError = "0";
+                    }
+                    else
+                    {
+                        result.Status = false;
+                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        result.StatusError = "-1";
+                    }
                 }
 
 
@@ -826,6 +902,42 @@ namespace SubcontractProfile.Web.Controllers
             }
             return Json(result);
         }
+
+        public JsonResult OnDelete(Guid trainingId)
+        {
+            var result = new ResponseModel();
+            HttpClient clientLocation = new HttpClient();
+            try
+            {
+
+                string uriString = string.Format("{0}/{1}", strpathAPI + "Training/Delete", trainingId);
+            
+
+                clientLocation.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage responseResult = clientLocation.DeleteAsync(uriString).Result;
+                if (responseResult.IsSuccessStatusCode)
+                {
+                    result.Message = "ลบข้อมูลเรียบร้อย";
+                    result.Status = true;
+                    result.StatusError = "0";
+                }
+                else
+                {
+                    result.Status = false;
+                    result.Message = "ลบข้อมูลไม่สำเร็จ กรุณาติดต่อ Administrator.";
+                    result.StatusError = "-1";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result.Message = "ลบข้อมูลไม่สำเร็จ กรุณาติดต่อ Administrator.";
+                result.StatusError = "-1";
+            }
+            return Json(result);
+        }
+
 
         public JsonResult OnDeleteEngineer(string locationId, string teamId, string engineerId)
         {
@@ -895,6 +1007,93 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data });
 
         }
+
+        public ActionResult SearchEngineerRequest(string Trainingid)
+        {
+
+            var Result = new List<SubcontractProfileTrainingEngineerModel>();
+
+            var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
+            // Skiping number of Rows count  
+            var start = Request.Form["start"].FirstOrDefault();
+            // Paging Length 10,20  
+            var length = Request.Form["length"].FirstOrDefault();
+            // Sort Column Name  
+            var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+            // Sort Column Direction ( asc ,desc)  
+            var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+            // Search Value from (Search box)  
+            var searchValue = Request.Form["search[value]"].FirstOrDefault();
+
+            //Paging Size (10,20,50,100)  
+            int pageSize = length != null ? Convert.ToInt32(length) : 0;
+            int skip = start != null ? Convert.ToInt32(start) : 0;
+            int recordsTotal = 0;
+
+            // Getting all company data  
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+
+            Guid trainingid;
+            if (Trainingid == null || Trainingid == "-1")
+            {
+                trainingid = Guid.Empty;
+            }
+            else
+            {
+                trainingid = new Guid(Trainingid);
+            }
+
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "TrainingEngineer/GetTrainingEngineerByTrainingId", trainingid);
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                //data
+                Result = JsonConvert.DeserializeObject<List<SubcontractProfileTrainingEngineerModel>>(result);
+
+            }
+
+            var resultEngineer = new List<SubcontractProfileTrainingEngineerModel>();
+            var trainingEn = new  SubcontractProfileTrainingEngineerModel();
+            for (var i = 0; i < Result.Count; i++)
+            {
+                trainingEn.TrainingId = Result[i].TrainingId;
+                trainingEn.LocationId = Result[i].LocationId;
+                trainingEn.TeamId = Result[i].TeamId;
+                trainingEn.EngineerId = Result[i].EngineerId;
+                trainingEn.TrainingEngineerId = Result[i].TrainingEngineerId;
+                trainingEn.LocationNameTh = Result[i].LocationNameTh;
+                trainingEn.TeamNameTh = Result[i].TeamNameTh;
+                trainingEn.StaffNameTh = Result[i].StaffNameTh;
+
+                resultEngineer = AddDataTable(trainingEn);
+            }
+           
+            //var data = SessionHelper.GetObjectFromJson<DataTable>(HttpContext.Session, "EngineerData");
+            //if (data != null)
+            //{
+
+            //}
+
+
+            //total number of rows count   
+            recordsTotal = resultEngineer.Count();
+
+            //Paging   
+            var data = resultEngineer.Skip(skip).Take(pageSize).ToList();
+
+
+            // Returning Json Data
+            return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data });
+        }
+
 
         #endregion
     }

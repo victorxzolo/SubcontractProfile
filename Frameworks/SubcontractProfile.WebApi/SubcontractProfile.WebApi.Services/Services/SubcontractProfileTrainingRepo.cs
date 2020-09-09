@@ -82,13 +82,13 @@ namespace SubcontractProfile.WebApi.Services.Services
         /// <summary>
         /// Update
         /// </summary>
-        public async Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining subcontractProfileTraining)
+        public async Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingRequest subcontractProfileTraining)
         {
             var p = new DynamicParameters();
             p.Add("@training_id", subcontractProfileTraining.TrainingId);
             p.Add("@company_id", subcontractProfileTraining.CompanyId);
             p.Add("@course", subcontractProfileTraining.Course);
-            p.Add("@request_date", subcontractProfileTraining.RequestDate);
+            p.Add("@request_date", subcontractProfileTraining.RequestDateStr);
             p.Add("@remark", subcontractProfileTraining.Remark);
             p.Add("@total_price", subcontractProfileTraining.TotalPrice);
             p.Add("@vat", subcontractProfileTraining.Vat);

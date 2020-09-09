@@ -199,10 +199,9 @@
                                 <div class="col-sm-2">
                                     <label>Course :</label>
                                 </div>
-                                <div class="col-sm-8">
-                                    <div class="col-md-10 training_couse">
-
-                                    </div>
+                                <div class="col-sm-4">
+                                    <select id="selCourse" class="form-control" data-live-search="true" required></select>
+                                    <div class="invalid-feedback">Please Select Course</div>
 
                                 </div>
 
@@ -237,8 +236,8 @@
                                     <thead>
                                         <tr>
 
-                                            <th>LocationName</th>
-                                            <th>TeamName</th>
+                                            <th>Location Name</th>
+                                            <th>Team Name</th>
                                             <th>Position</th>
                                             <th>Engineer</th>
                                             <th>ContactPhone</th>
@@ -361,8 +360,9 @@
 
                         $(document).ready(function () {
 
-                            getRadioCourse();
+                           // getRadioCourse();
                             // GetDropDownByNameTrainigCourse();
+                            GetDropDownByNameCourse();
                             GetDropDownByNameTrainigStatus();
 
 
@@ -487,6 +487,8 @@
                                     close: 'fa fa-time'
                                 }
                             });
+
+                            inittbSearchResult();
                         });
 
                         'use strict';
@@ -511,6 +513,31 @@
                             });
                         }, false);
 
+                 function GetDropDownByNameCourse() {
+                    $.ajax({
+                        type: 'GET',
+                        url: '@Url.Action("GetDropDownList", "RequestTraining")',
+                        data: { '_ddlType': 'training_couse' },
+                        dataType: 'json',
+                        success: function (data) {
+
+                            $("#selCourse").empty();
+                            $("#selCourse").append('<option value="">--Please select course--</option>');
+                            $.each(data, function (id, result) {
+                                $("#selCourse").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text  +'</option>');
+                                $("#lblcourseprice").html(result.value1);
+                            });
+
+
+                            },
+                            failure: function () {
+                                $("#selCourse").empty();
+                                $("#selCourse").append('<option value="">--Please select course--</option>');
+                            }
+                        });
+                  }
+
+
                         function onSave() {
 
                             var trainingModel = new Object();
@@ -518,6 +545,7 @@
                             trainingModel.CompanyId = $('#compid').val();
                             trainingModel.BookingDateStr = $('#bookingDate').val();
                             trainingModel.RemarkForAis = $('#txtaisremark').val();
+                            trainingModel.Course = $("select[id$=selCourse]").val();
 
                                  $.ajax({
                                       url: '@Url.Action("onSave", "RequestTraining")',
@@ -532,7 +560,8 @@
                                              bootbox.alert(result.Message);
                                              //$('#trnid').val('');
                                              //$('#compid').val('');
-                                            
+
+                                             inittbSearchResult();
 
                                          }
                                          else {
@@ -705,7 +734,7 @@
                                     //dataSrc:"",
                                     data: function (d) {
                                             d.companyName = $("#txtCompNo").val(),
-                                            d.Status = $("select[id$=inputStatus]").val(),     
+                                            d.Status = $("select[id$=inputStatus]").val(),
                                             d.TaxId = $("#txttaxID").val(),
                                             d.reqDateFrom = $("#reqdateFrom").val(),
                                             d.reqDateTo = $("#reqdateTo").val(),
@@ -732,7 +761,7 @@
                                         data: null, render: function (data, type, row) {
                                             return "<span class='badge outline-badge-secondary shadow-none'>" + row.Status + "</span>";
                                         }
-                                      
+
                                     },
                                     //{
                                     //    data: null, width: "10%", render: function (data, type, row) {
@@ -740,9 +769,9 @@
                                     //    }
 
                                     //},
-                                  
+
                                     { "data": "CompanyNameTh"},
-                                    { "data": "TaxId" },    
+                                    { "data": "TaxId" },
                                     {
                                         "data": "RequestDate", "render": function (data, type, row) {
                                             if (type === "sort" || type === "type") {
@@ -793,7 +822,7 @@
                             callTrainingDetail(trainingId);
                         }
                         function callTrainingDetail(trainingID) {
-                       
+
                                  $.ajax({
                                       url: '@Url.Action("GetTraining", "RequestTraining")',
                                       type: 'POST',
@@ -809,13 +838,13 @@
                                              $('#lblcompname').html(result.CompanyNameTh);
                                              $('#lbltaxid').html(result.TaxId);
 
+                                             $('#selCourse').val(result.Course);
 
                                              $('#lblemail').html(result.ContractEmail);
                                              $('#lblcontphone').html(result.ContractPhone);
 
                                              $('#lblRemark').html(result.Remark);
-                                             //course
-                                            // $('#lblcourseprice').html(result.CoursePrice);
+                                            
                                              $('#Coursecost').val(result.CoursePrice);
 
                                              inittbEngineer(result.TrainingId);
@@ -846,12 +875,12 @@
 
 
                     function getFormattedDate(date) {
-                       
+
                             let year = date.getFullYear();
                             let month = (1 + date.getMonth()).toString().padStart(2, '0');
                             let day = date.getDate().toString().padStart(2, '0');
 
-                           
+
                             return day + '/' + month + '/' + year;
                         }
 

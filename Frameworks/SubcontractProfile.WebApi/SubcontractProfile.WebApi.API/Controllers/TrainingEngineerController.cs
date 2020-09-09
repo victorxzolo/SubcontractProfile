@@ -183,6 +183,19 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
             return _service.Delete(id);
         }
+
+        [HttpDelete("DeleteByTriningId/{trainingId}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        public Task<bool> DeleteByTriningId(System.Guid trainingId)
+        {
+            _logger.LogInformation($"Start TrainingEngineerController::DeleteByTriningId", trainingId);
+
+            if (trainingId == Guid.Empty)
+                _logger.LogWarning($"Start TrainingEngineerController::DeleteByTriningId", trainingId);
+
+            return _service.DeleteByTriningId(trainingId);
+        }
+      
         #endregion
 
     }

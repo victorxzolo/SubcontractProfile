@@ -267,7 +267,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
         #region PUT
         [HttpPut("Update")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
-        public Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining subcontractProfileTraining)
+        public Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingRequest subcontractProfileTraining)
         {
             _logger.LogInformation($"Start TrainingController::Update", subcontractProfileTraining);
 

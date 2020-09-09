@@ -108,6 +108,20 @@ namespace SubcontractProfile.WebApi.Services.Services
         }
 
         /// <summary>
+        /// Delete
+        /// </summary>
+        public async Task<bool> DeleteByTriningId(System.Guid trainingId)
+        {
+            var p = new DynamicParameters();
+            p.Add("@training_id", trainingId);
+
+            var ok = await _dbContext.Connection.ExecuteAsync
+                ("uspSubcontractProfileTrainingEngineerByTrainingId_delete", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+
+            return true;
+        }
+
+        /// <summary>
         /// Bulk insert
         /// </summary>
         public async Task<bool> BulkInsert(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingEngineer> subcontractProfileTrainingEngineerList)

@@ -19,6 +19,7 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<bool> BulkInsert(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingEngineer> subcontractProfileTrainingEngineerList);
         Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingEngineer subcontractProfileTrainingEngineer);
         Task<bool> Delete(System.Guid id);
+        Task<bool> DeleteByTriningId(System.Guid trainingId);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingEngineer>> GetByPKList(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingEngineer_PK> pkList);
 
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingEngineer>> GetTrainingEngineerByTrainingId(System.Guid training_Id);
