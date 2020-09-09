@@ -39,31 +39,33 @@ $(document).ready(function () {
                     oTableAddress.row($(this).closest('tr')).remove().draw();//เดี๋ยวกลับมาทำ
 
                     $.ajax({
-        type: "POST",
+                        type: "POST",
                         url: "/CompanyProfile/GetAddressById",
                         data: {addressID: data_row.addressId },
                         dataType: "json",
                         success: function (data) {
-        $('#ddlcountry').val('')
 
-                            $('#ddlprovince').val('')
+                            $('#hdAddressID').val('');
+                            $('#ddlcountry').val('');
 
-                            $('#ddldistrict').val('')
+                            $('#ddlprovince').val('');
 
-                            $('#ddlsubdistrict').val('')
+                            $('#ddldistrict').val('');
 
-                            $('#ddlzipcode').val('')
+                            $('#ddlsubdistrict').val('');
 
-                            $('#ddlzone').val('')
+                            $('#ddlzipcode').val('');
 
-                            $('#txthomenumber').val('')
-                            $('#txtVillageNo').val('')
-                            $('#txtvillage').val('')
-                            $('#txtbuilding').val('')
-                            $('#txtfloor').val('')
-                            $('#txtroom').val('')
-                            $('#txtsoi').val('')
-                            $('#txtroad').val('')
+                            $('#ddlzone').val('');
+
+                            $('#txthomenumber').val('');
+                            $('#txtVillageNo').val('');
+                            $('#txtvillage').val('');
+                            $('#txtbuilding').val('');
+                            $('#txtfloor').val('');
+                            $('#txtroom').val('');
+                            $('#txtsoi').val('');
+                            $('#txtroad').val('');
 
 
                             $('#chkAddressType input[type=checkbox]').each(function () {
@@ -75,7 +77,7 @@ $(document).ready(function () {
                             if (data.status) {
                                 console.log(data.response);
 
-
+                                $('#hdAddressID').val(data.response.AddressId);
                                 $('#ddlcountry').val(data.response.Country)
 
                                 $('#ddlprovince').val(data.response.ProvinceId)
@@ -103,7 +105,7 @@ $(document).ready(function () {
                                     $(':checkbox').each(function (i) {
 
                                         if (addr_type_id == $(this).val()) {
-        $(this).prop('checked', true);
+                                            $(this).prop('checked', true);
                                         }
                                     });
                             }
@@ -201,7 +203,7 @@ $(document).ready(function () {
                         //val[i] = $(this).parent().text().trim();
 
                         var data = {
-        AddressTypeId: $(this).val(),
+                            AddressTypeId: $(this).val(),
                             address_type_name: $(this).parent().text().trim(),
                             Country: $('#country option').filter(':selected').val(),
                             ZipCode: $('#ddlzipcode option').filter(':selected').val(),
@@ -221,7 +223,8 @@ $(document).ready(function () {
                             province_name: $('#ddlprovince option').filter(':selected').text(),
                             RegionId: $('#ddlzone option').filter(':selected').val(),
                             location_code: $('#txtlocationcode').val(),
-                            CompanyId: $('#hdCompanyId').val()
+                            CompanyId: $('#hdCompanyId').val(),
+                            AddressId: $('#hdAddressID').val()
                         }
                         stuff.push(data);
 
@@ -977,7 +980,8 @@ $(document).ready(function () {
                     d.companyNameTh = $("#inputCompanynameTh").val(),
                         d.companyNameEn = $("#inputCompanynameEn").val(),
                         d.companyAilas = $("#inputCompanyAilas").val(),
-                        d.taxId = $("#inputTaxId").val()
+                        d.taxId = $("#inputTaxId").val(),
+                        d.SubcontractProfileType = $("#rdoCustomerTypeSub").is(":checked") ? $("#rdoCustomerTypeSub").val() : $("#rdoCustomerTypeDealer").val()
 
                 }
             },
@@ -993,8 +997,40 @@ $(document).ready(function () {
                 { "data": "CompanyNameTh", "width": "20%" },
                 { "data": "CompanyNameEn", "width": "20%" },
                 { "data": "TaxId", "width": "15%" },
-                { "data": "CreateDate", "width": "15%" },
-                { "data": "ActivateDate", "width": "15%" },
+                {
+                    "data": "CreateDate", "width": "15%", render: function (data) {
+                        var strCreateDate = "";
+                        if (data != null) {
+                            var date = new Date(data);
+                            var sMonth = padValue(date.getMonth() + 1);
+                            var sDay = padValue(date.getDate());
+                            var sYear = date.getFullYear();
+                            var sHour = date.getHours();
+                            var sMinute = padValue(date.getMinutes());
+                            //var sAMPM = "AM";
+
+                            strCreateDate = sDay + '/' + sMonth + '/' + sYear + ' ' + sHour + ':' + sMinute;
+                        }
+                        return strCreateDate;
+                    }
+                },
+                {
+                    "data": "ActivateDate", "width": "15%", render: function (data) {
+                        var strActivateDate = "";
+                        if (data != null) {
+                            var date = new Date(data);
+                            var sMonth = padValue(date.getMonth() + 1);
+                            var sDay = padValue(date.getDate());
+                            var sYear = date.getFullYear();
+                            var sHour = date.getHours();
+                            var sMinute = padValue(date.getMinutes());
+                            //var sAMPM = "AM";
+
+                            strActivateDate = sDay + '/' + sMonth + '/' + sYear + ' ' + sHour + ':' + sMinute;
+                        }
+                        return strActivateDate;
+                    }
+                },
                 {
                     data: null, width: "10%", render: function (data, type, row) {
                         return "<span class='badge outline-badge-secondary shadow-none'>" + row.Status + "</span>";
@@ -2009,4 +2045,8 @@ function Validate(formcontrol, custom, customselect, cutomupload) {
                 }
             });//customupload
             return hasError;
-        }
+}
+
+function padValue(value) {
+    return (value < 10) ? "0" + value : value;
+}

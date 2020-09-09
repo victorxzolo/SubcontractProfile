@@ -42,12 +42,13 @@ namespace SubcontractProfile.Web.Extension
 
         public Impersonator(string username, string password,string domainOrServerName, bool useDomain = true)
         {
-            Login(username, domainOrServerName, password);
+            Login(username, domainOrServerName, password, useDomain);
         }
 
 
-        public void Login(string username, string domain, string password)
+        public void Login(string username, string domain, string password,bool useDomain)
         {
+            bool logonSuccessfull = true;
             if (this.Identity != null)
             {
                 this.Identity.Dispose();
@@ -61,13 +62,24 @@ namespace SubcontractProfile.Web.Extension
                 Logout();
 
                 this.m_accessToken = System.IntPtr.Zero;
-                bool logonSuccessfull = LogonUser(
-                   username,
-                   domain,
-                   password,
-                   LOGON32_LOGON_INTERACTIVE,
-                   LOGON32_PROVIDER_DEFAULT,
-                   ref this.m_accessToken);
+
+                if (useDomain)
+                {
+                    logonSuccessfull = LogonUser(username, domain, password, LOGON32_LOGON_NETWORK, LOGON32_PROVIDER_DEFAULT, ref this.m_accessToken);
+                }
+                else
+                {
+                    logonSuccessfull = LogonUser(username, domain, password, LOGON32_LOGON_NEW_CREDENTIALS, LOGON32_PROVIDER_DEFAULT, ref this.m_accessToken);
+                }
+
+
+                //logonSuccessfull = LogonUser(
+                //   username,
+                //   domain,
+                //   password,
+                //   LOGON32_LOGON_INTERACTIVE,
+                //   LOGON32_PROVIDER_DEFAULT,
+                //   ref this.m_accessToken);
 
                 if (!logonSuccessfull)
                 {

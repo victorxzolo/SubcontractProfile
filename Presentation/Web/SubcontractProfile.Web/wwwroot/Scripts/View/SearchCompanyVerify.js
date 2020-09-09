@@ -203,9 +203,40 @@ $(document).ready(function () {
                 { "data": "VendorCode", "width": "20%" },
                 { "data": "DistributionChannel", "width": "20%" },
                 { "data": "ChannelSaleGroup", "width": "20%" },
-                { "data": "RegisterDate", "width": "20%" },
-                { "data": "CreateDate", "width": "20%" },
-                { "data": "CreateBy", "width": "20%" }
+                {
+                    "data": "RegisterDate", "width": "20%", render: function (data) {
+                        var strCreateDate = "";
+                        if (data != null) {
+                            var date = new Date(data);
+                            var sMonth = padValue(date.getMonth() + 1);
+                            var sDay = padValue(date.getDate());
+                            var sYear = date.getFullYear();
+                            var sHour = date.getHours();
+                            var sMinute = padValue(date.getMinutes());
+                            //var sAMPM = "AM";
+
+                            strCreateDate = sDay + '/' + sMonth + '/' + sYear + ' ' + sHour + ':' + sMinute;
+                        }
+                        return strCreateDate;
+                    }
+                },
+                {
+                    "data": "UpdateDate", "width": "20%", render: function (data) {
+                        var strCreateDate = "";
+                        if (data != null) {
+                            var date = new Date(data);
+                            var sMonth = padValue(date.getMonth() + 1);
+                            var sDay = padValue(date.getDate());
+                            var sYear = date.getFullYear();
+                            var sHour = date.getHours();
+                            var sMinute = padValue(date.getMinutes());
+                            //var sAMPM = "AM";
+
+                            strCreateDate = sDay + '/' + sMonth + '/' + sYear + ' ' + sHour + ':' + sMinute;
+                        }
+                        return strCreateDate;
+                    } },
+                { "data": "UpdateBy", "width": "20%" }
 
             ],
             "order": [[0, "desc"]],
@@ -216,3 +247,7 @@ $(document).ready(function () {
 
     }
 });
+
+function padValue(value) {
+    return (value < 10) ? "0" + value : value;
+}

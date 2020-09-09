@@ -22,7 +22,7 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<bool> Delete(string id);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> GetByPKList(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany_PK> pkList);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchCompany(Guid companyId
-            , string company_th, string company_en, string company_alias, string tax_id
+            , string company_th, string company_en, string company_alias, string tax_id,string subcontract_profile_type
            );
 
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchCompanyVerify(SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany search);

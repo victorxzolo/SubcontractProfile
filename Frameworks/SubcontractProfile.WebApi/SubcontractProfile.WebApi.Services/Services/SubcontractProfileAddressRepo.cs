@@ -235,7 +235,18 @@ namespace SubcontractProfile.WebApi.Services.Services
 
         }
 
-       
+        public async Task<bool> DeleteByCompanyId(string id)
+        {
+            var p = new DynamicParameters();
+            p.Add("@companyId", id);
+
+            var ok = await _dbContext.Connection.ExecuteAsync
+                ("uspSubcontractProfileAddress_deleteByCompanyId", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+
+            return true;
+        }
+
+
     }
 
 

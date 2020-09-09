@@ -129,17 +129,17 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileAddress))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileAddress))]
-        [HttpGet("SearchCompany/{companyId}/{company_th}/{company_en}/{company_alias}/{tax_id}")]
+        [HttpGet("SearchCompany/{companyId}/{company_th}/{company_en}/{company_alias}/{tax_id}/{subcontract_profile_type}")]
         public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchCompany(string companyId
-            , string company_th, string company_en, string company_alias, string tax_id)
+            , string company_th, string company_en, string company_alias, string tax_id,string subcontract_profile_type)
         {
             _logger.LogInformation($"Start CompanyController::SearchCompany", companyId, company_th, company_en, company_alias
                 , tax_id);
 
-            //if(subcontract_profile_type.ToUpper()=="NULL")
-            //{
-            //    subcontract_profile_type = string.Empty;
-            //}
+            if (subcontract_profile_type.ToUpper() == "NULL")
+            {
+                subcontract_profile_type = string.Empty;
+            }
 
             //if (location_code.ToUpper() == "NULL")
             //{
@@ -150,7 +150,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
             //{
             //    vendor_code = string.Empty;
             //}
-            
+
 
             if (company_th.ToUpper() == "NULL")
             {
@@ -189,12 +189,12 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
             System.Guid strCompanyId = new Guid(companyId);
 
-            var entities = _service.SearchCompany(strCompanyId, company_th, company_en, company_alias, tax_id);
+            var entities = _service.SearchCompany(strCompanyId, company_th, company_en, company_alias, tax_id, subcontract_profile_type);
 
             if (entities == null)
             {
                 _logger.LogWarning($"CompanyController::", "SearchCompany NOT FOUND", companyId, company_th, company_en, company_alias
-                , tax_id);
+                , tax_id, subcontract_profile_type);
                 return null;
             }
 

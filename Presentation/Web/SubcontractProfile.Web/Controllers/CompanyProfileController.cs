@@ -28,6 +28,8 @@ namespace SubcontractProfile.Web.Controllers
         private const int MegaBytes = 1024 * 1024;
         private const int TMegaBytes = 1024 * 1024;
 
+        private string PathNas = "";
+
         public CompanyProfileController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
@@ -49,6 +51,10 @@ namespace SubcontractProfile.Web.Controllers
             #endregion
 
             //strpathASCProfile = _configuration.GetValue<string>("PathASCProfile:DEV").ToString();
+
+
+            //NSA
+            PathNas = _configuration.GetValue<string>("PathUploadfile:NAS").ToString();
         }
 
         // GET: CompanyProfileController
@@ -68,7 +74,7 @@ namespace SubcontractProfile.Web.Controllers
 
         // GET: CompanyProfileController/Search/5
         public ActionResult Search(string companyNameTh, string companyNameEn, string companyAilas
-            , string taxId)
+            , string taxId,string SubcontractProfileType)
         {
 
             var companyResult = new List<SubcontractProfileCompanyModel>();
@@ -120,8 +126,13 @@ namespace SubcontractProfile.Web.Controllers
                 taxId = "null";
             }
 
-            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}", strpathAPI + "Company/SearchCompany", strCompanyId
-                , companyNameTh, companyNameEn, companyAilas, taxId);
+            if(SubcontractProfileType==null)
+            {
+                SubcontractProfileType = "null";
+            }
+
+            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", strpathAPI + "Company/SearchCompany", strCompanyId
+                , companyNameTh, companyNameEn, companyAilas, taxId, SubcontractProfileType);
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -258,6 +269,11 @@ namespace SubcontractProfile.Web.Controllers
             ResponseModel res = new ResponseModel();
             try
             {
+                if (datauser == null)
+                {
+                    getsession();
+                }
+
                 var companyId = model.CompanyId;
 
                 model.UpdateDate = DateTime.Now;
@@ -309,11 +325,13 @@ namespace SubcontractProfile.Web.Controllers
                         model.Status = "W";// Waiting
 
                         var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Update"));
+
                         HttpClient clientCompany = new HttpClient();
-                        clientCompany.DefaultRequestHeaders.Accept.Add(
-                        new MediaTypeWithQualityHeaderValue("application/json"));
+                        clientCompany.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
                         var httpContentCompany = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
                         HttpResponseMessage responseCompany = clientCompany.PutAsync(uriCompany, httpContentCompany).Result;
+
                         if (responseCompany.IsSuccessStatusCode)
                         {
                             #region Insert Address
@@ -321,47 +339,77 @@ namespace SubcontractProfile.Web.Controllers
 
                             if (dataaddr != null && dataaddr.Count != 0)
                             {
-                                SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftCompany");
+                                var uriAddrDelete = new Uri(Path.Combine(strpathAPI, "Address", "DeleteByCompanyID"));
+                                HttpClient clientAddrDelete= new HttpClient();
+                                clientAddrDelete.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                                foreach (var d in dataaddr)
+                                var httpContentAddrDelete = new StringContent(JsonConvert.SerializeObject(companyId.ToString()), Encoding.UTF8, "application/json");
+
+                                var responseDelete = await clientAddrDelete.PostAsync(uriAddrDelete, httpContentAddrDelete);
+                                if(responseDelete.IsSuccessStatusCode)
                                 {
-                                    SubcontractProfileAddressModel addr = new SubcontractProfileAddressModel();
-                                    addr.AddressId = d.AddressId;
-                                    addr.AddressTypeId = d.AddressTypeId;
-                                    addr.Building = d.Building;
-                                    addr.City = d.City;
-                                    addr.Country = d.Country;
-                                    addr.DistrictId = d.DistrictId;
-                                    addr.Floor = d.Floor;
-                                    addr.HouseNo = d.HouseNo;
-                                    addr.Moo = d.Moo;
-                                    addr.ProvinceId = d.ProvinceId;
-                                    addr.CompanyId = companyId.ToString();
-                                    addr.ModifiedBy = datauser.UserId.ToString();
-                                    addr.ModifiedDate = DateTime.Now;
-                                    addr.RegionId = d.RegionId;
-                                    addr.Road = d.Road;
-                                    addr.Soi = d.Soi;
-                                    addr.RoomNo = d.RoomNo;
-                                    addr.SubDistrictId = d.SubDistrictId;
-                                    addr.VillageName = d.VillageName;
-                                    addr.ZipCode = d.ZipCode;
-
-                                    var uriAddress = new Uri(Path.Combine(strpathAPI, "Address", "Update"));
-                                    HttpClient clientAddress = new HttpClient();
-                                    clientAddress.DefaultRequestHeaders.Accept.Add(
-                                    new MediaTypeWithQualityHeaderValue("application/json"));
-
-                                    // string rr = JsonConvert.SerializeObject(addr);
-
-                                    var httpContent = new StringContent(JsonConvert.SerializeObject(addr), Encoding.UTF8, "application/json");
-                                    HttpResponseMessage responseAddress = clientAddress.PutAsync(uriAddress, httpContent).Result;
-                                    if (responseAddress.IsSuccessStatusCode)
+                                    var r= responseDelete.Content.ReadAsStringAsync().Result;
+                                  bool  statusDelete = JsonConvert.DeserializeObject<bool>(r);
+                                    if(statusDelete)
                                     {
-                                        
-                                        res.Status = true;
-                                        res.Message = "Register Success";
-                                        res.StatusError = "0";
+                                        SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftCompany");
+                                        bool statusAddAddr = true;
+
+                                        foreach (var d in dataaddr)
+                                        {
+                                            SubcontractProfileAddressModel addr = new SubcontractProfileAddressModel();
+                                            addr.AddressId = d.AddressId;
+                                            addr.AddressTypeId = d.AddressTypeId;
+                                            addr.Building = d.Building;
+                                            addr.City = d.City;
+                                            addr.Country = d.Country;
+                                            addr.DistrictId = d.DistrictId;
+                                            addr.Floor = d.Floor;
+                                            addr.HouseNo = d.HouseNo;
+                                            addr.Moo = d.Moo;
+                                            addr.ProvinceId = d.ProvinceId;
+                                            addr.CompanyId = companyId.ToString();
+                                            addr.CreateBy = datauser.UserId.ToString();
+                                            addr.CreateDate = DateTime.Now;
+                                            addr.RegionId = d.RegionId;
+                                            addr.Road = d.Road;
+                                            addr.Soi = d.Soi;
+                                            addr.RoomNo = d.RoomNo;
+                                            addr.SubDistrictId = d.SubDistrictId;
+                                            addr.VillageName = d.VillageName;
+                                            addr.ZipCode = d.ZipCode;
+
+                                            var uriAddress = new Uri(Path.Combine(strpathAPI, "Address", "Insert"));
+                                            HttpClient clientAddress = new HttpClient();
+                                            clientAddress.DefaultRequestHeaders.Accept.Add(
+                                            new MediaTypeWithQualityHeaderValue("application/json"));
+
+                                            string rr = JsonConvert.SerializeObject(addr);
+
+                                            var httpContent = new StringContent(JsonConvert.SerializeObject(addr), Encoding.UTF8, "application/json");
+                                            HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
+                                            if (responseAddress.IsSuccessStatusCode)
+                                            {
+                                                statusAddAddr = true;
+                                            }
+                                            else
+                                            {
+                                                statusAddAddr = false; break;
+                                            }
+                                        }
+
+                                        if(statusAddAddr)
+                                        {
+                                            res.Status = true;
+                                            res.Message = "Update Success";
+                                            res.StatusError = "0";
+                                        }
+                                        else
+                                        {
+                                            res.Status = false;
+                                            res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                            res.StatusError = "-1";
+                                        }
                                     }
                                     else
                                     {
@@ -370,6 +418,14 @@ namespace SubcontractProfile.Web.Controllers
                                         res.StatusError = "-1";
                                     }
                                 }
+                                else
+                                {
+                                    res.Status = false;
+                                    res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                    res.StatusError = "-1";
+                                }
+
+                                
                             }
                             else
                             {
@@ -519,18 +575,18 @@ namespace SubcontractProfile.Web.Controllers
                             }
 
                             string straddr = "";
-                            straddr = string.Concat(f.HouseNo != "" ? f.HouseNo : "", " ",
-                                                      f.Building != "" ? "อาคาร " + f.Building : "", " ",
-                                                      f.Floor != "" ? "ชั้นที่ " + f.Floor : "", " ",
-                                                      f.RoomNo != "" ? "ห้องที่ " + f.RoomNo : "", " ",
-                                                      f.VillageName != "" ? "หมู่บ้าน " + f.VillageName : "", " ",
-                                                      f.Moo != null ? "หมู่ที่ " + f.Moo : "", " ",
-                                                      f.Soi != "" ? "ซอย " + f.Soi : "", " ",
-                                                      f.Road != "" ? "ถนน " + f.Road : "", " ",
-                                                      f.SubDistrictId != 0 ? "ตำบล/แขวง " + f.sub_district_name : "", " ",
-                                                      f.DistrictId != 0 ? "อำเภอ/เขต " + f.district_name : "", " ",
-                                                      f.ProvinceId != 0 ? "จังหวัด " + f.province_name : "", " ",
-                                                      f.ZipCode != "" ? f.ZipCode : "");
+                            straddr = string.Concat(f.HouseNo != null && f.HouseNo != "" ? f.HouseNo : "", " ",
+                                                  f.Building != null && f.Building != "" ? "อาคาร " + f.Building : "", " ",
+                                                  f.Floor != null && f.Floor != "" ? "ชั้นที่ " + f.Floor : "", " ",
+                                                  f.RoomNo != null && f.RoomNo != "" ? "ห้องที่ " + f.RoomNo : "", " ",
+                                                  f.VillageName != null && f.VillageName != "" ? "หมู่บ้าน " + f.VillageName : "", " ",
+                                                  f.Moo != null ? "หมู่ที่ " + f.Moo : "", " ",
+                                                  f.Soi != null && f.Soi != "" ? "ซอย " + f.Soi : "", " ",
+                                                  f.Road != null && f.Road != "" ? "ถนน " + f.Road : "", " ",
+                                                  f.SubDistrictId != 0 ? "ตำบล/แขวง " + f.sub_district_name : "", " ",
+                                                  f.DistrictId != 0 ? "อำเภอ/เขต " + f.district_name : "", " ",
+                                                  f.ProvinceId != 0 ? "จังหวัด " + f.province_name : "", " ",
+                                                  f.ZipCode != "" ? f.ZipCode : "");
                             f.outFullAddress = straddr;
 
                         }
@@ -596,7 +652,7 @@ namespace SubcontractProfile.Web.Controllers
                                 RegionId = e.RegionId,
                                 outFullAddress = e.outFullAddress,
                                 location_code = e.location_code,
-                                CompanyId=e.CompanyId
+                                CompanyId = e.CompanyId
                             });
                             foreach (var r in SaveAddressSession(newaddr))
                             {
@@ -606,6 +662,7 @@ namespace SubcontractProfile.Web.Controllers
                         }
                         else
                         {
+
                             data.RemoveAll(x => x.AddressId == e.AddressId && x.CompanyId==e.CompanyId);
                             data.Add(e);
                         }
@@ -1204,42 +1261,99 @@ namespace SubcontractProfile.Web.Controllers
             return result;
         }
 
+        [HttpPost]
+        public IActionResult TestNAS()
+        {
+            string str = "";
+            var output = new List<SubcontractDropdownModel>();
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "nas_subcontract");
+
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var v = response.Content.ReadAsStringAsync().Result;
+                    output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+                }
+                if (output != null)
+                {
+                    using (var impersonator = new Impersonator(output[0].value1, output[0].value2, output[0].dropdown_text, false))
+                    {
+                        string pathdir = Path.Combine(output[0].dropdown_text,"f2423a7a-ed2c-4c9b-b766-c37ada227b6d");
+                        string[] filePaths = Directory.GetFiles(pathdir, "*.*");
+                        str = filePaths.Count().ToString() + " , username:" + output[0].value1 + 
+                            " ,password:" + output[0].value2 + " ,domainOrServerName: " + output[0].dropdown_value; ;
+                    }
+                }
+
+               
+            }
+            catch (Exception e)
+            {
+                str = e.Message+" , username:"+ output[0].value1+" ,password:"+output[0].value2+ " ,domainOrServerName: "+ output[0].dropdown_value;
+            }
+            return Json(str);
+        }
+
         private bool GetFile(string companyid,ref List<FileUploadModal> L_File)
         {
             bool result = true;
+            //var output = new List<SubcontractDropdownModel>();
             try
             {
+                //HttpClient client = new HttpClient();
+                //client.DefaultRequestHeaders.Accept.Add(
+                //new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "nas_subcontract");
+
+                //HttpResponseMessage response = client.GetAsync(uriString).Result;
+                //if (response.IsSuccessStatusCode)
+                //{
+                //    var v = response.Content.ReadAsStringAsync().Result;
+                //    output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+                //}
+
+                //if(output !=null)
+                //{
+                //using(var impersonator = new Impersonator(output[0].value1, output[0].value2, output[0].dropdown_value, false))
+                //{
+
+                //string pathdir = Path.Combine(output[0].dropdown_text, companyid);
                 string pathdir = Path.Combine(strpathUpload, companyid);
+                //if (Directory.Exists(pathdir))
+                //{
+                string[] filePaths = Directory.GetFiles(pathdir, "*.*");
 
-                string[] filePaths = Directory.GetFiles(pathdir, "*.*", SearchOption.AllDirectories);
-
-
-
-                foreach (string file in filePaths)
-                {
-
-
-                    using (var ms = new MemoryStream(System.IO.File.ReadAllBytes(file)))
-                    {
-
-                        foreach (var e in L_File)
-                        {
-                            string filename = Path.GetFileName(file);
-                            filename = EnsureCorrectFilename(filename);
-                            var fileBytes = ms.ToArray();
-                  
-
-                            if (e.Filename == filename)
+                            foreach (string file in filePaths)
                             {
-                                e.Fileupload = fileBytes;
-                                e.ContentType = Path.GetExtension(Path.GetExtension(file));
-                                e.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "files", FileName = filename }.ToString();
-                            }
-                        }
-                       
-                    }
+                                using(var ms = new MemoryStream(System.IO.File.ReadAllBytes(file)))
+                                {
+                                    foreach (var e in L_File)
+                                    {
+                                        string filename = Path.GetFileName(file);
+                                        filename = EnsureCorrectFilename(filename);
+                                        var fileBytes = ms.ToArray();
+                                        if (e.Filename == filename)
+                                        {
+                                            e.Fileupload = fileBytes;
+                                            e.ContentType = Path.GetExtension(Path.GetExtension(file));
+                                            e.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "files", FileName = filename }.ToString();
+                                        }
+                                    }
 
-                }
+                                }
+                            }
+                       // }
+
+                    //}
+                //}
+               
             }
             catch (Exception e)
             {

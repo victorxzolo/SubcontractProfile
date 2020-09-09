@@ -77,6 +77,20 @@ $(document).ready(function () {
             $('#hdrdtype').val($(this).attr("value"));
         }
     });
+
+    $('#ddlzone').change(function () {
+
+        BindDDLprovince($('#ddlzone option').filter(':selected').val());
+    });
+
+    $('#ddlprovince').change(function () {
+
+        BindDDLdistrict($('#ddlprovince option').filter(':selected').val());
+    });
+    $('#ddldistrict').change(function () {
+        BindDDLsubdistrict($('#ddldistrict option').filter(':selected').val());
+    });
+
     //Location
     $('#btnsearchlocation').click(function () {
         $('#Searchlocation').modal('show');
@@ -252,6 +266,7 @@ $(document).ready(function () {
             data: { addressID: data_row.addressId },
             dataType: "json",
             success: function (data) {
+                $('#hdAddressID').val('');
                 $('#ddlcountry').val('')
 
                 $('#ddlprovince').val('')
@@ -282,7 +297,7 @@ $(document).ready(function () {
                 if (data.status) {
                     console.log(data.response);
 
-
+                    $('#hdAddressID').val(data.response.AddressId);
                     $('#ddlcountry').val(data.response.Country)
 
                     $('#ddlprovince').val(data.response.ProvinceId)
@@ -428,7 +443,8 @@ $(document).ready(function () {
                 province_name: $('#ddlprovince option').filter(':selected').text(),
                 RegionId: $('#ddlzone option').filter(':selected').val(),
                 location_code: $('#txtlocationcode').val(),
-                CompanyId: $('#hdCompanyId').val()
+                CompanyId: $('#hdCompanyId').val(),
+                AddressId: $('#hdAddressID').val()
             }
             stuff.push(data);
 

@@ -422,10 +422,10 @@ namespace SubcontractProfile.WebApi.Services
         }
 
         public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchCompany(Guid companyId
-            , string company_th, string company_en, string company_alias, string tax_id)
+            , string company_th, string company_en, string company_alias, string tax_id,string subcontract_profile_type)
         {
             var p = new DynamicParameters();
-            //  p.Add("@subcontract_profile_type", subcontract_profile_type);
+            p.Add("@subcontract_profile_type", subcontract_profile_type);
             //  p.Add("@location_code", location_code);
             // p.Add("@vendor_code", vendor_code);
             p.Add("@companyid", companyId);

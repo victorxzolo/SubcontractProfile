@@ -999,7 +999,7 @@ namespace SubcontractProfile.Web.Controllers
 
                 if (status=="Approve")
                 {
-                    model.Status = "A";
+                    model.Status = "Y";
                 }
                 else if(status=="NotApprove")
                 {
@@ -1043,57 +1043,81 @@ namespace SubcontractProfile.Web.Controllers
 
                                 if (dataaddr != null && dataaddr.Count != 0)
                                 {
-                                    SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftCompanySSO");
+                                    var uriAddrDelete = new Uri(Path.Combine(strpathAPI, "Address", "DeleteByCompanyID"));
+                                    HttpClient clientAddrDelete = new HttpClient();
+                                    clientAddrDelete.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                                    var httpContentAddrDelete = new StringContent(JsonConvert.SerializeObject(model.CompanyId.ToString()), Encoding.UTF8, "application/json");
 
-                                    foreach (var d in dataaddr)
+                                    var responseDelete = await clientAddrDelete.PostAsync(uriAddrDelete, httpContentAddrDelete);
+                                    if(responseDelete.IsSuccessStatusCode)
                                     {
-                                        SubcontractProfileAddressModel addr = new SubcontractProfileAddressModel();
-                                        addr.AddressId = d.AddressId;
-                                        addr.AddressTypeId = d.AddressTypeId;
-                                        addr.Building = d.Building;
-                                        addr.City = d.City;
-                                        addr.Country = d.Country;
-                                        addr.DistrictId = d.DistrictId;
-                                        addr.Floor = d.Floor;
-                                        addr.HouseNo = d.HouseNo;
-                                        addr.Moo = d.Moo;
-                                        addr.ProvinceId = d.ProvinceId;
-                                        //addr.CompanyId = companyId.ToString();
-                                        addr.CompanyId = model.CompanyId.ToString();
-                                        addr.ModifiedBy = user;
-                                        addr.ModifiedDate = DateTime.Now;
-                                        addr.RegionId = d.RegionId;
-                                        addr.Road = d.Road;
-                                        addr.Soi = d.Soi;
-                                        addr.RoomNo = d.RoomNo;
-                                        addr.SubDistrictId = d.SubDistrictId;
-                                        addr.VillageName = d.VillageName;
-                                        addr.ZipCode = d.ZipCode;
-
-                                        var uriAddress = new Uri(Path.Combine(strpathAPI, "Address", "Update"));
-                                        HttpClient clientAddress = new HttpClient();
-                                        clientAddress.DefaultRequestHeaders.Accept.Add(
-                                        new MediaTypeWithQualityHeaderValue("application/json"));
-
-                                        // string rr = JsonConvert.SerializeObject(addr);
-
-                                        var httpContent = new StringContent(JsonConvert.SerializeObject(addr), Encoding.UTF8, "application/json");
-                                        HttpResponseMessage responseAddress = clientAddress.PutAsync(uriAddress, httpContent).Result;
-                                        if (responseAddress.IsSuccessStatusCode)
+                                        var r = responseDelete.Content.ReadAsStringAsync().Result;
+                                        bool statusDelete = JsonConvert.DeserializeObject<bool>(r);
+                                        if (statusDelete)
                                         {
+                                            SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftCompanySSO");
+                                            bool statusAddAddr = true;
 
-                                            res.Status = true;
-                                            res.Message = "Update Success";
-                                            res.StatusError = "0";
-                                        }
-                                        else
-                                        {
-                                            res.Status = false;
-                                            res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
-                                            res.StatusError = "-1";
+                                            foreach (var d in dataaddr)
+                                            {
+                                                SubcontractProfileAddressModel addr = new SubcontractProfileAddressModel();
+                                                addr.AddressId = d.AddressId;
+                                                addr.AddressTypeId = d.AddressTypeId;
+                                                addr.Building = d.Building;
+                                                addr.City = d.City;
+                                                addr.Country = d.Country;
+                                                addr.DistrictId = d.DistrictId;
+                                                addr.Floor = d.Floor;
+                                                addr.HouseNo = d.HouseNo;
+                                                addr.Moo = d.Moo;
+                                                addr.ProvinceId = d.ProvinceId;
+                                                //addr.CompanyId = companyId.ToString();
+                                                addr.CompanyId = model.CompanyId.ToString();
+                                                addr.ModifiedBy = user;
+                                                addr.ModifiedDate = DateTime.Now;
+                                                addr.RegionId = d.RegionId;
+                                                addr.Road = d.Road;
+                                                addr.Soi = d.Soi;
+                                                addr.RoomNo = d.RoomNo;
+                                                addr.SubDistrictId = d.SubDistrictId;
+                                                addr.VillageName = d.VillageName;
+                                                addr.ZipCode = d.ZipCode;
+
+                                                var uriAddress = new Uri(Path.Combine(strpathAPI, "Address", "Insert"));
+                                                HttpClient clientAddress = new HttpClient();
+                                                clientAddress.DefaultRequestHeaders.Accept.Add(
+                                                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                                                // string rr = JsonConvert.SerializeObject(addr);
+
+                                                var httpContent = new StringContent(JsonConvert.SerializeObject(addr), Encoding.UTF8, "application/json");
+                                                HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
+                                                if (responseAddress.IsSuccessStatusCode)
+                                                {
+                                                    statusAddAddr = true;
+                                                }
+                                                else
+                                                {
+                                                    statusAddAddr = false; break;
+                                                }
+                                            }
+
+                                            if (statusAddAddr)
+                                            {
+                                                res.Status = true;
+                                                res.Message = "Update Success";
+                                                res.StatusError = "0";
+                                            }
+                                            else
+                                            {
+                                                res.Status = false;
+                                                res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                                res.StatusError = "-1";
+                                            }
                                         }
                                     }
+                                    
                                 }
                                 else
                                 {

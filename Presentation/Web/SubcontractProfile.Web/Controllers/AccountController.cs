@@ -40,7 +40,7 @@ namespace SubcontractProfile.Web.Controllers
         private string Lang = "";
         private Utilities Util = new Utilities();
         private SubcontractProfileUserModel dataUser = new SubcontractProfileUserModel();
-
+        private string PathNas = "";
         private const int MegaBytes = 1024 * 1024;
         public AccountController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
@@ -52,6 +52,9 @@ namespace SubcontractProfile.Web.Controllers
        
 
             strpathASCProfile = _configuration.GetValue<string>("PathASCProfile:DEV").ToString();
+
+            //NSA
+            PathNas = _configuration.GetValue<string>("PathUploadfile:NAS").ToString();
         }
 
         #region Login
@@ -113,6 +116,7 @@ namespace SubcontractProfile.Web.Controllers
                 if(model.username !=null && model.password !=null)
                 {
                     string encryptedPassword = Util.EncryptText(model.password);
+                    //string de = Util.DecryptText("f/bNopH92zWjB3G00w0dBw==");
                     var authenticatedUser = GetUser(model.username, encryptedPassword);
                     if(authenticatedUser != null)
                     {
@@ -1634,7 +1638,7 @@ namespace SubcontractProfile.Web.Controllers
                                     addr.Moo = d.Moo;
                                     addr.ProvinceId = d.ProvinceId;
                                     addr.CompanyId = companyId.ToString();
-                                    addr.CreateBy = "SYSTEM";
+                                    addr.CreateBy = dataUser.UserId.ToString();
                                     addr.CreateDate = DateTime.Now;
                                     addr.RegionId = d.RegionId;
                                     addr.Road = d.Road;
@@ -1716,23 +1720,23 @@ namespace SubcontractProfile.Web.Controllers
 
         #region Upload File
 
-        [HttpPost]
-        public IActionResult TestNAS()
-        {
-            string str = "";
-            try
-            {
-                using (var impersonator = new Impersonator("nas_fixedbb", "Ais2018fixedbb", "\\10.137.32.9\fbb_idcard_ndev001b", true))
-                {
-                    str = "Connect";
-                }
-            }
-            catch (Exception e)
-            {
-                str = e.Message;
-            }
-            return Json(str);
-        }
+        //[HttpPost]
+        //public IActionResult TestNAS()
+        //{
+        //    string str = "";
+        //    try
+        //    {
+        //        using (var impersonator = new Impersonator("nas_fixedbb", "Ais2018fixedbb", "\\10.137.32.9", false))
+        //        {
+        //            str = "Connect";
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        str = e.Message;
+        //    }
+        //    return Json(str);
+        //}
 
         [HttpPost]
         [DisableRequestSizeLimit]
@@ -1847,8 +1851,17 @@ namespace SubcontractProfile.Web.Controllers
 
                 string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                 filename = EnsureCorrectFilename(file.Filename);
-                using (output = System.IO.File.Create(this.GetPathAndFilename(guid,filename)))
-                  await  files.CopyToAsync(output);
+
+                //var adminToken = new IntPtr();
+
+                //using (var impersonator = new Impersonator("nas_fixedbb", "Ais2018fixedbb", "\\10.137.32.9", false))
+                //{
+                //using (output = System.IO.File.Create(this.GetPathAndFilename(guid, filename, PathNas)))
+                using (output = System.IO.File.Create(this.GetPathAndFilename(guid, filename, _configuration.GetValue<string>("PathUploadfile:Local").ToString())))
+                    {
+                        await files.CopyToAsync(output);
+                    }
+                //}
             }
             catch (Exception e)
             {
@@ -1865,10 +1878,9 @@ namespace SubcontractProfile.Web.Controllers
             return filename;
         }
 
-        private string GetPathAndFilename(string guid, string filename)
+        private string GetPathAndFilename(string guid, string filename,string dir)
         {
-            //return this.hostingEnvironment.WebRootPath + "\\uploads\\" + filename;
-            string dir=_configuration.GetValue<string>("PathUploadfile:Local").ToString();
+           // string dir=_configuration.GetValue<string>("PathUploadfile:Local").ToString();
             string pathdir = Path.Combine(dir, guid);
             string PathOutput = "";
             if (!Directory.Exists(pathdir))
