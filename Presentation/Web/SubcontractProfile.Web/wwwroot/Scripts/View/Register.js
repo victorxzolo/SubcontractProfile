@@ -1780,7 +1780,7 @@ function BindDDLBank() {
     $.ajax({
         type: "POST",
        // async: false,
-        url: urlDDLBank
+        url: urlDDLBank,
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
