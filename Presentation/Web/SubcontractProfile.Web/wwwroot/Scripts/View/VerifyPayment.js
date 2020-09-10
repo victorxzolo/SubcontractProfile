@@ -1,7 +1,11 @@
 ﻿
 var oTableSearch;
+var url = null;
 
 $(document).ready(function () {
+
+    url = $("#controllername").data("url");
+
     $('#paymentdatefrom').datetimepicker({
         format: "DD/MM/YYYY",
         showClear: true,
@@ -126,12 +130,12 @@ $(document).ready(function () {
         $('.modal:visible').length && $(document.body).addClass('modal-open');
     });
 
-
+    var urlGetCompany = url.replace('Action', 'GetCompany');
     $('#txtcompanyname').autocomplete({
         lookup: function (query, done) {
             $.ajax({
                 type: "POST",
-                url: "/Payment/GetCompany",
+                url: urlGetCompany,
                 data: { companyname: query},
                 dataType: "json",
                 success: function (data) {
@@ -163,7 +167,7 @@ $(document).ready(function () {
 });
 
 function inittbSearchResult() {
-
+    var urlSearchVerify = url.replace('Action', 'SearchVerify');
     oTableSearch = $('#tbSearchResult').DataTable({
         processing: true, // for show progress bar
         serverSide: true, // for process server side
@@ -188,7 +192,7 @@ function inittbSearchResult() {
             "thousands": "."
         },
         ajax: {
-            url: '/Payment/SearchVerify',
+            url: urlSearchVerify,
             type: "POST",
             datatype: "JSON",
             //dataSrc:"",
@@ -272,10 +276,10 @@ function ClearDataModal() {
 }
 
 function BindDataTypeTransfer() {
-
+    var urlBindDataTypeTransfer= url.replace('Action', 'BindDataTypeTransfer');
     $.ajax({
         type: "POST",
-        url: "/Payment/BindDataTypeTransfer",
+        url: urlBindDataTypeTransfer,
         dataType: "json",
         success: function (data) {
             if (data != null) {
@@ -297,10 +301,10 @@ function BindDataTypeTransfer() {
 }
 
 function BindBankPayment() {
-
+    var urlGetDataBankPayment = url.replace('Action', 'GetDataBankPayment');
     $.ajax({
         type: "POST",
-        url: "/Payment/GetDataBankPayment",
+        url: urlGetDataBankPayment,
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
@@ -326,10 +330,10 @@ function BindBankPayment() {
 }
 
 function BindDDLBank() {
-
+    var urlDDLBank = url.replace('Action', 'DDLBank');
     $.ajax({
         type: "POST",
-        url: "/Payment/DDLBank",
+        url: urlDDLBank ,
 
         dataType: "json",
         success: function (data) {
@@ -351,8 +355,9 @@ function BindDDLBank() {
 }
 
 function getDataById(id) {
+    var urlGetDataById = url.replace('Action', 'GetDataById');
     $.ajax({
-        url: '/Payment/GetDataById',
+        url: urlGetDataById,
         type: 'POST',
         data: { 'paymentId': id },
         dataType: "json",
@@ -416,8 +421,9 @@ function ClearDataModalRevenue() {
 }
 
 function OnSave() {
+    var urlSaveVerify = url.replace('Action', 'SaveVerify');
     $.ajax({
-        url: '/Payment/SaveVerify',
+        url: urlSaveVerify,
         type: 'POST',
         data: {
             'paymentId': $('#hdpaymentId').val(),
@@ -463,18 +469,18 @@ function OnSave() {
 }
 
 function DownloadFileSlip() {
-
+    var urlDownloadfile = url.replace('Action', 'Downloadfile');
     // $('#ItemPreview').attr('src', '/Payment/DownloadCSV?paymentid=' + $('#hdpaymentId').val());
     
-    $('#linkdownload').attr("href", '/Payment/Downloadfile?paymentid=' + $('#hdpaymentId').val());
+    $('#linkdownload').attr("href", urlDownloadfile+'?paymentid=' + $('#hdpaymentId').val());
 
 }
 
 function GetStatus() {
-
+    var urlGetDataStatus = url.replace('Action', 'GetDataStatus');
     $.ajax({
         type: "POST",
-        url: "/Payment/GetDataStatus",
+        url: urlGetDataStatus,
         success: function (data) {
             if (data != null) {
 

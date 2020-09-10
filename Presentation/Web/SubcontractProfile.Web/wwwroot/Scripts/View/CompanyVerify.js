@@ -7,10 +7,12 @@ var tbLocation;
 var otbtablocation;
 var otbtabteam;
 var otbtabengineer;
+var url = null;
+var urlaccount = null;
 
 $(document).ready(function () {
-
-
+    url = $("#controllername").data("url");
+    urlaccount = $("#accountcontrollername").data("url");
     inittbAddressResult();
     inittbRevenue();
     inittblocation();
@@ -99,8 +101,10 @@ $(document).ready(function () {
     });
     $('#btn_search_modal').click(function () {
 
+        var urlSearchLocation = url.replace('Action', 'SearchLocation');
+
         $.ajax({
-            url: "/Registration/SearchLocation",
+            url: urlSearchLocation,
             type: "POST",
             data: {
                 asc_code: function () { return $('#txtasccodemodal').val() },
@@ -137,9 +141,10 @@ $(document).ready(function () {
 
         var value = tbLocation.row($(this).closest('tr')).data();
         var lo_id = value.location_id;
+        var urlGetLocationSession = url.replace('Action', 'GetLocationSession');
         $.ajax({
             type: "POST",
-            url: "/Registration/GetLocationSession",
+            url: urlGetLocationSession,
             dataType: "json",
             data: { location_id: lo_id },
             success: function (data) {
@@ -213,8 +218,9 @@ $(document).ready(function () {
     });
     $('#btn_search_revenue_modal').click(function () {
         //tbRevenue.ajax.reload();
+        var urlGetRevenue = url.replace('Action', 'GetRevenue');
         $.ajax({
-            url: "/Registration/GetRevenue",
+            url: urlGetRevenue,
             type: "POST",
             async: false,
             data: {
@@ -259,10 +265,10 @@ $(document).ready(function () {
     $('#tbAddressResult').on('click', 'tbody .edit_btn', function () {
         var data_row = oTableAddress.row($(this).closest('tr')).data();
         oTableAddress.row($(this).closest('tr')).remove().draw();//เดี๋ยวกลับมาทำ
-
+        var urlGetAddressById = url.replace('Action', 'GetAddressById');
         $.ajax({
             type: "POST",
-            url: "/Registration/GetAddressById",
+            url: urlGetAddressById,
             data: { addressID: data_row.addressId },
             dataType: "json",
             success: function (data) {
@@ -367,9 +373,10 @@ $(document).ready(function () {
 
     $('#tbAddressResult').on('click', 'tbody .delete_btn', function () {
         var data_row = oTableAddress.row($(this).closest('tr')).data();
+        var urlDeleteDaftAddress = url.replace('Action', 'DeleteDaftAddress');
         $.ajax({
             type: "POST",
-            url: "/Registration/DeleteDaftAddress",
+            url: urlDeleteDaftAddress,
             data: { AddressId: data_row.addressId },
             dataType: "json",
             success: function (data) {
@@ -752,8 +759,10 @@ function onSaveCompanyProfile(status) {
     company.CompanyId = $('#hdCompanyId').val();
     //company.ContractStartDate = $('#datecontractstart').val();
     //company.ContractEndDate = $('#datecontractend').val();
+
+    var urlOnSave = url.replace('Action', 'OnSave');
     $.ajax({
-        url: '/Registration/OnSave',
+        url: urlOnSave,
         type: 'POST',
         async: false,
         data: {
@@ -806,6 +815,9 @@ function BindDatatable(table, datamodel) {
 }
 
 function inittbAddressResult(companyId) {
+
+
+
     oTableAddress = $('#tbAddressResult').DataTable({
         processing: true, // for show progress bar
         //serverSide: true, // for process server side
@@ -856,6 +868,9 @@ function inittbAddressResult(companyId) {
 }
 
 function inittblocation() {
+
+
+
     tbLocation = $('#tblocationModal').DataTable({
         processing: true, // for show progress bar
         //serverSide: true, // for process server side
@@ -951,8 +966,9 @@ function inittbRevenue() {
 }
 
 function getDataById(companyId) {
+    var urlGetDataById = url.replace('Action', 'GetDataById');
     $.ajax({
-        url: '/Registration/GetDataById',
+        url: urlGetDataById,
         type: 'POST',
         data: { 'companyId': companyId },
         dataType: "json",
@@ -1095,9 +1111,9 @@ function getDataById(companyId) {
 
 function GetAddress(companyId) {
     // inittbAddressResult(companyId);
-
+    var urlGetAddress = url.replace('Action', 'GetAddress');
     $.ajax({
-        url: "/Registration/GetAddress",
+        url: urlGetAddress,
         type: "POST",
         async: false,
         data: {
@@ -1183,9 +1199,10 @@ function ConcatstrAddress(data) {
 }
 
 function SaveDaftAddress(stuff) {
+    var urlSaveDaftAddress = url.replace('Action', 'SaveDaftAddress');
     $.ajax({
         type: "POST",
-        url: "/Registration/SaveDaftAddress",
+        url: urlSaveDaftAddress,
         data: { daftdata: stuff },
         dataType: "json",
         success: function (data) {
@@ -1261,11 +1278,11 @@ function uploadFiles(inputId) {
         formData.append("Company", companyid);
     }
 
-
+    var urlUploadFile = url.replace('Action', 'UploadFile');
     $.ajax(
         {
             type: "POST",
-            url: "/Registration/UploadFile",
+            url: urlUploadFile,
             processData: false,
             contentType: false,
             dataType: "json",
@@ -1330,10 +1347,11 @@ function uploadFiles(inputId) {
 
 
 function BindDDLprovince(regionid) {
+    var urlDDLsubcontract_profile_province = urlaccount.replace('Action', 'DDLsubcontract_profile_province');
 
     $.ajax({
         type: "POST",
-        url: "/Account/DDLsubcontract_profile_province",
+        url: urlDDLsubcontract_profile_province,
         data: { region_id: regionid },
         dataType: "json",
         success: function (data) {
@@ -1368,10 +1386,10 @@ function BindDDLprovince(regionid) {
 }
 
 function BindDDLdistrict(province) {
-
+    var urlDDLsubcontract_profile_district = urlaccount.replace('Action', 'DDLsubcontract_profile_district');
     $.ajax({
         type: "POST",
-        url: "/Account/DDLsubcontract_profile_district",
+        url: urlDDLsubcontract_profile_district,
         data: { province_id: province },
         dataType: "json",
         success: function (data) {
@@ -1407,10 +1425,10 @@ function BindDDLdistrict(province) {
 }
 
 function BindDDLsubdistrict(district) {
-
+    var urlDDLsubcontract_profile_sub_district = urlaccount.replace('Action', 'DDLsubcontract_profile_sub_district');
     $.ajax({
         type: "POST",
-        url: "/Account/DDLsubcontract_profile_sub_district",
+        url: urlDDLsubcontract_profile_sub_district,
         data: { district_id: district },
         dataType: "json",
         success: function (data) {
@@ -1461,10 +1479,10 @@ function BindDDLsubdistrict(district) {
 }
 
 function BindDDLTitle() {
-
+    var urlDDLTitle = urlaccount.replace('Action', 'DDLTitle');
     $.ajax({
         type: "POST",
-        url: "/Account/DDLTitle",
+        url: urlDDLTitle,
         dataType: "json",
         success: function (data) {
 
@@ -1520,10 +1538,10 @@ function BindDDLTitle() {
 }
 
 function BindRegion() {
-
+    var urlDDLsubcontract_profile_Region = urlaccount.replace('Action', 'DDLsubcontract_profile_Region');
     $.ajax({
         type: "POST",
-        url: "/Account/DDLsubcontract_profile_Region",
+        url: urlDDLsubcontract_profile_Region,
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
@@ -1559,10 +1577,10 @@ function BindRegion() {
 }
 
 function BindDDLBank() {
-
+    var urlDDLBank = urlaccount.replace('Action', 'DDLBank');
     $.ajax({
         type: "POST",
-        url: "/Account/DDLBank",
+        url: urlDDLBank,
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
@@ -1599,10 +1617,11 @@ function BindDDLBank() {
 
 
 function BindAddressType() {
+    var urlGetAddressType = urlaccount.replace('Action', 'GetAddressType');
     $.ajax({
         type: "POST",
         async: false,
-        url: "/Account/GetAddressType",
+        url: urlGetAddressType,
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
@@ -1889,6 +1908,8 @@ function Validate(formcontrol, custom, customselect, cutomupload) {
 
 
 function inittbtablocation() {
+
+    var urlSearchListLocation = url.replace('Action', 'SearchListLocation');
     otbtablocation = $('#tbtablocation').DataTable({
         processing: true, // for show progress bar
         serverSide: true, // for process server side
@@ -1913,7 +1934,7 @@ function inittbtablocation() {
             "thousands": "."
         },
         ajax: {
-            url: "/Registration/SearchListLocation",
+            url: urlSearchListLocation,
             type: "POST",
             async: false,
             data: {
@@ -1966,8 +1987,9 @@ function inittbtablocation() {
 }
 
 function getDataLocationById(locationId) {
+    var urlGetDataLocationById = url.replace('Action', 'GetDataLocationById');
     $.ajax({
-        url: '/Registration/GetDataLocationById',
+        url: urlGetDataLocationById,
         type: 'POST',
         async: false,
         data: { 'locationId': locationId },
@@ -2051,6 +2073,7 @@ function getDataLocationById(locationId) {
 }
 
 function inittbtabTeam() {
+    var urlSearchListTeam = url.replace('Action', 'SearchListTeam');
     otbtabteam = $('#tbtabteam').DataTable({
         processing: true, // for show progress bar
         serverSide: true, // for process server side
@@ -2075,7 +2098,7 @@ function inittbtabTeam() {
             "thousands": "."
         },
         ajax: {
-            url: "/Registration/SearchListTeam",
+            url: urlSearchListTeam,
             type: "POST",
             async: false,
             data: {
@@ -2127,9 +2150,9 @@ function inittbtabTeam() {
 }
 
 function getDataTeamById(teamId) {
-
+    var urlGetDataTeamById = url.replace('Action', 'GetDataTeamById');
     $.ajax({
-        url: '/Registration/GetDataTeamById',
+        url: urlGetDataTeamById,
         type: 'POST',
         async: false,
         data: { 'teamId': teamId },
@@ -2172,10 +2195,11 @@ function getDataTeamById(teamId) {
 }
 
 function GetDropDownLocation() {
+    var urlGetLocationByCompany= url.replace('Action', 'GetLocationByCompany');
     $.ajax({
         type: 'POST',
         async: false,
-        url: '/Registration/GetLocationByCompany',
+        url: urlGetLocationByCompany,
         data: { companyid: $('#hdCompanyId').val() },
         dataType: 'json',
         success: function (data) {
@@ -2206,6 +2230,7 @@ function GetDropDownLocation() {
 }
 
 function inittbtabengineer() {
+    var urlSearchListEngineer = url.replace('Action', 'SearchListEngineer');
     otbtabengineer = $('#tbtabengineer').DataTable({
         processing: true, // for show progress bar
         serverSide: true, // for process server side
@@ -2230,7 +2255,7 @@ function inittbtabengineer() {
             "thousands": "."
         },
         ajax: {
-            url: "/Registration/SearchListEngineer",
+            url: urlSearchListEngineer,
             type: "POST",
             async: false,
             data: {
@@ -2283,10 +2308,10 @@ function inittbtabengineer() {
 }
 
 function BindDDLTeamEngineer(location) {
-
+    var urlDDLTeam = url.replace('Action', 'DDLTeam');
     $.ajax({
         type: "POST",
-        url: "/Registration/DDLTeam",
+        url: urlDDLTeam,
         data: {
             companyid: $('#hdCompanyId').val(),
             locationId: location
@@ -2325,9 +2350,9 @@ function BindDDLTeamEngineer(location) {
 }
 
 function getDataEngineerById(id) {
-
+    var urlGetDataEngineerById = url.replace('Action', 'GetDataEngineerById');
     $.ajax({
-        url: '/Registration/GetDataEngineerById',
+        url: urlGetDataEngineerById,
         type: 'POST',
         data: { 'engineerId': id },
         dataType: "json",
@@ -2385,8 +2410,9 @@ function getDataEngineerById(id) {
 }
 
 function getTeamByLocationIdEdit(locationId) {
+    var urlGetDataByLocationId = url.replace('Action', 'GetDataByLocationId');
     $.ajax({
-        url: '/Registration/GetDataByLocationId',
+        url: urlGetDataByLocationId,
         type: 'POST',
         data: {
             'locationId': locationId,
@@ -2408,8 +2434,9 @@ function getTeamByLocationIdEdit(locationId) {
 }
 
 function getDataPersonalById(id) {
+    var urlGetDataPersonalById = url.replace('Action', 'GetDataPersonalById');
     $.ajax({
-        url: '/Registration/GetDataPersonalById',
+        url: urlGetDataPersonalById,
         type: 'POST',
         data: { 'personalId': id },
         dataType: "json",
@@ -2510,9 +2537,10 @@ function getDataPersonalById(id) {
 }
 
 function GetDropDownBank() {
+    var urlGetBankName = url.replace('Action', 'GetBankName');
     $.ajax({
         type: 'POST',
-        url: '/Registration/GetBankName',
+        url: urlGetBankName,
         // data: {stateid:stateid},
         dataType: 'json',
         success: function (data) {
@@ -2537,9 +2565,10 @@ function GetDropDownBank() {
 }
 
 function GetDropDownTitle() {
+    var urlGetTitleName = url.replace('Action', 'GetTitleName');
     $.ajax({
         type: 'POST',
-        url: '/Registration/GetTitleName',
+        url: urlGetTitleName,
         // data: {stateid:stateid},
         dataType: 'json',
         success: function (data) {
@@ -2558,10 +2587,11 @@ function GetDropDownTitle() {
 }
 
 function BindDDlBankAccountType() {
+    var urlGetDataBankAccountType = url.replace('Action', 'GetDataBankAccountType');
     $.ajax({
         type: "POST",
         //async: false,
-        url: "/Account/GetDataBankAccountType",
+        url: urlGetDataBankAccountType,
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {

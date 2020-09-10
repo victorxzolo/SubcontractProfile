@@ -3,8 +3,12 @@
     var oTableAddress;
     var tbRevenue;
 var tbLocation;
-
+var url = null;
+var urlaccount = null;
 $(document).ready(function () {
+    url = $("#controllername").data("url");
+    urlaccount = $("#accountcontrollername").data("url");
+
         inittbSearchResult();
         inittbAddressResult();
         inittbRevenue();
@@ -38,9 +42,11 @@ $(document).ready(function () {
                     var data_row = oTableAddress.row($(this).closest('tr')).data();
                     oTableAddress.row($(this).closest('tr')).remove().draw();//เดี๋ยวกลับมาทำ
 
+                    var urlGetAddressById = url.replace('Action', 'GetAddressById');
+
                     $.ajax({
                         type: "POST",
-                        url: "/CompanyProfile/GetAddressById",
+                        url: urlGetAddressById,
                         data: {addressID: data_row.addressId },
                         dataType: "json",
                         success: function (data) {
@@ -147,9 +153,10 @@ $(document).ready(function () {
 
                 $('#tbAddressResult').on('click', 'tbody .delete_btn', function () {
                     var data_row = oTableAddress.row($(this).closest('tr')).data();
+                    var urlDeleteDaftAddress = url.replace('Action', 'DeleteDaftAddress');
                     $.ajax({
-        type: "POST",
-                        url: "/CompanyProfile/DeleteDaftAddress",
+                        type: "POST",
+                        url: urlDeleteDaftAddress,
                         data: {AddressId: data_row.addressId },
                         dataType: "json",
                         success: function (data) {
@@ -333,9 +340,9 @@ $(document).ready(function () {
         // });
 
 
-
+                    var urlSearchLocation = url.replace('Action', 'SearchLocation');
         $.ajax({
-            url: "/CompanyProfile/SearchLocation",
+            url: urlSearchLocation,
             type: "POST",
             data: {
                 asc_code: function () { return $('#txtasccodemodal').val() },
@@ -372,15 +379,16 @@ $(document).ready(function () {
 
                     var value = tbLocation.row($(this).closest('tr')).data();
                     var lo_id = value.location_id;
+                    var urlGetLocationSession = url.replace('Action', 'GetLocationSession');
                     $.ajax({
-        type: "POST",
-                        url: "/CompanyProfile/GetLocationSession",
+                        type: "POST",
+                        url: urlGetLocationSession,
                         dataType: "json",
                         data: {location_id: lo_id },
                         success: function (data) {
 
                             if (data.Response.Status) {
-        $('#txtlocationcode').val(data.LocationListModel[0].outLocationCode);
+                                $('#txtlocationcode').val(data.LocationListModel[0].outLocationCode);
                                 $('#txtlocationname').val(data.LocationListModel[0].outLocationName);
                                 $('#txtdistribution').val(data.LocationListModel[0].outDistChn);
                                 $('#txtchannelsalegroup').val(data.LocationListModel[0].outChnSales);
@@ -505,9 +513,10 @@ $(document).ready(function () {
         ClearDataModalRevenue()
     });
                 $('#btn_search_revenue_modal').click(function () {
-        //tbRevenue.ajax.reload();
+                    //tbRevenue.ajax.reload();
+                    var urlGetRevenue = url.replace('Action', 'GetRevenue');
         $.ajax({
-            url: "/CompanyProfile/GetRevenue",
+            url: urlGetRevenue,
             type: "POST",
             data: {
                 tIN: function () {
@@ -947,7 +956,8 @@ $(document).ready(function () {
 
 
 
-        function inittbSearchResult() {
+function inittbSearchResult() {
+    var urlSearch = url.replace('Action', 'Search');
         oTable = $('#tbSearchResult').DataTable({
             processing: true, // for show progress bar
             serverSide: true, // for process server side
@@ -972,7 +982,7 @@ $(document).ready(function () {
                 "thousands": "."
             },
             ajax: {
-                url: '/CompanyProfile/Search',
+                url: urlSearch,
                 type: "POST",
                 datatype: "JSON",
                 //dataSrc:"",
@@ -1112,9 +1122,10 @@ $(document).ready(function () {
 
         }
 
-        function getDataById(companyId) {
+function getDataById(companyId) {
+    var urlGetDataById = url.replace('Action', 'GetDataById');
         $.ajax({
-            url: '/CompanyProfile/GetDataById',
+            url: urlGetDataById,
             type: 'POST',
             data: { 'companyId': companyId },
             dataType: "json",
@@ -1247,9 +1258,9 @@ $(document).ready(function () {
 
         function GetAddress(companyId) {
         // inittbAddressResult(companyId);
-
+            var urlGetAddress = url.replace('Action', 'GetAddress');
         $.ajax({
-            url: "/CompanyProfile/GetAddress",
+            url: urlGetAddress,
             type: "POST",
             data: {
                 company: function () {
@@ -1334,10 +1345,11 @@ $(document).ready(function () {
         }
 
 
-        function SaveDaftAddress(stuff) {
+function SaveDaftAddress(stuff) {
+    var urlSaveDaftAddress = url.replace('Action', 'SaveDaftAddress');
         $.ajax({
             type: "POST",
-            url: "/CompanyProfile/SaveDaftAddress",
+            url: urlSaveDaftAddress,
             data: { daftdata: stuff },
             dataType: "json",
             success: function (data) {
@@ -1473,9 +1485,10 @@ function onSaveCompanyProfile() {
             company.CompanyTitleEnId= company_title_name_en;
             company.CompanyId = $('#hdCompanyId').val();
 
-            console.log(company);
+    console.log(company);
+    var urlOnSave= url.replace('Action', 'OnSave');
             $.ajax({
-                url:'/CompanyProfile/OnSave',
+                url: urlOnSave,
                 type: 'POST',
                 data: {'model': company },
                    dataType: "json",
@@ -1534,11 +1547,11 @@ function onSaveCompanyProfile() {
                 formData.append("Company", companyid);
             }
 
-
+            var urlUploadFile = url.replace('Action', 'UploadFile');
             $.ajax(
                 {
         type: "POST",
-                    url: "/CompanyProfile/UploadFile",
+                    url: urlUploadFile,
                     processData: false,
                     contentType: false,
                     dataType: "json",
@@ -1603,10 +1616,10 @@ function onSaveCompanyProfile() {
 
 
         function BindDDLprovince(regionid) {
-
+            var urlDDLsubcontract_profile_province = urlaccount.replace('Action', 'DDLsubcontract_profile_province');
         $.ajax({
             type: "POST",
-            url: "/Account/DDLsubcontract_profile_province",
+            url: urlDDLsubcontract_profile_province,
             data: { region_id: regionid },
             dataType: "json",
             success: function (data) {
@@ -1641,10 +1654,10 @@ function onSaveCompanyProfile() {
         }
 
         function BindDDLdistrict(province) {
-
+            var urlDDLsubcontract_profile_district = urlaccount.replace('Action', 'DDLsubcontract_profile_district');
         $.ajax({
             type: "POST",
-            url: "/Account/DDLsubcontract_profile_district",
+            url: urlDDLsubcontract_profile_district,
             data: { province_id: province },
             dataType: "json",
             success: function (data) {
@@ -1680,10 +1693,10 @@ function onSaveCompanyProfile() {
         }
 
         function BindDDLsubdistrict(district) {
-
+            var urlDDLsubcontract_profile_sub_district = urlaccount.replace('Action', 'DDLsubcontract_profile_sub_district');
         $.ajax({
             type: "POST",
-            url: "/Account/DDLsubcontract_profile_sub_district",
+            url: urlDDLsubcontract_profile_sub_district,
             data: { district_id: district },
             dataType: "json",
             success: function (data) {
@@ -1729,10 +1742,10 @@ function onSaveCompanyProfile() {
         }
 
         function BindDDLTitle() {
-
+            var urlDDLTitle = urlaccount.replace('Action', 'DDLTitle');
         $.ajax({
             type: "POST",
-            url: "/Account/DDLTitle",
+            url: urlDDLTitle,
             dataType: "json",
             success: function (data) {
 
@@ -1788,10 +1801,10 @@ function onSaveCompanyProfile() {
         }
 
         function BindRegion() {
-
+            var urlDDLsubcontract_profile_Region = urlaccount.replace('Action', 'DDLsubcontract_profile_Region');
         $.ajax({
             type: "POST",
-            url: "/Account/DDLsubcontract_profile_Region",
+            url: urlDDLsubcontract_profile_Region,
             //data: { province_id: province },
             dataType: "json",
             success: function (data) {
@@ -1827,10 +1840,10 @@ function onSaveCompanyProfile() {
         }
 
         function BindDDLBank() {
-
+            var urlDDLBank = urlaccount.replace('Action', 'DDLBank');
         $.ajax({
             type: "POST",
-            url: "/Account/DDLBank",
+            url: urlDDLBank,
             //data: { province_id: province },
             dataType: "json",
             success: function (data) {
@@ -1866,10 +1879,10 @@ function onSaveCompanyProfile() {
 }
 
 function BindDDlBankAccountType() {
-    
+    var urlGetDataBankAccountType= url.replace('Action', 'GetDataBankAccountType');
     $.ajax({
         type: "POST",
-        url: "/CompanyProfile/GetDataBankAccountType",
+        url: urlGetDataBankAccountType,
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {

@@ -1,8 +1,11 @@
 ﻿
 @{ Layout = "~/Views/Shared/_Layout.cshtml"; ViewBag.Title = "Company Profile";
 }
-<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
 
+<div id="controllername" data-url="@Url.Action("Action", "CompanyProfile")"></div>
+<div id="accountcontrollername" data-url="@Url.Action("Action", "Account")"></div>
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
     <div class="skills layout-spacing ">
         <div class="widget-content widget-content-area">
             <h3 class="">ข้อมูลบริษัท</h3>
@@ -493,14 +496,14 @@
 
                             <div class="col-sm-3">
                                 @*<div class="n-chk">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrbranch" value="01" required>
-                                        <label class="custom-control-label" for="chkaddrbranch">TEST</label>
-                                    </div>
-                                </div>*@
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" name="address_type_id" id="chkaddrbranch" value="01" required>
+                                            <label class="custom-control-label" for="chkaddrbranch">TEST</label>
+                                        </div>
+                                    </div>*@
                                 <div class="n-chk">
                                     <label class="new-control new-checkbox checkbox-primary">
-                                        <input id="chkLocationBranch" type="checkbox" name="address_type_id" class="new-control-input" value="01" required >
+                                        <input id="chkLocationBranch" type="checkbox" name="address_type_id" class="new-control-input" value="01" required>
                                         <span class="new-control-indicator"></span>ที่อยู่ตามที่ตั้งสาขา
                                     </label>
                                 </div>
@@ -514,14 +517,14 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="n-chk">
-                                    <label class="new-control new-checkbox checkbox-primary"> 
-                                        <input id="chkLocationTax" type="checkbox"name="address_type_id" class="new-control-input" value="02" required>
+                                    <label class="new-control new-checkbox checkbox-primary">
+                                        <input id="chkLocationTax" type="checkbox" name="address_type_id" class="new-control-input" value="02" required>
                                         <span class="new-control-indicator"></span>ที่อยู่ตามใบกำกับภาษี
                                     </label>
                                 </div>
                                 <div class="n-chk">
                                     <label class="new-control new-checkbox checkbox-primary">
-                                        <input id="chkLocationShip" type="checkbox"name="address_type_id" class="new-control-input" value="05" required>
+                                        <input id="chkLocationShip" type="checkbox" name="address_type_id" class="new-control-input" value="05" required>
                                         <span class="new-control-indicator"></span>ที่อยู่จัดส่งสินค้า
                                     </label>
                                 </div>
@@ -531,13 +534,13 @@
                             <div class="col-sm-3">
                                 <div class="n-chk">
                                     <label class="new-control new-checkbox checkbox-primary">
-                                        <input id="chkLocationWT" type="checkbox"name="address_type_id" class="new-control-input" value="03" required>
+                                        <input id="chkLocationWT" type="checkbox" name="address_type_id" class="new-control-input" value="03" required>
                                         <span class="new-control-indicator"></span>ที่อยู่ตาม W/T
                                     </label>
                                 </div>
                                 <div class="n-chk">
                                     <label class="new-control new-checkbox checkbox-primary">
-                                        <input id="chkLocationShipPOP" type="checkbox"name="address_type_id" class="new-control-input" value="06" required> 
+                                        <input id="chkLocationShipPOP" type="checkbox" name="address_type_id" class="new-control-input" value="06" required>
                                         <span class="new-control-indicator"></span>ที่อยู่จัดส่ง POP
                                     </label>
                                 </div>
@@ -962,7 +965,7 @@
                                     <label class="custom-file-label " for="inputUploadcertificate" id="lbuploadcertificate">เลือกไฟล์</label>
                                     @*</div>*@
                                     @*<small id="uploadlHelp2" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>*@
-                                <small id="uploadlHelp2" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>
+                                    <small id="uploadlHelp2" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>
                                     <div class="invalid-feedback">กรุณาอัพโหลดไฟล์ หนังสือรับรองบริษัท</div>
                                 </div>
                             </div>
@@ -978,7 +981,7 @@
                                     <label class="custom-file-label " for="inputUploadComRegis" id="lbuploadComRegis">เลือกไฟล์</label>
                                     @*</div>*@
                                     @*<small id="uploadlHelp3" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>*@
-                                <small id="uploadlHelp3" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>
+                                    <small id="uploadlHelp3" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>
                                     <div class="invalid-feedback">กรุณาอัพโหลดไฟล์ หนังสือทะเบียนพานิช</div>
                                 </div>
                             </div>
@@ -997,7 +1000,7 @@
                                     <label class="custom-file-label" for="inputUpload20" id="lbupload20">เลือกไฟล์</label>
                                     @*</div>*@
                                     @*<small id="uploadlHelp4" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>*@
-                                <small id="uploadlHelp4" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>
+                                    <small id="uploadlHelp4" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>
                                     <div class="invalid-feedback">กรุณาอัพโหลดไฟล์ หนังสือ ภ.พ. 20</div>
                                 </div>
                             </div>
@@ -1011,7 +1014,7 @@
 
                 </div>
 
-              
+
                 @*<input type="hidden" id="hdCompanyId">*@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">

@@ -1,10 +1,10 @@
 ﻿
 
-
+var url = null;
  var tbSearchconfirmpayment;
 
 $(document).ready(function () {
-
+    url = $("#controllername").data("url");
     $("#ConfirmPayment").hide();
     $("#btnconfirmpayment").hide();
 
@@ -234,11 +234,11 @@ function CheckFileUpload(inputId) {
         formData.append("files", files[i]);
     }
 
-
+    var urlCheckFileUpload = url.replace('Action', 'CheckFileUpload');
     $.ajax(
         {
             type: "POST",
-            url: "/Payment/CheckFileUpload",
+            url: urlCheckFileUpload,
             processData: false,
             contentType: false,
             dataType: "json",
@@ -275,7 +275,7 @@ function CheckFileUpload(inputId) {
 }
 
 function inittbSearchconfirmpayment() {
-
+    var urlSearchconfirmpayment = url.replace('Action', 'Searchconfirmpayment');
     tbSearchconfirmpayment = $('#tbSearchconfirmpayment').DataTable({
         processing: true, // for show progress bar
         serverSide: true, // for process server side
@@ -301,7 +301,7 @@ function inittbSearchconfirmpayment() {
         },
         ajax: {
             type: "POST",
-            url: "/Payment/Searchconfirmpayment",
+            url: urlSearchconfirmpayment,
             dataType: "json",
             data: {
                 Paymentno: function () { return $('#paymentno').val(); },
@@ -375,9 +375,10 @@ function inittbSearchconfirmpayment() {
 }
 
 function getDropDownPaymentChannal() {
+    var urlpaymentchannal = url.replace('Action', 'paymentchannal');
     $.ajax({
         type: "GET",
-        url: "/Payment/paymentchannal",
+        url: urlpaymentchannal,
         processData: false,
         contentType: false,
         async: false,
@@ -402,10 +403,10 @@ function confirmpayment() {
     data.append("branch", $('#branch').val());
     data.append("credit", $("#credit").get(0).files[0]);
     data.append("Note", $('#Note').val());
-
+    var urlconfirmpayment = url.replace('Action', 'confirmpayment');
     $.ajax({
         type: "POST",
-        url: "/Payment/confirmpayment",
+        url: urlconfirmpayment,
         data: data,
         processData: false,
         contentType: false,
@@ -424,10 +425,10 @@ function confirmpayment() {
 }
 
 function GetIdpayment(paymentId, status) {
-
+    var urlGetByPaymentId = url.replace('Action', 'GetByPaymentId');
     $.ajax({
         type: "GET",
-        url: "/Payment/GetByPaymentId/?id=" + paymentId,
+        url: urlGetByPaymentId+"?id=" + paymentId,
         processData: false,
         contentType: false,
         async: false,
@@ -453,8 +454,9 @@ function GetIdpayment(paymentId, status) {
 }
 
 function DownloadFileSlip(filename) {
+    var urlDownloadfileConfirm = url.replace('Action', 'DownloadfileConfirm');
 
-    $('#linkdownload').attr("href", '/Payment/DownloadfileConfirm?paymentid=' + $('#hdpaymentId').val() + '&&filename=' + filename);
+    $('#linkdownload').attr("href", urlDownloadfileConfirm+'?paymentid=' + $('#hdpaymentId').val() + '&&filename=' + filename);
 
 }
 
@@ -583,10 +585,10 @@ function UpdatePayment(PaymentId) {
     data.append("FileSilp", $('#slip_attach_file').get(0).files[0]);
     data.append("Remark ", $('#remark').val());
     data.append("Status", 'Y');
-
+    var urlUpdatepayment = url.replace('Action', 'Updatepayment');
     $.ajax({
         type: "POST",
-        url: "/Payment/Updatepayment",
+        url: urlUpdatepayment,
         data: data,
         processData: false,
         contentType: false,
@@ -652,10 +654,10 @@ function closepayment() {
 }
 
 function Getpaymentchannal() {
-
+    var urlBindDataTypeTransfer = url.replace('Action', 'BindDataTypeTransfer');
     $.ajax({
         type: "POST",
-        url: "/Payment/BindDataTypeTransfer",
+        url: urlBindDataTypeTransfer,
         processData: false,
         contentType: false,
         async: false,
@@ -683,9 +685,10 @@ function Getpaymentchannal() {
 function GetpaymentchannalById(id) {
     var dropdown;
     var strdropdown_text = '';
+    var urlpaymentchannal = url.replace('Action', 'paymentchannal');
     $.ajax({
         type: "GET",
-        url: "/Payment/paymentchannal",
+        url: urlpaymentchannal,
         processData: false,
         contentType: false,
         async: false,
@@ -706,10 +709,10 @@ function GetpaymentchannalById(id) {
 function GetDetailpaymentchannal() {
     var datapayment;
     var strGetDetailpaymentchannal = '';
-
+    var urlGetDataBankPayment = url.replace('Action', 'GetDataBankPayment');
     $.ajax({
         type: "POST",
-        url: "/Payment/GetDataBankPayment",
+        url: urlGetDataBankPayment,
         processData: false,
         contentType: false,
         async: false,
@@ -744,10 +747,10 @@ function GetDetailpaymentchannal() {
 }
 
 function GetBankTransfer() {
-
+    var urlDDLBank = url.replace('Action', 'DDLBank');
     $.ajax({
         type: "POST",
-        url: "/Payment/DDLBank",
+        url: urlDDLBank,
         processData: false,
         contentType: false,
         async: false,
@@ -769,10 +772,10 @@ function GetBankTransfer() {
 }
 
 function GetStatus() {
-
+    var urlGetDataStatus = url.replace('Action', 'GetDataStatus');
     $.ajax({
         type: "POST",
-        url: "/Payment/GetDataStatus",
+        url: urlGetDataStatus,
         async: false,
         success: function (data) {
             if (data != null) {

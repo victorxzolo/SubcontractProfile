@@ -3,6 +3,8 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+<div id="controllername" data-url="@Url.Action("Action", "Payment")"></div>
+
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
     <div class="skills layout-spacing">
         <div class="widget-content widget-content-area">
@@ -18,13 +20,13 @@
                         <input type="text" class="form-control" id="txttaxid" />
                     </div>
                     @*<div class="form-group col-md-6">
-                        <label for="txttaxid">Location Name</label>
-                        <select class="form-control" id="ddlLocation"></select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="txttaxid">Team Name</label>
-                        <select class="form-control" id="ddlTeam"></select>
-                    </div>*@
+                            <label for="txttaxid">Location Name</label>
+                            <select class="form-control" id="ddlLocation"></select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="txttaxid">Team Name</label>
+                            <select class="form-control" id="ddlTeam"></select>
+                        </div>*@
                     <div class="form-group col-md-6">
                         <label for="txttaxid">Payment No</label>
                         <input type="text" class="form-control" id="txtpayment" />
@@ -80,8 +82,8 @@
                             <th scope="col">Company Name</th>
                             <th scope="col">Tax ID</th>
                             @*<th scope="col">Location Name</th>
-                            <th scope="col">Team Name </th>
-                            <th scope="col">Engineer Name</th>*@
+                                <th scope="col">Team Name </th>
+                                <th scope="col">Engineer Name</th>*@
                             <th scope="col">Paid Date Time</th>
                             <th scope="col">Payment Status</th>
                             <th scope="col">ยอดโอน(บาท)</th>
@@ -219,7 +221,7 @@
                                     @*<img id="ItemPreview" src="" class="img-thumbnail" style="width: 300px; height: 300px;"/>*@
                                     <a id="linkdownload" href="#" target="_blank"></a>
                                 </div>
-                              
+
 
                                 <small id="uploadlHelp1" class="form-text text-muted">
                                     ขนาดไฟล์ไม่เกิน 3 Mb และไฟล์ประกอบประเภท PDF หรือ JPG,JPEG,PNG เท่านั้น
@@ -289,9 +291,9 @@
                             ปิด
                         </button>
                         <button id="btnSave" type="button" class="btn btn-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                                บันทึก
-                         </button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                            บันทึก
+                        </button>
                     </div>
                 </form>
             </div>
@@ -301,4 +303,4 @@
 </div>
 
 
-    <script src="~/Scripts/View/VerifyPayment.js"></script>
+<script src="~/Scripts/View/VerifyPayment.js"></script>

@@ -1,8 +1,9 @@
 ﻿var oTable;
-
+var url = null;
 
 
 $(document).ready(function () {
+    url = $("#controllername").data("url");
    // BindDDLStatus();
     inittbSearchResult();
     $('#regisdatefrom').datetimepicker({
@@ -42,12 +43,12 @@ $(document).ready(function () {
         //var dd = $("#dateregisfrom").val()
         //console.log(dd);
     });
-
+    var urlGetCompany = url.replace('Action', 'GetCompany');
     $('#txtcompanyname').autocomplete({
         lookup: function (query, done) {
             $.ajax({
                 type: "POST",
-                url: "/Registration/GetCompany",
+                url: urlGetCompany,
                 data: { companyname: query },
                 dataType: "json",
                 success: function (data) {
@@ -99,10 +100,10 @@ $(document).ready(function () {
        
     });
     function BindDDLStatus() {
-
+        var urlDDLStatus = url.replace('Action', 'DDLStatus');
         $.ajax({
             type: "POST",
-            url: "/Registration/DDLStatus",
+            url: urlDDLStatus,
             dataType: "json",
             success: function (data) {
 
@@ -134,7 +135,7 @@ $(document).ready(function () {
         });
     }
     function inittbSearchResult() {
-
+        var urlSearch = url.replace('Action', 'Search');
         oTable = $('#tbSearchComVerifyResult').DataTable({
             processing: true, // for show progress bar
             serverSide: true, // for process server side
@@ -159,7 +160,7 @@ $(document).ready(function () {
                 "thousands": "."
             },
             ajax: {
-                url: '/Registration/Search',
+                url: urlSearch,
                 type: "POST",
                 datatype: "JSON",
                 //dataSrc:"",
