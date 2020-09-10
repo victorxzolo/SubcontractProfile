@@ -14,8 +14,6 @@ $(document).ready(function () {
         $(this).is(':checked') ? $('#txtpassword').attr('type', 'text') : $('#txtpassword').attr('type', 'password');
 
     });
-
-
     $('#btnsignin').click(function (event) {
 
 

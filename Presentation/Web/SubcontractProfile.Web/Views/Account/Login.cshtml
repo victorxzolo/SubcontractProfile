@@ -1,5 +1,5 @@
 ﻿@{
-Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 
 }
 <style>
@@ -22,7 +22,9 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
             margin: 0px 8px;
         }
 </style>
+
 <div id="controllername" data-url="@Url.Action("Action", "Account")"></div>
+
 
 <div class="login-container">
     <div class="row justify-content-center">
@@ -66,8 +68,8 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                                 <div class="input-group p-0 ">
                                     <input type="password" id="txtpassword" class="form-control inputValidation" name="password" autocomplete="new-password" placeholder="รหัสผ่าน" maxlength="50" required>
                                     @*<div class="input-group-append input-group-addon ">
-                        <span class="input-group-text px-4 toggle-password"><i class="fa fa-eye-slash"></i></span>
-                    </div>*@
+                                            <span class="input-group-text px-4 toggle-password"><i class="fa fa-eye-slash"></i></span>
+                                        </div>*@
 
                                     <div class="invalid-tooltip">
                                         กรุณาระบุรหัสผ่าน
@@ -81,18 +83,18 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                         </div>
                         @*<div class="row">
 
-            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                <div class="form-group">
-                    <select class="custom-select" id="ddlLanguage">
-                        <option value="">Select Language</option>
-                        <option value="TH">Thai</option>
-                        <option value="EN">English</option>
-                    </select>
-                </div>
-            </div>
+                                <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                                    <div class="form-group">
+                                        <select class="custom-select" id="ddlLanguage">
+                                            <option value="">Select Language</option>
+                                            <option value="TH">Thai</option>
+                                            <option value="EN">English</option>
+                                        </select>
+                                    </div>
+                                </div>
 
 
-        </div>*@
+                            </div>*@
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                                 <div class="form-group row">
@@ -114,34 +116,34 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                                 <div class="form-group row">
                                     @*<div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
 
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="chkkeep">
-                            <label class="custom-control-label" for="chkkeep">
-                                Keep me sign in
-                            </label>
-                        </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="chkkeep">
+                                                <label class="custom-control-label" for="chkkeep">
+                                                    Keep me sign in
+                                                </label>
+                                            </div>
 
-                    </div>*@
+                                        </div>*@
                                     @*<div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
 
-                        <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" name="optionsRadios" id="chktypeW" value="W" checked>
-                            <label class="custom-control-label" for="chktypeW">
-                                Waiting Activate
-                            </label>
-                        </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" name="optionsRadios" id="chktypeW" value="W" checked>
+                                                <label class="custom-control-label" for="chktypeW">
+                                                    Waiting Activate
+                                                </label>
+                                            </div>
 
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                        <div class="custom-control custom-radio">
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                            <div class="custom-control custom-radio">
 
-                            <input type="radio" class="custom-control-input" name="optionsRadios" id="chktypeP" value="P">
-                            <label class="custom-control-label" for="chktypeP">
-                                Profile Activate
-                            </label>
-                        </div>
+                                                <input type="radio" class="custom-control-input" name="optionsRadios" id="chktypeP" value="P">
+                                                <label class="custom-control-label" for="chktypeP">
+                                                    Profile Activate
+                                                </label>
+                                            </div>
 
-                    </div>*@
+                                        </div>*@
                                 </div>
                             </div>
 
@@ -156,7 +158,7 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
                         <div class="form-group">
                             <div class="hr-sect">ยังไม่มีบัญชี?</div>
                         </div>
-                       
+
                         <div class="form-group">
                             <button type="button" class="btn btn-secondary btn-block" id="btnnewregis" onclick=" location.href='@Url.Action("Register", "Account")'"> สมัครใช้บริการ Subcontract profile</button>
                         </div>
@@ -173,10 +175,13 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 
         </div>
     </div>
-    
+
 
 
 </div>
 
 
-<script src="~/Scripts/View/Login.js"></script>
+
+@section scripts{
+    <script src="~/Scripts/View/Login.js"></script>
+}
