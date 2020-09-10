@@ -1,4 +1,8 @@
-﻿$(document).ready(function () {
+﻿var url = null;
+
+$(document).ready(function () {
+
+    url = $("#controllername").data("url");
 
     //$('.toggle-password').click(function () {
     //    $(this).children().toggleClass('fa-eye-slash fa-eye');
@@ -31,9 +35,10 @@
                             keepme: $('#chkkeep').is(':checked') ? true : false,
                             Language: $('#ddlLanguage option').filter(':selected').val()
                         }
+                        var urlLogin = url.replace('Action', 'Login');
                         $.ajax({
                             type: "POST",
-                            url: "/Account/Login",
+                            url: urlLogin,
                             data: {model: modelpass},
                             dataType: "json",
                             async: false,
