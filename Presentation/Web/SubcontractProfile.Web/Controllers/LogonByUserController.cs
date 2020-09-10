@@ -120,7 +120,7 @@ namespace SubcontractProfile.Web.Controllers
                     {
                         res.Status = true;
                         SessionHelper.SetObjectAsJson(HttpContext.Session, "userAISLogin", authenticatedUser);
-                        Url = "/Registration/SearchCompanyVerify";
+                        Url = "~/Registration/SearchCompanyVerify";
 
                         res.Status = true;
                         Lang = model.Language != null ? model.Language : "TH";
@@ -153,7 +153,8 @@ namespace SubcontractProfile.Web.Controllers
 
                 //}
             }
-
+            // return  RedirectToAction("SearchCompanyVerify", "Registration");
+       
             return Json(new { redirecturl = Url, Response = res });
         }
 

@@ -214,14 +214,14 @@
                         }
                         $.ajax({
                             type: "POST",
-                            url: "/LogonByUser/Login",
+                            url: '@Url.Action("Login", "LogonByUser")',
                             data: { model: modelpass },
                             dataType: "json",
                             async: false,
                             success: function (data) {
 
                                 if (data.Response.Status) {
-                                    window.location.href = data.redirecturl;
+                                    window.location.href = '@Url.Action("SearchCompanyVerify", "Registration")';//data.redirecturl;
                                 }
                                 else {
                                     showFeedback("error", data.Response.Message, "System Information",
@@ -272,5 +272,5 @@
         function forgotpassword() {
 
         }
-        </script>
+    </script>
 }
