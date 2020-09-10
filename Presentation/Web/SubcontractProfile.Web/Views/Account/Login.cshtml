@@ -224,7 +224,7 @@
                         success: function (data) {
 
                             if (data.Response.Status) {
-                                window.location.href = data.redirecturl;
+                                window.location.href = '@Url.Action("Index", "CompanyProfile")';//data.redirecturl;
                             }
                             else {
                                 showFeedback("error", data.Response.Message, "System Information",
