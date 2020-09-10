@@ -88,7 +88,7 @@ namespace SubcontractProfile.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult LoginGetUser(LoginModel model)
+        public IActionResult Login(LoginModel model)
         {
             ResponseModel res = new ResponseModel();
             string Url = "";
