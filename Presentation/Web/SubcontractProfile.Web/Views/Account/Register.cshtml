@@ -12,6 +12,8 @@
 <!-- Include SmartWizard JavaScript source -->
 <script type="text/javascript" src="~/dist/js/jquery.smartWizard.min.js"></script>
 
+<div id="controllername" data-url="@Url.Action("Action", "Account")"></div>
+
 <div class="row justify-content-center">
     <div class="grid-margin stretch-card col-md-12 ">
         @*<div class="card shadow p-3 mb-5 bg-white rounded">*@
@@ -21,6 +23,7 @@
             </div>
         </div>
 
+        <button class=" btn btn-danger" type="button" id="btnTestNas">TEST NAS</button>
         @*<div class="card-body">*@
 
         @*<div class="form-group">*@

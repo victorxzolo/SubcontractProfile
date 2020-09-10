@@ -2,9 +2,9 @@
 var tbRevenue;
 var tbaddressstep2;
 var tbaddressstep5;
-
+var url = null;
 $(document).ready(function () {
-
+    url = $("#controllername").data("url");
     var step = "";
 
     $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
@@ -263,10 +263,13 @@ $(document).ready(function () {
       Loading();
         var value = tbLocation.rows('.selected').data();
         var lo_id = value[0].location_id;
+
+        var urlLocation = url.replace('Action', 'GetLocationSession');
+
         $.ajax({
             type: "POST",
             async: false,
-            url: "/Account/GetLocationSession",
+            url: urlLocation,
             dataType: "json",
             data: { location_id: lo_id},
             success: function (data) {
@@ -547,10 +550,12 @@ $(document).ready(function () {
         var data_row = tbaddressstep2.row($(this).closest('tr')).data();
         tbaddressstep2.row($(this).closest('tr')).remove().draw();//เดี๋ยวกลับมาทำ 
 
+        var urlAddress = url.replace('Action', 'GetDaftAddress');
+
         $.ajax({
             type: "POST",
             async: false,
-            url: "/Account/GetDaftAddress",
+            url: urlAddress,
             data: { AddressId: data_row.addressId },
             dataType: "json",
             success: function (data) {
@@ -650,10 +655,13 @@ $(document).ready(function () {
 
     $('#tbaddressstep2').on('click', 'tbody .delete_btn', function () {
         var data_row = tbaddressstep2.row($(this).closest('tr')).data();
+
+        var urlAddress = url.replace('Action', 'DeleteDaftAddress');
+
         $.ajax({
             type: "POST",
             async: false,
-            url: "/Account/DeleteDaftAddress",
+            url: urlAddress,
             data: { AddressId: data_row.addressId },
             dataType: "json",
             success: function (data) {
@@ -941,11 +949,11 @@ $(document).ready(function () {
             //commercial_registration_file: $('#commercial_registration_file').val(),
             //vat_registration_certificate_file: $('#vat_registration_certificate_file').val(),
         }
-
+        var urlNewRegister = url.replace('Action', 'NewRegister');
         $.ajax({
             type: "POST",
             async: false,
-            url: "/Account/NewRegister",
+            url: urlNewRegister,
             data: { model: data },
             dataType: "json",
             success: function (data) {
@@ -994,6 +1002,9 @@ $(document).ready(function () {
 });
 
 function inittaLocation() {
+
+    var urlSearchLocation = url.replace('Action', 'SearchLocation');
+
      tbLocation = $('#tblocationModal').DataTable({
         ordering: true,
         select: true,
@@ -1009,7 +1020,7 @@ function inittaLocation() {
         ajax: {
             type: "POST",
             async: false,
-            url: "/Account/SearchLocation",
+            url: urlSearchLocation,
             data: {
                 asc_code: function () { return $('#txtasccodemodal').val() },
                 asc_mobile_no: function () { return $('#txtmobilenomodal').val() },
@@ -1061,6 +1072,9 @@ function inittaLocation() {
 }
 
 function inttbRevenue() {
+
+    var urlGetRevenue = url.replace('Action', 'GetRevenue');
+
     tbRevenue = $('#tbrevenueModal').DataTable({
         ordering: true,
         select: true,
@@ -1076,7 +1090,7 @@ function inttbRevenue() {
         ajax: {
             type: "POST",
             async: false,
-            url: "/Account/GetRevenue",
+            url: urlGetRevenue,
             data: {
                 tIN: function () { return $('#txtsearchrevenue').val() }
             },
@@ -1156,6 +1170,9 @@ function Comparepassword() {
 
 
 function inttbAddress2() {
+
+    var urlSearchAddress = url.replace('Action', 'SearchAddress');
+
      tbaddressstep2 = $('#tbaddressstep2').DataTable({
         ordering: true,
         order: [[1, "asc"]],
@@ -1172,7 +1189,7 @@ function inttbAddress2() {
         ajax: {
             type: "POST",
             async: false,
-            url: "/Account/SearchAddress",
+            url: urlSearchAddress,
             dataSrc: function (data) {
                 Loading(0);
                 var val = []
@@ -1252,11 +1269,12 @@ function uploadFiles(inputId) {
         formData.append("type_file", typefile);
     }
 
+    var urlUploadFile = url.replace('Action', 'UploadFile');
 
     $.ajax(
         {
             type: "POST",
-            url: "/Account/UploadFile",
+            url: urlUploadFile,
             processData: false,
             contentType: false,
             dataType: "json",
@@ -1345,11 +1363,14 @@ function inttbAddress5() {
 }
 
 function BindDataAddress() {
+
+    var urlGetDaftAddress = url.replace('Action', 'GetDaftAddress');
+
     Loading();
     $.ajax({
         type: "POST",
         async: false,
-        url: "/Account/GetDaftAddress",
+        url: urlGetDaftAddress,
         data: { address_type_id: null },
         dataType: "json",
         success: function (data) {
@@ -1541,11 +1562,14 @@ function ConcatstrAddress(data) {
 }
 
 function SaveDaftAddress(stuff) {
+
+    var urlSaveDaftAddress = url.replace('Action', 'SaveDaftAddress');
+
     Loading();
     $.ajax({
         type: "POST",
         async: false,
-        url: "/Account/SaveDaftAddress",
+        url: urlSaveDaftAddress,
         data: { daftdata: stuff },
         dataType: "json",
         success: function (data) {
@@ -1587,11 +1611,14 @@ function SaveDaftAddress(stuff) {
 
 
 function BindDDLprovince(regionid) {
+
+    var urlDDLsubcontract_profile_province = url.replace('Action', 'DDLsubcontract_profile_province');
+
     Loading();
     $.ajax({
         type: "POST",
         //async: false,
-        url: "/Account/DDLsubcontract_profile_province",
+        url: urlDDLsubcontract_profile_province,
         data: { region_id: regionid },
         dataType: "json",
         success: function (data) {
@@ -1613,11 +1640,11 @@ function BindDDLprovince(regionid) {
 }
 
 function BindDDLdistrict(province) {
-
+    var urlDDLsubcontract_profile_district = url.replace('Action', 'DDLsubcontract_profile_district');
     $.ajax({
         type: "POST",
         //async: false,
-        url: "/Account/DDLsubcontract_profile_district",
+        url: urlDDLsubcontract_profile_district,
         data: { province_id: province },
         dataType: "json",
         success: function (data) {
@@ -1639,11 +1666,11 @@ function BindDDLdistrict(province) {
 }
 
 function BindDDLsubdistrict(district) {
-    
+    var urlDDLsubcontract_profile_sub_district = url.replace('Action', 'DDLsubcontract_profile_sub_district');
     $.ajax({
         type: "POST",
         //async: false,
-        url: "/Account/DDLsubcontract_profile_sub_district",
+        url: urlDDLsubcontract_profile_sub_district,
         data: { district_id: district},
         dataType: "json",
         success: function (data) {
@@ -1672,11 +1699,13 @@ function BindDDLsubdistrict(district) {
 }
 
 function BindDDLTitle() {
+
+    var urlDDLTitle = url.replace('Action', 'DDLTitle');
     //Loading();
     $.ajax({
         type: "POST",
         //async: false,
-        url: "/Account/DDLTitle",
+        url: urlDDLTitle,
         dataType: "json",
         success: function (data) {
             //Loading(0);
@@ -1719,10 +1748,11 @@ function BindDDLTitle() {
 
 function BindRegion() {
     Loading();
+    var urlDDLsubcontract_profile_Region = url.replace('Action', 'DDLsubcontract_profile_Region');
     $.ajax({
         type: "POST",
         //async: false,
-        url: "/Account/DDLsubcontract_profile_Region",
+        url: urlDDLsubcontract_profile_Region,
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
@@ -1745,11 +1775,12 @@ function BindRegion() {
 }
 
 function BindDDLBank() {
+    var urlDDLBank = url.replace('Action', 'DDLBank');
     Loading();
     $.ajax({
         type: "POST",
        // async: false,
-        url: "/Account/DDLBank",
+        url: urlDDLBank
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
@@ -1773,10 +1804,11 @@ function BindDDLBank() {
 
 function BindDDLCompanyType() {
     Loading();
+    var urlDDLCompanyType = url.replace('Action', 'DDLCompanyType');
     $.ajax({
         type: "POST",
         //async: false,
-        url: "/Account/DDLCompanyType",
+        url: urlDDLCompanyType,
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
@@ -1799,11 +1831,12 @@ function BindDDLCompanyType() {
 }
 
 function BindAddressType() {
+    var urlGetAddressType = url.replace('Action', 'GetAddressType');
     Loading();
     $.ajax({
         type: "POST",
         async: false,
-        url: "/Account/GetAddressType",
+        url: urlGetAddressType,
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
@@ -1836,10 +1869,11 @@ function BindAddressType() {
 
 function BindDDlBankAccountType() {
     Loading();
+    var urlGetDataBankAccountType = url.replace('Action', 'GetDataBankAccountType');
     $.ajax({
         type: "POST",
         //async: false,
-        url: "/Account/GetDataBankAccountType",
+        url: urlGetDataBankAccountType,
         //data: { province_id: province },
         dataType: "json",
         success: function (data) {
@@ -1875,10 +1909,13 @@ function isEmail(email) {
 }
 
 function CheckUsername() {
+
+    var urlCheckUsername = url.replace('Action', 'CheckUsername');
+
      var jqXHR = $.ajax({
         type: "POST",
         async: false,
-        url: "/Account/CheckUsername",
+         url: urlCheckUsername,
         data: { username: $('#txtcreateuser').val() },
         dataType: "json",
         //success: function (res) {
