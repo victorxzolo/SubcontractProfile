@@ -34,16 +34,19 @@ $(document).ready(function () {
                             Language: $('#ddlLanguage option').filter(':selected').val()
                         }
                         var urlLogin = url.replace('Action', 'Login');
+                       
                         $.ajax({
                             type: "POST",
-                            url: urlLogin,
+                            url: urlLogin, //$("#hdLogin").val(),
                             data: {model: modelpass},
                             dataType: "json",
                             async: false,
                             success: function (data) {
 
                                 if (data.Response.Status) {
-                                    window.location.href = data.redirecturl;
+                              
+                                    window.location.href = $("#hdCompanyProfile").val();// data.redirecturl;
+                                   
                                 }
                                 else {
                                     showFeedback("error", data.Response.Message, "System Information",
@@ -70,6 +73,8 @@ $(document).ready(function () {
      
     });
 });
+
+
 
 function check() {
     var errorMessage = $("#idmsAlert");

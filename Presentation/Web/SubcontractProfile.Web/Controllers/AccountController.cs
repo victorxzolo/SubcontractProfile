@@ -28,6 +28,8 @@ using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.EntityFrameworkCore.Update.Internal;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -155,10 +157,11 @@ namespace SubcontractProfile.Web.Controllers
                    
                 //}
             }
-
+           // return RedirectToAction("Index", "CompanyProfile");
             return Json(new { redirecturl = Url ,Response= res });
         }
 
+       
 
         public SubcontractProfileUserModel GetUser(string userName,string password)
         {
