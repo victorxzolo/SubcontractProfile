@@ -54,7 +54,7 @@ namespace SubcontractProfile.Web.Controllers
             strpathASCProfile = _configuration.GetValue<string>("PathASCProfile:DEV").ToString();
 
             //NSA
-            PathNas = _configuration.GetValue<string>("PathUploadfile:NAS").ToString();
+           // PathNas = _configuration.GetValue<string>("PathUploadfile:NAS").ToString();
         }
 
         #region Login
@@ -963,12 +963,11 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                //string uriString = string.Format("http://10.138.34.60:8080/phxPartner/v1/partner/ChannelASCProfile.json?filter=(&(inSource={0})(inEvent={1})" +
-                //                                 "(inASCCode={2})(inASCMobileNo={3})(inIdNo={4})(inLocationCode={5})(inSAPCode={6})(inUserID={7}))"
-                //                                , "FBB", "evLocationInfo",model.asc_code,model.asc_mobile_no,model.id_Number,model.location_code,model.sap_code,
-                //                                model.user_id);
+
                 string uriString = string.Format(strpathASCProfile, "FBB", "evLocationInfo", model.asc_code, model.asc_mobile_no, model.id_Number
                                             , model.location_code, model.sap_code, model.user_id);
+
+
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {

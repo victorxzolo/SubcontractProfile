@@ -54,7 +54,7 @@ namespace SubcontractProfile.Web.Controllers
 
 
             //NSA
-            PathNas = _configuration.GetValue<string>("PathUploadfile:NAS").ToString();
+            //PathNas = _configuration.GetValue<string>("PathUploadfile:NAS").ToString();
         }
 
         // GET: CompanyProfileController
@@ -1266,40 +1266,64 @@ namespace SubcontractProfile.Web.Controllers
         {
             string str = "";
             var output = new List<SubcontractDropdownModel>();
+
+            string username = @"10.137.32.9\nas_fixedbb";
+            string password = "Ais2018fixedbb";
+            string destNAS = @"\\10.137.32.9\fbb_idcard_ndev001b" ;
+
             try
             {
-                HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+                //HttpClient client = new HttpClient();
+                //client.DefaultRequestHeaders.Accept.Add(
+                //new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "nas_subcontract");
+                //string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "nas_subcontract");
 
-                HttpResponseMessage response = client.GetAsync(uriString).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var v = response.Content.ReadAsStringAsync().Result;
-                    output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
-                }
-                if (output != null)
-                {
-                    using (var impersonator = new Impersonator(output[0].value1, output[0].value2, output[0].dropdown_text, false))
+                //HttpResponseMessage response = client.GetAsync(uriString).Result;
+                //if (response.IsSuccessStatusCode)
+                //{
+                //    var v = response.Content.ReadAsStringAsync().Result;
+                //    output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+                //}
+                //if (output != null)
+                //{
+                   
+                   
+
+                    using (var impersonator = new Impersonator(username, password, destNAS, false))
+                    // using (var impersonator = new Impersonator(output[0].value1, output[0].value2, output[0].dropdown_text, false))
                     {
-                        string pathdir = Path.Combine(output[0].dropdown_text,"f2423a7a-ed2c-4c9b-b766-c37ada227b6d");
-                        string[] filePaths = Directory.GetFiles(pathdir, "*.*");
-                        str = filePaths.Count().ToString() + " , username:" + output[0].value1 + 
-                            " ,password:" + output[0].value2 + " ,domainOrServerName: " + output[0].dropdown_value; ;
+                        if(Directory.GetFiles(destNAS+@"\SubContractProfile").Count()>0)
+                        {
+                        //string[] filePaths = Directory.GetFiles(Doc, "*.*");
+                        //str = filePaths.Count().ToString() + " , username:" + username + " ,password:" + password + " ,domainOrServerName: " + Doc;
+                        //int existFile = Directory.GetFiles(destNAS + @"\f2423a7a-ed2c-4c9b-b766-c37ada227b6d\").Count();
+                        str = "Found";
                     }
+                    else
+                    {
+                        //  Directory.CreateDirectory(destNAS + @"\f2423a7a-ed2c-4c9b-b766-c37ada227b6d\");
+                        str = "Doc Not Found :" + destNAS + @"\SubContractProfile";
+                    }
+
+
                 }
+                //}
 
                
             }
             catch (Exception e)
             {
-                str = e.Message+" , username:"+ output[0].value1+" ,password:"+output[0].value2+ " ,domainOrServerName: "+ output[0].dropdown_value;
+                str = e.Message;
             }
             return Json(str);
         }
-
+        public string Combine(string uri1, string uri2)
+        {
+            uri1 = uri1.TrimEnd('/');
+            uri2 = uri2.TrimStart('/');
+            return string.Format("{0}/{1}", uri1, uri2);
+        }
         private bool GetFile(string companyid,ref List<FileUploadModal> L_File)
         {
             bool result = true;

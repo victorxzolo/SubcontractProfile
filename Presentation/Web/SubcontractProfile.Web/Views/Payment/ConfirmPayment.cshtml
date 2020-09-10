@@ -20,7 +20,7 @@
             width: 100%;
         }
     </style>*@
-    <div id="controllername" data-url="@Url.Action("Action", "Payment")"></div>
+<div id="controllername" data-url="@Url.Action("Action", "Payment")"></div>
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
     <div class="skills layout-spacing">
@@ -272,7 +272,7 @@
                                     </div>
                                     <div class="invalid-feedback">กรุณาระบุวันที่ชำระเงิน</div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <br />
@@ -357,7 +357,7 @@
                     <br />
                     <input type="hidden" id="hdpaymentId">
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnClearModal" >
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnClearModal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
                             ปิด
                         </button>
@@ -365,7 +365,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
                             ล้างข้อมูล
                         </button>
-                        <button id="btnconfirmpayment" type="button" class="btn btn-primary"  style="display:none;">
+                        <button id="btnconfirmpayment" type="button" class="btn btn-primary" style="display:none;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
                             บันทึก
                         </button>
@@ -380,245 +380,243 @@
 
 
 @*<div class="container" id="ConfirmPayment">
-    <div class="row mt-5">
-        <div class="col-md-12">
-            <div class="widget-heading">
-                <h5 class="">แจ้งชำระเงิน</h5>
-                <hr>
-            </div>
-
-        </div>
-    </div>
-
-
-
-
-    <form class="ConfirmPaymentvalidation" novalidate action="javascript:void(0);">
-        <div class="widget-content">
-            <div class="form-row mt-2  mb-5">
-                <div class="col-md-1">
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="widget-heading">
+                    <h5 class="">แจ้งชำระเงิน</h5>
+                    <hr>
                 </div>
-                <div class="form-group col-md-8 ">
-                    <div class="col-md-12 mt-3">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">Request Training No:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <label id="Request_no"></label>
+
+            </div>
+        </div>
+
+
+
+
+        <form class="ConfirmPaymentvalidation" novalidate action="javascript:void(0);">
+            <div class="widget-content">
+                <div class="form-row mt-2  mb-5">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="form-group col-md-8 ">
+                        <div class="col-md-12 mt-3">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="">Request Training No:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <label id="Request_no"></label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class=" col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">Payment No:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <label id="Payment_no"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label>ชื่อบริษัท:</label>
-                            </div>
-                            <div class="col-md-7" style="word-wrap: break-word">
-                                <label id="Company_name"></label>
+                        <div class=" col-md-12 mt-3 ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="">Payment No:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <label id="Payment_no"></label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label>ที่อยุ่:</label>
-                            </div>
-                            <div class="col-md-7" style="word-wrap: break-word">
-                                <label id="address"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">เลขประจำตัวผู้เสียภาษี:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <label id="Tax_id"></label>
+                        <div class=" col-md-12 mt-3 ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label>ชื่อบริษัท:</label>
+                                </div>
+                                <div class="col-md-7" style="word-wrap: break-word">
+                                    <label id="Company_name"></label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label>ผู้ติดต่อ:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" id="Contact_name" value="" required>
-                                <div class="invalid-feedback">Please fill the ContactName</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label>อีเมล์:</label>
-                            </div>
-                            <div class=" col-md-7">
-                                <input type="text" class="form-control" id="Contact_email" value="" required>
-                                <div class="invalid-feedback">Please fill the Email</div>
+                        <div class="col-md-12 mt-3 ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label>ที่อยุ่:</label>
+                                </div>
+                                <div class="col-md-7" style="word-wrap: break-word">
+                                    <label id="address"></label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">เบอร์โทรศัพท์:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" id="Contact_phone_no" required />
-                                <div class="invalid-feedback">Please fill the Phoneno</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 mt-4 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">รูปแบบชำระเงิน*:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <select class="form-control" id="payment_channal">
-                                </select>
+                        <div class="col-md-12 mt-3 ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="">เลขประจำตัวผู้เสียภาษี:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <label id="Tax_id"></label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
+                        <div class="col-md-12 mt-3 ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label>ผู้ติดต่อ:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" id="Contact_name" value="" required>
+                                    <div class="invalid-feedback">Please fill the ContactName</div>
+                                </div>
                             </div>
-                            <div class="col-md-7">
-                                <div class="row">
-                                    <div class="col-md-12 ml-4" style="white-space: nowrap">
-                                        <div class="row" id="Detailpaymentchannal">
+                        </div>
+                        <div class="col-md-12 mt-3 ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label>อีเมล์:</label>
+                                </div>
+                                <div class=" col-md-7">
+                                    <input type="text" class="form-control" id="Contact_email" value="" required>
+                                    <div class="invalid-feedback">Please fill the Email</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3 ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="">เบอร์โทรศัพท์:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" id="Contact_phone_no" required />
+                                    <div class="invalid-feedback">Please fill the Phoneno</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-4 ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="">รูปแบบชำระเงิน*:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <select class="form-control" id="payment_channal">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3 ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="row">
+                                        <div class="col-md-12 ml-4" style="white-space: nowrap">
+                                            <div class="row" id="Detailpaymentchannal">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-4  ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="">วันที่ชำระเงิน*:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="payment_date" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.." required>
+                                    <div class="invalid-feedback">Please fill the PaymentDate</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-4  ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="">เวลาชำระเงิน*:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="payment_datetime" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Time.." required>
+                                    <div class="invalid-feedback">Please fill the PaymentTime</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mt-2  ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="">ยอดเงินที่โอน (B)*:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type='text' id="amount_transfer" value="" class="form-control" required />
+                                    <div class="invalid-feedback">Please fill the Amounttransfer</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-4  ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="">ธนาคารต้นทางที่โอน*:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <select class="form-control" id="bank_transfer">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-4 ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="">สาขา:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="text" id="bank_branch" class="form-control" placeholder="" required />
+                                    <div class="invalid-feedback">Please fill the BankBranch</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-4 ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="">หลักฐานการโอนเงิน*</label>
+                                </div>
+                                <div class="col-md-7 ">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="slip_attach_file" required>
+                                        <label id="nameslip_attach_file" class="custom-file-label" for="slip_attach_file">Choose file</label>
+                                        <div class="invalid-feedback mt-4">Please Upload the Silp</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3 ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="row">
+                                        <div class="col-md-12 ml-0" style="word-wrap:break-word">
+                                            <label style="font-size: 14px;white-space: nowrap;">ขนาดไฟล์ไม่เกิน3Mbและไฟล์ประกอบประเภทPDFหรือ JPG,JPEG,PNG เท่านั้น</label>
+                                            <label style="color:red;font-size:14px;white-space: nowrap; ">การใช้หลักฐานปลอม มีความผิดตาม พรบ.คอมพิวเตอร์</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3 ">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label>หมายเหตุ :</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="row">
+                                        <div class="col-md-12 ml-0">
+                                            <textarea id="remark" name="w3review" rows="7" style="width:inherit;border-color:#E0E0E0;"> </textarea>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 mt-4  ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">วันที่ชำระเงิน*:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input id="payment_date" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.." required>
-                                <div class="invalid-feedback">Please fill the PaymentDate</div>
-                            </div>
-                        </div>
+                    <div class="col-md-3">
                     </div>
-                    <div class="col-md-12 mt-4  ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">เวลาชำระเงิน*:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input id="payment_datetime" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Time.." required>
-                                <div class="invalid-feedback">Please fill the PaymentTime</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12 mt-2  ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">ยอดเงินที่โอน (B)*:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input type='text' id="amount_transfer" value="" class="form-control" required />
-                                <div class="invalid-feedback">Please fill the Amounttransfer</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 mt-4  ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">ธนาคารต้นทางที่โอน*:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <select class="form-control" id="bank_transfer">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 mt-4 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">สาขา:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input type="text" id="bank_branch" class="form-control" placeholder="" required />
-                                <div class="invalid-feedback">Please fill the BankBranch</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 mt-4 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="">หลักฐานการโอนเงิน*</label>
-                            </div>
-                            <div class="col-md-7 ">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="slip_attach_file" required>
-                                    <label id="nameslip_attach_file" class="custom-file-label" for="slip_attach_file">Choose file</label>
-                                    <div class="invalid-feedback mt-4">Please Upload the Silp</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                            </div>
-                            <div class="col-md-7">
-                                <div class="row">
-                                    <div class="col-md-12 ml-0" style="word-wrap:break-word">
-                                        <label style="font-size: 14px;white-space: nowrap;">ขนาดไฟล์ไม่เกิน3Mbและไฟล์ประกอบประเภทPDFหรือ JPG,JPEG,PNG เท่านั้น</label>
-                                        <label style="color:red;font-size:14px;white-space: nowrap; ">การใช้หลักฐานปลอม มีความผิดตาม พรบ.คอมพิวเตอร์</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 mt-3 ">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label>หมายเหตุ :</label>
-                            </div>
-                            <div class="col-md-7">
-                                <div class="row">
-                                    <div class="col-md-12 ml-0">
-                                        <textarea id="remark" name="w3review" rows="7" style="width:inherit;border-color:#E0E0E0;"> </textarea>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
                 </div>
             </div>
-        </div>
-        <div class="container mt-3" style="background-color:#E0E0E0;text-align: center; max-width:100%" id="btnconfirmpayment">
-        </div>
-    </form>
+            <div class="container mt-3" style="background-color:#E0E0E0;text-align: center; max-width:100%" id="btnconfirmpayment">
+            </div>
+        </form>
 
 
-</div>*@
-
-
+    </div>*@
 
 
 
@@ -627,5 +625,9 @@
 
 
 
-<script src="~/Scripts/View/ConfirmPayment.js"></script>
+@section scripts {
+    <script src="~/Scripts/View/ConfirmPayment.js"></script>
+}
+
+    
 

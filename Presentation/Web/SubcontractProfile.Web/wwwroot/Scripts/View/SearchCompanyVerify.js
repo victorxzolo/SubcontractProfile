@@ -38,6 +38,9 @@ $(document).ready(function () {
             close: 'fa fa-time'
         }
     });
+    $('#btnclear').click(function () {
+
+    });
     $('#btnSearch').click(function () {
         inittbSearchResult();
         //var dd = $("#dateregisfrom").val()

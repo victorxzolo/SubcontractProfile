@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        @*<button class=" btn btn-danger" type="button" id="btnTestNas" >TEST NAS</button>*@
+        <button class=" btn btn-danger" type="button" id="btnTestNas" style="display:none;">TEST NAS</button>
         @*<div class="card-body">*@
 
         @*<div class="form-group">*@
@@ -92,8 +92,8 @@
 
                 <div role="group" class="d-flex float-right" style="margin-right:10px">
                     @*<button class="btn btn-secondary" id="prev-btn" type="button">ย้อนกลับ</button>
-        <button class="btn btn-danger" id="reset-btn" type="button">ล้างข้อมูล</button>
-        <button class="btn btn-success" id="next-btn" type="button">ถัดไป</button>*@
+                        <button class="btn btn-danger" id="reset-btn" type="button">ล้างข้อมูล</button>
+                        <button class="btn btn-success" id="next-btn" type="button">ถัดไป</button>*@
 
                     <button class="btn-border btn-black mr-2" id="cancel-btn" onclick="window.location='@Url.Action( "Login", "Account")'" type="button">
                         <i class="fa fa-ban icon"></i><span>ยกเลิก</span>
@@ -117,5 +117,6 @@
 
     </div>
 </div>
-
-<script src="~/Scripts/View/Register.js"></script>
+@section scripts{
+    <script src="~/Scripts/View/Register.js"></script>
+}
