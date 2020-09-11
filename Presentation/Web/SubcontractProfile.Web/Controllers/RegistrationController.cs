@@ -313,15 +313,15 @@ namespace SubcontractProfile.Web.Controllers
                     });
                     companyResult.file_id_bookbank = file_id_bookbank;
                 }
-                if (L_File.Count != 0)
-                {
-                    if(GetFile(companyId, ref L_File))
-                    {
-                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
-                    }
+                //if (L_File.Count != 0)
+                //{
+                //    if(GetFile(companyId, ref L_File))
+                //    {
+                //        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
+                //    }
                     
                    
-                }
+                //}
 
 
             }
