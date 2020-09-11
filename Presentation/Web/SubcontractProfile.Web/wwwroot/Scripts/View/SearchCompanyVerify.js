@@ -96,7 +96,8 @@ $(document).ready(function () {
     $('#btnverifycompany').click(function () {
         var company = $('#tbSearchComVerifyResult tr input:radio[name="optionsRadios"]:checked').val();
         if (company != "") {
-            window.location.href = '/Registration/CompanyVerify?companyid=' + company;
+            var urlRedir = url.replace('Action', 'CompanyVerify');
+            window.location.href = urlRedir+'?companyid=' + company;
         }
         else {
             bootbox.confirm({
