@@ -1122,15 +1122,15 @@ function inittbSearchResult() {
 
         }
 
-function getDataById(companyId) {
+function getDataById(id) {
     var urlGetDataById = url.replace('Action', 'GetDataById');
         $.ajax({
             url: urlGetDataById,
             type: 'POST',
-            data: { 'companyId': companyId },
+            data: { companyId: id },
             dataType: "json",
             success: function (result) {
-                console.log(result)
+
                 if (result != null) {
                     $('#hdCompanyId').val(result.CompanyId);
                    
@@ -1185,11 +1185,31 @@ function getDataById(companyId) {
                             $('#chkvat_typeE_dealer').prop('checked', true);
                         }
                     }
+                    else {
+                        $('#rdoCompanyType1').prop('checked', true);
 
-                   
-                   
+                        $('#rdoCompanyType1').trigger('change');
 
-                    
+                        $('#hdrdtype').val(result.SubcontractProfileType);
+                        $("#inputCompany_alias").val(result.CompanyAlias);
+                        $("#inputCompany_name_th").val(result.CompanyNameTh);
+                        $('#inputTax_id').val(result.TaxId);
+                        $('#inputCompany_alias').val(result.CompanyAlias);
+                        $('#ddlprefixcompany_name_th').val(result.CompanyTitleThId);
+                        $('#inputCompany_name_th').val(result.CompanyNameTh);
+
+                        $('#ddlprefixcompany_name_en').val(result.CompanyTitleEnId);
+                        $('#inputCompany_name_en').val(result.CompanyNameEn);
+
+                        $('#inputWT_name').val(result.WtName);
+
+                        if (result.VatType == "VAT") {
+                            $('#chkvat_typeT').prop('checked', true);
+                        }
+                        else if (result.VatType == "NON_VAT") {
+                            $('#chkvat_typeE').prop('checked', true);
+                        }
+                    }
 
                     //contract
                     $('#mailCompany').val(result.CompanyEmail);
@@ -1250,7 +1270,7 @@ function getDataById(companyId) {
 
             },
             error: function (result) {
-
+                console.log(result);
             }
 
         });
@@ -1410,37 +1430,50 @@ function onSaveCompanyProfile() {
             var vat_type = null;
             var company = new Object();
 
-            if ($("#rdoCompanyType1").is(":checked")) {
+    if ($("#rdoCompanyType1").is(":checked")) {
         chksubcontract_type = $("#rdoCompanyType1").val();
-                //distribution_channel = $('#ddldistribution option').filter(':selected').val();
-                //channel_sale_group = $('#ddlchannelsalegroup option').filter(':selected').val();
+        //distribution_channel = $('#ddldistribution option').filter(':selected').val();
+        //channel_sale_group = $('#ddlchannelsalegroup option').filter(':selected').val();
 
-                tax_id = $('#inputTax_id').val();
-                company_alias = $('#inputCompany_alias').val();
+        tax_id = $('#inputTax_id').val();
+        company_alias = $('#inputCompany_alias').val();
 
-                company_title_name_th = $('#ddlprefixcompany_name_th option').filter(':selected').val();
-                company_name_th = $('#inputCompany_name_th').val();
+        company_title_name_th = $('#ddlprefixcompany_name_th option').filter(':selected').val();
+        company_name_th = $('#inputCompany_name_th').val();
 
-                company_title_name_en = $('#ddlprefixcompany_name_en option').filter(':selected').val();
-                company_name_en = $('#inputCompany_name_en').val();
+        company_title_name_en = $('#ddlprefixcompany_name_en option').filter(':selected').val();
+        company_name_en = $('#inputCompany_name_en').val();
 
-                wt_name = $('#inputWT_name').val();
-                vat_type = $('#chkvat_typeT').is(':checked') ? $('#chkvat_typeT').val() : $('#chkvat_typeE').val();
+        wt_name = $('#inputWT_name').val();
+        vat_type = $('#chkvat_typeT').is(':checked') ? $('#chkvat_typeT').val() : $('#chkvat_typeE').val();
 
-            }
-            else if ($("#rdoCompanyType2").is(":checked")) {
+    }
+    else if ($("#rdoCompanyType2").is(":checked")) {
         chksubcontract_type = $("#rdoCompanyType2").val();
-                distribution_channel = $('#txtdistribution').val();
-                channel_sale_group = $('#txtchannelsalegroup').val();
-                tax_id = $('#txttax_id_dealer').val();
-                company_alias = $('#txtcompany_alias_dealer').val();
-                company_title_name_th = $('#ddlprefixcompany_name_th_dealer option').filter(':selected').val();
-                company_name_th = $('#txtcompany_name_th_dealer').val();
-                company_title_name_en = $('#ddlprefixcompany_name_en_dealer option').filter(':selected').val();
-                company_name_en = $('#txtcompany_name_en_dealer').val();
-                wt_name = $('#txtwt_name_dealer').val();
-                vat_type = $('#chkvat_typeT_dealer').is(':checked') ? $('#chkvat_typeT_dealer').val() : $('#chkvat_typeE_dealer').val();
-            }
+        distribution_channel = $('#txtdistribution').val();
+        channel_sale_group = $('#txtchannelsalegroup').val();
+        tax_id = $('#txttax_id_dealer').val();
+        company_alias = $('#txtcompany_alias_dealer').val();
+        company_title_name_th = $('#ddlprefixcompany_name_th_dealer option').filter(':selected').val();
+        company_name_th = $('#txtcompany_name_th_dealer').val();
+        company_title_name_en = $('#ddlprefixcompany_name_en_dealer option').filter(':selected').val();
+        company_name_en = $('#txtcompany_name_en_dealer').val();
+        wt_name = $('#txtwt_name_dealer').val();
+        vat_type = $('#chkvat_typeT_dealer').is(':checked') ? $('#chkvat_typeT_dealer').val() : $('#chkvat_typeE_dealer').val();
+    }
+    else {
+        tax_id = $('#inputTax_id').val();
+        company_alias = $('#inputCompany_alias').val();
+
+        company_title_name_th = $('#ddlprefixcompany_name_th option').filter(':selected').val();
+        company_name_th = $('#inputCompany_name_th').val();
+
+        company_title_name_en = $('#ddlprefixcompany_name_en option').filter(':selected').val();
+        company_name_en = $('#inputCompany_name_en').val();
+
+        wt_name = $('#inputWT_name').val();
+        vat_type = $('#chkvat_typeT').is(':checked') ? $('#chkvat_typeT').val() : $('#chkvat_typeE').val();
+    }
 
             company.CompanyNameTh = company_name_th;
             company.CompanyNameEn = company_name_en;

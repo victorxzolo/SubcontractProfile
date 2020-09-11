@@ -1236,6 +1236,59 @@ namespace SubcontractProfile.Web.Controllers
         }
 
         [HttpPost]
+        public IActionResult GetDataBankAccountType()
+        {
+            var output = new List<SubcontractDropdownModel>();
+            List<SelectListItem> getAllBankAccList = new List<SelectListItem>();
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/bank_account_type");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+            }
+            if (Lang == "")
+            {
+                getsession();
+            }
+            if (Lang == "TH")
+            {
+                output.Add(new SubcontractDropdownModel
+                {
+                    dropdown_text = "กรุณาเลือกประเภทบัญชี",
+                    dropdown_value = ""
+
+                });
+
+                getAllBankAccList = output.Select(a => new SelectListItem
+                {
+                    Text = a.dropdown_text,
+                    Value = a.dropdown_value
+                }).OrderBy(c => c.Value).ToList();
+            }
+            else
+            {
+                output.Add(new SubcontractDropdownModel
+                {
+                    dropdown_text = "Select Acount Type",
+                    dropdown_value = ""
+                });
+                getAllBankAccList = output.Select(a => new SelectListItem
+                {
+                    Text = a.dropdown_text,
+                    Value = a.dropdown_value
+                }).OrderBy(c => c.Value).ToList();
+
+            }
+            return Json(new { response = getAllBankAccList });
+        }
+
+        [HttpPost]
         public JsonResult GetDataLocationById(string locationId)
         {
             var locationResult = new SubcontractProfileLocationModel();
@@ -1268,6 +1321,7 @@ namespace SubcontractProfile.Web.Controllers
 
             var Result = new List<SubcontractProfileTeamModel>();
             var ResultLocation = new SubcontractProfileLocationModel();
+            var ResultCompany = new SubcontractProfileCompanyModel();
 
             var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
             // Skiping number of Rows count  
@@ -1312,12 +1366,28 @@ namespace SubcontractProfile.Web.Controllers
 
             }
 
+            string uriStringcompany = string.Format("{0}/{1}", strpathAPI + "Company/GetByCompanyId", companyid);
+
+            response = client.GetAsync(uriStringcompany).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                //data
+                ResultCompany = JsonConvert.DeserializeObject<SubcontractProfileCompanyModel>(result);
+
+            }
+
             //total number of rows count   
             recordsTotal = Result.Count();
 
             //Paging   
             var data = Result.Skip(skip).Take(pageSize).ToList();
 
+            foreach (var d in data)
+            {
+                d.SubcontractProfileType = ResultCompany.SubcontractProfileType;
+            }
 
             // Returning Json Data
             return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data });
@@ -1553,6 +1623,7 @@ namespace SubcontractProfile.Web.Controllers
         {
 
             var Result = new List<SubcontractProfileEngineerModel>();
+            var ResultCompany = new SubcontractProfileCompanyModel();
 
             var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
             // Skiping number of Rows count  
@@ -1616,13 +1687,28 @@ namespace SubcontractProfile.Web.Controllers
 
             }
 
+            string uriStringcompany = string.Format("{0}/{1}", strpathAPI + "Company/GetByCompanyId", companyid);
+
+            response = client.GetAsync(uriStringcompany).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                //data
+                ResultCompany = JsonConvert.DeserializeObject<SubcontractProfileCompanyModel>(result);
+
+            }
+
 
             //total number of rows count   
             recordsTotal = Result.Count();
 
             //Paging   
             var data = Result.Skip(skip).Take(pageSize).ToList();
-
+            foreach (var d in data)
+            {
+                d.SubcontractProfileType = ResultCompany.SubcontractProfileType;
+            }
 
             // Returning Json Data
             return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data });
@@ -2048,7 +2134,6 @@ namespace SubcontractProfile.Web.Controllers
             catch (Exception e)
             {
                 result = false;
-                throw;
             }
             return result;
         }

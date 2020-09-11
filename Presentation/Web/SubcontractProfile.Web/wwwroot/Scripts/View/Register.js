@@ -950,6 +950,7 @@ $(document).ready(function () {
             //vat_registration_certificate_file: $('#vat_registration_certificate_file').val(),
         }
         var urlNewRegister = url.replace('Action', 'NewRegister');
+        
         $.ajax({
             type: "POST",
             async: false,
@@ -968,7 +969,8 @@ $(document).ready(function () {
                             console.log('This was logged in the callback: ' + result);
                         }
                     });
-                    window.location.href = data.redirecturl;
+                    var urlredirec = url.replace('Action', 'Login');
+                    window.location.href = urlredirec;
                 }
                 else {
                     bootbox.alert({

@@ -87,5 +87,7 @@ namespace SubcontractProfile.Web.Model
 
         public System.Guid CompanyId { get; set; }
         public System.Guid LocationId { get; set; }
+
+        public string SubcontractProfileType { get; set; }
     }
 }

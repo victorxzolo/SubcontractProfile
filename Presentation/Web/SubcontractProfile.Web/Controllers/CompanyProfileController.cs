@@ -157,7 +157,7 @@ namespace SubcontractProfile.Web.Controllers
         }
 
 
-        // GET: CompanyProfileController/GetDataById/5
+        [HttpPost]
         public async Task<JsonResult> GetDataById(string companyId)
         {
             var companyResult = new SubcontractProfileCompanyModel();
@@ -1267,9 +1267,7 @@ namespace SubcontractProfile.Web.Controllers
             string str = "";
             var output = new List<SubcontractDropdownModel>();
 
-            string username = @"10.137.32.9\nas_fixedbb";
-            string password = "Ais2018fixedbb";
-            string destNAS = @"\\10.137.32.9\fbb_idcard_ndev001b" ;
+            
 
             try
             {
@@ -1287,13 +1285,21 @@ namespace SubcontractProfile.Web.Controllers
                 //}
                 //if (output != null)
                 //{
-                   
-                   
 
-                    using (var impersonator = new Impersonator(username, password, destNAS, false))
+
+                //string username = "nas_fixedbb";
+                //string password = "Ais2018fixedbb";
+                //string destNAS = @"\\10.137.32.9\fbb_idcard_ndev001b";
+
+                string username = "PF0QMBH6";
+                string password = "1234";
+                string NAS = @"DESKTOP-MMCKBRE";
+                string destNAS = @"D:\NasPath";
+
+                using (var impersonator = new Impersonator(username, password, NAS, false))
                     // using (var impersonator = new Impersonator(output[0].value1, output[0].value2, output[0].dropdown_text, false))
                     {
-                        if(Directory.GetFiles(destNAS+@"\SubContractProfile").Count()>0)
+                        if(Directory.GetFiles(destNAS + @"\SubContractProfile").Count()>0)
                         {
                         //string[] filePaths = Directory.GetFiles(Doc, "*.*");
                         //str = filePaths.Count().ToString() + " , username:" + username + " ,password:" + password + " ,domainOrServerName: " + Doc;
@@ -1302,7 +1308,6 @@ namespace SubcontractProfile.Web.Controllers
                     }
                     else
                     {
-                        //  Directory.CreateDirectory(destNAS + @"\f2423a7a-ed2c-4c9b-b766-c37ada227b6d\");
                         str = "Doc Not Found :" + destNAS + @"\SubContractProfile";
                     }
 

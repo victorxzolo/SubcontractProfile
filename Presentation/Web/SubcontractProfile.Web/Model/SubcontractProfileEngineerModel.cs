@@ -130,5 +130,6 @@ namespace SubcontractProfile.Web.Model
         public string SubcontractType { get; set; }
         public System.Guid PersonalId { get; set; }
 
+        public string SubcontractProfileType { get; set; }
     }
 }

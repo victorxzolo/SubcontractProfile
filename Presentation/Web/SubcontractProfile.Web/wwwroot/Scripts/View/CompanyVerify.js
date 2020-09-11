@@ -2133,7 +2133,7 @@ function inittbtabTeam() {
                             </svg></a>";
                 }
             },
-            { "data": "SubcontractType", width: "10%" },
+            { "data": "SubcontractProfileType", width: "10%" },
             { "data": "LocationNameTh", width: "20%" },
             { "data": "TeamCode", width: "10%" },
             { "data": "TeamNameTh", width: "15%" },
@@ -2291,7 +2291,7 @@ function inittbtabengineer() {
                             </svg></a>";
                 }
             },
-            { "data": "SubcontractType", width: "10%" },
+            { "data": "SubcontractProfileType", width: "10%" },
             { "data": "LocationNameTh", width: "20%" },
             { "data": "TeamNameTh", width: "10%" },
             { "data": "StaffNameTh", width: "15%" },

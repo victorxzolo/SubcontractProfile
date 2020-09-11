@@ -40,6 +40,18 @@ $(document).ready(function () {
     });
     $('#btnclear').click(function () {
 
+        $('#txttaxid').val('');
+        $('#txtcompanyname').val('');
+        $('#ddldistribution').val('');
+        $('#ddlchannelsalegroup').val('');
+
+        $('#dateregisfrom').val('');
+        $('#regisdatefrom').data("DateTimePicker").date(moment(new Date(), 'DD/MM/YYYY'));
+        $('#dateregisto').val('');
+        $('#regisdateto').data("DateTimePicker").date(moment(new Date(), 'DD/MM/YYYY'));
+        $('#txtvendercode').val('');
+        inittbSearchResult();
+
     });
     $('#btnSearch').click(function () {
         inittbSearchResult();
