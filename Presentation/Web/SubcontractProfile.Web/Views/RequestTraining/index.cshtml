@@ -360,8 +360,6 @@
 
                         $(document).ready(function () {
 
-                           // getRadioCourse();
-                            // GetDropDownByNameTrainigCourse();
                             GetDropDownByNameCourse();
                             GetDropDownByNameTrainigStatus();
 
@@ -370,7 +368,7 @@
                                 lookup: function (query, done) {
                                     $.ajax({
                                         type: "POST",
-                                        url: "/RequestTraining/GetCompany",
+                                        url: '@Url.Action("GetCompany", "RequestTraining")',
                                         data: { companyname: query },
                                         dataType: "json",
                                         success: function (data) {
@@ -601,43 +599,6 @@
                         });
                         }
 
-                        function getRadioCourse() {
-                            $('.training_couse').empty();
-                            //$('.training_couse').append('');
-                            $.ajax({
-                                type: "POST",
-                                url: "/RequestTraining/GetDataCourse",
-                                data: { '_ddlType': 'training_couse' },
-                                dataType: "json",
-                                success: function (data) {
-                                    if (data != null) {
-                                        $.each(data.response, function () {
-                                            var strtext = this.dropdown_text;
-                                            var strvalue = this.dropdown_value;
-                                            var value = this.value1;
-                                            var str = "<div class='custom-control custom-radio custom-control-inline'>\
-                        <input type='radio' class='custom-control-input inputValidation' name='optionsRadios' id='rd"+ strvalue + "' value='" + strvalue + "' />\
-                        <label class='custom-control-label' for='rd"+ strvalue + "'>" + strtext + "</label></div >"
-                                            $('.training_couse').append(str);
-
-                                          //  alert(value);
-                                            $('#lblcourseprice').html(value);
-
-                                            $('#Coursecost').val(value);
-                                           //  alert(value);
-                                        });
-
-                                    }
-
-
-                                },
-                                error: function (xhr, status, error) {
-
-                                }
-                            });
-
-
-                        }
 
 
     function getTeamByLocationId(locationId) {
@@ -728,7 +689,7 @@
                                     "thousands": "."
                                 },
                                 ajax: {
-                                    url: '/RequestTraining/Search',
+                                    url:'@Url.Action("Search", "RequestTraining")',
                                     type: "POST",
                                     datatype: "JSON",
                                     //dataSrc:"",
@@ -844,7 +805,7 @@
                                              $('#lblcontphone').html(result.ContractPhone);
 
                                              $('#lblRemark').html(result.Remark);
-                                            
+
                                              $('#Coursecost').val(result.CoursePrice);
 
                                              inittbEngineer(result.TrainingId);
@@ -931,7 +892,7 @@
                                     "thousands": "."
                                 },
                                 ajax: {
-                                    url: '/RequestTraining/SearchEngineer',
+                                    url: '@Url.Action("SearchEngineer", "RequestTraining")',
                                     type: "POST",
                                     datatype: "JSON",
                                     //dataSrc:"",

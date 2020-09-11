@@ -38,7 +38,7 @@ namespace SubcontractProfile.Web.Controllers
         }
 
         public ActionResult Search(string subcontract_profile_type, string company_name_th, string tax_id
-           , string activate_date_fr, string activate_date_to, string activate_status)
+           , string activate_date_fr, string activate_date_to,string activate_status)
         {
 
             var Result = new List<SubcontractProfileCompanyModel>();
@@ -103,6 +103,7 @@ namespace SubcontractProfile.Web.Controllers
             {
                 activate_status = "null";
             }
+
 
             string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", strpathAPI + "Company/SearchActivateProfile",
                 subcontract_profile_type, company_name_th, tax_id, activate_date_fr, activate_date_to, activate_status);

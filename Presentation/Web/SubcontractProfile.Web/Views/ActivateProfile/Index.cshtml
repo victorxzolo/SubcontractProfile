@@ -149,6 +149,8 @@
 
         var oTable;
         $(document).ready(function () {
+            GetDropDownByNameStatus();
+
             $('#tbSearchResult').DataTable();
             $('#checkBoxAll').click(function () {
                 if ($(this).is(":checked")) {
@@ -264,12 +266,12 @@
                         },
                         callback: function (result) {
                             if (result == true) {
-                  
+
                                 for (j = 0; j < activateids_arr.length; j++) {
                                     onSave(activateids_arr[j]);
                                 }
 
-                               
+
                             }
                         }
                     });
@@ -287,6 +289,30 @@
             });
 
         });
+
+         function GetDropDownByNameStatus() {
+            
+                    $.ajax({
+                        type: 'GET',
+                        url: '@Url.Action("GetDropDownList", "SubcontractDropdown")',
+                        data: { 'dropdownname': 'company_status' },
+                        dataType: 'json',
+                        success: function (data) {
+
+                            $("#ddlActivateStatus").empty();
+                            $("#ddlActivateStatus").append('<option value="ALL">--Please All--</option>');
+                            $.each(data, function (id, result) {
+                                if (result.dropdown_value == "Y" || result.dropdown_value == "A") {
+                                    $("#ddlActivateStatus").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text + '</option>');
+                                }
+                            });
+                            },
+                            failure: function () {
+                                $("#ddlActivateStatus").empty();
+                                $("#ddlActivateStatus").append('<option value="-1">--Please All--</option>');
+                            }
+                        });
+        }
 
         function clearMainData() {
             $("input:radio[name ='radioSubcontractType']:checked").val('ALL')
@@ -331,8 +357,8 @@
                             d.company_name_th = $("#inputCompanyName").val(),
                             d.tax_id = $("#inputTaxId").val(),
                             d.activate_date_fr = $("#inputActivate_date_fr").val(),
-                            d.activate_date_to = $("#inputActivate_date_to").val(),
-                            d.activate_status = $("select[id$=ddlActivateStatus]").val()
+                            d.activate_date_to = $("#inputActivate_date_to").val()
+                            //d.activate_status = $("select[id$=ddlActivateStatus]").val()
 
                         }
                   },
@@ -412,7 +438,7 @@
          function onSave(companyId) {
             var company = new Object();
              company.CompanyId = companyId;
-           
+
             $.ajax({
                    url: '@Url.Action("OnSave", "ActivateProfile")',
                    type: 'POST',
