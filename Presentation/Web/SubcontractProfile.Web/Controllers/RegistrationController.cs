@@ -315,8 +315,12 @@ namespace SubcontractProfile.Web.Controllers
                 }
                 if (L_File.Count != 0)
                 {
-                    GetFile(companyId, ref L_File);
-                    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
+                    if(GetFile(companyId, ref L_File))
+                    {
+                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
+                    }
+                    
+                   
                 }
 
 
@@ -952,44 +956,72 @@ namespace SubcontractProfile.Web.Controllers
                     model.ContractEndDate = dateto;
                 }
 
+                #region Copy File to server
+                //var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompanySSO");
+                //if (dataUploadfile != null && dataUploadfile.Count != 0)
+                //{
+                //   
 
-                var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompanySSO");
-                if (dataUploadfile != null && dataUploadfile.Count != 0)
+                //    System.IO.DirectoryInfo di = new DirectoryInfo(Path.Combine(strpathUpload, model.CompanyId.ToString()));
+
+                //foreach (FileInfo finfo in di.GetFiles())
+                //{
+                //    finfo.Delete();
+                //}
+
+
+                //foreach (var e in dataUploadfile)
+                //{
+                //    resultGetFile = await CopyFile(e, model.CompanyId.ToString());
+
+                //    string filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
+                //    filename = EnsureCorrectFilename(filename);
+
+                //    switch (e.typefile)
+                //    {
+                //        case "CompanyCertifiedFile":
+                //            model.CompanyCertifiedFile = filename;
+                //            break;
+                //        case "CommercialRegistrationFile":
+                //            model.CommercialRegistrationFile = filename;
+                //            break;
+                //        case "VatRegistrationCertificateFile":
+                //            model.VatRegistrationCertificateFile = filename;
+                //            break;
+                //        case "bookbankfile":
+                //            model.AttachFile = filename;
+                //            break;
+                //    }
+                //}
+
+                if (model.FileBookBank != null && model.FileBookBank.Length > 0)
                 {
-                    #region Copy File to server
+                    resultGetFile = await UploadfileOnSave(model.FileBookBank, model.CompanyId.ToString());
+                    model.AttachFile = model.FileBookBank.FileName;
+                }
 
-                    System.IO.DirectoryInfo di = new DirectoryInfo(Path.Combine(strpathUpload, model.CompanyId.ToString()));
-
-                foreach (FileInfo finfo in di.GetFiles())
+                if (model.FileCompanyCertified != null && model.FileCompanyCertified.Length > 0)
                 {
-                    finfo.Delete();
+                    resultGetFile = await UploadfileOnSave(model.FileCompanyCertified, model.CompanyId.ToString());
+                    model.CompanyCertifiedFile = model.FileCompanyCertified.FileName;
                 }
 
 
-                foreach (var e in dataUploadfile)
+                if (model.FileCommercialRegistration != null && model.FileCommercialRegistration.Length > 0)
                 {
-                    resultGetFile = await CopyFile(e, model.CompanyId.ToString());
-
-                    string filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
-                    filename = EnsureCorrectFilename(filename);
-
-                    switch (e.typefile)
-                    {
-                        case "CompanyCertifiedFile":
-                            model.CompanyCertifiedFile = filename;
-                            break;
-                        case "CommercialRegistrationFile":
-                            model.CommercialRegistrationFile = filename;
-                            break;
-                        case "VatRegistrationCertificateFile":
-                            model.VatRegistrationCertificateFile = filename;
-                            break;
-                        case "bookbankfile":
-                            model.AttachFile = filename;
-                            break;
-                    }
+                    resultGetFile = await UploadfileOnSave(model.FileCommercialRegistration, model.CompanyId.ToString());
+                    model.CommercialRegistrationFile = model.FileCommercialRegistration.FileName;
                 }
+
+
+                if (model.FileVatRegistrationCertificate != null && model.FileVatRegistrationCertificate.Length > 0)
+                {
+                    resultGetFile = await UploadfileOnSave(model.FileVatRegistrationCertificate, model.CompanyId.ToString());
+                    model.VatRegistrationCertificateFile = model.FileVatRegistrationCertificate.FileName;
+                }
+                
                 #endregion
+
                 if (resultGetFile)
                 {
                     SessionHelper.RemoveSession(HttpContext.Session, "userUploadfileDaftCompanySSO");
@@ -1141,15 +1173,22 @@ namespace SubcontractProfile.Web.Controllers
                      res.StatusError = "-1";
                 }
                 #endregion
-            }
+            //}
+            //    else
+            //{
+            //    res.Status = false;
+            //    res.Message = "Upload file is not correct, Please Check Data or Contact System Admin";
+            //    res.StatusError = "-1";
+            //}
+                }
                 else
-            {
-                res.Status = false;
-                res.Message = "Upload file is not correct, Please Check Data or Contact System Admin";
-                res.StatusError = "-1";
+                {
+                    res.Status = false;
+                    res.Message = "Upload file is not correct, Please Check Data or Contact System Admin";
+                    res.StatusError = "-1";
+                }
+
             }
-        }
-    }
             catch (Exception e)
             {
                 res.Status = false;
@@ -2053,8 +2092,6 @@ namespace SubcontractProfile.Web.Controllers
                             }
                         }
 
-
-
                     }
 
                 }
@@ -2178,6 +2215,37 @@ namespace SubcontractProfile.Web.Controllers
             }
             PathOutput = Path.Combine(pathdir, filename);
             return PathOutput;
+        }
+
+        private async Task<bool> UploadfileOnSave(IFormFile files, string CompanyId)
+        {
+            bool statusupload = true;
+            List<FileUploadModal> L_File = new List<FileUploadModal>();
+            FileStream output;
+            string strmess = "";
+            try
+            {
+
+                if (files != null && files.Length > 0)
+                {
+
+                    string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
+                    filename = EnsureCorrectFilename(filename);
+                    using (output = System.IO.File.Create(this.GetPathAndFilename(CompanyId, filename)))
+                        await files.CopyToAsync(output);
+                }
+
+            }
+            catch (Exception e)
+            {
+                statusupload = false;
+                strmess = e.Message.ToString();
+                throw;
+            }
+
+
+            return statusupload;
+
         }
 
         #endregion

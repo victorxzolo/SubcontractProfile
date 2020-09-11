@@ -246,8 +246,11 @@ namespace SubcontractProfile.Web.Controllers
                 }
                 if(L_File.Count != 0)
                 {
-                    GetFile(companyId,ref L_File);
-                    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompany", L_File);
+                   if (GetFile(companyId, ref L_File))
+                    {
+                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompany", L_File);
+                    }
+                    
                 }
             
 
@@ -279,42 +282,71 @@ namespace SubcontractProfile.Web.Controllers
                 model.UpdateDate = DateTime.Now;
                 model.UpdateBy = datauser.UserId.ToString();
 
-                var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompany");
-                if (dataUploadfile != null && dataUploadfile.Count != 0)
-                {
+                //var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompany");
+                //if (dataUploadfile != null && dataUploadfile.Count != 0)
+                //{
                     #region Copy File to server
 
-                    System.IO.DirectoryInfo di = new DirectoryInfo(Path.Combine(strpathUpload, model.CompanyId.ToString()));
+                    //if (!DeleteFile(model.CompanyId.ToString()))
+                    //{
+                        //resultGetFile = false;
+                    //}
+                    //if(resultGetFile)
+                    //{
+                        //foreach (var e in dataUploadfile)
+                        //{
+                if (model.FileBookBank != null && model.FileBookBank.Length > 0)
+                {
+                    resultGetFile = await UploadfileOnSave(model.FileBookBank, model.CompanyId.ToString());
+                    model.AttachFile = model.FileBookBank.FileName;
+                }
 
-                    foreach (FileInfo finfo in di.GetFiles())
-                    {
-                        finfo.Delete();
-                    }
+                if (model.FileCompanyCertified != null && model.FileCompanyCertified.Length > 0)
+                {
+                    resultGetFile = await UploadfileOnSave(model.FileCompanyCertified, model.CompanyId.ToString());
+                    model.CompanyCertifiedFile = model.FileCompanyCertified.FileName;
+                }
 
 
-                    foreach (var e in dataUploadfile)
-                    {
-                        resultGetFile = await CopyFile(e, model.CompanyId.ToString());
+                if (model.FileCommercialRegistration != null && model.FileCommercialRegistration.Length > 0)
+                {
+                    resultGetFile = await UploadfileOnSave(model.FileCommercialRegistration, model.CompanyId.ToString());
+                    model.CommercialRegistrationFile = model.FileCommercialRegistration.FileName;
+                }
 
-                        string filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
-                        filename = EnsureCorrectFilename(filename);
 
-                        switch (e.typefile)
-                        {
-                            case "CompanyCertifiedFile":
-                                model.CompanyCertifiedFile = filename;
-                                break;
-                            case "CommercialRegistrationFile":
-                                model.CommercialRegistrationFile = filename;
-                                break;
-                            case "VatRegistrationCertificateFile":
-                                model.VatRegistrationCertificateFile = filename;
-                                break;
-                            case "bookbankfile":
-                                model.AttachFile = filename;
-                                break;
-                        }
-                    }
+                if (model.FileVatRegistrationCertificate != null && model.FileVatRegistrationCertificate.Length > 0)
+                {
+                    resultGetFile = await UploadfileOnSave(model.FileVatRegistrationCertificate, model.CompanyId.ToString());
+                    model.VatRegistrationCertificateFile = model.FileVatRegistrationCertificate.FileName;
+                }
+
+
+
+
+                //string filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
+                //            filename = EnsureCorrectFilename(filename);
+
+                //            switch (e.typefile)
+                //            {
+                //                case "CompanyCertifiedFile":
+                //                    model.CompanyCertifiedFile = filename;
+                //                    break;
+                //                case "CommercialRegistrationFile":
+                //                    model.CommercialRegistrationFile = filename;
+                //                    break;
+                //                case "VatRegistrationCertificateFile":
+                //                    model.VatRegistrationCertificateFile = filename;
+                //                    break;
+                //                case "bookbankfile":
+                //                    model.AttachFile = filename;
+                //                    break;
+                //            }
+
+
+                        //}
+                    //}
+                    
                     #endregion
                     if (resultGetFile)
                     {
@@ -449,7 +481,13 @@ namespace SubcontractProfile.Web.Controllers
                         res.Message = "Data is not correct, Please Check Data or Contact System Admin";
                         res.StatusError = "-1";
                     }
-                }
+                //}
+                //else
+                //{
+                //    res.Status = false;
+                //    res.Message = "Seesion file is not correct, Please Upload file.";
+                //    res.StatusError = "-1";
+                //}
 
                 //return RedirectToAction(nameof(Index));
             }
@@ -1241,18 +1279,51 @@ namespace SubcontractProfile.Web.Controllers
             // return Json(new { status = statusupload, message = strmess });
         }
 
-        private bool DeleteFile(string companyid,string filename)
+        private bool DeleteFile(string companyid)
         {
             bool result = true;
+            var output = new List<SubcontractDropdownModel>();
             try
             {
-                // Check if file exists with its full path    
-                if (System.IO.File.Exists(Path.Combine(strpathUpload, companyid, filename)))
+                #region NAS
+                //HttpClient client = new HttpClient();
+                //client.DefaultRequestHeaders.Accept.Add(
+                //new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "nas_subcontract");
+
+                //HttpResponseMessage response = client.GetAsync(uriString).Result;
+                //if (response.IsSuccessStatusCode)
+                //{
+                //    var v = response.Content.ReadAsStringAsync().Result;
+                //    output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+                //}
+                //if (output != null & output.Count() > 0)
+                //{
+                //    using (var impersonator = new Impersonator(output[0].value1, output[0].value2, output[0].dropdown_text, false))
+                //    {
+                //        if (Directory.GetFiles(output[0].dropdown_text + @"\SubContractProfile\" + companyid).Count() > 0)
+                //        {
+                //            System.IO.File.Delete(output[0].dropdown_text + @"\SubContractProfile\" + companyid);
+
+                //        }
+                //    }
+                //}
+                #endregion
+
+                string pathdir = Path.Combine(strpathUpload, companyid);
+                if (Directory.GetFiles(pathdir, "*", SearchOption.AllDirectories).Length > 0)
                 {
-                    // If file found, delete it    
-                    System.IO.File.Delete(Path.Combine(strpathUpload, companyid, filename));
-                   
+
+                    System.IO.DirectoryInfo di = new DirectoryInfo(pathdir);
+
+                    foreach (FileInfo file in di.GetFiles())
+                    {
+                        file.Delete();
+                    }
+
                 }
+
             }
             catch (IOException ioExp)
             {
@@ -1323,18 +1394,13 @@ namespace SubcontractProfile.Web.Controllers
             }
             return Json(str);
         }
-        public string Combine(string uri1, string uri2)
-        {
-            uri1 = uri1.TrimEnd('/');
-            uri2 = uri2.TrimStart('/');
-            return string.Format("{0}/{1}", uri1, uri2);
-        }
         private bool GetFile(string companyid,ref List<FileUploadModal> L_File)
         {
             bool result = true;
-            //var output = new List<SubcontractDropdownModel>();
+            var output = new List<SubcontractDropdownModel>();
             try
             {
+                #region NAS
                 //HttpClient client = new HttpClient();
                 //client.DefaultRequestHeaders.Accept.Add(
                 //new MediaTypeWithQualityHeaderValue("application/json"));
@@ -1347,70 +1413,143 @@ namespace SubcontractProfile.Web.Controllers
                 //    var v = response.Content.ReadAsStringAsync().Result;
                 //    output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
                 //}
-
-                //if(output !=null)
+                //if (output != null & output.Count() > 0)
                 //{
-                //using(var impersonator = new Impersonator(output[0].value1, output[0].value2, output[0].dropdown_value, false))
-                //{
+                //    using (var impersonator = new Impersonator(output[0].value1, output[0].value2, output[0].dropdown_text, false))
+                //    {
+                //        if (Directory.GetFiles(output[0].dropdown_text + @"\SubContractProfile\" + companyid).Count() > 0)
+                //        {
+                //            string pathdir = output[0].dropdown_text + @"\SubContractProfile\" + companyid;
+                //            string[] filePaths = Directory.GetFiles(pathdir, "*.*");
+                //            foreach (string file in filePaths)
+                //            {
+                //                using (var ms = new MemoryStream(System.IO.File.ReadAllBytes(file)))
+                //                {
+                //                    foreach (var e in L_File)
+                //                    {
+                //                        string filename = Path.GetFileName(file);
+                //                        filename = EnsureCorrectFilename(filename);
+                //                        var fileBytes = ms.ToArray();
+                //                        if (e.Filename == filename)
+                //                        {
+                //                            e.Fileupload = fileBytes;
+                //                            e.ContentType = Path.GetExtension(Path.GetExtension(file));
+                //                            e.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "files", FileName = filename }.ToString();
+                //                        }
+                //                    }
 
-                //string pathdir = Path.Combine(output[0].dropdown_text, companyid);
+                //                }
+                //            }
+                //        }
+                //        else
+                //        {
+                //            result = false;
+                //        }
+                //    }
+                //}
+                #endregion
+
                 string pathdir = Path.Combine(strpathUpload, companyid);
-                //if (Directory.Exists(pathdir))
-                //{
-                string[] filePaths = Directory.GetFiles(pathdir, "*.*");
-
-                            foreach (string file in filePaths)
+                if (Directory.GetFiles(pathdir, "*", SearchOption.AllDirectories).Length > 0)
+                {
+                    string[] filePaths = Directory.GetFiles(pathdir, "*.*");
+                    foreach (string file in filePaths)
+                    {
+                        using (var ms = new MemoryStream(System.IO.File.ReadAllBytes(file)))
+                        {
+                            foreach (var e in L_File)
                             {
-                                using(var ms = new MemoryStream(System.IO.File.ReadAllBytes(file)))
+                                string filename = Path.GetFileName(file);
+                                filename = EnsureCorrectFilename(filename);
+                                var fileBytes = ms.ToArray();
+                                if (e.Filename == filename)
                                 {
-                                    foreach (var e in L_File)
-                                    {
-                                        string filename = Path.GetFileName(file);
-                                        filename = EnsureCorrectFilename(filename);
-                                        var fileBytes = ms.ToArray();
-                                        if (e.Filename == filename)
-                                        {
-                                            e.Fileupload = fileBytes;
-                                            e.ContentType = Path.GetExtension(Path.GetExtension(file));
-                                            e.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "files", FileName = filename }.ToString();
-                                        }
-                                    }
-
+                                    e.Fileupload = fileBytes;
+                                    e.ContentType = Path.GetExtension(Path.GetExtension(file));
+                                    e.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "files", FileName = filename }.ToString();
                                 }
                             }
-                       // }
 
-                    //}
-                //}
-               
+                        }
+                    }
+                }
+                else
+                {
+                    result = false;
+                }
+
+
             }
             catch (Exception e)
             {
                 result = false;
-                throw;
             }
             return result;
         }
         private async Task<bool> CopyFile(FileUploadModal file,string companyid)
         {
             FileStream output;
+            var outputNas = new List<SubcontractDropdownModel>();
             try
             {
-                var stream = new MemoryStream(file.Fileupload);
-                FormFile files = new FormFile(stream, 0, file.Fileupload.Length, "name", "fileName");
+                #region NAS
+                //HttpClient client = new HttpClient();
+                //client.DefaultRequestHeaders.Accept.Add(
+                //new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                //string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "nas_subcontract");
+
+                //HttpResponseMessage response = client.GetAsync(uriString).Result;
+                //if (response.IsSuccessStatusCode)
+                //{
+                //    var v = response.Content.ReadAsStringAsync().Result;
+                //    outputNas = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+                //} 
+               
+                //if (outputNas != null & outputNas.Count() > 0)
+                //{
+
+                //    using (var impersonator = new Impersonator(outputNas[0].value1, outputNas[0].value2, outputNas[0].dropdown_text, false))
+                //    {
+                //        if (!Directory.Exists(outputNas[0].dropdown_text + @"\SubContractProfile\" + companyid))
+                //        {
+                //            Directory.CreateDirectory(outputNas[0].dropdown_text + @"\SubContractProfile\" + companyid);
+                //        }
+
+                //        var stream = new MemoryStream(file.Fileupload);
+                //        FormFile files = new FormFile(stream, 0, file.Fileupload.Length, "name", "fileName");
+
+                //        string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                //        filename = EnsureCorrectFilename(file.Filename);
+                //        using (output = System.IO.File.Create(Path.Combine(outputNas[0].dropdown_text + @"\SubContractProfile\" + companyid, filename)))
+                //        {
+                //            await files.CopyToAsync(output);
+                //        }
+
+                //    }
+
+                //}
+                #endregion
+
+                
+                    var stream = new MemoryStream(file.Fileupload);
+                    FormFile files = new FormFile(stream, 0, file.Fileupload.Length, "name", "fileName");
+
+                    string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
 
                     filename = EnsureCorrectFilename(file.Filename);
-                    using (output = System.IO.File.Create(this.GetPathAndFilename(companyid, filename)))
+                    using (output = System.IO.File.Create(GetPathAndFilename(companyid, filename)))
+                    {
                         await files.CopyToAsync(output);
-               
-               
+                    }
+
+
+
             }
             catch (Exception e)
             {
                 return false;
-                throw;
             }
             return true;
         }
@@ -1432,6 +1571,37 @@ namespace SubcontractProfile.Web.Controllers
             }
             PathOutput = Path.Combine(pathdir, filename);
             return PathOutput;
+        }
+
+        private async Task<bool> UploadfileOnSave(IFormFile files, string CompanyId)
+        {
+            bool statusupload = true;
+            List<FileUploadModal> L_File = new List<FileUploadModal>();
+            FileStream output;
+            string strmess = "";
+            try
+            {
+
+                if (files != null && files.Length > 0)
+                {
+
+                    string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
+                    filename = EnsureCorrectFilename(filename);
+                    using (output = System.IO.File.Create(this.GetPathAndFilename(CompanyId, filename)))
+                        await files.CopyToAsync(output);
+                }
+
+            }
+            catch (Exception e)
+            {
+                statusupload = false;
+                strmess = e.Message.ToString();
+                throw;
+            }
+
+
+            return statusupload;
+
         }
 
         #endregion

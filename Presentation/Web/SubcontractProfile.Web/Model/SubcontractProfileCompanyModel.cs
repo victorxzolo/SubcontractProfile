@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -192,6 +193,11 @@ namespace SubcontractProfile.Web.Model
         public DateTime? CompanyRegisterDate { get; set; }
         public DateTime? TriningDate { get; set; }
         public DateTime? PaymentDatetime { get; set; }
+
+        public IFormFile FileBookBank { get; set; }
+        public IFormFile FileCompanyCertified { get; set; }
+        public IFormFile FileCommercialRegistration { get; set; }
+        public IFormFile FileVatRegistrationCertificate { get; set; }
 
     }
 

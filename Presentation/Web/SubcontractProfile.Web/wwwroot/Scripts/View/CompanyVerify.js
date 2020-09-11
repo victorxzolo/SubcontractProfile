@@ -683,6 +683,8 @@ function onSaveCompanyProfile(status) {
     var vat_type = null;
     var company = new Object();
 
+    var data = new FormData();
+
     if ($("#rdoCompanyType1").is(":checked")) {
         chksubcontract_type = $("#rdoCompanyType1").val();
         //distribution_channel = $('#ddldistribution option').filter(':selected').val();
@@ -715,63 +717,121 @@ function onSaveCompanyProfile(status) {
         vat_type = $('#chkvat_typeT_dealer').is(':checked') ? $('#chkvat_typeT_dealer').val() : $('#chkvat_typeE_dealer').val();
     }
 
-    company.CompanyNameTh = company_name_th;
-    company.CompanyNameEn = company_name_en;
-    company.CompanyAlias = company_alias;
-    company.DistributionChannel = distribution_channel;
-    company.ChannelSaleGroup = channel_sale_group;
-    company.TaxId = tax_id;
-    company.WtName = wt_name;
-    company.VatType = vat_type;
-    company.CompanyEmail = $('#mailCompany').val();
-    company.ContractName = $('#nameContract').val();
-    company.ContractPhone = $('#telContract').val();
-    company.ContractEmail = $('#mailContract').val();
+    //company.CompanyNameTh = company_name_th;
+    //company.CompanyNameEn = company_name_en;
+    //company.CompanyAlias = company_alias;
+    //company.DistributionChannel = distribution_channel;
+    //company.ChannelSaleGroup = channel_sale_group;
+    //company.TaxId = tax_id;
+    //company.WtName = wt_name;
+    //company.VatType = vat_type;
+    //company.CompanyEmail = $('#mailCompany').val();
+    //company.ContractName = $('#nameContract').val();
+    //company.ContractPhone = $('#telContract').val();
+    //company.ContractEmail = $('#mailContract').val();
 
-    company.BankCode = $('#selBankName option').filter(':selected').val()
-    company.BankName = $('#txtbank_Name').val();
-    company.AccountNumber = $('#codeNumber').val();
-    company.AccountName = $('#busiName').val();
+    //company.BankCode = $('#selBankName option').filter(':selected').val()
+    //company.BankName = $('#txtbank_Name').val();
+    //company.AccountNumber = $('#codeNumber').val();
+    //company.AccountName = $('#busiName').val();
 
-    //company.BranchCode= $('#txtbranch_Code').val();
-    company.BranchName = $('#nameBranch').val();
+    ////company.BranchCode= $('#txtbranch_Code').val();
+    //company.BranchName = $('#nameBranch').val();
 
-    company.DeptOfInstallName = $('#name1').val();
-    company.DeptOfMaintenName = $('#name2').val();
-    company.DeptOfAccountName = $('#name3').val();
+    //company.DeptOfInstallName = $('#name1').val();
+    //company.DeptOfMaintenName = $('#name2').val();
+    //company.DeptOfAccountName = $('#name3').val();
 
-    company.DeptOfInstallPhone = $('#tel1').val();
-    company.DeptOfMaintenPhone = $('#tel2').val();
-    company.DeptOfAccountPhone = $('#tel3').val();
+    //company.DeptOfInstallPhone = $('#tel1').val();
+    //company.DeptOfMaintenPhone = $('#tel2').val();
+    //company.DeptOfAccountPhone = $('#tel3').val();
 
-    company.DeptOfInstallEmail = $('#mail1').val();
-    company.DeptOfMaintenEmail = $('#mail2').val();
-    company.DeptOfAccountEmail = $('#mail3').val();
+    //company.DeptOfInstallEmail = $('#mail1').val();
+    //company.DeptOfMaintenEmail = $('#mail2').val();
+    //company.DeptOfAccountEmail = $('#mail3').val();
 
-    company.LocationCode = $('#txtlocationcode').val();
-    company.LocationNameTh = $('#txtlocationname').val();
-    company.LocationNameEn = $('#txtlocationname').val();
+    //company.LocationCode = $('#txtlocationcode').val();
+    //company.LocationNameTh = $('#txtlocationname').val();
+    //company.LocationNameEn = $('#txtlocationname').val();
 
-    company.BankAccountTypeId = $('#AccType option').filter(':selected').val();
-    company.SubcontractProfileType = chksubcontract_type;
-    company.CompanyTitleThId = company_title_name_th;
-    company.CompanyTitleEnId = company_title_name_en;
-    company.CompanyId = $('#hdCompanyId').val();
-    //company.ContractStartDate = $('#datecontractstart').val();
-    //company.ContractEndDate = $('#datecontractend').val();
+    //company.BankAccountTypeId = $('#AccType option').filter(':selected').val();
+    //company.SubcontractProfileType = chksubcontract_type;
+    //company.CompanyTitleThId = company_title_name_th;
+    //company.CompanyTitleEnId = company_title_name_en;
+    //company.CompanyId = $('#hdCompanyId').val();
+    ////company.ContractStartDate = $('#datecontractstart').val();
+    ////company.ContractEndDate = $('#datecontractend').val();
+
+    data.append("CompanyNameTh", company_name_th);
+    data.append("CompanyNameEn", company_name_en);
+    data.append("CompanyAlias", company_alias);
+    data.append("DistributionChannel", distribution_channel);
+    data.append("ChannelSaleGroup", channel_sale_group);
+    data.append("TaxId", tax_id);
+    data.append("WtName", wt_name);
+    data.append("VatType", vat_type);
+    data.append("CompanyEmail", $('#mailCompany').val());
+    data.append("ContractName", $('#nameContract').val());
+    data.append("ContractPhone", $('#telContract').val());
+    data.append("ContractEmail", $('#mailContract').val());
+
+    data.append("BankCode", $('#selBankName option').filter(':selected').val());
+    data.append("BankName", $('#txtbank_Name').val());
+    data.append("AccountNumber", $('#codeNumber').val());
+    data.append("AccountName", $('#busiName').val());
+    data.append("BranchName", $('#nameBranch').val());
+
+    data.append("DeptOfInstallName", $('#name1').val());
+    data.append("DeptOfMaintenName", $('#name2').val());
+    data.append("DeptOfAccountName", $('#name3').val());
+
+    data.append("DeptOfInstallPhone", $('#tel1').val());
+    data.append("DeptOfMaintenPhone", $('#tel2').val());
+    data.append("DeptOfAccountPhone", $('#tel3').val());
+
+    data.append("DeptOfInstallEmail", $('#mail1').val());
+    data.append("DeptOfMaintenEmail", $('#mail2').val());
+    data.append("DeptOfAccountEmail", $('#mail3').val());
+
+    data.append("LocationCode", $('#txtlocationcode').val());
+    data.append("LocationNameTh", $('#txtlocationname').val());
+    data.append("LocationNameEn", $('#txtlocationname').val());
+
+    data.append("BankAccountTypeId", $('#AccType option').filter(':selected').val());
+    data.append("SubcontractProfileType", chksubcontract_type);
+    data.append("CompanyTitleThId", company_title_name_th);
+    data.append("CompanyTitleEnId", company_title_name_en);
+    data.append("CompanyId", $('#hdCompanyId').val());
+
+    data.append("status", status);
+    data.append("contractstart", $('#datecontractstart').val());
+    data.append("contractend", $('#datecontractend').val());
+
+    data.append("FileBookBank", $("#inputuploadbookbank").get(0).files[0]);
+    data.append("FileCompanyCertified", $("#inputUploadcertificate").get(0).files[0]);
+    data.append("FileCommercialRegistration", $("#inputUploadComRegis").get(0).files[0]);
+    data.append("FileVatRegistrationCertificate", $("#inputUpload20").get(0).files[0]);
+
+    data.append("AttachFile", $('#lbuploadbookbank').text());
+    data.append("CompanyCertifiedFile", $('#lbuploadcertificate').text());
+    data.append("CommercialRegistrationFile", $('#lbuploadComRegis').text());
+    data.append("VatRegistrationCertificateFile", $('#lbupload20').text());
 
     var urlOnSave = url.replace('Action', 'OnSave');
     $.ajax({
         url: urlOnSave,
         type: 'POST',
         async: false,
-        data: {
-            model: company,
-            status: status,
-            contractstart: $('#datecontractstart').val(),
-            contractend: $('#datecontractend').val()
-        },
-        dataType: "json",
+        data: data,
+        processData: false,
+        contentType: false,
+        //data: {
+        //    model: company,
+        //    status: status,
+        //    contractstart: $('#datecontractstart').val(),
+        //    contractend: $('#datecontractend').val()
+        //},
+        //dataType: "json",
         success: function (result) {
             if (result.Response.Status) {
                 bootbox.alert(result.Response.Message);
