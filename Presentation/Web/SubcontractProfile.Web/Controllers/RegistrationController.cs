@@ -479,10 +479,11 @@ namespace SubcontractProfile.Web.Controllers
                     {
                         if (e.AddressId == null)
                         {
-                            if (e.location_code != "")//มาจาก dealer
-                            {
-                                data.RemoveAll(x => x.location_code == e.location_code && x.AddressTypeId == e.AddressTypeId);
-                            }
+                            //if (e.location_code != "")//มาจาก dealer
+                            //{
+                            //    data.RemoveAll(x => x.location_code == e.location_code && x.AddressTypeId == e.AddressTypeId);
+                            //}
+                            data.RemoveAll(x => x.AddressTypeId == e.AddressTypeId);
                             List<SubcontractProfileAddressModel> newaddr = new List<SubcontractProfileAddressModel>();
                             newaddr.Add(new SubcontractProfileAddressModel
                             {
