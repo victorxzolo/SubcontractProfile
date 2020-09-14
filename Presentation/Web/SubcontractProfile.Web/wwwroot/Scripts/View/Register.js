@@ -219,9 +219,9 @@ $(document).ready(function () {
 
                 console.log(data);
             },
-            error: function (xhr, status, error) {
+            error: function (xhr) {
                 Loading(0);
-                console.log(status);
+                console.log(xhr);
             }
         });
     });
@@ -342,16 +342,9 @@ $(document).ready(function () {
                 }
 
             },
-            error: function (xhr, status, error) {
+            error: function (xhr) {
                 Loading(0);
-                //bootbox.alert({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    size: "small",
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
+                console.log(xhr);
              }
         });
 
@@ -638,17 +631,9 @@ $(document).ready(function () {
                     });
                 }
             },
-            error: function (xhr, status, error) {
+            error: function (xhr) {
                 //Loading(0);
-                //clearForEdit();
-                //bootbox.alert({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    size: "small",
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
+                console.log(xhr);
             }
         });
     });
@@ -682,16 +667,9 @@ $(document).ready(function () {
                     });
                 }
             },
-            error: function (xhr, status, error) {
+            error: function (xhr) {
                 //Loading(0);
-                //bootbox.alert({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    size: "small",
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
+                console.log(xhr);
                }
         });
     });
@@ -983,17 +961,9 @@ $(document).ready(function () {
                     });
                 }
             },
-            error: function (xhr, status, error) {
+            error: function (xhr) {
                 Loading(0);
-                //clearForEdit();
-                //bootbox.alert({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    size: "small",
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
+                console.log(xhr);
             }
         });
     });
@@ -1034,14 +1004,7 @@ function inittaLocation() {
             dataType: "json",
             error: function (xhr, status, error) {
                 Loading(0);
-                bootbox.alert({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    size: "small",
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                console.log(xhr);
             }
 
         },
@@ -1097,16 +1060,9 @@ function inttbRevenue() {
                 tIN: function () { return $('#txtsearchrevenue').val() }
             },
             dataType: "json",
-            error: function (xhr, status, error) {
+            error: function (xhr) {
                 Loading(0);
-                bootbox.alert({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    size: "small",
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                console.log(xhr);
             }
 
         },
@@ -1199,16 +1155,9 @@ function inttbAddress2() {
                 data.data = val;
                 return data.data;
             },
-            error: function (xhr, status, error) {
+            error: function (xhr) {
                 Loading(0);
-                bootbox.alert({
-                    title: "System Information",
-                    message: "This action is not available.",
-                    size: "small",
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                console.log(xhr);
             }
 
         },
@@ -1320,9 +1269,9 @@ function uploadFiles(inputId) {
                 }
 
             },
-            error: function (xhr, status, error) {
+            error: function (xhr) {
                 Loading(0);
-
+                console.log(xhr);
             }
         }
     );
@@ -1394,17 +1343,9 @@ function BindDataAddress() {
                 });
             }
         },
-        error: function (xhr, status, error) {
+        error: function (xhr) {
             Loading(0);
-            //clearForEdit();
-            bootbox.alert({
-                title: "System Information",
-                message: "This action is not available.",
-                size: "small",
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            console.log(xhr);
         }
     });
 }
@@ -1597,16 +1538,9 @@ function SaveDaftAddress(stuff) {
             }
 
         },
-        error: function (xhr, status, error) {
+        error: function (xhr) {
             Loading(0);
-            //bootbox.alert({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    size: "small",
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
+            console.log(xhr);
         }
     });
 }
@@ -1634,9 +1568,9 @@ function BindDDLprovince(regionid) {
            
 
         },
-        error: function (xhr, status, error) {
+        error: function (xhr) {
             Loading(0);
-
+            console.log(xhr);
         }
     });
 }
@@ -1661,8 +1595,8 @@ function BindDDLdistrict(province) {
           
 
         },
-        error: function (xhr, status, error) {
-
+        error: function (xhr) {
+            console.log(xhr);
         }
     });
 }
@@ -1694,8 +1628,8 @@ function BindDDLsubdistrict(district) {
           
 
         },
-        error: function (xhr, status, error) {
-
+        error: function (xhr) {
+            console.log(xhr);
         }
     });
 }
@@ -1742,8 +1676,8 @@ function BindDDLTitle() {
 
 
         },
-        error: function (xhr, status, error) {
-
+        error: function (xhr) {
+            console.log(xhr);
         }
     });
 }
@@ -1769,9 +1703,9 @@ function BindRegion() {
 
 
         },
-        error: function (xhr, status, error) {
+        error: function (xhr) {
             Loading(0);
-
+            console.log(xhr);
         }
     });
 }
@@ -1797,9 +1731,9 @@ function BindDDLBank() {
 
 
         },
-        error: function (xhr, status, error) {
+        error: function (xhr) {
             Loading(0);
-
+            console.log(xhr);
         }
     });
 }
@@ -1825,9 +1759,9 @@ function BindDDLCompanyType() {
 
 
         },
-        error: function (xhr, status, error) {
+        error: function (xhr) {
             Loading(0);
-
+            console.log(xhr);
         }
     });
 }
@@ -1862,9 +1796,9 @@ function BindAddressType() {
 
 
         },
-        error: function (xhr, status, error) {
+        error: function (xhr) {
             Loading(0);
-
+            console.log(xhr);
         }
     });
 }
@@ -1890,9 +1824,9 @@ function BindDDlBankAccountType() {
 
 
         },
-        error: function (xhr, status, error) {
+        error: function (xhr) {
             Loading(0);
-
+            console.log(xhr);
         }
     });
 }

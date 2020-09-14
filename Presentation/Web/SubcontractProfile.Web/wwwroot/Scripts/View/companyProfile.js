@@ -125,7 +125,7 @@ $(document).ready(function () {
                 }
             },
             callback: function (result) {
-                console.log('This was logged in the callback: ' + result);
+                console.log(xhr);
             }
         });
 
@@ -176,7 +176,7 @@ $(document).ready(function () {
                 }
             },
             callback: function (result) {
-                console.log('This was logged in the callback: ' + result);
+                console.log(xhr);
             }
         });
                             }
@@ -366,7 +366,7 @@ $(document).ready(function () {
                     }
                 },
                 callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
+                    console.log(xhr);
                 }
             });
         });
@@ -375,6 +375,7 @@ $(document).ready(function () {
                 $('#btn_reset_modal').click(function () {
         ClearDataModalLocation();
                 });
+
                 $('#tblocationModal').on('click', 'tbody .select_btn', function () {
 
                     var value = tbLocation.row($(this).closest('tr')).data();
@@ -422,12 +423,8 @@ $(document).ready(function () {
                             }
 
                         },
-                        error: function (xhr, status, error) {
-
-        //clearForEdit();
-        console.log(status);
-                            showFeedback("error", xhr.responseText, "System Information",
-                                "<button type='button' class='btn-border btn-black' data-dismiss='modal' id='btncancelpopup'><i class='fa fa-ban icon'></i><span>Cancel</span></button >");
+                        error: function (xhr) {
+                            console.log(xhr);
                         }
                     });
 
@@ -527,19 +524,8 @@ $(document).ready(function () {
         }).done(function (data) {
             tbRevenue.clear().draw();
             tbRevenue.rows.add(data.data).draw();
-        }).fail(function (xhr, status, error) {
-            bootbox.confirm({
-                title: "System Information",
-                message: xhr.responseText,
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+        }).fail(function (xhr) {
+            console.log(xhr);
         });
 
                 });
@@ -1294,23 +1280,12 @@ function getDataById(id) {
             data.data = val;
             oTableAddress.clear().draw();
             oTableAddress.rows.add(data.data).draw();
-        }).fail(function (xhr, status, error) {
-            bootbox.confirm({
-                title: "System Information",
-                message: xhr.responseText,
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+        }).fail(function (xhr) {
+            console.log(xhr);
         });
         }
 
-        function ConcatstrAddress(data) {
+function ConcatstrAddress(data) {
             var val = [];
 
             $.each(data, function () {
@@ -1397,21 +1372,9 @@ function SaveDaftAddress(stuff) {
                 }
 
             },
-            error: function (xhr, status, error) {
+            error: function (xhr) {
 
-                console.log(status);
-                bootbox.confirm({
-                    title: "System Information",
-                    message: xhr.responseText,
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                console.log(xhr);
             }
         });
         }
@@ -1599,15 +1562,15 @@ function onSaveCompanyProfile() {
 
                        }
                   },
-                error: function (xhr, status, error) {
-        bootbox.alert(xhr.responseText);
+                error: function (xhr) {
+                    console.log(xhr);
                   }
 
             });
 
         }
 
-        function uploadFiles(inputId) {
+function uploadFiles(inputId) {
 
 
             var input = document.getElementById(inputId);
@@ -1686,23 +1649,12 @@ function onSaveCompanyProfile() {
                         }
 
                     },
-                    error: function (xhr, status, error) {
-        bootbox.confirm({
-            title: "System Information",
-            message: xhr.responseText,
-            buttons: {
-                cancel: {
-                    label: '<i class="fa fa-times"></i> Cancel'
-                }
-            },
-            callback: function (result) {
-                console.log('This was logged in the callback: ' + result);
-            }
-        });
+                    error: function (xhr) {
+                        console.log(xhr);
                     }
                 }
             );
-        }
+}
 
 
         function BindDDLprovince(regionid) {
@@ -1723,22 +1675,9 @@ function onSaveCompanyProfile() {
 
 
             },
-            error: function (xhr, status, error) {
+            error: function (xhr) {
 
-                //clearForEdit();
-                console.log(status);
-                bootbox.confirm({
-                    title: "System Information",
-                    message: xhr.responseText,
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                console.log(xhr);
             }
         });
         }
@@ -1764,20 +1703,7 @@ function onSaveCompanyProfile() {
             },
             error: function (xhr, status, error) {
 
-                //clearForEdit();
-                console.log(status);
-                bootbox.confirm({
-                    title: "System Information",
-                    message: xhr.responseText,
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                console.log(xhr);
             }
         });
         }
@@ -1811,22 +1737,9 @@ function onSaveCompanyProfile() {
 
 
             },
-            error: function (xhr, status, error) {
+            error: function (xhr) {
 
-                //clearForEdit();
-                console.log(status);
-                bootbox.confirm({
-                    title: "System Information",
-                    message: xhr.responseText,
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                console.log(xhr);
             }
         });
         }
@@ -1870,22 +1783,9 @@ function onSaveCompanyProfile() {
 
 
             },
-            error: function (xhr, status, error) {
+            error: function (xhr) {
 
-                //clearForEdit();
-                console.log(status);
-                bootbox.confirm({
-                    title: "System Information",
-                    message: xhr.responseText,
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                console.log(xhr);
             }
         });
         }
@@ -1909,22 +1809,9 @@ function onSaveCompanyProfile() {
 
 
             },
-            error: function (xhr, status, error) {
+            error: function (xhr) {
 
-                //clearForEdit();
-                console.log(status);
-                bootbox.confirm({
-                    title: "System Information",
-                    message: xhr.responseText,
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                console.log(xhr);
             }
         });
         }
@@ -1948,22 +1835,9 @@ function onSaveCompanyProfile() {
 
 
             },
-            error: function (xhr, status, error) {
+            error: function (xhr) {
 
-                //clearForEdit();
-                console.log(status);
-                bootbox.confirm({
-                    title: "System Information",
-                    message: xhr.responseText,
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
+                console.log(xhr);
             }
         });
 }
@@ -1987,17 +1861,9 @@ function BindDDlBankAccountType() {
 
 
         },
-        error: function (xhr, status, error) {
+        error: function (xhr) {
    
-            //clearForEdit();
-            //bootbox.alert({
-            //    title: "System Information",
-            //    message: "This action is not available.",
-            //    size: "small",
-            //    callback: function (result) {
-            //        console.log('This was logged in the callback: ' + result);
-            //    }
-            //});
+            console.log(xhr);
         }
     });
 }

@@ -60,28 +60,26 @@ $(document).ready(function () {
     });
     var urlGetCompany = url.replace('Action', 'GetCompany');
     $('#txtcompanyname').autocomplete({
-        lookup: function (query, done) {
+        //lookup:
+            //fruits,
+        lookup:function (query, done) {
             $.ajax({
                 type: "POST",
                 url: urlGetCompany,
                 data: { companyname: query },
                 dataType: "json",
+                async: false,
                 success: function (data) {
-                    var suggestions = [];
-                    $.each(data.response, function () {
-                        var d = {
-                            "value": this.CompanyNameTh, "data": this.CompanyId
-                        }
-                        suggestions.push(d);
+                    var suggestions = $.map(data.response, function (v) {
+                        return {
+                            'value': v.CompanyNameTh, 'data': v.CompanyId
+                        };
                     });
-                    var result = { suggestions };
-
+                    var result = { 'suggestions': suggestions };
                     done(result);
-
-
                 },
                 error: function (xhr, status, error) {
-
+                    console.log(xhr);
                 }
             });
         },

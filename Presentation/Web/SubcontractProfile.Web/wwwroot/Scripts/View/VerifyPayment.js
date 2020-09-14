@@ -139,15 +139,12 @@ $(document).ready(function () {
                 data: { companyname: query},
                 dataType: "json",
                 success: function (data) {
-                    var suggestions = [];
-                        $.each(data.response, function () {
-                            var d = {
-                                "value": this.CompanyNameTh , "data": this.CompanyId 
-                            }
-                            suggestions.push(d);
-                        });
-                    var result = { suggestions };
-
+                    var suggestions = $.map(data.response, function (v) {
+                        return {
+                            'value': v.CompanyNameTh, 'data': v.CompanyId
+                        };
+                    });
+                    var result = { 'suggestions': suggestions };
                     done(result);
 
 
