@@ -257,7 +257,7 @@ namespace SubcontractProfile.Web.Controllers
                 }
 
                 
-                if (await Uploadfile(Payment.FileSilp, Payment.PaymentId))
+                if (await Uploadfile(Payment.FileSilp, Payment.PaymentId, dataUser.UserId.ToString()))
                 {
                     Payment.SlipAttachFile = Payment.FileSilp.FileName;
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -614,11 +614,11 @@ namespace SubcontractProfile.Web.Controllers
                     });
                     PaymentResult.file_id_Slip = file_id;
                 }
-                if (L_File.Count != 0)
-                {
-                    GetFile(paymentId, ref L_File);
-                    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftPaymentSSO", L_File);
-                }
+                //if (L_File.Count != 0)
+                //{
+                //    GetFile(paymentId, ref L_File);
+                //    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftPaymentSSO", L_File);
+                //}
 
 
             }
@@ -674,86 +674,93 @@ namespace SubcontractProfile.Web.Controllers
         }
 
 
-        private async Task< bool> GetBlobDownload(string paymentid)
-        {
-            try
-            {
-                var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftPaymentSSO");
-                string filename = "";
-                foreach (var e in dataUploadfile)
-                {
-                    // await CopyFile(e, model.CompanyId.ToString());
+        //private async Task< bool> GetBlobDownload(string paymentid)
+        //{
+        //    try
+        //    {
+        //        if (dataUser == null)
+        //        {
+        //            getsession();
+        //        }
+        //        var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftPaymentSSO");
+        //        string filename = "";
+        //        foreach (var e in dataUploadfile)
+        //        {
+        //            // await CopyFile(e, model.CompanyId.ToString());
 
-                    filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
-                    filename = EnsureCorrectFilename(filename);
-                }
+        //            filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
+        //            filename = EnsureCorrectFilename(filename);
+        //        }
               
 
-                var path = this.GetPathAndFilename(paymentid, filename);
+        //        var path = this.GetPathAndFilename(paymentid, filename,, dataUser.companyid.ToString());
 
-                var memory = new MemoryStream();
-                using (var stream = new FileStream(path, FileMode.Open))
-                {
-                    await stream.CopyToAsync(memory);
-                    //using (var img = Image.FromStream(stream))
-                    //{
-                    //    // TODO: ResizeImage(img, 100, 100);
-                    //}
+        //        var memory = new MemoryStream();
+        //        using (var stream = new FileStream(path, FileMode.Open))
+        //        {
+        //            await stream.CopyToAsync(memory);
+        //            //using (var img = Image.FromStream(stream))
+        //            //{
+        //            //    // TODO: ResizeImage(img, 100, 100);
+        //            //}
 
-                }
+        //        }
                 
-                memory.Position = 0;
+        //        memory.Position = 0;
 
-                TempData["Output"] = memory.ToArray();
-                //return File(path, content);
-                //return File(memory, GetContentType(path), Path.GetFileName(path));
-                return true;
+        //        TempData["Output"] = memory.ToArray();
+        //        //return File(path, content);
+        //        //return File(memory, GetContentType(path), Path.GetFileName(path));
+        //        return true;
 
-            }
-            catch (Exception e)
-            {
-                return false;
-                throw;
-            }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return false;
+        //        throw;
+        //    }
             
 
-        }
-        public async Task<ActionResult> Downloadfile(string paymentid)
-        {
-            // retrieve byte array here
-            var array = TempData["Output"] as byte[];
-            if (array == null)
-            {
-               await GetBlobDownload(paymentid);
-              array = TempData["Output"] as byte[];
-            }
+        //}
+        //public async Task<ActionResult> Downloadfile(string paymentid)
+        //{
+        //    // retrieve byte array here
+        //    var array = TempData["Output"] as byte[];
+        //    if (array == null)
+        //    {
+        //       await GetBlobDownload(paymentid);
+        //      array = TempData["Output"] as byte[];
+        //    }
 
-            var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftPaymentSSO");
-            string filename = "";
-            foreach (var e in dataUploadfile)
-            {
-                // await CopyFile(e, model.CompanyId.ToString());
+        //    var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftPaymentSSO");
+        //    string filename = "";
+        //    foreach (var e in dataUploadfile)
+        //    {
+        //        // await CopyFile(e, model.CompanyId.ToString());
 
-                filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
-                filename = EnsureCorrectFilename(filename);
-            }
+        //        filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
+        //        filename = EnsureCorrectFilename(filename);
+        //    }
 
-            var path = this.GetPathAndFilename(paymentid, filename);
-            string content = GetContentType(path);
+        //    var path = this.GetPathAndFilename(paymentid, filename);
+        //    string content = GetContentType(path);
 
-            if (array != null)
-            {
-                return File(array, content, Path.GetFileName(path));
-            }
-            else
-            {
-                return new EmptyResult();
-            }
-        }
+        //    if (array != null)
+        //    {
+        //        return File(array, content, Path.GetFileName(path));
+        //    }
+        //    else
+        //    {
+        //        return new EmptyResult();
+        //    }
+        //}
         public async Task<ActionResult> DownloadfileConfirm(string paymentid,string filename)
         {
-
-            var path = this.GetPathAndFilename(paymentid, filename);
+            if (dataUser == null)
+            {
+                getsession();
+            }
+            var path = this.GetPathAndFilename(paymentid, filename, dataUser.companyid.ToString());
             string content = GetContentType(path);
             var memory = new MemoryStream();
             using (var stream = new FileStream(path, FileMode.Open))
@@ -845,7 +852,7 @@ namespace SubcontractProfile.Web.Controllers
             }
             return Json(new { status = statusupload, message = strmess,file_id= fid });
         }
-        private async Task<bool> Uploadfile(IFormFile files,string paymentid)
+        private async Task<bool> Uploadfile(IFormFile files,string paymentid,string companyid)
         {
             bool statusupload = true;
             List<FileUploadModal> L_File = new List<FileUploadModal>();
@@ -858,16 +865,25 @@ namespace SubcontractProfile.Web.Controllers
                 {
                     if (files != null)
                     {
-                        System.IO.DirectoryInfo di = new DirectoryInfo(Path.Combine(strpathUpload, paymentid));
-
-                        foreach (FileInfo finfo in di.GetFiles())
+                        string strdir = Path.Combine(strpathUpload, companyid, "Payment",paymentid);
+                        if (!Directory.Exists(strdir))
                         {
-                            finfo.Delete();
+                            Directory.CreateDirectory(strdir);
                         }
+                        else
+                        {
+                            System.IO.DirectoryInfo di = new DirectoryInfo(strdir);
+                            foreach (FileInfo finfo in di.GetFiles())
+                            {
+                                finfo.Delete();
+                            }
+                        }
+
+                        
                     }
                     string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
                         filename = EnsureCorrectFilename(filename);
-                        using (output = System.IO.File.Create(this.GetPathAndFilename(paymentid,filename)))
+                        using (output = System.IO.File.Create(this.GetPathAndFilename(paymentid,filename, companyid)))
                             await files.CopyToAsync(output);
                 }
 
@@ -927,30 +943,6 @@ namespace SubcontractProfile.Web.Controllers
             }
             return result;
         }
-
-        private async Task<bool> CopyFile(FileUploadModal file, string companyid)
-        {
-            FileStream output;
-            try
-            {
-                var stream = new MemoryStream(file.Fileupload);
-                FormFile files = new FormFile(stream, 0, file.Fileupload.Length, "name", "fileName");
-
-                string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-
-                filename = EnsureCorrectFilename(file.Filename);
-                using (output = System.IO.File.Create(this.GetPathAndFilename(companyid, filename)))
-                    await files.CopyToAsync(output);
-
-
-            }
-            catch (Exception e)
-            {
-                return false;
-                throw;
-            }
-            return true;
-        }
         private string EnsureCorrectFilename(string filename)
         {
             if (filename.Contains("\\"))
@@ -958,9 +950,9 @@ namespace SubcontractProfile.Web.Controllers
 
             return filename;
         }
-        private string GetPathAndFilename(string paymentid, string filename)
+        private string GetPathAndFilename(string paymentid, string filename,string companyid)
         {
-            string pathdir = Path.Combine(strpathUpload, paymentid);
+            string pathdir = Path.Combine(strpathUpload, companyid, "Payment", paymentid);
             string PathOutput = "";
             if (!Directory.Exists(pathdir))
             {

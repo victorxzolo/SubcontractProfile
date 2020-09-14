@@ -21,15 +21,24 @@ namespace SubcontractProfile.Web.Controllers
         private readonly string strpathAPI;
         private readonly IConfiguration _configuration;
 
-        public LocationController(IConfiguration configuration)
+        private const int MegaBytes = 3 * 1024 * 1024;
+        private readonly string strpathUpload;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private string Lang = "";
+        private SubcontractProfileUserModel dataUser = new SubcontractProfileUserModel();
+
+        public LocationController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
 
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
+
+            strpathUpload = _configuration.GetValue<string>("PathUploadfile:Local").ToString();
             //Lang = "TH";
             //strpathASCProfile = _configuration.GetValue<string>("PathASCProfile:DEV").ToString();
 
-           // HttpContext.Session.SetString("username", username);
+            // HttpContext.Session.SetString("username", username);
         }
 
         // GET: LocationController
@@ -150,13 +159,19 @@ namespace SubcontractProfile.Web.Controllers
                 var result = response.Content.ReadAsStringAsync().Result;
                 //data
                 locationResult = JsonConvert.DeserializeObject<SubcontractProfileLocationModel>(result);
+                if (locationResult.BankAttachFile != null)
+                {
+                    Guid file_id = Guid.NewGuid();
 
+                    locationResult.file_id__BankAttach = file_id;
+                }
             }
 
             return Json(locationResult);
         }
 
-        public ActionResult OnSave(SubcontractProfileLocationModel model)
+        [HttpPost]
+        public async Task<ActionResult> OnSave(SubcontractProfileLocationModel model)
         {
             ResponseModel result = new ResponseModel();
             HttpClient clientLocation = new HttpClient();
@@ -168,47 +183,83 @@ namespace SubcontractProfile.Web.Controllers
                 //insert
                 if (model.LocationId == Guid.Empty)
                 {
-                    model.CompanyId = userProfile.companyid;
-                    var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Insert"));
+                    model.LocationId = Guid.NewGuid();
+                    if (model.File_BankAttach != null && model.File_BankAttach.Length > 0)
+                    {
+                        if (await Uploadfile(model.File_BankAttach, model.LocationId.ToString(), userProfile.companyid.ToString()))
+                        {
+                            model.BankAttachFile = model.File_BankAttach.FileName;
+                            model.CompanyId = userProfile.companyid;
+                            model.CreateBy = userProfile.UserId.ToString();
+                            var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Insert"));
 
-                    clientLocation.DefaultRequestHeaders.Accept.Add(
-                    new MediaTypeWithQualityHeaderValue("application/json"));
-                    var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                    HttpResponseMessage responseCompany = clientLocation.PostAsync(uriLocation, httpContent).Result;
-                    if (responseCompany.IsSuccessStatusCode)
-                    {
-                        result.Status = true;
-                        result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
-                        result.StatusError = "0";
+                            clientLocation.DefaultRequestHeaders.Accept.Add(
+                            new MediaTypeWithQualityHeaderValue("application/json"));
+                            var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                            HttpResponseMessage responseCompany = clientLocation.PostAsync(uriLocation, httpContent).Result;
+                            if (responseCompany.IsSuccessStatusCode)
+                            {
+                                result.Status = true;
+                                result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                                result.StatusError = "0";
+                            }
+                            else
+                            {
+                                result.Status = false;
+                                result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                                result.StatusError = "-1";
+                            }
+
+                        }
+                        else
+                        {
+                            result.Status = false;
+                            result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                            result.StatusError = "-1";
+                        }
                     }
-                    else
-                    {
-                        result.Status = false;
-                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
-                        result.StatusError = "-1";
-                    }
+
+                    
                 }
                 else //update
                 {
-                    var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Update"));
-
-                    clientLocation.DefaultRequestHeaders.Accept.Add(
-                    new MediaTypeWithQualityHeaderValue("application/json"));
-                    var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                    HttpResponseMessage responseResult = clientLocation.PutAsync(uriLocation, httpContent).Result;
-
-                    if (responseResult.IsSuccessStatusCode)
+                    if (model.File_BankAttach != null && model.File_BankAttach.Length > 0)
                     {
-                        result.Status = true;
-                        result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
-                        result.StatusError = "0";
+                        if (await Uploadfile(model.File_BankAttach, model.LocationId.ToString(), userProfile.companyid.ToString()))
+                        {
+                            model.BankAttachFile = model.File_BankAttach.FileName;
+
+                            var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Update"));
+                            model.UpdateBy = userProfile.UserId.ToString();
+
+                            clientLocation.DefaultRequestHeaders.Accept.Add(
+                            new MediaTypeWithQualityHeaderValue("application/json"));
+                            var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                            HttpResponseMessage responseResult = clientLocation.PutAsync(uriLocation, httpContent).Result;
+
+                            if (responseResult.IsSuccessStatusCode)
+                            {
+                                result.Status = true;
+                                result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                                result.StatusError = "0";
+                            }
+                            else
+                            {
+                                result.Status = false;
+                                result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                                result.StatusError = "-1";
+                            }
+
+                        }
+                        else
+                        {
+                            result.Status = false;
+                            result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                            result.StatusError = "-1";
+                        }
                     }
-                    else
-                    {
-                        result.Status = false;
-                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
-                        result.StatusError = "-1";
-                    }
+
+                    
                 }
             }
 
@@ -221,12 +272,13 @@ namespace SubcontractProfile.Web.Controllers
             return Json(result);
         }
 
-        public JsonResult OnDelete(string locationId)
+        public async Task<JsonResult> OnDelete(string locationId)
         {
             var result = new ResponseModel();
             HttpClient clientLocation = new HttpClient();
             try
             {
+                var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
                 string uriString = string.Format("{0}/{1}", strpathAPI + "Location/Delete", locationId);
               //  var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Delete"));
 
@@ -236,9 +288,20 @@ namespace SubcontractProfile.Web.Controllers
                 HttpResponseMessage responseResult = clientLocation.DeleteAsync(uriString).Result;
                 if (responseResult.IsSuccessStatusCode)
                 {
-                    result.Message = "ลบข้อมูลเรียบร้อย";
-                    result.Status = true;
-                    result.StatusError = "0";
+                   
+
+                    if(await Deletefile(locationId, userProfile.companyid.ToString()))
+                    {
+                        result.Message = "ลบข้อมูลเรียบร้อย";
+                        result.Status = true;
+                        result.StatusError = "0";
+                    }
+                    else
+                    {
+                        result.Status = false;
+                        result.Message = "ลบข้อมูลไม่สำเร็จ กรุณาติดต่อ Administrator.";
+                        result.StatusError = "-1";
+                    }
                 }
                 else
                 {
@@ -256,7 +319,263 @@ namespace SubcontractProfile.Web.Controllers
             return Json(result);
         }
 
-       
+        public IActionResult CheckLocationCode(string locationcode)
+        {
+            bool status = true;
+            string message = "";
+            List<SubcontractProfileLocationModel> L_location= new List<SubcontractProfileLocationModel>();
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
 
+                var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+
+                Guid strCompanyId = userProfile.companyid;
+
+                string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Location/SearchLocation", strCompanyId
+                   , locationcode, "null", "null", "null", "null", "null");
+
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = response.Content.ReadAsStringAsync().Result;
+                    //data
+                    L_location = JsonConvert.DeserializeObject<List<SubcontractProfileLocationModel>>(result);
+
+                }
+                if (L_location != null && L_location.Count > 0)
+                {
+                    if (Lang == "")
+                    {
+                        getsession();
+                    }
+                    if (Lang == "TH")
+                    {
+                        status = false;
+                        message = "Location Code นี้มีในระบบแล้ว";
+                    }
+                    else
+                    {
+                        status = false;
+                        message = "Location Code duplicate";
+                    }
+                }
+            }
+            catch (Exception w)
+            {
+                status = false;
+                message = w.Message;
+                throw;
+            }
+            return Json(new { Status = status, Message = message });
+        }
+
+        #region Upload
+        [HttpPost]
+        public IActionResult CheckFileUpload(List<IFormFile> files)
+        {
+            bool statusupload = true;
+            string strmess = "";
+            Guid? fid = null;
+            try
+            {
+                foreach (FormFile source in files)
+                {
+                    if (source.Length > 0)
+                    {
+                        string filename = ContentDispositionHeaderValue.Parse(source.ContentDisposition).FileName.Trim('"');
+                        filename = EnsureCorrectFilename(filename);
+                        if (
+                                source.ContentType.ToLower() != "image/jpg" &&
+                                source.ContentType.ToLower() != "image/jpeg" &&
+                                source.ContentType.ToLower() != "image/pjpeg" &&
+                                source.ContentType.ToLower() != "image/gif" &&
+                                source.ContentType.ToLower() != "image/png" &&
+                                source.ContentType.ToLower() != "image/bmp" &&
+                                source.ContentType.ToLower() != "image/tif" &&
+                                 source.ContentType.ToLower() != "image/tiff"
+                                )
+                        {
+                            statusupload = false;
+                            strmess = "Upload type file miss match.";
+                        }
+                        else
+                        {
+                            var fileSize = source.Length;
+                            if (fileSize > MegaBytes)
+                            {
+                                statusupload = false;
+                                strmess = "Upload file is too large.";
+                            }
+                            else
+                            {
+                                fid = Guid.NewGuid();
+                                strmess = "Upload file success.";
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                statusupload = false;
+                strmess = e.Message.ToString();
+            }
+            return Json(new { status = statusupload, message = strmess, file_id = fid });
+        }
+
+        private string EnsureCorrectFilename(string filename)
+        {
+            if (filename.Contains("\\"))
+                filename = filename.Substring(filename.LastIndexOf("\\") + 1);
+
+            return filename;
+        }
+
+        private async Task<bool> Uploadfile(IFormFile files, string locationid,string companyid)
+        {
+            bool statusupload = true;
+            List<FileUploadModal> L_File = new List<FileUploadModal>();
+            FileStream output;
+            string strmess = "";
+            try
+            {
+
+                if (files != null && files.Length > 0)
+                {
+                    if (files != null)
+                    {
+                        string strdir = Path.Combine(strpathUpload, companyid, "Location",locationid);
+                        if(!Directory.Exists(strdir))
+                        {
+                            Directory.CreateDirectory(strdir);
+                        }
+                        else
+                        {
+                            System.IO.DirectoryInfo di = new DirectoryInfo(strdir);
+                            foreach (FileInfo finfo in di.GetFiles())
+                            {
+                                finfo.Delete();
+                            }
+                        }
+                        
+                    }
+                    string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
+                    filename = EnsureCorrectFilename(filename);
+                    using (output = System.IO.File.Create(this.GetPathAndFilename(locationid, filename,companyid)))
+                        await files.CopyToAsync(output);
+                }
+
+            }
+            catch (Exception e)
+            {
+                statusupload = false;
+                strmess = e.Message.ToString();
+                throw;
+            }
+
+
+            return statusupload;
+
+        }
+
+        private string GetPathAndFilename(string locationid, string filename,string companyid)
+        {
+            string pathdir = Path.Combine(strpathUpload, companyid, "Location", locationid);
+            string PathOutput = "";
+            if (!Directory.Exists(pathdir))
+            {
+                Directory.CreateDirectory(pathdir);
+            }
+            PathOutput = Path.Combine(pathdir, filename);
+            return PathOutput;
+        }
+
+        public async Task<ActionResult> DownloadfileLocation(string locationid, string filename)
+        {
+            if (dataUser == null)
+            {
+                getsession();
+            }
+            var path = this.GetPathAndFilename(locationid, filename, dataUser.companyid.ToString());
+            string content = GetContentType(path);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(path, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+
+            }
+
+            memory.Position = 0;
+            var array = memory.ToArray();
+
+
+            if (array != null)
+            {
+                return File(array, content, Path.GetFileName(path));
+            }
+            else
+            {
+                return new EmptyResult();
+            }
+        }
+
+        private async Task<bool> Deletefile(string locationid,string companyid)
+        {
+            bool result = true;
+            try
+            {
+                string strdir = Path.Combine(strpathUpload, companyid, "Location", locationid);
+                System.IO.DirectoryInfo di = new DirectoryInfo(strdir);
+                if(Directory.Exists(strdir))
+                {
+                    foreach (FileInfo file in di.GetFiles())
+                    {
+                        file.Delete();
+                    }
+
+                    Directory.Delete(strdir, true);
+                }
+                
+            }
+            catch (Exception e)
+            {
+                result = false;
+                throw;
+            }
+            return result;
+        }
+
+        private string GetContentType(string path)
+        {
+            var types = GetMimeTypes();
+            var ext = Path.GetExtension(path).ToLowerInvariant();
+            return types[ext];
+        }
+        private Dictionary<string, string> GetMimeTypes()
+        {
+            return new Dictionary<string, string>
+            {
+                {".pdf", "application/pdf"},
+                {".png", "image/png"},
+                {".jpg", "image/jpeg"},
+                {".jpeg", "image/jpeg"},
+                {".gif", "image/gif"}
+            };
+        }
+
+        #endregion
+        private void getsession()
+        {
+            Lang = SessionHelper.GetObjectFromJson<string>(_httpContextAccessor.HttpContext.Session, "language");
+            if (Lang == null || Lang == "")
+            {
+                Lang = "TH";
+            }
+            dataUser = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(_httpContextAccessor.HttpContext.Session, "userLogin");
+        }
     }
 }

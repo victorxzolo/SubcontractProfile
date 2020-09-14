@@ -58,7 +58,7 @@ namespace SubcontractProfile.WebApi.Services.Services
         {
             var p = new DynamicParameters();
 
-           // p.Add("@location_id", subcontractProfileLocation.LocationId);
+            p.Add("@location_id", subcontractProfileLocation.LocationId);
             p.Add("@location_code", subcontractProfileLocation.LocationCode);
             p.Add("@location_name", subcontractProfileLocation.LocationName);
             p.Add("@location_name_th", subcontractProfileLocation.LocationNameTh);

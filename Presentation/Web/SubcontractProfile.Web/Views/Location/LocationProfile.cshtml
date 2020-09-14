@@ -139,6 +139,7 @@
                                     <div class="invalid-feedback">
                                         กรุณากรอกข้อมูล Location Code.
                                     </div>
+                                    <span class='chklocation' style="color:red;display:none;"></span>
                                 </div>
                                 <div class="col-sm-2">
                                     <label><span style="color:red">*</span> Location Name Alias:</label>
@@ -440,11 +441,13 @@
 
                                         <div class="custom-file mb-4">
                                             @*<input type="file" class="custom-file-input" id="inputBankAttach"
-                                                   aria-describedby="uploadlHelp1" style="width:190px">
-                                            <label class="custom-file-label" for="inputGroupFile01">เลือกไฟล์</label>*@
+               aria-describedby="uploadlHelp1" style="width:190px">
+        <label class="custom-file-label" for="inputGroupFile01">เลือกไฟล์</label>*@
 
-                                            <input type="file" class="custom-file-input" id="inputBankAttach" aria-describedby="uploadlHelp1" style="width:190px">
-                                            <label class="custom-file-label" for="inputBankAttach">เลือกไฟล์</label>
+                                            <<input type="hidden" id="hdupfileBankAttach" />
+                                            <input type="file" class="custom-file-input" id="inputBankAttach" aria-describedby="uploadlHelp1" style="width:190px"
+                                                   accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff" >
+                                            <label class="custom-file-label" for="inputBankAttach" id="lbfileBankAttach">เลือกไฟล์</label>
                                             <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
                                         </div>
@@ -504,7 +507,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
                                 ปิด
                             </button>
-                            <button id="btnSave" type="submit" class="btn btn-primary">
+                            <button id="btnSave" type="button" class="btn btn-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
                                 บันทึก
                             </button>
@@ -540,33 +543,69 @@
                     openModal("new","");
                 });
 
+                $(".custom-file-input").on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                });
 
+                $('#inputBankAttach').change(function () {
+                    CheckFileUpload('inputBankAttach');
+                });
+
+                $('#btnSave').click(function () {
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function (form) {
+                        if (Validateform() || ValidateUpload()) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            } else {
+                                onSave();
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+
+                    });
+                });
+
+                $(document).on('show.bs.modal', '.modal', function () {
+                    var zIndex = 1040 + (10 * $('.modal:visible').length);
+                    $(this).css('z-index', zIndex);
+                    setTimeout(function () {
+                        $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+                    }, 0);
+                });
+
+                $(document).on('hidden.bs.modal', '.modal', function () {
+                    $('.modal:visible').length && $(document.body).addClass('modal-open');
+                });
 
             });
 
-            'use strict';
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
+            //'use strict';
+            //window.addEventListener('load', function () {
+            //    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            //    var forms = document.getElementsByClassName('needs-validation');
+            //    // Loop over them and prevent submission
+            //    var validation = Array.prototype.filter.call(forms, function (form) {
+            //        form.addEventListener('submit', function (event) {
 
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        } else {
-                            onSave();
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
+            //            if (form.checkValidity() === false || ValidateUpload()) {
+            //                event.preventDefault();
+            //                event.stopPropagation();
+            //            } else {
+            //                onSave();
+            //                event.preventDefault();
+            //                event.stopPropagation();
+            //            }
+            //            form.classList.add('was-validated');
+            //        }, false);
+            //    });
+            //}, false);
 
         function inittbSearchResult() {
- 
+
                var oTable = $('#tbSearchLocationResult').DataTable({
                 processing: true, // for show progress bar
                 serverSide: true, // for process server side
@@ -632,7 +671,7 @@
 
         }
 
-      
+
 
         function openModal(mode, locationId) {
 
@@ -696,14 +735,6 @@
 
                       $("#lblcompanyName").text(result.CompanyNameTh);
 
-                      //if (result.SubcontractProfileType == "newsub") {
-                      //    $('#rdoCompanyTypeNew').prop('checked', true);
-
-                      //}
-                      //else if (result.SubcontractProfileType == "dealer") {
-                      //    $('#rdoCompanyTypeDealer').prop('checked', true);
-                      //}
-
                       $('#inputLocationCode').val(result.LocationCode);
 
                       $('#inputLocationAlias').val(result.LocationNameAlias);
@@ -745,20 +776,13 @@
                       $('#inputContractMail').val(result.ContractMail);
                       $('#hdCompanyId').val(result.CompanyId);
 
+                      if (result.BankAttachFile != null) {
+                          $('#lbfileBankAttach').html(result.BankAttachFile);
+                          $('#hdupfileBankAttach').val(result.file_id__BankAttach);
+                          //$('#linkdownload').text(data.SlipAttachFile);
+                          //DownloadFileSlip(data.SlipAttachFile);
+                      }
 
-
-                      //if (result.VatType == "VAT") {
-                      //    $('#chkvat_typeT').prop('checked', true);
-                      //}
-                      //else if (result.VatType == "NON_VAT") {
-                      //    $('#chkvat_typeE').prop('checked', true);
-                      //}
-
-                      //if (result.isActive == true) {
-                      //    $("[name=rdoActive]").filter("[value='true']").prop("checked", true);
-                      //} else {
-                      //    $("[name=rdoActive]").filter("[value='false']").prop("checked", true);
-                      //}
                   }
                   },
                   error: function (result) {
@@ -769,58 +793,105 @@
     }
 
         function onSave() {
-            var location = new Object();
-            location.LocationId = $('#hdLocationId').val();
-            location.LocationCode = $('#inputLocationCode').val();
-            location.LocationNameAlias =  $('#inputLocationAlias').val();
-            location.LocationNameTh = $('#inputLocationNameT').val();
-            location.LocationNameEn =$('#inputLocationNameE').val();
-            location.StorageLocation =$('#inputStorage').val();
-            location.ShipTo =$('#inputShip').val();
-            location.OutOfServiceStorageLocation =$('#inoutOutStorage').val();
-            location.VatBranchNumber =$('#inputVat').val();
-            location.Phone =$('#inputPhoneNo').val();
-            location.CompanyMainContractPhone =$('#inputMainPhone').val();
-            location.InstallationsContractPhone =$('#inputInstallationsPhone').val();
-            location.MaintenanceContractPhone =$('#inputMaintenencePhone').val();
-            location.InventoryContractPhone =$('#inputInventoryPhone').val();
-            location.PaymentContractPhone =$('#inputPaymentPhone').val();
-            location.EtcContractPhone =$('#inputEtcPhone').val();
-            location.CompanyGroupMail = $('#inputCompanyMail').val();
-            location.InstallationsContractMail =$('#inputInstallationMail').val();
-            location.MaintenanceContractMail =$('#inputMaintanenceMail').val();
-            location.InventoryContractMail =$('#inputInventoryMail').val();
-            location.PaymentContractMail = $('#inputPaymentMail').val();
-            location.EtcContractMail = $('#inputEtcMail').val();
+            //var location = new Object();
 
-            location.LocationAddress =$('#inputLocationAddress').val();
+            //location.LocationId = $('#hdLocationId').val();
+            //location.LocationCode = $('#inputLocationCode').val();
+            //location.LocationNameAlias =  $('#inputLocationAlias').val();
+            //location.LocationNameTh = $('#inputLocationNameT').val();
+            //location.LocationNameEn =$('#inputLocationNameE').val();
+            //location.StorageLocation =$('#inputStorage').val();
+            //location.ShipTo =$('#inputShip').val();
+            //location.OutOfServiceStorageLocation =$('#inoutOutStorage').val();
+            //location.VatBranchNumber =$('#inputVat').val();
+            //location.Phone =$('#inputPhoneNo').val();
+            //location.CompanyMainContractPhone =$('#inputMainPhone').val();
+            //location.InstallationsContractPhone =$('#inputInstallationsPhone').val();
+            //location.MaintenanceContractPhone =$('#inputMaintenencePhone').val();
+            //location.InventoryContractPhone =$('#inputInventoryPhone').val();
+            //location.PaymentContractPhone =$('#inputPaymentPhone').val();
+            //location.EtcContractPhone =$('#inputEtcPhone').val();
+            //location.CompanyGroupMail = $('#inputCompanyMail').val();
+            //location.InstallationsContractMail =$('#inputInstallationMail').val();
+            //location.MaintenanceContractMail =$('#inputMaintanenceMail').val();
+            //location.InventoryContractMail =$('#inputInventoryMail').val();
+            //location.PaymentContractMail = $('#inputPaymentMail').val();
+            //location.EtcContractMail = $('#inputEtcMail').val();
 
-            location.PostAddress = $("#inputPostAddress").val()
-            location.TaxAddress =$("#inputTaxAddress").val()
-            location.WtAddress =$("#inputWTAddress").val()
+            //location.LocationAddress =$('#inputLocationAddress').val();
 
-            location.BankCode = $('#inputBankCode').val();
-            location.BankName =$('#inputBankName').val();
-            location.BankAccountNo =$('#inputBankAccountNo').val();
-            location.BankAccountName =$('#inputBankAccountName').val();
-            location.BankBranchCode =$('#inputBankBranchNo').val();
-            location.BankBranchName =$('#inputBankBranchName').val();
-            location.PenaltyContractPhone =$('#inputPanaltyPhone').val();
-            location.PenaltyContractMail =$('#inputPanaltyMail').val();
-            location.ContractPhone = $('#inputContractPhone').val();
-            location.ContractMail = $('#inputContractMail').val();
-            location.CompanyId = $('#hdCompanyId').val();
+            //location.PostAddress = $("#inputPostAddress").val()
+            //location.TaxAddress =$("#inputTaxAddress").val()
+            //location.WtAddress =$("#inputWTAddress").val()
+
+            //location.BankCode = $('#inputBankCode').val();
+            //location.BankName =$('#inputBankName').val();
+            //location.BankAccountNo =$('#inputBankAccountNo').val();
+            //location.BankAccountName =$('#inputBankAccountName').val();
+            //location.BankBranchCode =$('#inputBankBranchNo').val();
+            //location.BankBranchName =$('#inputBankBranchName').val();
+            //location.PenaltyContractPhone =$('#inputPanaltyPhone').val();
+            //location.PenaltyContractMail =$('#inputPanaltyMail').val();
+            //location.ContractPhone = $('#inputContractPhone').val();
+            //location.ContractMail = $('#inputContractMail').val();
+            //location.CompanyId = $('#hdCompanyId').val();
+
+            var formData = new FormData();
+
+            formData.append("LocationId", $('#hdLocationId').val());
+            formData.append("LocationCode", $('#inputLocationCode').val());
+            formData.append("LocationNameAlias", $('#inputLocationAlias').val());
+            formData.append("LocationNameTh", $('#inputLocationNameT').val());
+            formData.append("LocationNameEn", $('#inputLocationNameE').val());
+            formData.append("StorageLocation", $('#inputStorage').val());
+            formData.append("ShipTo", $('#inputShip').val());
+            formData.append("OutOfServiceStorageLocation", $('#inoutOutStorage').val());
+            formData.append("VatBranchNumber", $('#inputVat').val());
+            formData.append("Phone", $('#inputPhoneNo').val());
+            formData.append("CompanyMainContractPhone", $('#inputMainPhone').val());
+            formData.append("InstallationsContractPhone", $('#inputInstallationsPhone').val());
+            formData.append("MaintenanceContractPhone", $('#inputMaintenencePhone').val());
+            formData.append("InventoryContractPhone", $('#inputInventoryPhone').val());
+            formData.append("PaymentContractPhone", $('#inputPaymentPhone').val());
+            formData.append("EtcContractPhone", $('#inputEtcPhone').val());
+            formData.append("CompanyGroupMail", $('#inputCompanyMail').val());
+            formData.append("InstallationsContractMail", $('#inputInstallationMail').val());
+            formData.append("MaintenanceContractMail", $('#inputMaintanenceMail').val());
+            formData.append("InventoryContractMail", $('#inputInventoryMail').val());
+            formData.append("PaymentContractMail", $('#inputPaymentMail').val());
+            formData.append("EtcContractMail", $('#inputEtcMail').val());
+
+            formData.append("LocationAddress", $('#inputLocationAddress').val());
+
+            formData.append("PostAddress", $("#inputPostAddress").val());
+            formData.append("TaxAddress", $("#inputTaxAddress").val());
+            formData.append("WtAddress", $("#inputWTAddress").val());
+
+            formData.append("BankCode", $('#inputBankCode').val());
+            formData.append("BankName", $('#inputBankName').val());
+            formData.append("BankAccountNo", $('#inputBankAccountNo').val());
+            formData.append("BankAccountName", $('#inputBankAccountName').val());
+            formData.append("BankBranchCode", $('#inputBankBranchNo').val());
+            formData.append("BankBranchName", $('#inputBankBranchName').val());
+            formData.append("PenaltyContractPhone", $('#inputPanaltyPhone').val());
+            formData.append("PenaltyContractMail", $('#inputPanaltyMail').val());
+            formData.append("ContractPhone", $('#inputContractPhone').val());
+            formData.append("ContractMail", $('#inputContractMail').val());
+            formData.append("CompanyId", $('#hdCompanyId').val());
+
+            formData.append("File_BankAttach", $('#inputBankAttach').get(0).files[0]);
 
             $.ajax({
                    url: '@Url.Action("OnSave", "Location")',
                    type: 'POST',
-                   data: { 'model': location },
-                   dataType: "json",
-                  // contentType: "application/json; charset=utf-8",
+                data: formData,
+                processData: false,
+                contentType: false,
+                async: false,
                 success: function (result) {
                        if (result.Status == true) {
                            if ($('#hdMode').val() == 'edit') {
-                             
+
                            } else {
                                bootbox.alert(result.Message);
                                clearData();
@@ -853,7 +924,7 @@
                      data: { 'locationId': locationId },
                    dataType: "json",
                      success: function (result) {
-                         if (result.Status == true) {                 
+                         if (result.Status == true) {
                              inittbSearchResult();
                              bootbox.alert(result.Message);
                          }
@@ -865,7 +936,91 @@
             });
             }
         });
-    }
+        }
+
+        function CheckFileUpload(inputId) {
+            var input = document.getElementById(inputId);
+            var files = input.files;
+            var formData = new FormData();
+
+            for (var i = 0; i != files.length; i++) {
+                formData.append("files", files[i]);
+            }
+
+            $.ajax(
+                {
+                    type: "POST",
+                    url: '@Url.Action("CheckFileUpload", "Location")',
+                    processData: false,
+                    contentType: false,
+                    dataType: "json",
+                    data: formData,
+                    success: function (data) {
+                        if (data.status) {
+                            $('#hdupfileBankAttach').val(data.file_id);
+                        }
+
+                        bootbox.alert({
+                            title: "System Information",
+                            message: data.message,
+                            size: "small",
+                            callback: function (result) {
+                                console.log('This was logged in the callback: ' + data.status);
+                            }
+                        });
+
+                    },
+                    error: function (xhr) {
+
+                        console.log(xhr)
+                    }
+                }
+            );
+        }
+
+        function ValidateUpload() {
+            var hasError = false;
+            if ($('#hdupfileBankAttach').val() == "") {
+                hasError = true;
+                $("#inputBankAttach").attr('required', 'required');
+            }
+            else {
+                $("#inputBankAttach").removeAttr('required');
+            }
+
+            return hasError;
+        }
+
+        function Validateform() {
+            var haserror = false;
+            var resultlocationcode = CheckLocationcode();
+            if (resultlocationcode.Status) {
+                $('.chklocation').hide();
+            }
+            else {
+                $('.chklocation').text(resultlocationcode.Message);
+                $('.chklocation').show();
+            }
+            var hasUser = resultlocationcode.Status;
+            if ($('#inputLocationCode').val() == '' || $('#inputLocationNameT').val() == '' ||
+                $('#inputPhoneNo').val() == '' || $('#inputMainPhone').val() == '' || $('#inputInstallationsPhone').val() == '' ||
+                $('#inputMaintenencePhone').val() == '' || $('#inputBankName').val() == '' || $('#inputBankAccountNo').val() == '' ||
+                $('#inputBankAccountName').val() == '' || $('#inputBankBranchName').val() == '' || !hasUser) {
+                haserror = true;
+            }
+            return haserror;
+        }
+
+        function CheckLocationcode() {
+            var jqXHR = $.ajax({
+                type: "POST",
+                async: false,
+                url: '@Url.Action("CheckLocationCode", "Location")',
+                data: { locationcode: $('#inputLocationCode').val() },
+                dataType: "json"
+            });
+            return jqXHR.responseJSON;
+        }
 
     </script>
 

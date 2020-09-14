@@ -466,7 +466,7 @@ function OnSave() {
 }
 
 function DownloadFileSlip() {
-    var urlDownloadfile = url.replace('Action', 'Downloadfile');
+    var urlDownloadfile = url.replace('Action', 'DownloadfileConfirm');
     // $('#ItemPreview').attr('src', '/Payment/DownloadCSV?paymentid=' + $('#hdpaymentId').val());
     
     $('#linkdownload').attr("href", urlDownloadfile+'?paymentid=' + $('#hdpaymentId').val());

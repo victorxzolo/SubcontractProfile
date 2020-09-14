@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -149,6 +150,9 @@ namespace SubcontractProfile.Web.Model
         public string channel_sale_group { get; set; }
 
         public string SubcontractProfileType { get; set; }
+
+        public Guid file_id__BankAttach { get; set; }
+        public IFormFile File_BankAttach { get; set; }
 
     }
 
