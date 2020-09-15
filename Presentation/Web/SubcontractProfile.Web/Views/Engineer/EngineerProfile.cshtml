@@ -23,11 +23,11 @@
 
                     <div class="form-group col-md-6">
                         <label for="inputStaffName">Staff Name</label>
-                        <input type="text" class="form-control" id="inputStaffName" placeholder="Team Name (TH)">
+                        <input type="text" class="form-control" id="inputStaffName" placeholder="Staff Name">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputCitizen">Citizen ID</label>
-                        <input type="text" class="form-control" id="inputCitizen" placeholder="Team Name (EN)">
+                        <input type="text" class="form-control" id="inputCitizen" placeholder="Citizen ID">
                     </div>
 
                     <div class="form-group col-md-6">
@@ -159,7 +159,7 @@
                     <br />*@
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Staff Name:</label>
+                                            <label><span style="color:red">*</span>Staff Name:</label>
                                         </div>
                                         <div class="col-sm-4">
                                             <input type="text" id="StaffName" style="width:300px" class="form-control" required>
@@ -204,9 +204,10 @@
                                         <div class="col-sm-4">
                                             <div class="row col-sm-12">
                                                 <div class="custom-file mb-4">
-
-                                                    <input type="file" class="custom-file-input" id="personalAttahFile" aria-describedby="uploadlHelp1" style="width:190px">
-                                                    <label class="custom-file-label" for="inputBankAttach">เลือกไฟล์</label>
+                                                    <input type="hidden" id="hdupfilepersonalAttah" />
+                                                    <input type="file" class="custom-file-input" id="personalAttahFile" aria-describedby="uploadlHelp1" style="width:190px"
+                                                           accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
+                                                    <label class="custom-file-label" for="inputBankAttach" id="lbpersonalAttahFile">เลือกไฟล์</label>
                                                     <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
                                                 </div>
@@ -311,9 +312,10 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="custom-file mb-4">
-
-                                                <input type="file" class="custom-file-input" id="BankAttach" aria-describedby="uploadlHelp1" style="width:190px">
-                                                <label class="custom-file-label" for="inputBankAttach">เลือกไฟล์</label>
+                                                <input type="hidden" id="hdupfilevehicleAttach" />
+                                                <input type="file" class="custom-file-input" id="vehicleAttachFile" aria-describedby="uploadlHelp1" style="width:190px"
+                                                       accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
+                                                <label class="custom-file-label" for="inputBankAttach" id="lbvehicleAttachFile">เลือกไฟล์</label>
                                                 <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
 
@@ -368,7 +370,7 @@
                                         <div class="col-sm-4">
                                             <input type="text" id="AccNo" style="width:300px" class="form-control" required>
                                             <div class="invalid-feedback">
-                                                กรุณาเลือกข้อมูล Bank Name.
+                                                กรุณาระบุข้อมูล Account No.
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
@@ -377,7 +379,7 @@
                                         <div class="col-sm-4">
                                             <input type="text" id="AccName" style="width:300px" class="form-control" required>
                                             <div class="invalid-feedback">
-                                                กรุณาเลือกข้อมูล Account Name.
+                                                กรุณาระบุข้อมูล Account Name.
                                             </div>
                                         </div>
                                     </div>
@@ -534,9 +536,10 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="custom-file mb-4">
-
-                                                <input type="file" class="custom-file-input" id="fileWorkPermitAttach" aria-describedby="uploadlHelp1" style="width:220px">
-                                                <label class="custom-file-label" for="fileWorkPermitAttach">เลือกไฟล์</label>
+                                                <input type="hidden" id="hdupfileWorkPermitAttach" />
+                                                <input type="file" class="custom-file-input" id="fileWorkPermitAttach" aria-describedby="uploadlHelp1" style="width:220px"
+                                                        accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
+                                                <label class="custom-file-label" for="fileWorkPermitAttach" id="lbfileWorkPermitAttach">เลือกไฟล์</label>
                                                 <small id="uploadlHelpwork" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
                                             </div>
@@ -553,9 +556,10 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="custom-file mb-4">
-
-                                                <input type="file" class="custom-file-input" id="fileProfileAttach" aria-describedby="uploadlHelp1" style="width:220px">
-                                                <label class="custom-file-label" for="fileProfileAttach">เลือกไฟล์</label>
+                                                <input type="hidden" id="hdupfileProfileAttach" />
+                                                <input type="file" class="custom-file-input" id="fileProfileAttach" aria-describedby="uploadlHelp1" style="width:220px"
+                                                        accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
+                                                <label class="custom-file-label" for="fileProfileAttach" id="lbfileProfileAttach">เลือกไฟล์</label>
                                                 <small id="uploadlHelpprofile" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
                                             </div>
@@ -646,9 +650,10 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="custom-file mb-4">
-
-                                                <input type="file" class="custom-file-input" id="fileCertificateAttach" aria-describedby="uploadlHelp1" style="width:220px">
-                                                <label class="custom-file-label" for="fileCertificateAttach">เลือกไฟล์</label>
+                                                <input type="hidden" id="hdupfileCertificateAttach" />
+                                                <input type="file" class="custom-file-input" id="fileCertificateAttach" aria-describedby="uploadlHelp1" style="width:220px"
+                                                        accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
+                                                <label class="custom-file-label" for="fileCertificateAttach" id="lbfileCertificateAttach">เลือกไฟล์</label>
                                                 <small id="uploadlHelpCertificateAttach" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
                                             </div>
@@ -724,7 +729,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
                             ปิด
                         </button>
-                        <button id="btnSave" type="submit" class="btn btn-primary">
+                        <button id="btnSave" type="button" class="btn btn-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
                             บันทึก
                         </button>
@@ -761,6 +766,30 @@
             //    format: 'dd/mm/yyyy'
             //});
 
+            $("#inputCitizen").keyup(function () {
+                CheckKeyUps("inputCitizen", "[0-9]");
+            });
+
+            $('#personalAttahFile').change(function () {
+                CheckFileUpload('personalAttahFile');
+            });
+            $('#vehicleAttachFile').change(function () {
+                CheckFileUpload('vehicleAttachFile');
+            });
+            $('#fileWorkPermitAttach').change(function () {
+                CheckFileUpload('fileWorkPermitAttach');
+            });
+            $('#fileProfileAttach').change(function () {
+                CheckFileUpload('fileProfileAttach');
+            });
+            $('#fileCertificateAttach').change(function () {
+                CheckFileUpload('fileCertificateAttach');
+            });
+
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
 
             $('#ddlLocationName').change(function () {
                 getTeamByLocationId($(this).val());
@@ -785,33 +814,65 @@
                 openModal("new", "");
             });
 
-        });
-
-            'use strict';
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            $('#btnSave').click(function () {
                 var forms = document.getElementsByClassName('needs-validation');
-              //  var forms = document.getElementsByClassName('select');
-                var invalid = $('.select .invalid-feedback');
                 // Loop over them and prevent submission
                 var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
+                    //if (Validateform() || ValidateUpload()) {
+                    if (Validateform()) {
+                        event.preventDefault();
+                        event.stopPropagation();
 
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            invalid.css('display', 'block');
-                        } else {
-                            onSave();
-                            event.preventDefault();
-                            event.stopPropagation();
-                            invalid.css('display', 'none');
+                    } else {
+                        onSave();
+                        event.preventDefault();
+                        event.stopPropagation();
 
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
+                    }
+                    form.classList.add('was-validated');
+
                 });
-            }, false);
+            });
+
+
+            $(document).on('show.bs.modal', '.modal', function () {
+                var zIndex = 1040 + (10 * $('.modal:visible').length);
+                $(this).css('z-index', zIndex);
+                setTimeout(function () {
+                    $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+                }, 0);
+            });
+
+            $(document).on('hidden.bs.modal', '.modal', function () {
+                $('.modal:visible').length && $(document.body).addClass('modal-open');
+            });
+        });
+
+            //'use strict';
+            //window.addEventListener('load', function () {
+            //    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            //    var forms = document.getElementsByClassName('needs-validation');
+            //  //  var forms = document.getElementsByClassName('select');
+            //    var invalid = $('.select .invalid-feedback');
+            //    // Loop over them and prevent submission
+            //    var validation = Array.prototype.filter.call(forms, function (form) {
+            //        form.addEventListener('submit', function (event) {
+
+            //            if (form.checkValidity() === false || ValidateUpload()) {
+            //                event.preventDefault();
+            //                event.stopPropagation();
+            //                invalid.css('display', 'block');
+            //            } else {
+            //                onSave();
+            //                event.preventDefault();
+            //                event.stopPropagation();
+            //                invalid.css('display', 'none');
+
+            //            }
+            //            form.classList.add('was-validated');
+            //        }, false);
+            //    });
+            //}, false);
 
         function inittbSearchResult() {
 
@@ -909,11 +970,12 @@
         }
 
         function clearMainData() {
-                $("#ddlLocationName").val('-1'),
-                $("#ddlTeamName").val('-1'),
-                $("#inputStaffName").val(''),
-                $("#inputCitizen").val(''),
-                $("#inputPosition").val('')
+            $("#ddlLocationName").val('-1');
+                $("#ddlTeamName").val('-1');
+                $("#inputStaffName").val('');
+                $("#inputCitizen").val('');
+                $("#inputPosition").val('');
+            inittbSearchResult();
         }
 
         function clearData() {
@@ -992,6 +1054,19 @@
 
                           $('#hdCompanyId').val(result.CompanyId);
 
+                          if (result.PersonalAttachFile != null) {
+                              $('#lbpersonalAttahFile').html(result.PersonalAttachFile);
+                              $('#hdupfilepersonalAttah').val(result.file_id__PersonalAttach);
+                              //$('#linkdownload').text(data.SlipAttachFile);
+                              //DownloadFileSlip(data.SlipAttachFile);
+                          }
+                          if (result.VehicleAttachFile != null) {
+                              $('#lbvehicleAttachFile').html(result.VehicleAttachFile);
+                              $('#hdupfilevehicleAttach').val(result.file_id__VehicleAttach);
+                              //$('#linkdownload').text(data.SlipAttachFile);
+                              //DownloadFileSlip(data.SlipAttachFile);
+                          }
+
                           getDataPersonalById(result.PersonalId);
 
                           $("#Team").val(result.TeamId).change();
@@ -1039,14 +1114,14 @@
                        $('#Identity').val(result.IdentityBy);
                        $('#ContractEmail2').val(result.ContactEmail);
                        $('#IdentiAddress').val(result.IdentityCardAddress);
-                       
+
                        $('#PersonalContractPhone1').val(result.ContactPhone1);
 
                        $('#PersonalContractPhone2').val(result.ContactPhone2);
                        $('#ContractMail').val(result.ContactEmail);
                        $('#WorkPermit').val(result.WorkPermitNo);
-                       $('#fileWorkPermitAttach').val(result.WorkPermitAttachFile);
-                       $('#fileProfileAttach').val(result.ProfileImgAttachFile);
+                       //$('#fileWorkPermitAttach').val(result.WorkPermitAttachFile);
+                       //$('#fileProfileAttach').val(result.ProfileImgAttachFile);
                       // $('#CourseSkill').val(result.CourseSkill);
                        $('#Education').val(result.Education);
 
@@ -1077,7 +1152,7 @@
                            $('#chkWritingEN').prop('checked', true);
                        }
 
- 
+
                        //$('#chkListenTH').val(result.ThListening);
                        //$('#chkSpeakingTH').val(result.ThSpeaking);
                        //$('#chkReadingTH').val(result.ThReading);
@@ -1091,14 +1166,31 @@
                        $('#CertificateType').val(result.CertificateType);
                        $('#CertificateNo').val(result.CertificateNo);
                        $('#dateCertificateDate').val(result.CertificateExpireDate);
-                       $('#fileCertificateAttach').val(result.CertificateAttachFile);
+                       //$('#fileCertificateAttach').val(result.CertificateAttachFile);
 
                        $("#BankName2").val(result.BankName).change();
 
                        $('#AccNo2').val(result.AccountNumber);
                        $('#AccName2').val(result.AccountName);
 
-
+                       if (result.CertificateAttachFile != null) {
+                           $('#lbfileCertificateAttach').html(result.CertificateAttachFile);
+                           $('#hdupfileCertificateAttach').val(result.file_id__CertificateAttach);
+                           //$('#linkdownload').text(data.SlipAttachFile);
+                           //DownloadFileSlip(data.SlipAttachFile);
+                       }
+                       if (result.WorkPermitAttachFile != null) {
+                           $('#lbfileWorkPermitAttach').html(result.WorkPermitAttachFile);
+                           $('#hdupfileWorkPermitAttach').val(result.file_id__WorkPermitAttach);
+                           //$('#linkdownload').text(data.SlipAttachFile);
+                           //DownloadFileSlip(data.SlipAttachFile);
+                       }
+                       if (result.ProfileImgAttachFile != null) {
+                           $('#lbfileProfileAttach').html(result.ProfileImgAttachFile);
+                           $('#hdupfileProfileAttach').val(result.file_id__ProfileImgAttach);
+                           //$('#linkdownload').text(data.SlipAttachFile);
+                           //DownloadFileSlip(data.SlipAttachFile);
+                       }
                     }
                   },
                   error: function (result) {
@@ -1110,124 +1202,128 @@
 
         function onSave()
         {
-         
+
             var modelPersonal = new Object();
             var model = new Object();
-            model.EngineerId = $('#hdEngineerId').val();
-            model.LocationId = $("select[id$=Location]").val();
-            model.TeamId = $("select[id$=Team]").val();
-           // model.StaffCode = $('#StaffCode').val();
-            model.StaffName = $('#StaffName').val();
-            model.StaffNameTh = $('#StaffNameT').val();
-            model.StaffNameEn = $('#StaffNameE').val();
-            model.Position = $('#Position').val();
-            model.CitizenId = $('#CitizenID').val();
-            model.TshirtSize = $('#tshirtsize').val();
-            model.ContractPhone1 = $('#ContractPhone1').val();
-            model.ContractPhone2 = $('#ContractPhone2').val();
-            model.ContractEmail = $('#ContractEmail').val();
-            model.VehicleType = $('#VehicleType').val();
-            model.VehicleBrand = $('#VehicleBrand').val();
-            model.VehicleSerise = $('#VehicleSerise').val();
-            model.VehicleColor = $('#VehicleColor').val();
-            model.VehicleYear = $('#VehicleYear').val();
-            model.VehicleLicensePlate = $('#VehicleLicense').val();
-            model.ToolOtrd = $('#Toolotdr').val();
-            model.ToolSplicing = $('#ToolSplicing').val();
-            model.BankName = $('select[id$=ddlBankName]').val();
-            model.AccountNo = $('#AccNo').val();
-            model.AccountName = $('#AccName').val();
 
-            model.CompanyId = $('#hdCompanyId').val();
+            var formData = new FormData();
+
+
+            formData.append('model.EngineerId' , $('#hdEngineerId').val());
+            formData.append('model.LocationId' , $("select[id$=Location]").val());
+            formData.append('model.TeamId' , $("select[id$=Team]").val());
+           // model.StaffCode = $('#StaffCode').val();
+            formData.append('model.StaffName',$('#StaffName').val());
+            formData.append('model.StaffNameTh' , $('#StaffNameT').val());
+            formData.append('model.StaffNameEn' , $('#StaffNameE').val());
+            formData.append('model.Position' , $('#Position').val());
+            formData.append('model.CitizenId' , $('#CitizenID').val());
+            formData.append('model.TshirtSize' , $('#tshirtsize').val());
+            formData.append('model.ContractPhone1' , $('#ContractPhone1').val());
+            formData.append('model.ContractPhone2' , $('#ContractPhone2').val());
+            formData.append('model.ContractEmail' , $('#ContractEmail').val());
+            formData.append('model.VehicleType' , $('#VehicleType').val());
+            formData.append('model.VehicleBrand' , $('#VehicleBrand').val());
+            formData.append('model.VehicleSerise' , $('#VehicleSerise').val());
+            formData.append('model.VehicleColor' , $('#VehicleColor').val());
+            formData.append('model.VehicleYear' , $('#VehicleYear').val());
+            formData.append('model.VehicleLicensePlate' , $('#VehicleLicense').val());
+            formData.append('model.ToolOtrd' , $('#Toolotdr').val());
+            formData.append('model.ToolSplicing' , $('#ToolSplicing').val());
+            formData.append('model.BankName' , $('select[id$=ddlBankName]').val());
+            formData.append('model.AccountNo' , $('#AccNo').val());
+            formData.append('model.AccountName' , $('#AccName').val());
+
+            formData.append('model.CompanyId' , $('#hdCompanyId').val());
 
             //---personal name
-           
-            modelPersonal.PersonalId = $('#hdPersonalId').val();
-            modelPersonal.EngineerId = $('#hdEngineerId').val();
-            modelPersonal.CitizenId = $('#CitizenID2').val();
-            modelPersonal.TitleName = $('#Title').val();
-            modelPersonal.FullNameEn = $('#FullNameT').val();
-            modelPersonal.FullNameTh = $('#FullNameE').val();
-            modelPersonal.BirthDate = $('#BirthDate').val();
+
+            formData.append('personal.PersonalId' , $('#hdPersonalId').val());
+            formData.append('personal.EngineerId' , $('#hdEngineerId').val());
+            formData.append('personal.CitizenId' , $('#CitizenID2').val());
+            formData.append('personal.TitleName' , $('#Title').val());
+            formData.append('personal.FullNameEn' , $('#FullNameT').val());
+            formData.append('personal.FullNameTh' , $('#FullNameE').val());
+            formData.append('personal.BirthDate' , $('#BirthDate').val());
 
             //Gender
-            if ($('#rdoMale').val() == "M") {
-                modelPersonal.Gender = "M";
+            if ($('#rdoMale').is(":checked")) {
+                formData.append('personal.Gender' , "M");
             } else {
-                modelPersonal.Gender = "F";
+                formData.append('personal.Gender' , "F");
             }
 
-            modelPersonal.Race = $('#Race').val();
-            modelPersonal.Nationality = $('#Nationality').val();
-            modelPersonal.Religion = $('#Religion').val();
-            modelPersonal.IdentityBy = $('#Identity').val();
-            modelPersonal.ContactEmail = $('#ContractEmail2').val();
-            modelPersonal.IdentityCardAddress = $('#IdentiAddress').val();
+            formData.append('personal.Race' , $('#Race').val());
+            formData.append('personal.Nationality' , $('#Nationality').val());
+            formData.append('personal.Religion' , $('#Religion').val());
+            formData.append('personal.IdentityBy' , $('#Identity').val());
+            formData.append('personal.ContactEmail' , $('#ContractEmail2').val());
+            formData.append('personal.IdentityCardAddress' , $('#IdentiAddress').val());
 
-            modelPersonal.ContactPhone1 = $('#PersonalContractPhone1').val();
-            modelPersonal.ContactPhone2 = $('#PersonalContractPhone2').val();
-            modelPersonal.ContactEmail = $('#ContractMail').val();
-            modelPersonal.WorkPermitNo = $('#WorkPermit').val();
-            modelPersonal.WorkPermitAttachFile = $('#fileWorkPermitAttach').val();
-            modelPersonal.ProfileImgAttachFile = $('#fileProfileAttach').val();
+            formData.append('personal.ContactPhone1' , $('#PersonalContractPhone1').val());
+            formData.append('personal.ContactPhone2' , $('#PersonalContractPhone2').val());
+            formData.append('personal.ContactEmail' , $('#ContractMail').val());
+            formData.append('personal.WorkPermitNo' , $('#WorkPermit').val());
+            formData.append('personal.WorkPermitAttachFile' , $('#fileWorkPermitAttach').val());
+            formData.append('personal.ProfileImgAttachFile' , $('#fileProfileAttach').val());
          //   modelPersonal.CourseSkill = $('#CourseSkill').val();
-            modelPersonal.Education = $('#Education').val();
+            formData.append('personal.Education' , $('#Education').val());
 
 
-            if ($("#chkListenTH").prop('checked') == true) {
-                modelPersonal.ThListening = "Y"
+            if ($("#chkListenTH").is(":checked")) {
+                formData.append(' personal.ThListening', "Y");
             }
             else {
-                modelPersonal.ThListening = "N"
+                formData.append('personal.ThListening', "N");
             }
 
-            if ($("#chkSpeakingTH").prop('checked') == true) {
-                modelPersonal.ThSpeaking = "Y"
+            if ($("#chkSpeakingTH").is(":checked")) {
+                formData.append('personal.ThSpeaking', "Y");
             }
             else {
-                modelPersonal.ThSpeaking = "N"
+                formData.append('personal.ThSpeaking', "N");
             }
 
-            if ($("#chkReadingTH").prop('checked') == true) {
-                modelPersonal.ThReading = "Y"
+            if ($("#chkReadingTH").is(":checked")) {
+                formData.append('personal.ThReading', "Y");
             }
             else {
-                modelPersonal.ThReading = "N"
+                formData.append('personal.ThReading', "N");
             }
 
-            if ($("#chkWritingTH").prop('checked') == true) {
-                modelPersonal.ThWriting = "Y"
+            if ($("#chkWritingTH").is(":checked")) {
+                formData.append('personal.ThWriting', "Y");
             }
             else {
-                modelPersonal.ThWriting = "N"
+                formData.append('personal.ThWriting', "N");
             }
 
-            if ($("#chkListenEN").prop('checked') == true) {
-                modelPersonal.EnListening = "Y"
+            if ($("#chkListenEN").is(":checked")) {
+                formData.append('personal.EnListening', "Y");
             }
             else {
-                modelPersonal.EnListening = "N"
+                formData.append('personal.EnListening', "N");
             }
 
-            if ($("#chkSpeakingEN").prop('checked') == true) {
-                modelPersonal.EnSpeaking = "Y"
+            if ($("#chkSpeakingEN").is(":checked")) {
+                formData.append('personal.EnSpeaking', "Y");
             }
             else {
-                modelPersonal.EnSpeaking = "N"
+                formData.append('personal.EnSpeaking', "N");
             }
 
-            if ($("#chkReadingEN").prop('checked') == true) {
-                modelPersonal.EnReading = "Y"
+            if ($("#chkReadingEN").is(":checked")) {
+                formData.append('personal.EnReading', "Y");
             }
             else {
-                modelPersonal.EnReading = "N"
+                formData.append('personal.EnReading', "N");
             }
 
-            if ($("#chkWritingEN").prop('checked') == true) {
-                modelPersonal.EnWriting = "Y"
+            if ($("#chkWritingEN").is(":checked")) {
+                formData.append('personal.EnWriting', "Y");
             }
             else {
-                modelPersonal.EnWriting = "N"
+                formData.append('personal.EnWriting', "N");
             }
 
             //modelPersonal.ThListening = $('#chkListenTH').val();
@@ -1239,22 +1335,36 @@
             //modelPersonal.EnReading = $('#chkReadingEN').val();
             //modelPersonal.EnWriting = $('#chkWritingEN').val();
 
-            modelPersonal.CertificateType = $('#CertificateType').val();
-            modelPersonal.CertificateNo = $('#CertificateNo').val();
-            modelPersonal.CertificateExpireDate = $('#dateCertificateDate').val();
-            modelPersonal.CertificateAttachFile = $('#fileCertificateAttach').val();
-            modelPersonal.BankName = $('#BankName2').val();
-            modelPersonal.AccountNumber = $('#AccNo2').val();
-            modelPersonal.AccountName = $('#AccName2').val();
+            formData.append('personal.CertificateType' , $('#CertificateType').val());
+            formData.append('personal.CertificateNo' , $('#CertificateNo').val());
+            formData.append('personal.CertificateExpireDate' , $('#dateCertificateDate').val());
+            formData.append('personal.CertificateAttachFile' , $('#fileCertificateAttach').val());
+            formData.append('personal.BankName' , $('#BankName2').val());
+            formData.append('personal.AccountNumber' , $('#AccNo2').val());
+            formData.append('personal.AccountName' , $('#AccName2').val());
             //model.BranchName = $('#BranchName').val();
             //model.BranchCode = $('#BranchCode').val();
 
+            formData.append('model.File_PersonalAttach' , $('#personalAttahFile').get(0).files[0]);
+            formData.append('model.File_VehicleAttach' , $('#vehicleAttachFile').get(0).files[0]);
+
+            formData.append('personal.File_CertificateAttach' , $('#fileCertificateAttach').get(0).files[0]);
+            formData.append('personal.File_WorkPermitAttach' , $('#fileWorkPermitAttach').get(0).files[0]);
+            formData.append('personal.File_ProfileImgAttach' , $('#fileProfileAttach').get(0).files[0]);
+
+
+            //formData.append('model', model);
+            //formData.append('personal', modelPersonal);
 
             $.ajax({
                    url: '@Url.Action("OnSave", "Engineer")',
                    type: 'POST',
-                data: { 'model': model, 'personal': modelPersonal },
-                   dataType: "json",
+                data: formData,
+                cache: false,
+                   //dataType: "json",
+                processData: false,
+                contentType: false,
+                async: false,
                 success: function (result) {
                        if (result.Status == true) {
                            if ($('#hdMode').val() == 'edit') {
@@ -1457,7 +1567,139 @@ function GetDropDownLocationSearch() {
                     $("#Title").append('<option value="">--Please All--</option>');
                 }
             });
-    }
+        }
 
+        function CheckKeyUps(id, RexStr) {
+            var strKey = $("#" + id).val();
+            var strBuilder = "";
+            var filter = new RegExp(RexStr);
+            for (var i = 0; i < strKey.length; i++) {
+                if (filter.test(strKey.substr(i, 1))) {
+                    strBuilder += strKey.substr(i, 1);
+                }
+            }
+            $("#" + id).val(strBuilder);
+        }
+
+        function CheckFileUpload(inputId) {
+            var input = document.getElementById(inputId);
+            var files = input.files;
+            var formData = new FormData();
+
+            for (var i = 0; i != files.length; i++) {
+                formData.append("files", files[i]);
+            }
+
+            $.ajax(
+                {
+                    type: "POST",
+                    url: '@Url.Action("CheckFileUpload", "Engineer")',
+                    processData: false,
+                    contentType: false,
+                    dataType: "json",
+                    data: formData,
+                    success: function (data) {
+                        if (data.status) {
+                            if (data.file_id != null) {
+                                switch (inputId) {
+                                    case "personalAttahFile": $('#hdupfilepersonalAttah').val(data.file_id); break;
+                                    case "vehicleAttachFile": $('#hdupfilevehicleAttach').val(data.file_id); break;
+                                    case "fileWorkPermitAttach": $('#hdupfileWorkPermitAttach').val(data.file_id); break;
+                                    case "fileProfileAttach": $('#hdupfileProfileAttach').val(data.file_id); break;
+                                    case "fileCertificateAttach": $('#hdupfileCertificateAttach').val(data.file_id); break;
+                                }
+                            }
+                            else {
+                                switch (inputId) {
+                                    case "personalAttahFile": $('#lbpersonalAttahFile').text('เลือกไฟล์'); break;
+                                    case "vehicleAttachFile": $('#lbvehicleAttachFile').text('เลือกไฟล์'); break;
+                                    case "fileWorkPermitAttach": $('#lbfileWorkPermitAttach').text('เลือกไฟล์'); break;
+                                    case "fileProfileAttach": $('#lbfileProfileAttach').text('เลือกไฟล์'); break;
+                                    case "fileCertificateAttach": $('#lbfileCertificateAttach').text('เลือกไฟล์'); break;
+                                }
+                            }
+
+                        }
+                        else {
+                            $('#lbpersonalAttahFile').text('เลือกไฟล์');
+                            $('#lbvehicleAttachFile').text('เลือกไฟล์');
+                            $('#lbfileWorkPermitAttach').text('เลือกไฟล์');
+                            $('#lbfileProfileAttach').text('เลือกไฟล์');
+                            $('#lbfileCertificateAttach').text('เลือกไฟล์');
+                        }
+
+                        bootbox.alert({
+                            title: "System Information",
+                            message: data.message,
+                            size: "small",
+                            callback: function (result) {
+                                console.log('This was logged in the callback: ' + data.status);
+                            }
+                        });
+
+                    },
+                    error: function (xhr) {
+
+                        console.log(xhr)
+                    }
+                }
+            );
+        }
+
+        function ValidateUpload() {
+            var hasError = false;
+            if ($('#hdupfilepersonalAttah').val() == "") {
+                hasError = true;
+                $("#personalAttahFile").attr('required', 'required');
+            }
+            else {
+                $("#personalAttahFile").removeAttr('required');
+            }
+
+            if ($('#hdupfilevehicleAttach').val() == "") {
+                hasError = true;
+                $("#vehicleAttachFile").attr('required', 'required');
+            }
+            else {
+                $("#vehicleAttachFile").removeAttr('required');
+            }
+
+            //if ($('#hdupfileWorkPermitAttach').val() == "") {
+            //    hasError = true;
+            //    $("#fileWorkPermitAttach").attr('required', 'required');
+            //}
+            //else {
+            //    $("#fileWorkPermitAttach").removeAttr('required');
+            //}
+
+            //if ($('#hdupfileProfileAttach').val() == "") {
+            //    hasError = true;
+            //    $("#fileProfileAttach").attr('required', 'required');
+            //}
+            //else {
+            //    $("#fileProfileAttach").removeAttr('required');
+            //}
+
+            //if ($('#hdupfileCertificateAttach').val() == "") {
+            //    hasError = true;
+            //    $("#fileCertificateAttach").attr('required', 'required');
+            //}
+            //else {
+            //    $("#fileCertificateAttach").removeAttr('required');
+            //}
+
+            return hasError;
+        }
+
+        function Validateform() {
+            var haserror = false;
+
+            if ($('#Location option').filter(':selected').val() == '' || $('#Team option').filter(':selected').val() == '' ||
+                $('#StaffName').val() == '' || $('#AccNo').val() == '' || $('#ddlBankName option').filter(':selected').val() == '' ||
+                $('#AccName').val()=='') {
+                haserror = true;
+            }
+            return haserror;
+        }
     </script>
 }

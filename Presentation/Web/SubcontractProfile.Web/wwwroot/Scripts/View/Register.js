@@ -433,6 +433,9 @@ $(document).ready(function () {
         }
     });
 
+    $("#txttax_id").keyup(function () {
+        CheckKeyUps("txttax_id", "[0-9]");
+    });
    
 
  
@@ -1989,5 +1992,15 @@ function ValidateUser() {
     return hasError;
 }
 
-
+function CheckKeyUps(id, RexStr) {
+    var strKey = $("#" + id).val();
+    var strBuilder = "";
+    var filter = new RegExp(RexStr);
+    for (var i = 0; i < strKey.length; i++) {
+        if (filter.test(strKey.substr(i, 1))) {
+            strBuilder += strKey.substr(i, 1);
+        }
+    }
+    $("#" + id).val(strBuilder);
+}
 

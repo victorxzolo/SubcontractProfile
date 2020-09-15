@@ -190,7 +190,7 @@ namespace SubcontractProfile.Web.Controllers
                         {
                             model.BankAttachFile = model.File_BankAttach.FileName;
                             model.CompanyId = userProfile.companyid;
-                            model.CreateBy = userProfile.UserId.ToString();
+                            model.CreateBy = userProfile.Username;
                             var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Insert"));
 
                             clientLocation.DefaultRequestHeaders.Accept.Add(
@@ -230,7 +230,7 @@ namespace SubcontractProfile.Web.Controllers
                             model.BankAttachFile = model.File_BankAttach.FileName;
 
                             var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Update"));
-                            model.UpdateBy = userProfile.UserId.ToString();
+                            model.UpdateBy = userProfile.Username;
 
                             clientLocation.DefaultRequestHeaders.Accept.Add(
                             new MediaTypeWithQualityHeaderValue("application/json"));

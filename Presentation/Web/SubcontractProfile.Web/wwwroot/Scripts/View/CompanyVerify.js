@@ -80,6 +80,14 @@ $(document).ready(function () {
         }
     });
 
+    $('#inputTax_id').keyup(function () {
+        CheckKeyUps("inputTax_id", "[0-9]");
+    });
+
+    $('#txttax_id_dealer').keyup(function () {
+        CheckKeyUps("txttax_id_dealer", "[0-9]");
+    });
+
     $('#ddlzone').change(function () {
 
         BindDDLprovince($('#ddlzone option').filter(':selected').val());
@@ -2452,4 +2460,16 @@ function isEmail(email) {
 
     }
     return haserror;
+}
+
+function CheckKeyUps(id, RexStr) {
+    var strKey = $("#" + id).val();
+    var strBuilder = "";
+    var filter = new RegExp(RexStr);
+    for (var i = 0; i < strKey.length; i++) {
+        if (filter.test(strKey.substr(i, 1))) {
+            strBuilder += strKey.substr(i, 1);
+        }
+    }
+    $("#" + id).val(strBuilder);
 }

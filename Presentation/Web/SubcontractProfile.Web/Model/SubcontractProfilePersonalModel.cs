@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -111,5 +112,15 @@ namespace SubcontractProfile.Web.Model
         public string UpdateBy { get; set; }
 
         public System.DateTime? UpdateDate { get; set; }
+
+
+        public Guid file_id__CertificateAttach { get; set; }
+        public IFormFile File_CertificateAttach { get; set; }
+
+        public Guid file_id__WorkPermitAttach { get; set; }
+        public IFormFile File_WorkPermitAttach { get; set; }
+
+        public Guid file_id__ProfileImgAttach { get; set; }
+        public IFormFile File_ProfileImgAttach { get; set; }
     }
 }
