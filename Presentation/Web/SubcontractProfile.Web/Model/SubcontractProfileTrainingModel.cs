@@ -83,6 +83,11 @@ namespace SubcontractProfile.Web.Model
         public string BookingDateStr { get; set; }
 
         public string RequestDateStr { get; set; }
+        public string TestDateStr { get; set; }
+
+        public string CourseName { get; set; }
+
+        public string RemarkForTest { get; set; }
 
         public object Clone()
         {

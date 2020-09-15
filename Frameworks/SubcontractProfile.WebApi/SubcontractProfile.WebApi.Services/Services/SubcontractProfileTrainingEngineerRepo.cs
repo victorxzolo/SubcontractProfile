@@ -65,7 +65,7 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@team_id", subcontractProfileTrainingEngineer.TeamId);
             p.Add("@engineer_id", subcontractProfileTrainingEngineer.EngineerId);
             //p.Add("@create_date", subcontractProfileTrainingEngineer.CreateDate);
-            p.Add("@create_user", subcontractProfileTrainingEngineer.CreateUser);
+            p.Add("@create_by", subcontractProfileTrainingEngineer.CreateBy);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTrainingEngineer_Insert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -84,8 +84,8 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@location_id", subcontractProfileTrainingEngineer.LocationId);
             p.Add("@team_id", subcontractProfileTrainingEngineer.TeamId);
             p.Add("@engineer_id", subcontractProfileTrainingEngineer.EngineerId);
-            p.Add("@create_date", subcontractProfileTrainingEngineer.CreateDate);
-            p.Add("@create_user", subcontractProfileTrainingEngineer.CreateUser);
+            p.Add("@test_status", subcontractProfileTrainingEngineer.TestStatus);
+            p.Add("@update_user", subcontractProfileTrainingEngineer.UpdateBy);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTrainingEngineer_Update", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -159,7 +159,7 @@ namespace SubcontractProfile.WebApi.Services.Services
                     row["team_id"] = new SqlGuid(curObj.TeamId);
                     row["engineer_id"] = new SqlGuid(curObj.EngineerId);
                     row["create_date"] = curObj.CreateDate == null ? SqlDateTime.Null : new SqlDateTime(curObj.CreateDate.Value);
-                    row["create_user"] = new SqlString(curObj.CreateUser);
+                    row["create_by"] = new SqlString(curObj.CreateBy);
 
                     dt.Rows.Add(row);
                 }
@@ -211,6 +211,23 @@ namespace SubcontractProfile.WebApi.Services.Services
             ("uspSubcontractProfileTrainingEngineer_selectTrainingEngineerByTrainingId", p, commandType: CommandType.StoredProcedure);
 
             return entity;
+        }
+
+        public async Task<bool> UpdateByTestResult(SubcontractProfileTrainingEngineer subcontractProfileTrainingEngineer)
+        {
+            var p = new DynamicParameters();
+   
+            p.Add("@training_id", subcontractProfileTrainingEngineer.TrainingId);
+            p.Add("@location_id", subcontractProfileTrainingEngineer.LocationId);
+            p.Add("@team_id", subcontractProfileTrainingEngineer.TeamId);
+            p.Add("@engineer_id", subcontractProfileTrainingEngineer.EngineerId);
+            p.Add("@test_status", subcontractProfileTrainingEngineer.TestStatus);
+            p.Add("@update_by", subcontractProfileTrainingEngineer.UpdateBy);
+
+            var ok = await _dbContext.Connection.ExecuteAsync
+                ("uspSubcontractProfileTrainingEngineer_updateByTest", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+
+            return true;
         }
     }
 }

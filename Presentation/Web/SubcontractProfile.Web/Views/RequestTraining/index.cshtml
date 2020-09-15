@@ -238,8 +238,8 @@
 
                                             <th>Location Name</th>
                                             <th>Team Name</th>
-                                            <th>Position</th>
                                             <th>Engineer</th>
+                                            <th>Position</th>
                                             <th>ContactPhone</th>
                                             <th>Email</th>
 
@@ -818,7 +818,6 @@
                                              $('#bookingDate').val(result.BookingDateStr);
                                              $('#txtaisremark').val(result.RemarkForAis);
 
-                                             $('input[name="optionsRadios"][value="' + result.Course + '"]').attr('checked',true);
                                          }
                                          else {
 
@@ -906,9 +905,9 @@
                                 columns: [
 
                                     { data: "LocationNameTh"},
-                                    { data: "TeamNameTh"},
-                                    { data: "Position" },
+                                    { data: "TeamNameTh" },
                                     { data: "StaffNameTh" },
+                                    { data: "Position" },
                                     { data: "ContractPhone1" },
                                     { data: "ContractEmail" }
 

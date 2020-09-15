@@ -171,7 +171,7 @@ namespace SubcontractProfile.Web.Controllers
         public ActionResult SearchEngineer(string Trainingid)
         {
 
-            var Result = new List<RequestTraininigModel>();
+            var Result = new List<SubcontractProfileTrainingEngineerModel>();
 
             var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
             // Skiping number of Rows count  
@@ -216,7 +216,7 @@ namespace SubcontractProfile.Web.Controllers
             {
                 var result = response.Content.ReadAsStringAsync().Result;
                 //data
-                Result = JsonConvert.DeserializeObject<List<RequestTraininigModel>>(result);
+                Result = JsonConvert.DeserializeObject<List<SubcontractProfileTrainingEngineerModel>>(result); //RequestTraininigModel
 
             }
 
@@ -790,7 +790,7 @@ namespace SubcontractProfile.Web.Controllers
                                     engineerModel.LocationId = Guid.Parse(dr["LocationId"].ToString());
                                     engineerModel.TeamId = Guid.Parse(dr["TeamId"].ToString());
                                     engineerModel.EngineerId = Guid.Parse(dr["EngineerId"].ToString());
-                                    engineerModel.CreateUser = userProfile.Username;
+                                    engineerModel.CreateBy = userProfile.Username;
 
                                     var uriengineer = new Uri(Path.Combine(strpathAPI, "TrainingEngineer", "Insert"));
 
@@ -861,7 +861,7 @@ namespace SubcontractProfile.Web.Controllers
                                     engineerModel.LocationId = Guid.Parse(dr["LocationId"].ToString());
                                     engineerModel.TeamId = Guid.Parse(dr["TeamId"].ToString());
                                     engineerModel.EngineerId = Guid.Parse(dr["EngineerId"].ToString());
-                                    engineerModel.CreateUser = userProfile.Username;
+                                    engineerModel.CreateBy = userProfile.Username;
 
                                     var uriengineer = new Uri(Path.Combine(strpathAPI, "TrainingEngineer", "Insert"));
 

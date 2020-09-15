@@ -304,6 +304,27 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
             return result;
         }
+
+        [HttpPut("UpdateTestResult")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        public Task<bool> UpdateTestResult(SubcontractProfileTrainingRequest subcontractProfileTraining)
+        {
+            _logger.LogInformation($"Start TrainingController::UpdateByVerified", subcontractProfileTraining);
+
+
+            if (subcontractProfileTraining == null)
+                _logger.LogWarning($"Start TrainingController::UpdateByVerified", subcontractProfileTraining);
+
+            var result = _service.UpdateTestResult(subcontractProfileTraining);
+
+            if (result == null)
+            {
+                _logger.LogWarning($"TrainingController::", "UpdateByVerified NOT FOUND", subcontractProfileTraining);
+
+            }
+
+            return result;
+        }
         #endregion
 
         #region DELETE

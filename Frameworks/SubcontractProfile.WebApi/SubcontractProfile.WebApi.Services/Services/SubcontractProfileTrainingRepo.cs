@@ -271,12 +271,11 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@training_id", subcontractProfileTraining.TrainingId);
             p.Add("@status", subcontractProfileTraining.Status);
             p.Add("@modified_by", subcontractProfileTraining.ModifiedBy);
-            p.Add("@test_date", subcontractProfileTraining.BookingDate);
-            p.Add("@skill", subcontractProfileTraining.RemarkForAis);
-            p.Add("@grade", subcontractProfileTraining.RemarkForAis);
-
+            p.Add("@test_date", subcontractProfileTraining.TestDateStr);
+            p.Add("@remark_for_test", subcontractProfileTraining.RemarkForTest);
+           
             var ok = await _dbContext.Connection.ExecuteAsync
-                ("uspSubcontractProfileTraining_updateByVerified", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+                ("uspSubcontractProfileTraining_updateTestResult", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
 
             return true;
         }

@@ -180,11 +180,11 @@
                                 </div>
 
                             </div>
-
+                          
                             <div class="row">
 
                                 <div class="col-sm-2">
-                                    <label>Course Price :</label>
+                                    <label>Course Price (บาท) :</label>
                                 </div>
                                 <div class="col-sm-4">
                                     <label id="lblcourseprice"></label>
@@ -306,7 +306,7 @@
 
 
 
-                            <input type="hidden" id="Coursecost" />
+                            <input type="hidden" id="hdcoursecostforCal" />
                             <input type="hidden" id="rowCount" />
                             <input type="hidden" id="trnid" />
                             <input type="hidden" id="compid" />
@@ -470,6 +470,7 @@
 
             $('#requestdateTo').datetimepicker({
                 format: "DD/MM/YYYY",
+                minDate: new Date(),
                 showClear: true,
                 showClose: true,
                 icons: {
@@ -597,8 +598,8 @@
                      var count = table.data().count();
 
                      $('#rowCount').val(count);
-                     var count = $('#rowCount').val();
-                     var cost = $('#lblcourseprice').text();
+                   //  var count = $('#rowCount').val();
+                     var cost = $('#hdcoursecostforCal').val();//$('#lblcourseprice').text();
 
                      var ttcost = calculateCost(cost, count);
 
@@ -706,13 +707,13 @@
                     // var count = $('#tbSearchEngineer tr').length - 1
 
                      var table = $('#tbSearchEngineer').DataTable();
-                     var count = table.data().count();
+                     var countEmp = table.data().count();
 
-                     $('#rowCount').val(count);
-                     var count = $('#rowCount').val();
-                     var cost = $('#lblcourseprice').text();
-
-                     var ttcost = calculateCost(cost, count);
+                     $('#rowCount').val(countEmp);
+                   //  var count = $('#rowCount').val();
+                     var costCouse = $('#hdcoursecostforCal').val();
+        
+                     var ttcost = calculateCost(costCouse, countEmp);
 
 
                      var incvat = vat7(ttcost);
@@ -742,7 +743,7 @@
             trainingModel.ContractPhone = $('#inputContactPhone').val();
             trainingModel.ContractEmail = $('#inputContactEmail').val();
             trainingModel.Course = $("select[id$=selCourse]").val();
-            trainingModel.CoursePrice = $('#lblcourseprice').text();
+            trainingModel.CoursePrice = $('#hdcoursecostforCal').val();// $('#lblcourseprice').text();
             trainingModel.RequestDateStr = $('#inputRequestdateTo').val();
             trainingModel.Remark = $('#txtRemark').val();
             trainingModel.TotalPrice = $('#lblttcost').text();
@@ -878,7 +879,8 @@
                             $("#selCourse").append('<option value="">--Please select course--</option>');
                             $.each(data, function (id, result) {
                                 $("#selCourse").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text  +'</option>');
-                                $("#lblcourseprice").html(result.value1);
+                                $("#lblcourseprice").html(FormatNumber(result.value1));
+                                $('#hdcoursecostforCal').val(result.value1);
                             });
 
 
@@ -891,17 +893,11 @@
                   }
 
 
-         function clearField() {
+        function clearField() {
+            $("#reqdateFrom").val('');
+            $("#reqdateTo").val('');
 
-                            $("#txtCompNo").val('');
-                            $("#txttaxid").val('');
-
-                            $("#txtReqNo").val('');
-                            $('#inputStatus').val('ALL');
-                            $("#reqdateFrom").val('');
-                            $("#reqdateTo").val('');
-
-                        }
+        }
 
 
           function inittbSearchResult() {
@@ -1054,18 +1050,17 @@
 
                                              inittbEngineer(result.TrainingId);
 
-                                           //  var count = $('#tbSearchEngineer tr').length - 1
                                              var table = $('#tbSearchEngineer').DataTable();
-                                             var count = table.data().count();
+                                             var countEmp = table.data().count();
 
-                                             $('#rowCount').val(count);
-                                             var count = $('#rowCount').val();
-                                             var cost = $('#lblcourseprice').text();
-
-                                             var ttcost = calculateCost(cost, count);
-
-
+                                             $('#rowCount').val(countEmp);
+                                
+                                             var cost = $('#hdcoursecostforCal').val();
+                                           
+                                             var ttcost = calculateCost(cost, countEmp);
+                                          
                                              var incvat = vat7(ttcost);
+
                                              $('#lblttcost').html(FormatNumber(ttcost));
                                              $('#lblvat7').html(parseInt(incvat));
 
@@ -1094,6 +1089,8 @@
 
         function callTrainingDetail(trainingID) {
 
+            $('#hdcoursecostforCal').val('0');
+
                                  $.ajax({
                                       url: '@Url.Action("GetTraining", "RequestTraining")',
                                       type: 'POST',
@@ -1113,20 +1110,17 @@
                                                  $('#btnSave').show();
                                              }
 
+                                             $('#lblcourseprice').val(FormatNumber(result.CoursePrice));
+                                             $('#hdcoursecostforCal').val(result.CoursePrice); 
+                                            
                                              $('#lblcompname').html(result.CompanyNameTh);
                                              $('#lbltaxid').html(result.TaxId);
-
-
                                              $('#inputContactEmail').val(result.ContractEmail);
                                              $('#inputContactPhone').val(result.ContractPhone);
                                              $('#selCourse').val(result.Course);
                                              $('#inputRequestdateTo').val(result.RequestDateStr);
 
                                              $('#txtRemark').val(result.Remark);
-
-                                             $('#Coursecost').val(result.CoursePrice);
-
-                                             inittbEngineer(result.TrainingId);
 
                                              $('#trnid').val(result.TrainingId);
                                              $('#compid').val(result.CompanyId);
@@ -1137,6 +1131,8 @@
                                              $('#lblBookingDate').html(result.BookingDateStr);
 
                                              $('#lblRemarkForAis').html(result.RemarkForAis);
+
+                                             inittbEngineer(result.TrainingId);
 
                                          }
                                          else {
@@ -1164,10 +1160,16 @@
                             return day + '/' + month + '/' + year;
                         }
 
-                        function calculateCost(cost,count) {
+        function calculateCost(costPrice,count) {
+                            if (costPrice == '') {
+                                costPrice = '0';
+                            }
+                            if (count == '') {
+                                count = '0';
+                            }
 
                             var totalcost = 0;
-                            totalcost = parseFloat(cost) * parseFloat(count);
+                            totalcost = parseFloat(costPrice) * parseFloat(count);
 
 
                             return totalcost;
@@ -1237,16 +1239,17 @@
                 "initComplete": function (settings, json) {//here is the tricky part
                    // var count = $('#tbSearchEngineer tr').length - 1
                     var table = $('#tbSearchEngineer').DataTable();
-                    var count = table.data().count();
+                    var countEmp = table.data().count();
 
-                    $('#rowCount').val(count);
-                    var count = $('#rowCount').val();
-                    var cost = $('#Coursecost').val();
+                    $('#rowCount').val(countEmp);
+                    var costPrice = $('#hdcoursecostforCal').val();
 
-                    var ttcost = calculateCost(cost, count);
-
+                    var ttcost = calculateCost(costPrice, countEmp);
+                                       
                     var incvat = vat7(ttcost);
+
                     $('#lblttcost').html(FormatNumber(ttcost));
+                   
                     $('#lblvat7').html(parseInt(incvat));
 
                     var _incvat = parseInt(incvat);
@@ -1264,7 +1267,7 @@
 
         }
 
-        function FormatNumber(number, numberOfDigits) {
+        function FormatNumber(number) {
             try {
                 return new Intl.NumberFormat('en-US').format(parseFloat(number).toFixed(2));
             } catch (error) {

@@ -14,7 +14,6 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using SubcontractProfile.Web.Extension;
 using SubcontractProfile.Web.Model;
-using SubcontractProfile.Web.Extension;
 using Microsoft.Win32.SafeHandles;
 
 namespace SubcontractProfile.Web.Controllers
@@ -35,6 +34,11 @@ namespace SubcontractProfile.Web.Controllers
 
         public IActionResult TestResultUpdate()
         {
+            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userAISLogin");
+            if (userProfile == null)
+            {
+                return RedirectToAction("LogonByUser", "LogonByUser");
+            }
             return View();
         }
 
@@ -142,5 +146,88 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data });
         }
 
+        public ActionResult OnUpdate(SubcontractProfileTrainingRequestModel model)
+        {
+            ResponseModel result = new ResponseModel();
+            HttpClient clientLocation = new HttpClient();
+
+            try
+            {
+                var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userAISLogin");
+
+                model.TestDateStr = Common.ConvertToDateTimeYYYYMMDD(model.TestDateStr);
+                model.ModifiedBy = userProfile.Username;
+                model.Status = "T";
+
+                var uriLocation = new Uri(Path.Combine(strpathAPI, "Training", "UpdateTestResult"));
+
+                clientLocation.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+                var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                HttpResponseMessage responseResult = clientLocation.PutAsync(uriLocation, httpContent).Result;
+
+                if (responseResult.IsSuccessStatusCode)
+                {
+                    result.Status = true;
+                    result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                    result.StatusError = "0";
+                }
+                else
+                {
+                    result.Status = false;
+                    result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                    result.StatusError = "-1";
+                }
+            }
+
+            catch (Exception ex)
+            {
+                result.Message = "ไม่สามารถบันทึกข้อมูลได้ กรุณาติดต่อ Administrator.";
+                result.Status = false;
+                result.StatusError = "0";
+            }
+            return Json(result);
+        }
+
+        public ActionResult OnSave(SubcontractProfileTrainingEngineerModel model)
+        {
+            ResponseModel result = new ResponseModel();
+            HttpClient clientLocation = new HttpClient();
+
+            try
+            {
+                var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userAISLogin");
+
+                model.UpdateBy = userProfile.Username;
+                
+                var uriLocation = new Uri(Path.Combine(strpathAPI, "TrainingEngineer", "UpdateByTestResult"));
+
+                clientLocation.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+                var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                HttpResponseMessage responseResult = clientLocation.PutAsync(uriLocation, httpContent).Result;
+
+                if (responseResult.IsSuccessStatusCode)
+                {
+                    result.Status = true;
+                    result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                    result.StatusError = "0";
+                }
+                else
+                {
+                    result.Status = false;
+                    result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                    result.StatusError = "-1";
+                }
+            }
+
+            catch (Exception ex)
+            {
+                result.Message = "ไม่สามารถบันทึกข้อมูลได้ กรุณาติดต่อ Administrator.";
+                result.Status = false;
+                result.StatusError = "0";
+            }
+            return Json(result);
+        }
     }
 }

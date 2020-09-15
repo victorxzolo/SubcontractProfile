@@ -43,7 +43,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         public System.DateTime? CreateDate { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
-        public string CreateUser { get; set; }
+        public string CreateBy { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string LocationNameTh { get; set; }
@@ -57,11 +57,13 @@ namespace SubcontractProfile.WebApi.Services.Model
         public string Position { get; set; }
 
         public string TestStatus { get; set; }
-        public string UpdateUser { get; set; }
+        public string UpdateBy { get; set; }
 
         public string ContractEmail { get; set; }
 
         public string ContractPhone1 { get; set; }
+
+        public string TestStatusName { get; set; }
 
         public object Clone()
         {

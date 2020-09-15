@@ -64,47 +64,10 @@ namespace SubcontractProfile.Web.Model
         public string BookingDateStr { get; set; }
 
         public string RequestDateStr { get; set; }
+        public string TestDateStr { get; set; }
 
-        //  [System.ComponentModel.DataAnnotations.StringLength(100)]
-        //  public string CompanyNameTh { get; set; }
-        //  [System.ComponentModel.DataAnnotations.StringLength(100)]
-        //  public string TaxId { get; set; }
-        //  [System.ComponentModel.DataAnnotations.StringLength(100)]
-        //  public string ContractName { get; set; }
-        //  [System.ComponentModel.DataAnnotations.StringLength(100)]
-        //  public string ContractEmail { get; set; }
-        //  [System.ComponentModel.DataAnnotations.StringLength(100)]
-        //  public string ContractPhone { get; set; }
-        //  [System.ComponentModel.DataAnnotations.StringLength(100)]
-        //  public string LocationNameTh { get; set; }
-        //  [System.ComponentModel.DataAnnotations.StringLength(100)]
-        //  public string LocationNameEn { get; set; }
-        //  [System.ComponentModel.DataAnnotations.StringLength(100)]
-        //  public string TeamNameTh { get; set; }
-        //  [System.ComponentModel.DataAnnotations.StringLength(100)]
-        //  public string TeamNameEn { get; set; }
-        //  [System.ComponentModel.DataAnnotations.StringLength(100)]
-        //  public string StaffNameTh { get; set; }
-
-        //  [System.ComponentModel.DataAnnotations.StringLength(100)]
-        //  public string StaffNameEn { get; set; }
-
-        //  [System.ComponentModel.DataAnnotations.StringLength(100)]
-        //  public string ContractPhone1 { get; set; }
-
-        //  [System.ComponentModel.DataAnnotations.StringLength(100)]
-        //  public string ContractEmailEn { get; set; }
-
-        //  [System.ComponentModel.DataAnnotations.StringLength(100)]
-        //  public string Position { get; set; }
-
-
-
-        //  public string PaymentStatus { get; set; }
-
-
-
-
+        public string RemarkForTest { get; set; }
+       
     }
 }
 

@@ -142,18 +142,37 @@ namespace SubcontractProfile.WebApi.API.Controllers
         #region PUT
         [HttpPut("Update")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
-        public Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingEngineer SubcontractProfileTrainingEngineer)
+        public Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingEngineer subcontractProfileTrainingEngineer)
         {
-            _logger.LogInformation($"Start TrainingEngineerController::Update", SubcontractProfileTrainingEngineer);
+            _logger.LogInformation($"Start TrainingEngineerController::Update", subcontractProfileTrainingEngineer);
 
-            if (SubcontractProfileTrainingEngineer == null)
-                _logger.LogWarning($"Start TrainingEngineerController::Update", SubcontractProfileTrainingEngineer);
+            if (subcontractProfileTrainingEngineer == null)
+                _logger.LogWarning($"Start TrainingEngineerController::Update", subcontractProfileTrainingEngineer);
 
-            var result = _service.Update(SubcontractProfileTrainingEngineer);
+            var result = _service.Update(subcontractProfileTrainingEngineer);
 
             if (result == null)
             {
-                _logger.LogWarning($"TrainingEngineerController::", "Update NOT FOUND", SubcontractProfileTrainingEngineer);
+                _logger.LogWarning($"TrainingEngineerController::", "Update NOT FOUND", subcontractProfileTrainingEngineer);
+
+            }
+            return result;
+        }
+
+        [HttpPut("UpdateByTestResult")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        public  Task<bool> UpdateByTestResult(SubcontractProfileTrainingEngineer subcontractProfileTrainingEngineer)
+        {
+            _logger.LogInformation($"Start TrainingEngineerController::UpdateByTestResult", subcontractProfileTrainingEngineer);
+
+            if (subcontractProfileTrainingEngineer == null)
+                _logger.LogWarning($"Start TrainingEngineerController::UpdateByTestResult", subcontractProfileTrainingEngineer);
+
+            var result = _service.UpdateByTestResult(subcontractProfileTrainingEngineer);
+
+            if (result == null)
+            {
+                _logger.LogWarning($"TrainingEngineerController::", "UpdateByTestResult NOT FOUND", subcontractProfileTrainingEngineer);
 
             }
             return result;

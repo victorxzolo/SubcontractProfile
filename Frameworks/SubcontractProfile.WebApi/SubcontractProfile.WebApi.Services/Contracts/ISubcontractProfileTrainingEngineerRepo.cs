@@ -24,6 +24,8 @@ namespace SubcontractProfile.WebApi.Services.Contracts
 
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingEngineer>> GetTrainingEngineerByTrainingId(System.Guid training_Id);
 
-  
+        Task<bool> UpdateByTestResult(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingEngineer subcontractProfileTrainingEngineer);
+
+        
     }
 }

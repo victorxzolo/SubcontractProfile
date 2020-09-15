@@ -77,6 +77,12 @@ namespace SubcontractProfile.WebApi.Services.Model
         public string CompanyNameTh { get; set; }
         public string TaxId { get; set; }
 
+        public string CourseName { get; set; }
+
+        public string TestDateStr { get; set; }
+        public string RemarkForTest { get; set; }
+      
+
         public object Clone()
         {
             return this.MemberwiseClone();
