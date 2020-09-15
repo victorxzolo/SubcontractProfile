@@ -35,7 +35,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string PaymentChannal { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+        //[System.ComponentModel.DataAnnotations.Required]
         public System.DateTime? PaymentDatetime { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]

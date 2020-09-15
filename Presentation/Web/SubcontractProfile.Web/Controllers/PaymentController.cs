@@ -127,6 +127,7 @@ namespace SubcontractProfile.Web.Controllers
                 model.Status = searchPayment.Paymentstatus;
 
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string str = JsonConvert.SerializeObject(model);
                 var uripayment = new Uri(Path.Combine(strpathAPI, "Payment", "SearchPayment"));
                 var httpContentPayment = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(uripayment, httpContentPayment).Result;
