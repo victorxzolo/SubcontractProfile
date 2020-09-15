@@ -167,13 +167,13 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileTraining))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileTraining))]
-        [HttpGet("SearchTrainingForTest/{company_name_th}/{tax_id}/{training_date_fr}/{training_date_to}/{test_date_fr}/{test_date_to}")]
+        [HttpGet("SearchTrainingForTest/{company_name_th}/{tax_id}/{training_date_fr}/{training_date_to}/{test_date_fr}/{test_date_to}/{status}")]
 
         public Task<IEnumerable<SubcontractProfileTraining>> SearchTrainingForTest(string company_name_th,
-           string tax_id, string training_date_fr, string training_date_to, string test_date_fr, string test_date_to)
+           string tax_id, string training_date_fr, string training_date_to, string test_date_fr, string test_date_to,string status)
         {
             _logger.LogInformation($"Start TrainingController::SearchTrainingForTest", company_name_th, tax_id,
-            training_date_fr, training_date_to, test_date_fr, test_date_to);
+            training_date_fr, training_date_to, test_date_fr, test_date_to, status);
 
             if (company_name_th.ToUpper() == "NULL")
             {
@@ -205,14 +205,18 @@ namespace SubcontractProfile.WebApi.API.Controllers
                 test_date_to = string.Empty;
             }
 
+            if (status.ToUpper() == "NULL")
+            {
+                status = string.Empty;
+            }
 
             var entities = _service.SearchTrainingForTest(company_name_th, tax_id,
-                training_date_fr, training_date_to, test_date_fr, test_date_to);
+                training_date_fr, training_date_to, test_date_fr, test_date_to, status);
 
             if (entities == null)
             {
                 _logger.LogWarning($"TrainingController::", "SearchTrainingForTest NOT FOUND", company_name_th, tax_id,
-            training_date_fr, training_date_to, test_date_fr, test_date_to);
+            training_date_fr, training_date_to, test_date_fr, test_date_to, status);
                 return null;
             }
 

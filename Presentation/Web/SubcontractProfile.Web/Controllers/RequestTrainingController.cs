@@ -34,6 +34,11 @@ namespace SubcontractProfile.Web.Controllers
         }
         public IActionResult Index()
         {
+            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userAISLogin");
+            if (userProfile == null)
+            {
+                return RedirectToAction("LogonByUser", "LogonByUser");
+            }
             return View();
         }
 
@@ -92,7 +97,7 @@ namespace SubcontractProfile.Web.Controllers
            
 
             string status = string.Empty;
-            if ((Status == null) || (Status == "ALL"))
+            if ((Status == null) || (Status == "-1"))
             {
                 status = "null";
             }
@@ -539,7 +544,7 @@ namespace SubcontractProfile.Web.Controllers
             var company_id = userProfile.companyid;
             
             string status = string.Empty;
-            if ((Status == null) || (Status == "ALL"))
+            if ((Status == null) || (Status == "-1"))
             {
                 status = "null";
             }

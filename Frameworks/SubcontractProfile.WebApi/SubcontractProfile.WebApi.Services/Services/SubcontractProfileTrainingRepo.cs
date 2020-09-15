@@ -281,7 +281,7 @@ namespace SubcontractProfile.WebApi.Services.Services
         }
 
         public async Task<IEnumerable<SubcontractProfileTraining>> SearchTrainingForTest(string company_name_th,
-            string tax_id, string training_date_fr, string training_date_to, string test_date_fr, string test_date_to)
+            string tax_id, string training_date_fr, string training_date_to, string test_date_fr, string test_date_to,string status)
         {
             var p = new DynamicParameters();
             p.Add("@company_name_th", company_name_th);
@@ -290,6 +290,7 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@trainig_date_to", training_date_to);
             p.Add("@test_date_fr", test_date_fr);
             p.Add("@test_date_to", test_date_to);
+            p.Add("@status", status);
 
             var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>
             ("uspSubcontractProfileTraining_searchTrainingForTest", p, commandType: CommandType.StoredProcedure);

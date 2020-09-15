@@ -853,7 +853,7 @@
                         success: function (data) {
 
                             $("#inputStatus").empty();
-                            $("#inputStatus").append('<option value="ALL">--Please All--</option>');
+                            $("#inputStatus").append('<option value="-1">--Please All--</option>');
                             $.each(data, function (id, result) {
                                 $("#inputStatus").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text +'</option>');
                                 });
@@ -896,7 +896,8 @@
         function clearField() {
             $("#reqdateFrom").val('');
             $("#reqdateTo").val('');
-
+            $("#inputStatus").val('-1');
+            
         }
 
 
@@ -1018,6 +1019,8 @@
             else {
                 $("#hTitleEdit").text('ขอรับการฝึกอบรม');
                 callTrainingDetailAdd();
+
+                $('#btnSave').show();
 
             }
 

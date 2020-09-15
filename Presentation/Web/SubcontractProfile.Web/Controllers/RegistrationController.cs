@@ -52,6 +52,12 @@ namespace SubcontractProfile.Web.Controllers
         }
         public IActionResult SearchCompanyVerify()
         {
+            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userAISLogin");
+            if (userProfile == null)
+            {
+                return RedirectToAction("LogonByUser", "LogonByUser");
+            }
+
             ViewData["Controller"] = "Registration";
             ViewData["View"] = "Search Company Verify";
             return View();

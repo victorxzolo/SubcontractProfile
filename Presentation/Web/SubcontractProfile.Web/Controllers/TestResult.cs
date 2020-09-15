@@ -43,7 +43,7 @@ namespace SubcontractProfile.Web.Controllers
         }
 
         public ActionResult Search( string company_name_th, string tax_id
-           , string training_date_fr, string training_date_to, string test_date_fr, string test_date_to)
+           , string training_date_fr, string training_date_to, string test_date_fr, string test_date_to,string status)
         {
 
             var Result = new List<SubcontractProfileTrainingModel>();
@@ -121,8 +121,13 @@ namespace SubcontractProfile.Web.Controllers
                 test_date_to = Common.ConvertToDateTimeYYYYMMDD(test_date_to);
             }
 
-            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", strpathAPI + "Training/SearchTrainingForTest",
-                 company_name_th, tax_id, training_date_fr, training_date_to, test_date_fr, test_date_to);
+            if(status =="-1")
+            {
+                status = "null";
+            }
+
+            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Training/SearchTrainingForTest",
+                 company_name_th, tax_id, training_date_fr, training_date_to, test_date_fr, test_date_to,status);
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
