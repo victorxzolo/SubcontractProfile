@@ -17,14 +17,14 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string PaymentChannal { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
-        public System.DateTime PaymentDatetime { get; set; }
+       // [System.ComponentModel.DataAnnotations.Required]
+        public System.DateTime? PaymentDatetime { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+       // [System.ComponentModel.DataAnnotations.Required]
         public decimal AmountTransfer { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        [System.ComponentModel.DataAnnotations.Required]
+        //[System.ComponentModel.DataAnnotations.Required]
         public string BankTransfer { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
@@ -34,11 +34,11 @@ namespace SubcontractProfile.Web.Model
         public string SlipAttachFile { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(255)]
-        [System.ComponentModel.DataAnnotations.Required]
+       // [System.ComponentModel.DataAnnotations.Required]
         public string ContactName { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        [System.ComponentModel.DataAnnotations.Required]
+        //[System.ComponentModel.DataAnnotations.Required]
         public string ContactPhoneNo { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(255)]
@@ -47,7 +47,7 @@ namespace SubcontractProfile.Web.Model
         public string Remark { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
-        [System.ComponentModel.DataAnnotations.Required]
+        //[System.ComponentModel.DataAnnotations.Required]
         public string Status { get; set; }
 
         public System.DateTime? CreateDate { get; set; }
