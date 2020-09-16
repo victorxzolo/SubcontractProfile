@@ -369,6 +369,8 @@ namespace SubcontractProfile.Web.Controllers
                     model.UpdateBy = userProfile.Username;
                     model.StaffCode = DateTime.Now.ToString("yyyyMMddhhmmss");
 
+                    
+
                     model.EngineerId = Guid.NewGuid();
 
 
@@ -395,6 +397,16 @@ namespace SubcontractProfile.Web.Controllers
                         personal.engineerId = model.EngineerId;
                         personal.PersonalId = Guid.NewGuid();
                         personal.CreateBy = userProfile.Username;
+                        if (personal.dateBirthDay != null)
+                        {
+                            DateTime datebirthday = DateTime.ParseExact(personal.dateBirthDay, "dd/MM/yyyy HH:mm", null);
+                            personal.BirthDate = datebirthday;
+                        }
+                        if (personal.dateCertificateExpireDate != null)
+                        {
+                            DateTime datecer= DateTime.ParseExact(personal.dateCertificateExpireDate, "dd/MM/yyyy HH:mm", null);
+                            personal.CertificateExpireDate = datecer;
+                        }
                         //personal
 
                         if (personal.File_CertificateAttach != null && personal.File_CertificateAttach.Length > 0)
@@ -467,11 +479,23 @@ namespace SubcontractProfile.Web.Controllers
 
                     clientLocation.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
+                    string str = JsonConvert.SerializeObject(model);
                     var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
                     HttpResponseMessage responseResult = clientLocation.PutAsync(uriLocation, httpContent).Result;
 
                     if (responseResult.IsSuccessStatusCode)
                     {
+                        if (personal.dateBirthDay != null)
+                        {
+                            DateTime datebirthday = DateTime.ParseExact(personal.dateBirthDay, "dd/MM/yyyy", null);
+                            personal.BirthDate = datebirthday;
+                        }
+                        if (personal.dateCertificateExpireDate != null)
+                        {
+                            DateTime datecer = DateTime.ParseExact(personal.dateCertificateExpireDate, "dd/MM/yyyy", null);
+                            personal.CertificateExpireDate = datecer;
+                        }
+
                         var uriPersonal = new Uri(Path.Combine(strpathAPI, "Personal", "Update"));
 
                         if (personal.File_CertificateAttach != null && personal.File_CertificateAttach.Length > 0)

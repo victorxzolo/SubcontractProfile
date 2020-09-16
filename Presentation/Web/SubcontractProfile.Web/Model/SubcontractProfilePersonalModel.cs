@@ -122,5 +122,8 @@ namespace SubcontractProfile.Web.Model
 
         public Guid file_id__ProfileImgAttach { get; set; }
         public IFormFile File_ProfileImgAttach { get; set; }
+
+        public string? dateBirthDay { get; set; }
+        public string? dateCertificateExpireDate { get; set; }
     }
 }

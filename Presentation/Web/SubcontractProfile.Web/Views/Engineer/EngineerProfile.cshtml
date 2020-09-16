@@ -426,8 +426,16 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="row col-sm-12">
-                                                <input type="text" id="BirthDate" style="width:280px" class="form-control">
+                                                @*<input type="text" id="" style="width:280px" class="form-control">*@
+                                                <div class='input-group p-0 date' id='dateBirthDate'>
+                                                    <input type='text' class="form-control" id="BirthDate" />
+                                                    <div class="input-group-append input-group-addon">
+                                                        <span class="input-group-text px-4">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -639,9 +647,17 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="row col-sm-12">
-                                                <input type="text" id="dateCertificateDAte" style="width:280px" class="form-control">
-                                                @*  <input id="dateCertificateDate" style="width:220px" type="text" placeholder="Select Date.." data-provide="datepicker" >*@
+                                                @*<input type="text" id="" style="width:280px" class="form-control">
+        <input id="dateCertificateDate" style="width:220px" type="text" placeholder="Select Date.." data-provide="datepicker" >*@
+                                                <div class='input-group p-0 date' id='datepickerCertificateDAte'>
+                                                    <input type='text' class="form-control" id="dateCertificateDAte" />
+                                                    <div class="input-group-append input-group-addon">
+                                                        <span class="input-group-text px-4">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
 
+                                                </div>
 
                                             </div>
                                         </div>
@@ -754,18 +770,39 @@
             GetDropDownTitle();
 
 
-            //document.getElementById("dateCertificateDate").flatpickr({
-            //    enableTime: false,
-            //    dateFormat: "d/m/Y",
-            //    //defaultDate: "today",
-            //    defaultDate: "07/10/2020"
-            //});
+            $('#dateBirthDate').datetimepicker({
+                format: "DD/MM/YYYY",
+                showClear: true,
+                showClose: true,
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'icon-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-time'
+                }
+            });
 
-
-            //$('.datepicker').datepicker({
-            //    format: 'dd/mm/yyyy'
-            //});
-
+            $('#datepickerCertificateDAte').datetimepicker({
+                format: "DD/MM/YYYY",
+                showClear: true,
+                showClose: true,
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'icon-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-time'
+                }
+            });
             $("#inputCitizen").keyup(function () {
                 CheckKeyUps("inputCitizen", "[0-9]");
             });
@@ -795,9 +832,7 @@
                 getTeamByLocationId($(this).val());
             });
 
-            $('#Location').change(function () {
-                getTeamByLocationIdEdit($(this).val());
-            });
+
 
 
             inittbSearchResult();
@@ -832,6 +867,11 @@
                     form.classList.add('was-validated');
 
                 });
+            });
+            $("#Location").on("change", function () {
+
+                getTeamByLocationIdEdit($('#Location option').filter(':selected').val());
+               
             });
 
 
@@ -926,7 +966,7 @@
                         },
                         { "data": "LocationNameTh", "width": "25%"  },
                         { "data": "TeamNameTh", "width": "25%" },
-                        { "data": "StaffName", "width": "25%" },
+                        { "data": "StaffNameTh", "width": "25%" },
                         { "data": "StaffNameEn", "width": "25%" },
                         { "data": "Position", "width": "20%" }
 
@@ -1018,16 +1058,14 @@
                   success: function (result) {
                 //  console.log(result)
                       if (result != null) {
-                          getTeamByLocationIdEdit(result.LocationId);
+                          //getTeamByLocationIdEdit(result.LocationId);
 
-                          $("#Location").val(result.LocationId).change();
-
-
-                          //$('#Team option').prop('selected', function () {
-                          //    return result.TeamId;
-                          //});
-
+                          $("#Location").val(result.LocationId);
+                          $("#Location").trigger('change');
+                          
                           $('#hdEngineerId').val(result.EngineerId);
+
+                         
 
                          // $('#StaffCode').val(result.StaffCode);
                           $('#StaffName').val(result.StaffName);
@@ -1066,11 +1104,11 @@
                               //$('#linkdownload').text(data.SlipAttachFile);
                               //DownloadFileSlip(data.SlipAttachFile);
                           }
-
+                         
                           getDataPersonalById(result.PersonalId);
 
-                          $("#Team").val(result.TeamId).change();
-
+                          //$("#Team").val(result.TeamId).change();
+                          $('#Team').val(result.TeamId);
                     }
                   },
                   error: function (result) {
@@ -1097,7 +1135,17 @@
                       // $('#Title').val(result.TitleName);
                        $('#FullNameT').val(result.FullNameEn);
                        $('#FullNameE').val(result.FullNameTh);
-                       $('#BirthDate').val(result.BirthDate);
+                       //$('#BirthDate').val(result.BirthDate);
+
+                       if (result.BirthDate) {
+                           var d = new Date(result.BirthDate);
+                           var month = d.getMonth();
+                           var day = d.getDate();
+                           var year = d.getFullYear();
+
+                           $('#dateBirthDate').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
+                       }
+                       
 
                        //Gender
                        if (result.Gender == "M") {
@@ -1165,8 +1213,18 @@
 
                        $('#CertificateType').val(result.CertificateType);
                        $('#CertificateNo').val(result.CertificateNo);
-                       $('#dateCertificateDate').val(result.CertificateExpireDate);
+                       //$('#dateCertificateDate').val(result.CertificateExpireDate);
                        //$('#fileCertificateAttach').val(result.CertificateAttachFile);
+
+                       if (result.CertificateExpireDate != null) {
+                           var d = new Date(result.CertificateExpireDate);
+                           var month = d.getMonth();
+                           var day = d.getDate();
+                           var year = d.getFullYear();
+
+                           $('#datepickerCertificateDAte').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
+                       }
+                     
 
                        $("#BankName2").val(result.BankName).change();
 
@@ -1244,7 +1302,7 @@
             formData.append('personal.TitleName' , $('#Title').val());
             formData.append('personal.FullNameEn' , $('#FullNameT').val());
             formData.append('personal.FullNameTh' , $('#FullNameE').val());
-            formData.append('personal.BirthDate' , $('#BirthDate').val());
+            formData.append('personal.dateBirthDay' , $('#BirthDate').val());
 
             //Gender
             if ($('#rdoMale').is(":checked")) {
@@ -1264,14 +1322,12 @@
             formData.append('personal.ContactPhone2' , $('#PersonalContractPhone2').val());
             formData.append('personal.ContactEmail' , $('#ContractMail').val());
             formData.append('personal.WorkPermitNo' , $('#WorkPermit').val());
-            formData.append('personal.WorkPermitAttachFile' , $('#fileWorkPermitAttach').val());
-            formData.append('personal.ProfileImgAttachFile' , $('#fileProfileAttach').val());
          //   modelPersonal.CourseSkill = $('#CourseSkill').val();
             formData.append('personal.Education' , $('#Education').val());
 
 
             if ($("#chkListenTH").is(":checked")) {
-                formData.append(' personal.ThListening', "Y");
+                formData.append('personal.ThListening', "Y");
             }
             else {
                 formData.append('personal.ThListening', "N");
@@ -1337,8 +1393,7 @@
 
             formData.append('personal.CertificateType' , $('#CertificateType').val());
             formData.append('personal.CertificateNo' , $('#CertificateNo').val());
-            formData.append('personal.CertificateExpireDate' , $('#dateCertificateDate').val());
-            formData.append('personal.CertificateAttachFile' , $('#fileCertificateAttach').val());
+            formData.append('personal.dateCertificateExpireDate', $('#dateCertificateDAte').val());
             formData.append('personal.BankName' , $('#BankName2').val());
             formData.append('personal.AccountNumber' , $('#AccNo2').val());
             formData.append('personal.AccountName' , $('#AccName2').val());
@@ -1350,13 +1405,18 @@
 
             formData.append('personal.File_CertificateAttach' , $('#fileCertificateAttach').get(0).files[0]);
             formData.append('personal.File_WorkPermitAttach' , $('#fileWorkPermitAttach').get(0).files[0]);
-            formData.append('personal.File_ProfileImgAttach' , $('#fileProfileAttach').get(0).files[0]);
+            formData.append('personal.File_ProfileImgAttach', $('#fileProfileAttach').get(0).files[0]);
+
+            formData.append('model.PersonalAttachFile', $('#lbpersonalAttahFile').text());
+            formData.append('model.VehicleAttachFile', $('#lbvehicleAttachFile').text());
 
 
-            //formData.append('model', model);
-            //formData.append('personal', modelPersonal);
+            formData.append('personal.CertificateAttachFile', $('#lbfileCertificateAttach').text());
+            formData.append('personal.WorkPermitAttachFile', $('#lbfileWorkPermitAttach').text());
+            formData.append('personal.ProfileImgAttachFile', $('#lbfileProfileAttach').text());
 
-            $.ajax({
+
+         $.ajax({
                    url: '@Url.Action("OnSave", "Engineer")',
                    type: 'POST',
                 data: formData,
