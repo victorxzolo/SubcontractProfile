@@ -202,7 +202,6 @@ window.addEventListener('load', function () {
 }, false);
 
 
-<<<<<<< HEAD
 function validateNumberDot(evt) {
     if (evt.keyCode != 8) {
         var theEvent = evt || window.event;
@@ -240,41 +239,7 @@ function clearData() {
 
         
 }
-=======
-    $('#btnClearModal').click(function () {
-        ClearDataModal();
-    });
-    $('#btnClearDataModal').click(function () {
-        ClearDataModal();
-    });
 
-});
->>>>>>> e34f07979a4ed312aed116fb580cca1de1567d07
-
-function ClearDataModal() {
-    $("#Request_no").text('');
-    $("#Payment_no").text('');
-    $("#Company_name").text('');
-    $("#address").text('');
-    $("#Tax_id").text('');
-    $("#Contact_name").val('');
-    $("#Contact_email").val('');
-    $("#Contact_phone_no").val('');
-    $('#amount_transfer').val('');
-    $('#bank_transfer').val('');
-    $('#bank_branch').val('');
-    $('#payment_channal').val('');
-    $("#remark").val('');
-    $('#payment_date').val('');
-    $('#datepayment').data("DateTimePicker").date(new Date(), 'DD/MM/YYYY');
-    $('#payment_datetime').val('');
-    $('#timepayment').data("DateTimePicker").date(new Date(), 'HH:MM');
-    
-    $('#lbuploadslip').text('Choose file');
-    $('#hdupfileslip').val('');
-    $('#linkdownload').text('');
-    $('#hdpaymentId').val('');
-}
 function ValidateUpload() {
     var hasError = false;
     if ($('#hdupfileslip').val() == "") {
@@ -393,11 +358,11 @@ function inittbSearchconfirmpayment() {
                         status = "A";
                     }
                     else if (data.Status == "Waiting") {
-                        action = "Confirm";
+                        action = "Confrim";
                         status = "W";
                     }
                     else if (data.Status == "Not Approve") {
-                        action = "Confirm";
+                        action = "Confrim";
                         status = "N";
                     }
                     return '<a href="javascript:void(0);" onclick="GetIdpayment(\'' + data.PaymentId + '\',\'' + status + '\')"><u>' + action + '</u></a>';
@@ -512,7 +477,7 @@ function GetIdpayment(paymentId, status) {
         async: false,
         success: function (response) {
             $('#hdpaymentId').val(response.Data.PaymentId);
-            ClearDataModal();
+
             if (status == 'W' || status == 'N') {
                 SetTextStatusN(response.Data);
             }
@@ -565,7 +530,6 @@ function SetTextStatusN(data) {
     $('#payment_channal').val(data.PaymentChannal);
     $("#remark").val(data.Remark);
 
-<<<<<<< HEAD
     //var d = new Date(data.PaymentDatetime);
     //var month = d.getMonth();
     //var day = d.getDate();
@@ -588,43 +552,6 @@ function SetTextStatusN(data) {
 
     EnableControl(false);
    
-=======
-    if (data.PaymentDatetime != null) {
-        var d = new Date(data.PaymentDatetime);
-        var month = d.getMonth();
-        var day = d.getDate();
-        var year = d.getFullYear();
-        var HH = d.getHours();
-        var MM = d.getMinutes();
-
-        $('#datepayment').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
-        $('#timepayment').data("DateTimePicker").date(moment(new Date(year, month, day, HH, MM), 'HH:MM'));
-    }
-  
-
-    if (data.SlipAttachFile != null) {
-        $('#lbuploadslip').html(data.SlipAttachFile);
-        $('#hdupfileslip').val(data.file_id_Slip);
-        $('#linkdownload').text(data.SlipAttachFile);
-        DownloadFileSlip(data.SlipAttachFile);
-    }
-
-
-    $("#Contact_name").prop("disabled", false);
-    $("#Contact_email").prop("disabled", false);
-    $("#Contact_phone_no").prop("disabled", false);
-    $("#payment_channal").prop("disabled", false);
-
-    $("#textpayment_channal").prop("disabled", false);
-    $("#Detailpaymentchannal input").prop("disabled", false);
-    $('#payment_date').prop("disabled", false);
-    $('#payment_datetime').prop("disabled", false);
-    $("#amount_transfer").prop("disabled", false);
-    $('#bank_transfer').prop("disabled", false);
-    $("#bank_branch").prop("disabled", false);
-    $("#slip_attach_file").prop("disabled", false);
-    $("#remark").prop("disabled", false);
->>>>>>> e34f07979a4ed312aed116fb580cca1de1567d07
 }
 
 function SetTextStatusY(data) {
@@ -676,24 +603,7 @@ function SetTextStatusY(data) {
 
     EnableControl(true); //'disabled'
 
-<<<<<<< HEAD
 }
-=======
-    $("#Contact_name").prop("disabled", true);
-    $("#Contact_email").prop("disabled", true);
-    $("#Contact_phone_no").prop("disabled", true);
-    $("#payment_channal").prop("disabled", true);
-
-    $("#textpayment_channal").prop("disabled", true);
-    $("#Detailpaymentchannal input").prop("disabled", true);
-    $('#payment_date').prop("disabled", true);
-    $('#payment_datetime').prop("disabled", true);
-    $("#amount_transfer").prop("disabled", true);
-    $('#bank_transfer').prop("disabled", true);
-    $("#bank_branch").prop("disabled", true);
-    $("#slip_attach_file").prop("disabled", true);
-    $("#remark").prop("disabled", true);
->>>>>>> e34f07979a4ed312aed116fb580cca1de1567d07
 
 function EnableControl(status) {
     $("#Contact_name").attr('disabled', status);
@@ -753,7 +663,6 @@ function UpdatePayment(PaymentId) {
                 })
 
             }
-            tbSearchconfirmpayment.ajax.reload();
         },
         failure: function (msg) {
         }
@@ -793,8 +702,6 @@ function clearSearchpayment() {
     $('#paymentrequestdateto').val('');
     $('#paymentdatefrom').val('');
     $('#paymentdateto').val('');
-
-    tbSearchconfirmpayment.ajax.reload();
 }
 
 function closepayment() {
