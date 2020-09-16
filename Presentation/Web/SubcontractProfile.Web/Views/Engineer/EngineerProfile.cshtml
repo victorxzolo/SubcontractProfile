@@ -1055,13 +1055,14 @@
                   type: 'POST',
                   data: { 'engineerId': id},
                   dataType: "json",
+                  async: false,
                   success: function (result) {
                 //  console.log(result)
                       if (result != null) {
-                          //getTeamByLocationIdEdit(result.LocationId);
+                          getTeamByLocationIdEdit(result.LocationId);
 
                           $("#Location").val(result.LocationId);
-                          $("#Location").trigger('change');
+                         // $("#Location").trigger('change');
                           
                           $('#hdEngineerId').val(result.EngineerId);
 
@@ -1112,7 +1113,7 @@
                     }
                   },
                   error: function (result) {
-
+                      console.log(result);
                   }
 
             });
@@ -1548,6 +1549,7 @@ function GetDropDownLocationSearch() {
                   type: 'POST',
                   data: { 'locationId': locationId},
                   dataType: "json",
+                  async: false,
                   success: function (data) {
                       $("#Team").empty();
                       $("#Team").append('<option value="">--Please All--</option>');
