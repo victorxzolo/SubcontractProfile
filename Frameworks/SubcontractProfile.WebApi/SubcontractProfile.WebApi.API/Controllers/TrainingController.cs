@@ -222,6 +222,58 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
             return entities;
         }
+
+
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileTraining))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileTraining))]
+        [HttpGet("SearchTrainingForSub/{company_id}/{training_date_fr}/{training_date_to}/{test_date_fr}/{test_date_to}/{status}")]
+
+        public Task<IEnumerable<SubcontractProfileTraining>> SearchTrainingForSub(Guid company_id,
+            string training_date_fr, string training_date_to, string test_date_fr, string test_date_to, string status)
+        {
+            _logger.LogInformation($"Start TrainingController::SearchTrainingForSub", company_id,
+            training_date_fr, training_date_to, test_date_fr, test_date_to, status);
+
+
+            if (training_date_fr.ToUpper() == "NULL")
+            {
+                training_date_fr = string.Empty;
+            }
+
+            if (training_date_to.ToUpper() == "NULL")
+            {
+                training_date_to = string.Empty;
+            }
+
+            if (test_date_fr.ToUpper() == "NULL")
+            {
+                test_date_fr = string.Empty;
+            }
+
+            if (test_date_to.ToUpper() == "NULL")
+            {
+                test_date_to = string.Empty;
+            }
+
+            if (status.ToUpper() == "NULL")
+            {
+                status = string.Empty;
+            }
+
+            var entities = _service.SearchTrainingForsub(company_id, 
+                training_date_fr, training_date_to, test_date_fr, test_date_to, status);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"TrainingController::", "SearchTrainingForSub NOT FOUND", company_id,
+            training_date_fr, training_date_to, test_date_fr, test_date_to, status);
+                return null;
+            }
+
+            return entities;
+        }
+
         #endregion
 
         #region POST

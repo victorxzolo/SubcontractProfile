@@ -64,6 +64,8 @@ namespace SubcontractProfile.WebApi.Services.Model
         public string ContractPhone1 { get; set; }
 
         public string TestStatusName { get; set; }
+        public string SkillLevel { get; set; }
+        
 
         public object Clone()
         {

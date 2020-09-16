@@ -48,5 +48,7 @@ namespace SubcontractProfile.Web.Model
         public string ContractPhone1 { get; set; }
         public string ContractEmail { get; set; }
 
+        public string SkillLevel { get; set; }
+
     }
 }

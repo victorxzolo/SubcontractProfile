@@ -42,6 +42,10 @@ namespace SubcontractProfile.Web.Controllers
             return View();
         }
 
+      
+
+
+
         public ActionResult Search( string company_name_th, string tax_id
            , string training_date_fr, string training_date_to, string test_date_fr, string test_date_to,string status)
         {

@@ -132,12 +132,13 @@ namespace SubcontractProfile.Web.Controllers
                 var httpContentPayment = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(uripayment, httpContentPayment).Result;
 
-               
+
                 //string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}", strpathAPI + "Payment/SearchPayment"
                 //                                , searchPayment.Paymentno, searchPayment.Paymentrequesttraningno, searchPayment.Paymantrequestdatefrom
                 //                                , searchPayment.Paymentrequestdateto, searchPayment.Paymentdatefrom, searchPayment.Paymentdateto
-                //                                , searchPayment.Paymentstatus,"null","null");
+                //                                , searchPayment.Paymentstatus, "null", "null");
                 //HttpResponseMessage response = client.GetAsync(uriString).Result;
+
                 if (response.IsSuccessStatusCode)
                 {
                     var dataresponse = response.Content.ReadAsStringAsync().Result;

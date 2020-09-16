@@ -381,18 +381,6 @@
 
         $(document).ready(function () {
 
-            $(document).on('show.bs.modal', '.modal', function () {
-                var zIndex = 1040 + (10 * $('.modal:visible').length);
-                $(this).css('z-index', zIndex);
-                setTimeout(function () {
-                    $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
-                }, 0);
-            });
-
-            $(document).on('hidden.bs.modal', '.modal', function () {
-                $('.modal:visible').length && $(document.body).addClass('modal-open');
-            });
-
 
             GetDropDownByNameCourse();
 
@@ -486,6 +474,18 @@
                 }
             });
 
+            $(document).on('show.bs.modal', '.modal', function () {
+                var zIndex = 1040 + (10 * $('.modal:visible').length);
+                $(this).css('z-index', zIndex);
+                setTimeout(function () {
+                    $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+                }, 0);
+            });
+
+            $(document).on('hidden.bs.modal', '.modal', function () {
+                $('.modal:visible').length && $(document.body).addClass('modal-open');
+            });
+
         });
 
         'use strict';
@@ -518,6 +518,7 @@
             $("select[id$=selLocationNametraining]").val('');
             $("select[id$=selTeamtraining]").val('');
             $("select[id$=selEngineertraining]").val('');
+
         }
 
         function onAddEngineer() {
@@ -712,7 +713,7 @@
                      $('#rowCount').val(countEmp);
                    //  var count = $('#rowCount').val();
                      var costCouse = $('#hdcoursecostforCal').val();
-        
+
                      var ttcost = calculateCost(costCouse, countEmp);
 
 
@@ -853,14 +854,14 @@
                         success: function (data) {
 
                             $("#inputStatus").empty();
-                            $("#inputStatus").append('<option value="-1">--Please All--</option>');
+                            $("#inputStatus").append('<option value="-1">--Select All--</option>');
                             $.each(data, function (id, result) {
                                 $("#inputStatus").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text +'</option>');
                                 });
                             },
                             failure: function () {
                                 $("#inputStatus").empty();
-                                $("#inputStatus").append('<option value="-1">--Please All--</option>');
+                                $("#inputStatus").append('<option value="-1">--Select All--</option>');
                             }
                         });
                         }
@@ -897,7 +898,7 @@
             $("#reqdateFrom").val('');
             $("#reqdateTo").val('');
             $("#inputStatus").val('-1');
-            
+
         }
 
 
@@ -1057,11 +1058,11 @@
                                              var countEmp = table.data().count();
 
                                              $('#rowCount').val(countEmp);
-                                
+
                                              var cost = $('#hdcoursecostforCal').val();
-                                           
+
                                              var ttcost = calculateCost(cost, countEmp);
-                                          
+
                                              var incvat = vat7(ttcost);
 
                                              $('#lblttcost').html(FormatNumber(ttcost));
@@ -1114,8 +1115,8 @@
                                              }
 
                                              $('#lblcourseprice').val(FormatNumber(result.CoursePrice));
-                                             $('#hdcoursecostforCal').val(result.CoursePrice); 
-                                            
+                                             $('#hdcoursecostforCal').val(result.CoursePrice);
+
                                              $('#lblcompname').html(result.CompanyNameTh);
                                              $('#lbltaxid').html(result.TaxId);
                                              $('#inputContactEmail').val(result.ContractEmail);
@@ -1248,11 +1249,11 @@
                     var costPrice = $('#hdcoursecostforCal').val();
 
                     var ttcost = calculateCost(costPrice, countEmp);
-                                       
+
                     var incvat = vat7(ttcost);
 
                     $('#lblttcost').html(FormatNumber(ttcost));
-                   
+
                     $('#lblvat7').html(parseInt(incvat));
 
                     var _incvat = parseInt(incvat);

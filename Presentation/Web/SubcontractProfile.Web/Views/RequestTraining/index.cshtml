@@ -27,7 +27,7 @@
 
                     <div class="form-group col-md-6">
                         <label for="">Tax ID</label>
-                        <input type="text" class="form-control" id="txttaxID" maxlength="13" placeholder="TaxID">
+                        <input type="text" class="form-control" id="txttaxID" maxlength="13" placeholder="TaxID" onkeypress="return isNumberKey(event);">
 
                     </div>
 
@@ -363,24 +363,20 @@
                             GetDropDownByNameCourse();
                             GetDropDownByNameTrainigStatus();
 
-
                             $('#txtCompNo').autocomplete({
                                 lookup: function (query, done) {
                                     $.ajax({
                                         type: "POST",
                                         url: '@Url.Action("GetCompany", "RequestTraining")',
-                                        data: { companyname: query },
+                                        data: { "companyname": query },
                                         dataType: "json",
                                         success: function (data) {
-                                            var suggestions = [];
-                                            $.each(data.response, function () {
-                                                var d = {
-                                                    "value": this.CompanyNameTh, "data": this.CompanyId
-                                                }
-                                                suggestions.push(d);
+                                            var suggestions = $.map(data.response, function (v) {
+                                                return {
+                                                    'value': v.CompanyNameTh, 'data': v.CompanyId
+                                                };
                                             });
-                                            var result = { suggestions };
-
+                                            var result = { 'suggestions': suggestions };
                                             done(result);
 
 
@@ -397,7 +393,6 @@
                                 showNoSuggestionNotice: true,
                                 noSuggestionNotice: 'Sorry, no matching results',
                             });
-
 
                             $('#regisdatefrom').datetimepicker({
                                 format: "DD/MM/YYYY",
@@ -535,8 +530,12 @@
                         });
                   }
 
+                function isNumberKey(evt) {
+                    var charCode = (evt.which) ? evt.which : evt.keyCode
+                    return !(charCode > 31 && (charCode < 48 || charCode > 57));
+                }
 
-                        function onSave() {
+            function onSave() {
 
                             var trainingModel = new Object();
                             trainingModel.TrainingId = $('#trnid').val();
@@ -587,14 +586,17 @@
                         success: function (data) {
 
                             $("#inputStatus").empty();
-                            $("#inputStatus").append('<option value="-1">--Please All--</option>');
+                            $("#inputStatus").append('<option value="-1">--Select All--</option>');
                             $.each(data, function (id, result) {
-                                $("#inputStatus").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text +'</option>');
+                                if (result.dropdown_value == "Y" || result.dropdown_value == "A" || result.dropdown_value == "N") {
+                                    $("#inputStatus").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text + '</option>');
+                                }
                                 });
+
                             },
                             failure: function () {
                                 $("#inputStatus").empty();
-                                $("#inputStatus").append('<option value="-1">--Please All--</option>');
+                                $("#inputStatus").append('<option value="-1">--Select All--</option>');
                             }
                         });
                         }
@@ -614,14 +616,14 @@
                   dataType: "json",
                   success: function (data) {
                       $("#selTeamName").empty();
-                      $("#selTeamName").append('<option value="-1">--Please All--</option>');
+                      $("#selTeamName").append('<option value="-1">--Select All--</option>');
                       $.each(data, function (id, result) {
                           $("#selTeamName").append('<option value="' + result.TeamId + '">' + result.TeamNameTh + '</option>');
                       });
                   },
                   failure: function () {
                       $("#selTeamName").empty();
-                      $("#selTeamName").append('<option value="-1">--Please All--</option>');
+                      $("#selTeamName").append('<option value="-1">--Select All--</option>');
                   }
               });
          }
@@ -638,29 +640,31 @@
                         success: function (data) {
 
                             $("#selLocationName").empty();
-                            $("#selLocationName").append('<option value="-1">--Please All--</option>');
+                            $("#selLocationName").append('<option value="-1">--Select All--</option>');
                             $.each(data, function (id, result) {
                                 $("#selLocationName").append('<option value="' + result.LocationId + '">' + result.LocationNameTh +'</option>');
                                 });
                             },
                             failure: function () {
                                 $("#selLocationName").empty();
-                                $("#selLocationName").append('<option value="-1">--Please All--</option>');
+                                $("#selLocationName").append('<option value="-1">--Select All--</option>');
                             }
                         });
                 }
 
-                        function clearField() {
+        function clearField() {
 
-                            $("#txtCompNo").val('');
-                            $("#txttaxid").val('');
+            $("#txtCompNo").val('');
+            $("#txttaxid").val('');
 
-                            $("#txtReqNo").val('');
-                            $('#inputStatus').val('-1');
-                            $("#reqdateFrom").val('');
-                            $("#reqdateTo").val('');
+            $("#txtReqNo").val('');
+            $('#inputStatus').val('-1');
+            $("#reqdateFrom").val('');
+            $("#reqdateTo").val('');
+            $("#inpbookingdateFrom").val('');
+            $("#inpbookingdateTo").val('');
 
-                        }
+        }
 
 
                         function inittbSearchResult() {

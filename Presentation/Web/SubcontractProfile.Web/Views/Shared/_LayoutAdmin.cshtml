@@ -58,6 +58,12 @@
         $(document).ready(function () {
             App.init();
         });
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode
+            return !(charCode > 31 && (charCode < 48 || charCode > 57));
+        }
+
     </script>
 
     <script src="~/plugins/highlight/highlight.pack.js"></script>
@@ -107,6 +113,8 @@
     <link href="~/plugins/autocomplete/autocomplete.css" rel="stylesheet" />
     <script src="~/plugins/autocomplete/jquery.autocomplete.js"></script>
     <script src="~/plugins/autocomplete/jquery.mockjax.js"></script>
+
+   
 
     @RenderSection("Scripts", required: false)
     @RenderSection("modalpanel", required: false)

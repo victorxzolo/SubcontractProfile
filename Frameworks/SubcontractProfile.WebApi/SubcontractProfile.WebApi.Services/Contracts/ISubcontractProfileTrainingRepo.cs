@@ -30,5 +30,9 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTrainingForTest(string company_name_th,
        string tax_id, string training_date_fr, string training_date_to, string test_date_fr, string test_date_to,string status);
 
+        Task<IEnumerable<SubcontractProfileTraining>> SearchTrainingForsub(Guid company_id,
+       string training_date_fr, string training_date_to, string test_date_fr, string test_date_to, string status);
+
+
     }
 }
