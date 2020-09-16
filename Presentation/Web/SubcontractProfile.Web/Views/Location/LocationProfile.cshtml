@@ -880,6 +880,7 @@
             formData.append("CompanyId", $('#hdCompanyId').val());
 
             formData.append("File_BankAttach", $('#inputBankAttach').get(0).files[0]);
+            formData.append("BankAttachFile", $('#lbfileBankAttach').text());
 
             $.ajax({
                    url: '@Url.Action("OnSave", "Location")',
@@ -993,15 +994,22 @@
 
         function Validateform() {
             var haserror = false;
-            var resultlocationcode = CheckLocationcode();
-            if (resultlocationcode.Status) {
-                $('.chklocation').hide();
+            var hasUser;
+            if ($('#hdMode').val() != "edit") {
+                var resultlocationcode = CheckLocationcode();
+                if (resultlocationcode.Status) {
+                    $('.chklocation').hide();
+                }
+                else {
+                    $('.chklocation').text(resultlocationcode.Message);
+                    $('.chklocation').show();
+                }
+                hasUser = resultlocationcode.Status;
             }
             else {
-                $('.chklocation').text(resultlocationcode.Message);
-                $('.chklocation').show();
+                hasUser = true;
             }
-            var hasUser = resultlocationcode.Status;
+           
             if ($('#inputLocationCode').val() == '' || $('#inputLocationNameT').val() == '' ||
                 $('#inputPhoneNo').val() == '' || $('#inputMainPhone').val() == '' || $('#inputInstallationsPhone').val() == '' ||
                 $('#inputMaintenencePhone').val() == '' || $('#inputBankName').val() == '' || $('#inputBankAccountNo').val() == '' ||
@@ -1011,7 +1019,8 @@
             return haserror;
         }
 
-        function CheckLocationcode() {
+        function CheckLocationcode(mode) {
+            
             var jqXHR = $.ajax({
                 type: "POST",
                 async: false,

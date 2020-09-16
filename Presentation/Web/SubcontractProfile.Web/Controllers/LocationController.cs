@@ -186,80 +186,65 @@ namespace SubcontractProfile.Web.Controllers
                     model.LocationId = Guid.NewGuid();
                     if (model.File_BankAttach != null && model.File_BankAttach.Length > 0)
                     {
-                        if (await Uploadfile(model.File_BankAttach, model.LocationId.ToString(), userProfile.companyid.ToString()))
-                        {
-                            model.BankAttachFile = model.File_BankAttach.FileName;
-                            model.CompanyId = userProfile.companyid;
-                            model.CreateBy = userProfile.Username;
-                            var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Insert"));
+                        await Uploadfile(model.File_BankAttach, model.LocationId.ToString(), userProfile.companyid.ToString());
+                        model.BankAttachFile = model.File_BankAttach.FileName;
 
-                            clientLocation.DefaultRequestHeaders.Accept.Add(
-                            new MediaTypeWithQualityHeaderValue("application/json"));
-                            var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                            HttpResponseMessage responseCompany = clientLocation.PostAsync(uriLocation, httpContent).Result;
-                            if (responseCompany.IsSuccessStatusCode)
-                            {
-                                result.Status = true;
-                                result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
-                                result.StatusError = "0";
-                            }
-                            else
-                            {
-                                result.Status = false;
-                                result.Message = "Data is not correct, Please Check Data or Contact System Admin";
-                                result.StatusError = "-1";
-                            }
+                    }
+                    
+                    model.CompanyId = userProfile.companyid;
+                    model.CreateBy = userProfile.Username;
+                    var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Insert"));
 
-                        }
-                        else
-                        {
-                            result.Status = false;
-                            result.Message = "Data is not correct, Please Check Data or Contact System Admin";
-                            result.StatusError = "-1";
-                        }
+                    clientLocation.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                    var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                    HttpResponseMessage responseCompany = clientLocation.PostAsync(uriLocation, httpContent).Result;
+                    if (responseCompany.IsSuccessStatusCode)
+                    {
+                        result.Status = true;
+                        result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                        result.StatusError = "0";
+                    }
+                    else
+                    {
+                        result.Status = false;
+                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        result.StatusError = "-1";
                     }
 
-                    
+
                 }
                 else //update
                 {
                     if (model.File_BankAttach != null && model.File_BankAttach.Length > 0)
                     {
-                        if (await Uploadfile(model.File_BankAttach, model.LocationId.ToString(), userProfile.companyid.ToString()))
-                        {
-                            model.BankAttachFile = model.File_BankAttach.FileName;
+                        await Uploadfile(model.File_BankAttach, model.LocationId.ToString(), userProfile.companyid.ToString());
+                        model.BankAttachFile = model.File_BankAttach.FileName;
 
-                            var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Update"));
-                            model.UpdateBy = userProfile.Username;
-
-                            clientLocation.DefaultRequestHeaders.Accept.Add(
-                            new MediaTypeWithQualityHeaderValue("application/json"));
-                            var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                            HttpResponseMessage responseResult = clientLocation.PutAsync(uriLocation, httpContent).Result;
-
-                            if (responseResult.IsSuccessStatusCode)
-                            {
-                                result.Status = true;
-                                result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
-                                result.StatusError = "0";
-                            }
-                            else
-                            {
-                                result.Status = false;
-                                result.Message = "Data is not correct, Please Check Data or Contact System Admin";
-                                result.StatusError = "-1";
-                            }
-
-                        }
-                        else
-                        {
-                            result.Status = false;
-                            result.Message = "Data is not correct, Please Check Data or Contact System Admin";
-                            result.StatusError = "-1";
-                        }
                     }
 
-                    
+                    var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Update"));
+                    model.UpdateBy = userProfile.Username;
+
+                    clientLocation.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                    var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                    HttpResponseMessage responseResult = clientLocation.PutAsync(uriLocation, httpContent).Result;
+
+                    if (responseResult.IsSuccessStatusCode)
+                    {
+                        result.Status = true;
+                        result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                        result.StatusError = "0";
+                    }
+                    else
+                    {
+                        result.Status = false;
+                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        result.StatusError = "-1";
+                    }
+
+
                 }
             }
 
