@@ -367,16 +367,19 @@ function getDataById(id) {
                 $('#lbpaymentno').text(result.PaymentNo);
                 $('#ddlpaymenttransfer').val(result.PaymentChannal);
 
-                var d = new Date(result.PaymentDatetime);
-                var month = d.getMonth();
-                var day = d.getDate();
-                var year = d.getFullYear();
-                var HH = d.getHours();
-                var MM = d.getMinutes();
+                if (result.PaymentDatetime != null) {
+                    var d = new Date(result.PaymentDatetime);
+                    var month = d.getMonth();
+                    var day = d.getDate();
+                    var year = d.getFullYear();
+                    var HH = d.getHours();
+                    var MM = d.getMinutes();
 
-                $('#datetimepicker').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
+                    $('#datetimepicker').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
 
-                $('#timepicker').data("DateTimePicker").date(moment(new Date(year, month, day, HH, MM), 'HH:MM'));
+                    $('#timepicker').data("DateTimePicker").date(moment(new Date(year, month, day, HH, MM), 'HH:MM'));
+                }
+           
 
                 $('#txtBalance').val(result.AmountTransfer);
                 $('#ddlbank').val(result.BankTransfer);

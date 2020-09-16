@@ -208,9 +208,39 @@ $(document).ready(function () {
         tbSearchconfirmpayment.ajax.reload();
     });
 
+    $('#btnClearModal').click(function () {
+        ClearDataModal();
+    });
+    $('#btnClearDataModal').click(function () {
+        ClearDataModal();
+    });
+
 });
 
-
+function ClearDataModal() {
+    $("#Request_no").text('');
+    $("#Payment_no").text('');
+    $("#Company_name").text('');
+    $("#address").text('');
+    $("#Tax_id").text('');
+    $("#Contact_name").val('');
+    $("#Contact_email").val('');
+    $("#Contact_phone_no").val('');
+    $('#amount_transfer').val('');
+    $('#bank_transfer').val('');
+    $('#bank_branch').val('');
+    $('#payment_channal').val('');
+    $("#remark").val('');
+    $('#payment_date').val('');
+    $('#datepayment').data("DateTimePicker").date(new Date(), 'DD/MM/YYYY');
+    $('#payment_datetime').val('');
+    $('#timepayment').data("DateTimePicker").date(new Date(), 'HH:MM');
+    
+    $('#lbuploadslip').text('Choose file');
+    $('#hdupfileslip').val('');
+    $('#linkdownload').text('');
+    $('#hdpaymentId').val('');
+}
 function ValidateUpload() {
     var hasError = false;
     if ($('#hdupfileslip').val() == "") {
@@ -434,7 +464,7 @@ function GetIdpayment(paymentId, status) {
         async: false,
         success: function (response) {
             $('#hdpaymentId').val(response.Data.PaymentId);
-
+            ClearDataModal();
             if (status == 'W' || status == 'N') {
                 SetTextStatusN(response.Data);
             }
@@ -484,15 +514,18 @@ function SetTextStatusN(data) {
     $('#payment_channal').val(data.PaymentChannal);
     $("#remark").val(data.Remark);
 
-    var d = new Date(data.PaymentDatetime);
-    var month = d.getMonth();
-    var day = d.getDate();
-    var year = d.getFullYear();
-    var HH = d.getHours();
-    var MM = d.getMinutes();
+    if (data.PaymentDatetime != null) {
+        var d = new Date(data.PaymentDatetime);
+        var month = d.getMonth();
+        var day = d.getDate();
+        var year = d.getFullYear();
+        var HH = d.getHours();
+        var MM = d.getMinutes();
 
-    $('#datepayment').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
-    $('#timepayment').data("DateTimePicker").date(moment(new Date(year, month, day, HH, MM), 'HH:MM'));
+        $('#datepayment').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
+        $('#timepayment').data("DateTimePicker").date(moment(new Date(year, month, day, HH, MM), 'HH:MM'));
+    }
+  
 
     if (data.SlipAttachFile != null) {
         $('#lbuploadslip').html(data.SlipAttachFile);
@@ -500,6 +533,22 @@ function SetTextStatusN(data) {
         $('#linkdownload').text(data.SlipAttachFile);
         DownloadFileSlip(data.SlipAttachFile);
     }
+
+
+    $("#Contact_name").prop("disabled", false);
+    $("#Contact_email").prop("disabled", false);
+    $("#Contact_phone_no").prop("disabled", false);
+    $("#payment_channal").prop("disabled", false);
+
+    $("#textpayment_channal").prop("disabled", false);
+    $("#Detailpaymentchannal input").prop("disabled", false);
+    $('#payment_date').prop("disabled", false);
+    $('#payment_datetime').prop("disabled", false);
+    $("#amount_transfer").prop("disabled", false);
+    $('#bank_transfer').prop("disabled", false);
+    $("#bank_branch").prop("disabled", false);
+    $("#slip_attach_file").prop("disabled", false);
+    $("#remark").prop("disabled", false);
 }
 
 function SetTextStatusY(data) {
@@ -550,20 +599,20 @@ function SetTextStatusY(data) {
     }
 
 
-    $("#Contact_name").attr('disabled', 'disabled');
-    $("#Contact_email").attr('disabled', 'disabled');
-    $("#Contact_phone_no").attr('disabled', 'disabled');
-    $("#payment_channal").attr('disabled', 'disabled');
+    $("#Contact_name").prop("disabled", true);
+    $("#Contact_email").prop("disabled", true);
+    $("#Contact_phone_no").prop("disabled", true);
+    $("#payment_channal").prop("disabled", true);
 
-    $("#textpayment_channal").attr('disabled', 'disabled');
-    $("#Detailpaymentchannal input").attr('disabled', 'disabled');
-    $('#payment_date').attr('disabled', 'disabled');
-    $('#payment_datetime').prop('disabled', 'disabled');
-    $("#amount_transfer").attr('disabled', 'disabled');
-    $('#bank_transfer').attr('disabled', 'disabled');
-    $("#bank_branch").attr('disabled', 'disabled');;
-    $("#slip_attach_file").attr('disabled', 'disabled');
-    $("#remark").attr('disabled', 'disabled');
+    $("#textpayment_channal").prop("disabled", true);
+    $("#Detailpaymentchannal input").prop("disabled", true);
+    $('#payment_date').prop("disabled", true);
+    $('#payment_datetime').prop("disabled", true);
+    $("#amount_transfer").prop("disabled", true);
+    $('#bank_transfer').prop("disabled", true);
+    $("#bank_branch").prop("disabled", true);
+    $("#slip_attach_file").prop("disabled", true);
+    $("#remark").prop("disabled", true);
 
 }
 
