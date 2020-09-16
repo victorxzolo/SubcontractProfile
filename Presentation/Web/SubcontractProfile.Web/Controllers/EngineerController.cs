@@ -306,24 +306,28 @@ namespace SubcontractProfile.Web.Controllers
                 var resultAsysc = response.Content.ReadAsStringAsync().Result;
                 //data
                 result = JsonConvert.DeserializeObject<SubcontractProfilePersonalModel>(resultAsysc);
-                if (result.CertificateAttachFile != null)
+                if(result !=null)
                 {
-                    Guid file_id = Guid.NewGuid();
+                    if (result.CertificateAttachFile != null)
+                    {
+                        Guid file_id = Guid.NewGuid();
 
-                    result.file_id__CertificateAttach = file_id;
-                }
-                if (result.WorkPermitAttachFile != null)
-                {
-                    Guid file_id = Guid.NewGuid();
+                        result.file_id__CertificateAttach = file_id;
+                    }
+                    if (result.WorkPermitAttachFile != null)
+                    {
+                        Guid file_id = Guid.NewGuid();
 
-                    result.file_id__WorkPermitAttach = file_id;
-                }
-                if (result.ProfileImgAttachFile != null)
-                {
-                    Guid file_id = Guid.NewGuid();
+                        result.file_id__WorkPermitAttach = file_id;
+                    }
+                    if (result.ProfileImgAttachFile != null)
+                    {
+                        Guid file_id = Guid.NewGuid();
 
-                    result.file_id__ProfileImgAttach = file_id;
+                        result.file_id__ProfileImgAttach = file_id;
+                    }
                 }
+                
             }
 
             return Json(result);
@@ -399,12 +403,12 @@ namespace SubcontractProfile.Web.Controllers
                         personal.CreateBy = userProfile.Username;
                         if (personal.dateBirthDay != null)
                         {
-                            DateTime datebirthday = DateTime.ParseExact(personal.dateBirthDay, "dd/MM/yyyy HH:mm", null);
+                            DateTime datebirthday = DateTime.ParseExact(personal.dateBirthDay, "dd/MM/yyyy", null);
                             personal.BirthDate = datebirthday;
                         }
                         if (personal.dateCertificateExpireDate != null)
                         {
-                            DateTime datecer= DateTime.ParseExact(personal.dateCertificateExpireDate, "dd/MM/yyyy HH:mm", null);
+                            DateTime datecer= DateTime.ParseExact(personal.dateCertificateExpireDate, "dd/MM/yyyy", null);
                             personal.CertificateExpireDate = datecer;
                         }
                         //personal
@@ -554,12 +558,31 @@ namespace SubcontractProfile.Web.Controllers
             return Json(result);
         }
 
-        public JsonResult OnDelete(string engineerId)
+        public async Task<JsonResult> OnDelete(string engineerId)
         {
             var result = new ResponseModel();
             HttpClient clientLocation = new HttpClient();
+            string personalid = "";
             try
             {
+                var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+
+                #region SearchPersonal
+                string uriSearch = string.Format("{0}/{1}", strpathAPI + "Engineer/GetByEngineerId", engineerId);
+                var resultengineer = new SubcontractProfileEngineerModel();
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response = client.GetAsync(uriSearch).Result;
+                if(response.IsSuccessStatusCode)
+                {
+                    var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                    resultengineer = JsonConvert.DeserializeObject<SubcontractProfileEngineerModel>(resultAsysc);
+                    personalid = resultengineer.PersonalId.ToString();
+                }
+
+                #endregion
+
                 string uriString = string.Format("{0}/{1}", strpathAPI + "Engineer/Delete", engineerId);
        
                 clientLocation.DefaultRequestHeaders.Accept.Add(
@@ -567,6 +590,20 @@ namespace SubcontractProfile.Web.Controllers
                 HttpResponseMessage responseResult = clientLocation.DeleteAsync(uriString).Result;
                 if (responseResult.IsSuccessStatusCode)
                 {
+                    await Deletefile(engineerId, userProfile.companyid.ToString(), "Engineer");
+                    if (personalid!=null && personalid != "")
+                    {
+                        string uriPersonal = string.Format("{0}/{1}", strpathAPI + "Personal/Delete", personalid);
+                        clientLocation.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                        HttpResponseMessage responsePersonal = clientLocation.DeleteAsync(uriPersonal).Result;
+                        if(responsePersonal.IsSuccessStatusCode)
+                        {
+                            await Deletefile(personalid, userProfile.companyid.ToString(), "Personal");
+                        }
+
+                       
+                    }
+
                     result.Message = "ลบข้อมูลเรียบร้อย";
                     result.Status = true;
                     result.StatusError = "0";
@@ -714,6 +751,32 @@ namespace SubcontractProfile.Web.Controllers
                 filename = filename.Substring(filename.LastIndexOf("\\") + 1);
 
             return filename;
+        }
+
+        private async Task<bool> Deletefile(string id, string companyid, string type)
+        {
+            bool result = true;
+            try
+            {
+                string strdir = Path.Combine(strpathUpload, companyid, type, id);
+                System.IO.DirectoryInfo di = new DirectoryInfo(strdir);
+                if (Directory.Exists(strdir))
+                {
+                    foreach (FileInfo file in di.GetFiles())
+                    {
+                        file.Delete();
+                    }
+
+                    Directory.Delete(strdir, true);
+                }
+
+            }
+            catch (Exception e)
+            {
+                result = false;
+                throw;
+            }
+            return result;
         }
 
         private string GetContentType(string path)

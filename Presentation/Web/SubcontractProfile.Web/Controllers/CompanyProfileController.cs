@@ -1359,20 +1359,21 @@ namespace SubcontractProfile.Web.Controllers
                 //{
 
 
-                //string username = "nas_fixedbb";
-                //string password = "Ais2018fixedbb";
-                //string destNAS = @"\\10.137.32.9\fbb_idcard_ndev001b";
+                string username = "nas_fixedbb";
+                string password = "Ais2018fixedbb";
+                string destNAS = @"\\10.137.32.9\fbb_idcard_ndev001b";
 
-                string username = "PF0QMBH6";
-                string password = "1234";
-                string NAS = @"DESKTOP-MMCKBRE";
-                string destNAS = @"D:\NasPath";
+                //string username = "PF0QMBH6";
+                //string password = "1234";
+                //string NAS = @"DESKTOP-MMCKBRE";
+                //string destNAS = @"D:\NasPath";
 
-                using (var impersonator = new Impersonator(username, password, NAS, false))
+                using (var impersonator = new Impersonator(username, password, destNAS, false))
                     // using (var impersonator = new Impersonator(output[0].value1, output[0].value2, output[0].dropdown_text, false))
                     {
-                        if(Directory.GetFiles(destNAS + @"\SubContractProfile").Count()>0)
-                        {
+                    string strdir = destNAS + @"\SubContractProfile" + @"\f2423a7a-ed2c-4c9b-b766-c37ada227b6d";
+                    if (Directory.Exists(strdir))
+                    {
                         //string[] filePaths = Directory.GetFiles(Doc, "*.*");
                         //str = filePaths.Count().ToString() + " , username:" + username + " ,password:" + password + " ,domainOrServerName: " + Doc;
                         //int existFile = Directory.GetFiles(destNAS + @"\f2423a7a-ed2c-4c9b-b766-c37ada227b6d\").Count();
@@ -1380,7 +1381,7 @@ namespace SubcontractProfile.Web.Controllers
                     }
                     else
                     {
-                        str = "Doc Not Found :" + destNAS + @"\SubContractProfile";
+                        str = "Doc Not Found :" + strdir;
                     }
 
 
