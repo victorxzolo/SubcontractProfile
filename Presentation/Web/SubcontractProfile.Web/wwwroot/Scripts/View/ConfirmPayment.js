@@ -329,11 +329,11 @@ function inittbSearchconfirmpayment() {
                         status = "A";
                     }
                     else if (data.Status == "Waiting") {
-                        action = "Confrim";
+                        action = "Confirm";
                         status = "W";
                     }
                     else if (data.Status == "Not Approve") {
-                        action = "Confrim";
+                        action = "Confirm";
                         status = "N";
                     }
                     return '<a href="javascript:void(0);" onclick="GetIdpayment(\'' + data.PaymentId + '\',\'' + status + '\')"><u>' + action + '</u></a>';
