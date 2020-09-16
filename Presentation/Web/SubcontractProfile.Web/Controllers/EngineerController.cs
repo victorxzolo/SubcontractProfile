@@ -20,12 +20,16 @@ namespace SubcontractProfile.Web.Controllers
     {
         private readonly string strpathAPI;
         private readonly IConfiguration _configuration;
+        private const int MegaBytes = 3 * 1024 * 1024;
+        private readonly string strpathUpload;
 
         public EngineerController(IConfiguration configuration)
         {
             _configuration = configuration;
 
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
+
+            strpathUpload = _configuration.GetValue<string>("PathUploadfile:Local").ToString();
 
         }
 
@@ -180,6 +184,18 @@ namespace SubcontractProfile.Web.Controllers
                 //data
                 result = JsonConvert.DeserializeObject<SubcontractProfileEngineerModel>(resultAsysc);
 
+                if (result.PersonalAttachFile != null)
+                {
+                    Guid file_id = Guid.NewGuid();
+
+                    result.file_id__PersonalAttach = file_id;
+                }
+                if (result.VehicleAttachFile != null)
+                {
+                    Guid file_id = Guid.NewGuid();
+
+                    result.file_id__VehicleAttach = file_id;
+                }
             }
 
             return Json(result);
@@ -290,7 +306,24 @@ namespace SubcontractProfile.Web.Controllers
                 var resultAsysc = response.Content.ReadAsStringAsync().Result;
                 //data
                 result = JsonConvert.DeserializeObject<SubcontractProfilePersonalModel>(resultAsysc);
+                if (result.CertificateAttachFile != null)
+                {
+                    Guid file_id = Guid.NewGuid();
 
+                    result.file_id__CertificateAttach = file_id;
+                }
+                if (result.WorkPermitAttachFile != null)
+                {
+                    Guid file_id = Guid.NewGuid();
+
+                    result.file_id__WorkPermitAttach = file_id;
+                }
+                if (result.ProfileImgAttachFile != null)
+                {
+                    Guid file_id = Guid.NewGuid();
+
+                    result.file_id__ProfileImgAttach = file_id;
+                }
             }
 
             return Json(result);
@@ -319,7 +352,7 @@ namespace SubcontractProfile.Web.Controllers
         }
 
 
-        public ActionResult OnSave(SubcontractProfileEngineerModel model, SubcontractProfilePersonalModel personal)
+        public async Task<ActionResult> OnSave(SubcontractProfileEngineerModel model, SubcontractProfilePersonalModel personal)
         {
             ResponseModel result = new ResponseModel();
             HttpClient clientLocation = new HttpClient();
@@ -336,7 +369,22 @@ namespace SubcontractProfile.Web.Controllers
                     model.UpdateBy = userProfile.Username;
                     model.StaffCode = DateTime.Now.ToString("yyyyMMddhhmmss");
 
+                    
+
                     model.EngineerId = Guid.NewGuid();
+
+
+                    if(model.File_PersonalAttach !=null && model.File_PersonalAttach.Length>0)
+                    {
+                        await Uploadfile(model.File_PersonalAttach, model.EngineerId.ToString(), userProfile.companyid.ToString(), "Engineer","I");
+                        model.PersonalAttachFile = model.File_PersonalAttach.FileName;
+                       
+                    }
+                    if(model.File_VehicleAttach != null && model.File_VehicleAttach.Length > 0)
+                    {
+                        await Uploadfile(model.File_VehicleAttach, model.EngineerId.ToString(), userProfile.companyid.ToString(), "Engineer", "I");
+                        model.VehicleAttachFile = model.File_VehicleAttach.FileName;
+                    }
 
                     var uriLocation = new Uri(Path.Combine(strpathAPI, "Engineer", "Insert"));
 
@@ -347,7 +395,36 @@ namespace SubcontractProfile.Web.Controllers
                     if (responseCompany.IsSuccessStatusCode)
                     {
                         personal.engineerId = model.EngineerId;
+                        personal.PersonalId = Guid.NewGuid();
+                        personal.CreateBy = userProfile.Username;
+                        if (personal.dateBirthDay != null)
+                        {
+                            DateTime datebirthday = DateTime.ParseExact(personal.dateBirthDay, "dd/MM/yyyy HH:mm", null);
+                            personal.BirthDate = datebirthday;
+                        }
+                        if (personal.dateCertificateExpireDate != null)
+                        {
+                            DateTime datecer= DateTime.ParseExact(personal.dateCertificateExpireDate, "dd/MM/yyyy HH:mm", null);
+                            personal.CertificateExpireDate = datecer;
+                        }
                         //personal
+
+                        if (personal.File_CertificateAttach != null && personal.File_CertificateAttach.Length > 0)
+                        {
+                            await Uploadfile(personal.File_CertificateAttach, personal.PersonalId.ToString(), userProfile.companyid.ToString(), "Personal", "I");
+                            personal.CertificateAttachFile = personal.File_CertificateAttach.FileName;
+                        }
+                        if(personal.File_WorkPermitAttach != null && personal.File_WorkPermitAttach.Length > 0)
+                        {
+                            await Uploadfile(personal.File_WorkPermitAttach, personal.PersonalId.ToString(), userProfile.companyid.ToString(), "Personal", "I");
+                            personal.WorkPermitAttachFile = personal.File_WorkPermitAttach.FileName;
+                        }
+                        if(personal.File_ProfileImgAttach != null && personal.File_ProfileImgAttach.Length > 0)
+                        {
+                            await Uploadfile(personal.File_ProfileImgAttach, personal.PersonalId.ToString(), userProfile.companyid.ToString(), "Personal", "I");
+                            personal.ProfileImgAttachFile = personal.File_ProfileImgAttach.FileName;
+                        }
+
                         var uriLocationPersonal = new Uri(Path.Combine(strpathAPI, "Personal", "Insert"));
 
                         clientLocation.DefaultRequestHeaders.Accept.Add(
@@ -366,6 +443,8 @@ namespace SubcontractProfile.Web.Controllers
                             result.Message = "Data is not correct, Please Check Data or Contact System Admin";
                             result.StatusError = "-1";
                         }
+
+
                     }
                     else
                     {
@@ -373,6 +452,8 @@ namespace SubcontractProfile.Web.Controllers
                         result.Message = "Data is not correct, Please Check Data or Contact System Admin";
                         result.StatusError = "-1";
                     }
+
+
                 }
                 else //update
                 {
@@ -382,16 +463,56 @@ namespace SubcontractProfile.Web.Controllers
 
                     var uriLocation = new Uri(Path.Combine(strpathAPI, "Engineer", "Update"));
 
-                   
+
+                    if (model.File_PersonalAttach != null && model.File_PersonalAttach.Length > 0)
+                    {
+                        await Uploadfile(model.File_PersonalAttach, model.EngineerId.ToString(), userProfile.companyid.ToString(), "Engineer", "U");
+                        model.PersonalAttachFile = model.File_PersonalAttach.FileName;
+
+                    }
+                    if (model.File_VehicleAttach != null && model.File_VehicleAttach.Length > 0)
+                    {
+                        await Uploadfile(model.File_VehicleAttach, model.EngineerId.ToString(), userProfile.companyid.ToString(), "Engineer", "U");
+                        model.VehicleAttachFile = model.File_VehicleAttach.FileName;
+                    }
+
 
                     clientLocation.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
+                    string str = JsonConvert.SerializeObject(model);
                     var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
                     HttpResponseMessage responseResult = clientLocation.PutAsync(uriLocation, httpContent).Result;
 
                     if (responseResult.IsSuccessStatusCode)
                     {
+                        if (personal.dateBirthDay != null)
+                        {
+                            DateTime datebirthday = DateTime.ParseExact(personal.dateBirthDay, "dd/MM/yyyy", null);
+                            personal.BirthDate = datebirthday;
+                        }
+                        if (personal.dateCertificateExpireDate != null)
+                        {
+                            DateTime datecer = DateTime.ParseExact(personal.dateCertificateExpireDate, "dd/MM/yyyy", null);
+                            personal.CertificateExpireDate = datecer;
+                        }
+
                         var uriPersonal = new Uri(Path.Combine(strpathAPI, "Personal", "Update"));
+
+                        if (personal.File_CertificateAttach != null && personal.File_CertificateAttach.Length > 0)
+                        {
+                            await Uploadfile(personal.File_CertificateAttach, personal.PersonalId.ToString(), userProfile.companyid.ToString(), "Personal", "I");
+                            personal.CertificateAttachFile = personal.File_CertificateAttach.FileName;
+                        }
+                        if (personal.File_WorkPermitAttach != null && personal.File_WorkPermitAttach.Length > 0)
+                        {
+                            await Uploadfile(personal.File_WorkPermitAttach, personal.PersonalId.ToString(), userProfile.companyid.ToString(), "Personal", "I");
+                            personal.WorkPermitAttachFile = personal.File_WorkPermitAttach.FileName;
+                        }
+                        if (personal.File_ProfileImgAttach != null && personal.File_ProfileImgAttach.Length > 0)
+                        {
+                            await Uploadfile(personal.File_ProfileImgAttach, personal.PersonalId.ToString(), userProfile.companyid.ToString(), "Personal", "I");
+                            personal.ProfileImgAttachFile = personal.File_ProfileImgAttach.FileName;
+                        }
 
                         personal.UpdateBy = userProfile.Username;
 
@@ -466,5 +587,153 @@ namespace SubcontractProfile.Web.Controllers
             return Json(result);
         }
 
+
+        #region UploadFile
+        [HttpPost]
+        [DisableRequestSizeLimit]
+        public IActionResult CheckFileUpload(List<IFormFile> files)
+        {
+            bool statusupload = true;
+            string strmess = "";
+            Guid? fid = null;
+            try
+            {
+                foreach (FormFile source in files)
+                {
+                    if (source.Length > 0)
+                    {
+                        string filename = ContentDispositionHeaderValue.Parse(source.ContentDisposition).FileName.Trim('"');
+                        filename = EnsureCorrectFilename(filename);
+                        if (
+                                source.ContentType.ToLower() != "image/jpg" &&
+                                source.ContentType.ToLower() != "image/jpeg" &&
+                                source.ContentType.ToLower() != "image/pjpeg" &&
+                                source.ContentType.ToLower() != "image/gif" &&
+                                source.ContentType.ToLower() != "image/png" &&
+                                source.ContentType.ToLower() != "image/bmp" &&
+                                source.ContentType.ToLower() != "image/tif" &&
+                                 source.ContentType.ToLower() != "image/tiff" &&
+                                 source.ContentType.ToLower() != "application/pdf"
+                                )
+                        {
+                            statusupload = false;
+                            strmess = "Upload type file miss match.";
+                        }
+                        else
+                        {
+                            var fileSize = source.Length;
+                            if (fileSize > MegaBytes)
+                            {
+                                statusupload = false;
+                                strmess = "Upload file is too large.";
+                            }
+                            else
+                            {
+                                fid = Guid.NewGuid();
+                                strmess = "Upload file success.";
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                statusupload = false;
+                strmess = e.Message.ToString();
+            }
+            return Json(new { status = statusupload, message = strmess, file_id = fid });
+        }
+
+        private async Task<bool> Uploadfile(IFormFile files, string id, string companyid,string type,string action)
+        {
+            bool statusupload = true;
+            List<FileUploadModal> L_File = new List<FileUploadModal>();
+            FileStream output;
+            string strmess = "";
+            try
+            {
+
+                if (files != null && files.Length > 0)
+                {
+                    if (files != null)
+                    {
+                      
+                        string strdir = Path.Combine(strpathUpload, companyid, type, id);
+                        if (!Directory.Exists(strdir))
+                        {
+                            Directory.CreateDirectory(strdir);
+                        }
+                        else
+                        {
+                            if (action == "U")
+                            {
+                                System.IO.DirectoryInfo di = new DirectoryInfo(strdir);
+                                foreach (FileInfo finfo in di.GetFiles())
+                                {
+                                    finfo.Delete();
+                                }
+                            }
+                           
+                        }
+
+                    }
+                    string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
+                    filename = EnsureCorrectFilename(filename);
+                    using (output = System.IO.File.Create(this.GetPathAndFilename(id, filename, companyid, type)))
+                        await files.CopyToAsync(output);
+                }
+
+            }
+            catch (Exception e)
+            {
+                statusupload = false;
+                strmess = e.Message.ToString();
+                throw;
+            }
+
+
+            return statusupload;
+
+        }
+
+        private string GetPathAndFilename(string id, string filename, string companyid,string type)
+        {
+            string pathdir = Path.Combine(strpathUpload, companyid, type, id);
+            string PathOutput = "";
+            if (!Directory.Exists(pathdir))
+            {
+                Directory.CreateDirectory(pathdir);
+            }
+            PathOutput = Path.Combine(pathdir, filename);
+            return PathOutput;
+        }
+
+        private string EnsureCorrectFilename(string filename)
+        {
+            if (filename.Contains("\\"))
+                filename = filename.Substring(filename.LastIndexOf("\\") + 1);
+
+            return filename;
+        }
+
+        private string GetContentType(string path)
+        {
+            var types = GetMimeTypes();
+            var ext = Path.GetExtension(path).ToLowerInvariant();
+            return types[ext];
+        }
+        private Dictionary<string, string> GetMimeTypes()
+        {
+            return new Dictionary<string, string>
+            {
+                {".pdf", "application/pdf"},
+                {".png", "image/png"},
+                {".jpg", "image/jpeg"},
+                {".jpeg", "image/jpeg"},
+                {".gif", "image/gif"}
+            };
+        }
+
+        #endregion
     }
 }

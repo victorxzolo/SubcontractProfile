@@ -113,6 +113,15 @@ $(document).ready(function () {
         }
        
     });
+
+
+    $('#txttaxid').keyup(function () {
+        CheckKeyUps("txttaxid", "[0-9]");
+    });
+
+
+
+
     function BindDDLStatus() {
         var urlDDLStatus = url.replace('Action', 'DDLStatus');
         $.ajax({
@@ -265,4 +274,16 @@ $(document).ready(function () {
 
 function padValue(value) {
     return (value < 10) ? "0" + value : value;
+}
+
+function CheckKeyUps(id, RexStr) {
+    var strKey = $("#" + id).val();
+    var strBuilder = "";
+    var filter = new RegExp(RexStr);
+    for (var i = 0; i < strKey.length; i++) {
+        if (filter.test(strKey.substr(i, 1))) {
+            strBuilder += strKey.substr(i, 1);
+        }
+    }
+    $("#" + id).val(strBuilder);
 }

@@ -13,7 +13,18 @@ $(document).ready(function () {
         inittbAddressResult();
         inittbRevenue();
         inittblocation();
-   
+
+    $('#inputTaxId').keyup(function () {
+        CheckKeyUps("inputTaxId", "[0-9]");
+    });
+
+    $('#inputTax_id').keyup(function () {
+        CheckKeyUps("inputTax_id", "[0-9]");
+    });
+
+    $('#txttax_id_dealer').keyup(function () {
+        CheckKeyUps("txttax_id_dealer", "[0-9]");
+    });
  
     $("#btnSearch").click(function (e) {
         searchdata();
@@ -2018,4 +2029,16 @@ function Validate(formcontrol, custom, customselect, cutomupload) {
 
 function padValue(value) {
     return (value < 10) ? "0" + value : value;
+}
+
+function CheckKeyUps(id, RexStr) {
+    var strKey = $("#" + id).val();
+    var strBuilder = "";
+    var filter = new RegExp(RexStr);
+    for (var i = 0; i < strKey.length; i++) {
+        if (filter.test(strKey.substr(i, 1))) {
+            strBuilder += strKey.substr(i, 1);
+        }
+    }
+    $("#" + id).val(strBuilder);
 }

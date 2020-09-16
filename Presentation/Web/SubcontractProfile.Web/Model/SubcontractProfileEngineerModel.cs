@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -131,6 +132,17 @@ namespace SubcontractProfile.Web.Model
         public System.Guid PersonalId { get; set; }
 
         public string SubcontractProfileType { get; set; }
-      
+
+
+
+        public Guid file_id__PersonalAttach { get; set; }
+        public IFormFile File_PersonalAttach{ get; set; }
+
+        public Guid file_id__VehicleAttach { get; set; }
+        public IFormFile File_VehicleAttach { get; set; }
+
+        //public Guid file_id__WorkExperienceAttach { get; set; }
+        //public IFormFile File_WorkExperienceAttach { get; set; }
+
     }
 }
