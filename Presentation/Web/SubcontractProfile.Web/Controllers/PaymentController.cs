@@ -121,7 +121,11 @@ namespace SubcontractProfile.Web.Controllers
                 {
                     getsession();
                 }
-                model.CompanyId = dataUser.companyid;
+                else
+                {
+                    model.CompanyId = dataUser.companyid;
+                }
+               
                 model.PaymentNo = searchPayment.Paymentno;
                 model.Request_no = searchPayment.Paymentrequesttraningno;
                 model.Status = searchPayment.Paymentstatus;

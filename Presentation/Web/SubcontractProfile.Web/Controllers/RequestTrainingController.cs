@@ -326,7 +326,17 @@ namespace SubcontractProfile.Web.Controllers
 
         public JsonResult GetTraining(string TrainingID)
         {
-          
+            var data = SessionHelper.GetObjectFromJson<DataTable>(HttpContext.Session, "EngineerData");
+
+            if (data != null)
+            {
+                if (data.Rows.Count > 0)
+                {
+                    data.Clear();
+                    SessionHelper.SetObjectAsJson(HttpContext.Session, "EngineerData", data);
+                }
+            }
+
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
 
             Guid trainingId;
@@ -747,7 +757,7 @@ namespace SubcontractProfile.Web.Controllers
         {
             HttpClient client = new HttpClient();
             ResponseModel result = new ResponseModel();
-            SubcontractProfileTrainingEngineerModel engineerModel = new SubcontractProfileTrainingEngineerModel();
+            SubcontractProfileTrainingEngineerModel engineerModel;
 
             try
             {
@@ -791,6 +801,8 @@ namespace SubcontractProfile.Web.Controllers
 
                                 foreach (DataRow dr in data.Rows)
                                 {
+                                    engineerModel = new SubcontractProfileTrainingEngineerModel();
+                                    engineerModel.TrainingEngineerId = Guid.NewGuid();
                                     engineerModel.TrainingId = model.TrainingId;
                                     engineerModel.LocationId = Guid.Parse(dr["LocationId"].ToString());
                                     engineerModel.TeamId = Guid.Parse(dr["TeamId"].ToString());
@@ -862,6 +874,8 @@ namespace SubcontractProfile.Web.Controllers
 
                                 foreach (DataRow dr in data.Rows)
                                 {
+                                    engineerModel = new SubcontractProfileTrainingEngineerModel();
+                                    engineerModel.TrainingEngineerId = Guid.NewGuid();
                                     engineerModel.TrainingId = model.TrainingId;
                                     engineerModel.LocationId = Guid.Parse(dr["LocationId"].ToString());
                                     engineerModel.TeamId = Guid.Parse(dr["TeamId"].ToString());
@@ -1081,12 +1095,7 @@ namespace SubcontractProfile.Web.Controllers
                 resultEngineer = AddDataTable(trainingEn);
             }
            
-            //var data = SessionHelper.GetObjectFromJson<DataTable>(HttpContext.Session, "EngineerData");
-            //if (data != null)
-            //{
-
-            //}
-
+          
 
             //total number of rows count   
             recordsTotal = resultEngineer.Count();

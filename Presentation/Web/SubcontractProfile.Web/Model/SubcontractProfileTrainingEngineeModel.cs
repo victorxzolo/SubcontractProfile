@@ -10,38 +10,39 @@ namespace SubcontractProfile.Web.Model
     {
         public System.Guid TrainingEngineerId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+        //[System.ComponentModel.DataAnnotations.Required]
         public System.Guid TrainingId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+        //[System.ComponentModel.DataAnnotations.Required]
         public System.Guid LocationId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+        //[System.ComponentModel.DataAnnotations.Required]
         public System.Guid TeamId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+        //[System.ComponentModel.DataAnnotations.Required]
         public System.Guid EngineerId { get; set; }
 
-        public System.DateTime? CreateDate { get; set; }
+        //public System.DateTime? CreateDate { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(50)]
+        //[System.ComponentModel.DataAnnotations.StringLength(50)]
         public string CreateBy { get; set; }
 
-        public System.DateTime? UpdateDate { get; set; }
+        public string UpdateBy { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        //public System.DateTime? UpdateDate { get; set; }
+
+      
         public string LocationNameTh { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string TeamNameTh { get; set; }
 
-        [System.ComponentModel.DataAnnotations.StringLength(100)]
+    
         public string StaffNameTh { get; set; }
 
         public string Position { get; set; }
 
         public string TestStatus { get; set; }
-        public string UpdateBy { get; set; }
+
 
         public string TestStatusName { get; set; }
 

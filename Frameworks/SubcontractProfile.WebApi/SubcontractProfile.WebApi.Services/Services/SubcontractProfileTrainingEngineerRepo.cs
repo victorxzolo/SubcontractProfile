@@ -59,12 +59,10 @@ namespace SubcontractProfile.WebApi.Services.Services
         {
             var p = new DynamicParameters();
 
-            //p.Add("@training_engineer_id", subcontractProfileTrainingEngineer.TrainingEngineerId);
             p.Add("@training_id", subcontractProfileTrainingEngineer.TrainingId);
             p.Add("@location_id", subcontractProfileTrainingEngineer.LocationId);
             p.Add("@team_id", subcontractProfileTrainingEngineer.TeamId);
             p.Add("@engineer_id", subcontractProfileTrainingEngineer.EngineerId);
-            //p.Add("@create_date", subcontractProfileTrainingEngineer.CreateDate);
             p.Add("@create_by", subcontractProfileTrainingEngineer.CreateBy);
 
             var ok = await _dbContext.Connection.ExecuteAsync
@@ -79,13 +77,13 @@ namespace SubcontractProfile.WebApi.Services.Services
         public async Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingEngineer subcontractProfileTrainingEngineer)
         {
             var p = new DynamicParameters();
-            p.Add("@training_engineer_id", subcontractProfileTrainingEngineer.TrainingEngineerId);
+          //  p.Add("@training_engineer_id", subcontractProfileTrainingEngineer.TrainingEngineerId);
             p.Add("@training_id", subcontractProfileTrainingEngineer.TrainingId);
             p.Add("@location_id", subcontractProfileTrainingEngineer.LocationId);
             p.Add("@team_id", subcontractProfileTrainingEngineer.TeamId);
             p.Add("@engineer_id", subcontractProfileTrainingEngineer.EngineerId);
             p.Add("@test_status", subcontractProfileTrainingEngineer.TestStatus);
-            p.Add("@update_user", subcontractProfileTrainingEngineer.UpdateBy);
+            p.Add("@update_by", subcontractProfileTrainingEngineer.UpdateBy);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTrainingEngineer_Update", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -147,18 +145,18 @@ namespace SubcontractProfile.WebApi.Services.Services
             dt.Columns.Add("team_id", typeof(SqlGuid));
             dt.Columns.Add("engineer_id", typeof(SqlGuid));
             dt.Columns.Add("create_date", typeof(SqlDateTime));
-            dt.Columns.Add("create_user", typeof(SqlString));
+            dt.Columns.Add("create_by", typeof(SqlString));
 
             if (SubcontractProfileTrainingEngineerList != null)
                 foreach (var curObj in SubcontractProfileTrainingEngineerList)
                 {
                     DataRow row = dt.NewRow();
-                    row["training_engineer_id"] = new SqlGuid(curObj.TrainingEngineerId);
+                  //  row["training_engineer_id"] = new SqlGuid(curObj.TrainingEngineerId);
                     row["training_id"] = new SqlGuid(curObj.TrainingId);
                     row["location_id"] = new SqlGuid(curObj.LocationId);
                     row["team_id"] = new SqlGuid(curObj.TeamId);
                     row["engineer_id"] = new SqlGuid(curObj.EngineerId);
-                    row["create_date"] = curObj.CreateDate == null ? SqlDateTime.Null : new SqlDateTime(curObj.CreateDate.Value);
+                  //  row["create_date"] = curObj.CreateDate == null ? SqlDateTime.Null : new SqlDateTime(curObj.CreateDate.Value);
                     row["create_by"] = new SqlString(curObj.CreateBy);
 
                     dt.Rows.Add(row);

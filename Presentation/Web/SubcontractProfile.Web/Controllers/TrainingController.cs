@@ -204,7 +204,7 @@ namespace SubcontractProfile.Web.Controllers
             {
                 dataTrainingEngineer.TrainingId = trainingId;
          
-                dataTrainingEngineer.CreateDate = DateTime.Now;
+             //   dataTrainingEngineer.CreateDate = DateTime.Now;
                 dataTrainingEngineer.CreateBy = userProfile.Username;
                 listdataTrainingEngineer.Add(dataTrainingEngineer);
 
@@ -228,7 +228,7 @@ namespace SubcontractProfile.Web.Controllers
                 //dataTrainingEngineer.TeamNameTh = splitteam[1];
                 //dataTrainingEngineer.EngineerId = new Guid(splitEngineer[0]);
                 //dataTrainingEngineer.StaffNameTh = splitEngineer[1];
-                dataTrainingEngineer.CreateDate = DateTime.Now;
+               // dataTrainingEngineer.CreateDate = DateTime.Now;
                 dataTrainingEngineer.CreateBy = userProfile.Username;
                 listdataTrainingEngineer.Add(dataTrainingEngineer);
 

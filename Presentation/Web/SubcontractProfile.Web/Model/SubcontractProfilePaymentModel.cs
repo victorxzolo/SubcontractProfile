@@ -71,7 +71,7 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Request_no { get; set; }
 
-        public System.DateTime? Request_date { get; set; }
+        public System.DateTime? RequestDate { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(500)]
         public string companyNameTh { get; set; }

@@ -128,48 +128,6 @@ $(document).ready(function () {
     });
 
 
-    //window.addEventListener('load', function () {
-
-    //    var formsSearchPayment = document.getElementsByClassName('SearchPaymentvalidation');
-    //    var invalidSearch = $('.SearchPaymentvalidation .invalid-feedback');
-    //    Array.prototype.filter.call(formsSearchPayment, function (form) {
-    //        form.addEventListener('submit', function (event) {
-    //            if (form.checkValidity() === false) {
-    //                event.preventDefault();
-    //                event.stopPropagation();
-    //                invalidSearch.css('display', 'block');
-
-    //            } else {
-
-    //                invalidSearch.css('display', 'none');
-    //                Searchpayment();
-    //            }
-    //        }, false);
-    //    });
-
-    //}, false);
-
-    //window.addEventListener('load', function () {
-    //    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    //    var forms = document.getElementsByClassName('ConfirmPaymentvalidation');
-
-    //    // Loop over them and prevent submission
-    //    var validation = Array.prototype.filter.call(forms, function (form) {
-    //        form.addEventListener('submit', function (event) {
-    //            var PaymentID = document.getElementById('btnupdatepayment');
-    //            if (form.checkValidity() === false) {
-    //                event.preventDefault();
-    //                event.stopPropagation();
-    //            }
-    //            else {
-    //                UpdatePayment(PaymentID.value);
-    //            }
-
-    //            form.classList.add('was-validated');
-    //        }, false);
-    //    });
-    //}, false);
-
     $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
@@ -181,35 +139,106 @@ $(document).ready(function () {
     });
 
 
-    $('#btnconfirmpayment').click(function () {
-        var paymentid = $('#hdpaymentId').val();
-       
-        var forms = document.getElementsByClassName('needs-validation-confirmpayment');
-        var validation = Array.prototype.filter.call(forms, function (form) {
-            if ($('#Contact_name').val() == "" || $('#Contact_email').val() == "" || $('#Contact_phone_no').val() == "" || 
-                $('#payment_channal option').filter(':selected').val() == "" || $('#payment_date').val() == "" ||$('#payment_datetime').val() == "" ||
-                $('#amount_transfer').val() == "" || $('#bank_transfer').val() == "" || ValidateUpload())
-            {
-                event.preventDefault();
-                event.stopPropagation();
+    //$('#btnconfirmpayment').click(function () {
+    //    var paymentid = $('#hdpaymentId').val();
 
-            }
+    //    var forms = document.getElementsByClassName('needs-validation-confirmpayment');
+    //    var validation = Array.prototype.filter.call(forms, function (form) {
+    //        if ($('#Contact_name').val() == "" || $('#Contact_email').val() == "" || $('#Contact_phone_no').val() == "" ||
+    //            $('#payment_channal option').filter(':selected').val() == "" || $('#payment_date').val() == "" || $('#payment_datetime').val() == "" ||
+    //            $('#amount_transfer').val() == "" || $('#bank_transfer').val() == "" || ValidateUpload()) {
+    //            event.preventDefault();
+    //            event.stopPropagation();
 
-            else {
-                UpdatePayment(paymentid);
-                return true;
+    //        }
 
-            }
-            form.classList.add('was-validated');
-        });
-    });
+    //        else {
+    //            UpdatePayment(paymentid);
+    //            inittbSearchconfirmpayment();
+    //            return true;
+
+    //        }
+    //        form.classList.add('was-validated');
+    //    });
+    //});
 
     $('#btnSearchconfirmpayment').click(function () {
         tbSearchconfirmpayment.ajax.reload();
     });
 
+    $('#btnClearDataModal').click(function () {
+        clearData();
+    });
+    
+
 });
 
+
+
+'use strict';
+window.addEventListener('load', function () {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener('submit', function (event) {
+
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+
+            } else {
+                var paymentid = $('#hdpaymentId').val();
+
+                UpdatePayment(paymentid);
+                inittbSearchconfirmpayment();
+
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+}, false);
+
+
+function validateNumberDot(evt) {
+    if (evt.keyCode != 8) {
+        var theEvent = evt || window.event;
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+        var regex = /[0-9]|\./;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+
+            if (theEvent.preventDefault)
+                theEvent.preventDefault();
+        }
+    }
+}
+
+function clearData() {
+  
+    $("#Contact_name").val('');
+    $("#Contact_email").val('');
+    $("#Contact_phone_no").val('');
+    $('#amount_transfer').val('');
+    $('#bank_transfer').val('');
+    $('#bank_branch').val('');
+    $('#payment_channal').val('');
+    $("#remark").val('');
+
+    $('#payment_date').val('');
+    $('#payment_datetime').val('');
+
+    $('#hdupfileslip').val('');
+    $('#lbuploadslip').html('Choose file');
+    $("#nameslip_attach_file").html('Choose file');
+     
+    $('#linkdownload').text('');
+
+        
+}
 
 function ValidateUpload() {
     var hasError = false;
@@ -304,8 +333,8 @@ function inittbSearchconfirmpayment() {
             url: urlSearchconfirmpayment,
             dataType: "json",
             data: {
-                Paymentno: function () { return $('#paymentno').val(); },
-                Paymentrequesttraningno: function () { return $('#paymentrequesttraningno').val(); },
+                //Paymentno: function () { return $('#paymentno').val(); },
+                //Paymentrequesttraningno: function () { return $('#paymentrequesttraningno').val(); },
                 Paymantrequestdatefrom: function () { return $('#paymentrequestdatefrom').val(); },
                 Paymentrequestdateto: function () { return $('#paymentrequestdateto').val(); },
                 Paymentdatefrom: function () { return $('#paymentdatefrom').val();},
@@ -339,34 +368,48 @@ function inittbSearchconfirmpayment() {
                     return '<a href="javascript:void(0);" onclick="GetIdpayment(\'' + data.PaymentId + '\',\'' + status + '\')"><u>' + action + '</u></a>';
                 },
 
-            },
-            { "data": "PaymentNo" },
-            { "data": "Request_no" },
+            },  
             {
-                "data": null, render: function (data, type, row, meta) {
-                    var strRequest_date =data.Request_date!=null? data.Request_date.substring(0, 10):"";
-                    return strRequest_date;
-                },
+                data: null, render: function (data, type, row) {
+                    return "<span class='badge outline-badge-secondary shadow-none'>" + row.Status + "</span>";
+                }
+
             },
             {
-                "data": null, render: function (data, type, row, meta) {
-                    var strPaymentDatetime = data.PaymentDatetime!=null?data.PaymentDatetime.substring(0, 10):"";
-                    return strPaymentDatetime;
-                },
+                "data": "RequestDate", "render": function (data, type, row) {
+                    if (type === "sort" || type === "type") {
+                        return data;
+                    }
+                    if (moment(data).format("DD/MM/YYYY") != 'Invalid date') {
+                        return moment(data).format("DD/MM/YYYY");
+                    }
+                    else {
+                        return data;
+                    }
+
+                }
             },
             {
-                "data": null, render: function (data, type, row, meta) {
-                    var datapaymentchannal = data.PaymentChannal!=null? GetpaymentchannalById(data.PaymentChannal):"";
-                    return datapaymentchannal;
-                },
+                "data": "PaymentDatetime", "render": function (data, type, row) {
+                    if (type === "sort" || type === "type") {
+                        return data;
+                    }
+                    if (moment(data).format("DD/MM/YYYY") != 'Invalid date') {
+                        return moment(data).format("DD/MM/YYYY");
+                    }
+                    else {
+                        return data;
+                    }
+
+                }
             },
+           
+            { "data": "PaymentChannal" },
             { "data": "BankTransfer" },
-            { "data": "AmountTransfer" },
+            { "data": "AmountTransfer", render: $.fn.dataTable.render.number(',', '.', 2, '') },
             { "data": "ContactName" },
             { "data": "ContactPhoneNo" },
-            {
-                "data": "Status"
-            }
+           
         ],
         "order": [[0, "desc"]],
         "stripeClasses": [],
@@ -464,14 +507,17 @@ function DownloadFileSlip(filename) {
 
 function SetTextStatusN(data) {
     console.log(data);
+
+    clearData();
+
     $("#ConfirmPayment").modal('show');
     //$("#btnconfirmpayment").show('slow');
 
     $('#btnClearDataModal').show();
     $('#btnconfirmpayment').show();
 
-    $("#Request_no").text(data.Request_no);
-    $("#Payment_no").text(data.PaymentNo);
+    //$("#Request_no").text(data.Request_no);
+    //$("#Payment_no").text(data.PaymentNo);
     $("#Company_name").text(data.companyNameTh);
     $("#address").text(data.companyAddress);
     $("#Tax_id").text(data.taxId);
@@ -484,22 +530,28 @@ function SetTextStatusN(data) {
     $('#payment_channal').val(data.PaymentChannal);
     $("#remark").val(data.Remark);
 
-    var d = new Date(data.PaymentDatetime);
-    var month = d.getMonth();
-    var day = d.getDate();
-    var year = d.getFullYear();
-    var HH = d.getHours();
-    var MM = d.getMinutes();
+    //var d = new Date(data.PaymentDatetime);
+    //var month = d.getMonth();
+    //var day = d.getDate();
+    //var year = d.getFullYear();
+    //var HH = d.getHours();
+    //var MM = d.getMinutes();
 
-    $('#datepayment').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
-    $('#timepayment').data("DateTimePicker").date(moment(new Date(year, month, day, HH, MM), 'HH:MM'));
+    //$('#datepayment').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
+    //$('#timepayment').data("DateTimePicker").date(moment(new Date(year, month, day, HH, MM), 'HH:MM'));
 
-    if (data.SlipAttachFile != null) {
-        $('#lbuploadslip').html(data.SlipAttachFile);
-        $('#hdupfileslip').val(data.file_id_Slip);
-        $('#linkdownload').text(data.SlipAttachFile);
-        DownloadFileSlip(data.SlipAttachFile);
-    }
+    $('#payment_date').val('');
+    $('#payment_datetime').val('');
+
+    //if (data.SlipAttachFile != null) {
+    //    $('#lbuploadslip').html(data.SlipAttachFile);
+    //    $('#hdupfileslip').val(data.file_id_Slip);
+    //    $('#linkdownload').text(data.SlipAttachFile);
+    //    DownloadFileSlip(data.SlipAttachFile);
+    //}
+
+    EnableControl(false);
+   
 }
 
 function SetTextStatusY(data) {
@@ -521,8 +573,8 @@ function SetTextStatusY(data) {
     $('#datepayment').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
     $('#timepayment').data("DateTimePicker").date(moment(new Date(year, month, day, HH, MM), 'HH:MM'));
 
-    $("#Request_no").text(data.Request_no);
-    $("#Payment_no").text(data.PaymentNo);
+    //$("#Request_no").text(data.Request_no);
+    //$("#Payment_no").text(data.PaymentNo);
     $("#Company_name").text(data.companyNameTh);
     $("#address").text(data.companyAddress);
     $("#Tax_id").text(data.taxId);
@@ -549,22 +601,25 @@ function SetTextStatusY(data) {
         DownloadFileSlip(data.SlipAttachFile);
     }
 
+    EnableControl(true); //'disabled'
 
-    $("#Contact_name").attr('disabled', 'disabled');
-    $("#Contact_email").attr('disabled', 'disabled');
-    $("#Contact_phone_no").attr('disabled', 'disabled');
-    $("#payment_channal").attr('disabled', 'disabled');
+}
 
-    $("#textpayment_channal").attr('disabled', 'disabled');
-    $("#Detailpaymentchannal input").attr('disabled', 'disabled');
-    $('#payment_date').attr('disabled', 'disabled');
-    $('#payment_datetime').prop('disabled', 'disabled');
-    $("#amount_transfer").attr('disabled', 'disabled');
-    $('#bank_transfer').attr('disabled', 'disabled');
-    $("#bank_branch").attr('disabled', 'disabled');;
-    $("#slip_attach_file").attr('disabled', 'disabled');
-    $("#remark").attr('disabled', 'disabled');
+function EnableControl(status) {
+    $("#Contact_name").attr('disabled', status);
+    $("#Contact_email").attr('disabled', status);
+    $("#Contact_phone_no").attr('disabled', status);
+    $("#payment_channal").attr('disabled', status);
 
+    $("#textpayment_channal").attr('disabled', status);
+    $("#Detailpaymentchannal input").attr('disabled', status);
+    $('#payment_date').attr('disabled', status);
+    $('#payment_datetime').prop('disabled', status);
+    $("#amount_transfer").attr('disabled', status);
+    $('#bank_transfer').attr('disabled', status);
+    $("#bank_branch").attr('disabled', status);;
+    $("#slip_attach_file").attr('disabled', status);
+    $("#remark").attr('disabled', status);
 }
 
 function UpdatePayment(PaymentId) {
@@ -572,8 +627,8 @@ function UpdatePayment(PaymentId) {
     var payment_datetime = $("#payment_datetime").val();
     var data = new FormData();
     data.append("PaymentId",PaymentId);
-    data.append("Request_no", $('#Request_no').text());
-    data.append("PaymentNo", $('#Payment_no').text());
+    //data.append("Request_no", $('#Request_no').text());
+    //data.append("PaymentNo", $('#Payment_no').text());
     data.append("ContactName", $('#Contact_name').val());
     data.append("ContactEmail", $('#Contact_email').val());
     data.append("ContactPhoneNo", $('#Contact_phone_no').val());
@@ -722,7 +777,7 @@ function GetDetailpaymentchannal() {
                     var strtext = this.dropdown_text;
                     var strvalue = this.dropdown_value;
                     var str = "<div class='custom-control custom-radio custom-control-inline'>\
-                        <input type='radio' class='custom-control-input inputValidation' name='optionsRadios' id='rd"+ strvalue + "' value='" + strvalue + "' checked required/>\
+                        <input type='radio' class='custom-control-input inputValidation' name='optionsRadios' id='rd"+ strvalue + "' value='" + strvalue + "' required/>\
                         <label class='custom-control-label' for='rd"+ strvalue + "'>" + strtext + "</label></div >"
                     $('.Detailpaymentchannal').append(str);
 
