@@ -608,6 +608,7 @@ function UpdatePayment(PaymentId) {
                 })
 
             }
+            tbSearchconfirmpayment.ajax.reload();
         },
         failure: function (msg) {
         }
@@ -647,6 +648,8 @@ function clearSearchpayment() {
     $('#paymentrequestdateto').val('');
     $('#paymentdatefrom').val('');
     $('#paymentdateto').val('');
+
+    tbSearchconfirmpayment.ajax.reload();
 }
 
 function closepayment() {

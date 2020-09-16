@@ -482,15 +482,20 @@ function GetStatus() {
             if (data != null) {
 
                 $('#ddlpaymentstatusais').empty();
+                $('#ddlStatus').empty();
 
 
                 $.each(data.response, function () {
                     $('#ddlpaymentstatusais').append($("<option></option>").val(this.Value).text(this.Text));
+                    $('#ddlStatus').append($("<option></option>").val(this.Value).text(this.Text));
                 });
             }
             else {
                 $('#ddlpaymentstatusais').empty();
                 $('#ddlpaymentstatusais').append($("<option></option>").val("").text("Select Status"));
+
+                $('#ddlStatus').empty();
+                $('#ddlStatus').append($("<option></option>").val("").text("Select Status"));
             }
         },
         failure: function (msg) {
