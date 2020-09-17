@@ -81,8 +81,8 @@ namespace SubcontractProfile.WebApi.Services.Model
 
         public string TestDateStr { get; set; }
         public string RemarkForTest { get; set; }
-      
 
+        public Int32 CountEngineer { get; set; }
         public object Clone()
         {
             return this.MemberwiseClone();

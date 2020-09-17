@@ -67,7 +67,9 @@ namespace SubcontractProfile.Web.Model
         public string TestDateStr { get; set; }
 
         public string RemarkForTest { get; set; }
-       
+
+        public Int32 CountEngineer { get; set; }
+
     }
 }
 

@@ -97,7 +97,8 @@ namespace SubcontractProfile.WebApi.Services.Model
         public Decimal? TotalAmount { get; set; }
 
         public string BookingDateStr { get; set; }
-
+        public Int32 CountEngineer { get; set; }
+        
 
         public object Clone()
         {

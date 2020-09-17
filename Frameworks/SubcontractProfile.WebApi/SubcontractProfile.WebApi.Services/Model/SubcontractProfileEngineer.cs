@@ -151,6 +151,8 @@ namespace SubcontractProfile.WebApi.Services.Model
         public System.Guid PersonalId { get; set; }
         public string SubcontractType { get; set; }
 
+        public string CompanyNameTh { get; set; }
+
         public object Clone()
         {
             return this.MemberwiseClone();

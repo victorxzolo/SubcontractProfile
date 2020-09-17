@@ -26,13 +26,13 @@
                         <input type="text" class="form-control" id="inputStaffName" placeholder="Staff Name">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputCitizen">Citizen ID</label>
-                        <input type="text" class="form-control" id="inputCitizen" placeholder="Citizen ID">
+                        <label for="inputCitizen">เลขที่บัตรประชาชน</label>
+                        <input type="text" class="form-control" id="inputCitizen" maxlength="13" onkeypress="return isNumberKey(event);" placeholder="เลขบัตรประชาชน">
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="inputPosition">Position</label>
-                        <input type="text" class="form-control" id="inputPosition" placeholder="Position">
+                        <label for="inputPosition">ตำแหน่ง</label>
+                        <input type="text" class="form-control" id="inputPosition" placeholder="ตำแหน่ง">
                     </div>
 
 
@@ -69,7 +69,7 @@
                             <th>Team Name</th>
                             <th>Staff Name(TH) </th>
                             <th style="width:40%">Staff Name(EN)</th>
-                            <th style="width:25%">Position</th>
+                            <th style="width:25%">ตำแหน่ง</th>
                         </tr>
                     </thead>
                 </table>
@@ -111,14 +111,14 @@
                                 <div id="Engineer">
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Company Name:</label>
+                                            <label>ชื่อบริษัท :</label>
                                         </div>
                                         <div class="col-sm-4">
                                             <label id="lblcompanyName"></label>
                                         </div>
 
                                     </div>
-                                    <br />
+                                   
                                     <div class="row">
                                         <div class="col-sm-2">
                                             <label><span style="color:red">*</span>Location Name:</label>
@@ -162,16 +162,19 @@
                                             <label><span style="color:red">*</span>Staff Name:</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="StaffName" style="width:300px" class="form-control" required>
+                                            <input type="text" id="StaffName" maxlength="100" style="width:300px" class="form-control" required>
                                             <div class="invalid-feedback">
-                                                กรุณาเลือกข้อมูล Staff Name.
+                                                กรุณากรอกข้อมูล Staff Name.
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Staff Name (TH):</label>
+                                            <label><span style="color:red">*</span> Staff Name (TH):</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="StaffNameT" style="width:300px" class="form-control">
+                                            <input type="text" id="StaffNameT" style="width:300px" maxlength="100" class="form-control" required>
+                                            <div class="invalid-feedback">
+                                                กรุณากรอกข้อมูล Staff Name (TH).
+                                            </div>
                                         </div>
                                     </div>
                                     <br />
@@ -180,26 +183,26 @@
                                             <label>Staff Name(EN):</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="StaffNameE" style="width:300px" class="form-control">
+                                            <input type="text" id="StaffNameE" style="width:300px" maxlength="100" class="form-control">
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Position:</label>
+                                            <label>ตำแหน่ง:</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="Position" style="width:300px" class="form-control">
+                                            <input type="text" id="Position" maxlength="100" style="width:300px" class="form-control">
 
                                         </div>
                                     </div>
                                     <br />
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Citizen ID:</label>
+                                            <label>เลขบัตรประชาชน:</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="CitizenID" style="width:300px" class="form-control">
+                                            <input type="text" id="CitizenID" onkeypress="return isNumberKey(event);" maxlength="13" style="width:300px" class="form-control">
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Personal Attach file:</label>
+                                            <label>แนบไฟล์ บัตรประชาชน:</label>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="row col-sm-12">
@@ -219,96 +222,104 @@
 
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>T-Shirt size:</label>
+                                            <label>ขนาด(size)เสื้อ:</label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input type="text" id="tshirtsize" style="width:300px" class="form-control">
+                                            <input type="text" id="tshirtsize" maxlength="50" style="width:300px" class="form-control">
                                         </div>
                                     </div>
                                     <br />
 
-                                    <h5>Contract Infomation</h5>
+                                    <h5>ข้อมูลติดต่อ</h5>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Contract Phone1:</label>
+                                            <label><span style="color:red">*</span> เบอร์โทร:</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="ContractPhone1" style="width:300px" class="form-control">
+                                            <input type="text" id="ContractPhone1" maxlength="100" style="width:300px" class="form-control" required>
+                                            <div class="invalid-feedback">
+                                                กรุณากรอกข้อมูล เบอร์โทรศัพท์
+                                            </div>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Contract Phone2:</label>
+                                            <label>เบอร์โทรสำรอง:</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="ContractPhone2" style="width:300px" class="form-control">
+                                            <input type="text" id="ContractPhone2" maxlength="100" style="width:300px" class="form-control">
                                         </div>
                                     </div>
                                     <br />
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Contract email:</label>
+                                            <label>อีเมล์:</label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input type="text" id="ContractEmail" style="width:300px" class="form-control">
+                                            <input type="email" id="ContractEmail" maxlength="100" style="width:300px" class="form-control" required>
+                                            <div class="invalid-feedback">
+                                                กรุณากรอกข้อมูล อีเมล์ ให้ถูกต้อง.
+                                            </div>
                                         </div>
                                     </div>
                                     <br />
 
-                                    <h5>Vehicle Infomation</h5>
+                                    <h5>ข้อมูลรถ</h5>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Vehicle Type:</label>
+                                            <label>
+                                                ประเภทรถ:
+                                            </label>
                                         </div>
                                         <div class="col-sm-4">
 
-                                            <input type="text" id="VehicleType" style="width:300px" class="form-control">
+                                            <input type="text" id="VehicleType" maxlength="100" style="width:300px" class="form-control">
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Vehicle Brand:</label>
+                                            <label>ยี่ห้อรถ:</label>
                                         </div>
                                         <div class="col-sm-4">
 
-                                            <input type="text" id="VehicleBrand" style="width:300px" class="form-control">
+                                            <input type="text" id="VehicleBrand" maxlength="100" style="width:300px" class="form-control">
                                         </div>
                                     </div>
                                     <br />
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Vehicle Serise:</label>
+                                            <label>รุ่นรถ:</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="VehicleSerise" style="width:300px" class="form-control">
+                                            <input type="text" id="VehicleSerise" maxlength="100" style="width:300px" class="form-control">
 
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Vehicle Color:</label>
+                                            <label>สีรถ:</label>
                                         </div>
                                         <div class="col-sm-4">
 
-                                            <input type="text" id="VehicleColor" style="width:300px" class="form-control">
+                                            <input type="text" id="VehicleColor"  maxlength="100" style="width:300px" class="form-control">
                                         </div>
                                     </div>
                                     <br />
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Vehicle Year:</label>
+                                            <label>ปีของรถ:</label>
                                         </div>
                                         <div class="col-sm-4">
 
-                                            <input type="text" id="VehicleYear" style="width:300px" class="form-control">
+                                            <input type="text" id="VehicleYear" maxlength="100" style="width:300px" class="form-control">
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Vehicle license plate:</label>
+                                            <label>ป้ายทะเบียนรถ:</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="VehicleLicense" style="width:300px" class="form-control">
+                                            <input type="text" id="VehicleLicense" maxlength="100" style="width:300px" class="form-control">
                                         </div>
                                     </div>
                                     <br />
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Vehicle Attach File:</label>
+                                            <label>แนบไฟล์รูปรถ:</label>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="custom-file mb-4">
@@ -324,35 +335,37 @@
                                     </div>
                                     <br />
 
-                                    <h5>Tool Infomation</h5>
+                                    <h5>ข้อมูลเครื่องมือ</h5>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Tool otdr:</label>
+                                            <label>
+                                                เครื่องวัด OTDR:
+                                            </label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="Toolotdr" style="width:300px" class="form-control">
+                                            <input type="text" id="Toolotdr" maxlength="100" style="width:300px" class="form-control">
                                         </div>
                                         <div class="col-sm-2">
                                             <label>Tool splicing:</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="ToolSplicing" style="width:300px" class="form-control">
+                                            <input type="text" id="ToolSplicing" maxlength="100" style="width:300px" class="form-control">
                                         </div>
                                     </div>
                                     <br />
 
-                                    <h5>Bank Infomation</h5>
+                                    <h5>ข้อมูลธนาคาร</h5>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label><span style="color:red">*</span>Bank Name:</label>
+                                            <label><span style="color:red">*</span> ชื่อธนาคาร:</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <select id="ddlBankName" name="BankName" style="width:300px" class="form-control" required>
+                                            <select id="ddlBankName" name="BankName"  style="width:300px" class="form-control" required>
                                             </select>
                                             <div class="invalid-feedback">
-                                                กรุณาเลือกข้อมูล Bank Name.
+                                                กรุณาเลือกข้อมูล ชื่อธนาคาร
                                             </div>
                                         </div>
                                         @*<div class="col-sm-2">
@@ -365,21 +378,21 @@
                                     <br />
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label><span style="color:red">*</span>Account No:</label>
+                                            <label><span style="color:red">*</span> เลขที่บัญชี:</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="AccNo" style="width:300px" class="form-control" required>
+                                            <input type="text" id="AccNo" maxlength="100" style="width:300px" class="form-control" required>
                                             <div class="invalid-feedback">
-                                                กรุณาระบุข้อมูล Account No.
+                                                กรุณากรอกข้อมูล เลขที่บัญชี
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label><span style="color:red">*</span> Account Name:</label>
+                                            <label><span style="color:red">*</span> ชื่อบัญชี:</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="AccName" style="width:300px" class="form-control" required>
+                                            <input type="text" id="AccName" maxlength="100" style="width:300px" class="form-control" required>
                                             <div class="invalid-feedback">
-                                                กรุณาระบุข้อมูล Account Name.
+                                                กรุณากรอกข้อมูล ชื่อบัญชี
                                             </div>
                                         </div>
                                     </div>
@@ -391,38 +404,50 @@
                                 <div id="Personal">
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Citizen ID :</label>
+                                            <label><span style="color:red">*</span> เลขบัตรประชาชน :</label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input type="text" id="CitizenID2" style="width:300px" class="form-control">
+                                            <input type="text" id="CitizenID2" onkeypress="return isNumberKey(event);" maxlength="13" style="width:300px" class="form-control" required>
+                                            <div class="invalid-feedback">
+                                                กรุณากรอกข้อมูล เลขบัตรประชาชน
+                                            </div>
                                         </div>
                                     </div>
                                     <br />
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Title Name :</label>
+                                            <label><span style="color:red">*</span> คำนำหน้าชื่อ :</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <select id="Title" name="Title" style="width:300px" class="form-control">
+                                            <select id="Title" name="Title" style="width:300px" class="form-control" required>
                                             </select>
+                                            <div class="invalid-feedback">
+                                                กรุณาเลือกข้อมูล คำนำหน้าชื่อ
+                                            </div>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Full Name(TH) :</label>
+                                            <label><span style="color:red">*</span> ชื่อ-นามสกุล(ไทย):</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="FullNameT" style="width:300px" class="form-control">
+                                            <input type="text" id="FullNameT" maxlength="100" style="width:300px" class="form-control" required>
+                                            <div class="invalid-feedback">
+                                                กรุณากรอกข้อมูล ชื่อ-นามสกุล(ไทย)
+                                            </div>
                                         </div>
                                     </div>
                                     <br />
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Full Name(EN) :</label>
+                                            <label><span style="color:red">*</span> ชื่อ-นามสกุล(อังกฤษ):</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="FullNameE" style="width:300px" class="form-control">
+                                            <input type="text" id="FullNameE" maxlength="100" style="width:300px" class="form-control" required>
+                                            <div class="invalid-feedback">
+                                                กรุณากรอกข้อมูล ชื่อ-นามสกุล(อังกฤษ)
+                                            </div>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Birth date :</label>
+                                            <label>วันเกิด :</label>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="row col-sm-12">
@@ -442,37 +467,37 @@
                                     <br />
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Gender:</label>
+                                            <label>เพศ:</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="radio" id="rdoMale" name="Gender" value="M">
+                                            <input type="radio" id="rdoMale" name="Gender" value="M" checked>
                                             <label for="Male">ชาย</label>&nbsp;&nbsp;
                                             <input type="radio" id="rdoFeMale" name="Gender" value="F">
                                             <label for="FeMale">หญิง</label>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Race :</label>
+                                            <label>เชื่อชาติ :</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="Race" class="form-control" style="width:300px">
+                                            <input type="text" id="Race" maxlength="100" class="form-control" style="width:300px">
 
                                         </div>
                                     </div>
                                     <br />
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Nationality :</label>
+                                            <label>สัญชาติ :</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="Nationality" class="form-control" style="width:300px">
+                                            <input type="text" id="Nationality" maxlength="100" class="form-control" style="width:300px">
                                             @*<select id="Nationality" name="Nationality" style="width:300px" class="form-control">
                             </select>*@
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Religion :</label>
+                                            <label>ศาสนา :</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="Religion" class="form-control" style="width:300px">
+                                            <input type="text" id="Religion" maxlength="100" class="form-control" style="width:300px">
                                             @*<select id="Religion" name="Religion" style="width:300px" class="form-control">
                             </select>*@
                                         </div>
@@ -480,67 +505,76 @@
                                     <br />
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Identity by :</label>
+                                            <label>ประเภทบัตร :</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="Identity" style="width:300px" class="form-control">
+                                            <input type="text" id="Identity" maxlength="100" style="width:300px" class="form-control">
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Contract email :</label>
+                                            <label>อีเมล์ :</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="ContractEmail2" style="width:300px" class="form-control">
+                                            <input type="email" id="ContractEmail2" maxlength="100" style="width:300px" class="form-control">
+                                            <div class="invalid-feedback">
+                                                กรุณากรอกข้อมูล อีเมล์ให้ถูกต้อง
+                                            </div>
                                         </div>
                                     </div>
                                     <br />
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Identity card address :</label>
+                                            <label>ที่อยู่ตามบัตรประชาชน :</label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <textarea id="IdentiAddress" class="form-control" rows="2" style="width:300px;"></textarea>
+                                            <textarea id="IdentiAddress"  class="form-control" rows="2" style="width:300px;"></textarea>
                                         </div>
                                     </div>
                                     <br />
 
-                                    <h5>Contract Infomation</h5>
+                                    <h5>ข้อมูลติดต่อ</h5>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Contract phone1 :</label>
+                                            <label><span style="color:red">*</span> เบอร์โทรศัพท์ :</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="PersonalContractPhone1" style="width:300px" class="form-control">
+                                            <input type="text" id="PersonalContractPhone1" maxlength="100" style="width:300px" class="form-control" required>
+                                            <div class="invalid-feedback">
+                                                กรุณากรอกข้อมูล เบอร์โทรศัพท์
+                                            </div>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Contract phone2 :</label>
+                                            <label>เบอร์โทรศัพท์สำรอง :</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="PersonalContractPhone2" style="width:300px" class="form-control">
+                                            <input type="text" id="PersonalContractPhone2" maxlength="100" style="width:300px" class="form-control">
                                         </div>
                                     </div>
                                     <br />
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Contract email :</label>
+                                            <label>อีเมล์ :</label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input type="text" id="ContractMail" style="width:300px" class="form-control">
+                                            <input type="email" id="ContractMail" maxlength="100" style="width:300px" class="form-control">
+                                            <div class="invalid-feedback">
+                                                กรุณากรอกข้อมูล อีเมล์ให้ถูกต้อง
+                                            </div>
                                         </div>
                                     </div>
                                     <br />
 
-                                    <h5>Work experience infomation</h5>
+                                    <h5>ข้อมูล ประสบการณ์การทำงาน</h5>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Work permit no :</label>
+                                            <label>ใบอนุญาตทำงานเลขที่ :</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="WorkPermit" style="width:300px" class="form-control">
+                                            <input type="text" id="WorkPermit" maxlength="100" style="width:300px" class="form-control">
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Work permit attach file:</label>
+                                            <label>แนบไฟล์ ใบอนุญาตทำงาน:</label>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="custom-file mb-4">
@@ -560,7 +594,7 @@
                                     <br />
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Proflie img attach file :</label>
+                                            <label>รูปโปรไฟล์ :</label>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="custom-file mb-4">
@@ -582,11 +616,11 @@
                                     </div>
                                     <br />
 
-                                    <h5>Education infomation</h5>
+                                    <h5>ข้อมูลการศึกษา</h5>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Education :</label>
+                                            <label>การศึกษา :</label>
                                         </div>
                                         <div class="col-sm-10">
                                             <textarea id="Education" class="form-control" rows="2" style="width:880px;"></textarea>
@@ -594,11 +628,11 @@
                                     </div>
                                     <br />
 
-                                    <h5>Languqges infomation</h5>
+                                    <h5>ข้อมูล ภาษา</h5>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Languqges :</label>
+                                            <label>ภาษา :</label>
                                         </div>
                                         <div class="col-sm-2">
                                             <input id="chkListenTH" type="checkbox" value="Y" />
@@ -623,27 +657,27 @@
                                     </div>
                                     <br />
 
-                                    <h5>Certificate infomation</h5>
+                                    <h5>ข้อมูลใบรับรอง</h5>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Certificate type :</label>
+                                            <label>ประเภทใบรับรอง :</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="CertificateType" style="width:300px" class="form-control">
+                                            <input type="text" id="CertificateType" maxlength="100" style="width:300px" class="form-control">
 
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Certificate no :</label>
+                                            <label>ใบรับรองเลขที่ :</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="CertificateNo" style="width:300px" class="form-control">
+                                            <input type="text" id="CertificateNo" maxlength="100" style="width:300px" class="form-control">
                                         </div>
                                     </div>
                                     <br />
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Certificate expire date :</label>
+                                            <label>วันหมดอายุ :</label>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="row col-sm-12">
@@ -662,7 +696,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Certificate attach file :</label>
+                                            <label>แนบไฟล์ ใบรับรอง :</label>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="custom-file mb-4">
@@ -679,56 +713,44 @@
                                     </div>
                                     <br />
 
-                                    <h5>Bank infomation</h5>
+                                    <h5>ข้อมูลธนาคาร</h5>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Bank Name :</label>
+                                            <label> <span style="color:red">*</span> ชื่อธนาคาร :</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <select id="BankName2" name="BankName2" style="width:300px" class="form-control">
+                                            <select id="BankName2" name="BankName2" style="width:300px" class="form-control" required>
                                             </select>
+                                            <div class="invalid-feedback">
+                                                กรุณาเลือกข้อมูล ชื่อธนาคาร
+                                            </div>
                                         </div>
-                                        @*<div class="col-sm-2">
-                            <label>Bank Code :</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" id="BankCode2" style="width:300px" class="form-control">
-                        </div>*@
+                                     
                                     </div>
                                     <br />
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label>Account no :</label>
+                                            <label> <span style="color:red">*</span> เลขที่บัญชี :</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="AccNo2" style="width:300px" class="form-control">
+                                            <input type="text" id="AccNo2" maxlength="100" style="width:300px" class="form-control" required>
+                                            <div class="invalid-feedback">
+                                                กรุณากรอกข้อมูล เลขที่บัญชี
+                                            </div>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>Account Name :</label>
+                                            <label><span style="color:red">*</span> ชื่อบัญชี :</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="AccName2" style="width:300px" class="form-control">
+                                            <input type="text" id="AccName2" maxlength="100" style="width:300px" class="form-control" required>
+                                            <div class="invalid-feedback">
+                                                กรุณากรอกข้อมูล ชื่อบัญชี
+                                            </div>
                                         </div>
                                     </div>
                                     <br />
-                                    @*<div class="row">
-                        <div class="col-sm-2">
-                            <label>Bank branch name:</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" id="BranchName" style="width:300px" class="form-control">
-                        </div>
-                        <div class="col-sm-2">
-                            <label>Bank Branch Code:</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" id="BranchCode" style="width:300px" class="form-control">
-                        </div>
-
-                    </div>
-
-                    <br />*@
+                                
                                 </div>
 
                             </div>
@@ -1002,6 +1024,7 @@
             else {
                 $("#hTitleEdit").text('เพิ่ม Engineer');
 
+                $('#lblcompanyName').html('');
               //  $("#txtCompanyCode").prop("disabled", false);
 
               //  $("#frNew")[0].reset();
@@ -1073,7 +1096,7 @@
 
                          
 
-                         // $('#StaffCode').val(result.StaffCode);
+                          $('#lblcompanyName').html(result.CompanyNameTh);
                           $('#StaffName').val(result.StaffName);
                           $('#StaffNameT').val(result.StaffNameTh);
                           $('#StaffNameE').val(result.StaffNameEn);
