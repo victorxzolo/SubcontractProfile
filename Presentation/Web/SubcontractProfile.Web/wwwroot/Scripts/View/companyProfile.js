@@ -1001,6 +1001,13 @@ function inittbSearchResult() {
                     // orderable: false,
                     //className: 'text-center'
                 },
+                {
+                    data: null, width: "10%", render: function (data, type, row) {
+                        return "<span class='badge outline-badge-secondary shadow-none'>" + row.Status + "</span>";
+                    }
+                    // orderable: false,
+                    // className: 'text-center'
+                },
                 { "data": "CompanyNameTh", "width": "20%" },
                 { "data": "CompanyNameEn", "width": "20%" },
                 { "data": "TaxId", "width": "15%" },
@@ -1037,14 +1044,8 @@ function inittbSearchResult() {
                         }
                         return strActivateDate;
                     }
-                },
-                {
-                    data: null, width: "10%", render: function (data, type, row) {
-                        return "<span class='badge outline-badge-secondary shadow-none'>" + row.Status + "</span>";
-                    }
-                    // orderable: false,
-                    // className: 'text-center'
                 }
+               
                 //{ "data": "Status", "width": "10%" },
 
             ],
