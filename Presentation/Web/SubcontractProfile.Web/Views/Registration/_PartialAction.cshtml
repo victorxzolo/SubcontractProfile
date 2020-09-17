@@ -801,7 +801,7 @@
             </div>
         </div>
 
-        <div class="col-sm-2">
+        @*<div class="col-sm-2">
             <label>ประเภทธุรกิจ :</label>
         </div>
         <div class="col-sm-4">
@@ -809,7 +809,7 @@
                 <select id="businessType" name="businessType" class="custom-select form-control" style="width:300px">
                 </select>
             </div>
-        </div>
+        </div>*@
     </div>
 </div>
 <br />
@@ -881,8 +881,17 @@
         <div class="form-group row">
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Contract Start Date :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <div class='input-group p-0 date' id='contractstartdate'>
+                @*<div class='input-group p-0 date' id='contractstartdate'>
                     <input type='text' class="form-control inputisvalidate" id="datecontractstart" required />
+                    <div class="input-group-append input-group-addon">
+                        <span class="input-group-text px-4">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                    
+                </div>*@
+                <div class='input-group date p-0' id='contractstartdate'>
+                    <input type='text' class="form-control" id="datecontractstart" />
                     <div class="input-group-append input-group-addon">
                         <span class="input-group-text px-4">
                             <i class="fa fa-calendar"></i>
@@ -890,7 +899,6 @@
                     </div>
                     <div class="invalid-feedback">กรุณาระบุวันที่เริ่ม Contract</div>
                 </div>
-              
             </div>
 
         </div>
@@ -900,7 +908,7 @@
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Contract End Date :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                 <div class='input-group p-0 date' id='contractenddate'>
-                    <input type='text' class="form-control inputisvalidate" id="datecontractend" required />
+                    <input type='text' class="form-control inputisvalidate" id="datecontractend"  />
                     <div class="input-group-append input-group-addon">
                         <span class="input-group-text px-4">
                             <i class="fa fa-calendar"></i>

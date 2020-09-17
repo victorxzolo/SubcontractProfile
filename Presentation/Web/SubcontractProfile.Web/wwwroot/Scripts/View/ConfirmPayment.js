@@ -146,7 +146,13 @@ $(document).ready(function () {
         var validation = Array.prototype.filter.call(forms, function (form) {
             if ($('#Contact_name').val() == "" || $('#Contact_email').val() == "" || $('#Contact_phone_no').val() == "" ||
                 $('#payment_channal option').filter(':selected').val() == "" || $('#payment_date').val() == "" || $('#payment_datetime').val() == "" ||
-                $('#amount_transfer').val() == "" || $('#bank_transfer').val() == "" || ValidateUpload()) {
+                ($('#amount_transfer').val() == "" || $('#amount_transfer').val() == "0") || $('#bank_transfer').val() == "" || ValidateUpload()) {
+                if ($('#amount_transfer').val() == "" || $('#amount_transfer').val() == "0") {
+                    $("#amount_transfer").attr('required', 'required');
+                }
+                else {
+                    $("#amount_transfer").removeAttr('required');
+                }
                 event.preventDefault();
                 event.stopPropagation();
 

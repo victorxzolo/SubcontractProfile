@@ -187,7 +187,7 @@
                                             <div class="custom-file mb-4">
 
                                                 <input type="file" class="custom-file-input" id="personalAttahFile" aria-describedby="uploadlHelp1" style="width:190px">
-                                                <label class="custom-file-label" for="inputBankAttach">เลือกไฟล์</label>
+                                                <label class="custom-file-label" for="inputBankAttach" id="lbpersonalAttahFile">เลือกไฟล์</label>
                                                 <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
                                             </div>
@@ -293,8 +293,8 @@
                                     <div class="col-sm-4">
                                         <div class="custom-file mb-4">
 
-                                            <input type="file" class="custom-file-input" id="BankAttach" aria-describedby="uploadlHelp1" style="width:190px">
-                                            <label class="custom-file-label" for="inputBankAttach">เลือกไฟล์</label>
+                                            <input type="file" class="custom-file-input" id="VehicleAttachFile" aria-describedby="uploadlHelp1" style="width:190px">
+                                            <label class="custom-file-label" for="inputBankAttach" id="lbVehicleAttachFile">เลือกไฟล์</label>
                                             <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
 
@@ -405,7 +405,16 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="row col-sm-12">
-                                            <input type="text" id="BirthDate" style="width:280px" class="form-control">
+                                            @*<input type="text" id="BirthDate" style="width:280px" class="form-control">*@
+                                            <div class='input-group p-0 date' id='dateBirthDate'>
+                                                <input type='text' class="form-control" id="BirthDate" />
+                                                <div class="input-group-append input-group-addon">
+                                                    <span class="input-group-text px-4">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+
+                                            </div>
 
                                         </div>
                                     </div>
@@ -517,7 +526,7 @@
                                         <div class="custom-file mb-4">
 
                                             <input type="file" class="custom-file-input" id="fileWorkPermitAttach" aria-describedby="uploadlHelp1" style="width:220px">
-                                            <label class="custom-file-label" for="fileWorkPermitAttach">เลือกไฟล์</label>
+                                            <label class="custom-file-label" for="fileWorkPermitAttach" id="lbfileWorkPermitAttach">เลือกไฟล์</label>
                                             <small id="uploadlHelpwork" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
                                         </div>
@@ -536,7 +545,7 @@
                                         <div class="custom-file mb-4">
 
                                             <input type="file" class="custom-file-input" id="fileProfileAttach" aria-describedby="uploadlHelp1" style="width:220px">
-                                            <label class="custom-file-label" for="fileProfileAttach">เลือกไฟล์</label>
+                                            <label class="custom-file-label" for="fileProfileAttach" id="lbfileProfileAttach">เลือกไฟล์</label>
                                             <small id="uploadlHelpprofile" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
                                         </div>
@@ -629,7 +638,7 @@
                                         <div class="custom-file mb-4">
 
                                             <input type="file" class="custom-file-input" id="fileCertificateAttach" aria-describedby="uploadlHelp1" style="width:220px">
-                                            <label class="custom-file-label" for="fileCertificateAttach">เลือกไฟล์</label>
+                                            <label class="custom-file-label" for="fileCertificateAttach" id="lbfileCertificateAttach">เลือกไฟล์</label>
                                             <small id="uploadlHelpCertificateAttach" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
                                         </div>

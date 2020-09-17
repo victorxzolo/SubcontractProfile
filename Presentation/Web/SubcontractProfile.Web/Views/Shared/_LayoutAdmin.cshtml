@@ -51,8 +51,10 @@
     <script src="~/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="~/assets/js/app.js"></script>
+    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 
 
+    <script src="~/lib/moment.js/moment.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -103,18 +105,20 @@
 
 
     @*<link href="~/bootstrap-datetimepicker/css/bootstrap-datetimepicker-standalone.css" rel="stylesheet" />*@
-    <link href="~/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" />
-    <script src="~/lib/moment.js/moment.js"></script>
-    <script src="~/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
 
 
     <link href="~/assets/css/forms/theme-checkbox-radio.css" rel="stylesheet" />
 
     <link href="~/plugins/autocomplete/autocomplete.css" rel="stylesheet" />
     <script src="~/plugins/autocomplete/jquery.autocomplete.js"></script>
-    <script src="~/plugins/autocomplete/jquery.mockjax.js"></script>
+    @*<script src="~/plugins/autocomplete/jquery.mockjax.js"></script>*@
 
-   
+
+    <link href="~/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <script src="~/lib/moment.js/moment.js"></script>
+    <script src="~/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
 
     @RenderSection("Scripts", required: false)
     @RenderSection("modalpanel", required: false)

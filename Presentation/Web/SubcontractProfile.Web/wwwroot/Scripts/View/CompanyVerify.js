@@ -63,22 +63,40 @@ $(document).ready(function () {
             close: 'fa fa-time'
         }
     });
+    $('#dateBirthDate').datetimepicker({
+        format: "DD/MM/YYYY",
+        showClear: true,
+        showClose: true,
+        icons: {
+            time: 'fa fa-clock-o',
+            date: 'fa fa-calendar',
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down',
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'icon-screenshot',
+            clear: 'fa fa-trash',
+            close: 'fa fa-time'
+        }
+    });
 
     $('#rdoCompanyType1').on("change", function () {
-        if ($(this).attr("value") == "NewSubContract") {
+        //if ($(this).attr("value") == "NewSubContract") {
             $("#divdealer").hide('slow');
             $('#divnewsubcontract').show('slow');
             $('#hdrdtype').val($(this).attr("value"));
-        }
+        //}
     });
 
     $('#rdoCompanyType2').on("change", function () {
-        if ($(this).attr("value") == "Dealer") {
+        //if ($(this).attr("value") == "Dealer") {
             $("#divnewsubcontract").hide('slow');
             $("#divdealer").show('slow');
             $('#hdrdtype').val($(this).attr("value"));
-        }
+        //}
     });
+
+
 
     $('#inputTax_id').keyup(function () {
         CheckKeyUps("inputTax_id", "[0-9]");
@@ -823,8 +841,6 @@ function BindDatatable(table, datamodel) {
 
 function inittbAddressResult(companyId) {
 
-
-
     oTableAddress = $('#tbAddressResult').DataTable({
         processing: true, // for show progress bar
         //serverSide: true, // for process server side
@@ -979,6 +995,8 @@ function getDataById(companyId) {
         type: 'POST',
         data: { 'companyId': companyId },
         dataType: "json",
+        async: false,
+        cache: false,
         success: function (result) {
             console.log(result)
             if (result != null) {
@@ -986,9 +1004,9 @@ function getDataById(companyId) {
 
 
                 if (result.SubcontractProfileType == "NewSubContract") {
-                    $('#rdoCompanyType1').prop('checked', true);
+                    $('#rdoCompanyType1').attr('checked', 'checked');  
                     $('#hdrdtype').val(result.SubcontractProfileType);
-                    $('#rdoCompanyType1').trigger('change');
+                    //$('#rdoCompanyType1').trigger('change');
 
                     $("#inputCompany_alias").val(result.CompanyAlias);
                     $("#inputCompany_name_th").val(result.CompanyNameTh);
@@ -1009,11 +1027,15 @@ function getDataById(companyId) {
                     else if (result.VatType == "NON_VAT") {
                         $('#chkvat_typeE').prop('checked', true);
                     }
+
+                    $("#divdealer").hide('slow');
+                    $('#divnewsubcontract').show('slow');
+                    $('#hdrdtype').val($(this).attr("value"));
                 }
                 else if (result.SubcontractProfileType == "Dealer") {
-                    $('#rdoCompanyType2').prop('checked', true);
+                    $('#rdoCompanyType2').attr('checked', 'checked');  
                     $('#hdrdtype').val(result.SubcontractProfileType);
-                    $('#rdoCompanyType2').trigger('change');
+                    //$('#rdoCompanyType2').trigger("click");
 
                     $('#txtlocationcode').val(result.LocationCode);
                     $('#txtdistribution').val(result.DistributionChannel);
@@ -1034,6 +1056,10 @@ function getDataById(companyId) {
                     else if (result.VatType == "NON_VAT") {
                         $('#chkvat_typeE_dealer').prop('checked', true);
                     }
+
+                    $("#divnewsubcontract").hide('slow');
+                    $("#divdealer").show('slow');
+                    $('#hdrdtype').val($(this).attr("value"));
                 }
 
 
@@ -1083,28 +1109,41 @@ function getDataById(companyId) {
                     $('#hdupfilevat_registration_certificate').val(result.file_id_VatRegistrationCertificateFile);
                 }
 
-                if (result.ContractStartDate != null) {
-                    var dstart = new Date(result.ContractStartDate);
-                    var month = dstart.getMonth();
-                    var day = dstart.getDate();
-                    var year = dstart.getFullYear();
+                GetAddress(companyId);
 
-                    $('#contractstartdate').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
+                if (result.ContractStartDate != null) {
+                    //var d = new Date(result.ContractStartDate);
+                    //var month = d.getMonth();
+                    //var day = d.getDate();
+                    //var year = d.getFullYear();
+
+                    var date = new Date(result.ContractStartDate);
+                    var sMonth = padValue(date.getMonth() + 1);
+                    var sDay = padValue(date.getDate());
+                    var sYear = date.getFullYear();
+                    var strCreateDate = "";
+
+                    strCreateDate = sDay + '/' + sMonth + '/' + sYear;
+                    //$('#contractstartdate').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
+                    $('#datecontractstart').val(strCreateDate);
                 }
-          
+
 
                 if (result.ContractEndDate != null) {
+                    //var dateend = new Date(result.ContractEndDate);
+                    //var monthend = dateend.getMonth();
+                    //var dayend = dateend.getDate();
+                    //var yearend = dateend.getFullYear();
                     var dateend = new Date(result.ContractEndDate);
-                   var month = dateend.getMonth();
-                   var day = dateend.getDate();
-                   var year = dateend.getFullYear();
-
-                    $('#contractenddate').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
+                    var sMonthend = padValue(dateend.getMonth() + 1);
+                    var sDayend = padValue(dateend.getDate());
+                    var sYearend = dateend.getFullYear();
+                    var strCreateDateend = "";
+                    strCreateDateend = sDayend + '/' + sMonthend + '/' + sYearend;
+                    $('#datecontractend').val(strCreateDateend);
+                    //$('#contractenddate').data("DateTimePicker").date(moment(new Date(yearend, monthend, dayend), 'DD/MM/YYYY'));
                 }
-              
-
-
-                GetAddress(companyId);
+       
             }
 
 
@@ -1821,14 +1860,14 @@ function inittbtablocation() {
             type: "POST",
             async: false,
             data: {
-                companyid: function () {
+                'companyid': function () {
                     return $('#hdCompanyId').val()
                 }
             },
             datatype: "JSON",
-            dataSrc: function (data) {
-                $('#lbcompanyname').text(data.companynameth);
-                return data.data;
+            dataSrc: function (datalocation) {
+                $('#lbcompanyname').text(datalocation.companynameth);
+                return datalocation.data;
             },
             error: function (xhr) {
                 console.log(xhr);
@@ -1920,6 +1959,16 @@ function getDataLocationById(locationId) {
                 $('#inputContractPhone').val(result.ContractPhone);
                 $('#inputContractMail').val(result.ContractMail);
                 $('#hdCompanyId').val(result.CompanyId);
+
+                if (result.BankAttachFile != null) {
+                    $('#lbBankAttach').text(result.BankAttachFile);
+                    //$('#hdupfileslip').val(data.file_id_Slip);
+                    //$('#linkdownload').text(data.SlipAttachFile);
+                    // DownloadFileSlip(data.SlipAttachFile);
+                }
+                else {
+                    $('#lbBankAttach').text("เลือกไฟล์");
+                }
 
 
 
@@ -2234,6 +2283,14 @@ function getDataEngineerById(id) {
 
                 $('#hdEngineerCompanyId').val(result.CompanyId);
 
+                if (result.PersonalAttachFile != null) {
+                    $('#lbpersonalAttahFile').text(result.PersonalAttachFile);
+                }
+
+                if (result.VehicleAttachFile != null) {
+                    $('#lbVehicleAttachFile').text(result.VehicleAttachFile);
+                }
+
 
 
                 $("#Team").val(result.TeamId);
@@ -2288,7 +2345,15 @@ function getDataPersonalById(id) {
                 // $('#Title').val(result.TitleName);
                 $('#FullNameT').val(result.FullNameEn);
                 $('#FullNameE').val(result.FullNameTh);
-                $('#BirthDate').val(result.BirthDate);
+                //$('#BirthDate').val(result.BirthDate);
+                if (result.BirthDate) {
+                    var d = new Date(result.BirthDate);
+                    var month = d.getMonth();
+                    var day = d.getDate();
+                    var year = d.getFullYear();
+
+                    $('#dateBirthDate').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
+                }
 
                 //Gender
                 if (result.Gender == "M") {
@@ -2363,6 +2428,16 @@ function getDataPersonalById(id) {
 
                 $('#AccNo2').val(result.AccountNumber);
                 $('#AccName2').val(result.AccountName);
+
+                if (result.WorkPermitAttachFile != null) {
+                    $('#lbfileWorkPermitAttach').text(result.WorkPermitAttachFile);
+                }
+                if (result.ProfileImgAttachFile != null) {
+                    $('#lbfileProfileAttach').text(result.ProfileImgAttachFile);
+                }
+                if (result.CertificateAttachFile != null) {
+                    $('#lbfileCertificateAttach').text(result.CertificateAttachFile);
+                }
 
 
             }
@@ -2472,4 +2547,9 @@ function CheckKeyUps(id, RexStr) {
         }
     }
     $("#" + id).val(strBuilder);
+}
+
+
+function padValue(value) {
+    return (value < 10) ? "0" + value : value;
 }

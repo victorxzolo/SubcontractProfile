@@ -206,7 +206,8 @@ namespace SubcontractProfile.Web.Controllers
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
-            
+
+            string ss = JsonConvert.SerializeObject(model);
 
             var httpContentCompany = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PostAsync(uriCompany, httpContentCompany).Result;
@@ -1352,6 +1353,28 @@ namespace SubcontractProfile.Web.Controllers
                 //data
                 locationResult = JsonConvert.DeserializeObject<SubcontractProfileLocationModel>(result);
 
+                if (locationResult.BankAttachFile != null)
+                {
+                    Guid file_id = Guid.NewGuid();
+                    //L_File.Add(new FileUploadModal
+                    //{
+                    //    file_id = file_id,
+                    //    //Fileupload = fileBytes,
+                    //    typefile = "SlipAttachFile",
+                    //    //ContentDisposition = source.ContentDisposition,
+                    //    //ContentType = source.ContentType,
+                    //    Filename = PaymentResult.SlipAttachFile
+
+                    //});
+                    locationResult.file_id__BankAttach = file_id;
+                }
+                //if (L_File.Count != 0)
+                //{
+                //    GetFile(paymentId, ref L_File);
+                //    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftPaymentSSO", L_File);
+                //}
+
+
             }
 
             return Json(locationResult);
@@ -1776,7 +1799,47 @@ namespace SubcontractProfile.Web.Controllers
                 var resultAsysc = response.Content.ReadAsStringAsync().Result;
                 //data
                 result = JsonConvert.DeserializeObject<SubcontractProfileEngineerModel>(resultAsysc);
+                if (result.PersonalAttachFile != null)
+                {
+                    Guid file_id = Guid.NewGuid();
+                    //L_File.Add(new FileUploadModal
+                    //{
+                    //    file_id = file_id,
+                    //    //Fileupload = fileBytes,
+                    //    typefile = "SlipAttachFile",
+                    //    //ContentDisposition = source.ContentDisposition,
+                    //    //ContentType = source.ContentType,
+                    //    Filename = PaymentResult.SlipAttachFile
 
+                    //});
+                    result.file_id__PersonalAttach = file_id;
+                }
+                //if (L_File.Count != 0)
+                //{
+                //    GetFile(paymentId, ref L_File);
+                //    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftPaymentSSO", L_File);
+                //}
+
+                if (result.VehicleAttachFile != null)
+                {
+                    Guid file_id = Guid.NewGuid();
+                    //L_File.Add(new FileUploadModal
+                    //{
+                    //    file_id = file_id,
+                    //    //Fileupload = fileBytes,
+                    //    typefile = "SlipAttachFile",
+                    //    //ContentDisposition = source.ContentDisposition,
+                    //    //ContentType = source.ContentType,
+                    //    Filename = PaymentResult.SlipAttachFile
+
+                    //});
+                    result.file_id__VehicleAttach = file_id;
+                }
+                //if (L_File.Count != 0)
+                //{
+                //    GetFile(paymentId, ref L_File);
+                //    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftPaymentSSO", L_File);
+                //}
             }
 
             return Json(result);
@@ -1835,6 +1898,25 @@ namespace SubcontractProfile.Web.Controllers
                 var resultAsysc = response.Content.ReadAsStringAsync().Result;
                 //data
                 result = JsonConvert.DeserializeObject<SubcontractProfilePersonalModel>(resultAsysc);
+                if(result !=null)
+                {
+                    if (result.CertificateAttachFile != null)
+                    {
+                        Guid file_id = Guid.NewGuid();
+                        result.file_id__CertificateAttach = file_id;
+                    }
+                    if (result.WorkPermitAttachFile != null)
+                    {
+                        Guid file_id = Guid.NewGuid();
+                        result.file_id__WorkPermitAttach = file_id;
+                    }
+                    if (result.ProfileImgAttachFile != null)
+                    {
+                        Guid file_id = Guid.NewGuid();
+                        result.file_id__ProfileImgAttach = file_id;
+                    }
+                }
+               
 
             }
 
