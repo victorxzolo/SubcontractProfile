@@ -110,9 +110,9 @@ $(document).ready(function () {
         oTableSearch.ajax.reload();
     });
 
-    $('#btnSave').click(function () {
-        OnSave();
-    });
+    //$('#btnSave').click(function () {
+    //    OnSave();
+    //});
 
     $('#btnClearModal').click(function () {
         ClearDataModal();
@@ -163,6 +163,32 @@ $(document).ready(function () {
     });
 });
 
+
+'use strict';
+window.addEventListener('load', function () {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener('submit', function (event) {
+
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+
+            } else {
+
+                OnSave();
+                inittbSearchResult();
+
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+}, false);
+
 function inittbSearchResult() {
     var urlSearchVerify = url.replace('Action', 'SearchVerify');
     oTableSearch = $('#tbSearchResult').DataTable({
@@ -196,9 +222,7 @@ function inittbSearchResult() {
             data: function (d) {
                 d.companyNameTh = $("#txtcompanyname").val(),
                     d.taxId = $("#txttaxid").val(),
-                    //d.locationid = $('#ddlLocation option').filter(':selected').val(),
-                    //d.teamid = $('#ddlTeam option').filter(':selected').val(),
-                    d.PaymentNo = $('#txtpayment').val(),
+                   // d.PaymentNo = $('#txtpayment').val(),
                     d.Status = $('#ddlStatus option').filter(':selected').val(),
                     d.PaymentDatetimeFrom = $("#datepaymentfrom").val(),
                     d.PaymentDatetimeTo = $("#datepaymentto").val()
@@ -213,12 +237,8 @@ function inittbSearchResult() {
                 // orderable: false,
                 //className: 'text-center'
             },
-            { "data": "PaymentNo", "visible": false },
             { "data": "companyNameTh", "width": "20%" },
             { "data": "taxId", "width": "20%" },
-            //{ "data": "LocationNameTh", "width": "20%" },
-            //{ "data": "TeamName", "width": "20%" },
-            //{ "data": "StaffNameTh", "width": "20%" },
             { "data": "PaymentDatetime", "width": "20%" },
             { "data": "Status", "width": "20%" },
             { "data": "AmountTransfer", "width": "20%" }
@@ -247,7 +267,7 @@ function openModal(paymentid) {
 function ClearDataModal() {
     $('#lblcompanyName').text('');
     $('#hdpaymentId').val('');
-    $('#lbpaymentno').text('');
+    //$('#lbpaymentno').text('');
     $('#ddlpaymenttransfer').val('');
     $('#dateverify').val('');
     $('#datetimepicker').data("DateTimePicker").date(moment(new Date(), 'DD/MM/YYYY'));
@@ -364,7 +384,7 @@ function getDataById(id) {
                 $('#hdpaymentId').val(id);
 
                 $("#lblcompanyName").text(result.companyNameTh);
-                $('#lbpaymentno').text(result.PaymentNo);
+                //$('#lbpaymentno').text(result.PaymentNo);
                 $('#ddlpaymenttransfer').val(result.PaymentChannal);
 
                 if (result.PaymentDatetime != null) {
@@ -506,65 +526,3 @@ function GetStatus() {
     });
 
 }
-
-//function GetDropDownLocation() {
-//    $.ajax({
-//        type: 'POST',
-//        url: '/Payment/GetLocationByCompany',
-//        data: { companyid: $('#txtcompanyname').val() },
-//        dataType: 'json',
-//        success: function (data) {
-//            $("#ddlLocation").empty();
-
-//            $.each(data, function () {
-//                $("#ddlLocation").append($("<option></option>").val(this.Value).text(this.Text));
-//            });
-
-//        },
-//        failure: function () {
-
-//        }
-//    });
-//}
-
-//function BindDDLTeam(location) {
-
-//    $.ajax({
-//        type: "POST",
-//        url: "/Payment/DDLTeam",
-//        data: {
-//            companyid: $('#hdCompanyId').val(),
-//            locationId: location
-//        },
-//        dataType: "json",
-//        success: function (data) {
-
-//            if (data != null) {
-//                $('#ddlTeam').empty();
-
-//                $.each(data.response, function () {
-//                    $('#ddlTeam').append($("<option></option>").val(this.Value).text(this.Text));
-//                });
-//            }
-
-
-//        },
-//        error: function (xhr, status, error) {
-
-//            //clearForEdit();
-//            console.log(status);
-//            bootbox.confirm({
-//                title: "System Information",
-//                message: "This action is not available.",
-//                buttons: {
-//                    cancel: {
-//                        label: '<i class="fa fa-times"></i> Cancel'
-//                    }
-//                },
-//                callback: function (result) {
-//                    console.log('This was logged in the callback: ' + result);
-//                }
-//            });
-//        }
-//    });
-//}

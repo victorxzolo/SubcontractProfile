@@ -331,7 +331,7 @@ namespace SubcontractProfile.Web.Controllers
                     model.PaymentDatetimeTo = dateto;
                 }
 
-                model.PaymentNo = searchmodel.PaymentNo;
+               // model.PaymentNo = searchmodel.PaymentNo;
                 model.RequestDateFrom = null;
                 model.RequestDateTo = null;
                 model.Request_no = null;
