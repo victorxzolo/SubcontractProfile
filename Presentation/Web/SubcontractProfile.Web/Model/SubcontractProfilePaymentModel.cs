@@ -89,6 +89,7 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(5000)]
         public string remarkForSub { get; set; }
 
+        public string? transfer_to_account { get; set; }
 
         public System.DateTime? RequestDateFrom { get; set; }
 

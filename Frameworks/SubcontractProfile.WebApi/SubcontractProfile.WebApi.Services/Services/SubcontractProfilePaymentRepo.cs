@@ -91,7 +91,7 @@ namespace SubcontractProfile.WebApi.Services.Services
         {
             var p = new DynamicParameters();
             p.Add("@payment_id", subcontractProfilePayment.PaymentId);
-            p.Add("@payment_no", subcontractProfilePayment.PaymentNo);
+            //p.Add("@payment_no", subcontractProfilePayment.PaymentNo);
             p.Add("@payment_channal", subcontractProfilePayment.PaymentChannal);
             p.Add("@payment_datetime", subcontractProfilePayment.PaymentDatetime);
             p.Add("@amount_transfer", subcontractProfilePayment.AmountTransfer);
@@ -106,6 +106,7 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@modified_by", subcontractProfilePayment.ModifiedBy);
             p.Add("@verified_date", subcontractProfilePayment.verifiedDate);
             p.Add("@remark_for_sub", subcontractProfilePayment.remarkForSub);
+            p.Add("@transfer_to_account", subcontractProfilePayment.transfer_to_account);
             //p.Add("@create_date", subcontractProfilePayment.CreateDate);
             //p.Add("@create_by", subcontractProfilePayment.CreateBy);
             //p.Add("@modified_by", subcontractProfilePayment.ModifiedBy);

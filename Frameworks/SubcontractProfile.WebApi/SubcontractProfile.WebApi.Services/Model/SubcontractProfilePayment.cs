@@ -106,6 +106,8 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(5000)]
         public string remarkForSub { get; set; }
 
+        public string? transfer_to_account { get; set; }
+
 
         //Search payment verify
         public System.DateTime? RequestDateFrom { get; set; }

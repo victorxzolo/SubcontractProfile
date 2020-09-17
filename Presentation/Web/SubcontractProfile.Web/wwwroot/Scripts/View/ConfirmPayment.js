@@ -139,28 +139,28 @@ $(document).ready(function () {
     });
 
 
-    //$('#btnconfirmpayment').click(function () {
-    //    var paymentid = $('#hdpaymentId').val();
+    $('#btnconfirmpayment').click(function () {
+        var paymentid = $('#hdpaymentId').val();
 
-    //    var forms = document.getElementsByClassName('needs-validation-confirmpayment');
-    //    var validation = Array.prototype.filter.call(forms, function (form) {
-    //        if ($('#Contact_name').val() == "" || $('#Contact_email').val() == "" || $('#Contact_phone_no').val() == "" ||
-    //            $('#payment_channal option').filter(':selected').val() == "" || $('#payment_date').val() == "" || $('#payment_datetime').val() == "" ||
-    //            $('#amount_transfer').val() == "" || $('#bank_transfer').val() == "" || ValidateUpload()) {
-    //            event.preventDefault();
-    //            event.stopPropagation();
+        var forms = document.getElementsByClassName('needs-validation-confirmpayment');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            if ($('#Contact_name').val() == "" || $('#Contact_email').val() == "" || $('#Contact_phone_no').val() == "" ||
+                $('#payment_channal option').filter(':selected').val() == "" || $('#payment_date').val() == "" || $('#payment_datetime').val() == "" ||
+                $('#amount_transfer').val() == "" || $('#bank_transfer').val() == "" || ValidateUpload()) {
+                event.preventDefault();
+                event.stopPropagation();
 
-    //        }
+            }
 
-    //        else {
-    //            UpdatePayment(paymentid);
-    //            inittbSearchconfirmpayment();
-    //            return true;
+            else {
+                UpdatePayment(paymentid);
+                inittbSearchconfirmpayment();
+                return true;
 
-    //        }
-    //        form.classList.add('was-validated');
-    //    });
-    //});
+            }
+            form.classList.add('was-validated');
+        });
+    });
 
     $('#btnSearchconfirmpayment').click(function () {
         tbSearchconfirmpayment.ajax.reload();
@@ -175,31 +175,7 @@ $(document).ready(function () {
 
 
 
-'use strict';
-window.addEventListener('load', function () {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function (form) {
-        form.addEventListener('submit', function (event) {
 
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-
-            } else {
-                var paymentid = $('#hdpaymentId').val();
-
-                UpdatePayment(paymentid);
-                inittbSearchconfirmpayment();
-
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-        }, false);
-    });
-}, false);
 
 
 function validateNumberDot(evt) {
@@ -584,7 +560,6 @@ function SetTextStatusY(data) {
     $("#Contact_phone_no").val(data.ContactPhoneNo);
     //$("#payment_channal option").remove();
     //$('#payment_channal').append(textpaymentchannal);
-    //GetDetailpaymentchannal();
 
     $("#payment_channal").val(data.PaymentChannal);
     //document.getElementById("amount_transfer").style.backgroundColor = "lightgray";
@@ -593,6 +568,15 @@ function SetTextStatusY(data) {
     $('#bank_branch').val(data.BankBranch);
    // $("#nameslip_attach_file").html(data.SlipAttachFile);
     $("#remark").val(data.Remark);
+
+    if (data.transfer_to_account != null) {
+        $('.Detailpaymentchannal input[name=optionsRadios]').each(function (i) {
+            if (data.transfer_to_account == $(this).val()) {
+                $(this).prop('checked', true);
+            }
+        });
+    }
+    
 
     if (data.SlipAttachFile != null) {
         $('#lbuploadslip').html(data.SlipAttachFile);
@@ -620,11 +604,23 @@ function EnableControl(status) {
     $("#bank_branch").attr('disabled', status);;
     $("#slip_attach_file").attr('disabled', status);
     $("#remark").attr('disabled', status);
+
+    //$('.Detailpaymentchannal input[name=optionsRadios]:checked').each(function (i) {
+    //    if (data.transfer_to_account == $(this).val()) {
+    //        $(this).prop('checked', true);
+    //    }
+    //});
 }
 
 function UpdatePayment(PaymentId) {
     var payment_date = $("#payment_date").val();
     var payment_datetime = $("#payment_datetime").val();
+    var transfertoaccount = "";
+
+    $('.Detailpaymentchannal input[name=optionsRadios]:checked').each(function (i) {
+        transfertoaccount = $(this).val();
+    });
+
     var data = new FormData();
     data.append("PaymentId",PaymentId);
     //data.append("Request_no", $('#Request_no').text());
@@ -640,6 +636,8 @@ function UpdatePayment(PaymentId) {
     data.append("FileSilp", $('#slip_attach_file').get(0).files[0]);
     data.append("Remark ", $('#remark').val());
     data.append("Status", 'Y');
+    data.append("transfer_to_account", transfertoaccount);
+
     var urlUpdatepayment = url.replace('Action', 'Updatepayment');
     $.ajax({
         type: "POST",
