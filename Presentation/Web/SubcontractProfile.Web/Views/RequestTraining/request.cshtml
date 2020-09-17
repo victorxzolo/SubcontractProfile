@@ -81,10 +81,10 @@
                             <th>วันที่ขออบรม</th>
                             <th>วันที่อบรม </th>
                             <th>ชื่อคอร์ส</th>
-                            <th>จำนวนผู้อบรม</th>
+                            <th style="text-align:center">จำนวนผู้อบรม</th>
                             <th>ราคาคอร์ส</th>
                             <th>Vat (7%)</th>
-                            <th>ค่าอบรม</th>
+                            <th>จำนวนเงินทั้งหมด</th>
                         </tr>
 
                     </thead>
@@ -993,9 +993,10 @@
                                         }
                                     },
                                     { "data": "Course" },
-                                    { "data": "CoursePrice", render: $.fn.dataTable.render.number(',', '.', 2, '') },
-                                    { "data": "Vat" },
-                                    { "data": "TotalAmount", render: $.fn.dataTable.render.number(',', '.', 2, '') }
+                                    { "data": "CountEngineer", className: 'text-center'},
+                                    { "data": "CoursePrice", render: $.fn.dataTable.render.number(',', '.', 2, ''), className: 'text-right' },
+                                    { "data": "Vat", className: 'text-right'},
+                                    { "data": "TotalAmount", render: $.fn.dataTable.render.number(',', '.', 2, ''), className: 'text-right' }
 
                                 ],
                                 "order": [[0, "desc"]],

@@ -119,15 +119,16 @@
                         <tr>
 
                             <th>Action</th>
-                            <th>Status </th>
-                            <th>Company Name</th>
-                            <th>TaxID </th>
-                            <th>Request Date </th>
-                            <th>Booking Date </th>
-                            <th>Course Name</th>
-                            <th>Total Price</th>
+                            <th>สถานะ </th>
+                            <th>ชื่อบริษัท</th>
+                            <th>เลขผู้เสียภาษี </th>
+                            <th>วันที่ขออบรม </th>
+                            <th>วันที่อบรม </th>
+                            <th>ชื่อคอร์ส</th>
+                            <th style="text-align:center">จำนวนผู้อบรม</th>
+                            <th>ราคาคอร์ส</th>
                             <th>Vat (7%)</th>
-                            <th>Total Amount</th>
+                            <th>จำนวนเงินทั้งหมด</th>
                         </tr>
 
                     </thead>
@@ -205,20 +206,15 @@
 
                                 </div>
 
-                            </div>
-
-                            <div class="row">
-
                                 <div class="col-sm-2">
                                     <label>Course Price :</label>
                                 </div>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                     <label id="lblcourseprice"></label>
                                 </div>
-
                             </div>
 
-                            <div class="row">
+                                <div class="row">
                                 <div class="col-sm-2">
                                     <label>Remark :</label>
                                 </div>
@@ -482,6 +478,19 @@
                             });
 
                             inittbSearchResult();
+
+                            $(document).on('show.bs.modal', '.modal', function () {
+                                var zIndex = 1040 + (10 * $('.modal:visible').length);
+                                $(this).css('z-index', zIndex);
+                                setTimeout(function () {
+                                    $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+                                }, 0);
+                            });
+
+                            $(document).on('hidden.bs.modal', '.modal', function () {
+                                $('.modal:visible').length && $(document.body).addClass('modal-open');
+                            });
+
                         });
 
                         'use strict';
@@ -518,7 +527,7 @@
                             $("#selCourse").append('<option value="">--Please select course--</option>');
                             $.each(data, function (id, result) {
                                 $("#selCourse").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text  +'</option>');
-                                $("#lblcourseprice").html(result.value1);
+                                $("#lblcourseprice").html(FormatNumber(result.value1));
                             });
 
 
@@ -718,23 +727,14 @@
                                         // orderable: false,
                                         className: 'text-center'
                                     },
-                                    //{ "data": "Status" },
-                                    //  { "data": "PaymentStatus" },
-                                    //{ "data": "RequestNo"},
-
+                           
                                     {
                                         data: null, render: function (data, type, row) {
                                             return "<span class='badge outline-badge-secondary shadow-none'>" + row.Status + "</span>";
                                         }
 
                                     },
-                                    //{
-                                    //    data: null, width: "10%", render: function (data, type, row) {
-                                    //        return "<span class='badge outline-badge-secondary shadow-none'>" + row.PaymentStatus + "</span>";
-                                    //    }
-
-                                    //},
-
+                                    
                                     { "data": "CompanyNameTh"},
                                     { "data": "TaxId" },
                                     {
@@ -766,9 +766,10 @@
                                         }
                                     },
                                     { "data": "Course" },
-                                    { "data": "CoursePrice", render: $.fn.dataTable.render.number(',', '.', 2, '') },
-                                    { "data": "Vat" },
-                                    { "data": "TotalAmount", render: $.fn.dataTable.render.number(',', '.', 2, '') }
+                                    { "data": "CountEngineer", className: 'text-center' },
+                                    { "data": "CoursePrice", render: $.fn.dataTable.render.number(',', '.', 2, ''), className: 'text-right' },
+                                    { "data": "Vat", className: 'text-right' },
+                                    { "data": "TotalAmount", render: $.fn.dataTable.render.number(',', '.', 2, ''), className: 'text-right'}
 
                                 ],
                                 "order": [[0, "desc"]],

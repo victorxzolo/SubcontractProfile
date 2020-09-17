@@ -107,6 +107,8 @@ namespace SubcontractProfile.Web.Model
 
         public string BookingDateStr { get; set; }
 
+        public Int32 CountEngineer { get; set; }
+
         public object Clone()
         {
             return this.MemberwiseClone();
