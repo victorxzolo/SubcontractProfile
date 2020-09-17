@@ -92,7 +92,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">Activate Status</label>
-                        <select id="ddlActivateStatus" class="form-control " required></select>
+                        <select id="ddlActivateStatus" class="form-control "></select>
                     </div>
 
                 </div>
@@ -271,7 +271,8 @@
                                     onSave(activateids_arr[j]);
                                 }
 
-
+                                bootbox.alert('บันทึกข้อมูลเรียบร้อย');
+                                inittbSearchResult();
                             }
                         }
                     });
@@ -300,7 +301,7 @@
                         success: function (data) {
 
                             $("#ddlActivateStatus").empty();
-                            $("#ddlActivateStatus").append('<option value="ALL">--Please All--</option>');
+                            $("#ddlActivateStatus").append('<option value="">--Select All--</option>');
                             $.each(data, function (id, result) {
                                 if (result.dropdown_value == "Y" || result.dropdown_value == "A") {
                                     $("#ddlActivateStatus").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text + '</option>');
@@ -309,7 +310,7 @@
                             },
                             failure: function () {
                                 $("#ddlActivateStatus").empty();
-                                $("#ddlActivateStatus").append('<option value="-1">--Please All--</option>');
+                                $("#ddlActivateStatus").append('<option value="">--Select All--</option>');
                             }
                         });
         }
@@ -357,16 +358,20 @@
                             d.company_name_th = $("#inputCompanyName").val(),
                             d.tax_id = $("#inputTaxId").val(),
                             d.activate_date_fr = $("#inputActivate_date_fr").val(),
-                            d.activate_date_to = $("#inputActivate_date_to").val()
-                            //d.activate_status = $("select[id$=ddlActivateStatus]").val()
+                            d.activate_date_to = $("#inputActivate_date_to").val(),
+                            d.activate_status = $("select[id$=ddlActivateStatus]").val()
 
                         }
                   },
                     columns: [
                         {
                             data: null, orderable: false, render: function (data, type, row) {
-                                return '<input class="custom-checkbox chkCheckBoxId" type="checkbox" id="' + row.CompanyId + '" name="chkBox" value="' + row.CompanyId + '">';
-
+                               
+                                if (row.CompanyStatus == "Activate") {
+                                    return '<input style="display:none" class="custom-checkbox chkCheckBoxId" type="checkbox" id="' + row.CompanyId + '" name="chkBox" value="' + row.CompanyId + '">';
+                                } else {
+                                    return '<input class="custom-checkbox chkCheckBoxId" type="checkbox" id="' + row.CompanyId + '" name="chkBox" value="' + row.CompanyId + '">';
+                                }
                             }
                         },
                         { "data": "CompanyNameTh"  },
@@ -449,10 +454,10 @@
                            if ($('#hdMode').val() == 'edit') {
 
                            } else {
-                               bootbox.alert(result.Message);
+                               //bootbox.alert(result.Message);
                            }
 
-                           inittbSearchResult();
+                         //  inittbSearchResult();
 
                           }
                         else {
