@@ -108,6 +108,8 @@ namespace SubcontractProfile.WebApi.Services.Model
         public System.Guid CompanyId { get; set; }
         public System.Guid LocationId { get; set; }
 
+        public string CompanyStatus { get; set; }
+
         public object Clone()
         {
             return this.MemberwiseClone();

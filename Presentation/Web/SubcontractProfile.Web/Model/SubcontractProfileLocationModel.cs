@@ -154,6 +154,9 @@ namespace SubcontractProfile.Web.Model
         public Guid file_id__BankAttach { get; set; }
         public IFormFile File_BankAttach { get; set; }
 
+        public string CompanyStatus { get; set; }
+        
+
     }
 
 

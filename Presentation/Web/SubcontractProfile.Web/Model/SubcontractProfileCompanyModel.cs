@@ -199,6 +199,8 @@ namespace SubcontractProfile.Web.Model
         public IFormFile FileCommercialRegistration { get; set; }
         public IFormFile FileVatRegistrationCertificate { get; set; }
 
+        public string RemarkForSub { get; set; }
+    
     }
 
     public class SubcontractProfileCompanyViewModel

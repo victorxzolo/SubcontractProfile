@@ -24,6 +24,9 @@ $(document).ready(function () {
     BindDDLsubdistrict();
     //BindAddressType();
     BindDDlBankAccountType();
+
+  //  $('#divSignContract').hide();
+
     getDataById($('#hdCompanyId').val());
 
     inittbtablocation();
@@ -32,7 +35,7 @@ $(document).ready(function () {
 
 
     $('#contractstartdate').datetimepicker({
-        format: "DD/MM/YYYY",
+        format: "DD/MM/YYYY",   
         showClear: true,
         showClose: true,
         icons: {
@@ -508,6 +511,7 @@ $(document).ready(function () {
     $('#btnback').click(function () {
         window.location.href = '/Registration/SearchCompanyVerify';
     });
+
     $('#btnnotapprove').click(function () {
 
         var Error = validateform();
@@ -515,20 +519,24 @@ $(document).ready(function () {
         if (!Error) {
             onSaveCompanyProfile("NotApprove");
         }
-
-
-
     });
+
     $('#btnapprove').click(function () {
         var Error = validateform();
-
+      
         if (!Error) {
             onSaveCompanyProfile("Approve");
         }
-
-
-
     });
+
+    $('#btnEdit').click(function () {
+        var Error = validateform();
+
+        if (!Error) {
+            onSaveCompanyProfile("");
+        }
+    });
+    
 
 
     //Tab Location
@@ -682,50 +690,6 @@ function onSaveCompanyProfile(status) {
         vat_type = $('#chkvat_typeT_dealer').is(':checked') ? $('#chkvat_typeT_dealer').val() : $('#chkvat_typeE_dealer').val();
     }
 
-    //company.CompanyNameTh = company_name_th;
-    //company.CompanyNameEn = company_name_en;
-    //company.CompanyAlias = company_alias;
-    //company.DistributionChannel = distribution_channel;
-    //company.ChannelSaleGroup = channel_sale_group;
-    //company.TaxId = tax_id;
-    //company.WtName = wt_name;
-    //company.VatType = vat_type;
-    //company.CompanyEmail = $('#mailCompany').val();
-    //company.ContractName = $('#nameContract').val();
-    //company.ContractPhone = $('#telContract').val();
-    //company.ContractEmail = $('#mailContract').val();
-
-    //company.BankCode = $('#selBankName option').filter(':selected').val()
-    //company.BankName = $('#txtbank_Name').val();
-    //company.AccountNumber = $('#codeNumber').val();
-    //company.AccountName = $('#busiName').val();
-
-    ////company.BranchCode= $('#txtbranch_Code').val();
-    //company.BranchName = $('#nameBranch').val();
-
-    //company.DeptOfInstallName = $('#name1').val();
-    //company.DeptOfMaintenName = $('#name2').val();
-    //company.DeptOfAccountName = $('#name3').val();
-
-    //company.DeptOfInstallPhone = $('#tel1').val();
-    //company.DeptOfMaintenPhone = $('#tel2').val();
-    //company.DeptOfAccountPhone = $('#tel3').val();
-
-    //company.DeptOfInstallEmail = $('#mail1').val();
-    //company.DeptOfMaintenEmail = $('#mail2').val();
-    //company.DeptOfAccountEmail = $('#mail3').val();
-
-    //company.LocationCode = $('#txtlocationcode').val();
-    //company.LocationNameTh = $('#txtlocationname').val();
-    //company.LocationNameEn = $('#txtlocationname').val();
-
-    //company.BankAccountTypeId = $('#AccType option').filter(':selected').val();
-    //company.SubcontractProfileType = chksubcontract_type;
-    //company.CompanyTitleThId = company_title_name_th;
-    //company.CompanyTitleEnId = company_title_name_en;
-    //company.CompanyId = $('#hdCompanyId').val();
-    ////company.ContractStartDate = $('#datecontractstart').val();
-    ////company.ContractEndDate = $('#datecontractend').val();
 
     data.append("CompanyNameTh", company_name_th);
     data.append("CompanyNameEn", company_name_en);
@@ -768,7 +732,10 @@ function onSaveCompanyProfile(status) {
     data.append("CompanyTitleEnId", company_title_name_en);
     data.append("CompanyId", $('#hdCompanyId').val());
 
-    data.append("status", status);
+    if (status != "") {
+        data.append("status", status);
+    }
+ 
     data.append("contractstart", $('#datecontractstart').val());
     data.append("contractend", $('#datecontractend').val());
 
@@ -781,6 +748,8 @@ function onSaveCompanyProfile(status) {
     data.append("CompanyCertifiedFile", $('#lbuploadcertificate').text());
     data.append("CommercialRegistrationFile", $('#lbuploadComRegis').text());
     data.append("VatRegistrationCertificateFile", $('#lbupload20').text());
+
+    data.append("RemarkForSub", $('#txtRemarkForSub').val());
 
     var urlOnSave = url.replace('Action', 'OnSave');
     $.ajax({
@@ -859,7 +828,7 @@ function inittbAddressResult(companyId) {
             "sSearch": false,
             "sLengthMenu": "Results :  _MENU_",
         },
-        "scrollX": true,
+        "scrollX": false,
         "language": {
             "zeroRecords": "No data found.",
             "decimal": ",",
@@ -873,12 +842,12 @@ function inittbAddressResult(companyId) {
             { "data": "address_type", orderable: true, },
             { "data": "address", orderable: true, },
             {
-                data: null, width: "10%", orderable: false, render: function (data, type, row) {
+                data: null, width: "5%", orderable: false, render: function (data, type, row) {
                     return "<a href='#'class='edit_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='แก้ไข'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a>";
                 }
             },
             {
-                data: null, width: "10%", orderable: false, render: function (data, type, row) {
+                data: null, width: "5%", orderable: false, render: function (data, type, row) {
                     return "<a href='#' class='delete_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='ลบ'><svg xmlns='http://www.w3.org/2000/svg'width='24' height='24' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'><g fill='none' stroke='#626262' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 6h18'/><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'/></g></svg></a>";
                 }
             },
@@ -911,7 +880,7 @@ function inittblocation() {
             "sSearch": false,
             "sLengthMenu": "Results :  _MENU_",
         },
-        "scrollX": true,
+        "scrollX": false,
         "language": {
             "zeroRecords": "No data found.",
             "decimal": ",",
@@ -959,7 +928,7 @@ function inittbRevenue() {
             "sSearch": false,
             "sLengthMenu": "Results :  _MENU_",
         },
-        "scrollX": true,
+        "scrollX": false,
         "language": {
             "zeroRecords": "No data found.",
             "decimal": ",",
@@ -1000,7 +969,23 @@ function getDataById(companyId) {
         success: function (result) {
             console.log(result)
             if (result != null) {
+               
+                //if (result.Status == 'Activate') {
+                //    $('#divSignContract').show();
+                //    $('#btnnotapprove').hide();
+                //    $('#btnapprove').hide();
+                //} else {
+                //    $('#divSignContract').hide();
+                //    $('#btnnotapprove').show();
+                //    $('#btnapprove').show();
+                //}
+
+                
+                $('#lblStatusSub').text(result.Status);
+
                 $('#hdCompanyId').val(result.CompanyId);
+
+                $('#txtRemarkForSub').val(result.RemarkForSub); 
 
 
                 if (result.SubcontractProfileType == "NewSubContract") {
@@ -1081,7 +1066,7 @@ function getDataById(companyId) {
                 $('#name3').val(result.DeptOfAccountName);
                 $('#tel3').val(result.DeptOfAccountPhone);
                 $('#mail3').val(result.DeptOfAccountEmail);
-
+               
                 $('#selBankName').val(result.BankCode);
                 $('#nameBranch').val(result.BranchName);
                 $('#AccType').val(result.BankAccountTypeId);
@@ -1849,7 +1834,7 @@ function inittbtablocation() {
             "sSearch": false,
             "sLengthMenu": "Results :  _MENU_",
         },
-        "scrollX": true,
+        "scrollX": false,
         "language": {
             "zeroRecords": "No data found.",
             "decimal": ",",
@@ -1881,13 +1866,13 @@ function inittbtablocation() {
                             </svg></a>";
                 }
             },
-            { "data": "SubcontractProfileType", width: "10%" },
-            { "data": "LocationCode", width: "10%" },
-            { "data": "LocationNameTh", width: "20%" },
-            { "data": "LocationNameEn", width: "20%" },
-            { "data": "LocationNameAlias", width: "15%" },
-            { "data": "StorageLocation", width: "10%" },
-            { "data": "LocationAddress", width: "10%" },
+            { "data": "SubcontractProfileType" },
+            { "data": "LocationCode"},
+            { "data": "LocationNameTh"},
+            { "data": "LocationNameEn" },
+            //{ "data": "LocationNameAlias" },
+            //{ "data": "StorageLocation"},
+            //{ "data": "LocationAddress"},
             { "data": "LocationId", "visible": false }
         ],
         "order": [[2, "desc"]],
@@ -2012,7 +1997,7 @@ function inittbtabTeam() {
             "sSearch": false,
             "sLengthMenu": "Results :  _MENU_",
         },
-        "scrollX": true,
+        "scrollX": false,
         "language": {
             "zeroRecords": "No data found.",
             "decimal": ",",
@@ -2043,13 +2028,13 @@ function inittbtabTeam() {
                             </svg></a>";
                 }
             },
-            { "data": "SubcontractProfileType", width: "10%" },
-            { "data": "LocationNameTh", width: "20%" },
-            { "data": "TeamCode", width: "10%" },
-            { "data": "TeamNameTh", width: "15%" },
-            { "data": "TeamNameEn", width: "15%" },
-            { "data": "StageLocal", width: "15%" },
-            { "data": "ShipTo", width: "10%" },
+            { "data": "SubcontractProfileType"},
+            { "data": "LocationNameTh"},
+            { "data": "TeamCode" },
+            { "data": "TeamNameTh"},
+            { "data": "TeamNameEn" },
+            //{ "data": "StageLocal", width: "15%" },
+            //{ "data": "ShipTo", width: "10%" },
             { "data": "TeamId", "visible": false }
         ],
         "order": [[2, "desc"]],
@@ -2158,7 +2143,7 @@ function inittbtabengineer() {
             "sSearch": false,
             "sLengthMenu": "Results :  _MENU_",
         },
-        "scrollX": true,
+        "scrollX": false,
         "language": {
             "zeroRecords": "No data found.",
             "decimal": ",",
@@ -2190,13 +2175,13 @@ function inittbtabengineer() {
                             </svg></a>";
                 }
             },
-            { "data": "SubcontractProfileType", width: "10%" },
-            { "data": "LocationNameTh", width: "20%" },
-            { "data": "TeamNameTh", width: "10%" },
-            { "data": "StaffNameTh", width: "15%" },
-            { "data": "StaffNameEn", width: "15%" },
-            { "data": "Position", width: "10%" },
-            { "data": "ContractPhone1", width: "15%" },
+            { "data": "SubcontractProfileType" },
+            { "data": "LocationNameTh"},
+            { "data": "TeamNameTh"},
+            { "data": "StaffNameTh" },
+            { "data": "StaffNameEn"},
+            //{ "data": "Position", width: "10%" },
+            //{ "data": "ContractPhone1", width: "15%" },
             { "data": "EngineerId", "visible": false }
         ],
         "order": [[2, "desc"]],

@@ -153,6 +153,7 @@ namespace SubcontractProfile.WebApi.Services.Model
 
         public string CompanyNameTh { get; set; }
 
+        public string CompanyStatus { get; set; }
         public object Clone()
         {
             return this.MemberwiseClone();

@@ -304,7 +304,7 @@ function inittbSearchconfirmpayment() {
             "sSearch": false,
             "sLengthMenu": "Results :  _MENU_",
         },
-        "scrollX": true,
+        "scrollX": false,
         "language": {
             "zeroRecords": "No data found.",
             "decimal": ",",

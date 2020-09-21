@@ -48,8 +48,8 @@ hr.style-two {
 }
 
 hr {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 5px;
+    margin-bottom: 10px;
      border-top: 1px solid #f1f2f3;
   
 }
@@ -200,7 +200,7 @@ span.red {
 
 .form-group label, label {
     font-family: 'db_helvethaica_x55_regular', sans-serif;
-    font-size: 22px;
+    font-size: 21px;
     /*color: #acb0c3;*/
     color: #000000;
     letter-spacing: 1px;

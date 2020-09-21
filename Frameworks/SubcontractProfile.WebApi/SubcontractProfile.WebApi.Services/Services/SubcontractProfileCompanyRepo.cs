@@ -196,6 +196,7 @@ namespace SubcontractProfile.WebApi.Services
             p.Add("@company_title_en_id", subcontractProfileCompany.CompanyTitleEnId);
             p.Add("@status", subcontractProfileCompany.Status);
             p.Add("@activate_date", subcontractProfileCompany.ActivateDate);
+            p.Add("@remark_for_sub", subcontractProfileCompany.RemarkForSub);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileCompany_Update", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);

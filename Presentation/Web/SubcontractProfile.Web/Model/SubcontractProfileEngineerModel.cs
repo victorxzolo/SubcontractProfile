@@ -141,7 +141,7 @@ namespace SubcontractProfile.Web.Model
         public Guid file_id__VehicleAttach { get; set; }
         public IFormFile File_VehicleAttach { get; set; }
 
-       
+        public string CompanyStatus { get; set; }
 
         //public Guid file_id__WorkExperienceAttach { get; set; }
         //public IFormFile File_WorkExperienceAttach { get; set; }

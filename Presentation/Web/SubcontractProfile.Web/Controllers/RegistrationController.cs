@@ -948,7 +948,7 @@ namespace SubcontractProfile.Web.Controllers
                // model.CompanyId= new Guid(companyId);
 
                 #region Verify
-                user = dataUser.UserId.ToString();
+                user = dataUser.Username;
                 model.UpdateBy = user;
 
                 #endregion
@@ -2349,7 +2349,7 @@ namespace SubcontractProfile.Web.Controllers
             {
                 Lang = "TH";
             }
-            dataUser = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(_httpContextAccessor.HttpContext.Session, "userLogin");
+            dataUser = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(_httpContextAccessor.HttpContext.Session, "userAISLogin");
         }
         private List<SubcontractProfileAddressModel> SaveAddressSession(List<SubcontractProfileAddressModel> daftdata)
         {

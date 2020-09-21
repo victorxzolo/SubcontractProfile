@@ -1,21 +1,35 @@
 ﻿
 
 <div class="row mb-4">
-    <div class="form-group col-md-12 need-validate-checktyperegister">
 
-        <label>ประเภทผู้สมัคร </label>  <span style="color:red">*</span><br />
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="rdoCompanyType1" name="customRadioSucRegisEdit" class="custom-control-input is-validate" value="NewSubContract" disabled>
-            <label class="custom-control-label" for="rdoCompanyType1">New Subcontract</label>
+
+    <div class="container need-validate-checktyperegister">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                <div class="row">
+                    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-right">
+                        <label>ประเภทผู้สมัคร : </label>  <span style="color:red">*</span>
+                    </div>
+                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="rdoCompanyType1" name="customRadioSucRegisEdit" class="custom-control-input is-validate" value="NewSubContract" disabled>
+                            <label class="custom-control-label" for="rdoCompanyType1">New Subcontract</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="rdoCompanyType2" name="customRadioSucRegisEdit" class="custom-control-input is-validate " value="Dealer" disabled>
+                            <label class="custom-control-label" for="rdoCompanyType2">Dealer</label>
+                            <div class="invalid-feedback">	&nbsp;	&nbsp;	&nbsp;Please select type.</div>
+                        </div>
+                        <input type="hidden" id="hdrdtype" class="form-control is-validate" required />
+                    </div>
+                </div>
+
+
+            </div>
+
         </div>
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="rdoCompanyType2" name="customRadioSucRegisEdit" class="custom-control-input is-validate " value="Dealer" disabled>
-            <label class="custom-control-label" for="rdoCompanyType2">Dealer</label>
-            <div class="invalid-feedback">	&nbsp;	&nbsp;	&nbsp;Please select type.</div>
-        </div>
-        <input type="hidden" id="hdrdtype" class="form-control is-validate" required />
     </div>
-
+    <br />
     <div id="divnewsubcontract" class="container needs-validation-newregister" novalidate>
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
@@ -352,7 +366,8 @@
     </div>
 
 </div>
-<h4 class="">ข้อมูลที่อยู่บริษัท</h4>
+<h4 >ข้อมูลที่อยู่บริษัท</h4>
+
 <hr>
 <div class="container needs-validation-step2" novalidate>
     <div class="row">
@@ -401,7 +416,7 @@
         <div class="col-sm-3">
             <div class="n-chk">
                 <label class="new-control new-checkbox checkbox-primary" for="chkLocationWT">
-                    <input id="chkLocationWT" type="checkbox" class="new-control-input"  name="address_type_id" value="03">
+                    <input id="chkLocationWT" type="checkbox" class="new-control-input" name="address_type_id" value="03">
                     <span class="new-control-indicator"></span>ที่อยู่ตาม W/T
                 </label>
             </div>
@@ -424,7 +439,7 @@
             <div class="row col-sm-12">
                 <input type="text" id="txthomenumber" style="width:110px" class="form-control inputValidationAddress" required>
                 <label>&nbsp;&nbsp;&nbsp;&nbsp;หมู่ที่ :</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" id="txtVillageNo" style="width:90px" class="form-control">
+                <input type="text" id="txtVillageNo" style="width:50px" class="form-control">
                 <div class="invalid-feedback">
                     กรุณาระบุเลขที่
                 </div>
@@ -452,7 +467,7 @@
             <div class="row col-sm-12">
                 <input type="text" id="txtfloor" style="width:110px" class="form-control">
                 <label>&nbsp;&nbsp;&nbsp;&nbsp;ห้อง :</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" id="txtroom" style="width:90px" class="form-control">
+                <input type="text" id="txtroom" style="width:70px" class="form-control">
             </div>
         </div>
     </div>
@@ -566,9 +581,9 @@
                         <th scope="col"></th>
                         <th scope="col"></th>
                         <th width="30%">ประเภทที่อยู่</th>
-                        <th width="50%">ที่อยู่</th>
+                        <th width="60%">ที่อยู่</th>
                         @*<th width="10%">แก้ไข</th>
-                        <th width="10%">ลบ</th>*@
+                            <th width="10%">ลบ</th>*@
 
                     </tr>
                 </thead>
@@ -802,14 +817,14 @@
         </div>
 
         @*<div class="col-sm-2">
-            <label>ประเภทธุรกิจ :</label>
-        </div>
-        <div class="col-sm-4">
-            <div class="row col-sm-12">
-                <select id="businessType" name="businessType" class="custom-select form-control" style="width:300px">
-                </select>
+                <label>ประเภทธุรกิจ :</label>
             </div>
-        </div>*@
+            <div class="col-sm-4">
+                <div class="row col-sm-12">
+                    <select id="businessType" name="businessType" class="custom-select form-control" style="width:300px">
+                    </select>
+                </div>
+            </div>*@
     </div>
 </div>
 <br />
@@ -828,7 +843,7 @@
                        accept="application/pdf" />
                 <label class="custom-file-label " for="inputUploadcertificate" id="lbuploadcertificate">เลือกไฟล์</label>
                 @*<small id="uploadlHelp2" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>*@
-            <small id="uploadlHelp2" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>
+                <small id="uploadlHelp2" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>
                 <div class="invalid-feedback">กรุณาอัพโหลดไฟล์ หนังสือรับรองบริษัท</div>
             </div>
         </div>
@@ -842,7 +857,7 @@
                        accept="application/pdf" />
                 <label class="custom-file-label " for="inputUploadComRegis" id="lbuploadComRegis">เลือกไฟล์</label>
                 @*<small id="uploadlHelp3" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>*@
-            <small id="uploadlHelp3" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>
+                <small id="uploadlHelp3" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>
                 <div class="invalid-feedback">กรุณาอัพโหลดไฟล์ หนังสือทะเบียนพานิช</div>
             </div>
         </div>
@@ -859,7 +874,7 @@
                        accept="application/pdf" />
                 <label class="custom-file-label" for="inputUpload20" id="lbupload20">เลือกไฟล์</label>
                 @*<small id="uploadlHelp4" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>*@
-            <small id="uploadlHelp4" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>
+                <small id="uploadlHelp4" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>
                 <div class="invalid-feedback">กรุณาอัพโหลดไฟล์ หนังสือ ภ.พ. 20</div>
             </div>
         </div>
@@ -876,78 +891,137 @@
         <hr />
     </div>
 </div>
-<div class="row needs-isvalidate" novalidate>
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Contract Start Date :</label>
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                @*<div class='input-group p-0 date' id='contractstartdate'>
-                    <input type='text' class="form-control inputisvalidate" id="datecontractstart" required />
-                    <div class="input-group-append input-group-addon">
-                        <span class="input-group-text px-4">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-                    </div>
-                    
-                </div>*@
-                <div class='input-group date p-0' id='contractstartdate'>
-                    <input type='text' class="form-control" id="datecontractstart" />
-                    <div class="input-group-append input-group-addon">
-                        <span class="input-group-text px-4">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-                    </div>
-                    <div class="invalid-feedback">กรุณาระบุวันที่เริ่ม Contract</div>
-                </div>
-            </div>
 
-        </div>
+<div class="row">
+    <div class="col-sm-2">
+        <label>สถานะ :</label>
     </div>
-    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Contract End Date :</label>
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <div class='input-group p-0 date' id='contractenddate'>
-                    <input type='text' class="form-control inputisvalidate" id="datecontractend"  />
-                    <div class="input-group-append input-group-addon">
-                        <span class="input-group-text px-4">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-                    </div>
-                    <div class="invalid-feedback">กรุณาระบุวันที่สิ้นสุด Contract</div>
-                </div>
-                
-            </div>
+    <div class="col-sm-10">
 
-        </div>
+        <span id="lblStatusSub" class='badge outline-badge-secondary shadow-none'> </span>
     </div>
 </div>
+
+<div id="divSignContract">
+    <br />
+    <div class="row">
+        <div class="col-sm-2">
+            <label>วันที่เริ่มสัญญา :</label>
+        </div>
+        <div class="col-sm-4">
+            <div class='input-group date p-0' id='contractstartdate'>
+                <input type='text' class="form-control" id="datecontractstart" />
+                <div class="input-group-append input-group-addon">
+                    <span class="input-group-text px-4">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                </div>
+                <div class="invalid-feedback">กรุณาระบุวันที่เริ่มสัญญา</div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-2">
+            <label>วันที่สิ้นสุดสัญญา :</label>
+        </div>
+        <div class="col-sm-4">
+            <div class='input-group p-0 date' id='contractenddate'>
+                <input type='text' class="form-control" id="datecontractend" />
+                <div class="input-group-append input-group-addon">
+                    <span class="input-group-text px-4">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                </div>
+                <div class="invalid-feedback">กรุณาระบุวันที่สิ้นสุดสัญญา</div>
+            </div>
+        </div>
+    </div>
+
+    @*<div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">วันที่เริ่มสัญญา :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+
+                    <div class='input-group date p-0' id='contractstartdate'>
+                        <input type='text' class="form-control" id="datecontractstart" />
+                        <div class="input-group-append input-group-addon">
+                            <span class="input-group-text px-4">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                        <div class="invalid-feedback">กรุณาระบุวันที่เริ่มสัญญา</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>*@
+
+    @*<div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">สิ้นสุดสัญญา :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <div class='input-group p-0 date' id='contractenddate'>
+                        <input type='text' class="form-control inputisvalidate" id="datecontractend" />
+                        <div class="input-group-append input-group-addon">
+                            <span class="input-group-text px-4">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                        <div class="invalid-feedback">กรุณาระบุวันที่สิ้นสุดสัญญา</div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>*@
+
+
+</div>
+
+<br />
+
+<div class="row">
+    <div class="col-sm-2">
+        <label>หมายเหตุ :</label>
+    </div>
+    <div class="col-sm-10">
+        <textarea id="txtRemarkForSub" class="form-control" rows="3"> </textarea>
+    </div>
+
+</div>
+<br />
 <div class="clearfix"></div>
 <div style="text-align:center">
     <button class="btn btn-dark mr-2" id="btnback" type="button">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M19.164 19.547c-1.641-2.5-3.669-3.285-6.164-3.484V17.5c0 .534-.208 1.036-.586 1.414c-.756.756-2.077.751-2.823.005l-6.293-6.207a1 1 0 0 1 0-1.425l6.288-6.203c.754-.755 2.073-.756 2.829.001c.377.378.585.88.585 1.414v1.704c4.619.933 8 4.997 8 9.796v1a.999.999 0 0 1-1.836.548zm-7.141-5.536c2.207.056 4.638.394 6.758 2.121a7.985 7.985 0 0 0-6.893-6.08C11.384 9.996 11 10 11 10V6.503l-5.576 5.496l5.576 5.5V14l1.023.011z" fill="white" /></svg>
-        Back
+        กลับหน้าแรก
     </button>
-            <button class="btn btn-warning mr-2" id="btnnotapprove" type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="15" y1="9" x2="9" y2="15"></line>
-                    <line x1="9" y1="9" x2="15" y2="15"></line>
-                </svg>
-                Not Approve
-            </button>
-            <button class="btn btn-success mr-2" id="btnapprove" type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" 
-                     style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" 
-                     viewBox="0 0 512 512">
-                <path fill="white" d="M199.066 456l-7.379-7.514l-3.94-3.9l-86.2-86.2l.053-.055l-83.664-83.666l97.614-97.613l83.565 83.565L398.388 61.344L496 158.958L296.729 358.229l-11.26 11.371zM146.6 358.183l52.459 52.46l.1-.1l.054.054l52.311-52.311l11.259-11.368l187.963-187.96l-52.358-52.358l-199.273 199.271l-83.565-83.565l-52.359 52.359l83.464 83.463z" />
-                </svg>
-                Approve
-            </button>
-  
+    <button class="btn btn-info mr-2" id="btnEdit" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+        แก้ไข
+    </button>
 
- 
+    <button class="btn btn-warning mr-2" id="btnnotapprove" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
+        </svg>
+        ไม่อุนมัติ
+    </button>
+    <button class="btn btn-success mr-2" id="btnapprove" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em"
+             style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet"
+             viewBox="0 0 512 512">
+            <path fill="white" d="M199.066 456l-7.379-7.514l-3.94-3.9l-86.2-86.2l.053-.055l-83.664-83.666l97.614-97.613l83.565 83.565L398.388 61.344L496 158.958L296.729 358.229l-11.26 11.371zM146.6 358.183l52.459 52.46l.1-.1l.054.054l52.311-52.311l11.259-11.368l187.963-187.96l-52.358-52.358l-199.273 199.271l-83.565-83.565l-52.359 52.359l83.464 83.463z" />
+        </svg>
+        อนุมัติ
+    </button>
+
+
+
 
 </div>
 
@@ -955,23 +1029,23 @@
 
 
 <script type="text/javascript">
-    //$(document).ready(function () {
+                            //$(document).ready(function () {
 
-    //    $('#contractstartdate').datepicker({
-    //        format: 'dd/mm/yyyy',
-    //        daysOfWeekHighlighted: "6,0",
-    //        autoclose: true,
-    //        todayHighlight: true,
-    //        clearBtn: true,
-    //    });
-    //    $('#contractenddate').datepicker({
-    //        format: 'dd/mm/yyyy',
-    //        daysOfWeekHighlighted: "6,0",
-    //        autoclose: true,
-    //        todayHighlight: true,
-    //        clearBtn: true,
-    //    });
-    //});
+                            //    $('#contractstartdate').datepicker({
+                            //        format: 'dd/mm/yyyy',
+                            //        daysOfWeekHighlighted: "6,0",
+                            //        autoclose: true,
+                            //        todayHighlight: true,
+                            //        clearBtn: true,
+                            //    });
+                            //    $('#contractenddate').datepicker({
+                            //        format: 'dd/mm/yyyy',
+                            //        daysOfWeekHighlighted: "6,0",
+                            //        autoclose: true,
+                            //        todayHighlight: true,
+                            //        clearBtn: true,
+                            //    });
+                            //});
 </script>
 
 

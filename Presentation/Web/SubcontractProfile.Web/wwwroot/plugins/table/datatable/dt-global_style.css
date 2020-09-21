@@ -21,11 +21,12 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting:after, tab
 table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting_desc:after {
     color: #0e1726;
 }
+
 table.dataTable {
     border-collapse: separate;
     border-spacing: 0 5px;
     margin-top: 8px !important;
-    margin-bottom: 50px !important;
+    margin-bottom: 0px !important;
     border-collapse: collapse !important;
   
 }
@@ -42,10 +43,7 @@ table.dataTable {
     border-bottom: 1px solid #e0e6ed;
 }
 .table > thead > tr > th {
-    /*background-color: #040c95;*/
     color: #1b55e2;
-    /* color: #fff;*/
-   /* font-weight: 600;*/
     font-size: 18px;
     border: none;
     letter-spacing: 1px;
@@ -54,11 +52,10 @@ table.dataTable {
 }
 .table > tbody > tr > td {
     border: none;
-    color: #0e1726;
+    color: #4c4b4b; /* #0e1726*/
     font-size: 18px;
     letter-spacing: 1px;
     font-family: 'db_helvethaica_x55_regular', sans-serif;
-   
 }
 .table-striped tbody tr:nth-of-type(odd) {
     background-color: transparent!important;

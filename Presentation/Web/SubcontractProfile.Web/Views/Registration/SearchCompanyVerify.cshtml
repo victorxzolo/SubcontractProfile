@@ -14,55 +14,63 @@
 
             <div class="widget-content1">
                 <div class="form-row mb-4">
-
-
                     <div class="form-group col-md-12">
                         <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="rdoCustomerTypeAll" name="customRadioSucRegis" class="custom-control-input" value="ALL" checked>
-                            <label class="custom-control-label" for="rdoCustomerTypeAll">All</label>
+
+                        <div class="n-chk">
+                            <label class="new-control new-checkbox new-checkbox-rounded new-checkbox-text checkbox-outline-success">
+                                <input id="rdoCustomerTypeAll" type="radio" class="new-control-input" name="customRadioSucRegis" value="ALL" checked>
+                                <span class="new-control-indicator"></span><span class="new-chk-content">ALL</span>
+                            </label>
+
+                            <label class="new-control new-checkbox new-checkbox-rounded new-checkbox-text checkbox-outline-success">
+                                <input id="rdoCustomerTypeSub" type="radio" class="new-control-input" name="customRadioSucRegis" value="NewSubContract">
+                                <span class="new-control-indicator"></span><span class="new-chk-content">New Subcontract</span>
+                            </label>
+
+                            <label class="new-control new-checkbox new-checkbox-rounded new-checkbox-text checkbox-outline-success">
+                                <input id="rdoCustomerTypeDealer" type="radio" class="new-control-input" name="customRadioSucRegis" value="Dealer">
+                                <span class="new-control-indicator"></span><span class="new-chk-content">Dealer</span>
+                            </label>
                         </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="rdoCustomerTypeSub" name="customRadioSucRegis" class="custom-control-input" value="NewSubContract">
-                            <label class="custom-control-label" for="rdoCustomerTypeSub">New Subcontract</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="rdoCustomerTypeDealer" name="customRadioSucRegis" class="custom-control-input" value="Dealer">
-                            <label class="custom-control-label" for="rdoCustomerTypeDealer">Dealer</label>
-                        </div>
+
+                    </div>
+
+                   
+                    <div class="form-group col-md-6">
+                        <label for="txtcompanyname">ชื่อบริษัท</label>
+                        <input type="text" class="form-control" id="txtcompanyname" />
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="txttaxid">Tax ID</label>
+                        <label for="txttaxid">เลขประจำตัวผู้เสียภาษี</label>
                         <input type="text" class="form-control" id="txttaxid" maxlength="13" />
                     </div>
 
+
+                    @*<div class="form-group col-md-6">
+            <label for="ddldistribution">Distribution Channel</label>
+            <select class="form-control" id="ddldistribution">
+                <option value="">Select Distribution Channel</option>
+                <option>Channel1</option>
+                <option>Channel2</option>
+                <option>Channel3</option>
+                <option>Channel4</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="ddlchannelsalegroup">Channel Sale Group</label>
+            <select class="form-control" id="ddlchannelsalegroup">
+                <option value="">Select Channel Sale Group</option>
+                <option>Group1</option>
+                <option>Group2</option>
+                <option>Group3</option>
+                <option>Group4</option>
+            </select>
+        </div>*@
+
                     <div class="form-group col-md-6">
-                        <label for="txtcompanyname">Company name</label>
-                        <input type="text" class="form-control" id="txtcompanyname" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="ddldistribution">Distribution Channel</label>
-                        <select class="form-control" id="ddldistribution">
-                            <option value="">Select Distribution Channel</option>
-                            <option>Channel1</option>
-                            <option>Channel2</option>
-                            <option>Channel3</option>
-                            <option>Channel4</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="ddlchannelsalegroup">Channel Sale Group</label>
-                        <select class="form-control" id="ddlchannelsalegroup">
-                            <option value="">Select Channel Sale Group</option>
-                            <option>Group1</option>
-                            <option>Group2</option>
-                            <option>Group3</option>
-                            <option>Group4</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="txtcompanyname">Register Date From</label>
+                        <label for="txtcompanyname">วันที่สมัคร</label>
                         <div class='input-group p-0 date' id='regisdatefrom'>
                             <input type='text' class="form-control" id="dateregisfrom" />
                             <div class="input-group-append input-group-addon">
@@ -74,7 +82,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="txtcompanyname">Register Date To</label>
+                        <label for="txtcompanyname">ถึงวันที่</label>
                         <div class='input-group p-0 date' id='regisdateto'>
                             <input type='text' class="form-control" id="dateregisto" />
                             <div class="input-group-append input-group-addon">
@@ -89,9 +97,9 @@
                         <input type="text" class="form-control" id="txtvendercode" />
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="ddlStatus">Status</label>
+                        <label for="ddlStatus">สะถานะ</label>
                         <select class="form-control" id="ddlStatus">
-                            <option value="">กรุณาเลือกสถานะ</option>
+                            <option value="">เลือกสถานะทั้งหมด</option>
                             <option value="W">Waiting</option>
                             <option value="Y">Approve</option>
                             <option value="A">Activate</option>
@@ -115,7 +123,7 @@
                                      style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet"
                                      viewBox="0 0 512 512">
                                     <path fill="white" d="M199.066 456l-7.379-7.514l-3.94-3.9l-86.2-86.2l.053-.055l-83.664-83.666l97.614-97.613l83.565 83.565L398.388 61.344L496 158.958L296.729 358.229l-11.26 11.371zM146.6 358.183l52.459 52.46l.1-.1l.054.054l52.311-52.311l11.259-11.368l187.963-187.96l-52.358-52.358l-199.273 199.271l-83.565-83.565l-52.359 52.359l83.464 83.463z" />
-                                </svg> Verify Company
+                                </svg> ตรวจสอบข้อมูลบริษัท
                             </button>
                         </div>
 
@@ -129,23 +137,21 @@
                 <h3 class="">ผลการค้นหา</h3>
 
             </div>
-            <div class="table-responsive">
-                <table id="tbSearchComVerifyResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+            <div class="table-responsive mb-4 mt-4">
+                <table id="tbSearchComVerifyResult" class="table table-hover" style="width:100%" >
                     <thead>
                         <tr>
-                            <th>Select</th>
+                            <th style="width:30px" >เลือก</th>
                             <th></th>
-                            <th>Status</th>
-                            <th>Register Type</th>
-                            <th>Tax ID</th>
-                            <th>Company Name (TH)</th>
-                            <th>Company Name (EN)</th>
-                            <th>Vender Code</th>
-                            <th>Distribution Channel</th>
-                            <th>Channel Sale Group</th>
-                            <th>Register Date</th>
-                            <th>Verify Date</th>
-                            <th>Verify By</th>
+                            <th >สถานะ</th>
+                            <th >ประเภทผู้สมัคร</th>
+                            <th >เลขประจำตัวผู้เสียภาษี</th>
+                            <th>ชื่อบริษัท (ไทย)</th>
+                            <th >ชื่อบริษัท (อังกฤษ)</th>
+                            <th >Vender Code</th>
+                            <th>วันที่สมัคร</th>
+                            <th >วันที่ตรวจสอบ</th>
+                            <th >ตรวจสอบโดย</th>
                         </tr>
                     </thead>
                 </table>

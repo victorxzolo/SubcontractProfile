@@ -46,9 +46,9 @@ $(document).ready(function () {
         $('#ddlchannelsalegroup').val('');
 
         $('#dateregisfrom').val('');
-        $('#regisdatefrom').data("DateTimePicker").date(moment(new Date(), 'DD/MM/YYYY'));
+        //$('#regisdatefrom').data("DateTimePicker").date(moment(new Date(), 'DD/MM/YYYY'));
         $('#dateregisto').val('');
-        $('#regisdateto').data("DateTimePicker").date(moment(new Date(), 'DD/MM/YYYY'));
+       // $('#regisdateto').data("DateTimePicker").date(moment(new Date(), 'DD/MM/YYYY'));
         $('#txtvendercode').val('');
         inittbSearchResult();
 
@@ -162,11 +162,11 @@ $(document).ready(function () {
         oTable = $('#tbSearchComVerifyResult').DataTable({
             processing: true, // for show progress bar
             serverSide: true, // for process server side
-            filter: false, // this is for disable filter (search box)
-            orderMulti: false, // for disable multiple column at once
+            //filter: false, // this is for disable filter (search box)
+            //orderMulti: true, // for disable multiple column at once
             pageLength: 10,
             order: [],
-            autoWidth: false,
+            //autoWidth: true,
             searching: false,
             destroy: true,
             lengthChange: false,
@@ -176,7 +176,7 @@ $(document).ready(function () {
                 "sSearch": false,
                 "sLengthMenu": "Results :  _MENU_",
             },
-            "scrollX": true,
+            "scrollX": false,
             "language": {
                 "zeroRecords": "No data found.",
                 "decimal": ",",
@@ -201,8 +201,8 @@ $(document).ready(function () {
                     d.SubcontractProfileType = type,
                         d.TaxId = $("#txttaxid").val(),
                         d.CompanyName = $("#txtcompanyname").val(),
-                        d.DistributionChannel = $('#ddldistribution option').filter(':selected').val(),
-                        d.ChannelSaleGroup = $('#ddlchannelsalegroup option').filter(':selected').val(),
+                        //d.DistributionChannel = $('#ddldistribution option').filter(':selected').val(),
+                        //d.ChannelSaleGroup = $('#ddlchannelsalegroup option').filter(':selected').val(),
                         d.RegisterDateFrom = $("#dateregisfrom").val(),
                         d.RegisterDateTo = $("#dateregisto").val(),
                         d.VendorCode = $("#txtvendercode").val(),
@@ -212,23 +212,27 @@ $(document).ready(function () {
             columns: [
 
                 {
-                    data: null, width: "10%", className: "text-center", render: function (data, type, row) {
-                        return "<input type='radio' class='' name='optionsRadios' id='chktype' value='" + row.CompanyId + "'>";
+                    data: null, className: "text-center", render: function (data, type, row) {
+                        return "<input type='radio' class='checkbox-column' name='optionsRadios' id='chktype' value='" + row.CompanyId + "'>";
                     }
                     // orderable: false,
                     //className: 'text-center'
                 },
-                { "data": "CompanyId", "visible": false },
-                { "data": "Status", "width": "20%" },
-                { "data": "SubcontractProfileType", "width": "20%" },
-                { "data": "TaxId", "width": "20%" },
-                { "data": "CompanyNameTh", "width": "20%" },
-                { "data": "CompanyNameEn", "width": "20%" },
-                { "data": "VendorCode", "width": "20%" },
-                { "data": "DistributionChannel", "width": "20%" },
-                { "data": "ChannelSaleGroup", "width": "20%" },
+                { "data": "CompanyId", "visible": false },        
                 {
-                    "data": "RegisterDate", "width": "20%", render: function (data) {
+                    data: null, render: function (data, type, row) {
+                        return "<span class='badge outline-badge-secondary shadow-none'>" + row.Status + "</span>";
+                    }
+
+                },
+                { "data": "SubcontractProfileType" },
+                { "data": "TaxId" },
+                { "data": "CompanyNameTh"},
+                { "data": "CompanyNameEn"},
+                { "data": "VendorCode" },
+            
+                {
+                    "data": "RegisterDate", render: function (data) {
                         var strCreateDate = "";
                         if (data != null) {
                             var date = new Date(data);
@@ -245,7 +249,7 @@ $(document).ready(function () {
                     }
                 },
                 {
-                    "data": "UpdateDate", "width": "20%", render: function (data) {
+                    "data": "UpdateDate", render: function (data) {
                         var strCreateDate = "";
                         if (data != null) {
                             var date = new Date(data);
@@ -260,7 +264,7 @@ $(document).ready(function () {
                         }
                         return strCreateDate;
                     } },
-                { "data": "UpdateBy", "width": "20%" }
+                { "data": "UpdateBy" }
 
             ],
             "order": [[0, "desc"]],

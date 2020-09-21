@@ -201,14 +201,14 @@ namespace SubcontractProfile.WebApi.Services.Model
 
         public System.DateTime? RegisterDate { get; set; }
 
-
-        
+    
         public string TrainingStatus { get; set; }
         public string PaymentStatus { get; set; }
         public DateTime? CompanyRegisterDate { get; set; }
         public DateTime? TriningDate { get; set; }
         public DateTime? PaymentDatetime { get; set; }
 
+        public string RemarkForSub { get; set; }
 
         public object Clone()
         {

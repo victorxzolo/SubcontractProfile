@@ -9,6 +9,8 @@ $(document).ready(function () {
     url = $("#controllername").data("url");
     urlaccount = $("#accountcontrollername").data("url");
 
+    $('#btn_OnSave_Modal').hide();
+
         inittbSearchResult();
         inittbAddressResult();
         inittbRevenue();
@@ -823,7 +825,7 @@ $(document).ready(function () {
                 "sSearch": false,
                 "sLengthMenu": "Results :  _MENU_",
             },
-            "scrollX": true,
+            "scrollX": false,
             "language": {
                 "zeroRecords": "No data found.",
                 "decimal": ",",
@@ -872,7 +874,7 @@ $(document).ready(function () {
                 "sSearch": false,
                 "sLengthMenu": "Results :  _MENU_",
             },
-            "scrollX": true,
+            "scrollX": false,
             "language": {
                 "zeroRecords": "No data found.",
                 "decimal": ",",
@@ -920,7 +922,7 @@ $(document).ready(function () {
                 "sSearch": false,
                 "sLengthMenu": "Results :  _MENU_",
             },
-            "scrollX": true,
+            "scrollX": false,
             "language": {
                 "zeroRecords": "No data found.",
                 "decimal": ",",
@@ -972,7 +974,7 @@ function inittbSearchResult() {
                 "sSearch": false,
                 "sLengthMenu": "Results :  _MENU_",
             },
-            "scrollX": true,
+            "scrollX": false,
             "language": {
                 "zeroRecords": "No data found.",
                 "decimal": ",",
@@ -1080,13 +1082,13 @@ function inittbSearchResult() {
             BindDDLsubdistrict();
 
             if (mode == "edit") {
-        $("#txtCompanyCode").prop("disabled", true);
+                $("#txtCompanyCode").prop("disabled", true);
                 $("#hTitleEdit").text('แก้ไข ข้อมูลบริษัท');
 
                 getDataById(companyId);
             }
             else {
-        $("#hTitleEdit").text('เพิ่ม ข้อมูลบริษัท');
+                 $("#hTitleEdit").text('เพิ่ม ข้อมูลบริษัท');
                 $("#txtCompanyCode").prop("disabled", false);
 
                 // let form = $('#frNew');
@@ -1130,8 +1132,14 @@ function getDataById(id) {
             success: function (result) {
 
                 if (result != null) {
+               
+                    if (result.Status == "A" || result.Status == "Y" ) {
+                        $('#btn_OnSave_Modal').hide();
+                    } else {
+                        $('#btn_OnSave_Modal').show();
+                    }
+
                     $('#hdCompanyId').val(result.CompanyId);
-                   
 
                     if (result.SubcontractProfileType == "NewSubContract") {
                         $('#rdoCompanyType1').prop('checked', true);
@@ -1255,6 +1263,8 @@ function getDataById(id) {
                     }
 
                     GetAddress(id);
+
+                  
                 }
 
 
