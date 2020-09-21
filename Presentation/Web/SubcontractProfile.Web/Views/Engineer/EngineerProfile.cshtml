@@ -94,685 +94,686 @@
                 </div>
                 <form id="frNew" class="needs-validation" novalidate>
                     <div class="modal-body">
+                        <div class="border-tab">
+                            <ul class="nav nav-tabs mt-3" id="simpletab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="engineer-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Engineer</a>
+                                </li>
 
-                        <ul class="nav nav-tabs  mb-3 mt-3" id="simpletab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="engineer-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Engineer</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="prosonal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="contact" aria-selected="false">Personal</a>
+                                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" id="prosonal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="contact" aria-selected="false">Personal</a>
-                            </li>
+                            </ul>
 
-                        </ul>
-
-                        <div class="tab-content" id="simpletabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div id="Engineer">
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>ชื่อบริษัท :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <label id="lblcompanyName"></label>
-                                        </div>
-
-                                    </div>
-                                   
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label><span style="color:red">*</span>Location Name:</label>
+                            <div class="tab-content mb-4" id="simpletabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div id="Engineer">
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>ชื่อบริษัท :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label id="lblcompanyName"></label>
+                                            </div>
 
                                         </div>
-                                        <div class="col-sm-4">
-                                            <select id="Location" name="Location" style="width:300px" class="form-control" required>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                กรุณาเลือกข้อมูล Location Name.
+
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label><span style="color:red">*</span>Location Name:</label>
+
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <select id="Location" name="Location" style="width:300px" class="form-control" required>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    กรุณาเลือกข้อมูล Location Name.
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label><span style="color:red">*</span> Team Name:</label>
+
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <select id="Team" name="Team" style="width:300px" class="form-control" required>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    กรุณาเลือกข้อมูล Team Name.
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-2">
-                                            <label><span style="color:red">*</span> Team Name:</label>
-
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <select id="Team" name="Team" style="width:300px" class="form-control" required>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                กรุณาเลือกข้อมูล Team Name.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    @*<div class="row">
-                        <div class="col-sm-2">
-                            <label><span style="color:red">*</span> Staff Code:</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" id="StaffCode" style="width:300px" class="form-control" required>
-                            <div class="invalid-feedback">
-                                กรุณาเลือกข้อมูล Staff Code.
+                                        <br />
+                                        @*<div class="row">
+                            <div class="col-sm-2">
+                                <label><span style="color:red">*</span> Staff Code:</label>
                             </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="StaffCode" style="width:300px" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    กรุณาเลือกข้อมูล Staff Code.
+                                </div>
+                            </div>
+
                         </div>
-
-                    </div>
-                    <br />*@
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label><span style="color:red">*</span>Staff Name:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="StaffName" maxlength="100" style="width:300px" class="form-control" required>
-                                            <div class="invalid-feedback">
-                                                กรุณากรอกข้อมูล Staff Name.
+                        <br />*@
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label><span style="color:red">*</span>Staff Name:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="StaffName" maxlength="100" style="width:300px" class="form-control" required>
+                                                <div class="invalid-feedback">
+                                                    กรุณากรอกข้อมูล Staff Name.
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label><span style="color:red">*</span> Staff Name (TH):</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="StaffNameT" style="width:300px" maxlength="100" class="form-control" required>
+                                                <div class="invalid-feedback">
+                                                    กรุณากรอกข้อมูล Staff Name (TH).
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-2">
-                                            <label><span style="color:red">*</span> Staff Name (TH):</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="StaffNameT" style="width:300px" maxlength="100" class="form-control" required>
-                                            <div class="invalid-feedback">
-                                                กรุณากรอกข้อมูล Staff Name (TH).
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>Staff Name(EN):</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="StaffNameE" style="width:300px" maxlength="100" class="form-control">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label>ตำแหน่ง:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="Position" maxlength="100" style="width:300px" class="form-control">
+
                                             </div>
                                         </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>Staff Name(EN):</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="StaffNameE" style="width:300px" maxlength="100" class="form-control">
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label>ตำแหน่ง:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="Position" maxlength="100" style="width:300px" class="form-control">
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>เลขบัตรประชาชน:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="CitizenID" onkeypress="return isNumberKey(event);" maxlength="13" style="width:300px" class="form-control">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label>แนบไฟล์ บัตรประชาชน:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="row col-sm-12">
+                                                    <div class="custom-file mb-4">
+                                                        <input type="hidden" id="hdupfilepersonalAttah" />
+                                                        <input type="file" class="custom-file-input" id="personalAttahFile" aria-describedby="uploadlHelp1" style="width:190px"
+                                                               accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
+                                                        <label class="custom-file-label" for="inputBankAttach" id="lbpersonalAttahFile">เลือกไฟล์</label>
+                                                        <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>เลขบัตรประชาชน:</label>
+
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>ขนาด(size)เสื้อ:</label>
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <input type="text" id="tshirtsize" maxlength="50" style="width:300px" class="form-control">
+                                            </div>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="CitizenID" onkeypress="return isNumberKey(event);" maxlength="13" style="width:300px" class="form-control">
+                                        <br />
+
+                                        <h5>ข้อมูลติดต่อ</h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label><span style="color:red">*</span> เบอร์โทร:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="ContractPhone1" maxlength="100" style="width:300px" class="form-control" required>
+                                                <div class="invalid-feedback">
+                                                    กรุณากรอกข้อมูล เบอร์โทรศัพท์
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label>เบอร์โทรสำรอง:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="ContractPhone2" maxlength="100" style="width:300px" class="form-control">
+                                            </div>
                                         </div>
-                                        <div class="col-sm-2">
-                                            <label>แนบไฟล์ บัตรประชาชน:</label>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>อีเมล์:</label>
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <input type="email" id="ContractEmail" maxlength="100" style="width:300px" class="form-control" required>
+                                                <div class="invalid-feedback">
+                                                    กรุณากรอกข้อมูล อีเมล์ ให้ถูกต้อง.
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <div class="row col-sm-12">
+                                        <br />
+
+                                        <h5>ข้อมูลรถ</h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>
+                                                    ประเภทรถ:
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-4">
+
+                                                <input type="text" id="VehicleType" maxlength="100" style="width:300px" class="form-control">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label>ยี่ห้อรถ:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+
+                                                <input type="text" id="VehicleBrand" maxlength="100" style="width:300px" class="form-control">
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>รุ่นรถ:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="VehicleSerise" maxlength="100" style="width:300px" class="form-control">
+
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label>สีรถ:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+
+                                                <input type="text" id="VehicleColor" maxlength="100" style="width:300px" class="form-control">
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>ปีของรถ:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+
+                                                <input type="text" id="VehicleYear" maxlength="100" style="width:300px" class="form-control">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label>ป้ายทะเบียนรถ:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="VehicleLicense" maxlength="100" style="width:300px" class="form-control">
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>แนบไฟล์รูปรถ:</label>
+                                            </div>
+                                            <div class="col-sm-4">
                                                 <div class="custom-file mb-4">
-                                                    <input type="hidden" id="hdupfilepersonalAttah" />
-                                                    <input type="file" class="custom-file-input" id="personalAttahFile" aria-describedby="uploadlHelp1" style="width:190px"
+                                                    <input type="hidden" id="hdupfilevehicleAttach" />
+                                                    <input type="file" class="custom-file-input" id="vehicleAttachFile" aria-describedby="uploadlHelp1" style="width:190px"
                                                            accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
-                                                    <label class="custom-file-label" for="inputBankAttach" id="lbpersonalAttahFile">เลือกไฟล์</label>
+                                                    <label class="custom-file-label" for="inputBankAttach" id="lbvehicleAttachFile">เลือกไฟล์</label>
                                                     <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
+
                                                 </div>
-
-
                                             </div>
                                         </div>
-                                    </div>
+                                        <br />
 
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>ขนาด(size)เสื้อ:</label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <input type="text" id="tshirtsize" maxlength="50" style="width:300px" class="form-control">
-                                        </div>
-                                    </div>
-                                    <br />
-
-                                    <h5>ข้อมูลติดต่อ</h5>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label><span style="color:red">*</span> เบอร์โทร:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="ContractPhone1" maxlength="100" style="width:300px" class="form-control" required>
-                                            <div class="invalid-feedback">
-                                                กรุณากรอกข้อมูล เบอร์โทรศัพท์
+                                        <h5>ข้อมูลเครื่องมือ</h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>
+                                                    เครื่องวัด OTDR:
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="Toolotdr" maxlength="100" style="width:300px" class="form-control">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label>Tool splicing:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="ToolSplicing" maxlength="100" style="width:300px" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-sm-2">
-                                            <label>เบอร์โทรสำรอง:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="ContractPhone2" maxlength="100" style="width:300px" class="form-control">
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>อีเมล์:</label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <input type="email" id="ContractEmail" maxlength="100" style="width:300px" class="form-control" required>
-                                            <div class="invalid-feedback">
-                                                กรุณากรอกข้อมูล อีเมล์ ให้ถูกต้อง.
+                                        <br />
+
+                                        <h5>ข้อมูลธนาคาร</h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label><span style="color:red">*</span> ชื่อธนาคาร:</label>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <br />
-
-                                    <h5>ข้อมูลรถ</h5>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>
-                                                ประเภทรถ:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-4">
-
-                                            <input type="text" id="VehicleType" maxlength="100" style="width:300px" class="form-control">
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label>ยี่ห้อรถ:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-
-                                            <input type="text" id="VehicleBrand" maxlength="100" style="width:300px" class="form-control">
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>รุ่นรถ:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="VehicleSerise" maxlength="100" style="width:300px" class="form-control">
-
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label>สีรถ:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-
-                                            <input type="text" id="VehicleColor"  maxlength="100" style="width:300px" class="form-control">
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>ปีของรถ:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-
-                                            <input type="text" id="VehicleYear" maxlength="100" style="width:300px" class="form-control">
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label>ป้ายทะเบียนรถ:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="VehicleLicense" maxlength="100" style="width:300px" class="form-control">
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>แนบไฟล์รูปรถ:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="custom-file mb-4">
-                                                <input type="hidden" id="hdupfilevehicleAttach" />
-                                                <input type="file" class="custom-file-input" id="vehicleAttachFile" aria-describedby="uploadlHelp1" style="width:190px"
-                                                       accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
-                                                <label class="custom-file-label" for="inputBankAttach" id="lbvehicleAttachFile">เลือกไฟล์</label>
-                                                <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
-
-
+                                            <div class="col-sm-4">
+                                                <select id="ddlBankName" name="BankName" style="width:300px" class="form-control" required>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    กรุณาเลือกข้อมูล ชื่อธนาคาร
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <br />
-
-                                    <h5>ข้อมูลเครื่องมือ</h5>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>
-                                                เครื่องวัด OTDR:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="Toolotdr" maxlength="100" style="width:300px" class="form-control">
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label>Tool splicing:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="ToolSplicing" maxlength="100" style="width:300px" class="form-control">
-                                        </div>
-                                    </div>
-                                    <br />
-
-                                    <h5>ข้อมูลธนาคาร</h5>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label><span style="color:red">*</span> ชื่อธนาคาร:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <select id="ddlBankName" name="BankName"  style="width:300px" class="form-control" required>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                กรุณาเลือกข้อมูล ชื่อธนาคาร
-                                            </div>
-                                        </div>
-                                        @*<div class="col-sm-2">
-                            <label>Bank Code:</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" id="BankCode" style="width:300px" class="form-control">
-                        </div>*@
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label><span style="color:red">*</span> เลขที่บัญชี:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="AccNo" maxlength="100" style="width:300px" class="form-control" required>
-                                            <div class="invalid-feedback">
-                                                กรุณากรอกข้อมูล เลขที่บัญชี
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label><span style="color:red">*</span> ชื่อบัญชี:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="AccName" maxlength="100" style="width:300px" class="form-control" required>
-                                            <div class="invalid-feedback">
-                                                กรุณากรอกข้อมูล ชื่อบัญชี
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
+                                            @*<div class="col-sm-2">
+                                <label>Bank Code:</label>
                             </div>
-                            <div class="tab-pane fade" id="personal" role="tabpanel" aria-labelledby="profile-tab">
-                                <div id="Personal">
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label><span style="color:red">*</span> เลขบัตรประชาชน :</label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <input type="text" id="CitizenID2" onkeypress="return isNumberKey(event);" maxlength="13" style="width:300px" class="form-control" required>
-                                            <div class="invalid-feedback">
-                                                กรุณากรอกข้อมูล เลขบัตรประชาชน
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label><span style="color:red">*</span> คำนำหน้าชื่อ :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <select id="Title" name="Title" style="width:300px" class="form-control" required>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                กรุณาเลือกข้อมูล คำนำหน้าชื่อ
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label><span style="color:red">*</span> ชื่อ-นามสกุล(ไทย):</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="FullNameT" maxlength="100" style="width:300px" class="form-control" required>
-                                            <div class="invalid-feedback">
-                                                กรุณากรอกข้อมูล ชื่อ-นามสกุล(ไทย)
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label><span style="color:red">*</span> ชื่อ-นามสกุล(อังกฤษ):</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="FullNameE" maxlength="100" style="width:300px" class="form-control" required>
-                                            <div class="invalid-feedback">
-                                                กรุณากรอกข้อมูล ชื่อ-นามสกุล(อังกฤษ)
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label>วันเกิด :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="row col-sm-12">
-                                                @*<input type="text" id="" style="width:280px" class="form-control">*@
-                                                <div class='input-group p-0 date' id='dateBirthDate'>
-                                                    <input type='text' class="form-control" id="BirthDate" />
-                                                    <div class="input-group-append input-group-addon">
-                                                        <span class="input-group-text px-4">
-                                                            <i class="fa fa-calendar"></i>
-                                                        </span>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>เพศ:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="radio" id="rdoMale" name="Gender" value="M" checked>
-                                            <label for="Male">ชาย</label>&nbsp;&nbsp;
-                                            <input type="radio" id="rdoFeMale" name="Gender" value="F">
-                                            <label for="FeMale">หญิง</label>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label>เชื่อชาติ :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="Race" maxlength="100" class="form-control" style="width:300px">
-
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>สัญชาติ :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="Nationality" maxlength="100" class="form-control" style="width:300px">
-                                            @*<select id="Nationality" name="Nationality" style="width:300px" class="form-control">
-                            </select>*@
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label>ศาสนา :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="Religion" maxlength="100" class="form-control" style="width:300px">
-                                            @*<select id="Religion" name="Religion" style="width:300px" class="form-control">
-                            </select>*@
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>ประเภทบัตร :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="Identity" maxlength="100" style="width:300px" class="form-control">
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label>อีเมล์ :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="email" id="ContractEmail2" maxlength="100" style="width:300px" class="form-control">
-                                            <div class="invalid-feedback">
-                                                กรุณากรอกข้อมูล อีเมล์ให้ถูกต้อง
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>ที่อยู่ตามบัตรประชาชน :</label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <textarea id="IdentiAddress"  class="form-control" rows="2" style="width:300px;"></textarea>
-                                        </div>
-                                    </div>
-                                    <br />
-
-                                    <h5>ข้อมูลติดต่อ</h5>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label><span style="color:red">*</span> เบอร์โทรศัพท์ :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="PersonalContractPhone1" maxlength="100" style="width:300px" class="form-control" required>
-                                            <div class="invalid-feedback">
-                                                กรุณากรอกข้อมูล เบอร์โทรศัพท์
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label>เบอร์โทรศัพท์สำรอง :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="PersonalContractPhone2" maxlength="100" style="width:300px" class="form-control">
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>อีเมล์ :</label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <input type="email" id="ContractMail" maxlength="100" style="width:300px" class="form-control">
-                                            <div class="invalid-feedback">
-                                                กรุณากรอกข้อมูล อีเมล์ให้ถูกต้อง
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br />
-
-                                    <h5>ข้อมูล ประสบการณ์การทำงาน</h5>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>ใบอนุญาตทำงานเลขที่ :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="WorkPermit" maxlength="100" style="width:300px" class="form-control">
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label>แนบไฟล์ ใบอนุญาตทำงาน:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="custom-file mb-4">
-                                                <input type="hidden" id="hdupfileWorkPermitAttach" />
-                                                <input type="file" class="custom-file-input" id="fileWorkPermitAttach" aria-describedby="uploadlHelp1" style="width:220px"
-                                                        accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
-                                                <label class="custom-file-label" for="fileWorkPermitAttach" id="lbfileWorkPermitAttach">เลือกไฟล์</label>
-                                                <small id="uploadlHelpwork" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
-
-                                            </div>
-                                            @*<div class="row col-sm-12">
-
-
+                            <div class="col-sm-4">
+                                <input type="text" id="BankCode" style="width:300px" class="form-control">
                             </div>*@
                                         </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>รูปโปรไฟล์ :</label>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label><span style="color:red">*</span> เลขที่บัญชี:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="AccNo" maxlength="100" style="width:300px" class="form-control" required>
+                                                <div class="invalid-feedback">
+                                                    กรุณากรอกข้อมูล เลขที่บัญชี
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label><span style="color:red">*</span> ชื่อบัญชี:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="AccName" maxlength="100" style="width:300px" class="form-control" required>
+                                                <div class="invalid-feedback">
+                                                    กรุณากรอกข้อมูล ชื่อบัญชี
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <div class="custom-file mb-4">
-                                                <input type="hidden" id="hdupfileProfileAttach" />
-                                                <input type="file" class="custom-file-input" id="fileProfileAttach" aria-describedby="uploadlHelp1" style="width:220px"
-                                                        accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
-                                                <label class="custom-file-label" for="fileProfileAttach" id="lbfileProfileAttach">เลือกไฟล์</label>
-                                                <small id="uploadlHelpprofile" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane fade" id="personal" role="tabpanel" aria-labelledby="profile-tab">
+                                    <div id="Personal">
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label><span style="color:red">*</span> เลขบัตรประชาชน :</label>
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <input type="text" id="CitizenID2" onkeypress="return isNumberKey(event);" maxlength="13" style="width:300px" class="form-control" required>
+                                                <div class="invalid-feedback">
+                                                    กรุณากรอกข้อมูล เลขบัตรประชาชน
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label><span style="color:red">*</span> คำนำหน้าชื่อ :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <select id="Title" name="Title" style="width:300px" class="form-control" required>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    กรุณาเลือกข้อมูล คำนำหน้าชื่อ
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label><span style="color:red">*</span> ชื่อ-นามสกุล(ไทย):</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="FullNameT" maxlength="100" style="width:300px" class="form-control" required>
+                                                <div class="invalid-feedback">
+                                                    กรุณากรอกข้อมูล ชื่อ-นามสกุล(ไทย)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label><span style="color:red">*</span> ชื่อ-นามสกุล(อังกฤษ):</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="FullNameE" maxlength="100" style="width:300px" class="form-control" required>
+                                                <div class="invalid-feedback">
+                                                    กรุณากรอกข้อมูล ชื่อ-นามสกุล(อังกฤษ)
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label>วันเกิด :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="row col-sm-12">
+                                                    @*<input type="text" id="" style="width:280px" class="form-control">*@
+                                                    <div class='input-group p-0 date' id='dateBirthDate'>
+                                                        <input type='text' class="form-control" id="BirthDate" />
+                                                        <div class="input-group-append input-group-addon">
+                                                            <span class="input-group-text px-4">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>เพศ:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="radio" id="rdoMale" name="Gender" value="M" checked>
+                                                <label for="Male">ชาย</label>&nbsp;&nbsp;
+                                                <input type="radio" id="rdoFeMale" name="Gender" value="F">
+                                                <label for="FeMale">หญิง</label>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label>เชื่อชาติ :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="Race" maxlength="100" class="form-control" style="width:300px">
 
                                             </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>สัญชาติ :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="Nationality" maxlength="100" class="form-control" style="width:300px">
+                                                @*<select id="Nationality" name="Nationality" style="width:300px" class="form-control">
+                                </select>*@
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label>ศาสนา :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="Religion" maxlength="100" class="form-control" style="width:300px">
+                                                @*<select id="Religion" name="Religion" style="width:300px" class="form-control">
+                                </select>*@
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>ประเภทบัตร :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="Identity" maxlength="100" style="width:300px" class="form-control">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label>อีเมล์ :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="email" id="ContractEmail2" maxlength="100" style="width:300px" class="form-control">
+                                                <div class="invalid-feedback">
+                                                    กรุณากรอกข้อมูล อีเมล์ให้ถูกต้อง
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>ที่อยู่ตามบัตรประชาชน :</label>
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <textarea id="IdentiAddress" class="form-control" rows="2" style="width:300px;"></textarea>
+                                            </div>
+                                        </div>
+                                        <br />
 
+                                        <h5>ข้อมูลติดต่อ</h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label><span style="color:red">*</span> เบอร์โทรศัพท์ :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="PersonalContractPhone1" maxlength="100" style="width:300px" class="form-control" required>
+                                                <div class="invalid-feedback">
+                                                    กรุณากรอกข้อมูล เบอร์โทรศัพท์
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label>เบอร์โทรศัพท์สำรอง :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="PersonalContractPhone2" maxlength="100" style="width:300px" class="form-control">
+                                            </div>
                                         </div>
-                                        @*<div class="col-sm-2">
-                            <label>Course skill :</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" id="CourseSkill" style="width:300px" class="form-control">
-                        </div>*@
-                                    </div>
-                                    <br />
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>อีเมล์ :</label>
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <input type="email" id="ContractMail" maxlength="100" style="width:300px" class="form-control">
+                                                <div class="invalid-feedback">
+                                                    กรุณากรอกข้อมูล อีเมล์ให้ถูกต้อง
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
 
-                                    <h5>ข้อมูลการศึกษา</h5>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>การศึกษา :</label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <textarea id="Education" class="form-control" rows="2" style="width:880px;"></textarea>
-                                        </div>
-                                    </div>
-                                    <br />
+                                        <h5>ข้อมูล ประสบการณ์การทำงาน</h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>ใบอนุญาตทำงานเลขที่ :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="WorkPermit" maxlength="100" style="width:300px" class="form-control">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label>แนบไฟล์ ใบอนุญาตทำงาน:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="custom-file mb-4">
+                                                    <input type="hidden" id="hdupfileWorkPermitAttach" />
+                                                    <input type="file" class="custom-file-input" id="fileWorkPermitAttach" aria-describedby="uploadlHelp1" style="width:220px"
+                                                           accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
+                                                    <label class="custom-file-label" for="fileWorkPermitAttach" id="lbfileWorkPermitAttach">เลือกไฟล์</label>
+                                                    <small id="uploadlHelpwork" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
-                                    <h5>ข้อมูล ภาษา</h5>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>ภาษา :</label>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <input id="chkListenTH" type="checkbox" value="Y" />
-                                            <label>Listening Thai</label><br />
-                                            <input id="chkSpeakingTH" type="checkbox" value="Y" />
-                                            <label>Speaking Thai</label><br />
-                                            <input id="chkReadingTH" type="checkbox" value="Y" />
-                                            <label>Reading Thai</label><br />
-                                            <input id="chkWritingTH" type="checkbox" value="Y" />
-                                            <label>Writing Thai</label><br />
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <input id="chkListenEN" type="checkbox" value="Y" />
-                                            <label>Listening Eng</label><br />
-                                            <input id="chkSpeakingEN" type="checkbox" value="Y" />
-                                            <label>Speaking Eng</label><br />
-                                            <input id="chkReadingEN" type="checkbox" value="Y" />
-                                            <label>Reading Eng</label><br />
-                                            <input id="chkWritingEN" type="checkbox" value="Y" />
-                                            <label>Writing Eng</label><br />
-                                        </div>
-                                    </div>
-                                    <br />
+                                                </div>
+                                                @*<div class="row col-sm-12">
 
-                                    <h5>ข้อมูลใบรับรอง</h5>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>ประเภทใบรับรอง :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="CertificateType" maxlength="100" style="width:300px" class="form-control">
 
+                                </div>*@
+                                            </div>
                                         </div>
-                                        <div class="col-sm-2">
-                                            <label>ใบรับรองเลขที่ :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="CertificateNo" maxlength="100" style="width:300px" class="form-control">
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label>วันหมดอายุ :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="row col-sm-12">
-                                                @*<input type="text" id="" style="width:280px" class="form-control">
-        <input id="dateCertificateDate" style="width:220px" type="text" placeholder="Select Date.." data-provide="datepicker" >*@
-                                                <div class='input-group p-0 date' id='datepickerCertificateDAte'>
-                                                    <input type='text' class="form-control" id="dateCertificateDAte" />
-                                                    <div class="input-group-append input-group-addon">
-                                                        <span class="input-group-text px-4">
-                                                            <i class="fa fa-calendar"></i>
-                                                        </span>
-                                                    </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>รูปโปรไฟล์ :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="custom-file mb-4">
+                                                    <input type="hidden" id="hdupfileProfileAttach" />
+                                                    <input type="file" class="custom-file-input" id="fileProfileAttach" aria-describedby="uploadlHelp1" style="width:220px"
+                                                           accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
+                                                    <label class="custom-file-label" for="fileProfileAttach" id="lbfileProfileAttach">เลือกไฟล์</label>
+                                                    <small id="uploadlHelpprofile" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
                                                 </div>
 
                                             </div>
+                                            @*<div class="col-sm-2">
+                                <label>Course skill :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="CourseSkill" style="width:300px" class="form-control">
+                            </div>*@
                                         </div>
-                                        <div class="col-sm-2">
-                                            <label>แนบไฟล์ ใบรับรอง :</label>
+                                        <br />
+
+                                        <h5>ข้อมูลการศึกษา</h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>การศึกษา :</label>
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <textarea id="Education" class="form-control" rows="2" style="width:880px;"></textarea>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <div class="custom-file mb-4">
-                                                <input type="hidden" id="hdupfileCertificateAttach" />
-                                                <input type="file" class="custom-file-input" id="fileCertificateAttach" aria-describedby="uploadlHelp1" style="width:220px"
-                                                        accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
-                                                <label class="custom-file-label" for="fileCertificateAttach" id="lbfileCertificateAttach">เลือกไฟล์</label>
-                                                <small id="uploadlHelpCertificateAttach" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+                                        <br />
+
+                                        <h5>ข้อมูล ภาษา</h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>ภาษา :</label>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input id="chkListenTH" type="checkbox" value="Y" />
+                                                <label>Listening Thai</label><br />
+                                                <input id="chkSpeakingTH" type="checkbox" value="Y" />
+                                                <label>Speaking Thai</label><br />
+                                                <input id="chkReadingTH" type="checkbox" value="Y" />
+                                                <label>Reading Thai</label><br />
+                                                <input id="chkWritingTH" type="checkbox" value="Y" />
+                                                <label>Writing Thai</label><br />
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <input id="chkListenEN" type="checkbox" value="Y" />
+                                                <label>Listening Eng</label><br />
+                                                <input id="chkSpeakingEN" type="checkbox" value="Y" />
+                                                <label>Speaking Eng</label><br />
+                                                <input id="chkReadingEN" type="checkbox" value="Y" />
+                                                <label>Reading Eng</label><br />
+                                                <input id="chkWritingEN" type="checkbox" value="Y" />
+                                                <label>Writing Eng</label><br />
+                                            </div>
+                                        </div>
+                                        <br />
+
+                                        <h5>ข้อมูลใบรับรอง</h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>ประเภทใบรับรอง :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="CertificateType" maxlength="100" style="width:300px" class="form-control">
 
                                             </div>
+                                            <div class="col-sm-2">
+                                                <label>ใบรับรองเลขที่ :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="CertificateNo" maxlength="100" style="width:300px" class="form-control">
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>วันหมดอายุ :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="row col-sm-12">
+                                                    @*<input type="text" id="" style="width:280px" class="form-control">
+                                    <input id="dateCertificateDate" style="width:220px" type="text" placeholder="Select Date.." data-provide="datepicker" >*@
+                                                    <div class='input-group p-0 date' id='datepickerCertificateDAte'>
+                                                        <input type='text' class="form-control" id="dateCertificateDAte" />
+                                                        <div class="input-group-append input-group-addon">
+                                                            <span class="input-group-text px-4">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </span>
+                                                        </div>
 
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label>แนบไฟล์ ใบรับรอง :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="custom-file mb-4">
+                                                    <input type="hidden" id="hdupfileCertificateAttach" />
+                                                    <input type="file" class="custom-file-input" id="fileCertificateAttach" aria-describedby="uploadlHelp1" style="width:220px"
+                                                           accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
+                                                    <label class="custom-file-label" for="fileCertificateAttach" id="lbfileCertificateAttach">เลือกไฟล์</label>
+                                                    <small id="uploadlHelpCertificateAttach" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <br />
+
+                                        <h5>ข้อมูลธนาคาร</h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label> <span style="color:red">*</span> ชื่อธนาคาร :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <select id="BankName2" name="BankName2" style="width:300px" class="form-control" required>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    กรุณาเลือกข้อมูล ชื่อธนาคาร
+                                                </div>
+                                            </div>
 
                                         </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label> <span style="color:red">*</span> เลขที่บัญชี :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="AccNo2" maxlength="100" style="width:300px" class="form-control" required>
+                                                <div class="invalid-feedback">
+                                                    กรุณากรอกข้อมูล เลขที่บัญชี
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label><span style="color:red">*</span> ชื่อบัญชี :</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="AccName2" maxlength="100" style="width:300px" class="form-control" required>
+                                                <div class="invalid-feedback">
+                                                    กรุณากรอกข้อมูล ชื่อบัญชี
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+
                                     </div>
-                                    <br />
 
-                                    <h5>ข้อมูลธนาคาร</h5>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label> <span style="color:red">*</span> ชื่อธนาคาร :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <select id="BankName2" name="BankName2" style="width:300px" class="form-control" required>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                กรุณาเลือกข้อมูล ชื่อธนาคาร
-                                            </div>
-                                        </div>
-                                     
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label> <span style="color:red">*</span> เลขที่บัญชี :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="AccNo2" maxlength="100" style="width:300px" class="form-control" required>
-                                            <div class="invalid-feedback">
-                                                กรุณากรอกข้อมูล เลขที่บัญชี
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label><span style="color:red">*</span> ชื่อบัญชี :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="AccName2" maxlength="100" style="width:300px" class="form-control" required>
-                                            <div class="invalid-feedback">
-                                                กรุณากรอกข้อมูล ชื่อบัญชี
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br />
-                                
                                 </div>
-
                             </div>
                         </div>
-                        <br />
+                       
                         <input type="hidden" id="hdMode">
                         <input type="hidden" id="hdEngineerId">
                         <input type="hidden" id="hdCompanyId">
                         <input type="hidden" id="hdPersonalId">
 
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
-                            ปิด
-                        </button>
-                        <button id="btnSave" type="button" class="btn btn-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                            บันทึก
-                        </button>
-                    </div>
-                </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                                ปิด
+                            </button>
+                            <button id="btnSave" type="button" class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                บันทึก
+                            </button>
+                        </div>
+</form>
 
             </div>
         </div>

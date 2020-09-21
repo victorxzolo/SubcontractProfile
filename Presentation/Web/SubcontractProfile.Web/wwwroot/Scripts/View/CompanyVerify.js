@@ -514,19 +514,11 @@ $(document).ready(function () {
 
     $('#btnnotapprove').click(function () {
 
-        var Error = validateform();
-
-        if (!Error) {
-            onSaveCompanyProfile("NotApprove");
-        }
+        onSaveCompanyProfileVerified("N");
     });
 
     $('#btnapprove').click(function () {
-        var Error = validateform();
-      
-        if (!Error) {
-            onSaveCompanyProfile("Approve");
-        }
+        onSaveCompanyProfileVerified("Y");
     });
 
     $('#btnEdit').click(function () {
@@ -641,6 +633,51 @@ $(document).ready(function () {
         }
     });
 });
+
+function onSaveCompanyProfileVerified(status) {
+
+    var data = new FormData();
+
+    data.append("CompanyId", $('#hdCompanyId').val());
+
+    if (status != "") {
+        data.append("status", status);
+    }
+
+    data.append("RemarkForSub", $('#txtRemarkForSub').val());
+
+    var urlOnSave = url.replace('Action', 'OnUpdateByVerified');
+    $.ajax({
+        url: urlOnSave,
+        type: 'POST',
+        async: false,
+        data: data,
+        processData: false,
+        contentType: false,
+        //data: {
+        //    model: company,
+        //    status: status,
+        //    contractstart: $('#datecontractstart').val(),
+        //    contractend: $('#datecontractend').val()
+        //},
+        //dataType: "json",
+        success: function (result) {
+            if (result.Response.Status) {
+                bootbox.alert(result.Response.Message);
+            }
+            else {
+                bootbox.alert(result.Response.Message);
+
+            }
+        },
+        error: function (xhr) {
+            console.log(xhr);
+        }
+
+    });
+
+}
+
 
 function onSaveCompanyProfile(status) {
     var chksubcontract_type = null;

@@ -347,7 +347,7 @@ function inittbSearchconfirmpayment() {
                         action = "Confrim";
                         status = "N";
                     }
-                    return '<a href="javascript:void(0);" onclick="GetIdpayment(\'' + data.PaymentId + '\',\'' + status + '\')"><u>' + action + '</u></a>';
+                    return '<input type="button" value=' + action + ' class="btn btn-primary" onclick="GetIdpayment(\'' + data.PaymentId + '\',\'' + status + '\')"></input>';
                 },
 
             },  

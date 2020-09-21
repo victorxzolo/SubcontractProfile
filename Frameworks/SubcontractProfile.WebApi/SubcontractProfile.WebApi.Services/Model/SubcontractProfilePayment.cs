@@ -116,6 +116,8 @@ namespace SubcontractProfile.WebApi.Services.Model
         public System.DateTime? PaymentDatetimeFrom { get; set; }
         public System.DateTime? PaymentDatetimeTo { get; set; }
 
+        public string TotalPrice { get; set; }
+       
         public object Clone()
         {
             return this.MemberwiseClone();

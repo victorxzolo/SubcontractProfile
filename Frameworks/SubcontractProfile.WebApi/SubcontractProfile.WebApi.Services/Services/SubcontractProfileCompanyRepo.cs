@@ -493,8 +493,6 @@ namespace SubcontractProfile.WebApi.Services
         {
             var p = new DynamicParameters();
             p.Add("@company_id", subcontractProfileCompany.CompanyId);
-            p.Add("@contract_start_date", subcontractProfileCompany.ContractStartDate);
-            p.Add("@contract_end_date", subcontractProfileCompany.ContractEndDate);
             p.Add("@update_by", subcontractProfileCompany.UpdateBy);
             p.Add("@status", subcontractProfileCompany.Status);
 

@@ -102,6 +102,7 @@ namespace SubcontractProfile.Web.Model
 
         public Guid file_id_Slip { get; set; }
 
+        public string TotalPrice { get; set; }
         public object Clone()
         {
             return this.MemberwiseClone();

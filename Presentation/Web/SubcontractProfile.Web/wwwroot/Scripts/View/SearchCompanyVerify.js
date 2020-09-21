@@ -263,8 +263,8 @@ $(document).ready(function () {
                             strCreateDate = sDay + '/' + sMonth + '/' + sYear + ' ' + sHour + ':' + sMinute;
                         }
                         return strCreateDate;
-                    } },
-                { "data": "UpdateBy" }
+                    } }
+                //,{ "data": "UpdateBy" }
 
             ],
             "order": [[0, "desc"]],

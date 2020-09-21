@@ -280,7 +280,7 @@ namespace SubcontractProfile.Web.Controllers
                 var companyId = model.CompanyId;
 
                 model.UpdateDate = DateTime.Now;
-                model.UpdateBy = datauser.UserId.ToString();
+                model.UpdateBy = datauser.Username;
 
                 //var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompany");
                 //if (dataUploadfile != null && dataUploadfile.Count != 0)

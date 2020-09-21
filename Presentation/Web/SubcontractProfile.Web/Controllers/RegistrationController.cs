@@ -928,8 +928,91 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { response = output });
         }
 
-
         [HttpPost]
+        public ActionResult OnUpdateByVerified(SubcontractProfileCompanyModel model, string status)
+        {
+            ResponseModel res = new ResponseModel();
+            string user = "";
+        
+            if (dataUser == null)
+            {
+                getsession();
+
+            }
+
+            try
+            {
+
+
+                #region Verify
+     
+                model.UpdateBy = dataUser.Username;
+
+                #endregion
+
+                #region Update Company for AIS
+
+                if (status == "Approve")
+                {
+                    model.Status = "Y";
+                }
+                else if (status == "NotApprove")
+                {
+                    model.Status = "N";
+                }
+
+                var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "UpdateVerify"));
+
+                HttpClient clientCompany = new HttpClient();
+                clientCompany.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string str = JsonConvert.SerializeObject(model);
+                var httpContentCompany = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+
+                HttpResponseMessage responseCompany = clientCompany.PutAsync(uriCompany, httpContentCompany).Result;
+
+                if (responseCompany.IsSuccessStatusCode)
+                {
+                    var result = responseCompany.Content.ReadAsStringAsync().Result;
+                    //data
+                    var output = JsonConvert.DeserializeObject<bool>(result);
+
+                    if (output)
+                    {
+                        res.Status = true;
+                        res.Message = "Update Success";
+                        res.StatusError = "0";
+                    }
+                    else
+                    {
+                        res.Status = false;
+                        res.Message = "Company Data is not correct, Please Check Data or Contact System Admin";
+                        res.StatusError = "-1";
+                    }
+                }
+                else
+                {
+                    res.Status = false;
+                    res.Message = "Company is not correct, Please Check Data or Contact System Admin";
+                    res.StatusError = "-1";
+                }
+                #endregion
+
+
+            }
+            catch (Exception e)
+            {
+                res.Status = false;
+                res.Message = e.Message;
+                res.StatusError = "-1";
+            }
+
+            return Json(new { Response = res });
+
+        }
+
+            [HttpPost]
         public async Task<IActionResult> OnSave(SubcontractProfileCompanyModel model,string status,string? contractstart,string? contractend)
         {
             bool resultGetFile = true;
