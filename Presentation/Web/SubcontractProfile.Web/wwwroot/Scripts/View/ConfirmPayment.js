@@ -150,7 +150,7 @@ $(document).ready(function () {
 
                 event.preventDefault();
                 event.stopPropagation();
-
+                
             }
 
             else {
@@ -234,14 +234,26 @@ function ValidateUpload() {
 
 function ValidateAmountTransfer() {
     var hasError = false;
-    if ($('#amount_transfer').val() == "" //|| $('#amount_transfer').val() == "0"
-    ) {
+    if ($('#amount_transfer').val() == "") {
         hasError = true;
         $("#amount_transfer").attr('required', 'required');
+        $("#amount_transfer").removeClass("is-valid");
+        $("#amount_transfer").addClass("is-invalid");
     }
     else {
-        $("#amount_transfer").removeAttr('required');
+        if (parseFloat($('#amount_transfer').val()) == 0) {
+            hasError = true;
+            $("#amount_transfer").attr('required', 'required');
+            $("#amount_transfer").removeClass("is-valid");
+            $("#amount_transfer").addClass("is-invalid");
+        }
+        else {
+            $("#amount_transfer").removeAttr('required');
+            $("#amount_transfer").addClass("is-valid");
+            $("#amount_transfer").removeClass("is-invalid");
+        }
     }
+    
 
 
 
