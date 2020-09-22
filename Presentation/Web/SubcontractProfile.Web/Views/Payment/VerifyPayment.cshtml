@@ -123,14 +123,14 @@
                                 <label>ช่องทางการชำระเงิน </label>  <span style="color:red">*</span>
                             </div>
                             <div class="col-sm-7">
-                                <select class="form-control" id="ddlpaymenttransfer"></select>
+                                <select class="form-control" id="ddlpaymenttransfer" disabled></select>
                             </div>
                         </div>
                         <br />
                         <div class="row">
                             <div class="col-sm-3">
                             </div>
-                            <div class="col-sm-7 rdbank_payment">
+                            <div class="col-sm-7 rdbank_payment" disabled>
 
                             </div>
                         </div>
@@ -140,8 +140,8 @@
                                 <label>วันที่ชำระเงิน </label>  <span style="color:red">*</span>
                             </div>
                             <div class="col-sm-7">
-                                <div class='input-group date p-0' id='datetimepicker'>
-                                    <input type='text' class="form-control" id="dateverify" />
+                                <div class='input-group date p-0' id='datetimepicker' >
+                                    <input type='text' class="form-control" id="dateverify"disabled />
                                     <div class="input-group-append input-group-addon">
                                         <span class="input-group-text px-4">
                                             <i class="fa fa-calendar"></i>
@@ -157,8 +157,8 @@
                                 <label>เวลาชำระเงิน </label>  <span style="color:red">*</span>
                             </div>
                             <div class="col-sm-7">
-                                <div class='input-group date p-0 ' id='timepicker'>
-                                    <input type='text' class="form-control" id="timepayverify" />
+                                <div class='input-group date p-0 ' id='timepicker' >
+                                    <input type='text' class="form-control" id="timepayverify" disabled />
                                     <div class="input-group-append input-group-addon">
                                         <span class="input-group-text px-4">
                                             <i class="fa fa-clock-o"></i>
@@ -183,7 +183,7 @@
                                 <label>ธนาคารต้นทางที่โอน </label>  <span style="color:red">*</span>
                             </div>
                             <div class="col-sm-7">
-                                <select class="form-control" id="ddlbank"></select>
+                                <select class="form-control" id="ddlbank" disabled></select>
                             </div>
                         </div>
                         <br />
@@ -192,7 +192,7 @@
                                 <label>สาขา </label>  <span style="color:red">*</span>
                             </div>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" id="txtbranch" placeholder="" />
+                                <input type="text" class="form-control" id="txtbranch" placeholder=""  disabled/>
                             </div>
                         </div>
                         <br />
@@ -202,8 +202,8 @@
                             </div>
                             <div class="col-sm-7">
                                 <input type="hidden" id="hdupfiletransfer" />
-                                <input type="file" class="custom-file-input inputValidation" id="transfer_file" required
-                                       accept="image/jpeg,image/gif,image/png,application/pdf" />
+                                <input type="file" class="custom-file-input inputValidation" id="transfer_file"
+                                       accept="image/jpeg,image/gif,image/png,application/pdf" disabled />
                                 <label class="custom-file-label" for="customFile" id="lbuploadslip">Choose file</label>
 
                                 <div id="targetDiv">
@@ -225,7 +225,7 @@
                                 <label>หมายเหตุ </label>
                             </div>
                             <div class="col-sm-7">
-                                <textarea id="txtremark" name="remark" rows="3" class="form-control"> </textarea>
+                                <textarea id="txtremark" name="remark" rows="3" class="form-control" disabled> </textarea>
                             </div>
                         </div>
                         <br />
@@ -281,7 +281,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
                         ปิด
                     </button>
-                    <button id="btnSave" type="submit" class="btn btn-primary">
+                    <button id="btnSave" type="button" class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
                         บันทึก
                     </button>

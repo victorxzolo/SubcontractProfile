@@ -258,7 +258,7 @@ namespace SubcontractProfile.Web.Controllers
                     getsession();
                 }
                 Payment.ModifiedDate = DateTime.Now;
-                Payment.ModifiedBy = dataUser.UserId.ToString();
+                Payment.ModifiedBy = dataUser.Username;
                 Payment.verifiedDate = DateTime.Now;
 
                 if (Payment.datetimepayment != null)
@@ -267,10 +267,12 @@ namespace SubcontractProfile.Web.Controllers
                     Payment.PaymentDatetime = datefrom;
                 }
 
-                
-                if (await Uploadfile(Payment.FileSilp, Payment.PaymentId, dataUser.UserId.ToString()))
+                if(Payment.FileSilp !=null)
                 {
+                    await Uploadfile(Payment.FileSilp, Payment.PaymentId, dataUser.UserId.ToString());
                     Payment.SlipAttachFile = Payment.FileSilp.FileName;
+                }
+                  
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     string uriString = string.Format("{0}", strpathAPI + "Payment/Update");
                     var httpContent = new StringContent(JsonConvert.SerializeObject(Payment), Encoding.UTF8, "application/json");
@@ -280,11 +282,7 @@ namespace SubcontractProfile.Web.Controllers
                         dataresponse = response.Content.ReadAsStringAsync().Result;
                         status= JsonConvert.DeserializeObject<bool>(dataresponse);
                     }
-                }
-                else
-                {
-                    status = false;
-                }
+
                 
             }
             catch (Exception ex)
@@ -643,14 +641,15 @@ namespace SubcontractProfile.Web.Controllers
             string mess = "";
             try
             {
+                var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userAISLogin");
+
                 SubcontractProfilePaymentModel model = new SubcontractProfilePaymentModel();
                 model.PaymentId = paymentId;
                 model.Status = status;
                 DateTime dateverify = DateTime.ParseExact(verifydate, "dd/MM/yyyy", null);
                 model.verifiedDate = dateverify;
                 model.remarkForSub = remark_for_sub;
-                model.ModifiedBy = "SYSTEM";//Get Session from SSO********
-                model.ModifiedDate = DateTime.Now;
+                model.ModifiedBy = userProfile.Username;//Get Session from SSO********
 
                 var uriPayment = new Uri(Path.Combine(strpathAPI, "Payment", "UpdateByVerified"));
                 HttpClient clientCompany = new HttpClient();
@@ -1160,6 +1159,8 @@ namespace SubcontractProfile.Web.Controllers
             }
             dataUser = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(_httpContextAccessor.HttpContext.Session, "userLogin");
         }
+
+   
 
     }
 }

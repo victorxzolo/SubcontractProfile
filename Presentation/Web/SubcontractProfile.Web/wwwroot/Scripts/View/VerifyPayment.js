@@ -110,9 +110,25 @@ $(document).ready(function () {
         oTableSearch.ajax.reload();
     });
 
-    //$('#btnSave').click(function () {
-    //    OnSave();
-    //});
+    $('#btnSave').click(function () {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            if ($('#ddlpaymentstatusais option').filter(':selected').val() == "" || $('#dateverifyais').val() == "" ) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+            }
+
+            else {
+                OnSave();
+                return true;
+
+            }
+            form.classList.add('was-validated');
+        });
+       
+    });
 
     $('#btnClearModal').click(function () {
         ClearDataModal();
@@ -164,30 +180,30 @@ $(document).ready(function () {
 });
 
 
-'use strict';
-window.addEventListener('load', function () {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function (form) {
-        form.addEventListener('submit', function (event) {
+//'use strict';
+//window.addEventListener('load', function () {
+//    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+//    var forms = document.getElementsByClassName('needs-validation');
+//    // Loop over them and prevent submission
+//    var validation = Array.prototype.filter.call(forms, function (form) {
+//        form.addEventListener('submit', function (event) {
 
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
+//            if (form.checkValidity() === false) {
+//                event.preventDefault();
+//                event.stopPropagation();
 
-            } else {
+//            } else {
 
-                OnSave();
-                inittbSearchResult();
+//                OnSave();
+//                inittbSearchResult();
 
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-        }, false);
-    });
-}, false);
+//                event.preventDefault();
+//                event.stopPropagation();
+//            }
+//            form.classList.add('was-validated');
+//        }, false);
+//    });
+//}, false);
 
 function inittbSearchResult() {
     var urlSearchVerify = url.replace('Action', 'SearchVerify');
@@ -239,9 +255,30 @@ function inittbSearchResult() {
             },
             { "data": "companyNameTh", "width": "20%" },
             { "data": "taxId", "width": "20%" },
-            { "data": "PaymentDatetime", "width": "20%" },
+            {
+                "data": "PaymentDatetime", "width": "20%", "render": function (data, type, row) {
+                    if (type === "sort" || type === "type") {
+                        return data;
+                    }
+                    if (moment(data).format("DD/MM/YYYY HH:MM") != 'Invalid date') {
+                        return moment(data).format("DD/MM/YYYY HH:MM");
+                    }
+                    else {
+                        return data;
+                    }
+
+                }
+
+            },
             { "data": "Status", "width": "20%" },
-            { "data": "AmountTransfer", "width": "20%" }
+            {
+                "data": "AmountTransfer", "width": "20%", "render": function (data, type, row) {
+                    if (type === "sort" || type === "type") {
+                        return data;
+                    }
+                    return formatMoney(data);
+                }
+            }
 
         ],
         "order": [[0, "desc"]],
@@ -413,12 +450,13 @@ function getDataById(id) {
                 $('#txtremark').val(result.Remark);
 
                 var channel = result.PaymentChannal
-                $(':radio').each(function (i) {
-
-                    if (channel == $(this).val()) {
-                        $(this).prop('checked', true);
-                    }
-                });
+                if (result.transfer_to_account != null) {
+                    $('.rdbank_payment input[name=optionsRadios]').each(function (i) {
+                        if (result.transfer_to_account == $(this).val()) {
+                            $(this).prop('checked', true);
+                        }
+                    });
+                }
                DownloadFileSlip();
             }
 
@@ -525,4 +563,19 @@ function GetStatus() {
         }
     });
 
+}
+
+
+function formatMoney(number, decPlaces, decSep, thouSep) {
+    decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 2 : decPlaces,
+        decSep = typeof decSep === "undefined" ? "." : decSep;
+    thouSep = typeof thouSep === "undefined" ? "," : thouSep;
+    var sign = number < 0 ? "-" : "";
+    var i = String(parseInt(number = Math.abs(Number(number) || 0).toFixed(decPlaces)));
+    var j = (j = i.length) > 3 ? j % 3 : 0;
+
+    return sign +
+        (j ? i.substr(0, j) + thouSep : "") +
+        i.substr(j).replace(/(\decSep{3})(?=\decSep)/g, "$1" + thouSep) +
+        (decPlaces ? decSep + Math.abs(number - i).toFixed(decPlaces).slice(2) : "");
 }
