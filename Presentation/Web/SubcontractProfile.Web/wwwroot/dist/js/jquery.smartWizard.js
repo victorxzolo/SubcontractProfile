@@ -17,7 +17,7 @@
     var defaults = {
         selected: 0, // Initial selected step, 0 = first step
         keyNavigation: true, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
-        autoAdjustHeight: true, // Automatically adjust content height
+        autoAdjustHeight: false, // Automatically adjust content height
         cycleSteps: false, // Allows to cycle the navigation of steps
         backButtonSupport: true, // Enable the back button support
         useURLhash: true, // Enable selection of the step based on url hash
@@ -516,10 +516,10 @@
         },
         _fixHeight: function (idx) {
             // Auto adjust height of the container
-            //if (this.options.autoAdjustHeight) {
-            //    var selPage = this.steps.eq(idx).length > 0 ? $(this.steps.eq(idx).attr("href"), this.main) : null;
-            //    this.container.finish().animate({ minHeight: selPage.outerHeight() }, this.options.transitionSpeed, function () {});
-            //}
+            if (this.options.autoAdjustHeight) {
+                var selPage = this.steps.eq(idx).length > 0 ? $(this.steps.eq(idx).attr("href"), this.main) : null;
+                this.container.finish().animate({ minHeight: selPage.outerHeight() }, this.options.transitionSpeed, function () {});
+            }
             return true;
         },
         _triggerEvent: function (name, params) {
