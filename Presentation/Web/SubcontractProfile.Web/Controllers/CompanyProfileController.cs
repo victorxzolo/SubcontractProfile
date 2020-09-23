@@ -66,8 +66,16 @@ namespace SubcontractProfile.Web.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            
+            return View();
+        }
 
+        public ActionResult Profile()
+        {
+            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+            if (userProfile == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
 
             return View();
         }
