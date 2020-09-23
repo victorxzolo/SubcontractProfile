@@ -990,7 +990,7 @@ function inittbSearchResult() {
                         d.companyNameEn = $("#inputCompanynameEn").val(),
                         d.companyAilas = $("#inputCompanyAilas").val(),
                         d.taxId = $("#inputTaxId").val(),
-                        d.SubcontractProfileType = $("#rdoCustomerTypeSub").is(":checked") ? $("#rdoCustomerTypeSub").val() : $("#rdoCustomerTypeDealer").val()
+                        d.SubcontractProfileType = $("input:radio[name ='radioSubcontractType']:checked").val()//$("#radioSubcontractType").is(":checked") ? $("#rdoCustomerTypeSub").val() : $("#rdoCustomerTypeDealer").val()
 
                 }
             },
