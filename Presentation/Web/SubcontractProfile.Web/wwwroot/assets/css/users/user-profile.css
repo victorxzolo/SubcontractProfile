@@ -59,13 +59,13 @@
 }
 .user-profile .widget-content-area .user-info-list ul.contacts-block {
     border: none;
-    max-width: 217px;
+    max-width: 320px;
     margin: 36px auto;
 }
 .user-profile .widget-content-area .user-info-list ul.contacts-block li {
     margin-bottom: 13px;
-    font-weight: 600;
-    font-size: 13px;
+    font-weight: 500;
+    font-size: 20px;
 }
 .user-profile .widget-content-area .user-info-list ul.contacts-block li a {
     font-weight: 600;
