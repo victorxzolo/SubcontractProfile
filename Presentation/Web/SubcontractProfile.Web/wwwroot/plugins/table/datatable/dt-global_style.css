@@ -30,6 +30,22 @@ table.dataTable {
     border-collapse: collapse !important;
   
 }
+/*.table > thead > tr > th:first-child {
+    border-top-left-radius: 6px;
+}
+
+.table > thead > tr > th:first-child {
+    border-bottom-left-radius: 6px;
+}
+
+.table > thead > tr > th:last-child {
+    border-top-right-radius: 6px;
+}
+
+.table > thead > tr > th:last-child {
+    border-bottom-right-radius: 6px;
+}*/
+
 .table > tbody:before {
     line-height: 1em;
     content: "_";
@@ -44,9 +60,10 @@ table.dataTable {
 }
 .table > thead > tr > th {
     color: #1b55e2;
+   /* background: #e0e6ed;*/
     font-size: 18px;
     border: none;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     font-family: 'db_helvethaica_x55_regular', sans-serif;
 }
