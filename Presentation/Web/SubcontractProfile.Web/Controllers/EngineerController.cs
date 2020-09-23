@@ -22,10 +22,13 @@ namespace SubcontractProfile.Web.Controllers
         private readonly IConfiguration _configuration;
         private const int MegaBytes = 3 * 1024 * 1024;
         private readonly string strpathUpload;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private string Lang = "";
 
-        public EngineerController(IConfiguration configuration)
+        public EngineerController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
 
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
 
@@ -35,12 +38,25 @@ namespace SubcontractProfile.Web.Controllers
 
         public IActionResult EngineerProfile()
         {
+            
+
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
             if (userProfile == null)
             {
                 return RedirectToAction("Login", "Account");
             }
-           // ViewBag.Pageitem = "Engineer";
+            getsession();
+            if (Lang == "TH")
+            {
+                ViewData["Controller"] = "ข้อมูลโปรไฟล์";
+                ViewData["View"] = "ข้อมูลวิศวกร";
+            }
+            else
+            {
+                ViewData["Controller"] = "Profile";
+                ViewData["View"] = "Engineer Profile";
+            }
+            // ViewBag.Pageitem = "Engineer";
             return View();
         }
 
@@ -798,5 +814,15 @@ namespace SubcontractProfile.Web.Controllers
         }
 
         #endregion
+
+        private void getsession()
+        {
+            Lang = SessionHelper.GetObjectFromJson<string>(_httpContextAccessor.HttpContext.Session, "language");
+            if (Lang == null || Lang == "")
+            {
+                Lang = "TH";
+            }
+            //dataUser = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(_httpContextAccessor.HttpContext.Session, "userLogin");
+        }
     }
 }

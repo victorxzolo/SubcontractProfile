@@ -24,10 +24,12 @@ namespace SubcontractProfile.Web.Controllers
         private readonly string strpathAPI;
         private readonly IConfiguration _configuration;
         CultureInfo culture = new CultureInfo("en-US");
-        public TestResultController(IConfiguration configuration)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private string Lang = "";
+        public TestResultController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
-
+            _httpContextAccessor = httpContextAccessor;
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
            
         }
@@ -39,6 +41,17 @@ namespace SubcontractProfile.Web.Controllers
             {
                 return RedirectToAction("LogonByUser", "LogonByUser");
             }
+            getsession();
+            //if (Lang == "TH")
+            //{
+            //    ViewData["Controller"] = "ข้อมูลอบรม";
+            //    ViewData["View"] = "ขอรับการฝึกอบรม";
+            //}
+            //else
+            //{
+            ViewData["Controller"] = "Training";
+            ViewData["View"] = "Report Test Result";
+            // }
             return View();
         }
 
@@ -237,6 +250,16 @@ namespace SubcontractProfile.Web.Controllers
                 result.StatusError = "0";
             }
             return Json(result);
+        }
+
+        private void getsession()
+        {
+            Lang = SessionHelper.GetObjectFromJson<string>(_httpContextAccessor.HttpContext.Session, "language");
+            if (Lang == null || Lang == "")
+            {
+                Lang = "TH";
+            }
+            // datauser = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(_httpContextAccessor.HttpContext.Session, "userLogin");
         }
     }
 }

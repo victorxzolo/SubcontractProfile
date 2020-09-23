@@ -44,13 +44,24 @@ namespace SubcontractProfile.Web.Controllers
         // GET: LocationController
         public ActionResult LocationProfile()
         {
+          
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
             if (userProfile == null)
             {
                 return RedirectToAction("Login", "Account");
             }
-
-           // ViewBag.Pageitem = "Location";
+            getsession();
+            if (Lang == "TH")
+            {
+                ViewData["Controller"] = "ข้อมูลโปรไฟล์";
+                ViewData["View"] = "ข้อมูลสถานที่";
+            }
+            else
+            {
+                ViewData["Controller"] = "Profile";
+                ViewData["View"] = "Location Profile";
+            }
+            // ViewBag.Pageitem = "Location";
             return View();
         }
 

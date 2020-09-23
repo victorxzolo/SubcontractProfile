@@ -34,6 +34,8 @@ namespace SubcontractProfile.Web.Controllers
 
         public IActionResult Index()
         {
+            ViewData["Controller"] = "Registration";
+            ViewData["View"] = "Activate Profile";
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userAISLogin");
             if (userProfile == null)
             {

@@ -60,13 +60,26 @@ namespace SubcontractProfile.Web.Controllers
         // GET: CompanyProfileController
         public ActionResult Index()
         {
+            
+           
+
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
             if (userProfile == null)
             {
                 return RedirectToAction("Login", "Account");
             }
 
-            
+            getsession();
+            if (Lang == "TH")
+            {
+                ViewData["Controller"] = "ข้อมูลโปรไฟล์";
+                ViewData["View"] = "ข้อมูลบริษัท";
+            }
+            else
+            {
+                ViewData["Controller"] = "Profile";
+                ViewData["View"] = "Company Profile";
+            }
 
 
             return View();
