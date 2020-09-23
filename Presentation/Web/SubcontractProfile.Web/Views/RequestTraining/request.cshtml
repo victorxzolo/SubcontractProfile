@@ -382,6 +382,11 @@
 
         $(document).ready(function () {
 
+            var companystatus = '@ViewBag.CompanyStatus';
+            $("#btnAdd").hide();
+            if (companystatus == 'Approve' || companystatus == 'Activate') {
+                $("#btnAdd").show();
+            }
 
             GetDropDownByNameCourse();
 

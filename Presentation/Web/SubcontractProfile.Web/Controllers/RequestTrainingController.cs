@@ -49,7 +49,36 @@ namespace SubcontractProfile.Web.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
+
+            var companyResult = GetCompanyDataById(userProfile.companyid);
+            ViewBag.CompanyStatus = companyResult.Status;
+
             return View();
+        }
+
+        public  SubcontractProfileCompanyModel GetCompanyDataById(Guid companyId)
+        {
+            var companyResult = new SubcontractProfileCompanyModel();
+
+            // Getting all company data  
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Company/GetByCompanyId", companyId);
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                //data
+                companyResult = JsonConvert.DeserializeObject<SubcontractProfileCompanyModel>(result);
+
+
+            }
+
+            return companyResult;
         }
 
         [HttpPost]
