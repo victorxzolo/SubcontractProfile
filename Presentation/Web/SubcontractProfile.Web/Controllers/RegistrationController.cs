@@ -64,8 +64,8 @@ namespace SubcontractProfile.Web.Controllers
         }
         public IActionResult CompanyVerify(string companyid)
         {
-            //ViewData["Controller"] = "Registration";
-            //ViewData["View"] = "Company Verify";
+            ViewData["Controller"] = "Registration";
+            ViewData["View"] = "Company Verify";
             ViewBag.Companyid = companyid;
             return View();
         }

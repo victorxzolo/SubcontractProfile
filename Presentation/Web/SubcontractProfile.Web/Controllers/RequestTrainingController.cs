@@ -25,10 +25,12 @@ namespace SubcontractProfile.Web.Controllers
     {
         private readonly string strpathAPI;
         private readonly IConfiguration _configuration;
-        public RequestTrainingController(IConfiguration configuration)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private string Lang = "";
+        public RequestTrainingController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
-
+            _httpContextAccessor = httpContextAccessor;
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
 
         }
@@ -39,6 +41,17 @@ namespace SubcontractProfile.Web.Controllers
             {
                 return RedirectToAction("LogonByUser", "LogonByUser");
             }
+            getsession();
+            //if (Lang == "TH")
+            //{
+            //    ViewData["Controller"] = "ข้อมูลอบรม";
+            //    ViewData["View"] = "ขอรับการฝึกอบรม";
+            //}
+            //else
+            //{
+                ViewData["Controller"] = "Training";
+                ViewData["View"] = "Request Training";
+           // }
             return View();
         }
 
@@ -52,6 +65,18 @@ namespace SubcontractProfile.Web.Controllers
 
             var companyResult = GetCompanyDataById(userProfile.companyid);
             ViewBag.CompanyStatus = companyResult.Status;
+
+            getsession();
+            if (Lang == "TH")
+            {
+                ViewData["Controller"] = "ข้อมูลอบรม";
+                ViewData["View"] = "ขอรับการฝึกอบรม";
+            }
+            else
+            {
+                ViewData["Controller"] = "Training";
+                ViewData["View"] = "Request Training";
+            }
 
             return View();
         }
@@ -1139,5 +1164,17 @@ namespace SubcontractProfile.Web.Controllers
 
 
         #endregion
+
+
+
+        private void getsession()
+        {
+            Lang = SessionHelper.GetObjectFromJson<string>(_httpContextAccessor.HttpContext.Session, "language");
+            if (Lang == null || Lang == "")
+            {
+                Lang = "TH";
+            }
+           // datauser = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(_httpContextAccessor.HttpContext.Session, "userLogin");
+        }
     }
 }

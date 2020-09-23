@@ -20,10 +20,13 @@ namespace SubcontractProfile.Web.Controllers
     {
         private readonly string strpathAPI;
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private string Lang = "";
 
-        public TeamController(IConfiguration configuration)
+        public TeamController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
 
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
 
@@ -31,10 +34,22 @@ namespace SubcontractProfile.Web.Controllers
 
         public IActionResult TeamProfile()
         {
+            
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
             if (userProfile == null)
             {
                 return RedirectToAction("Login", "Account");
+            }
+            getsession();
+            if (Lang == "TH")
+            {
+                ViewData["Controller"] = "ข้อมูลโปรไฟล์";
+                ViewData["View"] = "ข้อมูลทีม";
+            }
+            else
+            {
+                ViewData["Controller"] = "Profile";
+                ViewData["View"] = "Team Profile";
             }
             return View();
         }
@@ -321,6 +336,16 @@ namespace SubcontractProfile.Web.Controllers
                 result.StatusError = "-1";
             }
             return Json(result);
+        }
+
+        private void getsession()
+        {
+            Lang = SessionHelper.GetObjectFromJson<string>(_httpContextAccessor.HttpContext.Session, "language");
+            if (Lang == null || Lang == "")
+            {
+                Lang = "TH";
+            }
+            //dataUser = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(_httpContextAccessor.HttpContext.Session, "userLogin");
         }
 
     }

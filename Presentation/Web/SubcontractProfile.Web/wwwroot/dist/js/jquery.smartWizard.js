@@ -17,7 +17,7 @@
     var defaults = {
         selected: 0, // Initial selected step, 0 = first step
         keyNavigation: true, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
-        autoAdjustHeight: true, // Automatically adjust content height
+        autoAdjustHeight: false, // Automatically adjust content height
         cycleSteps: false, // Allows to cycle the navigation of steps
         backButtonSupport: true, // Enable the back button support
         useURLhash: true, // Enable selection of the step based on url hash

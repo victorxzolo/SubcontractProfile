@@ -41,17 +41,40 @@ namespace SubcontractProfile.Web.Controllers
         }
         public IActionResult ConfirmPayment()
         {
-            //ViewData["Controller"] = "Payment";
             ViewData["Title"] = "ConfirmPayment";
+            getsession();
+            if (Lang == "TH")
+            {
+                ViewData["Controller"] = "ชำระค่าอบรม";
+                ViewData["View"] = "ยืนยันชำระค่าอบรม";
+            }
+            else
+            {
+                ViewData["Controller"] = "Payment";
+                ViewData["View"] = "Confirm Payment";
+            }
             return View();
         }
         public IActionResult VerifyPayment()
         {
+            
+
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userAISLogin");
             if (userProfile == null)
             {
                 return RedirectToAction("LogonByUser", "LogonByUser");
             }
+            //getsession();
+            //if (Lang == "TH")
+            //{
+            //    ViewData["Controller"] = "ชำระค่าอบรม";
+            //    ViewData["View"] = "ตรวจสอบการชำระค่าอบรม";
+            //}
+            //else
+            //{
+                ViewData["Controller"] = "Payment";
+                ViewData["View"] = "Verfified Payment";
+            //}
             return View();
         }
         [HttpGet]
