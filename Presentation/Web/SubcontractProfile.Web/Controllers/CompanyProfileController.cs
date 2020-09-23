@@ -69,10 +69,6 @@ namespace SubcontractProfile.Web.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-<<<<<<< HEAD
-            return View();
-        }
-=======
             getsession();
             if (Lang == "TH")
             {
@@ -84,7 +80,11 @@ namespace SubcontractProfile.Web.Controllers
                 ViewData["Controller"] = "Profile";
                 ViewData["View"] = "Company Profile";
             }
->>>>>>> bc7daa71c9602d5d5b2ac3723875f586f5279efe
+            return View();
+        }
+
+            
+
 
         public ActionResult Profile()
         {
