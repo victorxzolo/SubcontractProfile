@@ -525,7 +525,9 @@ namespace SubcontractProfile.Web.Controllers
                         }
                         else
                         {
-                            data.RemoveAll(x => x.AddressId == e.AddressId && x.CompanyId == e.CompanyId);
+                            //data.RemoveAll(x => x.AddressId == e.AddressId && x.CompanyId == e.CompanyId);
+
+                            data.RemoveAll(x => x.AddressTypeId == e.AddressTypeId);
                             data.Add(e);
                         }
 
