@@ -1,5 +1,8 @@
 ﻿@{ Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; ViewBag.Title = "Location Profile";
 }
+
+    <div id="pageID" style="display:none;">ActivateProfile</div>
+
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
 
     <div class="skills layout-spacing ">
@@ -11,7 +14,7 @@
                 <div class="form-row mb-4">
                     <div class="form-group col-md-12">
                         <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
-                       
+
                         <div class="n-chk">
                             <label class="new-control new-checkbox new-checkbox-rounded new-checkbox-text checkbox-outline-success">
                                 <input id="rdoCustomerTypeALL" type="radio" class="new-control-input" name="radioSubcontractType" value="ALL" checked>
@@ -123,7 +126,7 @@
                 <table id="tbSearchResult" class="table table-hover" style="width:100%">
                     <thead>
                         <tr>
-                            <th ><input type="checkbox" name="select_all" value="ALL" id="checkBoxAll" /></th>
+                            <th><input type="checkbox" name="select_all" value="ALL" id="checkBoxAll" /></th>
                             <th>Company Name </th>
                             <th>Tax Id </th>
                             <th>Company Status</th>
@@ -292,7 +295,7 @@
         });
 
          function GetDropDownByNameStatus() {
-            
+
                     $.ajax({
                         type: 'GET',
                         url: '@Url.Action("GetDropDownList", "SubcontractDropdown")',
@@ -366,7 +369,7 @@
                     columns: [
                         {
                             data: null, orderable: false, render: function (data, type, row) {
-                               
+
                                 if (row.CompanyStatus == "Activate") {
                                     return '<input style="display:none" class="custom-checkbox chkCheckBoxId" type="checkbox" id="' + row.CompanyId + '" name="chkBox" value="' + row.CompanyId + '">';
                                 } else {

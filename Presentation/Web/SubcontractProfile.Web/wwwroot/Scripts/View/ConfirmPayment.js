@@ -365,11 +365,11 @@ function inittbSearchconfirmpayment() {
                         status = "A";
                     }
                     else if (data.Status == "Waiting") {
-                        action = "Confrim";
+                        action = "Confirm";
                         status = "W";
                     }
                     else if (data.Status == "Not Approve") {
-                        action = "Confrim";
+                        action = "Confirm";
                         status = "N";
                     }
                     return '<input type="button" value=' + action + ' class="btn btn-primary" onclick="GetIdpayment(\'' + data.PaymentId + '\',\'' + status + '\')"></input>';

@@ -2,6 +2,9 @@
     ViewData["Title"] = "Test Result";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+    <div id="pageID" style="display:none;">TestResultForSub</div>
+
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
 
     <div class="skills layout-spacing ">
@@ -11,7 +14,7 @@
             <div class="widget-content1">
 
                 <div class="form-row mb-4">
-                 
+
 
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">Training Date From</label>
@@ -209,20 +212,20 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class='input-group date p-0' id="test_date">
-                                        <label id="inputTest_date" ></label>
-                                       
+                                        <label id="inputTest_date"></label>
+
                                     </div>
                                 </div>
 
                             </div>
-                           
+
                             <div class="row">
                                 <div class="col-sm-2">
                                     <label>Remark :</label>
                                 </div>
                                 <div class="col-sm-10">
-                                  
-                                    <label id="txtRemark" ></label>
+
+                                    <label id="txtRemark"></label>
                                 </div>
                             </div>
 
@@ -230,16 +233,16 @@
                             <input type="hidden" id="hdTrainingId" />
                         </div>
 
-                        </div>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
                             Close
                         </button>
                         @*<button id="btnSave" type="submit" class="btn btn-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                            Save
-                        </button>*@
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                Save
+                            </button>*@
                     </div>
                 </form>
             </div>
@@ -254,9 +257,9 @@
 
         var oTable;
         $(document).ready(function () {
-         
 
-                      
+
+
 
             GetDropDownByNameTrainigStatus();
 
@@ -592,7 +595,7 @@
                                     { data: "StaffNameTh" },
                                     { data: "TestStatusName" },
                                     { data: "SkillLevel" }
-                                    
+
 
 
                                 ],

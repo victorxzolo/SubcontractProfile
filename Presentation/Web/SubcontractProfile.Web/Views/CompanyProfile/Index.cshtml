@@ -2,6 +2,8 @@
 @{ Layout = "~/Views/Shared/_Layout.cshtml"; ViewBag.Title = "Company Profile";
 }
 
+    <div id="pageID" style="display:none;">CompanyProfile</div>
+
 <div id="controllername" data-url="@Url.Action("Action", "CompanyProfile")"></div>
 <div id="accountcontrollername" data-url="@Url.Action("Action", "Account")"></div>
 
@@ -14,15 +16,15 @@
             <div class="widget-content1">
 
                 <div class="form-row mb-4">
-                 
+
 
                     <div class="form-group col-md-12">
                         <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
 
                         <div class="n-chk">
-                          
+
                             <label class="new-control new-checkbox new-checkbox-rounded new-checkbox-text checkbox-outline-success">
-                                <input id="rdoCustomerTypeSub" type="radio" class="new-control-input" name="radioSubcontractType" value="NewSubContract" checked >
+                                <input id="rdoCustomerTypeSub" type="radio" class="new-control-input" name="radioSubcontractType" value="NewSubContract" checked>
                                 <span class="new-control-indicator"></span><span class="new-chk-content">New Subcontract</span>
                             </label>
 

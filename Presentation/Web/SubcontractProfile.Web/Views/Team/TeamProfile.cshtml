@@ -1,5 +1,8 @@
 ﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; ViewBag.Title = "Team Profile";
 }
+
+    <div id="pageID" style="display:none;">TeamProfile</div>
+
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
 
     <div class="skills layout-spacing ">
@@ -14,7 +17,7 @@
                     <div class="form-group col-md-6">
                         <label for="inputLocationCodeMain">Location Name</label>
                         <select id="inputLocationName" class="form-control" data-live-search="true" required></select>
-                      
+
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputTeamNameAilas">Team Code</label>
@@ -27,7 +30,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputTeamNameEn">Team Name (EN)</label>
-                        <input type="text" class="form-control"  id="inputTeamNameEn" placeholder="Team Name (EN)">
+                        <input type="text" class="form-control" id="inputTeamNameEn" placeholder="Team Name (EN)">
                     </div>
 
                     <div class="form-group col-md-6">
@@ -98,7 +101,7 @@
                 <div class="modal-body">
                     <form id="frNew" class="needs-validation" novalidate>
                         <div class="container">
-                          
+
                             <div class="row">
                                 <div class="col-sm-2">
                                     <span style="color:red">*</span> <label> Location Name : </label>
@@ -109,13 +112,13 @@
                                         กรุณาเลือกข้อมูล Location Name.
                                     </div>
                                 </div>
-                              
+
                                 <div class="col-sm-2">
-                                     <label>Location Code :</label>
+                                    <label>Location Code :</label>
                                 </div>
                                 <div class="col-sm-4">
                                     <input type="text" id="locationCode" style="width:300px" class="form-control" disabled />
-                                   
+
                                 </div>
                             </div>
                             <br />
@@ -183,7 +186,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <input type="text" id="WarrantyMA" style="width:300px" class="form-control">
-                                  
+
                                 </div>
                             </div>
                             <br />
@@ -193,7 +196,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <input type="text" id="WarrantyInstall" style="width:300px" class="form-control">
-                                   
+
                                 </div>
                                 <div class="col-sm-2">
                                     <label>Service skill :</label>
@@ -205,7 +208,7 @@
                             <br />
 
                             <h5>Contract Phone</h5>
-                            <hr >
+                            <hr>
                             <div>
                                 <div class="row">
                                     <div class="col-sm-2">
@@ -221,7 +224,7 @@
                                         <label> Maintenance contract phone:</label>
                                     </div>
                                     <div class="col-sm-4">
-                                         <input type="text" id="MaintenancePhone" style="width:300px" class="form-control" >
+                                        <input type="text" id="MaintenancePhone" style="width:300px" class="form-control">
                                     </div>
                                 </div>
                                 <br />
@@ -237,7 +240,7 @@
                             <br />
 
                             <h5>Contract Mail</h5>
-                            <hr >
+                            <hr>
                             <div>
                                 <div class="row">
                                     <div class="col-sm-2">
@@ -288,7 +291,7 @@
                                 </div>
 
                             </div>
-                          
+
                         </div>
 
                     </form>
@@ -349,7 +352,7 @@
                             event.preventDefault();
                             event.stopPropagation();
                             invalid.css('display', 'none');
-                        
+
                         }
                         form.classList.add('was-validated');
                     }, false);
@@ -500,7 +503,7 @@
                   success: function (result) {
                 //  console.log(result)
                       if (result != null) {
-                         
+
                           if (result.CompanyStatus == 'A') {
                               $("#btnSave").hide();
                           } else {
@@ -623,7 +626,7 @@ function GetDropDownLocationSearch() {
            // data: {stateid:stateid},
             dataType: 'json',
             success: function (data) {
-             
+
                 $("#inputLocationName").empty();
                 $("#inputLocationName").append('<option value="-1">--Please All--</option>');
                 $.each(data, function (id, result) {

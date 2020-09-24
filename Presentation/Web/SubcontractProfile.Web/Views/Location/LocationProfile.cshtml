@@ -1,5 +1,7 @@
 ﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; ViewBag.Title = "Location Profile";
 }
+    <div id="pageID" style="display:none;">LocationProfile</div>
+
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
 
     <div class="skills layout-spacing ">
@@ -76,7 +78,7 @@
                 <table id="tbSearchLocationResult" class="table table-hover" style="width:100%">
                     <thead>
                         <tr>
-                            <th class="text-center" >แก้ไข</th>
+                            <th class="text-center">แก้ไข</th>
                             <th>Location Code </th>
                             <th>Location Name (Th) </th>
                             <th>Location Name (En) </th>
@@ -118,17 +120,17 @@
                                 </div>
                             </div>
                             @*<br />
-            <div class="row">
-                <div class="col-sm-2">
-                    <label>Register Type:</label>
-                </div>
-                <div class="col-sm-10">
-                    <input type="radio" id="rdoCompanyTypeNew" name="CompType" value="newsub">
-                    <label for="new">New Subcontract</label>&nbsp;&nbsp;
-                    <input type="radio" id="rdoCompanyTypeDealer" name="CompType" value="dealer">
-                    <label for="deal">Dealer</label>
-                </div>
-            </div>*@
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>Register Type:</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input type="radio" id="rdoCompanyTypeNew" name="CompType" value="newsub">
+                                        <label for="new">New Subcontract</label>&nbsp;&nbsp;
+                                        <input type="radio" id="rdoCompanyTypeDealer" name="CompType" value="dealer">
+                                        <label for="deal">Dealer</label>
+                                    </div>
+                                </div>*@
                             <br />
                             <div class="row">
                                 <div class="col-sm-2">
@@ -175,13 +177,13 @@
                                     <label>Storage Location:</label>
                                 </div>
                                 <div class="col-sm-4">
-                                    <input type="text" id="inputStorage" style="width:300px" class="form-control" >
+                                    <input type="text" id="inputStorage" style="width:300px" class="form-control">
                                 </div>
                                 <div class="col-sm-2">
                                     <label>Ship To:</label>
                                 </div>
                                 <div class="col-sm-4">
-                                    <input type="text" id="inputShip" style="width:300px" class="form-control" >
+                                    <input type="text" id="inputShip" style="width:300px" class="form-control">
                                 </div>
                             </div>
                             <br />
@@ -205,7 +207,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <label><span style="color:red">*</span> Phone No :</label> 
+                                    <label><span style="color:red">*</span> Phone No :</label>
                                 </div>
                                 <div class="col-sm-4">
                                     <input type="text" id="inputPhoneNo" style="width:300px" class="form-control" required>
@@ -214,7 +216,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
-                                    <label><span style="color:red">*</span>  Company main contract phone:</label> 
+                                    <label><span style="color:red">*</span>  Company main contract phone:</label>
                                 </div>
                                 <div class="col-sm-4">
                                     <input type="text" id="inputMainPhone" style="width:300px" class="form-control" required>
@@ -251,13 +253,13 @@
                                     <label>Inventory contract phone:</label>
                                 </div>
                                 <div class="col-sm-4">
-                                    <input type="text" id="inputInventoryPhone" style="width:300px" class="form-control" >
+                                    <input type="text" id="inputInventoryPhone" style="width:300px" class="form-control">
                                 </div>
                                 <div class="col-sm-2">
                                     <label>Payment contract phone:</label>
                                 </div>
                                 <div class="col-sm-4">
-                                    <input type="text" id="inputPaymentPhone" style="width:300px" class="form-control" >
+                                    <input type="text" id="inputPaymentPhone" style="width:300px" class="form-control">
                                 </div>
                             </div>
                             <br />
@@ -266,7 +268,7 @@
                                     <label>Etc contract phone:</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="text" id="inputEtcPhone" style="width:300px" class="form-control" >
+                                    <input type="text" id="inputEtcPhone" style="width:300px" class="form-control">
                                 </div>
                             </div>
                             <br />
@@ -441,12 +443,12 @@
 
                                         <div class="custom-file mb-4">
                                             @*<input type="file" class="custom-file-input" id="inputBankAttach"
-               aria-describedby="uploadlHelp1" style="width:190px">
-        <label class="custom-file-label" for="inputGroupFile01">เลือกไฟล์</label>*@
+                                                       aria-describedby="uploadlHelp1" style="width:190px">
+                                                <label class="custom-file-label" for="inputGroupFile01">เลือกไฟล์</label>*@
 
                                             <input type="hidden" id="hdupfileBankAttach" />
                                             <input type="file" class="custom-file-input" id="inputBankAttach" aria-describedby="uploadlHelp1" style="width:190px"
-                                                   accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff" >
+                                                   accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff">
                                             <label class="custom-file-label" for="inputBankAttach" id="lbfileBankAttach">เลือกไฟล์</label>
                                             <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ jpg,jpeg,bmp,gif,tif,tiff,png</small>
 
@@ -479,7 +481,7 @@
                                     <label> Contract phone:</label>
                                 </div>
                                 <div class="col-sm-4">
-                                    <input type="text" id="inputContractPhone" style="width:300px" class="form-control" >
+                                    <input type="text" id="inputContractPhone" style="width:300px" class="form-control">
                                 </div>
                                 <div class="col-sm-2">
                                     <label> Contract email:</label>
@@ -514,7 +516,7 @@
                         </div>
                     </form>
                 </div>
-               
+
             </div>
         </div>
     </div>
@@ -732,13 +734,13 @@
                   console.log(result)
                   if (result != null) {
 
-                    
+
                       if (result.CompanyStatus == 'A') {
                           $("#btnSave").hide();
                       } else {
                           $("#btnSave").show();
                       }
-                     
+
 
                       $("#lblcompanyName").text(result.CompanyNameTh);
 
@@ -1016,7 +1018,7 @@
             else {
                 hasUser = true;
             }
-           
+
             if ($('#inputLocationCode').val() == '' || $('#inputLocationNameT').val() == '' ||
                 $('#inputPhoneNo').val() == '' || $('#inputMainPhone').val() == '' || $('#inputInstallationsPhone').val() == '' ||
                 $('#inputMaintenencePhone').val() == '' || $('#inputBankName').val() == '' || $('#inputBankAccountNo').val() == '' ||
@@ -1027,7 +1029,7 @@
         }
 
         function CheckLocationcode(mode) {
-            
+
             var jqXHR = $.ajax({
                 type: "POST",
                 async: false,
