@@ -37,10 +37,10 @@ namespace SubcontractProfile.Web.Model
         public string Remark { get; set; }
 
 
-        public decimal TotalPrice { get; set; }
+        public decimal? TotalPrice { get; set; }
 
 
-        public Int32 Vat { get; set; }
+        public decimal? Vat { get; set; }
 
         public decimal? Tax { get; set; }
 

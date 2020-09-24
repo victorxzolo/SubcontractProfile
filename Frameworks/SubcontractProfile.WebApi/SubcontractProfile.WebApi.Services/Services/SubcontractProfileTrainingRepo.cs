@@ -164,7 +164,7 @@ namespace SubcontractProfile.WebApi.Services.Services
                     row["request_date"] = new SqlDateTime(curObj.RequestDate);
                     row["remark"] = new SqlString(curObj.Remark);
                     row["total_price"] = new SqlDecimal(curObj.TotalPrice);
-                    row["vat"] = new SqlDecimal(curObj.Vat);
+                    row["vat"] = curObj.Vat == null ? SqlDecimal.Null : new SqlDecimal(curObj.Vat.Value);
                     row["tax"] = curObj.Tax == null ? SqlDecimal.Null : new SqlDecimal(curObj.Tax.Value);
                     row["status"] = new SqlString(curObj.Status);
                     row["request_no"] = new SqlString(curObj.RequestNo);
