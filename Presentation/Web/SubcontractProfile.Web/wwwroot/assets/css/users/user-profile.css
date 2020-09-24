@@ -17,12 +17,12 @@
     justify-content: center;
     align-self: center;
     background-color: #1b55e2;
-    background: linear-gradient(to right, #0081ff 0%, #0045ff 100%);;
+    background: linear-gradient(to right, #0081ff 0%, #0045ff 100%);
     border-radius: 50%;
     box-shadow: 0 10px 15px rgba(0, 69, 255, 0.2);
 }
 .user-profile .widget-content-area .edit-profile svg {
-    font-size: 17px;
+    font-size: 23px;
     vertical-align: middle;
     margin-right: 0;
     color: #fff;
@@ -59,7 +59,7 @@
 }
 .user-profile .widget-content-area .user-info-list ul.contacts-block {
     border: none;
-    max-width: 450px;
+    max-width: 270px;
     margin: 36px auto;
 }
 .user-profile .widget-content-area .user-info-list ul.contacts-block li {
@@ -111,7 +111,7 @@
 .skills .widget-content-area { border-radius: 6px; }
     .skills .widget-content-area h3 {
         position: relative;
-        font-size: 26px;
+        font-size: 23px;
         font-weight: 600;
         color: #3b3f5c;
         margin: 6px 0px 40px 0;

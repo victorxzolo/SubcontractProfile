@@ -816,7 +816,7 @@ namespace SubcontractProfile.Web.Controllers
             try
             {
                 var data = SessionHelper.GetObjectFromJson<DataTable>(HttpContext.Session, "EngineerData");
-                if(data.Rows.Count ==0)
+                if (data == null || data.Rows.Count == 0)
                 {
                     result.Status = false;
                     result.Message = "กรุณาเพิ่มข้อมูลผู้เข้าอบรม";
