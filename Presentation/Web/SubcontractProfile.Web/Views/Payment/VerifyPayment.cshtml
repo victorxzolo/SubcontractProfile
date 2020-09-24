@@ -3,6 +3,8 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+    <div id="pageID" style="display:none;">VerfifiedPayment</div>
+
 <div id="controllername" data-url="@Url.Action("Action", "Payment")"></div>
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
@@ -20,17 +22,17 @@
                         <input type="text" class="form-control" id="txttaxid" />
                     </div>
                     @*<div class="form-group col-md-6">
-            <label for="txttaxid">Location Name</label>
-            <select class="form-control" id="ddlLocation"></select>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="txttaxid">Team Name</label>
-            <select class="form-control" id="ddlTeam"></select>
-        </div>*@
+                            <label for="txttaxid">Location Name</label>
+                            <select class="form-control" id="ddlLocation"></select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="txttaxid">Team Name</label>
+                            <select class="form-control" id="ddlTeam"></select>
+                        </div>*@
                     @*<div class="form-group col-md-6">
-                        <label for="txttaxid">Payment No</label>
-                        <input type="text" class="form-control" id="txtpayment" />
-                    </div>*@
+                            <label for="txttaxid">Payment No</label>
+                            <input type="text" class="form-control" id="txtpayment" />
+                        </div>*@
 
                     <div class="form-group col-md-6">
                         <label for="txttaxid">Payment Date From</label>
@@ -116,8 +118,8 @@
                                 <label id="lblcompanyName"></label>
                             </div>
                         </div>
-                     
-                       
+
+
                         <div class="row">
                             <div class="col-sm-3 text-right">
                                 <label>ช่องทางการชำระเงิน </label>  <span style="color:red">*</span>
@@ -140,8 +142,8 @@
                                 <label>วันที่ชำระเงิน </label>  <span style="color:red">*</span>
                             </div>
                             <div class="col-sm-7">
-                                <div class='input-group date p-0' id='datetimepicker' >
-                                    <input type='text' class="form-control" id="dateverify"disabled />
+                                <div class='input-group date p-0' id='datetimepicker'>
+                                    <input type='text' class="form-control" id="dateverify" disabled />
                                     <div class="input-group-append input-group-addon">
                                         <span class="input-group-text px-4">
                                             <i class="fa fa-calendar"></i>
@@ -157,7 +159,7 @@
                                 <label>เวลาชำระเงิน </label>  <span style="color:red">*</span>
                             </div>
                             <div class="col-sm-7">
-                                <div class='input-group date p-0 ' id='timepicker' >
+                                <div class='input-group date p-0 ' id='timepicker'>
                                     <input type='text' class="form-control" id="timepayverify" disabled />
                                     <div class="input-group-append input-group-addon">
                                         <span class="input-group-text px-4">
@@ -192,7 +194,7 @@
                                 <label>สาขา </label>  <span style="color:red">*</span>
                             </div>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" id="txtbranch" placeholder=""  disabled/>
+                                <input type="text" class="form-control" id="txtbranch" placeholder="" disabled />
                             </div>
                         </div>
                         <br />

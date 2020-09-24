@@ -1,5 +1,8 @@
 ﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; ViewBag.Title = "Engineer Profile";
 }
+
+    <div id="pageID" style="display:none;">EngineerProfile</div>
+
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
 
     <div class="skills layout-spacing ">
@@ -145,18 +148,18 @@
                                         </div>
                                         <br />
                                         @*<div class="row">
-                            <div class="col-sm-2">
-                                <label><span style="color:red">*</span> Staff Code:</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="text" id="StaffCode" style="width:300px" class="form-control" required>
-                                <div class="invalid-feedback">
-                                    กรุณาเลือกข้อมูล Staff Code.
-                                </div>
-                            </div>
+                                                <div class="col-sm-2">
+                                                    <label><span style="color:red">*</span> Staff Code:</label>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input type="text" id="StaffCode" style="width:300px" class="form-control" required>
+                                                    <div class="invalid-feedback">
+                                                        กรุณาเลือกข้อมูล Staff Code.
+                                                    </div>
+                                                </div>
 
-                        </div>
-                        <br />*@
+                                            </div>
+                                            <br />*@
                                         <div class="row">
                                             <div class="col-sm-2">
                                                 <label><span style="color:red">*</span>Staff Name:</label>
@@ -369,11 +372,11 @@
                                                 </div>
                                             </div>
                                             @*<div class="col-sm-2">
-                                <label>Bank Code:</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="text" id="BankCode" style="width:300px" class="form-control">
-                            </div>*@
+                                                    <label>Bank Code:</label>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input type="text" id="BankCode" style="width:300px" class="form-control">
+                                                </div>*@
                                         </div>
                                         <br />
                                         <div class="row">
@@ -491,7 +494,7 @@
                                             <div class="col-sm-4">
                                                 <input type="text" id="Nationality" maxlength="100" class="form-control" style="width:300px">
                                                 @*<select id="Nationality" name="Nationality" style="width:300px" class="form-control">
-                                </select>*@
+                                                    </select>*@
                                             </div>
                                             <div class="col-sm-2">
                                                 <label>ศาสนา :</label>
@@ -499,7 +502,7 @@
                                             <div class="col-sm-4">
                                                 <input type="text" id="Religion" maxlength="100" class="form-control" style="width:300px">
                                                 @*<select id="Religion" name="Religion" style="width:300px" class="form-control">
-                                </select>*@
+                                                    </select>*@
                                             </div>
                                         </div>
                                         <br />
@@ -588,7 +591,7 @@
                                                 @*<div class="row col-sm-12">
 
 
-                                </div>*@
+                                                    </div>*@
                                             </div>
                                         </div>
                                         <br />
@@ -608,11 +611,11 @@
 
                                             </div>
                                             @*<div class="col-sm-2">
-                                <label>Course skill :</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="text" id="CourseSkill" style="width:300px" class="form-control">
-                            </div>*@
+                                                    <label>Course skill :</label>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input type="text" id="CourseSkill" style="width:300px" class="form-control">
+                                                </div>*@
                                         </div>
                                         <br />
 
@@ -682,7 +685,7 @@
                                             <div class="col-sm-4">
                                                 <div class="row col-sm-12">
                                                     @*<input type="text" id="" style="width:280px" class="form-control">
-                                    <input id="dateCertificateDate" style="width:220px" type="text" placeholder="Select Date.." data-provide="datepicker" >*@
+                                                        <input id="dateCertificateDate" style="width:220px" type="text" placeholder="Select Date.." data-provide="datepicker" >*@
                                                     <div class='input-group p-0 date' id='datepickerCertificateDAte'>
                                                         <input type='text' class="form-control" id="dateCertificateDAte" />
                                                         <div class="input-group-append input-group-addon">
@@ -756,24 +759,24 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                         <input type="hidden" id="hdMode">
                         <input type="hidden" id="hdEngineerId">
                         <input type="hidden" id="hdCompanyId">
                         <input type="hidden" id="hdPersonalId">
 
                     </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
-                                ปิด
-                            </button>
-                            <button id="btnSave" type="button" class="btn btn-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                                บันทึก
-                            </button>
-                        </div>
-</form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                            ปิด
+                        </button>
+                        <button id="btnSave" type="button" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                            บันทึก
+                        </button>
+                    </div>
+                </form>
 
             </div>
         </div>
@@ -894,7 +897,7 @@
             $("#Location").on("change", function () {
 
                 getTeamByLocationIdEdit($('#Location option').filter(':selected').val());
-               
+
             });
 
 
@@ -1103,10 +1106,10 @@
 
                           $("#Location").val(result.LocationId);
                          // $("#Location").trigger('change');
-                          
+
                           $('#hdEngineerId').val(result.EngineerId);
 
-                         
+
 
                           $('#lblcompanyName').html(result.CompanyNameTh);
                           $('#StaffName').val(result.StaffName);
@@ -1145,7 +1148,7 @@
                               //$('#linkdownload').text(data.SlipAttachFile);
                               //DownloadFileSlip(data.SlipAttachFile);
                           }
-                         
+
                           getDataPersonalById(result.PersonalId);
 
                           //$("#Team").val(result.TeamId).change();
@@ -1186,7 +1189,7 @@
 
                            $('#dateBirthDate').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
                        }
-                       
+
 
                        //Gender
                        if (result.Gender == "M") {
@@ -1265,7 +1268,7 @@
 
                            $('#datepickerCertificateDAte').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
                        }
-                     
+
 
                        $("#BankName2").val(result.BankName).change();
 
