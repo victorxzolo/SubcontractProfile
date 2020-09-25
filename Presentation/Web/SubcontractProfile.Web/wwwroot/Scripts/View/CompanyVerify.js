@@ -508,9 +508,9 @@ $(document).ready(function () {
         uploadFiles('inputuploadbookbank')
     });
 
-    $('#btnback').click(function () {
-        window.location.href = '/Registration/SearchCompanyVerify';
-    });
+    //$('#btnback').click(function () {
+    //    window.location.href = '/Registration/SearchCompanyVerify';
+    //});
 
     $('#btnnotapprove').click(function () {
 
