@@ -954,14 +954,16 @@ namespace SubcontractProfile.Web.Controllers
 
                 #region Update Company for AIS
 
-                if (status == "Approve")
-                {
-                    model.Status = "Y";
-                }
-                else if (status == "NotApprove")
-                {
-                    model.Status = "N";
-                }
+                model.Status = status;
+
+                //if (status.Trim(' ') == "Approve")
+                //{
+                //    model.Status = "Y";
+                //}
+                //else if (status.Trim(' ') == "NotApprove")
+                //{
+                //    model.Status = "N";
+                //}
 
                 var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "UpdateVerify"));
 
@@ -1118,21 +1120,30 @@ namespace SubcontractProfile.Web.Controllers
                 if (resultGetFile)
                 {
                     SessionHelper.RemoveSession(HttpContext.Session, "userUploadfileDaftCompanySSO");
-                //SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftCompanySSO");
+                    //SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftCompanySSO");
 
-                #region Update Company for AIS
+                    #region Update Company for AIS
 
-                if (status=="Approve")
-                {
-                    model.Status = "Y";
-                }
-                else if(status=="NotApprove")
-                {
-                    model.Status = "N";
-                }
 
-                        //var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "UpdateVerify"));
-                        var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Update"));
+                    if (status.Replace(" ", "") == "Approve")
+                    {
+                        model.Status = "Y";
+                    }
+                    else if (status.Replace(" ", "") == "NotApprove")
+                    {
+                        model.Status = "N";
+                    }
+                    else if(status.Replace(" ", "") == "Waiting")
+                    {
+                        model.Status = "W";
+                    }
+                    else if (status.Replace(" ", "") == "Activate")
+                    {
+                        model.Status = "A";
+                    }
+
+                    //var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "UpdateVerify"));
+                    var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Update"));
 
                 HttpClient clientCompany = new HttpClient();
                 clientCompany.DefaultRequestHeaders.Accept.Add(

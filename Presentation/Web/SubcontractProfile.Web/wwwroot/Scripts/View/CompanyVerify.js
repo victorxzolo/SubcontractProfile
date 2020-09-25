@@ -525,7 +525,8 @@ $(document).ready(function () {
         var Error = validateform();
 
         if (!Error) {
-            onSaveCompanyProfile("");
+           
+            onSaveCompanyProfile($('#lblStatusSub').text());
         }
     });
     
@@ -787,6 +788,8 @@ function onSaveCompanyProfile(status) {
     data.append("VatRegistrationCertificateFile", $('#lbupload20').text());
 
     data.append("RemarkForSub", $('#txtRemarkForSub').val());
+
+    data.append("VendorCode", $('#txtvendercode').val())
 
     var urlOnSave = url.replace('Action', 'OnSave');
     $.ajax({
@@ -1165,6 +1168,8 @@ function getDataById(companyId) {
                     $('#datecontractend').val(strCreateDateend);
                     //$('#contractenddate').data("DateTimePicker").date(moment(new Date(yearend, monthend, dayend), 'DD/MM/YYYY'));
                 }
+
+                $('#txtvendercode').val(result.VendorCode);
        
             }
 
@@ -1552,6 +1557,7 @@ function BindDDLBank() {
         url: urlDDLBank,
         //data: { province_id: province },
         dataType: "json",
+        async: false,
         success: function (data) {
 
             if (data != null) {
@@ -2521,6 +2527,7 @@ function BindDDlBankAccountType() {
         url: urlGetDataBankAccountType,
         //data: { province_id: province },
         dataType: "json",
+        async:false,
         success: function (data) {
             if (data != null) {
                 $('#AccType').empty();
