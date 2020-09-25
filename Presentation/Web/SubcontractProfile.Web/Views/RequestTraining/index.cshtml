@@ -40,7 +40,7 @@
 
 
                     <div class="form-group col-md-6">
-                        <label for="txttaxid">Request Date From</label>
+                        <label for="lbltaxid">Request Date From</label>
                         <div class='input-group date p-0' id='regisdatefrom'>
                             <input type='text' class="form-control" id="reqdateFrom" />
                             <div class="input-group-append input-group-addon">
@@ -303,7 +303,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class='input-group date p-0' id='bookdatefrom'>
-                                        <input type='text' class="form-control" id="bookingDate" />
+                                        <input type='text' class="form-control" id="bookingDate" required />
                                         <div class="input-group-append input-group-addon">
                                             <span class="input-group-text px-4">
                                                 <i class="fa fa-calendar"></i>
@@ -664,8 +664,8 @@
         function clearField() {
 
             $("#txtCompNo").val('');
-            $("#txttaxid").val('');
-
+            $("#txttaxID").val('');
+            
             $("#txtReqNo").val('');
             $('#inputStatus').val('-1');
             $("#reqdateFrom").val('');
