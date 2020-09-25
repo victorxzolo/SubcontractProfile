@@ -1,7 +1,7 @@
 ﻿
-    var oTable;
-    var oTableAddress;
-    var tbRevenue;
+var oTable;
+var oTableAddress;
+var tbRevenue;
 var tbLocation;
 var url = null;
 var urlaccount = null;
@@ -145,19 +145,17 @@ $(document).ready(function () {
                             }
                         },
                         error: function (xhr, status, error) {
-        //Loading(0);
-        //clearForEdit();
-        console.log(status);
+                            console.log(status);
                             bootbox.confirm({
-        title: "System Information",
+                                title: "System Information",
                                 message: xhr.responseText,
                                 buttons: {
-        cancel: {
-        label: '<i class="fa fa-times"></i> Cancel'
+                                cancel: {
+                                        label: '<i class="fa fa-times"></i> Cancel'
                                     }
                                 },
                                 callback: function (result) {
-        console.log('This was logged in the callback: ' + result);
+                                    console.log('This was logged in the callback: ' + result);
                                 }
                             });
                         }
@@ -195,8 +193,6 @@ $(document).ready(function () {
                             }
                         },
                         error: function (xhr, status, error) {
-        //Loading(0);
-        //clearForEdit();
         console.log(status);
                             bootbox.confirm({
         title: "System Information",
@@ -297,29 +293,28 @@ $(document).ready(function () {
                     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
                 });
 
-                $('#inputUploadcertificate').change(function () {
-
+    $('#inputUploadcertificate').change(function () {
         uploadFiles('inputUploadcertificate')
     });
 
-                $('#inputUploadComRegis').change(function () {
+    $('#inputUploadComRegis').change(function () {
         uploadFiles('inputUploadComRegis')
     });
 
-                $('#inputUpload20').change(function () {
+    $('#inputUpload20').change(function () {
         uploadFiles('inputUpload20')
     });
-                $('#inputuploadbookbank').change(function () {
+    $('#inputuploadbookbank').change(function () {
         uploadFiles('inputuploadbookbank')
     });
 
-                $('#rdoCompanyType1').on("change", function () {
+    $('#rdoCompanyType1').on("change", function () {
                     if ($(this).attr("value") == "NewSubContract") {
         $("#divdealer").hide('slow');
                         $('#divnewsubcontract').show('slow');
                         $('#hdrdtype').val($(this).attr("value"));
-                    }
-                });
+        }
+    });
 
                 $('#rdoCompanyType2').on("change", function () {
                     if ($(this).attr("value") == "Dealer") {
@@ -706,17 +701,16 @@ $(document).ready(function () {
     });
 
 
-                $(document).on('show.bs.modal', '.modal', function () {
-                    var zIndex = 1040 + (10 * $('.modal:visible').length);
-                    $(this).css('z-index', zIndex);
-                    setTimeout(function () {
-        $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
-                    }, 0);
-                });
-
-                $(document).on('hidden.bs.modal', '.modal', function () {
+    $(document).on('show.bs.modal', '.modal', function () {
+        var zIndex = 1040 + (10 * $('.modal:visible').length);
+        $(this).css('z-index', zIndex);
+        setTimeout(function () {
+            $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+        }, 0);
+    });
+    $(document).on('hidden.bs.modal', '.modal', function () {
         $('.modal:visible').length && $(document.body).addClass('modal-open');
-                });
+    });
 
 
     $('#mailCompany').on('keypress', function () {
@@ -759,7 +753,7 @@ $(document).ready(function () {
             $('#errorAccount_email').hide();
         }
     });
-            });
+});
 
 
 
