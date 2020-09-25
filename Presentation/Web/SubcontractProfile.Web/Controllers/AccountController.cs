@@ -192,20 +192,6 @@ namespace SubcontractProfile.Web.Controllers
             return authenticatedUser;
         }
 
-        //public bool AuthenLDAP(string userName, string password, out string authenMessage)
-        //{
-        //    var authLDAPQuery = new LoginModel
-        //    {
-        //        username = userName,
-        //        password = password,
-        //    };
-
-        //    //var authenLDAPResult = _QueryProcessor.Execute(authLDAPQuery);
-        //    var authenLDAPResult = true;
-        //    authenMessage = "";
-        //    return authenLDAPResult;
-        //}
-
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
@@ -965,7 +951,8 @@ namespace SubcontractProfile.Web.Controllers
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-
+                //string u = "http://10.138.34.61:8080/phxPartner/v1/partner/ChannelASCProfile.json?filter=" +
+                //    "(&(inSource=FBB)(inEvent=evPersonLocAddressInfo)(inASCCode=000375)(inASCMobileNo=)(inIdNo=)(inLocationCode=1000607)(inPersonType=ALL))";
 
                 string uriString = string.Format(strpathASCProfile, "FBB", "evLocationInfo", model.asc_code, model.asc_mobile_no, model.id_Number
                                             , model.location_code, model.sap_code, model.user_id);

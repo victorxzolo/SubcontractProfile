@@ -302,6 +302,11 @@ $(document).ready(function () {
                         $('#chkvat_typeE_dealer').prop('checked', true);
                     }
 
+                    //if (data.LocationListModel[0].ASCList != null) {
+                    //    var dataASC = data.LocationListModel[0].ASCList;
+                    //    $('#txtasccode').val(dataASC[0].outASCCode);
+                    //}
+
                     //if (data.locationListModel[0].addressLocationList != null) {
                     //    var stuff = [];
                     //    jQuery.each(data.locationListModel[0].addressLocationList, function (i, val) {
@@ -839,25 +844,10 @@ $(document).ready(function () {
             CompanyAlias: company_alias,
             DistributionChannel: distribution_channel,
             ChannelSaleGroup: channel_sale_group,
-           // VendorCode
-           // CustomerCode:
-            //AreaId
+            //VendorCode: $('#txtvendercode').val(),
             TaxId: tax_id,
             WtName: wt_name,
             VatType: vat_type,
-            //CompanyCertifiedFile 'Upload file'
-            //CommercialRegistrationFile 'Upload file'
-            //VatRegistrationCertificateFile 'Upload file'
-            //ContractAgreementFile
-            //DepositAuthorizationLevel
-            //DepositPaymentType
-            //ContractStartDate
-            //ContractEndDate
-            //OverDraftDeposit
-            //BalanceDeposit
-            //CompanyStatus: '',
-            //CompanyAddress
-            //VatAddress
             CompanyEmail: $('#txtcompany_Email').val(),
             ContractName: $('#txtcontract_name').val(),
             ContractPhone: $('#txtcontract_phone').val(),
@@ -892,43 +882,9 @@ $(document).ready(function () {
             CompanyTitleThId: company_title_name_th,
             CompanyTitleEnId: company_title_name_en,
             User_name: username,
-            Password: password,
-            //Status
-            
-            //subcontract_profile_type: chksubcontract_type,
-            //LocationCode: $('#txtlocationcode').val(),
-            //LocationNameTh: $('#txtlocationname').val(),
-            //LocationNameEn: $('#txtlocationname').val(),
-            //DistributionChannel: distribution_channel,
-            //ChannelSaleGroup: channel_sale_group,
-            //tax_id: tax_id,
-            //company_alias: company_alias,
-            //company_title_name_th: company_title_name_th,
-            //company_name_th: company_name_th,
-            //company_title_name_en: company_title_name_en,
-            //company_name_en: company_name_en,
-            //wt_name: wt_name,
-            //vat_type: vat_type,
-            //company_Email: $('#txtcompany_Email').val(),
-            //contract_name: $('#txtcontract_name').val(),
-            //contract_phone: $('#txtcontract_phone').val(),
-            //contract_email: $('#txtcontract_email').val(),
-            //dept_of_install_name: $('#txtdept_of_install_name').val(),
-            //dept_of_install_phone: $('#txtdept_of_install_phone').val(),
-            //dept_of_install_email: $('#txtdept_of_install_email').val(),
-            //dept_of_mainten_name: $('#txtdept_of_mainten_name').val(),
-            //dept_of_mainten_phone: $('#txtdept_of_mainten_phone').val(),
-            //dept_of_mainten_email: $('#txtdept_of_mainten_email').val(),
-            //dept_of_Account_name: $('#txtdept_of_Account_name').val(),
-            //dept_of_Account_phone: $('#txtdept_of_Account_phone').val(),
-            //dept_of_Account_email: $('#txtdept_of_Account_email').val(),
-            //account_Name: $('#ddlaccount_Name option').filter(':selected').val(),
-            //branch_Name: $('#txtbranch_Name').val(),
-            //branch_Code: $('#txtbranch_Code').val(),
-            //bank_account_type_id: $('#ddlbank_account_type option').filter(':selected').val(),
-            //company_certified_file: $('#company_certified_file').val(),
-            //commercial_registration_file: $('#commercial_registration_file').val(),
-            //vat_registration_certificate_file: $('#vat_registration_certificate_file').val(),
+            Password: password
+            //ASCCode: $('#txtasccode').val()
+
         }
         var urlNewRegister = url.replace('Action', 'NewRegister');
         
@@ -1376,14 +1332,29 @@ function BindDataStep5() {
         tax_id = $('#txttax_id').val();
         company_alias = $('#txtcompany_alias').val();
 
-        company_title_name_th = $('#ddlprefixcompany_name_th option').filter(':selected').text();
+        company_title_name_th = $('#ddlprefixcompany_name_th option').filter(':selected').val() != '' ?
+                                $('#ddlprefixcompany_name_th option').filter(':selected').text():'';
         company_name_th = $('#txtcompany_name_th').val();
 
-        company_title_name_en = $('#ddlprefixcompany_name_en option').filter(':selected').text();
+        company_title_name_en = $('#ddlprefixcompany_name_en option').filter(':selected').val() != '' ?
+                            $('#ddlprefixcompany_name_en option').filter(':selected').text():'';
         company_name_en = $('#txtcompany_name_en').val();
 
         wt_name = $('#txtwt_name').val();
         vat_type = $('#chkvat_typeT').is(':checked') ? $('#chkvat_typeT').parent().text().trim() : $('#chkvat_typeE').parent().text().trim();
+
+        
+        //$('#lbdistribution_channel').text(distribution_channel);
+        //$('#lbchannel_sale_group').text(channel_sale_group);
+        $('#lbtax_id').text(tax_id);
+        $('#lbcompany_alias').text(company_alias);
+        $('#lbcompany_name_th').text(company_title_name_th + ' ' + company_name_th);
+        $('#lbcompany_name_en').text(company_title_name_en + ' ' + company_name_en);
+        $('#lbwt_name').text(wt_name);
+        $('#vat_type').text(vat_type);
+
+        $('#divnewsubcontract5').show('slow');
+        $("#divdealer5").hide('slow');
     }
     else if ($("#chktypeD").is(":checked")) {
         chksubcontract_type = $('#chktypeD').parent().text().trim();
@@ -1394,25 +1365,35 @@ function BindDataStep5() {
         tax_id = $('#txttax_id_dealer').val();
         company_alias = $('#txtcompany_alias_dealer').val();
 
-        company_title_name_th = $('#ddlprefixcompany_name_th_dealer option').filter(':selected').text();
+        company_title_name_th = $('#ddlprefixcompany_name_th_dealer option').filter(':selected').val() != '' ?
+                                $('#ddlprefixcompany_name_th_dealer option').filter(':selected').text():'';
         company_name_th = $('#txtcompany_name_th_dealer').val();
 
-        company_title_name_en = $('#ddlprefixcompany_name_en_dealer option').filter(':selected').text();
+        company_title_name_en = $('#ddlprefixcompany_name_en_dealer option').filter(':selected').val() != '' ?
+                            $('#ddlprefixcompany_name_en_dealer option').filter(':selected').text():'';
         company_name_en = $('#txtcompany_name_en_dealer').val();
 
         wt_name = $('#txtwt_name_dealer').val();
         vat_type = $('#chkvat_typeT_dealer').is(':checked') ? $('#chkvat_typeT_dealer').parent().text().trim() : $('#chkvat_typeE_dealer').parent().text().trim();
-    }
+        $('#lblocationcode').text($('#txtlocationcode').val());
+        $('#lbdistributionDealer').text(distribution_channel);
+        $('#lblocationname').text($('#txtlocationname').val());
+        $('#lbchannelsalegroupDealer').text(channel_sale_group);
+        //$('#lbvendercode').text($('#txtvendercode').val());
+       // $('#lbasccode').text($('#txtasccode').val());
 
+        $('#lbtax_idDealer').text(tax_id);
+        $('#lbcompany_aliasDealer').text(company_alias);
+        $('#lbcompany_name_thDealer').text(company_title_name_th + ' ' + company_name_th);
+        $('#lbcompany_name_enDealer').text(company_title_name_en + ' ' + company_name_en);
+        $('#lbwt_nameDealer').text(wt_name);
+        $('#vat_typeDealer').text(vat_type);
+
+        $("#divnewsubcontract5").hide('slow');
+        $("#divdealer5").show('slow');
+    }
     $('#lbsubcontract_profile_type').text(chksubcontract_type);
-    $('#lbdistribution_channel').text(distribution_channel);
-    $('#lbchannel_sale_group').text(channel_sale_group);
-    $('#lbtax_id').text(tax_id);
-    $('#lbcompany_alias').text(company_alias);
-    $('#lbcompany_name_th').text(company_title_name_th + ' ' + company_name_th);
-    $('#lbcompany_name_en').text(company_title_name_en + ' ' + company_name_en);
-    $('#lbwt_name').text(wt_name);
-    $('#vat_type').text(vat_type);
+   
 
     $('#lbcompany_Email').text($('#txtcompany_Email').val());
     $('#lbcontract_name').text($('#txtcontract_name').val());

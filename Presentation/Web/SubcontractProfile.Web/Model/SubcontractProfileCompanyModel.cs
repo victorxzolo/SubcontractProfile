@@ -181,6 +181,7 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string Password { get; set; }
         public System.DateTime? RegisterDate { get; set; }
+        public string ASCCode { get; set; }
 
         public Guid file_id_CompanyCertifiedFile { get; set; }
         public Guid file_id_CommercialRegistrationFile { get; set; }
