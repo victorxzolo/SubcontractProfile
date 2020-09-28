@@ -1,7 +1,6 @@
 ﻿@{ Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; ViewBag.Title = "Location Profile";
 }
 
-
  <div id="pageID" style="display:none;">ActivateProfile</div>
 
 
@@ -128,7 +127,8 @@
                 <table id="tbSearchResult" class="table table-hover" style="width:100%">
                     <thead>
                         <tr>
-                            <th><input type="checkbox" name="select_all" value="ALL" id="checkBoxAll" /></th>
+                            <th ><input type="checkbox" name="select_all" value="ALL" id="checkBoxAll" /></th>
+
 
                             <th>Company Name </th>
                             <th>Tax Id </th>
@@ -361,7 +361,9 @@
                         data: function (d) {
                             d.subcontract_profile_type = $("input:radio[name ='radioSubcontractType']:checked").val(),
                             d.company_name_th = $("#inputCompanyName").val(),
-                            d.tax_id = $("#inputTaxId").val(),
+                                d.tax_id = $("#inputTaxId").val(),
+                                d.register_date_fr = $("#inputRegister_date_fr").val(),
+                                d.register_date_to = $("#inputRegister_date_to").val(),
                             d.activate_date_fr = $("#inputActivate_date_fr").val(),
                             d.activate_date_to = $("#inputActivate_date_to").val(),
                             d.activate_status = $("select[id$=ddlActivateStatus]").val()

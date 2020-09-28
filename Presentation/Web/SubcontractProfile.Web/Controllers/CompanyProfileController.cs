@@ -14,6 +14,10 @@ using Newtonsoft.Json;
 using SubcontractProfile.Web.Extension;
 using SubcontractProfile.Web.Model;
 
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Localization;
+using Microsoft.Extensions.Localization;
+
 namespace SubcontractProfile.Web.Controllers
 {
     public class CompanyProfileController : Controller
@@ -29,11 +33,22 @@ namespace SubcontractProfile.Web.Controllers
         private const int TMegaBytes = 1024 * 1024;
 
         private string PathNas = "";
+        // private readonly IHtmlLocalizer<CompanyProfileController> _localizer;
 
-        public CompanyProfileController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        private readonly IStringLocalizer<CompanyProfileController> _localizer;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
+
+        public CompanyProfileController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor//, IHtmlLocalizer<CompanyProfileController> localizer
+           ,IStringLocalizer<CompanyProfileController> localizer,
+                   IStringLocalizer<SharedResource> sharedLocalizer
+            )
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
+
+            _localizer = localizer;
+            _sharedLocalizer = sharedLocalizer;
+            // _localizer = localizer;
 
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
             strpathUpload = _configuration.GetValue<string>("PathUploadfile:Local").ToString();
@@ -57,10 +72,19 @@ namespace SubcontractProfile.Web.Controllers
             //PathNas = _configuration.GetValue<string>("PathUploadfile:NAS").ToString();
         }
 
-        // GET: CompanyProfileController
+     [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return LocalRedirect(returnUrl);
+        }
         public ActionResult Index()
         {
-            
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
             if (userProfile == null)
             {
@@ -1754,5 +1778,11 @@ namespace SubcontractProfile.Web.Controllers
             datauser = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(_httpContextAccessor.HttpContext.Session, "userLogin");
         }
         #endregion
+    }
+}
+namespace Localization.LocSample
+{
+    public class SharedResource
+    {
     }
 }
