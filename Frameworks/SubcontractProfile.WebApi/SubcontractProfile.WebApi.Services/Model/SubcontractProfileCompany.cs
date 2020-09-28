@@ -200,6 +200,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         public string Password { get; set; }
 
         public System.DateTime? RegisterDate { get; set; }
+        //public string ASCCode { get; set; }
 
     
         public string TrainingStatus { get; set; }

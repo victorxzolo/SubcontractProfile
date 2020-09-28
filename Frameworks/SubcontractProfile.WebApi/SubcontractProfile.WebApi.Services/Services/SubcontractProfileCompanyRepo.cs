@@ -122,7 +122,8 @@ namespace SubcontractProfile.WebApi.Services
             p.Add("@activate_date", subcontractProfileCompany.ActivateDate);
             p.Add("@user_name", subcontractProfileCompany.User_name);
             p.Add("@password", subcontractProfileCompany.Password);
-           
+           // p.Add("@asc_code", subcontractProfileCompany.ASCCode);
+
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileCompany_Insert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -197,6 +198,7 @@ namespace SubcontractProfile.WebApi.Services
             p.Add("@status", subcontractProfileCompany.Status);
             p.Add("@activate_date", subcontractProfileCompany.ActivateDate);
             p.Add("@remark_for_sub", subcontractProfileCompany.RemarkForSub);
+           // p.Add("@asc_code", subcontractProfileCompany.ASCCode);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileCompany_Update", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);

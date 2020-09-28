@@ -937,6 +937,19 @@
             </div>
         </div>
     </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-2">
+            <label>Vender Code :</label>
+        </div>
+        <div class="col-sm-4">
+            <div class="row col-sm-12">
+
+                <input type="text" id="txtvendercode" class="form-control" required />
+                <div class="invalid-feedback">Vender Code</div>
+            </div>
+        </div>
+    </div>
 
     @*<div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
@@ -993,7 +1006,7 @@
 <br />
 <div class="clearfix"></div>
 <div style="text-align:center">
-    <button class="btn btn-dark mr-2" id="btnback" type="button">
+    <button class="btn btn-dark mr-2" id="btnback" type="button" onclick="location.href='@Url.Action("SearchCompanyVerify","Registration")'">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M19.164 19.547c-1.641-2.5-3.669-3.285-6.164-3.484V17.5c0 .534-.208 1.036-.586 1.414c-.756.756-2.077.751-2.823.005l-6.293-6.207a1 1 0 0 1 0-1.425l6.288-6.203c.754-.755 2.073-.756 2.829.001c.377.378.585.88.585 1.414v1.704c4.619.933 8 4.997 8 9.796v1a.999.999 0 0 1-1.836.548zm-7.141-5.536c2.207.056 4.638.394 6.758 2.121a7.985 7.985 0 0 0-6.893-6.08C11.384 9.996 11 10 11 10V6.503l-5.576 5.496l5.576 5.5V14l1.023.011z" fill="white" /></svg>
         กลับหน้าแรก
     </button>

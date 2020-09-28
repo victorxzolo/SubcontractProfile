@@ -508,9 +508,9 @@ $(document).ready(function () {
         uploadFiles('inputuploadbookbank')
     });
 
-    $('#btnback').click(function () {
-        window.location.href = '/Registration/SearchCompanyVerify';
-    });
+    //$('#btnback').click(function () {
+    //    window.location.href = '/Registration/SearchCompanyVerify';
+    //});
 
     $('#btnnotapprove').click(function () {
 
@@ -525,7 +525,8 @@ $(document).ready(function () {
         var Error = validateform();
 
         if (!Error) {
-            onSaveCompanyProfile("");
+           
+            onSaveCompanyProfile($('#lblStatusSub').text());
         }
     });
     
@@ -787,6 +788,8 @@ function onSaveCompanyProfile(status) {
     data.append("VatRegistrationCertificateFile", $('#lbupload20').text());
 
     data.append("RemarkForSub", $('#txtRemarkForSub').val());
+
+    data.append("VendorCode", $('#txtvendercode').val())
 
     var urlOnSave = url.replace('Action', 'OnSave');
     $.ajax({
@@ -1165,6 +1168,8 @@ function getDataById(companyId) {
                     $('#datecontractend').val(strCreateDateend);
                     //$('#contractenddate').data("DateTimePicker").date(moment(new Date(yearend, monthend, dayend), 'DD/MM/YYYY'));
                 }
+
+                $('#txtvendercode').val(result.VendorCode);
        
             }
 
@@ -1552,6 +1557,7 @@ function BindDDLBank() {
         url: urlDDLBank,
         //data: { province_id: province },
         dataType: "json",
+        async: false,
         success: function (data) {
 
             if (data != null) {
@@ -2265,6 +2271,7 @@ function getDataEngineerById(id) {
         type: 'POST',
         data: { 'engineerId': id },
         dataType: "json",
+        async:false,
         success: function (result) {
             //  console.log(result)
             if (result != null) {
@@ -2272,7 +2279,7 @@ function getDataEngineerById(id) {
                 getDataPersonalById(result.PersonalId);
 
                 $("#Location").val(result.LocationId)
-
+                $("#lblcompanyNameE").text(result.CompanyNameTh);
 
                 //$('#Team option').prop('selected', function () {
                 //    return result.TeamId;
@@ -2336,6 +2343,7 @@ function getTeamByLocationIdEdit(locationId) {
             'companyid': $('#hdCompanyId').val()
         },
         dataType: "json",
+        async: false,
         success: function (data) {
             $("#Team").empty();
             $("#Team").append('<option value="">--Please All--</option>');
@@ -2357,6 +2365,7 @@ function getDataPersonalById(id) {
         type: 'POST',
         data: { 'personalId': id },
         dataType: "json",
+        async: false,
         success: function (result) {
             if (result != null) {
                 //---personal name
@@ -2398,8 +2407,8 @@ function getDataPersonalById(id) {
                 $('#PersonalContractPhone2').val(result.ContactPhone2);
                 $('#ContractMail').val(result.ContactEmail);
                 $('#WorkPermit').val(result.WorkPermitNo);
-                $('#fileWorkPermitAttach').val(result.WorkPermitAttachFile);
-                $('#fileProfileAttach').val(result.ProfileImgAttachFile);
+                //$('#fileWorkPermitAttach').val(result.WorkPermitAttachFile);
+                //$('#fileProfileAttach').val(result.ProfileImgAttachFile);
                 // $('#CourseSkill').val(result.CourseSkill);
                 $('#Education').val(result.Education);
 
@@ -2430,21 +2439,10 @@ function getDataPersonalById(id) {
                     $('#chkWritingEN').prop('checked', true);
                 }
 
-
-                //$('#chkListenTH').val(result.ThListening);
-                //$('#chkSpeakingTH').val(result.ThSpeaking);
-                //$('#chkReadingTH').val(result.ThReading);
-                //$('#chkWritingTH').val(result.ThWriting);
-
-                //$('#chkListenEN').val(result.EnListening);
-                //$('#chkSpeakingEN').val(result.EnSpeaking);
-                //$('#chkReadingEN').val(result.EnReading);
-                //$('#chkWritingEN').val(result.EnWriting);
-
                 $('#CertificateType').val(result.CertificateType);
                 $('#CertificateNo').val(result.CertificateNo);
                 $('#dateCertificateDate').val(result.CertificateExpireDate);
-                $('#fileCertificateAttach').val(result.CertificateAttachFile);
+                //$('#fileCertificateAttach').val(result.CertificateAttachFile);
 
                 $("#BankName2").val(result.BankName).change();
 
@@ -2529,6 +2527,7 @@ function BindDDlBankAccountType() {
         url: urlGetDataBankAccountType,
         //data: { province_id: province },
         dataType: "json",
+        async:false,
         success: function (data) {
             if (data != null) {
                 $('#AccType').empty();

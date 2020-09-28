@@ -87,10 +87,30 @@ namespace SubcontractProfile.Web.Model
         public string outAddressLastUpd { get; set; }
     }
 
+    public class AddressASCListModel {
+        public string outAddressType { get; set; }
+        public string outAddressID { get; set; }
+        public string outASCHouseNo { get; set; }
+        public string outASCMoo { get; set; }
+        public string outASCMooban { get; set; }
+        public string outASCBuilding { get; set; }
+        public string outASCFloor { get; set; }
+        public string outASCRoom { get; set; }
+        public string outASCSoi { get; set; }
+        public string outASCStreet { get; set; }
+        public string outASCProvince { get; set; }
+        public string outASCAmphur { get; set; }
+        public string outASCTumbol { get; set; }
+        public string outASCZipcode { get; set; }
+        public string outASCCountry { get; set; }
+        public string outASCFullAddress { get; set; }
+    }
+
     public class SAPCustomerListModel
     {
         public string outSAPCode { get; set; }
         public string outSAPAccountGroup { get; set; }
+        public string outSAPVendorCode { get; set; }
     }
     public class ASCListModel
     {
@@ -116,22 +136,11 @@ namespace SubcontractProfile.Web.Model
         public string outLastNameEng { get; set; }
         public string outNickname { get; set; }
         public string outBirthdate { get; set; }
-        public string outASCHouseNo { get; set; }
-        public string outASCMoo { get; set; }
-        public string outASCMooban { get; set; }
-        public string outASCBuilding { get; set; }
-        public string outASCFloor { get; set; }
-        public string outASCRoom { get; set; }
-        public string outASCSoi { get; set; }
-        public string outASCStreet { get; set; }
-        public string outASCProvince { get; set; }
-        public string outASCAmphur { get; set; }
-        public string outASCTumbol { get; set; }
-        public string outASCZipcode { get; set; }
-        public string outASCCountry { get; set; }
-        public string outASCFullAddress { get; set; }
         public string outMainPhone { get; set; }
         public string outMainSocial { get; set; }
+        public string outPinCode { get; set; }
+        public string outUserName { get; set; }
+        public List<AddressASCListModel> addressASCList { get; set; }
 
     }
 }
