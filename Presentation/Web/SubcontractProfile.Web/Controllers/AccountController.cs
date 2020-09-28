@@ -46,10 +46,10 @@ namespace SubcontractProfile.Web.Controllers
         private SubcontractProfileUserModel dataUser = new SubcontractProfileUserModel();
         private string PathNas = "";
         private const int MegaBytes = 1024 * 1024;
-        private readonly IStringLocalizer<AccountController> _localizer;
+     
 
-        public AccountController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor,
-            IStringLocalizer<AccountController> localizer)
+        public AccountController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor
+            )
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
@@ -63,43 +63,43 @@ namespace SubcontractProfile.Web.Controllers
             //NSA
             // PathNas = _configuration.GetValue<string>("PathUploadfile:NAS").ToString();
 
-            _localizer = localizer;
+           
 
 
         }
 
         #region Lang
 
-        [HttpPost]
-        public IActionResult SetLanguage(string culture, string returnUrl)
-        {
-            Response.Cookies.Append(
-                CookieRequestCultureProvider.DefaultCookieName,
-                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
-                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
-            );
+        //[HttpPost]
+        //public IActionResult SetLanguage(string culture, string returnUrl)
+        //{
+        //    Response.Cookies.Append(
+        //        CookieRequestCultureProvider.DefaultCookieName,
+        //        CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+        //        new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+        //    );
 
-            return LocalRedirect(returnUrl);
-        }
+        //    return LocalRedirect(returnUrl);
+        //}
 
 
-        public IActionResult SetThai()
-        {
-            var cookieValue = CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("th-TH"));
-            var option = new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) };
+        //public IActionResult SetThai()
+        //{
+        //    var cookieValue = CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("th-TH"));
+        //    var option = new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) };
 
-            Response.Cookies.Append("Web.Language", cookieValue, option);
-            return RedirectToAction(nameof(Index));
-        }
+        //    Response.Cookies.Append("Web.Language", cookieValue, option);
+        //    return RedirectToAction(nameof(Index));
+        //}
 
-        public IActionResult SetEnglish()
-        {
-            var cookieValue = CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("en-GB"));
-            var option = new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) };
+        //public IActionResult SetEnglish()
+        //{
+        //    var cookieValue = CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("en-GB"));
+        //    var option = new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) };
 
-            Response.Cookies.Append("Web.Language", cookieValue, option);
-            return RedirectToAction(nameof(Index));
-        }
+        //    Response.Cookies.Append("Web.Language", cookieValue, option);
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         #endregion
 
@@ -107,13 +107,11 @@ namespace SubcontractProfile.Web.Controllers
         public IActionResult Login()
         {
             ViewBag.ReturnURL = "";
-            int dd = SiteSession.CurrentUICulture;
-            var requestCultureFeature = HttpContext.Features.Get<IRequestCultureFeature>();
-            var culture = requestCultureFeature.RequestCulture.UICulture;
+            //int dd = SiteSession.CurrentUICulture;
+            //var requestCultureFeature = HttpContext.Features.Get<IRequestCultureFeature>();
+            //var culture = requestCultureFeature.RequestCulture.UICulture;
 
-          //   SetLanguage(culture.ToString(), "Login");
 
-          //  var ss = _localizer["Login"];
             return View();
         }
 
