@@ -1,14 +1,17 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
 using System;
-
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace SubcontractProfile.Web
 {
@@ -52,7 +55,31 @@ namespace SubcontractProfile.Web
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
             });
 
+            //services.AddLocalization(options => options.ResourcesPath = "Resources");
+            //services.AddMvc()
+            //    .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
+            //    .AddDataAnnotationsLocalization();
 
+            //services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
+
+ 
+        //    services.Configure<RequestLocalizationOptions>(
+        //opts =>
+        //{
+        //    var supportedCultures = new List<CultureInfo>
+        //    {
+        //        new CultureInfo("th-TH"),
+        //        new CultureInfo("en-US"),
+        //        new CultureInfo("en")
+
+        //    };
+
+        //    opts.DefaultRequestCulture = new RequestCulture("en-US");
+        //    // Formatting numbers, dates, etc.
+        //    opts.SupportedCultures = supportedCultures;
+        //    // UI strings that we have localized.
+        //    opts.SupportedUICultures = supportedCultures;
+        //});
         }
 
       
@@ -79,14 +106,48 @@ namespace SubcontractProfile.Web
             app.UseCookiePolicy();
             app.UseSession();
 
+            //var localizationOption = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            //app.UseRequestLocalization(localizationOption.Value);
+
+
+
+            //// กำหนด Culture ที่เว็บจะรองรับ
+            //var cultures = new List<CultureInfo>
+            //{
+            //    new CultureInfo("en-ES"),
+            //    new CultureInfo("th-TH")
+            //};
+
+            //// กำหนด Default Culture กำหนดเป็นภาษาอังกฤษครับ 
+            //// พารามิเตอร์แรกจะเป็น culture ถัดมาจะเป็น ui-culture
+            //var requestCulture = new RequestCulture("th-TH", "th-TH");
+
+            //app.UseRequestLocalization(new RequestLocalizationOptions
+            //{
+            //    DefaultRequestCulture = requestCulture,
+            //    SupportedCultures = cultures,
+            //    SupportedUICultures = cultures,
+            //    RequestCultureProviders = new List<IRequestCultureProvider>
+            //    {
+            //        new CookieRequestCultureProvider
+            //        {
+            //  // กำหนดชื่อของ Cookie ที่จะให้เก็บค่าของภาษาที่เลือกครับ
+            //            CookieName = "Web.Language"
+            //        }
+            //    }
+            //});
+
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                      //pattern: "{controller=Home}/{action=Index}/{id?}");
-                      pattern: "{controller=Account}/{action=Login}/{id?}"); //สำหรับ subcontract portal
-                  //  pattern: "{controller=Registration}/{action=SearchCompanyVerify}/{id?}"); //สำหรับ fbbportal
-        });
+                     pattern: "{controller=Account}/{action=Login}/{id?}"); //สำหรับ subcontract portal
+                                                                            //   pattern: "{controller=LogonByUser}/{action=LogonByUser}/{id?}"); //สำหรับ fbbportal
+                });
+
+
 
             loggerFactory.AddFile("Logs/SubcontractProfileLog-{Date}.txt");
         }
