@@ -30,6 +30,8 @@ using Microsoft.EntityFrameworkCore.Update.Internal;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Localization;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -44,7 +46,10 @@ namespace SubcontractProfile.Web.Controllers
         private SubcontractProfileUserModel dataUser = new SubcontractProfileUserModel();
         private string PathNas = "";
         private const int MegaBytes = 1024 * 1024;
-        public AccountController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        private readonly IStringLocalizer<AccountController> _localizer;
+
+        public AccountController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor,
+            IStringLocalizer<AccountController> localizer)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
@@ -56,20 +61,59 @@ namespace SubcontractProfile.Web.Controllers
             strpathASCProfile = _configuration.GetValue<string>("PathASCProfile:DEV").ToString();
 
             //NSA
-           // PathNas = _configuration.GetValue<string>("PathUploadfile:NAS").ToString();
+            // PathNas = _configuration.GetValue<string>("PathUploadfile:NAS").ToString();
+
+            _localizer = localizer;
+
+
         }
+
+        #region Lang
+
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return LocalRedirect(returnUrl);
+        }
+
+
+        public IActionResult SetThai()
+        {
+            var cookieValue = CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("th-TH"));
+            var option = new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) };
+
+            Response.Cookies.Append("Web.Language", cookieValue, option);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult SetEnglish()
+        {
+            var cookieValue = CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("en-GB"));
+            var option = new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) };
+
+            Response.Cookies.Append("Web.Language", cookieValue, option);
+            return RedirectToAction(nameof(Index));
+        }
+
+        #endregion
 
         #region Login
         public IActionResult Login()
         {
-            // SubcontractProfileCompanyBLL aa = new SubcontractProfileCompanyBLL();
             ViewBag.ReturnURL = "";
             int dd = SiteSession.CurrentUICulture;
-            //SubcontractProfileCompany test = new SubcontractProfileCompany();
-            //test.CompanyId = Guid.NewGuid();
+            var requestCultureFeature = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCultureFeature.RequestCulture.UICulture;
 
-            //var aa = _profileCompRepo.GetAll();
+          //   SetLanguage(culture.ToString(), "Login");
 
+          //  var ss = _localizer["Login"];
             return View();
         }
 
@@ -87,9 +131,12 @@ namespace SubcontractProfile.Web.Controllers
             return test;
         }
 
+
+
         [HttpPost]
         public IActionResult Login(LoginModel model)
         {
+            HttpContext.Session.Clear();
             ResponseModel res = new ResponseModel();
             string Url = "";
 
