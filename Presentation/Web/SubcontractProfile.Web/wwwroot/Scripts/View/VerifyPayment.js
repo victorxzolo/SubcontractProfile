@@ -39,6 +39,14 @@ $(document).ready(function () {
         }
     });
 
+    $("#paymentdatefrom").on("dp.change", function (e) {
+        $('#paymentdatefto').data("DateTimePicker").minDate(e.date);
+    });
+    $("#paymentdatefto").on("dp.change", function (e) {
+
+        $('#paymentdatefrom').data("DateTimePicker").maxDate(e.date);
+    });
+
     $('#datetimepicker').datetimepicker({
         format: "DD/MM/YYYY",
         showClear: true,

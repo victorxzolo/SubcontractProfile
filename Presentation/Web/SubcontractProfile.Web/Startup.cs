@@ -1,14 +1,17 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
 using System;
-
+using System.Globalization;
 
 namespace SubcontractProfile.Web
 {
@@ -40,6 +43,27 @@ namespace SubcontractProfile.Web
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            #region Localization
+
+            services.AddLocalization(options => options.ResourcesPath = "Resource");
+            services.AddMvc()
+              .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+              .AddDataAnnotationsLocalization();
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[] { new CultureInfo("th"), new CultureInfo("en") };
+                options.DefaultRequestCulture = new RequestCulture("th", "th");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
+
+          
+
+            #endregion
+
+
+
             // Add framework services.
             services.AddMvc()
                     .AddControllersAsServices();
@@ -51,7 +75,7 @@ namespace SubcontractProfile.Web
                 options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
             });
-
+            
 
         }
 
@@ -70,6 +94,20 @@ namespace SubcontractProfile.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            #region Localization
+
+            var supportedCultures = new[] { "th", "en" };
+            var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture("th")
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
+            app.UseRequestLocalization(localizationOptions);
+
+
+            #endregion
+
+
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -89,6 +127,8 @@ namespace SubcontractProfile.Web
         });
 
             loggerFactory.AddFile("Logs/SubcontractProfileLog-{Date}.txt");
+
+            app.UseRequestLocalization();
         }
     }
 }

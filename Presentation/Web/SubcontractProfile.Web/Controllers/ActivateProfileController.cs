@@ -45,7 +45,7 @@ namespace SubcontractProfile.Web.Controllers
         }
 
         public ActionResult Search(string subcontract_profile_type, string company_name_th, string tax_id
-           , string activate_date_fr, string activate_date_to,string activate_status)
+           , string activate_date_fr, string activate_date_to,string activate_status,string register_date_fr,string register_date_to)
         {
 
             var Result = new List<SubcontractProfileCompanyModel>();
@@ -111,9 +111,27 @@ namespace SubcontractProfile.Web.Controllers
                 activate_status = "null";
             }
 
+            if (register_date_fr == null)
+            {
+                register_date_fr = "null";
+            }
+            else
+            {
+                register_date_fr = Common.ConvertToDateTimeYYYYMMDD(register_date_fr);
+            }
 
-            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", strpathAPI + "Company/SearchActivateProfile",
-                subcontract_profile_type, company_name_th, tax_id, activate_date_fr, activate_date_to, activate_status);
+            if (register_date_to == null)
+            {
+                register_date_to = "null";
+            }
+            else
+            {
+                register_date_to = Common.ConvertToDateTimeYYYYMMDD(register_date_to);
+            }
+
+
+            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}", strpathAPI + "Company/SearchActivateProfile",
+                subcontract_profile_type, company_name_th, tax_id, activate_date_fr, activate_date_to, activate_status, register_date_fr, register_date_to);
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
