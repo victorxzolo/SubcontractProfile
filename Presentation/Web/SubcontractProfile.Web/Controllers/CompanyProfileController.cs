@@ -61,12 +61,17 @@ namespace SubcontractProfile.Web.Controllers
         public ActionResult Index()
         {
             
-           
-
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
             if (userProfile == null)
             {
                 return RedirectToAction("Login", "Account");
+            }
+            else
+            {
+                if(string.IsNullOrEmpty(userProfile.Username))
+                {
+                    return RedirectToAction("Login", "Account");
+                }
             }
 
             getsession();
