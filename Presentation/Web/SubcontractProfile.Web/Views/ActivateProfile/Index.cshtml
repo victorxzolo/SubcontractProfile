@@ -235,6 +235,24 @@
                 }
             });
 
+            $("#register_date_fr").on("dp.change", function (e) {
+                $('#register_date_to').data("DateTimePicker").minDate(e.date);
+            });
+            $("#register_date_to").on("dp.change", function (e) {
+
+                $('#register_date_fr').data("DateTimePicker").maxDate(e.date);
+            });
+
+
+            $("#activate_date_fr").on("dp.change", function (e) {
+                $('#activate_date_to').data("DateTimePicker").minDate(e.date);
+            });
+            $("#activate_date_to").on("dp.change", function (e) {
+
+                $('#activate_date_fr').data("DateTimePicker").maxDate(e.date);
+            });
+
+
             inittbSearchResult();
             $("#btnSearch").click(function (e) {
                 inittbSearchResult();
@@ -326,7 +344,8 @@
             $("#inputTaxId").val('');
             $("#inputActivate_date_fr").val('');
             $("#inputActivate_date_to").val('');
-            //$("select[id$=ddlActivateStatus]").val()
+            $("#inputRegister_date_fr").val('');
+            $("#inputRegister_date_to").val('');
         }
          function inittbSearchResult() {
 

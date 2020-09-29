@@ -320,10 +320,10 @@ $(document).ready(function () {
                     $('#ddlcountry').val(data.response.Country)
 
                     $('#ddlprovince').val(data.response.ProvinceId)
-                    //$('#ddlprovince').trigger('change');
+                    $('#ddlprovince').trigger('change');
 
                     $('#ddldistrict').val(data.response.DistrictId)
-                    // $('#ddldistrict').trigger('change');
+                     $('#ddldistrict').trigger('change');
 
                     $('#ddlsubdistrict').val(data.response.SubDistrictId)
 
@@ -1407,6 +1407,7 @@ function BindDDLprovince(regionid) {
 
     $.ajax({
         type: "POST",
+        async: false,
         url: urlDDLsubcontract_profile_province,
         data: { region_id: regionid },
         dataType: "json",
@@ -1432,6 +1433,7 @@ function BindDDLdistrict(province) {
     var urlDDLsubcontract_profile_district = urlaccount.replace('Action', 'DDLsubcontract_profile_district');
     $.ajax({
         type: "POST",
+        async: false,
         url: urlDDLsubcontract_profile_district,
         data: { province_id: province },
         dataType: "json",
@@ -1458,6 +1460,7 @@ function BindDDLsubdistrict(district) {
     var urlDDLsubcontract_profile_sub_district = urlaccount.replace('Action', 'DDLsubcontract_profile_sub_district');
     $.ajax({
         type: "POST",
+        async: false,
         url: urlDDLsubcontract_profile_sub_district,
         data: { district_id: district },
         dataType: "json",

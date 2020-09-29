@@ -101,10 +101,10 @@ $(document).ready(function () {
                                 $('#ddlcountry').val(data.response.Country)
 
                                 $('#ddlprovince').val(data.response.ProvinceId)
-                                    //$('#ddlprovince').trigger('change');
+                                    $('#ddlprovince').trigger('change');
 
                                     $('#ddldistrict').val(data.response.DistrictId)
-                                   // $('#ddldistrict').trigger('change');
+                                   $('#ddldistrict').trigger('change');
 
                                 $('#ddlsubdistrict').val(data.response.SubDistrictId)
 
@@ -1685,34 +1685,37 @@ function uploadFiles(inputId) {
                                 case "vat_registration_certificate_file": $('#hdupfilevat_registration_certificate').val(data.response); break;
                                 case "bookbank_file": $('#hduploadbookbank').val(data.response); break;
                             }
-                            bootbox.confirm({
-        title: "System Information",
-                                message: data.message,
-                                buttons: {
-        cancel: {
-        label: '<i class="fa fa-times"></i> Cancel'
-                                    }
-                                },
-                                callback: function (result) {
-        console.log('This was logged in the callback: ' + result);
-                                }
-                            });
+                            //bootbox.confirm({
+                            //    title: "System Information",
+                            //    message: data.message,
+                            //    buttons: {
+                            //        cancel: {
+                            //            label: '<i class="fa fa-times"></i> Cancel'
+                            //        }
+                            //    },
+                            //    callback: function (result) {
+                            //        console.log('This was logged in the callback: ' + result);
+                            //    }
+                            //});
+                      
                         }
                         else {
-        bootbox.confirm({
-            title: "System Information",
-            message: data.message,
-            buttons: {
-                cancel: {
-                    label: '<i class="fa fa-times"></i> Cancel'
-                }
-            },
-            callback: function (result) {
-                console.log('This was logged in the callback: ' + result);
-            }
-        });
+                            //bootbox.confirm({
+                            //    title: "System Information",
+                            //    message: data.message,
+                            //    buttons: {
+                            //        cancel: {
+                            //            label: '<i class="fa fa-times"></i> Cancel'
+                            //        }
+                            //    },
+                            //    callback: function (result) {
+                            //        console.log('This was logged in the callback: ' + result);
+                            //    }
+                            //});
 
                         }
+
+                        bootbox.alert(data.message);
 
                     },
                     error: function (xhr) {
@@ -1727,6 +1730,7 @@ function uploadFiles(inputId) {
             var urlDDLsubcontract_profile_province = urlaccount.replace('Action', 'DDLsubcontract_profile_province');
         $.ajax({
             type: "POST",
+            async: false,
             url: urlDDLsubcontract_profile_province,
             data: { region_id: regionid },
             dataType: "json",
@@ -1752,6 +1756,7 @@ function uploadFiles(inputId) {
             var urlDDLsubcontract_profile_district = urlaccount.replace('Action', 'DDLsubcontract_profile_district');
         $.ajax({
             type: "POST",
+            async: false,
             url: urlDDLsubcontract_profile_district,
             data: { province_id: province },
             dataType: "json",
@@ -1778,6 +1783,7 @@ function uploadFiles(inputId) {
             var urlDDLsubcontract_profile_sub_district = urlaccount.replace('Action', 'DDLsubcontract_profile_sub_district');
         $.ajax({
             type: "POST",
+            async: false,
             url: urlDDLsubcontract_profile_sub_district,
             data: { district_id: district },
             dataType: "json",
