@@ -83,6 +83,23 @@ $(document).ready(function () {
         }
     });
 
+    $('#datepickerCertificateDAte').datetimepicker({
+        format: "DD/MM/YYYY",
+        showClear: true,
+        showClose: true,
+        icons: {
+            time: 'fa fa-clock-o',
+            date: 'fa fa-calendar',
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down',
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'icon-screenshot',
+            clear: 'fa fa-trash',
+            close: 'fa fa-time'
+        }
+    });
+
     $('#rdoCompanyType1').on("change", function () {
         //if ($(this).attr("value") == "NewSubContract") {
             $("#divdealer").hide('slow');
@@ -2441,8 +2458,17 @@ function getDataPersonalById(id) {
 
                 $('#CertificateType').val(result.CertificateType);
                 $('#CertificateNo').val(result.CertificateNo);
-                $('#dateCertificateDate').val(result.CertificateExpireDate);
+                //$('#dateCertificateDate').val(result.CertificateExpireDate);
                 //$('#fileCertificateAttach').val(result.CertificateAttachFile);
+
+                if (result.CertificateExpireDate != null) {
+                    var d = new Date(result.CertificateExpireDate);
+                    var month = d.getMonth();
+                    var day = d.getDate();
+                    var year = d.getFullYear();
+
+                    $('#datepickerCertificateDAte').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
+                }
 
                 $("#BankName2").val(result.BankName).change();
 

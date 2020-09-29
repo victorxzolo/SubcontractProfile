@@ -1,4 +1,15 @@
+<<<<<<< HEAD
 ﻿@{
+=======
+﻿
+
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+
+@{
+>>>>>>> cc28d8c772b7d3ddc45eeea32cf278777756f335
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Company Profile";
 }
@@ -51,6 +62,7 @@
                             <input type="text" class="form-control" id="inputCompanyAilas" placeholder="ชื่อย่อบริษัท">
                         </div>
 
+<<<<<<< HEAD
                     </div>
 
                     <div style="text-align:center">
@@ -87,6 +99,24 @@
                             <tbody></tbody>
 
                         </table>
+=======
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">ชื่อบริษัท (ไทย) @*@Localizer["CompanynameTH"]*@</label>
+                        <input type="text" class="form-control" id="inputCompanynameTh" placeholder="ชื่อบริษัท (ไทย)">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">ชื่อบริษัท (อังกฤษ)@*@Localizer["CompanynameEN"]*@</label>
+                        <input type="text" class="form-control" id="inputCompanynameEn" placeholder="ชื่อบริษัท (อังกฤษ)">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Tax ID@*@Localizer["TaxID"]*@</label>
+                        <input type="text" class="form-control" maxlength="13" id="inputTaxId" placeholder="Tax ID">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">ชื่อย่อบริษัท@*@Localizer["CompanyAilas"]*@</label>
+                        <input type="text" class="form-control" id="inputCompanyAilas" placeholder="ชื่อย่อบริษัท">
+>>>>>>> cc28d8c772b7d3ddc45eeea32cf278777756f335
                     </div>
 
 
@@ -161,10 +191,28 @@
                     xxxxxxxxxxxxxx
                 </div>
 
+<<<<<<< HEAD
                 <label class="col-sm-5 col-form-label">ชื่อบัญชี :</label>
                 <div class="col-sm-7">
                     xxxxxxxxxxxxxx
                 </div>
+=======
+                    <button id="btnMainClear" type="button" class="btn btn-dark mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg> ล้างข้อมูล@*@Localizer["Reset"]*@
+                    </button>
+                    <button id="btnSearch" type="button" class="btn btn-success mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg> ค้นหาข้อมูล @*@Localizer["Search"]*@
+                    </button>
+>>>>>>> cc28d8c772b7d3ddc45eeea32cf278777756f335
 
                 <label class="col-sm-5 col-form-label">เลขบัญชี :</label>
                 <div class="col-sm-7">
@@ -175,6 +223,7 @@
     </div>
 
 
+<<<<<<< HEAD
 </div>
 
 <div class="col-xl-7 col-lg-6 col-md-7 col-sm-12 ">
@@ -198,6 +247,11 @@
                     </thead>
                 </table>
             </div>
+=======
+                <br />
+                <div class="widget-heading">
+                    <h3 class="">ผลการค้นหา@*@Localizer["SearchResult"]*@</h3>
+>>>>>>> cc28d8c772b7d3ddc45eeea32cf278777756f335
 
         </div>
     </div>

@@ -74,15 +74,16 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CompanyController))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(CompanyController))]
-        [HttpGet("SearchActivateProfile/{subcontract_profile_type}/{company_name_th}/{tax_id}/{activate_date_fr}/{activate_date_to}/{activate_status}")]
+        [HttpGet("SearchActivateProfile/{subcontract_profile_type}/{company_name_th}/{tax_id}/{activate_date_fr}/{activate_date_to}/{activate_status}" +
+            "/{register_date_fr}/{register_date_to}")]
         public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchActivateProfile(string subcontract_profile_type
            , string company_name_th, string tax_id, string activate_date_fr, string activate_date_to, 
-            string activate_status
+            string activate_status,string register_date_fr,string register_date_to
           )
         {
 
             _logger.LogInformation($"Start CompanyController::SearchActivateProfile", subcontract_profile_type, company_name_th, tax_id, activate_date_fr
-                , activate_date_to, activate_status);
+                , activate_date_to, activate_status, register_date_fr, register_date_to);
 
            
             if (subcontract_profile_type.ToUpper() == "NULL")
@@ -115,7 +116,18 @@ namespace SubcontractProfile.WebApi.API.Controllers
                 activate_status = string.Empty;
             }
 
-            var entities = _service.SearchActivateProfile(subcontract_profile_type, company_name_th, tax_id, activate_date_fr, activate_date_to, activate_status);
+            if (register_date_fr.ToUpper() == "NULL")
+            {
+                register_date_fr = string.Empty;
+            }
+
+            if (register_date_to.ToUpper() == "NULL")
+            {
+                register_date_to = string.Empty;
+            }
+
+            var entities = _service.SearchActivateProfile(subcontract_profile_type, company_name_th, tax_id, activate_date_fr, activate_date_to, activate_status
+                , register_date_fr, register_date_to);
 
             if (entities == null)
             {

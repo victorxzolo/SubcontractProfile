@@ -474,12 +474,14 @@ namespace SubcontractProfile.WebApi.Services
 
         public async Task<IEnumerable<SubcontractProfileCompany>> SearchActivateProfile(string subcontract_profile_type,
             string company_name_th, string tax_id, string activate_date_fr, 
-            string activate_date_to, string activate_status)
+            string activate_date_to, string activate_status,string register_date_fr,string register_date_to)
         {
             var p = new DynamicParameters();
             p.Add("@subcontract_profile_type", subcontract_profile_type);
             p.Add("@company_name_th", company_name_th);
             p.Add("@tax_id", tax_id);
+            p.Add("@register_date_fr", register_date_fr);
+            p.Add("@register_date_to", register_date_to);
             p.Add("@activate_date_fr", activate_date_fr);
             p.Add("@activate_date_to", activate_date_to);
             p.Add("@activate_status", activate_status);

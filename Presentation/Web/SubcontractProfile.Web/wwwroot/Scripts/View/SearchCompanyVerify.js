@@ -6,6 +6,7 @@ $(document).ready(function () {
     url = $("#controllername").data("url");
    // BindDDLStatus();
     inittbSearchResult();
+
     $('#regisdatefrom').datetimepicker({
         format: "DD/MM/YYYY",
         showClear: true,
@@ -38,6 +39,16 @@ $(document).ready(function () {
             close: 'fa fa-time'
         }
     });
+
+    $("#regisdatefrom").on("dp.change", function (e) {
+        $('#regisdateto').data("DateTimePicker").minDate(e.date);
+    });
+    $("#regisdateto").on("dp.change", function (e) {
+
+        $('#regisdatefrom').data("DateTimePicker").maxDate(e.date);
+    });
+
+
     $('#btnclear').click(function () {
 
         $('#txttaxid').val('');
@@ -93,7 +104,7 @@ $(document).ready(function () {
 
     $('#btnverifycompany').click(function () {
         var company = $('#tbSearchComVerifyResult tr input:radio[name="optionsRadios"]:checked').val();
-        if (company != "") {
+        if (company != undefined && company != "") {
             var urlRedir = url.replace('Action', 'CompanyVerify');
             window.location.href = urlRedir+'?companyid=' + company;
         }
