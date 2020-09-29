@@ -1359,39 +1359,28 @@ function uploadFiles(inputId) {
 
                 if (data.status) {
                     switch (inputId) {
-                        case "company_certified_file": $('#hdupfilecompany_certified').val(data.response); break;
-                        case "commercial_registration_file": $('#hdupfilecommercial_registration').val(data.response); break;
-                        case "vat_registration_certificate_file": $('#hdupfilevat_registration_certificate').val(data.response); break;
-                        case "bookbank_file": $('#hduploadbookbank').val(data.response); break;
+                        case "inputUploadcertificate": $('#hdupfilecompany_certified').val(data.response); break;
+                        case "inputUploadComRegis": $('#hdupfilecommercial_registration').val(data.response); break;
+                        case "inputUpload20": $('#hdupfilevat_registration_certificate').val(data.response); break;
+                        case "inputuploadbookbank": $('#hduploadbookbank').val(data.response); break;
                     }
-                    bootbox.confirm({
-                        title: "System Information",
-                        message: data.message,
-                        buttons: {
-                            cancel: {
-                                label: '<i class="fa fa-times"></i> Cancel'
-                            }
-                        },
-                        callback: function (result) {
-                            console.log('This was logged in the callback: ' + result);
-                        }
-                    });
                 }
                 else {
-                    bootbox.confirm({
-                        title: "System Information",
-                        message: data.message,
-                        buttons: {
-                            cancel: {
-                                label: '<i class="fa fa-times"></i> Cancel'
-                            }
-                        },
-                        callback: function (result) {
-                            console.log('This was logged in the callback: ' + result);
-                        }
-                    });
+                    switch (inputId) {
+                        case "inputUploadcertificate": $('#hdupfilecompany_certified').val('');
+                            $('#lbuploadcertificate').text('เลือกไฟล์');
+                            break;
+                        case "inputUploadComRegis": $('#hdupfilecommercial_registration').val('');
+                            $('#lbuploadComRegis').text('เลือกไฟล์');
+                            break;
+                        case "inputUpload20": $('#hdupfilevat_registration_certificate').val('');
+                            $('#lbupload20').text('เลือกไฟล์');
+                            break;
+                        case "inputuploadbookbank": $('#hduploadbookbank').val(''); $('#lbuploadbookbank').text('เลือกไฟล์'); break;
+                    }
 
                 }
+                bootbox.alert(data.message);
 
             },
             error: function (xhr) {
