@@ -242,6 +242,8 @@ namespace SubcontractProfile.Web.Controllers
             input.Username = userName;
             input.password = password;
 
+            string rr = JsonConvert.SerializeObject(input);
+
             var httpContentUser = new StringContent(JsonConvert.SerializeObject(input), Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PostAsync(uriUser, httpContentUser).Result;
 
@@ -1601,153 +1603,172 @@ namespace SubcontractProfile.Web.Controllers
             bool resultGetFile = true;
             ResponseModel res = new ResponseModel();
            string strredirecturl = "/Account/Login";
+            List<SubcontractProfileUserModel> L_user = new List<SubcontractProfileUserModel>();
             try
             {
                 if (ModelState.IsValid)
                 {
                     #region Check Username Duplicate
-
-                    #endregion
-
-                    Guid companyId = Guid.NewGuid();
-                    model.CompanyId = companyId;
-                    model.CreateDate = DateTime.Now;
-                    model.CreateBy = "SYSTEM";
-
-                    var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
-
-                    if (dataUploadfile != null && dataUploadfile.Count != 0)
-                    {
-                        #region Copy File to server
-                        foreach (var e in dataUploadfile)
-                        {
-                            resultGetFile = await GetFile(e, model.CompanyId.ToString());
-
-                            string filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
-                            filename = EnsureCorrectFilename(filename);
-
-                            switch (e.typefile)
-                            {
-                                case "CompanyCertifiedFile":
-                                    model.CompanyCertifiedFile = filename;
-                                    break;
-                                case "CommercialRegistrationFile":
-                                    model.CommercialRegistrationFile = filename;
-                                    break;
-                                case "VatRegistrationCertificateFile":
-                                    model.VatRegistrationCertificateFile = filename;
-                                    break;
-                            }
-                        }
-                        #endregion
-
-                    }
-                    if (resultGetFile)
-                    {
-                        SessionHelper.RemoveSession(HttpContext.Session, "userUploadfileDaft");
-
-                        #region Insert Company
-
-                        //if(model.SubcontractProfileType== "NewSubContract")
-                        //{
-                            string encrypted = Util.EncryptText(model.Password);
-                            model.Password = encrypted;
-                        //}
-
-                        
-                        model.Status = "Pending";
-
-
-
-
-                        var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
-                    HttpClient clientCompany = new HttpClient();
-                    clientCompany.DefaultRequestHeaders.Accept.Add(
+                    HttpClient client = new HttpClient();
+                    client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
-                    var httpContentCompany = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                    HttpResponseMessage responseCompany = clientCompany.PostAsync(uriCompany, httpContentCompany).Result;
-                    if (responseCompany.IsSuccessStatusCode)
+
+                    string uriStringUser = string.Format("{0}/{1}", strpathAPI + "User/CheckUsername", model.User_name);
+                    HttpResponseMessage response = client.GetAsync(uriStringUser).Result;
+                    if (response.IsSuccessStatusCode)
                     {
-                        #region Insert Address
-                        var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
-
-                            if (dataaddr != null && dataaddr.Count != 0)
-                            {
-                                SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaft");
-
-                                foreach (var d in dataaddr)
-                                {
-                                    SubcontractProfileAddressModel addr = new SubcontractProfileAddressModel();
-                                    addr.AddressId = d.AddressId;
-                                    addr.AddressTypeId = d.AddressTypeId;
-                                    addr.Building = d.Building;
-                                    addr.City = d.City;
-                                    addr.Country = d.Country;
-                                    addr.DistrictId = d.DistrictId;
-                                    addr.Floor = d.Floor;
-                                    addr.HouseNo = d.HouseNo;
-                                    addr.Moo = d.Moo;
-                                    addr.ProvinceId = d.ProvinceId;
-                                    addr.CompanyId = companyId.ToString();
-                                    addr.CreateBy = dataUser.UserId.ToString();
-                                    addr.CreateDate = DateTime.Now;
-                                    addr.RegionId = d.RegionId;
-                                    addr.Road = d.Road;
-                                    addr.Soi = d.Soi;
-                                    addr.RoomNo = d.RoomNo;
-                                    addr.SubDistrictId = d.SubDistrictId;
-                                    addr.VillageName = d.VillageName;
-                                    addr.ZipCode = d.ZipCode;
-
-                                    var uriAddress = new Uri(Path.Combine(strpathAPI, "Address", "Insert"));
-                                    HttpClient clientAddress = new HttpClient();
-                                    clientAddress.DefaultRequestHeaders.Accept.Add(
-                                    new MediaTypeWithQualityHeaderValue("application/json"));
-
-                               // string rr = JsonConvert.SerializeObject(addr);
-
-                                    var httpContent = new StringContent(JsonConvert.SerializeObject(addr), Encoding.UTF8, "application/json");
-                            HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
-                            if (responseAddress.IsSuccessStatusCode)
-                            {
-                                       
-                                res.Status = true;
-                                res.Message = "Register Success";
-                                res.StatusError = "0";
-                            }
-                            else
-                            {
-                                res.Status = false;
-                                res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
-                                res.StatusError = "-1";
-                            }
-                            }
-                        }
-                            else
-                            {
-                                res.Status = false;
-                                res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
-                                res.StatusError = "-1";
-                            }
-                        #endregion
+                        var v = response.Content.ReadAsStringAsync().Result;
+                        L_user = JsonConvert.DeserializeObject<List<SubcontractProfileUserModel>>(v);
+                    }
+                    if (L_user != null && L_user.Count > 0)
+                    {
+                        res.Status = false;
+                        res.Message = "Username นี้มีในระบบแล้ว";
+                        res.StatusError = "-1";
                     }
                     else
                     {
-                        res.Status = false;
-                        res.Message = "Data is not correct, Please Check Data or Contact System Admin";
-                        res.StatusError = "-1";
+                        Guid companyId = Guid.NewGuid();
+                        model.CompanyId = companyId;
+                        model.CreateDate = DateTime.Now;
+                        model.CreateBy = "SYSTEM";
+
+                        var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
+
+                        if (dataUploadfile != null && dataUploadfile.Count != 0)
+                        {
+                            #region Copy File to server
+                            foreach (var e in dataUploadfile)
+                            {
+                                resultGetFile = await GetFile(e, model.CompanyId.ToString());
+
+                                string filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
+                                filename = EnsureCorrectFilename(filename);
+
+                                switch (e.typefile)
+                                {
+                                    case "CompanyCertifiedFile":
+                                        model.CompanyCertifiedFile = filename;
+                                        break;
+                                    case "CommercialRegistrationFile":
+                                        model.CommercialRegistrationFile = filename;
+                                        break;
+                                    case "VatRegistrationCertificateFile":
+                                        model.VatRegistrationCertificateFile = filename;
+                                        break;
+                                }
+                            }
+                            #endregion
+
+                        }
+                        if (resultGetFile)
+                        {
+                            SessionHelper.RemoveSession(HttpContext.Session, "userUploadfileDaft");
+
+                            #region Insert Company
+
+                            //if(model.SubcontractProfileType== "NewSubContract")
+                            //{
+                            string encrypted = Util.EncryptText(model.Password);
+                            model.Password = encrypted;
+                            //}
+
+
+                            model.Status = "Pending";
+
+
+
+
+                            var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Insert"));
+                            HttpClient clientCompany = new HttpClient();
+                            clientCompany.DefaultRequestHeaders.Accept.Add(
+                            new MediaTypeWithQualityHeaderValue("application/json"));
+                            var httpContentCompany = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                            HttpResponseMessage responseCompany = clientCompany.PostAsync(uriCompany, httpContentCompany).Result;
+                            if (responseCompany.IsSuccessStatusCode)
+                            {
+                                #region Insert Address
+                                var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaft");
+
+                                if (dataaddr != null && dataaddr.Count != 0)
+                                {
+                                    SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaft");
+
+                                    foreach (var d in dataaddr)
+                                    {
+                                        SubcontractProfileAddressModel addr = new SubcontractProfileAddressModel();
+                                        addr.AddressId = d.AddressId;
+                                        addr.AddressTypeId = d.AddressTypeId;
+                                        addr.Building = d.Building;
+                                        addr.City = d.City;
+                                        addr.Country = d.Country;
+                                        addr.DistrictId = d.DistrictId;
+                                        addr.Floor = d.Floor;
+                                        addr.HouseNo = d.HouseNo;
+                                        addr.Moo = d.Moo;
+                                        addr.ProvinceId = d.ProvinceId;
+                                        addr.CompanyId = companyId.ToString();
+                                        addr.CreateBy = dataUser.UserId.ToString();
+                                        addr.CreateDate = DateTime.Now;
+                                        addr.RegionId = d.RegionId;
+                                        addr.Road = d.Road;
+                                        addr.Soi = d.Soi;
+                                        addr.RoomNo = d.RoomNo;
+                                        addr.SubDistrictId = d.SubDistrictId;
+                                        addr.VillageName = d.VillageName;
+                                        addr.ZipCode = d.ZipCode;
+
+                                        var uriAddress = new Uri(Path.Combine(strpathAPI, "Address", "Insert"));
+                                        HttpClient clientAddress = new HttpClient();
+                                        clientAddress.DefaultRequestHeaders.Accept.Add(
+                                        new MediaTypeWithQualityHeaderValue("application/json"));
+
+                                        // string rr = JsonConvert.SerializeObject(addr);
+
+                                        var httpContent = new StringContent(JsonConvert.SerializeObject(addr), Encoding.UTF8, "application/json");
+                                        HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
+                                        if (responseAddress.IsSuccessStatusCode)
+                                        {
+
+                                            res.Status = true;
+                                            res.Message = "Register Success";
+                                            res.StatusError = "0";
+                                        }
+                                        else
+                                        {
+                                            res.Status = false;
+                                            res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                            res.StatusError = "-1";
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    res.Status = false;
+                                    res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                    res.StatusError = "-1";
+                                }
+                                #endregion
+                            }
+                            else
+                            {
+                                res.Status = false;
+                                res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                                res.StatusError = "-1";
+                            }
+                        }
+                        else
+                        {
+                            res.Status = false;
+                            res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                            res.StatusError = "-1";
+                        }
+
+
+                        #endregion
                     }
+                    #endregion
                 }
-                else
-                {
-                    res.Status = false;
-                    res.Message = "Data is not correct, Please Check Data or Contact System Admin";
-                    res.StatusError = "-1";
-                }
-
-
-                #endregion
-            }
                     else
                 {
                     res.Status = false;
