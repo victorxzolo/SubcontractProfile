@@ -12,6 +12,7 @@ $(document).ready(function () {
     $('#btn_OnSave_Modal').hide();
 
         inittbSearchResult();
+       // initialCompanyDataById();
         inittbAddressResult();
         inittbRevenue();
         inittblocation();
@@ -756,6 +757,73 @@ $(document).ready(function () {
 });
 
 
+
+
+function initialCompanyDataById() {
+    var urlGetDataById = url.replace('Action', 'GetCompanyDataById');
+    $.ajax({
+        url: urlGetDataById,
+        type: 'POST',
+        dataType: "json",
+        success: function (result) {
+           // console.log(result)
+            if (result != null) {
+
+                
+                $("#lblStatusSub").text(result.Status);
+                $("#lblCompanyName").text(result.CompanyNameTh);
+
+                //$('#inputLocationCode').val(result.LocationCode);
+
+                //$('#inputLocationAlias').val(result.LocationNameAlias);
+                //$('#inputLocationNameT').val(result.LocationNameTh);
+                //$('#inputLocationNameE').val(result.LocationNameEn);
+                //$('#inputStorage').val(result.StorageLocation);
+                //$('#inputShip').val(result.ShipTo);
+                //$('#inoutOutStorage').val(result.OutOfServiceStorageLocation);
+                //$('#inputVat').val(result.VatBranchNumber);
+                //$('#inputPhoneNo').val(result.Phone);
+                //$('#inputMainPhone').val(result.CompanyMainContractPhone);
+                //$('#inputInstallationsPhone').val(result.InstallationsContractPhone);
+                //$('#inputMaintenencePhone').val(result.MaintenanceContractPhone);
+                //$('#inputInventoryPhone').val(result.InventoryContractPhone);
+                //$('#inputPaymentPhone').val(result.PaymentContractPhone);
+                //$('#inputEtcPhone').val(result.EtcContractPhone);
+                //$('#inputCompanyMail').val(result.CompanyGroupMail);
+                //$('#inputInstallationMail').val(result.InstallationsContractMail);
+                //$('#inputMaintanenceMail').val(result.MaintenanceContractMail);
+                //$('#inputInventoryMail').val(result.InventoryContractMail);
+                //$('#inputPaymentMail').val(result.PaymentContractMail);
+                //$('#inputEtcMail').val(result.EtcContractMail);
+
+                //$('#inputLocationAddress').val(result.LocationAddress);
+
+                //$("#inputPostAddress").val(result.PostAddress)
+                //$("#inputTaxAddress").val(result.TaxAddress)
+                //$("#inputWTAddress").val(result.WtAddress)
+
+                //$('#inputBankCode').val(result.BankCode);
+                //$('#inputBankName').val(result.BankName);
+                //$('#inputBankAccountNo').val(result.BankAccountNo);
+                //$('#inputBankAccountName').val(result.BankAccountName);
+                //$('#inputBankBranchNo').val(result.BankBranchCode);
+                //$('#inputBankBranchName').val(result.BankBranchName);
+                //$('#inputPanaltyPhone').val(result.PenaltyContractPhone);
+                //$('#inputPanaltyMail').val(result.PenaltyContractMail);
+                //$('#inputContractPhone').val(result.ContractPhone);
+                //$('#inputContractMail').val(result.ContractMail);
+                //$('#hdCompanyId').val(result.CompanyId);
+
+             
+
+            }
+        },
+        error: function (result) {
+
+        }
+
+    });
+}
 
 
         function ClearDataModalLocation() {
