@@ -294,18 +294,22 @@ $(document).ready(function () {
                     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
                 });
 
-    $('#inputUploadcertificate').change(function () {
+    $('#inputUploadcertificate').change(function (e) {
+        e.preventDefault();
         uploadFiles('inputUploadcertificate')
     });
 
-    $('#inputUploadComRegis').change(function () {
+    $('#inputUploadComRegis').change(function (e) {
+        e.preventDefault();
         uploadFiles('inputUploadComRegis')
     });
 
-    $('#inputUpload20').change(function () {
+    $('#inputUpload20').change(function (e) {
+        e.preventDefault();
         uploadFiles('inputUpload20')
     });
-    $('#inputuploadbookbank').change(function () {
+    $('#inputuploadbookbank').change(function (e) {
+        e.preventDefault();
         uploadFiles('inputuploadbookbank')
     });
 
