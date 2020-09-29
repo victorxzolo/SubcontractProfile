@@ -210,6 +210,31 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data });
         }
 
+        public JsonResult GetCompanyDataById()
+        {
+            var companyResult = new SubcontractProfileCompanyModel();
+
+            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Company/GetByCompanyId", userProfile.companyid);
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                //data
+                companyResult = JsonConvert.DeserializeObject<SubcontractProfileCompanyModel>(result);
+               
+            }
+
+            return Json(companyResult);
+        }
+
 
         [HttpPost]
         public async Task<JsonResult> GetDataById(string companyId)
