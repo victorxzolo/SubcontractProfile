@@ -141,6 +141,9 @@
   <data name="AddressType" xml:space="preserve">
     <value>Address Type</value>
   </data>
+  <data name="ASCCode" xml:space="preserve">
+    <value>ASC Code</value>
+  </data>
   <data name="BankAccountInformation" xml:space="preserve">
     <value>Bank Account Information</value>
   </data>
@@ -149,6 +152,9 @@
   </data>
   <data name="BankName" xml:space="preserve">
     <value>Bank Name</value>
+  </data>
+  <data name="Branch" xml:space="preserve">
+    <value>Branch</value>
   </data>
   <data name="BranchAddress" xml:space="preserve">
     <value>Branch Address</value>
@@ -209,6 +215,9 @@
   </data>
   <data name="CreateDate" xml:space="preserve">
     <value>Create Date</value>
+  </data>
+  <data name="DataRavenue" xml:space="preserve">
+    <value>ข้อมูลจากสรรพากร อาจจะไม่ตรงกับกรมพัฒนาธุรกิจ</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
@@ -318,6 +327,9 @@
   <data name="HouseNo" xml:space="preserve">
     <value>House No</value>
   </data>
+  <data name="IDNumber" xml:space="preserve">
+    <value>ID Number</value>
+  </data>
   <data name="InstallationDepartment" xml:space="preserve">
     <value>Installation Department</value>
   </data>
@@ -333,8 +345,14 @@
   <data name="LocationName" xml:space="preserve">
     <value>Location Name</value>
   </data>
+  <data name="LocationSearch" xml:space="preserve">
+    <value>Search Location</value>
+  </data>
   <data name="MaintenanceDepartment" xml:space="preserve">
     <value>Maintenance Department</value>
+  </data>
+  <data name="MobileNo" xml:space="preserve">
+    <value>Mobile No</value>
   </data>
   <data name="Moo" xml:space="preserve">
     <value>Moo</value>
@@ -363,6 +381,9 @@
   <data name="Room" xml:space="preserve">
     <value>Room</value>
   </data>
+  <data name="SapCode" xml:space="preserve">
+    <value>Sap Code</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
@@ -371,6 +392,12 @@
   </data>
   <data name="SearchResult" xml:space="preserve">
     <value>Search Result</value>
+  </data>
+  <data name="SearchRevenue" xml:space="preserve">
+    <value>Search VAT Information</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
   </data>
   <data name="ShippingAddress" xml:space="preserve">
     <value>Shipping Address</value>
@@ -404,6 +431,9 @@
   </data>
   <data name="UploadBookBank" xml:space="preserve">
     <value>Upload Book Bank</value>
+  </data>
+  <data name="UserId" xml:space="preserve">
+    <value>User Id</value>
   </data>
   <data name="VAT" xml:space="preserve">
     <value>VAT</value>

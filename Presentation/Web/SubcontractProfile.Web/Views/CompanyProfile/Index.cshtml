@@ -1043,7 +1043,7 @@
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Location Search</h4>
+                    <h4 class="modal-title">@Localizer["LocationSearch"]</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -1054,7 +1054,7 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">ASC Code :</label>
+                                    <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">@Localizer["ASCCode"] :</label>
                                     <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                         <input type="text" class="form-control" id="txtasccodemodal" />
 
@@ -1063,7 +1063,7 @@
                             </div>
                             <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Mobile No :</label>
+                                    <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">@Localizer["MobileNo"] :</label>
                                     <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                         <input type="text" class="form-control" id="txtmobilenomodal" />
 
@@ -1074,7 +1074,7 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">Location Code :</label>
+                                    <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">@Localizer["LocationCode"] :</label>
                                     <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                         <input type="text" class="form-control inputValidationlocationModal" id="txtlocationcodemodal" required />
                                         <div class="invalid-tooltip">
@@ -1085,7 +1085,7 @@
                             </div>
                             <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">ID Number :</label>
+                                    <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">@Localizer["IDNumber"] :</label>
                                     <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                         <input type="text" class="form-control" id="txtidnumbermodal" />
                                     </div>
@@ -1095,7 +1095,7 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">Sap Code :</label>
+                                    <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">@Localizer["SapCode"] :</label>
                                     <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                         <input type="text" class="form-control" id="txtsapcodemodal" />
                                     </div>
@@ -1103,7 +1103,7 @@
                             </div>
                             <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">User Id :</label>
+                                    <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">@Localizer["UserId"] :</label>
                                     <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                         <input type="text" class="form-control" id="txtuseridmodal" />
                                     </div>
@@ -1122,7 +1122,7 @@
                                             <line x1="15" y1="9" x2="9" y2="15"></line>
                                             <line x1="9" y1="9" x2="15" y2="15"></line>
                                         </svg>
-                                        ล้างข้อมูล
+                                        @Localizer["Reset"]
                                     </button>
                                     <button class="btn btn-success mb-2" id="btn_search_modal" type="button">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1130,7 +1130,7 @@
                                             <circle cx="11" cy="11" r="8"></circle>
                                             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                                         </svg>
-                                        ค้นหาข้อมูล
+                                        @Localizer["Search"]
                                     </button>
                                 </div>
 
@@ -1144,15 +1144,15 @@
                                     <table class="table table-bordered table-hover" id="tblocationModal">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>ชื่อบริษัท</th>
-                                                <th>ชื่อย่อบริษัท</th>
-                                                <th>เลขนิติบุคคล</th>
-                                                <th>Location Code</th>
-                                                <th>Location Name</th>
-                                                <th>Distribution Channel</th>
-                                                <th>Channel Sale Group</th>
+                                                <th>@Localizer["CompanyName"]</th>
+                                                <th>@Localizer["CompanyAilas"]</th>
+                                                <th>@Localizer["JuristicPersonRegistrationNumber"]</th>
+                                                <th>@Localizer["LocationCode"]</th>
+                                                <th>@Localizer["LocationName"]</th>
+                                                <th>@Localizer["DistributionChannel"]</th>
+                                                <th>@Localizer["ChannelSaleGroup"]</th>
                                                 <th></th>
-                                                <th>ตัวเลือก</th>
+                                                <th>@Localizer["Select"]</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -1176,7 +1176,7 @@
                             <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
                             <line x1="12" y1="2" x2="12" y2="12"></line>
                         </svg>
-                        ปิด
+                        @Localizer["Close"]
                     </button>
                     @*<button type="button" class="btn btn-success" id="btn_select_location">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg);
@@ -1200,7 +1200,7 @@
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">ค้นหาข้อมูลบริษัทจากฐานข้อมูลกรมสรรพากร</h4>
+                    <h4 class="modal-title">@Localizer["SearchRevenue"]</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -1211,7 +1211,7 @@
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                                 <div class="form-group">
-                                    <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">ข้อมูลจากสรรพากร อาจจะไม่ตรงกับกรมพัฒนาธุรกิจ</label>
+                                    <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">@Localizer["DataRavenue"]</label>
                                     <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                         <input type="text" class="form-control" id="txtsearchrevenue" />
 
@@ -1229,7 +1229,7 @@
                                             <line x1="15" y1="9" x2="9" y2="15"></line>
                                             <line x1="9" y1="9" x2="15" y2="15"></line>
                                         </svg>
-                                        ล้างข้อมูล
+                                        @Localizer["Reset"]
                                     </button>
                                     <button class="btn btn-success mb-2" id="btn_search_revenue_modal" type="button">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1237,7 +1237,7 @@
                                             <circle cx="11" cy="11" r="8"></circle>
                                             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                                         </svg>
-                                        ค้นหาข้อมูล
+                                        @Localizer["Search"]
                                     </button>
                                 </div>
 
@@ -1252,12 +1252,12 @@
                                         <thead class="thead-light">
                                             <tr>
                                                 @*<th></th>*@
-                                                <th>เลขผู้เสียภาษี</th>
-                                                <th>ชื่อบริษัท</th>
-                                                <th>สาขา</th>
-                                                <th>ที่อยู่</th>
+                                                <th>@Localizer["TaxID"]</th>
+                                                <th>@Localizer["CompanyName"]</th>
+                                                <th>@Localizer["Branch"]</th>
+                                                <th>@Localizer["Address"]</th>
                                                 <th></th>
-                                                <th>ตัวเลือก</th>
+                                                <th>@Localizer["Select"]</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -1283,7 +1283,7 @@
                             <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
                             <line x1="12" y1="2" x2="12" y2="12"></line>
                         </svg>
-                        ปิด
+                        @Localizer["Close"]
                     </button>
                     @*<button type="button" class="btn btn-success" id="btn_select_revenue">
                             <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg);transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">

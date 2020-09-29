@@ -141,6 +141,9 @@
   <data name="AddressType" xml:space="preserve">
     <value>ประเภทที่อยู่</value>
   </data>
+  <data name="ASCCode" xml:space="preserve">
+    <value>ASC Code</value>
+  </data>
   <data name="BankAccountInformation" xml:space="preserve">
     <value>ข้อมูลบัญชีธนาคาร</value>
   </data>
@@ -149,6 +152,9 @@
   </data>
   <data name="BankName" xml:space="preserve">
     <value>ชื่อธนาคาร</value>
+  </data>
+  <data name="Branch" xml:space="preserve">
+    <value>สาขา</value>
   </data>
   <data name="BranchAddress" xml:space="preserve">
     <value>ที่อยู่ตามที่ตั้งสาขา</value>
@@ -186,6 +192,9 @@
   <data name="CompanyDocuments" xml:space="preserve">
     <value>ข้อมูลเอกสารบริษัท</value>
   </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>ชื่อบริษัท</value>
+  </data>
   <data name="CompanynameEN" xml:space="preserve">
     <value>ชื่อบริษัท (อังกฤษ)</value>
   </data>
@@ -209,6 +218,9 @@
   </data>
   <data name="CreateDate" xml:space="preserve">
     <value>วันที่สมัคร</value>
+  </data>
+  <data name="DataRavenue" xml:space="preserve">
+    <value>ข้อมูลจากสรรพากร อาจจะไม่ตรงกับกรมพัฒนาธุรกิจ</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>ลบ</value>
@@ -318,6 +330,9 @@
   <data name="HouseNo" xml:space="preserve">
     <value>เลขที่</value>
   </data>
+  <data name="IDNumber" xml:space="preserve">
+    <value>เลขบัตรประชาชน</value>
+  </data>
   <data name="InstallationDepartment" xml:space="preserve">
     <value>แผนกติดตั้ง</value>
   </data>
@@ -333,8 +348,14 @@
   <data name="LocationName" xml:space="preserve">
     <value>ชื่อ Location</value>
   </data>
+  <data name="LocationSearch" xml:space="preserve">
+    <value>ค้นหา Location</value>
+  </data>
   <data name="MaintenanceDepartment" xml:space="preserve">
     <value>แผนกซ่อมบำรุง</value>
+  </data>
+  <data name="MobileNo" xml:space="preserve">
+    <value>เบอร์โทร</value>
   </data>
   <data name="Moo" xml:space="preserve">
     <value>หมู่ที่</value>
@@ -363,6 +384,9 @@
   <data name="Room" xml:space="preserve">
     <value>ห้อง</value>
   </data>
+  <data name="SapCode" xml:space="preserve">
+    <value>Sap Code</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>บันทึก</value>
   </data>
@@ -371,6 +395,12 @@
   </data>
   <data name="SearchResult" xml:space="preserve">
     <value>ผลการค้นหา</value>
+  </data>
+  <data name="SearchRevenue" xml:space="preserve">
+    <value>ค้นหาข้อมูลบริษัทจากฐานข้อมูลกรมสรรพากร</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>ตัวเลือก</value>
   </data>
   <data name="ShippingAddress" xml:space="preserve">
     <value>ที่อยู่จัดส่งสินค้า</value>
@@ -404,6 +434,9 @@
   </data>
   <data name="UploadBookBank" xml:space="preserve">
     <value>อัพโหลดหน้าบัญชีธนาคาร</value>
+  </data>
+  <data name="UserId" xml:space="preserve">
+    <value>User Id</value>
   </data>
   <data name="VAT" xml:space="preserve">
     <value>ภาษีมูลค่าเพิ่ม</value>
