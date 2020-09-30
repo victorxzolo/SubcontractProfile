@@ -122,23 +122,23 @@ namespace SubcontractProfile.Web.Controllers
                 SubcontractProfilePaymentModel model = new SubcontractProfilePaymentModel();
                 if (searchPayment.Paymentdatefrom != null)
                 {
-                    DateTime datefrom = DateTime.ParseExact(searchPayment.Paymentdatefrom, "dd/MM/yyyy", null);
+                    DateTime datefrom = DateTime.ParseExact(searchPayment.Paymentdatefrom, "dd/MM/yyyy", new CultureInfo("en-US"));
                     model.PaymentDatetimeFrom = datefrom;
                 }
                 if (searchPayment.Paymentdateto != null)
                 {
-                    DateTime dateto = DateTime.ParseExact(searchPayment.Paymentdateto, "dd/MM/yyyy", null);
+                    DateTime dateto = DateTime.ParseExact(searchPayment.Paymentdateto, "dd/MM/yyyy", new CultureInfo("en-US"));
                     model.PaymentDatetimeTo = dateto;
                 }
 
                 if (searchPayment.Paymantrequestdatefrom != null)
                 {
-                    DateTime datefrom = DateTime.ParseExact(searchPayment.Paymantrequestdatefrom, "dd/MM/yyyy", null);
+                    DateTime datefrom = DateTime.ParseExact(searchPayment.Paymantrequestdatefrom, "dd/MM/yyyy", new CultureInfo("en-US"));
                     model.RequestDateFrom = datefrom;
                 }
                 if (searchPayment.Paymentrequestdateto != null)
                 {
-                    DateTime dateto = DateTime.ParseExact(searchPayment.Paymentrequestdateto, "dd/MM/yyyy", null);
+                    DateTime dateto = DateTime.ParseExact(searchPayment.Paymentrequestdateto, "dd/MM/yyyy", new CultureInfo("en-US"));
                     model.RequestDateTo = dateto;
                 }
                 if (dataUser == null)
@@ -346,12 +346,12 @@ namespace SubcontractProfile.Web.Controllers
 
                 if (searchmodel.PaymentDatetimeFrom != null)
                 {
-                    DateTime datefrom = DateTime.ParseExact(searchmodel.PaymentDatetimeFrom, "dd/MM/yyyy", null);
+                    DateTime datefrom = DateTime.ParseExact(searchmodel.PaymentDatetimeFrom, "dd/MM/yyyy", new CultureInfo("en-US"));
                     model.PaymentDatetimeFrom = datefrom;
                 }
                 if (searchmodel.PaymentDatetimeTo != null)
                 {
-                    DateTime dateto = DateTime.ParseExact(searchmodel.PaymentDatetimeTo, "dd/MM/yyyy", null);
+                    DateTime dateto = DateTime.ParseExact(searchmodel.PaymentDatetimeTo, "dd/MM/yyyy", new CultureInfo("en-US"));
                     model.PaymentDatetimeTo = dateto;
                 }
 
