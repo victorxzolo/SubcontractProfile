@@ -229,7 +229,7 @@ namespace SubcontractProfile.Web.Controllers
                 var result = response.Content.ReadAsStringAsync().Result;
                 //data
                 companyResult = JsonConvert.DeserializeObject<SubcontractProfileCompanyModel>(result);
-                companyResult.RegisterDateStr = Common.ConvertToDateTimeDDMMYYYY(companyResult.RegisterDate.Value.ToString());
+                companyResult.RegisterDateStr = companyResult.RegisterDate.Value.ToString("dd/MM/yyyy HH:mm");
 
 
             }
