@@ -31,6 +31,13 @@
 
   <ItemGroup>
     <Folder Include="Logs\" />
+    <Folder Include="Resource\Views\Location\" />
+    <Folder Include="Resource\Views\Training\" />
+    <Folder Include="Resource\Views\TestResultForSub\" />
+    <Folder Include="Resource\Views\TestResult\" />
+    <Folder Include="Resource\Views\Team\" />
+    <Folder Include="Resource\Views\Registration\" />
+    <Folder Include="Resource\Views\Payment\" />
   </ItemGroup>
 
   <ItemGroup>
