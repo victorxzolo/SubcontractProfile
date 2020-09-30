@@ -1537,7 +1537,7 @@ function BindDDLprovince(regionid) {
     Loading();
     $.ajax({
         type: "POST",
-        //async: false,
+        async: false,
         url: urlDDLsubcontract_profile_province,
         data: { region_id: regionid },
         dataType: "json",
@@ -1563,7 +1563,7 @@ function BindDDLdistrict(province) {
     var urlDDLsubcontract_profile_district = url.replace('Action', 'DDLsubcontract_profile_district');
     $.ajax({
         type: "POST",
-        //async: false,
+        async: false,
         url: urlDDLsubcontract_profile_district,
         data: { province_id: province },
         dataType: "json",
@@ -1589,7 +1589,7 @@ function BindDDLsubdistrict(district) {
     var urlDDLsubcontract_profile_sub_district = url.replace('Action', 'DDLsubcontract_profile_sub_district');
     $.ajax({
         type: "POST",
-        //async: false,
+        async: false,
         url: urlDDLsubcontract_profile_sub_district,
         data: { district_id: district},
         dataType: "json",

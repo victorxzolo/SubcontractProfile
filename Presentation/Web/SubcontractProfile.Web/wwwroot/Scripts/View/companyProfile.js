@@ -106,10 +106,10 @@ $(document).ready(function () {
                                 $('#ddlcountry').val(data.response.Country)
 
                                 $('#ddlprovince').val(data.response.ProvinceId)
-                                    //$('#ddlprovince').trigger('change');
+                                    $('#ddlprovince').trigger('change');
 
                                     $('#ddldistrict').val(data.response.DistrictId)
-                                   // $('#ddldistrict').trigger('change');
+                                   $('#ddldistrict').trigger('change');
 
                                 $('#ddlsubdistrict').val(data.response.SubDistrictId)
 
@@ -299,18 +299,22 @@ $(document).ready(function () {
                     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
                 });
 
-    $('#inputUploadcertificate').change(function () {
+    $('#inputUploadcertificate').change(function (e) {
+        e.preventDefault();
         uploadFiles('inputUploadcertificate')
     });
 
-    $('#inputUploadComRegis').change(function () {
+    $('#inputUploadComRegis').change(function (e) {
+        e.preventDefault();
         uploadFiles('inputUploadComRegis')
     });
 
-    $('#inputUpload20').change(function () {
+    $('#inputUpload20').change(function (e) {
+        e.preventDefault();
         uploadFiles('inputUpload20')
     });
-    $('#inputuploadbookbank').change(function () {
+    $('#inputuploadbookbank').change(function (e) {
+        e.preventDefault();
         uploadFiles('inputuploadbookbank')
     });
 
@@ -1727,39 +1731,42 @@ function uploadFiles(inputId) {
 
                         if (data.status) {
                             switch (inputId) {
-                                case "company_certified_file": $('#hdupfilecompany_certified').val(data.response); break;
-                                case "commercial_registration_file": $('#hdupfilecommercial_registration').val(data.response); break;
-                                case "vat_registration_certificate_file": $('#hdupfilevat_registration_certificate').val(data.response); break;
-                                case "bookbank_file": $('#hduploadbookbank').val(data.response); break;
+                                case "inputUploadcertificate": $('#hdupfilecompany_certified').val(data.response); break;
+                                case "inputUploadComRegis": $('#hdupfilecommercial_registration').val(data.response); break;
+                                case "inputUpload20": $('#hdupfilevat_registration_certificate').val(data.response); break;
+                                case "inputuploadbookbank": $('#hduploadbookbank').val(data.response); break;
                             }
-                            bootbox.confirm({
-        title: "System Information",
-                                message: data.message,
-                                buttons: {
-        cancel: {
-        label: '<i class="fa fa-times"></i> Cancel'
-                                    }
-                                },
-                                callback: function (result) {
-        console.log('This was logged in the callback: ' + result);
-                                }
-                            });
+                            //bootbox.confirm({
+                            //    title: "System Information",
+                            //    message: data.message,
+                            //    buttons: {
+                            //        cancel: {
+                            //            label: '<i class="fa fa-times"></i> Cancel'
+                            //        }
+                            //    },
+                            //    callback: function (result) {
+                            //        console.log('This was logged in the callback: ' + result);
+                            //    }
+                            //});
+                      
                         }
                         else {
-        bootbox.confirm({
-            title: "System Information",
-            message: data.message,
-            buttons: {
-                cancel: {
-                    label: '<i class="fa fa-times"></i> Cancel'
-                }
-            },
-            callback: function (result) {
-                console.log('This was logged in the callback: ' + result);
-            }
-        });
+                            switch (inputId) {
+                                case "inputUploadcertificate": $('#hdupfilecompany_certified').val('');
+                                    $('#lbuploadcertificate').text('เลือกไฟล์');
+                                    break;
+                                case "inputUploadComRegis": $('#hdupfilecommercial_registration').val('');
+                                    $('#lbuploadComRegis').text('เลือกไฟล์');
+                                    break;
+                                case "inputUpload20": $('#hdupfilevat_registration_certificate').val('');
+                                    $('#lbupload20').text('เลือกไฟล์');
+                                    break;
+                                case "inputuploadbookbank": $('#hduploadbookbank').val(''); $('#lbuploadbookbank').text('เลือกไฟล์'); break;
+                            }
 
                         }
+
+                        bootbox.alert(data.message);
 
                     },
                     error: function (xhr) {
@@ -1774,6 +1781,7 @@ function uploadFiles(inputId) {
             var urlDDLsubcontract_profile_province = urlaccount.replace('Action', 'DDLsubcontract_profile_province');
         $.ajax({
             type: "POST",
+            async: false,
             url: urlDDLsubcontract_profile_province,
             data: { region_id: regionid },
             dataType: "json",
@@ -1799,6 +1807,7 @@ function uploadFiles(inputId) {
             var urlDDLsubcontract_profile_district = urlaccount.replace('Action', 'DDLsubcontract_profile_district');
         $.ajax({
             type: "POST",
+            async: false,
             url: urlDDLsubcontract_profile_district,
             data: { province_id: province },
             dataType: "json",
@@ -1825,6 +1834,7 @@ function uploadFiles(inputId) {
             var urlDDLsubcontract_profile_sub_district = urlaccount.replace('Action', 'DDLsubcontract_profile_sub_district');
         $.ajax({
             type: "POST",
+            async: false,
             url: urlDDLsubcontract_profile_sub_district,
             data: { district_id: district },
             dataType: "json",

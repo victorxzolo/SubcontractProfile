@@ -117,8 +117,83 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountingDepartment" xml:space="preserve">
+    <value>แผนกบัญชี</value>
+  </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>ชื่อบัญชี</value>
+  </data>
+  <data name="AccountNumber" xml:space="preserve">
+    <value>เลขบัญชี</value>
+  </data>
+  <data name="AccountType" xml:space="preserve">
+    <value>ประเภทบัญชี</value>
+  </data>
+  <data name="ActivateDate" xml:space="preserve">
+    <value>วันที่อนุมัติ</value>
+  </data>
+  <data name="AddAddress" xml:space="preserve">
+    <value>เพิ่มที่อยู่</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>ที่อยู่</value>
+  </data>
+  <data name="AddressType" xml:space="preserve">
+    <value>ประเภทที่อยู่</value>
+  </data>
+  <data name="ASCCode" xml:space="preserve">
+    <value>ASC Code</value>
+  </data>
+  <data name="BankAccountInformation" xml:space="preserve">
+    <value>ข้อมูลบัญชีธนาคาร</value>
+  </data>
+  <data name="BankBranchName" xml:space="preserve">
+    <value>ชื่อสาขา</value>
+  </data>
+  <data name="BankName" xml:space="preserve">
+    <value>ชื่อธนาคาร</value>
+  </data>
+  <data name="Branch" xml:space="preserve">
+    <value>สาขา</value>
+  </data>
+  <data name="BranchAddress" xml:space="preserve">
+    <value>ที่อยู่ตามที่ตั้งสาขา</value>
+  </data>
+  <data name="Building" xml:space="preserve">
+    <value>อาคาร</value>
+  </data>
+  <data name="BusinessType" xml:space="preserve">
+    <value>ประเภทธุรกิจ</value>
+  </data>
+  <data name="ChannelSaleGroup" xml:space="preserve">
+    <value>Channel Sale Group</value>
+  </data>
+  <data name="ChooseFile" xml:space="preserve">
+    <value>เลือกไฟล์</value>
+  </data>
+  <data name="ChooseFileType" xml:space="preserve">
+    <value>ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>ปิด</value>
+  </data>
+  <data name="CommercialRegistrationBook" xml:space="preserve">
+    <value>หนังสือทะเบียนพานิชย์</value>
+  </data>
+  <data name="CompanyAddress" xml:space="preserve">
+    <value>ข้อมูลที่อยู่บริษัท</value>
+  </data>
   <data name="CompanyAilas" xml:space="preserve">
     <value>ชื่อย่อบริษัท</value>
+  </data>
+  <data name="CompanyCertificate" xml:space="preserve">
+    <value>หนังสือรับรองบริษัท</value>
+  </data>
+  <data name="CompanyDocuments" xml:space="preserve">
+    <value>ข้อมูลเอกสารบริษัท</value>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>ชื่อบริษัท</value>
   </data>
   <data name="CompanynameEN" xml:space="preserve">
     <value>ชื่อบริษัท (อังกฤษ)</value>
@@ -126,8 +201,194 @@
   <data name="CompanynameTH" xml:space="preserve">
     <value>ชื่อบริษัท (ไทย)</value>
   </data>
+  <data name="CompanyProfile" xml:space="preserve">
+    <value>ข้อมูลบริษัท</value>
+  </data>
+  <data name="ContractCompany" xml:space="preserve">
+    <value>ข้อมูลติดต่อบริษัท</value>
+  </data>
+  <data name="ContractDepartment" xml:space="preserve">
+    <value>ข้อมูลติดต่อแผนก</value>
+  </data>
+  <data name="ContractName" xml:space="preserve">
+    <value>ชื่อผู้ติดต่อ</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>ประเทศ</value>
+  </data>
+  <data name="CreateDate" xml:space="preserve">
+    <value>วันที่สมัคร</value>
+  </data>
+  <data name="DataRavenue" xml:space="preserve">
+    <value>ข้อมูลจากสรรพากร อาจจะไม่ตรงกับกรมพัฒนาธุรกิจ</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>ลบ</value>
+  </data>
+  <data name="DistributionChannel" xml:space="preserve">
+    <value>Distribution Channel</value>
+  </data>
+  <data name="District" xml:space="preserve">
+    <value>อำเภอ/เขต</value>
+  </data>
+  <data name="DocumentAddress" xml:space="preserve">
+    <value>ที่อยู่จัดส่งเอกสาร</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>แก้ไข</value>
+  </data>
+  <data name="EditCompanyProfile" xml:space="preserve">
+    <value>แก้ไขข้อมูลบริษัท</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>อีเมลล์</value>
+  </data>
+  <data name="EmailCompany" xml:space="preserve">
+    <value>อีเมลล์ บริษัท</value>
+  </data>
+  <data name="ErrorAccountName" xml:space="preserve">
+    <value>กรุณาระบุชื่อบัญชี</value>
+  </data>
+  <data name="ErrorAccountNumber" xml:space="preserve">
+    <value>กรุณาระบุเลขที่บัญชี</value>
+  </data>
+  <data name="ErrorAccountType" xml:space="preserve">
+    <value>กรุณาระบุประเภทบัญชี</value>
+  </data>
+  <data name="ErrorBankName" xml:space="preserve">
+    <value>กรุณาระบุชื่อธนาคาร</value>
+  </data>
+  <data name="ErrorBookBank" xml:space="preserve">
+    <value>กรุณาอัพโหลดไฟล์ หน้าบัญชีธนาคาร</value>
+  </data>
+  <data name="ErrorCommercialRegistrationBook" xml:space="preserve">
+    <value>กรุณาอัพโหลดไฟล์ หนังสือทะเบียนพานิช</value>
+  </data>
+  <data name="ErrorCompanyCertificate" xml:space="preserve">
+    <value>กรุณาอัพโหลดไฟล์ หนังสือรับรองบริษัท</value>
+  </data>
+  <data name="ErrorContractName" xml:space="preserve">
+    <value>กรุณาระบุชื่อผู้ติดต่อ</value>
+  </data>
+  <data name="ErrorCountry" xml:space="preserve">
+    <value>กรุณาระบุประเทศ</value>
+  </data>
+  <data name="ErrorDistributionChannel" xml:space="preserve">
+    <value>กรุณาระบุ Distribution Channel</value>
+  </data>
+  <data name="ErrorDistrict" xml:space="preserve">
+    <value>กรุณาระบุอำเภอ/เขต</value>
+  </data>
+  <data name="ErrorEmail" xml:space="preserve">
+    <value>กรุณาระบุอีเมล์</value>
+  </data>
+  <data name="ErrorEmailCompany" xml:space="preserve">
+    <value>กรุณาระบุอีเมล์ บริษัท</value>
+  </data>
+  <data name="ErrorHouseNo" xml:space="preserve">
+    <value>กรุณาระบุเลขที่</value>
+  </data>
+  <data name="ErrorJuristicPersonRegistrationNumber" xml:space="preserve">
+    <value>กรุณาระบุเลขทะเบียนนิติบุคคล</value>
+  </data>
+  <data name="ErrorLocationCode" xml:space="preserve">
+    <value>กรุณาระบุ Location Code</value>
+  </data>
+  <data name="ErrorLocationName" xml:space="preserve">
+    <value>กรุณาระบุ ชื่อ Location</value>
+  </data>
+  <data name="ErrorNameofJuristicPersonEN" xml:space="preserve">
+    <value>กรุณาระบุชื่อนิติบุคคล(อังกฤษ)</value>
+  </data>
+  <data name="ErrorNameofJuristicPersonTH" xml:space="preserve">
+    <value>กรุณาระบุชื่อนิติบุคคล(ไทย)</value>
+  </data>
+  <data name="ErrorProvince" xml:space="preserve">
+    <value>กรุณาระบุจังหวัด</value>
+  </data>
+  <data name="ErrorSubdistrict" xml:space="preserve">
+    <value>กรุณาระบุตำบล/แขวง</value>
+  </data>
+  <data name="ErrorTaxwithholdName" xml:space="preserve">
+    <value>กรุณาระบุชื่อภาษีหัก ณ ที่จ่าย</value>
+  </data>
+  <data name="ErrorTel" xml:space="preserve">
+    <value>กรุณาระบุเบอร์ไทร</value>
+  </data>
+  <data name="ErrorVATRegistrationCertificate" xml:space="preserve">
+    <value>กรุณาอัพโหลดไฟล์ หนังสือ ภ.พ. 20</value>
+  </data>
+  <data name="ErrorZipcode" xml:space="preserve">
+    <value>กรุณาระบุรหัสไปรษณีย์</value>
+  </data>
+  <data name="ErrorZone" xml:space="preserve">
+    <value>กรุณาระบุภาค</value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>ชั้น</value>
+  </data>
+  <data name="HouseNo" xml:space="preserve">
+    <value>เลขที่</value>
+  </data>
+  <data name="IDNumber" xml:space="preserve">
+    <value>เลขบัตรประชาชน</value>
+  </data>
+  <data name="InstallationDepartment" xml:space="preserve">
+    <value>แผนกติดตั้ง</value>
+  </data>
+  <data name="InvalidEmailFormat" xml:space="preserve">
+    <value>รูปแบบอีเมล์ไม่ถูกต้อง</value>
+  </data>
+  <data name="JuristicPersonRegistrationNumber" xml:space="preserve">
+    <value>เลขทะเบียนนิติบุคล</value>
+  </data>
+  <data name="LocationCode" xml:space="preserve">
+    <value>Location Code</value>
+  </data>
+  <data name="LocationName" xml:space="preserve">
+    <value>ชื่อ Location</value>
+  </data>
+  <data name="LocationSearch" xml:space="preserve">
+    <value>ค้นหา Location</value>
+  </data>
+  <data name="MaintenanceDepartment" xml:space="preserve">
+    <value>แผนกซ่อมบำรุง</value>
+  </data>
+  <data name="MobileNo" xml:space="preserve">
+    <value>เบอร์โทร</value>
+  </data>
+  <data name="Moo" xml:space="preserve">
+    <value>หมู่ที่</value>
+  </data>
+  <data name="NameofJuristicPersonEN" xml:space="preserve">
+    <value>ชื่อนิติบุคคล(อังกฤษ)</value>
+  </data>
+  <data name="NameofJuristicPersonTH" xml:space="preserve">
+    <value>ชื่อนิติบุคคล(ไทย)</value>
+  </data>
+  <data name="NonVAT" xml:space="preserve">
+    <value>ไม่มีภาษีมูลค่าเพิ่ม</value>
+  </data>
+  <data name="POPAddress" xml:space="preserve">
+    <value>ที่อยู่จัดส่ง POP</value>
+  </data>
+  <data name="Province" xml:space="preserve">
+    <value>จังหวัด</value>
+  </data>
+  <data name="RegisterType" xml:space="preserve">
+    <value>ประเภทผู้สมัคร</value>
+  </data>
   <data name="Reset" xml:space="preserve">
     <value>ล้างข้อมูล</value>
+  </data>
+  <data name="Room" xml:space="preserve">
+    <value>ห้อง</value>
+  </data>
+  <data name="SapCode" xml:space="preserve">
+    <value>Sap Code</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>บันทึก</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>ค้นหาข้อมูล</value>
@@ -135,7 +396,67 @@
   <data name="SearchResult" xml:space="preserve">
     <value>ผลการค้นหา</value>
   </data>
+  <data name="SearchRevenue" xml:space="preserve">
+    <value>ค้นหาข้อมูลบริษัทจากฐานข้อมูลกรมสรรพากร</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>ตัวเลือก</value>
+  </data>
+  <data name="ShippingAddress" xml:space="preserve">
+    <value>ที่อยู่จัดส่งสินค้า</value>
+  </data>
+  <data name="Soi" xml:space="preserve">
+    <value>ซอย</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>สถานะ</value>
+  </data>
+  <data name="street" xml:space="preserve">
+    <value>ถนน</value>
+  </data>
+  <data name="Subdistrict" xml:space="preserve">
+    <value>ตำบล/แขวง</value>
+  </data>
+  <data name="SupportFilePDF" xml:space="preserve">
+    <value>รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</value>
+  </data>
+  <data name="TaxAddress" xml:space="preserve">
+    <value>ที่อยู่ตามใบกำกับภาษี</value>
+  </data>
   <data name="TaxID" xml:space="preserve">
     <value>เลขผู้เสียภาษี</value>
+  </data>
+  <data name="TaxwithholdName" xml:space="preserve">
+    <value>ชื่อภาษีหัก ณ ที่จ่าย</value>
+  </data>
+  <data name="Tel" xml:space="preserve">
+    <value>เบอร์โทร</value>
+  </data>
+  <data name="UploadBookBank" xml:space="preserve">
+    <value>อัพโหลดหน้าบัญชีธนาคาร</value>
+  </data>
+  <data name="UserId" xml:space="preserve">
+    <value>User Id</value>
+  </data>
+  <data name="VAT" xml:space="preserve">
+    <value>ภาษีมูลค่าเพิ่ม</value>
+  </data>
+  <data name="VATName" xml:space="preserve">
+    <value>ชื่อภาษีมูลค่าเพิ่ม</value>
+  </data>
+  <data name="VATRegistrationCertificate" xml:space="preserve">
+    <value>หนังสือ ภ.พ. 20</value>
+  </data>
+  <data name="Village" xml:space="preserve">
+    <value>หมู่บ้าน</value>
+  </data>
+  <data name="WTAddress" xml:space="preserve">
+    <value>ที่อยู่ตาม W/T</value>
+  </data>
+  <data name="Zipcode" xml:space="preserve">
+    <value>รหัสไปรษณีย์</value>
+  </data>
+  <data name="Zone" xml:space="preserve">
+    <value>ภาค</value>
   </data>
 </root>
