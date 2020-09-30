@@ -201,7 +201,10 @@ namespace SubcontractProfile.Web.Model
         public IFormFile FileVatRegistrationCertificate { get; set; }
 
         public string RemarkForSub { get; set; }
-    
+        public string RegisterDateStr { get; set; }
+        public string BankAccountType { get; set; }
+        
+
     }
 
     public class SubcontractProfileCompanyViewModel

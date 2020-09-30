@@ -211,6 +211,8 @@ namespace SubcontractProfile.WebApi.Services.Model
 
         public string RemarkForSub { get; set; }
 
+        public string BankAccountType { get; set; }
+
         public object Clone()
         {
             return this.MemberwiseClone();

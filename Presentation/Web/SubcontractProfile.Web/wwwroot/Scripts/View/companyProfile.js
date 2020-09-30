@@ -11,8 +11,8 @@ $(document).ready(function () {
 
     $('#btn_OnSave_Modal').hide();
 
-        inittbSearchResult();
-       // initialCompanyDataById();
+        //inittbSearchResult();
+        initialCompanyDataById();
         inittbAddressResult();
         inittbRevenue();
         inittblocation();
@@ -32,6 +32,11 @@ $(document).ready(function () {
     $("#btnSearch").click(function (e) {
         searchdata();
     });
+
+    $("#btnEdit").click(function (e) {
+        openModal('edit', $('#hdMainCompanyId').val());
+    });
+
 
                 $("#btnMainClear").click(function (e) {
         clearMainData();
@@ -770,51 +775,44 @@ function initialCompanyDataById() {
             if (result != null) {
 
                 
+                $("#hdMainCompanyId").val(result.CompanyId);
                 $("#lblStatusSub").text(result.Status);
                 $("#lblCompanyName").text(result.CompanyNameTh);
+                $("#lblsubcontractType").text(result.SubcontractProfileType);
+                $('#lblTaxId').text(result.TaxId);
+                $('#lblRegisterDate').text(result.RegisterDateStr);
+                $('#lblEmailCompany').text(result.ContractEmail);
+                $('#lblTelCompany').text(result.ContractPhone);
 
-                //$('#inputLocationCode').val(result.LocationCode);
+                $('#lblCompanyEmail').text(result.CompanyEmail);
+                $('#lblContactName').text(result.ContractName);
+                $('#lblContractEmail').text(result.ContractEmail);
+                $('#lblContactPhone').text(result.ContractPhone);
 
-                //$('#inputLocationAlias').val(result.LocationNameAlias);
-                //$('#inputLocationNameT').val(result.LocationNameTh);
-                //$('#inputLocationNameE').val(result.LocationNameEn);
-                //$('#inputStorage').val(result.StorageLocation);
-                //$('#inputShip').val(result.ShipTo);
-                //$('#inoutOutStorage').val(result.OutOfServiceStorageLocation);
-                //$('#inputVat').val(result.VatBranchNumber);
-                //$('#inputPhoneNo').val(result.Phone);
-                //$('#inputMainPhone').val(result.CompanyMainContractPhone);
-                //$('#inputInstallationsPhone').val(result.InstallationsContractPhone);
-                //$('#inputMaintenencePhone').val(result.MaintenanceContractPhone);
-                //$('#inputInventoryPhone').val(result.InventoryContractPhone);
-                //$('#inputPaymentPhone').val(result.PaymentContractPhone);
-                //$('#inputEtcPhone').val(result.EtcContractPhone);
-                //$('#inputCompanyMail').val(result.CompanyGroupMail);
-                //$('#inputInstallationMail').val(result.InstallationsContractMail);
-                //$('#inputMaintanenceMail').val(result.MaintenanceContractMail);
-                //$('#inputInventoryMail').val(result.InventoryContractMail);
-                //$('#inputPaymentMail').val(result.PaymentContractMail);
-                //$('#inputEtcMail').val(result.EtcContractMail);
+                $('#lbldept_of_install_name').text(result.DeptOfInstallName);
+                $('#lbldept_of_install_phone').text(result.DeptOfInstallPhone);
+                $('#lbldept_of_install_email').text(result.DeptOfInstallEmail);
 
-                //$('#inputLocationAddress').val(result.LocationAddress);
+                $('#lbldept_of_mainten_name').text(result.DeptOfMaintenName);
+                $('#lbldept_of_mainten_phone').text(result.DeptOfMaintenPhone);
+                $('#lbldept_of_mainten_email').text(result.DeptOfMaintenEmail);
 
-                //$("#inputPostAddress").val(result.PostAddress)
-                //$("#inputTaxAddress").val(result.TaxAddress)
-                //$("#inputWTAddress").val(result.WtAddress)
+                $('#lbldept_of_account_name').text(result.DeptOfAccountName);
+                $('#lbldept_of_account_phone').text(result.DeptOfAccountPhone);
+                $('#lbldept_of_account_email').text(result.DeptOfAccountEmail);
 
-                //$('#inputBankCode').val(result.BankCode);
-                //$('#inputBankName').val(result.BankName);
-                //$('#inputBankAccountNo').val(result.BankAccountNo);
-                //$('#inputBankAccountName').val(result.BankAccountName);
-                //$('#inputBankBranchNo').val(result.BankBranchCode);
-                //$('#inputBankBranchName').val(result.BankBranchName);
-                //$('#inputPanaltyPhone').val(result.PenaltyContractPhone);
-                //$('#inputPanaltyMail').val(result.PenaltyContractMail);
-                //$('#inputContractPhone').val(result.ContractPhone);
-                //$('#inputContractMail').val(result.ContractMail);
-                //$('#hdCompanyId').val(result.CompanyId);
+                $('#lblbank_name').text(result.BankName);
+                $('#lblbranch_name').text(result.BranchName);
+                $('#lblbank_account_type').text(result.BankAccountType);
+                $('#lblaccount_name').text(result.AccountName);
+                $('#lblaccount_number').text(result.AccountNumber);
 
-             
+                $('#lblDatecontractstart').text(result.ContractStartDate);
+                $('#lblDatecontractend').text(result.ContractEndDate);
+                $('#lblVendercode').text(result.VendorCode);
+                $('#lblRemarkForSub').text(result.RemarkForSub);
+
+                inittbAddressResultSearch();
 
             }
         },
@@ -823,6 +821,55 @@ function initialCompanyDataById() {
         }
 
     });
+}
+
+function inittbAddressResultSearch() {
+    var urlGetDataById = url.replace('Action', 'GetAddress');
+    var oTable = $('#tbAddressResultSearch').DataTable({
+        processing: true, // for show progress bar
+        serverSide: true, // for process server side
+        filter: false, // this is for disable filter (search box)
+        orderMulti: false, // for disable multiple column at once
+        pageLength: 10,
+        order: [],
+        autoWidth: false,
+        searching: false,
+        destroy: true,
+        lengthChange: false,
+        "oLanguage": {
+            "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+            "sInfo": "Showing page _PAGE_ of _PAGES_",
+            "sSearch": false,
+            "sLengthMenu": "Results :  _MENU_",
+        },
+        "scrollX": false,
+        "language": {
+            "zeroRecords": "No data found.",
+            "decimal": ",",
+            "thousands": "."
+        },
+        ajax: {
+            url: urlGetDataById,
+            data: function (d) {
+                d.company = $("#hdMainCompanyId").val()
+
+            },
+            type: "POST",
+            datatype: "JSON",
+           
+        },
+        columns: [
+
+            { "data": "address_type_name", orderable: true, },
+            { "data": "outFullAddress", orderable: true, }
+
+        ],
+        "order": [[0, "desc"]],
+        "stripeClasses": [],
+        drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+    });
+
 }
 
 
