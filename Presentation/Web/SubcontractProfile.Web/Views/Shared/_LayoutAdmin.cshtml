@@ -1,4 +1,15 @@
-﻿<!DOCTYPE html>
+﻿
+
+@using System.Globalization
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -184,7 +195,14 @@
                                     <a class="" href="auth_lockscreen.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Lock Screen</a>
                                 </div>*@
                             <div class="dropdown-item">
-                                <a class="" href="@Url.Action("Logonbyuser", "LogonByUser")"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Sign Out</a>
+                                <a class="" href="@Url.Action("Logonbyuser", "LogonByUser")">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="feather feather-log-out">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                        <polyline points="16 17 21 12 16 7"></polyline>
+                                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                                    </svg> @Localizer["SignOut"]
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -231,10 +249,10 @@
                 <ul class="list-unstyled menu-categories" id="accordionExample">
 
                     <li class="menu">
-                        <a href="#Registration"data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <a href="#Registration" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg aria-hidden="true" width="24" height="24" focusable="false" data-prefix="far" data-icon="address-card" class="svg-inline--fa fa-address-card fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M528 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm0 400H48V80h480v352zM208 256c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm-89.6 128h179.2c12.4 0 22.4-8.6 22.4-19.2v-19.2c0-31.8-30.1-57.6-67.2-57.6-10.8 0-18.7 8-44.8 8-26.9 0-33.4-8-44.8-8-37.1 0-67.2 25.8-67.2 57.6v19.2c0 10.6 10 19.2 22.4 19.2zM360 320h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8zm0-64h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8zm0-64h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8z"></path></svg>
-                                <span>Registration</span>
+                                <span>@Localizer["Registration"]</span>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
@@ -242,11 +260,11 @@
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Registration" data-parent="#accordionExample">
                             <li>
-                                <a href="@Url.Action("SearchCompanyVerify", "Registration")" data-pageID="CompanyVerify"> Company Verify </a>
+                                <a href="@Url.Action("SearchCompanyVerify", "Registration")" data-pageID="CompanyVerify"> @Localizer["CompanyVerify"] </a>
 
                             </li>
                             <li>
-                                <a href="@Url.Action("index", "ActivateProfile")" data-pageID="ActivateProfile"> Activate Profile  </a>
+                                <a href="@Url.Action("index", "ActivateProfile")" data-pageID="ActivateProfile"> @Localizer["ActivateProfile"]  </a>
                             </li>
 
 
@@ -257,7 +275,7 @@
                         <a href="#Training" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg aria-hidden="true" width="24" height="24" focusable="false" data-prefix="fas" data-icon="chalkboard-teacher" class="svg-inline--fa fa-chalkboard-teacher fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M208 352c-2.39 0-4.78.35-7.06 1.09C187.98 357.3 174.35 360 160 360c-14.35 0-27.98-2.7-40.95-6.91-2.28-.74-4.66-1.09-7.05-1.09C49.94 352-.33 402.48 0 464.62.14 490.88 21.73 512 48 512h224c26.27 0 47.86-21.12 48-47.38.33-62.14-49.94-112.62-112-112.62zm-48-32c53.02 0 96-42.98 96-96s-42.98-96-96-96-96 42.98-96 96 42.98 96 96 96zM592 0H208c-26.47 0-48 22.25-48 49.59V96c23.42 0 45.1 6.78 64 17.8V64h352v288h-64v-64H384v64h-76.24c19.1 16.69 33.12 38.73 39.69 64H592c26.47 0 48-22.25 48-49.59V49.59C640 22.25 618.47 0 592 0z"></path></svg>
-                                <span>Training</span>
+                                <span>@Localizer["Training"]</span>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
@@ -265,10 +283,10 @@
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Training" data-parent="#accordionExample">
                             <li>
-                                <a href="@Url.Action("index", "RequestTraining")" data-pageID="RequestTraining"> Request Training </a>
+                                <a href="@Url.Action("index", "RequestTraining")" data-pageID="RequestTraining"> @Localizer["RequestTraining"] </a>
                             </li>
                             <li>
-                                <a href="@Url.Action("TestResultUpdate", "TestResult")" data-pageID="ReportTestResult"> Report Test Result </a>
+                                <a href="@Url.Action("TestResultUpdate", "TestResult")" data-pageID="ReportTestResult"> @Localizer["ReportTestResult"] </a>
                             </li>
 
                         </ul>
@@ -279,7 +297,7 @@
                             <div class="">
                                 <svg aria-hidden="true" width="24" height="24" focusable="false" data-prefix="far" data-icon="credit-card" class="svg-inline--fa fa-credit-card fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M527.9 32H48.1C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48.1 48h479.8c26.6 0 48.1-21.5 48.1-48V80c0-26.5-21.5-48-48.1-48zM54.1 80h467.8c3.3 0 6 2.7 6 6v42H48.1V86c0-3.3 2.7-6 6-6zm467.8 352H54.1c-3.3 0-6-2.7-6-6V256h479.8v170c0 3.3-2.7 6-6 6zM192 332v40c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v40c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12z"></path></svg>
 
-                                <span>Payment</span>
+                                <span>@Localizer["Payment"]</span>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
@@ -287,7 +305,7 @@
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Payment" data-parent="#accordionExample">
                             <li>
-                                <a href="@Url.Action("VerifyPayment", "Payment")" data-pageID="VerfifiedPayment"> Verfified Payment </a>
+                                <a href="@Url.Action("VerifyPayment", "Payment")" data-pageID="VerfifiedPayment"> @Localizer["VerfifiedPayment"] </a>
                             </li>
 
                         </ul>
@@ -297,7 +315,7 @@
                         <a href="@Url.Action("Logonbyuser", "LogonByUser")" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg aria-hidden="true" width="24" height="24" focusable="false" data-prefix="fas" data-icon="sign-out-alt" class="svg-inline--fa fa-sign-out-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"></path></svg>
-                                <span>Sign Out</span>
+                                <span>@Localizer["SignOut"]</span>
                             </div>
                         </a>
                     </li>
@@ -314,8 +332,8 @@
         <div id="content" class="main-content" style="background-image:url(~/assets/img/solution-list-bg1.jpg);background-repeat: no-repeat, repeat;">
             <div class="layout-px-spacing">
                 <div class="row layout-top-spacing">
-                  
-                        @RenderBody()
+
+                    @RenderBody()
 
 
                 </div>
@@ -346,7 +364,7 @@
                 $(e).attr("data-pageID") == p && $(e).parent().addClass('active')
                     && $(e).parent().parent().addClass('show') && $(e).closest('ul.submenu').prev().attr("aria-expanded", "true")
                     && $(e).closest('ul.submenu').prev().attr("data-active", "true");
-               
+
             })
         })(jQuery)
     </script>
