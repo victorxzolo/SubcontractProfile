@@ -244,16 +244,16 @@
     <value>กรุณากรอกข้อมูล เลขบัตรประชาชน</value>
   </data>
   <data name="ErrorLocationName" xml:space="preserve">
-    <value>กรุณาเลือกข้อมูล Location Name.</value>
+    <value>กรุณาเลือกข้อมูล ชื่อ Location.</value>
   </data>
   <data name="ErrorStaffName" xml:space="preserve">
-    <value>กรุณากรอกข้อมูล Staff Name.</value>
+    <value>กรุณากรอกข้อมูล ชื่อพนักงาน.</value>
   </data>
   <data name="ErrorStaffNameThai" xml:space="preserve">
-    <value>กรุณากรอกข้อมูล Staff Name (TH).</value>
+    <value>กรุณากรอกข้อมูล ชื่อพนักงาน (ไทย).</value>
   </data>
   <data name="ErrorTeamName" xml:space="preserve">
-    <value>กรุณาเลือกข้อมูล Team Name.</value>
+    <value>กรุณาเลือกข้อมูล ชื่อ Team .</value>
   </data>
   <data name="ErrorTel" xml:space="preserve">
     <value>กรุณากรอกข้อมูล เบอร์โทรศัพท์</value>
@@ -286,13 +286,13 @@
     <value>ป้ายทะเบียนรถ</value>
   </data>
   <data name="ListeningEng" xml:space="preserve">
-    <value>Listening Eng</value>
+    <value>ฟังภาษาอังกฤษ</value>
   </data>
   <data name="ListeningThai" xml:space="preserve">
-    <value>Listening Thai</value>
+    <value>ฟังภาษาไทย</value>
   </data>
   <data name="LocationName" xml:space="preserve">
-    <value>Location Name</value>
+    <value>ชื่อ Location</value>
   </data>
   <data name="Male" xml:space="preserve">
     <value>ชาย</value>
@@ -307,7 +307,7 @@
     <value>ที่อยู่ตามบัตรประชาชน</value>
   </data>
   <data name="Personal" xml:space="preserve">
-    <value>Personal</value>
+    <value>บุคคล</value>
   </data>
   <data name="Postion" xml:space="preserve">
     <value>ตำแหน่ง</value>
@@ -319,10 +319,10 @@
     <value>เชื้อชาติ</value>
   </data>
   <data name="ReadingEng" xml:space="preserve">
-    <value>Reading Eng</value>
+    <value>อ่านภาษาอังกฤษ</value>
   </data>
   <data name="ReadingThai" xml:space="preserve">
-    <value>Reading Thai</value>
+    <value>อ่านภาษาไทย</value>
   </data>
   <data name="Religion" xml:space="preserve">
     <value>ศาสนา</value>
@@ -343,13 +343,13 @@
     <value>ขนาด(size)เสื้อ</value>
   </data>
   <data name="SpeakingEng" xml:space="preserve">
-    <value>Speaking Eng</value>
+    <value>พูดภาษาอังกฤษ</value>
   </data>
   <data name="SpeakingThai" xml:space="preserve">
-    <value>Speaking Thai</value>
+    <value>พูดภาษาไทย</value>
   </data>
   <data name="StaffName" xml:space="preserve">
-    <value>Staff Name</value>
+    <value>ชื่อพนักงาน</value>
   </data>
   <data name="StaffNameEnglish" xml:space="preserve">
     <value>ชื่อพนักงาน(อังกฤษ)</value>
@@ -358,10 +358,10 @@
     <value>ชื่อพนักงาน(ไทย)</value>
   </data>
   <data name="TeamName" xml:space="preserve">
-    <value>Team Name</value>
+    <value>ชื่อ Team</value>
   </data>
   <data name="TeamNameTH" xml:space="preserve">
-    <value>Team Name (TH)</value>
+    <value>ชื่อ Team (ไทย)</value>
   </data>
   <data name="Tel" xml:space="preserve">
     <value>เบอร์โทรศัพท์</value>
@@ -382,9 +382,9 @@
     <value>ใบอนุญาตทำงานเลขที่</value>
   </data>
   <data name="WritingEng" xml:space="preserve">
-    <value>Writing Eng</value>
+    <value>เขียนภาษาอังกฤษ</value>
   </data>
   <data name="WritingThai" xml:space="preserve">
-    <value>Writing Thai</value>
+    <value>เขียนภาษาไทย</value>
   </data>
 </root>

@@ -123,12 +123,17 @@ namespace SubcontractProfile.Web
 
             #region Localization
 
-            var supportedCultures = new[] { "th", "en" };
-            var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture("th")
-                .AddSupportedCultures(supportedCultures)
-                .AddSupportedUICultures(supportedCultures);
-            app.UseRequestLocalization(localizationOptions);
-
+            var supportedCultures = new[] { new CultureInfo("th"), new CultureInfo("en") };
+            //var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture("th")
+            //    //.AddSupportedCultures(supportedCultures)
+            //    //.AddSupportedUICultures(supportedCultures);
+            //app.UseRequestLocalization(localizationOptions);
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("th"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
 
             #endregion
 
