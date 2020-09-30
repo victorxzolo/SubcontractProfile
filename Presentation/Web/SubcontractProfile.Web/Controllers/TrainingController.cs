@@ -382,7 +382,7 @@ namespace SubcontractProfile.Web.Controllers
              var requestnumber= requetno.Substring(8, 6);
              var date = requetno.Substring(0, 8);
 
-             DateTime daterequest = DateTime.ParseExact(date, "yyyyMMdd", null);
+             DateTime daterequest = DateTime.ParseExact(date, "yyyyMMdd", new CultureInfo("en-US"));
              var DateGen = dateTimeNow.ToString("yyyyMMdd");
              var Mouthrequest = daterequest.Month;
              var number = int.Parse(requestnumber) + 1;

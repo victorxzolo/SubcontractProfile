@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -419,12 +420,12 @@ namespace SubcontractProfile.Web.Controllers
                         personal.CreateBy = userProfile.Username;
                         if (personal.dateBirthDay != null)
                         {
-                            DateTime datebirthday = DateTime.ParseExact(personal.dateBirthDay, "dd/MM/yyyy", null);
+                            DateTime datebirthday = DateTime.ParseExact(personal.dateBirthDay, "dd/MM/yyyy", new CultureInfo("en-US"));
                             personal.BirthDate = datebirthday;
                         }
                         if (personal.dateCertificateExpireDate != null)
                         {
-                            DateTime datecer= DateTime.ParseExact(personal.dateCertificateExpireDate, "dd/MM/yyyy", null);
+                            DateTime datecer= DateTime.ParseExact(personal.dateCertificateExpireDate, "dd/MM/yyyy", new CultureInfo("en-US"));
                             personal.CertificateExpireDate = datecer;
                         }
                         //personal
@@ -507,12 +508,12 @@ namespace SubcontractProfile.Web.Controllers
                     {
                         if (personal.dateBirthDay != null)
                         {
-                            DateTime datebirthday = DateTime.ParseExact(personal.dateBirthDay, "dd/MM/yyyy", null);
+                            DateTime datebirthday = DateTime.ParseExact(personal.dateBirthDay, "dd/MM/yyyy", new CultureInfo("en-US"));
                             personal.BirthDate = datebirthday;
                         }
                         if (personal.dateCertificateExpireDate != null)
                         {
-                            DateTime datecer = DateTime.ParseExact(personal.dateCertificateExpireDate, "dd/MM/yyyy", null);
+                            DateTime datecer = DateTime.ParseExact(personal.dateCertificateExpireDate, "dd/MM/yyyy", new CultureInfo("en-US"));
                             personal.CertificateExpireDate = datecer;
                         }
 

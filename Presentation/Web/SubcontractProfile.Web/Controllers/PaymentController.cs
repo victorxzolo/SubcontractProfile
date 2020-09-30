@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -280,13 +281,12 @@ namespace SubcontractProfile.Web.Controllers
                 {
                     getsession();
                 }
-                Payment.ModifiedDate = DateTime.Now;
                 Payment.ModifiedBy = dataUser.Username;
                 Payment.verifiedDate = DateTime.Now;
 
                 if (Payment.datetimepayment != null)
                 {
-                    DateTime datefrom = DateTime.ParseExact(Payment.datetimepayment, "dd/MM/yyyy HH:mm", null);
+                     DateTime datefrom = DateTime.ParseExact(Payment.datetimepayment, "dd/MM/yyyy HH:mm", new CultureInfo("en-US"));
                     Payment.PaymentDatetime = datefrom;
                 }
 
@@ -298,6 +298,9 @@ namespace SubcontractProfile.Web.Controllers
                   
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     string uriString = string.Format("{0}", strpathAPI + "Payment/Update");
+
+                string ss = JsonConvert.SerializeObject(Payment);
+
                     var httpContent = new StringContent(JsonConvert.SerializeObject(Payment), Encoding.UTF8, "application/json");
                     HttpResponseMessage response = client.PutAsync(uriString, httpContent).Result;
                     if (response.IsSuccessStatusCode)
@@ -669,7 +672,7 @@ namespace SubcontractProfile.Web.Controllers
                 SubcontractProfilePaymentModel model = new SubcontractProfilePaymentModel();
                 model.PaymentId = paymentId;
                 model.Status = status;
-                DateTime dateverify = DateTime.ParseExact(verifydate, "dd/MM/yyyy", null);
+                DateTime dateverify = DateTime.ParseExact(verifydate, "dd/MM/yyyy", new CultureInfo("en-US"));
                 model.verifiedDate = dateverify;
                 model.remarkForSub = remark_for_sub;
                 model.ModifiedBy = userProfile.Username;//Get Session from SSO********

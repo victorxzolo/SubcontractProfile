@@ -210,8 +210,14 @@
   <data name="ContractDepartment" xml:space="preserve">
     <value>ข้อมูลติดต่อแผนก</value>
   </data>
+  <data name="ContractEndDate" xml:space="preserve">
+    <value>วันที่สิ้นสุดสัญญา</value>
+  </data>
   <data name="ContractName" xml:space="preserve">
     <value>ชื่อผู้ติดต่อ</value>
+  </data>
+  <data name="ContractStartDate" xml:space="preserve">
+    <value>วันที่เริ่มสัญญา</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>ประเทศ</value>
@@ -245,6 +251,9 @@
   </data>
   <data name="EmailCompany" xml:space="preserve">
     <value>อีเมลล์ บริษัท</value>
+  </data>
+  <data name="EmailContract" xml:space="preserve">
+    <value>อีเมลล์ผู้ติดต่อ</value>
   </data>
   <data name="ErrorAccountName" xml:space="preserve">
     <value>กรุณาระบุชื่อบัญชี</value>
@@ -327,6 +336,9 @@
   <data name="Floor" xml:space="preserve">
     <value>ชั้น</value>
   </data>
+  <data name="ForAISStaff" xml:space="preserve">
+    <value>สำหรับเจ้าหน้าที่ AIS</value>
+  </data>
   <data name="HouseNo" xml:space="preserve">
     <value>เลขที่</value>
   </data>
@@ -377,6 +389,9 @@
   </data>
   <data name="RegisterType" xml:space="preserve">
     <value>ประเภทผู้สมัคร</value>
+  </data>
+  <data name="Remark" xml:space="preserve">
+    <value>หมายเหตุ</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>ล้างข้อมูล</value>
@@ -446,6 +461,9 @@
   </data>
   <data name="VATRegistrationCertificate" xml:space="preserve">
     <value>หนังสือ ภ.พ. 20</value>
+  </data>
+  <data name="VenderCode" xml:space="preserve">
+    <value>Vender Code</value>
   </data>
   <data name="Village" xml:space="preserve">
     <value>หมู่บ้าน</value>

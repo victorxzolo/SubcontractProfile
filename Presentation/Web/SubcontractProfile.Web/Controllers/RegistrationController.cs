@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -185,12 +186,12 @@ namespace SubcontractProfile.Web.Controllers
 
             if(searchmodel.RegisterDateFrom !=null)
             {
-                DateTime datefrom = DateTime.ParseExact(searchmodel.RegisterDateFrom, "dd/MM/yyyy", null);
+                DateTime datefrom = DateTime.ParseExact(searchmodel.RegisterDateFrom, "dd/MM/yyyy", new CultureInfo("en-US"));
                 model.ContractStartDate = datefrom;
             }
            if(searchmodel.RegisterDateTo !=null)
             {
-                DateTime dateto = DateTime.ParseExact(searchmodel.RegisterDateTo, "dd/MM/yyyy", null);
+                DateTime dateto = DateTime.ParseExact(searchmodel.RegisterDateTo, "dd/MM/yyyy", new CultureInfo("en-US"));
                 model.ContractEndDate = dateto;
             }
             model.CompanyName = searchmodel.CompanyName;
@@ -1042,12 +1043,12 @@ namespace SubcontractProfile.Web.Controllers
 
                 if (contractstart != null && contractstart != "")
                 {
-                    DateTime datefrom = DateTime.ParseExact(contractstart, "dd/MM/yyyy", null);
+                    DateTime datefrom = DateTime.ParseExact(contractstart, "dd/MM/yyyy", new CultureInfo("en-US"));
                     model.ContractStartDate = datefrom;
                 }
                 if (contractend != null && contractend != "")
                 {
-                    DateTime dateto = DateTime.ParseExact(contractend, "dd/MM/yyyy", null);
+                    DateTime dateto = DateTime.ParseExact(contractend, "dd/MM/yyyy", new CultureInfo("en-US"));
                     model.ContractEndDate = dateto;
                 }
 
