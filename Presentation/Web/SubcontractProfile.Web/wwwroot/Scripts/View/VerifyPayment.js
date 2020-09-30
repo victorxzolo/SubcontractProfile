@@ -506,19 +506,16 @@ function OnSave() {
 
             if (result.Status) {
                 ClearDataModalRevenue();
+                bootbox.alert({
+                    message: result.Message
+                })
             }
-            bootbox.confirm({
-                title: "System Information",
-                message: result.Message,
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
-                callback: function (result) {
-                    console.log('This was logged in the callback: ' + result);
-                }
-            });
+            else {
+                bootbox.alert({
+                    message: result.Message + response.Data,
+
+                })
+            }
         },
         error: function (xhr, status, error) {
             //bootbox.confirm({
