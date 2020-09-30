@@ -404,7 +404,7 @@ function BindBankPayment() {
                     var strtext = this.dropdown_text;
                     var strvalue = this.dropdown_value;
                     var str = "<div class='custom-control custom-radio custom-control-inline'>\
-                        <input type='radio' class='custom-control-input inputValidation' name='optionsRadios' id='rd"+ strvalue + "' value='" + strvalue+"' checked required/>\
+                        <input type='radio' class='custom-control-input inputValidation' name='optionsRadios' id='rd"+ strvalue + "' value='" + strvalue+"' checked/>\
                         <label class='custom-control-label' for='rd"+ strvalue+"'>"+ strtext+"</label></div >"
                     $('.rdbank_payment').append(str);
 
