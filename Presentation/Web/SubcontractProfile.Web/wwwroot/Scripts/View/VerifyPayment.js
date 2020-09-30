@@ -123,36 +123,11 @@ $(document).ready(function () {
         var validation = Array.prototype.filter.call(forms, function (form) {
             if ($('#ddlpaymentstatusais option').filter(':selected').val() == "" ) {
 
-               
-                bootbox.confirm({
-                    title: "System Information",
-                    message: "Please select Payment Status.",
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
                 event.preventDefault();
                 event.stopPropagation();
             }
             else if ($('#dateverifyais').val() == "")
             {
-                bootbox.confirm({
-                    title: "System Information",
-                    message: "Please select Verify Date.",
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        }
-                    },
-                    callback: function (result) {
-                        console.log('This was logged in the callback: ' + result);
-                    }
-                });
                 event.preventDefault();
                 event.stopPropagation();
             }
