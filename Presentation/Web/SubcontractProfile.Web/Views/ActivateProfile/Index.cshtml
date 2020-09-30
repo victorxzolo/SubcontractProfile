@@ -1,20 +1,26 @@
-﻿@{ Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; ViewBag.Title = "Location Profile";
+﻿
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+
+@{ Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; ViewBag.Title = "Location Profile";
 }
 
- <div id="pageID" style="display:none;">ActivateProfile</div>
+<div id="pageID" style="display:none;">ActivateProfile</div>
 
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
 
     <div class="skills layout-spacing ">
         <div class="widget-content widget-content-area">
-            <h3 class="">Activate Profile</h3>
+            <h3 class="">@Localizer["ActivateProfile"]</h3>
 
             <div class="widget-content1">
 
                 <div class="form-row mb-4">
                     <div class="form-group col-md-12">
-                        <label for="inputEmail4">ประเภทผู้สมัคร</label> <br />
+                        <label for="inputEmail4">@Localizer["RegisterType"]</label> <br />
 
                         <div class="n-chk">
                             <label class="new-control new-checkbox new-checkbox-rounded new-checkbox-text checkbox-outline-success">
@@ -36,16 +42,16 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="inputEmail4">Company Name</label>
+                        <label for="inputEmail4">@Localizer["CompanyName"]</label>
                         <input type="text" class="form-control" id="inputCompanyName" placeholder="Company Name">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputPassword4">Tax Id</label>
+                        <label for="inputPassword4">@Localizer["TaxId"]</label>
                         <input type="text" class="form-control" id="inputTaxId" placeholder="Tax Id">
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="inputEmail4">Register Date From</label>
+                        <label for="inputEmail4">@Localizer["RegisterDateFrom"]</label>
                         <div class='input-group date p-0' id="register_date_fr">
                             <input type='text' class="form-control" id="inputRegister_date_fr" />
                             <div class="input-group-append input-group-addon">
@@ -58,7 +64,7 @@
 
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputPassword4">Register Date To</label>
+                        <label for="inputPassword4">@Localizer["RegisterDateTo"]</label>
                         <div class='input-group date p-0' id="register_date_to">
                             <input type='text' class="form-control" id="inputRegister_date_to" />
                             <div class="input-group-append input-group-addon">
@@ -71,7 +77,7 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="inputEmail4">Activate Date From</label>
+                        <label for="inputEmail4">@Localizer["ActivateDateFrom"]</label>
                         <div class='input-group date p-0' id="activate_date_fr">
                             <input type='text' class="form-control" id="inputActivate_date_fr" />
                             <div class="input-group-append input-group-addon">
@@ -83,7 +89,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputPassword4">Activate Date To</label>
+                        <label for="inputPassword4">@Localizer["ActivateDateTo"]</label>
                         <div class='input-group date p-0' id="activate_date_to">
                             <input type='text' class="form-control" id="inputActivate_date_to" />
                             <div class="input-group-append input-group-addon">
@@ -95,7 +101,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputPassword4">Activate Status</label>
+                        <label for="inputPassword4">@Localizer["ActivateStatus"]</label>
                         <select id="ddlActivateStatus" class="form-control "></select>
                     </div>
 
@@ -103,8 +109,22 @@
 
                 <div style="text-align:center">
 
-                    <button id="btnMainClear" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
-                    <button id="btnSearch" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+                    <button id="btnMainClear" type="button" class="btn btn-dark mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="feather feather-x-circle">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg> @Localizer["Reset"]
+                    </button>
+                    <button id="btnSearch" type="button" class="btn btn-success mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>  @Localizer["Search"]
+                    </button>
 
                 </div>
 
@@ -114,11 +134,18 @@
 
             <br />
             <div class="widget-heading">
-                <h3 class="">ผลการค้นหา</h3>
+                <h3 class="">@Localizer["SearchResult"]</h3>
 
             </div>
             <div class="col-md-12 text-right mb-1">
-                <button id="btnActivate" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg> Activate Profile</button>
+                <button id="btnActivate" type="button" class="btn btn-success mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg> @Localizer["ActivateProfile"]
+                </button>
 
             </div>
 
@@ -127,18 +154,18 @@
                 <table id="tbSearchResult" class="table table-hover" style="width:100%">
                     <thead>
                         <tr>
-                            <th ><input type="checkbox" name="select_all" value="ALL" id="checkBoxAll" /></th>
+                            <th><input type="checkbox" name="select_all" value="ALL" id="checkBoxAll" /></th>
 
 
-                            <th>Company Name </th>
-                            <th>Tax Id </th>
-                            <th>Company Status</th>
-                            <th>Traning Status </th>
-                            <th>Payment Status </th>
-                            <th>Register Date </th>
-                            <th>Training Date </th>
-                            <th>Payment Date </th>
-                            <th>Activate Date </th>
+                            <th>@Localizer["CompanyName"] </th>
+                            <th>@Localizer["TaxId"] </th>
+                            <th>@Localizer["CompanyStatus"] </th>
+                            <th>@Localizer["TraningStatus"] </th>
+                            <th>@Localizer["PaymentStatus"] </th>
+                            <th>@Localizer["RegisterDate"] </th>
+                            <th>@Localizer["TrainingDate"] </th>
+                            <th>@Localizer["PaymentDate"] </th>
+                            <th>@Localizer["ActivateDate"] </th>
                         </tr>
                     </thead>
                 </table>
@@ -277,7 +304,7 @@
                 if (activateids_arr.length > 0) {
 
                     bootbox.confirm({
-                        message: "Do you really want to Activate Profile records?",
+                        message: "@Localizer["Question"]",
                         buttons: {
                             confirm: {
                                 label: 'Yes',
@@ -295,7 +322,7 @@
                                     onSave(activateids_arr[j]);
                                 }
 
-                                bootbox.alert('บันทึกข้อมูลเรียบร้อย');
+                                bootbox.alert('@Localizer["SaveDataSuccess"]');
                                 inittbSearchResult();
                             }
                         }
@@ -303,7 +330,7 @@
 
                 } else {
                     bootbox.alert({
-                        message: "กรุณาเลือกข้อมูลสำหรับ Activate Profile.",
+                        message: "@Localizer["PleaseSelect"]",
                         callback: function () {
 
                         }

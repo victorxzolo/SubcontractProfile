@@ -268,7 +268,7 @@
                             <div class="">
 
                                 <svg aria-hidden="true" width="24" height="24" focusable="false" data-prefix="far" data-icon="address-card" class="svg-inline--fa fa-address-card fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M528 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm0 400H48V80h480v352zM208 256c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm-89.6 128h179.2c12.4 0 22.4-8.6 22.4-19.2v-19.2c0-31.8-30.1-57.6-67.2-57.6-10.8 0-18.7 8-44.8 8-26.9 0-33.4-8-44.8-8-37.1 0-67.2 25.8-67.2 57.6v19.2c0 10.6 10 19.2 22.4 19.2zM360 320h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8zm0-64h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8zm0-64h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8z"></path></svg>
-                                <span>ข้อมูลโปรไฟล์</span>
+                                <span>@Localizer["Profile"]</span>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
@@ -276,16 +276,16 @@
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Registration" data-parent="#accordionExample">
                             <li>
-                                <a id="mnuCompany" href="@Url.Action("Index", "CompanyProfile")" data-pageID="CompanyProfile"> ข้อมูลบริษัท </a>
+                                <a id="mnuCompany" href="@Url.Action("Index", "CompanyProfile")" data-pageID="CompanyProfile"> @Localizer["CompanyProfile"] </a>
                             </li>
                             <li>
-                                <a id="mnuLocation" href="@Url.Action("LocationProfile", "Location")" data-pageID="LocationProfile"> ข้อมูลสถานที่ </a>
+                                <a id="mnuLocation" href="@Url.Action("LocationProfile", "Location")" data-pageID="LocationProfile"> @Localizer["LocationProfile"] </a>
                             </li>
                             <li>
-                                <a href="@Url.Action("TeamProfile", "Team")" data-pageID="TeamProfile"> ข้อมูลทีม </a>
+                                <a href="@Url.Action("TeamProfile", "Team")" data-pageID="TeamProfile"> @Localizer["TeamProfile"] </a>
                             </li>
                             <li>
-                                <a href="@Url.Action("EngineerProfile", "Engineer")" data-pageID="EngineerProfile"> ข้อมูลวิศวกร </a>
+                                <a href="@Url.Action("EngineerProfile", "Engineer")" data-pageID="EngineerProfile"> @Localizer["EngineerProfile"] </a>
                             </li>
 
                         </ul>
@@ -295,7 +295,7 @@
                         <a href="#Training" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg aria-hidden="true" width="24" height="24" focusable="false" data-prefix="fas" data-icon="chalkboard-teacher" class="svg-inline--fa fa-chalkboard-teacher fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M208 352c-2.39 0-4.78.35-7.06 1.09C187.98 357.3 174.35 360 160 360c-14.35 0-27.98-2.7-40.95-6.91-2.28-.74-4.66-1.09-7.05-1.09C49.94 352-.33 402.48 0 464.62.14 490.88 21.73 512 48 512h224c26.27 0 47.86-21.12 48-47.38.33-62.14-49.94-112.62-112-112.62zm-48-32c53.02 0 96-42.98 96-96s-42.98-96-96-96-96 42.98-96 96 42.98 96 96 96zM592 0H208c-26.47 0-48 22.25-48 49.59V96c23.42 0 45.1 6.78 64 17.8V64h352v288h-64v-64H384v64h-76.24c19.1 16.69 33.12 38.73 39.69 64H592c26.47 0 48-22.25 48-49.59V49.59C640 22.25 618.47 0 592 0z"></path></svg>
-                                <span>ข้อมูลอบรม</span>
+                                <span>@Localizer["Training"]</span>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
@@ -303,11 +303,11 @@
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Training" data-parent="#accordionExample">
                             <li>
-                                <a href="@Url.Action("request", "RequestTraining")" data-pageID="Request"> ขอรับการฝึกอบรม </a>
+                                <a href="@Url.Action("request", "RequestTraining")" data-pageID="Request"> @Localizer["RequestTraining"] </a>
 
                             </li>
                             <li>
-                                <a href="@Url.Action("TestResultForSub", "TestResultForSub")" data-pageID="TestResultForSub"> ผลการทดสอบ </a>
+                                <a href="@Url.Action("TestResultForSub", "TestResultForSub")" data-pageID="TestResultForSub"> @Localizer["TestResult"] </a>
 
                             </li>
 
@@ -319,7 +319,7 @@
                             <div class="">
 
                                 <svg aria-hidden="true" width="24" height="24" focusable="false" data-prefix="far" data-icon="credit-card" class="svg-inline--fa fa-credit-card fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M527.9 32H48.1C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48.1 48h479.8c26.6 0 48.1-21.5 48.1-48V80c0-26.5-21.5-48-48.1-48zM54.1 80h467.8c3.3 0 6 2.7 6 6v42H48.1V86c0-3.3 2.7-6 6-6zm467.8 352H54.1c-3.3 0-6-2.7-6-6V256h479.8v170c0 3.3-2.7 6-6 6zM192 332v40c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v40c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12z"></path></svg>
-                                <span>ชำระค่าอบรม</span>
+                                <span>@Localizer["Payment"]</span>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
@@ -327,7 +327,7 @@
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Payment" data-parent="#accordionExample">
                             <li>
-                                <a href="@Url.Action("ConfirmPayment", "payment")" data-pageID="ConfirmPayment"> ยืนยันชำระค่าอบรม </a>
+                                <a href="@Url.Action("ConfirmPayment", "payment")" data-pageID="ConfirmPayment"> @Localizer["ConfirmPayment"] </a>
                             </li>
 
                         </ul>
@@ -339,7 +339,7 @@
                         <a href="@Url.Action("Logout", "Account")" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg aria-hidden="true" width="24" height="24" focusable="false" data-prefix="fas" data-icon="sign-out-alt" class="svg-inline--fa fa-sign-out-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"></path></svg>
-                                <span>ออกจากระบบ</span>
+                                <span>@Localizer["SignOut"]</span>
                             </div>
                         </a>
                     </li>
