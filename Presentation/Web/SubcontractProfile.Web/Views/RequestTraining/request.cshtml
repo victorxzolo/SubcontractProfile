@@ -153,6 +153,42 @@
                                 </div>
 
                             </div>
+
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label> Request Date From : <span style="color:red">*</span></label>
+                                </div>
+                                <div class="col-sm-4">
+
+                                    <div class='input-group date p-0' id='requestdateFrom'>
+                                        <input type='text' class="form-control" id="inputRequestdateFrom" required />
+                                        <div class="input-group-append input-group-addon">
+                                            <span class="input-group-text px-4">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                        </div>
+                                        <div class="invalid-feedback">Please input the Request Date From.</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label> Request Date To : <span style="color:red">*</span></label>
+                                </div>
+                                <div class="col-sm-4">
+
+                                    <div class='input-group date p-0' id='requestdateTo'>
+                                        <input type='text' class="form-control" id="inputRequestdateTo" required />
+                                        <div class="input-group-append input-group-addon">
+                                            <span class="input-group-text px-4">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                        </div>
+                                        <div class="invalid-feedback">Please input the Request Date To.</div>
+                                    </div>
+                                </div>
+
+                            </div>
                             <br />
                             <div class="row">
                                 <div class="col-sm-2">
@@ -164,24 +200,9 @@
                                     <div class="invalid-feedback">Please Select Course</div>
                                 </div>
 
-                                <div class="col-sm-2">
-                                    <label> Request Date : <span style="color:red">*</span></label>
-                                </div>
-                                <div class="col-sm-4">
-
-                                    <div class='input-group date p-0' id='requestdateTo'>
-                                        <input type='text' class="form-control" id="inputRequestdateTo" required />
-                                        <div class="input-group-append input-group-addon">
-                                            <span class="input-group-text px-4">
-                                                <i class="fa fa-calendar"></i>
-                                            </span>
-                                        </div>
-                                        <div class="invalid-feedback">Please input the Request Date.</div>
-                                    </div>
-                                </div>
 
                             </div>
-
+                            <br />
                             <div class="row">
 
                                 <div class="col-sm-2">
@@ -267,13 +288,13 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-9 "></div>
-                                <div class="col-md-3 col-sm-12">
+                                <div class="col-md-8"></div>
+                                <div class="col-md-4 col-sm-12">
                                     <div class="row ">
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <div class="col-md-7">
-                                                    <p>ราคารวม (บาท) :</p>
+                                                    <p>ยอดรวม (บาท) :</p>
                                                 </div>
                                                 <div class="col-md-5" style="text-align: left;">
                                                     <label id="lblttcost"></label>
@@ -284,17 +305,28 @@
                                         <div class="col-md-12 mt-3">
                                             <div class="row">
                                                 <div class="col-md-7">
-                                                    <p>Vat 7% :</p>
+                                                    <p>ภาษีมูลค่าเพิ่ม 7% :</p>
                                                 </div>
                                                 <div class="col-md-5" style="text-align: left;">
                                                     <label id="lblvat7"></label>
                                                 </div>
                                             </div>
                                         </div>
+                                        @*<div class="col-md-12 mt-3">
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <p>ภาษีหัก ณ ที่จ่าย 3% :</p>
+                                                </div>
+                                                <div class="col-md-5" style="text-align: left;">
+                                                    <label id="lbltax"></label>
+                                                </div>
+                                            </div>
+                                        </div>*@
+
                                         <div class="col-md-12 mt-3">
                                             <div class="row">
                                                 <div class="col-md-7">
-                                                    <p>ราคาสุทธิ (บาท) :</p>
+                                                    <p>ยอดเงินสุทธิ (บาท) :</p>
                                                 </div>
                                                 <div class="col-md-5" style="text-align: left;">
                                                     <label id="lblCousetotal"></label>
@@ -461,6 +493,24 @@
                 }
             });
 
+            
+            $('#requestdateFrom').datetimepicker({
+                format: "DD/MM/YYYY",
+                minDate: new Date(),
+                showClear: true,
+                showClose: true,
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'icon-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-time'
+                }
+            });
 
             $('#requestdateTo').datetimepicker({
                 format: "DD/MM/YYYY",
@@ -751,10 +801,12 @@
             trainingModel.ContractEmail = $('#inputContactEmail').val();
             trainingModel.Course = $("select[id$=selCourse]").val();
             trainingModel.CoursePrice = $('#hdcoursecostforCal').val();// $('#lblcourseprice').text();
-            trainingModel.RequestDateStr = $('#inputRequestdateTo').val();
+            trainingModel.RequestDateStr = $('#inputRequestdateFrom').val();
+            trainingModel.RequestDateStrTo = $('#inputRequestdateTo').val();
             trainingModel.Remark = $('#txtRemark').val();
             trainingModel.TotalPrice = $('#lblttcost').text();
             trainingModel.Vat = $('#lblvat7').text();
+           // trainingModel.Tax = $('#lblvat7').text();
             trainingModel.Trainingid = $('#trnid').val();
             trainingModel.CompanyId = $('#compid').val();
 
@@ -908,6 +960,8 @@
 
         }
 
+
+      
 
           function inittbSearchResult() {
 
@@ -1130,7 +1184,8 @@
                                              $('#inputContactEmail').val(result.ContractEmail);
                                              $('#inputContactPhone').val(result.ContractPhone);
                                              $('#selCourse').val(result.Course);
-                                             $('#inputRequestdateTo').val(result.RequestDateStr);
+                                             $('#inputRequestdateFrom').val(result.RequestDateStr);
+                                             $('#inputRequestdateTo').val(result.RequestDateStrTo);
 
                                              $('#txtRemark').val(result.Remark);
 

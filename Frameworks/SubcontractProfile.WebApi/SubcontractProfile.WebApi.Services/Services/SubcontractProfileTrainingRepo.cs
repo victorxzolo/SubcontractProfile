@@ -66,10 +66,11 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@contract_email", subcontractProfileTraining.ContractEmail);
             p.Add("@course_price", subcontractProfileTraining.CoursePrice);
             p.Add("@request_date", subcontractProfileTraining.RequestDateStr);
+            p.Add("@request_date_to", subcontractProfileTraining.RequestDateStrTo);
             p.Add("@remark", subcontractProfileTraining.Remark);
             p.Add("@total_price", subcontractProfileTraining.TotalPrice);
             p.Add("@vat", subcontractProfileTraining.Vat);
-            //p.Add("@tax", subcontractProfileTraining.Tax);
+          //  p.Add("@tax", subcontractProfileTraining.Tax);
             p.Add("@create_by", subcontractProfileTraining.CreateBy);
  
 
@@ -89,10 +90,11 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@company_id", subcontractProfileTraining.CompanyId);
             p.Add("@course", subcontractProfileTraining.Course);
             p.Add("@request_date", subcontractProfileTraining.RequestDateStr);
+            p.Add("@request_date_to", subcontractProfileTraining.RequestDateStrTo);
             p.Add("@remark", subcontractProfileTraining.Remark);
             p.Add("@total_price", subcontractProfileTraining.TotalPrice);
             p.Add("@vat", subcontractProfileTraining.Vat);
-            p.Add("@tax", subcontractProfileTraining.Tax);
+           // p.Add("@tax", subcontractProfileTraining.Tax);
             p.Add("@status", subcontractProfileTraining.Status);
             p.Add("@request_no", subcontractProfileTraining.RequestNo);
             p.Add("@modified_by", subcontractProfileTraining.ModifiedBy);

@@ -33,7 +33,7 @@ namespace SubcontractProfile.WebApi.Services.Model
 
         // [System.ComponentModel.DataAnnotations.Required]
         public System.DateTime? RequestDate { get; set; }
-
+  
         public string Remark { get; set; }
 
         //  [System.ComponentModel.DataAnnotations.Required]
@@ -42,7 +42,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         //  [System.ComponentModel.DataAnnotations.Required]
         public decimal Vat { get; set; }
 
-        public decimal? Tax { get; set; }
+       // public decimal Tax { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(10)]
         //  [System.ComponentModel.DataAnnotations.Required]
@@ -73,6 +73,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         public string BookingDateStr { get; set; }
 
         public string RequestDateStr { get; set; }
+        public string RequestDateStrTo { get; set; }
 
         public string CompanyNameTh { get; set; }
         public string TaxId { get; set; }

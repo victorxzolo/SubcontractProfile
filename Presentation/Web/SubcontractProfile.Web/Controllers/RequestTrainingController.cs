@@ -832,6 +832,7 @@ namespace SubcontractProfile.Web.Controllers
                 {
 
                     model.RequestDateStr = ConvertToDateTimeYYYYMMDD(model.RequestDateStr);
+                    model.RequestDateStrTo = ConvertToDateTimeYYYYMMDD(model.RequestDateStrTo);
                     model.CompanyId = userProfile.companyid;
                     model.CreateBy = userProfile.Username;
                     model.TrainingId = Guid.NewGuid();
@@ -896,6 +897,7 @@ namespace SubcontractProfile.Web.Controllers
                     var uri = new Uri(Path.Combine(strpathAPI, "Training", "Update"));
 
                     model.RequestDateStr = ConvertToDateTimeYYYYMMDD(model.RequestDateStr);
+                    model.RequestDateStrTo = ConvertToDateTimeYYYYMMDD(model.RequestDateStrTo);
                     model.ModifiedBy = userProfile.Username;
                     model.Status = "Y";
 
