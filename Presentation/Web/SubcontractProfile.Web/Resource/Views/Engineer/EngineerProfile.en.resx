@@ -190,7 +190,7 @@
     <value>Choose File</value>
   </data>
   <data name="ChooseFileType" xml:space="preserve">
-    <value>Type Image File pdf,jpg,jpeg,bmp,gif,tif,tiff,png</value>
+    <value>Support Type File pdf,jpg,jpeg,bmp,gif,tif,tiff,png</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Close</value>
