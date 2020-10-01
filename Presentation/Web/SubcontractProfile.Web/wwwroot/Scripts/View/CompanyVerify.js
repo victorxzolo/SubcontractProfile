@@ -825,7 +825,14 @@ function onSaveCompanyProfile(status) {
         //dataType: "json",
         success: function (result) {
             if (result.Response.Status) {
-                bootbox.alert(result.Response.Message);
+                //bootbox.alert(result.Response.Message);
+                //location.reload();
+                bootbox.alert({
+                    message: result.Response.Message,
+                    callback: function() {
+                        window.location.reload();
+                    }
+            });
             }
             else {
                 bootbox.alert(result.Response.Message);

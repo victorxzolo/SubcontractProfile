@@ -1,9 +1,13 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+@{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     ViewBag.Title = "Company Verify";
 
 }
-    <div id="pageID" style="display:none;">CompanyVerify</div>
+<div id="pageID" style="display:none;">CompanyVerify</div>
 
 <div id="controllername" data-url="@Url.Action("Action", "Registration")"></div>
 <div id="accountcontrollername" data-url="@Url.Action("Action", "Account")"></div>
@@ -12,21 +16,21 @@
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
     <div class="skills layout-spacing">
         <div class="widget-content widget-content-area">
-            <h3 class="">Company Verify</h3>
+            <h3 class="">@Localizer["CompanyVerify"]</h3>
 
             <div class="border-tab">
                 <ul class="nav nav-tabs mt-3" id="border-tabs" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="action-tab" data-toggle="tab" href="#tabaction" role="tab" aria-controls="action" aria-selected="true">Company</a>
+                        <a class="nav-link active" id="action-tab" data-toggle="tab" href="#tabaction" role="tab" aria-controls="action" aria-selected="true">@Localizer["CompanyProfile"]</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="location-tab" href="#tablocation" data-toggle="tab" role="tab" aria-controls="location" aria-selected="false">Location</a>
+                        <a class="nav-link" id="location-tab" href="#tablocation" data-toggle="tab" role="tab" aria-controls="location" aria-selected="false">@Localizer["LocationProfile"]</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="team-tab" href="#tateam" data-toggle="tab" role="tab" aria-controls="team" aria-selected="false">Team</a>
+                        <a class="nav-link" id="team-tab" href="#tateam" data-toggle="tab" role="tab" aria-controls="team" aria-selected="false">@Localizer["TeamProfile"]</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="engineer-tab" href="#tabengineer" data-toggle="tab" role="tab" aria-controls="engineer" aria-selected="false">Engineer</a>
+                        <a class="nav-link" id="engineer-tab" href="#tabengineer" data-toggle="tab" role="tab" aria-controls="engineer" aria-selected="false">@Localizer["EngineerProfile"]</a>
                     </li>
                 </ul>
 

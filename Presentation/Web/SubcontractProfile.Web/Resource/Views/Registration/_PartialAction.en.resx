@@ -129,9 +129,6 @@
   <data name="AccountType" xml:space="preserve">
     <value>Account Type</value>
   </data>
-  <data name="ActivateDate" xml:space="preserve">
-    <value>Activate Date</value>
-  </data>
   <data name="AddAddress" xml:space="preserve">
     <value>Add Address</value>
   </data>
@@ -141,8 +138,11 @@
   <data name="AddressType" xml:space="preserve">
     <value>Address Type</value>
   </data>
-  <data name="ASCCode" xml:space="preserve">
-    <value>ASC Code</value>
+  <data name="Approve" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
   </data>
   <data name="BankAccountInformation" xml:space="preserve">
     <value>Bank Account Information</value>
@@ -153,17 +153,11 @@
   <data name="BankName" xml:space="preserve">
     <value>Bank Name</value>
   </data>
-  <data name="Branch" xml:space="preserve">
-    <value>Branch</value>
-  </data>
   <data name="BranchAddress" xml:space="preserve">
     <value>Branch Address</value>
   </data>
   <data name="Building" xml:space="preserve">
     <value>Building</value>
-  </data>
-  <data name="BusinessType" xml:space="preserve">
-    <value>Business Type</value>
   </data>
   <data name="ChannelSaleGroup" xml:space="preserve">
     <value>Channel Sale Group</value>
@@ -173,9 +167,6 @@
   </data>
   <data name="ChooseFileType" xml:space="preserve">
     <value>Support Type File pdf,jpg,jpeg,bmp,gif,tif,tiff,png</value>
-  </data>
-  <data name="Close" xml:space="preserve">
-    <value>Close</value>
   </data>
   <data name="CommercialRegistrationBook" xml:space="preserve">
     <value>Commercial Registration Book</value>
@@ -191,15 +182,6 @@
   </data>
   <data name="CompanyDocuments" xml:space="preserve">
     <value>Company Documents</value>
-  </data>
-  <data name="CompanynameEN" xml:space="preserve">
-    <value>Company Name English</value>
-  </data>
-  <data name="CompanynameTH" xml:space="preserve">
-    <value>Company Name Thai</value>
-  </data>
-  <data name="CompanyProfile" xml:space="preserve">
-    <value>Company Profile</value>
   </data>
   <data name="ContractCompany" xml:space="preserve">
     <value>Contract Company</value>
@@ -219,15 +201,6 @@
   <data name="Country" xml:space="preserve">
     <value>Country</value>
   </data>
-  <data name="CreateDate" xml:space="preserve">
-    <value>Create Date</value>
-  </data>
-  <data name="DataRavenue" xml:space="preserve">
-    <value>ข้อมูลจากสรรพากร อาจจะไม่ตรงกับกรมพัฒนาธุรกิจ</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
   <data name="DistributionChannel" xml:space="preserve">
     <value>Distribution Channel</value>
   </data>
@@ -240,17 +213,11 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="EditCompanyProfile" xml:space="preserve">
-    <value>Edit Company Profile</value>
-  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="EmailCompany" xml:space="preserve">
     <value>Email Company</value>
-  </data>
-  <data name="EmailContract" xml:space="preserve">
-    <value>Email Contract</value>
   </data>
   <data name="ErrorAccountName" xml:space="preserve">
     <value>Please fill Account Name</value>
@@ -273,8 +240,14 @@
   <data name="ErrorCompanyCertificate" xml:space="preserve">
     <value>Please Upload File Company Certificate</value>
   </data>
+  <data name="ErrorContractEndDate" xml:space="preserve">
+    <value>Please fill Contract End Date</value>
+  </data>
   <data name="ErrorContractName" xml:space="preserve">
     <value>Please fill Contract Name</value>
+  </data>
+  <data name="ErrorContractStartDate" xml:space="preserve">
+    <value>Please fill Contract Start Date</value>
   </data>
   <data name="ErrorCountry" xml:space="preserve">
     <value>Please fill Country</value>
@@ -286,7 +259,7 @@
     <value>Please fill District</value>
   </data>
   <data name="ErrorEmail" xml:space="preserve">
-    <value>Please fill Email</value>
+    <value>Please fill Email Company</value>
   </data>
   <data name="ErrorEmailCompany" xml:space="preserve">
     <value>Please fill Email Company</value>
@@ -303,6 +276,9 @@
   <data name="ErrorLocationName" xml:space="preserve">
     <value>Please fill Location Name</value>
   </data>
+  <data name="ErrorMobileNo" xml:space="preserve">
+    <value>Please fill Tel</value>
+  </data>
   <data name="ErrorNameofJuristicPersonEN" xml:space="preserve">
     <value>Please fill  Name Of Juristic Person EN</value>
   </data>
@@ -318,11 +294,11 @@
   <data name="ErrorTaxwithholdName" xml:space="preserve">
     <value>Please fill Withholding Tax Name</value>
   </data>
-  <data name="ErrorTel" xml:space="preserve">
-    <value>Please fill Tel</value>
-  </data>
   <data name="ErrorVATRegistrationCertificate" xml:space="preserve">
     <value>Please Upload File VAT Registration Certificate</value>
+  </data>
+  <data name="ErrorVenderCode" xml:space="preserve">
+    <value>Please fill Vender Code</value>
   </data>
   <data name="ErrorZipcode" xml:space="preserve">
     <value>Please fill Zip Code</value>
@@ -339,9 +315,6 @@
   <data name="HouseNo" xml:space="preserve">
     <value>House No</value>
   </data>
-  <data name="IDNumber" xml:space="preserve">
-    <value>ID Number</value>
-  </data>
   <data name="InstallationDepartment" xml:space="preserve">
     <value>Installation Department</value>
   </data>
@@ -357,14 +330,11 @@
   <data name="LocationName" xml:space="preserve">
     <value>Location Name</value>
   </data>
-  <data name="LocationSearch" xml:space="preserve">
-    <value>Search Location</value>
-  </data>
   <data name="MaintenanceDepartment" xml:space="preserve">
     <value>Maintenance Department</value>
   </data>
   <data name="MobileNo" xml:space="preserve">
-    <value>Mobile No</value>
+    <value>Tel</value>
   </data>
   <data name="Moo" xml:space="preserve">
     <value>Moo</value>
@@ -376,7 +346,10 @@
     <value>Name of Juristic Person TH</value>
   </data>
   <data name="NonVAT" xml:space="preserve">
-    <value>Non VAT</value>
+    <value>NonVAT</value>
+  </data>
+  <data name="NotApprove" xml:space="preserve">
+    <value>Not Approve</value>
   </data>
   <data name="POPAddress" xml:space="preserve">
     <value>POP Address</value>
@@ -388,31 +361,13 @@
     <value>Register Type</value>
   </data>
   <data name="Remark" xml:space="preserve">
-    <value>หมายเหตุ</value>
+    <value>Remark</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
   </data>
   <data name="Room" xml:space="preserve">
     <value>Room</value>
-  </data>
-  <data name="SapCode" xml:space="preserve">
-    <value>Sap Code</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="Search" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="SearchResult" xml:space="preserve">
-    <value>Search Result</value>
-  </data>
-  <data name="SearchRevenue" xml:space="preserve">
-    <value>Search VAT Information</value>
-  </data>
-  <data name="Select" xml:space="preserve">
-    <value>Select</value>
   </data>
   <data name="ShippingAddress" xml:space="preserve">
     <value>Shipping Address</value>
@@ -435,20 +390,11 @@
   <data name="TaxAddress" xml:space="preserve">
     <value>Tax Address</value>
   </data>
-  <data name="TaxID" xml:space="preserve">
-    <value>Tax ID</value>
-  </data>
   <data name="TaxwithholdName" xml:space="preserve">
     <value>Withholding Tax Name</value>
   </data>
-  <data name="Tel" xml:space="preserve">
-    <value>Tel</value>
-  </data>
   <data name="UploadBookBank" xml:space="preserve">
     <value>Upload Book Bank</value>
-  </data>
-  <data name="UserId" xml:space="preserve">
-    <value>User Id</value>
   </data>
   <data name="VAT" xml:space="preserve">
     <value>VAT</value>

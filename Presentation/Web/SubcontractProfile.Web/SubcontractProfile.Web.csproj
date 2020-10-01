@@ -33,7 +33,6 @@
     <Folder Include="Logs\" />
     <Folder Include="Resource\Views\Training\" />
     <Folder Include="Resource\Views\Team\" />
-    <Folder Include="Resource\Views\Registration\" />
   </ItemGroup>
 
   <ItemGroup>
