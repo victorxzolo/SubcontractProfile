@@ -133,7 +133,7 @@
     <value>สาขา</value>
   </data>
   <data name="ChooseFile" xml:space="preserve">
-    <value>Choose file</value>
+    <value>เลือกไฟล์</value>
   </data>
   <data name="ChooseFileSupportFileType" xml:space="preserve">
     <value>ขนาดไฟล์ไม่เกิน 3 Mb และไฟล์ประกอบประเภท PDF หรือ JPG,JPEG,PNG เท่านั้น</value>

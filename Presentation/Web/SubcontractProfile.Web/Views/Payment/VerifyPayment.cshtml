@@ -1,24 +1,27 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+@{
     ViewData["Title"] = "VerifyPayment";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-    <div id="pageID" style="display:none;">VerfifiedPayment</div>
+<div id="pageID" style="display:none;">VerfifiedPayment</div>
 
 <div id="controllername" data-url="@Url.Action("Action", "Payment")"></div>
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
     <div class="skills layout-spacing">
         <div class="widget-content widget-content-area">
-            <h3 class="">Search Payment Verify</h3>
+            <h3 class="">@Localizer["SearchPaymentVerify"]</h3>
             <div class="widget-content1">
                 <div class="form-row mb-4">
                     <div class="form-group col-md-6">
-                        <label for="txtcompanyname">Company Name</label>
+                        <label for="txtcompanyname">@Localizer["CompanyName"]</label>
                         <input type="text" class="form-control" id="txtcompanyname" />
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="txttaxid">Tax ID</label>
+                        <label for="txttaxid">@Localizer["TaxID"]</label>
                         <input type="text" class="form-control" id="txttaxid" />
                     </div>
                     @*<div class="form-group col-md-6">
@@ -35,7 +38,7 @@
                         </div>*@
 
                     <div class="form-group col-md-6">
-                        <label for="txttaxid">Payment Date From</label>
+                        <label for="txttaxid">@Localizer["PaymentDateFrom"]</label>
                         <div class='input-group date p-0' id='paymentdatefrom'>
                             <input type='text' class="form-control" id="datepaymentfrom" />
                             <div class="input-group-append input-group-addon">
@@ -47,7 +50,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="txttaxid">Payment Date To</label>
+                        <label for="txttaxid">@Localizer["PaymentDateTo"]</label>
                         <div class='input-group date p-0' id='paymentdatefto'>
                             <input type='text' class="form-control" id="datepaymentto" />
                             <div class="input-group-append input-group-addon">
@@ -59,33 +62,46 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="txttaxid">Status</label>
+                        <label for="txttaxid">@Localizer["Status"]</label>
                         <select class="form-control" id="ddlStatus">
                         </select>
                     </div>
                 </div>
                 <div style="text-align:center">
 
-                    <button id="btnclear" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
-                    <button id="btnSearch" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+                    <button id="btnclear" type="button" class="btn btn-dark mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg> @Localizer["Reset"]
+                    </button>
+                    <button id="btnSearch" type="button" class="btn btn-success mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>  @Localizer["Search"]
+                    </button>
 
                 </div>
             </div>
             <br />
             <div class="widget-heading">
-                <h3 class="">ผลการค้นหา</h3>
+                <h3 class="">@Localizer["SearchResult"]</h3>
 
             </div>
             <div class="table-responsive">
                 <table class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4" id="tbSearchResult">
                     <thead>
                         <tr>
-                            <th scope="col">Action</th>
-                            <th scope="col">Company Name</th>
-                            <th scope="col">Tax ID</th>
-                            <th scope="col">Paid Date Time</th>
-                            <th scope="col">Payment Status</th>
-                            <th scope="col">ยอดโอน(บาท)</th>
+                            <th scope="col">@Localizer["Action"]</th>
+                            <th scope="col">@Localizer["CompanyName"]</th>
+                            <th scope="col">@Localizer["TaxID"]</th>
+                            <th scope="col">@Localizer["PaidDateTime"]</th>
+                            <th scope="col">@Localizer["PaymentStatus"]</th>
+                            <th scope="col">@Localizer["Amount"]</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,7 +116,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 id="hTitleEdit" class="modal-title">Confirm Payment</h5>
+                <h5 id="hTitleEdit" class="modal-title">@Localizer["ConfirmPayment"]</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -112,7 +128,7 @@
 
                         <div class="row">
                             <div class="col-sm-3 text-right">
-                                <label>Company Name:</label>
+                                <label>@Localizer["CompanyName"]:</label>
                             </div>
                             <div class="col-sm-7">
                                 <label id="lblcompanyName"></label>
@@ -122,7 +138,7 @@
 
                         <div class="row">
                             <div class="col-sm-3 text-right">
-                                <label>ช่องทางการชำระเงิน </label>  <span style="color:red">*</span>
+                                <label>@Localizer["PaymentMethod"] </label>  <span style="color:red">*</span>
                             </div>
                             <div class="col-sm-7">
                                 <select class="form-control" id="ddlpaymenttransfer" disabled></select>
@@ -139,7 +155,7 @@
                         <br />
                         <div class="row">
                             <div class="col-sm-3 text-right">
-                                <label>วันที่ชำระเงิน </label>  <span style="color:red">*</span>
+                                <label>@Localizer["PaymentDate"] </label>  <span style="color:red">*</span>
                             </div>
                             <div class="col-sm-7">
                                 <div class='input-group date p-0' id='datetimepicker'>
@@ -156,7 +172,7 @@
                         <br />
                         <div class="row">
                             <div class="col-sm-3 text-right">
-                                <label>เวลาชำระเงิน </label>  <span style="color:red">*</span>
+                                <label>@Localizer["PaymentTime"] </label>  <span style="color:red">*</span>
                             </div>
                             <div class="col-sm-7">
                                 <div class='input-group date p-0 ' id='timepicker'>
@@ -173,7 +189,7 @@
                         <br />
                         <div class="row">
                             <div class="col-sm-3 text-right">
-                                <label>ยอดเงินที่โอน (B) </label>  <span style="color:red">*</span>
+                                <label>@Localizer["Amount"] </label>  <span style="color:red">*</span>
                             </div>
                             <div class="col-sm-7">
                                 <input type='text' id="txtBalance" value="1000" class="form-control" disabled />
@@ -182,7 +198,7 @@
                         <br />
                         <div class="row">
                             <div class="col-sm-3 text-right">
-                                <label>ธนาคารต้นทางที่โอน </label>  <span style="color:red">*</span>
+                                <label>@Localizer["BankTransfer"] </label>  <span style="color:red">*</span>
                             </div>
                             <div class="col-sm-7">
                                 <select class="form-control" id="ddlbank" disabled></select>
@@ -191,7 +207,7 @@
                         <br />
                         <div class="row">
                             <div class="col-sm-3 text-right">
-                                <label>สาขา </label>  <span style="color:red">*</span>
+                                <label>@Localizer["Branch"] </label>  <span style="color:red">*</span>
                             </div>
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" id="txtbranch" placeholder="" disabled />
@@ -200,13 +216,13 @@
                         <br />
                         <div class="row">
                             <div class="col-sm-3 text-right">
-                                <label>หลักฐานการโอนเงิน </label>  <span style="color:red">*</span>
+                                <label>@Localizer["TheTransferSlip"] </label>  <span style="color:red">*</span>
                             </div>
                             <div class="col-sm-7">
                                 <input type="hidden" id="hdupfiletransfer" />
                                 <input type="file" class="custom-file-input inputValidation" id="transfer_file"
                                        accept="image/jpeg,image/gif,image/png,application/pdf" disabled />
-                                <label class="custom-file-label" for="customFile" id="lbuploadslip">Choose file</label>
+                                <label class="custom-file-label" for="customFile" id="lbuploadslip">@Localizer["ChooseFile"]</label>
 
                                 <div id="targetDiv">
                                     @*<img id="ItemPreview" src="" class="img-thumbnail" style="width: 300px; height: 300px;"/>*@
@@ -215,16 +231,16 @@
 
 
                                 <small id="uploadlHelp1" class="form-text text-muted">
-                                    ขนาดไฟล์ไม่เกิน 3 Mb และไฟล์ประกอบประเภท PDF หรือ JPG,JPEG,PNG เท่านั้น
+                                    @Localizer["ChooseFileSupportFileType"]
                                 </small>
-                                <small id="uploadlHelp1" style="color:red">การใช้หลักฐานปลอม มีความผิดตาม พรบ.คอมพิวเตอร์</small>
-                                <div class="invalid-tooltip">Please Upload the Silp</div>
+                                <small id="uploadlHelp1" style="color:red">@Localizer["RemarkChooseFileSupportFileType"]</small>
+                                <div class="invalid-tooltip">@Localizer["ErrorTheTransferSlip"]</div>
                             </div>
                         </div>
                         <br />
                         <div class="row">
                             <div class="col-sm-3 text-right">
-                                <label>หมายเหตุ </label>
+                                <label>@Localizer["Remark"] </label>
                             </div>
                             <div class="col-sm-7">
                                 <textarea id="txtremark" name="remark" rows="3" class="form-control" disabled> </textarea>
@@ -233,23 +249,23 @@
                         <br />
                     </div>
                     <div class="container">
-                        <h4>สำหรับเจ้าหน้าที่ AIS</h4>
+                        <h4>@Localizer["ForAISStaff"]</h4>
                         <hr>
                         <div class="row">
                             <div class="col-sm-3 text-right">
-                                <label>Payment Status</label>
+                                <label>@Localizer["PaymentStatus"]</label>
                             </div>
                             <div class="col-md-7">
                                 <select class="form-control" id="ddlpaymentstatusais" required></select>
                                 <div class="invalid-feedback">
-                                    กรุณาเลือก Payment Status
+                                    @Localizer["ErrorPaymentStatus"]
                                 </div>
                             </div>
                         </div>
                         <br />
                         <div class="row">
                             <div class="col-sm-3 text-right">
-                                <label>Verify Date</label>
+                                <label>@Localizer["VerifyDate"]</label>
                             </div>
                             <div class="col-sm-7">
                                 <div class='input-group date p-0' id='datetimepickerais'>
@@ -260,7 +276,7 @@
                                         </span>
                                     </div>
                                     <div class="invalid-feedback">
-                                        กรุณาเลือก Verify Date
+                                        @Localizer["ErrorVerifyDate"]
                                     </div>
                                 </div>
                             </div>
@@ -268,7 +284,7 @@
                         <br />
                         <div class="row">
                             <div class="col-sm-3 text-right">
-                                <label>Remark </label>
+                                <label>@Localizer["Remark"] </label>
                             </div>
                             <div class="col-sm-7">
                                 <textarea id="txtremarkais" name="remark" rows="3" class="form-control"> </textarea>
@@ -286,11 +302,11 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnClearModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
-                        ปิด
+                        @Localizer["Close"]
                     </button>
                     <button id="btnSave" type="button" class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                        บันทึก
+                        @Localizer["Save"]
                     </button>
                 </div>
 

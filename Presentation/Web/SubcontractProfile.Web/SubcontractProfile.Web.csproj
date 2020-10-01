@@ -34,7 +34,6 @@
     <Folder Include="Resource\Views\Training\" />
     <Folder Include="Resource\Views\Team\" />
     <Folder Include="Resource\Views\Registration\" />
-    <Folder Include="Resource\Views\Payment\" />
   </ItemGroup>
 
   <ItemGroup>
