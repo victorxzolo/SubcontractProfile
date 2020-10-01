@@ -260,7 +260,7 @@ $(document).ready(function () {
                     }
                 },
                 {
-                    "data": "UpdateDate", render: function (data) {
+                    "data": "verified_date", render: function (data) {
                         var strCreateDate = "";
                         if (data != null) {
                             var date = new Date(data);
