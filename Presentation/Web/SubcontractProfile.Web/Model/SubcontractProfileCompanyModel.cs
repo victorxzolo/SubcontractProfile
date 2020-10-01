@@ -183,6 +183,8 @@ namespace SubcontractProfile.Web.Model
         public System.DateTime? RegisterDate { get; set; }
         public string ASCCode { get; set; }
 
+        public System.DateTime? verified_date { get; set; }
+
         public Guid file_id_CompanyCertifiedFile { get; set; }
         public Guid file_id_CommercialRegistrationFile { get; set; }
         public Guid file_id_VatRegistrationCertificateFile { get; set; }

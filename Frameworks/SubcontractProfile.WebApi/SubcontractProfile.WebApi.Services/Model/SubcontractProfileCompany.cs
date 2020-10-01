@@ -202,7 +202,10 @@ namespace SubcontractProfile.WebApi.Services.Model
         public System.DateTime? RegisterDate { get; set; }
         //public string ASCCode { get; set; }
 
-    
+        public System.DateTime? verified_date { get; set; }
+
+
+
         public string TrainingStatus { get; set; }
         public string PaymentStatus { get; set; }
         public DateTime? CompanyRegisterDate { get; set; }
