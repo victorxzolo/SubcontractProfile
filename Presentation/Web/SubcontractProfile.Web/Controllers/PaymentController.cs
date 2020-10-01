@@ -376,8 +376,12 @@ namespace SubcontractProfile.Web.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var result = response.Content.ReadAsStringAsync().Result;
+
+
                     //data
                     paymentResult = JsonConvert.DeserializeObject<List<SubcontractProfilePaymentModel>>(result);
+
+                    paymentResult = paymentResult.Where(x => x.Status != "Waiting").ToList();
 
                 }
 

@@ -553,11 +553,12 @@ function GetStatus() {
 
                 $('#ddlpaymentstatusais').empty();
                 $('#ddlStatus').empty();
-
-
+                             
                 $.each(data.response, function () {
-                    $('#ddlpaymentstatusais').append($("<option></option>").val(this.Value).text(this.Text));
-                    $('#ddlStatus').append($("<option></option>").val(this.Value).text(this.Text));
+                  
+                        $('#ddlpaymentstatusais').append($("<option></option>").val(this.Value).text(this.Text));
+                        $('#ddlStatus').append($("<option></option>").val(this.Value).text(this.Text));
+                
                 });
             }
             else {

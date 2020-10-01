@@ -196,6 +196,33 @@
 
                             </div>
 
+
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label> Request Date From : </label>
+                                </div>
+                                <div class="col-sm-4">
+
+                                    <div class='input-group date p-0' id='requestdateFrom'>
+                                       
+                                        <label id="inputRequestdateFrom"></label>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label> Request Date To :</label>
+                                </div>
+                                <div class="col-sm-4">
+
+                                    <div class='input-group date p-0' id='requestdateTo'>
+                                   
+                                        <label id="inputRequestdateTo"></label>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
                             <div class="row">
                                 <div class="col-sm-2">
                                     <label>Course :</label>
@@ -214,12 +241,12 @@
                                 </div>
                             </div>
 
-                                <div class="row">
+                            <div class="row">
                                 <div class="col-sm-2">
                                     <label>Remark :</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <label id="lblRemark" > </label>
+                                    <label id="lblRemark"> </label>
                                 </div>
 
                             </div>
@@ -675,8 +702,7 @@
 
         }
 
-
-                        function inittbSearchResult() {
+ function inittbSearchResult() {
 
                             oTable = $('#tbSearchResult').DataTable({
                                 processing: true, // for show progress bar
@@ -822,6 +848,10 @@
 
                                              $('#bookingDate').val(result.BookingDateStr);
                                              $('#txtaisremark').val(result.RemarkForAis);
+
+                                             $('#inputRequestdateFrom').html(result.RequestDateStr);
+                                             $('#inputRequestdateTo').html(result.RequestDateStrTo);
+                                             
 
                                          }
                                          else {
