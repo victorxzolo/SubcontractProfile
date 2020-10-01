@@ -853,8 +853,8 @@ $(document).ready(function () {
             ContractPhone: $('#txtcontract_phone').val(),
             ContractEmail: $('#txtcontract_email').val(),
 
-            BankCode: $('#txtbank_Code').val(),
-            BankName: $('#txtbank_Name').val(),
+            BankCode: $('#ddlBankname option').filter(':selected').val(),
+            BankName: $('#ddlBankname option').filter(':selected').text(),
             AccountNumber: $('#ddlaccount_Name option').filter(':selected').val() != "" ? $('#ddlaccount_Name option').filter(':selected').val() + $('#txtaccount_Number').val() : $('#txtaccount_Number').val(),
             AccountName: straccname,//$('#ddlaccount_Name option').filter(':selected').val(),
            // AttachFile

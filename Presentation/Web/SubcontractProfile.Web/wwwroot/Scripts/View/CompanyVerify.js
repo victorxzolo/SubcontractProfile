@@ -760,7 +760,7 @@ function onSaveCompanyProfile(status) {
     data.append("ContractEmail", $('#mailContract').val());
 
     data.append("BankCode", $('#selBankName option').filter(':selected').val());
-    data.append("BankName", $('#txtbank_Name').val());
+    data.append("BankName", $('#selBankName option').filter(':selected').text());
     data.append("AccountNumber", $('#codeNumber').val());
     data.append("AccountName", $('#busiName').val());
     data.append("BranchName", $('#nameBranch').val());
