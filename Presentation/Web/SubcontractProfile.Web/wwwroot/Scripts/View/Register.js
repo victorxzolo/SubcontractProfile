@@ -1121,17 +1121,19 @@ function inttbAddress2() {
 
         },
         columns: [
-            { "data": "addressId", "visible": false },
-            { "data": "address_type_id", "visible": false },
-            { "data": "address_type", orderable: true, },
-            { "data": "address", orderable: true, },
+            { "data": "addressId", "visible": false, "width": "0%"},
+            { "data": "address_type_id", "visible": false, "width": "0%" },
+            { "data": "address_type", orderable: true, "width": "30%"},
+            { "data": "address", orderable: true, "width": "50%" },
             {
+                "width": "10%",
                 "targets": -2,
                 "data": null,
                 orderable: false,
                 "defaultContent": "<button class='btn-border btn-green edit_btn'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button>"
             },
             {
+                "width": "10%",
                 "targets": -1,
                 "data": null,
                 orderable: false,
@@ -1152,7 +1154,10 @@ function inttbAddress2() {
             //}
 
         }
-    });
+     });
+
+
+    tbaddressstep2.columns.adjust().draw();
 }
 
 function uploadFiles(inputId) {
@@ -1508,6 +1513,7 @@ function SaveDaftAddress(stuff) {
                 //tbaddressstep2.clear().draw();
                 //BindDatatable(tbaddressstep2, val);
                 tbaddressstep2.ajax.reload();
+                tbaddressstep2.columns.adjust().draw();
             }
             else {
                 bootbox.alert({
