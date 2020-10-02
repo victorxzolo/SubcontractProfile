@@ -230,6 +230,7 @@ namespace SubcontractProfile.Web.Controllers
                 //data
                 companyResult = JsonConvert.DeserializeObject<SubcontractProfileCompanyModel>(result);
                 companyResult.RegisterDateStr = companyResult.RegisterDate.Value.ToString("dd/MM/yyyy HH:mm");
+                companyResult.BankAccountType = GetDataBankAccountType(companyResult.BankAccountTypeId);
 
 
             }
@@ -1206,6 +1207,8 @@ namespace SubcontractProfile.Web.Controllers
         }
 
 
+
+
         #region Upload File
 
 
@@ -1793,6 +1796,27 @@ namespace SubcontractProfile.Web.Controllers
                 throw;
             }
             return data;
+        }
+
+        private string GetDataBankAccountType(string id)
+        {
+            var output = new List<SubcontractDropdownModel>();
+            string result = "";
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/bank_account_type");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+                result = output.Where(x => x.dropdown_value == id).Select(c => c.dropdown_text).FirstOrDefault().ToString();
+            }
+            
+            return result;
         }
 
         private void getsession()

@@ -811,8 +811,28 @@ function initialCompanyDataById() {
                 $('#lblaccount_name').text(result.AccountName);
                 $('#lblaccount_number').text(result.AccountNumber);
 
-                $('#lblDatecontractstart').text(result.ContractStartDate);
-                $('#lblDatecontractend').text(result.ContractEndDate);
+
+
+                if (result.ContractStartDate != null) {
+                    var date = new Date(result.ContractStartDate);
+                    var sMonth = padValue(date.getMonth() + 1);
+                    var sDay = padValue(date.getDate());
+                    var sYear = date.getFullYear();
+
+                    $('#lblDatecontractstart').text(sDay + '/' + sMonth + '/' + sYear);
+                }
+
+                if (result.ContractEndDate != null) {
+                    var dateend = new Date(result.ContractStartDate);
+                    var sMonthend = padValue(date.getMonth() + 1);
+                    var sDayend = padValue(date.getDate());
+                    var sYearend = date.getFullYear();
+
+                    $('#lblDatecontractend').text(sDayend + '/' + sMonthend + '/' + sYearend);
+                }
+
+
+               
                 $('#lblVendercode').text(result.VendorCode);
                 $('#lblRemarkForSub').text(result.RemarkForSub);
 
