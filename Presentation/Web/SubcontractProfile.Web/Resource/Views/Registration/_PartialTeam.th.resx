@@ -190,13 +190,13 @@
     <value>Team Code</value>
   </data>
   <data name="TeamInformation" xml:space="preserve">
-    <value>ข้อมูล ทีม</value>
+    <value>ข้อมูล Team</value>
   </data>
   <data name="TeamNameEng" xml:space="preserve">
-    <value>ชื่อทีม (อังกฤษ)</value>
+    <value>ชื่อ Team (อังกฤษ)</value>
   </data>
   <data name="TeamNameThai" xml:space="preserve">
-    <value>ชื่อทีม (ไทย)</value>
+    <value>ชื่อ Team (ไทย)</value>
   </data>
   <data name="VendorCode" xml:space="preserve">
     <value>Vendor Code</value>

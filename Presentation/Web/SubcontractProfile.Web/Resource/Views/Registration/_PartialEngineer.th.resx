@@ -289,10 +289,10 @@
     <value>ชื่อพนักงาน(ไทย)</value>
   </data>
   <data name="Team" xml:space="preserve">
-    <value>ทีม</value>
+    <value>Team</value>
   </data>
   <data name="TeamName" xml:space="preserve">
-    <value>ชื่อทีม</value>
+    <value>ชื่อ Team</value>
   </data>
   <data name="Tel" xml:space="preserve">
     <value>เบอร์โทรศัพท์</value>
