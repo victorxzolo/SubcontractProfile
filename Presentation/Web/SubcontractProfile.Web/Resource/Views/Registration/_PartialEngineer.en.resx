@@ -120,32 +120,20 @@
   <data name="AccountName" xml:space="preserve">
     <value>Account Name</value>
   </data>
-  <data name="AccountNumber" xml:space="preserve">
-    <value>Account Number</value>
-  </data>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
-  </data>
-  <data name="AddEngineer" xml:space="preserve">
-    <value>Add Engineer</value>
-  </data>
-  <data name="AttachCarPic" xml:space="preserve">
-    <value>Vehicle Attach File</value>
+  <data name="AccountNo" xml:space="preserve">
+    <value>Account No</value>
   </data>
   <data name="AttachCertificate" xml:space="preserve">
-    <value>CertificateAttach File</value>
-  </data>
-  <data name="AttachIDCard" xml:space="preserve">
-    <value>Citizen Card Attach File</value>
+    <value>Certificate Attach file</value>
   </data>
   <data name="AttachProfile" xml:space="preserve">
-    <value>Profile Attach File </value>
+    <value>Proflie img attach file</value>
   </data>
   <data name="AttachWorkPermit" xml:space="preserve">
-    <value>Work Permit Attach File </value>
+    <value>Work permit attach file</value>
   </data>
-  <data name="BankInformation" xml:space="preserve">
-    <value>Bank Information</value>
+  <data name="BankInfomation" xml:space="preserve">
+    <value>Bank Infomation</value>
   </data>
   <data name="BankName" xml:space="preserve">
     <value>Bank Name</value>
@@ -153,32 +141,11 @@
   <data name="BirthDate" xml:space="preserve">
     <value>Birth Date</value>
   </data>
-  <data name="CarBrand" xml:space="preserve">
-    <value>Vehicle Brand</value>
-  </data>
-  <data name="CarColor" xml:space="preserve">
-    <value>Vehicle Color</value>
-  </data>
-  <data name="CardType" xml:space="preserve">
-    <value>Identity By</value>
-  </data>
-  <data name="CarInformation" xml:space="preserve">
-    <value>Vehicle Information</value>
-  </data>
-  <data name="CarModel" xml:space="preserve">
-    <value>Vehicle Model</value>
-  </data>
-  <data name="CarType" xml:space="preserve">
-    <value>Vehicle Type</value>
-  </data>
-  <data name="CarYears" xml:space="preserve">
-    <value>Vehicle Years</value>
-  </data>
   <data name="CertificateExpireDate" xml:space="preserve">
     <value>Certificate Expire Date</value>
   </data>
-  <data name="CertificateInformation" xml:space="preserve">
-    <value>Certificate Information</value>
+  <data name="CertificateInfomation" xml:space="preserve">
+    <value>Certificate Infomation</value>
   </data>
   <data name="CertificateNo" xml:space="preserve">
     <value>Certificate No</value>
@@ -192,104 +159,83 @@
   <data name="ChooseFileType" xml:space="preserve">
     <value>Support Type File pdf,jpg,jpeg,bmp,gif,tif,tiff,png</value>
   </data>
+  <data name="CitizenID" xml:space="preserve">
+    <value>Citizen ID</value>
+  </data>
   <data name="Close" xml:space="preserve">
     <value>Close</value>
   </data>
   <data name="CompanyName" xml:space="preserve">
     <value>Company Name</value>
   </data>
-  <data name="ContractInformation" xml:space="preserve">
-    <value>Contract Information</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="EditEngineer" xml:space="preserve">
-    <value>Edit Engineer</value>
+  <data name="ContractInfomation" xml:space="preserve">
+    <value>Contract Infomation</value>
   </data>
   <data name="Education" xml:space="preserve">
     <value>Education</value>
   </data>
-  <data name="EducationInformation" xml:space="preserve">
-    <value>Education Information</value>
+  <data name="EducationInfomation" xml:space="preserve">
+    <value>Education infomation</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Email</value>
+    <value>Contract email</value>
   </data>
   <data name="Engineer" xml:space="preserve">
     <value>Engineer</value>
   </data>
-  <data name="EquipmentInformation" xml:space="preserve">
-    <value>Equipment Information</value>
+  <data name="EngineerInformation" xml:space="preserve">
+    <value>Engineer Information</value>
   </data>
   <data name="ErrorAccountName" xml:space="preserve">
-    <value>Please fill Account Name</value>
+    <value>Please fill Account Name.</value>
   </data>
-  <data name="ErrorAccountNumber" xml:space="preserve">
-    <value>Please fill Account Number</value>
+  <data name="ErrorAccountNo" xml:space="preserve">
+    <value>Please fill Account No.</value>
   </data>
   <data name="ErrorBankName" xml:space="preserve">
     <value>Please fill Bank Name.</value>
-  </data>
-  <data name="ErrorEmail" xml:space="preserve">
-    <value>Please fill valid Email.</value>
-  </data>
-  <data name="ErrorFirstNameLastNameEnglish" xml:space="preserve">
-    <value>Please fill First Name and Last Name English.</value>
-  </data>
-  <data name="ErrorFirstNameLastNameThai" xml:space="preserve">
-    <value>Please fill First Name and Last Name Thai.</value>
-  </data>
-  <data name="ErrorIDCard" xml:space="preserve">
-    <value>Please fill ID Card</value>
   </data>
   <data name="ErrorLocationName" xml:space="preserve">
     <value>Please fill Location Name.</value>
   </data>
   <data name="ErrorStaffName" xml:space="preserve">
-    <value>Please fill Staff Name.</value>
-  </data>
-  <data name="ErrorStaffNameThai" xml:space="preserve">
-    <value>Please fill Staff Name (TH).</value>
+    <value>Please Staff Name.</value>
   </data>
   <data name="ErrorTeamName" xml:space="preserve">
     <value>Please fill Team Name.</value>
   </data>
-  <data name="ErrorTel" xml:space="preserve">
-    <value>Please fill Tel.</value>
-  </data>
-  <data name="ErrorTitleName" xml:space="preserve">
-    <value>Please fill Title</value>
-  </data>
   <data name="Female" xml:space="preserve">
     <value>Female</value>
   </data>
-  <data name="FirstNameLastNameEnglish" xml:space="preserve">
-    <value>FirstName-LastName (EN)</value>
-  </data>
-  <data name="FirstNameLastNameThai" xml:space="preserve">
+  <data name="FullNameEng" xml:space="preserve">
     <value>FirstName-LastName (TH)</value>
+  </data>
+  <data name="FuulNameThai" xml:space="preserve">
+    <value>FirstName-LastName (EN)</value>
   </data>
   <data name="Gender" xml:space="preserve">
     <value>Gender</value>
   </data>
-  <data name="IDCard" xml:space="preserve">
-    <value>Citizen ID</value>
+  <data name="IdentityBy" xml:space="preserve">
+    <value>Identity by</value>
   </data>
-  <data name="Language" xml:space="preserve">
-    <value>ภาษา</value>
+  <data name="IdentityCardAddress" xml:space="preserve">
+    <value>Identity Card Address</value>
   </data>
-  <data name="LanguageInformation" xml:space="preserve">
-    <value>Language Information</value>
+  <data name="Languages" xml:space="preserve">
+    <value>Languages</value>
   </data>
-  <data name="LicensePlate" xml:space="preserve">
-    <value>Vehicle license plate</value>
+  <data name="LanguagesInfomation" xml:space="preserve">
+    <value>Languages infomation</value>
   </data>
   <data name="ListeningEng" xml:space="preserve">
     <value>Listening Eng</value>
   </data>
   <data name="ListeningThai" xml:space="preserve">
     <value>Listening Thai</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
   </data>
   <data name="LocationName" xml:space="preserve">
     <value>Location Name</value>
@@ -300,20 +246,14 @@
   <data name="Nationality" xml:space="preserve">
     <value>Nationality</value>
   </data>
-  <data name="OTDR" xml:space="preserve">
-    <value>Tool OTDR</value>
-  </data>
-  <data name="PermanentAddress" xml:space="preserve">
-    <value>Identity card address</value>
-  </data>
   <data name="Personal" xml:space="preserve">
     <value>Personal</value>
   </data>
-  <data name="Postion" xml:space="preserve">
-    <value>Postion</value>
+  <data name="PersonalAttachfile" xml:space="preserve">
+    <value>Attach File Citizen Card</value>
   </data>
-  <data name="QuestionDelete" xml:space="preserve">
-    <value>Do you want delete this information?</value>
+  <data name="Position" xml:space="preserve">
+    <value>Position</value>
   </data>
   <data name="Race" xml:space="preserve">
     <value>Race</value>
@@ -324,20 +264,11 @@
   <data name="ReadingThai" xml:space="preserve">
     <value>Reading Thai</value>
   </data>
+  <data name="RegisterType" xml:space="preserve">
+    <value>Register Type</value>
+  </data>
   <data name="Religion" xml:space="preserve">
     <value>Religion</value>
-  </data>
-  <data name="Reset" xml:space="preserve">
-    <value>Reset</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="Search" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="SearchResult" xml:space="preserve">
-    <value>Search Result</value>
   </data>
   <data name="SizeClothes" xml:space="preserve">
     <value>Shirt Size</value>
@@ -357,11 +288,11 @@
   <data name="StaffNameThai" xml:space="preserve">
     <value>Staff Name (TH)</value>
   </data>
+  <data name="Team" xml:space="preserve">
+    <value>Team</value>
+  </data>
   <data name="TeamName" xml:space="preserve">
     <value>Team Name</value>
-  </data>
-  <data name="TeamNameTH" xml:space="preserve">
-    <value>Team Name (TH)</value>
   </data>
   <data name="Tel" xml:space="preserve">
     <value>Contract Phone1</value>
@@ -372,14 +303,47 @@
   <data name="TitleName" xml:space="preserve">
     <value>Title Name</value>
   </data>
+  <data name="ToolInfomation" xml:space="preserve">
+    <value>Tool Infomation</value>
+  </data>
+  <data name="Toolotdr" xml:space="preserve">
+    <value>Tool otdr</value>
+  </data>
   <data name="Toolsplicing" xml:space="preserve">
     <value>Tool splicing</value>
   </data>
-  <data name="WorkExperience" xml:space="preserve">
-    <value>Work Experience</value>
+  <data name="VehicleAttachFile" xml:space="preserve">
+    <value>Vehicle Attach File</value>
+  </data>
+  <data name="VehicleBrand" xml:space="preserve">
+    <value>Vehicle Brand</value>
+  </data>
+  <data name="VehicleColor" xml:space="preserve">
+    <value>Vehicle Color</value>
+  </data>
+  <data name="VehicleInfomation" xml:space="preserve">
+    <value>Vehicle Infomation</value>
+  </data>
+  <data name="Vehiclelicenseplate" xml:space="preserve">
+    <value>Vehicle license plate</value>
+  </data>
+  <data name="VehicleSerise" xml:space="preserve">
+    <value>Vehicle Serise</value>
+  </data>
+  <data name="VehicleType" xml:space="preserve">
+    <value>Vehicle Type</value>
+  </data>
+  <data name="VehicleYear" xml:space="preserve">
+    <value>Vehicle Year</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="WorkExperienceInfomation" xml:space="preserve">
+    <value>Work Experience Infomation</value>
   </data>
   <data name="WorkPermitNo" xml:space="preserve">
-    <value>Work Permit No</value>
+    <value>Work permit no</value>
   </data>
   <data name="WritingEng" xml:space="preserve">
     <value>Writing Eng</value>

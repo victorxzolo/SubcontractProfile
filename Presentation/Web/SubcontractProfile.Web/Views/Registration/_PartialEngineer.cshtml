@@ -1,8 +1,11 @@
-﻿
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
 <div class="row">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row mb-0">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Company Name :</label>
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["CompanyName"] :</label>
             <label class="col-sm-8 col-md-8 col-lg-8 col-xl-8 col-form-label text-left" id="lbengineercompanyname"></label>
         </div>
     </div>
@@ -10,7 +13,7 @@
 <div class="row">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row mb-0">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Location :</label>
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["Location"] :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                 <select class="form-control" id="ddllocationteamengineer">
                 </select>
@@ -23,7 +26,7 @@
 <div class="row">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row mb-0">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Team :</label>
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["Team"] :</label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                 <select class="form-control" id="ddlteamengineer">
                 </select>
@@ -34,24 +37,24 @@
 </div>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-        <h4>Engineer</h4>
+        <h4>@Localizer["Engineer"]</h4>
         <hr>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
         <div class="table-responsive mb-4 mt-4">
-            <table class="table table-hover" style="width:100%"  id="tbtabengineer">
+            <table class="table table-hover" style="width:100%" id="tbtabengineer">
                 <thead>
                     <tr>
-                        <th width="5%">View</th>
-                        <th >Register Type</th>
-                        <th>Location Name</th>
-                        <th >Team Name</th>
-                        <th >Staff Name (TH)</th>
-                        <th >Staff Name (En)</th>
+                        <th width="5%">@Localizer["View"]</th>
+                        <th>@Localizer["RegisterType"]</th>
+                        <th>@Localizer["LocationName"]</th>
+                        <th>@Localizer["TeamName"]</th>
+                        <th>@Localizer["StaffNameThai"]</th>
+                        <th>@Localizer["StaffNameEnglish"]</th>
                         @*<th >Position</th>
-                        <th >Contract Phone 1 </th>*@
+                            <th >Contract Phone 1 </th>*@
                         <th></th>
                     </tr>
                 </thead>
@@ -68,7 +71,7 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 id="hTitleEdit" class="modal-title">ข้อมูล Engineer</h5>
+                <h5 id="hTitleEdit" class="modal-title">@Localizer["EngineerInformation"]</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -78,11 +81,11 @@
 
                     <ul class="nav nav-tabs  mb-3 mt-3" id="simpletab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="engineer-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Engineer</a>
+                            <a class="nav-link active" id="engineer-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">@Localizer["Engineer"]</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" id="prosonal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="contact" aria-selected="false">Personal</a>
+                            <a class="nav-link" id="prosonal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="contact" aria-selected="false">@Localizer["Personal"]</a>
                         </li>
 
                     </ul>
@@ -92,7 +95,7 @@
                             <div id="Engineer">
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Company Name:</label>
+                                        <label>@Localizer["CompanyName"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <label id="lblcompanyNameE"></label>
@@ -102,25 +105,25 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label><span style="color:red">*</span>Location Name:</label>
+                                        <label><span style="color:red">*</span>@Localizer["LocationName"]:</label>
 
                                     </div>
                                     <div class="col-sm-4">
                                         <select id="Location" name="Location" style="width:300px" class="form-control" required>
                                         </select>
                                         <div class="invalid-feedback">
-                                            กรุณาเลือกข้อมูล Location Name.
+                                            @Localizer["ErrorLocationName"]
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
-                                        <label><span style="color:red">*</span> Team Name:</label>
+                                        <label><span style="color:red">*</span> @Localizer["TeamName"]:</label>
 
                                     </div>
                                     <div class="col-sm-4">
                                         <select id="Team" name="Team" style="width:300px" class="form-control" required>
                                         </select>
                                         <div class="invalid-feedback">
-                                            กรุณาเลือกข้อมูล Team Name.
+                                            @Localizer["ErrorTeamName"]
                                         </div>
                                     </div>
                                 </div>
@@ -140,16 +143,16 @@
                                     <br />*@
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Staff Name:</label>
+                                        <label>@Localizer["StaffName"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="StaffName" style="width:300px" class="form-control" required>
                                         <div class="invalid-feedback">
-                                            กรุณาเลือกข้อมูล Staff Name.
+                                            @Localizer["ErrorStaffName"]
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Staff Name (TH):</label>
+                                        <label>@Localizer["StaffNameThai"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="StaffNameT" style="width:300px" class="form-control">
@@ -158,13 +161,13 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Staff Name(EN):</label>
+                                        <label>@Localizer["StaffNameEnglish"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="StaffNameE" style="width:300px" class="form-control">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Position:</label>
+                                        <label>@Localizer["Position"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="Position" style="width:300px" class="form-control">
@@ -174,21 +177,21 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Citizen ID:</label>
+                                        <label>@Localizer["CitizenID"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="CitizenID" style="width:300px" class="form-control">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Personal Attach file:</label>
+                                        <label>@Localizer["PersonalAttachfile"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="row col-sm-12">
                                             <div class="custom-file mb-4">
 
                                                 <input type="file" class="custom-file-input" id="personalAttahFile" aria-describedby="uploadlHelp1" style="width:190px">
-                                                <label class="custom-file-label" for="inputBankAttach" id="lbpersonalAttahFile">เลือกไฟล์</label>
-                                                <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+                                                <label class="custom-file-label" for="inputBankAttach" id="lbpersonalAttahFile">@Localizer["ChooseFile"]</label>
+                                                <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
 
                                             </div>
 
@@ -199,7 +202,7 @@
 
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>T-Shirt size:</label>
+                                        <label>@Localizer["SizeClothes"]:</label>
                                     </div>
                                     <div class="col-sm-10">
                                         <input type="text" id="tshirtsize" style="width:300px" class="form-control">
@@ -207,17 +210,17 @@
                                 </div>
                                 <br />
 
-                                <h5>Contract Infomation</h5>
+                                <h5>@Localizer["ContractInfomation"]</h5>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Contract Phone1:</label>
+                                        <label>@Localizer["Tel"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="ContractPhone1" style="width:300px" class="form-control">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Contract Phone2:</label>
+                                        <label>@Localizer["Tel2"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="ContractPhone2" style="width:300px" class="form-control">
@@ -226,7 +229,7 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Contract email:</label>
+                                        <label>@Localizer["Email"]:</label>
                                     </div>
                                     <div class="col-sm-10">
                                         <input type="text" id="ContractEmail" style="width:300px" class="form-control">
@@ -234,18 +237,18 @@
                                 </div>
                                 <br />
 
-                                <h5>Vehicle Infomation</h5>
+                                <h5>@Localizer["VehicleInfomation"]</h5>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Vehicle Type:</label>
+                                        <label>@Localizer["VehicleType"]:</label>
                                     </div>
                                     <div class="col-sm-4">
 
                                         <input type="text" id="VehicleType" style="width:300px" class="form-control">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Vehicle Brand:</label>
+                                        <label>@Localizer["VehicleBrand"]:</label>
                                     </div>
                                     <div class="col-sm-4">
 
@@ -255,14 +258,14 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Vehicle Serise:</label>
+                                        <label>@Localizer["VehicleSerise"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="VehicleSerise" style="width:300px" class="form-control">
 
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Vehicle Color:</label>
+                                        <label>@Localizer["VehicleColor"]:</label>
                                     </div>
                                     <div class="col-sm-4">
 
@@ -272,14 +275,14 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Vehicle Year:</label>
+                                        <label>@Localizer["VehicleYear"]:</label>
                                     </div>
                                     <div class="col-sm-4">
 
                                         <input type="text" id="VehicleYear" style="width:300px" class="form-control">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Vehicle license plate:</label>
+                                        <label>@Localizer["Vehiclelicenseplate"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="VehicleLicense" style="width:300px" class="form-control">
@@ -288,14 +291,14 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Vehicle Attach File:</label>
+                                        <label>@Localizer["VehicleAttachFile"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="custom-file mb-4">
 
                                             <input type="file" class="custom-file-input" id="VehicleAttachFile" aria-describedby="uploadlHelp1" style="width:190px">
-                                            <label class="custom-file-label" for="inputBankAttach" id="lbVehicleAttachFile">เลือกไฟล์</label>
-                                            <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+                                            <label class="custom-file-label" for="inputBankAttach" id="lbVehicleAttachFile">@Localizer["ChooseFile"]</label>
+                                            <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
 
 
                                         </div>
@@ -303,17 +306,17 @@
                                 </div>
                                 <br />
 
-                                <h5>Tool Infomation</h5>
+                                <h5>@Localizer["ToolInfomation"]</h5>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Tool otdr:</label>
+                                        <label>@Localizer["Toolotdr"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="Toolotdr" style="width:300px" class="form-control">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Tool splicing:</label>
+                                        <label>@Localizer["Toolsplicing"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="ToolSplicing" style="width:300px" class="form-control">
@@ -321,17 +324,17 @@
                                 </div>
                                 <br />
 
-                                <h5>Bank Infomation</h5>
+                                <h5>@Localizer["BankInfomation"]</h5>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label><span style="color:red">*</span>Bank Name:</label>
+                                        <label><span style="color:red">*</span>@Localizer["BankName"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <select id="ddlBankName" name="BankName" style="width:300px" class="form-control" required>
                                         </select>
                                         <div class="invalid-feedback">
-                                            กรุณาเลือกข้อมูล Bank Name.
+                                            @Localizer["ErrorBankName"]
                                         </div>
                                     </div>
                                     @*<div class="col-sm-2">
@@ -344,21 +347,21 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Account No:</label>
+                                        <label>@Localizer["AccountNo"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="AccNo" style="width:300px" class="form-control" required>
                                         <div class="invalid-feedback">
-                                            กรุณาเลือกข้อมูล Bank Name.
+                                            @Localizer["ErrorAccountNo"]
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Account Name:</label>
+                                        <label>@Localizer["AccountName"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="AccName" style="width:300px" class="form-control" required>
                                         <div class="invalid-feedback">
-                                            กรุณาเลือกข้อมูล Account Name.
+                                            @Localizer["ErrorAccountName"]
                                         </div>
                                     </div>
                                 </div>
@@ -370,7 +373,7 @@
                             <div id="Personal">
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Citizen ID :</label>
+                                        <label> @Localizer["CitizenID"] :</label>
                                     </div>
                                     <div class="col-sm-10">
                                         <input type="text" id="CitizenID2" style="width:300px" class="form-control">
@@ -379,14 +382,14 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Title Name :</label>
+                                        <label>@Localizer["TitleName"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <select id="Title" name="Title" style="width:300px" class="form-control">
                                         </select>
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Full Name(TH) :</label>
+                                        <label>@Localizer["FuulNameThai"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="FullNameT" style="width:300px" class="form-control">
@@ -395,13 +398,13 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Full Name(EN) :</label>
+                                        <label>@Localizer["FullNameEng"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="FullNameE" style="width:300px" class="form-control">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Birth date :</label>
+                                        <label>@Localizer["BirthDate"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="row col-sm-12">
@@ -422,16 +425,16 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Gender:</label>
+                                        <label>@Localizer["Gender"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="radio" id="rdoMale" name="Gender" value="M">
-                                        <label for="Male">ชาย</label>&nbsp;&nbsp;
+                                        <label for="Male">@Localizer["Male"]</label>&nbsp;&nbsp;
                                         <input type="radio" id="rdoFeMale" name="Gender" value="F">
-                                        <label for="FeMale">หญิง</label>
+                                        <label for="FeMale">@Localizer["Female"]</label>
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Race :</label>
+                                        <label>@Localizer["Race"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="Race" class="form-control" style="width:300px">
@@ -441,7 +444,7 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Nationality :</label>
+                                        <label>@Localizer["Nationality"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="Nationality" class="form-control" style="width:300px">
@@ -449,7 +452,7 @@
                                             </select>*@
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Religion :</label>
+                                        <label>@Localizer["Religion"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="Religion" class="form-control" style="width:300px">
@@ -460,13 +463,13 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Identity by :</label>
+                                        <label>@Localizer["IdentityBy"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="Identity" style="width:300px" class="form-control">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Contract email :</label>
+                                        <label>@Localizer["Email"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="ContractEmail2" style="width:300px" class="form-control">
@@ -475,7 +478,7 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Identity card address :</label>
+                                        <label>@Localizer["IdentityCardAddress"]  :</label>
                                     </div>
                                     <div class="col-sm-10">
                                         <textarea id="IdentiAddress" rows="2" style="width:300px;"></textarea>
@@ -483,17 +486,17 @@
                                 </div>
                                 <br />
 
-                                <h5>Contract Infomation</h5>
+                                <h5>@Localizer["ContractInfomation"]</h5>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Contract phone1 :</label>
+                                        <label>@Localizer["Tel"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="PersonalContractPhone1" style="width:300px" class="form-control">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Contract phone2 :</label>
+                                        <label>@Localizer["Tel2"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="PersonalContractPhone2" style="width:300px" class="form-control">
@@ -502,7 +505,7 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Contract email :</label>
+                                        <label>@Localizer["Email"] :</label>
                                     </div>
                                     <div class="col-sm-10">
                                         <input type="text" id="ContractMail" style="width:300px" class="form-control">
@@ -510,24 +513,24 @@
                                 </div>
                                 <br />
 
-                                <h5>Work experience infomation</h5>
+                                <h5>@Localizer["WorkExperienceInfomation"]</h5>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Work permit no :</label>
+                                        <label>@Localizer["WorkPermitNo"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="WorkPermit" style="width:300px" class="form-control">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Work permit attach file:</label>
+                                        <label>@Localizer["AttachWorkPermit"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="custom-file mb-4">
 
                                             <input type="file" class="custom-file-input" id="fileWorkPermitAttach" aria-describedby="uploadlHelp1" style="width:220px">
-                                            <label class="custom-file-label" for="fileWorkPermitAttach" id="lbfileWorkPermitAttach">เลือกไฟล์</label>
-                                            <small id="uploadlHelpwork" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+                                            <label class="custom-file-label" for="fileWorkPermitAttach" id="lbfileWorkPermitAttach">@Localizer["ChooseFile"]</label>
+                                            <small id="uploadlHelpwork" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
 
                                         </div>
                                         @*<div class="row col-sm-12">
@@ -539,14 +542,14 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Proflie img attach file :</label>
+                                        <label>@Localizer["AttachProfile"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="custom-file mb-4">
 
                                             <input type="file" class="custom-file-input" id="fileProfileAttach" aria-describedby="uploadlHelp1" style="width:220px">
-                                            <label class="custom-file-label" for="fileProfileAttach" id="lbfileProfileAttach">เลือกไฟล์</label>
-                                            <small id="uploadlHelpprofile" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+                                            <label class="custom-file-label" for="fileProfileAttach" id="lbfileProfileAttach">@Localizer["ChooseFile"]</label>
+                                            <small id="uploadlHelpprofile" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
 
                                         </div>
 
@@ -560,11 +563,11 @@
                                 </div>
                                 <br />
 
-                                <h5>Education infomation</h5>
+                                <h5>@Localizer["EducationInfomation"]</h5>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Education :</label>
+                                        <label>@Localizer["Education"] :</label>
                                     </div>
                                     <div class="col-sm-10">
                                         <textarea id="Education" class="form-control" rows="2" style="width:880px;"></textarea>
@@ -572,47 +575,47 @@
                                 </div>
                                 <br />
 
-                                <h5>Languages infomation</h5>
+                                <h5>@Localizer["LanguagesInfomation"]</h5>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Languages :</label>
+                                        <label>@Localizer["Languages"] :</label>
                                     </div>
                                     <div class="col-sm-2">
                                         <input id="chkListenTH" type="checkbox" value="Y" />
-                                        <label>Listening Thai</label><br />
+                                        <label>@Localizer["ListeningThai"]</label><br />
                                         <input id="chkSpeakingTH" type="checkbox" value="Y" />
-                                        <label>Speaking Thai</label><br />
+                                        <label>@Localizer["SpeakingThai"]</label><br />
                                         <input id="chkReadingTH" type="checkbox" value="Y" />
-                                        <label>Reading Thai</label><br />
+                                        <label>@Localizer["ReadingThai"]</label><br />
                                         <input id="chkWritingTH" type="checkbox" value="Y" />
-                                        <label>Writing Thai</label><br />
+                                        <label>@Localizer["WritingThai"]</label><br />
                                     </div>
                                     <div class="col-sm-8">
                                         <input id="chkListenEN" type="checkbox" value="Y" />
-                                        <label>Listening Eng</label><br />
+                                        <label>@Localizer["ListeningEng"]</label><br />
                                         <input id="chkSpeakingEN" type="checkbox" value="Y" />
-                                        <label>Speaking Eng</label><br />
+                                        <label>@Localizer["SpeakingEng"]</label><br />
                                         <input id="chkReadingEN" type="checkbox" value="Y" />
-                                        <label>Reading Eng</label><br />
+                                        <label>@Localizer["ReadingEng"]</label><br />
                                         <input id="chkWritingEN" type="checkbox" value="Y" />
-                                        <label>Writing Eng</label><br />
+                                        <label>@Localizer["WritingEng"]</label><br />
                                     </div>
                                 </div>
                                 <br />
 
-                                <h5>Certificate infomation</h5>
+                                <h5>@Localizer["CertificateInfomation"]</h5>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Certificate type :</label>
+                                        <label>@Localizer["CertificateType"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="CertificateType" style="width:300px" class="form-control">
 
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Certificate no :</label>
+                                        <label>@Localizer["CertificateNo"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="CertificateNo" style="width:300px" class="form-control">
@@ -621,7 +624,7 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Certificate expire date :</label>
+                                        <label>@Localizer["CertificateExpireDate"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="row col-sm-12">
@@ -640,14 +643,14 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Certificate attach file :</label>
+                                        <label>@Localizer["AttachCertificate"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="custom-file mb-4">
 
                                             <input type="file" class="custom-file-input" id="fileCertificateAttach" aria-describedby="uploadlHelp1" style="width:220px">
-                                            <label class="custom-file-label" for="fileCertificateAttach" id="lbfileCertificateAttach">เลือกไฟล์</label>
-                                            <small id="uploadlHelpCertificateAttach" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
+                                            <label class="custom-file-label" for="fileCertificateAttach" id="lbfileCertificateAttach">@Localizer["ChooseFile"]</label>
+                                            <small id="uploadlHelpCertificateAttach" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
 
                                         </div>
 
@@ -656,11 +659,11 @@
                                 </div>
                                 <br />
 
-                                <h5>Bank infomation</h5>
+                                <h5>@Localizer["BankInfomation"]</h5>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Bank Name :</label>
+                                        <label>@Localizer["BankName"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <select id="BankName2" name="BankName2" style="width:300px" class="form-control">
@@ -676,13 +679,13 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Account no :</label>
+                                        <label>@Localizer["AccountNo"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="AccNo2" style="width:300px" class="form-control">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label>Account Name :</label>
+                                        <label>@Localizer["AccountName"] :</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="AccName2" style="width:300px" class="form-control">
@@ -720,12 +723,12 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
-                        ปิด
+                        @Localizer["Close"]
                     </button>
                     @*<button id="btnSave" type="submit" class="btn btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                        บันทึก
-                    </button>*@
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                            บันทึก
+                        </button>*@
                 </div>
             </form>
 

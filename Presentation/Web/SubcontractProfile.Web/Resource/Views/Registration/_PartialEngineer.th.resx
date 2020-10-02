@@ -118,273 +118,237 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccountName" xml:space="preserve">
-    <value>Account Name</value>
+    <value>ชื่อบัญชี</value>
   </data>
-  <data name="AccountNumber" xml:space="preserve">
-    <value>Account Number</value>
-  </data>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
-  </data>
-  <data name="AddEngineer" xml:space="preserve">
-    <value>Add Engineer</value>
-  </data>
-  <data name="AttachCarPic" xml:space="preserve">
-    <value>Vehicle Attach File</value>
+  <data name="AccountNo" xml:space="preserve">
+    <value>เลขบัญชี</value>
   </data>
   <data name="AttachCertificate" xml:space="preserve">
-    <value>CertificateAttach File</value>
-  </data>
-  <data name="AttachIDCard" xml:space="preserve">
-    <value>Citizen Card Attach File</value>
+    <value>แนบไฟล์ ใบรับรอง</value>
   </data>
   <data name="AttachProfile" xml:space="preserve">
-    <value>Profile Attach File </value>
+    <value>รูปโปรไฟล์</value>
   </data>
   <data name="AttachWorkPermit" xml:space="preserve">
-    <value>Work Permit Attach File </value>
+    <value>แนบไฟล์ ใบอนุญาตทำงาน</value>
   </data>
-  <data name="BankInformation" xml:space="preserve">
-    <value>Bank Information</value>
+  <data name="BankInfomation" xml:space="preserve">
+    <value>ข้อมูลธนาคาร</value>
   </data>
   <data name="BankName" xml:space="preserve">
-    <value>Bank Name</value>
+    <value>ชื่อธนาคาร</value>
   </data>
   <data name="BirthDate" xml:space="preserve">
-    <value>Birth Date</value>
-  </data>
-  <data name="CarBrand" xml:space="preserve">
-    <value>Vehicle Brand</value>
-  </data>
-  <data name="CarColor" xml:space="preserve">
-    <value>Vehicle Color</value>
-  </data>
-  <data name="CardType" xml:space="preserve">
-    <value>Identity By</value>
-  </data>
-  <data name="CarInformation" xml:space="preserve">
-    <value>Vehicle Information</value>
-  </data>
-  <data name="CarModel" xml:space="preserve">
-    <value>Vehicle Model</value>
-  </data>
-  <data name="CarType" xml:space="preserve">
-    <value>Vehicle Type</value>
-  </data>
-  <data name="CarYears" xml:space="preserve">
-    <value>Vehicle Years</value>
+    <value>วันเกิด</value>
   </data>
   <data name="CertificateExpireDate" xml:space="preserve">
-    <value>Certificate Expire Date</value>
+    <value>CertificateExpireDate</value>
   </data>
-  <data name="CertificateInformation" xml:space="preserve">
-    <value>Certificate Information</value>
+  <data name="CertificateInfomation" xml:space="preserve">
+    <value>ข้อมูลใบรับรอง</value>
   </data>
   <data name="CertificateNo" xml:space="preserve">
-    <value>Certificate No</value>
+    <value>ใบรับรองเลขที่</value>
   </data>
   <data name="CertificateType" xml:space="preserve">
-    <value>Certificate Type</value>
+    <value>ประเภทใบรับรอง</value>
   </data>
   <data name="ChooseFile" xml:space="preserve">
-    <value>Choose File</value>
+    <value>เลือกไฟล์</value>
   </data>
   <data name="ChooseFileType" xml:space="preserve">
-    <value>Support Type File pdf,jpg,jpeg,bmp,gif,tif,tiff,png</value>
+    <value>ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</value>
+  </data>
+  <data name="CitizenID" xml:space="preserve">
+    <value>เลขบัตรประชาชน</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Close</value>
+    <value>ปิด</value>
   </data>
   <data name="CompanyName" xml:space="preserve">
-    <value>Company Name</value>
+    <value>ชื่อบริษัท</value>
   </data>
-  <data name="ContractInformation" xml:space="preserve">
-    <value>Contract Information</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="EditEngineer" xml:space="preserve">
-    <value>Edit Engineer</value>
+  <data name="ContractInfomation" xml:space="preserve">
+    <value>ข้อมูลติดต่อ</value>
   </data>
   <data name="Education" xml:space="preserve">
-    <value>Education</value>
+    <value>การศึกษา</value>
   </data>
-  <data name="EducationInformation" xml:space="preserve">
-    <value>Education Information</value>
+  <data name="EducationInfomation" xml:space="preserve">
+    <value>ข้อมูลการศึกษา</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Email</value>
+    <value>อีเมล์</value>
   </data>
   <data name="Engineer" xml:space="preserve">
     <value>Engineer</value>
   </data>
-  <data name="EquipmentInformation" xml:space="preserve">
-    <value>Equipment Information</value>
+  <data name="EngineerInformation" xml:space="preserve">
+    <value>ข้อมูลวิศวกร</value>
   </data>
   <data name="ErrorAccountName" xml:space="preserve">
-    <value>Please fill Account Name</value>
+    <value>กรุณาเลือกข้อมูล ชื่อบัญชี</value>
   </data>
-  <data name="ErrorAccountNumber" xml:space="preserve">
-    <value>Please fill Account Number</value>
+  <data name="ErrorAccountNo" xml:space="preserve">
+    <value>กรุณาเลือกข้อมูล เลขบัญชี</value>
   </data>
   <data name="ErrorBankName" xml:space="preserve">
-    <value>Please fill Bank Name.</value>
-  </data>
-  <data name="ErrorEmail" xml:space="preserve">
-    <value>Please fill valid Email.</value>
-  </data>
-  <data name="ErrorFirstNameLastNameEnglish" xml:space="preserve">
-    <value>Please fill First Name and Last Name English.</value>
-  </data>
-  <data name="ErrorFirstNameLastNameThai" xml:space="preserve">
-    <value>Please fill First Name and Last Name Thai.</value>
-  </data>
-  <data name="ErrorIDCard" xml:space="preserve">
-    <value>Please fill ID Card</value>
+    <value>กรุณาเลือกข้อมูล ชื่อธนาคาร</value>
   </data>
   <data name="ErrorLocationName" xml:space="preserve">
-    <value>Please fill Location Name.</value>
+    <value>กรุณาเลือกข้อมูล ชื่อ Location.</value>
   </data>
   <data name="ErrorStaffName" xml:space="preserve">
-    <value>Please fill Staff Name.</value>
-  </data>
-  <data name="ErrorStaffNameThai" xml:space="preserve">
-    <value>Please fill Staff Name (TH).</value>
+    <value>กรุณาเลือกข้อมูล Staff Name.</value>
   </data>
   <data name="ErrorTeamName" xml:space="preserve">
-    <value>Please fill Team Name.</value>
-  </data>
-  <data name="ErrorTel" xml:space="preserve">
-    <value>Please fill Tel.</value>
-  </data>
-  <data name="ErrorTitleName" xml:space="preserve">
-    <value>Please fill Title</value>
+    <value>กรุณาเลือกข้อมูล ชื่อทีม .</value>
   </data>
   <data name="Female" xml:space="preserve">
-    <value>Female</value>
+    <value>หญิง</value>
   </data>
-  <data name="FirstNameLastNameEnglish" xml:space="preserve">
-    <value>FirstName-LastName (EN)</value>
+  <data name="FullNameEng" xml:space="preserve">
+    <value>ชื่อ-นามสกุล(อังกฤษ)</value>
   </data>
-  <data name="FirstNameLastNameThai" xml:space="preserve">
-    <value>FirstName-LastName (TH)</value>
+  <data name="FuulNameThai" xml:space="preserve">
+    <value>ชื่อ-นามสกุล(ไทย)</value>
   </data>
   <data name="Gender" xml:space="preserve">
     <value>Gender</value>
   </data>
-  <data name="IDCard" xml:space="preserve">
-    <value>Citizen ID</value>
+  <data name="IdentityBy" xml:space="preserve">
+    <value>ประเภทบัตร</value>
   </data>
-  <data name="Language" xml:space="preserve">
+  <data name="IdentityCardAddress" xml:space="preserve">
+    <value>ที่อยู่ตามบัตรประชาชน</value>
+  </data>
+  <data name="Languages" xml:space="preserve">
     <value>ภาษา</value>
   </data>
-  <data name="LanguageInformation" xml:space="preserve">
-    <value>Language Information</value>
-  </data>
-  <data name="LicensePlate" xml:space="preserve">
-    <value>Vehicle license plate</value>
+  <data name="LanguagesInfomation" xml:space="preserve">
+    <value>ข้อมูล ภาษา</value>
   </data>
   <data name="ListeningEng" xml:space="preserve">
-    <value>Listening Eng</value>
+    <value>ฟังภาษาอังกฤษ</value>
   </data>
   <data name="ListeningThai" xml:space="preserve">
-    <value>Listening Thai</value>
+    <value>ฟังภาษาไทย</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
   </data>
   <data name="LocationName" xml:space="preserve">
-    <value>Location Name</value>
+    <value>ชื่อ Location</value>
   </data>
   <data name="Male" xml:space="preserve">
-    <value>Male</value>
+    <value>ชาย</value>
   </data>
   <data name="Nationality" xml:space="preserve">
-    <value>Nationality</value>
-  </data>
-  <data name="OTDR" xml:space="preserve">
-    <value>Tool OTDR</value>
-  </data>
-  <data name="PermanentAddress" xml:space="preserve">
-    <value>Identity card address</value>
+    <value>สัญชาติ</value>
   </data>
   <data name="Personal" xml:space="preserve">
-    <value>Personal</value>
+    <value>บุคคล</value>
   </data>
-  <data name="Postion" xml:space="preserve">
-    <value>Postion</value>
+  <data name="PersonalAttachfile" xml:space="preserve">
+    <value>แนบไฟล์ บัตรประชาชน</value>
   </data>
-  <data name="QuestionDelete" xml:space="preserve">
-    <value>Do you want delete this information?</value>
+  <data name="Position" xml:space="preserve">
+    <value>ตำแหน่ง</value>
   </data>
   <data name="Race" xml:space="preserve">
-    <value>Race</value>
+    <value>เชื้อชาติ</value>
   </data>
   <data name="ReadingEng" xml:space="preserve">
-    <value>Reading Eng</value>
+    <value>อ่านภาษาอังกฤษ</value>
   </data>
   <data name="ReadingThai" xml:space="preserve">
-    <value>Reading Thai</value>
+    <value>อ่านภาษาไทย</value>
+  </data>
+  <data name="RegisterType" xml:space="preserve">
+    <value>ประเภทผู้สมัคร</value>
   </data>
   <data name="Religion" xml:space="preserve">
-    <value>Religion</value>
-  </data>
-  <data name="Reset" xml:space="preserve">
-    <value>Reset</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="Search" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="SearchResult" xml:space="preserve">
-    <value>Search Result</value>
+    <value>ศาสนา</value>
   </data>
   <data name="SizeClothes" xml:space="preserve">
-    <value>Shirt Size</value>
+    <value>ขนาด(size)เสื้อ</value>
   </data>
   <data name="SpeakingEng" xml:space="preserve">
-    <value>Speaking Eng</value>
+    <value>พูดภาษาอังกฤษ</value>
   </data>
   <data name="SpeakingThai" xml:space="preserve">
-    <value>Speaking Thai</value>
+    <value>พูดภาษาไทย</value>
   </data>
   <data name="StaffName" xml:space="preserve">
-    <value>Staff Name</value>
+    <value>ชื่อพนักงาน</value>
   </data>
   <data name="StaffNameEnglish" xml:space="preserve">
-    <value>Staff Name (EN)</value>
+    <value>ชื่อพนักงาน(อังกฤษ)</value>
   </data>
   <data name="StaffNameThai" xml:space="preserve">
-    <value>Staff Name (TH)</value>
+    <value>ชื่อพนักงาน(ไทย)</value>
+  </data>
+  <data name="Team" xml:space="preserve">
+    <value>ทีม</value>
   </data>
   <data name="TeamName" xml:space="preserve">
-    <value>Team Name</value>
-  </data>
-  <data name="TeamNameTH" xml:space="preserve">
-    <value>Team Name (TH)</value>
+    <value>ชื่อทีม</value>
   </data>
   <data name="Tel" xml:space="preserve">
-    <value>Contract Phone1</value>
+    <value>เบอร์โทรศัพท์</value>
   </data>
   <data name="Tel2" xml:space="preserve">
-    <value>Contract Phone2</value>
+    <value>เบอร์โทรศัพท์สำรอง</value>
   </data>
   <data name="TitleName" xml:space="preserve">
-    <value>Title Name</value>
+    <value>คำนำหน้าชื่อ</value>
+  </data>
+  <data name="ToolInfomation" xml:space="preserve">
+    <value>ข้อมูลเครื่องมือ</value>
+  </data>
+  <data name="Toolotdr" xml:space="preserve">
+    <value>เครื่องวัด OTDR</value>
   </data>
   <data name="Toolsplicing" xml:space="preserve">
-    <value>Tool splicing</value>
+    <value>เครื่องมือ Splicing</value>
   </data>
-  <data name="WorkExperience" xml:space="preserve">
-    <value>Work Experience</value>
+  <data name="VehicleAttachFile" xml:space="preserve">
+    <value>แนบไฟล์รูปรถ</value>
+  </data>
+  <data name="VehicleBrand" xml:space="preserve">
+    <value>ยี่ห้อรถ</value>
+  </data>
+  <data name="VehicleColor" xml:space="preserve">
+    <value>สีรถ</value>
+  </data>
+  <data name="VehicleInfomation" xml:space="preserve">
+    <value>ข้อมูลรถ</value>
+  </data>
+  <data name="Vehiclelicenseplate" xml:space="preserve">
+    <value>ป้ายทะเบียนรถ</value>
+  </data>
+  <data name="VehicleSerise" xml:space="preserve">
+    <value>ซีรี่ส์รถ</value>
+  </data>
+  <data name="VehicleType" xml:space="preserve">
+    <value>ประเภทรถ</value>
+  </data>
+  <data name="VehicleYear" xml:space="preserve">
+    <value>ปีของรถ</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="WorkExperienceInfomation" xml:space="preserve">
+    <value>ข้อมูล ประสบการณ์การทำงาน</value>
   </data>
   <data name="WorkPermitNo" xml:space="preserve">
-    <value>Work Permit No</value>
+    <value>ใบอนุญาตทำงานเลขที่</value>
   </data>
   <data name="WritingEng" xml:space="preserve">
-    <value>Writing Eng</value>
+    <value>เขียนภาษาอังกฤษ</value>
   </data>
   <data name="WritingThai" xml:space="preserve">
-    <value>Writing Thai</value>
+    <value>เขียนภาษาไทย</value>
   </data>
 </root>
