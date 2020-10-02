@@ -136,7 +136,7 @@
     <value>เลือกไฟล์</value>
   </data>
   <data name="ChooseFileSupportFileType" xml:space="preserve">
-    <value>ขนาดไฟล์ไม่เกิน 3 Mb และไฟล์ประกอบประเภท PDF หรือ JPG,JPEG,PNG เท่านั้น</value>
+    <value>ประเภทไฟล์ภาพที่รองรับ jpg,jpeg,bmp,gif,tif,tiff,png,pdf</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>ปิด</value>
