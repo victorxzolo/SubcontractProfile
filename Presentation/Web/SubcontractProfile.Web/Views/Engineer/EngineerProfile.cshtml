@@ -860,19 +860,24 @@
                 CheckKeyUps("inputCitizen", "[0-9]");
             });
 
-            $('#personalAttahFile').change(function () {
+            $('#personalAttahFile').change(function (e) {
+                e.preventDefault();
                 CheckFileUpload('personalAttahFile');
             });
-            $('#vehicleAttachFile').change(function () {
+            $('#vehicleAttachFile').change(function (e) {
+                e.preventDefault();
                 CheckFileUpload('vehicleAttachFile');
             });
-            $('#fileWorkPermitAttach').change(function () {
+            $('#fileWorkPermitAttach').change(function (e) {
+                e.preventDefault();
                 CheckFileUpload('fileWorkPermitAttach');
             });
-            $('#fileProfileAttach').change(function () {
+            $('#fileProfileAttach').change(function (e) {
+                e.preventDefault();
                 CheckFileUpload('fileProfileAttach');
             });
-            $('#fileCertificateAttach').change(function () {
+            $('#fileCertificateAttach').change(function (e) {
+                e.preventDefault();
                 CheckFileUpload('fileCertificateAttach');
             });
 

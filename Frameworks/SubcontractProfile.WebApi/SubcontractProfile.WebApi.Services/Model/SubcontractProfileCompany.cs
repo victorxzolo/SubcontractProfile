@@ -203,6 +203,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         //public string ASCCode { get; set; }
 
         public System.DateTime? verified_date { get; set; }
+        public string bank_account_type { get; set; }
 
 
 

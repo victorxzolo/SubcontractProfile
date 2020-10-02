@@ -576,7 +576,8 @@
                     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
                 });
 
-                $('#inputBankAttach').change(function () {
+                $('#inputBankAttach').change(function (e) {
+                    e.preventDefault();
                     CheckFileUpload('inputBankAttach');
                 });
 
@@ -1023,13 +1024,13 @@
                     dataType: "json",
                     data: formData,
                     success: function (data) {
+                       
                         if (data.status) {
                             $('#hdupfileBankAttach').val(data.file_id);
                         }
                         else {
                             $('#lbfileBankAttach').text('@Localizer["ChooseFile"]');
                             $('#hdupfileBankAttach').val('');
-                            $('#inputBankAttach').val('');
                         }
 
                         bootbox.alert({

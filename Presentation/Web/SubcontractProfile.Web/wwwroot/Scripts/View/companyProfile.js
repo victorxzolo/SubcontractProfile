@@ -807,7 +807,7 @@ function initialCompanyDataById() {
 
                 $('#lblbank_name').text(result.BankName);
                 $('#lblbranch_name').text(result.BranchName);
-                $('#lblbank_account_type').text(result.BankAccountType);
+                $('#lblbank_account_type').text(result.bank_account_type);
                 $('#lblaccount_name').text(result.AccountName);
                 $('#lblaccount_number').text(result.AccountNumber);
 
@@ -837,14 +837,6 @@ function initialCompanyDataById() {
                 $('#lblRemarkForSub').text(result.RemarkForSub);
 
                 inittbAddressResultSearch();
-
-                if (result.Status != "Approve") {
-                    $('#btnEdit').show();
-                }
-                else {
-                    $('#btnEdit').hide();
-                }
-
             }
         },
         error: function (result) {
@@ -1255,7 +1247,7 @@ function getDataById(id) {
 
                 if (result != null) {
                
-                    if (result.Status == "A" || result.Status == "Y" ) {
+                    if (result.Status == "Activate" || result.Status == "Approve" || result.Status =='Not Approve') {
                         $('#btn_OnSave_Modal').hide();
                     } else {
                         $('#btn_OnSave_Modal').show();
@@ -1792,8 +1784,14 @@ function uploadFiles(inputId) {
                             }
 
                         }
-
-                        bootbox.alert(data.message);
+                        bootbox.alert({
+                            title: "System Information",
+                            message: data.message,
+                            size: "small",
+                            callback: function (result) {
+                                console.log('This was logged in the callback: ' + data.status);
+                            }
+                        });
 
                     },
                     error: function (xhr) {

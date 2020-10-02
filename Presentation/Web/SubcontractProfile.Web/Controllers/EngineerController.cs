@@ -653,6 +653,8 @@ namespace SubcontractProfile.Web.Controllers
             Guid? fid = null;
             try
             {
+                if(files !=null)
+                {
                     if (files.Length > 0)
                     {
                         string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
@@ -675,35 +677,38 @@ namespace SubcontractProfile.Web.Controllers
                         else
                         {
                             var fileSize = files.Length;
-                        if(files.ContentType.ToLower() == "application/pdf")
-                        {
-                            if (fileSize > MegaBytes)
+                            if (files.ContentType.ToLower() == "application/pdf")
                             {
-                                statusupload = false;
-                                strmess = "Upload file is too large.";
+                                if (fileSize > MegaBytes)
+                                {
+                                    statusupload = false;
+                                    strmess = "Upload file is too large.";
+                                }
+                                else
+                                {
+                                    fid = Guid.NewGuid();
+                                    strmess = "Upload file success.";
+                                }
                             }
                             else
                             {
-                                fid = Guid.NewGuid();
-                                strmess = "Upload file success.";
+                                if (fileSize > TMegaBytes)
+                                {
+                                    statusupload = false;
+                                    strmess = "Upload file is too large.";
+                                }
+                                else
+                                {
+                                    fid = Guid.NewGuid();
+                                    strmess = "Upload file success.";
+                                }
                             }
-                        }
-                        else
-                        {
-                            if (fileSize > TMegaBytes)
-                            {
-                                statusupload = false;
-                                strmess = "Upload file is too large.";
-                            }
-                            else
-                            {
-                                fid = Guid.NewGuid();
-                                strmess = "Upload file success.";
-                            }
-                        }
-                           
+
                         }
                     }
+                }
+
+                    
             }
             catch (Exception e)
             {

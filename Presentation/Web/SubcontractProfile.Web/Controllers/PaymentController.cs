@@ -846,29 +846,30 @@ namespace SubcontractProfile.Web.Controllers
         #region UploadFile
 
         [HttpPost]
-        public IActionResult CheckFileUpload(List<IFormFile> files)
+        [DisableRequestSizeLimit]
+        public IActionResult CheckFileUpload(IFormFile files)
         {
             bool statusupload = true;
             string strmess = "";
             Guid? fid=null;
             try
             {
-                foreach (FormFile source in files)
+                if(files !=null)
                 {
-                    if (source.Length > 0)
+                    if (files.Length > 0)
                     {
-                        string filename = ContentDispositionHeaderValue.Parse(source.ContentDisposition).FileName.Trim('"');
+                        string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
                         filename = EnsureCorrectFilename(filename);
                         if (
-                                source.ContentType.ToLower() != "image/jpg" &&
-                            source.ContentType.ToLower() != "image/jpeg" &&
-                            source.ContentType.ToLower() != "image/pjpeg" &&
-                            source.ContentType.ToLower() != "image/gif" &&
-                            source.ContentType.ToLower() != "image/png" &&
-                            source.ContentType.ToLower() != "image/bmp" &&
-                            source.ContentType.ToLower() != "image/tiff" &&
-                            source.ContentType.ToLower() != "image/tif" &&
-                            source.ContentType.ToLower() != "application/pdf"
+                                files.ContentType.ToLower() != "image/jpg" &&
+                            files.ContentType.ToLower() != "image/jpeg" &&
+                            files.ContentType.ToLower() != "image/pjpeg" &&
+                            files.ContentType.ToLower() != "image/gif" &&
+                            files.ContentType.ToLower() != "image/png" &&
+                            files.ContentType.ToLower() != "image/bmp" &&
+                            files.ContentType.ToLower() != "image/tiff" &&
+                            files.ContentType.ToLower() != "image/tif" &&
+                            files.ContentType.ToLower() != "application/pdf"
                             )
                         {
                             statusupload = false;
@@ -876,9 +877,9 @@ namespace SubcontractProfile.Web.Controllers
                         }
                         else
                         {
-                            if(source.ContentType.ToLower() == "application/pdf")
+                            if (files.ContentType.ToLower() == "application/pdf")
                             {
-                                var fileSize = source.Length;
+                                var fileSize = files.Length;
                                 if (fileSize > MegaBytes)
                                 {
                                     statusupload = false;
@@ -892,7 +893,7 @@ namespace SubcontractProfile.Web.Controllers
                             }
                             else
                             {
-                                var fileSize = source.Length;
+                                var fileSize = files.Length;
                                 if (fileSize > TMegaBytes)
                                 {
                                     statusupload = false;
@@ -904,7 +905,7 @@ namespace SubcontractProfile.Web.Controllers
                                     strmess = "Upload file success.";
                                 }
                             }
-                           
+
                         }
                     }
                 }

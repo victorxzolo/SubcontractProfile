@@ -381,6 +381,8 @@ namespace SubcontractProfile.Web.Controllers
             Guid? fid = null;
             try
             {
+                if(files !=null)
+                {
                     if (files.Length > 0)
                     {
                         string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
@@ -402,7 +404,7 @@ namespace SubcontractProfile.Web.Controllers
                         }
                         else
                         {
-                            if(files.ContentType.ToLower() == "application/pdf")
+                            if (files.ContentType.ToLower() == "application/pdf")
                             {
                                 var fileSize = files.Length;
                                 if (fileSize > MegaBytes)
@@ -430,9 +432,11 @@ namespace SubcontractProfile.Web.Controllers
                                     strmess = "Upload file success.";
                                 }
                             }
-                            
+
                         }
                     }
+                }
+                    
             }
             catch (Exception e)
             {

@@ -133,8 +133,8 @@ $(document).ready(function () {
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 
-    $('#slip_attach_file').change(function () {
-
+    $('#slip_attach_file').change(function (e) {
+        e.preventDefault();
         CheckFileUpload('slip_attach_file')
     });
 
@@ -263,12 +263,12 @@ function ValidateAmountTransfer() {
 function CheckFileUpload(inputId) {
 
     var input = document.getElementById(inputId);
-    var files = input.files;
+    var files = input.files[0];
     var formData = new FormData();
 
-    for (var i = 0; i != files.length; i++) {
-        formData.append("files", files[i]);
-    }
+
+    formData.append("files", files);
+  
 
     var urlCheckFileUpload = url.replace('Action', 'CheckFileUpload');
     $.ajax(
@@ -282,6 +282,10 @@ function CheckFileUpload(inputId) {
             success: function (data) {
                 if (data.status) {
                     $('#hdupfileslip').val(data.file_id);
+                }
+                else {
+                    $('#lbuploadslip').text('เลือกไฟล์');
+                    $('#hdupfileslip').val('');
                 }
                
                     bootbox.alert({
@@ -730,7 +734,7 @@ function clearpayment() {
     newInput.className = oldInput.className;
     newInput.style.cssText = oldInput.style.cssText;
     oldInput.parentNode.replaceChild(newInput, oldInput);
-    $("#nameslip_attach_file").html('Choose file');
+    $("#nameslip_attach_file").text('Choose file');
 
     $("#remark").val('');
 

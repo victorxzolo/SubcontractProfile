@@ -184,6 +184,7 @@ namespace SubcontractProfile.Web.Model
         public string ASCCode { get; set; }
 
         public System.DateTime? verified_date { get; set; }
+        public string bank_account_type { get; set; }
 
         public Guid file_id_CompanyCertifiedFile { get; set; }
         public Guid file_id_CommercialRegistrationFile { get; set; }
@@ -204,7 +205,6 @@ namespace SubcontractProfile.Web.Model
 
         public string RemarkForSub { get; set; }
         public string RegisterDateStr { get; set; }
-        public string BankAccountType { get; set; }
         
 
     }
