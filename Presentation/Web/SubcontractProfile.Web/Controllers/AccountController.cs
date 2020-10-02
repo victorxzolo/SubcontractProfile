@@ -46,13 +46,18 @@ namespace SubcontractProfile.Web.Controllers
         private SubcontractProfileUserModel dataUser = new SubcontractProfileUserModel();
         private string PathNas = "";
         private const int MegaBytes = 1024 * 1024;
-     
+
+        private readonly IStringLocalizer<AccountController> _localizer;
+
 
         public AccountController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor
+             , IStringLocalizer<AccountController> localizer
             )
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
+
+            _localizer = localizer;
 
             //เรียก appsetting.json path api
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
@@ -429,17 +434,13 @@ namespace SubcontractProfile.Web.Controllers
                     }
                 }
             }
-            if (Lang == "")
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            if(culture.Name=="th")
             {
-                getsession();
-            }
-            if (Lang == "TH")
-            {
-
                 output.Add(new SubcontractProfileSubDistrictModel
                 {
                     SubDistrictId = 0,
-                    SubDistrictNameTh = "กรุณาเลือกแขวง/ตำบล"
+                    SubDistrictNameTh = _localizer["SelectSubDistrict"]
                 });
 
                 getAllSubDistrictList = output.Select(a => new SelectListItem
@@ -452,7 +453,7 @@ namespace SubcontractProfile.Web.Controllers
 
                 getAllZipcodeList.Add(new SelectListItem
                 {
-                    Text = "กรุณาเลือกรหัสไปรษณีย์",
+                    Text = _localizer["SelectZipCode"],
                     Value = ""
                 });
                 getAllZipcodeList.AddRange(resultZipCode.Select(c => new SelectListItem
@@ -460,26 +461,26 @@ namespace SubcontractProfile.Web.Controllers
                     Text = c.ZipCode,
                     Value = c.ZipCode
                 }).ToList());
-                
-               
             }
             else
             {
-
                 output.Add(new SubcontractProfileSubDistrictModel
                 {
                     SubDistrictId = 0,
-                    SubDistrictNameTh = "Select Sub District"
+                    SubDistrictNameTh = _localizer["SelectSubDistrict"]
                 });
+
                 getAllSubDistrictList = output.Select(a => new SelectListItem
                 {
                     Text = a.SubDistrictNameEn,
                     Value = a.SubDistrictId.ToString()
                 }).OrderBy(c => c.Value).ToList();
 
+
+
                 getAllZipcodeList.Add(new SelectListItem
                 {
-                    Text = "Select Zip Code",
+                    Text = _localizer["SelectZipCode"],
                     Value = ""
                 });
                 getAllZipcodeList.AddRange(resultZipCode.Select(c => new SelectListItem
@@ -487,9 +488,8 @@ namespace SubcontractProfile.Web.Controllers
                     Text = c.ZipCode,
                     Value = c.ZipCode
                 }).ToList());
-
-
             }
+         
 
             return Json(new { responsesubdistrict = getAllSubDistrictList, responsezipcode = getAllZipcodeList });
         }
@@ -526,30 +526,27 @@ namespace SubcontractProfile.Web.Controllers
                     output = JsonConvert.DeserializeObject<List<SubcontractProfileDistrictModel>>(v);
                 }
             }
-            if (Lang == "")
-            {
-                getsession();
-            }
-            if (Lang == "TH")
+
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            if (culture.Name == "th")
             {
                 output.Add(new SubcontractProfileDistrictModel
                 {
                     DistrictId = 0,
-                    DistrictNameTh = "กรุณาเลือกเขต/อำเภอ"
+                    DistrictNameTh = _localizer["SelectDistrict"]
                 });
                 getAllDistrictList = output.Select(a => new SelectListItem
                 {
                     Text = a.DistrictNameTh,
                     Value = a.DistrictId.ToString()
                 }).OrderBy(c => c.Value).ToList();
-
             }
-            else
+           else
             {
                 output.Add(new SubcontractProfileDistrictModel
                 {
                     DistrictId = 0,
-                    DistrictNameTh = "Select District"
+                    DistrictNameTh = _localizer["SelectDistrict"]
                 });
                 getAllDistrictList = output.Select(a => new SelectListItem
                 {
@@ -557,6 +554,10 @@ namespace SubcontractProfile.Web.Controllers
                     Value = a.DistrictId.ToString()
                 }).OrderBy(c => c.Value).ToList();
             }
+                
+          
+
+
 
             return Json(new { responsedistricrt = getAllDistrictList });
         }
@@ -577,17 +578,13 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileProvinceModel>>(v);
             }
-            if(Lang =="")
-            {
-                getsession();
-            }
-
-            if (Lang == "TH")
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            if (culture.Name == "th")
             {
                 output.Add(new SubcontractProfileProvinceModel
                 {
                     ProvinceId = 0,
-                    ProvinceNameTh = "กรุณาเลือกจังหวัด"
+                    ProvinceNameTh = _localizer["SelectProvince"]
                 });
                 getAllProvinceList = output.Select(a => new SelectListItem
                 {
@@ -600,7 +597,7 @@ namespace SubcontractProfile.Web.Controllers
                 output.Add(new SubcontractProfileProvinceModel
                 {
                     ProvinceId = 0,
-                    ProvinceNameTh = "Select Province"
+                    ProvinceNameTh = _localizer["SelectProvince"]
                 });
                 getAllProvinceList = output.Select(a => new SelectListItem
                 {
@@ -675,16 +672,13 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileRegionModel>>(v);
             }
-            if (Lang == "")
-            {
-                getsession();
-            }
-            if (Lang == "TH")
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            if (culture.Name == "th")
             {
                 output.Add(new SubcontractProfileRegionModel
                 {
                     RegionId = 0,
-                    RegionName = "กรุณาเลือกภาค"
+                    RegionName = _localizer["SelectZone"]
                 });
 
                getAllRegionList = output.Select(a => new SelectListItem
@@ -698,7 +692,7 @@ namespace SubcontractProfile.Web.Controllers
                 output.Add(new SubcontractProfileRegionModel
                 {
                     RegionId = 0,
-                    RegionName = "Select Region"
+                    RegionName = _localizer["SelectZone"]
                 });
                 getAllRegionList = output.Select(a => new SelectListItem
                 {
@@ -728,16 +722,13 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileBankingModel>>(v);
             }
-            if (Lang == "")
-            {
-                getsession();
-            }
-            if (Lang == "TH")
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            if (culture.Name == "th")
             {
                 output.Add(new SubcontractProfileBankingModel
                 {
                     BankCode = "0",
-                    BankName = "กรุณาเลือกชื่อธนาคาร"
+                    BankName = _localizer["SelectBankName"]
                 });
 
                 getAllBankList = output.Select(a => new SelectListItem
@@ -751,7 +742,7 @@ namespace SubcontractProfile.Web.Controllers
                 output.Add(new SubcontractProfileBankingModel
                 {
                     BankCode = "0",
-                    BankName = "Select Bank"
+                    BankName = _localizer["SelectBankName"]
                 });
                 getAllBankList = output.Select(a => new SelectListItem
                 {
@@ -781,16 +772,13 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileCompanyTypeModel>>(v);
             }
-            if (Lang == "")
-            {
-                getsession();
-            }
-            if (Lang == "TH")
+            CultureInfo culture = CultureInfo.CurrentCulture;
+                if (culture.Name == "th")
             {
                 output.Add(new SubcontractProfileCompanyTypeModel
                 {
                     CompanyTypeId = "0",
-                    CompanyTypeNameTh = "กรุณาเลือกประเภทธุรกิจ"
+                    CompanyTypeNameTh = _localizer["SelectBusinessType"]
                 });
 
                 getAllCompanyTypeList = output.Select(a => new SelectListItem
@@ -804,7 +792,7 @@ namespace SubcontractProfile.Web.Controllers
                 output.Add(new SubcontractProfileCompanyTypeModel
                 {
                     CompanyTypeId = "0",
-                    CompanyTypeNameEn = "Select Bank"
+                    CompanyTypeNameEn = _localizer["SelectBusinessType"]
                 });
                 getAllCompanyTypeList = output.Select(a => new SelectListItem
                 {
@@ -835,11 +823,8 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileAddressTypeModel>>(v);
             }
-            if (Lang == "")
-            {
-                getsession();
-            }
-            if (Lang == "TH")
+            CultureInfo culture = CultureInfo.CurrentCulture;
+                if (culture.Name == "th")
             {
                 getAllAddressTypeList = output.Select(a => new SelectListItem
                 {
@@ -875,15 +860,12 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
             }
-            if (Lang == "")
-            {
-                getsession();
-            }
-            if (Lang == "TH")
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            if (culture.Name == "th")
             {
                 output.Add(new SubcontractDropdownModel
                 {
-                    dropdown_text = "กรุณาเลือกประเภทบัญชี",
+                    dropdown_text = _localizer["SelectAccountType"],
                     dropdown_value = ""
 
                 });
@@ -898,7 +880,7 @@ namespace SubcontractProfile.Web.Controllers
             {
                 output.Add(new SubcontractDropdownModel
                 {
-                    dropdown_text = "Select Acount Type",
+                    dropdown_text = _localizer["SelectAccountType"],
                     dropdown_value = ""
                 });
                 getAllBankAccList = output.Select(a => new SelectListItem
@@ -1830,12 +1812,14 @@ namespace SubcontractProfile.Web.Controllers
                         //    await source.CopyToAsync(output);
 
                         if (
-                            //source.ContentType.ToLower() != "image/jpg" &&
-                            //source.ContentType.ToLower() != "image/jpeg" &&
-                            //source.ContentType.ToLower() != "image/pjpeg" &&
-                            //source.ContentType.ToLower() != "image/gif" &&
-                            //source.ContentType.ToLower() != "image/x-png" &&
-                            //source.ContentType.ToLower() != "image/png" &&
+                            source.ContentType.ToLower() != "image/jpg" &&
+                            source.ContentType.ToLower() != "image/jpeg" &&
+                            source.ContentType.ToLower() != "image/pjpeg" &&
+                            source.ContentType.ToLower() != "image/gif" &&
+                            source.ContentType.ToLower() != "image/png" &&
+                            source.ContentType.ToLower() != "image/bmp" &&
+                            source.ContentType.ToLower() != "image/tiff" &&
+                            source.ContentType.ToLower() != "image/tif" &&
                             source.ContentType.ToLower() != "application/pdf"
                             )
                         {

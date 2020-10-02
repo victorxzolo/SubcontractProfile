@@ -27,7 +27,7 @@ namespace SubcontractProfile.Web.Controllers
         private string strpathASCProfile;
         private readonly string strpathUpload;
         private const int MegaBytes = 1024 * 1024;
-        private const int TMegaBytes = 1024 *1024;
+        private const int TMegaBytes = 3 * 1024 * 1024;
         public RegistrationController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
@@ -2166,12 +2166,14 @@ namespace SubcontractProfile.Web.Controllers
                         {
 
                             if (source.ContentType.ToLower() != "image/jpg" &&
-                                source.ContentType.ToLower() != "image/jpeg" &&
-                                source.ContentType.ToLower() != "image/pjpeg" &&
-                                source.ContentType.ToLower() != "image/gif" &&
-                                source.ContentType.ToLower() != "image/x-png" &&
-                                source.ContentType.ToLower() != "image/png" &&
-                                source.ContentType.ToLower() != "application/pdf"
+                            source.ContentType.ToLower() != "image/jpeg" &&
+                            source.ContentType.ToLower() != "image/pjpeg" &&
+                            source.ContentType.ToLower() != "image/gif" &&
+                            source.ContentType.ToLower() != "image/png" &&
+                            source.ContentType.ToLower() != "image/bmp" &&
+                            source.ContentType.ToLower() != "image/tiff" &&
+                            source.ContentType.ToLower() != "image/tif" &&
+                            source.ContentType.ToLower() != "application/pdf"
                                 )
                             {
                                 statusupload = false;
@@ -2180,104 +2182,97 @@ namespace SubcontractProfile.Web.Controllers
                             else
                             {
                                 var fileSize = source.Length;
-                                if (fileSize > TMegaBytes)
+                                if(source.ContentType.ToLower() == "application/pdf")
                                 {
-                                    statusupload = false;
-                                    strmess = "Upload file is too large.";
-                                }
-                                else
-                                {
-                                    Guid id = Guid.NewGuid();
-                                    using (var ms = new MemoryStream())
+                                    if (fileSize > MegaBytes)
                                     {
-                                        source.CopyTo(ms);
-                                        var fileBytes = ms.ToArray();
-                                        L_File.Add(new FileUploadModal
-                                        {
-                                            file_id = id,
-                                            Fileupload = fileBytes,
-                                            typefile = type_file,
-                                            ContentDisposition = source.ContentDisposition,
-                                            ContentType = source.ContentType,
-                                            Filename = filename,
-                                            CompanyId = Company
-                                        });
-                                    }
-                                    var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompanySSO");
-
-                                    if (data != null)
-                                    {
-
-                                        data.RemoveAll(x => x.file_id.ToString() == fid);
-                                        data.Add(L_File[0]);
-                                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", data);
-
+                                        statusupload = false;
+                                        strmess = "Upload file is too large.";
                                     }
                                     else
                                     {
+                                        Guid id = Guid.NewGuid();
+                                        using (var ms = new MemoryStream())
+                                        {
+                                            source.CopyTo(ms);
+                                            var fileBytes = ms.ToArray();
+                                            L_File.Add(new FileUploadModal
+                                            {
+                                                file_id = id,
+                                                Fileupload = fileBytes,
+                                                typefile = type_file,
+                                                ContentDisposition = source.ContentDisposition,
+                                                ContentType = source.ContentType,
+                                                Filename = filename,
+                                                CompanyId = Company
+                                            });
+                                        }
+                                        var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompanySSO");
 
-                                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
+                                        if (data != null)
+                                        {
+
+                                            data.RemoveAll(x => x.file_id.ToString() == fid);
+                                            data.Add(L_File[0]);
+                                            SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", data);
+
+                                        }
+                                        else
+                                        {
+
+                                            SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
+                                        }
+                                        strmess = "Upload file success";
                                     }
-                                    strmess = "Upload file success";
                                 }
+                                else
+                                {
+                                    if (fileSize > TMegaBytes)
+                                    {
+                                        statusupload = false;
+                                        strmess = "Upload file is too large.";
+                                    }
+                                    else
+                                    {
+                                        Guid id = Guid.NewGuid();
+                                        using (var ms = new MemoryStream())
+                                        {
+                                            source.CopyTo(ms);
+                                            var fileBytes = ms.ToArray();
+                                            L_File.Add(new FileUploadModal
+                                            {
+                                                file_id = id,
+                                                Fileupload = fileBytes,
+                                                typefile = type_file,
+                                                ContentDisposition = source.ContentDisposition,
+                                                ContentType = source.ContentType,
+                                                Filename = filename,
+                                                CompanyId = Company
+                                            });
+                                        }
+                                        var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompanySSO");
+
+                                        if (data != null)
+                                        {
+
+                                            data.RemoveAll(x => x.file_id.ToString() == fid);
+                                            data.Add(L_File[0]);
+                                            SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", data);
+
+                                        }
+                                        else
+                                        {
+
+                                            SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
+                                        }
+                                        strmess = "Upload file success";
+                                    }
+                                }
+                                
 
                                 
                             }
                         }
-                        else
-                        {
-                            if (source.ContentType.ToLower() != "application/pdf")
-                            {
-                                statusupload = false;
-                                strmess = "Upload type file miss match.";
-                            }
-                            else
-                            {
-                                var fileSize = source.Length;
-                                if (fileSize > MegaBytes)
-                                {
-                                    statusupload = false;
-                                    strmess = "Upload file is too large.";
-                                }
-                                else
-                                {
-                                    Guid id = Guid.NewGuid();
-                                    using (var ms = new MemoryStream())
-                                    {
-                                        source.CopyTo(ms);
-                                        var fileBytes = ms.ToArray();
-                                        L_File.Add(new FileUploadModal
-                                        {
-                                            file_id = id,
-                                            Fileupload = fileBytes,
-                                            typefile = type_file,
-                                            ContentDisposition = source.ContentDisposition,
-                                            ContentType = source.ContentType,
-                                            Filename = filename,
-                                            CompanyId = Company
-                                        });
-                                    }
-                                    var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompanySSO");
-
-                                    if (data != null)
-                                    {
-
-                                        data.RemoveAll(x => x.file_id.ToString() == fid);
-                                        data.Add(L_File[0]);
-                                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", data);
-
-                                    }
-                                    else
-                                    {
-
-                                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
-                                    }
-                                    strmess = "Upload file success";
-                                }
-                                
-                            }
-                        }
-
                     }
 
                 }

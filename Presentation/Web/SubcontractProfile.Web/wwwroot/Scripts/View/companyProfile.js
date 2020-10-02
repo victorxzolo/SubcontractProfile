@@ -838,6 +838,13 @@ function initialCompanyDataById() {
 
                 inittbAddressResultSearch();
 
+                if (result.Status != "Approve") {
+                    $('#btnEdit').show();
+                }
+                else {
+                    $('#btnEdit').hide();
+                }
+
             }
         },
         error: function (result) {

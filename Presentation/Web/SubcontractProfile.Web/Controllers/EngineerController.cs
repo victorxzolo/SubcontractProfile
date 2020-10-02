@@ -21,7 +21,8 @@ namespace SubcontractProfile.Web.Controllers
     {
         private readonly string strpathAPI;
         private readonly IConfiguration _configuration;
-        private const int MegaBytes = 3 * 1024 * 1024;
+        private const int MegaBytes = 1024 * 1024;
+        private const int TMegaBytes = 3 * 1024 * 1024;
         private readonly string strpathUpload;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private string Lang = "";
@@ -645,29 +646,27 @@ namespace SubcontractProfile.Web.Controllers
         #region UploadFile
         [HttpPost]
         [DisableRequestSizeLimit]
-        public IActionResult CheckFileUpload(List<IFormFile> files)
+        public IActionResult CheckFileUpload(IFormFile files)
         {
             bool statusupload = true;
             string strmess = "";
             Guid? fid = null;
             try
             {
-                foreach (FormFile source in files)
-                {
-                    if (source.Length > 0)
+                    if (files.Length > 0)
                     {
-                        string filename = ContentDispositionHeaderValue.Parse(source.ContentDisposition).FileName.Trim('"');
+                        string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
                         filename = EnsureCorrectFilename(filename);
                         if (
-                                source.ContentType.ToLower() != "image/jpg" &&
-                                source.ContentType.ToLower() != "image/jpeg" &&
-                                source.ContentType.ToLower() != "image/pjpeg" &&
-                                source.ContentType.ToLower() != "image/gif" &&
-                                source.ContentType.ToLower() != "image/png" &&
-                                source.ContentType.ToLower() != "image/bmp" &&
-                                source.ContentType.ToLower() != "image/tif" &&
-                                 source.ContentType.ToLower() != "image/tiff" &&
-                                 source.ContentType.ToLower() != "application/pdf"
+                                files.ContentType.ToLower() != "image/jpg" &&
+                                files.ContentType.ToLower() != "image/jpeg" &&
+                                files.ContentType.ToLower() != "image/pjpeg" &&
+                                files.ContentType.ToLower() != "image/gif" &&
+                                files.ContentType.ToLower() != "image/png" &&
+                                files.ContentType.ToLower() != "image/bmp" &&
+                                files.ContentType.ToLower() != "image/tif" &&
+                                 files.ContentType.ToLower() != "image/tiff" &&
+                                 files.ContentType.ToLower() != "application/pdf"
                                 )
                         {
                             statusupload = false;
@@ -675,7 +674,9 @@ namespace SubcontractProfile.Web.Controllers
                         }
                         else
                         {
-                            var fileSize = source.Length;
+                            var fileSize = files.Length;
+                        if(files.ContentType.ToLower() == "application/pdf")
+                        {
                             if (fileSize > MegaBytes)
                             {
                                 statusupload = false;
@@ -687,8 +688,22 @@ namespace SubcontractProfile.Web.Controllers
                                 strmess = "Upload file success.";
                             }
                         }
+                        else
+                        {
+                            if (fileSize > TMegaBytes)
+                            {
+                                statusupload = false;
+                                strmess = "Upload file is too large.";
+                            }
+                            else
+                            {
+                                fid = Guid.NewGuid();
+                                strmess = "Upload file success.";
+                            }
+                        }
+                           
+                        }
                     }
-                }
             }
             catch (Exception e)
             {

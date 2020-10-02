@@ -239,7 +239,7 @@
                                                     <div class="custom-file mb-4">
                                                         <input type="hidden" id="hdupfilepersonalAttah" />
                                                         <input type="file" class="custom-file-input" id="personalAttahFile" aria-describedby="uploadlHelp1" style="width:190px"
-                                                               accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
+                                                               accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf">
                                                         <label class="custom-file-label" for="inputBankAttach" id="lbpersonalAttahFile">@Localizer["ChooseFile"]</label>
                                                         <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
 
@@ -355,7 +355,7 @@
                                                 <div class="custom-file mb-4">
                                                     <input type="hidden" id="hdupfilevehicleAttach" />
                                                     <input type="file" class="custom-file-input" id="vehicleAttachFile" aria-describedby="uploadlHelp1" style="width:190px"
-                                                           accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
+                                                           accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf">
                                                     <label class="custom-file-label" for="inputBankAttach" id="lbvehicleAttachFile">@Localizer["ChooseFile"]</label>
                                                     <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
 
@@ -610,7 +610,7 @@
                                                 <div class="custom-file mb-4">
                                                     <input type="hidden" id="hdupfileWorkPermitAttach" />
                                                     <input type="file" class="custom-file-input" id="fileWorkPermitAttach" aria-describedby="uploadlHelp1" style="width:220px"
-                                                           accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
+                                                           accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf">
                                                     <label class="custom-file-label" for="fileWorkPermitAttach" id="lbfileWorkPermitAttach">@Localizer["ChooseFile"]</label>
                                                     <small id="uploadlHelpwork" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
 
@@ -630,7 +630,7 @@
                                                 <div class="custom-file mb-4">
                                                     <input type="hidden" id="hdupfileProfileAttach" />
                                                     <input type="file" class="custom-file-input" id="fileProfileAttach" aria-describedby="uploadlHelp1" style="width:220px"
-                                                           accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
+                                                           accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf">
                                                     <label class="custom-file-label" for="fileProfileAttach" id="lbfileProfileAttach">@Localizer["ChooseFile"]</label>
                                                     <small id="uploadlHelpprofile" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
 
@@ -732,7 +732,7 @@
                                                 <div class="custom-file mb-4">
                                                     <input type="hidden" id="hdupfileCertificateAttach" />
                                                     <input type="file" class="custom-file-input" id="fileCertificateAttach" aria-describedby="uploadlHelp1" style="width:220px"
-                                                           accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff,application/pdf">
+                                                           accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf">
                                                     <label class="custom-file-label" for="fileCertificateAttach" id="lbfileCertificateAttach">@Localizer["ChooseFile"]</label>
                                                     <small id="uploadlHelpCertificateAttach" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
 
@@ -1715,12 +1715,12 @@ function GetDropDownLocationSearch() {
 
         function CheckFileUpload(inputId) {
             var input = document.getElementById(inputId);
-            var files = input.files;
+            var files = input.files[0];
             var formData = new FormData();
 
-            for (var i = 0; i != files.length; i++) {
-                formData.append("files", files[i]);
-            }
+            //for (var i = 0; i != files.length; i++) {
+                formData.append("files", files);
+            //}
 
             $.ajax(
                 {

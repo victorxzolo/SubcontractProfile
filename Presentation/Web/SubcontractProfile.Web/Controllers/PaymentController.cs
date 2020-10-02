@@ -28,7 +28,10 @@ namespace SubcontractProfile.Web.Controllers
         private SubcontractProfileUserModel dataUser = new SubcontractProfileUserModel();
         private readonly string strpathUpload;
 
-        private const int MegaBytes =3* 1024 * 1024;
+        private const int MegaBytes = 1024 * 1024;
+        private const int TMegaBytes = 3 * 1024 * 1024;
+
+
         public PaymentController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
@@ -858,29 +861,50 @@ namespace SubcontractProfile.Web.Controllers
                         filename = EnsureCorrectFilename(filename);
                         if (
                                 source.ContentType.ToLower() != "image/jpg" &&
-                                source.ContentType.ToLower() != "image/jpeg" &&
-                                source.ContentType.ToLower() != "image/pjpeg" &&
-                                source.ContentType.ToLower() != "image/gif" &&
-                                source.ContentType.ToLower() != "image/png" &&
-                                source.ContentType.ToLower() != "application/pdf"
-                                )
+                            source.ContentType.ToLower() != "image/jpeg" &&
+                            source.ContentType.ToLower() != "image/pjpeg" &&
+                            source.ContentType.ToLower() != "image/gif" &&
+                            source.ContentType.ToLower() != "image/png" &&
+                            source.ContentType.ToLower() != "image/bmp" &&
+                            source.ContentType.ToLower() != "image/tiff" &&
+                            source.ContentType.ToLower() != "image/tif" &&
+                            source.ContentType.ToLower() != "application/pdf"
+                            )
                         {
                             statusupload = false;
                             strmess = "Upload type file miss match.";
                         }
                         else
                         {
-                            var fileSize = source.Length;
-                            if (fileSize > MegaBytes)
+                            if(source.ContentType.ToLower() == "application/pdf")
                             {
-                                statusupload = false;
-                                strmess = "Upload file is too large.";
+                                var fileSize = source.Length;
+                                if (fileSize > MegaBytes)
+                                {
+                                    statusupload = false;
+                                    strmess = "Upload file is too large.";
+                                }
+                                else
+                                {
+                                    fid = Guid.NewGuid();
+                                    strmess = "Upload file success.";
+                                }
                             }
                             else
                             {
-                                fid = Guid.NewGuid();
-                                strmess = "Upload file success.";
+                                var fileSize = source.Length;
+                                if (fileSize > TMegaBytes)
+                                {
+                                    statusupload = false;
+                                    strmess = "Upload file is too large.";
+                                }
+                                else
+                                {
+                                    fid = Guid.NewGuid();
+                                    strmess = "Upload file success.";
+                                }
                             }
+                           
                         }
                     }
                 }

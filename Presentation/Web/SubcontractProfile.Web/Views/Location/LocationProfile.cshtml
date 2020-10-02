@@ -474,7 +474,7 @@
 
                                             <input type="hidden" id="hdupfileBankAttach" />
                                             <input type="file" class="custom-file-input" id="inputBankAttach" aria-describedby="uploadlHelp1" style="width:190px"
-                                                   accept="image/jpeg,image/png,image/gif,image/bmp,image/tif,image/tiff">
+                                                   accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf">
                                             <label class="custom-file-label" for="inputBankAttach" id="lbfileBankAttach">@Localizer["ChooseFile"]</label>
                                             <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
 
@@ -739,14 +739,47 @@
 
         function clearData() {
 
-            $("[name=CompType]").filter("[value='true']").prop("checked", false);
-            $("#inputLocationCode").val('');
-            $("#inputLocationAlias").val('');
-            $("#LocationNameT").val('');
-            $('#LocationNameE').val('');
+            $('#hdLocationId').val('');
+            $('#inputLocationCode').val('');
+            $('#inputLocationAlias').val('');
+            $('#inputLocationNameT').val('');
+            $('#inputLocationNameE').val('');
+            $('#inputStorage').val('');
+            $('#inputShip').val('');
+            $('#inoutOutStorage').val('');
+            $('#inputVat').val('');
+            $('#inputPhoneNo').val('');
+            $('#inputMainPhone').val('');
+            $('#inputInstallationsPhone').val('');
+            $('#inputMaintenencePhone').val('');
+            $('#inputInventoryPhone').val('');
+            $('#inputPaymentPhone').val('');
+            $('#inputEtcPhone').val('');
+            $('#inputCompanyMail').val('');
+            $('#inputInstallationMail').val('');
+            $('#inputMaintanenceMail').val('');
+            $('#inputInventoryMail').val('');
+            $('#inputPaymentMail').val('');
+            $('#inputEtcMail').val('');
+            $('#inputLocationAddress').val('');
+            $('#inputPostAddress').val('');
+            $('#inputTaxAddress').val('');
+            $('#inputWTAddress').val('');
+            $('#inputBankCode').val('');
+            $('#inputBankName').val('');
+            $('#inputBankAccountNo').val('');
+            $('#inputBankAccountName').val('');
+            $('#inputBankBranchNo').val('');
+            $('#inputBankBranchName').val('');
+            $('#inputPanaltyPhone').val('');
+            $('#inputPanaltyMail').val('');
+            $('#inputContractPhone').val('');
+            $('#inputContractMail').val('');
             $('#hdCompanyId').val('');
-            //$('#inputTax_id').val('');
-            //$("[name=vat_type]").filter("[value='true']").prop("checked", false);
+
+            $('#hdupfileBankAttach').val('');
+            $('#lbfileBankAttach').text('@Localizer["ChooseFile"]');
+            $('#inputBankAttach').val('');
 
         }
 
@@ -812,7 +845,7 @@
                       $('#hdCompanyId').val(result.CompanyId);
 
                       if (result.BankAttachFile != null) {
-                          $('#lbfileBankAttach').html(result.BankAttachFile);
+                          $('#lbfileBankAttach').text(result.BankAttachFile);
                           $('#hdupfileBankAttach').val(result.file_id__BankAttach);
                           //$('#linkdownload').text(data.SlipAttachFile);
                           //DownloadFileSlip(data.SlipAttachFile);
@@ -976,12 +1009,10 @@
 
         function CheckFileUpload(inputId) {
             var input = document.getElementById(inputId);
-            var files = input.files;
+            var files = input.files[0];
             var formData = new FormData();
 
-            for (var i = 0; i != files.length; i++) {
-                formData.append("files", files[i]);
-            }
+            formData.append("files", files);
 
             $.ajax(
                 {
@@ -994,6 +1025,11 @@
                     success: function (data) {
                         if (data.status) {
                             $('#hdupfileBankAttach').val(data.file_id);
+                        }
+                        else {
+                            $('#lbfileBankAttach').text('@Localizer["ChooseFile"]');
+                            $('#hdupfileBankAttach').val('');
+                            $('#inputBankAttach').val('');
                         }
 
                         bootbox.alert({
