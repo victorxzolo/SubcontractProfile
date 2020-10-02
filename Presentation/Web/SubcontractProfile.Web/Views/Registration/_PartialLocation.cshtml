@@ -1,10 +1,13 @@
 ﻿
 
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
 
 <div class="row pt-0 pb-0">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Company Name :</label>
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["CompanyName"] :</label>
             <label class="col-sm-8 col-md-8 col-lg-8 col-xl-8 col-form-label text-left" id="lbcompanyname"></label>
         </div>
     </div>
@@ -15,17 +18,17 @@
 <div class="row">
     <div class="col-md-12">
         <div class="table-responsive mb-4 mt-4">
-            <table class="table table-hover" style="width:100%"  id="tbtablocation" >
-                <thead >
-                    <tr >
-                        <th class="text-center" width="5%">View</th>
-                        <th >Register Type</th>
-                        <th >Location Code</th>
-                        <th >Location Name (TH)</th>
-                        <th >Location Name (EN)</th>
+            <table class="table table-hover" style="width:100%" id="tbtablocation">
+                <thead>
+                    <tr>
+                        <th class="text-center" width="5%">@Localizer["View"]</th>
+                        <th>@Localizer["RegisterType"]</th>
+                        <th>@Localizer["LocationCode"]</th>
+                        <th>@Localizer["LocationNameThai"]</th>
+                        <th>@Localizer["LocationNameEng"]</th>
                         @*<th >Location Alias</th>
-                        <th >Storage Location</th>
-                        <th >Address</th>*@
+                            <th >Storage Location</th>
+                            <th >Address</th>*@
                         <th></th>
                     </tr>
                 </thead>
@@ -38,423 +41,423 @@
 
 
 
-    <div id="dataLocationModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 id="hTitleEdit" class="modal-title">ข้อมูล Location</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+<div id="dataLocationModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="hTitleEdit" class="modal-title">@Localizer["LocationInformation"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
-                <div class="modal-body">
-                    <form id="frNew" class="needs-validation" novalidate>
-                        <div class="container">
+            <div class="modal-body">
+                <form id="frNew" class="needs-validation" novalidate>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>@Localizer["CompanyName"]:</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <label id="lblcompanyName"></label>
+                            </div>
+                        </div>
+                        @*<br />
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <label>Company Name:</label>
+                                    <label>Register Type:</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <label id="lblcompanyName"></label>
+                                    <input type="radio" id="rdoCompanyTypeNew" name="CompType" value="newsub">
+                                    <label for="new">New Subcontract</label>&nbsp;&nbsp;
+                                    <input type="radio" id="rdoCompanyTypeDealer" name="CompType" value="dealer">
+                                    <label for="deal">Dealer</label>
+                                </div>
+                            </div>*@
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label><span style="color:red">*</span>@Localizer["LocationCode"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputLocationCode" style="width:300px" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorLocationCode"]
                                 </div>
                             </div>
-                            @*<br />
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <label>Register Type:</label>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <input type="radio" id="rdoCompanyTypeNew" name="CompType" value="newsub">
-                                        <label for="new">New Subcontract</label>&nbsp;&nbsp;
-                                        <input type="radio" id="rdoCompanyTypeDealer" name="CompType" value="dealer">
-                                        <label for="deal">Dealer</label>
-                                    </div>
-                                </div>*@
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label><span style="color:red">*</span>Location Code:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputLocationCode" style="width:300px" class="form-control" required>
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Location Code.
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label><span style="color:red">*</span> Location Name Alias:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputLocationAlias" style="width:300px" class="form-control" required>
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Location Name Alias.
-                                    </div>
+                            <div class="col-sm-2">
+                                <label><span style="color:red">*</span> @Localizer["LocationNameAilas"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputLocationAlias" style="width:300px" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorLocationNameAlias"]
                                 </div>
                             </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label><span style="color:red">*</span> Location Name(TH):</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputLocationNameT" style="width:300px" class="form-control" required>
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล  Location Name(TH).
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>Location Name(EN):</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputLocationNameE" style="width:300px" class="form-control">
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label><span style="color:red">*</span>  @Localizer["LocationNameThai"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputLocationNameT" style="width:300px" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorLocationNameThai"]
                                 </div>
                             </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>Storage Location:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputStorage" style="width:300px" class="form-control">
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>Ship To:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputShip" style="width:300px" class="form-control">
-                                </div>
+                            <div class="col-sm-2">
+                                <label>@Localizer["LocationNameEng"]:</label>
                             </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>Out of Service Storage location:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inoutOutStorage" style="width:300px" class="form-control">
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>Vat branch Number:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputVat" style="width:300px" class="form-control">
-                                </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputLocationNameE" style="width:300px" class="form-control">
                             </div>
-                            <br />
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>@Localizer["StorageLocation"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputStorage" style="width:300px" class="form-control">
+                            </div>
+                            <div class="col-sm-2">
+                                <label>@Localizer["ShipTo"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputShip" style="width:300px" class="form-control">
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>@Localizer["OutofServiceStoragelocation"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inoutOutStorage" style="width:300px" class="form-control">
+                            </div>
+                            <div class="col-sm-2">
+                                <label>@Localizer["VatbranchNumber"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputVat" style="width:300px" class="form-control">
+                            </div>
+                        </div>
+                        <br />
 
-                            <h5>Contract Phone</h5>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label><span style="color:red">*</span> Phone No :</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputPhoneNo" style="width:300px" class="form-control" required>
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Phone No.
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label><span style="color:red">*</span>  Company main contract phone:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputMainPhone" style="width:300px" class="form-control" required>
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Company main contract phone.
-                                    </div>
+                        <h5>@Localizer["ContractPhone"]</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label><span style="color:red">*</span> @Localizer["PhoneNo"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputPhoneNo" style="width:300px" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorPhoneNo"]
                                 </div>
                             </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label><span style="color:red">*</span> Installations contract phone:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputInstallationsPhone" style="width:300px" class="form-control" required>
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Installations contract phone.
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label><span style="color:red">*</span>  Maintenence contract phone:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputMaintenencePhone" style="width:300px" class="form-control" required>
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Maintenence contract phone.
-                                    </div>
+                            <div class="col-sm-2">
+                                <label><span style="color:red">*</span>  @Localizer["Companymaincontractphone"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputMainPhone" style="width:300px" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorCompanymaincontractphone"]
                                 </div>
                             </div>
-                            <br />
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label><span style="color:red">*</span>   @Localizer["Installationscontractphone"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputInstallationsPhone" style="width:300px" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorInstallationscontractphone"]
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <label><span style="color:red">*</span>  @Localizer["Maintenencecontractphone"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputMaintenencePhone" style="width:300px" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorMaintenencecontractphone"]
+                                </div>
+                            </div>
+                        </div>
+                        <br />
 
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>Inventory contract phone:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputInventoryPhone" style="width:300px" class="form-control">
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>Payment contract phone:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputPaymentPhone" style="width:300px" class="form-control">
-                                </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>@Localizer["Inventorycontractphone"]:</label>
                             </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>Etc contract phone:</label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <input type="text" id="inputEtcPhone" style="width:300px" class="form-control">
-                                </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputInventoryPhone" style="width:300px" class="form-control">
                             </div>
-                            <br />
+                            <div class="col-sm-2">
+                                <label>@Localizer["Paymentcontractphone"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputPaymentPhone" style="width:300px" class="form-control">
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>@Localizer["Etccontractphone"]:</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" id="inputEtcPhone" style="width:300px" class="form-control">
+                            </div>
+                        </div>
+                        <br />
 
-                            <h5>Contract Email</h5>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>Company group mail:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="email" id="inputCompanyMail" style="width:300px" class="form-control">
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Email ให้ถูกต้อง
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>Installation contract mail:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="email" id="inputInstallationMail" style="width:300px" class="form-control">
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Email ให้ถูกต้อง
-                                    </div>
+                        <h5>@Localizer["ContractEmail"]</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>@Localizer["Companygroupmail"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="email" id="inputCompanyMail" style="width:300px" class="form-control">
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorEmail"]
                                 </div>
                             </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>Maintanence contract mail:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="email" id="inputMaintanenceMail" style="width:300px" class="form-control">
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Email ให้ถูกต้อง
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>Inventory contract mail:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="email" id="inputInventoryMail" style="width:300px" class="form-control">
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Email ให้ถูกต้อง
-                                    </div>
+                            <div class="col-sm-2">
+                                <label> @Localizer["Installationcontractmail"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="email" id="inputInstallationMail" style="width:300px" class="form-control">
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorEmail"]
                                 </div>
                             </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>Payment contract mail:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="email" id="inputPaymentMail" style="width:300px" class="form-control">
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Email ให้ถูกต้อง
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>Etc contract mail:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="email" id="inputEtcMail" style="width:300px" class="form-control">
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Email ให้ถูกต้อง
-                                    </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>@Localizer["Maintanencecontractmail"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="email" id="inputMaintanenceMail" style="width:300px" class="form-control">
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorEmail"]
                                 </div>
                             </div>
-                            <br />
+                            <div class="col-sm-2">
+                                <label>@Localizer["Inventorycontractmail"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="email" id="inputInventoryMail" style="width:300px" class="form-control">
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorEmail"]
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>@Localizer["Paymentcontractmail"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="email" id="inputPaymentMail" style="width:300px" class="form-control">
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorEmail"]
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>@Localizer["Etccontractmail"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="email" id="inputEtcMail" style="width:300px" class="form-control">
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorEmail"]
+                                </div>
+                            </div>
+                        </div>
+                        <br />
 
-                            <h5>Address</h5>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>Location Address:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <textarea id="inputLocationAddress" class="form-control" rows="2" style="width:300px;"></textarea>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>Post Address:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <textarea id="inputPostAddress" class="form-control" rows="2" style="width:300px;"></textarea>
-                                </div>
+                        <h5> @Localizer["Address"]</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>@Localizer["LocationAddress"]:</label>
                             </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>Tax Address:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <textarea id="inputTaxAddress" class="form-control" rows="2" style="width:300px;"></textarea>
-                                </div><br />
-                                <div class="col-sm-2">
-                                    <label>WT Address:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <textarea id="inputWTAddress" class="form-control" rows="2" style="width:300px;"></textarea>
-                                </div>
+                            <div class="col-sm-4">
+                                <textarea id="inputLocationAddress" class="form-control" rows="2" style="width:300px;"></textarea>
                             </div>
-                            <br />
+                            <div class="col-sm-2">
+                                <label>@Localizer["PostAddress"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <textarea id="inputPostAddress" class="form-control" rows="2" style="width:300px;"></textarea>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>@Localizer["TaxAddress"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <textarea id="inputTaxAddress" class="form-control" rows="2" style="width:300px;"></textarea>
+                            </div><br />
+                            <div class="col-sm-2">
+                                <label>@Localizer["WTAddress"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <textarea id="inputWTAddress" class="form-control" rows="2" style="width:300px;"></textarea>
+                            </div>
+                        </div>
+                        <br />
 
-                            <h5>Bank </h5>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>Bank code:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputBankCode" style="width:300px" class="form-control">
-                                </div>
-                                <div class="col-sm-2">
-                                    <label><span style="color:red">*</span> Bank Name:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="row col-sm-12">
-                                        <input type="text" id="inputBankName" style="width:280px" class="form-control" required>
-                                        <div class="invalid-feedback">
-                                            กรุณากรอกข้อมูล Bank Name.
-                                        </div>
-
-                                    </div>
-                                </div>
+                        <h5>@Localizer["Bank"] </h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>@Localizer["Bankcode"]:</label>
                             </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label><span style="color:red">*</span> Bank Account No:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputBankAccountNo" style="width:300px" class="form-control" required>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputBankCode" style="width:300px" class="form-control">
+                            </div>
+                            <div class="col-sm-2">
+                                <label><span style="color:red">*</span> @Localizer["BankName"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="row col-sm-12">
+                                    <input type="text" id="inputBankName" style="width:280px" class="form-control" required>
                                     <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Bank Account No.
+                                        @Localizer["ErrorBankName"]
                                     </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label><span style="color:red">*</span> Bank Account Name:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputBankAccountName" style="width:300px" class="form-control" required>
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Bank Account Name.
-                                    </div>
+
                                 </div>
                             </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>Bank Branch No:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputBankBranchNo" style="width:300px" class="form-control">
-                                </div>
-                                <div class="col-sm-2">
-                                    <label><span style="color:red">*</span> Bank Branch Name:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputBankBranchName" style="width:300px" class="form-control" required>
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Bank Branch Name.
-                                    </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label><span style="color:red">*</span>  @Localizer["BankAccountNo"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputBankAccountNo" style="width:300px" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorBankAccountNo"]
                                 </div>
                             </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label><span style="color:red">*</span> Bank Attach File:</label>
+                            <div class="col-sm-2">
+                                <label><span style="color:red">*</span> @Localizer["BankAccountName"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputBankAccountName" style="width:300px" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorBankAccountName"]
                                 </div>
-                                <div class="col-sm-10">
-                                    <div class="row col-sm-5">
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>@Localizer["BankBranchNo"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputBankBranchNo" style="width:300px" class="form-control">
+                            </div>
+                            <div class="col-sm-2">
+                                <label><span style="color:red">*</span> @Localizer["BankBranchName"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputBankBranchName" style="width:300px" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorBankBranchName"]
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label><span style="color:red">*</span> @Localizer["BankAttachFile"]:</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="row col-sm-5">
 
-                                        <div class="custom-file mb-4">
-                                            @*<input type="file" class="custom-file-input" id="inputBankAttach"
-                                                       aria-describedby="uploadlHelp1" style="width:190px">
-                                                <label class="custom-file-label" for="inputGroupFile01">เลือกไฟล์</label>*@
+                                    <div class="custom-file mb-4">
+                                        @*<input type="file" class="custom-file-input" id="inputBankAttach"
+                                                   aria-describedby="uploadlHelp1" style="width:190px">
+                                            <label class="custom-file-label" for="inputGroupFile01">เลือกไฟล์</label>*@
 
-                                            <input type="file" class="custom-file-input" id="inputBankAttach" aria-describedby="uploadlHelp1" style="width:190px">
-                                            <label class="custom-file-label" for="inputBankAttach" id="lbBankAttach">เลือกไฟล์</label>
-                                            <small id="uploadlHelp1" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>
-
-                                        </div>
+                                        <input type="file" class="custom-file-input" id="inputBankAttach" aria-describedby="uploadlHelp1" style="width:190px">
+                                        <label class="custom-file-label" for="inputBankAttach" id="lbBankAttach"> @Localizer["ChooseFile"]</label>
+                                        <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
 
                                     </div>
+
                                 </div>
                             </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>Panalty contract phone:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputPanaltyPhone" style="width:300px" class="form-control">
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>Panalty contract mail:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="email" id="inputPanaltyMail" style="width:300px" class="form-control">
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Email ให้ถูกต้อง
-                                    </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>@Localizer["Panaltycontractphone"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputPanaltyPhone" style="width:300px" class="form-control">
+                            </div>
+                            <div class="col-sm-2">
+                                <label>@Localizer["Panaltycontractmail"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="email" id="inputPanaltyMail" style="width:300px" class="form-control">
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorEmail"]
                                 </div>
                             </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label> Contract phone:</label>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label> @Localizer["ContractPhone"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="inputContractPhone" style="width:300px" class="form-control">
+                            </div>
+                            <div class="col-sm-2">
+                                <label>  @Localizer["ContractEmail"]:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="email" id="inputContractMail" style="width:300px" class="form-control">
+                                <div class="invalid-feedback">
+                                    @Localizer["ErrorEmail"]
                                 </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="inputContractPhone" style="width:300px" class="form-control">
-                                </div>
-                                <div class="col-sm-2">
-                                    <label> Contract email:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="email" id="inputContractMail" style="width:300px" class="form-control">
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกข้อมูล Email ให้ถูกต้อง
-                                    </div>
-                                </div>
-
-
                             </div>
 
 
                         </div>
 
-                        <br />
 
-                        <input type="hidden" id="hdMode">
-                        <input type="hidden" id="hdLocationId">
-                        <input type="hidden" id="hdCompanyId">
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
-                                ปิด
-                            </button>
-                            @*<button id="btnSave" type="submit" class="btn btn-primary">
+                    </div>
+
+                    <br />
+
+                    <input type="hidden" id="hdMode">
+                    <input type="hidden" id="hdLocationId">
+                    <input type="hidden" id="hdCompanyId">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                            @Localizer["Close"]
+                        </button>
+                        @*<button id="btnSave" type="submit" class="btn btn-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
                                 บันทึก
                             </button>*@
-                        </div>
-                    </form>
-                </div>
-
+                    </div>
+                </form>
             </div>
+
         </div>
     </div>
+</div>
 

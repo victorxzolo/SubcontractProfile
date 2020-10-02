@@ -117,29 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add" xml:space="preserve">
-    <value>เพิ่ม</value>
-  </data>
-  <data name="AddLocation" xml:space="preserve">
-    <value>เพิ่ม Location</value>
-  </data>
   <data name="Address" xml:space="preserve">
     <value>ที่อยู่</value>
   </data>
   <data name="Bank" xml:space="preserve">
-    <value>ธนคาร</value>
+    <value>ธนาคาร</value>
   </data>
   <data name="BankAccountName" xml:space="preserve">
-    <value>ชื่อบัญชี</value>
+    <value>Bank Account Name</value>
   </data>
   <data name="BankAccountNo" xml:space="preserve">
-    <value>เลขบัญชี</value>
+    <value>Bank Account No</value>
   </data>
   <data name="BankAttachFile" xml:space="preserve">
     <value>แนบไฟล์</value>
   </data>
   <data name="BankBranchName" xml:space="preserve">
-    <value>ชื่อสาขา</value>
+    <value>Bank Branch Name</value>
   </data>
   <data name="BankBranchNo" xml:space="preserve">
     <value>Bank Branch No</value>
@@ -148,13 +142,13 @@
     <value>Bank code</value>
   </data>
   <data name="BankName" xml:space="preserve">
-    <value>ชื่อธนาคาร</value>
+    <value>Bank Name</value>
   </data>
   <data name="ChooseFile" xml:space="preserve">
     <value>เลือกไฟล์</value>
   </data>
   <data name="ChooseFileType" xml:space="preserve">
-    <value>ประเภทไฟล์ภาพที่รองรับ jpg,jpeg,bmp,gif,tif,tiff,png,pdf</value>
+    <value>ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>ปิด</value>
@@ -174,23 +168,17 @@
   <data name="ContractPhone" xml:space="preserve">
     <value>เบอร์โทรศัพท์ติดต่อ</value>
   </data>
-  <data name="Edit" xml:space="preserve">
-    <value>แก้ไข</value>
-  </data>
-  <data name="EditLocation" xml:space="preserve">
-    <value>แก้ไข Location</value>
-  </data>
   <data name="ErrorBankAccountName" xml:space="preserve">
-    <value>กรุณากรอกข้อมูล ชื่อบัญชี</value>
+    <value>กรุณากรอกข้อมูล Bank Account Name.</value>
   </data>
   <data name="ErrorBankAccountNo" xml:space="preserve">
-    <value>กรุณากรอกข้อมูล เลขบัญชี.</value>
+    <value>กรุณากรอกข้อมูล Bank Account No.</value>
   </data>
   <data name="ErrorBankBranchName" xml:space="preserve">
-    <value>กรุณากรอกข้อมูล ชื่อสาขา.</value>
+    <value>กรุณากรอกข้อมูล Bank Branch Name.</value>
   </data>
   <data name="ErrorBankName" xml:space="preserve">
-    <value>กรุณากรอกข้อมูล ชื่อธนาคาร.</value>
+    <value>กรุณากรอกข้อมูล Bank Name.</value>
   </data>
   <data name="ErrorCompanymaincontractphone" xml:space="preserve">
     <value>กรุณากรอกข้อมูล Company main contract phone.</value>
@@ -234,14 +222,14 @@
   <data name="Inventorycontractphone" xml:space="preserve">
     <value>Inventory contract phone</value>
   </data>
-  <data name="Location" xml:space="preserve">
-    <value>Location</value>
-  </data>
   <data name="LocationAddress" xml:space="preserve">
     <value>ที่อยู่ Location</value>
   </data>
   <data name="LocationCode" xml:space="preserve">
     <value>Location Code</value>
+  </data>
+  <data name="LocationInformation" xml:space="preserve">
+    <value>ข้อมูล Location</value>
   </data>
   <data name="LocationNameAilas" xml:space="preserve">
     <value>ชื่อย่อ Location</value>
@@ -279,26 +267,11 @@
   <data name="PostAddress" xml:space="preserve">
     <value>Post Address</value>
   </data>
-  <data name="QuestionDelete" xml:space="preserve">
-    <value>คุณต้องการลบข้อมูล</value>
-  </data>
-  <data name="Reset" xml:space="preserve">
-    <value>ล้างข้อมูล</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>บันทึก</value>
-  </data>
-  <data name="Search" xml:space="preserve">
-    <value>ค้นหาข้อมูล</value>
-  </data>
-  <data name="SearchResult" xml:space="preserve">
-    <value>ผลการค้นหา</value>
+  <data name="RegisterType" xml:space="preserve">
+    <value>ประเภทสมัคร</value>
   </data>
   <data name="ShipTo" xml:space="preserve">
     <value>Ship To</value>
-  </data>
-  <data name="Storage" xml:space="preserve">
-    <value>Storage</value>
   </data>
   <data name="StorageLocation" xml:space="preserve">
     <value>Storage Location</value>
@@ -308,6 +281,9 @@
   </data>
   <data name="VatbranchNumber" xml:space="preserve">
     <value>Vat branch Number</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
   </data>
   <data name="WTAddress" xml:space="preserve">
     <value>WT Address</value>
