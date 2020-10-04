@@ -120,14 +120,26 @@
   <data name="Action" xml:space="preserve">
     <value>Action</value>
   </data>
+  <data name="Booking" xml:space="preserve">
+    <value>Booking</value>
+  </data>
+  <data name="BookingDate" xml:space="preserve">
+    <value>วันที่อบรม</value>
+  </data>
+  <data name="BookingDateFrom" xml:space="preserve">
+    <value>วันที่ Booking จาก</value>
+  </data>
+  <data name="BookingDateTo" xml:space="preserve">
+    <value>วันที่ Booking ถึง</value>
+  </data>
+  <data name="BookingTrainingDate" xml:space="preserve">
+    <value>Booking วันที่อบรม</value>
+  </data>
   <data name="Close" xml:space="preserve">
     <value>ปิด</value>
   </data>
   <data name="CompanyName" xml:space="preserve">
     <value>ชื่อบริษัท</value>
-  </data>
-  <data name="ContactEmail" xml:space="preserve">
-    <value>อีเมล์ติดต่อ</value>
   </data>
   <data name="ContactPhone" xml:space="preserve">
     <value>เบอร์โทรศัพท์ติดต่อ</value>
@@ -136,16 +148,22 @@
     <value>ชื่อคอร์ส</value>
   </data>
   <data name="CoursePrice" xml:space="preserve">
-    <value>ราคาคอร์ส (บาท)</value>
+    <value>ราคาคอร์ส</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>อีเมล์</value>
   </data>
   <data name="Engineer" xml:space="preserve">
     <value>Engineer</value>
   </data>
-  <data name="ErrorTestDate" xml:space="preserve">
-    <value>กรุณาเลือก วันที่ทดสอบ</value>
+  <data name="ErrorBookingTrainingDate" xml:space="preserve">
+    <value>กรุณาระบุ Booking วันที่อบรม</value>
+  </data>
+  <data name="ErrorCourse" xml:space="preserve">
+    <value>กรุณาเลือกคอร์ส</value>
   </data>
   <data name="ForStaffAIS" xml:space="preserve">
-    <value>สำหรับเจ้าหน้าที่</value>
+    <value>สำหรับเจ้าหน้าที่ AIS (เลือกวันที่อบรม)</value>
   </data>
   <data name="LocationName" xml:space="preserve">
     <value>ชื่อ Location</value>
@@ -153,26 +171,38 @@
   <data name="MessageAutocomplete" xml:space="preserve">
     <value>ไม่มีผลลัพธ์ที่ตรงกัน</value>
   </data>
-  <data name="NotPass" xml:space="preserve">
-    <value>ไม่ผ่าน</value>
+  <data name="NetPrice" xml:space="preserve">
+    <value>ราคาสุทธิ(บาท)</value>
   </data>
-  <data name="Pass" xml:space="preserve">
-    <value>ผ่าน</value>
+  <data name="NumberOfTrainees" xml:space="preserve">
+    <value>จำนวนผู้อบรม</value>
   </data>
-  <data name="PleaseSelect" xml:space="preserve">
-    <value>กรุณาเลือก</value>
+  <data name="Position" xml:space="preserve">
+    <value>ตำแหน่ง</value>
   </data>
   <data name="Remark" xml:space="preserve">
     <value>หมายเหตุ</value>
   </data>
+  <data name="RequestDate" xml:space="preserve">
+    <value>วันที่ขออบรม</value>
+  </data>
+  <data name="RequestDateFrom" xml:space="preserve">
+    <value>วันที่ขออบรม จาก</value>
+  </data>
+  <data name="RequestDateTo" xml:space="preserve">
+    <value>วันที่ขออบรม ถึง</value>
+  </data>
+  <data name="RequestTraining" xml:space="preserve">
+    <value>ขอรับการอบรม</value>
+  </data>
   <data name="Reset" xml:space="preserve">
     <value>ล้างข้อมูล</value>
   </data>
-  <data name="Save" xml:space="preserve">
-    <value>บันทึก</value>
-  </data>
   <data name="Search" xml:space="preserve">
     <value>ค้นหาข้อมูล</value>
+  </data>
+  <data name="SearchRequestTraining" xml:space="preserve">
+    <value>ค้นหา ขอรับการฝึกอบรม</value>
   </data>
   <data name="SearchResult" xml:space="preserve">
     <value>ผลการค้นหา</value>
@@ -181,7 +211,7 @@
     <value>กรุณาเลือก</value>
   </data>
   <data name="Status" xml:space="preserve">
-    <value>สถานะ</value>
+    <value>สภานะ</value>
   </data>
   <data name="TaxID" xml:space="preserve">
     <value>เลขผู้เสียภาษี</value>
@@ -189,31 +219,16 @@
   <data name="TeamName" xml:space="preserve">
     <value>ชื่อ Team</value>
   </data>
-  <data name="TestCandidate" xml:space="preserve">
-    <value>ผู้เข้าทดสอบ</value>
+  <data name="TotalAmount" xml:space="preserve">
+    <value>จำนวนเงินทั้งหมด</value>
   </data>
-  <data name="TestDate" xml:space="preserve">
-    <value>วันที่ทดสอบ</value>
+  <data name="TotalPrice" xml:space="preserve">
+    <value>ราคารวม(บาท)</value>
   </data>
-  <data name="TestDateFrom" xml:space="preserve">
-    <value>วันที่ทดสอบจาก</value>
+  <data name="Trainee" xml:space="preserve">
+    <value>ผู้เข้าอบรม</value>
   </data>
-  <data name="TestDateTo" xml:space="preserve">
-    <value>วันที่ทดสอบถึง</value>
-  </data>
-  <data name="TestResult" xml:space="preserve">
-    <value>ผลการทดสอบ</value>
-  </data>
-  <data name="TestStatus" xml:space="preserve">
-    <value>สถานะการทดสอบ</value>
-  </data>
-  <data name="TrainingDate" xml:space="preserve">
-    <value>วันที่อบรม</value>
-  </data>
-  <data name="TrainingDateFrom" xml:space="preserve">
-    <value>วันที่อบรม จาก</value>
-  </data>
-  <data name="TrainingDateTo" xml:space="preserve">
-    <value>วันที่อบรม ถึง</value>
+  <data name="Vat7" xml:space="preserve">
+    <value>ภาษีมูลค่าเพิ่ม 7%</value>
   </data>
 </root>

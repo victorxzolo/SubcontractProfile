@@ -120,14 +120,23 @@
   <data name="Action" xml:space="preserve">
     <value>Action</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>เพิ่มข้อมูล</value>
+  </data>
+  <data name="AddTrainees" xml:space="preserve">
+    <value>เพิ่ม ผู้เข้าอบรม</value>
+  </data>
+  <data name="BookingDate" xml:space="preserve">
+    <value>วันที่อบรม</value>
+  </data>
+  <data name="BookingTrainingDate" xml:space="preserve">
+    <value>Booking วันที่อบรม</value>
+  </data>
   <data name="Close" xml:space="preserve">
     <value>ปิด</value>
   </data>
   <data name="CompanyName" xml:space="preserve">
     <value>ชื่อบริษัท</value>
-  </data>
-  <data name="ContactEmail" xml:space="preserve">
-    <value>อีเมล์ติดต่อ</value>
   </data>
   <data name="ContactPhone" xml:space="preserve">
     <value>เบอร์โทรศัพท์ติดต่อ</value>
@@ -138,41 +147,101 @@
   <data name="CoursePrice" xml:space="preserve">
     <value>ราคาคอร์ส (บาท)</value>
   </data>
+  <data name="ddlEngineer" xml:space="preserve">
+    <value>กรุณาเลือก Engineer</value>
+  </data>
+  <data name="ddlLocation" xml:space="preserve">
+    <value>กรุณาเลือก Location</value>
+  </data>
+  <data name="ddlPleaseSelectCourse" xml:space="preserve">
+    <value>กรุณาเลือก course</value>
+  </data>
+  <data name="ddlTeam" xml:space="preserve">
+    <value>กรุณาเลือก Team</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="EditReqTraining" xml:space="preserve">
+    <value>แก้ไข ขอรับการฝึกอบรม</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>อีเมล์</value>
+  </data>
   <data name="Engineer" xml:space="preserve">
     <value>Engineer</value>
   </data>
-  <data name="ErrorTestDate" xml:space="preserve">
-    <value>กรุณาเลือก วันที่ทดสอบ</value>
+  <data name="ErrorCourse" xml:space="preserve">
+    <value>กรุณาเลือก คอร์ส</value>
   </data>
-  <data name="ForStaffAIS" xml:space="preserve">
-    <value>สำหรับเจ้าหน้าที่</value>
+  <data name="ErrorEmail" xml:space="preserve">
+    <value>กรุณาระบุ Email ให้ถูกต้อง</value>
+  </data>
+  <data name="ErrorEngineer" xml:space="preserve">
+    <value>กรุณาเลือก Engineer</value>
+  </data>
+  <data name="ErrorLocation" xml:space="preserve">
+    <value>กรุณาเลือก Location</value>
+  </data>
+  <data name="ErrorReqDateFrom" xml:space="preserve">
+    <value>กรุณาระบุ วันที่ขออบรม จาก</value>
+  </data>
+  <data name="ErrorReqDateTo" xml:space="preserve">
+    <value>กรุณาระบุ วันที่ขออบรม ถึง</value>
+  </data>
+  <data name="ErrorTeam" xml:space="preserve">
+    <value>กรุณาเลือก Team</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
   </data>
   <data name="LocationName" xml:space="preserve">
     <value>ชื่อ Location</value>
   </data>
-  <data name="MessageAutocomplete" xml:space="preserve">
-    <value>ไม่มีผลลัพธ์ที่ตรงกัน</value>
+  <data name="NetAmount" xml:space="preserve">
+    <value>ยอดเงินสุทธิ (บาท)</value>
   </data>
-  <data name="NotPass" xml:space="preserve">
-    <value>ไม่ผ่าน</value>
+  <data name="NumberOfTrainees" xml:space="preserve">
+    <value>จำนวนผู้อบรม</value>
   </data>
-  <data name="Pass" xml:space="preserve">
-    <value>ผ่าน</value>
+  <data name="Payment" xml:space="preserve">
+    <value>การชำระเงิน</value>
   </data>
-  <data name="PleaseSelect" xml:space="preserve">
+  <data name="PaymentViaBank" xml:space="preserve">
+    <value>ชำระเงินผ่านธนาคาร</value>
+  </data>
+  <data name="PlaeseSelect" xml:space="preserve">
     <value>กรุณาเลือก</value>
+  </data>
+  <data name="QuestionDelete" xml:space="preserve">
+    <value>คุณต้องการลบข้อมูล</value>
   </data>
   <data name="Remark" xml:space="preserve">
     <value>หมายเหตุ</value>
   </data>
+  <data name="Request" xml:space="preserve">
+    <value>Request</value>
+  </data>
+  <data name="RequestDate" xml:space="preserve">
+    <value>วันที่ขออบรม</value>
+  </data>
+  <data name="RequestDateFrom" xml:space="preserve">
+    <value>วันที่ขออบรม จาก</value>
+  </data>
+  <data name="RequestDateTo" xml:space="preserve">
+    <value>วันที่ขออบรม ถึง</value>
+  </data>
+  <data name="RequestTraining" xml:space="preserve">
+    <value>ขอรับการฝึกอบรม</value>
+  </data>
   <data name="Reset" xml:space="preserve">
     <value>ล้างข้อมูล</value>
   </data>
-  <data name="Save" xml:space="preserve">
-    <value>บันทึก</value>
-  </data>
   <data name="Search" xml:space="preserve">
     <value>ค้นหาข้อมูล</value>
+  </data>
+  <data name="SearchRequestTraining" xml:space="preserve">
+    <value>ค้นหา ขอรับการฝึกอบรม</value>
   </data>
   <data name="SearchResult" xml:space="preserve">
     <value>ผลการค้นหา</value>
@@ -186,34 +255,22 @@
   <data name="TaxID" xml:space="preserve">
     <value>เลขผู้เสียภาษี</value>
   </data>
+  <data name="Team" xml:space="preserve">
+    <value>Team</value>
+  </data>
   <data name="TeamName" xml:space="preserve">
     <value>ชื่อ Team</value>
   </data>
-  <data name="TestCandidate" xml:space="preserve">
-    <value>ผู้เข้าทดสอบ</value>
+  <data name="TotalAmount" xml:space="preserve">
+    <value>จำนวนเงินทั้งหมด</value>
   </data>
-  <data name="TestDate" xml:space="preserve">
-    <value>วันที่ทดสอบ</value>
-  </data>
-  <data name="TestDateFrom" xml:space="preserve">
-    <value>วันที่ทดสอบจาก</value>
-  </data>
-  <data name="TestDateTo" xml:space="preserve">
-    <value>วันที่ทดสอบถึง</value>
-  </data>
-  <data name="TestResult" xml:space="preserve">
-    <value>ผลการทดสอบ</value>
-  </data>
-  <data name="TestStatus" xml:space="preserve">
-    <value>สถานะการทดสอบ</value>
+  <data name="TotalAmountBaht" xml:space="preserve">
+    <value>ยอดรวม (บาท)</value>
   </data>
   <data name="TrainingDate" xml:space="preserve">
-    <value>วันที่อบรม</value>
+    <value>วันที่เข้ารับการอบรม</value>
   </data>
-  <data name="TrainingDateFrom" xml:space="preserve">
-    <value>วันที่อบรม จาก</value>
-  </data>
-  <data name="TrainingDateTo" xml:space="preserve">
-    <value>วันที่อบรม ถึง</value>
+  <data name="Vat7" xml:space="preserve">
+    <value>ภาษีมูลค่าเพิ่ม 7%</value>
   </data>
 </root>

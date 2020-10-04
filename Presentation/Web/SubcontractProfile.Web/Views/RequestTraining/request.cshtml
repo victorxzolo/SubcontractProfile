@@ -1,24 +1,26 @@
-﻿
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
 @{
     ViewData["Title"] = "ขอรับการฝึกอบรม";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div id="pageID" style="display:none;">Request</div>
+<div id="pageID" style="display:none;">Request</div>
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
 
 
     <div class="skills layout-spacing ">
         <div class="widget-content widget-content-area">
-            <h3 class="">ค้นหา ขอรับการฝึกอบรม</h3>
+            <h3 class="">@Localizer["SearchRequestTraining"]</h3>
             <div class="widget-content1">
 
                 <div class="form-row mb-4">
 
 
                     <div class="form-group col-md-6">
-                        <label for="txttaxid">จากวันที่</label>
+                        <label for="txttaxid">@Localizer["RequestDateFrom"]</label>
                         <div class='input-group date p-0' id='regisdatefrom'>
                             <input type='text' class="form-control" id="reqdateFrom" />
                             <div class="input-group-append input-group-addon">
@@ -30,7 +32,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="txttaxid">ถึงวันที่</label>
+                        <label for="txttaxid">@Localizer["RequestDateTo"]</label>
                         <div class='input-group date p-0' id='regisdateTo'>
                             <input type='text' class="form-control" id="reqdateTo" />
                             <div class="input-group-append input-group-addon">
@@ -43,7 +45,7 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="inputStatus">สถานะ</label>
+                        <label for="inputStatus">@Localizer["Status"]</label>
                         <select id="inputStatus" class="form-control" data-live-search="true"></select>
                     </div>
 
@@ -51,8 +53,21 @@
 
                 <div style="text-align:center">
 
-                    <button id="btnMainClear" type="button" onclick="clearField();" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
-                    <button id="btnSearchRqt" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+                    <button id="btnMainClear" type="button" onclick="clearField();" class="btn btn-dark mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg> @Localizer["Reset"]
+                    </button>
+                    <button id="btnSearchRqt" type="button" class="btn btn-success mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>  @Localizer["Search"]
+                    </button>
 
 
                 </div>
@@ -64,11 +79,18 @@
             <br />
 
             <div class="widget-heading">
-                <h3 class="">Search Result</h3>
+                <h3 class="">@Localizer["SearchResult"]</h3>
 
             </div>
             <div class="col-md-12 text-right mb-1">
-                <button id="btnAdd" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg> Request Training</button>
+                <button id="btnAdd" type="button" class="btn btn-success mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg> @Localizer["RequestTraining"]
+                </button>
 
             </div>
             <div class="table-responsive mb-4 mt-4">
@@ -76,15 +98,15 @@
                     <thead>
                         <tr>
 
-                            <th>Action</th>
-                            <th>สถานะ</th>
-                            <th>วันที่ขออบรม</th>
-                            <th>วันที่อบรม </th>
-                            <th>ชื่อคอร์ส</th>
-                            <th style="text-align:center">จำนวนผู้อบรม</th>
-                            <th>ราคาคอร์ส</th>
-                            <th>Vat (7%)</th>
-                            <th>จำนวนเงินทั้งหมด</th>
+                            <th>@Localizer["Action"]</th>
+                            <th>@Localizer["Status"]</th>
+                            <th>@Localizer["RequestDate"]</th>
+                            <th>@Localizer["BookingDate"] </th>
+                            <th>@Localizer["Course"]</th>
+                            <th style="text-align:center">@Localizer["NumberOfTrainees"]</th>
+                            <th>@Localizer["CoursePrice"]</th>
+                            <th>@Localizer["Vat7"]</th>
+                            <th>@Localizer["TotalAmount"]</th>
                         </tr>
 
                     </thead>
@@ -105,7 +127,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="hTitleEdit" class="modal-title">Request Training</h5>
+                    <h5 id="hTitleEdit" class="modal-title">@Localizer["RequestTraining"]</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -117,7 +139,7 @@
 
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <label>Company Name :</label>
+                                    <label>@Localizer["CompanyName"] :</label>
                                 </div>
                                 <div class="col-sm-4">
 
@@ -125,7 +147,7 @@
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <label>Tax ID :</label>
+                                    <label>@Localizer["TaxID"] :</label>
                                 </div>
                                 <div class="col-sm-4">
                                     <label id="lbltaxid"></label>
@@ -136,7 +158,7 @@
 
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <label>Contact Phone :</label>
+                                    <label>@Localizer["ContactPhone"] :</label>
                                 </div>
                                 <div class="col-sm-4">
 
@@ -145,11 +167,11 @@
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <label>Email :</label>
+                                    <label>@Localizer["Email"] :</label>
                                 </div>
                                 <div class="col-sm-4">
                                     <input type="email" id="inputContactEmail" style="width:300px" class="form-control">
-                                    <div class="invalid-feedback">กรุณาระบุ Email ให้ถูกต้อง.</div>
+                                    <div class="invalid-feedback">@Localizer["ErrorEmail"]</div>
                                 </div>
 
                             </div>
@@ -157,7 +179,7 @@
                             <br />
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <label> Request Date From : <span style="color:red">*</span></label>
+                                    <label> @Localizer["RequestDateFrom"] : <span style="color:red">*</span></label>
                                 </div>
                                 <div class="col-sm-4">
 
@@ -168,12 +190,12 @@
                                                 <i class="fa fa-calendar"></i>
                                             </span>
                                         </div>
-                                        <div class="invalid-feedback">Please input the Request Date From.</div>
+                                        <div class="invalid-feedback">@Localizer["ErrorReqDateFrom"]</div>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <label> Request Date To : <span style="color:red">*</span></label>
+                                    <label> @Localizer["RequestDateTo"] : <span style="color:red">*</span></label>
                                 </div>
                                 <div class="col-sm-4">
 
@@ -184,7 +206,7 @@
                                                 <i class="fa fa-calendar"></i>
                                             </span>
                                         </div>
-                                        <div class="invalid-feedback">Please input the Request Date To.</div>
+                                        <div class="invalid-feedback">@Localizer["ErrorReqDateTo"]</div>
                                     </div>
                                 </div>
 
@@ -192,12 +214,12 @@
                             <br />
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <label> Course : <span style="color:red">*</span></label>
+                                    <label> @Localizer["Course"] : <span style="color:red">*</span></label>
                                 </div>
                                 <div class="col-sm-4">
 
                                     <select id="selCourse" class="form-control" data-live-search="true" required></select>
-                                    <div class="invalid-feedback">Please Select Course</div>
+                                    <div class="invalid-feedback">@Localizer["ErrorCourse"]</div>
                                 </div>
 
 
@@ -206,7 +228,7 @@
                             <div class="row">
 
                                 <div class="col-sm-2">
-                                    <label>Course Price (บาท) :</label>
+                                    <label>@Localizer["CoursePrice"] :</label>
                                 </div>
                                 <div class="col-sm-4">
                                     <label id="lblcourseprice"></label>
@@ -216,7 +238,7 @@
 
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <label>Remark :</label>
+                                    <label>@Localizer["Remark"] :</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <textarea id="txtRemark" class="form-control" rows="3"> </textarea>
@@ -225,36 +247,36 @@
                             </div>
                             <br />
 
-                            <h4>เพิ่ม ผู้เข้าอบรม </h4>
+                            <h4>@Localizer["AddTrainees"] </h4>
                             <hr>
 
                             <div class="container">
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Location : <span style="color:red">*</span></label>
+                                        <label>@Localizer["Location"] : <span style="color:red">*</span></label>
                                     </div>
                                     <div class="col-sm-4">
                                         <select id="selLocationNametraining" class="form-control" data-live-search="true"></select>
-                                        <div class="invalid-feedback">Please Select the LocationName</div>
+                                        <div class="invalid-feedback">@Localizer["ErrorLocation"]</div>
                                     </div>
 
                                     <div class="col-sm-2">
-                                        <label>Team : <span style="color:red">*</span></label>
+                                        <label>@Localizer["Team"] : <span style="color:red">*</span></label>
                                     </div>
                                     <div class="col-sm-4">
                                         <select id="selTeamtraining" class="form-control" data-live-search="true"></select>
-                                        <div class="invalid-feedback">Please Select the Team</div>
+                                        <div class="invalid-feedback">@Localizer["ErrorTeam"]</div>
                                     </div>
 
                                 </div>
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label>Engineer : <span style="color:red">*</span></label>
+                                        <label>@Localizer["Engineer"] : <span style="color:red">*</span></label>
                                     </div>
                                     <div class="col-sm-4">
                                         <select id="selEngineertraining" class="form-control" data-live-search="true"></select>
-                                        <div class="invalid-feedback">Please Select the Engineer</div>
+                                        <div class="invalid-feedback">@Localizer["ErrorEngineer"]</div>
                                     </div>
                                 </div>
 
@@ -264,8 +286,21 @@
                             <div class="col-md-12 ">
                                 <div class="mt-5" style="text-align:center">
 
-                                    <button id="btnclearTraining" type="button" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
-                                    <button id="btnAddTraining" type="button" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> เพิ่มข้อมูล </button>
+                                    <button id="btnclearTraining" type="button" class="btn btn-dark mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                                        </svg> @Localizer["Reset"]
+                                    </button>
+                                    <button id="btnAddTraining" type="button" class="btn btn-success mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        </svg> @Localizer["Add"]
+                                    </button>
 
                                 </div>
                             </div>
@@ -276,10 +311,10 @@
                                 <table id="tbSearchEngineer" class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th width="10%">Delete</th>
-                                            <th>Location Name</th>
-                                            <th>Team Name</th>
-                                            <th>Engineer</th>
+                                            <th width="10%">@Localizer["Delete"]</th>
+                                            <th>@Localizer["LocationName"]</th>
+                                            <th>@Localizer["TeamName"]</th>
+                                            <th>@Localizer["Engineer"]</th>
 
 
                                         </tr>
@@ -294,7 +329,7 @@
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <div class="col-md-7">
-                                                    <p>ยอดรวม (บาท) :</p>
+                                                    <p>@Localizer["TotalAmountBaht"] :</p>
                                                 </div>
                                                 <div class="col-md-5" style="text-align: left;">
                                                     <label id="lblttcost"></label>
@@ -305,7 +340,7 @@
                                         <div class="col-md-12 mt-3">
                                             <div class="row">
                                                 <div class="col-md-7">
-                                                    <p>ภาษีมูลค่าเพิ่ม 7% :</p>
+                                                    <p>@Localizer["Vat7"] :</p>
                                                 </div>
                                                 <div class="col-md-5" style="text-align: left;">
                                                     <label id="lblvat7"></label>
@@ -313,20 +348,20 @@
                                             </div>
                                         </div>
                                         @*<div class="col-md-12 mt-3">
-                                            <div class="row">
-                                                <div class="col-md-7">
-                                                    <p>ภาษีหัก ณ ที่จ่าย 3% :</p>
+                                                <div class="row">
+                                                    <div class="col-md-7">
+                                                        <p>ภาษีหัก ณ ที่จ่าย 3% :</p>
+                                                    </div>
+                                                    <div class="col-md-5" style="text-align: left;">
+                                                        <label id="lbltax"></label>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-5" style="text-align: left;">
-                                                    <label id="lbltax"></label>
-                                                </div>
-                                            </div>
-                                        </div>*@
+                                            </div>*@
 
                                         <div class="col-md-12 mt-3">
                                             <div class="row">
                                                 <div class="col-md-7">
-                                                    <p>ยอดเงินสุทธิ (บาท) :</p>
+                                                    <p>@Localizer["NetAmount"] :</p>
                                                 </div>
                                                 <div class="col-md-5" style="text-align: left;">
                                                     <label id="lblCousetotal"></label>
@@ -349,11 +384,11 @@
 
                             <input type="hidden" id="locid" />
 
-                            <h4>วันที่เข้ารับการอบรม</h4>
+                            <h4>@Localizer["TrainingDate"]</h4>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <label>Booking Training Date : </label>
+                                    <label>@Localizer["BookingTrainingDate"] : </label>
                                 </div>
                                 <div class="col-sm-4">
                                     <label id="lblBookingDate"> </label>
@@ -363,7 +398,7 @@
 
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <label>Remark :</label>
+                                    <label>@Localizer["Remark"] :</label>
                                 </div>
                                 <div class="col-sm-8">
                                     <label id="lblRemarkForAis"> </label>
@@ -372,11 +407,11 @@
 
                             </div>
                             <br />
-                            <h4>การชำระเงิน</h4>
+                            <h4>@Localizer["Payment"]</h4>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <label>ชำระเงินผ่านธนาคาร</label>
+                                    <label>@Localizer["PaymentViaBank"]</label>
                                 </div>
 
 
@@ -390,11 +425,11 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
-                            Close
+                            @Localizer["Close"]
                         </button>
                         <button id="btnSave" type="submit" class="btn btn-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                            Request
+                            @Localizer["Request"]
                         </button>
                     </div>
                 </form>
@@ -493,7 +528,7 @@
                 }
             });
 
-            
+
             $('#requestdateFrom').datetimepicker({
                 format: "DD/MM/YYYY",
                 minDate: new Date(),
@@ -580,17 +615,17 @@
         function onAddEngineer() {
 
              if ($("select[id$=selLocationNametraining]").val() == "") {
-                 bootbox.alert("กรุณาเลือก Location");
+                 bootbox.alert("@Localizer["ddlLocation"]");
                  return;
              }
 
              if ($("select[id$=selTeamtraining]").val() == "") {
-                 bootbox.alert("กรุณาเลือก Team");
+                 bootbox.alert("@Localizer["ddlTeam"]");
                  return;
              }
 
              if ($("select[id$=selEngineertraining]").val() == "") {
-                 bootbox.alert("กรุณาเลือก Engineer");
+                 bootbox.alert("@Localizer["ddlEngineer"]");
                  return;
              }
 
@@ -683,7 +718,7 @@
 
 
         function deleteDataRequest(trainingId) {
-            bootbox.confirm("คุณต้องการลบข้อมูล?"
+            bootbox.confirm("@Localizer["QuestionDelete"]?"
                 , function (result) {
                     if (result == true) {
                             $.ajax({
@@ -709,7 +744,7 @@
         }
 
          function deleteData(locationId,teamId,engineerId) {
-           bootbox.confirm("คุณต้องการลบข้อมูล?"
+           bootbox.confirm("@Localizer["QuestionDelete"]?"
             , function (result) {
             if (result == true) {
 
@@ -846,14 +881,14 @@
             success: function (data) {
 
                 $("#selLocationNametraining").empty();
-                $("#selLocationNametraining").append('<option value="">--Please select--</option>');
+                $("#selLocationNametraining").append('<option value="">--@Localizer["PlaeseSelect"]--</option>');
                 $.each(data, function (id, result) {
                     $("#selLocationNametraining").append('<option value="' + result.LocationId + '">' + result.LocationNameTh +'</option>');
                     });
                 },
                 failure: function () {
                     $("#selLocationNametraining").empty();
-                    $("#selLocationNametraining").append('<option value="">--Please select--</option>');
+                    $("#selLocationNametraining").append('<option value="">--@Localizer["PlaeseSelect"]--</option>');
                 }
             });
     }
@@ -866,7 +901,7 @@
                   dataType: "json",
                   success: function (data) {
                       $("#selTeamtraining").empty();
-                      $("#selTeamtraining").append('<option value="">--Please select--</option>');
+                      $("#selTeamtraining").append('<option value="">--@Localizer["PlaeseSelect"]--</option>');
                       $.each(data, function (id, result) {
                          // $("#selTeamtraining").append('<option value="' + result.TeamId + '">' + result.TeamNameTh + '</option>');
                           $("#selTeamtraining").append($("<option></option>").val(result.TeamId).html(result.TeamNameTh));
@@ -874,7 +909,7 @@
                   },
                   failure: function () {
                       $("#selTeamtraining").empty();
-                      $("#selTeamtraining").append('<option value="">--Please select--</option>');
+                      $("#selTeamtraining").append('<option value="">--@Localizer["PlaeseSelect"]--</option>');
                   }
               });
          }
@@ -890,14 +925,14 @@
                   dataType: "json",
                   success: function (data) {
                       $("#selEngineertraining").empty();
-                      $("#selEngineertraining").append('<option value="">--Please select--</option>');
+                      $("#selEngineertraining").append('<option value="">--@Localizer["PlaeseSelect"]--</option>');
                       $.each(data, function (id, result) {
                           $("#selEngineertraining").append('<option value="' + result.EngineerId + '">' + result.StaffName + '</option>');
                       });
                   },
                   failure: function () {
                       $("#selEngineertraining").empty();
-                      $("#selEngineertraining").append('<option value="">--Please select--</option>');
+                      $("#selEngineertraining").append('<option value="">--@Localizer["PlaeseSelect"]--</option>');
                   }
               });
          }
@@ -912,14 +947,14 @@
                         success: function (data) {
 
                             $("#inputStatus").empty();
-                            $("#inputStatus").append('<option value="-1">--Select All--</option>');
+                            $("#inputStatus").append('<option value="-1">--@Localizer["SelectAll"]--</option>');
                             $.each(data, function (id, result) {
                                 $("#inputStatus").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text +'</option>');
                                 });
                             },
                             failure: function () {
                                 $("#inputStatus").empty();
-                                $("#inputStatus").append('<option value="-1">--Select All--</option>');
+                                $("#inputStatus").append('<option value="-1">--@Localizer["SelectAll"]--</option>');
                             }
                         });
                         }
@@ -935,7 +970,7 @@
                         success: function (data) {
 
                             $("#selCourse").empty();
-                            $("#selCourse").append('<option value="">--Please select course--</option>');
+                            $("#selCourse").append('<option value="">--@Localizer["ddlPleaseSelectCourse"]--</option>');
                             $.each(data, function (id, result) {
                                 $("#selCourse").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text  +'</option>');
                                 $("#lblcourseprice").html(FormatNumber(result.value1));
@@ -946,7 +981,7 @@
                             },
                             failure: function () {
                                 $("#selCourse").empty();
-                                $("#selCourse").append('<option value="">--Please select course--</option>');
+                                $("#selCourse").append('<option value="">--@Localizer["ddlPleaseSelectCourse"]--</option>');
                             }
                         });
                   }
@@ -1074,12 +1109,12 @@
             $('#hdMode').val(mode);
 
             if (mode == "edit") {
-                $("#hTitleEdit").text('แก้ไข ขอรับการฝึกอบรม');
+                $("#hTitleEdit").text('@Localizer["EditReqTraining"]');
                 callTrainingDetail(trainingId);
 
             }
             else {
-                $("#hTitleEdit").text('ขอรับการฝึกอบรม');
+                $("#hTitleEdit").text('@Localizer["RequestTraining"]');
                 callTrainingDetailAdd();
 
                 $('#btnSave').show();

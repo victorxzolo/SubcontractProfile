@@ -1,22 +1,24 @@
-﻿
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
 @{
     ViewData["Title"] = "Booking";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-    <div id="pageID" style="display:none;">RequestTraining</div>
+<div id="pageID" style="display:none;">RequestTraining</div>
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
 
 
     <div class="skills layout-spacing ">
         <div class="widget-content widget-content-area">
-            <h3 class="">Search Request Training</h3>
+            <h3 class="">@Localizer["SearchRequestTraining"]</h3>
             <div class="widget-content1">
 
                 <div class="form-row mb-4">
                     <div class="form-group col-md-6">
-                        <label for="inputLocationCodeMain">Company Name</label>
+                        <label for="inputLocationCodeMain">@Localizer["CompanyName"]</label>
 
 
                         <div class='input-group'>
@@ -26,21 +28,21 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="">Tax ID</label>
+                        <label for="">@Localizer["TaxID"]</label>
                         <input type="text" class="form-control" id="txttaxID" maxlength="13" placeholder="TaxID" onkeypress="return isNumberKey(event);">
 
                     </div>
 
 
                     @*<div class="form-group col-md-6">
-                        <label for="inputLocationCodeMain">Request No.</label>
-                        <input type="text" class="form-control" id="txtReqNo" placeholder="Request No.">
+                            <label for="inputLocationCodeMain">Request No.</label>
+                            <input type="text" class="form-control" id="txtReqNo" placeholder="Request No.">
 
-                    </div>*@
+                        </div>*@
 
 
                     <div class="form-group col-md-6">
-                        <label for="lbltaxid">Request Date From</label>
+                        <label for="lbltaxid">@Localizer["RequestDateFrom"]</label>
                         <div class='input-group date p-0' id='regisdatefrom'>
                             <input type='text' class="form-control" id="reqdateFrom" />
                             <div class="input-group-append input-group-addon">
@@ -52,7 +54,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="txttaxid">Request Date To</label>
+                        <label for="txttaxid">@Localizer["RequestDateTo"]</label>
                         <div class='input-group date p-0' id='regisdateTo'>
                             <input type='text' class="form-control" id="reqdateTo" />
                             <div class="input-group-append input-group-addon">
@@ -65,7 +67,7 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="lblbookingDatefrom">Booking Date From</label>
+                        <label for="lblbookingDatefrom">@Localizer["BookingDateFrom"]</label>
                         <div class='input-group date p-0' id='bookingdatefrom'>
                             <input type='text' class="form-control" id="inpbookingdateFrom" />
                             <div class="input-group-append input-group-addon">
@@ -77,7 +79,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="lblbookingDateTo">Booking Date To</label>
+                        <label for="lblbookingDateTo">@Localizer["BookingDateTo"]</label>
                         <div class='input-group date p-0' id='bookingdateTo'>
                             <input type='text' class="form-control" id="inpbookingdateTo" />
                             <div class="input-group-append input-group-addon">
@@ -89,7 +91,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputStatus">Status</label>
+                        <label for="inputStatus">@Localizer["Status"]</label>
                         <select id="inputStatus" class="form-control" data-live-search="true"></select>
                     </div>
 
@@ -97,8 +99,21 @@
 
                 <div style="text-align:center">
 
-                    <button id="btnMainClear" type="button" onclick="clearField();" class="btn btn-dark mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ล้างข้อมูล</button>
-                    <button id="btnSearchRqt" type="button" onclick="inittbSearchResult();" class="btn btn-success mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>  ค้นหาข้อมูล</button>
+                    <button id="btnMainClear" type="button" onclick="clearField();" class="btn btn-dark mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg> @Localizer["Reset"]
+                    </button>
+                    <button id="btnSearchRqt" type="button" onclick="inittbSearchResult();" class="btn btn-success mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>  @Localizer["Search"]
+                    </button>
 
 
                 </div>
@@ -109,7 +124,7 @@
 
             <br />
             <div class="widget-heading">
-                <h3 class="">Search Result</h3>
+                <h3 class="">@Localizer["SearchResult"]</h3>
 
             </div>
 
@@ -118,17 +133,17 @@
                     <thead>
                         <tr>
 
-                            <th>Action</th>
-                            <th>สถานะ </th>
-                            <th>ชื่อบริษัท</th>
-                            <th>เลขผู้เสียภาษี </th>
-                            <th>วันที่ขออบรม </th>
-                            <th>วันที่อบรม </th>
-                            <th>ชื่อคอร์ส</th>
-                            <th style="text-align:center">จำนวนผู้อบรม</th>
-                            <th>ราคาคอร์ส</th>
-                            <th>Vat(7%)</th>
-                            <th>จำนวนเงินทั้งหมด</th>
+                            <th>@Localizer["Action"]</th>
+                            <th>@Localizer["Status"] </th>
+                            <th>@Localizer["CompanyName"]</th>
+                            <th>@Localizer["TaxID"] </th>
+                            <th>@Localizer["RequestDate"] </th>
+                            <th>@Localizer["TrainingDate"] </th>
+                            <th>@Localizer["Course"]</th>
+                            <th style="text-align:center">@Localizer["NumberOfTrainees"]</th>
+                            <th>@Localizer["CoursePrice"]</th>
+                            <th>@Localizer["Vat7"]</th>
+                            <th>@Localizer["TotalAmount"]</th>
                         </tr>
 
                     </thead>
@@ -149,7 +164,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="hTitleEdit" class="modal-title">Request Training</h5>
+                    <h5 id="hTitleEdit" class="modal-title">@Localizer["RequestTraining"]</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -161,7 +176,7 @@
 
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <label>Company Name :</label>
+                                    <label>@Localizer["CompanyName"] :</label>
                                 </div>
                                 <div class="col-sm-4">
 
@@ -169,7 +184,7 @@
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <label>Tax ID :</label>
+                                    <label>@Localizer["TaxID"] :</label>
                                 </div>
                                 <div class="col-sm-4">
                                     <label id="lbltaxid"></label>
@@ -180,7 +195,7 @@
 
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <label>Contact Phone :</label>
+                                    <label>@Localizer["ContactPhone"] :</label>
                                 </div>
                                 <div class="col-sm-4">
 
@@ -188,7 +203,7 @@
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <label>Email :</label>
+                                    <label>@Localizer["Email"] :</label>
                                 </div>
                                 <div class="col-sm-4">
                                     <label id="lblemail"></label>
@@ -199,23 +214,23 @@
 
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <label> Request Date From : </label>
+                                    <label> @Localizer["RequestDateFrom"] : </label>
                                 </div>
                                 <div class="col-sm-4">
 
                                     <div class='input-group date p-0' id='requestdateFrom'>
-                                       
+
                                         <label id="inputRequestdateFrom"></label>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <label> Request Date To :</label>
+                                    <label> @Localizer["RequestDateTo"] :</label>
                                 </div>
                                 <div class="col-sm-4">
 
                                     <div class='input-group date p-0' id='requestdateTo'>
-                                   
+
                                         <label id="inputRequestdateTo"></label>
 
                                     </div>
@@ -225,16 +240,16 @@
 
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <label>Course :</label>
+                                    <label>@Localizer["Course"] :</label>
                                 </div>
                                 <div class="col-sm-4">
                                     <select id="selCourse" class="form-control" data-live-search="true" required></select>
-                                    <div class="invalid-feedback">Please Select Course</div>
+                                    <div class="invalid-feedback">@Localizer["ErrorCourse"]</div>
 
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <label>Course Price :</label>
+                                    <label>@Localizer["CoursePrice"] :</label>
                                 </div>
                                 <div class="col-sm-4">
                                     <label id="lblcourseprice"></label>
@@ -243,7 +258,7 @@
 
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <label>Remark :</label>
+                                    <label>@Localizer["Remark"] :</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <label id="lblRemark"> </label>
@@ -252,19 +267,19 @@
                             </div>
                             <br />
 
-                            <h4>ผู้เข้าอบรม </h4>
+                            <h4>@Localizer["Trainee"] </h4>
                             <hr>
                             <div class="table-responsive">
                                 <table id="tbSearchEngineer" style="width:100%" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
                                     <thead>
                                         <tr>
 
-                                            <th>Location Name</th>
-                                            <th>Team Name</th>
-                                            <th>Engineer</th>
-                                            <th>Position</th>
-                                            <th>ContactPhone</th>
-                                            <th>Email</th>
+                                            <th>@Localizer["LocationName"]</th>
+                                            <th>@Localizer["TeamName"]</th>
+                                            <th>@Localizer["Engineer"]</th>
+                                            <th>@Localizer["Position"]</th>
+                                            <th>@Localizer["ContactPhone"]</th>
+                                            <th>@Localizer["Email"]</th>
 
                                         </tr>
                                     </thead>
@@ -278,7 +293,7 @@
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <p>ราคารวม(บาท) :</p>
+                                                    <p>@Localizer["TotalPrice"] :</p>
                                                 </div>
                                                 <div class="col-md-6" style="text-align: left;">
                                                     <label id="lblttcost"></label>
@@ -289,7 +304,7 @@
                                         <div class="col-md-12 mt-3">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <p>Vat 7% :</p>
+                                                    <p>@Localizer["Vat7"] :</p>
                                                 </div>
                                                 <div class="col-md-6" style="text-align: left;">
                                                     <label id="lblvat7"></label>
@@ -299,7 +314,7 @@
                                         <div class="col-md-12 mt-3">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <p>ราคาสุทธิ(บาท) :</p>
+                                                    <p>@Localizer["NetPrice"] :</p>
                                                 </div>
                                                 <div class="col-md-6" style="text-align: left;">
                                                     <label id="lblCousetotal"></label>
@@ -322,11 +337,11 @@
 
                             <input type="hidden" id="locid" />
 
-                            <h4>สำหรับเจ้าหน้าที่ AIS (เลือกวัน Training)</h4>
+                            <h4>@Localizer["ForStaffAIS"]</h4>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <label>Booking Training Date</label>
+                                    <label>@Localizer["BookingTrainingDate"]</label>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class='input-group date p-0' id='bookdatefrom'>
@@ -336,15 +351,15 @@
                                                 <i class="fa fa-calendar"></i>
                                             </span>
                                         </div>
-                                        <div class="invalid-feedback">กรุณาระบุ Booking Training Date</div>
+                                        <div class="invalid-feedback">@Localizer["ErrorBookingTrainingDate"]</div>
                                     </div>
                                 </div>
 
                             </div>
-
+                            <br/>
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <label>Remark :</label>
+                                    <label>@Localizer["Remark"] :</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <textarea id="txtaisremark" class="form-control" rows="3"> </textarea>
@@ -359,11 +374,11 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
-                            Close
+                            @Localizer["Close"]
                         </button>
                         <button id="btnSave" type="submit" class="btn btn-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                            Booking
+                            @Localizer["Booking"]
                         </button>
                     </div>
                 </form>
@@ -414,7 +429,7 @@
                                     $('#selection').html('You selected: ' + suggestion.value);
                                 },
                                 showNoSuggestionNotice: true,
-                                noSuggestionNotice: 'Sorry, no matching results',
+                                noSuggestionNotice: '@Localizer["MessageAutocomplete"]',
                             });
 
                             $('#regisdatefrom').datetimepicker({
@@ -551,7 +566,7 @@
                         success: function (data) {
 
                             $("#selCourse").empty();
-                            $("#selCourse").append('<option value="">--Please select course--</option>');
+                            $("#selCourse").append('<option value="">--@Localizer["ErrorCourse"]--</option>');
                             $.each(data, function (id, result) {
                                 $("#selCourse").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text  +'</option>');
                                 $("#lblcourseprice").html(FormatNumber(result.value1));
@@ -561,7 +576,7 @@
                             },
                             failure: function () {
                                 $("#selCourse").empty();
-                                $("#selCourse").append('<option value="">--Please select course--</option>');
+                                $("#selCourse").append('<option value="">--@Localizer["ErrorCourse"]--</option>');
                             }
                         });
                   }
@@ -622,7 +637,7 @@
                         success: function (data) {
 
                             $("#inputStatus").empty();
-                            $("#inputStatus").append('<option value="-1">--Select All--</option>');
+                            $("#inputStatus").append('<option value="-1">--@Localizer["SelectAll"]--</option>');
                             $.each(data, function (id, result) {
                                 if (result.dropdown_value == "Y" || result.dropdown_value == "A" || result.dropdown_value == "N") {
                                     $("#inputStatus").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text + '</option>');
@@ -632,7 +647,7 @@
                             },
                             failure: function () {
                                 $("#inputStatus").empty();
-                                $("#inputStatus").append('<option value="-1">--Select All--</option>');
+                                $("#inputStatus").append('<option value="-1">--@Localizer["SelectAll"]--</option>');
                             }
                         });
                         }
@@ -652,14 +667,14 @@
                   dataType: "json",
                   success: function (data) {
                       $("#selTeamName").empty();
-                      $("#selTeamName").append('<option value="-1">--Select All--</option>');
+                      $("#selTeamName").append('<option value="-1">--@Localizer["SelectAll"]--</option>');
                       $.each(data, function (id, result) {
                           $("#selTeamName").append('<option value="' + result.TeamId + '">' + result.TeamNameTh + '</option>');
                       });
                   },
                   failure: function () {
                       $("#selTeamName").empty();
-                      $("#selTeamName").append('<option value="-1">--Select All--</option>');
+                      $("#selTeamName").append('<option value="-1">--@Localizer["SelectAll"]--</option>');
                   }
               });
          }
@@ -676,14 +691,14 @@
                         success: function (data) {
 
                             $("#selLocationName").empty();
-                            $("#selLocationName").append('<option value="-1">--Select All--</option>');
+                            $("#selLocationName").append('<option value="-1">--@Localizer["SelectAll"]--</option>');
                             $.each(data, function (id, result) {
                                 $("#selLocationName").append('<option value="' + result.LocationId + '">' + result.LocationNameTh +'</option>');
                                 });
                             },
                             failure: function () {
                                 $("#selLocationName").empty();
-                                $("#selLocationName").append('<option value="-1">--Select All--</option>');
+                                $("#selLocationName").append('<option value="-1">--@Localizer["SelectAll"]--</option>');
                             }
                         });
                 }
@@ -692,7 +707,7 @@
 
             $("#txtCompNo").val('');
             $("#txttaxID").val('');
-            
+
             $("#txtReqNo").val('');
             $('#inputStatus').val('-1');
             $("#reqdateFrom").val('');
@@ -753,14 +768,14 @@
                                         // orderable: false,
                                         className: 'text-center'
                                     },
-                           
+
                                     {
                                         data: null, render: function (data, type, row) {
                                             return "<span class='badge outline-badge-secondary shadow-none'>" + row.Status + "</span>";
                                         }
 
                                     },
-                                    
+
                                     { "data": "CompanyNameTh"},
                                     { "data": "TaxId" },
                                     {
@@ -851,7 +866,7 @@
 
                                              $('#inputRequestdateFrom').html(result.RequestDateStr);
                                              $('#inputRequestdateTo').html(result.RequestDateStrTo);
-                                             
+
 
                                          }
                                          else {

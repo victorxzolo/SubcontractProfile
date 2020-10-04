@@ -133,10 +133,10 @@
     <value>เบอร์โทรศัพท์ติดต่อ</value>
   </data>
   <data name="Course" xml:space="preserve">
-    <value>หลักสูตร</value>
+    <value>ชื่อคอร์ส</value>
   </data>
   <data name="CoursePrice" xml:space="preserve">
-    <value>ราคาหลักสูตร (บาท)</value>
+    <value>ราคาคอร์ส (บาท)</value>
   </data>
   <data name="Engineer" xml:space="preserve">
     <value>Engineer</value>
@@ -196,9 +196,9 @@
     <value>วันที่อบรม</value>
   </data>
   <data name="TrainingDateFrom" xml:space="preserve">
-    <value>วันที่อบรมจาก</value>
+    <value>วันที่อบรม จาก</value>
   </data>
   <data name="TrainingDateTo" xml:space="preserve">
-    <value>วันที่อบรมถึง</value>
+    <value>วันที่อบรม ถึง</value>
   </data>
 </root>
