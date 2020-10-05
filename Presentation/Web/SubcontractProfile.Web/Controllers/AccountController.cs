@@ -615,7 +615,8 @@ namespace SubcontractProfile.Web.Controllers
         public IActionResult DDLTitle()
         {
             var output = new List<SubcontractProfileCompanyTypeModel>();
-
+            List<SelectListItem> outputTh = new List<SelectListItem>();
+            List<SelectListItem> outputEn = new List<SelectListItem>();
 
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(
@@ -630,14 +631,46 @@ namespace SubcontractProfile.Web.Controllers
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileCompanyTypeModel>>(v);
             }
 
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            if (culture.Name == "th")
+            {
+                outputTh.Add(new SelectListItem
+                {
+                    Text = _localizer["ddlSelect"],
+                    Value = "0"
+                });
+                outputTh.AddRange(output.Select(c => new SelectListItem
+                {
+                    Text = c.CompanyTypeNameTh,
+                    Value = c.CompanyTypeId
+                }).ToList());
+            }
+            else
+            {
+                outputEn.Add(new SelectListItem
+                {
+                    Text = _localizer["ddlSelect"],
+                    Value = "0"
+                });
+                outputEn.AddRange(output.Select(c => new SelectListItem
+                {
+                    Text = c.CompanyTypeNameEn,
+                    Value = c.CompanyTypeId
+                }).ToList());
+            }
+            
 
-            return Json(new { responsetitle = output });
+            return Json(new { responsetitleTH = outputTh, responsetitleEN= outputEn });
         }
 
         [HttpPost]
         public IActionResult DDLNationality()
         {
             var output = new List<SubcontractProfileNationalityModel>();
+            List<SelectListItem> outputTh = new List<SelectListItem>();
+            List<SelectListItem> outputEn = new List<SelectListItem>();
+
+
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
@@ -649,10 +682,36 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileNationalityModel>>(v);
             }
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            if (culture.Name == "th")
+            {
+                outputTh.Add(new SelectListItem
+                {
+                    Text = _localizer["ddlSelect"],
+                    Value = "0"
+                });
+                outputTh.AddRange(output.Select(c => new SelectListItem
+                {
+                    Text = c.NationalityTh,
+                    Value = c.NationalityId
+                }).ToList());
+            }
+            else
+            {
+                outputEn.Add(new SelectListItem
+                {
+                    Text = _localizer["ddlSelect"],
+                    Value = "0"
+                });
+                outputEn.AddRange(output.Select(c => new SelectListItem
+                {
+                    Text = c.NationalityEn,
+                    Value = c.NationalityId
+                }).ToList());
+            }
 
 
-
-            return Json(new { response = output });
+            return Json(new { responseTH = outputTh, responseEN = outputEn });
         }
 
         [HttpPost]
@@ -824,7 +883,7 @@ namespace SubcontractProfile.Web.Controllers
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileAddressTypeModel>>(v);
             }
             CultureInfo culture = CultureInfo.CurrentCulture;
-                if (culture.Name == "th")
+             if (culture.Name == "th")
             {
                 getAllAddressTypeList = output.Select(a => new SelectListItem
                 {
@@ -1349,6 +1408,8 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage response;
 
+                CultureInfo culture = CultureInfo.CurrentCulture;
+
                 foreach (var e in daftdata)
                 {
                     Guid addr_id = Guid.NewGuid();
@@ -1363,7 +1424,9 @@ namespace SubcontractProfile.Web.Controllers
                             var v = response.Content.ReadAsStringAsync().Result;
                             outputprovince = JsonConvert.DeserializeObject<List<SubcontractProfileProvinceModel>>(v);
                             string[] s_provice = e.province_name.Split(" ");
-                            if (Lang == "TH")
+
+                           
+                            if (culture.Name == "th")
                             {
                                 var w = outputprovince.First(x => x.ProvinceNameTh.Contains(s_provice[1].ToString()));
                                 e.ProvinceId = w.ProvinceId;
@@ -1386,7 +1449,7 @@ namespace SubcontractProfile.Web.Controllers
                             var v = response.Content.ReadAsStringAsync().Result;
                             outputdistrict = JsonConvert.DeserializeObject<List<SubcontractProfileDistrictModel>>(v);
                             string[] s_district = e.district_name.Split(" ");
-                            if (Lang == "TH")
+                            if (culture.Name == "th")
                             {
                                 var w = outputdistrict.First(d => d.DistrictNameTh.Contains(s_district[1].ToString()));
                                 e.DistrictId = w.DistrictId;
@@ -1409,7 +1472,7 @@ namespace SubcontractProfile.Web.Controllers
                             outputsubdistrict = JsonConvert.DeserializeObject<List<SubcontractProfileSubDistrictModel>>(v);
 
                             string[] s_subdistrict = e.sub_district_name.Split(" ");
-                            if (Lang == "TH")
+                            if (culture.Name == "th")
                             {
                                 var w = outputsubdistrict.First(d => d.SubDistrictNameTh.Contains(s_subdistrict[1].ToString()));
                                 e.SubDistrictId = w.SubDistrictId;

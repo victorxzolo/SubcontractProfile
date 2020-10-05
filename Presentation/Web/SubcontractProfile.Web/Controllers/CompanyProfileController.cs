@@ -17,6 +17,7 @@ using SubcontractProfile.Web.Model;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Localization;
 using Microsoft.Extensions.Localization;
+using System.Globalization;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -94,18 +95,9 @@ namespace SubcontractProfile.Web.Controllers
                     return RedirectToAction("Login", "Account");
                 }
             }
+            ViewData["Controller"] = _localizer["Profile"];
+            ViewData["View"] = _localizer["CompanyProfile"];
 
-            getsession();
-            if (Lang == "TH")
-            {
-                ViewData["Controller"] = "ข้อมูลโปรไฟล์";
-                ViewData["View"] = "ข้อมูลบริษัท";
-            }
-            else
-            {
-                ViewData["Controller"] = "Profile";
-                ViewData["View"] = "Company Profile";
-            }
             return View();
         }
 
@@ -511,27 +503,27 @@ namespace SubcontractProfile.Web.Controllers
                                         if(statusAddAddr)
                                         {
                                             res.Status = true;
-                                            res.Message = "Update Success";
+                                            res.Message = _localizer["MessageUpdateSuccess"];
                                             res.StatusError = "0";
                                         }
                                         else
                                         {
                                             res.Status = false;
-                                            res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                            res.Message = _localizer["MessageAddresUnSuccess"];
                                             res.StatusError = "-1";
                                         }
                                     }
                                     else
                                     {
                                         res.Status = false;
-                                        res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                        res.Message = _localizer["MessageAddresUnSuccess"];
                                         res.StatusError = "-1";
                                     }
                                 }
                                 else
                                 {
                                     res.Status = false;
-                                    res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                    res.Message = _localizer["MessageAddresUnSuccess"];
                                     res.StatusError = "-1";
                                 }
 
@@ -540,7 +532,7 @@ namespace SubcontractProfile.Web.Controllers
                             else
                             {
                                 res.Status = false;
-                                res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                res.Message = _localizer["MessageAddresUnSuccess"];
                                 res.StatusError = "-1";
                             }
                             #endregion
@@ -548,7 +540,7 @@ namespace SubcontractProfile.Web.Controllers
                         else
                         {
                             res.Status = false;
-                            res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                            res.Message = _localizer["MessageUnSuccess"];
                             res.StatusError = "-1";
                         }
                         #endregion
@@ -556,7 +548,7 @@ namespace SubcontractProfile.Web.Controllers
                     else
                     {
                         res.Status = false;
-                        res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        res.Message = _localizer["MessageUnSuccess"];
                         res.StatusError = "-1";
                     }
                 //}
@@ -692,16 +684,16 @@ namespace SubcontractProfile.Web.Controllers
 
                             string straddr = "";
                             straddr = string.Concat(f.HouseNo != null && f.HouseNo != "" ? f.HouseNo : "", " ",
-                                                  f.Building != null && f.Building != "" ? "อาคาร " + f.Building : "", " ",
-                                                  f.Floor != null && f.Floor != "" ? "ชั้นที่ " + f.Floor : "", " ",
-                                                  f.RoomNo != null && f.RoomNo != "" ? "ห้องที่ " + f.RoomNo : "", " ",
-                                                  f.VillageName != null && f.VillageName != "" ? "หมู่บ้าน " + f.VillageName : "", " ",
-                                                  f.Moo != null ? "หมู่ที่ " + f.Moo : "", " ",
-                                                  f.Soi != null && f.Soi != "" ? "ซอย " + f.Soi : "", " ",
-                                                  f.Road != null && f.Road != "" ? "ถนน " + f.Road : "", " ",
-                                                  f.SubDistrictId != 0 ? "ตำบล/แขวง " + f.sub_district_name : "", " ",
-                                                  f.DistrictId != 0 ? "อำเภอ/เขต " + f.district_name : "", " ",
-                                                  f.ProvinceId != 0 ? "จังหวัด " + f.province_name : "", " ",
+                                                  f.Building != null && f.Building != "" ? _localizer["Building"]+" " + f.Building : "", " ",
+                                                  f.Floor != null && f.Floor != "" ? _localizer["Floor"] + " " + f.Floor : "", " ",
+                                                  f.RoomNo != null && f.RoomNo != "" ? _localizer["Room"] + " " + f.RoomNo : "", " ",
+                                                  f.VillageName != null && f.VillageName != "" ? _localizer["Village"] + " " + f.VillageName : "", " ",
+                                                  f.Moo != null ? _localizer["Moo"] + " " + f.Moo : "", " ",
+                                                  f.Soi != null && f.Soi != "" ? _localizer["Soi"] + " " + f.Soi : "", " ",
+                                                  f.Road != null && f.Road != "" ? _localizer["Street"] + " " + f.Road : "", " ",
+                                                  f.SubDistrictId != 0 ? _localizer["SubDistrict"] + " " + f.sub_district_name : "", " ",
+                                                  f.DistrictId != 0 ? _localizer["District"] + " " + f.district_name : "", " ",
+                                                  f.ProvinceId != 0 ? _localizer["Province"] + " " + f.province_name : "", " ",
                                                   f.ZipCode != "" ? f.ZipCode : "");
                             f.outFullAddress = straddr;
 
@@ -1065,16 +1057,16 @@ namespace SubcontractProfile.Web.Controllers
                         {
                             string straddr = "";
                             straddr = string.Concat(outputresponse.Value.vHouseNumber != null && outputresponse.Value.vHouseNumber != "-" ? outputresponse.Value.vHouseNumber : "", " ",
-                                                      outputresponse.Value.vBuildingName != null && outputresponse.Value.vBuildingName != "-" ? "อาคาร " + outputresponse.Value.vBuildingName : "", " ",
-                                                      outputresponse.Value.vFloorNumber != null && outputresponse.Value.vFloorNumber != "-" ? "ชั้นที่ " + outputresponse.Value.vFloorNumber : "", " ",
-                                                      outputresponse.Value.vRoomNumber != null && outputresponse.Value.vRoomNumber != "-" ? "ห้องที่ " + outputresponse.Value.vRoomNumber : "", " ",
-                                                      outputresponse.Value.vVillageName != null && outputresponse.Value.vVillageName != "-" ? "หมู่บ้าน " + outputresponse.Value.vVillageName : "", " ",
-                                                      outputresponse.Value.vMooNumber != null && outputresponse.Value.vMooNumber != "-" ? "หมู่ที่ " + outputresponse.Value.vMooNumber : "", " ",
-                                                      outputresponse.Value.vSoiName != null && outputresponse.Value.vSoiName != "-" ? "ซอย " + outputresponse.Value.vSoiName : "", " ",
-                                                      outputresponse.Value.vStreetName != null && outputresponse.Value.vStreetName != "-" ? "ถนน " + outputresponse.Value.vStreetName : "", " ",
-                                                      outputresponse.Value.vThambol != null && outputresponse.Value.vThambol != "-" ? "ตำบล/แขวง " + outputresponse.Value.vThambol : "", " ",
-                                                      outputresponse.Value.vAmphur != null && outputresponse.Value.vAmphur != "-" ? "อำเภอ/เขต " + outputresponse.Value.vAmphur : "", " ",
-                                                      outputresponse.Value.vProvince != null && outputresponse.Value.vProvince != "-" ? "จังหวัด " + outputresponse.Value.vProvince : "", " ",
+                                                      outputresponse.Value.vBuildingName != null && outputresponse.Value.vBuildingName != "-" ? _localizer["Building"] +" " + outputresponse.Value.vBuildingName : "", " ",
+                                                      outputresponse.Value.vFloorNumber != null && outputresponse.Value.vFloorNumber != "-" ? _localizer["Floor"] + " " + outputresponse.Value.vFloorNumber : "", " ",
+                                                      outputresponse.Value.vRoomNumber != null && outputresponse.Value.vRoomNumber != "-" ? _localizer["Room"] + " " + outputresponse.Value.vRoomNumber : "", " ",
+                                                      outputresponse.Value.vVillageName != null && outputresponse.Value.vVillageName != "-" ? _localizer["Village"] + " " + outputresponse.Value.vVillageName : "", " ",
+                                                      outputresponse.Value.vMooNumber != null && outputresponse.Value.vMooNumber != "-" ? _localizer["Moo"] + " " + outputresponse.Value.vMooNumber : "", " ",
+                                                      outputresponse.Value.vSoiName != null && outputresponse.Value.vSoiName != "-" ? _localizer["Soi"] + " " + outputresponse.Value.vSoiName : "", " ",
+                                                      outputresponse.Value.vStreetName != null && outputresponse.Value.vStreetName != "-" ? _localizer["Street"] + " " + outputresponse.Value.vStreetName : "", " ",
+                                                      outputresponse.Value.vThambol != null && outputresponse.Value.vThambol != "-" ? _localizer["SubDistrict"] + " " + outputresponse.Value.vThambol : "", " ",
+                                                      outputresponse.Value.vAmphur != null && outputresponse.Value.vAmphur != "-" ? _localizer["District"] + " " + outputresponse.Value.vAmphur : "", " ",
+                                                      outputresponse.Value.vProvince != null && outputresponse.Value.vProvince != "-" ? _localizer["Province"] + " " + outputresponse.Value.vProvince : "", " ",
                                                       outputresponse.Value.vPostCode != null && outputresponse.Value.vPostCode != "-" ? outputresponse.Value.vPostCode : "");
                             ListResult.Add(new VATModal
                             {
@@ -1166,19 +1158,16 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
             }
-            if (Lang == "")
-            {
-                getsession();
-            }
-            if (Lang == "TH")
-            {
-                output.Add(new SubcontractDropdownModel
-                {
-                    dropdown_text = "กรุณาเลือกประเภทบัญชี",
-                    dropdown_value = ""
 
-                });
+            output.Add(new SubcontractDropdownModel
+            {
+                dropdown_text = _localizer["ddlBankAccountType"],
+                dropdown_value = ""
 
+            });
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            if (culture.Name == "th")
+            {
                 getAllBankAccList = output.Select(a => new SelectListItem
                 {
                     Text = a.dropdown_text,
@@ -1187,17 +1176,11 @@ namespace SubcontractProfile.Web.Controllers
             }
             else
             {
-                output.Add(new SubcontractDropdownModel
-                {
-                    dropdown_text = "Select Acount Type",
-                    dropdown_value = ""
-                });
                 getAllBankAccList = output.Select(a => new SelectListItem
                 {
                     Text = a.dropdown_text,
                     Value = a.dropdown_value
                 }).OrderBy(c => c.Value).ToList();
-
             }
             return Json(new { response = getAllBankAccList });
         }
