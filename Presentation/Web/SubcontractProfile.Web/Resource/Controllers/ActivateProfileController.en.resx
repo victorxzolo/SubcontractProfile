@@ -117,52 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ALL" xml:space="preserve">
-    <value>ALL</value>
+  <data name="ActivateProfile" xml:space="preserve">
+    <value>Activate Profile</value>
   </data>
-  <data name="CompanyNameEng" xml:space="preserve">
-    <value>ชื่อบริษัท (อังกฤษ)</value>
+  <data name="MessageError" xml:space="preserve">
+    <value>Data cannot be save. Please contact System Admin.</value>
   </data>
-  <data name="CompanyNameThai" xml:space="preserve">
-    <value>ชื่อบริษัท (ไทย)</value>
+  <data name="MessageSuccess" xml:space="preserve">
+    <value>Update Success</value>
   </data>
-  <data name="RegisterDate" xml:space="preserve">
-    <value>วันที่สมัคร</value>
+  <data name="MessageUnSuccess" xml:space="preserve">
+    <value>Data is not correct, Please Check Data or Contact System Admin</value>
   </data>
-  <data name="RegisterType" xml:space="preserve">
-    <value>ประเภทผู้สมัคร</value>
-  </data>
-  <data name="Reset" xml:space="preserve">
-    <value>ล้างข้อมูล</value>
-  </data>
-  <data name="Search" xml:space="preserve">
-    <value>ค้นหาข้อมูล</value>
-  </data>
-  <data name="SearchCompanyVerify" xml:space="preserve">
-    <value>Search Company Verify</value>
-  </data>
-  <data name="SearchResult" xml:space="preserve">
-    <value>ผลการค้นหา</value>
-  </data>
-  <data name="Select" xml:space="preserve">
-    <value>เลือก</value>
-  </data>
-  <data name="Status" xml:space="preserve">
-    <value>สถานะ</value>
-  </data>
-  <data name="TaxID" xml:space="preserve">
-    <value>เลขผู้เสียภาษี</value>
-  </data>
-  <data name="ToDate" xml:space="preserve">
-    <value>ถึงวันที่</value>
-  </data>
-  <data name="VenderCode" xml:space="preserve">
-    <value>Vender Code</value>
-  </data>
-  <data name="VerifyCompany" xml:space="preserve">
-    <value>ตรวจสอบข้อมูลบริษัท</value>
-  </data>
-  <data name="VerifyDate" xml:space="preserve">
-    <value>วันที่ตรวจสอบ</value>
+  <data name="Registration" xml:space="preserve">
+    <value>Registration</value>
   </data>
 </root>

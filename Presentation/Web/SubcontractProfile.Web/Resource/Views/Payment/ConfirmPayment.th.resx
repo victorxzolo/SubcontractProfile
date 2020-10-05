@@ -193,7 +193,7 @@
     <value>วันที่ชำระเงิน จาก</value>
   </data>
   <data name="PaymentDateTo" xml:space="preserve">
-    <value>ถึง วันที่ชำระเงิน </value>
+    <value>วันที่ชำระเงิน ถึง</value>
   </data>
   <data name="PaymentMethod" xml:space="preserve">
     <value>รูปแบบการชำระเงิน</value>
@@ -238,7 +238,7 @@
     <value>สถานะ</value>
   </data>
   <data name="TaxID" xml:space="preserve">
-    <value>เลขประจำตัวผู้เสียภาษี</value>
+    <value>เลขผู้เสียภาษี</value>
   </data>
   <data name="TheTransferSlip" xml:space="preserve">
     <value>หลักฐานการโอนเงิน</value>

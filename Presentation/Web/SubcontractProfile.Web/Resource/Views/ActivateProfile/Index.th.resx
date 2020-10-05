@@ -154,10 +154,10 @@
     <value>วันที่ลงทะเบียน</value>
   </data>
   <data name="RegisterDateFrom" xml:space="preserve">
-    <value>วันที่ลงทะเบียนตั้งแต่</value>
+    <value>วันที่ลงทะเบียน จาก</value>
   </data>
   <data name="RegisterDateTo" xml:space="preserve">
-    <value>วันที่ลงทะเบียนถึง</value>
+    <value>วันที่ลงทะเบียน ถึง</value>
   </data>
   <data name="RegisterType" xml:space="preserve">
     <value>ประเภทผู้สมัคร</value>

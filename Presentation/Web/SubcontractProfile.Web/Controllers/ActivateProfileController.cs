@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using Newtonsoft.Json;
 using SubcontractProfile.Web.Extension;
 using SubcontractProfile.Web.Model;
@@ -21,9 +22,13 @@ namespace SubcontractProfile.Web.Controllers
         private readonly string strpathAPI;
         private readonly IConfiguration _configuration;
 
-        public ActivateProfileController(IConfiguration configuration)
+        private readonly IStringLocalizer<ActivateProfileController> _localizer;
+
+        public ActivateProfileController(IConfiguration configuration, IStringLocalizer<ActivateProfileController> localizer)
         {
             _configuration = configuration;
+
+            _localizer = localizer;
 
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
             //Lang = "TH";
@@ -34,8 +39,8 @@ namespace SubcontractProfile.Web.Controllers
 
         public IActionResult Index()
         {
-            ViewData["Controller"] = "Registration";
-            ViewData["View"] = "Activate Profile";
+            ViewData["Controller"] = _localizer["Registration"];
+            ViewData["View"] = _localizer["ActivateProfile"];
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userAISLogin");
             if (userProfile == null)
             {
@@ -180,13 +185,13 @@ namespace SubcontractProfile.Web.Controllers
                     if (responseResult.IsSuccessStatusCode)
                     {
                         result.Status = true;
-                        result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                        result.Message = _localizer["MessageSuccess"];
                         result.StatusError = "0";
                     }
                     else
                     {
                         result.Status = false;
-                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        result.Message = _localizer["MessageUnSuccess"];
                         result.StatusError = "-1";
                     }
                 }
@@ -195,7 +200,7 @@ namespace SubcontractProfile.Web.Controllers
 
             catch (Exception ex)
             {
-                result.Message = "ไม่สามารถบันทึกข้อมูลได้ กรุณาติดต่อ Administrator.";
+                result.Message = _localizer["MessageError"];
                 result.Status = false;
                 result.StatusError = "0";
             }

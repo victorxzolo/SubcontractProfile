@@ -28,8 +28,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.EntityFrameworkCore.Update.Internal;
 using System.Security.Cryptography;
-
-
+using Microsoft.AspNetCore.Localization;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -127,6 +126,14 @@ namespace SubcontractProfile.Web.Controllers
                         SessionHelper.SetObjectAsJson(HttpContext.Session, "language", Lang);
                         //var str_L= SessionHelper.GetObjectFromJson<string>(HttpContext.Session, "language");
                         //var datauser= SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+                        if (model.Language != null && model.Language != "")
+                        {
+                            SetLanguage(model.Language);
+                        }
+                        else
+                        {
+                            SetLanguage("th");
+                        }
                     }
                     else
                     {
@@ -326,6 +333,16 @@ namespace SubcontractProfile.Web.Controllers
             }
 
             public static int LatestUICulture { get; set; }
+        }
+
+        public void SetLanguage(string culture)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
         }
 
     }

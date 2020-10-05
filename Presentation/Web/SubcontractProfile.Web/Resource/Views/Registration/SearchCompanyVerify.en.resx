@@ -120,6 +120,9 @@
   <data name="ALL" xml:space="preserve">
     <value>ALL</value>
   </data>
+  <data name="CompanyNameEng" xml:space="preserve">
+    <value>Company Name (EN)</value>
+  </data>
   <data name="CompanyNameThai" xml:space="preserve">
     <value>Company Name (TH)</value>
   </data>

@@ -119,14 +119,14 @@
                             <circle cx="12" cy="12" r="10"></circle>
                             <line x1="15" y1="9" x2="9" y2="15"></line>
                             <line x1="9" y1="9" x2="15" y2="15"></line>
-                        </svg> @Localizer["Status"]
+                        </svg> @Localizer["Reset"]
                     </button>
                     <button id="btnSearch" type="button" class="btn btn-success mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                              stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
                             <circle cx="11" cy="11" r="8"></circle>
                             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>  ค้นหาข้อมูล
+                        </svg> @Localizer["Search"]
                     </button>
 
                 </div>
@@ -139,7 +139,7 @@
                                      style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet"
                                      viewBox="0 0 512 512">
                                     <path fill="white" d="M199.066 456l-7.379-7.514l-3.94-3.9l-86.2-86.2l.053-.055l-83.664-83.666l97.614-97.613l83.565 83.565L398.388 61.344L496 158.958L296.729 358.229l-11.26 11.371zM146.6 358.183l52.459 52.46l.1-.1l.054.054l52.311-52.311l11.259-11.368l187.963-187.96l-52.358-52.358l-199.273 199.271l-83.565-83.565l-52.359 52.359l83.464 83.463z" />
-                                </svg> ตรวจสอบข้อมูลบริษัท
+                                </svg> @Localizer["VerifyCompany"]
                             </button>
                         </div>
 
@@ -150,23 +150,23 @@
 
             <br />
             <div class="widget-heading">
-                <h3 class="">ผลการค้นหา</h3>
+                <h3 class=""> @Localizer["SearchResult"]</h3>
 
             </div>
             <div class="table-responsive mb-4 mt-4">
                 <table id="tbSearchComVerifyResult" class="table table-hover" style="width:100%">
                     <thead>
                         <tr>
-                            <th style="width:30px">เลือก</th>
+                            <th style="width:30px">@Localizer["Select"]</th>
                             <th></th>
-                            <th>สถานะ</th>
-                            <th>ประเภทผู้สมัคร</th>
-                            <th>เลขประจำตัวผู้เสียภาษี</th>
-                            <th>ชื่อบริษัท (ไทย)</th>
-                            <th>ชื่อบริษัท (อังกฤษ)</th>
-                            <th>Vender Code</th>
-                            <th>วันที่สมัคร</th>
-                            <th>วันที่ตรวจสอบ</th>
+                            <th>@Localizer["Status"]</th>
+                            <th>@Localizer["RegisterType"]</th>
+                            <th>@Localizer["TaxID"]</th>
+                            <th>@Localizer["CompanyNameThai"]</th>
+                            <th>@Localizer["CompanyNameEng"]</th>
+                            <th>@Localizer["VenderCode"]</th>
+                            <th>@Localizer["RegisterDate"]</th>
+                            <th>@Localizer["VerifyDate"]</th>
                             @*<th >ตรวจสอบโดย</th>*@
                         </tr>
                     </thead>
