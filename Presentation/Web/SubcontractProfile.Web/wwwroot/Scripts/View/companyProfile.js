@@ -1902,28 +1902,32 @@ function uploadFiles(inputId) {
 
                 if (data != null) {
 
+
                     $('#ddlprefixcompany_name_th').empty();
                     $('#ddlprefixcompany_name_en').empty();
 
                     $('#ddlprefixcompany_name_th_dealer').empty();
                     $('#ddlprefixcompany_name_en_dealer').empty();
+                    if (data.responsetitleTH.length > 0) {
+                        $.each(data.responsetitleTH, function (index, value) {
 
-                    $.each(data.responsetitleTH, function () {
+                            $('#ddlprefixcompany_name_th').append($('<option></option>').val(value.Value == "0" ? "" : value.Value).text(value.Text));
+                            $('#ddlprefixcompany_name_en').append($('<option></option>').val(this.Value == "0" ? "" : this.Value).text(this.Text));
 
-                        $('#ddlprefixcompany_name_th').append($('<option></option>').val(this.CompanyTypeId == "0" ? "" : this.CompanyTypeId).text(this.CompanyTypeNameTh));
-                       // $('#ddlprefixcompany_name_en').append($('<option></option>').val(this.CompanyTypeId == "0" ? "" : this.CompanyTypeId).text(this.CompanyTypeNameEn));
+                            $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val(value.Value == "0" ? "" : value.Value).text(value.Text));
+                            $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val(this.Value == "0" ? "" : this.Value).text(this.Text));
+                        });
+                    }
+                    else if (data.responsetitleEN.length > 0) {
+                        $.each(data.responsetitleEN, function (index, value) {
 
-                        $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val(this.CompanyTypeId == "0" ? "" : this.CompanyTypeId).text(this.CompanyTypeNameTh));
-                        //$('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val(this.CompanyTypeId == "0" ? "" : this.CompanyTypeId).text(this.CompanyTypeNameEn));
-                    });
-                    $.each(data.responsetitleEN, function () {
+                            $('#ddlprefixcompany_name_th').append($('<option></option>').val(this.Value == "0" ? "" : this.Value).text(this.Text));
+                            $('#ddlprefixcompany_name_en').append($('<option></option>').val(value.Value == "0" ? "" : value.Value).text(value.Text));
 
-                        //$('#ddlprefixcompany_name_th').append($('<option></option>').val(this.CompanyTypeId == "0" ? "" : this.CompanyTypeId).text(this.CompanyTypeNameTh));
-                         $('#ddlprefixcompany_name_en').append($('<option></option>').val(this.CompanyTypeId == "0" ? "" : this.CompanyTypeId).text(this.CompanyTypeNameEn));
-
-                        //$('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val(this.CompanyTypeId == "0" ? "" : this.CompanyTypeId).text(this.CompanyTypeNameTh));
-                        $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val(this.CompanyTypeId == "0" ? "" : this.CompanyTypeId).text(this.CompanyTypeNameEn));
-                    });
+                            $('#ddlprefixcompany_name_th_dealer').append($('<option></option>').val(this.Value == "0" ? "" : this.Value).text(this.Text));
+                            $('#ddlprefixcompany_name_en_dealer').append($('<option></option>').val(value.Value == "0" ? "" : value.Value).text(value.Text));
+                        });
+                    }
                 }
 
 
