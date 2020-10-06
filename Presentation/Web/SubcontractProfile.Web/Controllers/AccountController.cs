@@ -1233,16 +1233,16 @@ namespace SubcontractProfile.Web.Controllers
                         {
                             string straddr = "";
                              straddr= string.Concat( outputresponse.Value.vHouseNumber != "-" ? outputresponse.Value.vHouseNumber : "" , " " ,
-                                                       outputresponse.Value.vBuildingName != "-" ? "อาคาร " + outputresponse.Value.vBuildingName : "" , " " ,
-                                                       outputresponse.Value.vFloorNumber != "-" ? "ชั้นที่ " + outputresponse.Value.vFloorNumber : "" , " " ,
-                                                       outputresponse.Value.vRoomNumber != "-" ? "ห้องที่ " + outputresponse.Value.vRoomNumber : "" , " " ,
-                                                       outputresponse.Value.vVillageName != "-" ? "หมู่บ้าน " + outputresponse.Value.vVillageName : "" , " " ,
-                                                       outputresponse.Value.vMooNumber != "-" ? "หมู่ที่ " + outputresponse.Value.vMooNumber : "" , " " ,
-                                                       outputresponse.Value.vSoiName != "-" ? "ซอย " + outputresponse.Value.vSoiName : "" , " " ,
-                                                       outputresponse.Value.vStreetName != "-" ? "ถนน " + outputresponse.Value.vStreetName : "" , " " ,
-                                                       outputresponse.Value.vThambol != "-" ? "ตำบล/แขวง " + outputresponse.Value.vThambol : "" , " " ,
-                                                       outputresponse.Value.vAmphur != "-" ? "อำเภอ/เขต " + outputresponse.Value.vAmphur : "" ," " ,
-                                                       outputresponse.Value.vProvince != "-" ? "จังหวัด " + outputresponse.Value.vProvince : "" , " " ,
+                                                       outputresponse.Value.vBuildingName != "-" ? _localizer["Building"]+" " + outputresponse.Value.vBuildingName : "" , " " ,
+                                                       outputresponse.Value.vFloorNumber != "-" ? _localizer["Floor"] + " " + outputresponse.Value.vFloorNumber : "" , " " ,
+                                                       outputresponse.Value.vRoomNumber != "-" ? _localizer["Room"] + " " + outputresponse.Value.vRoomNumber : "" , " " ,
+                                                       outputresponse.Value.vVillageName != "-" ? _localizer["Village"] + " " + outputresponse.Value.vVillageName : "" , " " ,
+                                                       outputresponse.Value.vMooNumber != "-" ? _localizer["Moo"] + " " + outputresponse.Value.vMooNumber : "" , " " ,
+                                                       outputresponse.Value.vSoiName != "-" ? _localizer["Soi"] + " " + outputresponse.Value.vSoiName : "" , " " ,
+                                                       outputresponse.Value.vStreetName != "-" ? _localizer["Street"] + " " + outputresponse.Value.vStreetName : "" , " " ,
+                                                       outputresponse.Value.vThambol != "-" ? _localizer["SubDistrict"] + " " + outputresponse.Value.vThambol : "" , " " ,
+                                                       outputresponse.Value.vAmphur != "-" ? _localizer["District"] + " " + outputresponse.Value.vAmphur : "" ," " ,
+                                                       outputresponse.Value.vProvince != "-" ? _localizer["province"] + " " + outputresponse.Value.vProvince : "" , " " ,
                                                        outputresponse.Value.vPostCode != "-" ? outputresponse.Value.vPostCode : "");
                             ListResult.Add(new VATModal {
                                 vAmphur = outputresponse.Value.vAmphur,
@@ -1581,16 +1581,16 @@ namespace SubcontractProfile.Web.Controllers
                     {
                         string straddr = "";
                         straddr = string.Concat(a.HouseNo != null && a.HouseNo != "" ? a.HouseNo : "", " ",
-                                                  a.Building != null && a.Building != "" ? "อาคาร " + a.Building : "", " ",
-                                                  a.Floor != null && a.Floor != "" ? "ชั้นที่ " + a.Floor : "", " ",
-                                                  a.RoomNo != null && a.RoomNo != "" ? "ห้องที่ " + a.RoomNo : "", " ",
-                                                  a.VillageName != null && a.VillageName != "" ? "หมู่บ้าน " + a.VillageName : "", " ",
-                                                  a.Moo != null ? "หมู่ที่ " + a.Moo : "", " ",
-                                                  a.Soi != null && a.Soi != "" ? "ซอย " + a.Soi : "", " ",
-                                                  a.Road != null && a.Road != "" ? "ถนน " + a.Road : "", " ",
-                                                  a.SubDistrictId != 0 ? "ตำบล/แขวง " + a.sub_district_name : "", " ",
-                                                  a.DistrictId != 0 ? "อำเภอ/เขต " + a.district_name : "", " ",
-                                                  a.ProvinceId != 0 ? "จังหวัด " + a.province_name : "", " ",
+                                                  a.Building != null && a.Building != "" ? _localizer["Building"] + " " + a.Building : "", " ",
+                                                  a.Floor != null && a.Floor != "" ? _localizer["Floor"] + " " + a.Floor : "", " ",
+                                                  a.RoomNo != null && a.RoomNo != "" ? _localizer["Room"] + " " + a.RoomNo : "", " ",
+                                                  a.VillageName != null && a.VillageName != "" ? _localizer["Village"] + " " + a.VillageName : "", " ",
+                                                  a.Moo != null ? _localizer["Moo"] + " " + a.Moo : "", " ",
+                                                  a.Soi != null && a.Soi != "" ? _localizer["Soi"] + " " + a.Soi : "", " ",
+                                                  a.Road != null && a.Road != "" ? _localizer["Street"] + " " + a.Road : "", " ",
+                                                  a.SubDistrictId != 0 ? _localizer["SubDistrict"] + " " + a.sub_district_name : "", " ",
+                                                  a.DistrictId != 0 ? _localizer["District"] + " " + a.district_name : "", " ",
+                                                  a.ProvinceId != 0 ? _localizer["province"] + " " + a.province_name : "", " ",
                                                   a.ZipCode != "" ? a.ZipCode : "");
                         a.outFullAddress = straddr;
                     }
@@ -1668,7 +1668,7 @@ namespace SubcontractProfile.Web.Controllers
                     if (L_user != null && L_user.Count > 0)
                     {
                         res.Status = false;
-                        res.Message = "Username นี้มีในระบบแล้ว";
+                        res.Message = _localizer["MessageCheckUser"];
                         res.StatusError = "-1";
                     }
                     else
@@ -1776,13 +1776,13 @@ namespace SubcontractProfile.Web.Controllers
                                         {
 
                                             res.Status = true;
-                                            res.Message = "Register Success";
+                                            res.Message = _localizer["MessageRegisSuccess"];
                                             res.StatusError = "0";
                                         }
                                         else
                                         {
                                             res.Status = false;
-                                            res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                            res.Message = _localizer["MessageAddresUnSuccess"];
                                             res.StatusError = "-1";
                                         }
                                     }
@@ -1790,7 +1790,7 @@ namespace SubcontractProfile.Web.Controllers
                                 else
                                 {
                                     res.Status = false;
-                                    res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                    res.Message = _localizer["MessageAddresUnSuccess"];
                                     res.StatusError = "-1";
                                 }
                                 #endregion
@@ -1798,14 +1798,14 @@ namespace SubcontractProfile.Web.Controllers
                             else
                             {
                                 res.Status = false;
-                                res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                                res.Message = _localizer["MessageUnSuccess"];
                                 res.StatusError = "-1";
                             }
                         }
                         else
                         {
                             res.Status = false;
-                            res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                            res.Message = _localizer["MessageUnSuccess"];
                             res.StatusError = "-1";
                         }
 
@@ -1817,7 +1817,7 @@ namespace SubcontractProfile.Web.Controllers
                     else
                 {
                     res.Status = false;
-                    res.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                    res.Message = _localizer["MessageUnSuccess"];
                     res.StatusError = "-1";
                 }
             }
@@ -1887,7 +1887,7 @@ namespace SubcontractProfile.Web.Controllers
                             )
                         {
                             statusupload = false;
-                            strmess = "Upload type file miss match.";
+                            strmess = _localizer["MessageUploadmissmatch"];
                         }
                         else
                         {
@@ -1895,7 +1895,7 @@ namespace SubcontractProfile.Web.Controllers
                             if (fileSize > MegaBytes)
                             {
                                 statusupload = false;
-                                strmess = "Upload file is too large.";
+                                strmess = _localizer["MessageUploadtoolage"];
                             }
                             else
                             {
@@ -1935,7 +1935,7 @@ namespace SubcontractProfile.Web.Controllers
                                     SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", L_File);
                                 }
 
-                                strmess = "Upload file success";
+                                strmess = _localizer["MessageUploadSuccess"];
                             }
                             
                         }

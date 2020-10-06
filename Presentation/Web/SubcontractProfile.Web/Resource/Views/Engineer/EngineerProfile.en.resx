@@ -201,6 +201,9 @@
   <data name="ContractInformation" xml:space="preserve">
     <value>Contract Information</value>
   </data>
+  <data name="ddlPleaseSelect" xml:space="preserve">
+    <value>Please Select</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using Newtonsoft.Json;
 using SubcontractProfile.Web.Extension;
 using SubcontractProfile.Web.Model;
@@ -26,11 +27,12 @@ namespace SubcontractProfile.Web.Controllers
         private readonly string strpathUpload;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private string Lang = "";
-
-        public EngineerController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        private readonly IStringLocalizer<EngineerController> _localizer;
+        public EngineerController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IStringLocalizer<EngineerController> localizer)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
+            _localizer = localizer;
 
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
 
@@ -47,17 +49,12 @@ namespace SubcontractProfile.Web.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            getsession();
-            if (Lang == "TH")
-            {
-                ViewData["Controller"] = "ข้อมูลโปรไฟล์";
-                ViewData["View"] = "ข้อมูลวิศวกร";
-            }
-            else
-            {
-                ViewData["Controller"] = "Profile";
-                ViewData["View"] = "Engineer Profile";
-            }
+
+        
+                ViewData["Controller"] = _localizer["Profile"];
+                ViewData["View"] = _localizer["EngineerProfile"];
+
+
             // ViewBag.Pageitem = "Engineer";
             return View();
         }
@@ -456,13 +453,13 @@ namespace SubcontractProfile.Web.Controllers
                         if (response.IsSuccessStatusCode)
                         {
                             result.Status = true;
-                            result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                            result.Message = _localizer["MessageSuccess"];
                             result.StatusError = "0";
                         }
                         else
                         {
                             result.Status = false;
-                            result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                            result.Message = _localizer["MessageUnSuccess"];
                             result.StatusError = "-1";
                         }
 
@@ -471,7 +468,7 @@ namespace SubcontractProfile.Web.Controllers
                     else
                     {
                         result.Status = false;
-                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        result.Message = _localizer["MessageUnSuccess"];
                         result.StatusError = "-1";
                     }
 
@@ -547,13 +544,13 @@ namespace SubcontractProfile.Web.Controllers
                         if (responseResultPersonal.IsSuccessStatusCode)
                         {
                             result.Status = true;
-                            result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                            result.Message = _localizer["MessageSuccess"];
                             result.StatusError = "0";
                         }
                         else
                         {
                             result.Status = false;
-                            result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                            result.Message = _localizer["MessageUnSuccess"];
                             result.StatusError = "-1";
                         }
 
@@ -561,7 +558,7 @@ namespace SubcontractProfile.Web.Controllers
                     else
                     {
                         result.Status = false;
-                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        result.Message = _localizer["MessageUnSuccess"];
                         result.StatusError = "-1";
                     }
                 }
@@ -569,7 +566,7 @@ namespace SubcontractProfile.Web.Controllers
 
             catch (Exception ex)
             {
-                result.Message = "ไม่สามารถบันทึกข้อมูลได้ กรุณาติดต่อ Administrator.";
+                result.Message = _localizer["MessageError"];
                 result.Status = false;
                 result.StatusError = "0";
             }
@@ -622,21 +619,21 @@ namespace SubcontractProfile.Web.Controllers
                        
                     }
 
-                    result.Message = "ลบข้อมูลเรียบร้อย";
+                    result.Message = _localizer["MessageDeleteSuccess"];
                     result.Status = true;
                     result.StatusError = "0";
                 }
                 else
                 {
                     result.Status = false;
-                    result.Message = "ลบข้อมูลไม่สำเร็จ กรุณาติดต่อ Administrator.";
+                    result.Message = _localizer["MessageDeleteUnSuccess"];
                     result.StatusError = "-1";
                 }
 
             }
             catch (Exception ex)
             {
-                result.Message = "ลบข้อมูลไม่สำเร็จ กรุณาติดต่อ Administrator.";
+                result.Message = _localizer["MessageDeleteUnSuccess"];
                 result.StatusError = "-1";
             }
             return Json(result);
@@ -672,7 +669,7 @@ namespace SubcontractProfile.Web.Controllers
                                 )
                         {
                             statusupload = false;
-                            strmess = "Upload type file miss match.";
+                            strmess = _localizer["MessageUploadmissmatch"];
                         }
                         else
                         {
@@ -682,12 +679,12 @@ namespace SubcontractProfile.Web.Controllers
                                 if (fileSize > MegaBytes)
                                 {
                                     statusupload = false;
-                                    strmess = "Upload file is too large.";
+                                    strmess = _localizer["MessageUploadtoolage"];
                                 }
                                 else
                                 {
                                     fid = Guid.NewGuid();
-                                    strmess = "Upload file success.";
+                                    strmess = _localizer["MessageUploadSuccess"];
                                 }
                             }
                             else
@@ -695,12 +692,12 @@ namespace SubcontractProfile.Web.Controllers
                                 if (fileSize > TMegaBytes)
                                 {
                                     statusupload = false;
-                                    strmess = "Upload file is too large.";
+                                    strmess = _localizer["MessageUploadtoolage"];
                                 }
                                 else
                                 {
                                     fid = Guid.NewGuid();
-                                    strmess = "Upload file success.";
+                                    strmess = _localizer["MessageUploadSuccess"];
                                 }
                             }
 

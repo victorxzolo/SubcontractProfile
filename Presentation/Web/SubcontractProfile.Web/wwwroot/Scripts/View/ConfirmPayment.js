@@ -209,8 +209,8 @@ function clearData() {
     $('#payment_datetime').val('');
 
     $('#hdupfileslip').val('');
-    $('#lbuploadslip').html('Choose file');
-    $("#nameslip_attach_file").html('Choose file');
+    $('#lbuploadslip').html(localizedData.ChooseFile);
+    $("#nameslip_attach_file").html(localizedData.ChooseFile);
      
     $('#linkdownload').text('');
 
@@ -284,7 +284,7 @@ function CheckFileUpload(inputId) {
                     $('#hdupfileslip').val(data.file_id);
                 }
                 else {
-                    $('#lbuploadslip').text('เลือกไฟล์');
+                    $('#lbuploadslip').text(localizedData.ChooseFile);
                     $('#hdupfileslip').val('');
                 }
                
@@ -698,14 +698,14 @@ function UpdatePayment(PaymentId) {
         success: function (response) {
             if (response.Status) {
                 bootbox.alert({
-                    message: "แจ้งโอนเงินสำเร็จ"
+                    message: response.Message
                 })
 
                 $("#ConfirmPayment").modal('hide');
             }
             else {
                 bootbox.alert({
-                    message: "แจ้งโอนเงินไม่สำเร็จ : " + response.Data,
+                    message: response.Message,
 
                 })
 
@@ -734,7 +734,7 @@ function clearpayment() {
     newInput.className = oldInput.className;
     newInput.style.cssText = oldInput.style.cssText;
     oldInput.parentNode.replaceChild(newInput, oldInput);
-    $("#nameslip_attach_file").text('Choose file');
+    $("#nameslip_attach_file").text(localizedData.ChooseFile);
 
     $("#remark").val('');
 
@@ -764,21 +764,17 @@ function Getpaymentchannal() {
         contentType: false,
         async: false,
         success: function (data) {
-            if (data != null) {
-
-                $('#payment_channal').empty();
-
+            $('#payment_channal').empty();
 
                 $.each(data.response, function () {
                     $('#payment_channal').append($("<option></option>").val(this.Value).text(this.Text));
                 });
-            }
-            else {
-                $('#payment_channal').empty();
-                $('#payment_channal').append($("<option></option>").val("").text("Select Payment Transfer"));
-            }
+
+
         },
         failure: function (msg) {
+            $('#payment_channal').empty();
+            $('#payment_channal').append($("<option></option>").val("").text(localizedData.ddlSelectPaymentMethod));
         }
     });
 
@@ -868,7 +864,7 @@ function GetBankTransfer() {
         },
         failure: function (msg) {
             $('#bank_transfer').empty();
-            $('#bank_transfer').append($("<option></option>").val("").text("Select Bank"));
+            $('#bank_transfer').append($("<option></option>").val("").text(localizedData.ddlSelectBank));
         }
     });
 }
@@ -880,7 +876,6 @@ function GetStatus() {
         url: urlGetDataStatus,
         async: false,
         success: function (data) {
-            if (data != null) {
 
                 $('#paymentstatus').empty();
 
@@ -888,13 +883,11 @@ function GetStatus() {
                 $.each(data.response, function () {
                     $('#paymentstatus').append($("<option></option>").val(this.Value).text(this.Text));
                 });
-            }
-            else {
-                $('#paymentstatus').empty();
-                $('#paymentstatus').append($("<option></option>").val("").text("Select Status"));
-            }
+
         },
         failure: function (msg) {
+            $('#paymentstatus').empty();
+            $('#paymentstatus').append($("<option></option>").val("").text(localizedData.ddlSelectStatus));
         }
     });
 

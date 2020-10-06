@@ -351,6 +351,12 @@
   <data name="InvalidEmailFormat" xml:space="preserve">
     <value>รูปแบบอีเมล์ไม่ถูกต้อง</value>
   </data>
+  <data name="JSAddCompanyProfile" xml:space="preserve">
+    <value>เพิ่ม ข้อมูลบริษัท</value>
+  </data>
+  <data name="JSEditCompanyProfile" xml:space="preserve">
+    <value>แก้ไข ข้อมูลบริษัท222</value>
+  </data>
   <data name="JuristicPersonRegistrationNumber" xml:space="preserve">
     <value>เลขทะเบียนนิติบุคล</value>
   </data>

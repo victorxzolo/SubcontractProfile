@@ -1375,15 +1375,15 @@ function uploadFiles(inputId) {
                 else {
                     switch (inputId) {
                         case "inputUploadcertificate": $('#hdupfilecompany_certified').val('');
-                            $('#lbuploadcertificate').text('เลือกไฟล์');
+                            $('#lbuploadcertificate').text(localizedData.ChooseFile);
                             break;
                         case "inputUploadComRegis": $('#hdupfilecommercial_registration').val('');
-                            $('#lbuploadComRegis').text('เลือกไฟล์');
+                            $('#lbuploadComRegis').text(localizedData.ChooseFile);
                             break;
                         case "inputUpload20": $('#hdupfilevat_registration_certificate').val('');
-                            $('#lbupload20').text('เลือกไฟล์');
+                            $('#lbupload20').text(localizedData.ChooseFile);
                             break;
-                        case "inputuploadbookbank": $('#hduploadbookbank').val(''); $('#lbuploadbookbank').text('เลือกไฟล์'); break;
+                        case "inputuploadbookbank": $('#hduploadbookbank').val(''); $('#lbuploadbookbank').text(localizedData.ChooseFile); break;
                     }
 
                 }
@@ -1471,13 +1471,10 @@ function BindDDLsubdistrict(district) {
                     $('#ddlsubdistrict').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
                 });
                 $.each(data.responsezipcode, function () {
-                    if (this.Text == "กรุณาเลือกรหัสไปรษณีย์") {
 
-                        $('#ddlzipcode').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
-                    }
-                    else {
+                    
                         $('#ddlzipcode').append($("<option></option>").val(this.Value).text(this.Text));
-                    }
+                    
 
 
                 })
@@ -2012,7 +2009,7 @@ function getDataLocationById(locationId) {
                     // DownloadFileSlip(data.SlipAttachFile);
                 }
                 else {
-                    $('#lbBankAttach').text("เลือกไฟล์");
+                    $('#lbBankAttach').text(localizedData.ChooseFile);
                 }
 
 
@@ -2363,14 +2360,14 @@ function getTeamByLocationIdEdit(locationId) {
         async: false,
         success: function (data) {
             $("#Team").empty();
-            $("#Team").append('<option value="">--Please All--</option>');
+            $("#Team").append('<option value="">--' + localizedData.ddlPleaseSelect+'--</option>');
             $.each(data, function (id, result) {
                 $("#Team").append('<option value="' + result.TeamId + '">' + result.TeamNameTh + '</option>');
             });
         },
         failure: function () {
             $("#Team").empty();
-            $("#Team").append('<option value="">--Please All--</option>');
+            $("#Team").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
         }
     });
 }
@@ -2505,9 +2502,9 @@ function GetDropDownBank() {
         success: function (data) {
 
             $("#ddlBankName").empty();
-            $("#ddlBankName").append('<option value="">--Please Select--</option>');
+            $("#ddlBankName").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
             $("#BankName2").empty();
-            $("#BankName2").append('<option value="">--Please Select--</option>');
+            $("#BankName2").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
 
             $.each(data, function (id, result) {
                 $("#ddlBankName").append('<option value="' + result.BankName + '">' + result.BankName + '</option>');
@@ -2516,9 +2513,9 @@ function GetDropDownBank() {
         },
         failure: function () {
             $("#ddlBankName").empty();
-            $("#ddlBankName").append('<option value="">--Please All--</option>');
+            $("#ddlBankName").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
             $("#BankName2").empty();
-            $("#BankName2").append('<option value="">--Please All--</option>');
+            $("#BankName2").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
         }
     });
 }
@@ -2533,14 +2530,14 @@ function GetDropDownTitle() {
         success: function (data) {
 
             $("#Title").empty();
-            $("#Title").append('<option value="">--Please Select--</option>');
+            $("#Title").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
             $.each(data, function (id, result) {
                 $("#Title").append('<option value="' + result.dropdown_text + '">' + result.dropdown_text + '</option>');
             });
         },
         failure: function () {
             $("#Title").empty();
-            $("#Title").append('<option value="">--Please All--</option>');
+            $("#Title").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
         }
     });
 }

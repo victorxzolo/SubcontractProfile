@@ -135,6 +135,9 @@
   <data name="MessageCheckUser" xml:space="preserve">
     <value>Username is already in the system.</value>
   </data>
+  <data name="MessageLoginDuplicate" xml:space="preserve">
+    <value>Username or password does not match in system. Please register for use.</value>
+  </data>
   <data name="MessageRegisSuccess" xml:space="preserve">
     <value>Register Success</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="province" xml:space="preserve">
     <value>province</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
   </data>
   <data name="Room" xml:space="preserve">
     <value>Room</value>

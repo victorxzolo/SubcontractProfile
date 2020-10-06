@@ -117,61 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Building" xml:space="preserve">
-    <value>Building</value>
+  <data name="EngineerProfile" xml:space="preserve">
+    <value>ข้อมูลวิศวกร</value>
   </data>
-  <data name="CompanyProfile" xml:space="preserve">
-    <value>Company Profile</value>
+  <data name="MessageDeleteSuccess" xml:space="preserve">
+    <value>ลบข้อมูลเรียบร้อย</value>
   </data>
-  <data name="ddlBankAccountType" xml:space="preserve">
-    <value>Select Acount Type</value>
+  <data name="MessageDeleteUnSuccess" xml:space="preserve">
+    <value>ลบข้อมูลไม่สำเร็จ กรุณาติดต่อ Administrator.</value>
   </data>
-  <data name="District" xml:space="preserve">
-    <value>District</value>
+  <data name="MessageError" xml:space="preserve">
+    <value>ไม่สามารถบันทึกข้อมูลได้ กรุณาติดต่อ Administrator.</value>
   </data>
-  <data name="Floor" xml:space="preserve">
-    <value>Floor</value>
-  </data>
-  <data name="MessageAddresUnSuccess" xml:space="preserve">
-    <value>Address Data is not correct, Please Check Data or Contact System Admin</value>
+  <data name="MessageSuccess" xml:space="preserve">
+    <value>บันทึกข้อมูลเรียบร้อยแล้ว</value>
   </data>
   <data name="MessageUnSuccess" xml:space="preserve">
-    <value>Data is not correct, Please Check Data or Contact System Admin</value>
-  </data>
-  <data name="MessageUpdateSuccess" xml:space="preserve">
-    <value>Update Success</value>
+    <value>ข้อมูลไม่ถูกต้อง, กรุณาตรวจสอบความถูกต้อง หรือ ติดต่อ System Admin</value>
   </data>
   <data name="MessageUploadmissmatch" xml:space="preserve">
-    <value>Upload type file miss match.</value>
+    <value>ประเภท Upoad file ไม่ตรงกับที่ระบบรองรับ</value>
   </data>
   <data name="MessageUploadSuccess" xml:space="preserve">
-    <value>Upload file success</value>
+    <value>Upload file สำเร็จ</value>
   </data>
   <data name="MessageUploadtoolage" xml:space="preserve">
-    <value>Upload file is too large.</value>
-  </data>
-  <data name="Moo" xml:space="preserve">
-    <value>Moo</value>
+    <value>Upload file มีขนาดใหญ่เกินกว่าที่ระบบกำหนด</value>
   </data>
   <data name="Profile" xml:space="preserve">
-    <value>Profile</value>
-  </data>
-  <data name="Province" xml:space="preserve">
-    <value>Province</value>
-  </data>
-  <data name="Room" xml:space="preserve">
-    <value>Room</value>
-  </data>
-  <data name="Soi" xml:space="preserve">
-    <value>Soi</value>
-  </data>
-  <data name="Street" xml:space="preserve">
-    <value>Street</value>
-  </data>
-  <data name="SubDistrict" xml:space="preserve">
-    <value>SubDistrict</value>
-  </data>
-  <data name="Village" xml:space="preserve">
-    <value>Village</value>
+    <value>ข้อมูลโปรไฟล์</value>
   </data>
 </root>

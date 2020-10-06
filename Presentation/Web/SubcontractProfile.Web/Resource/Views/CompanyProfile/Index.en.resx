@@ -348,6 +348,12 @@
   <data name="InvalidEmailFormat" xml:space="preserve">
     <value>Invalid Email Format</value>
   </data>
+  <data name="JSAddCompanyProfile" xml:space="preserve">
+    <value>เพิ่ม ข้อมูลบริษัท</value>
+  </data>
+  <data name="JSEditCompanyProfile" xml:space="preserve">
+    <value>แก้ไข ข้อมูลบริษัท222</value>
+  </data>
   <data name="JuristicPersonRegistrationNumber" xml:space="preserve">
     <value>Juristic Person Registration No.</value>
   </data>

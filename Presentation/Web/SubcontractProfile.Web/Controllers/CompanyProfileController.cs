@@ -633,9 +633,11 @@ namespace SubcontractProfile.Web.Controllers
                         var a = response.Content.ReadAsStringAsync().Result;
                         var L_addresstype = JsonConvert.DeserializeObject<List<SubcontractProfileAddressTypeModel>>(a);
 
+                        CultureInfo culture = CultureInfo.CurrentCulture;
+
                         foreach (var f in addressResult)
                         {
-                            if (Lang == "TH")
+                            if (culture.Name == "th")
                             {
                                 if(f.AddressTypeId != null)
                                 {
@@ -1224,7 +1226,7 @@ namespace SubcontractProfile.Web.Controllers
                             )
                             {
                                 statusupload = false;
-                                strmess = "Upload type file miss match.";
+                                strmess = _localizer["MessageUploadmissmatch"];
                             }
                         else
                         {
@@ -1234,7 +1236,7 @@ namespace SubcontractProfile.Web.Controllers
                                 if (fileSize > MegaBytes)
                                 {
                                     statusupload = false;
-                                    strmess = "Upload file is too large.";
+                                    strmess = _localizer["MessageUploadtoolage"];
                                 }
                                 else
                                 {
@@ -1269,7 +1271,7 @@ namespace SubcontractProfile.Web.Controllers
 
                                         SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompany", L_File);
                                     }
-                                    strmess = "Upload file success";
+                                    strmess = _localizer["MessageUploadSuccess"];
                                 }
                             }
                             else
@@ -1277,7 +1279,7 @@ namespace SubcontractProfile.Web.Controllers
                                 if (fileSize > TMegaBytes)
                                 {
                                     statusupload = false;
-                                    strmess = "Upload file is too large.";
+                                    strmess = _localizer["MessageUploadtoolage"];
                                 }
                                 else
                                 {
@@ -1312,7 +1314,7 @@ namespace SubcontractProfile.Web.Controllers
 
                                         SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompany", L_File);
                                     }
-                                    strmess = "Upload file success";
+                                    strmess = _localizer["MessageUploadSuccess"];
                                 }
                             }
                                 
@@ -1683,7 +1685,7 @@ namespace SubcontractProfile.Web.Controllers
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage response;
-
+                CultureInfo culture = CultureInfo.CurrentCulture;
                 foreach (var e in daftdata)
                 {
                     Guid addr_id = Guid.NewGuid();
@@ -1698,7 +1700,10 @@ namespace SubcontractProfile.Web.Controllers
                             var v = response.Content.ReadAsStringAsync().Result;
                             outputprovince = JsonConvert.DeserializeObject<List<SubcontractProfileProvinceModel>>(v);
                             string[] s_provice = e.province_name.Split(" ");
-                            if (Lang == "TH")
+
+                           
+
+                            if (culture.Name == "th")
                             {
                                 var w = outputprovince.First(x => x.ProvinceNameTh.Contains(s_provice[1].ToString()));
                                 e.ProvinceId = w.ProvinceId;
@@ -1721,7 +1726,7 @@ namespace SubcontractProfile.Web.Controllers
                             var v = response.Content.ReadAsStringAsync().Result;
                             outputdistrict = JsonConvert.DeserializeObject<List<SubcontractProfileDistrictModel>>(v);
                             string[] s_district = e.district_name.Split(" ");
-                            if (Lang == "TH")
+                            if (culture.Name == "th")
                             {
                                 var w = outputdistrict.First(d => d.DistrictNameTh.Contains(s_district[1].ToString()));
                                 e.DistrictId = w.DistrictId;
@@ -1744,7 +1749,7 @@ namespace SubcontractProfile.Web.Controllers
                             outputsubdistrict = JsonConvert.DeserializeObject<List<SubcontractProfileSubDistrictModel>>(v);
 
                             string[] s_subdistrict = e.sub_district_name.Split(" ");
-                            if (Lang == "TH")
+                            if (culture.Name == "th")
                             {
                                 var w = outputsubdistrict.First(d => d.SubDistrictNameTh.Contains(s_subdistrict[1].ToString()));
                                 e.SubDistrictId = w.SubDistrictId;

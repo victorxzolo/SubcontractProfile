@@ -187,7 +187,7 @@ $(document).ready(function () {
             $('#selection').html('You selected: ' + suggestion.value);
         },
         showNoSuggestionNotice: true,
-        noSuggestionNotice: 'Sorry, no matching results',
+        noSuggestionNotice: localizedData.MessageAutocomplete,
     });
 });
 
@@ -561,13 +561,7 @@ function GetStatus() {
                 
                 });
             }
-            else {
-                $('#ddlpaymentstatusais').empty();
-                $('#ddlpaymentstatusais').append($("<option></option>").val("").text("Select Status"));
 
-                $('#ddlStatus').empty();
-                $('#ddlStatus').append($("<option></option>").val("").text("Select Status"));
-            }
         },
         failure: function (msg) {
         }

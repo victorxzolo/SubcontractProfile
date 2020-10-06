@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using Newtonsoft.Json;
 using SubcontractProfile.Web.Extension;
 using SubcontractProfile.Web.Model;
@@ -31,11 +32,13 @@ namespace SubcontractProfile.Web.Controllers
         private const int MegaBytes = 1024 * 1024;
         private const int TMegaBytes = 3 * 1024 * 1024;
 
-
-        public PaymentController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        private readonly IStringLocalizer<PaymentController> _localizer;
+        public PaymentController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor
+            , IStringLocalizer<PaymentController> localizer)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
+            _localizer = localizer;
 
             client = new HttpClient();
             _configuration = configuration;
@@ -45,18 +48,12 @@ namespace SubcontractProfile.Web.Controllers
         }
         public IActionResult ConfirmPayment()
         {
-            ViewData["Title"] = "ConfirmPayment";
+            ViewData["Title"] = _localizer["Payment"];
             getsession();
-            if (Lang == "TH")
-            {
-                ViewData["Controller"] = "ชำระค่าอบรม";
-                ViewData["View"] = "ยืนยันชำระค่าอบรม";
-            }
-            else
-            {
-                ViewData["Controller"] = "Payment";
-                ViewData["View"] = "Confirm Payment";
-            }
+
+                ViewData["Controller"] = _localizer["Payment"];
+                ViewData["View"] = _localizer["ConfirmPayment"];
+
             return View();
         }
         public IActionResult VerifyPayment()
@@ -68,17 +65,9 @@ namespace SubcontractProfile.Web.Controllers
             {
                 return RedirectToAction("LogonByUser", "LogonByUser");
             }
-            //getsession();
-            //if (Lang == "TH")
-            //{
-            //    ViewData["Controller"] = "ชำระค่าอบรม";
-            //    ViewData["View"] = "ตรวจสอบการชำระค่าอบรม";
-            //}
-            //else
-            //{
-                ViewData["Controller"] = "Payment";
-                ViewData["View"] = "Verfified Payment";
-            //}
+
+                ViewData["Controller"] = _localizer["Payment"];
+                ViewData["View"] = _localizer["VerfifiedPayment"];
             return View();
         }
         [HttpGet]
@@ -277,6 +266,7 @@ namespace SubcontractProfile.Web.Controllers
         {
             string dataresponse = "";
             bool status = false;
+            string message = "";
            
             try
             {
@@ -306,11 +296,16 @@ namespace SubcontractProfile.Web.Controllers
 
                     var httpContent = new StringContent(JsonConvert.SerializeObject(Payment), Encoding.UTF8, "application/json");
                     HttpResponseMessage response = client.PutAsync(uriString, httpContent).Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        dataresponse = response.Content.ReadAsStringAsync().Result;
-                        status= JsonConvert.DeserializeObject<bool>(dataresponse);
-                    }
+                if (response.IsSuccessStatusCode)
+                {
+                    dataresponse = response.Content.ReadAsStringAsync().Result;
+                    status = JsonConvert.DeserializeObject<bool>(dataresponse);
+                    message = _localizer["MessageConfirmPaymentSuccess"];
+                }
+                else
+                {
+                    message = _localizer["MessageConfirmPaymentUnSuccess"];
+                }
 
                 
             }
@@ -319,7 +314,7 @@ namespace SubcontractProfile.Web.Controllers
                 dataresponse = ex.Message;
             }
 
-            return Json(new { Data = dataresponse, Status = status });
+            return Json(new { Data = dataresponse, Status = status, Message = message }); ;
         }
 
         #region VerifyPayment
@@ -421,39 +416,45 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
             }
-            if (Lang == "")
-            {
-                getsession();
-            }
-            if (Lang == "TH")
-            {
-                output.Add(new SubcontractDropdownModel
-                {
-                    dropdown_text="กรุณาเลือกช่องทางการชำระเงิน",
-                    dropdown_value=""
-                    
-                });
 
-                getAllPaymenttypeList = output.Select(a => new SelectListItem
+            output.Add(new SubcontractDropdownModel
+            {
+                dropdown_text = _localizer["ddlSelectPaymentMethod"],
+                dropdown_value = ""
+
+            });
+            if(output.Count>1)
+            {
+                CultureInfo culture = CultureInfo.CurrentCulture;
+                if (culture.Name == "th")
                 {
-                    Text = a.dropdown_text,
-                    Value = a.dropdown_value
-                }).OrderBy(c => c.Value).ToList();
+
+
+                    getAllPaymenttypeList = output.Select(a => new SelectListItem
+                    {
+                        Text = a.dropdown_text,
+                        Value = a.dropdown_value
+                    }).OrderBy(c => c.Value).ToList();
+                }
+                else
+                {
+                    getAllPaymenttypeList = output.Select(a => new SelectListItem
+                    {
+                        Text = a.dropdown_text,
+                        Value = a.dropdown_value
+                    }).OrderBy(c => c.Value).ToList();
+
+                }
             }
             else
             {
-                output.Add(new SubcontractDropdownModel
-                {
-                    dropdown_text = "Select Payment Transfer",
-                    dropdown_value = ""
-                });
                 getAllPaymenttypeList = output.Select(a => new SelectListItem
                 {
                     Text = a.dropdown_text,
                     Value = a.dropdown_value
-                }).OrderBy(c => c.Value).ToList();
-
+                }).ToList() ;
             }
+           
 
             return Json(new { response = getAllPaymenttypeList });
         }
@@ -494,38 +495,45 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileBankingModel>>(v);
             }
-            if (Lang == "")
-            {
-                getsession();
-            }
-            if (Lang == "TH")
-            {
-                output.Add(new SubcontractProfileBankingModel
-                {
-                    BankCode = "0",
-                    BankName = "กรุณาเลือกชื่อธนาคาร"
-                });
 
-                getAllBankList = output.Select(a => new SelectListItem
+            output.Add(new SubcontractProfileBankingModel
+            {
+                BankCode = "0",
+                BankName = _localizer["ddlSelectBank"]
+            });
+            if (output.Count > 1)
+            {
+                CultureInfo culture = CultureInfo.CurrentCulture;
+                if (culture.Name == "th")
                 {
-                    Text = a.BankName,
-                    Value = a.BankCode
-                }).OrderBy(c => c.Value).ToList();
+
+
+                    getAllBankList = output.Select(a => new SelectListItem
+                    {
+                        Text = a.BankName,
+                        Value = a.BankCode
+                    }).OrderBy(c => c.Value).ToList();
+                }
+                else
+                {
+                    getAllBankList = output.Select(a => new SelectListItem
+                    {
+                        Text = a.BankName,
+                        Value = a.BankCode
+                    }).OrderBy(c => c.Value).ToList();
+
+                }
             }
             else
             {
-                output.Add(new SubcontractProfileBankingModel
-                {
-                    BankCode = "0",
-                    BankName = "Select Bank"
-                });
                 getAllBankList = output.Select(a => new SelectListItem
                 {
                     Text = a.BankName,
                     Value = a.BankCode
-                }).OrderBy(c => c.Value).ToList();
-
+                }).ToList();
             }
+
+            
 
             return Json(new { responsebank = getAllBankList });
         }
@@ -547,39 +555,45 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
             }
-            if (Lang == "")
+            output.Add(new SubcontractDropdownModel
             {
-                getsession();
-            }
-            if (Lang == "TH")
+                dropdown_text = _localizer["ddlSelectStatus"],
+                dropdown_value = ""
+
+            });
+            if(output.Count > 1)
             {
-                output.Add(new SubcontractDropdownModel
+                CultureInfo culture = CultureInfo.CurrentCulture;
+                if (Lang == "TH")
                 {
-                    dropdown_text = "กรุณาเลือกสถานะ",
-                    dropdown_value = ""
 
-                });
 
-                getList = output.Where(x=>x.dropdown_value.ToUpper()!="W").Select(a => new SelectListItem
+                    getList = output.Where(x => x.dropdown_value.ToUpper() != "W").Select(a => new SelectListItem
+                    {
+                        Text = a.dropdown_text,
+                        Value = a.dropdown_value
+                    }).OrderBy(c => c.Value).ToList();
+                }
+                else
                 {
-                    Text = a.dropdown_text,
-                    Value = a.dropdown_value
-                }).OrderBy(c => c.Value).ToList();
+                    getList = output.Where(x => x.dropdown_value.ToUpper() != "W").Select(a => new SelectListItem
+                    {
+                        Text = a.dropdown_text,
+                        Value = a.dropdown_value
+                    }).OrderBy(c => c.Value).ToList();
+
+                }
             }
             else
             {
-                output.Add(new SubcontractDropdownModel
-                {
-                    dropdown_text = "Select Status",
-                    dropdown_value = ""
-                });
-                getList = output.Where(x => x.dropdown_value.ToUpper() != "W").Select(a => new SelectListItem
+                getList = output.Select(a => new SelectListItem
                 {
                     Text = a.dropdown_text,
                     Value = a.dropdown_value
-                }).OrderBy(c => c.Value).ToList();
-
+                }).ToList();
             }
+
+         
 
             return Json(new { response = getList });
         }
@@ -700,11 +714,11 @@ namespace SubcontractProfile.Web.Controllers
                 }
                 if(result)
                 {
-                    mess = "Update Success";
+                    mess = _localizer["MessageUpdateVerifySuccess"];
                 }
                 else
                 {
-                    mess = "Update not Success";
+                    mess = _localizer["MessageUpdateVerifyUnSuccess"];
                 }
             }
             catch (Exception e)
@@ -873,7 +887,7 @@ namespace SubcontractProfile.Web.Controllers
                             )
                         {
                             statusupload = false;
-                            strmess = "Upload type file miss match.";
+                            strmess = _localizer["MessageUploadmissmatch"];
                         }
                         else
                         {
@@ -883,12 +897,12 @@ namespace SubcontractProfile.Web.Controllers
                                 if (fileSize > MegaBytes)
                                 {
                                     statusupload = false;
-                                    strmess = "Upload file is too large.";
+                                    strmess = _localizer["MessageUploadtoolage"];
                                 }
                                 else
                                 {
                                     fid = Guid.NewGuid();
-                                    strmess = "Upload file success.";
+                                    strmess = _localizer["MessageUploadSuccess"];
                                 }
                             }
                             else
@@ -897,12 +911,12 @@ namespace SubcontractProfile.Web.Controllers
                                 if (fileSize > TMegaBytes)
                                 {
                                     statusupload = false;
-                                    strmess = "Upload file is too large.";
+                                    strmess = _localizer["MessageUploadtoolage"];
                                 }
                                 else
                                 {
                                     fid = Guid.NewGuid();
-                                    strmess = "Upload file success.";
+                                    strmess = _localizer["MessageUploadSuccess"];
                                 }
                             }
 

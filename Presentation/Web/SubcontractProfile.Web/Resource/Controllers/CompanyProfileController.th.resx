@@ -139,7 +139,16 @@
     <value>ข้อมูลไม่ถูกต้อง, กรุณาตรวจสอบความถูกต้อง หรือ ติดต่อ System Admin</value>
   </data>
   <data name="MessageUpdateSuccess" xml:space="preserve">
-    <value>Update Success</value>
+    <value>Update ข้อมูลสำเร็จ</value>
+  </data>
+  <data name="MessageUploadmissmatch" xml:space="preserve">
+    <value>ประเภท Upoad file ไม่ตรงกับที่ระบบรองรับ</value>
+  </data>
+  <data name="MessageUploadSuccess" xml:space="preserve">
+    <value>Upload file สำเร็จ</value>
+  </data>
+  <data name="MessageUploadtoolage" xml:space="preserve">
+    <value>Upload file มีขนาดใหญ่เกินกว่าที่ระบบกำหนด</value>
   </data>
   <data name="Moo" xml:space="preserve">
     <value>หมู่ที่</value>

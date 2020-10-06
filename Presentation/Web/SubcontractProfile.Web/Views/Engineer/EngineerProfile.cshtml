@@ -1561,14 +1561,14 @@ function GetDropDownLocationSearch() {
             success: function (data) {
 
                 $("#ddlLocationName").empty();
-                $("#ddlLocationName").append('<option value="-1">--Please All--</option>');
+                $("#ddlLocationName").append('<option value="-1">--@Localizer["ddlPleaseSelect"]--</option>');
                 $.each(data, function (id, result) {
                     $("#ddlLocationName").append('<option value="' + result.LocationId + '">' + result.LocationNameTh +'</option>');
                     });
                 },
                 failure: function () {
                     $("#ddlLocationName").empty();
-                    $("#ddlLocationName").append('<option value="-1">--Please All--</option>');
+                    $("#ddlLocationName").append('<option value="-1">--@Localizer["ddlPleaseSelect"]--</option>');
                 }
             });
     }
@@ -1582,14 +1582,14 @@ function GetDropDownLocationSearch() {
                   dataType: "json",
                   success: function (data) {
                       $("#ddlTeamName").empty();
-                      $("#ddlTeamName").append('<option value="-1">--Please All--</option>');
+                      $("#ddlTeamName").append('<option value="-1">--@Localizer["ddlPleaseSelect"]--</option>');
                       $.each(data, function (id, result) {
                           $("#ddlTeamName").append('<option value="' + result.TeamId + '">' + result.TeamNameTh + '</option>');
                       });
                   },
                   failure: function () {
                       $("#ddlTeamName").empty();
-                      $("#ddlTeamName").append('<option value="-1">--Please All--</option>');
+                      $("#ddlTeamName").append('<option value="-1">--@Localizer["ddlPleaseSelect"]--</option>');
                   }
               });
          }
@@ -1605,14 +1605,14 @@ function GetDropDownLocationSearch() {
             success: function (data) {
 
                 $("#Location").empty();
-                $("#Location").append('<option value="">--Please All--</option>');
+                $("#Location").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
                 $.each(data, function (id, result) {
                     $("#Location").append('<option value="' + result.LocationId + '">' + result.LocationNameTh +'</option>');
                     });
                 },
                 failure: function () {
                     $("#Location").empty();
-                    $("#Location").append('<option value="">--Please All--</option>');
+                    $("#Location").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
                 }
             });
     }
@@ -1627,14 +1627,14 @@ function GetDropDownLocationSearch() {
                   async: false,
                   success: function (data) {
                       $("#Team").empty();
-                      $("#Team").append('<option value="">--Please All--</option>');
+                      $("#Team").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
                       $.each(data, function (id, result) {
                           $("#Team").append('<option value="' + result.TeamId + '">' + result.TeamNameTh + '</option>');
                       });
                   },
                   failure: function () {
                       $("#Team").empty();
-                      $("#Team").append('<option value="">--Please All--</option>');
+                      $("#Team").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
                   }
               });
         }
@@ -1649,14 +1649,14 @@ function GetDropDownLocationSearch() {
             success: function (data) {
 
                 $("#ddlBankName").empty();
-                $("#ddlBankName").append('<option value="">--Please Select--</option>');
+                $("#ddlBankName").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
                 $.each(data, function (id, result) {
                     $("#ddlBankName").append('<option value="' + result.BankName + '">' + result.BankName +'</option>');
                     });
                 },
                 failure: function () {
                     $("#ddlBankName").empty();
-                    $("#ddlBankName").append('<option value="">--Please All--</option>');
+                    $("#ddlBankName").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
                 }
             });
         }
@@ -1671,14 +1671,14 @@ function GetDropDownLocationSearch() {
             success: function (data) {
 
                 $("#BankName2").empty();
-                $("#BankName2").append('<option value="">--Please Select--</option>');
+                $("#BankName2").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
                 $.each(data, function (id, result) {
                     $("#BankName2").append('<option value="' + result.BankName + '">' + result.BankName +'</option>');
                     });
                 },
                 failure: function () {
                     $("#BankName2").empty();
-                    $("#BankName2").append('<option value="">--Please All--</option>');
+                    $("#BankName2").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
                 }
             });
     }
@@ -1694,14 +1694,14 @@ function GetDropDownLocationSearch() {
             success: function (data) {
 
                 $("#Title").empty();
-                $("#Title").append('<option value="">--Please Select--</option>');
+                $("#Title").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
                 $.each(data, function (id, result) {
                     $("#Title").append('<option value="' + result.dropdown_text + '">' + result.dropdown_text +'</option>');
                     });
                 },
                 failure: function () {
                     $("#Title").empty();
-                    $("#Title").append('<option value="">--Please All--</option>');
+                    $("#Title").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
                 }
             });
         }

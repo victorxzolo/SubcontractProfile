@@ -156,6 +156,9 @@
   <data name="ForAISStaff" xml:space="preserve">
     <value>For Staff AIS</value>
   </data>
+  <data name="MessageAutocomplete" xml:space="preserve">
+    <value>Sorry, no matching results</value>
+  </data>
   <data name="PaidDateTime" xml:space="preserve">
     <value>Paid Date Time</value>
   </data>

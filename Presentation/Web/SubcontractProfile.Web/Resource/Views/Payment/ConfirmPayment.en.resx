@@ -147,6 +147,15 @@
   <data name="Contract" xml:space="preserve">
     <value>Contract</value>
   </data>
+  <data name="ddlSelectBank" xml:space="preserve">
+    <value>Select Bank</value>
+  </data>
+  <data name="ddlSelectPaymentMethod" xml:space="preserve">
+    <value>Select Payment Method</value>
+  </data>
+  <data name="ddlSelectStatus" xml:space="preserve">
+    <value>Select Staus</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>

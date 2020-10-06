@@ -117,61 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Building" xml:space="preserve">
-    <value>Building</value>
+  <data name="ConfirmPayment" xml:space="preserve">
+    <value>ยืนยันชำระค่าอบรม</value>
   </data>
-  <data name="CompanyProfile" xml:space="preserve">
-    <value>Company Profile</value>
+  <data name="ddlSelectBank" xml:space="preserve">
+    <value>กรุณาเลือกชื่อธนาคาร</value>
   </data>
-  <data name="ddlBankAccountType" xml:space="preserve">
-    <value>Select Acount Type</value>
+  <data name="ddlSelectPaymentMethod" xml:space="preserve">
+    <value>กรุณาเลือกช่องทางการชำระเงิน</value>
   </data>
-  <data name="District" xml:space="preserve">
-    <value>District</value>
+  <data name="ddlSelectStatus" xml:space="preserve">
+    <value>กรุณาเลือกสถานะ</value>
   </data>
-  <data name="Floor" xml:space="preserve">
-    <value>Floor</value>
+  <data name="MessageConfirmPaymentSuccess" xml:space="preserve">
+    <value>แจ้งโอนเงิน สำเร็จ</value>
   </data>
-  <data name="MessageAddresUnSuccess" xml:space="preserve">
-    <value>Address Data is not correct, Please Check Data or Contact System Admin</value>
+  <data name="MessageConfirmPaymentUnSuccess" xml:space="preserve">
+    <value>แจ้งโอนเงิน ไม่สำเร็จ</value>
   </data>
-  <data name="MessageUnSuccess" xml:space="preserve">
-    <value>Data is not correct, Please Check Data or Contact System Admin</value>
+  <data name="MessageUpdateVerifySuccess" xml:space="preserve">
+    <value>ตรวจสอบการชำระเงิน สำเร็จ</value>
   </data>
-  <data name="MessageUpdateSuccess" xml:space="preserve">
-    <value>Update Success</value>
+  <data name="MessageUpdateVerifyUnSuccess" xml:space="preserve">
+    <value>ตรวจสอบการชำระเงิน ไม่สำเร็จ</value>
   </data>
   <data name="MessageUploadmissmatch" xml:space="preserve">
-    <value>Upload type file miss match.</value>
+    <value>ประเภท Upoad file ไม่ตรงกับที่ระบบรองรับ</value>
   </data>
   <data name="MessageUploadSuccess" xml:space="preserve">
-    <value>Upload file success</value>
+    <value>Upload file สำเร็จ</value>
   </data>
   <data name="MessageUploadtoolage" xml:space="preserve">
-    <value>Upload file is too large.</value>
+    <value>Upload file มีขนาดใหญ่เกินกว่าที่ระบบกำหนด</value>
   </data>
-  <data name="Moo" xml:space="preserve">
-    <value>Moo</value>
+  <data name="Payment" xml:space="preserve">
+    <value>ชำระค่าอบรม</value>
   </data>
-  <data name="Profile" xml:space="preserve">
-    <value>Profile</value>
-  </data>
-  <data name="Province" xml:space="preserve">
-    <value>Province</value>
-  </data>
-  <data name="Room" xml:space="preserve">
-    <value>Room</value>
-  </data>
-  <data name="Soi" xml:space="preserve">
-    <value>Soi</value>
-  </data>
-  <data name="Street" xml:space="preserve">
-    <value>Street</value>
-  </data>
-  <data name="SubDistrict" xml:space="preserve">
-    <value>SubDistrict</value>
-  </data>
-  <data name="Village" xml:space="preserve">
-    <value>Village</value>
+  <data name="VerfifiedPayment" xml:space="preserve">
+    <value>ตรวจสอบการชำระเงิน</value>
   </data>
 </root>

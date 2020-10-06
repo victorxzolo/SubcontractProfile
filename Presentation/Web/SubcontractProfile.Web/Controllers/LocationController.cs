@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using Newtonsoft.Json;
 using SubcontractProfile.Web.Extension;
 using SubcontractProfile.Web.Model;
@@ -28,11 +29,12 @@ namespace SubcontractProfile.Web.Controllers
 
         private const int MegaBytes = 1024 * 1024;
         private const int TMegaBytes = 3 * 1024 * 1024;
-
-        public LocationController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        private readonly IStringLocalizer<LocationController> _localizer;
+        public LocationController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IStringLocalizer<PaymentController> localizer)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
+            _localizer = localizer;
 
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
 

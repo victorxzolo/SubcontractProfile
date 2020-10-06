@@ -156,6 +156,9 @@
   <data name="ForAISStaff" xml:space="preserve">
     <value>สำหรับเจ้าหน้าที่ AIS</value>
   </data>
+  <data name="MessageAutocomplete" xml:space="preserve">
+    <value>ไม่มีผลลัพธ์ที่ตรงกัน</value>
+  </data>
   <data name="PaidDateTime" xml:space="preserve">
     <value>วันเวลาที่ชำระเงิน</value>
   </data>

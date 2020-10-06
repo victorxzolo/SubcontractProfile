@@ -147,6 +147,15 @@
   <data name="Contract" xml:space="preserve">
     <value>ผู้ติดต่อ</value>
   </data>
+  <data name="ddlSelectBank" xml:space="preserve">
+    <value>กรุณาเลือกธนาคาร</value>
+  </data>
+  <data name="ddlSelectPaymentMethod" xml:space="preserve">
+    <value>กรุณาเลือกช่องทางการชำระเงิน</value>
+  </data>
+  <data name="ddlSelectStatus" xml:space="preserve">
+    <value>กรุณาเลือกสถานะ</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>อีเมล์</value>
   </data>

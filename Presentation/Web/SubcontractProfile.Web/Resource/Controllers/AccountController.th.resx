@@ -130,31 +130,37 @@
     <value>ชั้นที่</value>
   </data>
   <data name="MessageAddresUnSuccess" xml:space="preserve">
-    <value>Address Data is not correct, Please Check Data or Contact System Admin</value>
+    <value>ข้อมูลที่อยู่ไม่ถูกต้อง, กรุณาตรวจสอบความถูกต้อง หรือ ติดต่อ System Admin</value>
   </data>
   <data name="MessageCheckUser" xml:space="preserve">
     <value>Username นี้มีในระบบแล้ว</value>
   </data>
+  <data name="MessageLoginDuplicate" xml:space="preserve">
+    <value>ชื่อผู้ใช้หรือรหัสผ่านไม่ตรงกันกับในระบบ กรุณาสมัครเพื่อใช้งาน</value>
+  </data>
   <data name="MessageRegisSuccess" xml:space="preserve">
-    <value>Register Success</value>
+    <value>ลงทะเบียนสำเร็จ</value>
   </data>
   <data name="MessageUnSuccess" xml:space="preserve">
-    <value>Data is not correct, Please Check Data or Contact System Admin</value>
+    <value>ข้อมูลไม่ถูกต้อง, กรุณาตรวจสอบความถูกต้อง หรือ ติดต่อ System Admin</value>
   </data>
   <data name="MessageUploadmissmatch" xml:space="preserve">
-    <value>Upload type file miss match.</value>
+    <value>ประเภท Upoad file ไม่ตรงกับที่ระบบรองรับ</value>
   </data>
   <data name="MessageUploadSuccess" xml:space="preserve">
-    <value>Upload file success</value>
+    <value>Upload file สำเร็จ</value>
   </data>
   <data name="MessageUploadtoolage" xml:space="preserve">
-    <value>Upload file is too large.</value>
+    <value>Upload file มีขนาดใหญ่เกินกว่าที่ระบบกำหนด</value>
   </data>
   <data name="Moo" xml:space="preserve">
     <value>หมู่ที่</value>
   </data>
   <data name="province" xml:space="preserve">
     <value>จังหวัด</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>ลงทะเบียน</value>
   </data>
   <data name="Room" xml:space="preserve">
     <value>ห้องที่</value>

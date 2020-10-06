@@ -1197,12 +1197,12 @@ function inittbSearchResult() {
 
             if (mode == "edit") {
                 $("#txtCompanyCode").prop("disabled", true);
-                $("#hTitleEdit").text('แก้ไข ข้อมูลบริษัท');
+                $("#hTitleEdit").text(localizedData.EditCompanyProfile);
 
                 getDataById(companyId);
             }
             else {
-                 $("#hTitleEdit").text('เพิ่ม ข้อมูลบริษัท');
+                $("#hTitleEdit").text(localizedData.AddCompanyProfile);
                 $("#txtCompanyCode").prop("disabled", false);
 
                 // let form = $('#frNew');
@@ -1772,15 +1772,15 @@ function uploadFiles(inputId) {
                         else {
                             switch (inputId) {
                                 case "inputUploadcertificate": $('#hdupfilecompany_certified').val('');
-                                    $('#lbuploadcertificate').text('เลือกไฟล์');
+                                    $('#lbuploadcertificate').text(localizedData.ChooseFile);
                                     break;
                                 case "inputUploadComRegis": $('#hdupfilecommercial_registration').val('');
-                                    $('#lbuploadComRegis').text('เลือกไฟล์');
+                                    $('#lbuploadComRegis').text(localizedData.ChooseFile);
                                     break;
                                 case "inputUpload20": $('#hdupfilevat_registration_certificate').val('');
-                                    $('#lbupload20').text('เลือกไฟล์');
+                                    $('#lbupload20').text(localizedData.ChooseFile);
                                     break;
-                                case "inputuploadbookbank": $('#hduploadbookbank').val(''); $('#lbuploadbookbank').text('เลือกไฟล์'); break;
+                                case "inputuploadbookbank": $('#hduploadbookbank').val(''); $('#lbuploadbookbank').text(localizedData.ChooseFile); break;
                             }
 
                         }
