@@ -126,6 +126,12 @@
   <data name="CompanyNameThai" xml:space="preserve">
     <value>Company Name (TH)</value>
   </data>
+  <data name="ErrorSelectCompany" xml:space="preserve">
+    <value>Please select company.</value>
+  </data>
+  <data name="MessageAutocomplete" xml:space="preserve">
+    <value>Sorry, no matching results</value>
+  </data>
   <data name="RegisterDate" xml:space="preserve">
     <value>Register Date</value>
   </data>

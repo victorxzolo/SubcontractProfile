@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
-
+using Microsoft.Extensions.Localization;
 using Newtonsoft.Json;
 using SubcontractProfile.Web.Extension;
 using SubcontractProfile.Web.Model;
@@ -27,10 +27,13 @@ namespace SubcontractProfile.Web.Controllers
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private string Lang = "";
-        public RequestTrainingController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+
+        private readonly IStringLocalizer<RequestTrainingController> _localizer;
+        public RequestTrainingController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IStringLocalizer<RequestTrainingController> localizer)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
+            _localizer = localizer;
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
 
         }
@@ -42,16 +45,10 @@ namespace SubcontractProfile.Web.Controllers
                 return RedirectToAction("LogonByUser", "LogonByUser");
             }
             getsession();
-            //if (Lang == "TH")
-            //{
-            //    ViewData["Controller"] = "ข้อมูลอบรม";
-            //    ViewData["View"] = "ขอรับการฝึกอบรม";
-            //}
-            //else
-            //{
-                ViewData["Controller"] = "Training";
-                ViewData["View"] = "Request Training";
-           // }
+
+                ViewData["Controller"] = _localizer["Training"];
+                ViewData["View"] = _localizer["RequestTraining"];
+
             return View();
         }
 
@@ -67,16 +64,10 @@ namespace SubcontractProfile.Web.Controllers
             ViewBag.CompanyStatus = companyResult.Status;
 
             getsession();
-            if (Lang == "TH")
-            {
-                ViewData["Controller"] = "ข้อมูลอบรม";
-                ViewData["View"] = "ขอรับการฝึกอบรม";
-            }
-            else
-            {
-                ViewData["Controller"] = "Training";
-                ViewData["View"] = "Request Training";
-            }
+
+                ViewData["Controller"] = _localizer["Training"];
+                ViewData["View"] = _localizer["RequestTraining"];
+
 
             return View();
         }
@@ -354,13 +345,13 @@ namespace SubcontractProfile.Web.Controllers
                 if (responseResult.IsSuccessStatusCode)
                 {
                     result.Status = true;
-                    result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                    result.Message = _localizer["MessageSaveSuccess"];
                     result.StatusError = "0";
                 }
                 else
                 {
                     result.Status = false;
-                    result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                    result.Message = _localizer["MessageUnSuccess"];
                     result.StatusError = "-1";
                 }
 
@@ -819,7 +810,7 @@ namespace SubcontractProfile.Web.Controllers
                 if (data == null || data.Rows.Count == 0)
                 {
                     result.Status = false;
-                    result.Message = "กรุณาเพิ่มข้อมูลผู้เข้าอบรม";
+                    result.Message = _localizer["MessageAddTrainee"];
                     result.StatusError = "-1";
 
                     return Json(result);
@@ -881,13 +872,13 @@ namespace SubcontractProfile.Web.Controllers
                         }
 
                         result.Status = true;
-                        result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                        result.Message = _localizer["MessageSaveSuccess"];
                         result.StatusError = "0";
                     }
                     else
                     {
                         result.Status = false;
-                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        result.Message = _localizer["MessageUnSuccess"];
                         result.StatusError = "-1";
                     }
 
@@ -917,7 +908,7 @@ namespace SubcontractProfile.Web.Controllers
                         HttpResponseMessage responseResultDel = client.DeleteAsync(uriString).Result;
                         if (responseResult.IsSuccessStatusCode)
                         {
-                            result.Message = "ลบข้อมูลเรียบร้อย";
+                            result.Message = _localizer["MessageDeleteSuccess"];
                             result.Status = true;
                             result.StatusError = "0";
                         }
@@ -955,13 +946,13 @@ namespace SubcontractProfile.Web.Controllers
                         }
 
                         result.Status = true;
-                        result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                        result.Message = _localizer["MessageSaveSuccess"];
                         result.StatusError = "0";
                     }
                     else
                     {
                         result.Status = false;
-                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        result.Message = _localizer["MessageUnSuccess"];
                         result.StatusError = "-1";
                     }
                 }
@@ -993,21 +984,21 @@ namespace SubcontractProfile.Web.Controllers
                 HttpResponseMessage responseResult = clientLocation.DeleteAsync(uriString).Result;
                 if (responseResult.IsSuccessStatusCode)
                 {
-                    result.Message = "ลบข้อมูลเรียบร้อย";
+                    result.Message = _localizer["MessageDeleteSuccess"];
                     result.Status = true;
                     result.StatusError = "0";
                 }
                 else
                 {
                     result.Status = false;
-                    result.Message = "ลบข้อมูลไม่สำเร็จ กรุณาติดต่อ Administrator.";
+                    result.Message = _localizer["MessageDeleteUnSuccess"];
                     result.StatusError = "-1";
                 }
 
             }
             catch (Exception ex)
             {
-                result.Message = "ลบข้อมูลไม่สำเร็จ กรุณาติดต่อ Administrator.";
+                result.Message = _localizer["MessageDeleteUnSuccess"];
                 result.StatusError = "-1";
             }
             return Json(result);
@@ -1071,7 +1062,7 @@ namespace SubcontractProfile.Web.Controllers
             SessionHelper.SetObjectAsJson(HttpContext.Session, "EngineerData", datatable);
 
             result.Status = true;
-            result.Message = "Delete Success.";
+            result.Message = _localizer["MessageDeleteSuccess"];
 
             recordsTotal = resultEngineer.Count();
 

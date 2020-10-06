@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -54,17 +55,10 @@ namespace SubcontractProfile.Web.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            getsession();
-            if (Lang == "TH")
-            {
-                ViewData["Controller"] = "ข้อมูลโปรไฟล์";
-                ViewData["View"] = "ข้อมูลสถานที่";
-            }
-            else
-            {
-                ViewData["Controller"] = "Profile";
-                ViewData["View"] = "Location Profile";
-            }
+
+                ViewData["Controller"] = _localizer["Profile"];
+                ViewData["View"] = _localizer["LocationProfile"];
+
             // ViewBag.Pageitem = "Location";
             return View();
         }
@@ -217,13 +211,13 @@ namespace SubcontractProfile.Web.Controllers
                     if (responseCompany.IsSuccessStatusCode)
                     {
                         result.Status = true;
-                        result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                        result.Message = _localizer["MessageSuccess"];
                         result.StatusError = "0";
                     }
                     else
                     {
                         result.Status = false;
-                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        result.Message = _localizer["MessageUnSuccess"];
                         result.StatusError = "-1";
                     }
 
@@ -249,13 +243,13 @@ namespace SubcontractProfile.Web.Controllers
                     if (responseResult.IsSuccessStatusCode)
                     {
                         result.Status = true;
-                        result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                        result.Message = _localizer["MessageSuccess"];
                         result.StatusError = "0";
                     }
                     else
                     {
                         result.Status = false;
-                        result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                        result.Message = _localizer["MessageUnSuccess"];
                         result.StatusError = "-1";
                     }
 
@@ -265,7 +259,7 @@ namespace SubcontractProfile.Web.Controllers
 
             catch (Exception ex)
             {
-                result.Message = "ไม่สามารถบันทึกข้อมูลได้ กรุณาติดต่อ Administrator.";
+                result.Message = _localizer["MessageError"];
                 result.Status = false;
                 result.StatusError = "0";
             }
@@ -292,28 +286,28 @@ namespace SubcontractProfile.Web.Controllers
 
                     if(await Deletefile(locationId, userProfile.companyid.ToString()))
                     {
-                        result.Message = "ลบข้อมูลเรียบร้อย";
+                        result.Message = _localizer["MessageDeleteSuccess"];
                         result.Status = true;
                         result.StatusError = "0";
                     }
                     else
                     {
                         result.Status = false;
-                        result.Message = "ลบข้อมูลไม่สำเร็จ กรุณาติดต่อ Administrator.";
+                        result.Message = _localizer["MessageDeleteUnSuccess"];
                         result.StatusError = "-1";
                     }
                 }
                 else
                 {
                     result.Status = false;
-                    result.Message = "ลบข้อมูลไม่สำเร็จ กรุณาติดต่อ Administrator.";
+                    result.Message = _localizer["MessageDeleteUnSuccess"];
                     result.StatusError = "-1";
                 }
 
             }
             catch (Exception ex)
             {
-                result.Message = "ลบข้อมูลไม่สำเร็จ กรุณาติดต่อ Administrator.";
+                result.Message = _localizer["MessageDeleteUnSuccess"];
                 result.StatusError = "-1";
             }
             return Json(result);
@@ -348,20 +342,11 @@ namespace SubcontractProfile.Web.Controllers
                 }
                 if (L_location != null && L_location.Count > 0)
                 {
-                    if (Lang == "")
-                    {
-                        getsession();
-                    }
-                    if (Lang == "TH")
-                    {
+
                         status = false;
-                        message = "Location Code นี้มีในระบบแล้ว";
-                    }
-                    else
-                    {
-                        status = false;
-                        message = "Location Code duplicate";
-                    }
+                        message = _localizer["MessageCheckLocationCode"];
+
+
                 }
             }
             catch (Exception w)
@@ -402,7 +387,7 @@ namespace SubcontractProfile.Web.Controllers
                                 )
                         {
                             statusupload = false;
-                            strmess = "Upload type file miss match.";
+                            strmess = _localizer["MessageUploadmissmatch"];
                         }
                         else
                         {
@@ -412,12 +397,12 @@ namespace SubcontractProfile.Web.Controllers
                                 if (fileSize > MegaBytes)
                                 {
                                     statusupload = false;
-                                    strmess = "Upload file is too large.";
+                                    strmess = _localizer["MessageUploadtoolage"];
                                 }
                                 else
                                 {
                                     fid = Guid.NewGuid();
-                                    strmess = "Upload file success.";
+                                    strmess = _localizer["MessageUploadSuccess"];
                                 }
                             }
                             else
@@ -426,12 +411,12 @@ namespace SubcontractProfile.Web.Controllers
                                 if (fileSize > TMegaBytes)
                                 {
                                     statusupload = false;
-                                    strmess = "Upload file is too large.";
+                                    strmess = _localizer["MessageUploadtoolage"];
                                 }
                                 else
                                 {
                                     fid = Guid.NewGuid();
-                                    strmess = "Upload file success.";
+                                    strmess = _localizer["MessageUploadSuccess"];
                                 }
                             }
 

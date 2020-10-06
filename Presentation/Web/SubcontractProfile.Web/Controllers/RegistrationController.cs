@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using Newtonsoft.Json;
 using SubcontractProfile.Web.Extension;
 using SubcontractProfile.Web.Model;
@@ -28,10 +29,12 @@ namespace SubcontractProfile.Web.Controllers
         private readonly string strpathUpload;
         private const int MegaBytes = 1024 * 1024;
         private const int TMegaBytes = 3 * 1024 * 1024;
-        public RegistrationController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        private readonly IStringLocalizer<RegistrationController> _localizer;
+        public RegistrationController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IStringLocalizer<RegistrationController> localizer)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
+            _localizer = localizer;
 
             //เรียก appsetting.json path api
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
@@ -45,12 +48,6 @@ namespace SubcontractProfile.Web.Controllers
 
             #endregion
         }
-        public IActionResult ActivateProfile()
-        {
-            ViewData["Controller"] = "Registration";
-            ViewData["View"] = "Activate Profile";
-            return View();
-        }
         public IActionResult SearchCompanyVerify()
         {
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userAISLogin");
@@ -59,14 +56,14 @@ namespace SubcontractProfile.Web.Controllers
                 return RedirectToAction("LogonByUser", "LogonByUser");
             }
 
-            ViewData["Controller"] = "Registration";
-            ViewData["View"] = "Search Company Verify";
+            ViewData["Controller"] = _localizer["Registration"];
+            ViewData["View"] = _localizer["SearchCompanyVerify"];
             return View();
         }
         public IActionResult CompanyVerify(string companyid)
         {
-            ViewData["Controller"] = "Registration";
-            ViewData["View"] = "Company Verify";
+            ViewData["Controller"] = _localizer["Registration"];
+            ViewData["View"] = _localizer["CompanyVerify"];
             ViewBag.Companyid = companyid;
             return View();
         }
@@ -88,12 +85,7 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileRequestStatusModel>>(v);
             }
-            if (Lang == null || Lang == "")
-            {
-                getsession();
-            }
-            if (Lang == "TH")
-            {
+
                 output.Add(new SubcontractProfileRequestStatusModel
                 {
                     request_status = "",
@@ -106,7 +98,7 @@ namespace SubcontractProfile.Web.Controllers
                     {
                         getAllStatusList.Add(new SelectListItem
                         {
-                            Text = "กรุณาเลือกสถานะ",
+                            Text = _localizer["ddlSelectStatus"],
                             Value = r.request_status
                         });
                     }
@@ -120,36 +112,8 @@ namespace SubcontractProfile.Web.Controllers
                     }
                 }
                
-            }
-            else
-            {
-                output.Add(new SubcontractProfileRequestStatusModel
-                {
-                    request_status = "",
+        
 
-                });
-
-                foreach (var r in output)
-                {
-                    if (r.request_status == "")
-                    {
-                        getAllStatusList.Add(new SelectListItem
-                        {
-                            Text = "Select Status",
-                            Value = r.request_status
-                        });
-                    }
-                    else
-                    {
-                        getAllStatusList.Add(new SelectListItem
-                        {
-                            Text = r.request_status,
-                            Value = r.request_status
-                        });
-                    }
-                }
-
-            }
           var result=  getAllStatusList.OrderBy(c => c.Value).ToList();
 
             return Json(new { response = result });
@@ -402,10 +366,10 @@ namespace SubcontractProfile.Web.Controllers
                         response = client.GetAsync(uriStringAddresstype).Result;
                         var a = response.Content.ReadAsStringAsync().Result;
                         var L_addresstype = JsonConvert.DeserializeObject<List<SubcontractProfileAddressTypeModel>>(a);
-
+                        CultureInfo culture = CultureInfo.CurrentCulture;
                         foreach (var f in addressResult)
                         {
-                            if (Lang == "TH")
+                            if (culture.Name == "th")
                             {
                                 if (f.AddressTypeId != null)
                                 {
@@ -814,16 +778,16 @@ namespace SubcontractProfile.Web.Controllers
                         {
                             string straddr = "";
                             straddr = string.Concat(outputresponse.Value.vHouseNumber != null && outputresponse.Value.vHouseNumber != "-" ? outputresponse.Value.vHouseNumber : "", " ",
-                                                      outputresponse.Value.vBuildingName != null && outputresponse.Value.vBuildingName != "-" ? "อาคาร " + outputresponse.Value.vBuildingName : "", " ",
-                                                      outputresponse.Value.vFloorNumber != null && outputresponse.Value.vFloorNumber != "-" ? "ชั้นที่ " + outputresponse.Value.vFloorNumber : "", " ",
-                                                      outputresponse.Value.vRoomNumber != null && outputresponse.Value.vRoomNumber != "-" ? "ห้องที่ " + outputresponse.Value.vRoomNumber : "", " ",
-                                                      outputresponse.Value.vVillageName != null && outputresponse.Value.vVillageName != "-" ? "หมู่บ้าน " + outputresponse.Value.vVillageName : "", " ",
-                                                      outputresponse.Value.vMooNumber != null && outputresponse.Value.vMooNumber != "-" ? "หมู่ที่ " + outputresponse.Value.vMooNumber : "", " ",
-                                                      outputresponse.Value.vSoiName != null && outputresponse.Value.vSoiName != "-" ? "ซอย " + outputresponse.Value.vSoiName : "", " ",
-                                                      outputresponse.Value.vStreetName != null && outputresponse.Value.vStreetName != "-" ? "ถนน " + outputresponse.Value.vStreetName : "", " ",
-                                                      outputresponse.Value.vThambol != null && outputresponse.Value.vThambol != "-" ? "ตำบล/แขวง " + outputresponse.Value.vThambol : "", " ",
-                                                      outputresponse.Value.vAmphur != null && outputresponse.Value.vAmphur != "-" ? "อำเภอ/เขต " + outputresponse.Value.vAmphur : "", " ",
-                                                      outputresponse.Value.vProvince != null && outputresponse.Value.vProvince != "-" ? "จังหวัด " + outputresponse.Value.vProvince : "", " ",
+                                                      outputresponse.Value.vBuildingName != null && outputresponse.Value.vBuildingName != "-" ? _localizer["Building"] +" " + outputresponse.Value.vBuildingName : "", " ",
+                                                      outputresponse.Value.vFloorNumber != null && outputresponse.Value.vFloorNumber != "-" ? _localizer["Floor"] + " " + outputresponse.Value.vFloorNumber : "", " ",
+                                                      outputresponse.Value.vRoomNumber != null && outputresponse.Value.vRoomNumber != "-" ? _localizer["Room"] + " " + outputresponse.Value.vRoomNumber : "", " ",
+                                                      outputresponse.Value.vVillageName != null && outputresponse.Value.vVillageName != "-" ? _localizer["Village"] + " " + outputresponse.Value.vVillageName : "", " ",
+                                                      outputresponse.Value.vMooNumber != null && outputresponse.Value.vMooNumber != "-" ? _localizer["Moo"] + " " + outputresponse.Value.vMooNumber : "", " ",
+                                                      outputresponse.Value.vSoiName != null && outputresponse.Value.vSoiName != "-" ? _localizer["Soi"] + " " + outputresponse.Value.vSoiName : "", " ",
+                                                      outputresponse.Value.vStreetName != null && outputresponse.Value.vStreetName != "-" ? _localizer["Street"] + " " + outputresponse.Value.vStreetName : "", " ",
+                                                      outputresponse.Value.vThambol != null && outputresponse.Value.vThambol != "-" ? _localizer["SubDistrict"] + " " + outputresponse.Value.vThambol : "", " ",
+                                                      outputresponse.Value.vAmphur != null && outputresponse.Value.vAmphur != "-" ? _localizer["District"] + " " + outputresponse.Value.vAmphur : "", " ",
+                                                      outputresponse.Value.vProvince != null && outputresponse.Value.vProvince != "-" ? _localizer["Province"] + " " + outputresponse.Value.vProvince : "", " ",
                                                       outputresponse.Value.vPostCode != null && outputresponse.Value.vPostCode != "-" ? outputresponse.Value.vPostCode : "");
                             ListResult.Add(new VATModal
                             {
@@ -986,20 +950,20 @@ namespace SubcontractProfile.Web.Controllers
                     if (output)
                     {
                         res.Status = true;
-                        res.Message = "Update Success";
+                        res.Message = _localizer["MessageUpdateSuccess"];
                         res.StatusError = "0";
                     }
                     else
                     {
                         res.Status = false;
-                        res.Message = "Company Data is not correct, Please Check Data or Contact System Admin";
+                        res.Message = _localizer["MessageCompanyUnSuccess"];
                         res.StatusError = "-1";
                     }
                 }
                 else
                 {
                     res.Status = false;
-                    res.Message = "Company is not correct, Please Check Data or Contact System Admin";
+                    res.Message = _localizer["MessageCompanyUnSuccess"];
                     res.StatusError = "-1";
                 }
                 #endregion
@@ -1243,13 +1207,13 @@ namespace SubcontractProfile.Web.Controllers
                                             if (statusAddAddr)
                                             {
                                                 res.Status = true;
-                                                res.Message = "Update Success";
+                                                res.Message = _localizer["MessageUpdateSuccess"];
                                                 res.StatusError = "0";
                                             }
                                             else
                                             {
                                                 res.Status = false;
-                                                res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                                res.Message = _localizer["MessageAddresUnSuccess"];
                                                 res.StatusError = "-1";
                                             }
                                         }
@@ -1259,7 +1223,7 @@ namespace SubcontractProfile.Web.Controllers
                                 else
                                 {
                                     res.Status = false;
-                                    res.Message = "Address Data is not correct, Please Check Data or Contact System Admin";
+                                    res.Message = _localizer["MessageAddresUnSuccess"];
                                     res.StatusError = "-1";
                                 }
                                 #endregion
@@ -1267,14 +1231,14 @@ namespace SubcontractProfile.Web.Controllers
                             else
                             {
                                 res.Status = false;
-                                res.Message = "Company Data is not correct, Please Check Data or Contact System Admin";
+                                res.Message = _localizer["MessageCompanyUnSuccess"];
                                 res.StatusError = "-1";
                             }
                         }
                 else
                 {
                      res.Status = false;
-                     res.Message = "Company is not correct, Please Check Data or Contact System Admin";
+                     res.Message = _localizer["MessageCompanyUnSuccess"];
                      res.StatusError = "-1";
                 }
                 #endregion
@@ -1289,7 +1253,7 @@ namespace SubcontractProfile.Web.Controllers
                 else
                 {
                     res.Status = false;
-                    res.Message = "Upload file is not correct, Please Check Data or Contact System Admin";
+                    res.Message = _localizer["MessageUploadUnSuccess"];
                     res.StatusError = "-1";
                 }
 
@@ -1396,19 +1360,15 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
             }
-            if (Lang == "")
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            output.Add(new SubcontractDropdownModel
             {
-                getsession();
-            }
-            if (Lang == "TH")
+                dropdown_text = _localizer["ddlSelectBankAccountType"],
+                dropdown_value = ""
+
+            });
+            if (culture.Name == "th")
             {
-                output.Add(new SubcontractDropdownModel
-                {
-                    dropdown_text = "กรุณาเลือกประเภทบัญชี",
-                    dropdown_value = ""
-
-                });
-
                 getAllBankAccList = output.Select(a => new SelectListItem
                 {
                     Text = a.dropdown_text,
@@ -1417,11 +1377,6 @@ namespace SubcontractProfile.Web.Controllers
             }
             else
             {
-                output.Add(new SubcontractDropdownModel
-                {
-                    dropdown_text = "Select Acount Type",
-                    dropdown_value = ""
-                });
                 getAllBankAccList = output.Select(a => new SelectListItem
                 {
                     Text = a.dropdown_text,
@@ -1691,17 +1646,15 @@ namespace SubcontractProfile.Web.Controllers
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileLocationModel>>(resultAsync);
 
             }
-            if (Lang == null || Lang == "")
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            output.Add(new SubcontractProfileLocationModel
             {
-                getsession();
-            }
-            if (Lang == "TH")
-            {
-                output.Add(new SubcontractProfileLocationModel
-                {
-                    LocationCode = ""
+                LocationCode = ""
 
-                }); ;
+            });
+            if (culture.Name == "th")
+            {
+                
 
                 foreach (var r in output)
                 {
@@ -1709,7 +1662,7 @@ namespace SubcontractProfile.Web.Controllers
                     {
                         getAllLocationList.Add(new SelectListItem
                         {
-                            Text = "กรุณาเลือก Location",
+                            Text = _localizer["ddlSelectLocation"],
                             Value = ""
                         });
                     }
@@ -1738,7 +1691,7 @@ namespace SubcontractProfile.Web.Controllers
                     {
                         getAllLocationList.Add(new SelectListItem
                         {
-                            Text = "Select Location",
+                            Text = _localizer["ddlSelectLocation"],
                             Value = ""
                         });
                     }
@@ -2069,11 +2022,8 @@ namespace SubcontractProfile.Web.Controllers
                 var v = response.Content.ReadAsStringAsync().Result;
                 output = JsonConvert.DeserializeObject<List<SubcontractProfileTeamModel>>(v);
             }
-            if (Lang == null || Lang == "")
-            {
-                getsession();
-            }
-            if (Lang == "TH")
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            if (culture.Name == "th")
             {
                 output.Add(new SubcontractProfileTeamModel
                 {
@@ -2087,7 +2037,7 @@ namespace SubcontractProfile.Web.Controllers
                     {
                         getAllTeamList.Add(new SelectListItem
                         {
-                            Text = "กรุณาเลือก Team",
+                            Text = _localizer["ddlSelectTeam"],
                             Value = ""
                         });
                     }
@@ -2116,7 +2066,7 @@ namespace SubcontractProfile.Web.Controllers
                     {
                         getAllTeamList.Add(new SelectListItem
                         {
-                            Text = "Select Team",
+                            Text = _localizer["ddlSelectTeam"],
                             Value = ""
                         });
                     }
@@ -2177,7 +2127,7 @@ namespace SubcontractProfile.Web.Controllers
                                 )
                             {
                                 statusupload = false;
-                                strmess = "Upload type file miss match.";
+                                strmess = _localizer["MessageUploadmissmatch"];
                             }
                             else
                             {
@@ -2187,7 +2137,7 @@ namespace SubcontractProfile.Web.Controllers
                                     if (fileSize > MegaBytes)
                                     {
                                         statusupload = false;
-                                        strmess = "Upload file is too large.";
+                                        strmess = _localizer["MessageUploadtoolage"];
                                     }
                                     else
                                     {
@@ -2222,7 +2172,7 @@ namespace SubcontractProfile.Web.Controllers
 
                                             SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
                                         }
-                                        strmess = "Upload file success";
+                                        strmess = _localizer["MessageUploadSuccess"];
                                     }
                                 }
                                 else
@@ -2230,7 +2180,7 @@ namespace SubcontractProfile.Web.Controllers
                                     if (fileSize > TMegaBytes)
                                     {
                                         statusupload = false;
-                                        strmess = "Upload file is too large.";
+                                        strmess = _localizer["MessageUploadtoolage"];
                                     }
                                     else
                                     {
@@ -2265,7 +2215,7 @@ namespace SubcontractProfile.Web.Controllers
 
                                             SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
                                         }
-                                        strmess = "Upload file success";
+                                        strmess = _localizer["MessageUploadSuccess"];
                                     }
                                 }
                                 
@@ -2459,7 +2409,7 @@ namespace SubcontractProfile.Web.Controllers
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage response;
-
+                CultureInfo culture = CultureInfo.CurrentCulture;
                 foreach (var e in daftdata)
                 {
                     Guid addr_id = Guid.NewGuid();
@@ -2474,7 +2424,7 @@ namespace SubcontractProfile.Web.Controllers
                             var v = response.Content.ReadAsStringAsync().Result;
                             outputprovince = JsonConvert.DeserializeObject<List<SubcontractProfileProvinceModel>>(v);
                             string[] s_provice = e.province_name.Split(" ");
-                            if (Lang == "TH")
+                            if (culture.Name == "th")
                             {
                                 var w = outputprovince.First(x => x.ProvinceNameTh.Contains(s_provice[1].ToString()));
                                 e.ProvinceId = w.ProvinceId;
@@ -2497,7 +2447,7 @@ namespace SubcontractProfile.Web.Controllers
                             var v = response.Content.ReadAsStringAsync().Result;
                             outputdistrict = JsonConvert.DeserializeObject<List<SubcontractProfileDistrictModel>>(v);
                             string[] s_district = e.district_name.Split(" ");
-                            if (Lang == "TH")
+                            if (culture.Name == "th")
                             {
                                 var w = outputdistrict.First(d => d.DistrictNameTh.Contains(s_district[1].ToString()));
                                 e.DistrictId = w.DistrictId;
@@ -2520,7 +2470,7 @@ namespace SubcontractProfile.Web.Controllers
                             outputsubdistrict = JsonConvert.DeserializeObject<List<SubcontractProfileSubDistrictModel>>(v);
 
                             string[] s_subdistrict = e.sub_district_name.Split(" ");
-                            if (Lang == "TH")
+                            if (culture.Name == "th")
                             {
                                 var w = outputsubdistrict.First(d => d.SubDistrictNameTh.Contains(s_subdistrict[1].ToString()));
                                 e.SubDistrictId = w.SubDistrictId;

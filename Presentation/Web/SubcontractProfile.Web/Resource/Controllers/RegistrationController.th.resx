@@ -117,37 +117,76 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LocationProfile" xml:space="preserve">
-    <value>Location Profile</value>
+  <data name="Building" xml:space="preserve">
+    <value>อาคาร</value>
   </data>
-  <data name="MessageCheckLocationCode" xml:space="preserve">
-    <value>Location Code duplicate</value>
+  <data name="CompanyVerify" xml:space="preserve">
+    <value>ตรวจสอบข้อมูลบริษัท</value>
   </data>
-  <data name="MessageDeleteSuccess" xml:space="preserve">
-    <value>Delete Data Success</value>
+  <data name="ddlSelectBankAccountType" xml:space="preserve">
+    <value>กรุณาเลือกประเภทบัญชี</value>
   </data>
-  <data name="MessageDeleteUnSuccess" xml:space="preserve">
-    <value>Delete Data Unsuccess. Please contact System Admin.</value>
+  <data name="ddlSelectLocation" xml:space="preserve">
+    <value>กรุณาเลือก Location</value>
   </data>
-  <data name="MessageError" xml:space="preserve">
-    <value>Data cannot be save. Please contact System Admin.</value>
+  <data name="ddlSelectStatus" xml:space="preserve">
+    <value>กรุณาเลือกสถานะ</value>
   </data>
-  <data name="MessageSuccess" xml:space="preserve">
-    <value>Save Data Success</value>
+  <data name="ddlSelectTeam" xml:space="preserve">
+    <value>กรุณาเลือก Team</value>
   </data>
-  <data name="MessageUnSuccess" xml:space="preserve">
-    <value>Data is not correct, Please Check Data or Contact System Admin</value>
+  <data name="District" xml:space="preserve">
+    <value>อำเภอ/เขต</value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>ชั้นที่</value>
+  </data>
+  <data name="MessageAddresUnSuccess" xml:space="preserve">
+    <value>ข้อมูลที่อยู่ไม่ถูกต้อง, กรุณาตรวจสอบความถูกต้อง หรือ ติดต่อ System Admin</value>
+  </data>
+  <data name="MessageCompanyUnSuccess" xml:space="preserve">
+    <value>ข้อมูลบริษัทไม่ถูกต้อง, กรุณาตรวจสอบความถูกต้อง หรือ ติดต่อ System Admin</value>
+  </data>
+  <data name="MessageUpdateSuccess" xml:space="preserve">
+    <value>Update ข้อมูลสำเร็จ</value>
   </data>
   <data name="MessageUploadmissmatch" xml:space="preserve">
-    <value>Upload type file miss match.</value>
+    <value>ประเภท Upoad file ไม่ตรงกับที่ระบบรองรับ</value>
   </data>
   <data name="MessageUploadSuccess" xml:space="preserve">
-    <value>Upload file success.</value>
+    <value>Upload file สำเร็จ</value>
   </data>
   <data name="MessageUploadtoolage" xml:space="preserve">
-    <value>Upload file is too large.</value>
+    <value>Upload file มีขนาดใหญ่เกินกว่าที่ระบบกำหนด</value>
   </data>
-  <data name="Profile" xml:space="preserve">
-    <value>Profile</value>
+  <data name="MessageUploadUnSuccess" xml:space="preserve">
+    <value>Upload file ไม่ถูกต้อง, กรุณาตรวจสอบความถูกต้อง หรือ ติดต่อ System Admin</value>
+  </data>
+  <data name="Moo" xml:space="preserve">
+    <value>หมู่ที่</value>
+  </data>
+  <data name="Province" xml:space="preserve">
+    <value>จังหวัด</value>
+  </data>
+  <data name="Registration" xml:space="preserve">
+    <value>การลงทะเบียน</value>
+  </data>
+  <data name="Room" xml:space="preserve">
+    <value>ห้องที่</value>
+  </data>
+  <data name="SearchCompanyVerify" xml:space="preserve">
+    <value>Search Company Verify</value>
+  </data>
+  <data name="Soi" xml:space="preserve">
+    <value>ซอย</value>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>ถนน</value>
+  </data>
+  <data name="SubDistrict" xml:space="preserve">
+    <value>ตำบล/แขวง</value>
+  </data>
+  <data name="Village" xml:space="preserve">
+    <value>หมู่บ้าน</value>
   </data>
 </root>

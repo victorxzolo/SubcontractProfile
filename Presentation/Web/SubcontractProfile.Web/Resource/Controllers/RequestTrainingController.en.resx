@@ -117,37 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LocationProfile" xml:space="preserve">
-    <value>Location Profile</value>
-  </data>
-  <data name="MessageCheckLocationCode" xml:space="preserve">
-    <value>Location Code duplicate</value>
+  <data name="MessageAddTrainee" xml:space="preserve">
+    <value>Please Add Trainee Data</value>
   </data>
   <data name="MessageDeleteSuccess" xml:space="preserve">
-    <value>Delete Data Success</value>
+    <value>Delete Success</value>
   </data>
   <data name="MessageDeleteUnSuccess" xml:space="preserve">
     <value>Delete Data Unsuccess. Please contact System Admin.</value>
   </data>
-  <data name="MessageError" xml:space="preserve">
-    <value>Data cannot be save. Please contact System Admin.</value>
-  </data>
-  <data name="MessageSuccess" xml:space="preserve">
+  <data name="MessageSaveSuccess" xml:space="preserve">
     <value>Save Data Success</value>
   </data>
   <data name="MessageUnSuccess" xml:space="preserve">
     <value>Data is not correct, Please Check Data or Contact System Admin</value>
   </data>
-  <data name="MessageUploadmissmatch" xml:space="preserve">
-    <value>Upload type file miss match.</value>
+  <data name="RequestTraining" xml:space="preserve">
+    <value>Request Training</value>
   </data>
-  <data name="MessageUploadSuccess" xml:space="preserve">
-    <value>Upload file success.</value>
-  </data>
-  <data name="MessageUploadtoolage" xml:space="preserve">
-    <value>Upload file is too large.</value>
-  </data>
-  <data name="Profile" xml:space="preserve">
-    <value>Profile</value>
+  <data name="Training" xml:space="preserve">
+    <value>Training</value>
   </data>
 </root>

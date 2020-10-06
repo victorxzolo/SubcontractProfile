@@ -99,7 +99,7 @@ $(document).ready(function () {
             $('#selection').html('You selected: ' + suggestion.value);
         },
         showNoSuggestionNotice: true,
-        noSuggestionNotice: 'Sorry, no matching results',
+        noSuggestionNotice: localizedData.MessageAutocomplete,
     });
 
     $('#btnverifycompany').click(function () {
@@ -111,7 +111,7 @@ $(document).ready(function () {
         else {
             bootbox.confirm({
                 title: "System Information",
-                message: "Please select company.",
+                message: localizedData.ErrorSelectCompany,
                 buttons: {
                     cancel: {
                         label: '<i class="fa fa-times"></i> Cancel'
