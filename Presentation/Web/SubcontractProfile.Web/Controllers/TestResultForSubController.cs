@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using SubcontractProfile.Web.Extension;
 using SubcontractProfile.Web.Model;
 using Microsoft.Win32.SafeHandles;
+using Microsoft.Extensions.Localization;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -26,10 +27,12 @@ namespace SubcontractProfile.Web.Controllers
         CultureInfo culture = new CultureInfo("en-US");
         private readonly IHttpContextAccessor _httpContextAccessor;
         private string Lang = "";
-        public TestResultForSubController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        private readonly IStringLocalizer<TestResultForSubController> _localizer;
+        public TestResultForSubController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IStringLocalizer<TestResultForSubController> localizer)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
+            _localizer = localizer;
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
 
         }
@@ -42,16 +45,11 @@ namespace SubcontractProfile.Web.Controllers
                 return RedirectToAction("Login", "Account");
             }
             getsession();
-            if (Lang == "TH")
-            {
-                ViewData["Controller"] = "ข้อมูลอบรม";
-                ViewData["View"] = "ผลการทดสอบ";
-            }
-            else
-            {
-                ViewData["Controller"] = "Training";
-                ViewData["View"] = "Test Result";
-            }
+
+                ViewData["Controller"] = _localizer["Training"];
+                ViewData["View"] = _localizer["TestResult"];
+
+
             return View();
         }
 

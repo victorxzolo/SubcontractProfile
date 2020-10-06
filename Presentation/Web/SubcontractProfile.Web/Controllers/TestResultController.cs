@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using SubcontractProfile.Web.Extension;
 using SubcontractProfile.Web.Model;
 using Microsoft.Win32.SafeHandles;
+using Microsoft.Extensions.Localization;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -26,6 +27,7 @@ namespace SubcontractProfile.Web.Controllers
         CultureInfo culture = new CultureInfo("en-US");
         private readonly IHttpContextAccessor _httpContextAccessor;
         private string Lang = "";
+        private readonly IStringLocalizer<TestResultController> _localizer;
         public TestResultController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
