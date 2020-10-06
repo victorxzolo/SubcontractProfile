@@ -123,9 +123,6 @@
   <data name="Booking" xml:space="preserve">
     <value>Booking</value>
   </data>
-  <data name="BookingDate" xml:space="preserve">
-    <value>Booking Date</value>
-  </data>
   <data name="BookingDateFrom" xml:space="preserve">
     <value>Booking Date From</value>
   </data>
@@ -227,6 +224,9 @@
   </data>
   <data name="Trainee" xml:space="preserve">
     <value>Trainee</value>
+  </data>
+  <data name="TrainingDate" xml:space="preserve">
+    <value>Training Date</value>
   </data>
   <data name="Vat7" xml:space="preserve">
     <value>Vat(7%)</value>
