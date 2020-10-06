@@ -62,6 +62,7 @@ namespace SubcontractProfile.Web.Controllers
         }
         public IActionResult CompanyVerify(string companyid)
         {
+            getsession();
             ViewData["Controller"] = _localizer["Registration"];
             ViewData["View"] = _localizer["CompanyVerify"];
             ViewBag.Companyid = companyid;

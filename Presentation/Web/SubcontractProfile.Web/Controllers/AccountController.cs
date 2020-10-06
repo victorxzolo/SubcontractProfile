@@ -230,6 +230,17 @@ namespace SubcontractProfile.Web.Controllers
 
         }
 
+        [HttpPost]
+        public IActionResult SetLanguageToPage(string culture)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+            return Json(new { Status = true });
+        }
+
         public SubcontractProfileUserModel GetUser(string userName,string password)
         {
             SubcontractProfileUserModel authenticatedUser = new SubcontractProfileUserModel();
@@ -280,10 +291,12 @@ namespace SubcontractProfile.Web.Controllers
 
 
         #region Register
-        public IActionResult Register(string language = "TH")
+        public IActionResult Register(string language = "th")
         {
-            ViewData["Controller"] = "Register";
-            ViewData["View"] = "Register";
+            SetLanguage("th");
+
+            ViewData["Controller"] = _localizer["Register"];
+            ViewData["View"] = _localizer["Register"];
 
             #region Example GET
             //HttpClient client = new HttpClient();
@@ -357,20 +370,9 @@ namespace SubcontractProfile.Web.Controllers
                 }
                 if (L_user !=null && L_user.Count >0)
                 {
-                    if (Lang == "")
-                    {
-                        getsession();
-                    }
-                    if (Lang == "TH")
-                    {
-                        status = false;
-                        message = "Username นี้มีในระบบแล้ว";
-                    }
-                     else
-                    {
-                        status = false;
-                        message = "Username duplicate";
-                    }
+                    status = false;
+                    message = _localizer["MessageCheckUser"];
+
                 }
             }
             catch (Exception e)

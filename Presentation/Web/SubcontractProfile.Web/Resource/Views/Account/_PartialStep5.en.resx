@@ -117,58 +117,121 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ALL" xml:space="preserve">
-    <value>ALL</value>
+  <data name="AccountingDepartment" xml:space="preserve">
+    <value>Accounting Department</value>
   </data>
-  <data name="CompanyNameEng" xml:space="preserve">
-    <value>ชื่อบริษัท (อังกฤษ)</value>
+  <data name="AccountName" xml:space="preserve">
+    <value>Account Name</value>
   </data>
-  <data name="CompanyNameThai" xml:space="preserve">
-    <value>ชื่อบริษัท (ไทย)</value>
+  <data name="AccountNumber" xml:space="preserve">
+    <value>Account Number</value>
   </data>
-  <data name="ErrorSelectCompany" xml:space="preserve">
-    <value>กรุณาเลือกบริษัท</value>
+  <data name="AccountType" xml:space="preserve">
+    <value>AccountType</value>
   </data>
-  <data name="MessageAutocomplete" xml:space="preserve">
-    <value>ไม่มีผลลัพธ์ที่ตรงกัน</value>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
   </data>
-  <data name="RegisterDate" xml:space="preserve">
-    <value>วันที่สมัคร</value>
+  <data name="AddressType" xml:space="preserve">
+    <value>Address Type</value>
+  </data>
+  <data name="ASCCode" xml:space="preserve">
+    <value>ASC Code</value>
+  </data>
+  <data name="BankAccountInformation" xml:space="preserve">
+    <value>Bank Account Information</value>
+  </data>
+  <data name="BankName" xml:space="preserve">
+    <value>Bank Name</value>
+  </data>
+  <data name="BranchName" xml:space="preserve">
+    <value>Branch Name</value>
+  </data>
+  <data name="ChannelSaleGroup" xml:space="preserve">
+    <value>Channel Sale Group</value>
+  </data>
+  <data name="CommercialRegistrationBook" xml:space="preserve">
+    <value>Commercial Registration Book</value>
+  </data>
+  <data name="CompanyAddressInformation" xml:space="preserve">
+    <value>Company Address Information</value>
+  </data>
+  <data name="CompanyAilas" xml:space="preserve">
+    <value>Company Ailas</value>
+  </data>
+  <data name="CompanyCertificate" xml:space="preserve">
+    <value>Company Certificate</value>
+  </data>
+  <data name="CompanyDocuments" xml:space="preserve">
+    <value>Company Documents</value>
+  </data>
+  <data name="CompanyProfile" xml:space="preserve">
+    <value>Company Profile</value>
+  </data>
+  <data name="ContractInformation" xml:space="preserve">
+    <value>Contract Information</value>
+  </data>
+  <data name="ContractName" xml:space="preserve">
+    <value>Contract Name</value>
+  </data>
+  <data name="CreateChannel" xml:space="preserve">
+    <value>Create Channel</value>
+  </data>
+  <data name="DepartmentContactInformation" xml:space="preserve">
+    <value>Department Contact Information</value>
+  </data>
+  <data name="DistributionChannel" xml:space="preserve">
+    <value>Distribution Channel</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailCompany" xml:space="preserve">
+    <value>Email Company</value>
+  </data>
+  <data name="InformationSummary" xml:space="preserve">
+    <value>Information Summary</value>
+  </data>
+  <data name="InstallationDepartment" xml:space="preserve">
+    <value>Installation Department</value>
+  </data>
+  <data name="JuristicID" xml:space="preserve">
+    <value>Juristic ID</value>
+  </data>
+  <data name="JuristicNameEng" xml:space="preserve">
+    <value>Juristic Name Eng</value>
+  </data>
+  <data name="JuristicNameThai" xml:space="preserve">
+    <value>Juristic Name Thai</value>
+  </data>
+  <data name="LocationCode" xml:space="preserve">
+    <value>Location Code</value>
+  </data>
+  <data name="LocationInformation" xml:space="preserve">
+    <value>Location Information</value>
+  </data>
+  <data name="LocationName" xml:space="preserve">
+    <value>Location Name</value>
+  </data>
+  <data name="MaintenanceDepartment" xml:space="preserve">
+    <value> Maintenance Department</value>
   </data>
   <data name="RegisterType" xml:space="preserve">
-    <value>ประเภทผู้สมัคร</value>
+    <value>Register Type</value>
   </data>
-  <data name="Reset" xml:space="preserve">
-    <value>ล้างข้อมูล</value>
+  <data name="TaxwithholdName" xml:space="preserve">
+    <value>Withholding Tax Name</value>
   </data>
-  <data name="Search" xml:space="preserve">
-    <value>ค้นหาข้อมูล</value>
+  <data name="Tel" xml:space="preserve">
+    <value>Tel</value>
   </data>
-  <data name="SearchCompanyVerify" xml:space="preserve">
-    <value>ค้นหาตรวจสอบข้อมูลบริษัท</value>
+  <data name="VAT" xml:space="preserve">
+    <value>VAT</value>
   </data>
-  <data name="SearchResult" xml:space="preserve">
-    <value>ผลการค้นหา</value>
-  </data>
-  <data name="Select" xml:space="preserve">
-    <value>เลือก</value>
-  </data>
-  <data name="Status" xml:space="preserve">
-    <value>สถานะ</value>
-  </data>
-  <data name="TaxID" xml:space="preserve">
-    <value>เลขผู้เสียภาษี</value>
-  </data>
-  <data name="ToDate" xml:space="preserve">
-    <value>ถึงวันที่</value>
+  <data name="VATRegistrationCertificate" xml:space="preserve">
+    <value>VAT Registration Certificate</value>
   </data>
   <data name="VenderCode" xml:space="preserve">
     <value>Vender Code</value>
-  </data>
-  <data name="VerifyCompany" xml:space="preserve">
-    <value>ตรวจสอบข้อมูลบริษัท</value>
-  </data>
-  <data name="VerifyDate" xml:space="preserve">
-    <value>วันที่ตรวจสอบ</value>
   </data>
 </root>

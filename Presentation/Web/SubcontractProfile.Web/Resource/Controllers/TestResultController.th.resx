@@ -124,7 +124,7 @@
     <value>บันทึกข้อมูลเรียบร้อยแล้ว</value>
   </data>
   <data name="MessageUnSuccess" xml:space="preserve">
-    <value>Data is not correct, Please Check Data or Contact System Admin</value>
+    <value>ข้อมูลไม่ถูกต้อง, กรุณาตรวจสอบความถูกต้อง หรือ ติดต่อ System Admin</value>
   </data>
   <data name="ReportTestResult" xml:space="preserve">
     <value>รายงานผลการทดสอบ</value>

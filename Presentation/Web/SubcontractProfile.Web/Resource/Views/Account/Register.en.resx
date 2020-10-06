@@ -117,58 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ALL" xml:space="preserve">
-    <value>ALL</value>
+  <data name="AddressInformation" xml:space="preserve">
+    <value>Address Information</value>
   </data>
-  <data name="CompanyNameEng" xml:space="preserve">
-    <value>ชื่อบริษัท (อังกฤษ)</value>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
   </data>
-  <data name="CompanyNameThai" xml:space="preserve">
-    <value>ชื่อบริษัท (ไทย)</value>
+  <data name="BankAccountInformation" xml:space="preserve">
+    <value>Bank Account Information</value>
   </data>
-  <data name="ErrorSelectCompany" xml:space="preserve">
-    <value>กรุณาเลือกบริษัท</value>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
   </data>
-  <data name="MessageAutocomplete" xml:space="preserve">
-    <value>ไม่มีผลลัพธ์ที่ตรงกัน</value>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>Contact Information</value>
   </data>
-  <data name="RegisterDate" xml:space="preserve">
-    <value>วันที่สมัคร</value>
+  <data name="InformationSummary" xml:space="preserve">
+    <value>Information Summary</value>
   </data>
-  <data name="RegisterType" xml:space="preserve">
-    <value>ประเภทผู้สมัคร</value>
+  <data name="MessageTitel" xml:space="preserve">
+    <value>Sign up for Subcontract Profile and Dealer.</value>
   </data>
-  <data name="Reset" xml:space="preserve">
-    <value>ล้างข้อมูล</value>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
   </data>
-  <data name="Search" xml:space="preserve">
-    <value>ค้นหาข้อมูล</value>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
   </data>
-  <data name="SearchCompanyVerify" xml:space="preserve">
-    <value>ค้นหาตรวจสอบข้อมูลบริษัท</value>
-  </data>
-  <data name="SearchResult" xml:space="preserve">
-    <value>ผลการค้นหา</value>
-  </data>
-  <data name="Select" xml:space="preserve">
-    <value>เลือก</value>
-  </data>
-  <data name="Status" xml:space="preserve">
-    <value>สถานะ</value>
-  </data>
-  <data name="TaxID" xml:space="preserve">
-    <value>เลขผู้เสียภาษี</value>
-  </data>
-  <data name="ToDate" xml:space="preserve">
-    <value>ถึงวันที่</value>
-  </data>
-  <data name="VenderCode" xml:space="preserve">
-    <value>Vender Code</value>
-  </data>
-  <data name="VerifyCompany" xml:space="preserve">
-    <value>ตรวจสอบข้อมูลบริษัท</value>
-  </data>
-  <data name="VerifyDate" xml:space="preserve">
-    <value>วันที่ตรวจสอบ</value>
+  <data name="UserInformation" xml:space="preserve">
+    <value>User Information</value>
   </data>
 </root>

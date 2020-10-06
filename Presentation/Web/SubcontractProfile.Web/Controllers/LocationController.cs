@@ -55,8 +55,8 @@ namespace SubcontractProfile.Web.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-
-                ViewData["Controller"] = _localizer["Profile"];
+            getsession();
+            ViewData["Controller"] = _localizer["Profile"];
                 ViewData["View"] = _localizer["LocationProfile"];
 
             // ViewBag.Pageitem = "Location";

@@ -295,7 +295,7 @@
     <value>Please fill House No</value>
   </data>
   <data name="ErrorJuristicPersonRegistrationNumber" xml:space="preserve">
-    <value>Please fill Juristic Person Registration No.</value>
+    <value>Please fill Juristic ID</value>
   </data>
   <data name="ErrorLocationCode" xml:space="preserve">
     <value>Please fill Location Code</value>
@@ -304,10 +304,10 @@
     <value>Please fill Location Name</value>
   </data>
   <data name="ErrorNameofJuristicPersonEN" xml:space="preserve">
-    <value>Please fill  Name Of Juristic Person EN</value>
+    <value>Please fill  Juristic Name Eng</value>
   </data>
   <data name="ErrorNameofJuristicPersonTH" xml:space="preserve">
-    <value>Please fill  Name Of Juristic Person TH</value>
+    <value>Please fill  Juristic Name Thai</value>
   </data>
   <data name="ErrorProvince" xml:space="preserve">
     <value>Please fill Province</value>
@@ -355,7 +355,7 @@
     <value>แก้ไข ข้อมูลบริษัท222</value>
   </data>
   <data name="JuristicPersonRegistrationNumber" xml:space="preserve">
-    <value>Juristic Person Registration No.</value>
+    <value>Juristic ID</value>
   </data>
   <data name="LocationCode" xml:space="preserve">
     <value>Location Code</value>
@@ -376,10 +376,10 @@
     <value>Moo</value>
   </data>
   <data name="NameofJuristicPersonEN" xml:space="preserve">
-    <value>Name of Juristic Person EN</value>
+    <value>Juristic Name Eng</value>
   </data>
   <data name="NameofJuristicPersonTH" xml:space="preserve">
-    <value>Name of Juristic Person TH</value>
+    <value>Juristic Name Thai</value>
   </data>
   <data name="NonVAT" xml:space="preserve">
     <value>Non VAT</value>

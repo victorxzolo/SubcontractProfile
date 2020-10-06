@@ -1,4 +1,7 @@
 ﻿
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
 @{
     // Layout = "~/Views/Shared/_LayoutRegister.cshtml";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
@@ -19,7 +22,7 @@
         @*<div class="card shadow p-3 mb-5 bg-white rounded">*@
         <div class="form-group my-4">
             <div class="card-header bg-white">
-                <h3>สมัครใช้บริการ สำหรับ Subcontract Profile และ Dealer</h3>
+                <h3>@Localizer["MessageTitel"]</h3>
             </div>
         </div>
 
@@ -29,11 +32,11 @@
         @*<div class="form-group">*@
         <div id="smartwizard">
             <ul>
-                <li><a href="#step-1">ระบุข้อมูลผู้ใช้บริการ</a></li>
-                <li><a href="#step-2">ระบุข้อมูลที่อยู่บริษัท</a></li>
-                <li><a href="#step-3">ระบุข้อมูลติดต่อบริษัท </a></li>
-                <li><a href="#step-4">ระบุข้อมูลบัญชีธนาคาร </a></li>
-                <li><a href="#step-5">ตรวจสอบรายละเอียด</a></li>
+                <li><a href="#step-1">@Localizer["UserInformation"]</a></li>
+                <li><a href="#step-2">@Localizer["AddressInformation"]</a></li>
+                <li><a href="#step-3">@Localizer["ContactInformation"] </a></li>
+                <li><a href="#step-4">@Localizer["BankAccountInformation"] </a></li>
+                <li><a href="#step-5">@Localizer["InformationSummary"]</a></li>
             </ul>
             <div>
                 @*<div class="alert alert-danger toast hide"  data-autohide="false" id="idmsAlert" style="position: absolute; top: 0; right: 0;">
@@ -96,18 +99,18 @@
                         <button class="btn btn-success" id="next-btn" type="button">ถัดไป</button>*@
 
                     <button class="btn-border btn-black mr-2" id="cancel-btn" onclick="window.location='@Url.Action( "Login", "Account")'" type="button">
-                        <i class="fa fa-ban icon"></i><span>ยกเลิก</span>
+                        <i class="fa fa-ban icon"></i><span>@Localizer["Cancel"]</span>
                     </button>
 
                     <button class="btn-border btn-gray mr-2" id="prev-btn" type="button">
-                        <i class="fa fa-undo icon"></i><span>ย้อนกลับ</span>
+                        <i class="fa fa-undo icon"></i><span>@Localizer["Back"]</span>
                     </button>
 
                     <button class="btn-border btn-green" id="next-btn" type="button">
-                        <i class="fa fa-forward icon"></i><span>ถัดไป</span>
+                        <i class="fa fa-forward icon"></i><span>@Localizer["Next"]</span>
                     </button>
                     <button class="btn-border btn-green" id="btnregis" type="button" style="display:none;">
-                        <i class="fa fa-sign-in icon"></i><span>สมัคร</span>
+                        <i class="fa fa-sign-in icon"></i><span>@Localizer["Register"]</span>
                     </button>
 
                 </div>

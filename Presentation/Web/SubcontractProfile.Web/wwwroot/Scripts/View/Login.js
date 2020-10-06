@@ -72,6 +72,24 @@ $(document).ready(function () {
             });
      
     });
+
+
+    //$('#ddlLanguage').change(function () {
+    //    var urlSetLanguage = url.replace('Action', 'SetLanguageToPage');
+    //    $.ajax({
+    //        type: "POST",
+    //        url: urlSetLanguage,
+    //        data: { culture: $('#ddlLanguage option').filter(':selected').val() },
+    //        dataType: "json",
+    //        async: false,
+    //        success: function (data) {
+    //            location.reload();
+    //        },
+    //        error: function (response) {
+
+    //        }
+    //    });
+    //});
 });
 
 

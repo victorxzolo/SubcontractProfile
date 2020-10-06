@@ -1,182 +1,184 @@
-﻿
-    <div class="needs-validation-step3" novalidate>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
 
-        <div class="row my-3">
-            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                <p class="font-weight-bolder lead">
-                    ข้อมูล ติดต่อบริษัท
-                </p>
-                <hr />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อีเมล์ บริษัท :<span style="color:red">*</span></label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <input type="text" class="form-control inputValidationContract form-control-sm" id="txtcompany_Email" required />
-                        <div class="invalid-tooltip">กรุณาระบุอีเมล์ บริษัท</div>
-                        <span id='errorcompany_Email' style="color:red;display:none;">รูปแบบอีเมล์ไม่ถูกต้อง</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อผู้ติดต่อ :<span style="color:red">*</span></label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <input type="text" class="form-control inputValidationContract form-control-sm" id="txtcontract_name" required />
-                        <div class="invalid-tooltip">กรุณาระบุชื่อผู้ติดต่อ</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เบอร์ไทร :<span style="color:red">*</span></label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <input type="text" class="form-control inputValidationContract form-control-sm" id="txtcontract_phone" required />
-                        <div class="invalid-tooltip">กรุณาระบุเบอร์ไทร</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อีเมล์ :<span style="color:red">*</span></label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <input type="text" class="form-control inputValidationContract form-control-sm" id="txtcontract_email" required />
-                        <div class="invalid-tooltip">กรุณาระบุอีเมล์</div>
-                        <span id='errorcontract_email' style="color:red;display:none;">รูปแบบอีเมล์ไม่ถูกต้อง</span>
-</div>
-                </div>
-            </div>
-        </div>
+@inject IViewLocalizer Localizer
+<div class="needs-validation-step3" novalidate>
 
-        <div class="row my-3">
-            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                <p class="font-weight-bolder lead">
-                    ข้อมูล ติดต่อแผนก
-                </p>
-                <hr />
-            </div>
+    <div class="row my-3">
+        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+            <p class="font-weight-bolder lead">
+                @Localizer["ContractInformation"]
+            </p>
+            <hr />
         </div>
-        <div class="row my-3">
-            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 text-left">
-                <p class="font-weight-bolder lead">
-                    แผนกติดตั้ง
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อผู้ติดต่อ :<span style="color:red">*</span></label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <input type="text" class="form-control inputValidationContract form-control-sm" id="txtdept_of_install_name" required/>
-                        <div class="invalid-tooltip">กรุณาระบุชื่อผู้ติดต่อ</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เบอร์ไทร :<span style="color:red">*</span></label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <input type="text" class="form-control inputValidationContract form-control-sm" id="txtdept_of_install_phone" required />
-                        <div class="invalid-tooltip">กรุณาระบุเบอร์ไทร</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อีเมล์ :</label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <input type="text" class="form-control form-control-sm" id="txtdept_of_install_email" />
-                        <span id='errorinstall_email' style="color:red;display:none;">รูปแบบอีเมล์ไม่ถูกต้อง</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row my-3">
-            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 text-left">
-                <p class="font-weight-bolder lead">
-                    แผนกซ่อมบำรุง
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อผู้ติดต่อ :<span style="color:red">*</span></label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <input type="text" class="form-control inputValidationContract form-control-sm" id="txtdept_of_mainten_name" required />
-                        <div class="invalid-tooltip">กรุณาระบุเชื่อผู้ติดต่อ</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เบอร์ไทร :<span style="color:red">*</span></label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <input type="text" class="form-control inputValidationContract form-control-sm" id="txtdept_of_mainten_phone" required />
-                        <div class="invalid-tooltip">กรุณาระบุเบอร์ไทร</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อีเมล์ :</label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <input type="text" class="form-control form-control-sm" id="txtdept_of_mainten_email"  />
-                        <span id='errormainten_email' style="color:red;display:none;">รูปแบบอีเมล์ไม่ถูกต้อง</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row my-3">
-            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 text-left">
-                <p class="font-weight-bolder lead">
-                    แผนกบัญชี
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อผู้ติดต่อ :<span style="color:red">*</span></label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <input type="text" class="form-control inputValidationContract form-control-sm" id="txtdept_of_Account_name" required />
-                        <div class="invalid-tooltip">กรุณาระบุชื่อผู้ติดต่อ</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เบอร์ไทร :<span style="color:red">*</span></label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <input type="text" class="form-control inputValidationContract form-control-sm" id="txtdept_of_Account_phone" required />
-                        <div class="invalid-tooltip">กรุณาระบุเบอร์ไทร</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อีเมล์ :</label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <input type="text" class="form-control form-control-sm" id="txtdept_of_Account_email" />
-                        <span id='errorAccount_email' style="color:red;display:none;">รูปแบบอีเมล์ไม่ถูกต้อง</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
     </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["EmailCompany"] :<span style="color:red">*</span></label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control inputValidationContract form-control-sm" id="txtcompany_Email" required />
+                    <div class="invalid-tooltip">@Localizer["ErrorEmailCompany"]</div>
+                    <span id='errorcompany_Email' style="color:red;display:none;">@Localizer["InvalidEmailFormat"]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["ContractName"] :<span style="color:red">*</span></label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control inputValidationContract form-control-sm" id="txtcontract_name" required />
+                    <div class="invalid-tooltip">@Localizer["ErrorContractName"]</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Tel"] :<span style="color:red">*</span></label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control inputValidationContract form-control-sm" id="txtcontract_phone" required />
+                    <div class="invalid-tooltip">@Localizer["ErrorTel"]</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Email"] :<span style="color:red">*</span></label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control inputValidationContract form-control-sm" id="txtcontract_email" required />
+                    <div class="invalid-tooltip">@Localizer["ErrorEmail"]</div>
+                    <span id='errorcontract_email' style="color:red;display:none;">@Localizer["InvalidEmailFormat"]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+            <p class="font-weight-bolder lead">
+                @Localizer["DepartmentContactInformation"]
+            </p>
+            <hr />
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 text-left">
+            <p class="font-weight-bolder lead">
+                @Localizer["InstallationDepartment"]
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["ContractName"] :<span style="color:red">*</span></label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control inputValidationContract form-control-sm" id="txtdept_of_install_name" required />
+                    <div class="invalid-tooltip">@Localizer["ErrorContractName"]</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Tel"] :<span style="color:red">*</span></label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control inputValidationContract form-control-sm" id="txtdept_of_install_phone" required />
+                    <div class="invalid-tooltip">@Localizer["ErrorTel"]</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Email"] :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txtdept_of_install_email" />
+                    <span id='errorinstall_email' style="color:red;display:none;">@Localizer["InvalidEmailFormat"]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 text-left">
+            <p class="font-weight-bolder lead">
+                @Localizer["MaintenanceDepartment"]
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["ContractName"] :<span style="color:red">*</span></label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control inputValidationContract form-control-sm" id="txtdept_of_mainten_name" required />
+                    <div class="invalid-tooltip">@Localizer["ErrorContractName"]</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Tel"] :<span style="color:red">*</span></label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control inputValidationContract form-control-sm" id="txtdept_of_mainten_phone" required />
+                    <div class="invalid-tooltip">@Localizer["ErrorTel"]</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Email"] :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txtdept_of_mainten_email" />
+                    <span id='errormainten_email' style="color:red;display:none;">@Localizer["InvalidEmailFormat"]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 text-left">
+            <p class="font-weight-bolder lead">
+                @Localizer["AccountingDepartment"]
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["ContractName"] :<span style="color:red">*</span></label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control inputValidationContract form-control-sm" id="txtdept_of_Account_name" required />
+                    <div class="invalid-tooltip">@Localizer["ErrorContractName"]</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Tel"] :<span style="color:red">*</span></label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control inputValidationContract form-control-sm" id="txtdept_of_Account_phone" required />
+                    <div class="invalid-tooltip">@Localizer["ErrorTel"]</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Email"] :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txtdept_of_Account_email" />
+                    <span id='errorAccount_email' style="color:red;display:none;">@Localizer["InvalidEmailFormat"]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

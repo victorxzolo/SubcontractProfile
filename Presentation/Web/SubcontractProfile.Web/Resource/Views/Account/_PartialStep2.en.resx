@@ -117,58 +117,91 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ALL" xml:space="preserve">
-    <value>ALL</value>
+  <data name="AddAddress" xml:space="preserve">
+    <value>Add Address</value>
   </data>
-  <data name="CompanyNameEng" xml:space="preserve">
-    <value>ชื่อบริษัท (อังกฤษ)</value>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
   </data>
-  <data name="CompanyNameThai" xml:space="preserve">
-    <value>ชื่อบริษัท (ไทย)</value>
+  <data name="AddressType" xml:space="preserve">
+    <value>Address Type</value>
   </data>
-  <data name="ErrorSelectCompany" xml:space="preserve">
-    <value>กรุณาเลือกบริษัท</value>
+  <data name="Building" xml:space="preserve">
+    <value>Building</value>
   </data>
-  <data name="MessageAutocomplete" xml:space="preserve">
-    <value>ไม่มีผลลัพธ์ที่ตรงกัน</value>
+  <data name="CompanyAddressInformation" xml:space="preserve">
+    <value>Address Information</value>
   </data>
-  <data name="RegisterDate" xml:space="preserve">
-    <value>วันที่สมัคร</value>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
   </data>
-  <data name="RegisterType" xml:space="preserve">
-    <value>ประเภทผู้สมัคร</value>
+  <data name="ddlSelect" xml:space="preserve">
+    <value>Please Select</value>
+  </data>
+  <data name="District" xml:space="preserve">
+    <value>District</value>
+  </data>
+  <data name="ErrorAddressType" xml:space="preserve">
+    <value>Please add address information.</value>
+  </data>
+  <data name="ErrorCountry" xml:space="preserve">
+    <value>Please fill Country</value>
+  </data>
+  <data name="ErrorDistrict" xml:space="preserve">
+    <value>Please fill District</value>
+  </data>
+  <data name="ErrorHouseNo" xml:space="preserve">
+    <value>Please fill HouseNo</value>
+  </data>
+  <data name="ErrorProvince" xml:space="preserve">
+    <value>Please fill Province</value>
+  </data>
+  <data name="ErrorSubdistrict" xml:space="preserve">
+    <value>Please fill Subdistrict</value>
+  </data>
+  <data name="ErrorZipcode" xml:space="preserve">
+    <value>Please fill Zipcode</value>
+  </data>
+  <data name="ErrorZone" xml:space="preserve">
+    <value>Please fill Zone</value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>Floor</value>
+  </data>
+  <data name="HouseNo" xml:space="preserve">
+    <value>HouseNo</value>
+  </data>
+  <data name="Moo" xml:space="preserve">
+    <value>Moo</value>
+  </data>
+  <data name="Province" xml:space="preserve">
+    <value>Province</value>
   </data>
   <data name="Reset" xml:space="preserve">
-    <value>ล้างข้อมูล</value>
+    <value>Reset</value>
   </data>
-  <data name="Search" xml:space="preserve">
-    <value>ค้นหาข้อมูล</value>
+  <data name="Room" xml:space="preserve">
+    <value>Room</value>
   </data>
-  <data name="SearchCompanyVerify" xml:space="preserve">
-    <value>ค้นหาตรวจสอบข้อมูลบริษัท</value>
+  <data name="Soi" xml:space="preserve">
+    <value>Soi</value>
   </data>
-  <data name="SearchResult" xml:space="preserve">
-    <value>ผลการค้นหา</value>
+  <data name="Street" xml:space="preserve">
+    <value>Street</value>
   </data>
-  <data name="Select" xml:space="preserve">
-    <value>เลือก</value>
+  <data name="SubDistrict" xml:space="preserve">
+    <value>SubDistrict</value>
   </data>
-  <data name="Status" xml:space="preserve">
-    <value>สถานะ</value>
+  <data name="Thailand" xml:space="preserve">
+    <value>Thailand</value>
   </data>
-  <data name="TaxID" xml:space="preserve">
-    <value>เลขผู้เสียภาษี</value>
+  <data name="Village" xml:space="preserve">
+    <value>Village</value>
   </data>
-  <data name="ToDate" xml:space="preserve">
-    <value>ถึงวันที่</value>
+  <data name="Zipcode" xml:space="preserve">
+    <value>Zip Code</value>
   </data>
-  <data name="VenderCode" xml:space="preserve">
-    <value>Vender Code</value>
-  </data>
-  <data name="VerifyCompany" xml:space="preserve">
-    <value>ตรวจสอบข้อมูลบริษัท</value>
-  </data>
-  <data name="VerifyDate" xml:space="preserve">
-    <value>วันที่ตรวจสอบ</value>
+  <data name="Zone" xml:space="preserve">
+    <value>Zone</value>
   </data>
 </root>

@@ -1,16 +1,18 @@
 ﻿
 
+@using Microsoft.AspNetCore.Mvc.Localization
 
+@inject IViewLocalizer Localizer
 <div class="row my-3">
     <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
         <p class="font-weight-bolder lead">
-            ข้อมูลที่อยู่บริษัท
+            @Localizer["CompanyAddressInformation"]
         </p>
         <hr />
     </div>
 </div>
 <div class="row">
-    <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">ประเภทที่อยู่</label>
+    <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">@Localizer["AddressType"]</label>
 </div>
 
 <div class="needs-validation-step2" novalidate>
@@ -69,7 +71,7 @@
                     </div>
                 </div>
             </div>
-            <div class="invalid-tooltip">Please choose valid address type.</div>
+            <div class="invalid-tooltip">@Localizer["ErrorAddressType"]</div>
         </div>
 
     </div>
@@ -77,14 +79,14 @@
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เลขที่ :</label>
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["HouseNo"] :</label>
                 <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
                     <input type="text" class="form-control inputValidationAddress form-control-sm" id="txthomenumber" required />
                     <div class="invalid-tooltip">
-                        กรุณาระบุเลขที่
+                        @Localizer["ErrorHouseNo"]
                     </div>
                 </div>
-                <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">หมู่ที่ :</label>
+                <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">@Localizer["Moo"] :</label>
                 <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
                     <input type="text" class="form-control form-control-sm" id="txtVillageNo" />
                     <div class="invalid-tooltip">
@@ -95,7 +97,7 @@
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">หมู่บ้าน :</label>
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Village"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <input type="text" class="form-control form-control-sm" id="txtvillage" />
                     <div class="invalid-tooltip">
@@ -108,7 +110,7 @@
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อาคาร :</label>
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Building"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <input type="text" class="form-control form-control-sm" id="txtbuilding" />
                 </div>
@@ -116,11 +118,11 @@
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชั้น :</label>
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Floor"] :</label>
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
                     <input type="text" class="form-control form-control-sm" id="txtfloor" />
                 </div>
-                <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">ห้อง :</label>
+                <label class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-form-label text-center">@Localizer["Room"] :</label>
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
                     <input type="text" class="form-control form-control-sm" id="txtroom" />
                 </div>
@@ -130,7 +132,7 @@
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ซอย :</label>
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Soi"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <input type="text" class="form-control form-control-sm" id="txtsoi" />
                 </div>
@@ -138,7 +140,7 @@
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ถนน :</label>
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Street"]  :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <input type="text" class="form-control form-control-sm" id="txtroad" />
                 </div>
@@ -150,25 +152,25 @@
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเทศ :<span style="color:red">*</span></label>
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Country"] :<span style="color:red">*</span></label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <select class="custom-select inputValidationAddress custom-select-sm" id="ddlcountry" required>
-                        <option value="">กรุณาเลือก</option>
-                        <option value="THA">Thailand</option>
+                        <option value="">@Localizer["ddlSelect"]</option>
+                        <option value="THA">@Localizer["Thailand"]</option>
                     </select>
-                    <div class="invalid-tooltip">กรุณาระบุประเทศ</div>
+                    <div class="invalid-tooltip">@Localizer["ErrorCountry"]</div>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ภาค :<span style="color:red">*</span></label>
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Zone"] :<span style="color:red">*</span></label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <select class="custom-select inputValidationAddress custom-select-sm" id="ddlzone" required>
                         <option></option>
                     </select>
                     <div class="invalid-tooltip">
-                        กรุณาระบุภาค
+                        @Localizer["ErrorZone"]
                     </div>
                 </div>
             </div>
@@ -178,24 +180,24 @@
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">จังหวัด :<span style="color:red">*</span></label>
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Province"] :<span style="color:red">*</span></label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <select class="custom-select inputValidationAddress custom-select-sm" id="ddlprovince" required>
                     </select>
                     <div class="invalid-tooltip">
-                        กรุณาระบุจังหวัด
+                        @Localizer["ErrorProvince"]
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">อำเภอ/เขต :<span style="color:red">*</span></label>
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["District"] :<span style="color:red">*</span></label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <select class="custom-select inputValidationAddress custom-select-sm" id="ddldistrict" required>
                     </select>
                     <div class="invalid-tooltip">
-                        กรุณาระบุอำเภอ/เขต
+                        @Localizer["ErrorDistrict"]
                     </div>
                 </div>
             </div>
@@ -205,23 +207,23 @@
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ตำบล/แขวง :<span style="color:red">*</span></label>
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["SubDistrict"] :<span style="color:red">*</span></label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <select class="custom-select inputValidationAddress custom-select-sm" id="ddlsubdistrict" required>
                     </select>
                     <div class="invalid-tooltip">
-                        กรุณาระบุตำบล/แขวง
+                        @Localizer["ErrorSubdistrict"]
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">รหัสไปรษณีย์ :<span style="color:red">*</span></label>
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["Zipcode"] :<span style="color:red">*</span></label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <select class="custom-select inputValidationAddress custom-select-sm" id="ddlzipcode" required>
                     </select>
-                    <div class="invalid-tooltip">กรุณาระบุรหัสไปรษณีย์</div>
+                    <div class="invalid-tooltip">@Localizer["ErrorZipcode"]</div>
                 </div>
 
             </div>
@@ -234,10 +236,10 @@
     <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
         <div class="d-flex align-items-center justify-content-center h-100" role="group">
             <button class="btn-border btn-black mr-2" id="btnresetaddress" type="button">
-                <i class="fa fa-refresh icon"></i><span>รีเช็ต</span>
+                <i class="fa fa-refresh icon"></i><span>@Localizer["Reset"]</span>
             </button>
             <button class="btn-border btn-green" id="btnaddaddress" type="button">
-                <i class="fa fa-plus-circle icon"></i><span>เพิ่มที่อยู่</span>
+                <i class="fa fa-plus-circle icon"></i><span>@Localizer["AddAddress"]</span>
             </button>
         </div>
 
@@ -253,8 +255,8 @@
                     <tr>
                         <th width="0%"></th>
                         <th width="0%"></th>
-                        <th width="30%">ประเภทที่อยู่</th>
-                        <th width="50%">ที่อยู่</th>
+                        <th width="30%">@Localizer["AddressType"]</th>
+                        <th width="50%">@Localizer["Address"]</th>
                         <th width="10%"></th>
                         <th width="10%"></th>
 

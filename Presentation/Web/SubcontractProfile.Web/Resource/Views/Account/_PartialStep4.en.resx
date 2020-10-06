@@ -117,58 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ALL" xml:space="preserve">
-    <value>ALL</value>
+  <data name="AccountName" xml:space="preserve">
+    <value>Account Name</value>
   </data>
-  <data name="CompanyNameEng" xml:space="preserve">
-    <value>ชื่อบริษัท (อังกฤษ)</value>
+  <data name="AccountNumber" xml:space="preserve">
+    <value>Account Number</value>
   </data>
-  <data name="CompanyNameThai" xml:space="preserve">
-    <value>ชื่อบริษัท (ไทย)</value>
+  <data name="AccountType" xml:space="preserve">
+    <value>Account Type</value>
   </data>
-  <data name="ErrorSelectCompany" xml:space="preserve">
-    <value>กรุณาเลือกบริษัท</value>
+  <data name="BankAccountInformation" xml:space="preserve">
+    <value>Bank Account Information</value>
   </data>
-  <data name="MessageAutocomplete" xml:space="preserve">
-    <value>ไม่มีผลลัพธ์ที่ตรงกัน</value>
+  <data name="BankCode" xml:space="preserve">
+    <value>Bank Code</value>
   </data>
-  <data name="RegisterDate" xml:space="preserve">
-    <value>วันที่สมัคร</value>
+  <data name="BankName" xml:space="preserve">
+    <value>Bank Name</value>
   </data>
-  <data name="RegisterType" xml:space="preserve">
-    <value>ประเภทผู้สมัคร</value>
+  <data name="BranchName" xml:space="preserve">
+    <value>Branch Name</value>
   </data>
-  <data name="Reset" xml:space="preserve">
-    <value>ล้างข้อมูล</value>
+  <data name="ChooseFile" xml:space="preserve">
+    <value>Choose File</value>
   </data>
-  <data name="Search" xml:space="preserve">
-    <value>ค้นหาข้อมูล</value>
+  <data name="ChooseFileType" xml:space="preserve">
+    <value>Support Type File pdf,jpg,jpeg,bmp,gif,tif,tiff,png</value>
   </data>
-  <data name="SearchCompanyVerify" xml:space="preserve">
-    <value>ค้นหาตรวจสอบข้อมูลบริษัท</value>
+  <data name="CommercialRegistrationBook" xml:space="preserve">
+    <value>Commercial Registration Book</value>
   </data>
-  <data name="SearchResult" xml:space="preserve">
-    <value>ผลการค้นหา</value>
+  <data name="CompanyCertificate" xml:space="preserve">
+    <value>Company Certificate</value>
   </data>
-  <data name="Select" xml:space="preserve">
-    <value>เลือก</value>
+  <data name="CompanyDocuments" xml:space="preserve">
+    <value>Company Documents</value>
   </data>
-  <data name="Status" xml:space="preserve">
-    <value>สถานะ</value>
+  <data name="ErrorAccountName" xml:space="preserve">
+    <value>Please fill Account Name</value>
   </data>
-  <data name="TaxID" xml:space="preserve">
-    <value>เลขผู้เสียภาษี</value>
+  <data name="ErrorAccountNumber" xml:space="preserve">
+    <value>Please fill Account Number</value>
   </data>
-  <data name="ToDate" xml:space="preserve">
-    <value>ถึงวันที่</value>
+  <data name="ErrorAccountType" xml:space="preserve">
+    <value>Please fill Account Type</value>
   </data>
-  <data name="VenderCode" xml:space="preserve">
-    <value>Vender Code</value>
+  <data name="ErrorBankName" xml:space="preserve">
+    <value>Please fill Bank Name</value>
   </data>
-  <data name="VerifyCompany" xml:space="preserve">
-    <value>ตรวจสอบข้อมูลบริษัท</value>
+  <data name="ErrorCommercialRegistrationBook" xml:space="preserve">
+    <value>Please Upload File Commercial Registration Book</value>
   </data>
-  <data name="VerifyDate" xml:space="preserve">
-    <value>วันที่ตรวจสอบ</value>
+  <data name="ErrorCompanyCertificate" xml:space="preserve">
+    <value>Please Upload File Company Certificate</value>
+  </data>
+  <data name="ErrorVATRegistrationCertificate" xml:space="preserve">
+    <value>Please Upload File VAT Registration Certificate</value>
+  </data>
+  <data name="VATRegistrationCertificate" xml:space="preserve">
+    <value>VAT Registration Certificate</value>
   </data>
 </root>

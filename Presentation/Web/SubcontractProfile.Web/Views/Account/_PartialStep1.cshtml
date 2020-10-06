@@ -1,19 +1,21 @@
 ﻿
 
+@using Microsoft.AspNetCore.Mvc.Localization
 
+@inject IViewLocalizer Localizer
 @*<div class="alert alert-danger toast" data-autohide="false" id="idmsAlert">
-    <div class="alert-danger">
-        <strong class="mr-auto text-primary"></strong>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
-    </div>
-    <div class="toast-body">
-        <strong>กรุณาระบุข้อมูลให้ครบถ้วน</strong>
-    </div>
-</div>*@
+        <div class="alert-danger">
+            <strong class="mr-auto text-primary"></strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
+        </div>
+        <div class="toast-body">
+            <strong>กรุณาระบุข้อมูลให้ครบถ้วน</strong>
+        </div>
+    </div>*@
 <div class="row my-3">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ประเภทผู้สมัคร :<span style="color:red">*</span></label>
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["RegisterType"] :<span style="color:red">*</span></label>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                 <div class="input-group">
                     <div class="col-sm-7">
@@ -46,7 +48,7 @@
     <div class="form-group" style="display:none;">
         <div class="">
             <p class="font-weight-bolder lead">
-                ข้อมูลช่องทาง
+                @Localizer["ChannelInformation"]
             </p>
             <hr />
         </div>
@@ -54,7 +56,7 @@
     <div class="row my-3" style="display:none;">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Distribution Channel :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right"> @Localizer["DistributionChannel"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <select class="form-control form-control-sm" id="ddldistribution">
                         <option value="Channel1">Channel1</option>
@@ -68,7 +70,7 @@
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Channel Sale Group :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["ChannelSaleGroup"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <select class="form-control form-control-sm" id="ddlchannelsalegroup">
                         <option value="Group1">Group1</option>
@@ -85,52 +87,52 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
             <p class="font-weight-bolder lead">
-                ข้อมูลบริษัท
+                @Localizer["CompanyProfile"]
             </p>
             <hr />
         </div>
     </div>
     @*<div class="row my-3">
-        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-            <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ประเภทผู้สมัคร :</label>
-                <div class="col-sm-5">
-                    <div class="custom-control custom-radio">
+            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                <div class="form-group row">
+                    <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ประเภทผู้สมัคร :</label>
+                    <div class="col-sm-5">
+                        <div class="custom-control custom-radio">
 
-                        <input type="radio" class="custom-control-input inputValidation" name="optionsRadios" id="chktypeN" value="NewSubContract" checked required>
-                        <label class="custom-control-label" for="chktypeN">
-                            New Subcontract
-                        </label>
+                            <input type="radio" class="custom-control-input inputValidation" name="optionsRadios" id="chktypeN" value="NewSubContract" checked required>
+                            <label class="custom-control-label" for="chktypeN">
+                                New Subcontract
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="custom-control custom-radio">
+                    <div class="col-sm-4">
+                        <div class="custom-control custom-radio">
 
-                        <input type="radio" class="custom-control-input inputValidationdealer" name="optionsRadios" id="chktypeD" value="Dealer" required>
-                        <label class="custom-control-label" for="chktypeD">
-                            Dealer
-                        </label>
+                            <input type="radio" class="custom-control-input inputValidationdealer" name="optionsRadios" id="chktypeD" value="Dealer" required>
+                            <label class="custom-control-label" for="chktypeD">
+                                Dealer
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
 
-    
+
 
     <div class="row my-3">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">เลขทะเบียนนิติบุคคล :<span style="color:red">*</span></label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["JuristicPersonRegistrationNumber"] :<span style="color:red">*</span></label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <div class="input-group">
                         <input type="text" class="form-control inputValidation form-control-sm" id="txttax_id"
-                               placeholder="เลขทะเบียนนิติบุคคล" aria-label="เลขทะเบียนนิติบุคคล" maxlength="13" required>
+                               placeholder="@Localizer["JuristicPersonRegistrationNumber"]" aria-label="@Localizer["JuristicPersonRegistrationNumber"]" maxlength="13" required>
                         <div class="input-group-append">
                             <button class="btn btn-sm btn-secondary" type="button" id="btnsearchrevenue"><i class="fa fa-search"></i></button>
                         </div>
                         <div class="invalid-tooltip">
-                            กรุณาระบุเลขทะเบียนนิติบุคคล
+                            @Localizer["ErrorJuristicPersonRegistrationNumber"]
                         </div>
                     </div>
                 </div>
@@ -139,9 +141,9 @@
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อย่อบริษัท :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right"> @Localizer["CompanyAilas"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control form-control-sm" id="txtcompany_alias" maxlength="100" placeholder="ชื่อย่อบริษัท"  />
+                    <input type="text" class="form-control form-control-sm" id="txtcompany_alias" maxlength="100" placeholder="@Localizer["CompanyAilas"]" />
                 </div>
             </div>
         </div>
@@ -149,28 +151,28 @@
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(ไทย) :<span style="color:red">*</span></label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["NameofJuristicPersonTH"] :<span style="color:red">*</span></label>
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
                     <select class="custom-select  custom-select-sm" id="ddlprefixcompany_name_th" maxlength="100" required></select>
                 </div>
                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                    <input type="text" class="form-control inputValidation form-control-sm" id="txtcompany_name_th"  placeholder="ชื่อนิติบุคคล(ไทย)" required />
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtcompany_name_th" placeholder="@Localizer["NameofJuristicPersonTH"]" required />
                     <div class="invalid-tooltip">
-                        กรุณาระบุชื่อนิติบุคคล(ไทย)
+                        @Localizer["ErrorNameofJuristicPersonTH"]
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(อังกฤษ) :<span style="color:red">*</span></label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right"> @Localizer["NameofJuristicPersonEN"] :<span style="color:red">*</span></label>
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
                     <select class="custom-select  custom-select-sm" id="ddlprefixcompany_name_en" maxlength="100" required></select>
                 </div>
                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                    <input type="text" class="form-control inputValidation form-control-sm" id="txtcompany_name_en"  placeholder="ชื่อนิติบุคคล(อังกฤษ)" required />
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtcompany_name_en" placeholder="@Localizer["NameofJuristicPersonEN"]" required />
                     <div class="invalid-tooltip">
-                        กรุณาระบุชื่อนิติบุคคล(อังกฤษ)
+                        @Localizer["ErrorNameofJuristicPersonEN"]
                     </div>
                 </div>
             </div>
@@ -179,11 +181,11 @@
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อภาษีหัก ณ ที่จ่าย :<span style="color:red">*</span></label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["TaxwithholdName"] :<span style="color:red">*</span></label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control inputValidation form-control-sm" id="txtwt_name" maxlength="100" placeholder="ชื่อภาษีหัก ณ ที่จ่าย " required />
+                    <input type="text" class="form-control inputValidation form-control-sm" id="txtwt_name" maxlength="100" placeholder="@Localizer["TaxwithholdName"]" required />
                     <div class="invalid-tooltip">
-                        กรุณาระบุชื่อภาษีหัก ณ ที่จ่าย
+                        @Localizer["ErrorTaxwithholdName"]
                     </div>
                 </div>
 
@@ -191,14 +193,14 @@
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ภาษีมูลค่าเพิ่ม :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["VAT"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <div class="form-group row">
                         <div class="custom-control custom-radio">
 
-                            <input type="radio" class="custom-control-input" name="vat_type" id="chkvat_typeT" value="VAT"   checked>
+                            <input type="radio" class="custom-control-input" name="vat_type" id="chkvat_typeT" value="VAT" checked>
                             <label class="custom-control-label" for="chkvat_typeT">
-                                ภาษีมูลค่าเพิ่ม
+                                @Localizer["VAT"]
                             </label>
                         </div>
 
@@ -207,7 +209,7 @@
 
                             <input type="radio" class="custom-control-input" name="vat_type" id="chkvat_typeE" value="NON_VAT">
                             <label class="custom-control-label" for="chkvat_typeE">
-                                ไม่มีภาษีมูลค่าเพิ่ม
+                                @Localizer["NonVAT"]
                             </label>
                         </div>
                     </div>
@@ -225,7 +227,7 @@
     <div class="form-group">
         <div class="">
             <p class="font-weight-bolder lead">
-                ข้อมูลที่ตั้ง
+                @Localizer["LocationInformation"]
             </p>
             <hr />
         </div>
@@ -233,7 +235,7 @@
     <div class="row my-3">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Location Code :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["LocationCode"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <div class="input-group">
                         <input type="text" class="form-control inputValidationdealer form-control-sm"
@@ -244,7 +246,7 @@
                             </button>
                         </div>
                         <div class="invalid-tooltip">
-                            กรุณาระบุ Location Code
+                            @Localizer["ErrorLocationCode"]
                         </div>
                     </div>
                 </div>
@@ -253,12 +255,12 @@
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Distribution Channel :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right"> @Localizer["DistributionChannel"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <input type="hidden" id="hddistribution" />
                     <input type="text" class="form-control inputValidationdealer form-control-sm" id="txtdistribution" disabled maxlength="250" required />
                     <div class="invalid-tooltip">
-                        กรุณาระบุ Distribution Channel
+                        @Localizer["ErrorDistributionChannel"]
                     </div>
                 </div>
             </div>
@@ -268,18 +270,18 @@
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Location Name :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right"> @Localizer["LocationName"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <input type="text" class="form-control inputValidationdealer form-control-sm" id="txtlocationname" disabled maxlength="250" required />
                     <div class="invalid-tooltip">
-                        กรุณาระบุ Location Name
+                        @Localizer["ErrorLocationName"]
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Channel Sale Group :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["ChannelSaleGroup"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <input type="hidden" id="hdchannelsalegroup" />
                     <input type="text" class="form-control form-control-sm" id="txtchannelsalegroup" disabled />
@@ -290,22 +292,22 @@
     <div class="row" style="display:none;">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Vender Code :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["VenderCode"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <input type="text" class="form-control form-control-sm" id="txtvendercode" disabled maxlength="250" />
                     <div class="invalid-tooltip">
-                        กรุณาระบุ Vender Code
+                        @Localizer["ErrorVenderCode"]
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ASC Code :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["ASCCode"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <input type="text" class="form-control form-control-sm" id="txtasccode" disabled />
                     <div class="invalid-tooltip">
-                        กรุณาระบุ ASC Code
+                        @Localizer["ErrorASCCode"]
                     </div>
                 </div>
             </div>
@@ -315,7 +317,7 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
             <p class="font-weight-bolder lead">
-                ข้อมูลบริษัท
+                @Localizer["CompanyProfile"]
             </p>
             <hr />
         </div>
@@ -323,18 +325,18 @@
     <div class="row my-3">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">เลขทะเบียนนิติบุคคล :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right"> @Localizer["JuristicPersonRegistrationNumber"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <input type="text" class="form-control inputValidationdealer form-control-sm" id="txttax_id_dealer" disabled maxlength="100" required />
                     <div class="invalid-tooltip">
-                        กรุณาระบุเลขทะเบียนนิติบุคคล
+                        @Localizer["ErrorJuristicPersonRegistrationNumber"]
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อย่อบริษัท :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["CompanyAilas"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <input type="text" class="form-control form-control-sm" id="txtcompany_alias_dealer" maxlength="100" />
                 </div>
@@ -344,28 +346,28 @@
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(ไทย) :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["NameofJuristicPersonTH"] :</label>
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
                     <select class="custom-select custom-select-sm" id="ddlprefixcompany_name_th_dealer"></select>
                 </div>
                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
                     <input type="text" class="form-control inputValidationdealer form-control-sm"
-                           placeholder="ชื่อนิติบุคคล(ไทย)" id="txtcompany_name_th_dealer" disabled maxlength="100" required />
+                           placeholder="@Localizer["NameofJuristicPersonTH"]" id="txtcompany_name_th_dealer" disabled maxlength="100" required />
                     <div class="invalid-tooltip">
-                        กรุณาระบุชื่อนิติบุคคล(ไทย)
+                        @Localizer["ErrorNameofJuristicPersonTH"]
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(อังกฤษ) :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["NameofJuristicPersonEN"] :</label>
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
                     <select class="custom-select custom-select-sm" id="ddlprefixcompany_name_en_dealer"></select>
                 </div>
                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
                     <input type="text" class="form-control form-control-sm"
-                           placeholder="ชื่อนิติบุคคล(อังกฤษ)" id="txtcompany_name_en_dealer" maxlength="100" />
+                           placeholder="@Localizer["NameofJuristicPersonEN"]" id="txtcompany_name_en_dealer" maxlength="100" />
                     @*<div class="invalid-tooltip">
                             Please provide a valid company name english.
                         </div>*@
@@ -376,11 +378,11 @@
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อภาษีหัก ณ ที่จ่าย :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["TaxwithholdName"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <input type="text" class="form-control inputValidationdealer form-control-sm" id="txtwt_name_dealer" maxlength="100" disabled required />
                     <div class="invalid-tooltip">
-                        กรุณาระบุชื่อภาษีหัก ณ ที่จ่าย
+                        @Localizer["ErrorTaxwithholdName"]
                     </div>
                 </div>
 
@@ -388,14 +390,14 @@
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ภาษีมูลค่าเพิ่ม :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["VAT"] :</label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <div class="form-group row">
                         <div class="custom-control custom-radio">
 
                             <input type="radio" class="custom-control-input" name="rdtaxJ" id="chkvat_typeT_dealer" value="VAT">
                             <label class="custom-control-label" for="chkvat_typeT_dealer">
-                                ภาษีมูลค่าเพิ่ม
+                                @Localizer["VAT"]
                             </label>
                         </div>
 
@@ -404,7 +406,7 @@
 
                             <input type="radio" class="custom-control-input" name="rdtaxJ" id="chkvat_typeE_dealer" value="NON_VAT">
                             <label class="custom-control-label" for="chkvat_typeE_dealer">
-                                ไม่มีภาษีมูลค่าเพิ่ม
+                                @Localizer["NonVAT"]
                             </label>
                         </div>
                     </div>
@@ -415,10 +417,10 @@
 </div>
 
 <div class="needs-validation-user" id="divuser" novalidate>
-    <div class="row" >
+    <div class="row">
         <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
             <p class="font-weight-bolder lead">
-                กำหนดข้อมูลการใช้บริการ
+                @Localizer["SetUserInformation"]
             </p>
             <hr />
         </div>
@@ -426,11 +428,11 @@
     <div class="row my-3">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ระบุชื่อผู้ใช้งาน :<span style="color:red">*</span> </label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["UserName"] :<span style="color:red">*</span> </label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="text" class="form-control  form-control-sm" id="txtcreateuser" maxlength="50" placeholder="ระบุชื่อผู้ใช้งาน" required />
+                    <input type="text" class="form-control  form-control-sm" id="txtcreateuser" maxlength="50" placeholder="@Localizer["UserName"]" required />
                     <div class="invalid-tooltip">
-                        กรุณาระบุชื่อผู้ใช้งาน
+                        @Localizer["ErrorUserName"]
                     </div>
                     <span class='user' style="color:red;display:none;"></span>
                 </div>
@@ -438,13 +440,13 @@
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">อีเมลของผู้ใช้งานนี้  :<span style="color:red">*</span></label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["EmailUser"]  :<span style="color:red">*</span></label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="email" class="form-control  form-control-sm" id="txtcreateEmail" maxlength="50" placeholder="อีเมลของผู้ใช้งานนี้" required />
+                    <input type="email" class="form-control  form-control-sm" id="txtcreateEmail" maxlength="50" placeholder="@Localizer["EmailUser"]" required />
                     <div class="invalid-tooltip">
-                        กรุณาระบุอีเมลของผู้ใช้งานนี้
+                        @Localizer["ErrorEmailUser"]
                     </div>
-                    <span id='erroremail' style="color:red;display:none;">This email is not valid</span>
+                    <span id='erroremail' style="color:red;display:none;"> @Localizer["InvalidEmailFormat"]</span>
                 </div>
             </div>
         </div>
@@ -452,22 +454,22 @@
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">รหัสผ่าน :<span style="color:red">*</span></label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["Password"] :<span style="color:red">*</span></label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="password" class="form-control  form-control-sm" id="txtcreatepass" maxlength="50" placeholder="รหัสผ่าน" required />
+                    <input type="password" class="form-control  form-control-sm" id="txtcreatepass" maxlength="50" placeholder="@Localizer["Password"]" required />
                     <div class="invalid-tooltip">
-                        กรุณาระบุรหัสผ่าน
+                        @Localizer["ErrorPassword"]
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ยืนยันรหัสผ่าน :<span style="color:red">*</span></label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["ConfirmPassword"] :<span style="color:red">*</span></label>
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <input type="password" class="form-control  form-control-sm" id="txtconfirmpass" maxlength="50" placeholder="ยืนยันรหัสผ่าน" required />
+                    <input type="password" class="form-control  form-control-sm" id="txtconfirmpass" maxlength="50" placeholder="@Localizer["ConfirmPassword"]" required />
                     <div class="invalid-tooltip">
-                        กรุณาระบุยืนยันรหัสผ่าน
+                        @Localizer["ErrorConfirmPassword"]
                     </div>
                     <span id='message'></span>
                 </div>
@@ -483,7 +485,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Location Search</h4>
+                <h4 class="modal-title">@Localizer["LocationSearch"]</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
@@ -494,7 +496,7 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
                             <div class="form-group row">
-                                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">ASC Code :</label>
+                                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">@Localizer["ASCCode"] :</label>
                                 <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                     <input type="text" class="form-control  form-control-sm" id="txtasccodemodal" />
 
@@ -503,7 +505,7 @@
                         </div>
                         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
                             <div class="form-group row">
-                                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">Mobile No :</label>
+                                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">@Localizer["MobileNo"] :</label>
                                 <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                     <input type="text" class="form-control form-control-sm" id="txtmobilenomodal" />
 
@@ -514,18 +516,18 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
                             <div class="form-group row">
-                                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">Location Code :</label>
+                                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">@Localizer["LocationCode"] :</label>
                                 <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                     <input type="text" class="form-control inputValidationlocationModal form-control-sm" id="txtlocationcodemodal" required />
                                     <div class="invalid-tooltip">
-                                        Please provide a valid location code.
+                                        @Localizer["ErrorLocationCode"]
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
                             <div class="form-group row">
-                                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">ID Number :</label>
+                                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">@Localizer["IDNumber"] :</label>
                                 <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                     <input type="text" class="form-control form-control-sm" id="txtidnumbermodal" />
                                 </div>
@@ -535,7 +537,7 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
                             <div class="form-group row">
-                                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">Sap Code :</label>
+                                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">@Localizer["SapCode"] :</label>
                                 <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                     <input type="text" class="form-control form-control-sm" id="txtsapcodemodal" />
                                 </div>
@@ -543,7 +545,7 @@
                         </div>
                         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
                             <div class="form-group row">
-                                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">User Id :</label>
+                                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left">@Localizer["UserId"] :</label>
                                 <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                     <input type="text" class="form-control form-control-sm" id="txtuseridmodal" />
                                 </div>
@@ -556,10 +558,10 @@
                                 @*<button class="btn btn-secondary mr-2" id="rbtnresetlocationmodal" type="button">รีเช็ต</button>
                                     <button class="btn btn-info" id="btnsearchlocationmodal" type="button">ค้นหา</button>*@
                                 <button class="btn-border btn-black mr-2" id="btn_reset_modal" type="button">
-                                    <i class="fa fa-refresh icon"></i><span>รีเช็ต</span>
+                                    <i class="fa fa-refresh icon"></i><span>@Localizer["Reset"]</span>
                                 </button>
                                 <button class="btn-border btn-blue" id="btn_search_modal" type="button">
-                                    <i class="fa fa-search icon"></i><span>ค้นหา</span>
+                                    <i class="fa fa-search icon"></i><span>@Localizer["Search"]</span>
                                 </button>
                             </div>
 
@@ -573,13 +575,13 @@
                                 <table class="table table-bordered table-hover" id="tblocationModal">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th>ชื่อบริษัท</th>
-                                            <th>ชื่อย่อบริษัท</th>
-                                            <th>เลขนิติบุคคล</th>
-                                            <th>Location Code</th>
-                                            <th>Location Name</th>
-                                            <th>Distribution Channel</th>
-                                            <th>Channel Sale Group</th>
+                                            <th>@Localizer["CompanyName"]</th>
+                                            <th>@Localizer["CompanyAilas"]</th>
+                                            <th>@Localizer["JuristicPersonRegistrationNumber"]</th>
+                                            <th>@Localizer["LocationCode"]</th>
+                                            <th>@Localizer["LocationName"]</th>
+                                            <th>@Localizer["DistributionChannel"]</th>
+                                            <th>@Localizer["ChannelSaleGroup"]</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -615,10 +617,10 @@
                     <button type="button" class="btn btn-success" data-dismiss="modal">ตกลง</button>*@
 
                 <button type="button" class="btn-border btn-orange" data-dismiss="modal">
-                    <i class="fa fa-times icon"></i><span>ปิด</span>
+                    <i class="fa fa-times icon"></i><span>@Localizer["Close"]</span>
                 </button>
                 <button type="button" class="btn-border btn-green" id="btn_select_location">
-                    <i class="fa fa-check icon"></i><span>ตกลง</span>
+                    <i class="fa fa-check icon"></i><span>@Localizer["Select"]</span>
                 </button>
 
             </div>
@@ -633,7 +635,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">ค้นหาข้อมูลบริษัทจากฐานข้อมูลกรมสรรพากร</h4>
+                <h4 class="modal-title">@Localizer["SearchRevenue"]</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
@@ -644,7 +646,7 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                             <div class="form-group">
-                                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">ข้อมูลจากสรรพากร อาจจะไม่ตรงกับกรมพัฒนาธุรกิจ</label>
+                                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-left">@Localizer["DataRavenue"]</label>
                                 <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                     <input type="text" class="form-control  form-control-sm" id="txtsearchrevenue" />
 
@@ -656,17 +658,17 @@
                         <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
                             <div class="text-center">
                                 @*<button class="btn btn-dark" id="btn_reset_revenue_modal" type="button">
-                                    <i class="fa fa-refresh icon"></i><span>รีเช็ต</span>
-                                </button>
-                                <button class="btn btn-success" id="btn_search_revenue_modal" type="button">
-                                    <i class="fa fa-search icon"></i><span>ค้นหา</span>
-                                </button>*@
+                                        <i class="fa fa-refresh icon"></i><span>รีเช็ต</span>
+                                    </button>
+                                    <button class="btn btn-success" id="btn_search_revenue_modal" type="button">
+                                        <i class="fa fa-search icon"></i><span>ค้นหา</span>
+                                    </button>*@
                                 <button class="btn-border btn-black mr-2" id="btn_reset_revenue_modal" type="button">
-            <i class="fa fa-refresh icon"></i><span>รีเช็ต</span>
-        </button>
-        <button class="btn-border btn-blue" id="btn_search_revenue_modal" type="button">
-            <i class="fa fa-search icon"></i><span>ค้นหา</span>
-        </button>
+                                    <i class="fa fa-refresh icon"></i><span>@Localizer["Reset"]</span>
+                                </button>
+                                <button class="btn-border btn-blue" id="btn_search_revenue_modal" type="button">
+                                    <i class="fa fa-search icon"></i><span>@Localizer["Search"]</span>
+                                </button>
                             </div>
 
                         </div>
@@ -680,10 +682,10 @@
                                     <thead class="thead-light">
                                         <tr>
                                             @*<th></th>*@
-                                            <th>เลขผู้เสียภาษี</th>
-                                            <th>ชื่อบริษัท</th>
-                                            <th>สาขา</th>
-                                            <th>ที่อยู่</th>
+                                            <th>@Localizer["TaxID"]</th>
+                                            <th>@Localizer["CompanyName"]</th>
+                                            <th>@Localizer["Branch"]</th>
+                                            <th>@Localizer["Address"]</th>
                                             <th></th>
                                             @*<th>ตัวเลือก</th>*@
                                         </tr>
@@ -706,10 +708,10 @@
                     <button type="button" class="btn btn-success" data-dismiss="modal">ตกลง</button>*@
 
                 <button type="button" class="btn-border btn-orange" data-dismiss="modal">
-                    <i class="fa fa-times icon"></i><span>ปิด</span>
+                    <i class="fa fa-times icon"></i><span>@Localizer["Close"]</span>
                 </button>
                 <button type="button" class="btn-border btn-green" id="btn_select_revenue">
-                    <i class="fa fa-check icon"></i><span>ตกลง</span>
+                    <i class="fa fa-check icon"></i><span>@Localizer["Select"]</span>
                 </button>
 
             </div>

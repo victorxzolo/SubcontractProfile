@@ -28,10 +28,11 @@ namespace SubcontractProfile.Web.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private string Lang = "";
         private readonly IStringLocalizer<TestResultController> _localizer;
-        public TestResultController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public TestResultController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IStringLocalizer<TestResultController> localizer)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
+            _localizer = localizer;
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
            
         }
@@ -44,16 +45,10 @@ namespace SubcontractProfile.Web.Controllers
                 return RedirectToAction("LogonByUser", "LogonByUser");
             }
             getsession();
-            //if (Lang == "TH")
-            //{
-            //    ViewData["Controller"] = "ข้อมูลอบรม";
-            //    ViewData["View"] = "ขอรับการฝึกอบรม";
-            //}
-            //else
-            //{
-            ViewData["Controller"] = "Training";
-            ViewData["View"] = "Report Test Result";
-            // }
+
+            ViewData["Controller"] = _localizer["Training"];
+            ViewData["View"] = _localizer["ReportTestResult"];
+
             return View();
         }
 
@@ -193,20 +188,20 @@ namespace SubcontractProfile.Web.Controllers
                 if (responseResult.IsSuccessStatusCode)
                 {
                     result.Status = true;
-                    result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                    result.Message = _localizer["MessageSaveSuccess"];
                     result.StatusError = "0";
                 }
                 else
                 {
                     result.Status = false;
-                    result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                    result.Message = _localizer["MessageUnSuccess"];
                     result.StatusError = "-1";
                 }
             }
 
             catch (Exception ex)
             {
-                result.Message = "ไม่สามารถบันทึกข้อมูลได้ กรุณาติดต่อ Administrator.";
+                result.Message = _localizer["MessageError"];
                 result.Status = false;
                 result.StatusError = "0";
             }
@@ -234,20 +229,20 @@ namespace SubcontractProfile.Web.Controllers
                 if (responseResult.IsSuccessStatusCode)
                 {
                     result.Status = true;
-                    result.Message = "บันทึกข้อมูลเรียบร้อยแล้ว";
+                    result.Message = _localizer["MessageSaveSuccess"];
                     result.StatusError = "0";
                 }
                 else
                 {
                     result.Status = false;
-                    result.Message = "Data is not correct, Please Check Data or Contact System Admin";
+                    result.Message = _localizer["MessageUnSuccess"];
                     result.StatusError = "-1";
                 }
             }
 
             catch (Exception ex)
             {
-                result.Message = "ไม่สามารถบันทึกข้อมูลได้ กรุณาติดต่อ Administrator.";
+                result.Message = _localizer["MessageError"];
                 result.Status = false;
                 result.StatusError = "0";
             }

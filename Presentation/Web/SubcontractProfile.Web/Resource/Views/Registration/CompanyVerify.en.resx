@@ -127,7 +127,7 @@
     <value>Engineer Profile</value>
   </data>
   <data name="JSChooseFile" xml:space="preserve">
-    <value>เลือกไฟล์</value>
+    <value>Choose File</value>
   </data>
   <data name="JSddlPleaseSelect" xml:space="preserve">
     <value>Please Select</value>

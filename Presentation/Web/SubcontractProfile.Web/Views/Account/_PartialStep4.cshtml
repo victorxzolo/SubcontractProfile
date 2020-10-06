@@ -1,78 +1,80 @@
 ﻿
+@using Microsoft.AspNetCore.Mvc.Localization
 
-    <div class="needs-validation-step4" novalidate>
+@inject IViewLocalizer Localizer
+
+<div class="needs-validation-step4" novalidate>
 
 
-        <div class="row my-3">
-            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                <p class="font-weight-bolder lead">
-                    ข้อมูล บัญชีธนาคาร
-                </p>
-                <hr />
-            </div>
+    <div class="row my-3">
+        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+            <p class="font-weight-bolder lead">
+                @Localizer["BankAccountInformation"]
+            </p>
+            <hr />
         </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อธนาคาร :<span style="color:red">*</span></label>
-                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                        <input type="text" class="form-control inputValidationBank form-control-sm" id="txtbank_Code" placeholder="รหัสธนาคาร" disabled />
-                    </div>
-                    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                        <select class="custom-select inputValidationBank custom-select-sm" id="ddlBankname" required>
-                        </select>
-                        <div class="invalid-tooltip">กรุณาระบุชื่อธนาคาร</div>
-                    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["BankName"]:<span style="color:red">*</span></label>
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <input type="text" class="form-control inputValidationBank form-control-sm" id="txtbank_Code" placeholder="@Localizer["BankCode"]" disabled />
                 </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อสาขา :</label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <input type="text" class="form-control form-control-sm" id="txtbranch_Name" placeholder="ชื่อสาขา" />
-                   
-                    </div>
+                <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <select class="custom-select inputValidationBank custom-select-sm" id="ddlBankname" required>
+                    </select>
+                    <div class="invalid-tooltip">@Localizer["ErrorBankName"]</div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเภทบัญชี :<span style="color:red">*</span></label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <select class="custom-select inputValidationBank custom-select-sm" id="ddlbank_account_type" required>
-                            <option value="Saving">ออมทรัพย์</option>
-                        </select>
-                        <div class="invalid-tooltip">กรุณาระบุประเภทบัญชี</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">เลขที่บัญชี :<span style="color:red">*</span></label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <input type="text" class="form-control inputValidationBank form-control-sm" id="txtaccount_Number" required />
-                        <div class="invalid-tooltip">กรุณาระบุเลขที่บัญชี</div>
-                    </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["BranchName"] :</label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control form-control-sm" id="txtbranch_Name" placeholder="@Localizer["BranchName"]" />
+
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ชื่อบัญชี :<span style="color:red">*</span></label>
-                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                        <select class="custom-select custom-select-sm" id="ddlaccount_Name">
-                            <option></option>
-                        </select>
-                    </div>
-                    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                        <input type="text" class="form-control inputValidationBank form-control-sm" id="txtaccount_Name" required />
-                        <div class="invalid-tooltip">กรุณาระบุชื่อบัญชี </div>
-                    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["AccountType"] :<span style="color:red">*</span></label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <select class="custom-select inputValidationBank custom-select-sm" id="ddlbank_account_type" required>
+                    </select>
+                    <div class="invalid-tooltip">@Localizer["ErrorAccountType"]</div>
                 </div>
             </div>
-            @*<div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["AccountNumber"] :<span style="color:red">*</span></label>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <input type="text" class="form-control inputValidationBank form-control-sm" id="txtaccount_Number" required />
+                    <div class="invalid-tooltip">@Localizer["ErrorAccountNumber"]</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">@Localizer["AccountName"] :<span style="color:red">*</span></label>
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <select class="custom-select custom-select-sm" id="ddlaccount_Name">
+                        <option></option>
+                    </select>
+                </div>
+                <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <input type="text" class="form-control inputValidationBank form-control-sm" id="txtaccount_Name" required />
+                    <div class="invalid-tooltip">@Localizer["ErrorAccountName"] </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
                 <div class="form-group row">
                     <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเภทธุรกิจ :</label>
                     <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
@@ -82,37 +84,37 @@
                     </div>
                 </div>
             </div>*@
+    </div>
+    <div class="row my-3">
+        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+            <p class="font-weight-bolder lead">
+                @Localizer["CompanyDocuments"]
+            </p>
+            <hr />
         </div>
-        <div class="row my-3">
-            <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-                <p class="font-weight-bolder lead">
-                    ข้อมูล เอกสารบริษัท
-                </p>
-                <hr />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือรับรองบริษัท :<span style="color:red">*</span></label>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right"> @Localizer["CompanyCertificate"] :<span style="color:red">*</span></label>
 
-                    <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
-                        <input type="hidden" id="hdupfilecompany_certified" />
-                        <input type="file" class="custom-file-input inputValidationBank" id="company_certified_file" required
-                               accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf" />
-                        <label class="custom-file-label" for="customFile" id="lbcompany_certified_file">Choose file</label>
-                        @*<small id="uploadlHelp1" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>*@
-                    <small id="uploadlHelp1" class="form-text text-muted">
-                        ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png
-                    </small>
-                        <div class="invalid-tooltip">กรุณาอัพโหลดไฟล์ หนังสือรับรองบริษัท</div>
-                    </div>
+                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
+                    <input type="hidden" id="hdupfilecompany_certified" />
+                    <input type="file" class="custom-file-input inputValidationBank" id="company_certified_file" required
+                           accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf" />
+                    <label class="custom-file-label" for="customFile" id="lbcompany_certified_file">@Localizer["ChooseFile"]</label>
+                    @*<small id="uploadlHelp1" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>*@
+                <small id="uploadlHelp1" class="form-text text-muted">
+                    @Localizer["ChooseFileType"]
+                </small>
+                <div class="invalid-tooltip">@Localizer["ErrorCompanyCertificate"]</div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือทะเบียนพานิช :<span style="color:red">*</span></label>
-                    @*<input type="file" name="img[]" class="file-upload-default">
+        </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["CommercialRegistrationBook"] :<span style="color:red">*</span></label>
+                @*<input type="file" name="img[]" class="file-upload-default">
                     <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
                         <input type="text" class="form-control file-upload-info form-control-sm" disabled>
                         <span class="input-group-append">
@@ -124,22 +126,22 @@
                     <input type="hidden" id="hdupfilecommercial_registration" />
                     <input type="file" class="custom-file-input inputValidationBank" id="commercial_registration_file" required
                            accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf" />
-                    <label class="custom-file-label" for="customFile" id="lbcommercial_registration_file">Choose file</label>
+                    <label class="custom-file-label" for="customFile" id="lbcommercial_registration_file">@Localizer["ChooseFile"]</label>
                     @*<small id="uploadlHelp1" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>*@
-                    <small id="uploadlHelp1" class="form-text text-muted">
-                        ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png
-                    </small>
-                    <div class="invalid-tooltip">กรุณาอัพโหลดไฟล์ หนังสือทะเบียนพานิช</div>
-                </div>
+                <small id="uploadlHelp1" class="form-text text-muted">
+                    @Localizer["ChooseFileType"]
+                </small>
+                    <div class="invalid-tooltip">@Localizer["ErrorCommercialRegistrationBook"]</div>
                 </div>
             </div>
         </div>
-        <br />
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือ ภ.พ. 20 :<span style="color:red">*</span></label>
-                    @*<input type="file" name="img[]" class="file-upload-default">
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["VATRegistrationCertificate"] :<span style="color:red">*</span></label>
+                @*<input type="file" name="img[]" class="file-upload-default">
                     <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 input-group mb-4">
                         <input type="text" class="form-control file-upload-info form-control-sm" disabled>
                         <span class="input-group-append">
@@ -151,15 +153,15 @@
                     <input type="hidden" id="hdupfilevat_registration_certificate" />
                     <input type="file" class="custom-file-input inputValidationBank" id="vat_registration_certificate_file" required
                            accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf" />
-                    <label class="custom-file-label" for="customFile" id="lbvat_registration_certificate_file">Choose file</label>
+                    <label class="custom-file-label" for="customFile" id="lbvat_registration_certificate_file">@Localizer["ChooseFile"]</label>
                     @*<small id="uploadlHelp1" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>*@
-                    <small id="uploadlHelp1" class="form-text text-muted">
-                        ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png
-                    </small>
-                    <div class="invalid-tooltip">กรุณาอัพโหลดไฟล์ หนังสือ ภ.พ. 20</div>
-                </div>
+                <small id="uploadlHelp1" class="form-text text-muted">
+                    @Localizer["ChooseFileType"]
+                </small>
+                <div class="invalid-tooltip">@Localizer["ErrorVATRegistrationCertificate"]</div>
                 </div>
             </div>
         </div>
-
     </div>
+
+</div>

@@ -1,8 +1,10 @@
-﻿
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
 <div class="row my-3">
     <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
         <p class="font-weight-bolder lead">
-            สรุปข้อมูลผู้สมัคร
+            @Localizer["InformationSummary"]
         </p>
         <hr />
     </div>
@@ -10,7 +12,7 @@
 <div class="row pt-0 pb-0">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">ประเภทผู้สมัคร :</label>
+            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right"> @Localizer["RegisterType"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbsubcontract_profile_type"></label>
         </div>
     </div>
@@ -19,7 +21,7 @@
     <div class="row my-3" style="display:none;">
         <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
             <p class="font-weight-bolder lead">
-                Create Channel
+                @Localizer["CreateChannel"]
             </p>
             <hr />
         </div>
@@ -27,13 +29,13 @@
     <div class="row pt-0 pb-0" style="display:none;">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">Distribution Channel :</label>
+                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["DistributionChannel"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbdistribution_channel"></label>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Channel Sale Group :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["ChannelSaleGroup"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbchannel_sale_group"></label>
             </div>
         </div>
@@ -41,7 +43,7 @@
     <div class="row my-3">
         <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
             <p class="font-weight-bolder lead">
-                ข้อมูลบริษัท
+                @Localizer["CompanyProfile"]
             </p>
             <hr />
         </div>
@@ -49,13 +51,13 @@
     <div class="row pt-0 pb-0">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">เลขทะเบียนนิติบุคคล :</label>
+                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right"> @Localizer["JuristicID"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbtax_id"></label>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อย่อบริษัท :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["CompanyAilas"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbcompany_alias"></label>
             </div>
         </div>
@@ -63,13 +65,13 @@
     <div class="row pt-0 pb-0">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">ชื่อนิติบุคคล(ไทย) :</label>
+                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["JuristicNameThai"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbcompany_name_th"></label>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(อังกฤษ) :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["JuristicNameEng"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbcompany_name_en">xxxxxxxxxxxx</label>
             </div>
         </div>
@@ -77,13 +79,13 @@
     <div class="row pt-0 pb-0">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">ชื่อภาษีหัก ณ ที่จ่าย :</label>
+                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["TaxwithholdName"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbwt_name">xxxxxxxxxxxx</label>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ภาษีมูลค่าเพิ่ม :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["VAT"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="vat_type">xxxxxxxxxxxx</label>
             </div>
         </div>
@@ -94,7 +96,7 @@
     <div class="row my-3">
         <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
             <p class="font-weight-bolder lead">
-                ข้อมูลที่ตั้ง
+                @Localizer["LocationInformation"]
             </p>
             <hr />
         </div>
@@ -102,13 +104,13 @@
     <div class="row pt-0 pb-0">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">Location Code :</label>
+                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["LocationCode"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lblocationcode"></label>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Distribution Channel :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["DistributionChannel"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbdistributionDealer"></label>
             </div>
         </div>
@@ -116,13 +118,13 @@
     <div class="row pt-0 pb-0">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">Location Name :</label>
+                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["LocationName"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lblocationname"></label>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">Channel Sale Group :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["ChannelSaleGroup"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbchannelsalegroupDealer"></label>
             </div>
         </div>
@@ -130,13 +132,13 @@
     <div class="row pt-0 pb-0" style="display:none;">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">Vender Code :</label>
+                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["VenderCode"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbvendercode"></label>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ASC Code :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["ASCCode"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbasccode"></label>
             </div>
         </div>
@@ -144,7 +146,7 @@
     <div class="row my-3">
         <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
             <p class="font-weight-bolder lead">
-                ข้อมูลบริษัท
+               @Localizer["CompanyProfile"]
             </p>
             <hr />
         </div>
@@ -152,13 +154,13 @@
     <div class="row pt-0 pb-0">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">เลขทะเบียนนิติบุคคล :</label>
+                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["JuristicID"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbtax_idDealer"></label>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อย่อบริษัท :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["CompanyAilas"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbcompany_aliasDealer"></label>
             </div>
         </div>
@@ -166,13 +168,13 @@
     <div class="row pt-0 pb-0">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">ชื่อนิติบุคคล(ไทย) :</label>
+                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["JuristicNameThai"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbcompany_name_thDealer"></label>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อนิติบุคคล(อังกฤษ) :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["JuristicNameEng"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbcompany_name_enDealer">xxxxxxxxxxxx</label>
             </div>
         </div>
@@ -180,13 +182,13 @@
     <div class="row pt-0 pb-0">
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">ชื่อภาษีหัก ณ ที่จ่าย :</label>
+                <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["TaxwithholdName"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbwt_nameDealer">xxxxxxxxxxxx</label>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
             <div class="form-group row">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ภาษีมูลค่าเพิ่ม :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["VAT"] :</label>
                 <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="vat_typeDealer">xxxxxxxxxxxx</label>
             </div>
         </div>
@@ -197,7 +199,7 @@
 <div class="row my-3">
     <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
         <p class="font-weight-bolder lead">
-            ข้อมูล ที่อยู่บริษัท
+            @Localizer["CompanyAddressInformation"]
         </p>
         <hr />
     </div>
@@ -205,13 +207,13 @@
 <div class="row">
     <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
     <div class="col-md-10 col-sm-10 col-xl-10 col-lg-10">
-        <div class="table-responsive pt-3"  style="overflow-y:hidden;">
+        <div class="table-responsive pt-3" style="overflow-y:hidden;">
             <table class="table table-bordered table-hover" id="tbaddressstep5" style="width:100%">
                 <thead class="thead-light">
                     <tr>
                         <th></th>
-                        <th>ประเภทที่อยู่</th>
-                        <th>ที่อยู่</th>
+                        <th>@Localizer["AddressType"]</th>
+                        <th>@Localizer["Address"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -222,33 +224,33 @@
 
 </div>
 @*<div class="row">
-    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
-    <div class="col-md-7 col-sm-7 col-xl-7 col-lg-7">
-        <nav aria-label="...">
-            <ul class="pagination">
-                <li class="page-item">
-                    <span class="page-link">Previous</span>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active">
-                    <span class="page-link">
-                        2
-                        <span class="sr-only">(current)</span>
-                    </span>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+        <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+        <div class="col-md-7 col-sm-7 col-xl-7 col-lg-7">
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <span class="page-link">Previous</span>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item active">
+                        <span class="page-link">
+                            2
+                            <span class="sr-only">(current)</span>
+                        </span>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
-</div>*@
+    </div>*@
 <div class="row my-3">
     <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
         <p class="font-weight-bolder lead">
-            ข้อมูล ติดต่อบริษัท
+            @Localizer["ContractInformation"]
         </p>
         <hr />
     </div>
@@ -256,7 +258,7 @@
 <div class="row pt-0 pb-0">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">อีเมล์ บริษัท :</label>
+            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["EmailCompany"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbcompany_Email"></label>
         </div>
     </div>
@@ -264,13 +266,13 @@
 <div class="row pt-0 pb-0">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">ชื่อผู้ติดต่อ :</label>
+            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["ContractName"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbcontract_name"></label>
         </div>
     </div>
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">เบอร์โทร :</label>
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["Tel"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbcontract_phone"></label>
         </div>
     </div>
@@ -278,7 +280,7 @@
 <div class="row pt-0 pb-0">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">อีเมล์ :</label>
+            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["Email"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbcontract_email"></label>
         </div>
     </div>
@@ -286,7 +288,7 @@
 <div class="row my-3">
     <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
         <p class="font-weight-bolder lead">
-            ข้อมูล ติดต่อแผนก
+            @Localizer["DepartmentContactInformation"]
         </p>
         <hr />
     </div>
@@ -294,20 +296,20 @@
 <div class="row my-3">
     <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 text-left">
         <p class="font-weight-bolder lead">
-            แผนกติดตั้ง
+            @Localizer["InstallationDepartment"]
         </p>
     </div>
 </div>
 <div class="row pt-0 pb-0">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">ชื่อผู้ติดต่อ :</label>
+            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["ContractName"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbdept_of_install_name"></label>
         </div>
     </div>
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">เบอร์โทร :</label>
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["Tel"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbdept_of_install_phone"></label>
         </div>
     </div>
@@ -315,7 +317,7 @@
 <div class="row pt-0 pb-0">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">อีเมล์ :</label>
+            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["Email"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbdept_of_install_email"></label>
         </div>
     </div>
@@ -323,20 +325,20 @@
 <div class="row my-3">
     <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 text-left">
         <p class="font-weight-bolder lead">
-            แผนกซ่อมบำรุง
+            @Localizer["MaintenanceDepartment"]
         </p>
     </div>
 </div>
 <div class="row pt-0 pb-0">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">ชื่อผู้ติดต่อ :</label>
+            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["ContractName"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbdept_of_mainten_name"></label>
         </div>
     </div>
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">เบอร์โทร :</label>
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["Tel"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbdept_of_mainten_phone"></label>
         </div>
     </div>
@@ -344,7 +346,7 @@
 <div class="row pt-0 pb-0">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">อีเมล์ :</label>
+            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["Email"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbdept_of_mainten_email"></label>
         </div>
     </div>
@@ -352,20 +354,20 @@
 <div class="row my-3">
     <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 text-left">
         <p class="font-weight-bolder lead">
-            แผนกบัญชี
+            @Localizer["AccountingDepartment"]
         </p>
     </div>
 </div>
 <div class="row pt-0 pb-0">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">ชื่อผู้ติดต่อ :</label>
+            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["ContractName"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbdept_of_Account_name"></label>
         </div>
     </div>
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">เบอร์โทร :</label>
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["Tel"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbdept_of_Account_phone"></label>
         </div>
     </div>
@@ -373,7 +375,7 @@
 <div class="row pt-0 pb-0">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">อีเมล์ :</label>
+            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["Email"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbdept_of_Account_email"></label>
         </div>
     </div>
@@ -381,7 +383,7 @@
 <div class="row my-3">
     <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
         <p class="font-weight-bolder lead">
-            ข้อมูล บัญชีธนาคาร
+            @Localizer["BankAccountInformation"]
         </p>
         <hr />
     </div>
@@ -389,13 +391,13 @@
 <div class="row pt-0 pb-0">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">ชื่อธนาคาร :</label>
+            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right"> @Localizer["BankName"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbbank_Name"></label>
         </div>
     </div>
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ชื่อสาขา :</label>
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["BranchName"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbbranch_Name"></label>
         </div>
     </div>
@@ -403,13 +405,13 @@
 <div class="row pt-0 pb-0">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">ประเภทบัญชี :</label>
+            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["AccountType"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbbank_account_type_id"></label>
         </div>
     </div>
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">เลขที่บัญชี :</label>
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["AccountNumber"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbaccount_Number">xxxxxxxxxxxx</label>
         </div>
     </div>
@@ -417,21 +419,21 @@
 <div class="row pt-0 pb-0">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">ชื่อบัญชี :</label>
+            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["AccountName"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbaccount_Name">xxxxxxxxxxxx</label>
         </div>
     </div>
     @*<div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-        <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ประเภทธุรกิจ :</label>
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbbusiness_type">xxxxxxxxxxxx</label>
-        </div>
-    </div>*@
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">ประเภทธุรกิจ :</label>
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbbusiness_type">xxxxxxxxxxxx</label>
+            </div>
+        </div>*@
 </div>
 <div class="row my-3">
     <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
         <p class="font-weight-bolder lead">
-            ข้อมูล เอกสารบริษัท
+            @Localizer["CompanyDocuments"]
         </p>
         <hr />
     </div>
@@ -439,13 +441,13 @@
 <div class="row pt-0">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">หนังสือรับรองบริษัท :</label>
+            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["CompanyCertificate"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbcompany_certified_file_5"></label>
         </div>
     </div>
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">หนังสือทะเบียนพานิช :</label>
+            <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right">@Localizer["CommercialRegistrationBook"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbcommercial_registration_file_5"></label>
         </div>
     </div>
@@ -453,7 +455,7 @@
 <div class="row pt-0">
     <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
         <div class="form-group row">
-            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">หนังสือ ภ.พ. 20 :</label>
+            <label class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-form-label text-right">@Localizer["VATRegistrationCertificate"] :</label>
             <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-left" id="lbvat_registration_certificate_file_5"></label>
         </div>
     </div>
