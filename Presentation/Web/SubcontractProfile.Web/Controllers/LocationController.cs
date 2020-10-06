@@ -30,7 +30,7 @@ namespace SubcontractProfile.Web.Controllers
         private const int MegaBytes = 1024 * 1024;
         private const int TMegaBytes = 3 * 1024 * 1024;
         private readonly IStringLocalizer<LocationController> _localizer;
-        public LocationController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IStringLocalizer<PaymentController> localizer)
+        public LocationController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IStringLocalizer<LocationController> localizer)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
