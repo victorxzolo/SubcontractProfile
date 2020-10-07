@@ -135,6 +135,18 @@
   <data name="InformationSummary" xml:space="preserve">
     <value>ตรวจสอบรายละเอียด</value>
   </data>
+  <data name="JSChooseFile" xml:space="preserve">
+    <value>เลือกไฟล์</value>
+  </data>
+  <data name="JSDelete" xml:space="preserve">
+    <value>ลบ</value>
+  </data>
+  <data name="JSEdit" xml:space="preserve">
+    <value>แก้ไข</value>
+  </data>
+  <data name="JSErrorAddress" xml:space="preserve">
+    <value>กรุณาเพิ่มข้อมูลที่อยู่</value>
+  </data>
   <data name="MessageTitel" xml:space="preserve">
     <value>สมัครใช้บริการ สำหรับ Subcontract Profile และ Dealer</value>
   </data>

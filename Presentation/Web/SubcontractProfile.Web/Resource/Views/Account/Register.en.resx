@@ -135,6 +135,18 @@
   <data name="InformationSummary" xml:space="preserve">
     <value>Information Summary</value>
   </data>
+  <data name="JSChooseFile" xml:space="preserve">
+    <value>Choose File</value>
+  </data>
+  <data name="JSDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="JSEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="JSErrorAddress" xml:space="preserve">
+    <value>Please add address information.</value>
+  </data>
   <data name="MessageTitel" xml:space="preserve">
     <value>Sign up for Subcontract Profile and Dealer.</value>
   </data>

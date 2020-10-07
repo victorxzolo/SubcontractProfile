@@ -138,7 +138,7 @@ $(document).ready(function () {
                     //event.stopPropagation();
                     bootbox.alert({
                         title: "System Information",
-                        message: "กรุณาเพิ่มข้อมูลที่อยู่",
+                        message: localizedData.JSErrorAddress,
                         size: "small",
                         callback: function (result) {
                             console.log('This was logged in the callback: ' + result);
@@ -1130,14 +1130,14 @@ function inttbAddress2() {
                 "targets": -2,
                 "data": null,
                 orderable: false,
-                "defaultContent": "<button class='btn-border btn-green edit_btn'><i class='fa fa-edit icon'></i><span>แก้ไข</span></button>"
+                "defaultContent": "<button class='btn-border btn-green edit_btn'><i class='fa fa-edit icon'></i><span>" + localizedData.JSEdit+"</span></button>"
             },
             {
                 "width": "10%",
                 "targets": -1,
                 "data": null,
                 orderable: false,
-                "defaultContent": "<button class='btn-border btn-black delete_btn'><i class='fa fa-trash icon'></i><span>ลบ</span></button>"
+                "defaultContent": "<button class='btn-border btn-black delete_btn'><i class='fa fa-trash icon'></i><span>" + localizedData.JSDelete +"</span></button>"
             }
         ],
         language: {
@@ -1224,11 +1224,11 @@ function uploadFiles(inputId) {
                     });
                     switch (inputId) {
                         case "company_certified_file": $('#company_certified_file').val('');
-                            $('#lbcompany_certified_file').text('Choose file'); break;
+                            $('#lbcompany_certified_file').text(localizedData.JSChooseFile); break;
                         case "commercial_registration_file": $('#commercial_registration_file').val('');
-                            $('#lbcommercial_registration_file').text('Choose file'); break;
+                            $('#lbcommercial_registration_file').text(localizedData.JSChooseFile); break;
                         case "vat_registration_certificate_file": $('#vat_registration_certificate_file').val('');
-                            $('#lbvat_registration_certificate_file').text('Choose file'); break;
+                            $('#lbvat_registration_certificate_file').text(localizedData.JSChooseFile); break;
                     }
                 }
 
