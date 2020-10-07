@@ -109,14 +109,11 @@ $(document).ready(function () {
             window.location.href = urlRedir+'?companyid=' + company;
         }
         else {
-            bootbox.confirm({
+
+            bootbox.alert({
                 title: "System Information",
                 message: localizedData.ErrorSelectCompany,
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> Cancel'
-                    }
-                },
+                size: "small",
                 callback: function (result) {
                     console.log('This was logged in the callback: ' + result);
                 }
