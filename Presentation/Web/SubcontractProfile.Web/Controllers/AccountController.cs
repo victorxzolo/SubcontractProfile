@@ -46,6 +46,8 @@ namespace SubcontractProfile.Web.Controllers
         private SubcontractProfileUserModel dataUser = new SubcontractProfileUserModel();
         private string PathNas = "";
         private const int MegaBytes = 1024 * 1024;
+        private const int TMegaBytes = 3 * 1024 * 1024;
+        private readonly string strpathUpload;
 
         private readonly IStringLocalizer<AccountController> _localizer;
 
@@ -68,8 +70,8 @@ namespace SubcontractProfile.Web.Controllers
             //NSA
             // PathNas = _configuration.GetValue<string>("PathUploadfile:NAS").ToString();
 
-           
 
+            strpathUpload = _configuration.GetValue<string>("PathUploadfile:Local").ToString();
 
         }
 
@@ -231,14 +233,14 @@ namespace SubcontractProfile.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult SetLanguageToPage(string culture)
+        public IActionResult SetLanguageToPage(string culture,string returnUrl)
         {
             Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
                 new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
             );
-            return Json(new { Status = true });
+             return LocalRedirect(returnUrl);
         }
 
         public SubcontractProfileUserModel GetUser(string userName,string password)
@@ -293,7 +295,7 @@ namespace SubcontractProfile.Web.Controllers
         #region Register
         public IActionResult Register(string language = "th")
         {
-            SetLanguage("th");
+            //SetLanguage("th");
 
             ViewData["Controller"] = _localizer["Register"];
             ViewData["View"] = _localizer["Register"];
@@ -469,7 +471,7 @@ namespace SubcontractProfile.Web.Controllers
                 output.Add(new SubcontractProfileSubDistrictModel
                 {
                     SubDistrictId = 0,
-                    SubDistrictNameTh = _localizer["SelectSubDistrict"]
+                    SubDistrictNameEn = _localizer["SelectSubDistrict"]
                 });
 
                 getAllSubDistrictList = output.Select(a => new SelectListItem
@@ -548,7 +550,7 @@ namespace SubcontractProfile.Web.Controllers
                 output.Add(new SubcontractProfileDistrictModel
                 {
                     DistrictId = 0,
-                    DistrictNameTh = _localizer["SelectDistrict"]
+                    DistrictNameEn = _localizer["SelectDistrict"]
                 });
                 getAllDistrictList = output.Select(a => new SelectListItem
                 {
@@ -599,7 +601,7 @@ namespace SubcontractProfile.Web.Controllers
                 output.Add(new SubcontractProfileProvinceModel
                 {
                     ProvinceId = 0,
-                    ProvinceNameTh = _localizer["SelectProvince"]
+                    ProvinceNameEn = _localizer["SelectProvince"]
                 });
                 getAllProvinceList = output.Select(a => new SelectListItem
                 {
@@ -817,7 +819,7 @@ namespace SubcontractProfile.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult DDLCompanyType()
+        public IActionResult DDLAccountName()
         {
             var output = new List<SubcontractProfileCompanyTypeModel>();
             List<SelectListItem> getAllCompanyTypeList = new List<SelectListItem>();
@@ -839,7 +841,7 @@ namespace SubcontractProfile.Web.Controllers
                 output.Add(new SubcontractProfileCompanyTypeModel
                 {
                     CompanyTypeId = "0",
-                    CompanyTypeNameTh = _localizer["SelectBusinessType"]
+                    CompanyTypeNameTh = _localizer["SelectAccountName"]
                 });
 
                 getAllCompanyTypeList = output.Select(a => new SelectListItem
@@ -853,7 +855,7 @@ namespace SubcontractProfile.Web.Controllers
                 output.Add(new SubcontractProfileCompanyTypeModel
                 {
                     CompanyTypeId = "0",
-                    CompanyTypeNameEn = _localizer["SelectBusinessType"]
+                    CompanyTypeNameEn = _localizer["SelectAccountName"]
                 });
                 getAllCompanyTypeList = output.Select(a => new SelectListItem
                 {
@@ -1680,37 +1682,53 @@ namespace SubcontractProfile.Web.Controllers
                         model.CreateDate = DateTime.Now;
                         model.CreateBy = "SYSTEM";
 
-                        var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
+                        //var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
 
-                        if (dataUploadfile != null && dataUploadfile.Count != 0)
+                        if (model.FileCompanyCertified != null)
                         {
                             #region Copy File to server
-                            foreach (var e in dataUploadfile)
-                            {
-                                resultGetFile = await GetFile(e, model.CompanyId.ToString());
+                            //foreach (var e in dataUploadfile)
+                            //{
+                            //    resultGetFile = await GetFile(e, model.CompanyId.ToString());
 
-                                string filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
-                                filename = EnsureCorrectFilename(filename);
+                            //    string filename = ContentDispositionHeaderValue.Parse(e.ContentDisposition).FileName.Trim('"');
+                            //    filename = EnsureCorrectFilename(filename);
 
-                                switch (e.typefile)
-                                {
-                                    case "CompanyCertifiedFile":
-                                        model.CompanyCertifiedFile = filename;
-                                        break;
-                                    case "CommercialRegistrationFile":
-                                        model.CommercialRegistrationFile = filename;
-                                        break;
-                                    case "VatRegistrationCertificateFile":
-                                        model.VatRegistrationCertificateFile = filename;
-                                        break;
-                                }
-                            }
+                            //    switch (e.typefile)
+                            //    {
+                            //        case "CompanyCertifiedFile":
+                            //            model.CompanyCertifiedFile = filename;
+                            //            break;
+                            //        case "CommercialRegistrationFile":
+                            //            model.CommercialRegistrationFile = filename;
+                            //            break;
+                            //        case "VatRegistrationCertificateFile":
+                            //            model.VatRegistrationCertificateFile = filename;
+                            //            break;
+                            //    }
+                            //}
                             #endregion
 
+                            resultGetFile= await Uploadfile(model.FileCompanyCertified, model.CompanyId.ToString());
+                            model.CompanyCertifiedFile = model.FileCompanyCertified.FileName;
+
                         }
+                        if (model.FileCommercialRegistration != null)
+                        {
+                            resultGetFile= await Uploadfile(model.FileCommercialRegistration, model.CompanyId.ToString());
+                            model.CommercialRegistrationFile = model.FileCommercialRegistration.FileName;
+
+                        }
+                        if (model.FileVatRegistrationCertificate != null)
+                        {
+                            resultGetFile= await Uploadfile(model.FileVatRegistrationCertificate, model.CompanyId.ToString());
+                            model.VatRegistrationCertificateFile = model.FileVatRegistrationCertificate.FileName;
+
+                        }
+
                         if (resultGetFile)
                         {
-                            SessionHelper.RemoveSession(HttpContext.Session, "userUploadfileDaft");
+                            //SessionHelper.RemoveSession(HttpContext.Session, "userUploadfileDaft");
 
                             #region Insert Company
 
@@ -1857,35 +1875,167 @@ namespace SubcontractProfile.Web.Controllers
         //    return Json(str);
         //}
 
+
+        //[HttpPost]
+        //[DisableRequestSizeLimit]
+        //public IActionResult Uploadfile(IList<IFormFile> files, string fid,string type_file)
+        //{
+        //    bool statusupload = true;
+        //    List<FileUploadModal> L_File = new List<FileUploadModal>();
+        //    //FileStream output;
+        //    string strmess = "";
+        //    try
+        //    {
+        //        foreach (FormFile source in files)
+        //        {
+        //            if (source.Length > 0)
+        //            {
+        //                string filename = ContentDispositionHeaderValue.Parse(source.ContentDisposition).FileName.Trim('"');
+        //                filename = EnsureCorrectFilename(filename);
+        //                //using (output = System.IO.File.Create(this.GetPathAndFilename(filename)))
+        //                //    await source.CopyToAsync(output);
+
+        //                if (
+        //                    source.ContentType.ToLower() != "image/jpg" &&
+        //                    source.ContentType.ToLower() != "image/jpeg" &&
+        //                    source.ContentType.ToLower() != "image/pjpeg" &&
+        //                    source.ContentType.ToLower() != "image/gif" &&
+        //                    source.ContentType.ToLower() != "image/png" &&
+        //                    source.ContentType.ToLower() != "image/bmp" &&
+        //                    source.ContentType.ToLower() != "image/tiff" &&
+        //                    source.ContentType.ToLower() != "image/tif" &&
+        //                    source.ContentType.ToLower() != "application/pdf"
+        //                    )
+        //                {
+        //                    statusupload = false;
+        //                    strmess = _localizer["MessageUploadmissmatch"];
+        //                }
+        //                else
+        //                {
+        //                    var fileSize = source.Length;
+        //                    if (fileSize > MegaBytes)
+        //                    {
+        //                        statusupload = false;
+        //                        strmess = _localizer["MessageUploadtoolage"];
+        //                    }
+        //                    else
+        //                    {
+        //                        Guid id = Guid.NewGuid();
+        //                        using (var ms = new MemoryStream())
+        //                        {
+        //                            source.CopyTo(ms);
+        //                            var fileBytes = ms.ToArray();
+        //                            L_File.Add(new FileUploadModal
+        //                            {
+        //                                file_id = id,
+        //                                Fileupload = fileBytes,
+        //                                typefile = type_file,
+        //                                ContentDisposition = source.ContentDisposition,
+        //                                ContentType = source.ContentType,
+        //                                Filename = filename
+        //                            });
+        //                        }
+        //                        var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
+        //                        //byte[] byteArrayValue = HttpContext.Session.Get("userUploadfileDaft");
+        //                        //var data = FromByteArray<List<FileUploadModal>>(byteArrayValue);
+
+        //                        //var objComplex = HttpContext.Session.GetObject("userUploadfileDaft");
+
+        //                        if (data != null)
+        //                        {
+
+        //                            data.RemoveAll(x => x.file_id.ToString() == fid);
+        //                            data.Add(L_File[0]);
+        //                            SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", data);
+
+        //                        }
+        //                        else
+        //                        {
+        //                            // HttpContext.Session.Set("userUploadfileDaft", ToByteArray<List<FileUploadModal>>(L_File));
+
+        //                            SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", L_File);
+        //                        }
+
+        //                        strmess = _localizer["MessageUploadSuccess"];
+        //                    }
+
+        //                }
+
+        //            }
+
+
+
+        //        }
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        statusupload = false;
+        //        strmess = e.Message.ToString();
+        //        throw;
+        //    }
+
+
+        //    return Json(new { status = statusupload, message = strmess, response = (statusupload ? L_File[0].file_id.ToString() : "") });
+
+        //   // return Json(new { status = statusupload, message = strmess });
+        //}
+
+        //private async Task<bool> GetFile(FileUploadModal file,string guid)
+        //{
+        //    FileStream output;
+        //    try
+        //    {
+        //        var stream = new MemoryStream(file.Fileupload);
+        //        FormFile files = new FormFile(stream, 0, file.Fileupload.Length, "name", "fileName");
+
+        //        string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+        //        filename = EnsureCorrectFilename(file.Filename);
+
+        //        //var adminToken = new IntPtr();
+
+        //        //using (var impersonator = new Impersonator("nas_fixedbb", "Ais2018fixedbb", "\\10.137.32.9", false))
+        //        //{
+        //        //using (output = System.IO.File.Create(this.GetPathAndFilename(guid, filename, PathNas)))
+        //        using (output = System.IO.File.Create(this.GetPathAndFilename(guid, filename, _configuration.GetValue<string>("PathUploadfile:Local").ToString())))
+        //            {
+        //                await files.CopyToAsync(output);
+        //            }
+        //        //}
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return false;
+        //        throw;
+        //    }
+        //    return true;
+        //}
+
         [HttpPost]
         [DisableRequestSizeLimit]
-        public IActionResult Uploadfile(IList<IFormFile> files, string fid,string type_file)
+        public IActionResult CheckFileUpload(IFormFile files)
         {
             bool statusupload = true;
-            List<FileUploadModal> L_File = new List<FileUploadModal>();
-            //FileStream output;
             string strmess = "";
+            Guid? fid = null;
             try
             {
-                foreach (FormFile source in files)
+                if (files != null)
                 {
-                    if (source.Length > 0)
+                    if (files.Length > 0)
                     {
-                        string filename = ContentDispositionHeaderValue.Parse(source.ContentDisposition).FileName.Trim('"');
+                        string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
                         filename = EnsureCorrectFilename(filename);
-                        //using (output = System.IO.File.Create(this.GetPathAndFilename(filename)))
-                        //    await source.CopyToAsync(output);
-
                         if (
-                            source.ContentType.ToLower() != "image/jpg" &&
-                            source.ContentType.ToLower() != "image/jpeg" &&
-                            source.ContentType.ToLower() != "image/pjpeg" &&
-                            source.ContentType.ToLower() != "image/gif" &&
-                            source.ContentType.ToLower() != "image/png" &&
-                            source.ContentType.ToLower() != "image/bmp" &&
-                            source.ContentType.ToLower() != "image/tiff" &&
-                            source.ContentType.ToLower() != "image/tif" &&
-                            source.ContentType.ToLower() != "application/pdf"
+                                files.ContentType.ToLower() != "image/jpg" &&
+                            files.ContentType.ToLower() != "image/jpeg" &&
+                            files.ContentType.ToLower() != "image/pjpeg" &&
+                            files.ContentType.ToLower() != "image/gif" &&
+                            files.ContentType.ToLower() != "image/png" &&
+                            files.ContentType.ToLower() != "image/bmp" &&
+                            files.ContentType.ToLower() != "image/tiff" &&
+                            files.ContentType.ToLower() != "image/tif" &&
+                            files.ContentType.ToLower() != "application/pdf"
                             )
                         {
                             statusupload = false;
@@ -1893,61 +2043,73 @@ namespace SubcontractProfile.Web.Controllers
                         }
                         else
                         {
-                            var fileSize = source.Length;
-                            if (fileSize > MegaBytes)
+                            if (files.ContentType.ToLower() == "application/pdf")
                             {
-                                statusupload = false;
-                                strmess = _localizer["MessageUploadtoolage"];
-                            }
-                            else
-                            {
-                                Guid id = Guid.NewGuid();
-                                using (var ms = new MemoryStream())
+                                var fileSize = files.Length;
+                                if (fileSize > MegaBytes)
                                 {
-                                    source.CopyTo(ms);
-                                    var fileBytes = ms.ToArray();
-                                    L_File.Add(new FileUploadModal
-                                    {
-                                        file_id = id,
-                                        Fileupload = fileBytes,
-                                        typefile = type_file,
-                                        ContentDisposition = source.ContentDisposition,
-                                        ContentType = source.ContentType,
-                                        Filename = filename
-                                    });
-                                }
-                                var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaft");
-                                //byte[] byteArrayValue = HttpContext.Session.Get("userUploadfileDaft");
-                                //var data = FromByteArray<List<FileUploadModal>>(byteArrayValue);
-
-                                //var objComplex = HttpContext.Session.GetObject("userUploadfileDaft");
-
-                                if (data != null)
-                                {
-
-                                    data.RemoveAll(x => x.file_id.ToString() == fid);
-                                    data.Add(L_File[0]);
-                                    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", data);
-
+                                    statusupload = false;
+                                    strmess = _localizer["MessageUploadtoolage"];
                                 }
                                 else
                                 {
-                                    // HttpContext.Session.Set("userUploadfileDaft", ToByteArray<List<FileUploadModal>>(L_File));
-
-                                    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaft", L_File);
+                                    fid = Guid.NewGuid();
+                                    strmess = _localizer["MessageUploadSuccess"];
                                 }
-
-                                strmess = _localizer["MessageUploadSuccess"];
                             }
-                            
+                            else
+                            {
+                                var fileSize = files.Length;
+                                if (fileSize > TMegaBytes)
+                                {
+                                    statusupload = false;
+                                    strmess = _localizer["MessageUploadtoolage"];
+                                }
+                                else
+                                {
+                                    fid = Guid.NewGuid();
+                                    strmess = _localizer["MessageUploadSuccess"];
+                                }
+                            }
+
                         }
-                        
                     }
-                   
-
-
                 }
-               
+            }
+            catch (Exception e)
+            {
+                statusupload = false;
+                strmess = e.Message.ToString();
+            }
+            return Json(new { status = statusupload, message = strmess, file_id = fid });
+        }
+
+        private async Task<bool> Uploadfile(IFormFile files, string companyid)
+        {
+            bool statusupload = true;
+            List<FileUploadModal> L_File = new List<FileUploadModal>();
+            FileStream output;
+            string strmess = "";
+            try
+            {
+
+                if (files != null && files.Length > 0)
+                {
+                    if (files != null)
+                    {
+                        string strdir = Path.Combine(strpathUpload, companyid);
+                        if (!Directory.Exists(strdir))
+                        {
+                            Directory.CreateDirectory(strdir);
+                        }
+
+                    }
+                    string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
+                    filename = EnsureCorrectFilename(filename);
+                    using (output = System.IO.File.Create(this.GetPathAndFilename(companyid, filename, strpathUpload)))
+                        await files.CopyToAsync(output);
+                }
+
             }
             catch (Exception e)
             {
@@ -1957,40 +2119,11 @@ namespace SubcontractProfile.Web.Controllers
             }
 
 
-            return Json(new { status = statusupload, message = strmess, response = (statusupload ? L_File[0].file_id.ToString() : "") });
+            return statusupload;
 
-           // return Json(new { status = statusupload, message = strmess });
         }
 
-     private async Task<bool> GetFile(FileUploadModal file,string guid)
-        {
-            FileStream output;
-            try
-            {
-                var stream = new MemoryStream(file.Fileupload);
-                FormFile files = new FormFile(stream, 0, file.Fileupload.Length, "name", "fileName");
-
-                string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                filename = EnsureCorrectFilename(file.Filename);
-
-                //var adminToken = new IntPtr();
-
-                //using (var impersonator = new Impersonator("nas_fixedbb", "Ais2018fixedbb", "\\10.137.32.9", false))
-                //{
-                //using (output = System.IO.File.Create(this.GetPathAndFilename(guid, filename, PathNas)))
-                using (output = System.IO.File.Create(this.GetPathAndFilename(guid, filename, _configuration.GetValue<string>("PathUploadfile:Local").ToString())))
-                    {
-                        await files.CopyToAsync(output);
-                    }
-                //}
-            }
-            catch (Exception e)
-            {
-                return false;
-                throw;
-            }
-            return true;
-        }
+     
         private string EnsureCorrectFilename(string filename)
         {
             if (filename.Contains("\\"))

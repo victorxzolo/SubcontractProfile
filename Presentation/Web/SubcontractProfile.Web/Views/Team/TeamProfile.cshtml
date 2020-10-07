@@ -459,7 +459,7 @@
 
         function openModal(mode, teamId) {
 
-            $("#frNew")[0].reset();
+            clearData();
 
             $('#hdMode').val(mode);
             $('#hdTeamId').val(teamId);
@@ -493,7 +493,7 @@
         function clearData() {
 
             $("#frNew")[0].reset();
-
+            $('#frNew').removeClass('was-validated');
         }
 
 

@@ -835,65 +835,115 @@ $(document).ready(function () {
         }
         var straccname = $('#ddlaccount_Name option').filter(':selected').val() != '' ?
             $('#ddlaccount_Name option').filter(':selected').text() + ' ' + $('#txtaccount_Name').val() : $('#txtaccount_Name').val()
-        var data = {
-            //CompanyId
-            //CompanyCode
-            //CompanyName
-            CompanyNameTh: company_name_th,
-            CompanyNameEn: company_name_en,
-            CompanyAlias: company_alias,
-            DistributionChannel: distribution_channel,
-            ChannelSaleGroup: channel_sale_group,
-            //VendorCode: $('#txtvendercode').val(),
-            TaxId: tax_id,
-            WtName: wt_name,
-            VatType: vat_type,
-            CompanyEmail: $('#txtcompany_Email').val(),
-            ContractName: $('#txtcontract_name').val(),
-            ContractPhone: $('#txtcontract_phone').val(),
-            ContractEmail: $('#txtcontract_email').val(),
 
-            BankCode: $('#ddlBankname option').filter(':selected').val(),
-            BankName: $('#ddlBankname option').filter(':selected').text(),
-            AccountNumber:$('#txtaccount_Number').val(),
-            AccountName: straccname,//$('#ddlaccount_Name option').filter(':selected').val(),
-           // AttachFile
-            BranchCode: $('#txtbranch_Code').val(),
-            BranchName: $('#txtbranch_Name').val(),
 
-            DeptOfInstallName: $('#txtdept_of_install_name').val(),
-            DeptOfMaintenName: $('#txtdept_of_mainten_name').val(),
-            DeptOfAccountName: $('#txtdept_of_Account_name').val(),
+        var fData = new FormData();
+        fData.append("CompanyNameTh", company_name_th);
+        fData.append("CompanyNameEn", company_name_en);
+        fData.append("CompanyAlias", company_alias);
+        fData.append("DistributionChannel", distribution_channel);
+        fData.append("ChannelSaleGroup", channel_sale_group);
+        fData.append("TaxId", tax_id);
+        fData.append("WtName", wt_name);
+        fData.append("VatType", vat_type);
+        fData.append("CompanyEmail", $('#txtcompany_Email').val());
+        fData.append("ContractName", $('#txtcontract_name').val());
+        fData.append("ContractPhone", $('#txtcontract_phone').val());
+        fData.append("ContractEmail", $('#txtcontract_email').val());
 
-            DeptOfInstallPhone: $('#txtdept_of_install_phone').val(),
-            DeptOfMaintenPhone: $('#txtdept_of_mainten_phone').val(),
-            DeptOfAccountPhone: $('#txtdept_of_Account_phone').val(),
+        fData.append("BankCode", $('#ddlBankname option').filter(':selected').val());
+        fData.append("BankName", $('#ddlBankname option').filter(':selected').text());
+        fData.append("AccountNumber", $('#txtaccount_Number').val());
+        fData.append("AccountName", straccname);
+        fData.append("BranchCode", $('#txtbranch_Code').val());
+        fData.append("BranchName", $('#txtbranch_Name').val());
+        fData.append("DeptOfInstallName", $('#txtdept_of_install_name').val());
+        fData.append("DeptOfMaintenName", $('#txtdept_of_mainten_name').val());
+        fData.append("DeptOfAccountName", $('#txtdept_of_Account_name').val());
+        fData.append("DeptOfInstallPhone", $('#txtdept_of_install_phone').val());
+        fData.append("DeptOfMaintenPhone", $('#txtdept_of_mainten_phone').val());
+        fData.append("DeptOfAccountPhone", $('#txtdept_of_Account_phone').val());
+        fData.append("DeptOfInstallEmail", $('#txtdept_of_install_email').val());
+        fData.append("DeptOfMaintenEmail", $('#txtdept_of_mainten_email').val());
+        fData.append("DeptOfAccountEmail", $('#txtdept_of_Account_email').val());
+        fData.append("LocationCode", $('#txtlocationcode').val());
+        fData.append("LocationNameTh", $('#txtlocationname').val());
+        fData.append("LocationNameEn", $('#txtlocationname').val());
+        fData.append("BankAccountTypeId", $('#ddlbank_account_type option').filter(':selected').val());
+        fData.append("SubcontractProfileType", chksubcontract_type);
+        fData.append("CompanyTitleThId", company_title_name_th);
+        fData.append("CompanyTitleEnId", company_title_name_en);
+        fData.append("User_name", username);
+        fData.append("Password", password);
 
-            DeptOfInstallEmail: $('#txtdept_of_install_email').val(),
-            DeptOfMaintenEmail: $('#txtdept_of_mainten_email').val(),
-            DeptOfAccountEmail: $('#txtdept_of_Account_email').val(),
+        fData.append("FileCompanyCertified", $('#company_certified_file').get(0).files[0]);
+        fData.append("FileCommercialRegistration", $('#commercial_registration_file').get(0).files[0]);
+        fData.append("FileVatRegistrationCertificate", $('#vat_registration_certificate_file').get(0).files[0]);
 
-            LocationCode: $('#txtlocationcode').val(),
-            LocationNameTh: $('#txtlocationname').val(),
-            LocationNameEn: $('#txtlocationname').val(),
+        fData.append("CompanyCertifiedFile", $('#lbcompany_certified_file').text());
+        fData.append("CommercialRegistrationFile", $('#lbcommercial_registration_file').text());
+        fData.append("VatRegistrationCertificateFile", $('#lbvat_registration_certificate_file').text());
 
-            BankAccountTypeId: $('#ddlbank_account_type option').filter(':selected').val(),
-            SubcontractProfileType: chksubcontract_type,
-            CompanyTitleThId: company_title_name_th,
-            CompanyTitleEnId: company_title_name_en,
-            User_name: username,
-            Password: password
-            //ASCCode: $('#txtasccode').val()
+        //var data = {
+        //    //CompanyId
+        //    //CompanyCode
+        //    //CompanyName
+        //    CompanyNameTh: company_name_th,
+        //    CompanyNameEn: company_name_en,
+        //    CompanyAlias: company_alias,
+        //    DistributionChannel: distribution_channel,
+        //    ChannelSaleGroup: channel_sale_group,
+        //    //VendorCode: $('#txtvendercode').val(),
+        //    TaxId: tax_id,
+        //    WtName: wt_name,
+        //    VatType: vat_type,
+        //    CompanyEmail: $('#txtcompany_Email').val(),
+        //    ContractName: $('#txtcontract_name').val(),
+        //    ContractPhone: $('#txtcontract_phone').val(),
+        //    ContractEmail: $('#txtcontract_email').val(),
 
-        }
+        //    BankCode: $('#ddlBankname option').filter(':selected').val(),
+        //    BankName: $('#ddlBankname option').filter(':selected').text(),
+        //    AccountNumber:$('#txtaccount_Number').val(),
+        //    AccountName: straccname,//$('#ddlaccount_Name option').filter(':selected').val(),
+        //   // AttachFile
+        //    BranchCode: $('#txtbranch_Code').val(),
+        //    BranchName: $('#txtbranch_Name').val(),
+
+        //    DeptOfInstallName: $('#txtdept_of_install_name').val(),
+        //    DeptOfMaintenName: $('#txtdept_of_mainten_name').val(),
+        //    DeptOfAccountName: $('#txtdept_of_Account_name').val(),
+
+        //    DeptOfInstallPhone: $('#txtdept_of_install_phone').val(),
+        //    DeptOfMaintenPhone: $('#txtdept_of_mainten_phone').val(),
+        //    DeptOfAccountPhone: $('#txtdept_of_Account_phone').val(),
+
+        //    DeptOfInstallEmail: $('#txtdept_of_install_email').val(),
+        //    DeptOfMaintenEmail: $('#txtdept_of_mainten_email').val(),
+        //    DeptOfAccountEmail: $('#txtdept_of_Account_email').val(),
+
+        //    LocationCode: $('#txtlocationcode').val(),
+        //    LocationNameTh: $('#txtlocationname').val(),
+        //    LocationNameEn: $('#txtlocationname').val(),
+
+        //    BankAccountTypeId: $('#ddlbank_account_type option').filter(':selected').val(),
+        //    SubcontractProfileType: chksubcontract_type,
+        //    CompanyTitleThId: company_title_name_th,
+        //    CompanyTitleEnId: company_title_name_en,
+        //    User_name: username,
+        //    Password: password
+        //    //ASCCode: $('#txtasccode').val()
+
+        //}
         var urlNewRegister = url.replace('Action', 'NewRegister');
         
         $.ajax({
             type: "POST",
             async: false,
             url: urlNewRegister,
-            data: { model: data },
-            dataType: "json",
+            data: fData,
+            processData: false,
+            contentType: false,
             success: function (data) {
                 Loading(0);
                 console.log(data)
@@ -1163,29 +1213,31 @@ function inttbAddress2() {
 function uploadFiles(inputId) {
     Loading();
     var input = document.getElementById(inputId);
-    var files = input.files;
+    //var files = input.files;
+    var files = input.files[0];
     var formData = new FormData();
     var id = "";
     var typefile = "";
-    switch (inputId) {
-        case "company_certified_file": id = $('#hdupfilecompany_certified').val();
-            typefile = "CompanyCertifiedFile";
-            break;
-        case "commercial_registration_file": id = $('#hdupfilecommercial_registration').val();
-            typefile = "CommercialRegistrationFile";
-            break;
-        case "vat_registration_certificate_file": id = $('#hdupfilevat_registration_certificate').val();
-            typefile = "VatRegistrationCertificateFile";
-            break;
-    }
-    for (var i = 0; i != files.length; i++) {
-        formData.append("files", files[i]);
-        formData.append("fid", id);
-        formData.append("type_file", typefile);
-    }
+    //switch (inputId) {
+    //    case "company_certified_file": id = $('#hdupfilecompany_certified').val();
+    //        typefile = "CompanyCertifiedFile";
+    //        break;
+    //    case "commercial_registration_file": id = $('#hdupfilecommercial_registration').val();
+    //        typefile = "CommercialRegistrationFile";
+    //        break;
+    //    case "vat_registration_certificate_file": id = $('#hdupfilevat_registration_certificate').val();
+    //        typefile = "VatRegistrationCertificateFile";
+    //        break;
+    //}
+    //for (var i = 0; i != files.length; i++) {
+    //    formData.append("files", files[i]);
+    //    formData.append("fid", id);
+    //    formData.append("type_file", typefile);
+    //}
+    formData.append("files", files);
 
-    var urlUploadFile = url.replace('Action', 'UploadFile');
-
+    //var urlUploadFile = url.replace('Action', 'UploadFile');
+    var urlUploadFile = url.replace('Action', 'CheckFileUpload');
     $.ajax(
         {
             type: "POST",
@@ -1199,9 +1251,9 @@ function uploadFiles(inputId) {
                 console.log(data);
                 if (data.status) {
                     switch (inputId) {
-                        case "company_certified_file": $('#hdupfilecompany_certified').val(data.response); break;
-                        case "commercial_registration_file": $('#hdupfilecommercial_registration').val(data.response); break;
-                        case "vat_registration_certificate_file": $('#hdupfilevat_registration_certificate').val(data.response); break;
+                        case "company_certified_file": $('#hdupfilecompany_certified').val(data.file_id); break;
+                        case "commercial_registration_file": $('#hdupfilecommercial_registration').val(data.file_id); break;
+                        case "vat_registration_certificate_file": $('#hdupfilevat_registration_certificate').val(data.file_id); break;
                     }
                     bootbox.alert({
                         title: "System Information",
@@ -1733,7 +1785,7 @@ function BindDDLBank() {
 
 function BindDDLCompanyType() {
     Loading();
-    var urlDDLCompanyType = url.replace('Action', 'DDLCompanyType');
+    var urlDDLCompanyType = url.replace('Action', 'DDLAccountName');
     $.ajax({
         type: "POST",
         //async: false,

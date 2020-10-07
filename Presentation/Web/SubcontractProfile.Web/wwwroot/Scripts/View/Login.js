@@ -74,22 +74,27 @@ $(document).ready(function () {
     });
 
 
-    //$('#ddlLanguage').change(function () {
-    //    var urlSetLanguage = url.replace('Action', 'SetLanguageToPage');
-    //    $.ajax({
-    //        type: "POST",
-    //        url: urlSetLanguage,
-    //        data: { culture: $('#ddlLanguage option').filter(':selected').val() },
-    //        dataType: "json",
-    //        async: false,
-    //        success: function (data) {
-    //            location.reload();
-    //        },
-    //        error: function (response) {
+    $('#ddlLanguage').change(function () {
+        var urlSetLanguage = url.replace('Action', 'SetLanguageToPage');
+        var returnUrlLogin = url.replace('Action', 'Login');
+      var rr=  $('#ddlLanguage option').filter(':selected').val()
+        $.ajax({
+            type: "POST",
+            url: urlSetLanguage,
+            data: {
+                culture: rr,
+                returnUrl: returnUrlLogin
+            },
+            dataType: "json",
+            async: false,
+            success: function (data) {
 
-    //        }
-    //    });
-    //});
+            },
+            error: function (response) {
+
+            }
+        });
+    });
 });
 
 

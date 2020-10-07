@@ -564,7 +564,7 @@ namespace SubcontractProfile.Web.Controllers
             if(output.Count > 1)
             {
                 CultureInfo culture = CultureInfo.CurrentCulture;
-                if (Lang == "TH")
+                if (culture.Name == "th")
                 {
 
 

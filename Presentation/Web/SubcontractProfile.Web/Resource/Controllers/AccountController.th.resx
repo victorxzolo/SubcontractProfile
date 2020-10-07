@@ -165,14 +165,14 @@
   <data name="Room" xml:space="preserve">
     <value>ห้องที่</value>
   </data>
+  <data name="SelectAccountName" xml:space="preserve">
+    <value>กรุณาเลือกคำหน้าชื่อบัญชี</value>
+  </data>
   <data name="SelectAccountType" xml:space="preserve">
     <value>กรุณาเลือกประเภทบัญชี</value>
   </data>
   <data name="SelectBankName" xml:space="preserve">
     <value>กรุณาเลือกชื่อธนาคาร</value>
-  </data>
-  <data name="SelectBusinessType" xml:space="preserve">
-    <value>กรุณาเลือกประเภทธุรกิจ</value>
   </data>
   <data name="SelectDistrict" xml:space="preserve">
     <value>กรุณาเลือกเขต/อำเภอ</value>

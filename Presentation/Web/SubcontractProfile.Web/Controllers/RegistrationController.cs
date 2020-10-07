@@ -72,49 +72,57 @@ namespace SubcontractProfile.Web.Controllers
         [HttpPost]
         public IActionResult DDLStatus()
         {
-            var output = new List<SubcontractProfileRequestStatusModel>();
+            var output = new List<SubcontractDropdownModel>();
             List<SelectListItem> getAllStatusList = new List<SelectListItem>();
 
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}", strpathAPI + "RequestStatus/GetALL");
+            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/company_status");
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
                 var v = response.Content.ReadAsStringAsync().Result;
-                output = JsonConvert.DeserializeObject<List<SubcontractProfileRequestStatusModel>>(v);
+                output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
             }
+            output.Add(new SubcontractDropdownModel
+            {
+                dropdown_text = _localizer["ddlSelectStatus"],
+                dropdown_value = ""
 
-                output.Add(new SubcontractProfileRequestStatusModel
+            });
+            if(output.Count > 1)
+            {
+                CultureInfo culture = CultureInfo.CurrentCulture;
+                if (culture.Name == "th")
                 {
-                    request_status = "",
 
-                });
 
-                foreach(var r in output)
-                {
-                    if(r.request_status=="")
+                    getAllStatusList = output.Select(a => new SelectListItem
                     {
-                        getAllStatusList.Add(new SelectListItem
-                        {
-                            Text = _localizer["ddlSelectStatus"],
-                            Value = r.request_status
-                        });
-                    }
-                   else
-                    {
-                        getAllStatusList.Add(new SelectListItem
-                        {
-                            Text = r.request_status,
-                            Value = r.request_status
-                        });
-                    }
+                        Text = a.dropdown_text,
+                        Value = a.dropdown_value
+                    }).OrderBy(c => c.Value).ToList();
                 }
-               
-        
+                else
+                {
+                    getAllStatusList = output.Select(a => new SelectListItem
+                    {
+                        Text = a.dropdown_text,
+                        Value = a.dropdown_value
+                    }).OrderBy(c => c.Value).ToList();
 
+                }
+            }
+            else
+            {
+                getAllStatusList = output.Select(a => new SelectListItem
+                {
+                    Text = a.dropdown_text,
+                    Value = a.dropdown_value
+                }).ToList();
+            }
           var result=  getAllStatusList.OrderBy(c => c.Value).ToList();
 
             return Json(new { response = result });
@@ -2100,6 +2108,7 @@ namespace SubcontractProfile.Web.Controllers
             List<FileUploadModal> L_File = new List<FileUploadModal>();
             //FileStream output;
             string strmess = "";
+            Guid? fid2 = null;
 
             //string[] arr = { "application/pdf", "image/png", "image/jpeg", "image/jpeg", "image/bmp", "image/gif", "image/tif", "image/tiff" };
 
@@ -2142,37 +2151,7 @@ namespace SubcontractProfile.Web.Controllers
                                     }
                                     else
                                     {
-                                        Guid id = Guid.NewGuid();
-                                        using (var ms = new MemoryStream())
-                                        {
-                                            source.CopyTo(ms);
-                                            var fileBytes = ms.ToArray();
-                                            L_File.Add(new FileUploadModal
-                                            {
-                                                file_id = id,
-                                                Fileupload = fileBytes,
-                                                typefile = type_file,
-                                                ContentDisposition = source.ContentDisposition,
-                                                ContentType = source.ContentType,
-                                                Filename = filename,
-                                                CompanyId = Company
-                                            });
-                                        }
-                                        var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompanySSO");
-
-                                        if (data != null)
-                                        {
-
-                                            data.RemoveAll(x => x.file_id.ToString() == fid);
-                                            data.Add(L_File[0]);
-                                            SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", data);
-
-                                        }
-                                        else
-                                        {
-
-                                            SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
-                                        }
+                                        fid2 = Guid.NewGuid();
                                         strmess = _localizer["MessageUploadSuccess"];
                                     }
                                 }
@@ -2185,37 +2164,7 @@ namespace SubcontractProfile.Web.Controllers
                                     }
                                     else
                                     {
-                                        Guid id = Guid.NewGuid();
-                                        using (var ms = new MemoryStream())
-                                        {
-                                            source.CopyTo(ms);
-                                            var fileBytes = ms.ToArray();
-                                            L_File.Add(new FileUploadModal
-                                            {
-                                                file_id = id,
-                                                Fileupload = fileBytes,
-                                                typefile = type_file,
-                                                ContentDisposition = source.ContentDisposition,
-                                                ContentType = source.ContentType,
-                                                Filename = filename,
-                                                CompanyId = Company
-                                            });
-                                        }
-                                        var data = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompanySSO");
-
-                                        if (data != null)
-                                        {
-
-                                            data.RemoveAll(x => x.file_id.ToString() == fid);
-                                            data.Add(L_File[0]);
-                                            SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", data);
-
-                                        }
-                                        else
-                                        {
-
-                                            SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftCompanySSO", L_File);
-                                        }
+                                        fid2 = Guid.NewGuid();
                                         strmess = _localizer["MessageUploadSuccess"];
                                     }
                                 }
@@ -2238,7 +2187,7 @@ namespace SubcontractProfile.Web.Controllers
             }
 
 
-            return Json(new { status = statusupload, message = strmess, response = (statusupload ? L_File[0].file_id.ToString() : "") });
+            return Json(new { status = statusupload, message = strmess, response = fid2 });
 
             // return Json(new { status = statusupload, message = strmess });
         }

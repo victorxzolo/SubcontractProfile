@@ -1056,7 +1056,7 @@
 
         function openModal(mode, engineerId) {
 
-            $("#frNew")[0].reset();
+            clearData();
 
             $('#hdMode').val(mode);
             $('#hdEngineerId').val(engineerId);
@@ -1073,7 +1073,7 @@
                 $('#lblcompanyName').html('');
                 $("#btnSave").show();
             }
-
+            $('#engineer-tab').trigger('click');
             $('#AddEditModal').modal('show');
 
         }
@@ -1090,6 +1090,28 @@
         function clearData() {
 
             $("#frNew")[0].reset();
+
+            $('#frNew').removeClass('was-validated')
+
+            $('#hdupfilepersonalAttah').val('');
+            $('#personalAttahFile').val('');
+            $('#lbpersonalAttahFile').text('@Localizer["ChooseFile"]');
+
+            $('#hdupfilevehicleAttach').val('');
+            $('#vehicleAttachFile').val('');
+            $('#lbvehicleAttachFile').text('@Localizer["ChooseFile"]');
+
+            $('#hdupfileWorkPermitAttach').val('');
+            $('#fileWorkPermitAttach').val('');
+            $('#lbfileWorkPermitAttach').text('@Localizer["ChooseFile"]');
+
+            $('#hdupfileProfileAttach').val('');
+            $('#fileProfileAttach').val('');
+            $('#lbfileProfileAttach').text('@Localizer["ChooseFile"]');
+
+            $('#hdupfileCertificateAttach').val('');
+            $('#fileCertificateAttach').val('');
+            $('#lbfileCertificateAttach').text('@Localizer["ChooseFile"]');
 
         }
 

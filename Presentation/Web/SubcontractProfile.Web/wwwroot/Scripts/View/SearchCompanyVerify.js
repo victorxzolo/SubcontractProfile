@@ -4,7 +4,7 @@ var url = null;
 
 $(document).ready(function () {
     url = $("#controllername").data("url");
-   // BindDDLStatus();
+   BindDDLStatus();
     inittbSearchResult();
 
     $('#regisdatefrom').datetimepicker({

@@ -823,10 +823,10 @@ function initialCompanyDataById() {
                 }
 
                 if (result.ContractEndDate != null) {
-                    var dateend = new Date(result.ContractStartDate);
-                    var sMonthend = padValue(date.getMonth() + 1);
-                    var sDayend = padValue(date.getDate());
-                    var sYearend = date.getFullYear();
+                    var dateend = new Date(result.ContractEndDate);
+                    var sMonthend = padValue(dateend.getMonth() + 1);
+                    var sDayend = padValue(dateend.getDate());
+                    var sYearend = dateend.getFullYear();
 
                     $('#lblDatecontractend').text(sDayend + '/' + sMonthend + '/' + sYearend);
                 }

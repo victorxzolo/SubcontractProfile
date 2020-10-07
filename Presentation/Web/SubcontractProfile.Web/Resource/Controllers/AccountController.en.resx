@@ -165,14 +165,14 @@
   <data name="Room" xml:space="preserve">
     <value>Room</value>
   </data>
+  <data name="SelectAccountName" xml:space="preserve">
+    <value>Select Title Account Name</value>
+  </data>
   <data name="SelectAccountType" xml:space="preserve">
     <value>Select Acount Type</value>
   </data>
   <data name="SelectBankName" xml:space="preserve">
     <value>Select Bank Name</value>
-  </data>
-  <data name="SelectBusinessType" xml:space="preserve">
-    <value>Select Business Type</value>
   </data>
   <data name="SelectDistrict" xml:space="preserve">
     <value>Select District</value>
