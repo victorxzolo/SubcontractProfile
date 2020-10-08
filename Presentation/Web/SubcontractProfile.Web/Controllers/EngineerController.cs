@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -158,7 +159,7 @@ namespace SubcontractProfile.Web.Controllers
 
 
             string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", strpathAPI + "Engineer/SearchEngineer", companyId, gLocationId
-               , gTeamId, staffName, teamCitizen, position);
+               , gTeamId, HttpUtility.UrlEncode(staffName, Encoding.UTF8), teamCitizen, HttpUtility.UrlEncode(position, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 

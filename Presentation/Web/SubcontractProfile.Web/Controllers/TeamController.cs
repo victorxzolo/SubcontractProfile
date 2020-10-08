@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -114,7 +115,7 @@ namespace SubcontractProfile.Web.Controllers
             }
 
             string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Team/SearchTeam",companyId, locationId
-               , teamcode, teamNameTh, teamNameEn, storageLocation, shipto);
+               , teamcode, HttpUtility.UrlEncode(teamNameTh, Encoding.UTF8), teamNameEn, storageLocation, shipto);
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 

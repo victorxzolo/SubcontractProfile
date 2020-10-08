@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -136,7 +137,8 @@ namespace SubcontractProfile.Web.Controllers
 
 
             string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}", strpathAPI + "Company/SearchActivateProfile",
-                subcontract_profile_type, company_name_th, tax_id, activate_date_fr, activate_date_to, activate_status, register_date_fr, register_date_to);
+                subcontract_profile_type, HttpUtility.UrlEncode(company_name_th, Encoding.UTF8), tax_id
+                , activate_date_fr, activate_date_to, activate_status, register_date_fr, register_date_to);
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 

@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -128,9 +129,11 @@ namespace SubcontractProfile.Web.Controllers
             }
 
             string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Location/SearchLocation", strCompanyId
-               , locationCode, locationNameTh, locationNameEn, storageLocation, phoneNo, locationNameAilas);
+               , locationCode, HttpUtility.UrlEncode(locationNameTh, Encoding.UTF8), locationNameEn, storageLocation, phoneNo, locationNameAilas);
 
-            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            var httpContentSearch = uriString;
+
+            HttpResponseMessage response = client.GetAsync(httpContentSearch).Result;
 
             if (response.IsSuccessStatusCode)
             {
