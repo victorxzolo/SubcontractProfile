@@ -458,6 +458,7 @@ function getDataById(id) {
                     $('#lbuploadslip').html(result.SlipAttachFile);
                     $('#hdupfiletransfer').val(result.file_id_Slip);
                     $('#linkdownload').text(result.SlipAttachFile);
+                    DownloadFileSlip(result.SlipAttachFile);
                 }
                 $('#txtremark').val(result.Remark);
 
@@ -469,7 +470,7 @@ function getDataById(id) {
                         }
                     });
                 }
-               DownloadFileSlip();
+              
             }
 
 
@@ -535,11 +536,11 @@ function OnSave() {
     });
 }
 
-function DownloadFileSlip() {
+function DownloadFileSlip(filename) {
     var urlDownloadfile = url.replace('Action', 'DownloadfileConfirm');
     // $('#ItemPreview').attr('src', '/Payment/DownloadCSV?paymentid=' + $('#hdpaymentId').val());
     
-    $('#linkdownload').attr("href", urlDownloadfile+'?paymentid=' + $('#hdpaymentId').val());
+    $('#linkdownload').attr("href", urlDownloadfile + '?paymentid=' + $('#hdpaymentId').val() + '&&filename=' + filename);
 
 }
 
