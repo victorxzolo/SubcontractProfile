@@ -158,8 +158,13 @@ namespace SubcontractProfile.Web.Controllers
             }
 
 
-            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", strpathAPI + "Engineer/SearchEngineer", companyId, gLocationId
-               , gTeamId, HttpUtility.UrlEncode(staffName, Encoding.UTF8), teamCitizen, HttpUtility.UrlEncode(position, Encoding.UTF8));
+            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", strpathAPI + "Engineer/SearchEngineer"
+                , HttpUtility.UrlEncode(companyId.ToString(), Encoding.UTF8)
+                , HttpUtility.UrlEncode(gLocationId.ToString(), Encoding.UTF8)
+               , HttpUtility.UrlEncode(gTeamId.ToString(), Encoding.UTF8)
+               , HttpUtility.UrlEncode(staffName, Encoding.UTF8)
+               , HttpUtility.UrlEncode(teamCitizen, Encoding.UTF8)
+               , HttpUtility.UrlEncode(position, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -190,7 +195,8 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Engineer/GetByEngineerId", engineerId);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Engineer/GetByEngineerId"
+                , HttpUtility.UrlEncode(engineerId, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -246,7 +252,10 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}/{2}/{3}", strpathAPI + "Engineer/GetEngineerByTeam", companyId, gLocationid, gTeamid);
+            string uriString = string.Format("{0}/{1}/{2}/{3}", strpathAPI + "Engineer/GetEngineerByTeam"
+                , HttpUtility.UrlEncode(companyId.ToString(), Encoding.UTF8)
+                , HttpUtility.UrlEncode(gLocationid.ToString(), Encoding.UTF8)
+                , HttpUtility.UrlEncode(gTeamid.ToString(), Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -313,7 +322,8 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Personal/GetByPersonalId", personalId);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Personal/GetByPersonalId"
+                , HttpUtility.UrlEncode(personalId.ToString(), Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -584,7 +594,8 @@ namespace SubcontractProfile.Web.Controllers
                 var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
 
                 #region SearchPersonal
-                string uriSearch = string.Format("{0}/{1}", strpathAPI + "Engineer/GetByEngineerId", engineerId);
+                string uriSearch = string.Format("{0}/{1}", strpathAPI + "Engineer/GetByEngineerId"
+                    , HttpUtility.UrlEncode(engineerId, Encoding.UTF8));
                 var resultengineer = new SubcontractProfileEngineerModel();
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Add(

@@ -128,8 +128,14 @@ namespace SubcontractProfile.Web.Controllers
                 phoneNo = "null";
             }
 
-            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Location/SearchLocation", strCompanyId
-               , locationCode, HttpUtility.UrlEncode(locationNameTh, Encoding.UTF8), locationNameEn, storageLocation, phoneNo, locationNameAilas);
+            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Location/SearchLocation"
+                , HttpUtility.UrlEncode(strCompanyId.ToString(), Encoding.UTF8)
+               , HttpUtility.UrlEncode(locationCode, Encoding.UTF8)
+               , HttpUtility.UrlEncode(locationNameTh, Encoding.UTF8)
+               , HttpUtility.UrlEncode(locationNameEn, Encoding.UTF8)
+               , HttpUtility.UrlEncode(storageLocation, Encoding.UTF8)
+               , HttpUtility.UrlEncode(phoneNo, Encoding.UTF8)
+               , HttpUtility.UrlEncode(locationNameAilas, Encoding.UTF8));
 
             var httpContentSearch = uriString;
 
@@ -162,7 +168,7 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Location/GetByLocationId", locationId);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Location/GetByLocationId", HttpUtility.UrlEncode(locationId, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -331,8 +337,9 @@ namespace SubcontractProfile.Web.Controllers
 
                 Guid strCompanyId = userProfile.companyid;
 
-                string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Location/SearchLocation", strCompanyId
-                   , locationcode, "null", "null", "null", "null", "null");
+                string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Location/SearchLocation"
+                    , HttpUtility.UrlEncode(strCompanyId.ToString(), Encoding.UTF8)
+                   , HttpUtility.UrlEncode(locationcode, Encoding.UTF8), "null", "null", "null", "null", "null");
 
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
 

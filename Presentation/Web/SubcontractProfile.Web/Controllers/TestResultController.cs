@@ -142,7 +142,13 @@ namespace SubcontractProfile.Web.Controllers
             }
 
             string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Training/SearchTrainingForTest",
-                 HttpUtility.UrlEncode(company_name_th, Encoding.UTF8), tax_id, training_date_fr, training_date_to, test_date_fr, test_date_to,status);
+                 HttpUtility.UrlEncode(company_name_th, Encoding.UTF8)
+                 , HttpUtility.UrlEncode(tax_id, Encoding.UTF8)
+                 , HttpUtility.UrlEncode(training_date_fr, Encoding.UTF8)
+                 , HttpUtility.UrlEncode(training_date_to, Encoding.UTF8)
+                 , HttpUtility.UrlEncode(test_date_fr, Encoding.UTF8)
+                 , HttpUtility.UrlEncode(test_date_to, Encoding.UTF8)
+                 , HttpUtility.UrlEncode(status, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 

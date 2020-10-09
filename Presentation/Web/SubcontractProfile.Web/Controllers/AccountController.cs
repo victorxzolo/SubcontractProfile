@@ -32,6 +32,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Localization;
+using System.Web;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -363,7 +364,8 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "User/CheckUsername", username);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "User/CheckUsername"
+                    , HttpUtility.UrlEncode(username, Encoding.UTF8));
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -411,7 +413,8 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "SubDistrict/GetSubDistrictByDistrict", district_id);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "SubDistrict/GetSubDistrictByDistrict"
+                    , HttpUtility.UrlEncode(district_id.ToString(), Encoding.UTF8));
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -508,7 +511,8 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "District/GetDistrictByProvinceId", province_id);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "District/GetDistrictByProvinceId"
+                    , HttpUtility.UrlEncode(province_id.ToString(), Encoding.UTF8));
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -575,7 +579,9 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = region_id==0 ? string.Format("{0}", strpathAPI + "Province/GetAll"): string.Format("{0}/{1}", strpathAPI + "Province/GetProvinceByRegionId", region_id);
+            string uriString = region_id==0 ? string.Format("{0}", strpathAPI + "Province/GetAll"): 
+                string.Format("{0}/{1}", strpathAPI + "Province/GetProvinceByRegionId", HttpUtility.UrlEncode(region_id.ToString(), Encoding.UTF8));
+
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -1063,8 +1069,13 @@ namespace SubcontractProfile.Web.Controllers
                 //string u = "http://10.138.34.61:8080/phxPartner/v1/partner/ChannelASCProfile.json?filter=" +
                 //    "(&(inSource=FBB)(inEvent=evPersonLocAddressInfo)(inASCCode=000375)(inASCMobileNo=)(inIdNo=)(inLocationCode=1000607)(inPersonType=ALL))";
 
-                string uriString = string.Format(strpathASCProfile, "FBB", "evLocationInfo", model.asc_code, model.asc_mobile_no, model.id_Number
-                                            , model.location_code, model.sap_code, model.user_id);
+                string uriString = string.Format(strpathASCProfile, "FBB", "evLocationInfo"
+                    , HttpUtility.UrlEncode(model.asc_code, Encoding.UTF8)
+                    , HttpUtility.UrlEncode(model.asc_mobile_no, Encoding.UTF8)
+                    , HttpUtility.UrlEncode(model.id_Number, Encoding.UTF8)
+                    , HttpUtility.UrlEncode(model.location_code, Encoding.UTF8)
+                    , HttpUtility.UrlEncode(model.sap_code, Encoding.UTF8)
+                    , HttpUtility.UrlEncode(model.user_id, Encoding.UTF8));
 
 
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
@@ -1225,7 +1236,7 @@ namespace SubcontractProfile.Web.Controllers
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-                string uriString = string.Format("{0}/{1}", strpathAPI + "VATService/Get", model.tIN);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "VATService/Get", HttpUtility.UrlEncode(model.tIN, Encoding.UTF8));
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -1447,7 +1458,7 @@ namespace SubcontractProfile.Web.Controllers
                     }
                     if (e.DistrictId == 0)
                     {
-                        response = client.GetAsync(uridistrict + "/" + e.ProvinceId).Result;
+                        response = client.GetAsync(uridistrict + "/" + HttpUtility.UrlEncode(e.ProvinceId.ToString(), Encoding.UTF8)).Result;
                         if (response.IsSuccessStatusCode)
                         {
                             var v = response.Content.ReadAsStringAsync().Result;
@@ -1469,7 +1480,7 @@ namespace SubcontractProfile.Web.Controllers
                     }
                     if (e.SubDistrictId == 0)
                     {
-                        response = client.GetAsync(urisubdistrict + "/" + e.DistrictId).Result;
+                        response = client.GetAsync(urisubdistrict + "/" + HttpUtility.UrlEncode(e.DistrictId.ToString(), Encoding.UTF8)).Result;
                         if (response.IsSuccessStatusCode)
                         {
                             var v = response.Content.ReadAsStringAsync().Result;
@@ -1662,7 +1673,8 @@ namespace SubcontractProfile.Web.Controllers
                     client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    string uriStringUser = string.Format("{0}/{1}", strpathAPI + "User/CheckUsername", model.User_name);
+                    string uriStringUser = string.Format("{0}/{1}", strpathAPI + "User/CheckUsername"
+                        , HttpUtility.UrlEncode(model.User_name, Encoding.UTF8));
                     HttpResponseMessage response = client.GetAsync(uriStringUser).Result;
                     if (response.IsSuccessStatusCode)
                     {

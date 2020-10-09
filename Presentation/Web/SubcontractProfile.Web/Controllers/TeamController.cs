@@ -114,8 +114,14 @@ namespace SubcontractProfile.Web.Controllers
                 shipto = "null";
             }
 
-            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Team/SearchTeam",companyId, locationId
-               , teamcode, HttpUtility.UrlEncode(teamNameTh, Encoding.UTF8), teamNameEn, storageLocation, shipto);
+            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Team/SearchTeam"
+                , HttpUtility.UrlEncode(companyId.ToString(), Encoding.UTF8)
+                , HttpUtility.UrlEncode(locationId, Encoding.UTF8)
+               , HttpUtility.UrlEncode(teamcode, Encoding.UTF8)
+               , HttpUtility.UrlEncode(teamNameTh, Encoding.UTF8)
+               , HttpUtility.UrlEncode(teamNameEn, Encoding.UTF8)
+               , HttpUtility.UrlEncode(storageLocation, Encoding.UTF8)
+               , HttpUtility.UrlEncode(shipto, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -161,7 +167,9 @@ namespace SubcontractProfile.Web.Controllers
                 gLocationId = new Guid(locationId);
             }
 
-            string uriString = string.Format("{0}/{1}/{2}", strpathAPI + "Team/GetByLocationId", companyId, gLocationId);
+            string uriString = string.Format("{0}/{1}/{2}", strpathAPI + "Team/GetByLocationId"
+                , HttpUtility.UrlEncode(companyId.ToString(), Encoding.UTF8)
+                , HttpUtility.UrlEncode(gLocationId.ToString(), Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -183,7 +191,8 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Team/GetByTeamId", teamId);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Team/GetByTeamId"
+                , HttpUtility.UrlEncode(teamId, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -210,7 +219,8 @@ namespace SubcontractProfile.Web.Controllers
             var companyId = userProfile.companyid;
 
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Location/GetLocationByCompany", companyId);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Location/GetLocationByCompany"
+                , HttpUtility.UrlEncode(companyId.ToString(), Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 

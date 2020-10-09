@@ -82,7 +82,8 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Company/GetByCompanyId", companyId);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Company/GetByCompanyId"
+                , HttpUtility.UrlEncode(companyId.ToString(), Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -193,7 +194,13 @@ namespace SubcontractProfile.Web.Controllers
 
 
             string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Training/SearchTrainingForApprove"
-                , HttpUtility.UrlEncode(companyName, Encoding.UTF8), TaxId, status, date_from,date_to, bookingDateFrom, bookingDateTo);
+                , HttpUtility.UrlEncode(companyName, Encoding.UTF8)
+                , HttpUtility.UrlEncode(TaxId, Encoding.UTF8)
+                , HttpUtility.UrlEncode(status, Encoding.UTF8)
+                , HttpUtility.UrlEncode(date_from, Encoding.UTF8)
+                , HttpUtility.UrlEncode(date_to, Encoding.UTF8)
+                , HttpUtility.UrlEncode(bookingDateFrom, Encoding.UTF8)
+                , HttpUtility.UrlEncode(bookingDateTo, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -260,7 +267,8 @@ namespace SubcontractProfile.Web.Controllers
             }
 
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "TrainingEngineer/GetTrainingEngineerByTrainingId", trainingid);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "TrainingEngineer/GetTrainingEngineerByTrainingId"
+                , HttpUtility.UrlEncode(trainingid.ToString(), Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -404,7 +412,8 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}/{1}", strpathAPI + "Training/GetByTrainingId", trainingId);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "Training/GetByTrainingId"
+                    , HttpUtility.UrlEncode(trainingId.ToString(), Encoding.UTF8));
 
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -436,7 +445,12 @@ namespace SubcontractProfile.Web.Controllers
             var company_alias = "NULL";
             var tax_id = "NULL";
 
-            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}", strpathAPI + "Company/SearchCompany", companyId, company_th, company_en, company_alias, tax_id);
+            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}", strpathAPI + "Company/SearchCompany"
+                , HttpUtility.UrlEncode(companyId, Encoding.UTF8)
+                , HttpUtility.UrlEncode(company_th, Encoding.UTF8)
+                , HttpUtility.UrlEncode(company_en, Encoding.UTF8)
+                , HttpUtility.UrlEncode(company_alias, Encoding.UTF8)
+                , HttpUtility.UrlEncode(tax_id, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -464,7 +478,8 @@ namespace SubcontractProfile.Web.Controllers
             var companyId = Companyid;
 
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Location/GetLocationByCompany", companyId);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Location/GetLocationByCompany"
+                , HttpUtility.UrlEncode(companyId, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -501,7 +516,9 @@ namespace SubcontractProfile.Web.Controllers
                 gLocationId = new Guid(locationid);
             }
 
-            string uriString = string.Format("{0}/{1}/{2}", strpathAPI + "Team/GetByLocationId", companyId, gLocationId);
+            string uriString = string.Format("{0}/{1}/{2}", strpathAPI + "Team/GetByLocationId"
+                , HttpUtility.UrlEncode(companyId, Encoding.UTF8)
+                , HttpUtility.UrlEncode(gLocationId.ToString(), Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -548,7 +565,8 @@ namespace SubcontractProfile.Web.Controllers
 
             string ddlType = _ddlType;
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", ddlType);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName"
+                , HttpUtility.UrlEncode(ddlType, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -630,7 +648,11 @@ namespace SubcontractProfile.Web.Controllers
             }
 
 
-            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}", strpathAPI + "Training/SearchTraining", company_id, status, date_from, date_to);
+            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}", strpathAPI + "Training/SearchTraining"
+                , HttpUtility.UrlEncode(company_id.ToString(), Encoding.UTF8)
+                , HttpUtility.UrlEncode(status, Encoding.UTF8)
+                , HttpUtility.UrlEncode(date_from, Encoding.UTF8)
+                , HttpUtility.UrlEncode(date_to, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -781,7 +803,8 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Company/GetByCompanyId", companyID);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Company/GetByCompanyId"
+                , HttpUtility.UrlEncode(companyID.ToString(), Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -1116,7 +1139,8 @@ namespace SubcontractProfile.Web.Controllers
             }
 
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "TrainingEngineer/GetTrainingEngineerByTrainingId", trainingid);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "TrainingEngineer/GetTrainingEngineerByTrainingId"
+                , HttpUtility.UrlEncode(trainingid.ToString(), Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 

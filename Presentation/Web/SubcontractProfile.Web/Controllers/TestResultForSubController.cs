@@ -16,6 +16,7 @@ using SubcontractProfile.Web.Extension;
 using SubcontractProfile.Web.Model;
 using Microsoft.Win32.SafeHandles;
 using Microsoft.Extensions.Localization;
+using System.Web;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -128,7 +129,12 @@ namespace SubcontractProfile.Web.Controllers
 
 
             string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", strpathAPI + "Training/SearchTrainingForSub",
-                userProfile.companyid, training_date_fr, training_date_to, test_date_fr, test_date_to, status);
+                HttpUtility.UrlEncode(userProfile.companyid.ToString(), Encoding.UTF8)
+                , HttpUtility.UrlEncode(training_date_fr, Encoding.UTF8)
+                , HttpUtility.UrlEncode(training_date_to, Encoding.UTF8)
+                , HttpUtility.UrlEncode(test_date_fr, Encoding.UTF8)
+                , HttpUtility.UrlEncode(test_date_to, Encoding.UTF8)
+                , HttpUtility.UrlEncode(status, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 

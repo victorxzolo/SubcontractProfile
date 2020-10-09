@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using DataTables.AspNetCore.Mvc.Binder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -182,7 +183,8 @@ namespace SubcontractProfile.Web.Controllers
         {
             var data = new SubcontractProfilePaymentModel();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Payment/GetByPaymentId", id);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Payment/GetByPaymentId"
+                , HttpUtility.UrlEncode(id, Encoding.UTF8));
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -642,7 +644,7 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Payment/GetByPaymentId", paymentId);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Payment/GetByPaymentId", HttpUtility.UrlEncode(paymentId, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 

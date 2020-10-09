@@ -137,8 +137,14 @@ namespace SubcontractProfile.Web.Controllers
 
 
             string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}", strpathAPI + "Company/SearchActivateProfile",
-                subcontract_profile_type, HttpUtility.UrlEncode(company_name_th, Encoding.UTF8), tax_id
-                , activate_date_fr, activate_date_to, activate_status, register_date_fr, register_date_to);
+                HttpUtility.UrlEncode(subcontract_profile_type, Encoding.UTF8)
+                , HttpUtility.UrlEncode(company_name_th, Encoding.UTF8)
+                , HttpUtility.UrlEncode(tax_id, Encoding.UTF8)
+                , HttpUtility.UrlEncode(activate_date_fr, Encoding.UTF8)
+                , HttpUtility.UrlEncode(activate_date_to, Encoding.UTF8)
+                , HttpUtility.UrlEncode(activate_status, Encoding.UTF8)
+                , HttpUtility.UrlEncode(register_date_fr, Encoding.UTF8)
+                , HttpUtility.UrlEncode(register_date_to, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 

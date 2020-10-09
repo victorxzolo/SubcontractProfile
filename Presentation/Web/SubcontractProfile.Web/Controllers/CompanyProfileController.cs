@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Localization;
 using Microsoft.Extensions.Localization;
 using System.Globalization;
+using System.Web;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -174,8 +175,13 @@ namespace SubcontractProfile.Web.Controllers
                 SubcontractProfileType = "null";
             }
 
-            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", strpathAPI + "Company/SearchCompany", strCompanyId
-                , companyNameTh, companyNameEn, companyAilas, taxId, SubcontractProfileType);
+            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", strpathAPI + "Company/SearchCompany"
+                , HttpUtility.UrlEncode(strCompanyId.ToString(), Encoding.UTF8)
+                , HttpUtility.UrlEncode(companyNameTh, Encoding.UTF8)
+                , HttpUtility.UrlEncode(companyNameEn, Encoding.UTF8)
+                , HttpUtility.UrlEncode(companyAilas, Encoding.UTF8)
+                , HttpUtility.UrlEncode(taxId, Encoding.UTF8)
+                , HttpUtility.UrlEncode(SubcontractProfileType, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -209,7 +215,8 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Company/GetByCompanyId", userProfile.companyid);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Company/GetByCompanyId"
+                , HttpUtility.UrlEncode(userProfile.companyid.ToString(), Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -237,7 +244,8 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Company/GetByCompanyId", companyId);
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Company/GetByCompanyId"
+                , HttpUtility.UrlEncode(companyId, Encoding.UTF8));
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
@@ -914,8 +922,13 @@ namespace SubcontractProfile.Web.Controllers
                 //                                 "(inASCCode={2})(inASCMobileNo={3})(inIdNo={4})(inLocationCode={5})(inSAPCode={6})(inUserID={7}))"
                 //                                , "FBB", "evLocationInfo",model.asc_code,model.asc_mobile_no,model.id_Number,model.location_code,model.sap_code,
                 //                                model.user_id);
-                string uriString = string.Format(strpathASCProfile, "FBB", "evLocationInfo", model.asc_code, model.asc_mobile_no, model.id_Number
-                                            , model.location_code, model.sap_code, model.user_id);
+                string uriString = string.Format(strpathASCProfile, "FBB", "evLocationInfo"
+                    , HttpUtility.UrlEncode(model.asc_code, Encoding.UTF8)
+                    , HttpUtility.UrlEncode(model.asc_mobile_no, Encoding.UTF8)
+                    , HttpUtility.UrlEncode(model.id_Number, Encoding.UTF8)
+                    , HttpUtility.UrlEncode(model.location_code, Encoding.UTF8)
+                    , HttpUtility.UrlEncode(model.sap_code, Encoding.UTF8)
+                    , HttpUtility.UrlEncode(model.user_id, Encoding.UTF8));
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -1047,7 +1060,8 @@ namespace SubcontractProfile.Web.Controllers
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-                string uriString = string.Format("{0}/{1}", strpathAPI + "VATService/Get", model.tIN);
+                string uriString = string.Format("{0}/{1}", strpathAPI + "VATService/Get"
+                    , HttpUtility.UrlEncode(model.tIN, Encoding.UTF8));
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -1720,7 +1734,7 @@ namespace SubcontractProfile.Web.Controllers
                     }
                     if (e.DistrictId == 0)
                     {
-                        response = client.GetAsync(uridistrict + "/" + e.ProvinceId).Result;
+                        response = client.GetAsync(uridistrict + "/" + HttpUtility.UrlEncode(e.ProvinceId.ToString(), Encoding.UTF8)).Result;
                         if (response.IsSuccessStatusCode)
                         {
                             var v = response.Content.ReadAsStringAsync().Result;
@@ -1742,7 +1756,7 @@ namespace SubcontractProfile.Web.Controllers
                     }
                     if (e.SubDistrictId == 0)
                     {
-                        response = client.GetAsync(urisubdistrict + "/" + e.DistrictId).Result;
+                        response = client.GetAsync(urisubdistrict + "/" + HttpUtility.UrlEncode(e.DistrictId.ToString(), Encoding.UTF8)).Result;
                         if (response.IsSuccessStatusCode)
                         {
                             var v = response.Content.ReadAsStringAsync().Result;
