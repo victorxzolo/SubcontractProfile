@@ -287,7 +287,7 @@ namespace SubcontractProfile.Web.Controllers
 
                 if(Payment.FileSilp !=null)
                 {
-                    await Uploadfile(Payment.FileSilp, Payment.PaymentId, dataUser.UserId.ToString());
+                    await Uploadfile(Payment.FileSilp, Payment.PaymentId, dataUser.companyid.ToString());
                     Payment.SlipAttachFile = Payment.FileSilp.FileName;
                 }
                   

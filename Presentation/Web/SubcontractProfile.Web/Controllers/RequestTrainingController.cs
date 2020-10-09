@@ -858,6 +858,7 @@ namespace SubcontractProfile.Web.Controllers
                     client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
                     var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+
                     HttpResponseMessage response = client.PostAsync(uriLocation, httpContent).Result;
 
 
@@ -884,6 +885,7 @@ namespace SubcontractProfile.Web.Controllers
 
                                     client.DefaultRequestHeaders.Accept.Add(
                                     new MediaTypeWithQualityHeaderValue("application/json"));
+
                                     var httpContenten = new StringContent(JsonConvert.SerializeObject(engineerModel), Encoding.UTF8, "application/json");
                                     HttpResponseMessage responseEn = client.PostAsync(uriengineer, httpContenten).Result;
 
