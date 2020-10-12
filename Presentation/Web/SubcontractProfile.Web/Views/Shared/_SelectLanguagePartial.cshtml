@@ -16,18 +16,18 @@
     var strView = ViewContext.RouteData.Values["action"].ToString();
     var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
 }
-    <div title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
+    @*<div title="@Localizer["Language"] @requestCulture?.Provider?.GetType().Name">*@
 
 
-        <form id="selectLanguage" action="@Url.Action("SetLanguage",controllerName)" method="post">
+        <form id="selectLanguage" action="@Url.Action("SetLanguage",controllerName)" method="post" class="form-inline">
             @Html.Hidden("returnUrl", Url.Action(strView, controllerName))
-            <label asp-for="@requestCulture.RequestCulture.UICulture.Name">@Localizer["Language:"]</label>
+            <label asp-for="@requestCulture.RequestCulture.UICulture.Name" class="text-light mr-sm-2">@Localizer["Language"]</label>
             <select name="culture" class="form-control"
-                    onchange="this.form.submit();"
-                    asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems">
-                <option value="">Select</option>
-                <option value="th">TH</option>
-                <option value="en">EN</option>
-            </select>
+                onchange="this.form.submit();"
+                asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems">
+                <option value="">@Localizer["ddlLanguage"]</option>
+                <option value="th">@Localizer["Thai"]</option>
+                <option value="en">@Localizer["English"]</option>
+        </select>
         </form>
-    </div>
+    @*</div>*@

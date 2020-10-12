@@ -223,7 +223,7 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { redirecturl = Url ,Response= res });
         }
 
-        public void SetLanguage(string culture)
+        private void SetLanguage(string culture)
         {
             Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,
@@ -231,6 +231,18 @@ namespace SubcontractProfile.Web.Controllers
                 new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
             );
 
+        }
+
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return LocalRedirect(returnUrl);
         }
 
         [HttpPost]

@@ -47,9 +47,27 @@
                 width: 1.5em;
                 height: 1.5em;
             }
+        li {
+            list-style-position: outside;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
+    @*<header class="header navbar navbar-expand-sm"  style="background-color:#ffffff">
+        <ul class="navbar-item theme-brand flex-row  text-center">
+            <li class="nav-item theme-logo">
+                <a href="#">
+                    <img src="~/assets/img/ais-logob.png" class="navbar-logo" style="width:95px" alt="logo">
+                </a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto mr-2">
+
+            @await Html.PartialAsync("_SelectLanguagePartial")
+
+        </ul>
+    </header>*@
     <div id="container">
         <div id="wrapper">
             @*<ol class="breadcrumb breadcrumb_sme">

@@ -117,7 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ddlLanguage" xml:space="preserve">
+    <value>เลือกภาษา</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>อังกฤษ</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>ภาษา</value>
+  </data>
+  <data name="Thai" xml:space="preserve">
+    <value>ไทย</value>
   </data>
 </root>

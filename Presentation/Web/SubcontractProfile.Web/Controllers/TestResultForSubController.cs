@@ -17,6 +17,7 @@ using SubcontractProfile.Web.Model;
 using Microsoft.Win32.SafeHandles;
 using Microsoft.Extensions.Localization;
 using System.Web;
+using Microsoft.AspNetCore.Localization;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -158,6 +159,17 @@ namespace SubcontractProfile.Web.Controllers
             return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data });
         }
 
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return LocalRedirect(returnUrl);
+        }
         private void getsession()
         {
             Lang = SessionHelper.GetObjectFromJson<string>(_httpContextAccessor.HttpContext.Session, "language");

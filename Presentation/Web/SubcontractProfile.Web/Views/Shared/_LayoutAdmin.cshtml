@@ -136,8 +136,6 @@
 
     @RenderSection("Scripts", required: false)
     @RenderSection("modalpanel", required: false)
-
-
 </head>
 <body>
     <!-- BEGIN LOADER -->
@@ -231,7 +229,11 @@
                     </div>
                 </li>
             </ul>
+            <ul class="navbar-nav ml-auto mr-2">
 
+                @await Html.PartialAsync("_SelectLanguagePartial")
+
+            </ul>
         </header>
     </div>
     <!--  END NAVBAR  -->
