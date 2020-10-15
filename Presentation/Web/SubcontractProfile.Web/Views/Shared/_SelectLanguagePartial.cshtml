@@ -19,15 +19,31 @@
     @*<div title="@Localizer["Language"] @requestCulture?.Provider?.GetType().Name">*@
 
 
-        <form id="selectLanguage" action="@Url.Action("SetLanguage",controllerName)" method="post" class="form-inline">
-            @Html.Hidden("returnUrl", Url.Action(strView, controllerName))
-            <label asp-for="@requestCulture.RequestCulture.UICulture.Name" class="text-light mr-sm-2">@Localizer["Language"]</label>
-            <select name="culture" class="form-control"
+    <form id="selectLanguage" action="@Url.Action("SetLanguage",controllerName)" method="post" class="form-inline">
+        @Html.Hidden("returnUrl", Url.Action(strView, controllerName))
+        @Html.Hidden("culture")
+        @*<input type="hidden" name="hdLang_select" id="hdLang_select" value="" />*@
+        <label asp-for="@requestCulture.RequestCulture.UICulture.Name" class="text-light mr-sm-2">@Localizer["Language"]</label>
+        <a href="#" class="badge outline-badge-success shadow-none mr-1" style="color:#ffffff" id="submit_TH" data-value="th">@Localizer["Thai"]</a>
+        <a href="#" class="badge outline-badge-success shadow-none" style="color:#ffffff" id="submit_EN" data-value="en">@Localizer["English"]</a>
+        @*<select name="culture" class="form-control"
                 onchange="this.form.submit();"
                 asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems">
                 <option value="">@Localizer["ddlLanguage"]</option>
                 <option value="th">@Localizer["Thai"]</option>
                 <option value="en">@Localizer["English"]</option>
-        </select>
-        </form>
+        </select>*@
+    </form>
     @*</div>*@
+<script>
+    $(function () {
+        $('a#submit_TH').click(function () {
+            $('#culture').val($(this).attr('data-value'));
+            $('form#selectLanguage').submit();
+        });
+        $('a#submit_EN').click(function () {
+            $('#culture').val($(this).attr('data-value'));
+            $('form#selectLanguage').submit();
+        });
+    });
+</script>
