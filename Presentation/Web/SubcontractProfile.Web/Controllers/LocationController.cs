@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Policy;
@@ -458,32 +459,58 @@ namespace SubcontractProfile.Web.Controllers
             List<FileUploadModal> L_File = new List<FileUploadModal>();
             FileStream output;
             string strmess = "";
+            var outputNAS = new List<SubcontractDropdownModel>();
             try
             {
 
                 if (files != null && files.Length > 0)
                 {
-                    if (files != null)
+                    #region NAS
+                    HttpClient client = new HttpClient();
+                    client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/nas_subcontract");
+                    HttpResponseMessage response = client.GetAsync(uriString).Result;
+                    if (response.IsSuccessStatusCode)
                     {
-                        string strdir = Path.Combine(strpathUpload, companyid, "Location",locationid);
-                        if(!Directory.Exists(strdir))
-                        {
-                            Directory.CreateDirectory(strdir);
-                        }
-                        else
-                        {
-                            System.IO.DirectoryInfo di = new DirectoryInfo(strdir);
-                            foreach (FileInfo finfo in di.GetFiles())
-                            {
-                                finfo.Delete();
-                            }
-                        }
-                        
+                        var v = response.Content.ReadAsStringAsync().Result;
+                        outputNAS = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
                     }
-                    string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
-                    filename = EnsureCorrectFilename(filename);
-                    using (output = System.IO.File.Create(this.GetPathAndFilename(locationid, filename,companyid)))
-                        await files.CopyToAsync(output);
+
+                    string username = outputNAS[0].value1;
+                    string password = outputNAS[0].value2;
+                    string ipAddress = @"\\" + outputNAS[0].dropdown_value;
+                    string destNAS = outputNAS[0].dropdown_text;
+
+                    NetworkCredential sourceCredentials = new NetworkCredential { Domain = ipAddress, UserName = username, Password = password };
+
+                    #endregion
+                    using (new NetworkConnection(destNAS, sourceCredentials))
+                    {
+                        if (files != null)
+                        {
+                            string strdir = Path.Combine(destNAS + @"\SubContractProfile\", companyid, "Location", locationid);
+                            if (!Directory.Exists(strdir))
+                            {
+                                Directory.CreateDirectory(strdir);
+                            }
+                            else
+                            {
+                                System.IO.DirectoryInfo di = new DirectoryInfo(strdir);
+                                foreach (FileInfo finfo in di.GetFiles())
+                                {
+                                    finfo.Delete();
+                                }
+                            }
+
+                        }
+                        string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
+                        filename = EnsureCorrectFilename(filename);
+                        using (output = System.IO.File.Create(this.GetPathAndFilename(locationid, filename, companyid, destNAS + @"\SubContractProfile\")))
+                            await files.CopyToAsync(output);
+                    }
+                        
                 }
 
             }
@@ -499,9 +526,9 @@ namespace SubcontractProfile.Web.Controllers
 
         }
 
-        private string GetPathAndFilename(string locationid, string filename,string companyid)
+        private string GetPathAndFilename(string locationid, string filename,string companyid,string dir)
         {
-            string pathdir = Path.Combine(strpathUpload, companyid, "Location", locationid);
+            string pathdir = Path.Combine(dir, companyid, "Location", locationid);
             string PathOutput = "";
             if (!Directory.Exists(pathdir))
             {
@@ -517,45 +544,97 @@ namespace SubcontractProfile.Web.Controllers
             {
                 getsession();
             }
-            var path = this.GetPathAndFilename(locationid, filename, dataUser.companyid.ToString());
-            string content = GetContentType(path);
-            var memory = new MemoryStream();
-            using (var stream = new FileStream(path, FileMode.Open))
-            {
-                await stream.CopyToAsync(memory);
+            var outputNAS = new List<SubcontractDropdownModel>();
+            #region NAS
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
 
+            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/nas_subcontract");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                outputNAS = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
             }
 
-            memory.Position = 0;
-            var array = memory.ToArray();
+            string username = outputNAS[0].value1;
+            string password = outputNAS[0].value2;
+            string ipAddress = @"\\" + outputNAS[0].dropdown_value;
+            string destNAS = outputNAS[0].dropdown_text;
+
+            NetworkCredential sourceCredentials = new NetworkCredential { Domain = ipAddress, UserName = username, Password = password };
+
+            #endregion
+            using (new NetworkConnection(destNAS, sourceCredentials))
+            {
+                var path = this.GetPathAndFilename(locationid, filename, dataUser.companyid.ToString(), destNAS + @"\SubContractProfile\");
+                string content = GetContentType(path);
+                var memory = new MemoryStream();
+                using (var stream = new FileStream(path, FileMode.Open))
+                {
+                    await stream.CopyToAsync(memory);
+
+                }
+
+                memory.Position = 0;
+                var array = memory.ToArray();
 
 
-            if (array != null)
-            {
-                return File(array, content, Path.GetFileName(path));
+                if (array != null)
+                {
+                    return File(array, content, Path.GetFileName(path));
+                }
+                else
+                {
+                    return new EmptyResult();
+                }
             }
-            else
-            {
-                return new EmptyResult();
-            }
+             
         }
 
         private async Task<bool> Deletefile(string locationid,string companyid)
         {
             bool result = true;
+            var outputNAS = new List<SubcontractDropdownModel>();
             try
             {
-                string strdir = Path.Combine(strpathUpload, companyid, "Location", locationid);
-                System.IO.DirectoryInfo di = new DirectoryInfo(strdir);
-                if(Directory.Exists(strdir))
-                {
-                    foreach (FileInfo file in di.GetFiles())
-                    {
-                        file.Delete();
-                    }
+                #region NAS
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    Directory.Delete(strdir, true);
+                string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/nas_subcontract");
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var v = response.Content.ReadAsStringAsync().Result;
+                    outputNAS = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
                 }
+
+                string username = outputNAS[0].value1;
+                string password = outputNAS[0].value2;
+                string ipAddress = @"\\" + outputNAS[0].dropdown_value;
+                string destNAS = outputNAS[0].dropdown_text;
+
+                NetworkCredential sourceCredentials = new NetworkCredential { Domain = ipAddress, UserName = username, Password = password };
+
+                #endregion
+                using (new NetworkConnection(destNAS, sourceCredentials))
+                {
+                    string strdir = Path.Combine(destNAS + @"\SubContractProfile\", companyid, "Location", locationid);
+                    System.IO.DirectoryInfo di = new DirectoryInfo(strdir);
+                    if (Directory.Exists(strdir))
+                    {
+                        foreach (FileInfo file in di.GetFiles())
+                        {
+                            file.Delete();
+                        }
+
+                        Directory.Delete(strdir, true);
+                    }
+                }
+                   
                 
             }
             catch (Exception e)
