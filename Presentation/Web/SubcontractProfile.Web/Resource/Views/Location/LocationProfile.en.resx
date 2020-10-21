@@ -262,10 +262,10 @@
     <value>Out of Service Storage location</value>
   </data>
   <data name="Panaltycontractmail" xml:space="preserve">
-    <value>Panalty contract mail</value>
+    <value>Penalty contract mail</value>
   </data>
   <data name="Panaltycontractphone" xml:space="preserve">
-    <value>Panalty contract phone</value>
+    <value>Penalty contract phone</value>
   </data>
   <data name="Paymentcontractmail" xml:space="preserve">
     <value>Payment contract mail</value>
