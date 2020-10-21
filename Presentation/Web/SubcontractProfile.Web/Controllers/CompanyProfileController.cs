@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc.Localization;
 using Microsoft.Extensions.Localization;
 using System.Globalization;
 using System.Web;
+using System.Net;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -1406,228 +1407,168 @@ namespace SubcontractProfile.Web.Controllers
             return result;
         }
 
-        [HttpPost]
-        public IActionResult TestNAS()
-        {
-            string str = "";
-            var output = new List<SubcontractDropdownModel>();
+        #region Comment
+        //private bool GetFile(string companyid,ref List<FileUploadModal> L_File)
+        //{
+        //    bool result = true;
+        //    var output = new List<SubcontractDropdownModel>();
+        //    try
+        //    {
+        //        #region NAS
+        //        //HttpClient client = new HttpClient();
+        //        //client.DefaultRequestHeaders.Accept.Add(
+        //        //new MediaTypeWithQualityHeaderValue("application/json"));
 
-            
+        //        //string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "nas_subcontract");
 
-            try
-            {
-                //HttpClient client = new HttpClient();
-                //client.DefaultRequestHeaders.Accept.Add(
-                //new MediaTypeWithQualityHeaderValue("application/json"));
+        //        //HttpResponseMessage response = client.GetAsync(uriString).Result;
+        //        //if (response.IsSuccessStatusCode)
+        //        //{
+        //        //    var v = response.Content.ReadAsStringAsync().Result;
+        //        //    output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+        //        //}
+        //        //if (output != null & output.Count() > 0)
+        //        //{
+        //        //    using (var impersonator = new Impersonator(output[0].value1, output[0].value2, output[0].dropdown_text, false))
+        //        //    {
+        //        //        if (Directory.GetFiles(output[0].dropdown_text + @"\SubContractProfile\" + companyid).Count() > 0)
+        //        //        {
+        //        //            string pathdir = output[0].dropdown_text + @"\SubContractProfile\" + companyid;
+        //        //            string[] filePaths = Directory.GetFiles(pathdir, "*.*");
+        //        //            foreach (string file in filePaths)
+        //        //            {
+        //        //                using (var ms = new MemoryStream(System.IO.File.ReadAllBytes(file)))
+        //        //                {
+        //        //                    foreach (var e in L_File)
+        //        //                    {
+        //        //                        string filename = Path.GetFileName(file);
+        //        //                        filename = EnsureCorrectFilename(filename);
+        //        //                        var fileBytes = ms.ToArray();
+        //        //                        if (e.Filename == filename)
+        //        //                        {
+        //        //                            e.Fileupload = fileBytes;
+        //        //                            e.ContentType = Path.GetExtension(Path.GetExtension(file));
+        //        //                            e.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "files", FileName = filename }.ToString();
+        //        //                        }
+        //        //                    }
 
-                //string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "nas_subcontract");
+        //        //                }
+        //        //            }
+        //        //        }
+        //        //        else
+        //        //        {
+        //        //            result = false;
+        //        //        }
+        //        //    }
+        //        //}
+        //        #endregion
 
-                //HttpResponseMessage response = client.GetAsync(uriString).Result;
-                //if (response.IsSuccessStatusCode)
-                //{
-                //    var v = response.Content.ReadAsStringAsync().Result;
-                //    output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
-                //}
-                //if (output != null)
-                //{
+        //        string pathdir = Path.Combine(strpathUpload, companyid);
+        //        if (Directory.GetFiles(pathdir, "*", SearchOption.AllDirectories).Length > 0)
+        //        {
+        //            string[] filePaths = Directory.GetFiles(pathdir, "*.*");
+        //            foreach (string file in filePaths)
+        //            {
+        //                using (var ms = new MemoryStream(System.IO.File.ReadAllBytes(file)))
+        //                {
+        //                    foreach (var e in L_File)
+        //                    {
+        //                        string filename = Path.GetFileName(file);
+        //                        filename = EnsureCorrectFilename(filename);
+        //                        var fileBytes = ms.ToArray();
+        //                        if (e.Filename == filename)
+        //                        {
+        //                            e.Fileupload = fileBytes;
+        //                            e.ContentType = Path.GetExtension(Path.GetExtension(file));
+        //                            e.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "files", FileName = filename }.ToString();
+        //                        }
+        //                    }
 
-
-                string username = "nas_fixedbb";
-                string password = "Ais2018fixedbb";
-                string destNAS = @"\\10.137.32.9\fbb_idcard_ndev001b";
-
-                //string username = "PF0QMBH6";
-                //string password = "1234";
-                //string NAS = @"DESKTOP-MMCKBRE";
-                //string destNAS = @"D:\NasPath";
-
-                using (var impersonator = new Impersonator(username, password, destNAS, false))
-                    // using (var impersonator = new Impersonator(output[0].value1, output[0].value2, output[0].dropdown_text, false))
-                    {
-                    string strdir = destNAS + @"\SubContractProfile" + @"\f2423a7a-ed2c-4c9b-b766-c37ada227b6d";
-                    if (Directory.Exists(strdir))
-                    {
-                        //string[] filePaths = Directory.GetFiles(Doc, "*.*");
-                        //str = filePaths.Count().ToString() + " , username:" + username + " ,password:" + password + " ,domainOrServerName: " + Doc;
-                        //int existFile = Directory.GetFiles(destNAS + @"\f2423a7a-ed2c-4c9b-b766-c37ada227b6d\").Count();
-                        str = "Found";
-                    }
-                    else
-                    {
-                        str = "Doc Not Found :" + strdir;
-                    }
-
-
-                }
-                //}
-
-               
-            }
-            catch (Exception e)
-            {
-                str = e.Message;
-            }
-            return Json(str);
-        }
-        private bool GetFile(string companyid,ref List<FileUploadModal> L_File)
-        {
-            bool result = true;
-            var output = new List<SubcontractDropdownModel>();
-            try
-            {
-                #region NAS
-                //HttpClient client = new HttpClient();
-                //client.DefaultRequestHeaders.Accept.Add(
-                //new MediaTypeWithQualityHeaderValue("application/json"));
-
-                //string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "nas_subcontract");
-
-                //HttpResponseMessage response = client.GetAsync(uriString).Result;
-                //if (response.IsSuccessStatusCode)
-                //{
-                //    var v = response.Content.ReadAsStringAsync().Result;
-                //    output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
-                //}
-                //if (output != null & output.Count() > 0)
-                //{
-                //    using (var impersonator = new Impersonator(output[0].value1, output[0].value2, output[0].dropdown_text, false))
-                //    {
-                //        if (Directory.GetFiles(output[0].dropdown_text + @"\SubContractProfile\" + companyid).Count() > 0)
-                //        {
-                //            string pathdir = output[0].dropdown_text + @"\SubContractProfile\" + companyid;
-                //            string[] filePaths = Directory.GetFiles(pathdir, "*.*");
-                //            foreach (string file in filePaths)
-                //            {
-                //                using (var ms = new MemoryStream(System.IO.File.ReadAllBytes(file)))
-                //                {
-                //                    foreach (var e in L_File)
-                //                    {
-                //                        string filename = Path.GetFileName(file);
-                //                        filename = EnsureCorrectFilename(filename);
-                //                        var fileBytes = ms.ToArray();
-                //                        if (e.Filename == filename)
-                //                        {
-                //                            e.Fileupload = fileBytes;
-                //                            e.ContentType = Path.GetExtension(Path.GetExtension(file));
-                //                            e.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "files", FileName = filename }.ToString();
-                //                        }
-                //                    }
-
-                //                }
-                //            }
-                //        }
-                //        else
-                //        {
-                //            result = false;
-                //        }
-                //    }
-                //}
-                #endregion
-
-                string pathdir = Path.Combine(strpathUpload, companyid);
-                if (Directory.GetFiles(pathdir, "*", SearchOption.AllDirectories).Length > 0)
-                {
-                    string[] filePaths = Directory.GetFiles(pathdir, "*.*");
-                    foreach (string file in filePaths)
-                    {
-                        using (var ms = new MemoryStream(System.IO.File.ReadAllBytes(file)))
-                        {
-                            foreach (var e in L_File)
-                            {
-                                string filename = Path.GetFileName(file);
-                                filename = EnsureCorrectFilename(filename);
-                                var fileBytes = ms.ToArray();
-                                if (e.Filename == filename)
-                                {
-                                    e.Fileupload = fileBytes;
-                                    e.ContentType = Path.GetExtension(Path.GetExtension(file));
-                                    e.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "files", FileName = filename }.ToString();
-                                }
-                            }
-
-                        }
-                    }
-                }
-                else
-                {
-                    result = false;
-                }
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            result = false;
+        //        }
 
 
-            }
-            catch (Exception e)
-            {
-                result = false;
-            }
-            return result;
-        }
-        private async Task<bool> CopyFile(FileUploadModal file,string companyid)
-        {
-            FileStream output;
-            var outputNas = new List<SubcontractDropdownModel>();
-            try
-            {
-                #region NAS
-                //HttpClient client = new HttpClient();
-                //client.DefaultRequestHeaders.Accept.Add(
-                //new MediaTypeWithQualityHeaderValue("application/json"));
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        result = false;
+        //    }
+        //    return result;
+        //}
+        //private async Task<bool> CopyFile(FileUploadModal file,string companyid)
+        //{
+        //    FileStream output;
+        //    var outputNas = new List<SubcontractDropdownModel>();
+        //    try
+        //    {
+        //        #region NAS
+        //        //HttpClient client = new HttpClient();
+        //        //client.DefaultRequestHeaders.Accept.Add(
+        //        //new MediaTypeWithQualityHeaderValue("application/json"));
 
-                //string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "nas_subcontract");
+        //        //string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "nas_subcontract");
 
-                //HttpResponseMessage response = client.GetAsync(uriString).Result;
-                //if (response.IsSuccessStatusCode)
-                //{
-                //    var v = response.Content.ReadAsStringAsync().Result;
-                //    outputNas = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
-                //} 
-               
-                //if (outputNas != null & outputNas.Count() > 0)
-                //{
+        //        //HttpResponseMessage response = client.GetAsync(uriString).Result;
+        //        //if (response.IsSuccessStatusCode)
+        //        //{
+        //        //    var v = response.Content.ReadAsStringAsync().Result;
+        //        //    outputNas = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+        //        //} 
 
-                //    using (var impersonator = new Impersonator(outputNas[0].value1, outputNas[0].value2, outputNas[0].dropdown_text, false))
-                //    {
-                //        if (!Directory.Exists(outputNas[0].dropdown_text + @"\SubContractProfile\" + companyid))
-                //        {
-                //            Directory.CreateDirectory(outputNas[0].dropdown_text + @"\SubContractProfile\" + companyid);
-                //        }
+        //        //if (outputNas != null & outputNas.Count() > 0)
+        //        //{
 
-                //        var stream = new MemoryStream(file.Fileupload);
-                //        FormFile files = new FormFile(stream, 0, file.Fileupload.Length, "name", "fileName");
+        //        //    using (var impersonator = new Impersonator(outputNas[0].value1, outputNas[0].value2, outputNas[0].dropdown_text, false))
+        //        //    {
+        //        //        if (!Directory.Exists(outputNas[0].dropdown_text + @"\SubContractProfile\" + companyid))
+        //        //        {
+        //        //            Directory.CreateDirectory(outputNas[0].dropdown_text + @"\SubContractProfile\" + companyid);
+        //        //        }
 
-                //        string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+        //        //        var stream = new MemoryStream(file.Fileupload);
+        //        //        FormFile files = new FormFile(stream, 0, file.Fileupload.Length, "name", "fileName");
 
-                //        filename = EnsureCorrectFilename(file.Filename);
-                //        using (output = System.IO.File.Create(Path.Combine(outputNas[0].dropdown_text + @"\SubContractProfile\" + companyid, filename)))
-                //        {
-                //            await files.CopyToAsync(output);
-                //        }
+        //        //        string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
 
-                //    }
+        //        //        filename = EnsureCorrectFilename(file.Filename);
+        //        //        using (output = System.IO.File.Create(Path.Combine(outputNas[0].dropdown_text + @"\SubContractProfile\" + companyid, filename)))
+        //        //        {
+        //        //            await files.CopyToAsync(output);
+        //        //        }
 
-                //}
-                #endregion
+        //        //    }
 
-                
-                    var stream = new MemoryStream(file.Fileupload);
-                    FormFile files = new FormFile(stream, 0, file.Fileupload.Length, "name", "fileName");
+        //        //}
+        //        #endregion
 
-                    string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
 
-                    filename = EnsureCorrectFilename(file.Filename);
-                    using (output = System.IO.File.Create(GetPathAndFilename(companyid, filename)))
-                    {
-                        await files.CopyToAsync(output);
-                    }
+        //            var stream = new MemoryStream(file.Fileupload);
+        //            FormFile files = new FormFile(stream, 0, file.Fileupload.Length, "name", "fileName");
+
+        //            string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+        //            filename = EnsureCorrectFilename(file.Filename);
+        //            using (output = System.IO.File.Create(GetPathAndFilename(companyid, filename)))
+        //            {
+        //                await files.CopyToAsync(output);
+        //            }
 
 
 
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-            return true;
-        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return false;
+        //    }
+        //    return true;
+        //}
+        #endregion
+
         private string EnsureCorrectFilename(string filename)
         {
             if (filename.Contains("\\"))
@@ -1635,10 +1576,10 @@ namespace SubcontractProfile.Web.Controllers
 
             return filename;
         }
-        private string GetPathAndFilename(string guid, string filename)
+        private string GetPathAndFilename(string guid, string filename, string dir)
         {
             //return this.hostingEnvironment.WebRootPath + "\\uploads\\" + filename;
-            string pathdir = Path.Combine(strpathUpload, guid);
+            string pathdir = Path.Combine(dir, guid);
             string PathOutput = "";
             if (!Directory.Exists(pathdir))
             {
@@ -1654,16 +1595,47 @@ namespace SubcontractProfile.Web.Controllers
             List<FileUploadModal> L_File = new List<FileUploadModal>();
             FileStream output;
             string strmess = "";
+            var outputNAS = new List<SubcontractDropdownModel>();
             try
             {
 
                 if (files != null && files.Length > 0)
                 {
+                    #region NAS
+                    HttpClient client = new HttpClient();
+                    client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
-                    filename = EnsureCorrectFilename(filename);
-                    using (output = System.IO.File.Create(this.GetPathAndFilename(CompanyId, filename)))
-                        await files.CopyToAsync(output);
+                    string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/nas_subcontract");
+                    HttpResponseMessage response = client.GetAsync(uriString).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var v = response.Content.ReadAsStringAsync().Result;
+                        outputNAS = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+                    }
+
+                    string username = outputNAS[0].value1;
+                    string password = outputNAS[0].value2;
+                    string ipAddress = @"\\" + outputNAS[0].dropdown_value;
+                    string destNAS = outputNAS[0].dropdown_text;
+
+                    NetworkCredential sourceCredentials = new NetworkCredential { Domain = ipAddress, UserName = username, Password = password };
+
+                    #endregion
+                    using (new NetworkConnection(destNAS, sourceCredentials))
+                    {
+                        string strdir = destNAS + @"\SubContractProfile\" + CompanyId;
+                        if (!Directory.Exists(strdir))
+                        {
+                            Directory.CreateDirectory(strdir);
+                        }
+
+                        string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
+                        filename = EnsureCorrectFilename(filename);
+                        using (output = System.IO.File.Create(this.GetPathAndFilename(CompanyId, filename,destNAS + @"\SubContractProfile\")))
+                            await files.CopyToAsync(output);
+                    }
+                        
                 }
 
             }

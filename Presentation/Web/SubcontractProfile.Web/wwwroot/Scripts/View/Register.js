@@ -209,10 +209,11 @@ $(document).ready(function () {
 
 
     $('#btnTestNas').click(function () {
+        var urlNAS = url.replace('Action', 'TestNAS');
         $.ajax({
             type: "POST",
             async: false,
-            url: "/CompanyProfile/TestNAS",
+            url: urlNAS,
             dataType: "json",
             //data: { location_id: lo_id },
             success: function (data) {

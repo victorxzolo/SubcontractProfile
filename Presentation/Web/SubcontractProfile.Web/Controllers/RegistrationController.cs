@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -2212,15 +2213,41 @@ namespace SubcontractProfile.Web.Controllers
         private bool DeleteFile(string companyid, string filename)
         {
             bool result = true;
+            var outputNAS = new List<SubcontractDropdownModel>();
             try
             {
-                // Check if file exists with its full path    
-                if (System.IO.File.Exists(Path.Combine(strpathUpload, companyid, filename)))
-                {
-                    // If file found, delete it    
-                    System.IO.File.Delete(Path.Combine(strpathUpload, companyid, filename));
+                #region NAS
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
 
+                string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/nas_subcontract");
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var v = response.Content.ReadAsStringAsync().Result;
+                    outputNAS = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
                 }
+
+                string username = outputNAS[0].value1;
+                string password = outputNAS[0].value2;
+                string ipAddress = @"\\" + outputNAS[0].dropdown_value;
+                string destNAS = outputNAS[0].dropdown_text;
+
+                NetworkCredential sourceCredentials = new NetworkCredential { Domain = ipAddress, UserName = username, Password = password };
+
+                #endregion
+                using (new NetworkConnection(destNAS, sourceCredentials))
+                {
+                    // Check if file exists with its full path    
+                    if (System.IO.File.Exists(Path.Combine(destNAS + @"\SubContractProfile\", companyid, filename)))
+                    {
+                        // If file found, delete it    
+                        System.IO.File.Delete(Path.Combine(destNAS + @"\SubContractProfile\", companyid, filename));
+
+                    }
+                }
+                 
             }
             catch (IOException ioExp)
             {
@@ -2229,72 +2256,76 @@ namespace SubcontractProfile.Web.Controllers
             return result;
         }
 
-        private bool GetFile(string companyid, ref List<FileUploadModal> L_File)
-        {
-            bool result = true;
-            try
-            {
-                string pathdir = Path.Combine(strpathUpload, companyid);
+        #region Comment
+        //private bool GetFile(string companyid, ref List<FileUploadModal> L_File)
+        //{
+        //    bool result = true;
+        //    try
+        //    {
+        //        string pathdir = Path.Combine(strpathUpload, companyid);
 
-                string[] filePaths = Directory.GetFiles(pathdir, "*.*", SearchOption.AllDirectories);
-
-
-
-                foreach (string file in filePaths)
-                {
+        //        string[] filePaths = Directory.GetFiles(pathdir, "*.*", SearchOption.AllDirectories);
 
 
-                    using (var ms = new MemoryStream(System.IO.File.ReadAllBytes(file)))
-                    {
 
-                        foreach (var e in L_File)
-                        {
-                            string filename = Path.GetFileName(file);
-                            filename = EnsureCorrectFilename(filename);
-                            var fileBytes = ms.ToArray();
+        //        foreach (string file in filePaths)
+        //        {
 
 
-                            if (e.Filename == filename)
-                            {
-                                e.Fileupload = fileBytes;
-                                e.ContentType = Path.GetExtension(Path.GetExtension(file));
-                                e.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "files", FileName = filename }.ToString();
-                            }
-                        }
+        //            using (var ms = new MemoryStream(System.IO.File.ReadAllBytes(file)))
+        //            {
 
-                    }
-
-                }
-            }
-            catch (Exception e)
-            {
-                result = false;
-            }
-            return result;
-        }
-        private async Task<bool> CopyFile(FileUploadModal file, string companyid)
-        {
-            FileStream output;
-            try
-            {
-                var stream = new MemoryStream(file.Fileupload);
-                FormFile files = new FormFile(stream, 0, file.Fileupload.Length, "name", "fileName");
-
-                string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-
-                filename = EnsureCorrectFilename(file.Filename);
-                using (output = System.IO.File.Create(this.GetPathAndFilename(companyid, filename)))
-                    await files.CopyToAsync(output);
+        //                foreach (var e in L_File)
+        //                {
+        //                    string filename = Path.GetFileName(file);
+        //                    filename = EnsureCorrectFilename(filename);
+        //                    var fileBytes = ms.ToArray();
 
 
-            }
-            catch (Exception e)
-            {
-                return false;
-                throw;
-            }
-            return true;
-        }
+        //                    if (e.Filename == filename)
+        //                    {
+        //                        e.Fileupload = fileBytes;
+        //                        e.ContentType = Path.GetExtension(Path.GetExtension(file));
+        //                        e.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "files", FileName = filename }.ToString();
+        //                    }
+        //                }
+
+        //            }
+
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        result = false;
+        //    }
+        //    return result;
+        //}
+        //private async Task<bool> CopyFile(FileUploadModal file, string companyid)
+        //{
+        //    FileStream output;
+        //    try
+        //    {
+        //        var stream = new MemoryStream(file.Fileupload);
+        //        FormFile files = new FormFile(stream, 0, file.Fileupload.Length, "name", "fileName");
+
+        //        string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+        //        filename = EnsureCorrectFilename(file.Filename);
+        //        using (output = System.IO.File.Create(this.GetPathAndFilename(companyid, filename)))
+        //            await files.CopyToAsync(output);
+
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return false;
+        //        throw;
+        //    }
+        //    return true;
+        //}
+        #endregion
+
+
         private string EnsureCorrectFilename(string filename)
         {
             if (filename.Contains("\\"))
@@ -2302,10 +2333,10 @@ namespace SubcontractProfile.Web.Controllers
 
             return filename;
         }
-        private string GetPathAndFilename(string guid, string filename)
+        private string GetPathAndFilename(string guid, string filename,string dir)
         {
             //return this.hostingEnvironment.WebRootPath + "\\uploads\\" + filename;
-            string pathdir = Path.Combine(strpathUpload, guid);
+            string pathdir = Path.Combine(dir, guid);
             string PathOutput = "";
             if (!Directory.Exists(pathdir))
             {
@@ -2321,17 +2352,42 @@ namespace SubcontractProfile.Web.Controllers
             List<FileUploadModal> L_File = new List<FileUploadModal>();
             FileStream output;
             string strmess = "";
+            var outputNAS = new List<SubcontractDropdownModel>();
             try
             {
+                #region NAS
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
 
-                if (files != null && files.Length > 0)
+                string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/nas_subcontract");
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+                if (response.IsSuccessStatusCode)
                 {
-
-                    string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
-                    filename = EnsureCorrectFilename(filename);
-                    using (output = System.IO.File.Create(this.GetPathAndFilename(CompanyId, filename)))
-                        await files.CopyToAsync(output);
+                    var v = response.Content.ReadAsStringAsync().Result;
+                    outputNAS = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
                 }
+
+                string username = outputNAS[0].value1;
+                string password = outputNAS[0].value2;
+                string ipAddress = @"\\" + outputNAS[0].dropdown_value;
+                string destNAS = outputNAS[0].dropdown_text;
+
+                NetworkCredential sourceCredentials = new NetworkCredential { Domain = ipAddress, UserName = username, Password = password };
+
+                #endregion
+                using (new NetworkConnection(destNAS, sourceCredentials))
+                {
+                    if (files != null && files.Length > 0)
+                    {
+
+                        string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
+                        filename = EnsureCorrectFilename(filename);
+                        using (output = System.IO.File.Create(this.GetPathAndFilename(CompanyId, filename, destNAS + @"\SubContractProfile\")))
+                            await files.CopyToAsync(output);
+                    }
+                }
+                
 
             }
             catch (Exception e)

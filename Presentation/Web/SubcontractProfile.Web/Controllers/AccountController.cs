@@ -33,6 +33,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Localization;
 using System.Web;
+using System.Net;
 
 namespace SubcontractProfile.Web.Controllers
 {
@@ -52,15 +53,18 @@ namespace SubcontractProfile.Web.Controllers
 
         private readonly IStringLocalizer<AccountController> _localizer;
 
-
+        private readonly ILogger<AccountController> _logger;
         public AccountController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor
              , IStringLocalizer<AccountController> localizer
+            ,ILogger<AccountController> logger
             )
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
 
             _localizer = localizer;
+
+            _logger = logger;
 
             //เรียก appsetting.json path api
             strpathAPI = _configuration.GetValue<string>("Pathapi:Local").ToString();
@@ -75,6 +79,74 @@ namespace SubcontractProfile.Web.Controllers
             strpathUpload = _configuration.GetValue<string>("PathUploadfile:Local").ToString();
 
         }
+
+        [HttpPost]
+        public IActionResult TestNAS()
+        {
+            string str = "";
+            var output = new List<SubcontractDropdownModel>();
+
+
+
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/nas_subcontract");
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var v = response.Content.ReadAsStringAsync().Result;
+                    output = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+                }
+
+                //string username = "nas_fixedbb";
+                //string password = "Ais2018fixedbb";
+                //string ipAddress = @"\\10.137.32.9";
+                //string destNAS = @"\\10.137.32.9\fbb_idcard_ndev001b";
+
+                string username = output[0].value1;
+                string password = output[0].value2;
+                string ipAddress = @"\\"+output[0].dropdown_value;
+                string destNAS = output[0].dropdown_text;
+
+                //string username = "PF0QMBH6";
+                //string password = "1234";
+                //string NAS = @"DESKTOP-MMCKBRE";
+                //string destNAS = @"D:\NasPath";
+
+                // _logger.LogInformation($"Start AccountController::TestNAS Start","");
+
+                NetworkCredential sourceCredentials = new NetworkCredential { Domain = ipAddress, UserName = username, Password = password };
+                using (new NetworkConnection(destNAS, sourceCredentials))
+                {
+                   // _logger.LogInformation($"Start AccountController::TestNAS PASS!!!", "");
+
+                    string strdir = destNAS + @"\SubContractProfile" + @"\f2423a7a-ed2c-4c9b-b766-c37ada227b6d";
+                    if (Directory.Exists(strdir))
+                    {
+                        //_logger.LogInformation($"Start AccountController::TestNAS Found!!!", "");
+                        str = "Found";
+                    }
+                    else
+                    {
+                        //_logger.LogInformation($"Start AccountController::TestNAS NOT Found!!!", "");
+                        Directory.CreateDirectory(destNAS + @"\SubContractProfile" + @"\f2423a7a-ed2c-4c9b-b766-c37ada227b6d");
+                        str = "Create Success";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+               // _logger.LogError("Error AccountController::"+e.Message, "");
+                str = e.Message;
+            }
+            return Json(str);
+        }
+
+
 
         #region Lang
 
@@ -2114,24 +2186,50 @@ namespace SubcontractProfile.Web.Controllers
             List<FileUploadModal> L_File = new List<FileUploadModal>();
             FileStream output;
             string strmess = "";
+            var outputNAS = new List<SubcontractDropdownModel>();
             try
             {
 
                 if (files != null && files.Length > 0)
                 {
-                    if (files != null)
-                    {
-                        string strdir = Path.Combine(strpathUpload, companyid);
-                        if (!Directory.Exists(strdir))
-                        {
-                            Directory.CreateDirectory(strdir);
-                        }
+                    #region NAS
+                    HttpClient client = new HttpClient();
+                    client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
 
+                    string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/nas_subcontract");
+                    HttpResponseMessage response = client.GetAsync(uriString).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var v = response.Content.ReadAsStringAsync().Result;
+                        outputNAS = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
                     }
-                    string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
-                    filename = EnsureCorrectFilename(filename);
-                    using (output = System.IO.File.Create(this.GetPathAndFilename(companyid, filename, strpathUpload)))
-                        await files.CopyToAsync(output);
+
+                    string username = outputNAS[0].value1;
+                    string password = outputNAS[0].value2;
+                    string ipAddress = @"\\" + outputNAS[0].dropdown_value;
+                    string destNAS = outputNAS[0].dropdown_text;
+
+                    NetworkCredential sourceCredentials = new NetworkCredential { Domain = ipAddress, UserName = username, Password = password };
+
+                    #endregion
+                    using (new NetworkConnection(destNAS, sourceCredentials))
+                    {
+                        if (files != null)
+                        {
+                            string strdir = destNAS + @"\SubContractProfile\" + companyid;
+                            if (!Directory.Exists(strdir))
+                            {
+                                Directory.CreateDirectory(strdir);
+                            }
+
+                        }
+                        string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
+                        filename = EnsureCorrectFilename(filename);
+                        using (output = System.IO.File.Create(this.GetPathAndFilename(companyid, filename, destNAS + @"\SubContractProfile\")))
+                            await files.CopyToAsync(output);
+                    }
+                    
                 }
 
             }
@@ -2173,6 +2271,9 @@ namespace SubcontractProfile.Web.Controllers
 
 
         #endregion
+
+
+
     }
 
     #region Login
