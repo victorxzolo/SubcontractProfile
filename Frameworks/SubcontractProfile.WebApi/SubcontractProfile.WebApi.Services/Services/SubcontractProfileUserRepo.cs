@@ -206,5 +206,17 @@ namespace SubcontractProfile.WebApi.Services.Services
 
             return entity;
         }
+
+        public async Task<SubcontractProfileUser> LoginUserSSO(string username)
+        {
+            var p = new DynamicParameters();
+            p.Add("@username", username);
+
+
+            var entity = await _dbContext.Connection.QuerySingleOrDefaultAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileUser>
+            ("uspSubcontractProfileUser_LoginSSO", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
     }
 }

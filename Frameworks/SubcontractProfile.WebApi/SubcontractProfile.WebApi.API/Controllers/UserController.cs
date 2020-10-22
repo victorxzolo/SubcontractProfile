@@ -86,6 +86,25 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileUser))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileUser))]
+        [HttpPost("LoginUserSSO")]
+        public Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileUser> LoginUserSSO(SubcontractProfile.WebApi.Services.Model.SubcontractProfileUser user)
+        {
+            _logger.LogInformation($"Start UserController::LoginUser", user.Username, user.password);
+
+            var entities = _service.LoginUserSSO(user.Username);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"UserController::", "LoginUser NOT FOUND", user.Username, user.password);
+                return null;
+            }
+
+            return entities;
+
+        }
+
 
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserController))]

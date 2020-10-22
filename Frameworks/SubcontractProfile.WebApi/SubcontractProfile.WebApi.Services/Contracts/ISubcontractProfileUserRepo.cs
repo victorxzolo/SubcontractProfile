@@ -20,5 +20,6 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<bool> Delete(string id);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileUser>> GetByPKList(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileUser_PK> pkList);
         Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileUser> LoginUser(string username, string password);
+        Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileUser> LoginUserSSO(string username);
     }
 }

@@ -195,7 +195,36 @@ namespace SubcontractProfile.Web.Controllers
             return authenticatedUser;
         }
 
-       
+
+        public SubcontractProfileUserModel GetUserSSO(string userName)
+        {
+            SubcontractProfileUserModel authenticatedUser = new SubcontractProfileUserModel();
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //string uriString = string.Format("{0}/{1}/{2}", strpathAPI + "User/LoginUser", userName, password);
+            //HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            var uriUser = new Uri(Path.Combine(strpathAPI, "User", "LoginUserSSO"));
+
+            var input = new SubcontractProfileUserModel();
+            input.Username = userName;
+
+            var httpContentUser = new StringContent(JsonConvert.SerializeObject(input), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PostAsync(uriUser, httpContentUser).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                authenticatedUser = JsonConvert.DeserializeObject<SubcontractProfileUserModel>(v);
+            }
+
+            return authenticatedUser;
+        }
+
+
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
@@ -240,13 +269,15 @@ namespace SubcontractProfile.Web.Controllers
             ssoFields.SectionCode = form["sc"];
             ssoFields.PositionByJob = form["pt"];
 
+
+
             return ssoFields;
         }
 
         [HttpPost]
       //  [AllowAnonymous]
         //    [CustomActionFilter(LogType = "LogOnBySSO")]
-        public ActionResult LogOnBySSO(LoginModel model)
+        public ActionResult LogOnBySSO()
         {
             ResponseModel res = new ResponseModel();
             string Url = "";
@@ -258,44 +289,70 @@ namespace SubcontractProfile.Web.Controllers
 
 
                 var ssoFields = LoadSSOFieldsFromPostData(ssoData);
+
+
+                if(ssoFields.UserName !=null && ssoFields.UserName !="")
+                {
+                    var authenticatedUser = GetUserSSO(ssoFields.UserName);
+                    if(authenticatedUser != null)
+                    {
+                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userAISLogin", authenticatedUser);
+                        return RedirectToAction("SearchCompanyVerify", "Registration");
+                    }
+                    else
+                    {
+                        HttpContext.Session.Clear();
+                        HttpContext.SignOutAsync();
+                        return RedirectToAction("logonbyuser", "Account");
+                    }
+
+                }
+                else
+                {
+                    HttpContext.Session.Clear();
+                    HttpContext.SignOutAsync();
+                    return RedirectToAction("logonbyuser", "Account");
+                }
+
+
                 // _Logger.Info(ssoFields.Token);
                 // _Logger.Info(ssoFields.UserName);
 
                 //get profile
                 //  _Logger.Info("Get User Model");
-                var authenticatedUser = GetUser(ssoFields.UserName, "");
-                if (null != authenticatedUser)
-                {
-                    authenticatedUser.AuthenticateType = AuthenticateType.SSO;
-                    authenticatedUser.SSOFields = ssoFields;
+                //var authenticatedUser = GetUser(ssoFields.UserName, "");
+                //if (authenticatedUser != null)
+                //{
+                //    authenticatedUser.AuthenticateType = AuthenticateType.SSO;
+                //    authenticatedUser.SSOFields = ssoFields;
 
 
-                    res.Status = true;
-                    SessionHelper.SetObjectAsJson(HttpContext.Session, "userAISLogin", authenticatedUser);
-                    Url = "/Registration/SearchCompanyVerify";
+                //    res.Status = true;
+                //    SessionHelper.SetObjectAsJson(HttpContext.Session, "userAISLogin", authenticatedUser);
+                //    Url = "/Registration/SearchCompanyVerify";
 
-                    res.Status = true;
-                    Lang = model.Language != null ? model.Language : "TH";
-                    SessionHelper.SetObjectAsJson(HttpContext.Session, "language", Lang);
-                    //var str_L= SessionHelper.GetObjectFromJson<string>(HttpContext.Session, "language");
-                    //var datauser= SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+                //    res.Status = true;
+                //    //Lang = model.Language != null ? model.Language : "TH";
+                //    // SessionHelper.SetObjectAsJson(HttpContext.Session, "language", Lang);
+                //    //var str_L= SessionHelper.GetObjectFromJson<string>(HttpContext.Session, "language");
+                //    //var datauser= SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+                //    return RedirectToAction("SearchCompanyVerify", "Registration");
+                //}
+                //else
+                //{
 
-                }
-                else
-                {
+                //    HttpContext.Session.Clear();
+                //    HttpContext.SignOutAsync();
+                //    return RedirectToAction("Login", "Account");
 
-                    HttpContext.Session.Clear();
-                    HttpContext.SignOutAsync();
-                    return RedirectToAction("Login", "Account");
-
-                }
+                //}
             }
             catch (Exception ex)
             {
-
+                return RedirectToAction("logonbyuser", "Account");
             }
 
-            return RedirectToAction("Logout", "Account");
+            
         }
         public class SiteSession
         {
