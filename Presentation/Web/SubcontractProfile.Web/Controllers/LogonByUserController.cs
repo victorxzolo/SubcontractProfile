@@ -311,7 +311,7 @@ namespace SubcontractProfile.Web.Controllers
                     {
                         HttpContext.Session.Clear();
                         HttpContext.SignOutAsync();
-                        return RedirectToAction("logonbyuser", "Account");
+                        return RedirectToAction("logonbyuser", "LogonByUser");
                     }
 
                 }
@@ -319,7 +319,7 @@ namespace SubcontractProfile.Web.Controllers
                 {
                     HttpContext.Session.Clear();
                     HttpContext.SignOutAsync();
-                    return RedirectToAction("logonbyuser", "Account");
+                    return RedirectToAction("logonbyuser", "LogonByUser");
                 }
 
 
@@ -357,7 +357,7 @@ namespace SubcontractProfile.Web.Controllers
             }
             catch (Exception ex)
             {
-                return RedirectToAction("logonbyuser", "Account");
+                return RedirectToAction("logonbyuser", "LogonByUser");
             }
 
             
