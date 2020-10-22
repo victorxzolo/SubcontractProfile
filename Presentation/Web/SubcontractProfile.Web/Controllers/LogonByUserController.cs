@@ -302,7 +302,7 @@ namespace SubcontractProfile.Web.Controllers
                 if(ssoFields.UserName !=null && ssoFields.UserName !="")
                 {
                     var authenticatedUser = GetUserSSO(ssoFields.UserName);
-                    if(authenticatedUser != null)
+                    if(authenticatedUser != null && authenticatedUser.Username !=null)
                     {
                         SessionHelper.SetObjectAsJson(HttpContext.Session, "userAISLogin", authenticatedUser);
                         return RedirectToAction("SearchCompanyVerify", "Registration");
