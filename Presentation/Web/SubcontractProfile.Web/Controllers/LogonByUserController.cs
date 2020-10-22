@@ -117,22 +117,30 @@ namespace SubcontractProfile.Web.Controllers
                     var authenticatedUser = GetUser(model.username, encryptedPassword);
                     if (authenticatedUser != null)
                     {
-                        res.Status = true;
-                        SessionHelper.SetObjectAsJson(HttpContext.Session, "userAISLogin", authenticatedUser);
-                        Url = "~/Registration/SearchCompanyVerify";
-
-                        res.Status = true;
-                        Lang = model.Language != null ? model.Language : "TH";
-                        SessionHelper.SetObjectAsJson(HttpContext.Session, "language", Lang);
-                        //var str_L= SessionHelper.GetObjectFromJson<string>(HttpContext.Session, "language");
-                        //var datauser= SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
-                        if (model.Language != null && model.Language != "")
+                        if (!string.IsNullOrEmpty(authenticatedUser.Username))
                         {
-                            SetLanguage(model.Language);
+                            res.Status = true;
+                            SessionHelper.SetObjectAsJson(HttpContext.Session, "userAISLogin", authenticatedUser);
+                            Url = "~/Registration/SearchCompanyVerify";
+
+                            res.Status = true;
+                            Lang = model.Language != null ? model.Language : "TH";
+                            SessionHelper.SetObjectAsJson(HttpContext.Session, "language", Lang);
+                            //var str_L= SessionHelper.GetObjectFromJson<string>(HttpContext.Session, "language");
+                            //var datauser= SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+                            if (model.Language != null && model.Language != "")
+                            {
+                                SetLanguage(model.Language);
+                            }
+                            else
+                            {
+                                SetLanguage("th");
+                            }
                         }
                         else
                         {
-                            SetLanguage("th");
+                            res.Status = false;
+                            res.Message = "ชื่อผู้ใช้งานนี้ไม่มีในระบบ กรุณาลองใหม่อีกครับ";
                         }
                     }
                     else
