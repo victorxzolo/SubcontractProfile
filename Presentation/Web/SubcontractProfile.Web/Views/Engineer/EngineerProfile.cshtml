@@ -21,7 +21,7 @@
 
                     <div class="form-group col-md-6">
                         <label for="ddlLocationName">@Localizer["LocationName"]</label>
-                        <select id="ddlLocationName" class="form-control " required></select>
+                        <select id="ddlLocationName" class="form-control" required></select>
 
                     </div>
                     <div class="form-group col-md-6">
@@ -111,7 +111,7 @@
 
 @section modalpanel {
 
-    <div id="AddEditModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div id="AddEditModal" class="modal fade" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -188,15 +188,15 @@
                                             </div>
                                             <br />*@
                                         <div class="row">
-                                            <div class="col-sm-2">
-                                                <label><span style="color:red">*</span>@Localizer["StaffName"]:</label>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <input type="text" id="StaffName" maxlength="100" style="width:300px" class="form-control" required>
-                                                <div class="invalid-feedback">
-                                                    @Localizer["ErrorStaffName"]
+                                            @*<div class="col-sm-2">
+                                                    <label><span style="color:red">*</span>@Localizer["StaffName"]:</label>
                                                 </div>
-                                            </div>
+                                                <div class="col-sm-4">
+                                                    <input type="text" id="StaffName" maxlength="100" style="width:300px" class="form-control" required>
+                                                    <div class="invalid-feedback">
+                                                        @Localizer["ErrorStaffName"]
+                                                    </div>
+                                                </div>*@
                                             <div class="col-sm-2">
                                                 <label><span style="color:red">*</span>  @Localizer["StaffNameThai"]:</label>
                                             </div>
@@ -206,31 +206,35 @@
                                                     @Localizer["ErrorStaffNameThai"]
                                                 </div>
                                             </div>
-                                        </div>
-                                        <br />
-                                        <div class="row">
                                             <div class="col-sm-2">
                                                 <label> @Localizer["StaffNameEnglish"]:</label>
                                             </div>
                                             <div class="col-sm-4">
                                                 <input type="text" id="StaffNameE" style="width:300px" maxlength="100" class="form-control">
                                             </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+
                                             <div class="col-sm-2">
                                                 <label>@Localizer["Postion"]:</label>
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" id="Position" maxlength="100" style="width:300px" class="form-control">
+                                                @*<input type="text" id="Position" maxlength="100" style="width:300px" class="form-control">*@
+                                                <select id="Position" name="Position" style="width:300px" class="form-control">
+                                                </select>
 
                                             </div>
-                                        </div>
-                                        <br />
-                                        <div class="row">
                                             <div class="col-sm-2">
                                                 <label>@Localizer["IDCard"]:</label>
                                             </div>
                                             <div class="col-sm-4">
                                                 <input type="text" id="CitizenID" onkeypress="return isNumberKey(event);" maxlength="13" style="width:300px" class="form-control">
                                             </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+
                                             <div class="col-sm-2">
                                                 <label>@Localizer["AttachIDCard"]:</label>
                                             </div>
@@ -248,16 +252,17 @@
 
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="row">
                                             <div class="col-sm-2">
                                                 <label>@Localizer["SizeClothes"]:</label>
                                             </div>
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-4">
                                                 <input type="text" id="tshirtsize" maxlength="50" style="width:300px" class="form-control">
                                             </div>
                                         </div>
+
+                                        @*<div class="row">
+
+                                            </div>*@
                                         <br />
 
                                         <h5>@Localizer["ContractInformation"]</h5>
@@ -392,7 +397,7 @@
                                                 <label><span style="color:red">*</span> @Localizer["BankName"]:</label>
                                             </div>
                                             <div class="col-sm-4">
-                                                <select id="ddlBankName" name="BankName" style="width:300px" class="form-control" required>
+                                                <select id="ddlBankName" name="BankName" style="width: 300px;" class="form-control select2-container ddlsearch" required>
                                                 </select>
                                                 <div class="invalid-feedback">
                                                     @Localizer["ErrorBankName"]
@@ -750,7 +755,7 @@
                                                 <label> <span style="color:red">*</span> @Localizer["BankName"] :</label>
                                             </div>
                                             <div class="col-sm-4">
-                                                <select id="BankName2" name="BankName2" style="width:300px" class="form-control" required>
+                                                <select id="BankName2" name="BankName2" style="width:300px" class="form-control select2-container ddlsearch" required>
                                                 </select>
                                                 <div class="invalid-feedback">
                                                     @Localizer["ErrorBankName"]
@@ -817,11 +822,15 @@
         $(document).ready(function () {
 
             GetDropDownLocationSearch();
+            getTeamByLocationId();
             GetDropDownLocationEdit();
             GetDropDownBank();
             GetDropDownBankPersonal();
             GetDropDownTitle();
 
+            GetDropDownPosition();
+
+            $(".ddlsearch").select2();
 
             $('#dateBirthDate').datetimepicker({
                 format: "DD/MM/YYYY",
@@ -1081,7 +1090,7 @@
         function clearMainData() {
             $("#ddlLocationName").val('-1');
                 $("#ddlTeamName").val('-1');
-                $("#inputStaffName").val('');
+                //$("#inputStaffName").val('');
                 $("#inputCitizen").val('');
                 $("#inputPosition").val('');
             inittbSearchResult();
@@ -1113,6 +1122,26 @@
             $('#fileCertificateAttach').val('');
             $('#lbfileCertificateAttach').text('@Localizer["ChooseFile"]');
 
+        }
+        function GetDropDownPosition() {
+             $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetPosition", "Engineer")',
+           // data: {stateid:stateid},
+            dataType: 'json',
+            success: function (data) {
+
+                $("#Position").empty();
+                $("#Position").append('<option value="-1">--@Localizer["ddlPleaseSelect"]--</option>');
+                $.each(data, function (id, result) {
+                    $("#Position").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text +'</option>');
+                    });
+                },
+                failure: function () {
+                    $("#Position").empty();
+                    $("#Position").append('<option value="-1">--@Localizer["ddlPleaseSelect"]--</option>');
+                }
+            });
         }
 
 
@@ -1166,7 +1195,7 @@
 
 
                           $('#lblcompanyName').html(result.CompanyNameTh);
-                          $('#StaffName').val(result.StaffName);
+                         // $('#StaffName').val(result.StaffName);
                           $('#StaffNameT').val(result.StaffNameTh);
                           $('#StaffNameE').val(result.StaffNameEn);
                           $('#Position').val(result.Position);
@@ -1369,10 +1398,10 @@
             formData.append('model.LocationId' , $("select[id$=Location]").val());
             formData.append('model.TeamId' , $("select[id$=Team]").val());
            // model.StaffCode = $('#StaffCode').val();
-            formData.append('model.StaffName',$('#StaffName').val());
+           // formData.append('model.StaffName',$('#StaffName').val());
             formData.append('model.StaffNameTh' , $('#StaffNameT').val());
             formData.append('model.StaffNameEn' , $('#StaffNameE').val());
-            formData.append('model.Position' , $('#Position').val());
+            formData.append('model.Position', $('select[id$=Position]').val());
             formData.append('model.CitizenId' , $('#CitizenID').val());
             formData.append('model.TshirtSize' , $('#tshirtsize').val());
             formData.append('model.ContractPhone1' , $('#ContractPhone1').val());
@@ -1854,7 +1883,8 @@ function GetDropDownLocationSearch() {
             var haserror = false;
 
             if ($('#Location option').filter(':selected').val() == '' || $('#Team option').filter(':selected').val() == '' ||
-                $('#StaffName').val() == '' || $('#AccNo').val() == '' || $('#ddlBankName option').filter(':selected').val() == '' ||
+                //$('#StaffName').val() == '' ||
+                $('#AccNo').val() == '' || $('#ddlBankName option').filter(':selected').val() == '' ||
                 $('#AccName').val()=='') {
                 haserror = true;
             }

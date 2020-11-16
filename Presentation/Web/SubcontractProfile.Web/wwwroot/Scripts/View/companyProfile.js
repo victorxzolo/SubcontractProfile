@@ -1249,6 +1249,7 @@ function getDataById(id) {
                
                     if (result.Status == "Activate" || result.Status == "Approve" || result.Status =='Not Approve') {
                         $('#btn_OnSave_Modal').hide();
+                        $('.need-validate-checktyperegister input:radio').attr("disabled", true);
                     } else {
                         $('#btn_OnSave_Modal').show();
                     }
@@ -1380,6 +1381,8 @@ function getDataById(id) {
 
                   
                 }
+            
+               
 
 
                 //$("#txtRegisNum").val(result.reqisNumber);

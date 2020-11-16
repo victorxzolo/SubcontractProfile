@@ -229,6 +229,7 @@ $(document).ready(function () {
 
 
 /*Step1*/
+   
     BindDDLTitle();
     inttbRevenue();
     inittaLocation();
@@ -453,6 +454,8 @@ $(document).ready(function () {
     //BindDDLprovince();
     //BindDDLdistrict();
     //BindDDLsubdistrict();
+
+    $(".ddlsearch").select2({ width: '100%' });
 
 
     $('#btnaddaddress').click(function () {
@@ -755,7 +758,7 @@ $(document).ready(function () {
 
 /*Step4*/
     
-
+    $(".ddlsearch").select2({ width: '100%' });
     $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
