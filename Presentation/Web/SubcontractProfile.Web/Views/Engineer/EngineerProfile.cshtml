@@ -308,14 +308,18 @@
                                             </div>
                                             <div class="col-sm-4">
 
-                                                <input type="text" id="VehicleType" maxlength="100" style="width:300px" class="form-control">
+                                                @*<input type="text" id="VehicleType" maxlength="100" style="width:300px" class="form-control">*@
+                                                <select id="VehicleType" name="VehicleType" style="width:300px" class="form-control">
+                                                </select>
                                             </div>
                                             <div class="col-sm-2">
                                                 <label> @Localizer["CarBrand"]:</label>
                                             </div>
                                             <div class="col-sm-4">
 
-                                                <input type="text" id="VehicleBrand" maxlength="100" style="width:300px" class="form-control">
+                                                @*<input type="text" id="VehicleBrand" maxlength="100" style="width:300px" class="form-control">*@
+                                                <select id="VehicleBrand" name="VehicleBrand" style="width:300px" class="form-control">
+                                                </select>
                                             </div>
                                         </div>
                                         <br />
@@ -324,8 +328,9 @@
                                                 <label>@Localizer["CarModel"]:</label>
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" id="VehicleSerise" maxlength="100" style="width:300px" class="form-control">
-
+                                                @*<input type="text" id="VehicleSerise" maxlength="100" style="width:300px" class="form-control">*@
+                                                <select id="VehicleSerise" name="VehicleSerise" style="width:300px" class="form-control">
+                                                </select>
                                             </div>
                                             <div class="col-sm-2">
                                                 <label>@Localizer["CarColor"]:</label>
@@ -829,6 +834,10 @@
             GetDropDownTitle();
 
             GetDropDownPosition();
+            GetDDLVehicleType();
+            GetDDLVehicleBrand();
+            GetDDLVehicleSerise();
+
 
             $(".ddlsearch").select2();
 
@@ -939,6 +948,10 @@
 
                 getTeamByLocationIdEdit($('#Location option').filter(':selected').val());
 
+            });
+
+            $("#VehicleBrand").on("change", function () {
+                GetDDLVehicleSerise($("#VehicleBrand option").filter(':selected').val());
             });
 
 
@@ -1407,9 +1420,9 @@
             formData.append('model.ContractPhone1' , $('#ContractPhone1').val());
             formData.append('model.ContractPhone2' , $('#ContractPhone2').val());
             formData.append('model.ContractEmail' , $('#ContractEmail').val());
-            formData.append('model.VehicleType' , $('#VehicleType').val());
-            formData.append('model.VehicleBrand' , $('#VehicleBrand').val());
-            formData.append('model.VehicleSerise' , $('#VehicleSerise').val());
+            formData.append('model.VehicleType', $('select[id$=VehicleType]').val());
+            formData.append('model.VehicleBrand', $('select[id$=VehicleBrand]').val());
+            formData.append('model.VehicleSerise', $('select[id$=VehicleSerise]').val());
             formData.append('model.VehicleColor' , $('#VehicleColor').val());
             formData.append('model.VehicleYear' , $('#VehicleYear').val());
             formData.append('model.VehicleLicensePlate' , $('#VehicleLicense').val());
@@ -1753,6 +1766,66 @@ function GetDropDownLocationSearch() {
                 failure: function () {
                     $("#Title").empty();
                     $("#Title").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
+                }
+            });
+        }
+
+
+        function GetDDLVehicleType() {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetVehicleType", "Engineer")',
+            dataType: 'json',
+            success: function (data) {
+
+                $("#VehicleType").empty();
+                $("#VehicleType").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
+                $.each(data, function (id, result) {
+                    $("#VehicleType").append('<option value="' + result.VerhicleTypeId + '">' + result.VerhiclTypeName +'</option>');
+                    });
+                },
+                failure: function () {
+                    $("#VehicleType").empty();
+                    $("#VehicleType").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
+                }
+            });
+        }
+        function GetDDLVehicleBrand() {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetVehicleBrand", "Engineer")',
+            dataType: 'json',
+            success: function (data) {
+
+                $("#VehicleBrand").empty();
+                $("#VehicleBrand").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
+                $.each(data, function (id, result) {
+                    $("#VehicleBrand").append('<option value="' + result.VerhicleBrandId + '">' + result.VerhicleBrandName +'</option>');
+                    });
+                },
+                failure: function () {
+                    $("#VehicleBrand").empty();
+                    $("#VehicleBrand").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
+                }
+            });
+        }
+        function GetDDLVehicleSerise(id) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetVehicleSerise", "Engineer")',
+            data: { VerhicleBrandId: id},
+            dataType: 'json',
+            success: function (data) {
+
+                $("#VehicleSerise").empty();
+                $("#VehicleSerise").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
+                $.each(data, function (id, result) {
+                    $("#VehicleSerise").append('<option value="' + result.VerhicleSeriseId + '">' + result.VerhicleSeriseName +'</option>');
+                    });
+                },
+                failure: function () {
+                    $("#VehicleSerise").empty();
+                    $("#VehicleSerise").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
                 }
             });
         }

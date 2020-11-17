@@ -141,47 +141,50 @@
 
                                     </div>
                                     <br />*@
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <label>@Localizer["StaffName"]:</label>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="StaffName" style="width:300px" class="form-control" required>
-                                        <div class="invalid-feedback">
-                                            @Localizer["ErrorStaffName"]
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <label>@Localizer["StaffNameThai"]:</label>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="StaffNameT" style="width:300px" class="form-control">
-                                    </div>
+                            <div class="row">
+                                @*<div class="col-sm-2">
+            <label>@Localizer["StaffName"]:</label>
+        </div>
+        <div class="col-sm-4">
+            <input type="text" id="StaffName" style="width:300px" class="form-control" required>
+            <div class="invalid-feedback">
+                @Localizer["ErrorStaffName"]
+            </div>
+        </div>*@
+                                <div class="col-sm-2">
+                                    <label>@Localizer["StaffNameThai"]:</label>
                                 </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="StaffNameT" style="width:300px" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>@Localizer["StaffNameEnglish"]:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" id="StaffNameE" style="width:300px" class="form-control">
+                                </div>
+                            </div>
                                 <br />
                                 <div class="row">
-                                    <div class="col-sm-2">
-                                        <label>@Localizer["StaffNameEnglish"]:</label>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="StaffNameE" style="width:300px" class="form-control">
-                                    </div>
+
                                     <div class="col-sm-2">
                                         <label>@Localizer["Position"]:</label>
                                     </div>
                                     <div class="col-sm-4">
-                                        <input type="text" id="Position" style="width:300px" class="form-control">
-
+                                        @*<input type="text" id="Position" style="width:300px" class="form-control">*@
+                                        <select id="Position" name="Position" style="width:300px" class="form-control">
+                                        </select>
                                     </div>
-                                </div>
-                                <br />
-                                <div class="row">
                                     <div class="col-sm-2">
                                         <label>@Localizer["CitizenID"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" id="CitizenID" style="width:300px" class="form-control">
                                     </div>
+                                </div>
+                                <br />
+                                <div class="row">
+
                                     <div class="col-sm-2">
                                         <label>@Localizer["PersonalAttachfile"]:</label>
                                     </div>
@@ -198,16 +201,17 @@
 
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="row">
                                     <div class="col-sm-2">
                                         <label>@Localizer["SizeClothes"]:</label>
                                     </div>
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-4">
                                         <input type="text" id="tshirtsize" style="width:300px" class="form-control">
                                     </div>
                                 </div>
+
+                                @*<div class="row">
+                                    
+                                </div>*@
                                 <br />
 
                                 <h5>@Localizer["ContractInfomation"]</h5>
@@ -245,14 +249,18 @@
                                     </div>
                                     <div class="col-sm-4">
 
-                                        <input type="text" id="VehicleType" style="width:300px" class="form-control">
+                                        @*<input type="text" id="VehicleType" style="width:300px" class="form-control">*@
+                                        <select id="VehicleType" name="VehicleType" style="width:300px" class="form-control">
+                                        </select>
                                     </div>
                                     <div class="col-sm-2">
                                         <label>@Localizer["VehicleBrand"]:</label>
                                     </div>
                                     <div class="col-sm-4">
 
-                                        <input type="text" id="VehicleBrand" style="width:300px" class="form-control">
+                                        @*<input type="text" id="VehicleBrand" style="width:300px" class="form-control">*@
+                                        <select id="VehicleBrand" name="VehicleBrand" style="width:300px" class="form-control">
+                                        </select>
                                     </div>
                                 </div>
                                 <br />
@@ -261,8 +269,9 @@
                                         <label>@Localizer["VehicleSerise"]:</label>
                                     </div>
                                     <div class="col-sm-4">
-                                        <input type="text" id="VehicleSerise" style="width:300px" class="form-control">
-
+                                        @*<input type="text" id="VehicleSerise" style="width:300px" class="form-control">*@
+                                        <select id="VehicleSerise" name="VehicleSerise" style="width:300px" class="form-control">
+                                        </select>
                                     </div>
                                     <div class="col-sm-2">
                                         <label>@Localizer["VehicleColor"]:</label>
@@ -331,7 +340,7 @@
                                         <label><span style="color:red">*</span>@Localizer["BankName"]:</label>
                                     </div>
                                     <div class="col-sm-4">
-                                        <select id="ddlBankName" name="BankName" style="width:300px" class="form-control" required>
+                                        <select id="ddlBankName" name="BankName" style="width:300px" class="form-control ddlsearch" required>
                                         </select>
                                         <div class="invalid-feedback">
                                             @Localizer["ErrorBankName"]
@@ -666,7 +675,7 @@
                                         <label>@Localizer["BankName"] :</label>
                                     </div>
                                     <div class="col-sm-4">
-                                        <select id="BankName2" name="BankName2" style="width:300px" class="form-control">
+                                        <select id="BankName2" name="BankName2" style="width:300px" class="form-control ddlsearch">
                                         </select>
                                     </div>
                                     @*<div class="col-sm-2">

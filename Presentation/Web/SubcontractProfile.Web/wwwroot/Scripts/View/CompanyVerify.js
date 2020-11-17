@@ -9,10 +9,12 @@ var otbtabteam;
 var otbtabengineer;
 var url = null;
 var urlaccount = null;
+var urlengineer = null;
 
 $(document).ready(function () {
     url = $("#controllername").data("url");
     urlaccount = $("#accountcontrollername").data("url");
+    urlengineer = $("#engineercontrollername").data("url");
     inittbAddressResult();
     inittbRevenue();
     inittblocation();
@@ -24,7 +26,10 @@ $(document).ready(function () {
     BindDDLsubdistrict();
     //BindAddressType();
     BindDDlBankAccountType();
-
+    GetDropDownPosition(); 
+    GetDDLVehicleType();
+    GetDDLVehicleBrand();
+    GetDDLVehicleSerise();
   //  $('#divSignContract').hide();
 
     getDataById($('#hdCompanyId').val());
@@ -32,7 +37,7 @@ $(document).ready(function () {
     inittbtablocation();
     inittbtabTeam();
     inittbtabengineer();
-
+    $(".ddlsearch").select2();
 
     $('#contractstartdate').datetimepicker({
         format: "DD/MM/YYYY",   
@@ -2302,7 +2307,7 @@ function getDataEngineerById(id) {
                 $('#hdEngineerId').val(result.EngineerId);
 
                 // $('#StaffCode').val(result.StaffCode);
-                $('#StaffName').val(result.StaffName);
+                //$('#StaffName').val(result.StaffName);
                 $('#StaffNameT').val(result.StaffNameTh);
                 $('#StaffNameE').val(result.StaffNameEn);
                 $('#Position').val(result.Position);
@@ -2567,6 +2572,89 @@ function BindDDlBankAccountType() {
         }
     });
 }
+
+function GetDropDownPosition() {
+    var urlGetPosition = urlengineer.replace('Action', 'GetPosition');
+    $.ajax({
+        type: 'POST',
+        url: urlGetPosition,
+        dataType: 'json',
+        success: function (data) {
+
+            $("#Position").empty();
+            $("#Position").append('<option value="-1">--' + localizedData.ddlPleaseSelect +'--</option>');
+            $.each(data, function (id, result) {
+                $("#Position").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text + '</option>');
+            });
+        },
+        failure: function () {
+            $("#Position").empty();
+            $("#Position").append('<option value="-1">--' + localizedData.ddlPleaseSelect +'--</option>');
+        }
+    });
+}
+function GetDDLVehicleType() {
+    var urlGetVehicleType = urlengineer.replace('Action', 'GetVehicleType');
+    $.ajax({
+        type: 'POST',
+        url: urlGetVehicleType,
+        dataType: 'json',
+        success: function (data) {
+
+            $("#VehicleType").empty();
+            $("#VehicleType").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
+            $.each(data, function (id, result) {
+                $("#VehicleType").append('<option value="' + result.VerhicleTypeId + '">' + result.VerhiclTypeName + '</option>');
+            });
+        },
+        failure: function () {
+            $("#VehicleType").empty();
+            $("#VehicleType").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
+        }
+    });
+}
+function GetDDLVehicleBrand() {
+    var urlGetVehicleBrand = urlengineer.replace('Action', 'GetVehicleBrand');
+    $.ajax({
+        type: 'POST',
+        url: urlGetVehicleBrand,
+        dataType: 'json',
+        success: function (data) {
+
+            $("#VehicleBrand").empty();
+            $("#VehicleBrand").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
+            $.each(data, function (id, result) {
+                $("#VehicleBrand").append('<option value="' + result.VerhicleBrandId + '">' + result.VerhicleBrandName + '</option>');
+            });
+        },
+        failure: function () {
+            $("#VehicleBrand").empty();
+            $("#VehicleBrand").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
+        }
+    });
+}
+function GetDDLVehicleSerise(id) {
+    var urlGetVehicleSerise = urlengineer.replace('Action', 'GetVehicleSerise');
+    $.ajax({
+        type: 'POST',
+        url: urlGetVehicleSerise,
+        data: { VerhicleBrandId: id },
+        dataType: 'json',
+        success: function (data) {
+
+            $("#VehicleSerise").empty();
+            $("#VehicleSerise").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
+            $.each(data, function (id, result) {
+                $("#VehicleSerise").append('<option value="' + result.VerhicleSeriseId + '">' + result.VerhicleSeriseName + '</option>');
+            });
+        },
+        failure: function () {
+            $("#VehicleSerise").empty();
+            $("#VehicleSerise").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
+        }
+    });
+}
+
 
 function isEmail(email) {
     var haserror = false;

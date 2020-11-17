@@ -675,6 +675,82 @@ namespace SubcontractProfile.Web.Controllers
             return Json(result);
         }
 
+        [HttpPost]
+        public IActionResult GetVehicleType()
+        {
+            var result = new List<SubcontractProfileVerhicleTypeModel>();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "VerhicleType/GetAll");
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<List<SubcontractProfileVerhicleTypeModel>>(resultAsysc);
+
+            }
+
+            return Json(result);
+        }
+        [HttpPost]
+        public IActionResult GetVehicleBrand()
+        {
+            var result = new List<SubcontractProfileVerhicleBrandModel>();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "VerhicleBrand/GetAll");
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<List<SubcontractProfileVerhicleBrandModel>>(resultAsysc);
+
+            }
+
+            return Json(result);
+        }
+        [HttpPost]
+        public IActionResult GetVehicleSerise(string id)
+        {
+            var result = new List<SubcontractProfileVerhicleSeriseModel>();
+            string uriString = "";
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            if (id != null && id!="")
+            {
+                uriString = string.Format("{0}/{1}", strpathAPI + "VerhicleSerise/GetAll", HttpUtility.UrlEncode(id, Encoding.UTF8));
+            }
+            else
+            {
+                uriString = string.Format("{0}", strpathAPI + "VerhicleSerise/GetAll");
+            }
+            
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<List<SubcontractProfileVerhicleSeriseModel>>(resultAsysc);
+
+            }
+
+            return Json(result);
+        }
+
         #region UploadFile
         [HttpPost]
         [DisableRequestSizeLimit]

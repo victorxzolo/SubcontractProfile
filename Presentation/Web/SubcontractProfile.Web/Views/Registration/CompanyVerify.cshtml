@@ -11,6 +11,7 @@
 
 <div id="controllername" data-url="@Url.Action("Action", "Registration")"></div>
 <div id="accountcontrollername" data-url="@Url.Action("Action", "Account")"></div>
+<div id="engineercontrollername" data-url="@Url.Action("Action", "Engineer")"></div>
 
 <input type="hidden" id="hdCompanyId" name="hdCompanyId" value=@ViewBag.Companyid>
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
@@ -57,7 +58,7 @@
     <script>
 var localizedData = {
     'ChooseFile': '@Localizer["JSChooseFile"]',
-     'ddlPleaseSelect': '@Localizer["JSddlPleaseSelect"]',
+    'ddlPleaseSelect': '@Localizer["JSddlPleaseSelect"]',
 }
     </script>
     <script src="~/Scripts/View/CompanyVerify.js"></script>
