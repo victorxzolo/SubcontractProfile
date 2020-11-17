@@ -14,7 +14,7 @@ namespace SubcontractProfile.WebApi.Services.Contracts
 
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam>> GetAll();
         Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam> GetByTeamId(System.Guid teamId);
-        Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam subcontractProfileTeam);
+        Task<System.Guid> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam subcontractProfileTeam);
         Task<bool> BulkInsert(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam> subcontractProfileTeamList);
         Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam subcontractProfileTeam);
         Task<bool> Delete(string id);
@@ -23,5 +23,9 @@ namespace SubcontractProfile.WebApi.Services.Contracts
           , string teamNameTh, string teamNameEn, string storageLocation, string shipto);
 
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam>> GetByLocationId(System.Guid companyId, System.Guid locationId);
+
+        Task<bool> DeleteTeamServiceSkill(string teamid);
+        Task<bool> InsertTeamServiceSkill(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeamServiceSkill subcontractProfileTeamServiceSkill);
+        Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeamServiceSkill>> GetServiceSkillByTeamId(System.Guid teamId);
     }
 }

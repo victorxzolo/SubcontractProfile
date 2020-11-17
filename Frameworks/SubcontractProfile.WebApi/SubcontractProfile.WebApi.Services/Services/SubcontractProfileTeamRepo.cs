@@ -55,7 +55,7 @@ namespace SubcontractProfile.WebApi.Services.Services
         /// <summary>
         /// Insert
         /// </summary>
-        public async Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam subcontractProfileTeam)
+        public async Task<System.Guid> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam subcontractProfileTeam)
         {
             var p = new DynamicParameters();
 
@@ -85,11 +85,12 @@ namespace SubcontractProfile.WebApi.Services.Services
           
             p.Add("@company_id", subcontractProfileTeam.CompanyId);
             p.Add("@location_id", subcontractProfileTeam.LocationId);
+            p.Add("@team_id", dbType: DbType.Guid, direction: ParameterDirection.Output);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTeam_Insert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
-
-            return true;
+            System.Guid teamId = p.Get<System.Guid>("@team_id");
+            return teamId;
         }
 
         /// <summary>
@@ -293,6 +294,43 @@ namespace SubcontractProfile.WebApi.Services.Services
 
             var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam>
             ("uspSubcontractProfileTeam_selectByLocationId", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
+
+        public async Task<bool> DeleteTeamServiceSkill(string teamid)
+        {
+            var p = new DynamicParameters();
+            p.Add("@team_id", teamid);
+
+            var ok = await _dbContext.Connection.ExecuteAsync
+                ("uspSubcontractProfileTeam_service_skill_delete", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+
+            return true;
+        }
+
+        public async Task<bool> InsertTeamServiceSkill(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeamServiceSkill subcontractProfileTeamServiceSkill)
+        {
+            var p = new DynamicParameters();
+
+            p.Add("@team_id", subcontractProfileTeamServiceSkill.TeamId);
+            p.Add("@skill_id", subcontractProfileTeamServiceSkill.Skill_Id);
+
+
+
+            var ok = await _dbContext.Connection.ExecuteAsync
+                ("uspSubcontractProfileTeam_service_skill_insert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+
+            return true;
+        }
+
+        public async Task<IEnumerable<SubcontractProfileTeamServiceSkill>> GetServiceSkillByTeamId(Guid teamId)
+        {
+            var p = new DynamicParameters();
+            p.Add("@team_id", teamId);
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeamServiceSkill>
+            ("uspSubcontractProfileTeam_service_skill_selectByTeamId", p, commandType: CommandType.StoredProcedure);
 
             return entity;
         }

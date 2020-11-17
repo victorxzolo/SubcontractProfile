@@ -241,7 +241,7 @@ namespace SubcontractProfile.Web.Controllers
         {
             ResponseModel result = new ResponseModel();
             HttpClient clientLocation = new HttpClient();
-
+            Guid teamId;
             try
             {
                 var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
@@ -262,6 +262,28 @@ namespace SubcontractProfile.Web.Controllers
                     HttpResponseMessage responseCompany = clientLocation.PostAsync(uriLocation, httpContent).Result;
                     if (responseCompany.IsSuccessStatusCode)
                     {
+                        
+                        var resultAsysc = responseCompany.Content.ReadAsStringAsync().Result;
+                        //data
+                        teamId = JsonConvert.DeserializeObject<Guid>(resultAsysc);
+
+                        #region Insert Service Skill
+                        if (model.listteamserviceskill!=null && model.listteamserviceskill.Count !=0)
+                        {
+                           
+                            var uriskill = new Uri(Path.Combine(strpathAPI, "Team", "InsertTeamServiceSkill"));
+                            foreach (var s in model.listteamserviceskill)
+                            {
+                                SubcontractProfileTeamServiceSkillModel skill = new SubcontractProfileTeamServiceSkillModel();
+                                skill.TeamId = teamId;
+                                skill.Skill_Id = s;
+                              var  httpContentSkill = new StringContent(JsonConvert.SerializeObject(skill), Encoding.UTF8, "application/json");
+                              var  responseSkill = clientLocation.PostAsync(uriskill, httpContentSkill).Result;
+                            }
+                        }
+
+                        #endregion
+
                         result.Status = true;
                         result.Message = _localizer["MessageSaveSuccess"];
                         result.StatusError = "0";
@@ -288,6 +310,34 @@ namespace SubcontractProfile.Web.Controllers
 
                     if (responseResult.IsSuccessStatusCode)
                     {
+                        #region Delete Service Skill
+                        if (model.listteamserviceskill != null && model.listteamserviceskill.Count != 0)
+                        {
+
+                            var urideleteskill = string.Format("{0}/{1}", strpathAPI + "Team/DeleteTeamServiceSkill",
+                                                                HttpUtility.UrlEncode(model.TeamId.ToString(), Encoding.UTF8));
+                            var responseSkill = clientLocation.DeleteAsync(urideleteskill).Result;
+                        }
+
+                        #endregion
+
+                        #region Insert Service Skill
+                        if (model.listteamserviceskill != null && model.listteamserviceskill.Count != 0)
+                        {
+
+                            var uriskill = new Uri(Path.Combine(strpathAPI, "Team", "InsertTeamServiceSkill"));
+                            foreach (var s in model.listteamserviceskill)
+                            {
+                                SubcontractProfileTeamServiceSkillModel skill = new SubcontractProfileTeamServiceSkillModel();
+                                skill.TeamId = model.TeamId;
+                                skill.Skill_Id = s;
+                                var httpContentSkill = new StringContent(JsonConvert.SerializeObject(skill), Encoding.UTF8, "application/json");
+                                var responseSkill = clientLocation.PostAsync(uriskill, httpContentSkill).Result;
+                            }
+                        }
+
+                        #endregion
+
                         result.Status = true;
                         result.Message = _localizer["MessageSaveSuccess"];
                         result.StatusError = "0";
@@ -342,6 +392,29 @@ namespace SubcontractProfile.Web.Controllers
                 result.Message = _localizer["MessageDeleteUnSucess"];
                 result.StatusError = "-1";
             }
+            return Json(result);
+        }
+
+        [HttpPost]
+        public JsonResult GetServiceSkill()
+        {
+            var result = new List<SubcontractDropdownModel>();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "skill");
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(resultAsysc);
+
+            }
+
             return Json(result);
         }
 

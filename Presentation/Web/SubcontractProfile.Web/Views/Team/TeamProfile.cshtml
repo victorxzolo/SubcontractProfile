@@ -229,7 +229,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     @*<textarea id="ServiceSkill" class="form-control" name="ServiceSkill" rows="2" style="width:300px;"></textarea>*@
-                                    <select id="ServiceSkill" name="ServiceSkill" style="width:300px" class="form-control">
+                                    <select id="ServiceSkill" name="ServiceSkill" style="width:300px" class="form-control" multiple="multiple">
                                     </select>
                                 </div>
                             </div>
@@ -336,7 +336,10 @@
         var oTable;
         $(document).ready(function () {
 
-               GetDropDownLocationSearch();
+            GetDropDownLocationSearch();
+            GetDDLServiceSkill();
+
+            $('#ServiceSkill').select2();
 
                 $('#locationName_Th').change(function () {
                     getLocationCodeById($(this).val());
@@ -496,6 +499,8 @@
 
             $("#frNew")[0].reset();
             $('#frNew').removeClass('was-validated');
+
+            $("#ServiceSkill").select2('val', '');
         }
 
 
@@ -583,7 +588,7 @@
             team.OosStorageLocation = $('#OutStorage').val();
             team.WarrantyMa = $('#WarrantyMA').val();
             team.WarrantyInstall = $('#WarrantyInstall').val();
-            team.ServiceSkill = $('#ServiceSkill').val();
+            //team.ServiceSkill = $('#ServiceSkill').val();
             team.InstallationsContractPhone = $('#InstallationPhone').val();
             team.MaintenanceContractPhone = $('#MaintenancePhone').val();
             team.EtcContractPhone = $('#EtcPhone').val();
@@ -591,6 +596,7 @@
             team.MaintenanceContractEmail = $('#MaintenanceMail').val();
             team.EtcContractEmail = $('#EtcMail').val();
             team.CompanyId = $('#hdCompanyId').val();
+            team.listteamserviceskill = $('#ServiceSkill').val();
 
             $.ajax({
                    url: '@Url.Action("OnSave", "Team")',
@@ -686,6 +692,27 @@ function GetDropDownLocation() {
                 failure: function () {
                     $("#locationName_Th").empty();
                     $("#locationName_Th").append('<option value="">--@Localizer["PleaseSelect"]--</option>');
+                }
+            });
+        }
+
+        function GetDDLServiceSkill() {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetServiceSkill", "Team")',
+           // data: {stateid:stateid},
+            dataType: 'json',
+            success: function(data)
+            {
+                $("#ServiceSkill").empty();
+                $("#ServiceSkill").append('<option value="">--@Localizer["PleaseSelect"]--</option>');
+                $.each(data, function (id, result) {
+                    $("#ServiceSkill").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text+'</option>');
+                    });
+                },
+                failure: function () {
+                    $("#ServiceSkill").empty();
+                    $("#ServiceSkill").append('<option value="">--@Localizer["PleaseSelect"]--</option>');
                 }
             });
     }

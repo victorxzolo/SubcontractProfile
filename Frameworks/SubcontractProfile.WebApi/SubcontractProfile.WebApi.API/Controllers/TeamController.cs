@@ -165,12 +165,32 @@ namespace SubcontractProfile.WebApi.API.Controllers
         }
 
 
-            #endregion
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileTeamServiceSkill))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileTeamServiceSkill))]
+        [HttpGet("GetServiceSkillByTeamId/{teamId}")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeamServiceSkill>> GetServiceSkillByTeamId(System.Guid teamId)
+        {
+            _logger.LogInformation($"Start TeamController::GetServiceSkillByTeamId", teamId);
 
-            #region POST
-            [HttpPost("Insert")]
+            var entities = _service.GetServiceSkillByTeamId(teamId);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"TeamController::", "GetServiceSkillByTeamId NOT FOUND", teamId);
+                return null;
+            }
+
+            return entities;
+
+        }
+
+
+        #endregion
+
+        #region POST
+        [HttpPost("Insert")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileTeam))]
-        public Task<bool> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam subcontractProfileTeam)
+        public Task<System.Guid> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam subcontractProfileTeam)
         {
             _logger.LogInformation($"Start TeamController::Insert", subcontractProfileTeam);
 
@@ -204,6 +224,28 @@ namespace SubcontractProfile.WebApi.API.Controllers
             if (result == null)
             {
                 _logger.LogWarning($"TeamController::", "BulkInsert NOT FOUND", subcontractProfileTeamList);
+            }
+            return result;
+
+        }
+
+
+        [HttpPost("InsertTeamServiceSkill")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileTeam))]
+        public Task<bool> InsertTeamServiceSkill(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeamServiceSkill skill)
+        {
+            _logger.LogInformation($"Start TeamController::InsertTeamServiceSkill", skill);
+
+            if (skill == null)
+                _logger.LogWarning($"Start TeamController::InsertTeamServiceSkill", skill);
+
+
+            var result = _service.InsertTeamServiceSkill(skill);
+
+            if (result == null)
+            {
+                _logger.LogWarning($"TeamController::", "Insert NOT FOUND", skill);
+
             }
             return result;
 
@@ -254,6 +296,18 @@ namespace SubcontractProfile.WebApi.API.Controllers
                 _logger.LogWarning($"Start TeamController::Delete", id);
 
             return _service.Delete(id);
+        }
+
+        [HttpDelete("DeleteTeamServiceSkill/{teamid}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        public Task<bool> DeleteTeamServiceSkill(string teamid)
+        {
+            _logger.LogInformation($"Start TeamController::DeleteTeamServiceSkill", teamid);
+
+            if (teamid == "")
+                _logger.LogWarning($"Start TeamController::DeleteTeamServiceSkill", teamid);
+
+            return _service.DeleteTeamServiceSkill(teamid);
         }
         #endregion
     }

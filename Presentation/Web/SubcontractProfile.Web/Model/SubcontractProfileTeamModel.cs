@@ -91,5 +91,7 @@ namespace SubcontractProfile.Web.Model
         public string SubcontractProfileType { get; set; }
 
         public string CompanyStatus { get; set; }
+
+        public List<string> listteamserviceskill { get; set; }
     }
 }

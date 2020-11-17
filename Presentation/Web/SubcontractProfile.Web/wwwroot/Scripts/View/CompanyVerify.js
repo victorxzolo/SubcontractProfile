@@ -10,11 +10,14 @@ var otbtabengineer;
 var url = null;
 var urlaccount = null;
 var urlengineer = null;
+var urlteam = null;
 
 $(document).ready(function () {
     url = $("#controllername").data("url");
     urlaccount = $("#accountcontrollername").data("url");
     urlengineer = $("#engineercontrollername").data("url");
+    urlteam = $("#teamcontrollername").data("url");
+
     inittbAddressResult();
     inittbRevenue();
     inittblocation();
@@ -30,6 +33,7 @@ $(document).ready(function () {
     GetDDLVehicleType();
     GetDDLVehicleBrand();
     GetDDLVehicleSerise();
+    GetDDLServiceSkill();
   //  $('#divSignContract').hide();
 
     getDataById($('#hdCompanyId').val());
@@ -2654,7 +2658,25 @@ function GetDDLVehicleSerise(id) {
         }
     });
 }
-
+function GetDDLServiceSkill() {
+    var urlteamserviceskill = urlteam.replace('Action', 'GetServiceSkill');
+    $.ajax({
+        type: 'POST',
+        url: urlteamserviceskill,
+        dataType: 'json',
+        success: function (data) {
+            $("#ServiceSkill").empty();
+            $("#ServiceSkill").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
+            $.each(data, function (id, result) {
+                $("#ServiceSkill").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text + '</option>');
+            });
+        },
+        failure: function () {
+            $("#ServiceSkill").empty();
+            $("#ServiceSkill").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
+        }
+    });
+}
 
 function isEmail(email) {
     var haserror = false;
