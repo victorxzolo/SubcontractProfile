@@ -1550,7 +1550,20 @@ namespace SubcontractProfile.Web.Controllers
                 var resultAsysc = response.Content.ReadAsStringAsync().Result;
                 //data
                 result = JsonConvert.DeserializeObject<SubcontractProfileTeamModel>(resultAsysc);
+                string uriskill = string.Format("{0}/{1}", strpathAPI + "Team/GetServiceSkillByTeamId"
+             , HttpUtility.UrlEncode(teamId, Encoding.UTF8));
 
+                response = client.GetAsync(uriskill).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var resultskill = response.Content.ReadAsStringAsync().Result;
+                    var jsonskill = JsonConvert.DeserializeObject<List<SubcontractProfileTeamServiceSkillModel>>(resultskill);
+                    result.listteamserviceskill = new List<string>();
+                    result.listteamserviceskill.AddRange(jsonskill.Select(v => v.Skill_Id));
+
+
+                }
             }
 
             return Json(result);

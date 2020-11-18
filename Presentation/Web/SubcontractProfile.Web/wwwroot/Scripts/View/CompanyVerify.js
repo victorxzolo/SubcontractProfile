@@ -2136,7 +2136,7 @@ function getDataTeamById(teamId) {
                 $('#OutStorage').val(result.OosStorageLocation);
                 $('#WarrantyMA').val(result.WarrantyMa);
                 $('#WarrantyInstall').val(result.WarrantyInstall);
-                $('#ServiceSkill').val(result.ServiceSkill);
+                //$('#ServiceSkill').val(result.ServiceSkill);
                 $('#InstallationPhone').val(result.InstallationsContractPhone);
                 $('#MaintenancePhone').val(result.MaintenanceContractPhone);
                 $('#EtcPhone').val(result.EtcContractPhone);
@@ -2146,6 +2146,8 @@ function getDataTeamById(teamId) {
                 $('#hdTeamId').val(result.TeamId);
                 $('#hdTeamCompanyId').val(result.CompanyId);
 
+                $("#ServiceSkill").val(result.listteamserviceskill);
+                $('#ServiceSkill').trigger('change');
             }
         },
         error: function (result) {

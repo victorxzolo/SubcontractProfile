@@ -501,6 +501,7 @@
             $('#frNew').removeClass('was-validated');
 
             $("#ServiceSkill").select2('val', '');
+            $('#ServiceSkill').trigger('change');
         }
 
 
@@ -554,7 +555,7 @@
                       $('#OutStorage').val(result.OosStorageLocation);
                       $('#WarrantyMA').val(result.WarrantyMa);
                       $('#WarrantyInstall').val(result.WarrantyInstall);
-                      $('#ServiceSkill').val(result.ServiceSkill);
+                      //$('#ServiceSkill').val(result.ServiceSkill);
                       $('#InstallationPhone').val(result.InstallationsContractPhone);
                       $('#MaintenancePhone').val(result.MaintenanceContractPhone);
                       $('#EtcPhone').val(result.EtcContractPhone);
@@ -562,7 +563,10 @@
                       $('#MaintenanceMail').val(result.MaintenanceContractEmail);
                       $('#EtcMail').val(result.EtcContractEmail);
                       $('#hdTeamId').val(result.TeamId);
-                      $('#hdCompanyId').val(result.CompanyId);
+                          $('#hdCompanyId').val(result.CompanyId);
+
+                          $("#ServiceSkill").val(result.listteamserviceskill);
+                          $('#ServiceSkill').trigger('change');
 
                     }
                   },
