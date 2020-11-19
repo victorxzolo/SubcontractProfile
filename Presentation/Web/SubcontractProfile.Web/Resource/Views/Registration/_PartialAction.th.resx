@@ -288,6 +288,9 @@
   <data name="ErrorProvince" xml:space="preserve">
     <value>กรุณาระบุจังหวัด</value>
   </data>
+  <data name="ErrorRemark" xml:space="preserve">
+    <value>กรุณาระบุหมายเหตุ</value>
+  </data>
   <data name="ErrorSubdistrict" xml:space="preserve">
     <value>กรุณาระบุตำบล/แขวง</value>
   </data>
@@ -359,6 +362,9 @@
   </data>
   <data name="RegisterType" xml:space="preserve">
     <value>ประเภทผู้สมัคร</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>Reject</value>
   </data>
   <data name="Remark" xml:space="preserve">
     <value>หมายเหตุ</value>

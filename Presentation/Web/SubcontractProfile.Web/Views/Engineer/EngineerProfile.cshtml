@@ -256,7 +256,9 @@
                                                 <label>@Localizer["SizeClothes"]:</label>
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" id="tshirtsize" maxlength="50" style="width:300px" class="form-control">
+                                                @*<input type="text" id="tshirtsize" maxlength="50" style="width:300px" class="form-control">*@
+                                                <select id="tshirtsize" name="tshirtsize" style="width:300px" class="form-control">
+                                                </select>
                                             </div>
                                         </div>
 
@@ -837,6 +839,7 @@
             GetDDLVehicleType();
             GetDDLVehicleBrand();
             GetDDLVehicleSerise();
+            GetDropDownSizeShirt();
 
 
             $(".ddlsearch").select2();
@@ -1416,7 +1419,7 @@
             formData.append('model.StaffNameEn' , $('#StaffNameE').val());
             formData.append('model.Position', $('select[id$=Position]').val());
             formData.append('model.CitizenId' , $('#CitizenID').val());
-            formData.append('model.TshirtSize' , $('#tshirtsize').val());
+            formData.append('model.TshirtSize', $('select[id$=#tshirtsize]').val());
             formData.append('model.ContractPhone1' , $('#ContractPhone1').val());
             formData.append('model.ContractPhone2' , $('#ContractPhone2').val());
             formData.append('model.ContractEmail' , $('#ContractEmail').val());
@@ -1826,6 +1829,26 @@ function GetDropDownLocationSearch() {
                 failure: function () {
                     $("#VehicleSerise").empty();
                     $("#VehicleSerise").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
+                }
+            });
+        }
+
+        function GetDropDownSizeShirt() {
+                 $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetSizeShirt", "Engineer")',
+            dataType: 'json',
+            success: function (data) {
+
+                $("#tshirtsize").empty();
+                $("#tshirtsize").append('<option value="-1">--@Localizer["ddlPleaseSelect"]--</option>');
+                $.each(data, function (id, result) {
+                    $("#tshirtsize").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text +'</option>');
+                    });
+                },
+                failure: function () {
+                    $('#tshirtsize').empty();
+                    $("#tshirtsize").append('<option value="-1">--@Localizer["ddlPleaseSelect"]--</option>');
                 }
             });
         }

@@ -1002,7 +1002,10 @@
         <label>@Localizer["Remark"] :</label>
     </div>
     <div class="col-sm-10">
-        <textarea id="txtRemarkForSub" class="form-control" rows="3"> </textarea>
+        <textarea id="txtRemarkForSub" class="form-control" rows="3" required> </textarea>
+        <div class="invalid-feedback">
+            @Localizer["ErrorHouseNo"]
+        </div>
     </div>
 
 </div>
@@ -1034,6 +1037,11 @@
             <path fill="white" d="M199.066 456l-7.379-7.514l-3.94-3.9l-86.2-86.2l.053-.055l-83.664-83.666l97.614-97.613l83.565 83.565L398.388 61.344L496 158.958L296.729 358.229l-11.26 11.371zM146.6 358.183l52.459 52.46l.1-.1l.054.054l52.311-52.311l11.259-11.368l187.963-187.96l-52.358-52.358l-199.273 199.271l-83.565-83.565l-52.359 52.359l83.464 83.463z" />
         </svg>
         @Localizer["Approve"]
+    </button>
+
+    <button class="btn btn-danger mr-2" id="btnreject" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10zm-4.906-3.68L18.32 7.094A8 8 0 0 1 7.094 18.32zM5.68 16.906A8 8 0 0 1 16.906 5.68L5.68 16.906z" fill="white" fill-rule="evenodd" /></svg>
+        @Localizer["Reject"]
     </button>
 
 

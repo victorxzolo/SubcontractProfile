@@ -34,6 +34,7 @@ $(document).ready(function () {
     GetDDLVehicleBrand();
     GetDDLVehicleSerise();
     GetDDLServiceSkill();
+    GetDropDownSizeShirt();
   //  $('#divSignContract').hide();
 
     getDataById($('#hdCompanyId').val());
@@ -658,6 +659,10 @@ $(document).ready(function () {
         else {
             $('#errorAccount_email').hide();
         }
+    });
+
+    $('#btnreject').click(function () {
+
     });
 });
 
@@ -2676,6 +2681,27 @@ function GetDDLServiceSkill() {
         failure: function () {
             $("#ServiceSkill").empty();
             $("#ServiceSkill").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
+        }
+    });
+}
+
+function GetDropDownSizeShirt() {
+    var urlGetSizeShirt = urlengineer.replace('Action', 'GetSizeShirt');
+    $.ajax({
+        type: 'POST',
+        url: urlGetSizeShirt,
+        dataType: 'json',
+        success: function (data) {
+
+            $("#tshirtsize").empty();
+            $("#tshirtsize").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
+            $.each(data, function (id, result) {
+                $("#tshirtsize").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text + '</option>');
+            });
+        },
+        failure: function () {
+            $('#tshirtsize').empty();
+            $("#tshirtsize").append('<option value="-1">--' + localizedData.ddlPleaseSelect +'--</option>');
         }
     });
 }

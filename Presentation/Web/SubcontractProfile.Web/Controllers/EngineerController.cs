@@ -751,6 +751,29 @@ namespace SubcontractProfile.Web.Controllers
             return Json(result);
         }
 
+        [HttpPost]
+        public JsonResult GetSizeShirt()
+        {
+            var result = new List<SubcontractDropdownModel>();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "subcontract_size");
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(resultAsysc);
+
+            }
+
+            return Json(result);
+        }
+
         #region UploadFile
         [HttpPost]
         [DisableRequestSizeLimit]
