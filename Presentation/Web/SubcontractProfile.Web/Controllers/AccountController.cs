@@ -1831,6 +1831,12 @@ namespace SubcontractProfile.Web.Controllers
 
                         }
 
+                        if (model.FileBookBank != null && model.FileBookBank.Length > 0)
+                        {
+                            resultGetFile = await Uploadfile(model.FileBookBank, model.CompanyId.ToString());
+                            model.AttachFile = model.FileBookBank.FileName;
+                        }
+
                         if (resultGetFile)
                         {
                             //SessionHelper.RemoveSession(HttpContext.Session, "userUploadfileDaft");

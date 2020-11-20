@@ -777,6 +777,10 @@ $(document).ready(function () {
         uploadFiles('vat_registration_certificate_file')
     });
 
+    $('#inputuploadbookbank').change(function () {
+        uploadFiles('inputuploadbookbank')
+    });
+
     $('#ddlBankname').change(function () {
         var v_bankcode = $('#ddlBankname option').filter(':selected').val();
         $('#txtbank_Code').val(v_bankcode);
@@ -880,6 +884,7 @@ $(document).ready(function () {
         fData.append("User_name", username);
         fData.append("Password", password);
 
+        fData.append("FileBookBank", $("#inputuploadbookbank").get(0).files[0]);
         fData.append("FileCompanyCertified", $('#company_certified_file').get(0).files[0]);
         fData.append("FileCommercialRegistration", $('#commercial_registration_file').get(0).files[0]);
         fData.append("FileVatRegistrationCertificate", $('#vat_registration_certificate_file').get(0).files[0]);
@@ -888,57 +893,9 @@ $(document).ready(function () {
         fData.append("CommercialRegistrationFile", $('#lbcommercial_registration_file').text());
         fData.append("VatRegistrationCertificateFile", $('#lbvat_registration_certificate_file').text());
 
-        //var data = {
-        //    //CompanyId
-        //    //CompanyCode
-        //    //CompanyName
-        //    CompanyNameTh: company_name_th,
-        //    CompanyNameEn: company_name_en,
-        //    CompanyAlias: company_alias,
-        //    DistributionChannel: distribution_channel,
-        //    ChannelSaleGroup: channel_sale_group,
-        //    //VendorCode: $('#txtvendercode').val(),
-        //    TaxId: tax_id,
-        //    WtName: wt_name,
-        //    VatType: vat_type,
-        //    CompanyEmail: $('#txtcompany_Email').val(),
-        //    ContractName: $('#txtcontract_name').val(),
-        //    ContractPhone: $('#txtcontract_phone').val(),
-        //    ContractEmail: $('#txtcontract_email').val(),
+        fData.append("AttachFile", $('#lbuploadbookbank').text());
 
-        //    BankCode: $('#ddlBankname option').filter(':selected').val(),
-        //    BankName: $('#ddlBankname option').filter(':selected').text(),
-        //    AccountNumber:$('#txtaccount_Number').val(),
-        //    AccountName: straccname,//$('#ddlaccount_Name option').filter(':selected').val(),
-        //   // AttachFile
-        //    BranchCode: $('#txtbranch_Code').val(),
-        //    BranchName: $('#txtbranch_Name').val(),
-
-        //    DeptOfInstallName: $('#txtdept_of_install_name').val(),
-        //    DeptOfMaintenName: $('#txtdept_of_mainten_name').val(),
-        //    DeptOfAccountName: $('#txtdept_of_Account_name').val(),
-
-        //    DeptOfInstallPhone: $('#txtdept_of_install_phone').val(),
-        //    DeptOfMaintenPhone: $('#txtdept_of_mainten_phone').val(),
-        //    DeptOfAccountPhone: $('#txtdept_of_Account_phone').val(),
-
-        //    DeptOfInstallEmail: $('#txtdept_of_install_email').val(),
-        //    DeptOfMaintenEmail: $('#txtdept_of_mainten_email').val(),
-        //    DeptOfAccountEmail: $('#txtdept_of_Account_email').val(),
-
-        //    LocationCode: $('#txtlocationcode').val(),
-        //    LocationNameTh: $('#txtlocationname').val(),
-        //    LocationNameEn: $('#txtlocationname').val(),
-
-        //    BankAccountTypeId: $('#ddlbank_account_type option').filter(':selected').val(),
-        //    SubcontractProfileType: chksubcontract_type,
-        //    CompanyTitleThId: company_title_name_th,
-        //    CompanyTitleEnId: company_title_name_en,
-        //    User_name: username,
-        //    Password: password
-        //    //ASCCode: $('#txtasccode').val()
-
-        //}
+ 
         var urlNewRegister = url.replace('Action', 'NewRegister');
         
         $.ajax({
@@ -1258,6 +1215,7 @@ function uploadFiles(inputId) {
                         case "company_certified_file": $('#hdupfilecompany_certified').val(data.file_id); break;
                         case "commercial_registration_file": $('#hdupfilecommercial_registration').val(data.file_id); break;
                         case "vat_registration_certificate_file": $('#hdupfilevat_registration_certificate').val(data.file_id); break;
+                        case "inputuploadbookbank": $('#hduploadbookbank').val(data.file_id); break;
                     }
                     bootbox.alert({
                         title: "System Information",

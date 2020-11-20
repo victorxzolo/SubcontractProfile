@@ -297,6 +297,9 @@
   <data name="ShipTo" xml:space="preserve">
     <value>Ship To</value>
   </data>
+  <data name="SizeFile" xml:space="preserve">
+    <value>The pdf file size must not be more than 1 Mb or the file size jpg, jpeg, bmp, gif, tif, tiff, png must not be more than 3 Mb.</value>
+  </data>
   <data name="Storage" xml:space="preserve">
     <value>Storage</value>
   </data>

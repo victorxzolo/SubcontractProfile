@@ -243,6 +243,9 @@
   <data name="SearchResult" xml:space="preserve">
     <value>ผลการค้นหา</value>
   </data>
+  <data name="SizeFile" xml:space="preserve">
+    <value>ขนาดไฟล์ pdf ต้องไม่เกิน 1 Mb หรือ ขนาดไฟล์ jpg,jpeg,bmp,gif,tif,tiff,png ต้องไม่เกิน 3 Mb</value>
+  </data>
   <data name="Status" xml:space="preserve">
     <value>สถานะ</value>
   </data>

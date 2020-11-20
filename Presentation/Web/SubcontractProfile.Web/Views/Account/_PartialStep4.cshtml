@@ -74,16 +74,25 @@
                 </div>
             </div>
         </div>
-        @*<div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-form-label text-right">ประเภทธุรกิจ :</label>
-                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <select class="custom-select custom-select-sm" id="ddlbusiness_type">
-                            <option></option>
-                        </select>
-                    </div>
+        <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-form-label text-right"> @Localizer["UploadBookBank"]:<span style="color:red">*</span></label>
+
+                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
+                    <input type="hidden" id="hduploadbookbank" />
+                    <input type="file" class="custom-file-input inputValidationBank" id="inputuploadbookbank" required
+                           accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf" />
+                    <label class="custom-file-label" for="customFile" id="lbuploadbookbank">@Localizer["ChooseFile"]</label>
+                    <small id="uploadlHelp1" class="form-text text-muted">
+                        @Localizer["ChooseFileType"]
+                    </small>
+                    <small id="uploadlHelp1" class="form-text text-muted">
+                       @Localizer["SizeFile"]
+                    </small>
+                    <div class="invalid-tooltip">@Localizer["ErrorBookBank"]</div>
                 </div>
-            </div>*@
+            </div>
+        </div>
     </div>
     <div class="row my-3">
         <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
@@ -103,11 +112,13 @@
                     <input type="file" class="custom-file-input inputValidationBank" id="company_certified_file" required
                            accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf" />
                     <label class="custom-file-label" for="customFile" id="lbcompany_certified_file">@Localizer["ChooseFile"]</label>
-                    @*<small id="uploadlHelp1" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>*@
-                <small id="uploadlHelp1" class="form-text text-muted">
-                    @Localizer["ChooseFileType"]
-                </small>
-                <div class="invalid-tooltip">@Localizer["ErrorCompanyCertificate"]</div>
+                    <small id="uploadlHelp1" class="form-text text-muted">
+                        @Localizer["ChooseFileType"]
+                    </small>
+                    <small id="uploadlHelp1" class="form-text text-muted">
+                        @Localizer["SizeFile"]
+                    </small>
+                    <div class="invalid-tooltip">@Localizer["ErrorCompanyCertificate"]</div>
                 </div>
             </div>
         </div>
@@ -122,17 +133,19 @@
                         </span>
                     </div>*@
 
-                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
-                    <input type="hidden" id="hdupfilecommercial_registration" />
-                    <input type="file" class="custom-file-input inputValidationBank" id="commercial_registration_file" required
-                           accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf" />
-                    <label class="custom-file-label" for="customFile" id="lbcommercial_registration_file">@Localizer["ChooseFile"]</label>
-                    @*<small id="uploadlHelp1" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>*@
+            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
+                <input type="hidden" id="hdupfilecommercial_registration" />
+                <input type="file" class="custom-file-input inputValidationBank" id="commercial_registration_file" required
+                       accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf" />
+                <label class="custom-file-label" for="customFile" id="lbcommercial_registration_file">@Localizer["ChooseFile"]</label>
                 <small id="uploadlHelp1" class="form-text text-muted">
                     @Localizer["ChooseFileType"]
                 </small>
-                    <div class="invalid-tooltip">@Localizer["ErrorCommercialRegistrationBook"]</div>
-                </div>
+                <small id="uploadlHelp1" class="form-text text-muted">
+                    @Localizer["SizeFile"]
+                </small>
+                <div class="invalid-tooltip">@Localizer["ErrorCommercialRegistrationBook"]</div>
+            </div>
             </div>
         </div>
     </div>
@@ -149,17 +162,19 @@
                         </span>
                     </div>*@
 
-                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
-                    <input type="hidden" id="hdupfilevat_registration_certificate" />
-                    <input type="file" class="custom-file-input inputValidationBank" id="vat_registration_certificate_file" required
-                           accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf" />
-                    <label class="custom-file-label" for="customFile" id="lbvat_registration_certificate_file">@Localizer["ChooseFile"]</label>
-                    @*<small id="uploadlHelp1" class="form-text text-muted">***รองรับไฟล์นามสกุล .pdf เท่านั้นโดยขนาดไฟล์ต้องไม่เกิน 1 Mb</small>*@
+            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 custom-file inputValidationBank">
+                <input type="hidden" id="hdupfilevat_registration_certificate" />
+                <input type="file" class="custom-file-input inputValidationBank" id="vat_registration_certificate_file" required
+                       accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf" />
+                <label class="custom-file-label" for="customFile" id="lbvat_registration_certificate_file">@Localizer["ChooseFile"]</label>
                 <small id="uploadlHelp1" class="form-text text-muted">
                     @Localizer["ChooseFileType"]
                 </small>
+                <small id="uploadlHelp1" class="form-text text-muted">
+                    @Localizer["SizeFile"]
+                </small>
                 <div class="invalid-tooltip">@Localizer["ErrorVATRegistrationCertificate"]</div>
-                </div>
+            </div>
             </div>
         </div>
     </div>

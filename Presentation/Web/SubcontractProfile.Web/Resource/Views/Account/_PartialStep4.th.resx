@@ -165,6 +165,9 @@
   <data name="ErrorBankName" xml:space="preserve">
     <value>กรุณาระบุชื่อธนาคาร</value>
   </data>
+  <data name="ErrorBookBank" xml:space="preserve">
+    <value>กรุณาอัพโหลดไฟล์ หน้าบัญชีธนาคาร</value>
+  </data>
   <data name="ErrorCommercialRegistrationBook" xml:space="preserve">
     <value>กรุณาอัพโหลดไฟล์ หนังสือทะเบียนพานิช</value>
   </data>
@@ -173,6 +176,12 @@
   </data>
   <data name="ErrorVATRegistrationCertificate" xml:space="preserve">
     <value>กรุณาอัพโหลดไฟล์ หนังสือ ภ.พ. 20</value>
+  </data>
+  <data name="SizeFile" xml:space="preserve">
+    <value>ขนาดไฟล์ pdf ต้องไม่เกิน 1 Mb หรือ ขนาดไฟล์ jpg,jpeg,bmp,gif,tif,tiff,png ต้องไม่เกิน 3 Mb</value>
+  </data>
+  <data name="UploadBookBank" xml:space="preserve">
+    <value>อัพโหลดหน้าบัญชีธนาคาร</value>
   </data>
   <data name="VATRegistrationCertificate" xml:space="preserve">
     <value>หนังสือ ภ.พ. 20</value>
