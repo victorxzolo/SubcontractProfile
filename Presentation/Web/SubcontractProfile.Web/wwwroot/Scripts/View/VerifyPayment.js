@@ -96,6 +96,9 @@ $(document).ready(function () {
             close: 'fa fa-time'
         }
     });
+    $('#txttaxid').keyup(function () {
+        CheckKeyUps("txttaxid", "[0-9]");
+    });
 
     inittbSearchResult();
     BindDataTypeTransfer();
