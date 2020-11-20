@@ -312,6 +312,9 @@
   <data name="ErrorProvince" xml:space="preserve">
     <value>Please fill Province</value>
   </data>
+  <data name="ErrorRemark" xml:space="preserve">
+    <value>Please fill Remark.</value>
+  </data>
   <data name="ErrorSubdistrict" xml:space="preserve">
     <value>Please fill Subdistrict</value>
   </data>

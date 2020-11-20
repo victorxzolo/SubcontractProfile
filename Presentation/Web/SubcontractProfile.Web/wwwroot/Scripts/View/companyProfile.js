@@ -679,6 +679,20 @@ $(document).ready(function () {
 
                     }
                 }
+                if ($('#lblStatusSub').val() == "Reject") {
+                    var forms = document.getElementsByClassName('needs-isvalidate-reject');
+                    var validation = Array.prototype.filter.call(forms, function (form) {
+                        if ($('#txtRemark').val()=='') {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        else {
+
+                            hasError = false;
+                        }
+                        form.classList.add('was-validated');
+                    });
+                }
                 form.classList.add('was-validated');
             });
 
