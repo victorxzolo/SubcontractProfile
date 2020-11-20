@@ -662,7 +662,19 @@ $(document).ready(function () {
     });
 
     $('#btnreject').click(function () {
+        var forms = document.getElementsByClassName('need-isvalidate-reject');
+        var validation = Array.prototype.filter.call(forms, function (form) {
 
+            if ($('#txtRemarkForSub').val() == '') {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            else {
+                onSaveCompanyProfileVerified("R");
+            }
+
+            form.classList.add('was-validated');
+        });
     });
 });
 
@@ -821,6 +833,8 @@ function onSaveCompanyProfile(status) {
     data.append("RemarkForSub", $('#txtRemarkForSub').val());
 
     data.append("VendorCode", $('#txtvendercode').val())
+
+    data.append("Remark", $('#txtRemark').val())
 
     var urlOnSave = url.replace('Action', 'OnSave');
     $.ajax({
@@ -1208,6 +1222,8 @@ function getDataById(companyId) {
                 }
 
                 $('#txtvendercode').val(result.VendorCode);
+
+                $('#txtRemark').val(result.Remark);
        
             }
 

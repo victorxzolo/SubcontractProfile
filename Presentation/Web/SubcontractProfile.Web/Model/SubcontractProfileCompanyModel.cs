@@ -205,6 +205,8 @@ namespace SubcontractProfile.Web.Model
 
         public string RemarkForSub { get; set; }
         public string RegisterDateStr { get; set; }
+
+        public string Remark { get; set; }
         
 
     }
