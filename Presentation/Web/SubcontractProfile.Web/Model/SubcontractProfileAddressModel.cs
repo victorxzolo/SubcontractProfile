@@ -62,7 +62,7 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string ModifiedBy { get; set; }
 
-
+        public string LocationId { get; set; }
 
 
         public string address_type_name { get; set; }

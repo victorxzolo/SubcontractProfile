@@ -144,6 +144,9 @@
   <data name="BankName" xml:space="preserve">
     <value>ชื่อธนาคาร</value>
   </data>
+  <data name="BookBank" xml:space="preserve">
+    <value>หน้าบัญชีธนาคาร</value>
+  </data>
   <data name="BranchName" xml:space="preserve">
     <value>ชื่อสาขา</value>
   </data>

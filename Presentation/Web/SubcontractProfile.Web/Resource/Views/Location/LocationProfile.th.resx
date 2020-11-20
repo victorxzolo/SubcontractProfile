@@ -120,11 +120,17 @@
   <data name="Add" xml:space="preserve">
     <value>เพิ่ม</value>
   </data>
+  <data name="AddAddress" xml:space="preserve">
+    <value>เพิ่มที่อยู่</value>
+  </data>
   <data name="AddLocation" xml:space="preserve">
     <value>เพิ่ม Location</value>
   </data>
   <data name="Address" xml:space="preserve">
     <value>ที่อยู่</value>
+  </data>
+  <data name="AddressType" xml:space="preserve">
+    <value>ประเภทที่อยู่</value>
   </data>
   <data name="Bank" xml:space="preserve">
     <value>ธนคาร</value>
@@ -150,6 +156,12 @@
   <data name="BankName" xml:space="preserve">
     <value>ชื่อธนาคาร</value>
   </data>
+  <data name="BranchAddress" xml:space="preserve">
+    <value>ที่อยู่ตามที่ตั้งสาขา</value>
+  </data>
+  <data name="Building" xml:space="preserve">
+    <value>อาคาร</value>
+  </data>
   <data name="ChooseFile" xml:space="preserve">
     <value>เลือกไฟล์</value>
   </data>
@@ -174,6 +186,18 @@
   <data name="ContractPhone" xml:space="preserve">
     <value>เบอร์โทรศัพท์ติดต่อ</value>
   </data>
+  <data name="Country" xml:space="preserve">
+    <value>ประเทศ</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>ลบ</value>
+  </data>
+  <data name="District" xml:space="preserve">
+    <value>อำเภอ/เขต</value>
+  </data>
+  <data name="DocumentAddress" xml:space="preserve">
+    <value>ที่อยู่จัดส่งเอกสาร</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>แก้ไข</value>
   </data>
@@ -195,8 +219,17 @@
   <data name="ErrorCompanymaincontractphone" xml:space="preserve">
     <value>กรุณากรอกข้อมูล Company main contract phone.</value>
   </data>
+  <data name="ErrorCountry" xml:space="preserve">
+    <value>กรุณาระบุประเทศ</value>
+  </data>
+  <data name="ErrorDistrict" xml:space="preserve">
+    <value>กรุณาระบุอำเภอ/เขต</value>
+  </data>
   <data name="ErrorEmail" xml:space="preserve">
     <value>กรุณากรอกข้อมูล Email ให้ถูกต้อง</value>
+  </data>
+  <data name="ErrorHouseNo" xml:space="preserve">
+    <value>กรุณาระบุเลขที่</value>
   </data>
   <data name="ErrorInstallationscontractphone" xml:space="preserve">
     <value>กรุณากรอกข้อมูล Installations contract phone.</value>
@@ -216,11 +249,26 @@
   <data name="ErrorPhoneNo" xml:space="preserve">
     <value>กรุณากรอกข้อมูล Phone No.</value>
   </data>
+  <data name="ErrorProvince" xml:space="preserve">
+    <value>กรุณาระบุจังหวัด</value>
+  </data>
+  <data name="ErrorSubdistrict" xml:space="preserve">
+    <value>กรุณาระบุตำบล/แขวง</value>
+  </data>
+  <data name="ErrorZipcode" xml:space="preserve">
+    <value>กรุณาระบุรหัสไปรษณีย์</value>
+  </data>
   <data name="Etccontractmail" xml:space="preserve">
     <value>Etc contract mail</value>
   </data>
   <data name="Etccontractphone" xml:space="preserve">
     <value>Etc contract phone</value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>ชั้น</value>
+  </data>
+  <data name="HouseNo" xml:space="preserve">
+    <value>เลขที่</value>
   </data>
   <data name="Installationcontractmail" xml:space="preserve">
     <value>Installation contract mail</value>
@@ -258,6 +306,9 @@
   <data name="Maintenencecontractphone" xml:space="preserve">
     <value>Maintenence contract phone</value>
   </data>
+  <data name="Moo" xml:space="preserve">
+    <value>หมู่ที่</value>
+  </data>
   <data name="OutofServiceStoragelocation" xml:space="preserve">
     <value>Out of Service Storage location</value>
   </data>
@@ -276,14 +327,23 @@
   <data name="PhoneNo" xml:space="preserve">
     <value>เบอร์โทรศัพท์</value>
   </data>
+  <data name="POPAddress" xml:space="preserve">
+    <value>ที่อยู่จัดส่ง POP</value>
+  </data>
   <data name="PostAddress" xml:space="preserve">
     <value>Post Address</value>
+  </data>
+  <data name="Province" xml:space="preserve">
+    <value>จังหวัด</value>
   </data>
   <data name="QuestionDelete" xml:space="preserve">
     <value>คุณต้องการลบข้อมูล</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>ล้างข้อมูล</value>
+  </data>
+  <data name="Room" xml:space="preserve">
+    <value>ห้อง</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>บันทึก</value>
@@ -294,11 +354,17 @@
   <data name="SearchResult" xml:space="preserve">
     <value>ผลการค้นหา</value>
   </data>
+  <data name="ShippingAddress" xml:space="preserve">
+    <value>ที่อยู่จัดส่งสินค้า</value>
+  </data>
   <data name="ShipTo" xml:space="preserve">
     <value>Ship To</value>
   </data>
   <data name="SizeFile" xml:space="preserve">
     <value>ขนาดไฟล์ pdf ต้องไม่เกิน 1 Mb หรือ ขนาดไฟล์ jpg,jpeg,bmp,gif,tif,tiff,png ต้องไม่เกิน 3 Mb</value>
+  </data>
+  <data name="Soi" xml:space="preserve">
+    <value>ซอย</value>
   </data>
   <data name="Storage" xml:space="preserve">
     <value>Storage</value>
@@ -306,13 +372,28 @@
   <data name="StorageLocation" xml:space="preserve">
     <value>Storage Location</value>
   </data>
+  <data name="street" xml:space="preserve">
+    <value>ถนน</value>
+  </data>
+  <data name="Subdistrict" xml:space="preserve">
+    <value>ตำบล/แขวง</value>
+  </data>
   <data name="TaxAddress" xml:space="preserve">
     <value>Tax Address</value>
   </data>
   <data name="VatbranchNumber" xml:space="preserve">
     <value>Vat branch Number</value>
   </data>
+  <data name="Village" xml:space="preserve">
+    <value>หมู่บ้าน</value>
+  </data>
   <data name="WTAddress" xml:space="preserve">
     <value>WT Address</value>
+  </data>
+  <data name="Zipcode" xml:space="preserve">
+    <value>รหัสไปรษณีย์</value>
+  </data>
+  <data name="Zone" xml:space="preserve">
+    <value>ภาค</value>
   </data>
 </root>

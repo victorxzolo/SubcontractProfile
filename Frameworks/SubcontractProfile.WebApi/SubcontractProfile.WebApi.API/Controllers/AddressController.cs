@@ -103,6 +103,36 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileAddress))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileAddress))]
+        [HttpPost("GetByLocationId")]
+        public async Task<IEnumerable<SubcontractProfileAddress>> GetByLocationId(SubcontractProfileAddress modal)
+        {
+            _logger.LogInformation($"Start AddressController::GetByLocationId", modal.LocationId);
+
+            var entities = await _service.GetAll();
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"AddressController::", "GetByLocationId NOT FOUND", modal.LocationId);
+                return null;
+            }
+            else
+            {
+                if (modal.LocationId != null && modal.LocationId != "")
+                {
+                    var returnentities = entities.Where(x => x.LocationId == modal.LocationId).ToList();
+                    return returnentities;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+
+        }
+
         #endregion
 
         #region POST

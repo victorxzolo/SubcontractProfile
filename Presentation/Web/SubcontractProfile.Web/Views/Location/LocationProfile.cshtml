@@ -146,17 +146,17 @@
                                 </div>
                             </div>
                             @*<br />
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <label>Register Type:</label>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <input type="radio" id="rdoCompanyTypeNew" name="CompType" value="newsub">
-                                        <label for="new">New Subcontract</label>&nbsp;&nbsp;
-                                        <input type="radio" id="rdoCompanyTypeDealer" name="CompType" value="dealer">
-                                        <label for="deal">Dealer</label>
-                                    </div>
-                                </div>*@
+        <div class="row">
+            <div class="col-sm-2">
+                <label>Register Type:</label>
+            </div>
+            <div class="col-sm-10">
+                <input type="radio" id="rdoCompanyTypeNew" name="CompType" value="newsub">
+                <label for="new">New Subcontract</label>&nbsp;&nbsp;
+                <input type="radio" id="rdoCompanyTypeDealer" name="CompType" value="dealer">
+                <label for="deal">Dealer</label>
+            </div>
+        </div>*@
                             <br />
                             <div class="row">
                                 <div class="col-sm-2">
@@ -367,37 +367,264 @@
 
                             <h5>@Localizer["Address"]</h5>
                             <hr>
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>@Localizer["LocationAddress"]:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <textarea id="inputLocationAddress" class="form-control" rows="2" style="width:300px;"></textarea>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>@Localizer["PostAddress"]:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <textarea id="inputPostAddress" class="form-control" rows="2" style="width:300px;"></textarea>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>@Localizer["TaxAddress"]:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <textarea id="inputTaxAddress" class="form-control" rows="2" style="width:300px;"></textarea>
-                                </div><br />
-                                <div class="col-sm-2">
-                                    <label>@Localizer["WTAddress"]:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <textarea id="inputWTAddress" class="form-control" rows="2" style="width:300px;"></textarea>
-                                </div>
-                            </div>
-                            <br />
+                            @*<div class="row">
+            <div class="col-sm-2">
+                <label>@Localizer["LocationAddress"]:</label>
+            </div>
+            <div class="col-sm-4">
+                <textarea id="inputLocationAddress" class="form-control" rows="2" style="width:300px;"></textarea>
+            </div>
+            <div class="col-sm-2">
+                <label>@Localizer["PostAddress"]:</label>
+            </div>
+            <div class="col-sm-4">
+                <textarea id="inputPostAddress" class="form-control" rows="2" style="width:300px;"></textarea>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-2">
+                <label>@Localizer["TaxAddress"]:</label>
+            </div>
+            <div class="col-sm-4">
+                <textarea id="inputTaxAddress" class="form-control" rows="2" style="width:300px;"></textarea>
+            </div><br />
+            <div class="col-sm-2">
+                <label>@Localizer["WTAddress"]:</label>
+            </div>
+            <div class="col-sm-4">
+                <textarea id="inputWTAddress" class="form-control" rows="2" style="width:300px;"></textarea>
+            </div>
+        </div>
+        <br />*@
 
+
+                            <div class="container needs-validation-address" novalidate>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label>@Localizer["AddressType"]</label>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row" id="chkAddressType">
+                                    <div class="col-sm-1">
+
+                                    </div>
+
+
+                                    <div class="col-sm-3">
+                                        <div class="n-chk">
+                                            <label class="new-control new-checkbox checkbox-primary">
+                                                <input id="chkLocationBranch" type="checkbox" name="address_type_id" class="new-control-input" value="01" required>
+                                                <span class="new-control-indicator"></span>@Localizer["BranchAddress"]
+                                            </label>
+                                        </div>
+
+                                        <div class="n-chk">
+                                            <label class="new-control new-checkbox checkbox-primary">
+                                                <input id="chkLocationDoc" type="checkbox" name="address_type_id" class="new-control-input" value="04" required>
+                                                <span class="new-control-indicator"></span>@Localizer["DocumentAddress"]@*ที่อยู่จัดส่งเอกสาร*@
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="n-chk">
+                                            <label class="new-control new-checkbox checkbox-primary">
+                                                <input id="chkLocationTax" type="checkbox" name="address_type_id" class="new-control-input" value="02" required>
+                                                <span class="new-control-indicator"></span>@Localizer["TaxAddress"]@*ที่อยู่ตามใบกำกับภาษี*@
+                                            </label>
+                                        </div>
+                                        <div class="n-chk">
+                                            <label class="new-control new-checkbox checkbox-primary">
+                                                <input id="chkLocationShip" type="checkbox" name="address_type_id" class="new-control-input" value="05" required>
+                                                <span class="new-control-indicator"></span>@Localizer["ShippingAddress"]@*ที่อยู่จัดส่งสินค้า*@
+                                            </label>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="n-chk">
+                                            <label class="new-control new-checkbox checkbox-primary">
+                                                <input id="chkLocationWT" type="checkbox" name="address_type_id" class="new-control-input" value="03" required>
+                                                <span class="new-control-indicator"></span>@Localizer["WTAddress"]@*ที่อยู่ตาม W/T*@
+                                            </label>
+                                        </div>
+                                        <div class="n-chk">
+                                            <label class="new-control new-checkbox checkbox-primary">
+                                                <input id="chkLocationShipPOP" type="checkbox" name="address_type_id" class="new-control-input" value="06" required>
+                                                <span class="new-control-indicator"></span>@Localizer["POPAddress"]@*ที่อยู่จัดส่ง POP*@
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <input type="hidden" id="hdAddressID" />
+                                        <label>@Localizer["HouseNo"]@*เลขที่*@ :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="row col-sm-12">
+                                            <input type="text" id="txthomenumber" style="width:120px" class="form-control inputValidationAddress" required>
+
+                                            <label>&nbsp;&nbsp;&nbsp;&nbsp;@Localizer["Moo"] :</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input type="text" id="txtVillageNo" style="width:110px" class="form-control">
+                                            <div class="invalid-feedback">
+                                                @Localizer["ErrorHouseNo"]
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Village"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="txtvillage" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Building"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="txtbuilding" style="width:300px" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Floor"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="row col-sm-12">
+                                            <input type="text" id="txtfloor" style="width:120px" class="form-control">
+                                            <label>&nbsp;&nbsp;&nbsp;&nbsp;@Localizer["Room"] :</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input type="text" id="txtroom" style="width:110px" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Soi"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="txtsoi" style="width:300px" class="form-control">
+                                    </div>
+
+
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["street"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="txtroad" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Country"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="ddlcountry" name="country" class="custom-select inputValidationAddress" style="width:300px" required>
+                                            <option value="">Select Country</option>
+                                            <option value="THA">Thailand</option>
+                                        </select>
+                                        <div class="invalid-feedback">@Localizer["ErrorCountry"]</div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Zone"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="ddlzone" name="ddlzone" class="custom-select inputValidationAddress ddlsearch" style="width:300px" required>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            @Localizer["ErrorZone"]
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Province"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="ddlprovince" name="ddlprovince" class="custom-select inputValidationAddress ddlsearch" style="width:300px" required>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            @Localizer["ErrorProvince"]
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["District"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="ddldistrict" name="ddldistrict" class="custom-select inputValidationAddress ddlsearch" style="width:300px" required>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            @Localizer["ErrorDistrict"]
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Subdistrict"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="ddlsubdistrict" name="ddlsubdistrict" class="custom-select inputValidationAddress ddlsearch" style="width:300px" required>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            @Localizer["ErrorSubdistrict"]
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Zipcode"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="ddlzipcode" name="ddlzipcode" class="custom-select inputValidationAddress" style="width:300px" required>
+                                        </select>
+                                        <div class="invalid-feedback">@Localizer["ErrorZipcode"]</div>
+                                    </div>
+                                </div>
+
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-6" style="text-align:right; ">
+                                        <input type="button" id="btnClear" value="@Localizer["Reset"]" style="width:20%" class="btn btn-dark mb-2" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="button" id="btnAddAddress" value="@Localizer["AddAddress"]" style="width:20%" class="btn btn-success mb-2" />
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row col-sm-12">
+                                    <div class="table-responsive">
+                                        <table id="tbAddressResult" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col"></th>
+                                                    <th scope="col"></th>
+                                                    <th width="30%">@Localizer["AddressType"]</th>
+                                                    <th width="50%">@Localizer["Address"]</th>
+                                                    <th width="10%">@Localizer["Edit"]</th>
+                                                    <th width="10%">@Localizer["Delete"]</th>
+
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <br />
                             <h5>@Localizer["Bank"] </h5>
                             <hr>
                             <div class="row">
@@ -468,16 +695,14 @@
                                     <div class="row col-sm-5">
 
                                         <div class="custom-file mb-4">
-                                            @*<input type="file" class="custom-file-input" id="inputBankAttach"
-                                                       aria-describedby="uploadlHelp1" style="width:190px">
-                                                <label class="custom-file-label" for="inputGroupFile01">เลือกไฟล์</label>*@
-
                                             <input type="hidden" id="hdupfileBankAttach" />
                                             <input type="file" class="custom-file-input" id="inputBankAttach" aria-describedby="uploadlHelp1" style="width:190px"
                                                    accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf">
                                             <label class="custom-file-label" for="inputBankAttach" id="lbfileBankAttach">@Localizer["ChooseFile"]</label>
                                             <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
-
+                                            <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
+                                                @Localizer["SizeFile"]
+                                            </small>
                                         </div>
 
                                     </div>
@@ -555,9 +780,12 @@
             tags: true,
         });
 
-            var oTable;
+        var oTable;
+        var oTableAddress;
             $(document).ready(function () {
                 inittbSearchResult();
+                inittbAddressResult();
+                $(".ddlsearch").select2();
                 $("#btnSearchLoc").click(function (e) {
 
                     inittbSearchResult();
@@ -610,6 +838,262 @@
                     $('.modal:visible').length && $(document.body).addClass('modal-open');
                 });
 
+                $('#ddlzone').change(function () {
+
+                    BindDDLprovince($('#ddlzone option').filter(':selected').val());
+                });
+
+                $('#ddlprovince').change(function () {
+
+                    BindDDLdistrict($('#ddlprovince option').filter(':selected').val());
+                });
+                $('#ddldistrict').change(function () {
+                    BindDDLsubdistrict($('#ddldistrict option').filter(':selected').val());
+                });
+                $('#tbAddressResult').on('click', 'tbody .edit_btn', function () {
+                    var data_row = oTableAddress.row($(this).closest('tr')).data();
+                    oTableAddress.row($(this).closest('tr')).remove().draw();
+
+
+                    $.ajax({
+                        type: "POST",
+                        url:  '@Url.Action("GetAddressById", "Location")',
+                        data: { addressID: data_row.addressId },
+                        dataType: "json",
+                        success: function (data) {
+
+                            $('#hdAddressID').val('');
+                            $('#ddlcountry').val('');
+
+                            $('#ddlprovince').val('');
+
+                            $('#ddldistrict').val('');
+
+                            $('#ddlsubdistrict').val('');
+
+                            $('#ddlzipcode').val('');
+
+                            $('#ddlzone').val('');
+
+                            $('#txthomenumber').val('');
+                            $('#txtVillageNo').val('');
+                            $('#txtvillage').val('');
+                            $('#txtbuilding').val('');
+                            $('#txtfloor').val('');
+                            $('#txtroom').val('');
+                            $('#txtsoi').val('');
+                            $('#txtroad').val('');
+
+
+                            $('#chkAddressType input[type=checkbox]').each(function () {
+                                $(this).prop('checked', false);
+
+                            });
+
+
+                            if (data.status) {
+                                console.log(data.response);
+
+                                $('#hdAddressID').val(data.response.AddressId);
+                                $('#ddlcountry').val(data.response.Country)
+
+                                $('#ddlprovince').val(data.response.ProvinceId)
+                                $('#ddlprovince').trigger('change');
+
+                                $('#ddldistrict').val(data.response.DistrictId)
+                                $('#ddldistrict').trigger('change');
+
+                                $('#ddlsubdistrict').val(data.response.SubDistrictId)
+
+                                $('#ddlzipcode').val(data.response.ZipCode)
+
+                                $('#ddlzone').val(data.response.RegionId)
+
+                                $('#txthomenumber').val(data.response.HouseNo)
+                                $('#txtVillageNo').val(data.response.Moo)
+                                $('#txtvillage').val(data.response.VillageName)
+                                $('#txtbuilding').val(data.response.Building)
+                                $('#txtfloor').val(data.response.Floor)
+                                $('#txtroom').val(data.response.RoomNo)
+                                $('#txtsoi').val(data.response.Soi)
+                                $('#txtroad').val(data.response.Road)
+
+                                var addr_type_id = data.response.AddressTypeId
+                                $(':checkbox').each(function (i) {
+
+                                    if (addr_type_id == $(this).val()) {
+                                        $(this).prop('checked', true);
+                                    }
+                                });
+                            }
+                            else {
+                                bootbox.confirm({
+                                    title: "System Information",
+                                    message: data.message,
+                                    buttons: {
+                                        cancel: {
+                                            label: '<i class="fa fa-times"></i> Cancel'
+                                        }
+                                    },
+                                    callback: function (result) {
+                                        console.log(xhr);
+                                    }
+                                });
+
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(status);
+                            bootbox.confirm({
+                                title: "System Information",
+                                message: xhr.responseText,
+                                buttons: {
+                                    cancel: {
+                                        label: '<i class="fa fa-times"></i> Cancel'
+                                    }
+                                },
+                                callback: function (result) {
+                                    console.log('This was logged in the callback: ' + result);
+                                }
+                            });
+                        }
+                    });
+                });
+
+                $('#tbAddressResult').on('click', 'tbody .delete_btn', function () {
+                    var data_row = oTableAddress.row($(this).closest('tr')).data();
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("DeleteDaftAddress", "Location")',
+                        data: { AddressId: data_row.addressId },
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.status) {
+                                var val = []
+                                val = ConcatstrAddress(data.response);
+                                oTableAddress.clear();
+                                BindDatatable(oTableAddress, val);
+                            }
+                            else {
+                                bootbox.confirm({
+                                    title: "System Information",
+                                    message: data.message,
+                                    buttons: {
+                                        cancel: {
+                                            label: '<i class="fa fa-times"></i> Cancel'
+                                        }
+                                    },
+                                    callback: function (result) {
+                                        console.log(xhr);
+                                    }
+                                });
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(status);
+                            bootbox.confirm({
+                                title: "System Information",
+                                message: xhr.responseText,
+                                buttons: {
+                                    cancel: {
+                                        label: '<i class="fa fa-times"></i> Cancel'
+                                    }
+                                },
+                                callback: function (result) {
+                                    console.log('This was logged in the callback: ' + result);
+                                }
+                            });
+                        }
+                    });
+                });
+                $('#btnAddAddress').click(function () {
+                    var stuff = [];
+
+
+                    $(':checkbox:checked').each(function (i) {
+
+                        //val[i] = $(this).parent().text().trim();
+
+                        var data = {
+                            AddressTypeId: $(this).val(),
+                            address_type_name: $(this).parent().text().trim(),
+                            Country: $('#country option').filter(':selected').val(),
+                            ZipCode: $('#ddlzipcode option').filter(':selected').val(),
+                            HouseNo: $('#txthomenumber').val(),
+                            Moo: $('#txtVillageNo').val(),
+                            VillageName: $('#txtvillage').val(),
+                            Building: $('#txtbuilding').val(),
+                            Floor: $('#txtfloor').val(),
+                            RoomNo: $('#txtroom').val(),
+                            Soi: $('#txtsoi').val(),
+                            Road: $('#txtroad').val(),
+                            SubDistrictId: $('#ddlsubdistrict option').filter(':selected').val(),
+                            sub_district_name: $('#ddlsubdistrict option').filter(':selected').text(),
+                            DistrictId: $('#ddldistrict option').filter(':selected').val(),
+                            district_name: $('#ddldistrict option').filter(':selected').text(),
+                            ProvinceId: $('#ddlprovince option').filter(':selected').val(),
+                            province_name: $('#ddlprovince option').filter(':selected').text(),
+                            RegionId: $('#ddlzone option').filter(':selected').val(),
+                            location_code: $('#txtlocationcode').val(),
+                            CompanyId: $('#hdCompanyId').val(),
+                            AddressId: $('#hdAddressID').val()
+                        }
+                        stuff.push(data);
+
+
+                    });
+
+                    var forms = document.getElementsByClassName('needs-validation-address');
+                    var validation = Array.prototype.filter.call(forms, function (form) {
+                        var failed = false;
+
+                        if ($("[name='address_type_id']:checked").length == 0) {
+                            $("[name='address_type_id']").attr('required', true);
+                            failed = true;
+                            $("[name='address_type_id']").parent().css({ color: '#e7515a' });
+                        }
+                        else {
+                            $("[name='address_type_id']").attr('required', false);
+                            $("[name='address_type_id']").parent().removeAttr('style');
+                        }
+
+                        if (ValidateAddress(".form-control.inputValidationAddress", ".custom-control-input.inputValidationAddress"
+                            , ".custom-select.inputValidationAddress", ".custom-file-input.inputValidationAddress")) {
+                            failed = true;
+                        }
+
+                        if (failed == true) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        else {
+                            SaveDaftAddress(stuff);
+                        }
+                        form.classList.add('was-validated');
+                    });
+
+                });
+                $('#btnClear').click(function () {
+                    $('#txthomenumber').val('')
+                    $('#txtVillageNo').val('')
+                    $('#txtvillage').val('')
+                    $('#txtbuilding').val('')
+                    $('#txtfloor').val('')
+                    $('#txtroom').val('')
+                    $('#txtsoi').val('')
+                    $('#txtroad').val('')
+                    $('#ddlcountry').val('')
+                    $('#ddlzone').val('')
+                    $('#ddlprovince').val('')
+                    $('#ddldistrict').val('')
+                    $('#ddlsubdistrict').val('')
+                    $('#ddlzipcode').val('');
+
+                    $('#chkAddressType input[type=checkbox]').each(function () {
+                        $(this).prop('checked', false);
+
+                    });
+                });
             });
 
             //'use strict';
@@ -700,6 +1184,55 @@
 
         }
 
+        function inittbAddressResult() {
+            oTableAddress = $('#tbAddressResult').DataTable({
+                processing: true, // for show progress bar
+                //serverSide: true, // for process server side
+                filter: false, // this is for disable filter (search box)
+                orderMulti: false, // for disable multiple column at once
+                pageLength: 10,
+                order: [],
+                autoWidth: false,
+                searching: false,
+                destroy: true,
+                lengthChange: false,
+                paging: false,
+                "oLanguage": {
+                    //"oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                    //"sInfo": "Showing page _PAGE_ of _PAGES_",
+                    "sSearch": false,
+                    "sLengthMenu": "Results :  _MENU_",
+                },
+                "scrollX": false,
+                "language": {
+                    "zeroRecords": "No data found.",
+                    "decimal": ",",
+                    "thousands": "."
+                },
+                columns: [
+
+
+                    { "data": "addressId", "visible": false },
+                    { "data": "address_type_id", "visible": false },
+                    { "data": "address_type", orderable: true, },
+                    { "data": "address", orderable: true, },
+                    {
+                        data: null, width: "10%", orderable: false, render: function (data, type, row) {
+                            return "<a href='#'class='edit_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='แก้ไข'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg></a>";
+                        }
+                    },
+                    {
+                        data: null, width: "10%", orderable: false, render: function (data, type, row) {
+                            return "<a href='#' class='delete_btn'  data-toggle='modal' data-target='.bd-addedit-modal-xl' data-original-title='ลบ'><svg xmlns='http://www.w3.org/2000/svg'width='24' height='24' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'><g fill='none' stroke='#626262' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 6h18'/><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'/></g></svg></a>";
+                        }
+                    },
+                ],
+                "order": [[1, "desc"]],
+                "stripeClasses": [],
+                // drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+            });
+        }
 
 
         function openModal(mode, locationId) {
@@ -708,6 +1241,11 @@
 
             $('#hdMode').val(mode);
             $('#hdLocationId').val(locationId);
+
+            BindRegion();
+            BindDDLprovince();
+            BindDDLdistrict();
+            BindDDLsubdistrict();
 
             if (mode == "edit") {
                 //$("#txtCompanyCode").prop("disabled", true);
@@ -727,6 +1265,232 @@
 
             $('#AddEditModal').modal('show');
 
+        }
+
+        function GetAddress() {
+            // inittbAddressResult(companyId);
+            $.ajax({
+                url: '@Url.Action("GetAddress", "Location")',
+                type: "POST",
+                data: {
+                    locationid: function () {
+                        return $('#hdLocationId').val();
+                    }
+                },
+                datatype: "JSON",
+            }).done(function (data) {
+                var val = []
+                val = ConcatstrAddress(data.data);
+                data.data = val;
+                oTableAddress.clear().draw();
+                oTableAddress.rows.add(data.data).draw();
+            }).fail(function (xhr) {
+                console.log(xhr);
+            });
+        }
+        function BindRegion() {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DDLsubcontract_profile_Region", "Account")',
+                //data: { province_id: province },
+                dataType: "json",
+                success: function (data) {
+
+                    if (data != null) {
+                        $('#ddlzone').empty();
+
+                        $.each(data.responseregion, function () {
+                            $('#ddlzone').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
+                        });
+                    }
+
+
+                },
+                error: function (xhr) {
+
+                    console.log(xhr);
+                }
+            });
+        }
+        function BindDDLprovince(regionid) {
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: '@Url.Action("DDLsubcontract_profile_province", "Account")',
+                data: { region_id: regionid },
+                dataType: "json",
+                success: function (data) {
+
+                    if (data != null) {
+                        $('#ddlprovince').empty();
+                        $.each(data.responseprovince, function () {
+                            $('#ddlprovince').append($('<option></option>').val(this.Value == "0" ? "" : this.Value).text(this.Text));
+                        });
+                    }
+
+
+                },
+                error: function (xhr) {
+
+                    console.log(xhr);
+                }
+            });
+        }
+        function BindDDLdistrict(province) {
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: '@Url.Action("DDLsubcontract_profile_district", "Account")',
+                data: { province_id: province },
+                dataType: "json",
+                success: function (data) {
+
+                    if (data != null) {
+                        $('#ddldistrict').empty();
+
+                        $.each(data.responsedistricrt, function () {
+                            $('#ddldistrict').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
+                        });
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+
+                    console.log(xhr);
+                }
+            });
+        }
+        function BindDDLsubdistrict(district) {
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: '@Url.Action("DDLsubcontract_profile_sub_district", "Account")',
+                data: { district_id: district },
+                dataType: "json",
+                success: function (data) {
+
+                    if (data != null) {
+                        $('#ddlsubdistrict').empty();
+                        $('#ddlzipcode').empty();
+
+                        $.each(data.responsesubdistrict, function () {
+
+                            $('#ddlsubdistrict').append($("<option></option>").val(this.Value == "0" ? "" : this.Value).text(this.Text));
+                        });
+                        $.each(data.responsezipcode, function () {
+
+                            $('#ddlzipcode').append($("<option></option>").val(this.Value).text(this.Text));
+
+
+                        })
+
+                        $('#ddlzipcode').val("")
+                    }
+
+
+                },
+                error: function (xhr) {
+
+                    console.log(xhr);
+                }
+            });
+        }
+        function BindDatatable(table, datamodel) {
+
+            table.rows.add(datamodel).draw();
+
+        }
+
+        function SaveDaftAddress(stuff) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("SaveDaftAddress", "Location")',
+                data: { daftdata: stuff },
+                dataType: "json",
+                success: function (data) {
+
+                    if (data.status) {
+                        var val = []
+                        val = ConcatstrAddress(data.response);
+                        data.data = val;
+                        oTableAddress.clear().draw();
+                        oTableAddress.rows.add(data.data).draw();
+                    }
+                    else {
+                        bootbox.confirm({
+                            title: "System Information",
+                            message: data.message,
+                            buttons: {
+                                cancel: {
+                                    label: '<i class="fa fa-times"></i> Cancel'
+                                }
+                            },
+                            callback: function (result) {
+                                console.log('This was logged in the callback: ' + result);
+                            }
+                        });
+                    }
+
+                },
+                error: function (xhr) {
+
+                    console.log(xhr);
+                }
+            });
+        }
+        function ConcatstrAddress(data) {
+            var val = [];
+
+            $.each(data, function () {
+                if (this.outFullAddress != null && this.outFullAddress != "") {
+                    var strdata = {
+                        addressId: this.AddressId,
+                        address_type_id: this.AddressTypeId,
+                        address_type: this.address_type_name,
+                        address: this.outFullAddress
+                    };
+
+                    val.push(strdata);
+                }
+                else {
+                    var strnumber = this.HouseNo != '' && this.HouseNo != null ? this.HouseNo : '';
+                    var strvillage = this.VillageName != '' && this.VillageName != null ? $('#txtvillage').parent().parent().text().split(":")[0].trim() + ' ' + this.VillageName : '';
+                    var strvillageno = this.Moo != '' && this.Moo != null ? $('#txtVillageNo').parent().parent().text().split(":")[1].trim() + ' ' + this.Moo : '';
+
+                    var strbuilding = this.Building != '' && this.Building != null ? $('#txtbuilding').parent().parent().text().split(":")[0].trim() + ' ' + this.Building : '';
+                    var strfloor = this.Floor != '' && this.Floor != null ? $('#txtfloor').parent().parent().text().split(":")[0].trim() + ' ' + this.Floor : '';
+                    var strroom = this.RoomNo != '' && this.RoomNo != null ? $('#txtroom').parent().parent().text().split(":")[1].trim() + ' ' + this.RoomNo : '';
+                    var strsoi = this.Soi != '' && this.Soi != null ? $('#txtsoi').parent().parent().text().split(":")[0].trim() + ' ' + this.Soi : '';
+
+                    var strroad = this.Road != '' && this.Road != null ? $('#txtroad').parent().parent().text().split(":")[0].trim() + ' ' + this.Road : '';
+                    var strsubdistrict = this.SubDistrictId != '' && this.SubDistrictId != null ? $('#ddlsubdistrict').parent().parent().text().split(":")[0].trim() + ' ' +
+                        this.sub_district_name : '';
+                    var strdistrict = this.DistrictId != 0 && this.DistrictId != null ? $('#ddldistrict').parent().parent().text().split(":")[0].trim() + ' ' +
+                        this.district_name : '';
+                    var strprovince = this.ProvinceId != 0 && this.ProvinceId != null ? $('#ddlprovince').parent().parent().text().split(":")[0].trim() + ' ' +
+                        this.province_name : '';
+
+                    var strzipcode = this.ZipCode != '' && this.ZipCode != null ? $('#ddlzipcode').parent().parent().text().split(":")[0].trim() + ' ' +
+                        this.ZipCode : '';
+
+                    var strdata = {
+                        addressId: this.AddressId,
+                        address_type_id: this.AddressTypeId,
+                        address_type: this.address_type_name,
+                        address: strnumber.trim() + ' ' + strvillage.trim() + ' ' + strvillageno.trim() + ' ' + strbuilding.trim() + ' ' + strfloor.trim() + ' ' +
+                            strroom.trim() + ' ' + strsoi.trim() + ' ' + strroad.trim() + ' ' + strsubdistrict.trim() + ' ' + strdistrict.trim() + ' ' +
+                            strprovince.trim() + ' ' + strzipcode.trim(),
+                    };
+
+                    val.push(strdata);
+                }
+
+
+            });
+
+
+            return val;
         }
 
         function clearMainData() {
@@ -828,11 +1592,11 @@
                       $('#inputPaymentMail').val(result.PaymentContractMail);
                       $('#inputEtcMail').val(result.EtcContractMail);
 
-                      $('#inputLocationAddress').val(result.LocationAddress);
+                      //$('#inputLocationAddress').val(result.LocationAddress);
 
-                      $("#inputPostAddress").val(result.PostAddress)
-                      $("#inputTaxAddress").val(result.TaxAddress)
-                      $("#inputWTAddress").val(result.WtAddress)
+                      //$("#inputPostAddress").val(result.PostAddress)
+                      //$("#inputTaxAddress").val(result.TaxAddress)
+                      //$("#inputWTAddress").val(result.WtAddress)
 
                       $('#inputBankCode').val(result.BankCode);
                       $('#inputBankName').val(result.BankName);
@@ -852,6 +1616,8 @@
                           //$('#linkdownload').text(data.SlipAttachFile);
                           //DownloadFileSlip(data.SlipAttachFile);
                       }
+
+                      GetAddress();
 
                   }
                   },
@@ -1025,7 +1791,7 @@
                     dataType: "json",
                     data: formData,
                     success: function (data) {
-                       
+
                         if (data.status) {
                             $('#hdupfileBankAttach').val(data.file_id);
                         }
@@ -1090,6 +1856,103 @@
                 haserror = true;
             }
             return haserror;
+        }
+
+        function ValidateAddress(formcontrol, custom, customselect, cutomupload) {
+            var hasError = false;
+
+            $(formcontrol).each(function () {
+                var $this = $(this);
+                var fieldvalue = $this.val();
+                var type = $this.attr("type");
+                var tag = $this[0].tagName;
+
+                if (tag == "INPUT" && type == "text") {
+                    if (fieldvalue == "") {
+
+                        hasError = true;
+                    }
+                }
+                else if (tag == "INPUT" && type == "password") {
+                    if (fieldvalue == "") {
+
+                        hasError = true;
+                    }
+                }
+                else if ($this.is('select')) {
+                    if (fieldvalue == "0") {
+
+                        hasError = true;
+                    }
+                }
+                else if (tag == "INPUT" && type == 'radio') {
+                    if (!fieldvalue) {
+
+                        hasError = true;
+                    }
+                }
+                else if (tag == "INPUT" && type == 'checkbox') {
+                    if (!fieldvalue) {
+
+                        hasError = true;
+
+                    }
+                }
+                else if (type == "hidden") {
+                    if (fieldvalue == "") {
+
+                        hasError = true;
+                    }
+                }
+            }); //Input
+            $(custom).each(function () {
+                var $this = $(this);
+
+                var type = $this.attr("type");
+                var tag = $this[0].tagName;
+                var fieldvalue = $this.is(":checked");
+
+                if (tag == "INPUT" && type == 'radio') {
+                    if (!fieldvalue) {
+
+                        hasError = true;
+
+                    }
+                }
+                else if (tag == "INPUT" && type == 'checkbox') {
+                    if (!fieldvalue) {
+
+                        hasError = true;
+
+                    }
+                }
+            });//radio,check box
+            $(customselect).each(function () {
+                var $this = $(this);
+
+                var type = $this.attr("type");
+                var tag = $this[0].tagName;
+                var fieldvalue = $this.val();
+
+                if ($this.is('select')) {
+                    if (fieldvalue == "") {
+
+                        hasError = true;
+                    }
+                }
+            });//custom selete
+            $(cutomupload).each(function () {
+                var $this = $(this);
+                var fieldvalue = $this.files;
+                if ($this.is('input')) {
+                    var s = $(this).val().split("\\").pop();
+                    if (fieldvalue == "") {
+
+                        hasError = true;
+                    }
+                }
+            });//customupload
+            return hasError;
         }
 
         function CheckLocationcode(mode) {

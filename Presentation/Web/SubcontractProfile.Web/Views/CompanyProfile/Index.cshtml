@@ -758,7 +758,7 @@
                                 <label>@Localizer["Zone"] :</label>
                             </div>
                             <div class="col-sm-4">
-                                <select id="ddlzone" name="ddlzone" class="custom-select inputValidationAddress" style="width:300px" required>
+                                <select id="ddlzone" name="ddlzone" class="custom-select inputValidationAddress ddlsearch" style="width:300px" required>
                                 </select>
                                 <div class="invalid-feedback">
                                     @Localizer["ErrorZone"]
@@ -773,7 +773,7 @@
                                 <label>@Localizer["Province"] :</label>
                             </div>
                             <div class="col-sm-4">
-                                <select id="ddlprovince" name="ddlprovince" class="custom-select inputValidationAddress" style="width:300px" required>
+                                <select id="ddlprovince" name="ddlprovince" class="custom-select inputValidationAddress ddlsearch" style="width:300px" required>
                                 </select>
                                 <div class="invalid-feedback">
                                     @Localizer["ErrorProvince"]
@@ -784,7 +784,7 @@
                                 <label>@Localizer["District"] :</label>
                             </div>
                             <div class="col-sm-4">
-                                <select id="ddldistrict" name="ddldistrict" class="custom-select inputValidationAddress" style="width:300px" required>
+                                <select id="ddldistrict" name="ddldistrict" class="custom-select inputValidationAddress ddlsearch" style="width:300px" required>
                                 </select>
                                 <div class="invalid-feedback">
                                     @Localizer["ErrorDistrict"]
@@ -799,7 +799,7 @@
                                 <label>@Localizer["Subdistrict"] :</label>
                             </div>
                             <div class="col-sm-4">
-                                <select id="ddlsubdistrict" name="ddlsubdistrict" class="custom-select inputValidationAddress" style="width:300px" required>
+                                <select id="ddlsubdistrict" name="ddlsubdistrict" class="custom-select inputValidationAddress ddlsearch" style="width:300px" required>
                                 </select>
                                 <div class="invalid-feedback">
                                     @Localizer["ErrorSubdistrict"]
@@ -1064,6 +1064,9 @@
                                                aria-describedby="uploadlHelp1" accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf" />
                                         <label class="custom-file-label " for="inputuploadbookbank" id="lbuploadbookbank">@Localizer["ChooseFile"]</label>
                                         <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
+                                        <small id="uploadlHelp1" class="form-text text-muted"  style="margin-top:0;">
+                                            @Localizer["SizeFile"]
+                                        </small>
                                         <div class="invalid-feedback">@Localizer["ErrorBookBank"]</div>
                                     </div>
 
@@ -1101,6 +1104,9 @@
                                     @*<small id="uploadlHelp2" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>*@
                                     @*<small id="uploadlHelp2" class="form-text text-muted">***@@*Localizer["SupportFilePDF"]</small>*@
                                     <small id="uploadlHelp2" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
+                                    <small id="uploadlHelp2" class="form-text text-muted" style="margin-top:0;">
+                                        @Localizer["SizeFile"]
+                                    </small>
                                     <div class="invalid-feedback">@Localizer["ErrorCompanyCertificate"]</div>
                                 </div>
                             </div>
@@ -1118,6 +1124,9 @@
                                     @*<small id="uploadlHelp3" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>*@
                                     @*<small id="uploadlHelp3" class="form-text text-muted">***@@*Localizer["SupportFilePDF"]</small>*@
                                     <small id="uploadlHelp3" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
+                                    <small id="uploadlHelp3" class="form-text text-muted"  style="margin-top:0;">
+                                        @Localizer["SizeFile"]
+                                    </small>
                                     <div class="invalid-feedback">@Localizer["ErrorCommercialRegistrationBook"]</div>
                                 </div>
                             </div>
@@ -1138,6 +1147,9 @@
                                     @*<small id="uploadlHelp4" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>*@
                                     @*<small id="uploadlHelp4" class="form-text text-muted">***@@*Localizer["SupportFilePDF"]</small>*@
                                     <small id="uploadlHelp4" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
+                                    <small id="uploadlHelp4" class="form-text text-muted"  style="margin-top:0;">
+                                        @Localizer["SizeFile"]
+                                    </small>
                                     <div class="invalid-feedback">@Localizer["ErrorVATRegistrationCertificate"]</div>
                                 </div>
                             </div>

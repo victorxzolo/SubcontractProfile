@@ -80,6 +80,8 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string ModifiedBy { get; set; }
 
+        public string LocationId { get; set; }
+
 
         public object Clone()
         {
