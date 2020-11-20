@@ -1377,6 +1377,8 @@ function getDataById(id) {
                         $('#hdupfilevat_registration_certificate').val(result.file_id_VatRegistrationCertificateFile);
                     }
 
+                    $('#txtRemark').val(result.Remark);
+
                     GetAddress(id);
 
                   
@@ -1578,51 +1580,6 @@ function onSaveCompanyProfile() {
         wt_name = $('#inputWT_name').val();
         vat_type = $('#chkvat_typeT').is(':checked') ? $('#chkvat_typeT').val() : $('#chkvat_typeE').val();
     }
-
-    //        company.CompanyNameTh = company_name_th;
-    //        company.CompanyNameEn = company_name_en;
-    //        company.CompanyAlias = company_alias;
-    //        company.DistributionChannel = distribution_channel;
-    //        company.ChannelSaleGroup = channel_sale_group;
-    //        company.TaxId = tax_id;
-    //        company.WtName = wt_name;
-    //        company.VatType = vat_type;
-    //        company.CompanyEmail = $('#mailCompany').val();
-    //        company.ContractName = $('#nameContract').val();
-    //        company.ContractPhone = $('#telContract').val();
-    //        company.ContractEmail = $('#mailContract').val();
-
-    //        company.BankCode = $('#selBankName option').filter(':selected').val()
-    //        company.BankName = $('#txtbank_Name').val();
-    //        company.AccountNumber = $('#codeNumber').val();
-    //        company.AccountName = $('#busiName').val();
-
-    //        //company.BranchCode= $('#txtbranch_Code').val();
-    //        company.BranchName = $('#nameBranch').val();
-
-    //        company.DeptOfInstallName = $('#name1').val();
-    //        company.DeptOfMaintenName = $('#name2').val();
-    //        company.DeptOfAccountName = $('#name3').val();
-
-    //        company.DeptOfInstallPhone = $('#tel1').val();
-    //        company.DeptOfMaintenPhone = $('#tel2').val();
-    //        company.DeptOfAccountPhone = $('#tel3').val();
-
-    //        company.DeptOfInstallEmail = $('#mail1').val();
-    //        company.DeptOfMaintenEmail = $('#mail2').val();
-    //        company.DeptOfAccountEmail = $('#mail3').val();
-
-    //        company.LocationCode= $('#txtlocationcode').val();
-    //        company.LocationNameTh= $('#txtlocationname').val();
-    //        company.LocationNameEn= $('#txtlocationname').val();
-
-    //        company.BankAccountTypeId= $('#AccType option').filter(':selected').val();
-    //        company.SubcontractProfileType= chksubcontract_type;
-    //        company.CompanyTitleThId= company_title_name_th;
-    //        company.CompanyTitleEnId= company_title_name_en;
-    //company.CompanyId = $('#hdCompanyId').val();
-
-
     data.append("CompanyNameTh", company_name_th);
     data.append("CompanyNameEn", company_name_en);
     data.append("CompanyAlias", company_alias);
@@ -1674,6 +1631,8 @@ function onSaveCompanyProfile() {
     data.append("CompanyCertifiedFile", $('#lbuploadcertificate').text());
     data.append("CommercialRegistrationFile", $('#lbuploadComRegis').text());
     data.append("VatRegistrationCertificateFile", $('#lbupload20').text());
+
+    data.append("Remark", $('#txtRemark').val())
 
     //console.log(company);
     var urlOnSave= url.replace('Action', 'OnSave');
