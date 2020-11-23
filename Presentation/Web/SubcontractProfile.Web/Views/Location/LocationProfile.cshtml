@@ -6,6 +6,19 @@
 
 @{ Layout = "~/Views/Shared/_Layout.cshtml"; ViewBag.Title = "Location Profile";
 }
+    <style>
+        .was-validated .custom-select:invalid + .select2 .select2-selection {
+            border-color: #dc3545 !important;
+        }
+
+        .was-validated .custom-select:valid + .select2 .select2-selection {
+            border-color: #28a745 !important;
+        }
+
+        *:focus {
+            outline: 0px;
+        }
+    </style>
 <div id="pageID" style="display:none;">LocationProfile</div>
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
@@ -124,7 +137,7 @@
 
 @section modalpanel {
 
-    <div id="AddEditModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div id="AddEditModal" class="modal fade"  role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -416,14 +429,14 @@
                                         <div class="n-chk">
                                             <label class="new-control new-checkbox checkbox-primary">
                                                 <input id="chkLocationBranch" type="checkbox" name="address_type_id" class="new-control-input" value="01" required>
-                                                <span class="new-control-indicator"></span>@Localizer["BranchAddress"]
+                                                <span class="new-control-indicator"></span>@*@Localizer["BranchAddress"]*@
                                             </label>
                                         </div>
 
                                         <div class="n-chk">
                                             <label class="new-control new-checkbox checkbox-primary">
                                                 <input id="chkLocationDoc" type="checkbox" name="address_type_id" class="new-control-input" value="04" required>
-                                                <span class="new-control-indicator"></span>@Localizer["DocumentAddress"]@*ที่อยู่จัดส่งเอกสาร*@
+                                                <span class="new-control-indicator"></span>@*@Localizer["DocumentAddress"]*@@*ที่อยู่จัดส่งเอกสาร*@
                                             </label>
                                         </div>
                                     </div>
@@ -431,13 +444,13 @@
                                         <div class="n-chk">
                                             <label class="new-control new-checkbox checkbox-primary">
                                                 <input id="chkLocationTax" type="checkbox" name="address_type_id" class="new-control-input" value="02" required>
-                                                <span class="new-control-indicator"></span>@Localizer["TaxAddress"]@*ที่อยู่ตามใบกำกับภาษี*@
+                                                <span class="new-control-indicator"></span>@*@Localizer["TaxAddress"]*@@*ที่อยู่ตามใบกำกับภาษี*@
                                             </label>
                                         </div>
                                         <div class="n-chk">
                                             <label class="new-control new-checkbox checkbox-primary">
                                                 <input id="chkLocationShip" type="checkbox" name="address_type_id" class="new-control-input" value="05" required>
-                                                <span class="new-control-indicator"></span>@Localizer["ShippingAddress"]@*ที่อยู่จัดส่งสินค้า*@
+                                                <span class="new-control-indicator"></span>@*@Localizer["ShippingAddress"]*@@*ที่อยู่จัดส่งสินค้า*@
                                             </label>
                                         </div>
 
@@ -447,13 +460,13 @@
                                         <div class="n-chk">
                                             <label class="new-control new-checkbox checkbox-primary">
                                                 <input id="chkLocationWT" type="checkbox" name="address_type_id" class="new-control-input" value="03" required>
-                                                <span class="new-control-indicator"></span>@Localizer["WTAddress"]@*ที่อยู่ตาม W/T*@
+                                                <span class="new-control-indicator"></span>@*@Localizer["WTAddress"]*@@*ที่อยู่ตาม W/T*@
                                             </label>
                                         </div>
                                         <div class="n-chk">
                                             <label class="new-control new-checkbox checkbox-primary">
                                                 <input id="chkLocationShipPOP" type="checkbox" name="address_type_id" class="new-control-input" value="06" required>
-                                                <span class="new-control-indicator"></span>@Localizer["POPAddress"]@*ที่อยู่จัดส่ง POP*@
+                                                <span class="new-control-indicator"></span>@*@Localizer["POPAddress"]*@@*ที่อยู่จัดส่ง POP*@
                                             </label>
                                         </div>
                                     </div>
@@ -536,7 +549,7 @@
                                         <label>@Localizer["Zone"] :</label>
                                     </div>
                                     <div class="col-sm-4">
-                                        <select id="ddlzone" name="ddlzone" class="custom-select inputValidationAddress ddlsearch" style="width:300px" required>
+                                        <select id="ddlzone" name="ddlzone" class="custom-select inputValidationAddress" style="width:300px" required>
                                         </select>
                                         <div class="invalid-feedback">
                                             @Localizer["ErrorZone"]
@@ -782,10 +795,10 @@
 
         var oTable;
         var oTableAddress;
-            $(document).ready(function () {
+        $(document).ready(function () {
+            $(".ddlsearch").select2();
                 inittbSearchResult();
                 inittbAddressResult();
-                $(".ddlsearch").select2();
                 $("#btnSearchLoc").click(function (e) {
 
                     inittbSearchResult();
@@ -936,26 +949,15 @@
                                         }
                                     },
                                     callback: function (result) {
-                                        console.log(xhr);
+                                        console.log(result);
                                     }
                                 });
 
                             }
                         },
-                        error: function (xhr, status, error) {
-                            console.log(status);
-                            bootbox.confirm({
-                                title: "System Information",
-                                message: xhr.responseText,
-                                buttons: {
-                                    cancel: {
-                                        label: '<i class="fa fa-times"></i> Cancel'
-                                    }
-                                },
-                                callback: function (result) {
-                                    console.log('This was logged in the callback: ' + result);
-                                }
-                            });
+                        error: function (xhr) {
+                            console.log(xhr);
+
                         }
                     });
                 });
@@ -1084,9 +1086,9 @@
                     $('#txtroad').val('')
                     $('#ddlcountry').val('')
                     $('#ddlzone').val('')
-                    $('#ddlprovince').val('')
-                    $('#ddldistrict').val('')
-                    $('#ddlsubdistrict').val('')
+                    $('#ddlprovince').val('').change();
+                    $('#ddldistrict').val('').change();
+                    $('#ddlsubdistrict').val('').change();
                     $('#ddlzipcode').val('');
 
                     $('#chkAddressType input[type=checkbox]').each(function () {
@@ -1241,7 +1243,7 @@
 
             $('#hdMode').val(mode);
             $('#hdLocationId').val(locationId);
-
+            BindAddressType();
             BindRegion();
             BindDDLprovince();
             BindDDLdistrict();
@@ -1392,6 +1394,37 @@
                 },
                 error: function (xhr) {
 
+                    console.log(xhr);
+                }
+            });
+        }
+        function BindAddressType() {
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: '@Url.Action("GetAddressType", "Account")',
+                //data: { province_id: province },
+                dataType: "json",
+                success: function (data) {
+                    if (data != null) {
+                        $.each(data.responseaddresstype, function () {
+                            var strtext = this.Text;
+                            var strvalue = this.Value;
+                            $('#chkAddressType input[type=checkbox]').each(function () {
+
+                                if ($(this).val() == strvalue) {
+                                    var id = $(this).attr("id");
+
+                                    $(this).next('span').after(strtext);
+                                }
+                            });
+
+                        });
+                    }
+
+
+                },
+                error: function (xhr) {
                     console.log(xhr);
                 }
             });
@@ -1810,9 +1843,8 @@
                         });
 
                     },
-                    error: function (xhr) {
+                    error: function () {
 
-                        console.log(xhr)
                     }
                 }
             );

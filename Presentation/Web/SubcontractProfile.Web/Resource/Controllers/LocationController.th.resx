@@ -120,6 +120,9 @@
   <data name="LocationProfile" xml:space="preserve">
     <value>ข้อมูลสถานที่</value>
   </data>
+  <data name="MessageAddresUnSuccess" xml:space="preserve">
+    <value>ข้อมูลที่อยู่ไม่ถูกต้อง, กรุณาตรวจสอบความถูกต้อง หรือ ติดต่อ System Admin</value>
+  </data>
   <data name="MessageCheckLocationCode" xml:space="preserve">
     <value>Location Code นี้มีในระบบแล้ว</value>
   </data>

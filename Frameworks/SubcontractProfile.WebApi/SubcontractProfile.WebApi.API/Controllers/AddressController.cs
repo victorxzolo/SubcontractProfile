@@ -235,6 +235,17 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
             return await _service.DeleteByCompanyId(id);
         }
+        [HttpPost("DeleteByLocationId")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        public async Task<bool> DeleteByLocationId([FromBody] string id)
+        {
+            _logger.LogInformation($"Start AddressController::DeleteByLocationId", id);
+
+            if (id == null)
+                _logger.LogWarning($"Start AddressController::DeleteByLocationId", id);
+
+            return await _service.DeleteByLocationId(id);
+        }
         #endregion
 
         #region Excepions

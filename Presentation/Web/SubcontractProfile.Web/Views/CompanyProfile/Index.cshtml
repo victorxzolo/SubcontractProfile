@@ -15,8 +15,19 @@
 <div id="controllername" data-url="@Url.Action("Action", "CompanyProfile")" style="display:none;"></div>
 <div id="accountcontrollername" data-url="@Url.Action("Action", "Account")" style="display:none;"></div>
 
+<style>
+    .was-validated .custom-select:invalid + .select2 .select2-selection {
+        border-color: #dc3545 !important;
+    }
 
+    .was-validated .custom-select:valid + .select2 .select2-selection {
+        border-color: #28a745 !important;
+    }
 
+    *:focus {
+        outline: 0px;
+    }
+</style>
 <!-- Content -->
 <div class="col-xl-5 col-lg-6 col-md-5 col-sm-12 ">
 
@@ -247,7 +258,7 @@
 
 @section modalpanel {
 
-    <div class="modal fade" id="AddEditModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal fade" id="AddEditModal" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -638,14 +649,14 @@
                                 <div class="n-chk">
                                     <label class="new-control new-checkbox checkbox-primary">
                                         <input id="chkLocationBranch" type="checkbox" name="address_type_id" class="new-control-input" value="01" required>
-                                        <span class="new-control-indicator"></span>@Localizer["BranchAddress"]
+                                        <span class="new-control-indicator"></span>@*@Localizer["BranchAddress"]*@
                                     </label>
                                 </div>
 
                                 <div class="n-chk">
                                     <label class="new-control new-checkbox checkbox-primary">
                                         <input id="chkLocationDoc" type="checkbox" name="address_type_id" class="new-control-input" value="04" required>
-                                        <span class="new-control-indicator"></span>@Localizer["DocumentAddress"]@*ที่อยู่จัดส่งเอกสาร*@
+                                        <span class="new-control-indicator"></span>@*@Localizer["DocumentAddress"]*@@*ที่อยู่จัดส่งเอกสาร*@
                                     </label>
                                 </div>
                             </div>
@@ -653,13 +664,13 @@
                                 <div class="n-chk">
                                     <label class="new-control new-checkbox checkbox-primary">
                                         <input id="chkLocationTax" type="checkbox" name="address_type_id" class="new-control-input" value="02" required>
-                                        <span class="new-control-indicator"></span>@Localizer["TaxAddress"]@*ที่อยู่ตามใบกำกับภาษี*@
+                                        <span class="new-control-indicator"></span>@*@Localizer["TaxAddress"]*@@*ที่อยู่ตามใบกำกับภาษี*@
                                     </label>
                                 </div>
                                 <div class="n-chk">
                                     <label class="new-control new-checkbox checkbox-primary">
                                         <input id="chkLocationShip" type="checkbox" name="address_type_id" class="new-control-input" value="05" required>
-                                        <span class="new-control-indicator"></span>@Localizer["ShippingAddress"]@*ที่อยู่จัดส่งสินค้า*@
+                                        <span class="new-control-indicator"></span>@*@Localizer["ShippingAddress"]*@@*ที่อยู่จัดส่งสินค้า*@
                                     </label>
                                 </div>
 
@@ -669,13 +680,13 @@
                                 <div class="n-chk">
                                     <label class="new-control new-checkbox checkbox-primary">
                                         <input id="chkLocationWT" type="checkbox" name="address_type_id" class="new-control-input" value="03" required>
-                                        <span class="new-control-indicator"></span>@Localizer["WTAddress"]@*ที่อยู่ตาม W/T*@
+                                        <span class="new-control-indicator"></span>@*@Localizer["WTAddress"]*@@*ที่อยู่ตาม W/T*@
                                     </label>
                                 </div>
                                 <div class="n-chk">
                                     <label class="new-control new-checkbox checkbox-primary">
                                         <input id="chkLocationShipPOP" type="checkbox" name="address_type_id" class="new-control-input" value="06" required>
-                                        <span class="new-control-indicator"></span>@Localizer["POPAddress"]@*ที่อยู่จัดส่ง POP*@
+                                        <span class="new-control-indicator"></span>@*@Localizer["POPAddress"]*@@*ที่อยู่จัดส่ง POP*@
                                     </label>
                                 </div>
                             </div>
@@ -758,7 +769,7 @@
                                 <label>@Localizer["Zone"] :</label>
                             </div>
                             <div class="col-sm-4">
-                                <select id="ddlzone" name="ddlzone" class="custom-select inputValidationAddress ddlsearch" style="width:300px" required>
+                                <select id="ddlzone" name="ddlzone" class="custom-select inputValidationAddress" style="width:300px" required>
                                 </select>
                                 <div class="invalid-feedback">
                                     @Localizer["ErrorZone"]
@@ -773,7 +784,7 @@
                                 <label>@Localizer["Province"] :</label>
                             </div>
                             <div class="col-sm-4">
-                                <select id="ddlprovince" name="ddlprovince" class="custom-select inputValidationAddress ddlsearch" style="width:300px" required>
+                                <select id="ddlprovince" name="ddlprovince" class=" custom-select inputValidationAddress  form-control select2-container ddlsearch" style="width:300px" required>
                                 </select>
                                 <div class="invalid-feedback">
                                     @Localizer["ErrorProvince"]
@@ -784,7 +795,7 @@
                                 <label>@Localizer["District"] :</label>
                             </div>
                             <div class="col-sm-4">
-                                <select id="ddldistrict" name="ddldistrict" class="custom-select inputValidationAddress ddlsearch" style="width:300px" required>
+                                <select id="ddldistrict" name="ddldistrict" class="custom-select inputValidationAddress  form-control select2-container ddlsearch" style="width:300px" required>
                                 </select>
                                 <div class="invalid-feedback">
                                     @Localizer["ErrorDistrict"]
@@ -799,7 +810,7 @@
                                 <label>@Localizer["Subdistrict"] :</label>
                             </div>
                             <div class="col-sm-4">
-                                <select id="ddlsubdistrict" name="ddlsubdistrict" class="custom-select inputValidationAddress ddlsearch" style="width:300px" required>
+                                <select id="ddlsubdistrict" name="ddlsubdistrict" class="custom-select inputValidationAddress  form-control select2-container ddlsearch" style="width:300px" required>
                                 </select>
                                 <div class="invalid-feedback">
                                     @Localizer["ErrorSubdistrict"]
@@ -1001,7 +1012,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="row col-sm-12">
-                                    <select id="selBankName" class="custom-select inputisvalidate form-control " required>
+                                    <select id="selBankName" name="selBankName" style="width:300px" class="custom-select inputValidationAddress  form-control select2-container ddlsearch" required>
                                     </select>
                                     <div class="invalid-feedback">@Localizer["ErrorBankName"]</div>
                                 </div>
@@ -1064,7 +1075,7 @@
                                                aria-describedby="uploadlHelp1" accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf" />
                                         <label class="custom-file-label " for="inputuploadbookbank" id="lbuploadbookbank">@Localizer["ChooseFile"]</label>
                                         <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
-                                        <small id="uploadlHelp1" class="form-text text-muted"  style="margin-top:0;">
+                                        <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
                                             @Localizer["SizeFile"]
                                         </small>
                                         <div class="invalid-feedback">@Localizer["ErrorBookBank"]</div>
@@ -1124,7 +1135,7 @@
                                     @*<small id="uploadlHelp3" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>*@
                                     @*<small id="uploadlHelp3" class="form-text text-muted">***@@*Localizer["SupportFilePDF"]</small>*@
                                     <small id="uploadlHelp3" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
-                                    <small id="uploadlHelp3" class="form-text text-muted"  style="margin-top:0;">
+                                    <small id="uploadlHelp3" class="form-text text-muted" style="margin-top:0;">
                                         @Localizer["SizeFile"]
                                     </small>
                                     <div class="invalid-feedback">@Localizer["ErrorCommercialRegistrationBook"]</div>
@@ -1147,7 +1158,7 @@
                                     @*<small id="uploadlHelp4" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>*@
                                     @*<small id="uploadlHelp4" class="form-text text-muted">***@@*Localizer["SupportFilePDF"]</small>*@
                                     <small id="uploadlHelp4" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
-                                    <small id="uploadlHelp4" class="form-text text-muted"  style="margin-top:0;">
+                                    <small id="uploadlHelp4" class="form-text text-muted" style="margin-top:0;">
                                         @Localizer["SizeFile"]
                                     </small>
                                     <div class="invalid-feedback">@Localizer["ErrorVATRegistrationCertificate"]</div>
@@ -1456,29 +1467,29 @@
 @section scripts {
     @*@{
 
-        ResourceSet resourceSet = companyProfile.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
-        var sbInitial = " var CustomersResourceObj = {";
-        var sb = new StringBuilder(sbInitial);
-        var resEnum = resourceSet.GetEnumerator();
-        while (resEnum.MoveNext())
-        {
-            if (sb.ToString() != sbInitial)
+            ResourceSet resourceSet = companyProfile.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            var sbInitial = " var CustomersResourceObj = {";
+            var sb = new StringBuilder(sbInitial);
+            var resEnum = resourceSet.GetEnumerator();
+            while (resEnum.MoveNext())
             {
-                sb.Append(",");
+                if (sb.ToString() != sbInitial)
+                {
+                    sb.Append(",");
+                }
+                sb.Append("\"" + resEnum.Key + "\":\"" + resEnum.Value.ToString().Replace("\r\n", "").Replace("\"", "\\\"") + "\"");
             }
-            sb.Append("\"" + resEnum.Key + "\":\"" + resEnum.Value.ToString().Replace("\r\n", "").Replace("\"", "\\\"") + "\"");
+            sb.Append("}");
         }
-        sb.Append("}");
-    }
 
-    @(Html.Raw( sb.ToString()));*@
-<script>
+        @(Html.Raw( sb.ToString()));*@
+    <script>
 var localizedData = {
     'EditCompanyProfile': '@Localizer["JSEditCompanyProfile"]',
     'AddCompanyProfile': '@Localizer["JSAddCompanyProfile"]',
      'ChooseFile': '@Localizer["ChooseFile"]',
 }
-</script>
+    </script>
     <script src="~/Scripts/View/companyProfile.js"></script>
 
 }

@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddAddress" xml:space="preserve">
+    <value>Add Address</value>
+  </data>
   <data name="Address" xml:space="preserve">
     <value>Address</value>
+  </data>
+  <data name="AddressType" xml:space="preserve">
+    <value>Address Type</value>
   </data>
   <data name="Bank" xml:space="preserve">
     <value>Bank</value>
@@ -144,6 +150,9 @@
   <data name="BankName" xml:space="preserve">
     <value>Bank Name</value>
   </data>
+  <data name="Building" xml:space="preserve">
+    <value>Building</value>
+  </data>
   <data name="ChooseFile" xml:space="preserve">
     <value>Choose File</value>
   </data>
@@ -168,6 +177,15 @@
   <data name="ContractPhone" xml:space="preserve">
     <value>Contract Phone</value>
   </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="District" xml:space="preserve">
+    <value>District</value>
+  </data>
+  <data name="DocumentAddress" xml:space="preserve">
+    <value>Document Address</value>
+  </data>
   <data name="ErrorBankAccountName" xml:space="preserve">
     <value>Please fill Bank Account Name.</value>
   </data>
@@ -183,8 +201,17 @@
   <data name="ErrorCompanymaincontractphone" xml:space="preserve">
     <value>Please fill Company main contract phone.</value>
   </data>
+  <data name="ErrorCountry" xml:space="preserve">
+    <value>Please fill Country</value>
+  </data>
+  <data name="ErrorDistrict" xml:space="preserve">
+    <value>Please fill District</value>
+  </data>
   <data name="ErrorEmail" xml:space="preserve">
     <value>Please fill valid Email</value>
+  </data>
+  <data name="ErrorHouseNo" xml:space="preserve">
+    <value>Please fill House No</value>
   </data>
   <data name="ErrorInstallationscontractphone" xml:space="preserve">
     <value>Please fill Installations contract phone.</value>
@@ -204,11 +231,26 @@
   <data name="ErrorPhoneNo" xml:space="preserve">
     <value>Please fill Phone No.</value>
   </data>
+  <data name="ErrorProvince" xml:space="preserve">
+    <value>Please fill Province</value>
+  </data>
+  <data name="ErrorSubdistrict" xml:space="preserve">
+    <value>Please fill Subdistrict</value>
+  </data>
+  <data name="ErrorZipcode" xml:space="preserve">
+    <value>Please fill Zip Code</value>
+  </data>
   <data name="Etccontractmail" xml:space="preserve">
     <value>Etc contract mail</value>
   </data>
   <data name="Etccontractphone" xml:space="preserve">
     <value>Etc contract phone</value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>Floor</value>
+  </data>
+  <data name="HouseNo" xml:space="preserve">
+    <value>House No</value>
   </data>
   <data name="Installationcontractmail" xml:space="preserve">
     <value>Installation contract mail</value>
@@ -246,6 +288,9 @@
   <data name="Maintenencecontractphone" xml:space="preserve">
     <value>Maintenence contract phone</value>
   </data>
+  <data name="Moo" xml:space="preserve">
+    <value>Moo</value>
+  </data>
   <data name="OutofServiceStoragelocation" xml:space="preserve">
     <value>Out of Service Storage location</value>
   </data>
@@ -264,17 +309,38 @@
   <data name="PhoneNo" xml:space="preserve">
     <value>PhoneNo</value>
   </data>
+  <data name="POPAddress" xml:space="preserve">
+    <value>POP Address</value>
+  </data>
   <data name="PostAddress" xml:space="preserve">
     <value>Post Address</value>
+  </data>
+  <data name="Province" xml:space="preserve">
+    <value>Province</value>
   </data>
   <data name="RegisterType" xml:space="preserve">
     <value>RegisterType</value>
   </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="ShippingAddress" xml:space="preserve">
+    <value>Shipping Address</value>
+  </data>
   <data name="ShipTo" xml:space="preserve">
     <value>Ship To</value>
   </data>
+  <data name="Soi" xml:space="preserve">
+    <value>Soi</value>
+  </data>
   <data name="StorageLocation" xml:space="preserve">
     <value>Storage Location</value>
+  </data>
+  <data name="street" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="Subdistrict" xml:space="preserve">
+    <value>Subdistrict</value>
   </data>
   <data name="TaxAddress" xml:space="preserve">
     <value>Tax Address</value>
@@ -285,7 +351,16 @@
   <data name="View" xml:space="preserve">
     <value>View</value>
   </data>
+  <data name="Village" xml:space="preserve">
+    <value>Village</value>
+  </data>
   <data name="WTAddress" xml:space="preserve">
     <value>WT Address</value>
+  </data>
+  <data name="Zipcode" xml:space="preserve">
+    <value>Zipcode</value>
+  </data>
+  <data name="Zone" xml:space="preserve">
+    <value>Zone</value>
   </data>
 </root>

@@ -120,6 +120,9 @@
   <data name="LocationProfile" xml:space="preserve">
     <value>Location Profile</value>
   </data>
+  <data name="MessageAddresUnSuccess" xml:space="preserve">
+    <value>Address Data is not correct, Please Check Data or Contact System Admin</value>
+  </data>
   <data name="MessageCheckLocationCode" xml:space="preserve">
     <value>Location Code duplicate</value>
   </data>

@@ -21,5 +21,7 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileAddress>> GetByPKList(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileAddress_PK> pkList);
 
         Task<bool> DeleteByCompanyId(string id);
+
+        Task<bool> DeleteByLocationId(string id);
     }
 }

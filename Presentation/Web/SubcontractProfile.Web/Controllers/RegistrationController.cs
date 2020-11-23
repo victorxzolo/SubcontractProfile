@@ -355,7 +355,9 @@ namespace SubcontractProfile.Web.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var v = response.Content.ReadAsStringAsync().Result;
-                    addressResult = JsonConvert.DeserializeObject<List<SubcontractProfileAddressModel>>(v);
+                    var L_addressResult = JsonConvert.DeserializeObject<List<SubcontractProfileAddressModel>>(v);
+                    addressResult = L_addressResult.Where(x => x.LocationId == null).ToList();
+
                     if (addressResult.Count() != 0)
                     {
                         string uriStringSubdistrict = string.Format("{0}", strpathAPI + "SubDistrict/GetAll");

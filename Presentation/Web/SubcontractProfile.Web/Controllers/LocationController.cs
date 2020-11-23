@@ -215,8 +215,10 @@ namespace SubcontractProfile.Web.Controllers
             int recordsTotal = 0;
             try
             {
+                Guid sguid = new Guid();
                 SubcontractProfileAddressModel input = new SubcontractProfileAddressModel();
                 input.LocationId = locationid;
+                input.AddressId = sguid;
 
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Add(
@@ -224,7 +226,7 @@ namespace SubcontractProfile.Web.Controllers
 
                 string uriString = string.Format("{0}", strpathAPI + "Address/GetByLocationId");
 
-                //string jj = JsonConvert.SerializeObject(input);
+                string jj = JsonConvert.SerializeObject(input);
 
                 var httpContentCompany = new StringContent(JsonConvert.SerializeObject(input), Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(uriString, httpContentCompany).Result;
@@ -311,7 +313,7 @@ namespace SubcontractProfile.Web.Controllers
 
 
                 }
-                SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaftCompanySSO", addressResult);
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaftLocation", addressResult);
                 recordsTotal = addressResult.Count();
 
                 //Paging   
@@ -389,7 +391,7 @@ namespace SubcontractProfile.Web.Controllers
                 {
                     data = SaveAddressSession(daftdata);
                 }
-                SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaftCompany", data);
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaftLocation", data);
                 return Json(new { response = data, status = true });
             }
             catch (Exception e)
@@ -509,15 +511,15 @@ namespace SubcontractProfile.Web.Controllers
         {
             try
             {
-                var data = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaftCompany").ToList();
+                var data = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaftLocation").ToList();
 
                 data.RemoveAll(x => x.AddressId.ToString().Contains(AddressId));
 
-                SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaftCompany", data);
-                var data_delete = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaftCompany");
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaftLocation", data);
+                var data_delete = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaftLocation");
                 if (data_delete == null)
                 {
-                    SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftCompany");
+                    SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftLocation");
                 }
                 return Json(new { response = data_delete, status = true });
             }
@@ -599,7 +601,7 @@ namespace SubcontractProfile.Web.Controllers
                         model.BankAttachFile = model.File_BankAttach.FileName;
 
                     }
-                    
+
                     model.CompanyId = userProfile.companyid;
                     model.CreateBy = userProfile.Username;
                     var uriLocation = new Uri(Path.Combine(strpathAPI, "Location", "Insert"));
@@ -610,6 +612,80 @@ namespace SubcontractProfile.Web.Controllers
                     HttpResponseMessage responseCompany = clientLocation.PostAsync(uriLocation, httpContent).Result;
                     if (responseCompany.IsSuccessStatusCode)
                     {
+
+                        #region Insert Address
+                        var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaftLocation");
+                        if (dataaddr != null && dataaddr.Count != 0)
+                        {
+                                    SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftLocation");
+                                    bool statusAddAddr = true;
+
+                                    foreach (var d in dataaddr)
+                                    {
+                                        SubcontractProfileAddressModel addr = new SubcontractProfileAddressModel();
+                                        addr.AddressId = d.AddressId;
+                                        addr.AddressTypeId = d.AddressTypeId;
+                                        addr.Building = d.Building;
+                                        addr.City = d.City;
+                                        addr.Country = d.Country;
+                                        addr.DistrictId = d.DistrictId;
+                                        addr.Floor = d.Floor;
+                                        addr.HouseNo = d.HouseNo;
+                                        addr.Moo = d.Moo;
+                                        addr.ProvinceId = d.ProvinceId;
+                                        addr.CompanyId = userProfile.companyid.ToString();
+                                        addr.CreateBy = userProfile.UserId.ToString();
+                                        addr.CreateDate = DateTime.Now;
+                                        addr.RegionId = d.RegionId;
+                                        addr.Road = d.Road;
+                                        addr.Soi = d.Soi;
+                                        addr.RoomNo = d.RoomNo;
+                                        addr.SubDistrictId = d.SubDistrictId;
+                                        addr.VillageName = d.VillageName;
+                                        addr.ZipCode = d.ZipCode;
+                                        addr.LocationId = model.LocationId.ToString();
+
+                                        var uriAddress = new Uri(Path.Combine(strpathAPI, "Address", "Insert"));
+                                        HttpClient clientAddress = new HttpClient();
+                                        clientAddress.DefaultRequestHeaders.Accept.Add(
+                                        new MediaTypeWithQualityHeaderValue("application/json"));
+
+                                        string rr = JsonConvert.SerializeObject(addr);
+
+                                        httpContent = new StringContent(JsonConvert.SerializeObject(addr), Encoding.UTF8, "application/json");
+                                        HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
+                                        if (responseAddress.IsSuccessStatusCode)
+                                        {
+                                            statusAddAddr = true;
+                                        }
+                                        else
+                                        {
+                                            statusAddAddr = false; break;
+                                        }
+                                    }
+
+                                    if (statusAddAddr)
+                                    {
+                                        result.Status = true;
+                                        result.Message = _localizer["MessageSuccess"];
+                                        result.StatusError = "0";
+                                    }
+                                    else
+                                    {
+                                        result.Status = false;
+                                        result.Message = _localizer["MessageAddresUnSuccess"];
+                                        result.StatusError = "-1";
+                                    }
+
+                        }
+                        else
+                        {
+                            result.Status = false;
+                            result.Message = _localizer["MessageAddresUnSuccess"];
+                            result.StatusError = "-1";
+                        }
+                        #endregion
+
                         result.Status = true;
                         result.Message = _localizer["MessageSuccess"];
                         result.StatusError = "0";
@@ -642,6 +718,107 @@ namespace SubcontractProfile.Web.Controllers
 
                     if (responseResult.IsSuccessStatusCode)
                     {
+                        #region Insert Address
+                        var dataaddr = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaftLocation");
+
+                        if (dataaddr != null && dataaddr.Count != 0)
+                        {
+                            var uriAddrDelete = new Uri(Path.Combine(strpathAPI, "Address", "DeleteByLocationId"));
+                            HttpClient clientAddrDelete = new HttpClient();
+                            clientAddrDelete.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                            var httpContentAddrDelete = new StringContent(JsonConvert.SerializeObject(model.LocationId), Encoding.UTF8, "application/json");
+
+                            var responseDelete = await clientAddrDelete.PostAsync(uriAddrDelete, httpContentAddrDelete);
+                            if (responseDelete.IsSuccessStatusCode)
+                            {
+                                var r = responseDelete.Content.ReadAsStringAsync().Result;
+                                bool statusDelete = JsonConvert.DeserializeObject<bool>(r);
+                                if (statusDelete)
+                                {
+                                    SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftLocation");
+                                    bool statusAddAddr = true;
+
+                                    foreach (var d in dataaddr)
+                                    {
+                                        SubcontractProfileAddressModel addr = new SubcontractProfileAddressModel();
+                                        addr.AddressId = d.AddressId;
+                                        addr.AddressTypeId = d.AddressTypeId;
+                                        addr.Building = d.Building;
+                                        addr.City = d.City;
+                                        addr.Country = d.Country;
+                                        addr.DistrictId = d.DistrictId;
+                                        addr.Floor = d.Floor;
+                                        addr.HouseNo = d.HouseNo;
+                                        addr.Moo = d.Moo;
+                                        addr.ProvinceId = d.ProvinceId;
+                                        addr.CompanyId = userProfile.companyid.ToString();
+                                        addr.CreateBy = userProfile.UserId.ToString();
+                                        addr.CreateDate = DateTime.Now;
+                                        addr.RegionId = d.RegionId;
+                                        addr.Road = d.Road;
+                                        addr.Soi = d.Soi;
+                                        addr.RoomNo = d.RoomNo;
+                                        addr.SubDistrictId = d.SubDistrictId;
+                                        addr.VillageName = d.VillageName;
+                                        addr.ZipCode = d.ZipCode;
+                                        addr.LocationId = model.LocationId.ToString();
+
+                                        var uriAddress = new Uri(Path.Combine(strpathAPI, "Address", "Insert"));
+                                        HttpClient clientAddress = new HttpClient();
+                                        clientAddress.DefaultRequestHeaders.Accept.Add(
+                                        new MediaTypeWithQualityHeaderValue("application/json"));
+
+                                        string rr = JsonConvert.SerializeObject(addr);
+
+                                        httpContent = new StringContent(JsonConvert.SerializeObject(addr), Encoding.UTF8, "application/json");
+                                        HttpResponseMessage responseAddress = clientAddress.PostAsync(uriAddress, httpContent).Result;
+                                        if (responseAddress.IsSuccessStatusCode)
+                                        {
+                                            statusAddAddr = true;
+                                        }
+                                        else
+                                        {
+                                            statusAddAddr = false; break;
+                                        }
+                                    }
+
+                                    if (statusAddAddr)
+                                    {
+                                        result.Status = true;
+                                        result.Message = _localizer["MessageSuccess"];
+                                        result.StatusError = "0";
+                                    }
+                                    else
+                                    {
+                                        result.Status = false;
+                                        result.Message = _localizer["MessageAddresUnSuccess"];
+                                        result.StatusError = "-1";
+                                    }
+                                }
+                                else
+                                {
+                                    result.Status = false;
+                                    result.Message = _localizer["MessageAddresUnSuccess"];
+                                    result.StatusError = "-1";
+                                }
+                            }
+                            else
+                            {
+                                result.Status = false;
+                                result.Message = _localizer["MessageAddresUnSuccess"];
+                                result.StatusError = "-1";
+                            }
+
+
+                        }
+                        else
+                        {
+                            result.Status = false;
+                            result.Message = _localizer["MessageAddresUnSuccess"];
+                            result.StatusError = "-1";
+                        }
+                        #endregion
                         result.Status = true;
                         result.Message = _localizer["MessageSuccess"];
                         result.StatusError = "0";
@@ -682,9 +859,15 @@ namespace SubcontractProfile.Web.Controllers
                 HttpResponseMessage responseResult = clientLocation.DeleteAsync(uriString).Result;
                 if (responseResult.IsSuccessStatusCode)
                 {
-                   
+                    #region Delete Address
+                    var uriAddrDelete = new Uri(Path.Combine(strpathAPI, "Address", "DeleteByLocationId"));
+                    var httpContentAddrDelete = new StringContent(JsonConvert.SerializeObject(locationId), Encoding.UTF8, "application/json");
+                    responseResult = await clientLocation.PostAsync(uriAddrDelete, httpContentAddrDelete);
+                    #endregion
 
-                    if(await Deletefile(locationId, userProfile.companyid.ToString()))
+
+
+                    if (await Deletefile(locationId, userProfile.companyid.ToString()))
                     {
                         result.Message = _localizer["MessageDeleteSuccess"];
                         result.Status = true;

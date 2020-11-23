@@ -311,7 +311,7 @@
                                             <div class="col-sm-4">
 
                                                 @*<input type="text" id="VehicleType" maxlength="100" style="width:300px" class="form-control">*@
-                                                <select id="VehicleType" name="VehicleType" style="width:300px" class="form-control">
+                                                <select id="VehicleType" name="VehicleType" style="width:300px" class="form-control select2-container ddlsearch">
                                                 </select>
                                             </div>
                                             <div class="col-sm-2">
@@ -320,7 +320,7 @@
                                             <div class="col-sm-4">
 
                                                 @*<input type="text" id="VehicleBrand" maxlength="100" style="width:300px" class="form-control">*@
-                                                <select id="VehicleBrand" name="VehicleBrand" style="width:300px" class="form-control">
+                                                <select id="VehicleBrand" name="VehicleBrand" style="width:300px" class="form-control select2-container ddlsearch">
                                                 </select>
                                             </div>
                                         </div>
@@ -331,7 +331,7 @@
                                             </div>
                                             <div class="col-sm-4">
                                                 @*<input type="text" id="VehicleSerise" maxlength="100" style="width:300px" class="form-control">*@
-                                                <select id="VehicleSerise" name="VehicleSerise" style="width:300px" class="form-control">
+                                                <select id="VehicleSerise" name="VehicleSerise" style="width:300px" class="form-control select2-container ddlsearch">
                                                 </select>
                                             </div>
                                             <div class="col-sm-2">
@@ -1537,7 +1537,7 @@
             formData.append('personal.CertificateType' , $('#CertificateType').val());
             formData.append('personal.CertificateNo' , $('#CertificateNo').val());
             formData.append('personal.dateCertificateExpireDate', $('#dateCertificateDAte').val());
-            formData.append('personal.BankName' , $('#BankName2').val());
+            formData.append('personal.BankName', $('select[id$=BankName2]').text());
             formData.append('personal.AccountNumber' , $('#AccNo2').val());
             formData.append('personal.AccountName' , $('#AccName2').val());
             //model.BranchName = $('#BranchName').val();

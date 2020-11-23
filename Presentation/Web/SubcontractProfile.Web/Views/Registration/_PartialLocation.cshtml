@@ -41,7 +41,7 @@
 
 
 
-<div id="dataLocationModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+<div id="dataLocationModal" class="modal fade bd-example-modal-lg"  role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -63,17 +63,17 @@
                             </div>
                         </div>
                         @*<br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label>Register Type:</label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <input type="radio" id="rdoCompanyTypeNew" name="CompType" value="newsub">
-                                    <label for="new">New Subcontract</label>&nbsp;&nbsp;
-                                    <input type="radio" id="rdoCompanyTypeDealer" name="CompType" value="dealer">
-                                    <label for="deal">Dealer</label>
-                                </div>
-                            </div>*@
+        <div class="row">
+            <div class="col-sm-2">
+                <label>Register Type:</label>
+            </div>
+            <div class="col-sm-10">
+                <input type="radio" id="rdoCompanyTypeNew" name="CompType" value="newsub">
+                <label for="new">New Subcontract</label>&nbsp;&nbsp;
+                <input type="radio" id="rdoCompanyTypeDealer" name="CompType" value="dealer">
+                <label for="deal">Dealer</label>
+            </div>
+        </div>*@
                         <br />
                         <div class="row">
                             <div class="col-sm-2">
@@ -283,33 +283,260 @@
 
                         <h5> @Localizer["Address"]</h5>
                         <hr>
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <label>@Localizer["LocationAddress"]:</label>
+                        @*<div class="row">
+            <div class="col-sm-2">
+                <label>@Localizer["LocationAddress"]:</label>
+            </div>
+            <div class="col-sm-4">
+                <textarea id="inputLocationAddress" class="form-control" rows="2" style="width:300px;"></textarea>
+            </div>
+            <div class="col-sm-2">
+                <label>@Localizer["PostAddress"]:</label>
+            </div>
+            <div class="col-sm-4">
+                <textarea id="inputPostAddress" class="form-control" rows="2" style="width:300px;"></textarea>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-2">
+                <label>@Localizer["TaxAddress"]:</label>
+            </div>
+            <div class="col-sm-4">
+                <textarea id="inputTaxAddress" class="form-control" rows="2" style="width:300px;"></textarea>
+            </div><br />
+            <div class="col-sm-2">
+                <label>@Localizer["WTAddress"]:</label>
+            </div>
+            <div class="col-sm-4">
+                <textarea id="inputWTAddress" class="form-control" rows="2" style="width:300px;"></textarea>
+            </div>
+        </div>*@
+                        <div class="container needs-validation-address" novalidate>
+                            <div style="display:none;">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label>@Localizer["AddressType"]</label>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row" id="chkAddressType">
+                                    <div class="col-sm-1">
+
+                                    </div>
+
+
+                                    <div class="col-sm-3">
+                                        <div class="n-chk">
+                                            <label class="new-control new-checkbox checkbox-primary">
+                                                <input id="chkLocationBranchLo" type="checkbox" name="address_type_id" class="new-control-input" value="01" required>
+                                                <span class="new-control-indicator"></span>@*@Localizer["BranchAddress"]*@
+                                            </label>
+                                        </div>
+
+                                        <div class="n-chk">
+                                            <label class="new-control new-checkbox checkbox-primary">
+                                                <input id="chkLocationDocLo" type="checkbox" name="address_type_id" class="new-control-input" value="04" required>
+                                                <span class="new-control-indicator"></span>@*@Localizer["DocumentAddress"]*@@*ที่อยู่จัดส่งเอกสาร*@
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="n-chk">
+                                            <label class="new-control new-checkbox checkbox-primary">
+                                                <input id="chkLocationTaxLo" type="checkbox" name="address_type_id" class="new-control-input" value="02" required>
+                                                <span class="new-control-indicator"></span>@*@Localizer["TaxAddress"]*@@*ที่อยู่ตามใบกำกับภาษี*@
+                                            </label>
+                                        </div>
+                                        <div class="n-chk">
+                                            <label class="new-control new-checkbox checkbox-primary">
+                                                <input id="chkLocationShipLo" type="checkbox" name="address_type_id" class="new-control-input" value="05" required>
+                                                <span class="new-control-indicator"></span>@*@Localizer["ShippingAddress"]*@@*ที่อยู่จัดส่งสินค้า*@
+                                            </label>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="n-chk">
+                                            <label class="new-control new-checkbox checkbox-primary">
+                                                <input id="chkLocationWTLo" type="checkbox" name="address_type_id" class="new-control-input" value="03" required>
+                                                <span class="new-control-indicator"></span>@*@Localizer["WTAddress"]*@@*ที่อยู่ตาม W/T*@
+                                            </label>
+                                        </div>
+                                        <div class="n-chk">
+                                            <label class="new-control new-checkbox checkbox-primary">
+                                                <input id="chkLocationShipPOPLo" type="checkbox" name="address_type_id" class="new-control-input" value="06" required>
+                                                <span class="new-control-indicator"></span>@*@Localizer["POPAddress"]*@@*ที่อยู่จัดส่ง POP*@
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <input type="hidden" id="hdAddressID" />
+                                        <label>@Localizer["HouseNo"]@*เลขที่*@ :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="row col-sm-12">
+                                            <input type="text" id="txthomenumber" style="width:120px" class="form-control inputValidationAddress" required>
+
+                                            <label>&nbsp;&nbsp;&nbsp;&nbsp;@Localizer["Moo"] :</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input type="text" id="txtVillageNo" style="width:110px" class="form-control">
+                                            <div class="invalid-feedback">
+                                                @Localizer["ErrorHouseNo"]
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Village"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="txtvillage" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Building"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="txtbuilding" style="width:300px" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Floor"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="row col-sm-12">
+                                            <input type="text" id="txtfloor" style="width:120px" class="form-control">
+                                            <label>&nbsp;&nbsp;&nbsp;&nbsp;@Localizer["Room"] :</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input type="text" id="txtroom" style="width:110px" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Soi"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="txtsoi" style="width:300px" class="form-control">
+                                    </div>
+
+
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["street"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" id="txtroad" style="width:300px" class="form-control">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Country"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="ddlcountry" name="country" class="custom-select inputValidationAddress" style="width:300px" required>
+                                            <option value="">Select Country</option>
+                                            <option value="THA">Thailand</option>
+                                        </select>
+                                        <div class="invalid-feedback">@Localizer["ErrorCountry"]</div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Zone"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="ddlzone" name="ddlzone" class="custom-select inputValidationAddress" style="width:300px" required>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            @Localizer["ErrorZone"]
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Province"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="ddlprovince" name="ddlprovince" class="custom-select inputValidationAddress ddlsearch" style="width:300px" required>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            @Localizer["ErrorProvince"]
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["District"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="ddldistrict" name="ddldistrict" class="custom-select inputValidationAddress ddlsearch" style="width:300px" required>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            @Localizer["ErrorDistrict"]
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Subdistrict"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="ddlsubdistrict" name="ddlsubdistrict" class="custom-select inputValidationAddress ddlsearch" style="width:300px" required>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            @Localizer["ErrorSubdistrict"]
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label>@Localizer["Zipcode"] :</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="ddlzipcode" name="ddlzipcode" class="custom-select inputValidationAddress" style="width:300px" required>
+                                        </select>
+                                        <div class="invalid-feedback">@Localizer["ErrorZipcode"]</div>
+                                    </div>
+                                </div>
+
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-6" style="text-align:right; ">
+                                        <input type="button" id="btnClear" value="@Localizer["Reset"]" style="width:20%" class="btn btn-dark mb-2" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="button" id="btnAddAddress" value="@Localizer["AddAddress"]" style="width:20%" class="btn btn-success mb-2" />
+                                    </div>
+                                </div>
+                                <br />
                             </div>
-                            <div class="col-sm-4">
-                                <textarea id="inputLocationAddress" class="form-control" rows="2" style="width:300px;"></textarea>
-                            </div>
-                            <div class="col-sm-2">
-                                <label>@Localizer["PostAddress"]:</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <textarea id="inputPostAddress" class="form-control" rows="2" style="width:300px;"></textarea>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <label>@Localizer["TaxAddress"]:</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <textarea id="inputTaxAddress" class="form-control" rows="2" style="width:300px;"></textarea>
-                            </div><br />
-                            <div class="col-sm-2">
-                                <label>@Localizer["WTAddress"]:</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <textarea id="inputWTAddress" class="form-control" rows="2" style="width:300px;"></textarea>
+                          
+                            <div class="row col-sm-12">
+                                <div class="table-responsive">
+                                    <table id="tbAddressResultLocation" class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                                <th width="30%">@Localizer["AddressType"]</th>
+                                                <th width="50%">@Localizer["Address"]</th>
+                                                @*<th width="10%">@Localizer["Edit"]</th>
+                                                <th width="10%">@Localizer["Delete"]</th>*@
+
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+
                             </div>
                         </div>
                         <br />

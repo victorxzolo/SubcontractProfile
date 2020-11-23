@@ -8,15 +8,16 @@ var urlaccount = null;
 $(document).ready(function () {
     url = $("#controllername").data("url");
     urlaccount = $("#accountcontrollername").data("url");
-    $(".ddlsearch").select2();
+    
     $('#btn_OnSave_Modal').hide();
 
         //inittbSearchResult();
         initialCompanyDataById();
         inittbAddressResult();
         inittbRevenue();
-        inittblocation();
-
+    inittblocation();
+    BindAddressType();
+    $(".ddlsearch").select2();
     $('#inputTaxId').keyup(function () {
         CheckKeyUps("inputTaxId", "[0-9]");
     });
@@ -105,13 +106,13 @@ $(document).ready(function () {
                                 $('#hdAddressID').val(data.response.AddressId);
                                 $('#ddlcountry').val(data.response.Country)
 
-                                $('#ddlprovince').val(data.response.ProvinceId)
+                                $('#ddlprovince').val(data.response.ProvinceId).change()
                                     $('#ddlprovince').trigger('change');
 
-                                    $('#ddldistrict').val(data.response.DistrictId)
+                                $('#ddldistrict').val(data.response.DistrictId).change()
                                    $('#ddldistrict').trigger('change');
 
-                                $('#ddlsubdistrict').val(data.response.SubDistrictId)
+                                $('#ddlsubdistrict').val(data.response.SubDistrictId).change()
 
                                 $('#ddlzipcode').val(data.response.ZipCode)
 
@@ -270,13 +271,16 @@ $(document).ready(function () {
                         if (Validate(".form-control.inputValidationAddress", ".custom-control-input.inputValidationAddress"
                             , ".custom-select.inputValidationAddress", ".custom-file-input.inputValidationAddress")) {
                             failed = true;
+                           
                         }
 
                         if (failed == true) {
                             event.preventDefault();
                             event.stopPropagation();
+                          
                         }
                         else {
+                       
                             SaveDaftAddress(stuff);
                         }
                         //if (Validate(".form-control.inputValidationAddress", ".custom-control-input.inputValidationAddress"
@@ -584,9 +588,9 @@ $(document).ready(function () {
         $('#txtroad').val('')
         $('#ddlcountry').val('')
         $('#ddlzone').val('')
-        $('#ddlprovince').val('')
-        $('#ddldistrict').val('')
-        $('#ddlsubdistrict').val('')
+        $('#ddlprovince').val('').change();
+        $('#ddldistrict').val('').change();
+        $('#ddlsubdistrict').val('').change();
         $('#ddlzipcode').val('');
 
         $('#chkAddressType input[type=checkbox]').each(function () {
@@ -1364,7 +1368,7 @@ function getDataById(id) {
                     $('#tel3').val(result.DeptOfAccountPhone);
                     $('#mail3').val(result.DeptOfAccountEmail);
 
-                    $('#selBankName').val(result.BankCode);
+                    $('#selBankName').val(result.BankCode).change();
                     $('#nameBranch').val(result.BranchName);
                     $('#AccType').val(result.BankAccountTypeId);
                     $('#busiName').val(result.AccountName);
@@ -1965,6 +1969,39 @@ function uploadFiles(inputId) {
                 console.log(xhr);
             }
         });
+}
+
+function BindAddressType() {
+    var urlGetAddressType = urlaccount.replace('Action', 'GetAddressType');
+    $.ajax({
+        type: "POST",
+        async: false,
+        url: urlGetAddressType,
+        //data: { province_id: province },
+        dataType: "json",
+        success: function (data) {
+            if (data != null) {
+                $.each(data.responseaddresstype, function () {
+                    var strtext = this.Text;
+                    var strvalue = this.Value;
+                    $('#chkAddressType input[type=checkbox]').each(function () {
+
+                        if ($(this).val() == strvalue) {
+                            var id = $(this).attr("id");
+
+                            $(this).next('span').after(strtext);
+                        }
+                    });
+
+                });
+            }
+
+
+        },
+        error: function (xhr) {
+            console.log(xhr);
+        }
+    });
 }
 
 function BindDDlBankAccountType() {

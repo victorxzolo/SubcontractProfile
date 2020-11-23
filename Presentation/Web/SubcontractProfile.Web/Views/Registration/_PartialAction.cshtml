@@ -389,14 +389,14 @@
             <div class="n-chk">
                 <label class="new-control new-checkbox checkbox-primary" for="chkLocationBranch">
                     <input id="chkLocationBranch" type="checkbox" class="new-control-input" name="address_type_id" value="01">
-                    <span class="new-control-indicator"></span>@Localizer["BranchAddress"]
+                    <span class="new-control-indicator"></span>@*@Localizer["BranchAddress"]*@
                 </label>
             </div>
 
             <div class="n-chk">
                 <label class="new-control new-checkbox checkbox-primary" for="chkLocationDoc">
                     <input id="chkLocationDoc" type="checkbox" class="new-control-input" name="address_type_id" value="04">
-                    <span class="new-control-indicator"></span>@Localizer["DocumentAddress"]
+                    <span class="new-control-indicator"></span>@*@Localizer["DocumentAddress"]*@
                 </label>
             </div>
         </div>
@@ -404,13 +404,13 @@
             <div class="n-chk">
                 <label class="new-control new-checkbox checkbox-primary" for="chkLocationTax">
                     <input id="chkLocationTax" type="checkbox" class="new-control-input" name="address_type_id" value="02">
-                    <span class="new-control-indicator"></span>@Localizer["TaxAddress"]
+                    <span class="new-control-indicator"></span>@*@Localizer["TaxAddress"]*@
                 </label>
             </div>
             <div class="n-chk">
                 <label class="new-control new-checkbox checkbox-primary" for="chkLocationShip">
                     <input id="chkLocationShip" type="checkbox" class="new-control-input" name="address_type_id" value="05">
-                    <span class="new-control-indicator"></span>@Localizer["ShippingAddress"]
+                    <span class="new-control-indicator"></span>@*@Localizer["ShippingAddress"]*@
                 </label>
             </div>
 
@@ -420,13 +420,13 @@
             <div class="n-chk">
                 <label class="new-control new-checkbox checkbox-primary" for="chkLocationWT">
                     <input id="chkLocationWT" type="checkbox" class="new-control-input" name="address_type_id" value="03">
-                    <span class="new-control-indicator"></span>@Localizer["WTAddress"]
+                    <span class="new-control-indicator"></span>@*@Localizer["WTAddress"]*@
                 </label>
             </div>
             <div class="n-chk">
                 <label class="new-control new-checkbox checkbox-primary" for="chkLocationShipPOP">
                     <input id="chkLocationShipPOP" type="checkbox" class="new-control-input" name="address_type_id" value="06">
-                    <span class="new-control-indicator"></span>@Localizer["POPAddress"]
+                    <span class="new-control-indicator"></span>@*@Localizer["POPAddress"]*@
                 </label>
             </div>
         </div>
@@ -508,7 +508,7 @@
             <label>@Localizer["Zone"] :</label>
         </div>
         <div class="col-sm-4">
-            <select id="ddlzone" name="ddlzone" class="form-control inputValidationAddress ddlsearch" style="width:300px" required>
+            <select id="ddlzone" name="ddlzone" class="form-control inputValidationAddress" style="width:300px" required>
             </select>
             <div class="invalid-feedback">
                 @Localizer["ErrorZone"]

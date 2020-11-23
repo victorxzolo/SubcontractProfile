@@ -77,6 +77,7 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@company_id", subcontractProfileAddress. CompanyId);
             p.Add("@create_date", subcontractProfileAddress.CreateDate);
             p.Add("@create_by", subcontractProfileAddress.CreateBy);
+            p.Add("@location_id", subcontractProfileAddress.LocationId);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileAddress_Insert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -246,7 +247,16 @@ namespace SubcontractProfile.WebApi.Services.Services
             return true;
         }
 
+        public async Task<bool> DeleteByLocationId(string id)
+        {
+            var p = new DynamicParameters();
+            p.Add("@locationid", id);
 
+            var ok = await _dbContext.Connection.ExecuteAsync
+                ("uspSubcontractProfileAddress_deleteByLocationId", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+
+            return true;
+        }
     }
 
 
