@@ -144,6 +144,9 @@
   <data name="BankName" xml:space="preserve">
     <value>Bank Name</value>
   </data>
+  <data name="BookBank" xml:space="preserve">
+    <value>Book Bank</value>
+  </data>
   <data name="BranchName" xml:space="preserve">
     <value>Branch Name</value>
   </data>

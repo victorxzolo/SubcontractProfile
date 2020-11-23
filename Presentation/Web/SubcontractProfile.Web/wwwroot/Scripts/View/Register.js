@@ -1449,6 +1449,8 @@ function BindDataStep5() {
     var strvat = $('#lbvat_registration_certificate_file').text();
     $('#lbvat_registration_certificate_file_5').text(strvat);
 
+    var strcer = $('#lbuploadbookbank').text();
+    $('#lbuploadbookbank_5').text(strcer);
 
     BindDataAddress();
 }

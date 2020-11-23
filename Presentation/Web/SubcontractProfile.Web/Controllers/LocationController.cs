@@ -166,6 +166,8 @@ namespace SubcontractProfile.Web.Controllers
         public JsonResult GetDataById(string locationId)
         {
             var locationResult = new SubcontractProfileLocationModel();
+            var addressResult = new List<SubcontractProfileAddressModel>();
+
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
@@ -189,6 +191,393 @@ namespace SubcontractProfile.Web.Controllers
 
             return Json(locationResult);
         }
+
+        #region Address
+        [HttpPost]
+        public IActionResult GetAddress(string locationid)
+        {
+            var addressResult = new List<SubcontractProfileAddressModel>();
+            var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
+            // Skiping number of Rows count  
+            var start = Request.Form["start"].FirstOrDefault() == null ? "0" : Request.Form["start"].FirstOrDefault();
+            // Paging Length 10,20  
+            var length = Request.Form["length"].FirstOrDefault() == null ? "10" : Request.Form["length"].FirstOrDefault();
+            // Sort Column Name  
+            var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+            // Sort Column Direction ( asc ,desc)  
+            var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+            // Search Value from (Search box)  
+            var searchValue = Request.Form["search[value]"].FirstOrDefault();
+
+            //Paging Size (10,20,50,100)  
+            int pageSize = length != null ? Convert.ToInt32(length) : 0;
+            int skip = start != null ? Convert.ToInt32(start) : 0;
+            int recordsTotal = 0;
+            try
+            {
+                SubcontractProfileAddressModel input = new SubcontractProfileAddressModel();
+                input.LocationId = locationid;
+
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string uriString = string.Format("{0}", strpathAPI + "Address/GetByLocationId");
+
+                //string jj = JsonConvert.SerializeObject(input);
+
+                var httpContentCompany = new StringContent(JsonConvert.SerializeObject(input), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = client.PostAsync(uriString, httpContentCompany).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var v = response.Content.ReadAsStringAsync().Result;
+                    addressResult = JsonConvert.DeserializeObject<List<SubcontractProfileAddressModel>>(v);
+                    if (addressResult.Count() != 0)
+                    {
+                        string uriStringSubdistrict = string.Format("{0}", strpathAPI + "SubDistrict/GetAll");
+                        string uriStringDistirct = string.Format("{0}", strpathAPI + "District/GetAll");
+                        string uriStringProvince = string.Format("{0}", strpathAPI + "Province/GetAll");
+                        string uriStringAddresstype = string.Format("{0}", strpathAPI + "AddressType/GetALL");
+
+                        response = client.GetAsync(uriStringSubdistrict).Result;
+                        var s = response.Content.ReadAsStringAsync().Result;
+                        var L_subdistirct = JsonConvert.DeserializeObject<List<SubcontractProfileSubDistrictModel>>(s);
+
+                        response = client.GetAsync(uriStringDistirct).Result;
+                        var d = response.Content.ReadAsStringAsync().Result;
+                        var L_distirct = JsonConvert.DeserializeObject<List<SubcontractProfileDistrictModel>>(d);
+
+                        response = client.GetAsync(uriStringProvince).Result;
+                        var p = response.Content.ReadAsStringAsync().Result;
+                        var L_province = JsonConvert.DeserializeObject<List<SubcontractProfileProvinceModel>>(p);
+
+                        response = client.GetAsync(uriStringAddresstype).Result;
+                        var a = response.Content.ReadAsStringAsync().Result;
+                        var L_addresstype = JsonConvert.DeserializeObject<List<SubcontractProfileAddressTypeModel>>(a);
+                        CultureInfo culture = CultureInfo.CurrentCulture;
+                        foreach (var f in addressResult)
+                        {
+                            if (culture.Name == "th")
+                            {
+                                if (f.AddressTypeId != null)
+                                {
+                                    f.address_type_name = L_addresstype.Where(x => x.AddressTypeId == f.AddressTypeId).Select(x => x.AddressTypeNameTh).FirstOrDefault().ToString();
+
+                                }
+                                if (f.SubDistrictId != null)
+                                {
+                                    f.sub_district_name = L_subdistirct.Where(x => x.SubDistrictId == f.SubDistrictId).Select(x => x.SubDistrictNameTh).FirstOrDefault().ToString();
+
+                                }
+                                if (f.DistrictId != null)
+                                {
+                                    f.district_name = L_distirct.Where(e => e.DistrictId == f.DistrictId).Select(x => x.DistrictNameTh).FirstOrDefault().ToString();
+
+                                }
+                                if (f.ProvinceId != null)
+                                {
+                                    f.province_name = L_province.Where(x => x.ProvinceId == f.ProvinceId).Select(x => x.ProvinceNameTh).FirstOrDefault().ToString();
+
+                                }
+                            }
+                            else
+                            {
+                                if (f.AddressTypeId != null)
+                                {
+                                    f.address_type_name = L_addresstype.Where(x => x.AddressTypeId == f.AddressTypeId && f.AddressTypeId != null).Select(x => x.AddressTypeNameEn).FirstOrDefault().ToString();
+
+                                }
+                                if (f.SubDistrictId != null)
+                                {
+                                    f.sub_district_name = L_subdistirct.Where(x => x.SubDistrictId == f.SubDistrictId).Select(x => x.SubDistrictNameEn).FirstOrDefault().ToString();
+
+                                }
+                                if (f.DistrictId != null)
+                                {
+                                    f.district_name = L_distirct.Where(e => e.DistrictId == f.DistrictId).Select(x => x.DistrictNameEn).FirstOrDefault().ToString();
+
+                                }
+                                if (f.ProvinceId != null)
+                                {
+                                    f.province_name = L_province.Where(x => x.ProvinceId == f.ProvinceId).Select(x => x.ProvinceNameEn).FirstOrDefault().ToString();
+
+                                }
+                            }
+
+                        }
+                    }
+
+
+
+
+                }
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaftCompanySSO", addressResult);
+                recordsTotal = addressResult.Count();
+
+                //Paging   
+                var data = addressResult.Skip(skip).Take(pageSize).ToList();
+
+                return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = data });
+            }
+            catch (Exception e)
+            {
+                return Json(new { draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsTotal, data = new List<SubcontractProfileAddressModel>() });
+                throw;
+            }
+
+        }
+        [HttpPost]
+        public IActionResult SaveDaftAddress(List<SubcontractProfileAddressModel> daftdata)
+        {
+            try
+            {
+                var data = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaftLocation");
+                if (data != null && data.Count != 0)
+                {
+                    foreach (var e in daftdata)
+                    {
+                        if (e.AddressId == null)
+                        {
+                            //if (e.location_code != "")//มาจาก dealer
+                            //{
+                            //    data.RemoveAll(x => x.location_code == e.location_code && x.AddressTypeId == e.AddressTypeId);
+                            //}
+                            data.RemoveAll(x => x.AddressTypeId == e.AddressTypeId);
+                            List<SubcontractProfileAddressModel> newaddr = new List<SubcontractProfileAddressModel>();
+                            newaddr.Add(new SubcontractProfileAddressModel
+                            {
+                                AddressTypeId = e.AddressTypeId,
+                                address_type_name = e.address_type_name,
+                                Country = e.Country,
+                                ZipCode = e.ZipCode,
+                                HouseNo = e.HouseNo,
+                                Moo = e.Moo,
+                                VillageName = e.VillageName,
+                                Building = e.Building,
+                                Floor = e.Floor,
+                                RoomNo = e.RoomNo,
+                                Soi = e.Soi,
+                                Road = e.Road,
+                                SubDistrictId = e.SubDistrictId,
+                                sub_district_name = e.sub_district_name,
+                                DistrictId = e.DistrictId,
+                                district_name = e.district_name,
+                                ProvinceId = e.ProvinceId,
+                                province_name = e.province_name,
+                                RegionId = e.RegionId,
+                                outFullAddress = e.outFullAddress,
+                                location_code = e.location_code,
+                                CompanyId = e.CompanyId
+                            });
+                            foreach (var r in SaveAddressSession(newaddr))
+                            {
+                                data.Add(r);
+                            }
+
+                        }
+                        else
+                        {
+
+                            data.RemoveAll(x => x.AddressTypeId == e.AddressTypeId);
+                            data.Add(e);
+                        }
+
+                    }
+
+                }
+                else
+                {
+                    data = SaveAddressSession(daftdata);
+                }
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaftCompany", data);
+                return Json(new { response = data, status = true });
+            }
+            catch (Exception e)
+            {
+                return Json(new { message = e.Message, status = false });
+            }
+
+        }
+        private List<SubcontractProfileAddressModel> SaveAddressSession(List<SubcontractProfileAddressModel> daftdata)
+        {
+            List<SubcontractProfileAddressModel> data = new List<SubcontractProfileAddressModel>();
+            try
+            {
+                var outputprovince = new List<SubcontractProfileProvinceModel>();
+                var outputdistrict = new List<SubcontractProfileDistrictModel>();
+                var outputsubdistrict = new List<SubcontractProfileSubDistrictModel>();
+
+                string uriprovice = string.Format("{0}", strpathAPI + "Province/GetAll");
+                string uridistrict = string.Format("{0}", strpathAPI + "District/GetDistrictByProvinceId");
+                string urisubdistrict = string.Format("{0}", strpathAPI + "SubDistrict/GetSubDistrictByDistrict");
+
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response;
+                CultureInfo culture = CultureInfo.CurrentCulture;
+                foreach (var e in daftdata)
+                {
+                    Guid addr_id = Guid.NewGuid();
+                    e.AddressId = addr_id;
+
+
+                    if (e.ProvinceId == 0)
+                    {
+                        response = client.GetAsync(uriprovice).Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var v = response.Content.ReadAsStringAsync().Result;
+                            outputprovince = JsonConvert.DeserializeObject<List<SubcontractProfileProvinceModel>>(v);
+                            string[] s_provice = e.province_name.Split(" ");
+
+
+
+                            if (culture.Name == "th")
+                            {
+                                var w = outputprovince.First(x => x.ProvinceNameTh.Contains(s_provice[1].ToString()));
+                                e.ProvinceId = w.ProvinceId;
+                                e.RegionId = w.RegionId;
+
+                            }
+                            else
+                            {
+                                var w = outputprovince.First(x => x.ProvinceNameEn.Contains(s_provice[1].ToString()));
+                                e.ProvinceId = w.ProvinceId;
+                                e.RegionId = w.RegionId;
+                            }
+                        }
+                    }
+                    if (e.DistrictId == 0)
+                    {
+                        response = client.GetAsync(uridistrict + "/" + HttpUtility.UrlEncode(e.ProvinceId.ToString(), Encoding.UTF8)).Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var v = response.Content.ReadAsStringAsync().Result;
+                            outputdistrict = JsonConvert.DeserializeObject<List<SubcontractProfileDistrictModel>>(v);
+                            string[] s_district = e.district_name.Split(" ");
+                            if (culture.Name == "th")
+                            {
+                                var w = outputdistrict.First(d => d.DistrictNameTh.Contains(s_district[1].ToString()));
+                                e.DistrictId = w.DistrictId;
+                            }
+                            else
+                            {
+                                var w = outputdistrict.First(d => d.DistrictNameEn.Contains(s_district[1].ToString()));
+                                e.DistrictId = w.DistrictId;
+                            }
+
+                        }
+
+                    }
+                    if (e.SubDistrictId == 0)
+                    {
+                        response = client.GetAsync(urisubdistrict + "/" + HttpUtility.UrlEncode(e.DistrictId.ToString(), Encoding.UTF8)).Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var v = response.Content.ReadAsStringAsync().Result;
+                            outputsubdistrict = JsonConvert.DeserializeObject<List<SubcontractProfileSubDistrictModel>>(v);
+
+                            string[] s_subdistrict = e.sub_district_name.Split(" ");
+                            if (culture.Name == "th")
+                            {
+                                var w = outputsubdistrict.First(d => d.SubDistrictNameTh.Contains(s_subdistrict[1].ToString()));
+                                e.SubDistrictId = w.SubDistrictId;
+                            }
+                            else
+                            {
+                                var w = outputsubdistrict.First(d => d.SubDistrictNameEn.Contains(s_subdistrict[1].ToString()));
+                                e.SubDistrictId = w.SubDistrictId;
+                            }
+
+                        }
+                    }
+                }
+
+                data = daftdata;
+
+
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+            return data;
+        }
+        [HttpPost]
+        public IActionResult DeleteDaftAddress(string AddressId)
+        {
+            try
+            {
+                var data = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaftCompany").ToList();
+
+                data.RemoveAll(x => x.AddressId.ToString().Contains(AddressId));
+
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "userAddressDaftCompany", data);
+                var data_delete = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaftCompany");
+                if (data_delete == null)
+                {
+                    SessionHelper.RemoveSession(HttpContext.Session, "userAddressDaftCompany");
+                }
+                return Json(new { response = data_delete, status = true });
+            }
+            catch (Exception e)
+            {
+                return Json(new { message = e.Message, status = false });
+                throw;
+            }
+
+        }
+        [HttpPost]
+        public IActionResult GetAddressById(string addressID)
+        {
+            try
+            {
+                if (addressID != null && addressID != "")
+                {
+                    var data = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaftLocation");
+                    var result = data.Where(x => x.AddressId.ToString() == addressID).FirstOrDefault();
+                    return Json(new { response = result, status = true });
+                }
+                else
+                {
+                    var data = SessionHelper.GetObjectFromJson<List<SubcontractProfileAddressModel>>(HttpContext.Session, "userAddressDaftLocation");
+                    return Json(new { response = data, status = true });
+                }
+            }
+            catch (Exception e)
+            {
+                return Json(new { message = e.Message, status = false });
+            }
+            //var result = new SubcontractProfileAddressModel();
+            //try
+            //{
+            //    HttpClient client = new HttpClient();
+            //    client.DefaultRequestHeaders.Accept.Add(
+            //    new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //    string uriString = string.Format("{0}/{1}", strpathAPI + "Address/GetByAddressId", addressID);
+
+            //    //string jj = JsonConvert.SerializeObject(input);
+
+            //    HttpResponseMessage response = client.GetAsync(uriString).Result;
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        var v = response.Content.ReadAsStringAsync().Result;
+            //        result = JsonConvert.DeserializeObject<SubcontractProfileAddressModel>(v);
+            //    }
+            //    return Json(new { response = result, status = true, message= response.StatusCode });
+            //}
+            //catch (Exception e)
+            //{
+            //    return Json(new { message = e.Message, status = false });
+            //    throw;
+            //}
+
+        }
+        #endregion
+
+
 
         [HttpPost]
         public async Task<ActionResult> OnSave(SubcontractProfileLocationModel model)

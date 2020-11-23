@@ -8,7 +8,7 @@ var urlaccount = null;
 $(document).ready(function () {
     url = $("#controllername").data("url");
     urlaccount = $("#accountcontrollername").data("url");
-
+    $(".ddlsearch").select2();
     $('#btn_OnSave_Modal').hide();
 
         //inittbSearchResult();
