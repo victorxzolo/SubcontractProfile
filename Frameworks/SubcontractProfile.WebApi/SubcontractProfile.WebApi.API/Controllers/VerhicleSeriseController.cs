@@ -68,11 +68,11 @@ namespace SubcontractProfile.WebApi.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileVerhicleSerise))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileVerhicleSerise))]
         [HttpGet("GetByVerhicleBrandId/{verhicleBrandId}")]
-        public Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileVerhicleSerise> GetByVerhicleBrandId(string verhicleBrandId)
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileVerhicleSerise>> GetByVerhicleBrandId(string verhicleBrandId)
         {
             _logger.LogInformation($"Start VerhicleSeriseController::GetByVerhicleBrandId", verhicleBrandId);
 
-            var entities = _service.GetByVerhicleSeriseId(verhicleBrandId);
+            var entities = _service.GetByVerhicleBrandId(verhicleBrandId);
 
             if (entities == null)
             {

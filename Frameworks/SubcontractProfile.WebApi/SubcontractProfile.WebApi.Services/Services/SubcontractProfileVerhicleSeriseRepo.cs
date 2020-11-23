@@ -171,12 +171,12 @@ namespace SubcontractProfile.WebApi.Services.Services
 
         }
 
-        public async Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileVerhicleSerise> GetByVerhicleBrandId(string verhicleBrandId)
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileVerhicleSerise>> GetByVerhicleBrandId(string verhicleBrandId)
         {
             var p = new DynamicParameters();
             p.Add("@verhicle_brand_id", verhicleBrandId);
 
-            var entity = await _dbContext.Connection.QuerySingleOrDefaultAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileVerhicleSerise>
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileVerhicleSerise>
             ("uspSubcontractProfileVerhicleSerise_selectByVerhicleBrandId", p, commandType: CommandType.StoredProcedure);
 
             return entity;

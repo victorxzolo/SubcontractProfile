@@ -406,13 +406,13 @@ namespace SubcontractProfile.Web.Controllers
                     model.EngineerId = Guid.NewGuid();
 
 
-                    if(model.File_PersonalAttach !=null && model.File_PersonalAttach.Length>0)
+                    if (model.File_PersonalAttach != null && model.File_PersonalAttach.Length > 0)
                     {
-                        await Uploadfile(model.File_PersonalAttach, model.EngineerId.ToString(), userProfile.companyid.ToString(), "Engineer","I");
+                        await Uploadfile(model.File_PersonalAttach, model.EngineerId.ToString(), userProfile.companyid.ToString(), "Engineer", "I");
                         model.PersonalAttachFile = model.File_PersonalAttach.FileName;
-                       
+
                     }
-                    if(model.File_VehicleAttach != null && model.File_VehicleAttach.Length > 0)
+                    if (model.File_VehicleAttach != null && model.File_VehicleAttach.Length > 0)
                     {
                         await Uploadfile(model.File_VehicleAttach, model.EngineerId.ToString(), userProfile.companyid.ToString(), "Engineer", "I");
                         model.VehicleAttachFile = model.File_VehicleAttach.FileName;
@@ -446,12 +446,12 @@ namespace SubcontractProfile.Web.Controllers
                             await Uploadfile(personal.File_CertificateAttach, personal.PersonalId.ToString(), userProfile.companyid.ToString(), "Personal", "I");
                             personal.CertificateAttachFile = personal.File_CertificateAttach.FileName;
                         }
-                        if(personal.File_WorkPermitAttach != null && personal.File_WorkPermitAttach.Length > 0)
+                        if (personal.File_WorkPermitAttach != null && personal.File_WorkPermitAttach.Length > 0)
                         {
                             await Uploadfile(personal.File_WorkPermitAttach, personal.PersonalId.ToString(), userProfile.companyid.ToString(), "Personal", "I");
                             personal.WorkPermitAttachFile = personal.File_WorkPermitAttach.FileName;
                         }
-                        if(personal.File_ProfileImgAttach != null && personal.File_ProfileImgAttach.Length > 0)
+                        if (personal.File_ProfileImgAttach != null && personal.File_ProfileImgAttach.Length > 0)
                         {
                             await Uploadfile(personal.File_ProfileImgAttach, personal.PersonalId.ToString(), userProfile.companyid.ToString(), "Personal", "I");
                             personal.ProfileImgAttachFile = personal.File_ProfileImgAttach.FileName;
@@ -720,7 +720,7 @@ namespace SubcontractProfile.Web.Controllers
             return Json(result);
         }
         [HttpPost]
-        public IActionResult GetVehicleSerise(string id)
+        public IActionResult GetVehicleSerise(string VerhicleBrandId)
         {
             var result = new List<SubcontractProfileVerhicleSeriseModel>();
             string uriString = "";
@@ -728,9 +728,9 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            if (id != null && id!="")
+            if (VerhicleBrandId != null && VerhicleBrandId != "")
             {
-                uriString = string.Format("{0}/{1}", strpathAPI + "VerhicleSerise/GetAll", HttpUtility.UrlEncode(id, Encoding.UTF8));
+                uriString = string.Format("{0}/{1}", strpathAPI + "VerhicleSerise/GetByVerhicleBrandId", HttpUtility.UrlEncode(VerhicleBrandId, Encoding.UTF8));
             }
             else
             {

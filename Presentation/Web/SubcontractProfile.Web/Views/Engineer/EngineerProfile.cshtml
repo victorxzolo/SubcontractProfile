@@ -1220,9 +1220,9 @@
                           $('#ContractPhone1').val(result.ContractPhone1);
                           $('#ContractPhone2').val(result.ContractPhone2);
                           $('#ContractEmail').val(result.ContractEmail);
-                          $('#VehicleType').val(result.VehicleType);
-                          $('#VehicleBrand').val(result.VehicleBrand);
-                          $('#VehicleSerise').val(result.VehicleSerise);
+                          $('#VehicleType').val(result.VehicleType).change();
+                          $('#VehicleBrand').val(result.VehicleBrand).change();
+                          $('#VehicleSerise').val(result.VehicleSerise).change();
                           $('#VehicleColor').val(result.VehicleColor);
                           $('#VehicleYear').val(result.VehicleYear);
                           $('#VehicleLicense').val(result.VehicleLicensePlate);
@@ -1419,7 +1419,7 @@
             formData.append('model.StaffNameEn' , $('#StaffNameE').val());
             formData.append('model.Position', $('select[id$=Position]').val());
             formData.append('model.CitizenId' , $('#CitizenID').val());
-            formData.append('model.TshirtSize', $('select[id$=#tshirtsize]').val());
+            formData.append('model.TshirtSize', $('select[id$=tshirtsize]').val());
             formData.append('model.ContractPhone1' , $('#ContractPhone1').val());
             formData.append('model.ContractPhone2' , $('#ContractPhone2').val());
             formData.append('model.ContractEmail' , $('#ContractEmail').val());
