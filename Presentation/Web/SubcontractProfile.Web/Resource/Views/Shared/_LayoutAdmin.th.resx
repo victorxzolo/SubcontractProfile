@@ -120,6 +120,9 @@
   <data name="ActivateProfile" xml:space="preserve">
     <value>Activate Profile</value>
   </data>
+  <data name="Booking" xml:space="preserve">
+    <value>ระบุวันเข้าอบรม</value>
+  </data>
   <data name="CompanyVerify" xml:space="preserve">
     <value>ตรวจสอบข้อมูลบริษัท</value>
   </data>

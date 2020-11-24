@@ -120,6 +120,9 @@
   <data name="ActivateProfile" xml:space="preserve">
     <value>Activate Profile</value>
   </data>
+  <data name="Booking" xml:space="preserve">
+    <value>Booking</value>
+  </data>
   <data name="CompanyVerify" xml:space="preserve">
     <value>Company Verify</value>
   </data>
