@@ -117,34 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActivateProfile" xml:space="preserve">
-    <value>Activate Profile</value>
-  </data>
   <data name="Booking" xml:space="preserve">
-    <value>ระบุวันเข้าอบรม</value>
+    <value>Booking</value>
   </data>
-  <data name="CompanyVerify" xml:space="preserve">
-    <value>ตรวจสอบข้อมูลบริษัท</value>
+  <data name="MessageAddTrainee" xml:space="preserve">
+    <value>Please Add Trainee Data</value>
   </data>
-  <data name="Payment" xml:space="preserve">
-    <value>ชำระค่าอบรม</value>
+  <data name="MessageDeleteSuccess" xml:space="preserve">
+    <value>Delete Success</value>
   </data>
-  <data name="Registration" xml:space="preserve">
-    <value>การลงทะเบียน</value>
+  <data name="MessageDeleteUnSuccess" xml:space="preserve">
+    <value>Delete Data Unsuccess. Please contact System Admin.</value>
   </data>
-  <data name="ReportTestResult" xml:space="preserve">
-    <value>รายงานผลการทดสอบ</value>
+  <data name="MessageSaveSuccess" xml:space="preserve">
+    <value>Save Data Success</value>
   </data>
-  <data name="RequestTraining" xml:space="preserve">
-    <value>ขอรับการฝึกอบรม</value>
-  </data>
-  <data name="SignOut" xml:space="preserve">
-    <value>ออกจากระบบ</value>
-  </data>
-  <data name="Training" xml:space="preserve">
-    <value>การฝึกอบรม</value>
-  </data>
-  <data name="VerfifiedPayment" xml:space="preserve">
-    <value>ตรวจสอบการชำระเงิน</value>
+  <data name="MessageUnSuccess" xml:space="preserve">
+    <value>Data is not correct, Please Check Data or Contact System Admin</value>
   </data>
 </root>

@@ -1,12 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 
 @inject IViewLocalizer Localizer
+
 @{
     ViewData["Title"] = "Booking";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<div id="pageID" style="display:none;">RequestTraining</div>
+<div id="pageID" style="display:none;">Booking</div>
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
 
@@ -156,15 +156,13 @@
     </div>
 </div>
 
-
-
 @section modalpanel {
 
     <div id="AdjustReqTraining" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="hTitleEdit" class="modal-title">@Localizer["RequestTraining"]</h5>
+                    <h5 id="hTitleEdit" class="modal-title">@Localizer["Booking"]</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -337,7 +335,7 @@
 
                             <input type="hidden" id="locid" />
 
-                            @*<h4>@Localizer["ForStaffAIS"]</h4>
+                            <h4>@Localizer["ForStaffAIS"]</h4>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-2">
@@ -356,8 +354,8 @@
                                 </div>
 
                             </div>
-                            <br/>*@
-                            @*<div class="row">
+                            <br />
+                            <div class="row">
                                 <div class="col-sm-2">
                                     <label>@Localizer["Remark"] :</label>
                                 </div>
@@ -366,7 +364,7 @@
 
                                 </div>
 
-                            </div>*@
+                            </div>
                         </div>
 
                     </div>
@@ -376,10 +374,10 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
                             @Localizer["Close"]
                         </button>
-                        @*<button id="btnSave" type="submit" class="btn btn-primary">
+                        <button id="btnSave" type="submit" class="btn btn-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
                             @Localizer["Booking"]
-                        </button>*@
+                        </button>
                     </div>
                 </form>
             </div>
@@ -405,7 +403,7 @@
                                 lookup: function (query, done) {
                                     $.ajax({
                                         type: "POST",
-                                        url: '@Url.Action("GetCompany", "RequestTraining")',
+                                        url: '@Url.Action("GetCompany", "Booking")',
                                         data: { "companyname": query },
                                         dataType: "json",
                                         success: function (data) {
@@ -560,7 +558,7 @@
                  function GetDropDownByNameCourse() {
                     $.ajax({
                         type: 'GET',
-                        url: '@Url.Action("GetDropDownList", "RequestTraining")',
+                        url: '@Url.Action("GetDropDownList", "Booking")',
                         data: { '_ddlType': 'training_couse' },
                         dataType: 'json',
                         success: function (data) {
@@ -596,7 +594,7 @@
                             trainingModel.Course = $("select[id$=selCourse]").val();
 
                                  $.ajax({
-                                      url: '@Url.Action("onSave", "RequestTraining")',
+                                      url: '@Url.Action("onSave", "Booking")',
                                       type: 'POST',
                                      data: { 'model': trainingModel },
                                       dataType: "json",
@@ -608,7 +606,7 @@
                                              bootbox.alert(result.Message);
                                              //$('#trnid').val('');
                                              //$('#compid').val('');
-
+                                             $('#AdjustReqTraining').modal('hide');
                                              inittbSearchResult();
 
                                          }
@@ -631,7 +629,7 @@
                 //  alert('T');
                     $.ajax({
                         type: 'GET',
-                        url: '@Url.Action("GetDropDownList", "RequestTraining")',
+                        url: '@Url.Action("GetDropDownList", "Booking")',
                         data: { '_ddlType': 'training_status' },
                         dataType: 'json',
                         success: function (data) {
@@ -658,7 +656,7 @@
         var compnanyid = $("#txtCompNo").val();
         var locationId = $("#selLocationName").val();
               $.ajax({
-                  url: '@Url.Action("GetTeam", "RequestTraining")',
+                  url: '@Url.Action("GetTeam", "Booking")',
                   type: 'POST',
                   data: {
                       'companyId': compnanyid,
@@ -685,7 +683,7 @@
                   var compnanyid = $("#txtCompNo").val();
                     $.ajax({
                         type: 'GET',
-                        url: '@Url.Action("GetLocation","RequestTraining")',
+                        url: '@Url.Action("GetLocation", "Booking")',
                         data: { 'companyId': compnanyid },
                         dataType: 'json',
                         success: function (data) {
@@ -743,7 +741,7 @@
                                     "thousands": "."
                                 },
                                 ajax: {
-                                    url:'@Url.Action("Search", "RequestTraining")',
+                                    url:'@Url.Action("Search", "Booking")',
                                     type: "POST",
                                     datatype: "JSON",
                                     //dataSrc:"",
@@ -831,7 +829,7 @@
                         function callTrainingDetail(trainingID) {
 
                                  $.ajax({
-                                      url: '@Url.Action("GetTraining", "RequestTraining")',
+                                      url: '@Url.Action("GetTraining", "Booking")',
                                       type: 'POST',
                                       data: {
                                           'TrainingID': trainingID,
@@ -941,7 +939,7 @@
                                     "thousands": "."
                                 },
                                 ajax: {
-                                    url: '@Url.Action("SearchEngineer", "RequestTraining")',
+                                    url: '@Url.Action("SearchEngineer", "Booking")',
                                     type: "POST",
                                     datatype: "JSON",
                                     //dataSrc:"",

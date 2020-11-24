@@ -117,34 +117,118 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActivateProfile" xml:space="preserve">
-    <value>Activate Profile</value>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
   </data>
   <data name="Booking" xml:space="preserve">
-    <value>ระบุวันเข้าอบรม</value>
+    <value>Booking</value>
   </data>
-  <data name="CompanyVerify" xml:space="preserve">
-    <value>ตรวจสอบข้อมูลบริษัท</value>
+  <data name="BookingDateFrom" xml:space="preserve">
+    <value>วันที่ Booking จาก</value>
   </data>
-  <data name="Payment" xml:space="preserve">
-    <value>ชำระค่าอบรม</value>
+  <data name="BookingDateTo" xml:space="preserve">
+    <value>วันที่ Booking ถึง</value>
   </data>
-  <data name="Registration" xml:space="preserve">
-    <value>การลงทะเบียน</value>
+  <data name="BookingTrainingDate" xml:space="preserve">
+    <value>Booking วันที่อบรม</value>
   </data>
-  <data name="ReportTestResult" xml:space="preserve">
-    <value>รายงานผลการทดสอบ</value>
+  <data name="Close" xml:space="preserve">
+    <value>ปิด</value>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>ชื่อบริษัท</value>
+  </data>
+  <data name="ContactPhone" xml:space="preserve">
+    <value>เบอร์โทรศัพท์ติดต่อ</value>
+  </data>
+  <data name="Course" xml:space="preserve">
+    <value>ชื่อคอร์ส</value>
+  </data>
+  <data name="CoursePrice" xml:space="preserve">
+    <value>ราคาคอร์ส</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>อีเมล์</value>
+  </data>
+  <data name="Engineer" xml:space="preserve">
+    <value>Engineer</value>
+  </data>
+  <data name="ErrorBookingTrainingDate" xml:space="preserve">
+    <value>กรุณาระบุ Booking วันที่อบรม</value>
+  </data>
+  <data name="ErrorCourse" xml:space="preserve">
+    <value>กรุณาเลือกคอร์ส</value>
+  </data>
+  <data name="ForStaffAIS" xml:space="preserve">
+    <value>สำหรับเจ้าหน้าที่ AIS (เลือกวันที่อบรม)</value>
+  </data>
+  <data name="LocationName" xml:space="preserve">
+    <value>ชื่อ Location</value>
+  </data>
+  <data name="MessageAutocomplete" xml:space="preserve">
+    <value>ไม่มีผลลัพธ์ที่ตรงกัน</value>
+  </data>
+  <data name="NetPrice" xml:space="preserve">
+    <value>ราคาสุทธิ(บาท)</value>
+  </data>
+  <data name="NumberOfTrainees" xml:space="preserve">
+    <value>จำนวนผู้อบรม</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>ตำแหน่ง</value>
+  </data>
+  <data name="Remark" xml:space="preserve">
+    <value>หมายเหตุ</value>
+  </data>
+  <data name="RequestDate" xml:space="preserve">
+    <value>วันที่ขออบรม</value>
+  </data>
+  <data name="RequestDateFrom" xml:space="preserve">
+    <value>วันที่ขออบรม จาก</value>
+  </data>
+  <data name="RequestDateTo" xml:space="preserve">
+    <value>วันที่ขออบรม ถึง</value>
   </data>
   <data name="RequestTraining" xml:space="preserve">
-    <value>ขอรับการฝึกอบรม</value>
+    <value>ขอรับการอบรม</value>
   </data>
-  <data name="SignOut" xml:space="preserve">
-    <value>ออกจากระบบ</value>
+  <data name="Reset" xml:space="preserve">
+    <value>ล้างข้อมูล</value>
   </data>
-  <data name="Training" xml:space="preserve">
-    <value>การฝึกอบรม</value>
+  <data name="Search" xml:space="preserve">
+    <value>ค้นหาข้อมูล</value>
   </data>
-  <data name="VerfifiedPayment" xml:space="preserve">
-    <value>ตรวจสอบการชำระเงิน</value>
+  <data name="SearchRequestTraining" xml:space="preserve">
+    <value>ค้นหา ขอรับการฝึกอบรม</value>
+  </data>
+  <data name="SearchResult" xml:space="preserve">
+    <value>ผลการค้นหา</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>กรุณาเลือก</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>สภานะ</value>
+  </data>
+  <data name="TaxID" xml:space="preserve">
+    <value>เลขผู้เสียภาษี</value>
+  </data>
+  <data name="TeamName" xml:space="preserve">
+    <value>ชื่อ Team</value>
+  </data>
+  <data name="TotalAmount" xml:space="preserve">
+    <value>จำนวนเงินทั้งหมด</value>
+  </data>
+  <data name="TotalPrice" xml:space="preserve">
+    <value>ราคารวม(บาท)</value>
+  </data>
+  <data name="Trainee" xml:space="preserve">
+    <value>ผู้เข้าอบรม</value>
+  </data>
+  <data name="TrainingDate" xml:space="preserve">
+    <value>วันที่อบรม</value>
+  </data>
+  <data name="Vat7" xml:space="preserve">
+    <value>ภาษีมูลค่าเพิ่ม 7%</value>
   </data>
 </root>
