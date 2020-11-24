@@ -841,10 +841,21 @@ namespace SubcontractProfile.Web.Controllers
             string destNAS = outputNAS[0].dropdown_text;
 
             NetworkCredential sourceCredentials = new NetworkCredential { Domain = ipAddress, UserName = username, Password = password };
+            //var chkpath = @"D:\PathTest\ab6362c7-388e-4289-b999-dded33408ea0\Payment\C55BA6EB-B826-4D41-BE54-C538C2EE2AB4\img01.jpg"; //userid
+            //if (System.IO.File.Exists(chkpath))
+            //{
+            //    CheckDirPayment("C55BA6EB-B826-4D41-BE54-C538C2EE2AB4", "56f28ba9-8f7f-43fa-a598-e88fae450180", "");
+            //}
+            //var path = @"D:\PathTest\56f28ba9-8f7f-43fa-a598-e88fae450180\Payment\C55BA6EB-B826-4D41-BE54-C538C2EE2AB4\img01.jpg"; //companyid
 
             #endregion
             using (new NetworkConnection(destNAS, sourceCredentials))
             {
+                var chkpath = this.GetPathAndFilename(paymentid, filename, dataUser.UserId.ToString(), destNAS + @"\SubContractProfile\"); //userid
+                if (System.IO.File.Exists(chkpath))
+                {
+                    CheckDirPayment(dataUser.UserId.ToString(), dataUser.companyid.ToString(), destNAS + @"\SubContractProfile\");
+                }
                 var path = this.GetPathAndFilename(paymentid, filename, dataUser.companyid.ToString(), destNAS + @"\SubContractProfile\");
                 string content = GetContentType(path);
                 var memory = new MemoryStream();
@@ -869,6 +880,16 @@ namespace SubcontractProfile.Web.Controllers
             }
 
             
+        }
+        private void CheckDirPayment(string userid, string companyid, string dir)
+        {
+            //string strdir = Path.Combine(@"D:\PathTest\56f28ba9-8f7f-43fa-a598-e88fae450180");
+            //var path0 = @"D:\PathTest\ab6362c7-388e-4289-b999-dded33408ea0";
+            //Directory.Move(path0, strdir);
+            string strdir = Path.Combine(dir, companyid);
+            var path0 = Path.Combine(dir, userid);
+            Directory.Move(path0, strdir);
+
         }
         private string GetContentType(string path)
         {
