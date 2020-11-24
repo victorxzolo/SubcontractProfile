@@ -65,6 +65,9 @@ namespace SubcontractProfile.WebApi.Services.Model
         public string TestStatusName { get; set; }
         public string SkillLevel { get; set; }
 
+        public string TestReason { get; set; }
+        public string TestRemark { get; set; }
+
 
         public object Clone()
         {

@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Building" xml:space="preserve">
+    <value>อาคาร</value>
+  </data>
+  <data name="District" xml:space="preserve">
+    <value>อำเภอ/เขต</value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>ชั้น</value>
+  </data>
   <data name="LocationProfile" xml:space="preserve">
     <value>ข้อมูลสถานที่</value>
   </data>
@@ -150,7 +159,28 @@
   <data name="MessageUploadtoolage" xml:space="preserve">
     <value>Upload file มีขนาดใหญ่เกินกว่าที่ระบบกำหนด</value>
   </data>
+  <data name="Moo" xml:space="preserve">
+    <value>หมู่ที่</value>
+  </data>
   <data name="Profile" xml:space="preserve">
     <value>ข้อมูลโปรไฟล์</value>
+  </data>
+  <data name="Province" xml:space="preserve">
+    <value>จังหวัด</value>
+  </data>
+  <data name="Room" xml:space="preserve">
+    <value>ห้อง</value>
+  </data>
+  <data name="Soi" xml:space="preserve">
+    <value>ซอย</value>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>ถนน</value>
+  </data>
+  <data name="SubDistrict" xml:space="preserve">
+    <value>ตำบล/แขวง</value>
+  </data>
+  <data name="Village" xml:space="preserve">
+    <value>หมู่บ้าน</value>
   </data>
 </root>

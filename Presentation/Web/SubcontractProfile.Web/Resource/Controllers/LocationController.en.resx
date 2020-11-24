@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Building" xml:space="preserve">
+    <value>Building</value>
+  </data>
+  <data name="District" xml:space="preserve">
+    <value>District</value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>Floor</value>
+  </data>
   <data name="LocationProfile" xml:space="preserve">
     <value>Location Profile</value>
   </data>
@@ -150,7 +159,28 @@
   <data name="MessageUploadtoolage" xml:space="preserve">
     <value>Upload file is too large.</value>
   </data>
+  <data name="Moo" xml:space="preserve">
+    <value>Moo</value>
+  </data>
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
+  </data>
+  <data name="Province" xml:space="preserve">
+    <value>Province</value>
+  </data>
+  <data name="Room" xml:space="preserve">
+    <value>Room</value>
+  </data>
+  <data name="Soi" xml:space="preserve">
+    <value>Soi</value>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="SubDistrict" xml:space="preserve">
+    <value>SubDistrict</value>
+  </data>
+  <data name="Village" xml:space="preserve">
+    <value>Village</value>
   </data>
 </root>

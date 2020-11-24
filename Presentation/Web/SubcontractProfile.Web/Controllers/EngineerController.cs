@@ -459,6 +459,8 @@ namespace SubcontractProfile.Web.Controllers
 
                         var uriLocationPersonal = new Uri(Path.Combine(strpathAPI, "Personal", "Insert"));
 
+                        string rr = JsonConvert.SerializeObject(personal);
+
                         clientLocation.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
                         var httpContentPersonal = new StringContent(JsonConvert.SerializeObject(personal), Encoding.UTF8, "application/json");

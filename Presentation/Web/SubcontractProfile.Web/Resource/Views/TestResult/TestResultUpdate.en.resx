@@ -201,6 +201,12 @@
   <data name="TestDateTo" xml:space="preserve">
     <value>Test Date To</value>
   </data>
+  <data name="TestReason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="TestRemark" xml:space="preserve">
+    <value>Remark</value>
+  </data>
   <data name="TestResult" xml:space="preserve">
     <value>Test Result</value>
   </data>

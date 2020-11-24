@@ -246,7 +246,9 @@
                                                                accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf">
                                                         <label class="custom-file-label" for="inputBankAttach" id="lbpersonalAttahFile">@Localizer["ChooseFile"]</label>
                                                         <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
-
+                                                        <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
+                                                            @Localizer["SizeFile"]
+                                                        </small>
                                                     </div>
 
 
@@ -370,7 +372,9 @@
                                                            accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf">
                                                     <label class="custom-file-label" for="inputBankAttach" id="lbvehicleAttachFile">@Localizer["ChooseFile"]</label>
                                                     <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
-
+                                                    <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
+                                                        @Localizer["SizeFile"]
+                                                    </small>
 
                                                 </div>
                                             </div>
@@ -625,7 +629,9 @@
                                                            accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf">
                                                     <label class="custom-file-label" for="fileWorkPermitAttach" id="lbfileWorkPermitAttach">@Localizer["ChooseFile"]</label>
                                                     <small id="uploadlHelpwork" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
-
+                                                    <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
+                                                        @Localizer["SizeFile"]
+                                                    </small>
                                                 </div>
                                                 @*<div class="row col-sm-12">
 
@@ -645,7 +651,9 @@
                                                            accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf">
                                                     <label class="custom-file-label" for="fileProfileAttach" id="lbfileProfileAttach">@Localizer["ChooseFile"]</label>
                                                     <small id="uploadlHelpprofile" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
-
+                                                    <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
+                                                        @Localizer["SizeFile"]
+                                                    </small>
                                                 </div>
 
                                             </div>
@@ -747,7 +755,9 @@
                                                            accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf">
                                                     <label class="custom-file-label" for="fileCertificateAttach" id="lbfileCertificateAttach">@Localizer["ChooseFile"]</label>
                                                     <small id="uploadlHelpCertificateAttach" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
-
+                                                    <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
+                                                        @Localizer["SizeFile"]
+                                                    </small>
                                                 </div>
 
 
@@ -1430,8 +1440,9 @@
             formData.append('model.VehicleYear' , $('#VehicleYear').val());
             formData.append('model.VehicleLicensePlate' , $('#VehicleLicense').val());
             formData.append('model.ToolOtrd' , $('#Toolotdr').val());
-            formData.append('model.ToolSplicing' , $('#ToolSplicing').val());
-            formData.append('model.BankName' , $('select[id$=ddlBankName]').val());
+            formData.append('model.ToolSplicing', $('#ToolSplicing').val());
+            formData.append('model.BankCode', $('#ddlBankName option:selected').val());
+            formData.append('model.BankName', $('#ddlBankName option:selected').text());
             formData.append('model.AccountNo' , $('#AccNo').val());
             formData.append('model.AccountName' , $('#AccName').val());
 
@@ -1537,7 +1548,8 @@
             formData.append('personal.CertificateType' , $('#CertificateType').val());
             formData.append('personal.CertificateNo' , $('#CertificateNo').val());
             formData.append('personal.dateCertificateExpireDate', $('#dateCertificateDAte').val());
-            formData.append('personal.BankName', $('select[id$=BankName2]').text());
+            formData.append('personal.BankCode', $('#BankName2 option:selected').val());
+            formData.append('personal.BankName', $('#BankName2 option:selected').text());
             formData.append('personal.AccountNumber' , $('#AccNo2').val());
             formData.append('personal.AccountName' , $('#AccName2').val());
             //model.BranchName = $('#BranchName').val();
@@ -1718,7 +1730,7 @@ function GetDropDownLocationSearch() {
                 $("#ddlBankName").empty();
                 $("#ddlBankName").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
                 $.each(data, function (id, result) {
-                    $("#ddlBankName").append('<option value="' + result.BankName + '">' + result.BankName +'</option>');
+                    $("#ddlBankName").append('<option value="' + result.BankCode + '">' + result.BankName +'</option>');
                     });
                 },
                 failure: function () {
@@ -1740,7 +1752,7 @@ function GetDropDownLocationSearch() {
                 $("#BankName2").empty();
                 $("#BankName2").append('<option value="">--@Localizer["ddlPleaseSelect"]--</option>');
                 $.each(data, function (id, result) {
-                    $("#BankName2").append('<option value="' + result.BankName + '">' + result.BankName +'</option>');
+                    $("#BankName2").append('<option value="' + result.BankCode + '">' + result.BankName +'</option>');
                     });
                 },
                 failure: function () {

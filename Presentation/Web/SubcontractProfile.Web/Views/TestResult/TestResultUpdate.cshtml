@@ -218,10 +218,12 @@
                                             <th width="0%"></th>
                                             <th width="0%"></th>
                                             <th width="0%"></th>
-                                            <th width="20%">@Localizer["LocationName"]</th>
-                                            <th width="20%">@Localizer["TeamName"]</th>
+                                            <th width="15%">@Localizer["LocationName"]</th>
+                                            <th width="15%">@Localizer["TeamName"]</th>
                                             <th width="20%">@Localizer["Engineer"]</th>
-                                            <th width="20%">@Localizer["TestStatus"]</th>
+                                            <th width="10%">@Localizer["TestStatus"]</th>
+                                            <th width="20%">@Localizer["TestReason"]</th>
+                                            <th width="20%">@Localizer["TestRemark"]</th>
                                             @*<th width="15%">Remark</th>*@
 
                                         </tr>
@@ -631,7 +633,10 @@
                 var locationId = tEn.fnGetData(index).LocationId;
                 var teamId = tEn.fnGetData(index).TeamId;
                 var engineerId = tEn.fnGetData(index).EngineerId;
-                var status = $(value).find('select').val();
+                var status = $(value).find('#ddlAnswer').val();
+                var reason = $(value).find('#ddlReason').val();
+                var remark = $(value).find('#txtRemark').val()
+
 
                 var engineer = new Object();
                 engineer.TrainingId = trainingId;
@@ -639,6 +644,8 @@
                 engineer.TeamId = teamId;
                 engineer.EngineerId = engineerId;
                 engineer.TestStatus = status;
+                engineer.TestReason = reason;
+                engineer.TestRemark = remark;
 
                   $.ajax({
                    url: '@Url.Action("OnSave", "TestResult")',
@@ -775,8 +782,26 @@
                                             return $select[0].outerHTML
 
                                         }
-                                    }
+                                    },
+                                    {
+                                        data: null, orderable: false, render: function (data, type, row) {
+                                            var $select = $('<select id=ddlReason  class="form-control ">\n\
+                                            <option id="test0" value="-1">--@Localizer["PleaseSelect"]--</option/>\n\
+                                            <option id="test1" value="Y">@Localizer["Pass"]</option/>\n\
+                                            <option id="test2" value="N">@Localizer["NotPass"]</option/>\n\</select>');
 
+                                            $select.find('option[value="' + data.TestReason + '"]').attr('selected', 'selected');
+                                            return $select[0].outerHTML
+
+                                        }
+                                    },
+                                    {
+                                        data: null, orderable: false, render: function (data, type, row) {
+                                            var $select = $('<textarea id="txtRemark" class="form-control" rows="2">"' + data.TestRemark + '" </textarea>');
+                                            return $select[0].outerHTML
+
+                                        }
+                                    }
                                 ],
                                 "order": [[0, "desc"]],
                                 "stripeClasses": [],

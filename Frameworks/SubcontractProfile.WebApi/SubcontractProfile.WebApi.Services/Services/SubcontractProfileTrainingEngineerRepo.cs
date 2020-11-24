@@ -221,6 +221,8 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@engineer_id", subcontractProfileTrainingEngineer.EngineerId);
             p.Add("@test_status", subcontractProfileTrainingEngineer.TestStatus);
             p.Add("@update_by", subcontractProfileTrainingEngineer.UpdateBy);
+            p.Add("@testreason", subcontractProfileTrainingEngineer.TestReason);
+            p.Add("@testremark", subcontractProfileTrainingEngineer.TestRemark);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTrainingEngineer_updateByTest", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);

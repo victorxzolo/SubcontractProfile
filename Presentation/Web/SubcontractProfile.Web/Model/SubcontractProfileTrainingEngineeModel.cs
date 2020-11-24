@@ -51,5 +51,8 @@ namespace SubcontractProfile.Web.Model
 
         public string SkillLevel { get; set; }
 
+        public string TestReason { get; set; }
+        public string TestRemark { get; set; }
+
     }
 }
