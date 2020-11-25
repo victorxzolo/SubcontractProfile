@@ -101,7 +101,7 @@ namespace SubcontractProfile.Web.Controllers
 
         [HttpPost]
         public ActionResult Search(string companyName, string TaxId, string RequestNo,
-            string Status, string reqDateFrom, string reqDateTo, string bookingDateFrom, string bookingDateTo)
+            string reqDateFrom, string reqDateTo, string bookingDateFrom, string bookingDateTo)
         {
 
             var Result = new List<RequestTraininigModel>();
@@ -143,15 +143,15 @@ namespace SubcontractProfile.Web.Controllers
             }
 
 
-            string status = string.Empty;
-            if ((Status == null) || (Status == "-1"))
-            {
-                status = "null";
-            }
-            else
-            {
-                status = Status;
-            }
+            //string status = string.Empty;
+            //if ((Status == null) || (Status == "-1"))
+            //{
+            //    status = "null";
+            //}
+            //else
+            //{
+            //    status = Status;
+            //}
             string date_from = string.Empty;
             if (reqDateFrom == null)
             {
@@ -193,10 +193,10 @@ namespace SubcontractProfile.Web.Controllers
             }
 
 
-            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", strpathAPI + "Training/SearchTrainingForApprove"
+            string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", strpathAPI + "Training/SearchTrainingForBooking"
                 , HttpUtility.UrlEncode(companyName, Encoding.UTF8)
                 , HttpUtility.UrlEncode(TaxId, Encoding.UTF8)
-                , HttpUtility.UrlEncode(status, Encoding.UTF8)
+               // , HttpUtility.UrlEncode(status, Encoding.UTF8)
                 , HttpUtility.UrlEncode(date_from, Encoding.UTF8)
                 , HttpUtility.UrlEncode(date_to, Encoding.UTF8)
                 , HttpUtility.UrlEncode(bookingDateFrom, Encoding.UTF8)

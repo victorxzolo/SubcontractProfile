@@ -90,10 +90,10 @@
 
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+                    @*<div class="form-group col-md-6">
                         <label for="inputStatus">@Localizer["Status"]</label>
                         <select id="inputStatus" class="form-control" data-live-search="true"></select>
-                    </div>
+                    </div>*@
 
                 </div>
 
@@ -747,7 +747,7 @@
                                     //dataSrc:"",
                                     data: function (d) {
                                             d.companyName = $("#txtCompNo").val(),
-                                            d.Status = $("select[id$=inputStatus]").val(),
+                                           // d.Status = $("select[id$=inputStatus]").val(),
                                             d.TaxId = $("#txttaxID").val(),
                                             d.reqDateFrom = $("#reqdateFrom").val(),
                                             d.reqDateTo = $("#reqdateTo").val(),
