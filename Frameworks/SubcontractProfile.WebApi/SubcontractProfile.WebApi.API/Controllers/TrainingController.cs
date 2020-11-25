@@ -165,6 +165,63 @@ namespace SubcontractProfile.WebApi.API.Controllers
             return entities;
         }
 
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileTraining))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileTraining))]
+        [HttpGet("SearchTrainingForBooking/{company_name_th}/{tax_id}/{date_from}/{date_to}/{bookingdate_from}/{bookingdate_to}")]
+
+        public Task<IEnumerable<SubcontractProfileTraining>> SearchTrainingForBooking(string company_name_th,
+          string tax_id,  string date_from, string date_to,
+          string bookingdate_from, string bookingdate_to)
+        {
+
+            _logger.LogInformation($"Start TrainingController::SearchTrainingForBooking", company_name_th, tax_id,
+                 date_from, date_to, bookingdate_from, bookingdate_to);
+
+            if (company_name_th.ToUpper() == "NULL")
+            {
+                company_name_th = string.Empty;
+            }
+
+            if (tax_id.ToUpper() == "NULL")
+            {
+                tax_id = string.Empty;
+            }
+
+          
+            if (date_from.ToUpper() == "NULL")
+            {
+                date_from = string.Empty;
+            }
+
+            if (date_to.ToUpper() == "NULL")
+            {
+                date_to = string.Empty;
+            }
+
+            if (bookingdate_from.ToUpper() == "NULL")
+            {
+                bookingdate_from = string.Empty;
+            }
+
+            if (bookingdate_to.ToUpper() == "NULL")
+            {
+                bookingdate_to = string.Empty;
+            }
+
+            var entities = _service.SearchTrainingForBooking(company_name_th, tax_id,
+                  date_from, date_to, bookingdate_from, bookingdate_to);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"TrainingController::", "SearchTrainingForBooking NOT FOUND", company_name_th, tax_id,
+                 date_from, date_to, bookingdate_from, bookingdate_to);
+                return null;
+            }
+
+            return entities;
+        }
+
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileTraining))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileTraining))]
         [HttpGet("SearchTrainingForTest/{company_name_th}/{tax_id}/{training_date_fr}/{training_date_to}/{test_date_fr}/{test_date_to}/{status}")]

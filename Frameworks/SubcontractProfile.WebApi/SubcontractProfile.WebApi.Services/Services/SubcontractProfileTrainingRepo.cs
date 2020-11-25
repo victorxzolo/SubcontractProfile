@@ -251,6 +251,24 @@ namespace SubcontractProfile.WebApi.Services.Services
             return entity;
         }
 
+
+        public async Task<IEnumerable<SubcontractProfileTraining>> SearchTrainingForBooking(string company_name_th,
+           string tax_id, string date_from, string date_to, string bookingdate_from, string bookingdate_to)
+        {
+            var p = new DynamicParameters();
+            p.Add("@company_name_th", company_name_th);
+            p.Add("@tax_id", tax_id);
+            p.Add("@date_from", date_from);
+            p.Add("@date_to", date_to);
+            p.Add("@bookingdate_from", bookingdate_from);
+            p.Add("@bookingdate_to", bookingdate_to);
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>
+            ("uspSubcontractProfileTraining_searchTrainingForBooking", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
+
         public async Task<bool> UpdateByVerified(SubcontractProfileTrainingRequest subcontractProfileTraining)
         {
 
