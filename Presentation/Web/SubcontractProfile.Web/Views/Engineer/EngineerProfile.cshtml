@@ -226,10 +226,13 @@
 
                                             </div>
                                             <div class="col-sm-2">
-                                                <label>@Localizer["IDCard"]:</label>
+                                                <label>@Localizer["IDCard"]</label>
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" id="CitizenID" onkeypress="return isNumberKey(event);" maxlength="13" style="width:300px" class="form-control">
+                                                <input type="text" id="CitizenID" maxlength="13" style="width:300px" class="form-control">
+                                                @*<div class="invalid-feedback">
+                                                    @Localizer["ErrorLocationName"]
+                                                </div>*@
                                             </div>
                                         </div>
                                         <br />
@@ -276,7 +279,7 @@
                                                 <label><span style="color:red">*</span> @Localizer["Tel"]:</label>
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" id="ContractPhone1" maxlength="100" style="width:300px" class="form-control" required>
+                                                <input type="text" id="ContractPhone1" maxlength="20" style="width:300px" class="form-control" required>
                                                 <div class="invalid-feedback">
                                                     @Localizer["ErrorTel"]
                                                 </div>
@@ -285,7 +288,7 @@
                                                 <label>@Localizer["Tel2"]:</label>
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" id="ContractPhone2" maxlength="100" style="width:300px" class="form-control">
+                                                <input type="text" id="ContractPhone2" maxlength="20" style="width:300px" class="form-control">
                                             </div>
                                         </div>
                                         <br />
@@ -453,7 +456,7 @@
                                                 <label><span style="color:red">*</span> @Localizer["IDCard"] :</label>
                                             </div>
                                             <div class="col-sm-10">
-                                                <input type="text" id="CitizenID2" onkeypress="return isNumberKey(event);" maxlength="13" style="width:300px" class="form-control" required>
+                                                <input type="text" id="CitizenID2" maxlength="13" style="width:300px" class="form-control" required>
                                                 <div class="invalid-feedback">
                                                     @Localizer["ErrorIDCard"]
                                                 </div>
@@ -584,7 +587,7 @@
                                                 <label><span style="color:red">*</span> @Localizer["Tel"] :</label>
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" id="PersonalContractPhone1" maxlength="100" style="width:300px" class="form-control" required>
+                                                <input type="text" id="PersonalContractPhone1" maxlength="20" style="width:300px" class="form-control" required>
                                                 <div class="invalid-feedback">
                                                     @Localizer["ErrorTel"]
                                                 </div>
@@ -593,7 +596,7 @@
                                                 <label>@Localizer["Tel2"] :</label>
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" id="PersonalContractPhone2" maxlength="100" style="width:300px" class="form-control">
+                                                <input type="text" id="PersonalContractPhone2" maxlength="20" style="width:300px" class="form-control">
                                             </div>
                                         </div>
                                         <br />
@@ -921,7 +924,13 @@
                 getTeamByLocationId($(this).val());
             });
 
+            $('#CitizenID').keyup(function () {
+                CheckKeyUps("CitizenID", "[0-9]"); 
+            });
 
+            $('#CitizenID2').keyup(function () {
+                CheckKeyUps("CitizenID2", "[0-9]"); 
+            });
 
 
             inittbSearchResult();
