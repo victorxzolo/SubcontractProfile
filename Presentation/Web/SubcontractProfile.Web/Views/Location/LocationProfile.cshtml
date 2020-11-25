@@ -712,11 +712,18 @@
                                             <input type="file" class="custom-file-input" id="inputBankAttach" aria-describedby="uploadlHelp1" style="width:190px"
                                                    accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf">
                                             <label class="custom-file-label" for="inputBankAttach" id="lbfileBankAttach">@Localizer["ChooseFile"]</label>
+                                        </div>
+                                        <div id="targetDiv" class="row">
+                                            <a id="linkdownload" href="#" target="_blank"></a>
+                                        </div>
+                                        <div class="row">
                                             <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
                                             <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
                                                 @Localizer["SizeFile"]
                                             </small>
                                         </div>
+                                            
+                                        
 
                                     </div>
                                 </div>
@@ -1646,8 +1653,9 @@
                       if (result.BankAttachFile != null) {
                           $('#lbfileBankAttach').text(result.BankAttachFile);
                           $('#hdupfileBankAttach').val(result.file_id__BankAttach);
-                          //$('#linkdownload').text(data.SlipAttachFile);
-                          //DownloadFileSlip(data.SlipAttachFile);
+
+                          $('#linkdownload').text(result.BankAttachFile);
+                          DownloadFileSlip(result.BankAttachFile, $('#linkdownload'));
                       }
 
                       GetAddress();
@@ -1997,6 +2005,13 @@
                 dataType: "json"
             });
             return jqXHR.responseJSON;
+        }
+
+        function DownloadFile(filename, linkdownload) {
+            var urlDownloadfile = '@Url.Action("DownloadfileLocation", "Location")';
+
+            linkdownload.attr("href", urlDownloadfile + '?locationid=' + $('#hdLocationId').val() + '&&filename=' + filename);
+
         }
 
     </script>

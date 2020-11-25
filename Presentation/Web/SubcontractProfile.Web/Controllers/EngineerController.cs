@@ -1001,6 +1001,57 @@ namespace SubcontractProfile.Web.Controllers
             return result;
         }
 
+        public async Task<ActionResult> Downloadfile(string id, string filename,string type)
+        {
+            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+            var outputNAS = new List<SubcontractDropdownModel>();
+            #region NAS
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/nas_subcontract");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                outputNAS = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+            }
+
+            string username = outputNAS[0].value1;
+            string password = outputNAS[0].value2;
+            string ipAddress = @"\\" + outputNAS[0].dropdown_value;
+            string destNAS = outputNAS[0].dropdown_text;
+
+            NetworkCredential sourceCredentials = new NetworkCredential { Domain = ipAddress, UserName = username, Password = password };
+
+            #endregion
+            using (new NetworkConnection(destNAS, sourceCredentials))
+            {
+                var path = this.GetPathAndFilename(id,filename, userProfile.companyid.ToString(), type, destNAS + @"\SubContractProfile\");
+                string content = GetContentType(path);
+                var memory = new MemoryStream();
+                using (var stream = new FileStream(path, FileMode.Open))
+                {
+                    await stream.CopyToAsync(memory);
+
+                }
+
+                memory.Position = 0;
+                var array = memory.ToArray();
+
+
+                if (array != null)
+                {
+                    return File(array, content, Path.GetFileName(path));
+                }
+                else
+                {
+                    return new EmptyResult();
+                }
+            }
+
+        }
         private string GetContentType(string path)
         {
             var types = GetMimeTypes();

@@ -38,6 +38,7 @@ $(document).ready(function () {
     GetDDLVehicleSerise();
     GetDDLServiceSkill();
     GetDropDownSizeShirt();
+    GetDropDownBank();
   //  $('#divSignContract').hide();
 
     getDataById($('#hdCompanyId').val());
@@ -647,7 +648,6 @@ $(document).ready(function () {
         $('#lbengineercompanyname').text($('#lbcompanyname').text());
     });
     BindDDLTeamEngineer();
-    GetDropDownBank();
     GetDropDownTitle();
     $('#ddllocationteamengineer').change(function () {
         var data = $('#ddllocationteamengineer option').filter(':selected').val()
@@ -1218,6 +1218,9 @@ function getDataById(companyId) {
                 if (result.AttachFile != null) {
                     $('#lbuploadbookbank').html(result.AttachFile);
                     $('#hduploadbookbank').val(result.file_id_bookbank);
+
+                    $('#linkdownloadbookbank').text(result.BankAttachFile);
+                    DownloadFile(result.AttachFile, $('#linkdownloadbookbank'), '', '');
                 }
 
 
@@ -1226,14 +1229,23 @@ function getDataById(companyId) {
                 if (result.CompanyCertifiedFile != null) {
                     $('#lbuploadcertificate').html(result.CompanyCertifiedFile);
                     $('#hdupfilecompany_certified').val(result.file_id_CompanyCertifiedFile);
+
+                    $('#linkdownloadcertificate').text(result.CompanyCertifiedFile);
+                    DownloadFile(result.CompanyCertifiedFile, $('#linkdownloadcertificate'), '', '');
                 }
                 if (result.CommercialRegistrationFile != null) {
                     $('#lbuploadComRegis').html(result.CommercialRegistrationFile);
                     $('#hdupfilecommercial_registration').val(result.file_id_CommercialRegistrationFile);
+
+                    $('#linkdownloadComRegis').text(result.CommercialRegistrationFile);
+                    DownloadFile(result.CommercialRegistrationFile, $('#linkdownloadComRegis'), '', '');
                 }
                 if (result.VatRegistrationCertificateFile != null) {
                     $('#lbupload20').html(result.VatRegistrationCertificateFile);
                     $('#hdupfilevat_registration_certificate').val(result.file_id_VatRegistrationCertificateFile);
+
+                    $('#linkdownload20').text(result.VatRegistrationCertificateFile);
+                    DownloadFile(result.VatRegistrationCertificateFile, $('#linkdownload20'), '', '');
                 }
 
                 GetAddress(companyId);
@@ -2070,11 +2082,13 @@ function getDataLocationById(locationId) {
                 if (result.BankAttachFile != null) {
                     $('#lbBankAttach').text(result.BankAttachFile);
                     //$('#hdupfileslip').val(data.file_id_Slip);
-                    //$('#linkdownload').text(data.SlipAttachFile);
-                    // DownloadFileSlip(data.SlipAttachFile);
+
+                    $('#linkdownloadBankAttach').text(result.BankAttachFile);
+                    DownloadFile(result.BankAttachFile, $('#linkdownloadBankAttach'), locationId, 'Location');
                 }
                 else {
                     $('#lbBankAttach').text(localizedData.ChooseFile);
+                    $('#linkdownloadBankAttach').text('');
                 }
 
                 GetAddressLocation(locationId);
@@ -2379,16 +2393,19 @@ function getDataEngineerById(id) {
                 $('#ContractPhone1').val(result.ContractPhone1);
                 $('#ContractPhone2').val(result.ContractPhone2);
                 $('#ContractEmail').val(result.ContractEmail);
-                $('#VehicleType').val(result.VehicleType);
-                $('#VehicleBrand').val(result.VehicleBrand);
-                $('#VehicleSerise').val(result.VehicleSerise);
+                $('#VehicleType').val(result.VehicleType).change();
+
+                $('#VehicleBrand').val(result.VehicleBrand).change();
+                $('#VehicleBrand').trigger('change');
+
+               
                 $('#VehicleColor').val(result.VehicleColor);
                 $('#VehicleYear').val(result.VehicleYear);
                 $('#VehicleLicense').val(result.VehicleLicensePlate);
                 $('#Toolotdr').val(result.ToolOtrd);
                 $('#ToolSplicing').val(result.ToolSplicing);
 
-                $("#ddlBankName").val(result.BankName);
+              
                 $('#AccNo').val(result.AccountNo);
                 $('#AccName').val(result.AccountName);
 
@@ -2396,13 +2413,19 @@ function getDataEngineerById(id) {
 
                 if (result.PersonalAttachFile != null) {
                     $('#lbpersonalAttahFile').text(result.PersonalAttachFile);
+
+                    $('#linkdownloadpersonal').text(result.PersonalAttachFile);
+                    DownloadFile(result.PersonalAttachFile, $('#linkdownloadpersonal'), result.EngineerId, 'Engineer');
                 }
 
                 if (result.VehicleAttachFile != null) {
                     $('#lbVehicleAttachFile').text(result.VehicleAttachFile);
+
+                    $('#linkdownloadvehicle').text(result.VehicleAttachFile);
+                    DownloadFile(result.VehicleAttachFile, $('#linkdownloadvehicle'), result.EngineerId, 'Engineer');
                 }
-
-
+                $("#ddlBankName").val(result.BankCode).change();
+                $('#VehicleSerise').val(result.VehicleSerise).change();
 
                 $("#Team").val(result.TeamId);
 
@@ -2535,19 +2558,28 @@ function getDataPersonalById(id) {
                     $('#datepickerCertificateDAte').data("DateTimePicker").date(moment(new Date(year, month, day), 'DD/MM/YYYY'));
                 }
 
-                $("#BankName2").val(result.BankName).change();
+                $("#BankName2").val(result.BankCode).change();
 
                 $('#AccNo2').val(result.AccountNumber);
                 $('#AccName2').val(result.AccountName);
 
                 if (result.WorkPermitAttachFile != null) {
                     $('#lbfileWorkPermitAttach').text(result.WorkPermitAttachFile);
+
+                    $('#linkdownloadfileWorkPermit').text(result.WorkPermitAttachFile);
+                    DownloadFile(result.WorkPermitAttachFile, $('#linkdownloadfileWorkPermit'), result.EngineerId, 'Personal');
                 }
                 if (result.ProfileImgAttachFile != null) {
                     $('#lbfileProfileAttach').text(result.ProfileImgAttachFile);
+
+                    $('#linkdownloadfileProfile').text(result.ProfileImgAttachFile);
+                    DownloadFile(result.ProfileImgAttachFile, $('#linkdownloadfileProfile'), result.EngineerId, 'Personal');
                 }
                 if (result.CertificateAttachFile != null) {
                     $('#lbfileCertificateAttach').text(result.CertificateAttachFile);
+
+                    $('#linkdownloadfileCertificate').text(result.CertificateAttachFile);
+                    DownloadFile(result.CertificateAttachFile, $('#linkdownloadfileCertificate'), result.EngineerId, 'Personal');
                 }
 
 
@@ -2567,6 +2599,7 @@ function GetDropDownBank() {
         url: urlGetBankName,
         // data: {stateid:stateid},
         dataType: 'json',
+        async: false,
         success: function (data) {
 
             $("#ddlBankName").empty();
@@ -2575,8 +2608,8 @@ function GetDropDownBank() {
             $("#BankName2").append('<option value="">--' + localizedData.ddlPleaseSelect +'--</option>');
 
             $.each(data, function (id, result) {
-                $("#ddlBankName").append('<option value="' + result.BankName + '">' + result.BankName + '</option>');
-                $("#BankName2").append('<option value="' + result.BankName + '">' + result.BankName + '</option>');
+                $("#ddlBankName").append('<option value="' + result.BankCode + '">' + result.BankName + '</option>');
+                $("#BankName2").append('<option value="' + result.BankCode + '">' + result.BankName + '</option>');
             });
         },
         failure: function () {
@@ -2595,6 +2628,7 @@ function GetDropDownTitle() {
         url: urlGetTitleName,
         // data: {stateid:stateid},
         dataType: 'json',
+        async: false,
         success: function (data) {
 
             $("#Title").empty();
@@ -2715,6 +2749,7 @@ function GetDDLVehicleBrand() {
         type: 'POST',
         url: urlGetVehicleBrand,
         dataType: 'json',
+        async: false,
         success: function (data) {
 
             $("#VehicleBrand").empty();
@@ -2736,6 +2771,7 @@ function GetDDLVehicleSerise(id) {
         url: urlGetVehicleSerise,
         data: { VerhicleBrandId: id },
         dataType: 'json',
+        async:false,
         success: function (data) {
 
             $("#VehicleSerise").empty();
@@ -2789,6 +2825,13 @@ function GetDropDownSizeShirt() {
             $("#tshirtsize").append('<option value="-1">--' + localizedData.ddlPleaseSelect +'--</option>');
         }
     });
+}
+
+function DownloadFile(filename, linkdownload, id, type) {
+    var urlDownloadfile = url.replace('Action', 'Downloadfile');
+
+    linkdownload.attr("href", urlDownloadfile + '?id=' + id + '&&filename=' + filename + '&&type=' + type + '&&companyId=' + $('#hdCompanyId').val());
+
 }
 
 function isEmail(email) {

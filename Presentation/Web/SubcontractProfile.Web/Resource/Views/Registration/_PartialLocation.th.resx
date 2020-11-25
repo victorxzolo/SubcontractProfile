@@ -336,6 +336,9 @@
   <data name="ShipTo" xml:space="preserve">
     <value>Ship To</value>
   </data>
+  <data name="SizeFile" xml:space="preserve">
+    <value>ขนาดไฟล์ pdf ต้องไม่เกิน 1 Mb หรือ ขนาดไฟล์ jpg,jpeg,bmp,gif,tif,tiff,png ต้องไม่เกิน 3 Mb</value>
+  </data>
   <data name="Soi" xml:space="preserve">
     <value>ซอย</value>
   </data>

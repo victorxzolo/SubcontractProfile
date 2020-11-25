@@ -273,6 +273,9 @@
   <data name="SizeClothes" xml:space="preserve">
     <value>ขนาด(size)เสื้อ</value>
   </data>
+  <data name="SizeFile" xml:space="preserve">
+    <value>ขนาดไฟล์ pdf ต้องไม่เกิน 1 Mb หรือ ขนาดไฟล์ jpg,jpeg,bmp,gif,tif,tiff,png ต้องไม่เกิน 3 Mb</value>
+  </data>
   <data name="SpeakingEng" xml:space="preserve">
     <value>พูดภาษาอังกฤษ</value>
   </data>

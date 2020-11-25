@@ -186,6 +186,12 @@
   <data name="TestDateTo" xml:space="preserve">
     <value>วันที่ทดสอบถึง</value>
   </data>
+  <data name="TestReason" xml:space="preserve">
+    <value>เหตุผล</value>
+  </data>
+  <data name="TestRemark" xml:space="preserve">
+    <value>หมายเหตุ</value>
+  </data>
   <data name="TestResult" xml:space="preserve">
     <value>ผลการทดสอบ</value>
   </data>
