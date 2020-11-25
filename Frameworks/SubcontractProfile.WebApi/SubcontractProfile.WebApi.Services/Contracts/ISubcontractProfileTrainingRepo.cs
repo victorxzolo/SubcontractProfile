@@ -23,6 +23,11 @@ namespace SubcontractProfile.WebApi.Services.Contracts
 
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTrainingForApprove(string company_name_th,
          string tax_id, string status, string date_from, string date_to, string bookingdate_from, string bookingdate_to);
+
+        Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTraining>> SearchTrainingForBooking(string company_name_th,
+         string tax_id, string date_from, string date_to, string bookingdate_from, string bookingdate_to);
+
+
         Task<bool> UpdateByVerified(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingRequest subcontractProfileTraining);
 
         Task<bool> UpdateTestResult(SubcontractProfileTrainingRequest subcontractProfileTraining);
