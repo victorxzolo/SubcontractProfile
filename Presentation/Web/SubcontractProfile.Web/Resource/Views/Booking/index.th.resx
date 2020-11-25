@@ -208,7 +208,7 @@
     <value>กรุณาเลือก</value>
   </data>
   <data name="Status" xml:space="preserve">
-    <value>สภานะ</value>
+    <value>สถานะ</value>
   </data>
   <data name="TaxID" xml:space="preserve">
     <value>เลขผู้เสียภาษี</value>
