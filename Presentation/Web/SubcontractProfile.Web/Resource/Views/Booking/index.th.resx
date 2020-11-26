@@ -198,8 +198,8 @@
   <data name="Search" xml:space="preserve">
     <value>ค้นหาข้อมูล</value>
   </data>
-  <data name="SearchRequestTraining" xml:space="preserve">
-    <value>ค้นหา ขอรับการฝึกอบรม</value>
+  <data name="SearchBookingTraining" xml:space="preserve">
+    <value>ค้นหา จองวันที่เข้าอบรม</value>
   </data>
   <data name="SearchResult" xml:space="preserve">
     <value>ผลการค้นหา</value>
@@ -208,7 +208,7 @@
     <value>กรุณาเลือก</value>
   </data>
   <data name="Status" xml:space="preserve">
-    <value>สภานะ</value>
+    <value>สถานะ</value>
   </data>
   <data name="TaxID" xml:space="preserve">
     <value>เลขผู้เสียภาษี</value>

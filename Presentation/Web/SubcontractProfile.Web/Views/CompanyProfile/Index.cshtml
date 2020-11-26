@@ -893,7 +893,7 @@
                                 <label>@Localizer["Tel"] :</label>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" id="telContract" style="width:300px" class="form-control inputisvalidate" required>
+                                <input type="text" id="telContract" maxlength="20" style="width:300px" class="form-control inputisvalidate" required>
                                 <div class="invalid-feedback">@Localizer["ErrorTel"]</div>
                             </div>
                         </div>
@@ -919,7 +919,7 @@
                                 <label>@Localizer["Tel"] :</label>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" id="tel1" style="width:300px" class="form-control inputisvalidate" required>
+                                <input type="text" id="tel1" maxlength="20" style="width:300px" class="form-control inputisvalidate" required>
                                 <div class="invalid-feedback">@Localizer["ErrorTel"]</div>
 
                             </div>
@@ -953,7 +953,7 @@
                                 <label>@Localizer["Tel"] :</label>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" id="tel2" style="width:300px" class="form-control inputisvalidate" required>
+                                <input type="text" id="tel2" maxlength="20" style="width:300px" class="form-control inputisvalidate" required>
                                 <div class="invalid-feedback">@Localizer["ErrorTel"]</div>
 
                             </div>
@@ -1069,19 +1069,23 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="row col-sm-12">
-                                    <div class="custom-file">
                                         <input type="hidden" id="hduploadbookbank" class="form-control" />
                                         <input type="file" class="custom-file-input" id="inputuploadbookbank"
                                                aria-describedby="uploadlHelp1" accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf" />
                                         <label class="custom-file-label " for="inputuploadbookbank" id="lbuploadbookbank">@Localizer["ChooseFile"]</label>
-                                        <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
+                                        <div class="invalid-feedback">@Localizer["ErrorBookBank"]</div>
+                                </div>
+                                    <div id="targetDiv" class="row">
+                                        <a id="linkdownloadbookbank" href="#" target="_blank"></a>
+                                    </div>
+                                    <div class="row">
+                                        <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">@Localizer["ChooseFileType"]</small>
                                         <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
                                             @Localizer["SizeFile"]
                                         </small>
-                                        <div class="invalid-feedback">@Localizer["ErrorBookBank"]</div>
                                     </div>
 
-                                </div>
+                                
                             </div>
 
                             <div class="col-sm-2" style="display:none;">
@@ -1106,40 +1110,48 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="row col-sm-12">
-                                    @*<div class="custom-file">*@
                                     <input type="hidden" id="hdupfilecompany_certified" class="form-control" />
                                     <input type="file" class="custom-file-input" id="inputUploadcertificate"
                                            accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf" />
                                     <label class="custom-file-label " for="inputUploadcertificate" id="lbuploadcertificate">@Localizer["ChooseFile"]</label>
-                                    @*</div>*@
-                                    @*<small id="uploadlHelp2" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>*@
-                                    @*<small id="uploadlHelp2" class="form-text text-muted">***@@*Localizer["SupportFilePDF"]</small>*@
-                                    <small id="uploadlHelp2" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
-                                    <small id="uploadlHelp2" class="form-text text-muted" style="margin-top:0;">
-                                        @Localizer["SizeFile"]
-                                    </small>
                                     <div class="invalid-feedback">@Localizer["ErrorCompanyCertificate"]</div>
                                 </div>
+                                    <div id="targetDiv" class="row">
+                                        <a id="linkdownloadcertificate" href="#" target="_blank"></a>
+                                    </div>
+                                    <div class="row">
+                                        <small id="uploadlHelp2" class="form-text text-muted" style="margin-top:0;">@Localizer["ChooseFileType"]</small>
+                                        <small id="uploadlHelp2" class="form-text text-muted" style="margin-top:0;">
+                                            @Localizer["SizeFile"]
+                                        </small>
+                                    </div>
+                                    
+
+                               
                             </div>
                             <div class="col-sm-2">
                                 <label>@Localizer["CommercialRegistrationBook"]:</label>
                             </div>
                             <div class="col-sm-4">
                                 <div class="row col-sm-12">
-                                    @*<div class="custom-file">*@
                                     <input type="hidden" id="hdupfilecommercial_registration" class="form-control" />
                                     <input type="file" class="custom-file-input" id="inputUploadComRegis"
                                            accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf" />
                                     <label class="custom-file-label " for="inputUploadComRegis" id="lbuploadComRegis">@Localizer["ChooseFile"]</label>
-                                    @*</div>*@
-                                    @*<small id="uploadlHelp3" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>*@
-                                    @*<small id="uploadlHelp3" class="form-text text-muted">***@@*Localizer["SupportFilePDF"]</small>*@
-                                    <small id="uploadlHelp3" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
-                                    <small id="uploadlHelp3" class="form-text text-muted" style="margin-top:0;">
-                                        @Localizer["SizeFile"]
-                                    </small>
                                     <div class="invalid-feedback">@Localizer["ErrorCommercialRegistrationBook"]</div>
                                 </div>
+                                    <div id="targetDiv" class="row">
+                                        <a id="linkdownloadComRegis" href="#" target="_blank"></a>
+                                    </div>
+                                    <div class="row">
+                                        <small id="uploadlHelp3" class="form-text text-muted" style="margin-top:0;">@Localizer["ChooseFileType"]</small>
+                                        <small id="uploadlHelp3" class="form-text text-muted" style="margin-top:0;">
+                                            @Localizer["SizeFile"]
+                                        </small>
+                                    </div>
+                                   
+                                    
+                               
                             </div>
                         </div>
                         <br />
@@ -1147,21 +1159,25 @@
                             <div class="col-sm-2">
                                 <label>@Localizer["VATRegistrationCertificate"] :</label>
                             </div>
-                            <div class="col-sm-10">
-                                <div class="row col-sm-6">
+                            <div class="col-sm-4">
+                                <div class="row col-sm-12">
                                     @*<div class="custom-file">*@
                                     <input type="hidden" id="hdupfilevat_registration_certificate" class="form-control" />
                                     <input type="file" class="custom-file-input" id="inputUpload20" style="width:170px"
                                            accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf" />
                                     <label class="custom-file-label" for="inputUpload20" id="lbupload20">@Localizer["ChooseFile"]</label>
+                                    <div class="invalid-feedback">@Localizer["ErrorVATRegistrationCertificate"]</div>
                                     @*</div>*@
-                                    @*<small id="uploadlHelp4" class="form-text text-muted">ประเภทไฟล์ภาพที่รองรับ pdf,jpg,jpeg,bmp,gif,tif,tiff,png</small>*@
-                                    @*<small id="uploadlHelp4" class="form-text text-muted">***@@*Localizer["SupportFilePDF"]</small>*@
-                                    <small id="uploadlHelp4" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
+                                </div>
+                                <div id="targetDiv" class="row">
+                                    <a id="linkdownload20" href="#" target="_blank"></a>
+                                </div>
+                                <div class="row">
+                                    <small id="uploadlHelp4" class="form-text text-muted" style="margin-top:0;">@Localizer["ChooseFileType"]</small>
                                     <small id="uploadlHelp4" class="form-text text-muted" style="margin-top:0;">
                                         @Localizer["SizeFile"]
                                     </small>
-                                    <div class="invalid-feedback">@Localizer["ErrorVATRegistrationCertificate"]</div>
+
                                 </div>
                             </div>
                         </div>

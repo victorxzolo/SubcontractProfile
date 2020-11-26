@@ -776,6 +776,8 @@ namespace SubcontractProfile.Web.Controllers
                             });
                             foreach (var r in SaveAddressSession(newaddr))
                             {
+                                Guid addr_id = Guid.NewGuid();
+                                r.AddressId = addr_id;
                                 data.Add(r);
                             }
 
@@ -784,6 +786,8 @@ namespace SubcontractProfile.Web.Controllers
                         {
 
                             data.RemoveAll(x => x.AddressTypeId== e.AddressTypeId);
+                            Guid addr_id = Guid.NewGuid();
+                            e.AddressId = addr_id;
                             data.Add(e);
                         }
 
@@ -1407,6 +1411,66 @@ namespace SubcontractProfile.Web.Controllers
             return result;
         }
 
+        public async Task<ActionResult> Downloadfile(string filename)
+        {
+            if (datauser == null)
+            {
+                getsession();
+            }
+            var outputNAS = new List<SubcontractDropdownModel>();
+            #region NAS
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/nas_subcontract");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                outputNAS = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+            }
+
+            string username = outputNAS[0].value1;
+            string password = outputNAS[0].value2;
+            string ipAddress = @"\\" + outputNAS[0].dropdown_value;
+            string destNAS = outputNAS[0].dropdown_text;
+
+            //string username = "PF0QMBH6";
+            //string password = "1234";
+            //string ipAddress = @"\\" + "DESKTOP-MMCKBRE";
+            //string destNAS = @"D:\NasPath\";
+
+            NetworkCredential sourceCredentials = new NetworkCredential { Domain = ipAddress, UserName = username, Password = password };
+            #endregion
+            using (new NetworkConnection(destNAS, sourceCredentials))
+            {
+                var path = this.GetPathAndFilename(datauser.companyid.ToString(), filename, destNAS + @"\SubContractProfile\");
+                string content = GetContentType(path);
+                var memory = new MemoryStream();
+                using (var stream = new FileStream(path, FileMode.Open))
+                {
+                    await stream.CopyToAsync(memory);
+
+                }
+
+                memory.Position = 0;
+                var array = memory.ToArray();
+
+
+                if (array != null)
+                {
+                    return File(array, content, Path.GetFileName(path));
+                }
+                else
+                {
+                    return new EmptyResult();
+                }
+            }
+
+
+        }
+
         #region Comment
         //private bool GetFile(string companyid,ref List<FileUploadModal> L_File)
         //{
@@ -1578,7 +1642,6 @@ namespace SubcontractProfile.Web.Controllers
         }
         private string GetPathAndFilename(string guid, string filename, string dir)
         {
-            //return this.hostingEnvironment.WebRootPath + "\\uploads\\" + filename;
             string pathdir = Path.Combine(dir, guid);
             string PathOutput = "";
             if (!Directory.Exists(pathdir))
@@ -1649,6 +1712,24 @@ namespace SubcontractProfile.Web.Controllers
 
             return statusupload;
 
+        }
+
+        private string GetContentType(string path)
+        {
+            var types = GetMimeTypes();
+            var ext = Path.GetExtension(path).ToLowerInvariant();
+            return types[ext];
+        }
+        private Dictionary<string, string> GetMimeTypes()
+        {
+            return new Dictionary<string, string>
+            {
+                {".pdf", "application/pdf"},
+                {".png", "image/png"},
+                {".jpg", "image/jpeg"},
+                {".jpeg", "image/jpeg"},
+                {".gif", "image/gif"}
+            };
         }
 
         #endregion

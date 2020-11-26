@@ -292,7 +292,7 @@
 
         var oTable;
         $(document).ready(function () {
-
+            var reasonOption = [];
             $('#inputCompanyName').autocomplete({
                                 lookup: function (query, done) {
                                     $.ajax({
@@ -434,7 +434,6 @@
             $(document).on('hidden.bs.modal', '.modal', function () {
                 $('.modal:visible').length && $(document.body).addClass('modal-open');
             });
-
         });
 
          function GetDropDownByNameTrainigStatus() {
@@ -760,6 +759,7 @@
                                     type: "POST",
                                     datatype: "JSON",
                                     //dataSrc:"",
+                                    async: false,
                                     data: function (d) {
                                         d.Trainingid = Trainingid
                                     }
@@ -784,20 +784,39 @@
                                         }
                                     },
                                     {
-                                        data: null, orderable: false, render: function (data, type, row) {
-                                            var $select = $('<select id=ddlReason  class="form-control ">\n\
-                                            <option id="test0" value="-1">--@Localizer["PleaseSelect"]--</option/>\n\
-                                            <option id="test1" value="Y">@Localizer["Pass"]</option/>\n\
-                                            <option id="test2" value="N">@Localizer["NotPass"]</option/>\n\</select>');
+                                        data: null,
+                                        orderable: false,
+                                        render: function (data, type, row) {
+                                            var resultusername = getData();
 
+                                            var $select = $('<select id=ddlReason class="form-control"></select>',
+                                                {
+                                                    id: row.dropdown_value,
+                                                    value: row.dropdown_text
+                                                });
+                                            var $option = "'<option value='-1'>--@Localizer["ddlPleaseSelect"]--</option>'";
+                                            $select.append($option);
+
+                                            $.each(resultusername, function (k, v) {
+                                                $option = "";
+                                                    $option = $("<option></option>",
+                                                        {
+                                                            text: v.dropdown_text,
+                                                            value: v.dropdown_value
+                                                        });
+                                                    if (row.selected_id == v.id) {
+                                                        $option.attr("selected", "selected");
+                                                    }
+                                                    $select.append($option);
+                                            });
                                             $select.find('option[value="' + data.TestReason + '"]').attr('selected', 'selected');
-                                            return $select[0].outerHTML
-
+                                            return $select.prop("outerHTML");
                                         }
                                     },
                                     {
                                         data: null, orderable: false, render: function (data, type, row) {
-                                            var $select = $('<textarea id="txtRemark" class="form-control" rows="2">' + data.TestRemark +'  </textarea>');
+                                            var remark = data.TestRemark == null ? '' : data.TestRemark;
+                                            var $select = $('<textarea id="txtRemark" class="form-control" rows="2">' + remark +'  </textarea>');
                                             return $select[0].outerHTML
 
                                         }
@@ -813,8 +832,18 @@
                             });
 
 
-                        }
+        }
 
+
+        function getData() {
+            var jqXHR = $.ajax({
+                type: 'POST',
+                 url: '@Url.Action("GetReason", "TestResult")',
+                 dataType: 'json',
+                async: false
+            });
+            return jqXHR.responseJSON;
+        }
         function FormatNumber(number, numberOfDigits) {
             try {
                 return new Intl.NumberFormat('en-US').format(parseFloat(number).toFixed(2));

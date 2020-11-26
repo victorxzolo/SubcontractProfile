@@ -190,16 +190,22 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="row col-sm-12">
-                                            <div class="custom-file mb-4">
 
                                                 <input type="file" class="custom-file-input" id="personalAttahFile" aria-describedby="uploadlHelp1" style="width:190px">
                                                 <label class="custom-file-label" for="inputBankAttach" id="lbpersonalAttahFile">@Localizer["ChooseFile"]</label>
-                                                <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
-
+                                            </div>
+                                            <div id="targetDiv" class="row">
+                                                <a id="linkdownloadpersonal" href="#" target="_blank"></a>
+                                            </div>
+                                            <div class="row">
+                                                <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">@Localizer["ChooseFileType"]</small>
+                                                <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">@Localizer["SizeFile"]</small>
                                             </div>
 
 
-                                        </div>
+
+
+                                       
                                     </div>
                                     <div class="col-sm-2">
                                         <label>@Localizer["SizeClothes"]:</label>
@@ -301,19 +307,34 @@
                                 </div>
                                 <br />
                                 <div class="row">
-                                    <div class="col-sm-2">
-                                        <label>@Localizer["VehicleAttachFile"]:</label>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="custom-file mb-4">
-
-                                            <input type="file" class="custom-file-input" id="VehicleAttachFile" aria-describedby="uploadlHelp1" style="width:190px">
-                                            <label class="custom-file-label" for="inputBankAttach" id="lbVehicleAttachFile">@Localizer["ChooseFile"]</label>
-                                            <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
-
-
+                                        <div class="col-sm-2">
+                                            <label>@Localizer["VehicleAttachFile"]:</label>
                                         </div>
-                                    </div>
+                                        <div class="col-sm-10">
+                                            <div class="col-sm-4">
+
+                                                <input type="file" class="custom-file-input" id="VehicleAttachFile" aria-describedby="uploadlHelp1" style="width:190px">
+                                                <label class="custom-file-label" for="inputBankAttach" id="lbVehicleAttachFile">@Localizer["ChooseFile"]</label>
+                                            </div>
+                                            
+                                            <div id="targetDiv" class="row">
+                                                <div class="col-sm-4">
+                                                    <a id="linkdownloadvehicle" href="#" target="_blank"></a>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">@Localizer["ChooseFileType"]</small>
+                                                    <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">@Localizer["SizeFile"]</small>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                    
+
+
                                 </div>
                                 <br />
 
@@ -537,18 +558,22 @@
                                         <label>@Localizer["AttachWorkPermit"]:</label>
                                     </div>
                                     <div class="col-sm-4">
-                                        <div class="custom-file mb-4">
-
+                                        <div class="col-sm-12">
                                             <input type="file" class="custom-file-input" id="fileWorkPermitAttach" aria-describedby="uploadlHelp1" style="width:220px">
                                             <label class="custom-file-label" for="fileWorkPermitAttach" id="lbfileWorkPermitAttach">@Localizer["ChooseFile"]</label>
-                                            <small id="uploadlHelpwork" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
-
+                                            <div id="targetDiv" class="row">
+                                                <a id="linkdownloadfileWorkPermit" href="#" target="_blank"></a>
+                                            </div>
+                                            <div class="row">
+                                                <small id="uploadlHelpwork" class="form-text text-muted" style="margin-top:0;">@Localizer["ChooseFileType"]</small>
+                                                <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">@Localizer["SizeFile"]</small>
+                                            </div>
                                         </div>
-                                        @*<div class="row col-sm-12">
 
+                                            
+                                        </div>
+                                       
 
-                                            </div>*@
-                                    </div>
                                 </div>
                                 <br />
                                 <div class="row">
@@ -556,21 +581,21 @@
                                         <label>@Localizer["AttachProfile"] :</label>
                                     </div>
                                     <div class="col-sm-4">
-                                        <div class="custom-file mb-4">
-
+                                        <div class="col-sm-12">
                                             <input type="file" class="custom-file-input" id="fileProfileAttach" aria-describedby="uploadlHelp1" style="width:220px">
                                             <label class="custom-file-label" for="fileProfileAttach" id="lbfileProfileAttach">@Localizer["ChooseFile"]</label>
-                                            <small id="uploadlHelpprofile" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
 
+                                            <div id="targetDiv" class="row">
+                                                <a id="linkdownloadfileProfile" href="#" target="_blank"></a>
+                                            </div>
+                                            <div class="row">
+                                                <small id="uploadlHelpprofile" class="form-text text-muted" style="margin-top:0;">@Localizer["ChooseFileType"]</small>
+                                                <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">@Localizer["SizeFile"]</small>
+                                            </div>
                                         </div>
-
                                     </div>
-                                    @*<div class="col-sm-2">
-                                            <label>Course skill :</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="CourseSkill" style="width:300px" class="form-control">
-                                        </div>*@
+
+                                           
                                 </div>
                                 <br />
 
@@ -657,13 +682,23 @@
                                         <label>@Localizer["AttachCertificate"] :</label>
                                     </div>
                                     <div class="col-sm-4">
-                                        <div class="custom-file mb-4">
-
+                                        <div class="col-sm-12">
                                             <input type="file" class="custom-file-input" id="fileCertificateAttach" aria-describedby="uploadlHelp1" style="width:220px">
                                             <label class="custom-file-label" for="fileCertificateAttach" id="lbfileCertificateAttach">@Localizer["ChooseFile"]</label>
-                                            <small id="uploadlHelpCertificateAttach" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
 
+                                            <div id="targetDiv" class="row">
+                                                <a id="linkdownloadfileCertificate" href="#" target="_blank"></a>
+                                            </div>
+                                            <div class="row">
+                                                <small id="uploadlHelpCertificateAttach" class="form-text text-muted" style="margin-top:0;">@Localizer["ChooseFileType"]</small>
+                                                <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">@Localizer["SizeFile"]</small>
+                                            </div>
                                         </div>
+
+
+                                            
+
+
 
 
                                     </div>

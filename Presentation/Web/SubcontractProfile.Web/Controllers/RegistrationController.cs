@@ -498,6 +498,8 @@ namespace SubcontractProfile.Web.Controllers
                             });
                             foreach (var r in SaveAddressSession(newaddr))
                             {
+                                Guid addr_id = Guid.NewGuid();
+                                r.AddressId = addr_id;
                                 data.Add(r);
                             }
 
@@ -507,6 +509,8 @@ namespace SubcontractProfile.Web.Controllers
                             //data.RemoveAll(x => x.AddressId == e.AddressId && x.CompanyId == e.CompanyId);
 
                             data.RemoveAll(x => x.AddressTypeId == e.AddressTypeId);
+                            Guid addr_id = Guid.NewGuid();
+                            e.AddressId = addr_id;
                             data.Add(e);
                         }
 
@@ -2348,10 +2352,14 @@ namespace SubcontractProfile.Web.Controllers
 
             return filename;
         }
-        private string GetPathAndFilename(string guid, string filename,string dir)
+        private string GetPathAndFilename(string companyid, string filename,string dir,string type, string id)
         {
-            //return this.hostingEnvironment.WebRootPath + "\\uploads\\" + filename;
-            string pathdir = Path.Combine(dir, guid);
+  
+            string pathdir = Path.Combine(dir, companyid);
+            if(type!="")
+            {
+                pathdir = Path.Combine(dir, companyid, type, id);
+            }
             string PathOutput = "";
             if (!Directory.Exists(pathdir))
             {
@@ -2398,7 +2406,7 @@ namespace SubcontractProfile.Web.Controllers
 
                         string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
                         filename = EnsureCorrectFilename(filename);
-                        using (output = System.IO.File.Create(this.GetPathAndFilename(CompanyId, filename, destNAS + @"\SubContractProfile\")))
+                        using (output = System.IO.File.Create(this.GetPathAndFilename(CompanyId, filename, destNAS + @"\SubContractProfile\","","")))
                             await files.CopyToAsync(output);
                     }
                 }
@@ -2414,6 +2422,75 @@ namespace SubcontractProfile.Web.Controllers
 
 
             return statusupload;
+
+        }
+        private string GetContentType(string path)
+        {
+            var types = GetMimeTypes();
+            var ext = Path.GetExtension(path).ToLowerInvariant();
+            return types[ext];
+        }
+        private Dictionary<string, string> GetMimeTypes()
+        {
+            return new Dictionary<string, string>
+            {
+                {".pdf", "application/pdf"},
+                {".png", "image/png"},
+                {".jpg", "image/jpeg"},
+                {".jpeg", "image/jpeg"},
+                {".gif", "image/gif"}
+            };
+        }
+        public async Task<ActionResult> Downloadfile(string id, string filename, string type,string companyId)
+        {
+            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+            var outputNAS = new List<SubcontractDropdownModel>();
+            #region NAS
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/nas_subcontract");
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var v = response.Content.ReadAsStringAsync().Result;
+                outputNAS = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+            }
+
+            string username = outputNAS[0].value1;
+            string password = outputNAS[0].value2;
+            string ipAddress = @"\\" + outputNAS[0].dropdown_value;
+            string destNAS = outputNAS[0].dropdown_text;
+
+            NetworkCredential sourceCredentials = new NetworkCredential { Domain = ipAddress, UserName = username, Password = password };
+
+            #endregion
+            using (new NetworkConnection(destNAS, sourceCredentials))
+            {
+                var path = this.GetPathAndFilename(companyId,filename, destNAS + @"\SubContractProfile\", type, id);
+
+                string content = GetContentType(path);
+                var memory = new MemoryStream();
+                using (var stream = new FileStream(path, FileMode.Open))
+                {
+                    await stream.CopyToAsync(memory);
+
+                }
+
+                memory.Position = 0;
+                var array = memory.ToArray();
+
+
+                if (array != null)
+                {
+                    return File(array, content, Path.GetFileName(path));
+                }
+                else
+                {
+                    return new EmptyResult();
+                }
+            }
 
         }
 

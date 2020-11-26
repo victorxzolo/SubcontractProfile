@@ -198,8 +198,8 @@
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
-  <data name="SearchRequestTraining" xml:space="preserve">
-    <value>Search Request Training</value>
+  <data name="SearchBookingTraining" xml:space="preserve">
+    <value>SearchBookingTraining</value>
   </data>
   <data name="SearchResult" xml:space="preserve">
     <value>SearchResult</value>

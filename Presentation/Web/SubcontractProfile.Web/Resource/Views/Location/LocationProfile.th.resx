@@ -258,6 +258,9 @@
   <data name="ErrorZipcode" xml:space="preserve">
     <value>กรุณาระบุรหัสไปรษณีย์</value>
   </data>
+  <data name="ErrorZone" xml:space="preserve">
+    <value>กรุณาระบุภาค</value>
+  </data>
   <data name="Etccontractmail" xml:space="preserve">
     <value>Etc contract mail</value>
   </data>

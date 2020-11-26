@@ -18,6 +18,12 @@ $(document).ready(function () {
     inittblocation();
     BindAddressType();
     $(".ddlsearch").select2();
+
+    $('#linkdownloadbookbank').text('');
+    $('#linkdownloadcertificate').text('');
+    $('#linkdownloadComRegis').text('');
+    $('#linkdownload20').text('');
+
     $('#inputTaxId').keyup(function () {
         CheckKeyUps("inputTaxId", "[0-9]");
     });
@@ -228,7 +234,7 @@ $(document).ready(function () {
                         var data = {
                             AddressTypeId: $(this).val(),
                             address_type_name: $(this).parent().text().trim(),
-                            Country: $('#country option').filter(':selected').val(),
+                            Country: $('#ddlcountry option').filter(':selected').val(),
                             ZipCode: $('#ddlzipcode option').filter(':selected').val(),
                             HouseNo: $('#txthomenumber').val(),
                             Moo: $('#txtVillageNo').val(),
@@ -1377,6 +1383,9 @@ function getDataById(id) {
                     if (result.AttachFile != null) {
                         $('#lbuploadbookbank').html(result.AttachFile);
                         $('#hduploadbookbank').val(result.file_id_bookbank);
+
+                        $('#linkdownloadbookbank').text(result.AttachFile);
+                        DownloadFile(result.AttachFile, $('#linkdownloadbookbank'));
                     }
 
 
@@ -1385,14 +1394,23 @@ function getDataById(id) {
                     if (result.CompanyCertifiedFile != null) {
                         $('#lbuploadcertificate').html(result.CompanyCertifiedFile);
                         $('#hdupfilecompany_certified').val(result.file_id_CompanyCertifiedFile);
+
+                        $('#linkdownloadcertificate').text(result.CompanyCertifiedFile);
+                        DownloadFile(result.CompanyCertifiedFile, $('#linkdownloadcertificate'));
                     }
                     if (result.CommercialRegistrationFile != null) {
                         $('#lbuploadComRegis').html(result.CommercialRegistrationFile);
                         $('#hdupfilecommercial_registration').val(result.file_id_CommercialRegistrationFile);
+
+                        $('#linkdownloadComRegis').text(result.CommercialRegistrationFile);
+                        DownloadFile(result.CommercialRegistrationFile, $('#linkdownloadComRegis'));
                     }
                     if (result.VatRegistrationCertificateFile != null) {
                         $('#lbupload20').html(result.VatRegistrationCertificateFile);
                         $('#hdupfilevat_registration_certificate').val(result.file_id_VatRegistrationCertificateFile);
+
+                        $('#linkdownload20').text(result.VatRegistrationCertificateFile);
+                        DownloadFile(result.VatRegistrationCertificateFile, $('#linkdownload20'));
                     }
 
                     $('#txtRemark').val(result.Remark);
@@ -2028,6 +2046,13 @@ function BindDDlBankAccountType() {
             console.log(xhr);
         }
     });
+}
+
+function DownloadFile(filename,linkdownload) {
+    var urlDownloadfileConfirm = url.replace('Action', 'Downloadfile');
+
+    linkdownload.attr("href", urlDownloadfileConfirm +  '?filename=' + filename);
+
 }
 
 function isEmail(email) {

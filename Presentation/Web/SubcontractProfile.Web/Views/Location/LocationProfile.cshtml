@@ -258,7 +258,7 @@
                                     <label><span style="color:red">*</span>  @Localizer["Companymaincontractphone"]:</label>
                                 </div>
                                 <div class="col-sm-4">
-                                    <input type="text" id="inputMainPhone" style="width:300px" class="form-control" required>
+                                    <input type="text" id="inputMainPhone" maxlength="20" style="width:300px" class="form-control" required>
                                     <div class="invalid-feedback">
                                         @Localizer["ErrorCompanymaincontractphone"]
                                     </div>
@@ -270,7 +270,7 @@
                                     <label><span style="color:red">*</span> @Localizer["Installationscontractphone"]:</label>
                                 </div>
                                 <div class="col-sm-4">
-                                    <input type="text" id="inputInstallationsPhone" style="width:300px" class="form-control" required>
+                                    <input type="text" id="inputInstallationsPhone" maxlength="20" style="width:300px" class="form-control" required>
                                     <div class="invalid-feedback">
                                         @Localizer["ErrorInstallationscontractphone"]
                                     </div>
@@ -279,7 +279,7 @@
                                     <label><span style="color:red">*</span>  @Localizer["Maintenencecontractphone"]:</label>
                                 </div>
                                 <div class="col-sm-4">
-                                    <input type="text" id="inputMaintenencePhone" style="width:300px" class="form-control" required>
+                                    <input type="text" id="inputMaintenencePhone" maxlength="20" style="width:300px" class="form-control" required>
                                     <div class="invalid-feedback">
                                         @Localizer["ErrorMaintenencecontractphone"]
                                     </div>
@@ -707,16 +707,23 @@
                                 <div class="col-sm-10">
                                     <div class="row col-sm-5">
 
-                                        <div class="custom-file mb-4">
+                                        <div class="col-sm-12">
                                             <input type="hidden" id="hdupfileBankAttach" />
                                             <input type="file" class="custom-file-input" id="inputBankAttach" aria-describedby="uploadlHelp1" style="width:190px"
                                                    accept="image/jpeg,image/gif,image/png,image/bmp,image/tif,image/tiff,application/pdf">
                                             <label class="custom-file-label" for="inputBankAttach" id="lbfileBankAttach">@Localizer["ChooseFile"]</label>
-                                            <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
-                                            <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
-                                                @Localizer["SizeFile"]
-                                            </small>
-                                        </div>
+
+                                            <div id="targetDiv" class="row">
+                                                <a id="linkdownload" href="#" target="_blank"></a>
+                                            </div>
+                                            <div class="row">
+                                                <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">@Localizer["ChooseFileType"]</small>
+                                                <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
+                                                    @Localizer["SizeFile"]
+                                                </small>
+                                            </div>
+                                        </div> 
+                                        
 
                                     </div>
                                 </div>
@@ -798,7 +805,8 @@
         $(document).ready(function () {
             $(".ddlsearch").select2();
                 inittbSearchResult();
-                inittbAddressResult();
+            inittbAddressResult();
+            BindAddressType();
                 $("#btnSearchLoc").click(function (e) {
 
                     inittbSearchResult();
@@ -1019,7 +1027,7 @@
                         var data = {
                             AddressTypeId: $(this).val(),
                             address_type_name: $(this).parent().text().trim(),
-                            Country: $('#country option').filter(':selected').val(),
+                            Country: $('#ddlcountry option').filter(':selected').val(),
                             ZipCode: $('#ddlzipcode option').filter(':selected').val(),
                             HouseNo: $('#txthomenumber').val(),
                             Moo: $('#txtVillageNo').val(),
@@ -1236,14 +1244,13 @@
             });
         }
 
-
         function openModal(mode, locationId) {
 
             clearData();
 
             $('#hdMode').val(mode);
             $('#hdLocationId').val(locationId);
-            BindAddressType();
+
             BindRegion();
             BindDDLprovince();
             BindDDLdistrict();
@@ -1252,7 +1259,7 @@
             if (mode == "edit") {
                 //$("#txtCompanyCode").prop("disabled", true);
                 $("#hTitleEdit").text('@Localizer["EditLocation"]');
-
+                $("#frNew")[0].reset();
                 getDataById(locationId);
             }
             else {
@@ -1407,6 +1414,7 @@
                 dataType: "json",
                 success: function (data) {
                     if (data != null) {
+
                         $.each(data.responseaddresstype, function () {
                             var strtext = this.Text;
                             var strvalue = this.Value;
@@ -1579,6 +1587,8 @@
             $('#lbfileBankAttach').text('@Localizer["ChooseFile"]');
             $('#inputBankAttach').val('');
 
+   
+
             $('#frNew').removeClass('was-validated');
         }
 
@@ -1646,8 +1656,9 @@
                       if (result.BankAttachFile != null) {
                           $('#lbfileBankAttach').text(result.BankAttachFile);
                           $('#hdupfileBankAttach').val(result.file_id__BankAttach);
-                          //$('#linkdownload').text(data.SlipAttachFile);
-                          //DownloadFileSlip(data.SlipAttachFile);
+
+                          $('#linkdownload').text(result.BankAttachFile);
+                          DownloadFile(result.BankAttachFile, $('#linkdownload'));
                       }
 
                       GetAddress();
@@ -1760,12 +1771,9 @@
                 async: false,
                 success: function (result) {
                        if (result.Status == true) {
-                           if ($('#hdMode').val() == 'edit') {
 
-                           } else {
                                bootbox.alert(result.Message);
                                clearData();
-                           }
 
                            inittbSearchResult();
                            $('#AddEditModal').modal('hide');
@@ -1997,6 +2005,13 @@
                 dataType: "json"
             });
             return jqXHR.responseJSON;
+        }
+
+        function DownloadFile(filename, linkdownload) {
+            var urlDownloadfile = '@Url.Action("DownloadfileLocation", "Location")';
+
+            linkdownload.attr("href", urlDownloadfile + '?locationid=' + $('#hdLocationId').val() + '&&filename=' + filename);
+
         }
 
     </script>

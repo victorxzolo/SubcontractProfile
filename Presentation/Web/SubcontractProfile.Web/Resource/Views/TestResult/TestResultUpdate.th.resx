@@ -138,6 +138,9 @@
   <data name="CoursePrice" xml:space="preserve">
     <value>ราคาคอร์ส (บาท)</value>
   </data>
+  <data name="ddlPleaseSelect" xml:space="preserve">
+    <value>กรุณาเลือก</value>
+  </data>
   <data name="Engineer" xml:space="preserve">
     <value>Engineer</value>
   </data>

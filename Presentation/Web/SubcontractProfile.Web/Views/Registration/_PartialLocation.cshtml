@@ -609,17 +609,22 @@
                             </div>
                             <div class="col-sm-10">
                                 <div class="row col-sm-5">
-
-                                    <div class="custom-file mb-4">
                                         <input type="file" class="custom-file-input" id="inputBankAttach" aria-describedby="uploadlHelp1" style="width:190px">
                                         <label class="custom-file-label" for="inputBankAttach" id="lbBankAttach"> @Localizer["ChooseFile"]</label>
-                                        <small id="uploadlHelp1" class="form-text text-muted">@Localizer["ChooseFileType"]</small>
+                                </div>
+                                    <div id="targetDiv" class="row custom-file">
+                                        <a id="linkdownloadBankAttach" href="#" target="_blank"></a>
+                                    </div>
+                                    <div class="row custom-file">
+                                        <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">@Localizer["ChooseFileType"]</small>
                                         <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
                                             @Localizer["SizeFile"]
                                         </small>
                                     </div>
 
-                                </div>
+
+
+                                
                             </div>
                         </div>
                         <br />

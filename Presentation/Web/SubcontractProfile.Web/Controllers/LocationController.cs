@@ -388,6 +388,8 @@ namespace SubcontractProfile.Web.Controllers
                             });
                             foreach (var r in SaveAddressSession(newaddr))
                             {
+                                Guid addr_id = Guid.NewGuid();
+                                r.AddressId = addr_id;
                                 data.Add(r);
                             }
 
@@ -396,7 +398,23 @@ namespace SubcontractProfile.Web.Controllers
                         {
 
                             data.RemoveAll(x => x.AddressTypeId == e.AddressTypeId);
+                            Guid addr_id = Guid.NewGuid();
+                            e.AddressId = addr_id;
                             data.Add(e);
+                            string straddr = "";
+                            straddr = string.Concat(e.HouseNo != null && e.HouseNo != "" ? e.HouseNo : "", " ",
+                                                  e.Building != null && e.Building != "" ? _localizer["Building"] + " " + e.Building : "", " ",
+                                                  e.Floor != null && e.Floor != "" ? _localizer["Floor"] + " " + e.Floor : "", " ",
+                                                  e.RoomNo != null && e.RoomNo != "" ? _localizer["Room"] + " " + e.RoomNo : "", " ",
+                                                  e.VillageName != null && e.VillageName != "" ? _localizer["Village"] + " " + e.VillageName : "", " ",
+                                                  e.Moo != null ? _localizer["Moo"] + " " + e.Moo : "", " ",
+                                                  e.Soi != null && e.Soi != "" ? _localizer["Soi"] + " " + e.Soi : "", " ",
+                                                  e.Road != null && e.Road != "" ? _localizer["Street"] + " " + e.Road : "", " ",
+                                                  e.SubDistrictId != 0 ? _localizer["SubDistrict"] + " " + e.sub_district_name : "", " ",
+                                                  e.DistrictId != 0 ? _localizer["District"] + " " + e.district_name : "", " ",
+                                                  e.ProvinceId != 0 ? _localizer["Province"] + " " + e.province_name : "", " ",
+                                                  e.ZipCode != "" ? e.ZipCode : "");
+                            e.outFullAddress = straddr;
                         }
 
                     }

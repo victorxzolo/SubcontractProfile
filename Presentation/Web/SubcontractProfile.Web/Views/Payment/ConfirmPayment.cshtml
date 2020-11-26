@@ -234,7 +234,7 @@
                                     <label class="">@Localizer["MobileNo"]<span style="color:red">*</span>:</label>
                                 </div>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" id="Contact_phone_no" required />
+                                    <input type="text" class="form-control" id="Contact_phone_no" maxlength="20" required />
                                     <div class="invalid-feedback">@Localizer["ErrorMobileNo"]</div>
                                 </div>
                             </div>
@@ -337,8 +337,11 @@
                                     <div id="targetDiv">
                                         <a id="linkdownload" href="#" target="_blank"></a>
                                     </div>
-                                    <small id="uploadlHelp1" class="form-text text-muted">
+                                    <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
                                         @Localizer["ChooseFileSupportFileType"]
+                                    </small>
+                                    <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
+                                        @Localizer["SizeFile"]
                                     </small>
                                     <small id="uploadlHelp1" style="color:red">@Localizer["RemarkChooseFileSupportFileType"]</small>
 
