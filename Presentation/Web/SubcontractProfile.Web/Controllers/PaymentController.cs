@@ -835,15 +835,15 @@ namespace SubcontractProfile.Web.Controllers
                 outputNAS = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
             }
 
-            //string username = outputNAS[0].value1;
-            //string password = outputNAS[0].value2;
-            //string ipAddress = @"\\" + outputNAS[0].dropdown_value;
-            //string destNAS = outputNAS[0].dropdown_text;
+            string username = outputNAS[0].value1;
+            string password = outputNAS[0].value2;
+            string ipAddress = @"\\" + outputNAS[0].dropdown_value;
+            string destNAS = outputNAS[0].dropdown_text;
 
-            string username = "PF0QMBH6";
-            string password = "1234";
-            string ipAddress = @"DESKTOP-MMCKBRE";
-            string destNAS = @"D:\NasPath";
+            //string username = "PF0QMBH6";
+            //string password = "1234";
+            //string ipAddress = @"DESKTOP-MMCKBRE";
+            //string destNAS = @"D:\NasPath";
 
             NetworkCredential sourceCredentials = new NetworkCredential { Domain = ipAddress, UserName = username, Password = password };
             //var chkpath = @"D:\PathTest\ab6362c7-388e-4289-b999-dded33408ea0\Payment\C55BA6EB-B826-4D41-BE54-C538C2EE2AB4\img01.jpg"; //userid
@@ -854,8 +854,8 @@ namespace SubcontractProfile.Web.Controllers
             //var path = @"D:\PathTest\56f28ba9-8f7f-43fa-a598-e88fae450180\Payment\C55BA6EB-B826-4D41-BE54-C538C2EE2AB4\img01.jpg"; //companyid
 
             #endregion
-            //using (new NetworkConnection(destNAS, sourceCredentials))
-            //{
+            using (new NetworkConnection(destNAS, sourceCredentials))
+            {
                 var chkpath = this.GetPathAndFilename(paymentid, filename, dataUser.UserId.ToString(), destNAS + @"\SubContractProfile\"); //userid
                 if (System.IO.File.Exists(chkpath))
                 {
@@ -882,7 +882,7 @@ namespace SubcontractProfile.Web.Controllers
                 {
                     return new EmptyResult();
                 }
-            //}
+            }
 
             
         }
