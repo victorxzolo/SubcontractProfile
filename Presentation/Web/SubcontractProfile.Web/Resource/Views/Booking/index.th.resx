@@ -171,6 +171,9 @@
   <data name="NetPrice" xml:space="preserve">
     <value>ราคาสุทธิ(บาท)</value>
   </data>
+  <data name="NetTax" xml:space="preserve">
+    <value>ยอดชำระ(บาท)</value>
+  </data>
   <data name="NumberOfTrainees" xml:space="preserve">
     <value>จำนวนผู้อบรม</value>
   </data>
@@ -209,6 +212,9 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>สถานะ</value>
+  </data>
+  <data name="Tax" xml:space="preserve">
+    <value>หัก ณ ที่จ่าย 3%</value>
   </data>
   <data name="TaxID" xml:space="preserve">
     <value>เลขผู้เสียภาษี</value>

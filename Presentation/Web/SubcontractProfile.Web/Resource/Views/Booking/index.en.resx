@@ -171,6 +171,9 @@
   <data name="NetPrice" xml:space="preserve">
     <value>Net Price(Baht)</value>
   </data>
+  <data name="NetTax" xml:space="preserve">
+    <value>Payment amount</value>
+  </data>
   <data name="NumberOfTrainees" xml:space="preserve">
     <value>Number Of Trainees</value>
   </data>
@@ -209,6 +212,9 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="Tax" xml:space="preserve">
+    <value>Withholding Tax 3%</value>
   </data>
   <data name="TaxID" xml:space="preserve">
     <value>Tax ID</value>
