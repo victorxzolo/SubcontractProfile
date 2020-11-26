@@ -265,7 +265,7 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "subcontract_position");
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "subcontract_reason");
 
             HttpResponseMessage response = client.GetAsync(uriString).Result;
 
