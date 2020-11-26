@@ -241,7 +241,7 @@
                                     <label>@Localizer["Course"] :</label>
                                 </div>
                                 <div class="col-sm-4">
-                                    <select id="selCourse" class="form-control" data-live-search="true" required></select>
+                                    <select id="selCourse" class="form-control"  data-live-search="true" required></select>
                                     <div class="invalid-feedback">@Localizer["ErrorCourse"]</div>
 
                                 </div>
@@ -319,6 +319,27 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-12 mt-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p>@Localizer["Tax"] :</p>
+                                                </div>
+                                                <div class="col-md-6" style="text-align: left;">
+                                                    <label id="lbltax"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mt-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p>@Localizer["NetTax"] :</p>
+                                                </div>
+                                                <div class="col-md-6" style="text-align: left;">
+                                                    <label id="lblTotalAmountBytax"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -395,6 +416,7 @@
                         var compname =  $("#txtCompNo").val();
 
                         $(document).ready(function () {
+
 
                             GetDropDownByNameCourse();
                             GetDropDownByNameTrainigStatus();
@@ -519,6 +541,16 @@
 
                             inittbSearchResult();
 
+                            $("#tbSearchEngineer").on("change", "input", function () {
+                                var row = $(this).closest("tr");
+                                var price = row.find('#txtCoursePrice').val();
+
+                                calculateCourcePrice();
+
+                            });
+
+
+
                             $(document).on('show.bs.modal', '.modal', function () {
                                 var zIndex = 1040 + (10 * $('.modal:visible').length);
                                 $(this).css('z-index', zIndex);
@@ -566,6 +598,7 @@
                             $("#selCourse").empty();
                             $("#selCourse").append('<option value="">--@Localizer["ErrorCourse"]--</option>');
                             $.each(data, function (id, result) {
+
                                 $("#selCourse").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text  +'</option>');
                                 $("#lblcourseprice").html(FormatNumber(result.value1));
                             });
@@ -576,9 +609,22 @@
                                 $("#selCourse").empty();
                                 $("#selCourse").append('<option value="">--@Localizer["ErrorCourse"]--</option>');
                             }
-                        });
+                    });
+                     $('#selCourse').prop('disabled', 'disabled');
                   }
 
+        function taxCalculate(cost) {
+            //const formatter = new Intl.NumberFormat('en-US', {
+            //    minimumFractionDigits: 2,
+            //    maximumFractionDigits: 2,
+            //});
+            alert(cost);
+            var incTax = 0;
+            incTax = cost * (3 / 100);
+            incTax = formatter.format(incTax);
+             
+            return incTax;
+        }
                 function isNumberKey(evt) {
                     var charCode = (evt.which) ? evt.which : evt.keyCode
                     return !(charCode > 31 && (charCode < 48 || charCode > 57));
@@ -912,6 +958,18 @@
                             return incvat;
                         }
 
+        function taxCalculate(cost) {
+            const formatter = new Intl.NumberFormat('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+            });
+
+            var incTax = 0;
+            incTax = cost * (3 / 100);
+            incTax = formatter.format(incTax);
+            // alert(incTax);
+            return incTax;
+        }
 
                    function inittbEngineer(Trainingid) {
                            var i = 0;
@@ -965,36 +1023,107 @@
                                 "order": [[0, "desc"]],
                                 "stripeClasses": [],
                                 "initComplete": function (settings, json) {//here is the tricky part
-                                    var count = $('#tbSearchEngineer tr').length - 1
-                                  //  alert(count);
+                                    var count = $('#tbSearchEngineer tr').length - 1;
+                                    $("tbody tr td.dataTables_empty").each(
+                                        function () {
+                                            if ($(this).text() == "No data available in table") {
+                                               // alert('T');
+                                              count = 0;
+                                            }
+                                        
+                                             
+                                        }
+                                    );
+                                      alert(count);
+
+                                    $('#tbSearchEngineer .LocationNameTh').each(function () {
+                                        alert($(this).html());
+                                    });
 
                                     $('#rowCount').val(count);
                                     var count = $('#rowCount').val();
                                     var cost = $('#Coursecost').val();
-                                    // alert(cost);
-                                    //alert(count);
+                                 
+                                  
                                     var ttcost = calculateCost(cost, count);
 
 
                                     var incvat = vat7(ttcost);
                                     $('#lblttcost').html(FormatNumber(ttcost));
-                                    $('#lblvat7').html(parseInt(incvat));
+                                  
 
                                     var _incvat = parseInt(incvat);
                                     var _ttcost = parseFloat(ttcost);
                                     var CoursetotalCost = _incvat + _ttcost;
-
+                                    var totalcost = _incvat + _ttcost;
                                     CoursetotalCost = FormatNumber(CoursetotalCost);
-
+                                   
 
                                     $('#lblCousetotal').html(CoursetotalCost);
+                                 //   calculateCourcePrice();
+
+                                    var intTax = 0;
+                                    intTax = totalcost * (3 / 100);
+                                    var totalTax = 0;
+                                    var totalTax = parseFloat(totalcost) + parseFloat(intTax);
+                                   // alert(CoursetotalCost);
+                                   // alert(intTax);
+                                    $('#lblvat7').html(parseInt(incvat));
+                                    $('#lbltax').html(FormatNumber(intTax));
+                                    $('#lblTotalAmountBytax').html(FormatNumber(totalTax));
                                 },
                                 drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
 
                             });
 
 
-                        }
+        }
+
+
+
+
+        function calculateCourcePrice() {
+            var totalPrice = 0;
+            var tEn = $('#tbSearchEngineer').dataTable();
+            $.each(tEn.fnGetNodes(), function (index, value) {
+                var price = 0;
+                if ($(value).find('#txtCoursePrice').val() != "") {
+                    price = parseFloat($(value).find('#txtCoursePrice').val());
+                }
+                totalPrice += price;
+
+            });
+            alert(totalPrice);
+            var sumTotalPrice = parseFloat(isNaN(totalPrice) ? "" : totalPrice);
+            var intVat = vat7(sumTotalPrice);
+            var sumVatAmount = sumTotalPrice + parseFloat(intVat);
+
+            var intTax = taxCalculate(sumTotalPrice);
+            var totalTax = parseFloat(sumTotalPrice) + parseFloat(intTax);
+
+            //totalTax = parseFloat(totalTax).toFixed(2);
+            if (isNaN(intVat)) {
+                intVat = 0;
+            }
+
+            if (isNaN(totalTax)) {
+                totalTax = 0;
+            }
+
+            if (isNaN(intTax)) {
+                intTax = 0;
+            }
+
+            $('#lblttcost').html(isNaN(totalPrice) ? "0" : FormatNumber(totalPrice));
+            $('#lblvat7').html(intVat);
+            $('#lblCousetotal').html(isNaN(sumVatAmount) ? "0" : FormatNumber(sumVatAmount));
+
+
+            $('#lbltax').html(intTax);
+            $('#lblTotalAmountBytax').html(FormatNumber(totalTax));
+
+        }
+
 
         function FormatNumber(number, numberOfDigits) {
             try {
