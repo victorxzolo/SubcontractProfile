@@ -56,5 +56,7 @@ namespace SubcontractProfile.Web.Model
 
         public decimal? CoursePrice { get; set; }
 
+        public string Remark { get; set; }
+
     }
 }
