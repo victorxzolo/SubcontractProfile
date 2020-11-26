@@ -120,6 +120,9 @@
   <data name="Action" xml:space="preserve">
     <value>Action</value>
   </data>
+  <data name="Approve" xml:space="preserve">
+    <value>แจ้งค่าอบรม</value>
+  </data>
   <data name="Booking" xml:space="preserve">
     <value>Booking</value>
   </data>
@@ -171,11 +174,17 @@
   <data name="NetPrice" xml:space="preserve">
     <value>ราคาสุทธิ(บาท)</value>
   </data>
+  <data name="NetTax" xml:space="preserve">
+    <value>ยอดชำระ(บาท)</value>
+  </data>
   <data name="NumberOfTrainees" xml:space="preserve">
     <value>จำนวนผู้อบรม</value>
   </data>
   <data name="Position" xml:space="preserve">
     <value>ตำแหน่ง</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>ค่าอบรม</value>
   </data>
   <data name="Remark" xml:space="preserve">
     <value>หมายเหตุ</value>
@@ -209,6 +218,9 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>สถานะ</value>
+  </data>
+  <data name="Tax" xml:space="preserve">
+    <value>หัก ณ ที่จ่าย 3%</value>
   </data>
   <data name="TaxID" xml:space="preserve">
     <value>เลขผู้เสียภาษี</value>
