@@ -575,33 +575,38 @@
 
             var sumTotalPrice = parseFloat(isNaN(totalPrice) ? "" : totalPrice);
             var intVat = vat7(sumTotalPrice);
+          
             var sumVatAmount = sumTotalPrice + parseFloat(intVat);
 
             var intTax = taxCalculate(sumTotalPrice);
             var totalTax = parseFloat(sumTotalPrice) + parseFloat(intTax);
 
             //totalTax = parseFloat(totalTax).toFixed(2);
-            if (isNaN(intVat)) {
-                intVat = 0;
-            }
+            //if (isNaN(intVat)) {
+            //    intVat = 0;
+            //}
 
-            if (isNaN(totalTax)) {
-                totalTax = 0;
-            }
+            //if (isNaN(totalTax)) {
+            //    totalTax = 0;
+            //}
 
-            if (isNaN(intTax)) {
-                intTax = 0;
-            }
+            //if (isNaN(intTax)) {
+            //    intTax = 0;
+            //}
 
-            $('#lblttcost').html(isNaN(totalPrice) ? "0" : FormatNumber(totalPrice));
-            $('#lblvat7').html(intVat);
-            $('#lblCousetotal').html(isNaN(sumVatAmount) ? "0" : FormatNumber(sumVatAmount));
+            $('#lblttcost').html(isNaN(totalPrice) ? "0" : numberWithCommas(totalPrice));
+            $('#lblvat7').html(numberWithCommas(intVat));
+            $('#lblCousetotal').html(isNaN(sumVatAmount) ? "0" : numberWithCommas(sumVatAmount));
 
 
-            $('#lbltax').html(intTax);
-            $('#lblTotalAmountBytax').html(FormatNumber(totalTax));
+            $('#lbltax').html(numberWithCommas(intTax));
+            $('#lblTotalAmountBytax').html(numberWithCommas(totalTax));
             
         }
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
                  function GetDropDownByNameCourse() {
                     $.ajax({
                         type: 'GET',
@@ -1040,7 +1045,7 @@
                                     {
                                         data: null, orderable: false, render: function (data, type, row) {
 
-                                            var $text = $('<input id="txtCoursePrice" class="form-control" style="width:100%"  value="' + data.CoursePrice + '" > </input>');
+                                            var $text = $('<input id="txtCoursePrice" onkeypress="return onlyNumberKey(event)"  class="form-control" style="width:100%"  value="' + data.CoursePrice + '" > </input>');
                                             return $text[0].outerHTML
 
                                         }
@@ -1102,6 +1107,15 @@
 
 
                         }
+
+        function onlyNumberKey(evt) {
+
+            // Only ASCII charactar in that range allowed 
+            var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+            if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+                return false;
+            return true;
+        } 
 
         function FormatNumber(number) {
             try {
