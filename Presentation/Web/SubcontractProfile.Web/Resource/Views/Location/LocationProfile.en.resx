@@ -258,6 +258,9 @@
   <data name="ErrorZipcode" xml:space="preserve">
     <value>Please fill Zip Code</value>
   </data>
+  <data name="ErrorZone" xml:space="preserve">
+    <value>Please fill Zone</value>
+  </data>
   <data name="Etccontractmail" xml:space="preserve">
     <value>Etc contract mail</value>
   </data>

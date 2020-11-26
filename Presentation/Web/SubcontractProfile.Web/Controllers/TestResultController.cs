@@ -258,6 +258,34 @@ namespace SubcontractProfile.Web.Controllers
         }
 
         [HttpPost]
+        public JsonResult GetReason()
+        {
+            var result = new List<SubcontractDropdownModel>();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Dropdown/GetByDropDownName", "subcontract_position");
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(resultAsysc);
+
+            }
+            //result.Add(new SubcontractDropdownModel
+            //{
+            //    dropdown_text = _localizer["ddlPleaseSelect"],
+            //    dropdown_value = "-1"
+            //});
+
+            return Json(result);
+        }
+
+        [HttpPost]
         public IActionResult SetLanguage(string culture, string returnUrl)
         {
             Response.Cookies.Append(
