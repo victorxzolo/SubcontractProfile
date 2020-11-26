@@ -141,9 +141,9 @@
                             <th>@Localizer["TrainingDate"] </th>
                             <th>@Localizer["Course"]</th>
                             <th style="text-align:center">@Localizer["NumberOfTrainees"]</th>
-                            <th>@Localizer["CoursePrice"]</th>
+                            <th>@Localizer["TotalPrice"]</th>
                             <th>@Localizer["Vat7"]</th>
-                            <th>@Localizer["TotalAmount"]</th>
+                            <th>@Localizer["NetPrice"]</th>
                         </tr>
 
                     </thead>
@@ -575,33 +575,38 @@
 
             var sumTotalPrice = parseFloat(isNaN(totalPrice) ? "" : totalPrice);
             var intVat = vat7(sumTotalPrice);
+          
             var sumVatAmount = sumTotalPrice + parseFloat(intVat);
 
             var intTax = taxCalculate(sumTotalPrice);
             var totalTax = parseFloat(sumTotalPrice) + parseFloat(intTax);
 
             //totalTax = parseFloat(totalTax).toFixed(2);
-            if (isNaN(intVat)) {
-                intVat = 0;
-            }
+            //if (isNaN(intVat)) {
+            //    intVat = 0;
+            //}
 
-            if (isNaN(totalTax)) {
-                totalTax = 0;
-            }
+            //if (isNaN(totalTax)) {
+            //    totalTax = 0;
+            //}
 
-            if (isNaN(intTax)) {
-                intTax = 0;
-            }
+            //if (isNaN(intTax)) {
+            //    intTax = 0;
+            //}
 
-            $('#lblttcost').html(isNaN(totalPrice) ? "0" : FormatNumber(totalPrice));
-            $('#lblvat7').html(intVat);
-            $('#lblCousetotal').html(isNaN(sumVatAmount) ? "0" : FormatNumber(sumVatAmount));
+            $('#lblttcost').html(isNaN(totalPrice) ? "0" : numberWithCommas(totalPrice));
+            $('#lblvat7').html(numberWithCommas(intVat));
+            $('#lblCousetotal').html(isNaN(sumVatAmount) ? "0" : numberWithCommas(sumVatAmount));
 
 
-            $('#lbltax').html(intTax);
-            $('#lblTotalAmountBytax').html(FormatNumber(totalTax));
+            $('#lbltax').html(numberWithCommas(intTax));
+            $('#lblTotalAmountBytax').html(numberWithCommas(totalTax));
             
         }
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
                  function GetDropDownByNameCourse() {
                     $.ajax({
                         type: 'GET',
@@ -633,7 +638,7 @@
 
             function onSave() {
 
-                var engineer = new Object();
+                
                 var engineerDefs = [];
                 var tEn = $('#tbSearchEngineer').dataTable();
                 
@@ -641,16 +646,19 @@
 
                     var trainingEngineerId = tEn.fnGetData(index).TrainingEngineerId;
                     var engineerId = tEn.fnGetData(index).EngineerId;
+                    var remark = $(value).find('#txtRemark').val();
                     var price = $(value).find('#txtCoursePrice').val();
                     if (price == "") {
                         price = '0';
                     }
-                    //engineer = new Object();
-                    //engineer.TrainingId = $('#trnid').val();
-                    //engineer.EngineerId = engineerId;
-                    //engineer.CoursePrice = price;
-
-                    engineerDefs.push({ 'TrainingEngineerId': trainingEngineerId,'TrainingId': $('#trnid').val(), 'EngineerId': engineerId, 'CoursePrice': price })
+         
+                    engineerDefs.push({
+                        'TrainingEngineerId': trainingEngineerId
+                        , 'TrainingId': $('#trnid').val()
+                        , 'EngineerId': engineerId
+                        , 'CoursePrice': price
+                        , 'Remark': remark
+                    })
 
                 });
 
@@ -871,7 +879,7 @@
                                     },
                                     { "data": "Course" },
                                     { "data": "CountEngineer", className: 'text-center' },
-                                    { "data": "CoursePrice", render: $.fn.dataTable.render.number(',', '.', 2, ''), className: 'text-right' },
+                                    { "data": "TotalPrice", render: $.fn.dataTable.render.number(',', '.', 2, ''), className: 'text-right' },
                                     { "data": "Vat", className: 'text-right' },
                                     { "data": "TotalAmount", render: $.fn.dataTable.render.number(',', '.', 2, ''), className: 'text-right'}
 
@@ -1024,7 +1032,6 @@
 
                                         d.Trainingid = Trainingid
 
-
                                     }
                                 },
                                 columns: [
@@ -1038,7 +1045,18 @@
                                     {
                                         data: null, orderable: false, render: function (data, type, row) {
 
-                                            var $text = $('<input id="txtCoursePrice" class="form-control" style="width:100px"  value="' + data.CoursePrice + '" > </input>');
+                                            var $text = $('<input id="txtCoursePrice" onkeypress="return onlyNumberKey(event)"  class="form-control" style="width:100%"  value="' + data.CoursePrice + '" > </input>');
+                                            return $text[0].outerHTML
+
+                                        }
+                                    },
+                                    {
+                                        data: null, orderable: false, render: function (data, type, row) {
+                                            var remark = "";
+                                            if (data.Remark != null) {
+                                                remark = data.Remark;
+                                            } 
+                                            var $text = $('<input id="txtRemark" class="form-control" style="width:100%"  value="' + remark + '" > </input>');
                                             return $text[0].outerHTML
 
                                         }
@@ -1089,6 +1107,15 @@
 
 
                         }
+
+        function onlyNumberKey(evt) {
+
+            // Only ASCII charactar in that range allowed 
+            var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+            if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+                return false;
+            return true;
+        } 
 
         function FormatNumber(number) {
             try {

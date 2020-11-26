@@ -367,13 +367,15 @@ namespace SubcontractProfile.Web.Controllers
                             HttpClient client = new HttpClient();
                             foreach (var engineer in engineerModel)
                             {
-                                _engineerModel = new SubcontractProfileTrainingEngineerModel();
-                                _engineerModel.TrainingEngineerId = engineer.TrainingEngineerId;
-                                _engineerModel.TrainingId = engineer.TrainingId;
-                                _engineerModel.EngineerId = engineer.EngineerId;
-                                _engineerModel.UpdateBy = userProfile.Username;
-                                _engineerModel.TestStatus = "N";
-                                _engineerModel.CoursePrice = engineer.CoursePrice;
+                                //_engineerModel = new SubcontractProfileTrainingEngineerModel();
+                                //_engineerModel.TrainingEngineerId = engineer.TrainingEngineerId;
+                                //_engineerModel.TrainingId = engineer.TrainingId;
+                                //_engineerModel.EngineerId = engineer.EngineerId;
+                                //_engineerModel.UpdateBy = userProfile.Username;
+                                //_engineerModel.TestStatus = "N";
+                                //_engineerModel.CoursePrice = engineer.CoursePrice;
+                                engineer.UpdateBy = userProfile.Username;
+                                engineer.TestStatus = "N";
 
                                 var uriengineer = new Uri(Path.Combine(strpathAPI, "TrainingEngineer", "Update"));
 

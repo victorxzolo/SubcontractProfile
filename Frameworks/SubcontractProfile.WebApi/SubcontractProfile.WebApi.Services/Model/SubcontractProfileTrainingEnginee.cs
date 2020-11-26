@@ -68,8 +68,8 @@ namespace SubcontractProfile.WebApi.Services.Model
         public string TestReason { get; set; }
         public string TestRemark { get; set; }
         public decimal? CoursePrice { get; set; }
-        
 
+        public string Remark { get; set; }
 
         public object Clone()
         {
