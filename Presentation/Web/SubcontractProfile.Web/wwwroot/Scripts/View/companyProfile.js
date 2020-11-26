@@ -17,7 +17,9 @@ $(document).ready(function () {
         inittbRevenue();
     inittblocation();
     BindAddressType();
-    $(".ddlsearch").select2();
+    $(".ddlsearch").select2({
+        dropdownParent: $('#AddEditModal .modal-content')
+    });
 
     $('#linkdownloadbookbank').text('');
     $('#linkdownloadcertificate').text('');

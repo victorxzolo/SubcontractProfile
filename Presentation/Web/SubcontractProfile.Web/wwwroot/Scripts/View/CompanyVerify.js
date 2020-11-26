@@ -47,7 +47,10 @@ $(document).ready(function () {
     inittbtabTeam();
     inittbtabengineer();
     inittbAddressResultLocation();
+
     $(".ddlsearch").select2();
+    $('.ddlsearchengineer').select2();
+    $('.ddlsearchlocation').select2();
 
     $('#contractstartdate').datetimepicker({
         format: "DD/MM/YYYY",   

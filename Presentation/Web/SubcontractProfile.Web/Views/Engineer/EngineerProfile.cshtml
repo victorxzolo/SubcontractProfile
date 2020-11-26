@@ -892,7 +892,9 @@
             GetDropDownSizeShirt();
 
 
-            $(".ddlsearch").select2();
+            $(".ddlsearch").select2({
+                dropdownParent: $('#AddEditModal .modal-content')
+            });
 
             $('#dateBirthDate').datetimepicker({
                 format: "DD/MM/YYYY",
