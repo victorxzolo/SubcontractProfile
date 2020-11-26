@@ -84,6 +84,7 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@test_status", subcontractProfileTrainingEngineer.TestStatus);
             p.Add("@update_by", subcontractProfileTrainingEngineer.UpdateBy);
             p.Add("@course_price", subcontractProfileTrainingEngineer.CoursePrice);
+            p.Add("@remark", subcontractProfileTrainingEngineer.Remark);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTrainingEngineer_Update", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);

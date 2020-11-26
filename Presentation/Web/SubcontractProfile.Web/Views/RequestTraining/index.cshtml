@@ -141,9 +141,9 @@
                             <th>@Localizer["TrainingDate"] </th>
                             <th>@Localizer["Course"]</th>
                             <th style="text-align:center">@Localizer["NumberOfTrainees"]</th>
-                            <th>@Localizer["CoursePrice"]</th>
+                            <th>@Localizer["TotalPrice"]</th>
                             <th>@Localizer["Vat7"]</th>
-                            <th>@Localizer["TotalAmount"]</th>
+                            <th>@Localizer["NetPrice"]</th>
                         </tr>
 
                     </thead>
@@ -633,7 +633,7 @@
 
             function onSave() {
 
-                var engineer = new Object();
+                
                 var engineerDefs = [];
                 var tEn = $('#tbSearchEngineer').dataTable();
                 
@@ -641,16 +641,19 @@
 
                     var trainingEngineerId = tEn.fnGetData(index).TrainingEngineerId;
                     var engineerId = tEn.fnGetData(index).EngineerId;
+                    var remark = $(value).find('#txtRemark').val();
                     var price = $(value).find('#txtCoursePrice').val();
                     if (price == "") {
                         price = '0';
                     }
-                    //engineer = new Object();
-                    //engineer.TrainingId = $('#trnid').val();
-                    //engineer.EngineerId = engineerId;
-                    //engineer.CoursePrice = price;
-
-                    engineerDefs.push({ 'TrainingEngineerId': trainingEngineerId,'TrainingId': $('#trnid').val(), 'EngineerId': engineerId, 'CoursePrice': price })
+         
+                    engineerDefs.push({
+                        'TrainingEngineerId': trainingEngineerId
+                        , 'TrainingId': $('#trnid').val()
+                        , 'EngineerId': engineerId
+                        , 'CoursePrice': price
+                        , 'Remark': remark
+                    })
 
                 });
 
@@ -871,7 +874,7 @@
                                     },
                                     { "data": "Course" },
                                     { "data": "CountEngineer", className: 'text-center' },
-                                    { "data": "CoursePrice", render: $.fn.dataTable.render.number(',', '.', 2, ''), className: 'text-right' },
+                                    { "data": "TotalPrice", render: $.fn.dataTable.render.number(',', '.', 2, ''), className: 'text-right' },
                                     { "data": "Vat", className: 'text-right' },
                                     { "data": "TotalAmount", render: $.fn.dataTable.render.number(',', '.', 2, ''), className: 'text-right'}
 
@@ -1024,7 +1027,6 @@
 
                                         d.Trainingid = Trainingid
 
-
                                     }
                                 },
                                 columns: [
@@ -1038,7 +1040,18 @@
                                     {
                                         data: null, orderable: false, render: function (data, type, row) {
 
-                                            var $text = $('<input id="txtCoursePrice" class="form-control" style="width:100px"  value="' + data.CoursePrice + '" > </input>');
+                                            var $text = $('<input id="txtCoursePrice" class="form-control" style="width:100%"  value="' + data.CoursePrice + '" > </input>');
+                                            return $text[0].outerHTML
+
+                                        }
+                                    },
+                                    {
+                                        data: null, orderable: false, render: function (data, type, row) {
+                                            var remark = "";
+                                            if (data.Remark != null) {
+                                                remark = data.Remark;
+                                            } 
+                                            var $text = $('<input id="txtRemark" class="form-control" style="width:100%"  value="' + remark + '" > </input>');
                                             return $text[0].outerHTML
 
                                         }
