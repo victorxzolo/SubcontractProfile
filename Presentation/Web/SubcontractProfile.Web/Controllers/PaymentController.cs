@@ -815,13 +815,14 @@ namespace SubcontractProfile.Web.Controllers
         //        return new EmptyResult();
         //    }
         //}
-        public async Task<ActionResult> DownloadfileConfirm(string paymentid,string filename)
+        public async Task<ActionResult> DownloadfileConfirm(string paymentid,string filename,string companyId)
         {
             if (dataUser == null)
             {
                 getsession();
             }
             var outputNAS = new List<SubcontractDropdownModel>();
+            var outputUser = new List<SubcontractProfileUserModel>();
             #region NAS
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(
@@ -846,22 +847,32 @@ namespace SubcontractProfile.Web.Controllers
             //string destNAS = @"D:\NasPath";
 
             NetworkCredential sourceCredentials = new NetworkCredential { Domain = ipAddress, UserName = username, Password = password };
-            //var chkpath = @"D:\PathTest\ab6362c7-388e-4289-b999-dded33408ea0\Payment\C55BA6EB-B826-4D41-BE54-C538C2EE2AB4\img01.jpg"; //userid
-            //if (System.IO.File.Exists(chkpath))
-            //{
-            //    CheckDirPayment("C55BA6EB-B826-4D41-BE54-C538C2EE2AB4", "56f28ba9-8f7f-43fa-a598-e88fae450180", "");
-            //}
-            //var path = @"D:\PathTest\56f28ba9-8f7f-43fa-a598-e88fae450180\Payment\C55BA6EB-B826-4D41-BE54-C538C2EE2AB4\img01.jpg"; //companyid
+
+            #region Select User
+
+            SubcontractProfileUserModel usersearch = new SubcontractProfileUserModel();
+            usersearch.companyid = new Guid(companyId);
+            var uriStringUser = new Uri(Path.Combine(strpathAPI, "User", "GetByCompanyId"));
+            var httpContentUser = new StringContent(JsonConvert.SerializeObject(usersearch), Encoding.UTF8, "application/json");
+            response = client.PostAsync(uriStringUser, httpContentUser).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                outputUser= JsonConvert.DeserializeObject<List<SubcontractProfileUserModel>>(result);
+            }
 
             #endregion
-            using (new NetworkConnection(destNAS, sourceCredentials))
+
+
+                #endregion
+                using (new NetworkConnection(destNAS, sourceCredentials))
             {
-                var chkpath = this.GetPathAndFilename(paymentid, filename, dataUser.UserId.ToString(), destNAS + @"\SubContractProfile\"); //userid
+                var chkpath = this.GetPathAndFilename(paymentid, filename, outputUser[0].UserId.ToString(), destNAS + @"\SubContractProfile\"); //userid
                 if (System.IO.File.Exists(chkpath))
                 {
-                    CheckDirPayment(dataUser.UserId.ToString(), dataUser.companyid.ToString(), destNAS + @"\SubContractProfile\");
+                    CheckDirPayment(dataUser.UserId.ToString(), companyId, destNAS + @"\SubContractProfile\");
                 }
-                var path = this.GetPathAndFilename(paymentid, filename, dataUser.companyid.ToString(), destNAS + @"\SubContractProfile\");
+                var path = this.GetPathAndFilename(paymentid, filename, companyId, destNAS + @"\SubContractProfile\");
                 string content = GetContentType(path);
                 var memory = new MemoryStream();
                 using (var stream = new FileStream(path, FileMode.Open))

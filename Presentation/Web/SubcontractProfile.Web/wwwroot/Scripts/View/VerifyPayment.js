@@ -543,7 +543,7 @@ function DownloadFileSlip(filename) {
     var urlDownloadfile = url.replace('Action', 'DownloadfileConfirm');
     // $('#ItemPreview').attr('src', '/Payment/DownloadCSV?paymentid=' + $('#hdpaymentId').val());
     
-    $('#linkdownload').attr("href", urlDownloadfile + '?paymentid=' + $('#hdpaymentId').val() + '&&filename=' + filename);
+    $('#linkdownload').attr("href", urlDownloadfile + '?paymentid=' + $('#hdpaymentId').val() + '&&filename=' + filename + '&&companyId=' + $('#hdpaymentId').val(););
 
 }
 

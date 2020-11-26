@@ -132,6 +132,40 @@ namespace SubcontractProfile.WebApi.API.Controllers
             
 
         }
+
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileUser))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileUser))]
+        [HttpPost("GetByCompanyId")]
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileUser>> GetByCompanyId(
+            SubcontractProfile.WebApi.Services.Model.SubcontractProfileUser model)
+        {
+            _logger.LogInformation($"Start UserController::GetByCompanyId", model.companyid);
+
+            var entities = await _service.GetAll();
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"UserController::", "GetByCompanyId NOT FOUND", model.companyid);
+                return null;
+            }
+            else
+            {
+
+                if (model.companyid != null && model.companyid.ToString() != "")
+                {
+                    var returnentities = entities.Where(x => x.companyid.Equals(model.companyid)).ToList();
+                    return returnentities;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+
+        }
+
         #endregion
 
         #region POST
