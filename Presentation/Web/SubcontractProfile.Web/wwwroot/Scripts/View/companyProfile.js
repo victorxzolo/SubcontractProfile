@@ -234,7 +234,7 @@ $(document).ready(function () {
                         var data = {
                             AddressTypeId: $(this).val(),
                             address_type_name: $(this).parent().text().trim(),
-                            Country: $('#country option').filter(':selected').val(),
+                            Country: $('#ddlcountry option').filter(':selected').val(),
                             ZipCode: $('#ddlzipcode option').filter(':selected').val(),
                             HouseNo: $('#txthomenumber').val(),
                             Moo: $('#txtVillageNo').val(),

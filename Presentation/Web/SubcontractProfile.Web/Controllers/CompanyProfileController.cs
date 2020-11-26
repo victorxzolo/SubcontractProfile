@@ -776,6 +776,8 @@ namespace SubcontractProfile.Web.Controllers
                             });
                             foreach (var r in SaveAddressSession(newaddr))
                             {
+                                Guid addr_id = Guid.NewGuid();
+                                r.AddressId = addr_id;
                                 data.Add(r);
                             }
 
@@ -784,6 +786,8 @@ namespace SubcontractProfile.Web.Controllers
                         {
 
                             data.RemoveAll(x => x.AddressTypeId== e.AddressTypeId);
+                            Guid addr_id = Guid.NewGuid();
+                            e.AddressId = addr_id;
                             data.Add(e);
                         }
 
