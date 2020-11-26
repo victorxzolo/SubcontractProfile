@@ -60,10 +60,11 @@ namespace SubcontractProfile.WebApi.Services.Services
             var p = new DynamicParameters();
 
             p.Add("@training_id", subcontractProfileTrainingEngineer.TrainingId);
-            p.Add("@location_id", subcontractProfileTrainingEngineer.LocationId);
-            p.Add("@team_id", subcontractProfileTrainingEngineer.TeamId);
+            //p.Add("@location_id", subcontractProfileTrainingEngineer.LocationId);
+            //p.Add("@team_id", subcontractProfileTrainingEngineer.TeamId);
             p.Add("@engineer_id", subcontractProfileTrainingEngineer.EngineerId);
             p.Add("@create_by", subcontractProfileTrainingEngineer.CreateBy);
+            p.Add("@course_price", subcontractProfileTrainingEngineer.CoursePrice); 
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTrainingEngineer_Insert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
@@ -77,13 +78,12 @@ namespace SubcontractProfile.WebApi.Services.Services
         public async Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTrainingEngineer subcontractProfileTrainingEngineer)
         {
             var p = new DynamicParameters();
-          //  p.Add("@training_engineer_id", subcontractProfileTrainingEngineer.TrainingEngineerId);
+            p.Add("@training_engineer_id", subcontractProfileTrainingEngineer.TrainingEngineerId);
             p.Add("@training_id", subcontractProfileTrainingEngineer.TrainingId);
-            p.Add("@location_id", subcontractProfileTrainingEngineer.LocationId);
-            p.Add("@team_id", subcontractProfileTrainingEngineer.TeamId);
             p.Add("@engineer_id", subcontractProfileTrainingEngineer.EngineerId);
             p.Add("@test_status", subcontractProfileTrainingEngineer.TestStatus);
             p.Add("@update_by", subcontractProfileTrainingEngineer.UpdateBy);
+            p.Add("@course_price", subcontractProfileTrainingEngineer.CoursePrice);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTrainingEngineer_Update", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);

@@ -26,10 +26,10 @@ namespace SubcontractProfile.Web.Model
         public string Remark { get; set; }
 
         //  [System.ComponentModel.DataAnnotations.Required]
-        public decimal TotalPrice { get; set; }
+        public decimal? TotalPrice { get; set; }
 
         //  [System.ComponentModel.DataAnnotations.Required]
-        public decimal Vat { get; set; }
+        public decimal? Vat { get; set; }
 
         public decimal? Tax { get; set; }
 

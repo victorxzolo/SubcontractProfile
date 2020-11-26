@@ -104,9 +104,9 @@
                             <th>@Localizer["BookingDate"] </th>
                             <th>@Localizer["Course"]</th>
                             <th style="text-align:center">@Localizer["NumberOfTrainees"]</th>
-                            <th>@Localizer["CoursePrice"]</th>
+                            @*<th>@Localizer["CoursePrice"]</th>
                             <th>@Localizer["Vat7"]</th>
-                            <th>@Localizer["TotalAmount"]</th>
+                            <th>@Localizer["TotalAmount"]</th>*@
                         </tr>
 
                     </thead>
@@ -224,7 +224,7 @@
 
 
                             </div>
-                            <br />
+                            
                             <div class="row">
 
                                 <div class="col-sm-2">
@@ -251,7 +251,7 @@
                             <hr>
 
                             <div class="container">
-                                <div class="row">
+                                @*<div class="row">
                                     <div class="col-sm-2">
                                         <label>@Localizer["Location"] : <span style="color:red">*</span></label>
                                     </div>
@@ -269,7 +269,7 @@
                                     </div>
 
                                 </div>
-                                <br />
+                                <br />*@
                                 <div class="row">
                                     <div class="col-sm-2">
                                         <label>@Localizer["Engineer"] : <span style="color:red">*</span></label>
@@ -312,8 +312,8 @@
                                     <thead>
                                         <tr>
                                             <th width="10%">@Localizer["Delete"]</th>
-                                            <th>@Localizer["LocationName"]</th>
-                                            <th>@Localizer["TeamName"]</th>
+                                            @*<th>@Localizer["LocationName"]</th>
+                                            <th>@Localizer["TeamName"]</th>*@
                                             <th>@Localizer["Engineer"]</th>
 
 
@@ -322,7 +322,7 @@
                                 </table>
                             </div>
 
-                            <div class="row">
+                            @*<div class="row">
                                 <div class="col-md-8"></div>
                                 <div class="col-md-4 col-sm-12">
                                     <div class="row ">
@@ -347,16 +347,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @*<div class="col-md-12 mt-3">
-                                                <div class="row">
-                                                    <div class="col-md-7">
-                                                        <p>ภาษีหัก ณ ที่จ่าย 3% :</p>
-                                                    </div>
-                                                    <div class="col-md-5" style="text-align: left;">
-                                                        <label id="lbltax"></label>
-                                                    </div>
-                                                </div>
-                                            </div>*@
 
                                         <div class="col-md-12 mt-3">
                                             <div class="row">
@@ -368,9 +358,30 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <hr>
+                                        <div class="col-md-12 mt-3">
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <p>หัก ณ ที่จ่าย 3%  :</p>
+                                                </div>
+                                                <div class="col-md-5" style="text-align: left;">
+                                                    <label id="lbltax"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mt-3">
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <p>ยอดชำระ  :</p>
+                                                </div>
+                                                <div class="col-md-5" style="text-align: left;">
+                                                    <label id="lblTotalAmountBytax"></label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
 
 
 
@@ -458,7 +469,10 @@
             GetDropDownByNameCourse();
 
             GetDropDownByNameTrainigStatus();
-            GetDropDownLocation();
+           // GetDropDownLocation();
+
+            //get engineer
+            GetEngineerByCompany();
 
             $('#selLocationNametraining').change(function () {
                 getTeamByLocationId($(this).val());
@@ -468,10 +482,7 @@
                 getEngineerByTeam($("select[id$=selLocationNametraining]").val(),$(this).val());
             });
 
-            $('#selCourse').change(function () {
-
-            });
-
+            
 
             inittbSearchResult();
             $("#btnSearchRqt").click(function (e) {
@@ -614,7 +625,7 @@
 
         function onAddEngineer() {
 
-             if ($("select[id$=selLocationNametraining]").val() == "") {
+             @*if ($("select[id$=selLocationNametraining]").val() == "") {
                  bootbox.alert("@Localizer["ddlLocation"]");
                  return;
              }
@@ -622,7 +633,7 @@
              if ($("select[id$=selTeamtraining]").val() == "") {
                  bootbox.alert("@Localizer["ddlTeam"]");
                  return;
-             }
+             }*@
 
              if ($("select[id$=selEngineertraining]").val() == "") {
                  bootbox.alert("@Localizer["ddlEngineer"]");
@@ -630,11 +641,12 @@
              }
 
              var model = new Object();
-             model.LocationId = $("select[id$=selLocationNametraining]").val();
-             model.TeamId = $("select[id$=selTeamtraining]").val();
+             //model.LocationId = $("select[id$=selLocationNametraining]").val();
+             //model.TeamId = $("select[id$=selTeamtraining]").val();
+            
+             //model.LocationNameTh = $("#selLocationNametraining option:selected").text();
+             //model.TeamNameTh = $("#selTeamtraining option:selected").text();
              model.EngineerId = $("select[id$=selEngineertraining]").val();
-             model.LocationNameTh = $("#selLocationNametraining option:selected").text();
-             model.TeamNameTh = $("#selTeamtraining option:selected").text();
              model.StaffNameTh = $("#selEngineertraining option:selected").text();
 
              var i = 0;
@@ -676,38 +688,37 @@
                              return "  <a onclick=deleteData('" + row.LocationId + "','" + row.TeamId + "','" + row.EngineerId + "');return false; href='#'  data-toggle='tooltip' data-placement='top' title='Delete'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-trash-2'><polyline points='3 6 5 6 21 6'></polyline><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'></path><line x1='10' y1='11' x2='10' y2='17'></line><line x1='14' y1='11' x2='14' y2='17'></line></svg></a>";
                          }
                      },
-                     { data: "LocationNameTh" },
-                     { data: "TeamNameTh" },
+                     //{ data: "LocationNameTh" },
+                     //{ data: "TeamNameTh" },
                      { data: "StaffNameTh" }
 
                  ],
                  "order": [[0, "desc"]],
                  "stripeClasses": [],
                  "initComplete": function (settings, json) {//here is the tricky part
-                    // var count = $('#tbSearchEngineer tr').length - 1
-                     //  alert(count);
+                   
                      var table = $('#tbSearchEngineer').DataTable();
                      var count = table.data().count();
 
                      $('#rowCount').val(count);
-                   //  var count = $('#rowCount').val();
-                     var cost = $('#hdcoursecostforCal').val();//$('#lblcourseprice').text();
+                 
+                     //var cost = $('#hdcoursecostforCal').val();//$('#lblcourseprice').text();
 
-                     var ttcost = calculateCost(cost, count);
-
-
-                     var incvat = vat7(ttcost);
-                     $('#lblttcost').html(FormatNumber(ttcost));
-                     $('#lblvat7').html(parseInt(incvat));
-
-                     var _incvat = parseInt(incvat);
-                     var _ttcost = parseFloat(ttcost);
-                     var CoursetotalCost = _incvat + _ttcost;
-
-                     CoursetotalCost = FormatNumber(CoursetotalCost);
+                     //var ttcost = calculateCost(cost, count);
 
 
-                     $('#lblCousetotal').html(CoursetotalCost);
+                     //var incvat = vat7(ttcost);
+                     //$('#lblttcost').html(FormatNumber(ttcost));
+                     //$('#lblvat7').html(parseInt(incvat));
+
+                     //var _incvat = parseInt(incvat);
+                     //var _ttcost = parseFloat(ttcost);
+                     //var CoursetotalCost = _incvat + _ttcost;
+
+                     //CoursetotalCost = FormatNumber(CoursetotalCost);
+
+
+                     //$('#lblCousetotal').html(CoursetotalCost);
                  },
                  drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
 
@@ -788,8 +799,8 @@
                              return "  <a onclick=deleteData('" + row.LocationId + "','" + row.TeamId + "','" + row.EngineerId + "');return false; href='#'  data-toggle='tooltip' data-placement='top' title='Delete'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-trash-2'><polyline points='3 6 5 6 21 6'></polyline><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'></path><line x1='10' y1='11' x2='10' y2='17'></line><line x1='14' y1='11' x2='14' y2='17'></line></svg></a>";
                          }
                      },
-                     { data: "LocationNameTh" },
-                     { data: "TeamNameTh" },
+                     //{ data: "LocationNameTh" },
+                     //{ data: "TeamNameTh" },
                      { data: "StaffNameTh" }
 
                  ],
@@ -802,24 +813,24 @@
                      var countEmp = table.data().count();
 
                      $('#rowCount').val(countEmp);
-                   //  var count = $('#rowCount').val();
-                     var costCouse = $('#hdcoursecostforCal').val();
+                   
+                     //var costCouse = $('#hdcoursecostforCal').val();
 
-                     var ttcost = calculateCost(costCouse, countEmp);
-
-
-                     var incvat = vat7(ttcost);
-                     $('#lblttcost').html(FormatNumber(ttcost));
-                     $('#lblvat7').html(parseInt(incvat));
-
-                     var _incvat = parseInt(incvat);
-                     var _ttcost = parseFloat(ttcost);
-                     var CoursetotalCost = _incvat + _ttcost;
-
-                     CoursetotalCost = FormatNumber(CoursetotalCost);
+                     //var ttcost = calculateCost(costCouse, countEmp);
 
 
-                     $('#lblCousetotal').html(CoursetotalCost);
+                     //var incvat = vat7(ttcost);
+                     //$('#lblttcost').html(FormatNumber(ttcost));
+                     //$('#lblvat7').html(parseInt(incvat));
+
+                     //var _incvat = parseInt(incvat);
+                     //var _ttcost = parseFloat(ttcost);
+                     //var CoursetotalCost = _incvat + _ttcost;
+
+                     //CoursetotalCost = FormatNumber(CoursetotalCost);
+
+
+                     //$('#lblCousetotal').html(CoursetotalCost);
                  },
                  drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
 
@@ -839,9 +850,9 @@
             trainingModel.RequestDateStr = $('#inputRequestdateFrom').val();
             trainingModel.RequestDateStrTo = $('#inputRequestdateTo').val();
             trainingModel.Remark = $('#txtRemark').val();
-            trainingModel.TotalPrice = $('#lblttcost').text();
-            trainingModel.Vat = $('#lblvat7').text();
-           // trainingModel.Tax = $('#lblvat7').text();
+            trainingModel.TotalPrice = 0;//$('#lblttcost').text();
+            trainingModel.Vat = 0;//$('#lblvat7').text();
+            trainingModel.Tax = 0;//$('#lblvat7').text();
             trainingModel.Trainingid = $('#trnid').val();
             trainingModel.CompanyId = $('#compid').val();
 
@@ -914,14 +925,11 @@
               });
          }
 
-        function getEngineerByTeam(locationId,teamId) {
+        function GetEngineerByCompany() {
+           
               $.ajax({
-                  url: '@Url.Action("GetEngineerByTeam", "Engineer")',
-                  type: 'POST',
-                  data: {
-                      'locationId': locationId,
-                      'teamId': teamId,
-                  },
+                  url: '@Url.Action("GetEngineerByCompany", "Engineer")',
+                  type: 'GET',  
                   dataType: "json",
                   success: function (data) {
                       $("#selEngineertraining").empty();
@@ -1087,10 +1095,10 @@
                                         }
                                     },
                                     { "data": "Course" },
-                                    { "data": "CountEngineer", className: 'text-center'},
-                                    { "data": "CoursePrice", render: $.fn.dataTable.render.number(',', '.', 2, ''), className: 'text-right' },
-                                    { "data": "Vat", className: 'text-right'},
-                                    { "data": "TotalAmount", render: $.fn.dataTable.render.number(',', '.', 2, ''), className: 'text-right' }
+                                    { "data": "CountEngineer", className: 'text-center'}
+                                    //{ "data": "CoursePrice", render: $.fn.dataTable.render.number(',', '.', 2, ''), className: 'text-right' },
+                                    //{ "data": "Vat", className: 'text-right'},
+                                    //{ "data": "TotalAmount", render: $.fn.dataTable.render.number(',', '.', 2, ''), className: 'text-right' }
 
                                 ],
                                 "order": [[0, "desc"]],
@@ -1155,23 +1163,23 @@
 
                                              $('#rowCount').val(countEmp);
 
-                                             var cost = $('#hdcoursecostforCal').val();
+                                             //var cost = $('#hdcoursecostforCal').val();
 
-                                             var ttcost = calculateCost(cost, countEmp);
+                                             //var ttcost = calculateCost(cost, countEmp);
 
-                                             var incvat = vat7(ttcost);
+                                             //var incvat = vat7(ttcost);
 
-                                             $('#lblttcost').html(FormatNumber(ttcost));
-                                             $('#lblvat7').html(parseInt(incvat));
+                                             //$('#lblttcost').html(FormatNumber(ttcost));
+                                             //$('#lblvat7').html(parseInt(incvat));
 
-                                             var _incvat = parseInt(incvat);
-                                             var _ttcost = parseFloat(ttcost);
-                                             var CoursetotalCost = _incvat + _ttcost;
+                                             //var _incvat = parseInt(incvat);
+                                             //var _ttcost = parseFloat(ttcost);
+                                             //var CoursetotalCost = _incvat + _ttcost;
 
-                                             CoursetotalCost = FormatNumber(CoursetotalCost);
+                                             //CoursetotalCost = FormatNumber(CoursetotalCost);
 
 
-                                             $('#lblCousetotal').html(CoursetotalCost);
+                                             //$('#lblCousetotal').html(CoursetotalCost);
                                          }
                                          else {
 
@@ -1219,6 +1227,7 @@
                                              $('#inputContactPhone').val(result.ContractPhone);
                                              $('#selCourse').val(result.Course);
                                              $('#inputRequestdateFrom').val(result.RequestDateStr);
+                                            
                                              $('#inputRequestdateTo').val(result.RequestDateStrTo);
 
                                              $('#txtRemark').val(result.Remark);
@@ -1330,8 +1339,8 @@
                             return "  <a onclick=deleteData('" + row.LocationId + "','" + row.TeamId + "','" + row.EngineerId + "');return false; href='#'  data-toggle='tooltip' data-placement='top' title='Delete'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-trash-2'><polyline points='3 6 5 6 21 6'></polyline><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'></path><line x1='10' y1='11' x2='10' y2='17'></line><line x1='14' y1='11' x2='14' y2='17'></line></svg></a>";
                         }
                     },
-                    { data: "LocationNameTh" },
-                    { data: "TeamNameTh" },
+                    //{ data: "LocationNameTh" },
+                    //{ data: "TeamNameTh" },
                     { data: "StaffNameTh" }
 
                 ],
@@ -1343,23 +1352,23 @@
                     var countEmp = table.data().count();
 
                     $('#rowCount').val(countEmp);
-                    var costPrice = $('#hdcoursecostforCal').val();
+                    //var costPrice = $('#hdcoursecostforCal').val();
 
-                    var ttcost = calculateCost(costPrice, countEmp);
+                    //var ttcost = calculateCost(costPrice, countEmp);
 
-                    var incvat = vat7(ttcost);
+                    //var incvat = vat7(ttcost);
 
-                    $('#lblttcost').html(FormatNumber(ttcost));
+                    //$('#lblttcost').html(FormatNumber(ttcost));
 
-                    $('#lblvat7').html(FormatNumber(incvat));
+                    //$('#lblvat7').html(FormatNumber(incvat));
 
-                    var _incvat = parseInt(incvat);
-                    var _ttcost = parseFloat(ttcost);
-                    var CoursetotalCost = _incvat + _ttcost;
+                    //var _incvat = parseInt(incvat);
+                    //var _ttcost = parseFloat(ttcost);
+                    //var CoursetotalCost = _incvat + _ttcost;
 
-                    CoursetotalCost = FormatNumber(CoursetotalCost);
+                    //CoursetotalCost = FormatNumber(CoursetotalCost);
 
-                    $('#lblCousetotal').html(CoursetotalCost);
+                    //$('#lblCousetotal').html(CoursetotalCost);
                 },
                 drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
 

@@ -335,17 +335,20 @@ namespace SubcontractProfile.Web.Controllers
             return sDateTime;
         }
 
-        public ActionResult onSave(SubcontractProfileTrainingRequestModel model)
+        public ActionResult onSave(SubcontractProfileTrainingRequestModel model
+            ,List<SubcontractProfileTrainingEngineerModel> engineerModel)
         {
             ResponseModel result = new ResponseModel();
+            SubcontractProfileTrainingEngineerModel _engineerModel;
             try
             {
 
                 HttpClient clientRequest = new HttpClient();
-                 var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
-               
-                model.BookingDateStr = ConvertToDateTimeYYYYMMDD(model.BookingDateStr);
-
+                 var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userAISLogin");
+               if (!string.IsNullOrEmpty(model.BookingDateStr)){
+                    model.BookingDateStr = ConvertToDateTimeYYYYMMDD(model.BookingDateStr);
+                }
+       
                 var uri = new Uri(Path.Combine(strpathAPI, "Training", "UpdateByVerified"));
 
                 clientRequest.DefaultRequestHeaders.Accept.Add(
@@ -353,8 +356,41 @@ namespace SubcontractProfile.Web.Controllers
                 var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
                 HttpResponseMessage responseResult = clientRequest.PutAsync(uri, httpContent).Result;
 
+               
                 if (responseResult.IsSuccessStatusCode)
                 {
+                    //insert engineer
+                    if (engineerModel != null)
+                    {
+                        if (engineerModel.Count > 0)
+                        {
+                            HttpClient client = new HttpClient();
+                            foreach (var engineer in engineerModel)
+                            {
+                                _engineerModel = new SubcontractProfileTrainingEngineerModel();
+                                _engineerModel.TrainingEngineerId = engineer.TrainingEngineerId;
+                                _engineerModel.TrainingId = engineer.TrainingId;
+                                _engineerModel.EngineerId = engineer.EngineerId;
+                                _engineerModel.UpdateBy = userProfile.Username;
+                                _engineerModel.TestStatus = "N";
+                                _engineerModel.CoursePrice = engineer.CoursePrice;
+
+                                var uriengineer = new Uri(Path.Combine(strpathAPI, "TrainingEngineer", "Update"));
+
+                                client.DefaultRequestHeaders.Accept.Add(
+                                new MediaTypeWithQualityHeaderValue("application/json"));
+                                var httpContenten = new StringContent(JsonConvert.SerializeObject(engineer), Encoding.UTF8, "application/json");
+                                HttpResponseMessage responseEn = client.PutAsync(uriengineer, httpContenten).Result;
+
+                                if (responseEn.IsSuccessStatusCode)
+                                {
+
+                                }
+
+                            }
+                        }
+                    }
+
                     result.Status = true;
                     result.Message = _localizer["MessageSaveSuccess"];
                     result.StatusError = "0";
@@ -877,10 +913,10 @@ namespace SubcontractProfile.Web.Controllers
                                     engineerModel = new SubcontractProfileTrainingEngineerModel();
                                     engineerModel.TrainingEngineerId = Guid.NewGuid();
                                     engineerModel.TrainingId = model.TrainingId;
-                                    engineerModel.LocationId = Guid.Parse(dr["LocationId"].ToString());
-                                    engineerModel.TeamId = Guid.Parse(dr["TeamId"].ToString());
+       
                                     engineerModel.EngineerId = Guid.Parse(dr["EngineerId"].ToString());
                                     engineerModel.CreateBy = userProfile.Username;
+                                    engineerModel.CoursePrice = model.CoursePrice;
 
                                     var uriengineer = new Uri(Path.Combine(strpathAPI, "TrainingEngineer", "Insert"));
 
@@ -952,10 +988,11 @@ namespace SubcontractProfile.Web.Controllers
                                     engineerModel = new SubcontractProfileTrainingEngineerModel();
                                     engineerModel.TrainingEngineerId = Guid.NewGuid();
                                     engineerModel.TrainingId = model.TrainingId;
-                                    engineerModel.LocationId = Guid.Parse(dr["LocationId"].ToString());
-                                    engineerModel.TeamId = Guid.Parse(dr["TeamId"].ToString());
+                                    //engineerModel.LocationId = Guid.Parse(dr["LocationId"].ToString());
+                                    //engineerModel.TeamId = Guid.Parse(dr["TeamId"].ToString());
                                     engineerModel.EngineerId = Guid.Parse(dr["EngineerId"].ToString());
                                     engineerModel.CreateBy = userProfile.Username;
+                                    engineerModel.CoursePrice = model.CoursePrice;
 
                                     var uriengineer = new Uri(Path.Combine(strpathAPI, "TrainingEngineer", "Insert"));
 

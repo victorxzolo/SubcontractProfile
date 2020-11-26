@@ -272,6 +272,34 @@ namespace SubcontractProfile.Web.Controllers
             return Json(result);
         }
 
+        public JsonResult GetEngineerByCompany()
+        {
+            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+            Guid companyId = userProfile.companyid;
+
+           
+            var result = new List<SubcontractProfileEngineerModel>();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Engineer/GetEngineerByCompany"
+                , HttpUtility.UrlEncode(companyId.ToString(), Encoding.UTF8));
+
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                //data
+                result = JsonConvert.DeserializeObject<List<SubcontractProfileEngineerModel>>(resultAsysc);
+
+            }
+
+            return Json(result);
+        }
+
         public JsonResult getEngineerByTeamId(string Teamid,string Locationid)
         {
             var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");

@@ -347,5 +347,17 @@ namespace SubcontractProfile.WebApi.Services.Services
 
             return entity;
         }
+
+        public async Task<IEnumerable<SubcontractProfileEngineer>> GetEngineerByCompany(Guid companyId)
+        {
+            var p = new DynamicParameters();
+            p.Add("@company_id", companyId);
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>
+            ("uspSubcontractProfileEngineer_selectByCompany", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
+        
     }
 }
