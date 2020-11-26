@@ -1,0 +1,386 @@
+﻿
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = "Migration Profile";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div id="pageID" style="display:none;">Migration Profile</div>
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+
+    <div class="skills layout-spacing ">
+        <div class="widget-content widget-content-area">
+            <h3 class="">@Localizer["ImportData Migration Profile"]</h3>
+            <div class="widget-content1">
+
+                <div class="form-row mb-4">
+
+                    <div class="form-group col-md-6">
+                        <label for="inputmasterdata">@Localizer["MasterTable"]</label>
+                        <select id="inputmasterdata" class="form-control" data-live-search="true" onchange="chkchangetable();">
+                            <option value="Select">Please Select</option>
+                            <option value="Location">Location</option>
+                            <option value="Team">Team</option>
+                            <option value="Engineer">Engineer</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Company">Company</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="form-row mb-4">
+                    <div class="form-group col-md-6">
+                        <<input type="hidden" id="hdupfileslip" />
+                        <input type="file" class="custom-file-input inputValidation" id="slip_attach_file"
+                               accept="xlsx,xls" required />
+                        <label class="custom-file-label" for="slip_attach_file" id="lbuploadslip">@Localizer["ChooseFile"]</label>
+                        <div class="invalid-feedback">@Localizer["ErrorFileFormat"]</div>
+                      
+                        @*<small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
+                                @Localizer["ChooseFileSupportFileType"]
+                            </small>
+                            <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
+                                @Localizer["SizeFile"]
+                            </small>
+                            <small id="uploadlHelp1" style="color:red">@Localizer["RemarkChooseFileSupportFileType"]</small>*@
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="form-row mb-4">
+                    <div id="location" class="table-responsive mb-4 mt-4">
+                        <table id="tbSearchResult" class="table table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>@Localizer["location_id"]</th>
+                                    <th>@Localizer["location_code"]</th>
+                                    <th>@Localizer["location_name"]</th>
+                                    <th>@Localizer["location_name_en"]</th>
+                                    <th>@Localizer["location_name_alias"]</th>
+                                    <th>@Localizer["vendor_code"]</th>
+                                    <th>@Localizer["location_name_th"]</th>
+                                    <th>@Localizer["storage_location"]</th>
+                                    <th>@Localizer["ship_to"]</th>
+                                    <th>@Localizer["out_of_service_storage_location"]</th>
+                                    <th>@Localizer["sub_phase"]</th>
+                                    <th>@Localizer["effective_date"]</th>
+                                    <th>@Localizer["shop_type"]</th>
+                                    <th>@Localizer["vat_branch_number"]</th>
+                                    <th>@Localizer["phone"]</th>
+                                    <th>@Localizer["company_main_contract_phone"]</th>
+                                    <th>@Localizer["installations_contract_phone"]</th>
+                                    <th>@Localizer["maintenance_contract_phone"]</th>
+                                    <th>@Localizer["inventory_contract_phone"]</th>
+                                    <th>@Localizer["payment_contract_phone"]</th>
+                                    <th>@Localizer["etc_contract_phone"]</th>
+                                    <th>@Localizer["company_group_mail"]</th>
+                                    <th>@Localizer["installations_contract_mail"]</th>
+                                    <th>@Localizer["maintenance_contract_mail"]</th>
+                                    <th>@Localizer["inventory_contract_mail"]</th>
+                                    <th>@Localizer["payment_contract_mail"]</th>
+                                    <th>@Localizer["etc_contract_mail"]</th>
+                                    <th>@Localizer["location_address"]</th>
+                                    <th>@Localizer["post_address"]</th>
+                                    <th>@Localizer["tax_address"]</th>
+                                    <th>@Localizer["wt_address"]</th>
+                                    <th>@Localizer["house_no"]</th>
+                                    <th>@Localizer["area_code"]</th>
+                                    <th>@Localizer["bank_code"]</th>
+                                    <th>@Localizer["bank_name"]</th>
+                                    <th>@Localizer["bank_account_no"]</th>
+                                    <th>@Localizer["bank_account_name"]</th>
+                                    <th>@Localizer["bank_branch_code"]</th>
+                                    <th>@Localizer["bank_branch_name"]</th>
+                                    <th>@Localizer["penalty_contract_phone"]</th>
+                                    <th>@Localizer["penalty_contract_mail"]</th>
+                                    <th>@Localizer["contract_phone"]</th>
+                                    <th>@Localizer["contract_mail"]</th>
+                                    <th>@Localizer["company_id"]</th>
+                                    <th>@Localizer["status"]</th>
+                                    <th>@Localizer["create_date"]</th>
+                                    <th>@Localizer["create_by"]</th>
+                                    <th>@Localizer["update_date"]</th>
+                                    <th>@Localizer["update_by"]</th>
+
+                                </tr>
+
+                            </thead>
+
+                        </table>
+                    </div>
+                    <div id="engineer" class="table-responsive mb-4 mt-4">
+                        <table id="tbSearchResult" class="table table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+
+                                    <th>@Localizer["engineer_id"]</th>
+                                    <th>@Localizer["staff_code"]</th>
+                                    <th>@Localizer["staff_code_type"]</th>
+                                    <th>@Localizer["foa_code"]</th>
+                                    <th>@Localizer["staff_name"]</th>
+                                    <th>@Localizer["staff_name_th"]</th>
+                                    <th>@Localizer["staff_name_en"]</th>
+                                    <th>@Localizer["identity_by"]</th>
+                                    <th>@Localizer["asc_code--"]</th>
+                                    <th>@Localizer["tshirt_size--"]</th>
+                                    <th>@Localizer["contract_phone1"]</th>
+                                    <th>@Localizer["contract_phone2"]</th>
+                                    <th>@Localizer["contract_email"]</th>
+                                    <th>@Localizer["work_experience"]</th>
+                                    <th>@Localizer["work_type"]</th>
+                                    <th>@Localizer["course_skill"]</th>
+                                    <th>@Localizer["skill_level"]</th>
+                                    <th>@Localizer["position"]</th>
+                                    <th>@Localizer["location_code"]</th>
+                                    <th>@Localizer["staff_id"]</th>
+                                    <th>@Localizer["team_code"]</th>
+                                    <th>@Localizer["citizen_id"]</th>
+                                    <th>@Localizer["personal_attach_file"]</th>
+                                    <th>@Localizer["bookbank_attach_file"]</th>
+                                    <th>@Localizer["bank_code"]</th>
+                                    <th>@Localizer["bank_name"]</th>
+                                    <th>@Localizer["brance_code "]</th>
+                                    <th>@Localizer["brance_name"]</th>
+                                    <th>@Localizer["account_no"]</th>
+                                    <th>@Localizer["account_name"]</th>
+                                    <th>@Localizer["staff_status"]</th>
+                                    <th>@Localizer["create_date"]</th>
+                                    <th>@Localizer["create_by"]</th>
+                                    <th>@Localizer["update_date"]</th>
+                                    <th>@Localizer["update_by"]</th>
+                                </tr>
+
+                            </thead>
+
+                        </table>
+                    </div>
+                    <div id="team" class="table-responsive mb-4 mt-4">
+                        <table id="tbSearchResult" class="table table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>@Localizer["team_id"]</th>
+                                    <th>@Localizer["team_code"]</th>
+                                    <th>@Localizer["team_name"]</th>
+                                    <th>@Localizer["team_name_th"]</th>
+                                    <th>@Localizer["team_name_en"]</th>
+                                    <th>@Localizer["ship_to"]</th>
+                                    <th>@Localizer["stage_local"]</th>
+                                    <th>@Localizer["oos_storage_location"]</th>
+                                    <th>@Localizer["location_code"]</th>
+                                    <th>@Localizer["vendor_code"]</th>
+                                    <th>@Localizer["job_type"]</th>
+                                    <th>@Localizer["subcontract_type"]</th>
+                                    <th>@Localizer["subcontract_sub_type"]</th>
+                                    <th>@Localizer["warranty_ma"]</th>
+                                    <th>@Localizer["warranty_install"]</th>
+                                    <th>@Localizer["service_skill"]</th>
+                                    <th>@Localizer["installations_contract_phone"]</th>
+                                    <th>@Localizer["maintenance_contract_phone"]</th>
+                                    <th>@Localizer["etc_contract_phone"]</th>
+                                    <th>@Localizer["installations_contract_email"]</th>
+                                    <th>@Localizer["maintenance_contract_email"]</th>
+                                    <th>@Localizer["etc_contract_email"]</th>
+                                    <th>@Localizer["status"]</th>
+                                    <th>@Localizer["create_date"]</th>
+                                    <th>@Localizer["create_by"]</th>
+                                    <th>@Localizer["update_date"]</th>
+                                    <th>@Localizer["update_by"]</th>
+
+                                </tr>
+
+                            </thead>
+
+                        </table>
+                    </div>
+                    <div id="personal" class="table-responsive mb-4 mt-4">
+                        <table id="tbSearchResult" class="table table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>@Localizer["personal_id"]</th>
+                                    <th>@Localizer["citizen_id"]</th>
+                                    <th>@Localizer["title_name"]</th>
+                                    <th>@Localizer["full_name_en"]</th>
+                                    <th>@Localizer["full_name_th"]</th>
+                                    <th>@Localizer["birth_date"]</th>
+                                    <th>@Localizer["gender"]</th>
+                                    <th>@Localizer["race"]</th>
+                                    <th>@Localizer["nationality"]</th>
+                                    <th>@Localizer["religion"]</th>
+                                    <th>@Localizer["identity_by"]</th>
+                                    <th>@Localizer["identity_card_address"]</th>
+                                    <th>@Localizer["work_permit_no"]</th>
+                                    <th>@Localizer["education"]</th>
+                                    <th>@Localizer["th_listening"]</th>
+                                    <th>@Localizer["th_speaking"]</th>
+                                    <th>@Localizer["th_reading"]</th>
+                                    <th>@Localizer["th_writing"]</th>
+                                    <th>@Localizer["en_listening"]</th>
+                                    <th>@Localizer["en_speaking"]</th>
+                                    <th>@Localizer["en_reading"]</th>
+                                    <th>@Localizer["en_writing"]</th>
+                                    <th>@Localizer["certificate_type"]</th>
+                                    <th>@Localizer["certificate_no"]</th>
+                                    <th>@Localizer["certificate_expire_date"]</th>
+                                    <th>@Localizer["status"]</th>
+                                    <th>@Localizer["create_date"]</th>
+                                    <th>@Localizer["create_by"]</th>
+                                    <th>@Localizer["update_date"]</th>
+                                    <th>@Localizer["update_by"]</th>
+
+                                </tr>
+
+                            </thead>
+
+                        </table>
+                    </div>
+                    <div id="company" class="table-responsive mb-4 mt-4">
+                        <table id="tbSearchResult" class="table table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>@Localizer["company_id"]</th>
+                                    <th>@Localizer["company_code"]</th>
+                                    <th>@Localizer["company_name"]</th>
+                                    <th>@Localizer["company_name_th"]</th>
+                                    <th>@Localizer["company_name_en"]</th>
+                                    <th>@Localizer["company_alias"]</th>
+                                    <th>@Localizer["distribution_channel"]</th>
+                                    <th>@Localizer["channel_sale_group"]</th>
+                                    <th>@Localizer["vendor_code"]</th>
+                                    <th>@Localizer["customer_code"]</th>
+                                    <th>@Localizer["area_id"]</th>
+                                    <th>@Localizer["tax_id"]</th>
+                                    <th>@Localizer["wt_name"]</th>
+                                    <th>@Localizer["vat_type"]</th>
+                                    <th>@Localizer["company_certified_file"]</th>
+                                    <th>@Localizer["commercial_registration_file"]</th>
+                                    <th>@Localizer["vat_registration_certificate_file"]</th>
+                                    <th>@Localizer["contract_agreement_file"]</th>
+                                    <th>@Localizer["deposit_authorization_level"]</th>
+                                    <th>@Localizer["deposit_payment_type"]</th>
+                                    <th>@Localizer["contract_start_date"]</th>
+                                    <th>@Localizer["contract_end_date"]</th>
+                                    <th>@Localizer["over_draft_deposit"]</th>
+                                    <th>@Localizer["balance_deposit"]</th>
+                                    <th>@Localizer["company_status"]</th>
+                                    <th>@Localizer["company_address"]</th>
+                                    <th>@Localizer["vat_address"]</th>
+                                    <th>@Localizer["create_by"]</th>
+                                    <th>@Localizer["create_date"]</th>
+                                    <th>@Localizer["update_by"]</th>
+                                    <th>@Localizer["update_date"]</th>
+                                    <th>@Localizer["company_email"]</th>
+                                    <th>@Localizer["contract_name"]</th>
+                                    <th>@Localizer["contract_phone"]</th>
+                                    <th>@Localizer["contract_email"]</th>
+                                    <th>@Localizer["bank_code"]</th>
+                                    <th>@Localizer["bank_name"]</th>
+                                    <th>@Localizer["account_number"]</th>
+                                    <th>@Localizer["account_name"]</th>
+                                    <th>@Localizer["attach_file"]</th>
+                                    <th>@Localizer["branch_code"]</th>
+                                    <th>@Localizer["branch_name"]</th>
+                                    <th>@Localizer["dept_of_install_name"]</th>
+                                    <th>@Localizer["dept_of_mainten_name"]</th>
+                                    <th>@Localizer["dept_of_account_name"]</th>
+                                    <th>@Localizer["dept_of_install_phone"]</th>
+                                    <th>@Localizer["dept_of_mainten_phone"]</th>
+                                    <th>@Localizer["dept_of_account_phone"]</th>
+                                    <th>@Localizer["dept_of_install_email"]</th>
+                                    <th>@Localizer["dept_of_mainten_email"]</th>
+                                    <th>@Localizer["dept_of_account_email"]</th>
+                                    <th>@Localizer["location_code"]</th>
+                                    <th>@Localizer["location_name_th"]</th>
+                                    <th>@Localizer["location_name_en"]</th>
+                                    <th>@Localizer["bank_account_type_id"]</th>
+                                    <th>@Localizer["subcontract_profile_type"]</th>
+                                    <th>@Localizer["company_title_th_id"]</th>
+                                    <th>@Localizer["company_title_en_id"]</th>
+                                    <th>@Localizer["status"]</th>
+                                    <th>@Localizer["activate_date"]</th>
+                                    <th>@Localizer["register_date"]</th>
+                                    <th>@Localizer["remark_for_sub"]</th>
+                                    <th>@Localizer["verified_date"]</th>
+                                    <th>@Localizer["Remark"]</th>
+
+                                </tr>
+
+                            </thead>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+
+    <script type="text/javascript">
+                        var oTable;
+                        var oTableEngineer;
+                     
+
+                        $(document).ready(function () {
+
+                            hideAll();
+
+                        });
+
+        function hideAll() {
+            $("#team").hide();
+            $("#engineer").hide();
+            $("#location").hide();
+            $("#personal").hide();
+            $("#company").hide();
+        }
+        function chkchangetable() {
+            var  d  = $("#inputmasterdata").val();
+            if (d == "Team") {
+                $("#team").show();
+                $("#engineer").hide();
+                $("#location").hide();
+                $("#personal").hide();
+                $("#company").hide();
+            }
+            if (d == "Engineer") {
+                $("#team").hide();
+                $("#engineer").show();
+                $("#location").hide();
+                $("#personal").hide();
+                $("#company").hide();
+            }
+            if (d == "Location") {
+                $("#team").hide();
+                $("#engineer").hide();
+                $("#location").show();
+                $("#personal").hide();
+                $("#company").hide();
+            }
+            if (d == "Personal") {
+                $("#team").hide();
+                $("#engineer").hide();
+                $("#location").hide();
+                $("#personal").show();
+                $("#company").hide();
+            }
+            if (d == "Company") {
+                $("#team").hide();
+                $("#engineer").hide();
+                $("#location").hide();
+                $("#personal").hide();
+                $("#company").show();
+            }
+
+        }
+    </script>
+
+}
+
