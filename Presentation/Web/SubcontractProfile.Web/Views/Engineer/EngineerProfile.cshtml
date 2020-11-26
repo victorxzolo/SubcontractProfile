@@ -40,7 +40,9 @@
 
                     <div class="form-group col-md-6">
                         <label for="inputPosition">@Localizer["Postion"]</label>
-                        <input type="text" class="form-control" id="inputPosition" placeholder="ตำแหน่ง">
+                        @*<input type="text" class="form-control" id="inputPosition" placeholder="ตำแหน่ง">*@
+                        <select id="inputPosition" name="inputPosition" class="form-control">
+                        </select>
                     </div>
 
 
@@ -960,11 +962,11 @@
             });
 
             $('#CitizenID').keyup(function () {
-                CheckKeyUps("CitizenID", "[0-9]"); 
+                CheckKeyUps("CitizenID", "[0-9]");
             });
 
             $('#CitizenID2').keyup(function () {
-                CheckKeyUps("CitizenID2", "[0-9]"); 
+                CheckKeyUps("CitizenID2", "[0-9]");
             });
 
 
@@ -1086,7 +1088,7 @@
                                d.teamId = $("select[id$=ddlTeamName]").val(),
                                d.staffName = $("#inputStaffName").val(),
                                d.teamCitizen = $("#inputCitizen").val(),
-                               d.position = $("#inputPosition").val()
+                                   d.position = $("#inputPosition option").filter(':selected').val()
 
 
                         }
@@ -1206,13 +1208,24 @@
 
                 $("#Position").empty();
                 $("#Position").append('<option value="-1">--@Localizer["ddlPleaseSelect"]--</option>');
+
+                $("#inputPosition").empty();
+                $("#inputPosition").append('<option value="-1">--@Localizer["ddlPleaseSelect"]--</option>');
+
                 $.each(data, function (id, result) {
                     $("#Position").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text +'</option>');
-                    });
+              
+
+                $("#inputPosition").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text + '</option>');
+                 });
+
                 },
                 failure: function () {
                     $("#Position").empty();
                     $("#Position").append('<option value="-1">--@Localizer["ddlPleaseSelect"]--</option>');
+
+                    $("#inputPosition").empty();
+                    $("#inputPosition").append('<option value="-1">--@Localizer["ddlPleaseSelect"]--</option>');
                 }
             });
         }
@@ -1283,7 +1296,7 @@
                           $('#VehicleBrand').val(result.VehicleBrand).change();
                           $('#VehicleBrand').trigger('change');
 
-                       
+
 
                           $('#VehicleColor').val(result.VehicleColor);
                           $('#VehicleYear').val(result.VehicleYear);

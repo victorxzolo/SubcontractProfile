@@ -154,7 +154,7 @@ namespace SubcontractProfile.Web.Controllers
                 teamCitizen = "null";
             }
 
-            if (position == null)
+            if (position == null || position=="-1")
             {
                 position = "null";
             }

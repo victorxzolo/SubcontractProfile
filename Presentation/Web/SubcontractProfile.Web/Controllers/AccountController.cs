@@ -389,7 +389,7 @@ namespace SubcontractProfile.Web.Controllers
         #region Register
         public IActionResult Register(string language = "th")
         {
-            SetLanguage("th");
+            //SetLanguage("th");
 
             ViewData["Controller"] = _localizer["Register"];
             ViewData["View"] = _localizer["Register"];
