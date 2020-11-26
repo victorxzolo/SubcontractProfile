@@ -510,7 +510,7 @@ function GetIdpayment(paymentId, status) {
 function DownloadFileSlip(filename) {
     var urlDownloadfileConfirm = url.replace('Action', 'DownloadfileConfirm');
 
-    $('#linkdownload').attr("href", urlDownloadfileConfirm+'?paymentid=' + $('#hdpaymentId').val() + '&&filename=' + filename);
+    $('#linkdownload').attr("href", urlDownloadfileConfirm + '?paymentid=' + $('#hdpaymentId').val() + '&&filename=' + filename + '&&companyId=' + $('#hdcompanyId').val());
 
 }
 
@@ -531,6 +531,9 @@ function SetTextStatusN(data) {
 
     //$("#Request_no").text(data.Request_no);
     //$("#Payment_no").text(data.PaymentNo);
+
+    $('#hdcompanyId').val(data.CompanyId);
+
     $("#Company_name").text(data.companyNameTh);
     $("#address").text(data.companyAddress);
     $("#Tax_id").text(data.taxId);
@@ -599,6 +602,9 @@ function SetTextStatusY(data) {
 
     //$("#Request_no").text(data.Request_no);
     //$("#Payment_no").text(data.PaymentNo);
+
+    $('#hdcompanyId').val(data.CompanyId);
+
     $("#Company_name").text(data.companyNameTh);
     $("#address").text(data.companyAddress);
     $("#Tax_id").text(data.taxId);
