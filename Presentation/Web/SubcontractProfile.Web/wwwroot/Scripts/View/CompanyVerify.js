@@ -49,8 +49,12 @@ $(document).ready(function () {
     inittbAddressResultLocation();
 
     $(".ddlsearch").select2();
-    $('.ddlsearchengineer').select2();
-    $('.ddlsearchlocation').select2();
+    $('.ddlsearchengineer').select2({
+        dropdownParent: $('#dataEngineerModal .modal-content')
+    });
+    $('.ddlsearchlocation').select2({
+        dropdownParent: $('#dataLocationModal .modal-content')
+    });
 
     $('#contractstartdate').datetimepicker({
         format: "DD/MM/YYYY",   
