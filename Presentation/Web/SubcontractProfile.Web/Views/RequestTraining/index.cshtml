@@ -366,13 +366,17 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <button  id="btnClose" type="button" class="btn btn-danger" data-dismiss="modal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
                             @Localizer["Close"]
                         </button>
                         <button id="btnSave" type="submit" class="btn btn-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
                             @Localizer["Approve"]
+                        </button>
+                        <button id="btnNotApprove" type="button" onclick="onNotApprove();" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                            @Localizer["NotApprove"]
                         </button>
                     </div>
                 </form>
@@ -553,11 +557,13 @@
 
                                     } else {
                                         onSave();
+                                      
                                         event.preventDefault();
                                         event.stopPropagation();
                                     }
                                     form.classList.add('was-validated');
                                 }, false);
+
                             });
                         }, false);
 
@@ -575,7 +581,7 @@
 
             var sumTotalPrice = parseFloat(isNaN(totalPrice) ? "" : totalPrice);
             var intVat = vat7(sumTotalPrice);
-          
+
             var sumVatAmount = sumTotalPrice + parseFloat(intVat);
 
             var intTax = taxCalculate(sumTotalPrice);
@@ -601,7 +607,7 @@
 
             $('#lbltax').html(numberWithCommas(intTax));
             $('#lblTotalAmountBytax').html(numberWithCommas(totalTax));
-            
+
         }
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -634,14 +640,78 @@
                 function isNumberKey(evt) {
                     var charCode = (evt.which) ? evt.which : evt.keyCode
                     return !(charCode > 31 && (charCode < 48 || charCode > 57));
-                }
+        }
+
+
+           function onNotApprove() {
+
+
+                var engineerDefs = [];
+                var tEn = $('#tbSearchEngineer').dataTable();
+
+                $.each(tEn.fnGetNodes(), function (index, value) {
+
+                    var trainingEngineerId = tEn.fnGetData(index).TrainingEngineerId;
+                    var engineerId = tEn.fnGetData(index).EngineerId;
+                    var remark = $(value).find('#txtRemark').val();
+                    var price = $(value).find('#txtCoursePrice').val();
+                  
+                    if (price == "") {
+                        price = '0';
+                    }
+
+                    engineerDefs.push({
+                        'TrainingEngineerId': trainingEngineerId
+                        , 'TrainingId': $('#trnid').val()
+                        , 'EngineerId': engineerId
+                        , 'CoursePrice': price
+                        , 'Remark': remark
+                        , 'Status': status
+                    })
+
+                });
+
+                var trainingModel = new Object();
+                trainingModel.TrainingId = $('#trnid').val();
+                trainingModel.CompanyId = $('#compid').val();
+                trainingModel.BookingDateStr = $('#bookingDate').val();
+                trainingModel.RemarkForAis = $('#txtaisremark').val();
+                trainingModel.Course = $("select[id$=selCourse]").val();
+                trainingModel.Status = "N";
+                 $.ajax({
+                      url: '@Url.Action("onNotApprove", "RequestTraining")',
+                     type: 'POST',
+                     data: { 'model': trainingModel, 'engineerModel': engineerDefs},
+                                      dataType: "json",
+                                      success: function (result) {
+                                         console.log(result)
+                                         if (result != null) {
+
+                                             bootbox.alert(result.Message);
+
+                                             inittbSearchResult();
+
+                                         }
+                                         else {
+                                             bootbox.alert(result.Message);
+                                         }
+
+
+                                      },
+                                     error: function (result) {
+                                         bootbox.alert(result.Message);
+                                      }
+                                 });
+
+
+                        }
 
             function onSave() {
 
-                
+
                 var engineerDefs = [];
                 var tEn = $('#tbSearchEngineer').dataTable();
-                
+
                 $.each(tEn.fnGetNodes(), function (index, value) {
 
                     var trainingEngineerId = tEn.fnGetData(index).TrainingEngineerId;
@@ -651,7 +721,7 @@
                     if (price == "") {
                         price = '0';
                     }
-         
+
                     engineerDefs.push({
                         'TrainingEngineerId': trainingEngineerId
                         , 'TrainingId': $('#trnid').val()
@@ -668,7 +738,7 @@
                 trainingModel.BookingDateStr = $('#bookingDate').val();
                 trainingModel.RemarkForAis = $('#txtaisremark').val();
                 trainingModel.Course = $("select[id$=selCourse]").val();
-
+                trainingModel.Status = "A";
                  $.ajax({
                       url: '@Url.Action("onSave", "RequestTraining")',
                      type: 'POST',
@@ -913,6 +983,14 @@
 
                                          if (result != null) {
                                              console.log(result);
+
+                                             if (result.Status == "A" || result.Status == "T") {
+                                                 $('#btnSave').hide(); $('#btnNotApprove').hide(); $('#btnClose').show();
+                                             } else {
+                                                 $('#btnSave').show(); $('#btnNotApprove').show(); $('#btnClose').show();
+                                             }
+
+
                                              $('#lblcompname').html(result.CompanyNameTh);
                                              $('#lbltaxid').html(result.TaxId);
 
@@ -1055,7 +1133,7 @@
                                             var remark = "";
                                             if (data.Remark != null) {
                                                 remark = data.Remark;
-                                            } 
+                                            }
                                             var $text = $('<input id="txtRemark" class="form-control" style="width:100%"  value="' + remark + '" > </input>');
                                             return $text[0].outerHTML
 
@@ -1069,12 +1147,12 @@
                                 "stripeClasses": [],
                                 "initComplete": function (settings, json) {//here is the tricky part
                                     var count = $('#tbSearchEngineer tr').length - 1
-                            
+
 
                                     $('#rowCount').val(count);
                                     var count = $('#rowCount').val();
                                     var cost = $('#Coursecost').val();
-                              
+
                                     //var ttcost = calculateCost(cost, count);
 
 
@@ -1084,8 +1162,8 @@
                                     //$('#lblttcost').html(FormatNumber(ttcost));
                                     //$('#lblvat7').html(parseInt(incvat));
                                     //$('#lbltax').html(FormatNumber(intTax));
-                                    
-                                    
+
+
                                     //var _incvat = parseInt(incvat);
                                     //var _ttcost = parseFloat(ttcost);
                                     //var CoursetotalCost = _incvat + _ttcost;
@@ -1110,12 +1188,12 @@
 
         function onlyNumberKey(evt) {
 
-            // Only ASCII charactar in that range allowed 
+            // Only ASCII charactar in that range allowed
             var ASCIICode = (evt.which) ? evt.which : evt.keyCode
             if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
                 return false;
             return true;
-        } 
+        }
 
         function FormatNumber(number) {
             try {

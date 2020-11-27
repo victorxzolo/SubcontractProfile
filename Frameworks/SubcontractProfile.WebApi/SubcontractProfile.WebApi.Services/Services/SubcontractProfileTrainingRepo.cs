@@ -277,7 +277,7 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@modified_by", subcontractProfileTraining.ModifiedBy);
             p.Add("@booking_date", subcontractProfileTraining.BookingDateStr);
             p.Add("@remark_for_ais", subcontractProfileTraining.RemarkForAis);
-
+            p.Add("@status", subcontractProfileTraining.Status);
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTraining_updateByVerified", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
 
