@@ -195,6 +195,7 @@ namespace SubcontractProfile.Web.Controllers
 
                 if (responseResult.IsSuccessStatusCode)
                 {
+
                     result.Status = true;
                     result.Message = _localizer["MessageSaveSuccess"];
                     result.StatusError = "0";

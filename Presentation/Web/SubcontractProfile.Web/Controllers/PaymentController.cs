@@ -383,7 +383,7 @@ namespace SubcontractProfile.Web.Controllers
                     //data
                     paymentResult = JsonConvert.DeserializeObject<List<SubcontractProfilePaymentModel>>(result);
 
-                    paymentResult = paymentResult.Where(x => x.Status != "Waiting").ToList();
+                   // paymentResult = paymentResult.Where(x => x.Status != "Waiting").ToList();
 
                 }
 
@@ -572,7 +572,7 @@ namespace SubcontractProfile.Web.Controllers
                 {
 
 
-                    getList = output.Where(x => x.dropdown_value.ToUpper() != "W").Select(a => new SelectListItem
+                    getList = output.Select(a => new SelectListItem
                     {
                         Text = a.dropdown_text,
                         Value = a.dropdown_value
@@ -580,7 +580,7 @@ namespace SubcontractProfile.Web.Controllers
                 }
                 else
                 {
-                    getList = output.Where(x => x.dropdown_value.ToUpper() != "W").Select(a => new SelectListItem
+                    getList = output.Select(a => new SelectListItem
                     {
                         Text = a.dropdown_text,
                         Value = a.dropdown_value

@@ -435,6 +435,8 @@ function getDataById(id) {
             if (result != null) {
                 $('#hdpaymentId').val(id);
 
+                $('#hdCompanyId').val(result.CompanyId);
+
                 $("#lblcompanyName").text(result.companyNameTh);
                 //$('#lbpaymentno').text(result.PaymentNo);
                 $('#ddlpaymenttransfer').val(result.PaymentChannal);
@@ -543,7 +545,7 @@ function DownloadFileSlip(filename) {
     var urlDownloadfile = url.replace('Action', 'DownloadfileConfirm');
     // $('#ItemPreview').attr('src', '/Payment/DownloadCSV?paymentid=' + $('#hdpaymentId').val());
     
-    $('#linkdownload').attr("href", urlDownloadfile + '?paymentid=' + $('#hdpaymentId').val() + '&&filename=' + filename + '&&companyId=' + $('#hdpaymentId').val(););
+    $('#linkdownload').attr("href", urlDownloadfile + '?paymentid=' + $('#hdpaymentId').val() + '&&filename=' + filename + '&&companyId=' + $('#hdCompanyId').val());
 
 }
 

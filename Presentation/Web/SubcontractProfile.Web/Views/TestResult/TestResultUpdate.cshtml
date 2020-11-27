@@ -218,12 +218,12 @@
                                             <th width="0%"></th>
                                             <th width="0%"></th>
                                             <th width="0%"></th>
-                                            <th width="15%">@Localizer["LocationName"]</th>
-                                            <th width="15%">@Localizer["TeamName"]</th>
-                                            <th width="15%">@Localizer["Engineer"]</th>
-                                            <th width="15%">@Localizer["TestStatus"]</th>
+                                            @*<th width="15%">@Localizer["LocationName"]</th>
+                                            <th width="15%">@Localizer["TeamName"]</th>*@
+                                            <th width="30%">@Localizer["Engineer"]</th>
+                                            <th width="20%">@Localizer["TestStatus"]</th>
                                             <th width="20%">@Localizer["TestReason"]</th>
-                                            <th width="20%">@Localizer["TestRemark"]</th>
+                                            <th width="30%">@Localizer["TestRemark"]</th>
                                             @*<th width="15%">Remark</th>*@
 
                                         </tr>
@@ -632,9 +632,9 @@
                 var locationId = tEn.fnGetData(index).LocationId;
                 var teamId = tEn.fnGetData(index).TeamId;
                 var engineerId = tEn.fnGetData(index).EngineerId;
-                var status = $(value).find('#ddlAnswer').val();
-                var reason = $(value).find('#ddlReason').val();
-                var remark = $(value).find('#txtRemark').val()
+                var status = $(value).find('#ddlAnswer option').filter(':selected').val();
+                var reason = $(value).find('#ddlReason option').filter(':selected').val();
+                var remark = $(value).find('#txtRemarkEn').val()
 
 
                 var engineer = new Object();
@@ -768,8 +768,8 @@
                                     { data: "LocationId", "visible": false },
                                     { data: "TeamId", "visible": false },
                                     { data: "EngineerId", "visible": false },
-                                    { data: "LocationNameTh"},
-                                    { data: "TeamNameTh"},
+                                    //{ data: "LocationNameTh"},
+                                    //{ data: "TeamNameTh"},
                                     { data: "StaffNameTh" },
                                     {
                                         data: null, orderable: false, render: function (data, type, row) {
@@ -816,7 +816,7 @@
                                     {
                                         data: null, orderable: false, render: function (data, type, row) {
                                             var remark = data.TestRemark == null ? '' : data.TestRemark;
-                                            var $select = $('<textarea id="txtRemark" class="form-control" rows="2">' + remark +'  </textarea>');
+                                            var $select = $('<textarea id="txtRemarkEn" class="form-control" rows="2">' + remark +'  </textarea>');
                                             return $select[0].outerHTML
 
                                         }

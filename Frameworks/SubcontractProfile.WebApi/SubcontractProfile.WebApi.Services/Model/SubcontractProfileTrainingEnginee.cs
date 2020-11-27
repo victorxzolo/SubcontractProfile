@@ -71,6 +71,8 @@ namespace SubcontractProfile.WebApi.Services.Model
 
         public string Remark { get; set; }
 
+        public string test_reason_text { get; set; }
+
         public object Clone()
         {
             return this.MemberwiseClone();

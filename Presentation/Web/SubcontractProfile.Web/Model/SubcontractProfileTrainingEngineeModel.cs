@@ -58,5 +58,7 @@ namespace SubcontractProfile.Web.Model
 
         public string Remark { get; set; }
 
+        public string test_reason_text { get; set; }
+
     }
 }
