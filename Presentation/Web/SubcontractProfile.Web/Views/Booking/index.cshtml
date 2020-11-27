@@ -272,8 +272,8 @@
                                     <thead>
                                         <tr>
 
-                                            <th>@Localizer["LocationName"]</th>
-                                            <th>@Localizer["TeamName"]</th>
+                                          @*//  <th>@Localizer["LocationName"]</th>
+                                          //  <th>@Localizer["TeamName"]</th>*@
                                             <th>@Localizer["Engineer"]</th>
                                             <th>@Localizer["Position"]</th>
                                             <th>@Localizer["ContactPhone"]</th>
@@ -1010,8 +1010,8 @@
                                 },
                                 columns: [
 
-                                    { data: "LocationNameTh"},
-                                    { data: "TeamNameTh" },
+                                 //   { data: "LocationNameTh"},
+                                  //  { data: "TeamNameTh" },
                                     { data: "StaffNameTh" },
                                     { data: "Position" },
                                     { data: "ContractPhone1" },
@@ -1065,7 +1065,7 @@
                                     var intTax = 0;
                                     intTax = totalcost * (3 / 100);
                                     var totalTax = 0;
-                                    var totalTax = parseFloat(totalcost) + parseFloat(intTax);
+                                    var totalTax = parseFloat(ttcost) + parseFloat(intTax);
                                    // alert(CoursetotalCost);
                                    // alert(intTax);
                                     $('#lblvat7').html(parseInt(incvat));
