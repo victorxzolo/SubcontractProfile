@@ -121,7 +121,7 @@
     <value>Action</value>
   </data>
   <data name="Approve" xml:space="preserve">
-    <value>แจ้งค่าอบรม</value>
+    <value>อนุมัติ</value>
   </data>
   <data name="Booking" xml:space="preserve">
     <value>Booking</value>
@@ -176,6 +176,9 @@
   </data>
   <data name="NetTax" xml:space="preserve">
     <value>ยอดชำระ(บาท)</value>
+  </data>
+  <data name="NotApprove" xml:space="preserve">
+    <value>ไม่อนุมัติ</value>
   </data>
   <data name="NumberOfTrainees" xml:space="preserve">
     <value>จำนวนผู้อบรม</value>

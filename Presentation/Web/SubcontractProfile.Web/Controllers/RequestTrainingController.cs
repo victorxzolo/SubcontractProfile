@@ -416,7 +416,89 @@ namespace SubcontractProfile.Web.Controllers
             return Json(result);
         }
 
-     
+
+        public ActionResult onNotApprove(SubcontractProfileTrainingRequestModel model
+          , List<SubcontractProfileTrainingEngineerModel> engineerModel)
+        {
+            ResponseModel result = new ResponseModel();
+            SubcontractProfileTrainingEngineerModel _engineerModel;
+            try
+            {
+
+                HttpClient clientRequest = new HttpClient();
+                var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userAISLogin");
+                if (!string.IsNullOrEmpty(model.BookingDateStr))
+                {
+                    model.BookingDateStr = ConvertToDateTimeYYYYMMDD(model.BookingDateStr);
+                }
+
+                var uri = new Uri(Path.Combine(strpathAPI, "Training", "UpdateByVerified"));
+
+                clientRequest.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+                var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                HttpResponseMessage responseResult = clientRequest.PutAsync(uri, httpContent).Result;
+
+
+                if (responseResult.IsSuccessStatusCode)
+                {
+                    //insert engineer
+                    if (engineerModel != null)
+                    {
+                        if (engineerModel.Count > 0)
+                        {
+                            HttpClient client = new HttpClient();
+                            foreach (var engineer in engineerModel)
+                            {
+                                //_engineerModel = new SubcontractProfileTrainingEngineerModel();
+                                //_engineerModel.TrainingEngineerId = engineer.TrainingEngineerId;
+                                //_engineerModel.TrainingId = engineer.TrainingId;
+                                //_engineerModel.EngineerId = engineer.EngineerId;
+                                //_engineerModel.UpdateBy = userProfile.Username;
+                                //_engineerModel.TestStatus = "N";
+                                //_engineerModel.CoursePrice = engineer.CoursePrice;
+                                engineer.UpdateBy = userProfile.Username;
+                                engineer.TestStatus = "N";
+
+                                var uriengineer = new Uri(Path.Combine(strpathAPI, "TrainingEngineer", "Update"));
+
+                                client.DefaultRequestHeaders.Accept.Add(
+                                new MediaTypeWithQualityHeaderValue("application/json"));
+                                var httpContenten = new StringContent(JsonConvert.SerializeObject(engineer), Encoding.UTF8, "application/json");
+                                HttpResponseMessage responseEn = client.PutAsync(uriengineer, httpContenten).Result;
+
+                                if (responseEn.IsSuccessStatusCode)
+                                {
+
+                                }
+
+                            }
+                        }
+                    }
+
+                    result.Status = true;
+                    result.Message = _localizer["MessageSaveSuccess"];
+                    result.StatusError = "0";
+                }
+                else
+                {
+                    result.Status = false;
+                    result.Message = _localizer["MessageUnSuccess"];
+                    result.StatusError = "-1";
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                result.Status = false;
+                result.Message = "Fail" + ex.Message;
+                result.StatusError = "-1";
+
+            }
+            return Json(result);
+        }
+
 
         public JsonResult GetTraining(string TrainingID)
         {

@@ -177,6 +177,9 @@
   <data name="NetTax" xml:space="preserve">
     <value>Payment amount</value>
   </data>
+  <data name="NotApprove" xml:space="preserve">
+    <value>NotApprove</value>
+  </data>
   <data name="NumberOfTrainees" xml:space="preserve">
     <value>Number Of Trainees</value>
   </data>
