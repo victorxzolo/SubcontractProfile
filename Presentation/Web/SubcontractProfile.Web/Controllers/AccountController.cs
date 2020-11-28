@@ -192,7 +192,119 @@ namespace SubcontractProfile.Web.Controllers
             //var culture = requestCultureFeature.RequestCulture.UICulture;
 
 
+
+            //string rr = MoveFileToNAS();
+           // ViewBag.messMove = rr;
+
             return View();
+        }
+
+        private string MoveFileToNAS()
+        {
+            string vv = "";
+            try
+            {
+                if (Directory.Exists(Path.Combine(strpathUpload)))
+                {
+                    DirectoryInfo dirI = new DirectoryInfo(strpathUpload);
+                    DirectoryInfo[] dirs = dirI.GetDirectories();
+                    string[] files = Directory.GetFiles(strpathUpload);
+                    Int32 i = dirs.Count() + files.Count();
+                    if (i>0)
+                    {
+                        #region NAS 
+
+                        var outputNAS = new List<SubcontractDropdownModel>();
+                        HttpClient client = new HttpClient();
+                        client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+
+                        string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/nas_subcontract");
+                        HttpResponseMessage response = client.GetAsync(uriString).Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var v = response.Content.ReadAsStringAsync().Result;
+                            outputNAS = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+                        }
+                        string username = outputNAS[0].value1;
+                        string password = outputNAS[0].value2;
+                        string ipAddress = @"\\" + outputNAS[0].dropdown_value;
+                        string destNAS = outputNAS[0].dropdown_text;
+                        NetworkCredential sourceCredentials = new NetworkCredential { Domain = ipAddress, UserName = username, Password = password };
+
+                        using (new NetworkConnection(destNAS, sourceCredentials))
+                        {
+                        string strdir = Path.Combine(destNAS + @"\SubContractProfile\");
+
+                            
+
+                            foreach (DirectoryInfo subdir in dirs)
+                            {
+                                string temppath = Path.Combine(strdir, subdir.Name);
+                                DirectoryInfo temppathDir = new DirectoryInfo(temppath);
+                                //if(!Directory.Exists(Path.Combine(temppath, subdir.Name)))
+                                //{
+                                    vv= CopyAll(subdir, temppathDir);
+                                //}
+                               
+                                //DeleteFile(subdir);
+                            }
+                        }
+
+                        #endregion
+                    }
+
+                    
+                }
+            }
+            catch (Exception w)
+            {
+                vv = w.Message;
+                throw;
+            }
+            return vv;
+        }
+        public string CopyAll(DirectoryInfo source, DirectoryInfo target)
+        {
+            string result = "";
+            try
+            {
+                Directory.CreateDirectory(target.FullName);
+
+                // Copy each file into the new directory.
+                foreach (FileInfo fi in source.GetFiles())
+                {
+                    fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                }
+
+                // Copy each subdirectory using recursion.
+                foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
+                {
+                    DirectoryInfo nextTargetSubDir =
+                        target.CreateSubdirectory(diSourceSubDir.Name);
+                    CopyAll(diSourceSubDir, nextTargetSubDir);
+                }
+            }
+            catch (Exception e)
+            {
+                result = e.Message;
+                throw;
+            }
+            return result;
+
+        }
+
+        public void DeleteFile(DirectoryInfo directory)
+        {
+            foreach (FileInfo file in directory.GetFiles())
+            {
+                file.Delete();
+            }
+
+            foreach (DirectoryInfo dir in directory.GetDirectories())
+            {
+                dir.Delete(true);
+            }
         }
 
         public List<string> GetScreenConfig(string page)
