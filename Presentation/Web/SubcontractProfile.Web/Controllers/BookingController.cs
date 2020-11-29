@@ -344,6 +344,7 @@ namespace SubcontractProfile.Web.Controllers
                 var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
 
                 model.BookingDateStr = ConvertToDateTimeYYYYMMDD(model.BookingDateStr);
+                model.Status = "A";
 
                 var uri = new Uri(Path.Combine(strpathAPI, "Training", "UpdateByVerified"));
 

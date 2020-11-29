@@ -1080,6 +1080,8 @@ namespace SubcontractProfile.Web.Controllers
 
                                     var uriengineer = new Uri(Path.Combine(strpathAPI, "TrainingEngineer", "Insert"));
 
+                                    //string rr = JsonConvert.SerializeObject(engineerModel);
+
                                     client.DefaultRequestHeaders.Accept.Add(
                                     new MediaTypeWithQualityHeaderValue("application/json"));
                                     var httpContenten = new StringContent(JsonConvert.SerializeObject(engineerModel), Encoding.UTF8, "application/json");
