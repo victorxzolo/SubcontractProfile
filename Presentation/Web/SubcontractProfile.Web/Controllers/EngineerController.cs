@@ -420,6 +420,8 @@ namespace SubcontractProfile.Web.Controllers
             try
             {
                 var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+                
+
 
                 //insert
                 if (model.EngineerId == Guid.Empty)
@@ -802,6 +804,51 @@ namespace SubcontractProfile.Web.Controllers
             }
 
             return Json(result);
+        }
+
+        [HttpPost]
+        public IActionResult CheckBlacklist(string id)
+        {
+            bool find = false;
+            string Message = "";
+            try
+            {
+                var result = new List<SubcontractProfileEngineerBlacklistModel>();
+
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var uriBackList = new Uri(Path.Combine(strpathAPI, "Engineer", "CheckBlacklist"));
+
+                SubcontractProfileEngineerBlacklistModel model = new SubcontractProfileEngineerBlacklistModel();
+                model.id_card = id;
+
+                var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = client.PostAsync(uriBackList, httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                    result = JsonConvert.DeserializeObject<List<SubcontractProfileEngineerBlacklistModel>>(resultAsysc);
+                }
+
+                if (result != null && result.Count>0)
+                {
+                    find = true;
+                    Message = _localizer["MessageBlacklist"];
+                }
+            }
+            catch (Exception e)
+            {
+                //find = true;
+                //Message = e.Message;
+                throw;
+            }
+            return Json(new
+            {
+                Status = find,
+                Message= Message
+            }); 
         }
 
         #region UploadFile

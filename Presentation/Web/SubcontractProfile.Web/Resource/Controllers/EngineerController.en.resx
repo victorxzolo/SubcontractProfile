@@ -120,6 +120,9 @@
   <data name="EngineerProfile" xml:space="preserve">
     <value>Engineer Profile</value>
   </data>
+  <data name="MessageBlacklist" xml:space="preserve">
+    <value>ID card number is on the black list.</value>
+  </data>
   <data name="MessageDeleteSuccess" xml:space="preserve">
     <value>Delete Data Success</value>
   </data>

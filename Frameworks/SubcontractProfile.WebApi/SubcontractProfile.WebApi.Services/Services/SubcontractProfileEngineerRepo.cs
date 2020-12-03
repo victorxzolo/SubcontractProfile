@@ -358,6 +358,16 @@ namespace SubcontractProfile.WebApi.Services.Services
 
             return entity;
         }
-        
+
+        public async Task<IEnumerable<SubcontractProfileEngineerBlacklist>> CheckBlacklist(string id_card)
+        {
+            var p = new DynamicParameters();
+            p.Add("@id_card", id_card);
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineerBlacklist>
+            ("uspSubcontractProfileEngineer_CheckBlacklist", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
     }
 }

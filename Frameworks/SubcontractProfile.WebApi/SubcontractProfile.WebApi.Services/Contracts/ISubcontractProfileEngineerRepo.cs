@@ -26,5 +26,6 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>> GetEngineerByTeam(System.Guid companyId, System.Guid locationId, System.Guid teamId);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>> GetEngineerByCompany(System.Guid companyId);
 
+        Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineerBlacklist>> CheckBlacklist(string id_card);
     }
 }

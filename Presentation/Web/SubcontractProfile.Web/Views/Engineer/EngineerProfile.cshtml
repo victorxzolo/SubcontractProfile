@@ -228,13 +228,13 @@
 
                                             </div>
                                             <div class="col-sm-2">
-                                                <label>@Localizer["IDCard"]</label>
+                                                <label><span style="color:red">*</span>@Localizer["IDCard"]</label>
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" id="CitizenID" maxlength="13" style="width:300px" class="form-control">
-                                                @*<div class="invalid-feedback">
-                                                    @Localizer["ErrorLocationName"]
-                                                </div>*@
+                                                <input type="text" id="CitizenID" maxlength="13" style="width:300px" class="form-control" required>
+                                                <div class="invalid-feedback">
+                                                    @Localizer["ErrorIDCard"]
+                                                </div>
                                             </div>
                                         </div>
                                         <br />
@@ -306,7 +306,7 @@
                                                 <label>@Localizer["Email"]:</label>
                                             </div>
                                             <div class="col-sm-10">
-                                                <input type="email" id="ContractEmail" maxlength="100" style="width:300px" class="form-control" required>
+                                                <input type="email" id="ContractEmail" maxlength="100" style="width:300px" class="form-control">
                                                 <div class="invalid-feedback">
                                                     @Localizer["ErrorEmail"]
                                                 </div>
@@ -1216,7 +1216,7 @@
 
                 $.each(data, function (id, result) {
                     $("#Position").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text +'</option>');
-              
+
 
                 $("#inputPosition").append('<option value="' + result.dropdown_value + '">' + result.dropdown_text + '</option>');
                  });
@@ -2069,15 +2069,36 @@ function GetDropDownLocationSearch() {
         }
 
         function Validateform() {
+            var resultBlacklist = CheckBlackList($('#CitizenID').val());
             var haserror = false;
 
             if ($('#Location option').filter(':selected').val() == '' || $('#Team option').filter(':selected').val() == '' ||
                 //$('#StaffName').val() == '' ||
                 $('#AccNo').val() == '' || $('#ddlBankName option').filter(':selected').val() == '' ||
-                $('#AccName').val()=='') {
+                $('#AccName').val() == '' || $('#CitizenID').val() == '') {
+
                 haserror = true;
             }
+            else if (resultBlacklist.Status) {
+                haserror = true;
+
+                bootbox.alert(resultBlacklist.Message);
+
+            }
             return haserror;
+        }
+
+
+
+        function CheckBlackList(idcard) {
+            var jqXHR = $.ajax({
+                type: 'POST',
+                async: false,
+                url: '@Url.Action("CheckBlacklist", "Engineer")',
+                dataType: 'json',
+                data: { id: idcard }
+            });
+            return jqXHR.responseJSON;
         }
     </script>
 }

@@ -149,6 +149,25 @@ namespace SubcontractProfile.WebApi.API.Controllers
         }
 
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileEngineer))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileEngineer))]
+        [HttpPost("CheckBlackList")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineerBlacklist>> CheckBlackList(SubcontractProfileEngineerBlacklist model)
+        {
+            _logger.LogInformation($"Start EngineerController::CheckBackList", model.id_card);
+
+            var entities = _service.CheckBlacklist(model.id_card);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"EngineerController::", "CheckBackList NOT FOUND", model.id_card);
+                return null;
+            }
+
+            return entities;
+
+        }
+
         #endregion
 
         #region POST

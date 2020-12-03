@@ -120,6 +120,9 @@
   <data name="EngineerProfile" xml:space="preserve">
     <value>ข้อมูลวิศวกร</value>
   </data>
+  <data name="MessageBlacklist" xml:space="preserve">
+    <value>เลขบัตรประชาชนนี้อยู่ในรายชื่อ Blacklist </value>
+  </data>
   <data name="MessageDeleteSuccess" xml:space="preserve">
     <value>ลบข้อมูลเรียบร้อย</value>
   </data>
