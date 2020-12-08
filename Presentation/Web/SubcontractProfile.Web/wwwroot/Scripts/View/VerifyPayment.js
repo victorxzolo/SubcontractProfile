@@ -96,6 +96,51 @@ $(document).ready(function () {
             close: 'fa fa-time'
         }
     });
+
+    var urlUploadFile = url.replace('Action', 'UploadMulti');
+    $(".file-loading input").fileinput({
+        language: 'th',
+        theme: 'fa',
+        allowedFileExtensions: ['jpg', 'jpeg', 'bmp', 'gif', 'tif', 'tiff', 'png', 'pdf'],
+        maxFileCount: localizedData.ConfigUpload,
+        uploadUrl: urlUploadFile,
+        uploadAsync: false,
+        overwriteInitial: false,
+        showRemove: false,
+        showUpload: false,
+        initialPreviewAsData: true,
+        uploadExtraData: function (previewId, index) {
+            var input = document.getElementById('input-700');
+            var files = input.files[index];
+            var formData = new FormData();
+            formData.append("files", files);
+            return {
+                files: files,
+                companyid: $('#hdcompanyId').val(),
+                paymentid: $('#hdpaymentId').val()
+            };
+
+        },
+    }).on('fileuploaded', function (event, data, previewId, index) {
+        var form = data.form
+        var files = data.files
+        var extra = data.extra
+        var response = data.response
+        var reader = data.reader;
+        console.log(data);
+
+    }).on('filebatchuploaderror', function (event, data, previewId, index) {
+        var form = data.form, files = data.files, extra = data.extra,
+            response = data.response, reader = data.reader;
+        console.log('File error ' + data.response.Message);
+    }).on('filepreremove', function (event, key, jqXHR, data) {
+        console.log(event);
+        console.log(key);
+        console.log(jqXHR);
+        console.log(data);
+    });
+
+
     $('#txttaxid').keyup(function () {
         CheckKeyUps("txttaxid", "[0-9]");
     });
@@ -435,14 +480,14 @@ function getDataById(id) {
             if (result != null) {
                 $('#hdpaymentId').val(id);
 
-                $('#hdCompanyId').val(result.CompanyId);
+                $('#hdCompanyId').val(result.Payment.CompanyId);
 
-                $("#lblcompanyName").text(result.companyNameTh);
+                $("#lblcompanyName").text(result.Payment.companyNameTh);
                 //$('#lbpaymentno').text(result.PaymentNo);
-                $('#ddlpaymenttransfer').val(result.PaymentChannal);
+                $('#ddlpaymenttransfer').val(result.Payment.PaymentChannal);
 
-                if (result.PaymentDatetime != null) {
-                    var d = new Date(result.PaymentDatetime);
+                if (result.Payment.PaymentDatetime != null) {
+                    var d = new Date(result.Payment.PaymentDatetime);
                     var month = d.getMonth();
                     var day = d.getDate();
                     var year = d.getFullYear();
@@ -455,25 +500,30 @@ function getDataById(id) {
                 }
            
 
-                $('#txtBalance').val(result.AmountTransfer);
-                $('#ddlbank').val(result.BankTransfer);
-                $('#txtbranch').val(result.BankBranch);
+                $('#txtBalance').val(result.Payment.AmountTransfer);
+                $('#ddlbank').val(result.Payment.BankTransfer);
+                $('#txtbranch').val(result.Payment.BankBranch);
 
-                if (result.SlipAttachFile != null) {
-                    $('#lbuploadslip').html(result.SlipAttachFile);
-                    $('#hdupfiletransfer').val(result.file_id_Slip);
-                    $('#linkdownload').text(result.SlipAttachFile);
-                    DownloadFileSlip(result.SlipAttachFile);
-                }
-                $('#txtremark').val(result.Remark);
+                //if (result.SlipAttachFile != null) {
+                //    $('#lbuploadslip').html(result.SlipAttachFile);
+                //    $('#hdupfiletransfer').val(result.file_id_Slip);
+                //    $('#linkdownload').text(result.SlipAttachFile);
+                //    DownloadFileSlip(result.SlipAttachFile);
+                //}
+                $('#txtremark').val(result.Payment.Remark);
 
-                var channel = result.PaymentChannal
+                var channel = result.Payment.PaymentChannal
                 if (result.transfer_to_account != null) {
                     $('.rdbank_payment input[name=optionsRadios]').each(function (i) {
                         if (result.transfer_to_account == $(this).val()) {
                             $(this).prop('checked', true);
                         }
                     });
+                }
+
+                console.log(result.FileInput);
+                if (result.FileInput != null) {
+                    $(".file-loading input").fileinput(result.FileInput);
                 }
               
             }

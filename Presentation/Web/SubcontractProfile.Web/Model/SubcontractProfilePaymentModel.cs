@@ -103,10 +103,86 @@ namespace SubcontractProfile.Web.Model
         public Guid file_id_Slip { get; set; }
 
         public string TotalPrice { get; set; }
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
+
+       
+
+    }
+
+    public class SubcontractProfilePaymentSendDataModel
+    {
+        public string PaymentId { get; set; }
+
+        public string PaymentNo { get; set; }
+
+        public string PaymentChannal { get; set; }
+
+        public System.DateTime? PaymentDatetime { get; set; }
+
+        public decimal AmountTransfer { get; set; }
+
+        public string BankTransfer { get; set; }
+
+        public string BankBranch { get; set; }
+        public string SlipAttachFile { get; set; }
+        public string ContactName { get; set; }
+        public string ContactPhoneNo { get; set; }
+
+        public string ContactEmail { get; set; }
+
+        public string Remark { get; set; }
+
+        public string Status { get; set; }
+
+        public System.DateTime? CreateDate { get; set; }
+
+        public string CreateBy { get; set; }
+
+        public string ModifiedBy { get; set; }
+
+        public System.DateTime? ModifiedDate { get; set; }
+
+        public System.Guid TrainingId { get; set; }
+
+        public System.Guid? CompanyId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string Request_no { get; set; }
+
+        public System.DateTime? RequestDate { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(500)]
+        public string companyNameTh { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string taxId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(5000)]
+        public string companyAddress { get; set; }
+
+        public List<IFormFile> FileSilp { get; set; }
+
+        public DateTime? verifiedDate { get; set; }
+
+        [System.ComponentModel.DataAnnotations.StringLength(5000)]
+        public string remarkForSub { get; set; }
+
+        public string? transfer_to_account { get; set; }
+
+        public System.DateTime? RequestDateFrom { get; set; }
+
+        public System.DateTime? RequestDateTo { get; set; }
+        public System.DateTime? PaymentDatetimeFrom { get; set; }
+        public System.DateTime? PaymentDatetimeTo { get; set; }
+
+        public string? datetimepayment { get; set; }
+
+
+        public Guid file_id_Slip { get; set; }
+
+        public string TotalPrice { get; set; }
+
+
+
     }
 
     public class SubcontractProfilePaymentViewModel

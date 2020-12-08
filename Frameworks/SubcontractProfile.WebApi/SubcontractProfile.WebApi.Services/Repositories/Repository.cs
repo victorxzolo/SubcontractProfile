@@ -54,6 +54,7 @@ namespace Repository
 
         SubcontractProfile.WebApi.Services.Contracts.ISubcontractDropdownRepo SubcontractDropdownRepo { get; }
 
+        SubcontractProfile.WebApi.Services.Contracts.ISubcontractProfileFileRepo SubcontractProfileFileRepo { get; }
     }
 
 
@@ -364,6 +365,16 @@ namespace Repository
             }
         }
 
+        protected SubcontractProfile.WebApi.Services.Contracts.ISubcontractProfileFileRepo _subcontractprofileFileRepo;
+        public SubcontractProfile.WebApi.Services.Contracts.ISubcontractProfileFileRepo SubcontractProfileFileRepo
+        {
+            get
+            {
+                if (_subcontractprofileFileRepo == null)
+                    _subcontractprofileFileRepo = new SubcontractProfile.WebApi.Services.Services.SubcontractProfileFileRepo(this);
+                return _subcontractprofileFileRepo;
+            }
+        }
 
         /// <summary>
         /// Main constructor, inject standard config : Default connection string

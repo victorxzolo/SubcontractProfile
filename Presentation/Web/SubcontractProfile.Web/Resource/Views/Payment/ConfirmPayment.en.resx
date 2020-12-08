@@ -192,6 +192,9 @@
   <data name="ErrorTransferAmount" xml:space="preserve">
     <value>Please fill Transfer Amount.</value>
   </data>
+  <data name="ForAISStaff" xml:space="preserve">
+    <value>For Staff AIS</value>
+  </data>
   <data name="MobileNo" xml:space="preserve">
     <value>Tel</value>
   </data>
@@ -257,5 +260,8 @@
   </data>
   <data name="TransferAmount" xml:space="preserve">
     <value>Transfer Amount (B)</value>
+  </data>
+  <data name="VerifyDate" xml:space="preserve">
+    <value>Verify Date</value>
   </data>
 </root>

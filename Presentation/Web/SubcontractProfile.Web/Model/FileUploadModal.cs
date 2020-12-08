@@ -19,5 +19,7 @@ namespace SubcontractProfile.Web.Model
 
         public string CompanyId { get; set; }
 
+        public IFormFile FileuploadFormFile { get; set; }
+
     }
 }

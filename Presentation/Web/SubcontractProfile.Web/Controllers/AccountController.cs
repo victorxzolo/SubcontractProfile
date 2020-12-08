@@ -2099,24 +2099,6 @@ namespace SubcontractProfile.Web.Controllers
 
         #region Upload File
 
-        //[HttpPost]
-        //public IActionResult TestNAS()
-        //{
-        //    string str = "";
-        //    try
-        //    {
-        //        using (var impersonator = new Impersonator("nas_fixedbb", "Ais2018fixedbb", "\\10.137.32.9", false))
-        //        {
-        //            str = "Connect";
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        str = e.Message;
-        //    }
-        //    return Json(str);
-        //}
-
 
         //[HttpPost]
         //[DisableRequestSizeLimit]

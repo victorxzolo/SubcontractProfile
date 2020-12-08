@@ -5,7 +5,15 @@
     ViewData["Title"] = "VerifyPayment";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+<link href="~/bootstrap-fileinput/css/fileinput.css" rel="stylesheet" />
 
+<script src="~/bootstrap-fileinput/js/plugins/piexif.min.js" type="text/javascript"></script>
+<script src="~/bootstrap-fileinput/js/plugins/sortable.min.js" type="text/javascript"></script>
+
+<script src="~/bootstrap-fileinput/js/fileinput.min.js"></script>
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/fileinput.min.js"></script>*@
+<script src="~/bootstrap-fileinput/themes/fa/theme.js"></script>
+<script src="~/bootstrap-fileinput/js/locales/th.js"></script>
 <div id="pageID" style="display:none;">VerfifiedPayment</div>
 
 <div id="controllername" data-url="@Url.Action("Action", "Payment")"></div>
@@ -22,7 +30,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="txttaxid">@Localizer["TaxID"]</label>
-                        <input type="text" class="form-control" id="txttaxid" maxlength="13"/>
+                        <input type="text" class="form-control" id="txttaxid" maxlength="13" />
                     </div>
                     @*<div class="form-group col-md-6">
                             <label for="txttaxid">Location Name</label>
@@ -219,17 +227,19 @@
                                 <label>@Localizer["TheTransferSlip"] </label>  <span style="color:red">*</span>
                             </div>
                             <div class="col-sm-7">
-                                <input type="hidden" id="hdupfiletransfer" />
-                                <input type="file" class="custom-file-input inputValidation" id="transfer_file"
-                                       accept="image/jpeg,image/gif,image/png,application/pdf" disabled />
-                                <label class="custom-file-label" for="customFile" id="lbuploadslip">@Localizer["ChooseFile"]</label>
+                                @*<input type="hidden" id="hdupfiletransfer" />
+                                    <input type="file" class="custom-file-input inputValidation" id="transfer_file"
+                                           accept="image/jpeg,image/gif,image/png,application/pdf" disabled />
+                                    <label class="custom-file-label" for="customFile" id="lbuploadslip">@Localizer["ChooseFile"]</label>
 
-                                <div id="targetDiv">
-                                    @*<img id="ItemPreview" src="" class="img-thumbnail" style="width: 300px; height: 300px;"/>*@
-                                    <a id="linkdownload" href="#" target="_blank"></a>
+                                    <div id="targetDiv">
+
+                                        <a id="linkdownload" href="#" target="_blank"></a>
+                                    </div>*@
+
+                                <div class="file-loading">
+                                    <input id="input-700" name="kartik-input-700[]" type="file" accept="image/jpeg,image/png,application/pdf" multiple>
                                 </div>
-
-
                                 <small id="uploadlHelp1" class="form-text text-muted">
                                     @Localizer["ChooseFileSupportFileType"]
                                 </small>

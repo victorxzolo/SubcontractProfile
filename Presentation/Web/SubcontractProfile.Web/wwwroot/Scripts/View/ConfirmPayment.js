@@ -111,6 +111,48 @@ $(document).ready(function () {
         }
     });
 
+    var urlUploadFile = url.replace('Action', 'UploadMulti');
+
+    $(".file-loading input").fileinput({
+        language: 'th',
+        theme: 'fa',
+        allowedFileExtensions: ['jpg', 'jpeg', 'bmp', 'gif', 'tif', 'tiff', 'png', 'pdf'],
+        maxFileCount: localizedData.ConfigUpload,
+        uploadUrl: urlUploadFile,
+        uploadAsync: false,
+        overwriteInitial: false,
+        showUpload: false,
+        initialPreviewAsData: true,
+        uploadExtraData: function (previewId, index) {
+            var input = document.getElementById('input-700');
+            var files = input.files[index];
+            var formData = new FormData();
+            formData.append("files", files);
+            return {
+                files: files,
+                companyid: $('#hdcompanyId').val(),
+                paymentid: $('#hdpaymentId').val()
+            };
+
+        },
+    }).on('fileuploaded', function (event, data, previewId, index) {
+        var form = data.form
+        var files = data.files
+        var extra = data.extra
+        var response = data.response
+        var reader = data.reader;
+        console.log(data);
+
+    }).on('filebatchuploaderror', function (event, data, previewId, index) {
+        var form = data.form, files = data.files, extra = data.extra,
+            response = data.response, reader = data.reader;
+        console.log('File error ' + data.response.Message);
+    }).on('filepreremove', function (event, key, jqXHR, data) {
+        console.log(event);
+        console.log(key);
+        console.log(jqXHR);
+        console.log(data);
+    });
 
     inittbSearchconfirmpayment();
 
@@ -146,7 +188,9 @@ $(document).ready(function () {
         var validation = Array.prototype.filter.call(forms, function (form) {
             if ($('#Contact_name').val() == "" || $('#Contact_email').val() == "" || $('#Contact_phone_no').val() == "" ||
                 $('#payment_channal option').filter(':selected').val() == "" || $('#payment_date').val() == "" || $('#payment_datetime').val() == "" ||
-                $('#bank_transfer').val() == "" || ValidateAmountTransfer()|| ValidateUpload()) {
+                $('#bank_transfer').val() == "" || ValidateAmountTransfer()
+               // ||ValidateUpload()
+            ) {
 
                 event.preventDefault();
                 event.stopPropagation();
@@ -170,8 +214,6 @@ $(document).ready(function () {
     $('#btnClearDataModal').click(function () {
         clearData();
     });
-    
-
 });
 
 
@@ -216,6 +258,10 @@ function clearData() {
 
     $('#slip_attach_file').removeAttr('required');
 
+
+    $('#lbdateverifyais').text('');
+    $('#lbpaymentstatusais').text('');
+    $('#lbremarkais').text('');
         
 }
 
@@ -285,7 +331,12 @@ function CheckFileUpload(inputId) {
                 }
                 else {
                     $('#lbuploadslip').text(localizedData.ChooseFile);
+
                     $('#hdupfileslip').val('');
+
+                    $("#input-700").fileinput({
+                        initialPreviewAsData: false,
+                    });
                 }
                
                     bootbox.alert({
@@ -300,15 +351,6 @@ function CheckFileUpload(inputId) {
             },
             error: function (xhr, status, error) {
 
-
-                //bootbox.alert({
-                //    title: "System Information",
-                //    message: "This action is not available.",
-                //    size: "small",
-                //    callback: function (result) {
-                //        console.log('This was logged in the callback: ' + result);
-                //    }
-                //});
             }
         }
     );
@@ -495,6 +537,10 @@ function GetIdpayment(paymentId, status) {
             else if (status == 'Y' || status =='A') {
                 SetTextStatusY(response.Data);
             }
+            console.log(response.FileInput);
+            if (response.FileInput != null) {
+                $('.file-loading input').fileinput('addToStack', response.FileInput); 
+            }
             
         },
         failure: function (msg) {
@@ -577,6 +623,20 @@ function SetTextStatusN(data) {
         });
     }
 
+
+    if (data.verifiedDate != null) {
+        var d = new Date(data.verifiedDate);
+        var month = d.getMonth();
+        var day = d.getDate();
+        var year = d.getFullYear();
+        $('#lbdateverifyais').text(day + "/" + month + "/" + year);
+    }
+
+
+    $('#lbpaymentstatusais').text(data.Status);
+   
+    $('#lbremarkais').text(data.remarkForSub);
+
   
    
 }
@@ -641,6 +701,17 @@ function SetTextStatusY(data) {
 
     EnableControl(true); //'disabled'
 
+    if (data.verifiedDate != null) {
+        var d = new Date(data.verifiedDate);
+        var month = d.getMonth();
+        var day = d.getDate();
+        var year = d.getFullYear();
+        $('#lbdateverifyais').text(day + "/" + month + "/" + year);
+    }
+
+    $('#lbpaymentstatusais').text(data.Status);
+    $('#lbremarkais').text(data.remarkForSub);
+
 }
 
 function EnableControl(status) {
@@ -687,11 +758,15 @@ function UpdatePayment(PaymentId) {
     data.append("AmountTransfer", $("#amount_transfer").val());
     data.append("BankTransfer", $('#bank_transfer').val());
     data.append("BankBranch", $('#bank_branch').val());
-    data.append("FileSilp", $('#slip_attach_file').get(0).files[0]);
+   
     data.append("Remark", $('#remark').val());
     data.append("Status", 'Y');
     data.append("transfer_to_account", transfertoaccount);
-    data.append("SlipAttachFile", $('#lbuploadslip').text())
+    data.append("CompanyId", $('#hdcompanyId').val());
+    //data.append("SlipAttachFile", $('#lbuploadslip').text())
+
+    //data.append("FileSilp", send);
+    //data.append("FileSilp", $('#slip_attach_file').get(0).files[0]);
 
     var urlUpdatepayment = url.replace('Action', 'Updatepayment');
     $.ajax({

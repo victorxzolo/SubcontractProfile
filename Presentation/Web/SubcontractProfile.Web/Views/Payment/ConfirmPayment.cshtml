@@ -6,11 +6,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/bootstrap-fileinput/css/fileinput.css" rel="stylesheet" />
+
+<script src="~/bootstrap-fileinput/js/plugins/piexif.min.js" type="text/javascript"></script>
+<script src="~/bootstrap-fileinput/js/plugins/sortable.min.js" type="text/javascript"></script>
+
+<script src="~/bootstrap-fileinput/js/fileinput.min.js"></script>
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/fileinput.min.js"></script>*@
+<script src="~/bootstrap-fileinput/themes/fa/theme.js"></script>
+<script src="~/bootstrap-fileinput/js/locales/th.js"></script>
+
+
+
 
 <div id="pageID" style="display:none;">ConfirmPayment</div>
 
 <div id="controllername" data-url="@Url.Action("Action", "Payment")"></div>
-
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
     <div class="skills layout-spacing">
@@ -164,24 +175,6 @@
                     <div class="needs-validation-confirmpayment" novalidate>
                         <div class="container">
 
-                            @*<div class="row">
-                <div class="col-sm-3 text-right">
-                    <label>Request Training No:</label>
-                </div>
-                <div class="col-sm-7">
-                    <label id="Request_no"></label>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    <label>Payment No:</label>
-                </div>
-                <div class="col-sm-4">
-                    <label id="Payment_no"></label>
-                </div>
-            </div>*@
-
                             <div class="row">
                                 <div class="col-sm-3 text-right">
                                     <label>@Localizer["CompanyName"]:</label>
@@ -329,13 +322,8 @@
                                     <label class="">@Localizer["TheTransferSlip"]<span style="color:red">*</span></label>
                                 </div>
                                 <div class="col-sm-7">
-                                    <<input type="hidden" id="hdupfileslip" />
-                                    <input type="file" class="custom-file-input inputValidation" id="slip_attach_file"
-                                           accept="image/jpeg,image/png,application/pdf" required />
-                                    <label class="custom-file-label" for="slip_attach_file" id="lbuploadslip">@Localizer["ChooseFile"]</label>
-                                    <div class="invalid-feedback">@Localizer["ErrorTheTransferSlip"]</div>
-                                    <div id="targetDiv">
-                                        <a id="linkdownload" href="#" target="_blank"></a>
+                                    <div class="file-loading">
+                                        <input id="input-700" name="kartik-input-700[]" type="file" accept="image/jpeg,image/png,application/pdf" multiple>
                                     </div>
                                     <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
                                         @Localizer["ChooseFileSupportFileType"]
@@ -344,8 +332,25 @@
                                         @Localizer["SizeFile"]
                                     </small>
                                     <small id="uploadlHelp1" style="color:red">@Localizer["RemarkChooseFileSupportFileType"]</small>
-
                                 </div>
+                                @*<div class="col-sm-7">
+            <<input type="hidden" id="hdupfileslip" />
+            <input type="file" class="custom-file-input inputValidation" id="slip_attach_file"
+                   accept="image/jpeg,image/png,application/pdf" required />
+            <label class="custom-file-label" for="slip_attach_file" id="lbuploadslip">@Localizer["ChooseFile"]</label>
+            <div class="invalid-feedback">@Localizer["ErrorTheTransferSlip"]</div>
+            <div id="targetDiv">
+                <a id="linkdownload" href="#" target="_blank"></a>
+            </div>
+            <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
+                @Localizer["ChooseFileSupportFileType"]
+            </small>
+            <small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
+                @Localizer["SizeFile"]
+            </small>
+            <small id="uploadlHelp1" style="color:red">@Localizer["RemarkChooseFileSupportFileType"]</small>
+
+        </div>*@
                             </div>
                             <br />
                             <div class="row">
@@ -356,28 +361,77 @@
                                     <textarea id="remark" name="remark" rows="3" class="form-control"> </textarea>
                                 </div>
                             </div>
+                            @*<br />
+                            <div class="row">
+                                <div class="col-sm-3 text-right">
+                                    <label class="">@Localizer["TheTransferSlip"]<span style="color:red">*</span></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="file-loading">
+                                        <input id="input-700" name="kartik-input-700[]" type="file" accept="image/jpeg,image/png,application/pdf" multiple>
+                                    </div>
+
+                                </div>
+                            </div>*@
+
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <h4>@Localizer["ForAISStaff"]</h4>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                <label>@Localizer["PaymentStatus"]</label>
+                            </div>
+                            <div class="col-md-7">
+                                <p id="lbpaymentstatusais" class=""></p>
+                            </div>
                         </div>
                         <br />
-                        <input type="hidden" id="hdpaymentId">
-                        <input type="hidden" id="hdcompanyId">
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                <label>@Localizer["VerifyDate"]</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <p id="lbdateverifyais" class=""></p>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                <label>@Localizer["Remark"] </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <p id="lbremarkais" class=""></p>
 
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnClearModal">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
-                        @Localizer["Close"]
-                    </button>
-                    <button id="btnClearDataModal" type="button" class="btn btn-primary" style="display:none;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
-                        @Localizer["Reset"]
-                    </button>
-                    <button id="btnconfirmpayment" type="button" class="btn btn-primary" style="display:none;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                        @Localizer["Save"]
-                    </button>
+
+
+
+                    <br />
+                    <input type="hidden" id="hdpaymentId">
+                    <input type="hidden" id="hdcompanyId">
+
                 </div>
             </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnClearModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                    @Localizer["Close"]
+                </button>
+                <button id="btnClearDataModal" type="button" class="btn btn-primary" style="display:none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                    @Localizer["Reset"]
+                </button>
+                <button id="btnconfirmpayment" type="button" class="btn btn-primary" style="display:none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                    @Localizer["Save"]
+                </button>
+            </div>
+
         </div>
     </div>
 </div>
@@ -390,6 +444,7 @@ var localizedData = {
     'ddlSelectBank': '@Localizer["ddlSelectBank"]',
     'ddlSelectStatus': '@Localizer["ddlSelectStatus"]',
     'ddlSelectPaymentMethod': '@Localizer["ddlSelectPaymentMethod"]',
+    'ConfigUpload':'@ViewBag.ConfigUpload'
 }
     </script>
     <script src="~/Scripts/View/ConfirmPayment.js"></script>

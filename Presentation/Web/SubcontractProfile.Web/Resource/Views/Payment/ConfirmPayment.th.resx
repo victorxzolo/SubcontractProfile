@@ -192,6 +192,9 @@
   <data name="ErrorTransferAmount" xml:space="preserve">
     <value>กรุณาระบุยอดเงินที่โอน</value>
   </data>
+  <data name="ForAISStaff" xml:space="preserve">
+    <value>สำหรับเจ้าหน้าที่ AIS</value>
+  </data>
   <data name="MobileNo" xml:space="preserve">
     <value>เบอร์โทรศัพท์</value>
   </data>
@@ -257,5 +260,8 @@
   </data>
   <data name="TransferAmount" xml:space="preserve">
     <value>ยอดเงินที่โอน (บาท)</value>
+  </data>
+  <data name="VerifyDate" xml:space="preserve">
+    <value>วันที่ตรวจสอบ</value>
   </data>
 </root>

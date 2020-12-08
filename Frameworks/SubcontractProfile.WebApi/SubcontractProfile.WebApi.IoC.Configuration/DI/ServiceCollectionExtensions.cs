@@ -47,7 +47,7 @@ namespace SubcontractProfile.WebApi.IoC.Configuration.DI
 
                 services.AddScoped<ISubcontractProfileRequestStatusRepo, SubcontractProfileRequestStatusRepo>();
                 services.AddScoped<ISubcontractProfileTrainingEngineerRepo, SubcontractProfileTrainingEngineerRepo>();
-
+                services.AddScoped<ISubcontractProfileFileRepo, SubcontractProfileFileRepo>();
             }
 
         }
