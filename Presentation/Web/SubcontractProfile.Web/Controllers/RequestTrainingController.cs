@@ -704,6 +704,11 @@ namespace SubcontractProfile.Web.Controllers
             return Json(result);
         }
 
+       
+
+           
+
+   
 
         #region Request Training
         [HttpPost]
@@ -849,23 +854,47 @@ namespace SubcontractProfile.Web.Controllers
             dt.Columns.Add("ContractPhone1", typeof(string));
             dt.Columns.Add("ContractEmail", typeof(string));
             dt.Columns.Add("Remark", typeof(string));
+
+
             var data = SessionHelper.GetObjectFromJson<DataTable>(HttpContext.Session, "EngineerData");
-          
+
             if (data != null)
             {
+
+                var result = new SubcontractProfileEngineerModel();
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+                string uriString = string.Format("{0}/{1}", strpathAPI + "Engineer/GetByEngineerId"
+                    , HttpUtility.UrlEncode(model.EngineerId.ToString(), Encoding.UTF8));
+
+                HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                    if (resultAsysc != null)
+                    {
+                        //data
+                        result = JsonConvert.DeserializeObject<SubcontractProfileEngineerModel>(resultAsysc);
+                    }
+                }
+
                 if (data.Rows.Count > 0)
                 {
                     dt = data;
                     DataRow row = dt.NewRow();
-                    row["LocationId"] = model.LocationId;
-                    row["TeamId"] = model.TeamId;
-                    row["EngineerId"] = model.EngineerId;
-                    row["LocationNameTh"] = model.LocationNameTh;
-                    row["TeamNameTh"] = model.TeamNameTh;
-                    row["StaffNameTh"] = model.StaffNameTh;
-                    row["Position"] = model.Position;
-                    row["ContractPhone1"] = model.ContractPhone1;
-                    row["ContractEmail"] = model.ContractEmail;
+                    row["LocationId"] = result.LocationId;
+                    row["TeamId"] = result.TeamId;
+                    row["EngineerId"] = result.EngineerId;
+                    row["LocationNameTh"] = result.LocationNameTh;
+                    row["TeamNameTh"] = result.TeamNameTh;
+                    row["StaffNameTh"] = result.StaffNameTh;
+                    row["Position"] = result.Position;
+                    row["ContractPhone1"] = result.ContractPhone1;
+                    row["ContractEmail"] = result.ContractEmail;
                     row["Remark"] = model.Remark;
                     dt.Rows.Add(row);
 
