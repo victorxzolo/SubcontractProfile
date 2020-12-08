@@ -126,6 +126,12 @@
   <data name="CompanyVerify" xml:space="preserve">
     <value>ตรวจสอบข้อมูลบริษัท</value>
   </data>
+  <data name="DataMigration" xml:space="preserve">
+    <value>จัดการฐานข้อมูล</value>
+  </data>
+  <data name="Migrate" xml:space="preserve">
+    <value>จัดการฐานข้อมูล</value>
+  </data>
   <data name="Payment" xml:space="preserve">
     <value>ชำระค่าอบรม</value>
   </data>

@@ -837,6 +837,7 @@ namespace SubcontractProfile.Web.Controllers
 
         private List<SubcontractProfileTrainingEngineerModel> AddDataTable(SubcontractProfileTrainingEngineerModel model)
         {
+         
             DataTable dt = new DataTable("engineer");
             dt.Columns.Add("LocationId", typeof(string));
             dt.Columns.Add("TeamId", typeof(string));
@@ -844,9 +845,12 @@ namespace SubcontractProfile.Web.Controllers
             dt.Columns.Add("LocationNameTh", typeof(string));
             dt.Columns.Add("TeamNameTh", typeof(string));
             dt.Columns.Add("StaffNameTh", typeof(string));
-
-             var data = SessionHelper.GetObjectFromJson<DataTable>(HttpContext.Session, "EngineerData");
-            
+            dt.Columns.Add("Position", typeof(string));
+            dt.Columns.Add("ContractPhone1", typeof(string));
+            dt.Columns.Add("ContractEmail", typeof(string));
+            dt.Columns.Add("Remark", typeof(string));
+            var data = SessionHelper.GetObjectFromJson<DataTable>(HttpContext.Session, "EngineerData");
+          
             if (data != null)
             {
                 if (data.Rows.Count > 0)
@@ -859,6 +863,10 @@ namespace SubcontractProfile.Web.Controllers
                     row["LocationNameTh"] = model.LocationNameTh;
                     row["TeamNameTh"] = model.TeamNameTh;
                     row["StaffNameTh"] = model.StaffNameTh;
+                    row["Position"] = model.Position;
+                    row["ContractPhone1"] = model.ContractPhone1;
+                    row["ContractEmail"] = model.ContractEmail;
+                    row["Remark"] = model.Remark;
                     dt.Rows.Add(row);
 
                     dt = dt.DefaultView.ToTable( /*distinct*/ true);
@@ -866,14 +874,14 @@ namespace SubcontractProfile.Web.Controllers
                 else
                 {
                     //Data  
-                    dt.Rows.Add(model.LocationId, model.TeamId, model.EngineerId, model.LocationNameTh, model.TeamNameTh, model.StaffNameTh);
+                    dt.Rows.Add(model.LocationId, model.TeamId, model.EngineerId, model.LocationNameTh, model.TeamNameTh, model.StaffNameTh,model.Position,model.ContractPhone1,model.ContractEmail,model.Remark);
 
                 }
             }
             else
             {
                 //Data  
-                dt.Rows.Add(model.LocationId, model.TeamId, model.EngineerId, model.LocationNameTh, model.TeamNameTh, model.StaffNameTh);
+                dt.Rows.Add(model.LocationId, model.TeamId, model.EngineerId, model.LocationNameTh, model.TeamNameTh, model.StaffNameTh, model.Position, model.ContractPhone1, model.ContractEmail, model.Remark);
 
             }
 
@@ -887,7 +895,11 @@ namespace SubcontractProfile.Web.Controllers
                                   EngineerId = Guid.Parse(dr["EngineerId"].ToString()),
                                   LocationNameTh = dr["LocationNameTh"].ToString(),
                                   TeamNameTh = dr["TeamNameTh"].ToString(),
-                                  StaffNameTh = dr["StaffNameTh"].ToString()
+                                  StaffNameTh = dr["StaffNameTh"].ToString(),
+                                  Position = dr["Position"].ToString(),
+                                  ContractEmail = dr["ContractEmail"].ToString(),
+                                  ContractPhone1 = dr["ContractPhone1"].ToString(),
+                                  Remark = dr["Remark"].ToString()
                               }).ToList();
 
 
@@ -1204,7 +1216,11 @@ namespace SubcontractProfile.Web.Controllers
                                   EngineerId = Guid.Parse(dr["EngineerId"].ToString()),
                                   LocationNameTh = dr["LocationNameTh"].ToString(),
                                   TeamNameTh = dr["TeamNameTh"].ToString(),
-                                  StaffNameTh = dr["StaffNameTh"].ToString()
+                                  StaffNameTh = dr["StaffNameTh"].ToString(),
+                                  Position = dr["Position"].ToString(),
+                                  ContractEmail = dr["ContractEmail"].ToString(),
+                                 // ContractPhone1 = dr["ContractPhone1"].ToString(),
+                                  Remark = dr["Remark"].ToString()
                               }).ToList();
 
 
@@ -1290,7 +1306,10 @@ namespace SubcontractProfile.Web.Controllers
                 trainingEn.LocationNameTh = Result[i].LocationNameTh;
                 trainingEn.TeamNameTh = Result[i].TeamNameTh;
                 trainingEn.StaffNameTh = Result[i].StaffNameTh;
-
+                trainingEn.Position = Result[i].Position;
+                trainingEn.ContractEmail = Result[i].ContractEmail;
+                trainingEn.ContractPhone1 = Result[i].ContractPhone1;
+                trainingEn.Remark = Result[i].Remark;
                 resultEngineer = AddDataTable(trainingEn);
             }
            

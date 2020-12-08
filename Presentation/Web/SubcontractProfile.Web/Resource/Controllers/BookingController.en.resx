@@ -121,7 +121,7 @@
     <value>Booking</value>
   </data>
   <data name="MessageAddTrainee" xml:space="preserve">
-    <value>Please Add Trainee Data</value>
+    <value>Please Add Booking Data</value>
   </data>
   <data name="MessageDeleteSuccess" xml:space="preserve">
     <value>Delete Success</value>

@@ -315,7 +315,11 @@
                                             @*<th>@Localizer["LocationName"]</th>
                                             <th>@Localizer["TeamName"]</th>*@
                                             <th>@Localizer["Engineer"]</th>
-
+                                            <th>@Localizer["Position"]</th>
+                                            <th>@Localizer["ContactPhone"]</th>
+                                            <th>@Localizer["Email"]</th>
+                                
+                                            <th>@Localizer["Remark"]</th>
 
                                         </tr>
                                     </thead>
@@ -496,6 +500,7 @@
 
             $("#btnAddTraining").click(function (e) {
                 onAddEngineer();
+                
 
             });
 
@@ -648,7 +653,7 @@
              //model.TeamNameTh = $("#selTeamtraining option:selected").text();
              model.EngineerId = $("select[id$=selEngineertraining]").val();
              model.StaffNameTh = $("#selEngineertraining option:selected").text();
-
+             
              var i = 0;
              oTableEngineer = $('#tbSearchEngineer').DataTable({
                  processing: true, // for show progress bar
@@ -687,11 +692,14 @@
                          data: null,width:'10%', render: function (data, type, row) {
                              return "  <a onclick=deleteData('" + row.LocationId + "','" + row.TeamId + "','" + row.EngineerId + "');return false; href='#'  data-toggle='tooltip' data-placement='top' title='Delete'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-trash-2'><polyline points='3 6 5 6 21 6'></polyline><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'></path><line x1='10' y1='11' x2='10' y2='17'></line><line x1='14' y1='11' x2='14' y2='17'></line></svg></a>";
                          }
-                     },
-                     //{ data: "LocationNameTh" },
-                     //{ data: "TeamNameTh" },
-                     { data: "StaffNameTh" }
 
+                     },
+                  
+                     { data: "StaffNameTh" },
+                     { data: "Position" },
+                     { data: "ContractPhone1" },
+                     { data: "ContractEmail" },
+                     { data: "Remark" }
                  ],
                  "order": [[0, "desc"]],
                  "stripeClasses": [],
@@ -801,7 +809,11 @@
                      },
                      //{ data: "LocationNameTh" },
                      //{ data: "TeamNameTh" },
-                     { data: "StaffNameTh" }
+                     { data: "StaffNameTh" },
+                     { data: "Position" },
+                     { data: "ContractPhone1" },
+                     { data: "ContractEmail" },
+                     { data: "Remark" }
 
                  ],
                  "order": [[0, "desc"]],
@@ -1144,7 +1156,7 @@
                                       //},
                                       dataType: "json",
                                      success: function (result) {
-
+                                         console.log('GetTrainingAdd');
                                          if (result != null) {
 
 
@@ -1331,18 +1343,24 @@
                     //dataSrc:"",
                     data: function (d) {
                         d.Trainingid = Trainingid
+
                     }
+                    
                 },
                 columns: [
                     {
                         data: null, width: '10%', render: function (data, type, row) {
                             return "  <a onclick=deleteData('" + row.LocationId + "','" + row.TeamId + "','" + row.EngineerId + "');return false; href='#'  data-toggle='tooltip' data-placement='top' title='Delete'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-trash-2'><polyline points='3 6 5 6 21 6'></polyline><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'></path><line x1='10' y1='11' x2='10' y2='17'></line><line x1='14' y1='11' x2='14' y2='17'></line></svg></a>";
                         }
+
                     },
                     //{ data: "LocationNameTh" },
-                    //{ data: "TeamNameTh" },
-                    { data: "StaffNameTh" }
-
+                    //{ data: "ContractPhone" },
+                    { data: "StaffNameTh" },
+                    { data: "Position" },
+                    { data: "ContractPhone1" },
+                    { data: "ContractEmail" },
+                    { data: "Remark" }
                 ],
                 "order": [[0, "desc"]],
                 "stripeClasses": [],

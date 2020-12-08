@@ -1,5 +1,4 @@
-﻿
-@using Microsoft.AspNetCore.Mvc.Localization
+﻿@using Microsoft.AspNetCore.Mvc.Localization
 
 @inject IViewLocalizer Localizer
 
@@ -13,7 +12,7 @@
 
     <div class="skills layout-spacing ">
         <div class="widget-content widget-content-area">
-            <h3 class="">@Localizer["ImportData Migration Profile"]</h3>
+            <h3 class="">@Localizer["MigrationProfile"]</h3>
             <div class="widget-content1">
 
                 <div class="form-row mb-4">
@@ -23,22 +22,23 @@
                         <select id="inputmasterdata" class="form-control" data-live-search="true" onchange="chkchangetable();">
                             <option value="Select">Please Select</option>
                             <option value="Location">Location</option>
-                            <option value="Team">Team</option>
+                            @*<option value="Team">Team</option>
                             <option value="Engineer">Engineer</option>
                             <option value="Personal">Personal</option>
-                            <option value="Company">Company</option>
+                            <option value="Company">Company</option>*@
                         </select>
 
                     </div>
                 </div>
                 <div class="form-row mb-4">
                     <div class="form-group col-md-6">
-                        <<input type="hidden" id="hdupfileslip" />
-                        <input type="file" class="custom-file-input inputValidation" id="slip_attach_file"
-                               accept="xlsx,xls" required />
-                        <label class="custom-file-label" for="slip_attach_file" id="lbuploadslip">@Localizer["ChooseFile"]</label>
+                        <input type="hidden" id="upfileData" />
+                        <input type="file" class="custom-file-input inputValidation" id="uploadfileMigrateData"
+                               accept="text/plain, .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                               required />
+                        <label class="custom-file-label" for="uploadfileMigrateData" id="lbuploadData">@Localizer["ChooseFile"]</label>
                         <div class="invalid-feedback">@Localizer["ErrorFileFormat"]</div>
-                      
+
                         @*<small id="uploadlHelp1" class="form-text text-muted" style="margin-top:0;">
                                 @Localizer["ChooseFileSupportFileType"]
                             </small>
@@ -51,62 +51,74 @@
 
 
                 </div>
+                <div class="form-row mb-4">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                        @Localizer["Close"]
+                    </button>
+                    &nbsp;&nbsp;&nbsp;
+                    <button id="btnSave" onclick="onUploadData();" class="btn btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
 
-
+                        @Localizer["Upload"]
+                    </button>
+                </div>
                 <div class="form-row mb-4">
                     <div id="location" class="table-responsive mb-4 mt-4">
-                        <table id="tbSearchResult" class="table table-hover" style="width:100%">
+                        <table id="tbLocSearchResult" class="table table-hover" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>@Localizer["location_id"]</th>
-                                    <th>@Localizer["location_code"]</th>
-                                    <th>@Localizer["location_name"]</th>
-                                    <th>@Localizer["location_name_en"]</th>
-                                    <th>@Localizer["location_name_alias"]</th>
-                                    <th>@Localizer["vendor_code"]</th>
-                                    <th>@Localizer["location_name_th"]</th>
-                                    <th>@Localizer["storage_location"]</th>
-                                    <th>@Localizer["ship_to"]</th>
-                                    <th>@Localizer["out_of_service_storage_location"]</th>
-                                    <th>@Localizer["sub_phase"]</th>
-                                    <th>@Localizer["effective_date"]</th>
-                                    <th>@Localizer["shop_type"]</th>
-                                    <th>@Localizer["vat_branch_number"]</th>
-                                    <th>@Localizer["phone"]</th>
-                                    <th>@Localizer["company_main_contract_phone"]</th>
-                                    <th>@Localizer["installations_contract_phone"]</th>
-                                    <th>@Localizer["maintenance_contract_phone"]</th>
-                                    <th>@Localizer["inventory_contract_phone"]</th>
-                                    <th>@Localizer["payment_contract_phone"]</th>
-                                    <th>@Localizer["etc_contract_phone"]</th>
-                                    <th>@Localizer["company_group_mail"]</th>
-                                    <th>@Localizer["installations_contract_mail"]</th>
-                                    <th>@Localizer["maintenance_contract_mail"]</th>
-                                    <th>@Localizer["inventory_contract_mail"]</th>
-                                    <th>@Localizer["payment_contract_mail"]</th>
-                                    <th>@Localizer["etc_contract_mail"]</th>
-                                    <th>@Localizer["location_address"]</th>
-                                    <th>@Localizer["post_address"]</th>
-                                    <th>@Localizer["tax_address"]</th>
-                                    <th>@Localizer["wt_address"]</th>
-                                    <th>@Localizer["house_no"]</th>
-                                    <th>@Localizer["area_code"]</th>
-                                    <th>@Localizer["bank_code"]</th>
-                                    <th>@Localizer["bank_name"]</th>
-                                    <th>@Localizer["bank_account_no"]</th>
-                                    <th>@Localizer["bank_account_name"]</th>
-                                    <th>@Localizer["bank_branch_code"]</th>
-                                    <th>@Localizer["bank_branch_name"]</th>
-                                    <th>@Localizer["penalty_contract_phone"]</th>
-                                    <th>@Localizer["penalty_contract_mail"]</th>
-                                    <th>@Localizer["contract_phone"]</th>
-                                    <th>@Localizer["contract_mail"]</th>
-                                    <th>@Localizer["company_id"]</th>
-                                    <th>@Localizer["status"]</th>
-                                    <th>@Localizer["create_date"]</th>
-                                    <th>@Localizer["create_by"]</th>
-                                    <th>@Localizer["update_date"]</th>
-                                    <th>@Localizer["update_by"]</th>
+                                    <th>@Localizer["LocationId"]</th>
+                                    <th>@Localizer["LocationCode"]</th>
+                                    <th>@Localizer["LocationName"]</th>
+                                    <th>@Localizer["LocationNameTh"]</th>
+                                    <th>@Localizer["LocationNameEn"]</th>
+                                    <th>@Localizer["LocationNameAlias"]</th>
+                                    <th>@Localizer["VendorCode"]</th>
+                                    <th>@Localizer["StorageLocation"]</th>
+                                    <th>@Localizer["ShipTo"]</th>
+                                    <th>@Localizer["OutOfServiceStorageLocation"]</th>
+                                    <th>@Localizer["SubPhase"]</th>
+                                    <th>@Localizer["EffectiveDate"]</th>
+                                    <th>@Localizer["ShopType"]</th>
+                                    <th>@Localizer["VatBranchNumber"]</th>
+                                    <th>@Localizer["Phone"]</th>
+                                    <th>@Localizer["CompanyMainContractPhone"]</th>
+                                    <th>@Localizer["InstallationsContractPhone"]</th>
+                                    <th>@Localizer["MaintenanceContractPhone"]</th>
+                                    <th>@Localizer["InventoryContractPhone"]</th>
+                                    <th>@Localizer["PaymentContractPhone"]</th>
+                                    <th>@Localizer["EtcContractPhone"]</th>
+                                    <th>@Localizer["CompanyGroupMail"]</th>
+                                    <th>@Localizer["InstallationsContractMail"]</th>
+                                    <th>@Localizer["MaintenanceContractMail"]</th>
+                                    <th>@Localizer["InventoryContractMail"]</th>
+                                    <th>@Localizer["PaymentContractMail"]</th>
+                                    <th>@Localizer["EtcContractMail"]</th>
+                                    <th>@Localizer["LocationAddress"]</th>
+                                    <th>@Localizer["PostAddress"]</th>
+                                    <th>@Localizer["TaxAddress"]</th>
+                                    <th>@Localizer["WtAddress"]</th>
+                                    <th>@Localizer["HouseNo"]</th>
+                                    <th>@Localizer["AreaCode"]</th>
+                                    <th>@Localizer["BankCode"]</th>
+                                    <th>@Localizer["BankName"]</th>
+                                    <th>@Localizer["BankAccountNo"]</th>
+                                    <th>@Localizer["BankAccountName"]</th>
+                                    <th>@Localizer["BankAttachFile"]</th>
+                                    <th>@Localizer["Status"]</th>
+                                    <th>@Localizer["CreateDate"]</th>
+                                    <th>@Localizer["CreateBy"]</th>
+                                    <th>@Localizer["UpdateBy"]</th>
+                                    <th>@Localizer["UpdateDate"]</th>
+                                    <th>@Localizer["BankBranchCode"]</th>
+                                    <th>@Localizer["BankBranchName"]</th>
+                                    <th>@Localizer["PenaltyContractPhone"]</th>
+                                    <th>@Localizer["PenaltyContractMail"]</th>
+                                    <th>@Localizer["ContractPhone"]</th>
+                                    <th>@Localizer["ContractMail"]</th>
+                                    <th>@Localizer["CompanyId"]</th>
+
 
                                 </tr>
 
@@ -326,15 +338,47 @@
     <script type="text/javascript">
                         var oTable;
                         var oTableEngineer;
-                     
 
-                        $(document).ready(function () {
+
+        $(document).ready(function () {
+
+                $(".custom-file-input").on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                });
+
 
                             hideAll();
 
-                        });
+
+                            $('#uploadfileMigrateData').change(function (e) {
+                                e.preventDefault();
+                                CheckFileUpload('uploadfileMigrateData')
+
+                            });
+
+
+
+            $('#btnSave').click(function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    if (Validateform() || ValidateUpload()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    } else {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+
+                });
+            });
+         });
 
         function hideAll() {
+
             $("#team").hide();
             $("#engineer").hide();
             $("#location").hide();
@@ -363,6 +407,7 @@
                 $("#location").show();
                 $("#personal").hide();
                 $("#company").hide();
+
             }
             if (d == "Personal") {
                 $("#team").hide();
@@ -379,6 +424,212 @@
                 $("#company").show();
             }
 
+        }
+
+
+
+        function ValidateUpload() {
+            var hasError = false;
+            if ($('#upfileData').val() == "") {
+                hasError = true;
+                $("#uploadfileMigrateData").attr('required', 'required');
+            }
+            else {
+                $("#uploadfileMigrateData").removeAttr('required');
+            }
+
+            return hasError;
+        }
+        function CheckFileUpload(inputId) {
+
+            var input = document.getElementById(inputId);
+            var files = input.files[0];
+            var formData = new FormData();
+
+
+            formData.append("files", files);
+
+
+
+            $.ajax(
+                {
+                    type: "POST",
+                    url: '@Url.Action("onCheckUpload", "MigrationProfile")',
+                    processData: false,
+                    async : false,
+                    contentType: false,
+                    dataType: "json",
+                    data: formData,
+                    success: function (data) {
+                        if (data.status) {
+                            $('#upfileData').val(data.file_id);
+                        }
+                        else {
+                            $('#lbuploadData').text(localizedData.ChooseFile);
+                            $('#upfileData').val('');
+                        }
+
+                        bootbox.alert(data.message);
+                        //    title: "System Information",
+                        //    message: data.message,
+                        //    size: "small",
+                        //    callback: function (result) {
+                        //        console.log('This was logged in the callback: ' + data.status);
+                        //    }
+                        //});
+
+                    },
+                    error: function (xhr, status, error) {
+
+
+                        //bootbox.alert({
+                        //    title: "System Information",
+                        //    message: "This action is not available.",
+                        //    size: "small",
+                        //    callback: function (result) {
+                        //        console.log('This was logged in the callback: ' + result);
+                        //    }
+                        //});
+                    }
+                }
+
+
+            );
+            onLoadDataLocation();
+        }
+
+        function onLoadDataLocation() {
+
+
+
+
+
+
+             var i = 0;
+             oTableEngineer = $('#tbLocSearchResult').DataTable({
+                 processing: true, // for show progress bar
+                 serverSide: true, // for process server side
+                 filter: false, // this is for disable filter (search box)
+                 orderMulti: false, // for disable multiple column at once
+                 pageLength: 10,
+                 order: [],
+                 autoWidth: false,
+                 searching: false,
+                 destroy: true,
+                 lengthChange: false,
+                 "oLanguage": {
+                     "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                     "sInfo": "Showing page _PAGE_ of _PAGES_",
+                     "sSearch": false,
+                     "sLengthMenu": "Results :  _MENU_",
+                 },
+                 "scrollX": false,
+                 "language": {
+                     "zeroRecords": "No data found.",
+                     "decimal": ",",
+                     "thousands": "."
+                 },
+                 ajax: {
+                     url: '@Url.Action("AddDataTableLocation", "MigrationProfile")',
+                     type: "POST",
+                     async: false,
+                     datatype: "JSON",
+
+                 },
+                 columns: [
+
+
+                     { data: "LocationId" },
+                     { data: "LocationCode" },
+                     { data: "LocationName" },
+                     { data: "LocationNameTh" },
+                     { data: "LocationNameEn" },
+                     { data: "LocationNameAlias" },
+                     { data: "VendorCode" },
+                     { data: "StorageLocation" },
+                     { data: "ShipTo" },
+                     { data: "OutOfServiceStorageLocation" },
+                     { data: "SubPhase" },
+                     { data: "EffectiveDate" },
+                     { data: "ShopType" },
+                     { data: "VatBranchNumber" },
+                     { data: "Phone" },
+                     { data: "CompanyMainContractPhone" },
+                     { data: "InstallationsContractPhone" },
+                     { data: "MaintenanceContractPhone" },
+                     { data: "InventoryContractPhone" },
+                     { data: "PaymentContractPhone" },
+                     { data: "EtcContractPhone" },
+                     { data: "CompanyGroupMail" },
+                     { data: "InstallationsContractMail" },
+                     { data: "MaintenanceContractMail" },
+                     { data: "InventoryContractMail" },
+                     { data: "PaymentContractMail" },
+                     { data: "EtcContractMail" },
+                     { data: "LocationAddress" },
+                     { data: "PostAddress" },
+                     { data: "TaxAddress" },
+                     { data: "WtAddress" },
+                     { data: "HouseNo" },
+                     { data: "AreaCode" },
+                     { data: "BankCode" },
+                     { data: "BankName" },
+                     { data: "BankAccountNo" },
+                     { data: "BankAccountName" },
+                     { data: "BankAttachFile" },
+                     { data: "Status" },
+                     { data: "CreateDate" },
+                     { data: "CreateBy" },
+                     { data: "UpdateBy" },
+                     { data: "UpdateDate" },
+                     { data: "BankBranchCode" },
+                     { data: "BankBranchName" },
+                     { data: "PenaltyContractPhone" },
+                     { data: "PenaltyContractMail" },
+                     { data: "ContractPhone" },
+                     { data: "ContractMail" },
+                     { data: "CompanyId" }
+                 ],
+                 "order": [[0, "desc"]],
+                 "stripeClasses": [],
+                 "initComplete": function (settings, json) {
+
+
+                 },
+                 drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+             });
+
+         }
+
+        function onUploadData() {
+            var tablename = $('#inputmasterdata').val();
+           //  alert("Table:"+tablename);
+             $.ajax(
+                {
+                    type: "POST",
+                    url: '@Url.Action("BulkInsertLocation", "MigrationProfile")',
+                     type: 'POST',
+                     data: { 'table': tablename },
+                     dataType: "json",
+                     async: false,
+                     success: function (result) {
+
+                         if (result != null) {
+                             console.log(result);
+                         }
+
+                         bootbox.alert(result.Message);
+
+                    },
+                    error: function (xhr, status, error) {
+
+                        bootbox.alert( result.Message);
+                    }
+                }
+
+
+            );
         }
     </script>
 

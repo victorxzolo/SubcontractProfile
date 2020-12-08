@@ -112,7 +112,7 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string Status { get; set; }
 
-        public System.DateTime CreateDate { get; set; }
+        public System.DateTime? CreateDate { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string CreateBy { get; set; }
@@ -140,7 +140,7 @@ namespace SubcontractProfile.Web.Model
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string ContractMail { get; set; }
 
-        public System.Guid CompanyId { get; set; }
+        public System.Guid? CompanyId { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string CompanyNameTh { get; set; }
