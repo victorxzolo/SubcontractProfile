@@ -213,6 +213,9 @@
   <data name="PlaeseSelect" xml:space="preserve">
     <value>Please select</value>
   </data>
+  <data name="Position" xml:space="preserve">
+    <value>Position</value>
+  </data>
   <data name="QuestionDelete" xml:space="preserve">
     <value>Do you want delete this information</value>
   </data>

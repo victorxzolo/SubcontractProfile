@@ -160,7 +160,7 @@
     <value>กรุณาเลือก Team</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>ลบ</value>
   </data>
   <data name="EditReqTraining" xml:space="preserve">
     <value>แก้ไข ขอรับการฝึกอบรม</value>
@@ -212,6 +212,9 @@
   </data>
   <data name="PlaeseSelect" xml:space="preserve">
     <value>กรุณาเลือก</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>ตำแหน่ง</value>
   </data>
   <data name="QuestionDelete" xml:space="preserve">
     <value>คุณต้องการลบข้อมูล</value>
