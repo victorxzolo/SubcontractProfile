@@ -855,32 +855,44 @@ namespace SubcontractProfile.Web.Controllers
             dt.Columns.Add("ContractEmail", typeof(string));
             dt.Columns.Add("Remark", typeof(string));
 
+            var result = new SubcontractProfileEngineerModel();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+            string uriString = string.Format("{0}/{1}", strpathAPI + "Engineer/GetByEngineerId"
+                , HttpUtility.UrlEncode(model.EngineerId.ToString(), Encoding.UTF8));
+
+            HttpResponseMessage response = client.GetAsync(uriString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultAsysc = response.Content.ReadAsStringAsync().Result;
+                if (resultAsysc != null)
+                {
+                    //data
+                    result = JsonConvert.DeserializeObject<SubcontractProfileEngineerModel>(resultAsysc);
+
+                    model.LocationId = result.LocationId;
+                    model.TeamId = result.TeamId;
+                    model.EngineerId = result.EngineerId;
+                    model.LocationNameTh = result.LocationNameTh;
+                    model.TeamNameTh = result.TeamNameTh;
+                    model.StaffNameTh = result.StaffNameTh;
+                    model.Position = result.Position;
+                    model.ContractPhone1 = result.ContractPhone1;
+                    model.ContractEmail = result.ContractEmail;
+                }
+            }
+
 
             var data = SessionHelper.GetObjectFromJson<DataTable>(HttpContext.Session, "EngineerData");
 
             if (data != null)
             {
 
-                var result = new SubcontractProfileEngineerModel();
-                HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-
-
-                string uriString = string.Format("{0}/{1}", strpathAPI + "Engineer/GetByEngineerId"
-                    , HttpUtility.UrlEncode(model.EngineerId.ToString(), Encoding.UTF8));
-
-                HttpResponseMessage response = client.GetAsync(uriString).Result;
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var resultAsysc = response.Content.ReadAsStringAsync().Result;
-                    if (resultAsysc != null)
-                    {
-                        //data
-                        result = JsonConvert.DeserializeObject<SubcontractProfileEngineerModel>(resultAsysc);
-                    }
-                }
+                
 
                 if (data.Rows.Count > 0)
                 {
@@ -899,14 +911,18 @@ namespace SubcontractProfile.Web.Controllers
                     dt.Rows.Add(row);
 
                     dt = dt.DefaultView.ToTable( /*distinct*/ true);
+                   
+                   
+
                 }
                 else
                 {
+
                     //Data  
                     dt.Rows.Add(model.LocationId, model.TeamId, model.EngineerId, model.LocationNameTh, model.TeamNameTh, model.StaffNameTh,model.Position,model.ContractPhone1,model.ContractEmail,model.Remark);
 
                 }
-            }
+        }
             else
             {
                 //Data  
@@ -914,7 +930,7 @@ namespace SubcontractProfile.Web.Controllers
 
             }
 
-            var resultEngineer = new List<SubcontractProfileTrainingEngineerModel>();
+    var resultEngineer = new List<SubcontractProfileTrainingEngineerModel>();
 
             resultEngineer = (from DataRow dr in dt.Rows
                               select new SubcontractProfileTrainingEngineerModel()
