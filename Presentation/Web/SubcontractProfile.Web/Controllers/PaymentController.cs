@@ -40,6 +40,8 @@ namespace SubcontractProfile.Web.Controllers
 
         private readonly IWebHostEnvironment _webHostEnvironment;
 
+        private int countupload = 0;
+
         public PaymentController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor
             , IStringLocalizer<PaymentController> localizer
            , IWebHostEnvironment webHostEnvironment)
@@ -63,8 +65,20 @@ namespace SubcontractProfile.Web.Controllers
             ViewData["Controller"] = _localizer["Payment"];
             ViewData["View"] = _localizer["ConfirmPayment"];
 
-            int result = GetConfigUpload();
-            ViewBag.ConfigUpload = result.ToString();
+            countupload = GetConfigUpload();
+            ViewBag.ConfigUpload = countupload.ToString();
+
+
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            if (culture.Name == "th")
+            {
+                ViewBag.Language = "th";
+            }
+            else
+            {
+                ViewBag.Language = "en";
+            }
+                
 
             return View();
         }
@@ -80,6 +94,20 @@ namespace SubcontractProfile.Web.Controllers
 
             ViewData["Controller"] = _localizer["Payment"];
             ViewData["View"] = _localizer["VerfifiedPayment"];
+
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            if (culture.Name == "th")
+            {
+                ViewBag.Language = "th";
+            }
+            else
+            {
+                ViewBag.Language = "en";
+            }
+
+            countupload = GetConfigUpload();
+            ViewBag.ConfigUpload = countupload.ToString();
+
             return View();
         }
         [HttpGet]
@@ -223,10 +251,28 @@ namespace SubcontractProfile.Web.Controllers
                         JsonResult.initialPreview = new List<string>();
                         JsonResult.initialPreviewConfig = new List<initialPreviewConfig>();
                         string urlDelete = Url.Action("DeletefileSession", "Payment");
+
+                        int count= GetConfigUpload();
+
+                        JsonResult.maxFileCount = count - ListFileSlip.Count();
+
+
                         foreach (var v in ListFileSlip)
                         {
-                            JsonResult.initialPreview.Add(Path.Combine(Url.Action("DownloadfileTemp", "Payment", new { filename = v.file_Name, paymentid = id })));
-                            string content = Path.GetExtension(v.file_Name).Replace(".", "");
+                            var virtualPath = Path.Combine(Url.Action("DownloadfileTemp", "Payment", new { filename = v.file_Name, paymentid = id }));
+
+                            JsonResult.initialPreview.Add(virtualPath);
+                            string content = Path.GetExtension(v.file_Name);
+
+                            if (content == ".pdf")
+                            {
+                                content = "pdf";
+                            }
+                            else
+                            {
+                                content = "image";
+                            }
+
                             JsonResult.initialPreviewConfig.Add(new initialPreviewConfig
                             {
                                 caption = v.file_Name,
@@ -238,33 +284,13 @@ namespace SubcontractProfile.Web.Controllers
                                     fid = v.file_Name,
                                     paymentid = id
                                 },
-                                downloadUrl = Path.Combine(Url.Action("DownloadfileTemp", "Payment", new { filename = v.file_Name, paymentid = id })),
-                                //type = content
+                                downloadUrl = Path.Combine(virtualPath),
+                                type = content
                             });
                         }
                     }
                     
                 }
-                //if (data.SlipAttachFile != null)
-                //{
-                //    Guid file_id = Guid.NewGuid();
-                //    L_File.Add(new FileUploadModal
-                //    {
-                //        file_id = file_id,
-                //        //Fileupload = fileBytes,
-                //        typefile = "SlipAttachFile",
-                //        //ContentDisposition = source.ContentDisposition,
-                //        //ContentType = source.ContentType,
-                //        Filename = data.SlipAttachFile
-
-                //    });
-                //    data.file_id_Slip = file_id;
-                //    //if (L_File.Count != 0)
-                //    //{
-                //    //    GetFile(paymentId, ref L_File);
-                //    //    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftPaymentSSO", L_File);
-                //    //}
-                //}
             }
             return Json(new { Data = data,FileInput= JsonResult });
 
@@ -812,16 +838,18 @@ namespace SubcontractProfile.Web.Controllers
                         string urlDelete = Url.Action("DeletefileSession", "Payment");
                         foreach (var v in ListFileSlip)
                         {
-                            var virtualPath = Path.Combine(Url.Action("DownloadfileTemp", "Payment", new { filename = v.file_Name, paymentid = v.payment_id }));
+                            JsonResult.initialPreview.Add(Path.Combine(Url.Action("DownloadfileTemp", "Payment", new { filename = v.file_Name, paymentid = paymentId })));
+                            string content = Path.GetExtension(v.file_Name).Replace(".", "");
 
+                            if (content == ".pdf")
+                            {
+                                content = "pdf";
+                            }
+                            else
+                            {
+                                content = "image";
+                            }
 
-                            JsonResult.append = true;
-                            JsonResult.initialPreview = new List<string>();
-                            JsonResult.initialPreviewAsData = true;
-
-                            JsonResult.initialPreview.Add(virtualPath);
-
-                            JsonResult.initialPreviewConfig = new List<initialPreviewConfig>();
                             JsonResult.initialPreviewConfig.Add(new initialPreviewConfig
                             {
                                 caption = v.file_Name,
@@ -831,42 +859,18 @@ namespace SubcontractProfile.Web.Controllers
                                 extra = new
                                 {
                                     fid = v.file_Name,
-                                    paymentid = v.payment_id
+                                    paymentid = paymentId
                                 },
-                                downloadUrl = virtualPath,
-                                zoomData = virtualPath,
+                                downloadUrl = Path.Combine(Url.Action("DownloadfileTemp", "Payment", new { filename = v.file_Name, paymentid = paymentId })),
+                                type = content
                             });
                         }
                     }
 
-                    
+                      
+
+
                 }
-
-
-
-                //List<FileUploadModal> L_File = new List<FileUploadModal>();
-
-
-                //if (PaymentResult.SlipAttachFile != null)
-                //{
-                //    Guid file_id = Guid.NewGuid();
-                //    L_File.Add(new FileUploadModal
-                //    {
-                //        file_id = file_id,
-                //        //Fileupload = fileBytes,
-                //        typefile = "SlipAttachFile",
-                //        //ContentDisposition = source.ContentDisposition,
-                //        //ContentType = source.ContentType,
-                //        Filename = PaymentResult.SlipAttachFile
-
-                //    });
-                //    PaymentResult.file_id_Slip = file_id;
-                //}
-                //if (L_File.Count != 0)
-                //{
-                //    GetFile(paymentId, ref L_File);
-                //    SessionHelper.SetObjectAsJson(HttpContext.Session, "userUploadfileDaftPaymentSSO", L_File);
-                //}
 
 
             }
@@ -1070,7 +1074,10 @@ namespace SubcontractProfile.Web.Controllers
             public List<initialPreviewConfig> initialPreviewConfig { get; set; }
             public bool initialPreviewAsData { get; set; } = true;
             public bool append { get; set; } = true;
-           
+            public int maxFileCount { get; set; }
+
+
+
         }
         public class initialPreviewConfig
         {
@@ -1080,7 +1087,7 @@ namespace SubcontractProfile.Web.Controllers
             public string url { get; set; }
             public object extra { get; set; }
             public string downloadUrl { get; set; }
-            //public string type { get; set; }
+            public string type { get; set; }
             //public string width { get; set; }
             public string zoomData { get; set; }
         }
@@ -1122,35 +1129,69 @@ namespace SubcontractProfile.Web.Controllers
                     filename = EnsureCorrectFilename(filename);
 
                    
-                    var path = Path.Combine(contentRootPath, "upload", "temp", fid + "_" + filename);
+                    var path = Path.Combine(contentRootPath, "upload", "temp", filename);
                 string content = Path.GetExtension(filename);
 
-                var virtualPath = Path.Combine(Url.Action("DownloadfileTemp", "Payment", new { filename = fid + "_" + filename, paymentid = paymentid }));
+                var virtualPath = Path.Combine(Url.Action("DownloadfileTemp", "Payment", new { filename = filename, paymentid = paymentid }));
 
+                if(content==".pdf")
+                {
+                    content = "pdf";
+                }
+                else
+                {
+                    content = "image";
+                }
 
-                JsonResult.append = true;
+                int count = GetConfigUpload();
+                int fCount = Directory.GetFiles(Path.Combine(contentRootPath, "upload", "temp", paymentid), "*", SearchOption.AllDirectories).Length;
+
+                if(fCount > 5)
+                {
+                    JsonResult.append = false;
+                    CultureInfo culture = CultureInfo.CurrentCulture;
+                    if (culture.Name == "th")
+                    {
+                        JsonResult.error = "ไฟล์ที่คุณเลือกมีจำนวน (" + fCount + ") ซึ่งเกินกว่าที่ระบบอนุญาตที่ "+count+", กรุณาลองใหม่อีกครั้ง!";
+                    }
+                    else
+                    {
+                        JsonResult.error = "Number of files selected for upload (" + fCount + ") exceeds maximum allowed limit of "+count+".";
+                    }
+
+                   
+                    JsonResult.initialPreview = new List<string>();
+                    JsonResult.initialPreviewConfig = new List<initialPreviewConfig>();
+                }
+                else
+                {
+                    JsonResult.append = true;
+
                     JsonResult.initialPreview = new List<string>();
                     JsonResult.initialPreviewAsData = true;
 
-                JsonResult.initialPreview.Add(virtualPath);
+                    JsonResult.initialPreview.Add(virtualPath);
 
-                JsonResult.initialPreviewConfig = new List<initialPreviewConfig>();
+                    JsonResult.initialPreviewConfig = new List<initialPreviewConfig>();
                     JsonResult.initialPreviewConfig.Add(new initialPreviewConfig
                     {
-                        caption = fid + "_" + filename,
+                        caption = filename,
                         url = urlDelete,
-                        key = fid + "_" + filename,
-                        fileId = fid + "_" + filename,
+                        key = filename,
+                        fileId = filename,
                         //width= "120px",
                         extra = new
                         {
-                            fid = fid + "_" + filename,
+                            fid = filename,
                             paymentid = paymentid
                         },
                         downloadUrl = virtualPath,
-                        zoomData= virtualPath,
-                        //type = content
+                        zoomData = virtualPath,
+                        type = content
                     });
+                }
+
+              
                 }
                 else
                 {
@@ -1467,7 +1508,7 @@ namespace SubcontractProfile.Web.Controllers
                     Directory.CreateDirectory(pathdir);
                 }
 
-                PathOutput = Path.Combine(pathdir,fid+"_"+ filename);
+                PathOutput = Path.Combine(pathdir,filename);
                 return PathOutput;
             }
             catch (Exception e)

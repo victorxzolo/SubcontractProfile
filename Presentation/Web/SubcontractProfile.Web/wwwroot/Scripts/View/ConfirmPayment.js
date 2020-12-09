@@ -114,7 +114,7 @@ $(document).ready(function () {
     var urlUploadFile = url.replace('Action', 'UploadMulti');
 
     $(".file-loading input").fileinput({
-        language: 'th',
+        language: localizedData.Lang,
         theme: 'fa',
         allowedFileExtensions: ['jpg', 'jpeg', 'bmp', 'gif', 'tif', 'tiff', 'png', 'pdf'],
         maxFileCount: localizedData.ConfigUpload,
@@ -262,6 +262,9 @@ function clearData() {
     $('#lbdateverifyais').text('');
     $('#lbpaymentstatusais').text('');
     $('#lbremarkais').text('');
+
+
+    $('.file-loading input').fileinput('clear');
         
 }
 
@@ -537,9 +540,68 @@ function GetIdpayment(paymentId, status) {
             else if (status == 'Y' || status =='A') {
                 SetTextStatusY(response.Data);
             }
+
+            var urlUploadFileInput = url.replace('Action', 'UploadMulti');
             console.log(response.FileInput);
-            if (response.FileInput != null) {
-                $('.file-loading input').fileinput('addToStack', response.FileInput); 
+            if (response.FileInput.initialPreview != null) {
+              
+                let _input = $('#input-700')
+                _input.fileinput('destroy');
+
+                _input.fileinput({
+                    language: localizedData.Lang,
+                    theme: 'fa',
+                    allowedFileExtensions: ['jpg', 'jpeg', 'bmp', 'gif', 'tif', 'tiff', 'png', 'pdf'],
+                    maxFileCount: response.FileInput.maxFileCount,
+                    uploadUrl: urlUploadFileInput,
+                    uploadAsync: false,
+                    overwriteInitial: false,
+                    showUpload: false,
+                    initialPreviewAsData: true,
+                    initialPreview: response.FileInput.initialPreview,
+                    initialPreviewConfig: response.FileInput.initialPreviewConfig,
+                    initialPreviewAsData: response.FileInput.initialPreviewAsData,
+                    uploadExtraData: function (previewId, index) {
+                        var input = document.getElementById('input-700');
+                        var files = input.files[index];
+                        var formData = new FormData();
+                        formData.append("files", files);
+                        return {
+                            files: files,
+                            companyid: $('#hdcompanyId').val(),
+                            paymentid: $('#hdpaymentId').val()
+                        };
+
+                    },
+                });
+
+            }
+            else {
+                let _input = $('#input-700')
+                _input.fileinput('destroy');
+                _input.fileinput({
+                    language: localizedData.Lang,
+                    theme: 'fa',
+                    allowedFileExtensions: ['jpg', 'jpeg', 'bmp', 'gif', 'tif', 'tiff', 'png', 'pdf'],
+                    maxFileCount: localizedData.ConfigUpload,
+                    uploadUrl: urlUploadFileInput,
+                    uploadAsync: false,
+                    overwriteInitial: false,
+                    showUpload: false,
+                    initialPreviewAsData: true,
+                    uploadExtraData: function (previewId, index) {
+                        var input = document.getElementById('input-700');
+                        var files = input.files[index];
+                        var formData = new FormData();
+                        formData.append("files", files);
+                        return {
+                            files: files,
+                            companyid: $('#hdcompanyId').val(),
+                            paymentid: $('#hdpaymentId').val()
+                        };
+
+                    },
+                });
             }
             
         },

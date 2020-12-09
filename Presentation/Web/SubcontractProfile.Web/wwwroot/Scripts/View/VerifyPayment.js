@@ -99,7 +99,7 @@ $(document).ready(function () {
 
     var urlUploadFile = url.replace('Action', 'UploadMulti');
     $(".file-loading input").fileinput({
-        language: 'th',
+        language: localizedData.Lang,
         theme: 'fa',
         allowedFileExtensions: ['jpg', 'jpeg', 'bmp', 'gif', 'tif', 'tiff', 'png', 'pdf'],
         maxFileCount: localizedData.ConfigUpload,
@@ -108,6 +108,8 @@ $(document).ready(function () {
         overwriteInitial: false,
         showRemove: false,
         showUpload: false,
+        showPreview: true,
+        showBrowse: false,
         initialPreviewAsData: true,
         uploadExtraData: function (previewId, index) {
             var input = document.getElementById('input-700');
@@ -522,8 +524,72 @@ function getDataById(id) {
                 }
 
                 console.log(result.FileInput);
+
+                var urlUploadFileInput = url.replace('Action', 'UploadMulti');
+
                 if (result.FileInput != null) {
-                    $(".file-loading input").fileinput(result.FileInput);
+                    let _input = $('#input-700')
+                    _input.fileinput('destroy');
+
+                    _input.fileinput({
+                        language: localizedData.Lang,
+                        theme: 'fa',
+                        allowedFileExtensions: ['jpg', 'jpeg', 'bmp', 'gif', 'tif', 'tiff', 'png', 'pdf'],
+                        maxFileCount: localizedData.ConfigUpload,
+                        uploadUrl: urlUploadFileInput,
+                        uploadAsync: false,
+                        overwriteInitial: false,
+                        showRemove: false,
+                        showUpload: false,
+                        showPreview: true,
+                        showBrowse: false,
+                        initialPreviewAsData: true,
+                        initialPreview: response.FileInput.initialPreview,
+                        initialPreviewConfig: response.FileInput.initialPreviewConfig,
+                        initialPreviewAsData: response.FileInput.initialPreviewAsData,
+                        uploadExtraData: function (previewId, index) {
+                            var input = document.getElementById('input-700');
+                            var files = input.files[index];
+                            var formData = new FormData();
+                            formData.append("files", files);
+                            return {
+                                files: files,
+                                companyid: $('#hdcompanyId').val(),
+                                paymentid: $('#hdpaymentId').val()
+                            };
+
+                        },
+                    });
+                }
+                else {
+                    let _input = $('#input-700')
+                    _input.fileinput('destroy');
+                    _input.fileinput({
+                        language: localizedData.Lang,
+                        theme: 'fa',
+                        allowedFileExtensions: ['jpg', 'jpeg', 'bmp', 'gif', 'tif', 'tiff', 'png', 'pdf'],
+                        maxFileCount: localizedData.ConfigUpload,
+                        uploadUrl: urlUploadFileInput,
+                        uploadAsync: false,
+                        overwriteInitial: false,
+                        showRemove: false,
+                        showUpload: false,
+                        showPreview: true,
+                        showBrowse: false,
+                        initialPreviewAsData: true,
+                        uploadExtraData: function (previewId, index) {
+                            var input = document.getElementById('input-700');
+                            var files = input.files[index];
+                            var formData = new FormData();
+                            formData.append("files", files);
+                            return {
+                                files: files,
+                                companyid: $('#hdcompanyId').val(),
+                                paymentid: $('#hdpaymentId').val()
+                            };
+
+                        },
+                    });
                 }
               
             }
