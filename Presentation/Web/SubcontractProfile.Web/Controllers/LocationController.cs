@@ -761,6 +761,9 @@ namespace SubcontractProfile.Web.Controllers
 
                     clientLocation.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    string ee = JsonConvert.SerializeObject(model);
+
                     var httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
                     HttpResponseMessage responseResult = clientLocation.PutAsync(uriLocation, httpContent).Result;
 

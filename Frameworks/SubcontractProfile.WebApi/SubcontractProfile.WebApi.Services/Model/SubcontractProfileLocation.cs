@@ -130,7 +130,7 @@ namespace SubcontractProfile.WebApi.Services.Model
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string Status { get; set; }
 
-        public System.DateTime CreateDate { get; set; }
+        public System.DateTime? CreateDate { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string CreateBy { get; set; }

@@ -306,7 +306,7 @@ namespace SubcontractProfile.WebApi.Services.Services
                     row["bank_account_name"] = new SqlString(curObj.BankAccountName);
                     row["bank_attach_file"] = new SqlString(curObj.BankAttachFile);
                     row["status"] = new SqlString(curObj.Status);
-                    row["create_date"] = new SqlDateTime(curObj.CreateDate);
+                    row["create_date"] = curObj.CreateDate == null ? SqlDateTime.Null : new SqlDateTime(curObj.CreateDate.Value);
                     row["create_by"] = new SqlString(curObj.CreateBy);
                     row["update_by"] = new SqlString(curObj.UpdateBy);
                     row["update_date"] = curObj.UpdateDate == null ? SqlDateTime.Null : new SqlDateTime(curObj.UpdateDate.Value);
