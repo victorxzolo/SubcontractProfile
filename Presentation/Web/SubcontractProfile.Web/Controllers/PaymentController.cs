@@ -1118,53 +1118,42 @@ namespace SubcontractProfile.Web.Controllers
 
 
                 ResultChkfile chk = ValidateFileUpload(files, companyid);
-                if (chk.status)
+            if (chk.status)
+            {
+
+                int count = GetConfigUpload();
+                int fCount = 0;
+                if (Directory.Exists(Path.Combine(contentRootPath, "upload", "temp", paymentid)))
                 {
-                    fid = Guid.NewGuid();
-                    await UploadfileTemp(files, fid.ToString(), paymentid);
+                    fCount = Directory.GetFiles(Path.Combine(contentRootPath, "upload", "temp", paymentid), "*").Length;
+                }
 
-                    string urlDelete = Url.Action("DeletefileSession", "Payment");
+                fCount = fCount + 1;
 
-                    string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
-                    filename = EnsureCorrectFilename(filename);
+                string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
+                filename = EnsureCorrectFilename(filename);
 
-                   
-                    var path = Path.Combine(contentRootPath, "upload", "temp", filename);
+                var path = Path.Combine(contentRootPath, "upload", "temp", filename);
                 string content = Path.GetExtension(filename);
 
                 var virtualPath = Path.Combine(Url.Action("DownloadfileTemp", "Payment", new { filename = filename, paymentid = paymentid }));
 
-                if(content==".pdf")
-                {
-                    content = "pdf";
-                }
-                else
-                {
-                    content = "image";
-                }
+                string urlDelete = Url.Action("DeletefileSession", "Payment");
 
-                int count = GetConfigUpload();
-                int fCount = Directory.GetFiles(Path.Combine(contentRootPath, "upload", "temp", paymentid), "*", SearchOption.AllDirectories).Length;
-
-                if(fCount > 5)
+                if (fCount <= count)
                 {
-                    JsonResult.append = false;
-                    CultureInfo culture = CultureInfo.CurrentCulture;
-                    if (culture.Name == "th")
+                    fid = Guid.NewGuid();
+                    await UploadfileTemp(files, fid.ToString(), paymentid);
+
+                    if (content == ".pdf")
                     {
-                        JsonResult.error = "ไฟล์ที่คุณเลือกมีจำนวน (" + fCount + ") ซึ่งเกินกว่าที่ระบบอนุญาตที่ "+count+", กรุณาลองใหม่อีกครั้ง!";
+                        content = "pdf";
                     }
                     else
                     {
-                        JsonResult.error = "Number of files selected for upload (" + fCount + ") exceeds maximum allowed limit of "+count+".";
+                        content = "image";
                     }
 
-                   
-                    JsonResult.initialPreview = new List<string>();
-                    JsonResult.initialPreviewConfig = new List<initialPreviewConfig>();
-                }
-                else
-                {
                     JsonResult.append = true;
 
                     JsonResult.initialPreview = new List<string>();
@@ -1190,17 +1179,34 @@ namespace SubcontractProfile.Web.Controllers
                         type = content
                     });
                 }
-
-              
-                }
                 else
                 {
+                   
+
                     JsonResult.append = false;
-                    JsonResult.error = chk.mess;
+                    CultureInfo culture = CultureInfo.CurrentCulture;
+                    if (culture.Name == "th")
+                    {
+                        JsonResult.error = "ไฟล์ที่คุณเลือกมีจำนวน (" + fCount + ") ซึ่งเกินกว่าที่ระบบอนุญาตที่ " + count + ", กรุณาลองใหม่อีกครั้ง!";
+                    }
+                    else
+                    {
+                        JsonResult.error = "Number of files selected for upload (" + fCount + ") exceeds maximum allowed limit of " + count + ".";
+                    }
+
+
                     JsonResult.initialPreview = new List<string>();
                     JsonResult.initialPreviewConfig = new List<initialPreviewConfig>();
-
                 }
+            }
+            else
+            {
+                JsonResult.append = false;
+                JsonResult.error = chk.mess;
+                JsonResult.initialPreview = new List<string>();
+                JsonResult.initialPreviewConfig = new List<initialPreviewConfig>();
+
+            }
 
 
            
