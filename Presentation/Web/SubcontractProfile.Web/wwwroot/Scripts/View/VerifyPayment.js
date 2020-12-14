@@ -544,9 +544,9 @@ function getDataById(id) {
                         showPreview: true,
                         showBrowse: false,
                         initialPreviewAsData: true,
-                        initialPreview: response.FileInput.initialPreview,
-                        initialPreviewConfig: response.FileInput.initialPreviewConfig,
-                        initialPreviewAsData: response.FileInput.initialPreviewAsData,
+                        initialPreview: result.FileInput.initialPreview,
+                        initialPreviewConfig: result.FileInput.initialPreviewConfig,
+                        initialPreviewAsData: result.FileInput.initialPreviewAsData,
                         uploadExtraData: function (previewId, index) {
                             var input = document.getElementById('input-700');
                             var files = input.files[index];

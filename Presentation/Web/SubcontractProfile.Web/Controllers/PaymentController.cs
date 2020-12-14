@@ -365,11 +365,12 @@ namespace SubcontractProfile.Web.Controllers
                     {
                         #region Copy File to server
 
-                        string[] arrayfileid = info.Name.Split('_');
+                        //string[] arrayfileid = info.Name.Split('_');
+                        var fid = Guid.NewGuid();
 
                         ListFile.Add(new SubcontractProfileFileModel
                         {
-                            file_id = new Guid(arrayfileid[0].ToString()),
+                            file_id = fid,
                             company_id = new Guid(Payment.CompanyId.ToString()),
                             CreateBy = Payment.ModifiedBy,
                             CreateDate = DateTime.Now,
@@ -381,7 +382,7 @@ namespace SubcontractProfile.Web.Controllers
 
                         L_files.Add(new FileUploadModal
                         {
-                            file_id = new Guid(arrayfileid[0].ToString()),
+                            file_id = fid,
                             Filename = info.Name
 
                         });
@@ -391,7 +392,7 @@ namespace SubcontractProfile.Web.Controllers
                 }
 
                 GetFile(path, ref L_files);
-                if (L_files.Count() > 0)
+                if (L_files!=null && L_files.Count() > 0)
                 {
                     foreach (var v in L_files)
                     {
@@ -405,6 +406,10 @@ namespace SubcontractProfile.Web.Controllers
                         resultGetFile = await Uploadfile(Ffile, Payment.PaymentId, dataUser.companyid.ToString());
                     }
 
+                }
+                else
+                {
+                    resultGetFile = false;
                 }
                 if (resultGetFile)
                 {
@@ -472,13 +477,14 @@ namespace SubcontractProfile.Web.Controllers
                 }
                 else
                 {
+
                     message = _localizer["MessageConfirmPaymentUnSuccess"];
                 }
 
             }
             catch (Exception ex)
             {
-                dataresponse = ex.Message;
+                message = ex.Message;
             }
 
             return Json(new { Data = dataresponse, Status = status, Message = message }); ;
@@ -1423,11 +1429,11 @@ namespace SubcontractProfile.Web.Controllers
                             }
                             else
                             {
-                                System.IO.DirectoryInfo di = new DirectoryInfo(strdir);
-                                foreach (FileInfo finfo in di.GetFiles())
-                                {
-                                    finfo.Delete();
-                                }
+                                //System.IO.DirectoryInfo di = new DirectoryInfo(strdir);
+                                //foreach (FileInfo finfo in di.GetFiles())
+                                //{
+                                //    finfo.Delete();
+                                //}
                             }
 
 
