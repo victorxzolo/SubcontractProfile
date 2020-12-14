@@ -42,7 +42,7 @@ button:focus {
         -moz-transform: translateY(-49%);
         -o-transform: translateY(-49%);
         -ms-transform: translateY(-49%);
-        /*   transform: translateY(-49%);*/
+           transform: translateY(-49%);
         top: 50%;
         margin-right: 5px;
     }
@@ -99,7 +99,7 @@ button:focus {
         -moz-transform: translateY(-49%);
         -o-transform: translateY(-49%);
         -ms-transform: translateY(-49%);
-        /*   transform: translateY(-49%);*/
+           transform: translateY(-49%);
         top: 50%;
         margin-right: 5px;
     }
@@ -156,7 +156,7 @@ button:focus {
         -moz-transform: translateY(-49%);
         -o-transform: translateY(-49%);
         -ms-transform: translateY(-49%);
-        /*   transform: translateY(-49%);*/
+           transform: translateY(-49%);
         top: 50%;
         margin-right: 5px;
     }
@@ -213,7 +213,7 @@ button:focus {
         -moz-transform: translateY(-49%);
         -o-transform: translateY(-49%);
         -ms-transform: translateY(-49%);
-        /*   transform: translateY(-49%);*/
+           transform: translateY(-49%);
         top: 50%;
         margin-right: 5px;
     }
@@ -270,7 +270,7 @@ button:focus {
         -moz-transform: translateY(-49%);
         -o-transform: translateY(-49%);
         -ms-transform: translateY(-49%);
-        /*   transform: translateY(-49%);*/
+           transform: translateY(-49%);
         top: 50%;
         margin-right: 5px;
     }
