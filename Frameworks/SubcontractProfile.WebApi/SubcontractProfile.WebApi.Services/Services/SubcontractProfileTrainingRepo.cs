@@ -100,7 +100,8 @@ namespace SubcontractProfile.WebApi.Services.Services
             p.Add("@modified_by", subcontractProfileTraining.ModifiedBy);
             p.Add("@booking_date", subcontractProfileTraining.BookingDate);
             p.Add("@remark_for_ais", subcontractProfileTraining.RemarkForAis);
-
+            p.Add("@contract_email", subcontractProfileTraining.ContractEmail);
+            p.Add("@contract_phone", subcontractProfileTraining.ContractPhone);
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileTraining_Update", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
 
