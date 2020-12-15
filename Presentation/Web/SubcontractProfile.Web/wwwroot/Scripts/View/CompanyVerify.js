@@ -737,31 +737,27 @@ $(document).ready(function () {
 
 function onSaveCompanyProfileVerified(status) {
 
-    var data = new FormData();
+    var data  = new Object();
 
-    data.append("CompanyId", $('#hdCompanyId').val());
-
-    if (status != "") {
-        data.append("status", status);
-    }
-
-    data.append("RemarkForSub", $('#txtRemarkForSub').val());
+    data.CompanyId = $('#hdCompanyId').val();
+    data.Status = status;
+    //data.ContractStartDate = $('#datecontractstart').val();
+    //data.ContractEndDate = $('#datecontractend').val();
+    data.RemarkForSub = $('#txtRemarkForSub').val();
+    data.VendorCode = $('#txtvendercode').val();
 
     var urlOnSave = url.replace('Action', 'OnUpdateByVerified');
     $.ajax({
         url: urlOnSave,
         type: 'POST',
         async: false,
-        data: data,
-        processData: false,
-        contentType: false,
-        //data: {
-        //    model: company,
-        //    status: status,
-        //    contractstart: $('#datecontractstart').val(),
-        //    contractend: $('#datecontractend').val()
-        //},
-        //dataType: "json",
+        dataType: "json",
+        data: {
+            model: data,
+            contractstart: $('#datecontractstart').val(),
+            contractend: $('#datecontractend').val()
+        },
+       
         success: function (result) {
             if (result.Response.Status) {
                 bootbox.alert(result.Response.Message);
@@ -874,8 +870,8 @@ function onSaveCompanyProfile(status) {
         data.append("status", status);
     }
  
-    data.append("contractstart", $('#datecontractstart').val());
-    data.append("contractend", $('#datecontractend').val());
+    //data.append("contractstart", $('#datecontractstart').val());
+    //data.append("contractend", $('#datecontractend').val());
 
     data.append("FileBookBank", $("#inputuploadbookbank").get(0).files[0]);
     data.append("FileCompanyCertified", $("#inputUploadcertificate").get(0).files[0]);
@@ -887,9 +883,9 @@ function onSaveCompanyProfile(status) {
     data.append("CommercialRegistrationFile", $('#lbuploadComRegis').text());
     data.append("VatRegistrationCertificateFile", $('#lbupload20').text());
 
-    data.append("RemarkForSub", $('#txtRemarkForSub').val());
+    //data.append("RemarkForSub", $('#txtRemarkForSub').val());
 
-    data.append("VendorCode", $('#txtvendercode').val())
+    //data.append("VendorCode", $('#txtvendercode').val())
 
     data.append("Remark", $('#txtRemark').val())
 
@@ -1118,16 +1114,18 @@ function getDataById(companyId) {
         success: function (result) {
             console.log(result)
             if (result != null) {
-               
-                //if (result.Status == 'Activate') {
-                //    $('#divSignContract').show();
-                //    $('#btnnotapprove').hide();
-                //    $('#btnapprove').hide();
-                //} else {
-                //    $('#divSignContract').hide();
-                //    $('#btnnotapprove').show();
-                //    $('#btnapprove').show();
-                //}
+
+                if (result.Status == 'Activate' || result.Status == 'Approve' || result.Status =='Not Approve') {
+                    //$('#divSignContract').show();
+                    $('#btnnotapprove').hide();
+                    $('#btnapprove').hide();
+                    $('#btnreject').hide();
+                } else {
+                    //$('#divSignContract').hide();
+                    $('#btnnotapprove').show();
+                    $('#btnapprove').show();
+                    $('#btnreject').show();
+                }
 
                 
                 $('#lblStatusSub').text(result.Status);
@@ -1293,6 +1291,8 @@ function getDataById(companyId) {
                 $('#txtvendercode').val(result.VendorCode);
 
                 $('#txtRemark').val(result.Remark);
+
+
        
             }
 
@@ -1619,6 +1619,7 @@ function BindDDLTitle() {
         type: "POST",
         url: urlDDLTitle,
         dataType: "json",
+        async: false,
         success: function (data) {
 
             if (data != null) {

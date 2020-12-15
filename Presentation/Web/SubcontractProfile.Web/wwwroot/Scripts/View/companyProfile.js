@@ -1898,6 +1898,7 @@ function uploadFiles(inputId) {
             type: "POST",
             url: urlDDLTitle,
             dataType: "json",
+            async: false,
             success: function (data) {
 
                 if (data != null) {
@@ -1972,6 +1973,7 @@ function uploadFiles(inputId) {
             url: urlDDLBank,
             //data: { province_id: province },
             dataType: "json",
+            async: false,
             success: function (data) {
 
                 if (data != null) {
@@ -2031,6 +2033,7 @@ function BindDDlBankAccountType() {
         url: urlGetDataBankAccountType,
         //data: { province_id: province },
         dataType: "json",
+        async: false,
         success: function (data) {
      
             if (data != null) {

@@ -145,7 +145,7 @@ namespace SubcontractProfile.WebApi.Services
             p.Add("@company_alias", subcontractProfileCompany.CompanyAlias);
             p.Add("@distribution_channel", subcontractProfileCompany.DistributionChannel);
             p.Add("@channel_sale_group", subcontractProfileCompany.ChannelSaleGroup);
-            p.Add("@vendor_code", subcontractProfileCompany.VendorCode);
+           // p.Add("@vendor_code", subcontractProfileCompany.VendorCode);
             p.Add("@customer_code", subcontractProfileCompany.CustomerCode);
             p.Add("@area_id", subcontractProfileCompany.AreaId);
             p.Add("@tax_id", subcontractProfileCompany.TaxId);
@@ -157,8 +157,8 @@ namespace SubcontractProfile.WebApi.Services
             p.Add("@contract_agreement_file", subcontractProfileCompany.ContractAgreementFile);
             p.Add("@deposit_authorization_level", subcontractProfileCompany.DepositAuthorizationLevel);
             p.Add("@deposit_payment_type", subcontractProfileCompany.DepositPaymentType);
-            p.Add("@contract_start_date", subcontractProfileCompany.ContractStartDate);
-            p.Add("@contract_end_date", subcontractProfileCompany.ContractEndDate);
+            //p.Add("@contract_start_date", subcontractProfileCompany.ContractStartDate);
+           // p.Add("@contract_end_date", subcontractProfileCompany.ContractEndDate);
             p.Add("@over_draft_deposit", subcontractProfileCompany.OverDraftDeposit);
             p.Add("@balance_deposit", subcontractProfileCompany.BalanceDeposit);
             p.Add("@company_status", subcontractProfileCompany.CompanyStatus);
@@ -197,7 +197,7 @@ namespace SubcontractProfile.WebApi.Services
             p.Add("@company_title_en_id", subcontractProfileCompany.CompanyTitleEnId);
             p.Add("@status", subcontractProfileCompany.Status);
             p.Add("@activate_date", subcontractProfileCompany.ActivateDate);
-            p.Add("@remark_for_sub", subcontractProfileCompany.RemarkForSub);
+            //p.Add("@remark_for_sub", subcontractProfileCompany.RemarkForSub);
            // p.Add("@asc_code", subcontractProfileCompany.ASCCode);
 
             var ok = await _dbContext.Connection.ExecuteAsync
@@ -499,6 +499,10 @@ namespace SubcontractProfile.WebApi.Services
             p.Add("@company_id", subcontractProfileCompany.CompanyId);
             p.Add("@update_by", subcontractProfileCompany.UpdateBy);
             p.Add("@status", subcontractProfileCompany.Status);
+            p.Add("@contract_start_date", subcontractProfileCompany.ContractStartDate);
+            p.Add("@contract_end_date", subcontractProfileCompany.ContractEndDate);
+            p.Add("@remark_for_sub", subcontractProfileCompany.RemarkForSub);
+            p.Add("@vendor_code", subcontractProfileCompany.VendorCode);
 
             var ok = await _dbContext.Connection.ExecuteAsync
                 ("uspSubcontractProfileCompany_updateVerify", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);

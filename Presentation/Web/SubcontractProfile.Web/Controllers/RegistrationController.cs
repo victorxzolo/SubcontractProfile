@@ -919,7 +919,7 @@ namespace SubcontractProfile.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult OnUpdateByVerified(SubcontractProfileCompanyModel model, string status)
+        public ActionResult OnUpdateByVerified(SubcontractProfileCompanyModel model, string? contractstart, string? contractend)
         {
             ResponseModel res = new ResponseModel();
             string user = "";
@@ -942,16 +942,16 @@ namespace SubcontractProfile.Web.Controllers
 
                 #region Update Company for AIS
 
-                model.Status = status;
-
-                //if (status.Trim(' ') == "Approve")
-                //{
-                //    model.Status = "Y";
-                //}
-                //else if (status.Trim(' ') == "NotApprove")
-                //{
-                //    model.Status = "N";
-                //}
+                if (contractstart != null && contractstart != "")
+                {
+                    DateTime datefrom = DateTime.ParseExact(contractstart, "dd/MM/yyyy", new CultureInfo("en-US"));
+                    model.ContractStartDate = datefrom;
+                }
+                if (contractend != null && contractend != "")
+                {
+                    DateTime dateto = DateTime.ParseExact(contractend, "dd/MM/yyyy", new CultureInfo("en-US"));
+                    model.ContractEndDate = dateto;
+                }
 
                 var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "UpdateVerify"));
 
@@ -1005,7 +1005,7 @@ namespace SubcontractProfile.Web.Controllers
         }
 
             [HttpPost]
-        public async Task<IActionResult> OnSave(SubcontractProfileCompanyModel model,string status,string? contractstart,string? contractend)
+        public async Task<IActionResult> OnSave(SubcontractProfileCompanyModel model,string status)
         {
             bool resultGetFile = true;
             ResponseModel res = new ResponseModel();
@@ -1028,16 +1028,7 @@ namespace SubcontractProfile.Web.Controllers
 
                 #endregion
 
-                if (contractstart != null && contractstart != "")
-                {
-                    DateTime datefrom = DateTime.ParseExact(contractstart, "dd/MM/yyyy", new CultureInfo("en-US"));
-                    model.ContractStartDate = datefrom;
-                }
-                if (contractend != null && contractend != "")
-                {
-                    DateTime dateto = DateTime.ParseExact(contractend, "dd/MM/yyyy", new CultureInfo("en-US"));
-                    model.ContractEndDate = dateto;
-                }
+   
 
                 #region Copy File to server
                 //var dataUploadfile = SessionHelper.GetObjectFromJson<List<FileUploadModal>>(HttpContext.Session, "userUploadfileDaftCompanySSO");
