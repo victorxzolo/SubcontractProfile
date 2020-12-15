@@ -214,6 +214,10 @@ $(document).ready(function () {
     $('#btnClearDataModal').click(function () {
         clearData();
     });
+
+    $('#btnClearModal').click(function () {
+        DeleteFileTemp();
+    });
 });
 
 
@@ -1031,6 +1035,34 @@ function GetStatus() {
         failure: function (msg) {
             $('#paymentstatus').empty();
             $('#paymentstatus').append($("<option></option>").val("").text(localizedData.ddlSelectStatus));
+        }
+    });
+
+}
+
+function DeleteFileTemp() {
+    var urlDatadelete = url.replace('Action', 'DeleteFileTemp');
+    $.ajax({
+        type: "POST",
+        url: urlDatadelete,
+        async: false,
+        dataType: "json",
+        data: { paymentid: $('#hdpaymentId').val() },
+        success: function (response) {
+
+            if (response.Status) {
+              
+
+                $("#ConfirmPayment").modal('hide');
+            }
+            else {
+               
+
+            }
+
+        },
+        failure: function (msg) {
+            console.log(msg);
         }
     });
 

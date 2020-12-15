@@ -487,7 +487,7 @@ namespace SubcontractProfile.Web.Controllers
                 message = ex.Message;
             }
 
-            return Json(new { Data = dataresponse, Status = status, Message = message }); ;
+            return Json(new { Data = dataresponse, Status = status, Message = message }); 
         }
 
         #region VerifyPayment
@@ -1500,6 +1500,34 @@ namespace SubcontractProfile.Web.Controllers
                 System.IO.File.Delete(path);
             }
                 return true;
+        }
+
+        [HttpPost]
+        public IActionResult DeleteFileTemp(string paymentid)
+        {
+            bool status = true;
+            string message = "";
+            try
+            {
+                string contentRootPath = _webHostEnvironment.ContentRootPath;
+                var path = Path.Combine(contentRootPath, "upload", "temp", paymentid);
+                System.IO.DirectoryInfo di = new DirectoryInfo(path);
+
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+                di.Delete(true);
+            }
+            catch (Exception e)
+            {
+                status = false;
+                message = e.Message;
+                throw;
+            }
+
+          return  Json(new { Status = status, Message = message });
+
         }
 
         private string GetPathTempAndFilename(string filename,string fid,string paymentid)
