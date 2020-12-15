@@ -215,9 +215,6 @@ $(document).ready(function () {
         clearData();
     });
 
-    $('#btnClearModal').click(function () {
-        DeleteFileTemp();
-    });
 });
 
 
@@ -530,11 +527,11 @@ function confirmpayment() {
 function GetIdpayment(paymentId, status) {
     var urlGetByPaymentId = url.replace('Action', 'GetByPaymentId');
     $.ajax({
-        type: "GET",
-        url: urlGetByPaymentId+"?id=" + paymentId,
-        processData: false,
-        contentType: false,
+        type: "POST",
+        url: urlGetByPaymentId,
         async: false,
+        data: { id: paymentId },
+        dataType: "json",
         success: function (response) {
             $('#hdpaymentId').val(response.Data.PaymentId);
 
@@ -1040,30 +1037,3 @@ function GetStatus() {
 
 }
 
-function DeleteFileTemp() {
-    var urlDatadelete = url.replace('Action', 'DeleteFileTemp');
-    $.ajax({
-        type: "POST",
-        url: urlDatadelete,
-        async: false,
-        dataType: "json",
-        data: { paymentid: $('#hdpaymentId').val() },
-        success: function (response) {
-
-            if (response.Status) {
-              
-
-                $("#ConfirmPayment").modal('hide');
-            }
-            else {
-               
-
-            }
-
-        },
-        failure: function (msg) {
-            console.log(msg);
-        }
-    });
-
-}

@@ -217,13 +217,17 @@ namespace SubcontractProfile.Web.Controllers
             }
 
         }
-        [HttpGet]
+        [HttpPost]
         public IActionResult GetByPaymentId(string id)
         {
             var data = new SubcontractProfilePaymentModel();
             jsonFileResult JsonResult = new jsonFileResult();
 
-       
+            #region DeleteFileTemp
+
+            DeleteFileTemp(id);
+
+            #endregion
 
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             string uriString = string.Format("{0}/{1}", strpathAPI + "Payment/GetByPaymentId"
@@ -810,6 +814,12 @@ namespace SubcontractProfile.Web.Controllers
         {
             var PaymentResult = new SubcontractProfilePaymentModel();
             jsonFileResult JsonResult = new jsonFileResult();
+
+            #region DeleteFileTemp
+
+            DeleteFileTemp(paymentId);
+
+            #endregion
 
             // Getting all company data  
             HttpClient client = new HttpClient();
@@ -1501,32 +1511,33 @@ namespace SubcontractProfile.Web.Controllers
             }
                 return true;
         }
-
-        [HttpPost]
-        public IActionResult DeleteFileTemp(string paymentid)
+        private bool DeleteFileTemp(string paymentid)
         {
             bool status = true;
-            string message = "";
             try
             {
                 string contentRootPath = _webHostEnvironment.ContentRootPath;
                 var path = Path.Combine(contentRootPath, "upload", "temp", paymentid);
-                System.IO.DirectoryInfo di = new DirectoryInfo(path);
-
-                foreach (FileInfo file in di.GetFiles())
+                
+                
+                if(Directory.Exists(path))
                 {
-                    file.Delete();
+                    System.IO.DirectoryInfo di = new DirectoryInfo(path);
+                    foreach (FileInfo file in di.GetFiles())
+                    {
+                        file.Delete();
+                    }
+                    di.Delete(true);
                 }
-                di.Delete(true);
+                
             }
             catch (Exception e)
             {
                 status = false;
-                message = e.Message;
                 throw;
             }
 
-          return  Json(new { Status = status, Message = message });
+            return status;
 
         }
 
