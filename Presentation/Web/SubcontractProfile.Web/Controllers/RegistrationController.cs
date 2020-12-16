@@ -430,6 +430,21 @@ namespace SubcontractProfile.Web.Controllers
                                 }
                             }
 
+                            string straddr = "";
+                            straddr = string.Concat(f.HouseNo != null && f.HouseNo != "" ? f.HouseNo : "", " ",
+                                                  f.Building != null && f.Building != "" ? _localizer["Building"] + " " + f.Building : "", " ",
+                                                  f.Floor != null && f.Floor != "" ? _localizer["Floor"] + " " + f.Floor : "", " ",
+                                                  f.RoomNo != null && f.RoomNo != "" ? _localizer["Room"] + " " + f.RoomNo : "", " ",
+                                                  f.VillageName != null && f.VillageName != "" ? _localizer["Village"] + " " + f.VillageName : "", " ",
+                                                  f.Moo != null ? _localizer["Moo"] + " " + f.Moo : "", " ",
+                                                  f.Soi != null && f.Soi != "" ? _localizer["Soi"] + " " + f.Soi : "", " ",
+                                                  f.Road != null && f.Road != "" ? _localizer["Street"] + " " + f.Road : "", " ",
+                                                  f.SubDistrictId != 0 ? _localizer["SubDistrict"] + " " + f.sub_district_name : "", " ",
+                                                  f.DistrictId != 0 ? _localizer["District"] + " " + f.district_name : "", " ",
+                                                  f.ProvinceId != 0 ? _localizer["Province"] + " " + f.province_name : "", " ",
+                                                  f.ZipCode != "" ? f.ZipCode : "");
+                            f.outFullAddress = straddr;
+
                         }
                     }
 
@@ -501,6 +516,21 @@ namespace SubcontractProfile.Web.Controllers
                                 Guid addr_id = Guid.NewGuid();
                                 r.AddressId = addr_id;
                                 data.Add(r);
+
+                                string straddr = "";
+                                straddr = string.Concat(r.HouseNo != null && r.HouseNo != "" ? r.HouseNo : "", " ",
+                                                      r.Building != null && r.Building != "" ? _localizer["Building"] + " " + r.Building : "", " ",
+                                                      r.Floor != null && r.Floor != "" ? _localizer["Floor"] + " " + r.Floor : "", " ",
+                                                      r.RoomNo != null && r.RoomNo != "" ? _localizer["Room"] + " " + r.RoomNo : "", " ",
+                                                      r.VillageName != null && r.VillageName != "" ? _localizer["Village"] + " " + r.VillageName : "", " ",
+                                                      r.Moo != null ? _localizer["Moo"] + " " + r.Moo : "", " ",
+                                                      r.Soi != null && r.Soi != "" ? _localizer["Soi"] + " " + r.Soi : "", " ",
+                                                      r.Road != null && r.Road != "" ? _localizer["Street"] + " " + r.Road : "", " ",
+                                                      r.SubDistrictId != 0 ? _localizer["SubDistrict"] + " " + r.sub_district_name : "", " ",
+                                                      r.DistrictId != 0 ? _localizer["District"] + " " + r.district_name : "", " ",
+                                                      r.ProvinceId != 0 ? _localizer["Province"] + " " + r.province_name : "", " ",
+                                                      r.ZipCode != "" ? r.ZipCode : "");
+                                r.outFullAddress = straddr;
                             }
 
                         }
@@ -512,6 +542,21 @@ namespace SubcontractProfile.Web.Controllers
                             Guid addr_id = Guid.NewGuid();
                             e.AddressId = addr_id;
                             data.Add(e);
+
+                            string straddr = "";
+                            straddr = string.Concat(e.HouseNo != null && e.HouseNo != "" ? e.HouseNo : "", " ",
+                                                  e.Building != null && e.Building != "" ? _localizer["Building"] + " " + e.Building : "", " ",
+                                                  e.Floor != null && e.Floor != "" ? _localizer["Floor"] + " " + e.Floor : "", " ",
+                                                  e.RoomNo != null && e.RoomNo != "" ? _localizer["Room"] + " " + e.RoomNo : "", " ",
+                                                  e.VillageName != null && e.VillageName != "" ? _localizer["Village"] + " " + e.VillageName : "", " ",
+                                                  e.Moo != null ? _localizer["Moo"] + " " + e.Moo : "", " ",
+                                                  e.Soi != null && e.Soi != "" ? _localizer["Soi"] + " " + e.Soi : "", " ",
+                                                  e.Road != null && e.Road != "" ? _localizer["Street"] + " " + e.Road : "", " ",
+                                                  e.SubDistrictId != 0 ? _localizer["SubDistrict"] + " " + e.sub_district_name : "", " ",
+                                                  e.DistrictId != 0 ? _localizer["District"] + " " + e.district_name : "", " ",
+                                                  e.ProvinceId != 0 ? _localizer["Province"] + " " + e.province_name : "", " ",
+                                                  e.ZipCode != "" ? e.ZipCode : "");
+                            e.outFullAddress = straddr;
                         }
 
                     }

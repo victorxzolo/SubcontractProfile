@@ -1587,6 +1587,21 @@ namespace SubcontractProfile.Web.Controllers
                                 Guid addr_id = Guid.NewGuid();
                                 r.AddressId = addr_id;
                                 data.Add(r);
+
+                                string straddr = "";
+                                straddr = string.Concat(r.HouseNo != null && r.HouseNo != "" ? r.HouseNo : "", " ",
+                                                      r.Building != null && r.Building != "" ? _localizer["Building"] + " " + r.Building : "", " ",
+                                                      r.Floor != null && r.Floor != "" ? _localizer["Floor"] + " " + r.Floor : "", " ",
+                                                      r.RoomNo != null && r.RoomNo != "" ? _localizer["Room"] + " " + r.RoomNo : "", " ",
+                                                      r.VillageName != null && r.VillageName != "" ? _localizer["Village"] + " " + r.VillageName : "", " ",
+                                                      r.Moo != null ? _localizer["Moo"] + " " + r.Moo : "", " ",
+                                                      r.Soi != null && r.Soi != "" ? _localizer["Soi"] + " " + r.Soi : "", " ",
+                                                      r.Road != null && r.Road != "" ? _localizer["Street"] + " " + r.Road : "", " ",
+                                                      r.SubDistrictId != 0 ? _localizer["SubDistrict"] + " " + r.sub_district_name : "", " ",
+                                                      r.DistrictId != 0 ? _localizer["District"] + " " + r.district_name : "", " ",
+                                                      r.ProvinceId != 0 ? _localizer["Province"] + " " + r.province_name : "", " ",
+                                                      r.ZipCode != "" ? r.ZipCode : "");
+                                r.outFullAddress = straddr;
                             }
                             
                         }
