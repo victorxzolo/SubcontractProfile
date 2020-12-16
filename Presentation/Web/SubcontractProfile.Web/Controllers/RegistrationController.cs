@@ -1120,6 +1120,10 @@ namespace SubcontractProfile.Web.Controllers
                     {
                         model.Status = "A";
                     }
+                    else if (status.Replace(" ", "") == "Reject")
+                    {
+                        model.Status = "R";
+                    }
 
                     //var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "UpdateVerify"));
                     var uriCompany = new Uri(Path.Combine(strpathAPI, "Company", "Update"));
@@ -2231,7 +2235,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/nas_subcontract");
+                string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/subcontract_nas");
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -2374,7 +2378,7 @@ namespace SubcontractProfile.Web.Controllers
                 client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/nas_subcontract");
+                string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/subcontract_nas");
                 HttpResponseMessage response = client.GetAsync(uriString).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -2441,7 +2445,7 @@ namespace SubcontractProfile.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/nas_subcontract");
+            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/subcontract_nas");
             HttpResponseMessage response = client.GetAsync(uriString).Result;
             if (response.IsSuccessStatusCode)
             {

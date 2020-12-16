@@ -313,7 +313,7 @@
             </div>
         </div>*@
                         <div class="container needs-validation-address" novalidate>
-                            <div style="display:none;">
+                            @*<div style="display:none;">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <label>@Localizer["AddressType"]</label>
@@ -330,14 +330,14 @@
                                         <div class="n-chk">
                                             <label class="new-control new-checkbox checkbox-primary">
                                                 <input id="chkLocationBranchLo" type="checkbox" name="address_type_id" class="new-control-input" value="01" required>
-                                                <span class="new-control-indicator"></span>@*@Localizer["BranchAddress"]*@
+                                                <span class="new-control-indicator"></span>
                                             </label>
                                         </div>
 
                                         <div class="n-chk">
                                             <label class="new-control new-checkbox checkbox-primary">
                                                 <input id="chkLocationDocLo" type="checkbox" name="address_type_id" class="new-control-input" value="04" required>
-                                                <span class="new-control-indicator"></span>@*@Localizer["DocumentAddress"]*@@*ที่อยู่จัดส่งเอกสาร*@
+                                                <span class="new-control-indicator"></span>
                                             </label>
                                         </div>
                                     </div>
@@ -345,13 +345,13 @@
                                         <div class="n-chk">
                                             <label class="new-control new-checkbox checkbox-primary">
                                                 <input id="chkLocationTaxLo" type="checkbox" name="address_type_id" class="new-control-input" value="02" required>
-                                                <span class="new-control-indicator"></span>@*@Localizer["TaxAddress"]*@@*ที่อยู่ตามใบกำกับภาษี*@
+                                                <span class="new-control-indicator"></span>
                                             </label>
                                         </div>
                                         <div class="n-chk">
                                             <label class="new-control new-checkbox checkbox-primary">
                                                 <input id="chkLocationShipLo" type="checkbox" name="address_type_id" class="new-control-input" value="05" required>
-                                                <span class="new-control-indicator"></span>@*@Localizer["ShippingAddress"]*@@*ที่อยู่จัดส่งสินค้า*@
+                                                <span class="new-control-indicator"></span>
                                             </label>
                                         </div>
 
@@ -361,13 +361,13 @@
                                         <div class="n-chk">
                                             <label class="new-control new-checkbox checkbox-primary">
                                                 <input id="chkLocationWTLo" type="checkbox" name="address_type_id" class="new-control-input" value="03" required>
-                                                <span class="new-control-indicator"></span>@*@Localizer["WTAddress"]*@@*ที่อยู่ตาม W/T*@
+                                                <span class="new-control-indicator"></span>
                                             </label>
                                         </div>
                                         <div class="n-chk">
                                             <label class="new-control new-checkbox checkbox-primary">
                                                 <input id="chkLocationShipPOPLo" type="checkbox" name="address_type_id" class="new-control-input" value="06" required>
-                                                <span class="new-control-indicator"></span>@*@Localizer["POPAddress"]*@@*ที่อยู่จัดส่ง POP*@
+                                                <span class="new-control-indicator"></span>
                                             </label>
                                         </div>
                                     </div>
@@ -377,11 +377,11 @@
                                 <div class="row">
                                     <div class="col-sm-2">
                                         <input type="hidden" id="hdAddressID" />
-                                        <label>@Localizer["HouseNo"]@*เลขที่*@ :</label>
+                                        <label>@Localizer["HouseNo"]:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="row col-sm-12">
-                                            <input type="text" id="txthomenumber" style="width:120px" class="form-control inputValidationAddress" required>
+                                            <input type="text" id="txthomenumberLocation" style="width:120px" class="form-control inputValidationAddress" required>
 
                                             <label>&nbsp;&nbsp;&nbsp;&nbsp;@Localizer["Moo"] :</label>&nbsp;&nbsp;&nbsp;&nbsp;
                                             <input type="text" id="txtVillageNo" style="width:110px" class="form-control">
@@ -518,7 +518,7 @@
                                     </div>
                                 </div>
                                 <br />
-                            </div>
+                            </div>*@
                           
                             <div class="row col-sm-12">
                                 <div class="table-responsive">

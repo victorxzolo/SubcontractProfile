@@ -568,6 +568,22 @@ $(document).ready(function () {
             onSaveCompanyProfile($('#lblStatusSub').text());
         }
     });
+
+    $('#btnreject').click(function () {
+        var forms = document.getElementsByClassName('need-isvalidate-reject');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+
+            if ($('#txtRemarkForSub').val() == '') {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            else {
+                onSaveCompanyProfileVerified("R");
+            }
+
+            form.classList.add('was-validated');
+        });
+    });
     
 
 
@@ -718,21 +734,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#btnreject').click(function () {
-        var forms = document.getElementsByClassName('need-isvalidate-reject');
-        var validation = Array.prototype.filter.call(forms, function (form) {
-
-            if ($('#txtRemarkForSub').val() == '') {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            else {
-                onSaveCompanyProfileVerified("R");
-            }
-
-            form.classList.add('was-validated');
-        });
-    });
+   
 });
 
 function onSaveCompanyProfileVerified(status) {
