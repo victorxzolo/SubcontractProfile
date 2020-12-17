@@ -231,7 +231,7 @@
                                                 <label><span style="color:red">*</span>@Localizer["IDCard"]</label>
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" id="CitizenID" maxlength="13" style="width:300px" class="form-control" required>
+                                                <input type="text" id="CitizenID" maxlength="13" pattern="[0-9]{13}" style="width:300px" class="form-control" required>
                                                 <div class="invalid-feedback">
                                                     @Localizer["ErrorIDCard"]
                                                 </div>
@@ -472,7 +472,7 @@
                                                 <label><span style="color:red">*</span> @Localizer["IDCard"] :</label>
                                             </div>
                                             <div class="col-sm-10">
-                                                <input type="text" id="CitizenID2" maxlength="13" style="width:300px" class="form-control" required>
+                                                <input type="text" id="CitizenID2" maxlength="13" pattern="[0-9]{13}" style="width:300px" class="form-control" required>
                                                 <div class="invalid-feedback">
                                                     @Localizer["ErrorIDCard"]
                                                 </div>
