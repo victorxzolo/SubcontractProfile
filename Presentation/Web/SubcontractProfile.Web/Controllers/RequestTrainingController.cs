@@ -854,6 +854,7 @@ namespace SubcontractProfile.Web.Controllers
             dt.Columns.Add("ContractPhone1", typeof(string));
             dt.Columns.Add("ContractEmail", typeof(string));
             dt.Columns.Add("Remark", typeof(string));
+            dt.Columns.Add("CoursePrice", typeof(decimal));
 
             var result = new SubcontractProfileEngineerModel();
             HttpClient client = new HttpClient();
@@ -908,6 +909,7 @@ namespace SubcontractProfile.Web.Controllers
                     row["ContractPhone1"] = result.ContractPhone1;
                     row["ContractEmail"] = result.ContractEmail;
                     row["Remark"] = model.Remark;
+                    row["CoursePrice"] = model.CoursePrice;
                     dt.Rows.Add(row);
 
                     dt = dt.DefaultView.ToTable( /*distinct*/ true);
@@ -919,14 +921,16 @@ namespace SubcontractProfile.Web.Controllers
                 {
 
                     //Data  
-                    dt.Rows.Add(model.LocationId, model.TeamId, model.EngineerId, model.LocationNameTh, model.TeamNameTh, model.StaffNameTh,model.Position,model.ContractPhone1,model.ContractEmail,model.Remark);
+                    dt.Rows.Add(model.LocationId, model.TeamId, model.EngineerId, model.LocationNameTh, model.TeamNameTh, model.StaffNameTh
+                        ,model.Position,model.ContractPhone1,model.ContractEmail,model.Remark,model.CoursePrice);
 
                 }
         }
             else
             {
                 //Data  
-                dt.Rows.Add(model.LocationId, model.TeamId, model.EngineerId, model.LocationNameTh, model.TeamNameTh, model.StaffNameTh, model.Position, model.ContractPhone1, model.ContractEmail, model.Remark);
+                dt.Rows.Add(model.LocationId, model.TeamId, model.EngineerId, model.LocationNameTh, model.TeamNameTh, model.StaffNameTh
+                    , model.Position, model.ContractPhone1, model.ContractEmail, model.Remark, model.CoursePrice);
 
             }
 
@@ -944,7 +948,8 @@ namespace SubcontractProfile.Web.Controllers
                                   Position = dr["Position"].ToString(),
                                   ContractEmail = dr["ContractEmail"].ToString(),
                                   ContractPhone1 = dr["ContractPhone1"].ToString(),
-                                  Remark = dr["Remark"].ToString()
+                                  Remark = dr["Remark"].ToString(),
+                                  CoursePrice=dr["CoursePrice"] != DBNull.Value? Convert.ToDecimal(dr["CoursePrice"]):0
                               }).ToList();
 
 
@@ -1355,6 +1360,7 @@ namespace SubcontractProfile.Web.Controllers
                 trainingEn.ContractEmail = Result[i].ContractEmail;
                 trainingEn.ContractPhone1 = Result[i].ContractPhone1;
                 trainingEn.Remark = Result[i].Remark;
+                trainingEn.CoursePrice = Result[i].CoursePrice;
                 resultEngineer = AddDataTable(trainingEn);
             }
            

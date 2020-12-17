@@ -197,6 +197,7 @@ namespace SubcontractProfile.WebApi.Services
             p.Add("@company_title_en_id", subcontractProfileCompany.CompanyTitleEnId);
             p.Add("@status", subcontractProfileCompany.Status);
             p.Add("@activate_date", subcontractProfileCompany.ActivateDate);
+            p.Add("@remark", subcontractProfileCompany.Remark);
             //p.Add("@remark_for_sub", subcontractProfileCompany.RemarkForSub);
            // p.Add("@asc_code", subcontractProfileCompany.ASCCode);
 

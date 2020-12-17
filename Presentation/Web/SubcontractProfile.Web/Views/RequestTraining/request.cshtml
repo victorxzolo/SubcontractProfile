@@ -320,6 +320,7 @@
                                             <th>@Localizer["Email"]</th>
                                 
                                             <th>@Localizer["Remark"]</th>
+                                            <th></th>
 
                                         </tr>
                                     </thead>
@@ -425,10 +426,66 @@
                             <h4>@Localizer["Payment"]</h4>
                             <hr>
                             <div class="row">
-                                <div class="col-sm-2">
+                                <div class="col-sm-8">
                                     <label>@Localizer["PaymentViaBank"]</label>
                                 </div>
+                                <div class="col-md-4 col-sm-4 CoursePrice" style="display:none;">
+                                    <div class="row ">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p>@Localizer["TotalPrice"] :</p>
+                                                </div>
+                                                <div class="col-md-6" style="text-align: left;">
+                                                    <label id="lblttcost"></label>
+                                                </div>
+                                            </div>
 
+                                        </div>
+                                        <div class="col-md-12 mt-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p>@Localizer["Vat7"] :</p>
+                                                </div>
+                                                <div class="col-md-6" style="text-align: left;">
+                                                    <label id="lblvat7"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mt-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p>@Localizer["NetPrice"] :</p>
+                                                </div>
+                                                <div class="col-md-6" style="text-align: left;">
+                                                    <label id="lblCousetotal"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="col-md-12 mt-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p>@Localizer["Tax"] :</p>
+                                                </div>
+                                                <div class="col-md-6" style="text-align: left;">
+                                                    <label id="lbltax"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mt-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p>@Localizer["NetTax"] :</p>
+                                                </div>
+                                                <div class="col-md-6" style="text-align: left;">
+                                                    <label id="lblTotalAmountBytax"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
 
                             </div>
 
@@ -1226,8 +1283,10 @@
 
                                              if ( result.Status == "A" || result.Status == "T") {
                                                  $('#btnSave').hide();
+                                                 $('.CoursePrice').show();
                                              } else {
                                                  $('#btnSave').show();
+                                                 $('.CoursePrice').hide();
                                              }
 
                                              $('#lblcourseprice').val(FormatNumber(result.CoursePrice));
@@ -1360,7 +1419,8 @@
                     { data: "Position" },
                     { data: "ContractPhone1" },
                     { data: "ContractEmail" },
-                    { data: "Remark" }
+                    { data: "Remark" },
+                    { data: "CoursePrice", "visible": false}
                 ],
                 "order": [[0, "desc"]],
                 "stripeClasses": [],
@@ -1387,12 +1447,62 @@
                     //CoursetotalCost = FormatNumber(CoursetotalCost);
 
                     //$('#lblCousetotal').html(CoursetotalCost);
+
+                    calculateCourcePrice();
                 },
                 drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
 
             });
 
 
+        }
+
+        function calculateCourcePrice() {
+            var totalPrice = 0;
+            var tEn = $('#tbSearchEngineer').dataTable();
+
+            $.each(tEn.fnGetNodes(), function (index, value) {
+                var price = 0;
+                var rr = $("#tbSearchEngineer").dataTable().fnGetData(index).CoursePrice;
+                if (rr != "") {
+                    price = parseFloat(rr);
+                }
+                totalPrice += price;
+
+            });
+
+            var sumTotalPrice = parseFloat(isNaN(totalPrice) ? "" : totalPrice);
+            var intVat = vat7(sumTotalPrice);
+
+            var sumVatAmount = sumTotalPrice + parseFloat(intVat);
+
+            var intTax = taxCalculate(sumTotalPrice);
+            var totalTax = parseFloat(sumTotalPrice) + parseFloat(intTax);
+
+
+            $('#lblttcost').html(isNaN(totalPrice) ? "0" : numberWithCommas(totalPrice));
+            $('#lblvat7').html(numberWithCommas(intVat));
+            $('#lblCousetotal').html(isNaN(sumVatAmount) ? "0" : numberWithCommas(sumVatAmount));
+
+
+            $('#lbltax').html(numberWithCommas(intTax));
+            $('#lblTotalAmountBytax').html(numberWithCommas(totalTax));
+
+        }
+        function taxCalculate(cost) {
+            const formatter = new Intl.NumberFormat('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+            });
+
+            var incTax = 0;
+            incTax = cost * (3 / 100);
+            incTax = formatter.format(incTax);
+            // alert(incTax);
+            return incTax;
+        }
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         }
 
         function FormatNumber(number) {
