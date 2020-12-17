@@ -186,6 +186,9 @@
   <data name="CertificateType" xml:space="preserve">
     <value>Certificate Type</value>
   </data>
+  <data name="CheckIDCardLength" xml:space="preserve">
+    <value>Please fill ID Card 13 digits.</value>
+  </data>
   <data name="ChooseFile" xml:space="preserve">
     <value>Choose File</value>
   </data>

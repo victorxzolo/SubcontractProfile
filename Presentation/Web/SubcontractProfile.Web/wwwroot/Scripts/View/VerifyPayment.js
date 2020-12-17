@@ -477,6 +477,7 @@ function getDataById(id) {
         type: 'POST',
         data: { 'paymentId': id },
         dataType: "json",
+        async: false,
         success: function (result) {
             ClearDataModal();
             if (result != null) {

@@ -235,6 +235,10 @@
                                                 <div class="invalid-feedback">
                                                     @Localizer["ErrorIDCard"]
                                                 </div>
+                                                <span id='errorlengthidcard'
+                                                      style="color:red;display:none;font-family:db_helvethaica_x55_regular;font-size:18px;"> @Localizer["CheckIDCardLength"]</span>
+
+                                               
                                             </div>
                                         </div>
                                         <br />
@@ -476,7 +480,10 @@
                                                 <div class="invalid-feedback">
                                                     @Localizer["ErrorIDCard"]
                                                 </div>
-                                            </div>
+                                                <span id='errorlengthidcard2'
+                                                      style="color:red;display:none;font-family:db_helvethaica_x55_regular;font-size:18px;"> @Localizer["CheckIDCardLength"]</span>
+
+                                                </div>
                                         </div>
                                         <br />
                                         <div class="row">
@@ -976,6 +983,7 @@
             $("#btnSearchLoc").click(function (e) {
 
                 inittbSearchResult();
+
             });
 
             $("#btnMainClearLoc").click(function (e) {
@@ -987,6 +995,7 @@
             });
 
             $('#btnSave').click(function () {
+                var haserror = false;
                 var forms = document.getElementsByClassName('needs-validation');
                 // Loop over them and prevent submission
                 var validation = Array.prototype.filter.call(forms, function (form) {
@@ -995,10 +1004,29 @@
                         event.preventDefault();
                         event.stopPropagation();
 
-                    } else {
-                        onSave();
-                        event.preventDefault();
-                        event.stopPropagation();
+                    }
+                    else {
+                        var lenEngineer = $('#CitizenID').val().length;
+                        var lenPersonal = $('#CitizenID2').val().length;
+                        if (lenEngineer != 13) {
+                            $('#errorlengthidcard').show();
+                            haserror = true;
+                        }
+                        else {
+                            $('#errorlengthidcard').hide();
+                        }
+
+                        if (lenPersonal != 13) {
+                            $('#errorlengthidcard2').show();
+                            haserror = true;
+                        }
+                        else {
+                            $('#errorlengthidcard2').hide();
+                        }
+                        if (!haserror) {
+                            onSave();
+                        }
+                      
 
                     }
                     form.classList.add('was-validated');
@@ -1171,6 +1199,9 @@
         }
 
         function clearData() {
+
+            $('#errorlengthidcard').hide();
+            $('#errorlengthidcard2').hide();
 
             $("#frNew")[0].reset();
 

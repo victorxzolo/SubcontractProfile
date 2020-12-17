@@ -609,22 +609,35 @@ $(document).ready(function () {
 
     function validateform() {
         var hasError = true;
-       
+
             var forms = document.getElementsByClassName('need-validate-checktyperegister');
             var validation = Array.prototype.filter.call(forms, function (form) {
+
                 if ($('#hdrdtype').val() == "") {
                     event.preventDefault();
                     event.stopPropagation();
-
                 }
                 else {
                     if ($('#rdoCompanyType1').is(":checked")) {
                         var forms = document.getElementsByClassName('needs-validation-newregister');
                         var validation = Array.prototype.filter.call(forms, function (form) {
                             if (Validate(".form-control.inputValidation", ".custom-control-input.inputValidation"
-                                , ".custom-select.inputValidation", ".custom-file-input.inputValidation")) {
+                                , ".custom-select.inputValidation", ".custom-file-input.inputValidation") ) {
                                 event.preventDefault();
                                 event.stopPropagation();
+                                
+                            }
+                            else if ($('#inputTax_id').val()!='') {
+                                var len = $('#inputTax_id').val().length;
+                                if (len != 13) {
+                                    $('#errorlengthidcard').show();
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                }
+                                else {
+                                    $('#errorlengthidcard').hide();
+                                    hasError = false;
+                                }
                             }
                             else {
                                 var forms = document.getElementsByClassName('needs-isvalidate');
@@ -660,6 +673,18 @@ $(document).ready(function () {
                                 , ".custom-select.inputValidationdealer", ".custom-file-input.inputValidationdealer")) {
                                 event.preventDefault();
                                 event.stopPropagation();
+                            }
+                            else if ($('#txttax_id_dealer').val() != '') {
+                                var lendealer = $('#txttax_id_dealer').val().length;
+                                if (lendealer != 13) {
+                                    $('#errorlengthidcarddealer').show();
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                }
+                                else {
+                                    $('#errorlengthidcarddealer').hide();
+                                    hasError = false;
+                                }
                             }
                             else {
                                 var forms = document.getElementsByClassName('needs-isvalidate');
@@ -727,11 +752,14 @@ $(document).ready(function () {
 
      
     $('#btn_OnSave_Modal').click(function () {
-
+       
         var Error = validateform();
 
         if (!Error) {
-            onSaveCompanyProfile();
+
+                    onSaveCompanyProfile();
+
+            
         }
 
     });
@@ -1250,7 +1278,10 @@ function inittbSearchResult() {
             $("#inputTaxId").val('');
         }
 
-        function clearData() {
+function clearData() {
+
+    $('#errorlengthidcard').hide();
+    $('#errorlengthidcarddealer').hide();
 
         $("[name=customRadioSucRegisEdit]").filter("[value='true']").prop("checked", false);
             $("#inputTax_id").val('');

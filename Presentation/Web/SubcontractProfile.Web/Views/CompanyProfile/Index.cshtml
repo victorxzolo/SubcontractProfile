@@ -300,6 +300,10 @@
                                             <div class="invalid-feedback">
                                                 @Localizer["ErrorJuristicPersonRegistrationNumber"]@*กรุณาระบุเลขทะเบียนนิติบุคคล*@
                                             </div>
+
+                                            <span id='errorlengthidcard'
+                                                  style="color:red;display:none;font-family:db_helvethaica_x55_regular;font-size:18px;"> @Localizer["CheckJuristicIDLength"]</span>
+
                                             <div class="input-group" style="display:none;">
                                                 <input id="inputTax_id" type="text" class="form-control" placeholder="@Localizer["JuristicPersonRegistrationNumber"]"
                                                        aria-label="Recipient's username" maxlength="13" style="width:100px" />
@@ -511,7 +515,10 @@
                                             <div class="invalid-feedback">
                                                 @Localizer["ErrorJuristicPersonRegistrationNumber"]
                                             </div>
-                                        </div>
+                                            <span id='errorlengthidcarddealer'
+                                                  style="color:red;display:none;font-family:db_helvethaica_x55_regular;font-size:18px;"> @Localizer["CheckJuristicIDLength"]</span>
+
+                                            </div>
                                     </div>
 
                                 </div>
@@ -1500,14 +1507,15 @@
 
         @(Html.Raw( sb.ToString()));*@
     <script>
-var localizedData = {
-    'EditCompanyProfile': '@Localizer["JSEditCompanyProfile"]',
-    'AddCompanyProfile': '@Localizer["JSAddCompanyProfile"]',
-     'ChooseFile': '@Localizer["ChooseFile"]',
-}
+        var localizedData = {
+            'EditCompanyProfile': '@Localizer["JSEditCompanyProfile"]',
+            'AddCompanyProfile': '@Localizer["JSAddCompanyProfile"]',
+            'ChooseFile': '@Localizer["ChooseFile"]',
+            //'CheckJuristicIDLength':'@Localizer["CheckJuristicIDLength"]',
+     }
     </script>
     <script src="~/Scripts/View/companyProfile.js"></script>
-
 }
+
 
 
