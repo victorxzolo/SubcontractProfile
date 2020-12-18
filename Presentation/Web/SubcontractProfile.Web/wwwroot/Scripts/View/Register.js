@@ -78,6 +78,16 @@ $(document).ready(function () {
                         event.stopPropagation();
                         
                     }
+                    else if ($('#txttax_id').val() != '')
+                    {
+                        var len = $('#txttax_id').val().length;
+                        if (len != 13) {
+                            $('#errorlengthidcard').show();
+                        }
+                        else {
+                            $('#errorlengthidcard').hide();
+                        }
+                    }
                     else if (!Comparepassword())
                     {
                         return false;

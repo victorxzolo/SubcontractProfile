@@ -132,6 +132,9 @@
   <data name="ChannelSaleGroup" xml:space="preserve">
     <value>Channel Sale Group</value>
   </data>
+  <data name="CheckJuristicIDLength" xml:space="preserve">
+    <value>กรุณาระบุเลขทะเบียนนิติบุคคลให้ครบ 13 หลัก</value>
+  </data>
   <data name="Close" xml:space="preserve">
     <value>ปิด</value>
   </data>
