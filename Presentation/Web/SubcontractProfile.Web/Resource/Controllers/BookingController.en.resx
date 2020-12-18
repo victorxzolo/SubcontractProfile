@@ -120,6 +120,9 @@
   <data name="Booking" xml:space="preserve">
     <value>Booking</value>
   </data>
+  <data name="index" xml:space="preserve">
+    <value>Booking</value>
+  </data>
   <data name="MessageAddTrainee" xml:space="preserve">
     <value>Please Add Booking Data</value>
   </data>

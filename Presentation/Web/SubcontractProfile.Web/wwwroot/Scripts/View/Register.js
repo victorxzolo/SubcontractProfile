@@ -68,6 +68,7 @@ $(document).ready(function () {
 
         if (step == 1) {
             if ($('#chktypeN').is(":checked")) {
+
                 var resultUser= ValidateUser();
                 var forms = document.getElementsByClassName('needs-validation-newregister');
                 var validation = Array.prototype.filter.call(forms, function (form) {
@@ -83,16 +84,15 @@ $(document).ready(function () {
                         var len = $('#txttax_id').val().length;
                         if (len != 13) {
                             $('#errorlengthidcard').show();
+                            event.preventDefault();
+                            event.stopPropagation();
                         }
                         else {
                             $('#errorlengthidcard').hide();
-                        }
-                    }
-                    else if (!Comparepassword())
-                    {
-                        return false;
-                    }
-                    else {
+                            if (!Comparepassword()) {
+                                return false;
+                            }
+                            else {
                         Loading();
                         BindRegion();
                         BindAddressType();
@@ -101,10 +101,13 @@ $(document).ready(function () {
                         BindDDLsubdistrict();
                         inttbAddress2();
                         $('#smartwizard').smartWizard("next");
-                       
+
                         return true;
-                       
+
                     }
+                        }
+                    }
+                    
                     form.classList.add('was-validated');
                 });
             }

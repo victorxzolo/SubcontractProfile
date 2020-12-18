@@ -1735,6 +1735,18 @@ function validateform() {
                 event.preventDefault();
                 event.stopPropagation();
             }
+            else if ($('#inputTax_id').val() != '') {
+                var len = $('#inputTax_id').val().length;
+                if (len != 13) {
+                    $('#errorlengthidcard').show();
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                else {
+                    $('#errorlengthidcard').hide();
+                    hasError = false;
+                }
+            }
             else {
                 var forms = document.getElementsByClassName('needs-isvalidate');
                 var validation = Array.prototype.filter.call(forms, function (form) {
@@ -1778,6 +1790,18 @@ function validateform() {
                         if (ValidateUpload()) {
                             event.preventDefault();
                             event.stopPropagation();
+                        }
+                    }
+                    else if ($('#txttax_id_dealer').val() != '') {
+                        var lendealer = $('#txttax_id_dealer').val().length;
+                        if (lendealer != 13) {
+                            $('#errorlengthidcarddealer').show();
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        else {
+                            $('#errorlengthidcarddealer').hide();
+                            hasError = false;
                         }
                     }
                     else {

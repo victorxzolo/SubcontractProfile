@@ -162,6 +162,9 @@
   <data name="ChannelSaleGroup" xml:space="preserve">
     <value>Channel Sale Group</value>
   </data>
+  <data name="CheckJuristicIDLength" xml:space="preserve">
+    <value>Please fill Juristic ID 13 digits.</value>
+  </data>
   <data name="ChooseFile" xml:space="preserve">
     <value>Choose File</value>
   </data>
