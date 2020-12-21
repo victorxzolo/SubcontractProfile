@@ -41,10 +41,10 @@ namespace SubcontractProfile.Web.Controllers
         }
         public IActionResult Index()
         {
-            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userLogin");
+            var userProfile = SessionHelper.GetObjectFromJson<SubcontractProfileUserModel>(HttpContext.Session, "userAISLogin");
             if (userProfile == null)
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("LogonByUser", "LogonByUser");
             }
 
             getsession();
