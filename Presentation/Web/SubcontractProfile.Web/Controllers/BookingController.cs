@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -280,6 +281,23 @@ namespace SubcontractProfile.Web.Controllers
 
             }
 
+            var resultEngineer = new List<SubcontractProfileTrainingEngineerModel>();
+            var trainingEn = new SubcontractProfileTrainingEngineerModel();
+            for (var i = 0; i < Result.Count; i++)
+            {
+                trainingEn.TrainingId = Result[i].TrainingId;
+                trainingEn.LocationId = Result[i].LocationId;
+                trainingEn.TeamId = Result[i].TeamId;
+                trainingEn.EngineerId = Result[i].EngineerId;
+                trainingEn.TrainingEngineerId = Result[i].TrainingEngineerId;
+                trainingEn.LocationNameTh = Result[i].LocationNameTh;
+                trainingEn.TeamNameTh = Result[i].TeamNameTh;
+                trainingEn.StaffNameTh = Result[i].StaffNameTh;
+                trainingEn.ContractEmail = Result[i].ContractEmail;
+
+                resultEngineer = AddDataTable(trainingEn);
+            }
+
 
             //total number of rows count   
             recordsTotal = Result.Count();
@@ -358,6 +376,12 @@ namespace SubcontractProfile.Web.Controllers
                     result.Status = true;
                     result.Message = _localizer["MessageSaveSuccess"];
                     result.StatusError = "0";
+
+                    #region SendMail
+
+                    SendMail(model);
+
+                    #endregion
                 }
                 else
                 {
@@ -376,6 +400,157 @@ namespace SubcontractProfile.Web.Controllers
 
             }
             return Json(result);
+        }
+
+        private string SendMail(SubcontractProfileTrainingRequestModel model)
+        {
+            List<SubcontractProfileTrainingEngineerModel> engineerModel = new List<SubcontractProfileTrainingEngineerModel>(); ;
+            string emailMsg = "";
+            HttpClient clientRequest = new HttpClient();
+            var resultModel = new SubcontractProfileTrainingModel();
+            var resultCompany = new SubcontractProfileCompanyModel();
+
+            #region Get Engineer
+
+            var data = SessionHelper.GetObjectFromJson<DataTable>(HttpContext.Session, "EngineerData");
+            if (data != null)
+            {
+                if (data.Rows.Count > 0)
+                {
+
+                    foreach (DataRow dr in data.Rows)
+                    {
+                        engineerModel.Add(new SubcontractProfileTrainingEngineerModel
+                        {
+                            StaffNameTh = dr["StaffNameTh"].ToString()
+                        });
+                    }
+                }
+            }
+
+            #endregion
+
+
+            #region Get Data Training
+
+            string uriTrainingString = string.Format("{0}/{1}", strpathAPI + "Training/GetByTrainingId"
+                , HttpUtility.UrlEncode(model.TrainingId.ToString(), Encoding.UTF8));
+
+            HttpResponseMessage response = clientRequest.GetAsync(uriTrainingString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                resultModel = JsonConvert.DeserializeObject<SubcontractProfileTrainingModel>(result);
+            }
+
+            #endregion
+
+
+            #region Get Data Company
+
+            string uriCompanyString = string.Format("{0}/{1}", strpathAPI + "Company/GetByCompanyId"
+               , HttpUtility.UrlEncode(model.CompanyId.ToString(), Encoding.UTF8));
+            response = clientRequest.GetAsync(uriCompanyString).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                resultCompany = JsonConvert.DeserializeObject<SubcontractProfileCompanyModel>(result);
+            }
+
+            #endregion
+
+
+            #region Get Email
+
+            string uriString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/subcontract_email");
+            clientRequest.DefaultRequestHeaders.Accept.Add(
+               new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage responseResult = clientRequest.GetAsync(uriString).Result;
+
+
+            var v = responseResult.Content.ReadAsStringAsync().Result;
+            var outputemail = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(v);
+
+            #endregion
+
+            #region Get Email Detail
+
+            string uriEmailDetailString = string.Format("{0}", strpathAPI + "Dropdown/GetByDropDownName/subcontract_email_detail");
+            clientRequest.DefaultRequestHeaders.Accept.Add(
+               new MediaTypeWithQualityHeaderValue("application/json"));
+            responseResult = clientRequest.GetAsync(uriEmailDetailString).Result;
+            var u = responseResult.Content.ReadAsStringAsync().Result;
+            var outputemaildetail = JsonConvert.DeserializeObject<List<SubcontractDropdownModel>>(u);
+
+            #endregion
+
+            string SENDTO = resultModel.ContractEmail ==null? resultCompany.ContractEmail : resultModel.ContractEmail;
+
+            string SUBJECT = outputemail[0].value1;
+            string SENDFROM = outputemail[0].value2;
+
+            var emailData = new SubcontractProfileSendMailModel();
+            var emailServerSplitValue = outputemail[0].dropdown_text.Split('|');
+            if (emailServerSplitValue.Length > 0)
+            {
+                emailData.IPMailServer = emailServerSplitValue[0];
+                emailData.Port = emailServerSplitValue[1];
+                emailData.Domaim = emailServerSplitValue[2];
+                emailData.FromPassword = emailServerSplitValue[3];
+            
+            }
+            emailData.SendTo = SENDTO;
+            emailData.Subject = SUBJECT;
+            emailData.SendFrom = SENDFROM;
+
+            string SubjectDTL = string.Format(outputemaildetail[0].dropdown_text, resultModel.CompanyNameTh);
+
+
+            string SubjectDTL2 = string.Format(outputemaildetail[0].value1, model.BookingDateStr, "");
+            string SubjectDTL3 = outputemaildetail[0].value2; //footer
+
+            StringBuilder tempBody = new StringBuilder();
+            CultureInfo ThaiCulture = new CultureInfo("th-TH");
+            CultureInfo UsaCulture = new CultureInfo("en-US");
+
+            #region Body
+            tempBody.Append("<p style='font-weight:bold;'>&nbsp;" + SubjectDTL);
+            tempBody.Append("<br/><br/>&emsp;&emsp;");
+            tempBody.Append(SubjectDTL2);
+            tempBody.Append("<table style='padding-left:2em;'>");
+            if (engineerModel.Count >0)
+            {
+                for(int i=0;i<engineerModel.Count;i++)
+                {
+                    StringBuilder str = new StringBuilder();
+                    int row = i + 1;
+                    str.Append("<tr><td>"+ row + ".&nbsp;</td><td>" + engineerModel[i].StaffNameTh + "</td></tr>");
+                    tempBody.Append(str);
+                }
+            }
+            tempBody.Append("</table>");
+            tempBody.Append("<br/><br/>");
+            tempBody.Append(SubjectDTL3);
+
+            #endregion
+
+            emailData.Body = tempBody.ToString();
+
+
+            var uriSendEmailString = new Uri(Path.Combine(strpathAPI, "SendMail", "SendMail"));
+
+            string rr = JsonConvert.SerializeObject(emailData);
+
+            var httpContent = new StringContent(JsonConvert.SerializeObject(emailData), Encoding.UTF8, "application/json");
+            response = clientRequest.PostAsync(uriSendEmailString, httpContent).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                emailMsg = JsonConvert.DeserializeObject<string>(result);
+            }
+
+            return emailMsg;
+
         }
 
 
@@ -724,6 +899,7 @@ namespace SubcontractProfile.Web.Controllers
             dt.Columns.Add("LocationNameTh", typeof(string));
             dt.Columns.Add("TeamNameTh", typeof(string));
             dt.Columns.Add("StaffNameTh", typeof(string));
+            dt.Columns.Add("ContractEmail", typeof(string));
 
             var data = SessionHelper.GetObjectFromJson<DataTable>(HttpContext.Session, "EngineerData");
 
@@ -739,6 +915,7 @@ namespace SubcontractProfile.Web.Controllers
                     row["LocationNameTh"] = model.LocationNameTh;
                     row["TeamNameTh"] = model.TeamNameTh;
                     row["StaffNameTh"] = model.StaffNameTh;
+                    row["ContractEmail"] = model.ContractEmail;
                     dt.Rows.Add(row);
 
                     dt = dt.DefaultView.ToTable( /*distinct*/ true);
@@ -746,14 +923,14 @@ namespace SubcontractProfile.Web.Controllers
                 else
                 {
                     //Data  
-                    dt.Rows.Add(model.LocationId, model.TeamId, model.EngineerId, model.LocationNameTh, model.TeamNameTh, model.StaffNameTh);
+                    dt.Rows.Add(model.LocationId, model.TeamId, model.EngineerId, model.LocationNameTh, model.TeamNameTh, model.StaffNameTh,model.ContractEmail);
 
                 }
             }
             else
             {
                 //Data  
-                dt.Rows.Add(model.LocationId, model.TeamId, model.EngineerId, model.LocationNameTh, model.TeamNameTh, model.StaffNameTh);
+                dt.Rows.Add(model.LocationId, model.TeamId, model.EngineerId, model.LocationNameTh, model.TeamNameTh, model.StaffNameTh,model.ContractEmail);
 
             }
 
@@ -767,7 +944,8 @@ namespace SubcontractProfile.Web.Controllers
                                   EngineerId = Guid.Parse(dr["EngineerId"].ToString()),
                                   LocationNameTh = dr["LocationNameTh"].ToString(),
                                   TeamNameTh = dr["TeamNameTh"].ToString(),
-                                  StaffNameTh = dr["StaffNameTh"].ToString()
+                                  StaffNameTh = dr["StaffNameTh"].ToString(),
+                                  ContractEmail= dr["ContractEmail"].ToString()
                               }).ToList();
 
 
@@ -1167,6 +1345,7 @@ namespace SubcontractProfile.Web.Controllers
                 trainingEn.LocationNameTh = Result[i].LocationNameTh;
                 trainingEn.TeamNameTh = Result[i].TeamNameTh;
                 trainingEn.StaffNameTh = Result[i].StaffNameTh;
+                trainingEn.ContractEmail = Result[i].ContractEmail;
 
                 resultEngineer = AddDataTable(trainingEn);
             }

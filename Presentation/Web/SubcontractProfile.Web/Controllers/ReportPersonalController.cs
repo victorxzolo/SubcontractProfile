@@ -47,7 +47,7 @@ namespace SubcontractProfile.Web.Controllers
             {
                 return RedirectToAction("LogonByUser", "LogonByUser");
             }
-            }
+            
             getsession();
             ViewData["Controller"] = _localizer["Index"];
             ViewData["View"] = _localizer["ReportPersonalController"];
