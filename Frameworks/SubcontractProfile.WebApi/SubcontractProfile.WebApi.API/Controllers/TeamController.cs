@@ -182,7 +182,7 @@ namespace SubcontractProfile.WebApi.API.Controllers
             }
 
 
-            var entities = _service.selectTeamAll(team_code,location_code, vendor_code, date_from, date_to);
+            var entities = _service.selectTeamAll(team_code, vendor_code, location_code, date_from, date_to);
 
             if (entities == null)
             {
