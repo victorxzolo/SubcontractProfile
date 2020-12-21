@@ -1857,7 +1857,7 @@ namespace SubcontractProfile.Web.Controllers
                     }
                 }
             }
-            else 5if (TableName == "Company")
+            else if (TableName == "Company")
             {
                 List<SubcontractProfileCompanyModel> CompanyList = new List<SubcontractProfileCompanyModel>();
                 var newfile = new FileInfo(postedFile.FileName);
