@@ -197,7 +197,7 @@ namespace SubcontractProfile.Web.Model
         public DateTime? CompanyRegisterDate { get; set; }
         public DateTime? TriningDate { get; set; }
         public DateTime? PaymentDatetime { get; set; }
-
+        public DateTime? VerifiedDate { get; set; }
         public IFormFile FileBookBank { get; set; }
         public IFormFile FileCompanyCertified { get; set; }
         public IFormFile FileCommercialRegistration { get; set; }
@@ -209,6 +209,11 @@ namespace SubcontractProfile.Web.Model
         public string Remark { get; set; }
         
 
+        public string _ContractStartDate { get; set; }
+        public string _ContractEndDate { get; set; }
+        public string _ActivateDate { get; set; }
+        public string _RegisterDate { get; set; }
+        public string _VerifiedDate { get; set; }
     }
 
     public class SubcontractProfileCompanyViewModel

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace SubcontractProfile.Web.Model
         public string FullNameTh { get; set; }
 
         public System.DateTime? BirthDate { get; set; }
-
+        public  string _BirthDate { get; set; }
         public string Gender { get; set; }
 
         [System.ComponentModel.DataAnnotations.StringLength(100)]
@@ -125,5 +126,6 @@ namespace SubcontractProfile.Web.Model
 
         public string? dateBirthDay { get; set; }
         public string? dateCertificateExpireDate { get; set; }
+        public string _CertificateExpireDate { get; set; }
     }
 }

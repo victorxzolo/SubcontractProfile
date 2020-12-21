@@ -15,12 +15,18 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam>> GetAll();
         Task<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam> GetByTeamId(System.Guid teamId);
         Task<System.Guid> Insert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam subcontractProfileTeam);
+        Task<bool> MigrationInsert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam subcontractProfileTeam);
         Task<bool> BulkInsert(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam> subcontractProfileTeamList);
         Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam subcontractProfileTeam);
         Task<bool> Delete(string id);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam>> GetByPKList(IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam_PK> pkList);
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam>> SearchTeam(System.Guid companyId, System.Guid locationId, string teamcode
           , string teamNameTh, string teamNameEn, string storageLocation, string shipto);
+
+
+        Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam>> selectTeamAll(
+        string team_code, string vendor_code, string location_code, string date_from , string date_to);
+
 
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam>> GetByLocationId(System.Guid companyId, System.Guid locationId);
 

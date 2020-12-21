@@ -51,6 +51,57 @@ namespace SubcontractProfile.WebApi.Services.Services
             return entity;
         }
 
+
+
+
+        public async Task<bool> MigrationInsert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer subcontractProfileEngineer)
+        {
+            var p = new DynamicParameters();
+
+            //  p.Add("@location_id", subcontractProfileLocation.LocationId);
+            p.Add("@staff_code", subcontractProfileEngineer.StaffCode);
+            p.Add("@foa_code", subcontractProfileEngineer.FoaCode);
+            p.Add("@staff_name", subcontractProfileEngineer.StaffName);
+            p.Add("@staff_name_th", subcontractProfileEngineer.StaffNameTh);
+            p.Add("@staff_name_en", subcontractProfileEngineer.StaffNameEn);
+            p.Add("@asc_code", subcontractProfileEngineer.AscCode);
+            p.Add("@tshirt_size", subcontractProfileEngineer.TshirtSize);
+            p.Add("@contract_phone1", subcontractProfileEngineer.ContractPhone1);
+            p.Add("@contract_phone2", subcontractProfileEngineer.ContractPhone2);
+            p.Add("@contract_email", subcontractProfileEngineer.ContractEmail);
+            p.Add("@work_experience", subcontractProfileEngineer.WorkExperience);
+            p.Add("@work_experience_attach_file", subcontractProfileEngineer.WorkExperienceAttachFile);
+            p.Add("@work_type", subcontractProfileEngineer.WorkType);
+            p.Add("@course_skill", subcontractProfileEngineer.CourseSkill);
+            p.Add("@skill_level", subcontractProfileEngineer.SkillLevel);
+            p.Add("@vehicle_type", subcontractProfileEngineer.VehicleType);
+            p.Add("@vehicle_brand", subcontractProfileEngineer.VehicleBrand);
+            p.Add("@vehicle_serise", subcontractProfileEngineer.VehicleSerise);
+            p.Add("@vehicle_color", subcontractProfileEngineer.VehicleColor);
+            p.Add("@vehicle_year", subcontractProfileEngineer.VehicleYear);
+            p.Add("@vehicle_license_plate", subcontractProfileEngineer.VehicleLicensePlate);
+            p.Add("@vehicle_attach_file", subcontractProfileEngineer.VehicleAttachFile);
+            p.Add("@tool_otrd", subcontractProfileEngineer.ToolOtrd);
+            p.Add("@tool_splicing", subcontractProfileEngineer.ToolSplicing);
+            p.Add("@position", subcontractProfileEngineer.Position);
+            p.Add("@location_code", subcontractProfileEngineer.LocationCode);
+            p.Add("@staff_id", subcontractProfileEngineer.StaffId);
+            p.Add("@team_code", subcontractProfileEngineer.TeamCode);
+            p.Add("@citizen_id", subcontractProfileEngineer.CitizenId);
+            p.Add("@bank_code", subcontractProfileEngineer.BankCode);
+            p.Add("@bank_name", subcontractProfileEngineer.BankName);
+            p.Add("@account_no", subcontractProfileEngineer.AccountNo);
+            p.Add("@account_name", subcontractProfileEngineer.AccountName);
+            p.Add("@personal_attach_file", subcontractProfileEngineer.PersonalAttachFile);
+            p.Add("@staff_status", subcontractProfileEngineer.StaffStatus);
+         
+
+            var ok = await _dbContext.Connection.ExecuteAsync
+                ("uspSubcontractProfileengineer_migrationinsert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+
+            return true;
+        }
+
         /// <summary>
         /// Insert
         /// </summary>
@@ -331,6 +382,45 @@ namespace SubcontractProfile.WebApi.Services.Services
        
             var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>
             ("uspSubcontractProfileEngineer_searchEngineer", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
+
+
+
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>> selectEngineer(
+       string citizen_id, string staff_name, string contact_phone, string date_from, string date_to)
+        {
+            var p = new DynamicParameters();
+
+            p.Add("@citizen_id", citizen_id);
+            p.Add("@staff_name", staff_name);
+            p.Add("@contact_phone", contact_phone);
+            p.Add("@date_from", date_from);
+            p.Add("@date_to", date_to);
+
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>
+            ("uspSubcontractProfileEngineer_selectEngineer", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
+
+
+
+
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>> selectEngineerAll(string citizen_id, string staff_name, string contract_phone, string date_from, string date_to)
+        {
+            var p = new DynamicParameters();
+            p.Add("@citizen_id", citizen_id);
+            p.Add("@staff_name", staff_name);
+            p.Add("@contract_phone", contract_phone);
+            p.Add("@date_from ", date_from);
+            p.Add("@date_to", date_to);
+           
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>
+            ("uspSubcontractProfileEngineer_selectEngineerAll", p, commandType: CommandType.StoredProcedure);
 
             return entity;
         }

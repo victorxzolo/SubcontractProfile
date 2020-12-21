@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -146,6 +147,55 @@ namespace SubcontractProfile.WebApi.API.Controllers
             return entities;
 
         }
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileTeam))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileTeam))]
+        [HttpGet("selectTeamAll/{team_code}/{location_code}/{vendor_code}/{date_from}/{date_to}")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam>> selectLocationAll(
+           string team_code,     string location_code, string vendor_code, string date_from, string date_to)
+        {
+            _logger.LogInformation($"Start TeamController::selectTeamAll", team_code, location_code, vendor_code, date_from, date_to);
+
+            if (team_code.ToUpper() == "NULL")
+            {
+                team_code = string.Empty;
+            }
+
+            if (location_code.ToUpper() == "NULL")
+            {
+                location_code = string.Empty;
+            }
+
+            if (vendor_code.ToUpper() == "NULL")
+            {
+                vendor_code = string.Empty;
+            }
+
+            if (date_from.ToUpper() == "NULL")
+            {
+                date_from = string.Empty;
+            }
+
+            if (date_to.ToUpper() == "NULL")
+            {
+                date_to = string.Empty;
+            }
+
+
+            var entities = _service.selectTeamAll(team_code,location_code, vendor_code, date_from, date_to);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"LocationController::", "selectLocationAll NOT FOUND", team_code  , location_code, vendor_code, date_from, date_to);
+                return null;
+            }
+
+            return entities;
+
+        }
+
+
+
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileLocation))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileLocation))]
         [HttpGet("GetByLocationId/{companyId}/{locationId}")]
@@ -254,6 +304,30 @@ namespace SubcontractProfile.WebApi.API.Controllers
         #endregion
 
         #region PUT
+
+
+        [HttpPost("MigrationInsert")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileTeam))]
+        public Task<bool> MigrationInsert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam subcontractProfileTeam)
+        {
+            _logger.LogInformation($"Start LocationController::MigrationInsert", subcontractProfileTeam);
+
+            if (subcontractProfileTeam == null)
+                _logger.LogWarning($"Start LocationController::MigrationInsert", subcontractProfileTeam);
+
+
+            var result = _service.MigrationInsert(subcontractProfileTeam);
+
+            if (result == null)
+            {
+                _logger.LogWarning($"LocationController::", "Insert NOT FOUND", subcontractProfileTeam);
+
+            }
+            return result;
+
+        }
+
+
         [HttpPut("Update")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         public Task<bool> Update(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam subcontractProfileTeam)

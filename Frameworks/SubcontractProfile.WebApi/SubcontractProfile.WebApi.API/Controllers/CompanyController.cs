@@ -215,6 +215,56 @@ namespace SubcontractProfile.WebApi.API.Controllers
         }
 
 
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileCompany))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileCompany))]
+        [HttpGet("selectCompanyAll/{company_code}/{company_name}/{vendor_code}/{date_from}/{date_to}")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> selectCompanyAll(
+         string company_code, string company_name, string vendor_code, string date_from, string date_to)
+        {
+            _logger.LogInformation($"Start CompanyController::selectCompanyAll", company_code, company_name, vendor_code, date_from, date_to);
+             
+
+           
+            if (company_name.ToUpper() == "NULL")
+            {
+                company_name = string.Empty;
+            }
+            if (company_code.ToUpper() == "NULL")
+            {
+                company_code = string.Empty;
+            }
+            if (vendor_code.ToUpper() == "NULL")
+            {
+                vendor_code = string.Empty;
+            }
+            if (date_from.ToUpper() == "NULL")
+            {
+                date_from = string.Empty;
+            }
+            if (date_to.ToUpper() == "NULL")
+            {
+                date_to = string.Empty;
+            }
+
+
+
+
+
+
+            var entities = _service.selectCompanyAll(company_name, company_code, vendor_code, date_from, date_to);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"CompanyController::", "selectCompanyAll NOT FOUND", company_name, company_code, vendor_code, date_from, date_to);
+                
+                return null;
+            }
+
+            return entities;
+
+        }
+
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileAddress))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileAddress))]
         [HttpPost("SearchCompanyVerify")]

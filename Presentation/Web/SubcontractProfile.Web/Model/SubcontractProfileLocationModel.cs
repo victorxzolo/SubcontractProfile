@@ -42,7 +42,7 @@ namespace SubcontractProfile.Web.Model
         public string SubPhase { get; set; }
 
         public System.DateTime? EffectiveDate { get; set; }
-
+        public string _EffectiveDate { get; set; }
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string ShopType { get; set; }
 

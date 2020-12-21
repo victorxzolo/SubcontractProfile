@@ -347,9 +347,12 @@
                             </div>
                         </a>
                         <ul class="collapse submenu list-unstyled" id="DataMigration" data-parent="#accordionExample">
-                            <li>
-                                <a href="@Url.Action("index", "MigrationProfile")" data-pageID="Migrate"> @Localizer["Migrate"] </a>
-                            </li>
+                            <li><a href="@Url.Action("index", "MigrationProfile")" data-pageID="Migrate"> @Localizer["Migrate"] </a></li>
+                            <li><a href="@Url.Action("Index", "ReportLocation")" data-pageID="LocationReport"> @Localizer["ReportLocation"] </a></li>
+                            <li><a href="@Url.Action("Index", "ReportCompany")" data-pageID="CompanyReport"> @Localizer["ReportCompany"] </a></li>
+                            <li><a href="@Url.Action("Index", "ReportTeam")" data-pageID="TeamReport"> @Localizer["ReportTeam"] </a></li>
+                            <li><a href="@Url.Action("Index", "ReportEngineer")" data-pageID="EngineerReport"> @Localizer["ReportEngineer"] </a></li>
+                            <li><a href="@Url.Action("Index", "ReportPersonal")" data-pageID="PersonalReport"> @Localizer["ReportPersonal"] </a></li>
 
                         </ul>
                     </li>

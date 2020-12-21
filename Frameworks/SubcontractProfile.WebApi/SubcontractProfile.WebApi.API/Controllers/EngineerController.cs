@@ -89,6 +89,78 @@ namespace SubcontractProfile.WebApi.API.Controllers
             return entities;
         }
 
+
+
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EngineerController))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(EngineerController))]
+        [HttpGet("selectEngineer/{citizen_id}/{staff_name}/{contact_phone}/{date_from}/{date_to}")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>> selectEngineer(
+                 string citizen_id, string staff_name, string contact_phone, string date_from, string date_to)
+        {
+            _logger.LogInformation($"Start EngineerController::selectEngineer", citizen_id, staff_name, contact_phone, date_from, date_to);
+
+            if (citizen_id.ToUpper() == "NULL")
+            {
+                citizen_id = string.Empty;
+            }
+
+            if (staff_name.ToUpper() == "NULL")
+            {
+                staff_name = string.Empty;
+            }
+
+            if (contact_phone.ToUpper() == "NULL")
+            {
+                contact_phone = string.Empty;
+            }
+
+            if (date_from.ToUpper() == "NULL")
+            {
+                date_from = string.Empty;
+            }
+
+            if (date_to.ToUpper() == "NULL")
+            {
+                date_to = string.Empty;
+            }
+
+
+            var entities = _service.selectEngineer(citizen_id, staff_name, contact_phone, date_from, date_to);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"EngineerController::", "selectEngineer NOT FOUND", citizen_id, staff_name, contact_phone, date_from, date_to);
+                return null;
+            }
+
+            return entities;
+
+        }
+
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EngineerController))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(EngineerController))]
+        [HttpGet("selectEngineerAll/{citizen_id}/{staff_name}/{contract_phone}/{date_from}/{date_to}")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer>> selectEngineerAll(
+          string citizen_id ,string staff_name ,string contract_phone , string date_from ,string date_to)
+        {
+            _logger.LogInformation($"Start EngineerController::selectEngineerAll", citizen_id, staff_name,
+               contract_phone, date_from , date_to);
+
+
+            var entities = _service.selectEngineerAll(citizen_id, staff_name, contract_phone,date_from, date_to);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"EngineerController::", "GetEngineerByTeam NOT FOUND", citizen_id, staff_name,
+               contract_phone, date_from, date_to);
+                return null;
+            }
+
+            return entities;
+        }
+
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EngineerController))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(EngineerController))]
         [HttpGet("GetEngineerByCompany/{companyId}")]
@@ -213,6 +285,31 @@ namespace SubcontractProfile.WebApi.API.Controllers
         }
 
         #endregion
+
+
+
+
+
+        [HttpPost("MigrationInsert")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileEngineer))]
+        public Task<bool> MigrationInsert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileEngineer subcontractProfileEngineer)
+        {
+            _logger.LogInformation($"Start EngineerController::MigrationInsert", subcontractProfileEngineer);
+
+            if (subcontractProfileEngineer == null)
+                _logger.LogWarning($"Start EngineerController::MigrationInsert", subcontractProfileEngineer);
+
+
+            var result = _service.MigrationInsert(subcontractProfileEngineer);
+
+            if (result == null)
+            {
+                _logger.LogWarning($"EngineerController::", "Insert NOT FOUND", subcontractProfileEngineer);
+
+            }
+            return result;
+
+        }
 
         #region PUT
         [HttpPut("Update")]

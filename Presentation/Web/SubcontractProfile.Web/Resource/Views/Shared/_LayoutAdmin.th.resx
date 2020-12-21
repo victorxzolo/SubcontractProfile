@@ -138,6 +138,21 @@
   <data name="Registration" xml:space="preserve">
     <value>การลงทะเบียน</value>
   </data>
+  <data name="ReportCompany" xml:space="preserve">
+    <value>รายงาน บริษัท</value>
+  </data>
+  <data name="ReportEngineer" xml:space="preserve">
+    <value>รายงาน วิศวะกร</value>
+  </data>
+  <data name="ReportLocation" xml:space="preserve">
+    <value>รายงาน  สถานที่</value>
+  </data>
+  <data name="ReportPersonal" xml:space="preserve">
+    <value>รายงาน บุคคล</value>
+  </data>
+  <data name="ReportTeam" xml:space="preserve">
+    <value>รายงาน ทีม</value>
+  </data>
   <data name="ReportTestResult" xml:space="preserve">
     <value>รายงานผลการทดสอบ</value>
   </data>
