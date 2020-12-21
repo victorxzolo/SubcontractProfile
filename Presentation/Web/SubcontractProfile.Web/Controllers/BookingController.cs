@@ -379,7 +379,7 @@ namespace SubcontractProfile.Web.Controllers
 
                     #region SendMail
 
-                    SendMail(model);
+                    //SendMail(model);
 
                     #endregion
                 }
