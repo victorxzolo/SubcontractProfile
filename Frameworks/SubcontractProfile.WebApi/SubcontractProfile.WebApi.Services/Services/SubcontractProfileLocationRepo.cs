@@ -115,6 +115,68 @@ namespace SubcontractProfile.WebApi.Services.Services
             return true;
         }
 
+        public async Task<bool> MigrationInsert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation subcontractProfileLocation)
+        {
+            var p = new DynamicParameters();
+
+           //  p.Add("@location_id", subcontractProfileLocation.LocationId);
+            p.Add("@location_code", subcontractProfileLocation.LocationCode);
+            p.Add("@location_name", subcontractProfileLocation.LocationName);
+            p.Add("@location_name_th", subcontractProfileLocation.LocationNameTh);
+            p.Add("@location_name_en", subcontractProfileLocation.LocationNameEn);
+            p.Add("@location_name_alias", subcontractProfileLocation.LocationNameAlias);
+            p.Add("@vendor_code", subcontractProfileLocation.VendorCode);
+            p.Add("@storage_location", subcontractProfileLocation.StorageLocation);
+            p.Add("@ship_to", subcontractProfileLocation.ShipTo);
+            p.Add("@out_of_service_storage_location", subcontractProfileLocation.OutOfServiceStorageLocation);
+            p.Add("@sub_phase", subcontractProfileLocation.SubPhase);
+            p.Add("@effective_date", subcontractProfileLocation.EffectiveDate);
+            p.Add("@shop_type", subcontractProfileLocation.ShopType);
+            p.Add("@vat_branch_number", subcontractProfileLocation.VatBranchNumber);
+            p.Add("@phone", subcontractProfileLocation.Phone);
+            p.Add("@company_main_contract_phone", subcontractProfileLocation.CompanyMainContractPhone);
+            p.Add("@installations_contract_phone", subcontractProfileLocation.InstallationsContractPhone);
+            p.Add("@maintenance_contract_phone", subcontractProfileLocation.MaintenanceContractPhone);
+            p.Add("@inventory_contract_phone", subcontractProfileLocation.InventoryContractPhone);
+            p.Add("@payment_contract_phone", subcontractProfileLocation.PaymentContractPhone);
+            p.Add("@etc_contract_phone", subcontractProfileLocation.EtcContractPhone);
+            p.Add("@company_group_mail", subcontractProfileLocation.CompanyGroupMail);
+            p.Add("@installations_contract_mail", subcontractProfileLocation.InstallationsContractMail);
+            p.Add("@maintenance_contract_mail", subcontractProfileLocation.MaintenanceContractMail);
+            p.Add("@inventory_contract_mail", subcontractProfileLocation.InventoryContractMail);
+            p.Add("@payment_contract_mail", subcontractProfileLocation.PaymentContractMail);
+            p.Add("@etc_contract_mail", subcontractProfileLocation.EtcContractMail);
+            p.Add("@location_address", subcontractProfileLocation.LocationAddress);
+            p.Add("@post_address", subcontractProfileLocation.PostAddress);
+            p.Add("@tax_address", subcontractProfileLocation.TaxAddress);
+            p.Add("@wt_address", subcontractProfileLocation.WtAddress);
+            p.Add("@house_no", subcontractProfileLocation.HouseNo);
+            p.Add("@area_code", subcontractProfileLocation.AreaCode);
+            p.Add("@bank_code", subcontractProfileLocation.BankCode);
+            p.Add("@bank_name", subcontractProfileLocation.BankName);
+            p.Add("@bank_account_no", subcontractProfileLocation.BankAccountNo);
+            p.Add("@bank_account_name", subcontractProfileLocation.BankAccountName);
+            p.Add("@bank_attach_file", subcontractProfileLocation.BankAttachFile);
+            p.Add("@status", subcontractProfileLocation.Status);
+            //p.Add("@create_date", subcontractProfileLocation.CreateDate);
+            p.Add("@create_by", subcontractProfileLocation.CreateBy);
+            //p.Add("@update_by", subcontractProfileLocation.UpdateBy);
+            //p.Add("@update_date", subcontractProfileLocation.UpdateDate);
+            p.Add("@bank_branch_code", subcontractProfileLocation.BankBranchCode);
+            p.Add("@bank_branch_name", subcontractProfileLocation.BankBranchName);
+            p.Add("@penalty_contract_phone", subcontractProfileLocation.PenaltyContractPhone);
+            p.Add("@penalty_contract_mail", subcontractProfileLocation.PenaltyContractMail);
+            p.Add("@contract_phone", subcontractProfileLocation.ContractPhone);
+            p.Add("@contract_mail", subcontractProfileLocation.ContractMail);
+          //   p.Add("@company_id", subcontractProfileLocation.CompanyId);
+
+            var ok = await _dbContext.Connection.ExecuteAsync
+                ("uspSubcontractProfileLocation_migrationinsert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+
+            return true;
+        }
+
+
         /// <summary>
         /// Update
         /// </summary>
@@ -376,6 +438,25 @@ namespace SubcontractProfile.WebApi.Services.Services
 
             return entity;
         }
+
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>> selectLocationAll(
+           string location_code, string vendor_code ,string date_from , string date_to)
+        {
+            var p = new DynamicParameters();
+         
+            p.Add("@location_code", location_code);
+            p.Add("@vendor_code", vendor_code);
+            p.Add("@date_from", date_from);
+            p.Add("@date_to", date_to);
+      
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>
+            ("uspSubcontractProfileLocation_selectLocationAll", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
+
+
 
         public async Task<IEnumerable<SubcontractProfileLocationList>> SearchListLocation(SearchSubcontractProfileLocationQuery data)
         {

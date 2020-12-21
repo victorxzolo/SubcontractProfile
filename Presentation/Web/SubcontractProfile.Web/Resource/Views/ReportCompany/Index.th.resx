@@ -117,55 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActivateProfile" xml:space="preserve">
-    <value>Activate Profile</value>
+  <data name="comapnyname" xml:space="preserve">
+    <value>ชื่อบริษัท</value>
   </data>
-  <data name="Booking" xml:space="preserve">
-    <value>Booking</value>
+  <data name="comnanycode" xml:space="preserve">
+    <value>รหัสบริษัท</value>
   </data>
-  <data name="CompanyVerify" xml:space="preserve">
-    <value>Company Verify</value>
+  <data name="CreateDateFrom" xml:space="preserve">
+    <value>วันที่สร้างถึง</value>
   </data>
-  <data name="DataMigration" xml:space="preserve">
-    <value>DataMigration</value>
-  </data>
-  <data name="Migrate" xml:space="preserve">
-    <value>Migrate</value>
-  </data>
-  <data name="Payment" xml:space="preserve">
-    <value>Payment</value>
-  </data>
-  <data name="Registration" xml:space="preserve">
-    <value>Registration</value>
+  <data name="CreateDateTo" xml:space="preserve">
+    <value>วันที่สร้างจาก</value>
   </data>
   <data name="ReportCompany" xml:space="preserve">
-    <value>ReportCompany</value>
+    <value>รายงาน บริษัท</value>
   </data>
-  <data name="ReportEngineer" xml:space="preserve">
-    <value>ReportEngineer</value>
+  <data name="Reset" xml:space="preserve">
+    <value>รีเซต</value>
   </data>
-  <data name="ReportLocation" xml:space="preserve">
-    <value>ReportLocation</value>
+  <data name="Search" xml:space="preserve">
+    <value>ค้นหา</value>
   </data>
-  <data name="ReportPersonal" xml:space="preserve">
-    <value>ReportPersonal</value>
+  <data name="SearchCompanyResult" xml:space="preserve">
+    <value>ผลการค้นหา บริษัท</value>
   </data>
-  <data name="ReportTeam" xml:space="preserve">
-    <value>ReportTeam</value>
-  </data>
-  <data name="ReportTestResult" xml:space="preserve">
-    <value>Report Test Result</value>
-  </data>
-  <data name="RequestTraining" xml:space="preserve">
-    <value>Request Training</value>
-  </data>
-  <data name="SignOut" xml:space="preserve">
-    <value>Sign Out</value>
-  </data>
-  <data name="Training" xml:space="preserve">
-    <value>Training</value>
-  </data>
-  <data name="VerfifiedPayment" xml:space="preserve">
-    <value>Verfified Payment</value>
+  <data name="vendorcode" xml:space="preserve">
+    <value>รหัสตัวแทน</value>
   </data>
 </root>

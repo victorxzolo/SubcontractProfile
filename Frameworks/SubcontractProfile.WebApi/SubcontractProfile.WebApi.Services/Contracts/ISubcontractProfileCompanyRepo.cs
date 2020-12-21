@@ -24,7 +24,10 @@ namespace SubcontractProfile.WebApi.Services.Contracts
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchCompany(Guid companyId
             , string company_th, string company_en, string company_alias, string tax_id,string subcontract_profile_type
            );
-
+        //selectCompanyAll
+        Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> selectCompanyAll(
+       string company_code, string company_name, string vendor_code, string date_from, string date_to);
+    
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchCompanyVerify(SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany search);
 
         Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchActivateProfile(string subcontract_profile_type

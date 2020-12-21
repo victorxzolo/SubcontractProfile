@@ -22,10 +22,10 @@
                         <select id="inputmasterdata" class="form-control" data-live-search="true" onchange="chkchangetable();">
                             <option value="Select">Please Select</option>
                             <option value="Location">Location</option>
-                            @*<option value="Team">Team</option>
+                            <option value="Team">Team</option>
                             <option value="Engineer">Engineer</option>
                             <option value="Personal">Personal</option>
-                            <option value="Company">Company</option>*@
+                             <option value="Company">Company</option>
                         </select>
 
                     </div>
@@ -68,7 +68,7 @@
                         <table id="tbLocSearchResult" class="table table-hover" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>@Localizer["LocationId"]</th>
+                                  @*//   <th>@Localizer["LocationId"]</th>*@
                                     <th>@Localizer["LocationCode"]</th>
                                     <th>@Localizer["LocationName"]</th>
                                     <th>@Localizer["LocationNameTh"]</th>
@@ -117,7 +117,7 @@
                                     <th>@Localizer["PenaltyContractMail"]</th>
                                     <th>@Localizer["ContractPhone"]</th>
                                     <th>@Localizer["ContractMail"]</th>
-                                    <th>@Localizer["CompanyId"]</th>
+                                    @*<th>@Localizer["CompanyId"]</th>*@
 
 
                                 </tr>
@@ -127,45 +127,47 @@
                         </table>
                     </div>
                     <div id="engineer" class="table-responsive mb-4 mt-4">
-                        <table id="tbSearchResult" class="table table-hover" style="width:100%">
+                        <table id="tbEngineerSearchResult" class="table table-hover" style="width:100%">
                             <thead>
                                 <tr>
 
-                                    <th>@Localizer["engineer_id"]</th>
-                                    <th>@Localizer["staff_code"]</th>
-                                    <th>@Localizer["staff_code_type"]</th>
-                                    <th>@Localizer["foa_code"]</th>
-                                    <th>@Localizer["staff_name"]</th>
-                                    <th>@Localizer["staff_name_th"]</th>
-                                    <th>@Localizer["staff_name_en"]</th>
-                                    <th>@Localizer["identity_by"]</th>
-                                    <th>@Localizer["asc_code--"]</th>
-                                    <th>@Localizer["tshirt_size--"]</th>
-                                    <th>@Localizer["contract_phone1"]</th>
-                                    <th>@Localizer["contract_phone2"]</th>
-                                    <th>@Localizer["contract_email"]</th>
-                                    <th>@Localizer["work_experience"]</th>
-                                    <th>@Localizer["work_type"]</th>
-                                    <th>@Localizer["course_skill"]</th>
-                                    <th>@Localizer["skill_level"]</th>
-                                    <th>@Localizer["position"]</th>
-                                    <th>@Localizer["location_code"]</th>
-                                    <th>@Localizer["staff_id"]</th>
-                                    <th>@Localizer["team_code"]</th>
-                                    <th>@Localizer["citizen_id"]</th>
-                                    <th>@Localizer["personal_attach_file"]</th>
-                                    <th>@Localizer["bookbank_attach_file"]</th>
-                                    <th>@Localizer["bank_code"]</th>
-                                    <th>@Localizer["bank_name"]</th>
-                                    <th>@Localizer["brance_code "]</th>
-                                    <th>@Localizer["brance_name"]</th>
-                                    <th>@Localizer["account_no"]</th>
-                                    <th>@Localizer["account_name"]</th>
-                                    <th>@Localizer["staff_status"]</th>
-                                    <th>@Localizer["create_date"]</th>
-                                    <th>@Localizer["create_by"]</th>
-                                    <th>@Localizer["update_date"]</th>
-                                    <th>@Localizer["update_by"]</th>
+
+                                    <th>@Localizer["StaffCode"]</th>
+                                    <th>@Localizer["FoaCode"]</th>
+                                    <th>@Localizer["StaffName"]</th>
+                                    <th>@Localizer["StaffNameTh"]</th>
+                                    <th>@Localizer["StaffNameEn"]</th>
+                                    <th>@Localizer["AscCode"]</th>
+                                    <th>@Localizer["TshirtSize"]</th>
+                                    <th>@Localizer["ContractPhone1"]</th>
+                                    <th>@Localizer["ContractPhone2"]</th>
+                                    <th>@Localizer["ContractEmail"]</th>
+                                    <th>@Localizer["WorkExperience"]</th>
+                                    <th>@Localizer["WorkExperienceAttachFile"]</th>
+                                    <th>@Localizer["WorkType"]</th>
+                                    <th>@Localizer["CourseSkill"]</th>
+                                    <th>@Localizer["SkillLevel"]</th>
+                                    <th>@Localizer["VehicleType"]</th>
+                                    <th>@Localizer["VehicleBrand"]</th>
+                                    <th>@Localizer["VehicleSerise"]</th>
+                                    <th>@Localizer["VehicleColor"]</th>
+                                    <th>@Localizer["VehicleYear"]</th>
+                                    <th>@Localizer["VehicleLicensePlate"]</th>
+
+                                    <th>@Localizer["ToolOtrd"]</th>
+                                    <th>@Localizer["ToolSplicing"]</th>
+                                    <th>@Localizer["Position"]</th>
+                                    <th>@Localizer["LocationCode"]</th>
+                                    <th>@Localizer["StaffId"]</th>
+                                    <th>@Localizer["TeamCode"]</th>
+                                    <th>@Localizer["CitizenId"]</th>
+                                    <th>@Localizer["BankCode"]</th>
+                                    <th>@Localizer["BankName"]</th>
+                                    <th>@Localizer["AccountNo"]</th>
+                                    <th>@Localizer["AccountName"]</th>
+                                    <th>@Localizer["PersonalAttachFile"]</th>
+                                    <th>@Localizer["StaffStatus"]</th>
+
                                 </tr>
 
                             </thead>
@@ -173,10 +175,10 @@
                         </table>
                     </div>
                     <div id="team" class="table-responsive mb-4 mt-4">
-                        <table id="tbSearchResult" class="table table-hover" style="width:100%">
+                        <table id="tbTeamSearchResult" class="table table-hover" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>@Localizer["team_id"]</th>
+                                    
                                     <th>@Localizer["team_code"]</th>
                                     <th>@Localizer["team_name"]</th>
                                     <th>@Localizer["team_name_th"]</th>
@@ -211,39 +213,50 @@
                         </table>
                     </div>
                     <div id="personal" class="table-responsive mb-4 mt-4">
-                        <table id="tbSearchResult" class="table table-hover" style="width:100%">
+                        <table id="tbPersonalSearchResult" class="table table-hover" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>@Localizer["personal_id"]</th>
-                                    <th>@Localizer["citizen_id"]</th>
-                                    <th>@Localizer["title_name"]</th>
-                                    <th>@Localizer["full_name_en"]</th>
-                                    <th>@Localizer["full_name_th"]</th>
-                                    <th>@Localizer["birth_date"]</th>
-                                    <th>@Localizer["gender"]</th>
-                                    <th>@Localizer["race"]</th>
-                                    <th>@Localizer["nationality"]</th>
-                                    <th>@Localizer["religion"]</th>
-                                    <th>@Localizer["identity_by"]</th>
-                                    <th>@Localizer["identity_card_address"]</th>
-                                    <th>@Localizer["work_permit_no"]</th>
-                                    <th>@Localizer["education"]</th>
-                                    <th>@Localizer["th_listening"]</th>
-                                    <th>@Localizer["th_speaking"]</th>
-                                    <th>@Localizer["th_reading"]</th>
-                                    <th>@Localizer["th_writing"]</th>
-                                    <th>@Localizer["en_listening"]</th>
-                                    <th>@Localizer["en_speaking"]</th>
-                                    <th>@Localizer["en_reading"]</th>
-                                    <th>@Localizer["en_writing"]</th>
-                                    <th>@Localizer["certificate_type"]</th>
-                                    <th>@Localizer["certificate_no"]</th>
-                                    <th>@Localizer["certificate_expire_date"]</th>
-                                    <th>@Localizer["status"]</th>
-                                    <th>@Localizer["create_date"]</th>
-                                    <th>@Localizer["create_by"]</th>
-                                    <th>@Localizer["update_date"]</th>
-                                    <th>@Localizer["update_by"]</th>
+
+                                    <th>@Localizer["CitizenId"]</th>
+                                    <th>@Localizer["TitleName"]</th>
+                                    <th>@Localizer["FullNameTh"]</th>
+                                    <th>@Localizer["FullNameEn"]</th>
+                                    <th>@Localizer["BirthDate"]</th>
+                                    <th>@Localizer["Gender"]</th>
+                                    <th>@Localizer["Race"]</th>
+                                    <th>@Localizer["Nationality"]</th>
+                                    <th>@Localizer["Religion"]</th>
+                                    <th>@Localizer["PassportAttachFile"]</th>
+                                    <th>@Localizer["IdentityBy"]</th>
+                                    <th>@Localizer["AddressId"]</th>
+                                    <th>@Localizer["IdentityCardAddress"]</th>
+                                    <th>@Localizer["ContactPhone1"]</th>
+                                    <th>@Localizer["ContactPhone2"]</th>
+                                    <th>@Localizer["ContactEmail"]</th>
+                                    <th>@Localizer[" WorkPermitNo"]</th>
+                                    <th>@Localizer["WorkPermitAttachFile"]</th>
+                                    <th>@Localizer["ProfileImgAttachFile"]</th>
+                                    <th>@Localizer["Education"]</th>
+                                    <th>@Localizer["ThListening"]</th>
+                                    <th>@Localizer["ThSpeaking"]</th>
+                                    <th>@Localizer["ThReading"]</th>
+                                    <th>@Localizer["ThWriting"]</th>
+                                    <th>@Localizer["EnListening"]</th>
+                                    <th>@Localizer["EnSpeaking"]</th>
+                                    <th>@Localizer["EnReading"]</th>
+                                    <th>@Localizer["EnWriting"]</th>
+                                    <th>@Localizer["CertificateType"]</th>
+                                    <th>@Localizer["CertificateNo"]</th>
+                                    <th>@Localizer["CertificateExpireDate"]</th>
+                                    <th>@Localizer["CertificateAttachFile"]</th>
+                                    <th>@Localizer["BankCode"]</th>
+                                    <th>@Localizer["BankName"]</th>
+                                    <th>@Localizer["AccountNumber"]</th>
+                                    <th>@Localizer["AccountName"]</th>
+                                    <th>@Localizer["Status"]</th>
+                                    
+
+
 
                                 </tr>
 
@@ -252,73 +265,69 @@
                         </table>
                     </div>
                     <div id="company" class="table-responsive mb-4 mt-4">
-                        <table id="tbSearchResult" class="table table-hover" style="width:100%">
+                        <table id="tbCompanySearchResult" class="table table-hover" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>@Localizer["company_id"]</th>
-                                    <th>@Localizer["company_code"]</th>
-                                    <th>@Localizer["company_name"]</th>
-                                    <th>@Localizer["company_name_th"]</th>
-                                    <th>@Localizer["company_name_en"]</th>
-                                    <th>@Localizer["company_alias"]</th>
-                                    <th>@Localizer["distribution_channel"]</th>
-                                    <th>@Localizer["channel_sale_group"]</th>
-                                    <th>@Localizer["vendor_code"]</th>
-                                    <th>@Localizer["customer_code"]</th>
-                                    <th>@Localizer["area_id"]</th>
-                                    <th>@Localizer["tax_id"]</th>
-                                    <th>@Localizer["wt_name"]</th>
-                                    <th>@Localizer["vat_type"]</th>
-                                    <th>@Localizer["company_certified_file"]</th>
-                                    <th>@Localizer["commercial_registration_file"]</th>
-                                    <th>@Localizer["vat_registration_certificate_file"]</th>
-                                    <th>@Localizer["contract_agreement_file"]</th>
-                                    <th>@Localizer["deposit_authorization_level"]</th>
-                                    <th>@Localizer["deposit_payment_type"]</th>
-                                    <th>@Localizer["contract_start_date"]</th>
-                                    <th>@Localizer["contract_end_date"]</th>
-                                    <th>@Localizer["over_draft_deposit"]</th>
-                                    <th>@Localizer["balance_deposit"]</th>
-                                    <th>@Localizer["company_status"]</th>
-                                    <th>@Localizer["company_address"]</th>
-                                    <th>@Localizer["vat_address"]</th>
-                                    <th>@Localizer["create_by"]</th>
-                                    <th>@Localizer["create_date"]</th>
-                                    <th>@Localizer["update_by"]</th>
-                                    <th>@Localizer["update_date"]</th>
-                                    <th>@Localizer["company_email"]</th>
-                                    <th>@Localizer["contract_name"]</th>
-                                    <th>@Localizer["contract_phone"]</th>
-                                    <th>@Localizer["contract_email"]</th>
-                                    <th>@Localizer["bank_code"]</th>
-                                    <th>@Localizer["bank_name"]</th>
-                                    <th>@Localizer["account_number"]</th>
-                                    <th>@Localizer["account_name"]</th>
-                                    <th>@Localizer["attach_file"]</th>
-                                    <th>@Localizer["branch_code"]</th>
-                                    <th>@Localizer["branch_name"]</th>
-                                    <th>@Localizer["dept_of_install_name"]</th>
-                                    <th>@Localizer["dept_of_mainten_name"]</th>
-                                    <th>@Localizer["dept_of_account_name"]</th>
-                                    <th>@Localizer["dept_of_install_phone"]</th>
-                                    <th>@Localizer["dept_of_mainten_phone"]</th>
-                                    <th>@Localizer["dept_of_account_phone"]</th>
-                                    <th>@Localizer["dept_of_install_email"]</th>
-                                    <th>@Localizer["dept_of_mainten_email"]</th>
-                                    <th>@Localizer["dept_of_account_email"]</th>
-                                    <th>@Localizer["location_code"]</th>
-                                    <th>@Localizer["location_name_th"]</th>
-                                    <th>@Localizer["location_name_en"]</th>
-                                    <th>@Localizer["bank_account_type_id"]</th>
-                                    <th>@Localizer["subcontract_profile_type"]</th>
-                                    <th>@Localizer["company_title_th_id"]</th>
-                                    <th>@Localizer["company_title_en_id"]</th>
-                                    <th>@Localizer["status"]</th>
-                                    <th>@Localizer["activate_date"]</th>
-                                    <th>@Localizer["register_date"]</th>
-                                    <th>@Localizer["remark_for_sub"]</th>
-                                    <th>@Localizer["verified_date"]</th>
+                                    <th>@Localizer["CompanyCode"]</th>
+                                    <th>@Localizer["CompanyName"]</th>
+                                    <th>@Localizer["CompanyNameTh"]</th>
+                                    <th>@Localizer["CompanyNameEn"]</th>
+                                    <th>@Localizer["CompanyAlias"]</th>
+                                    <th>@Localizer["DistributionChannel"]</th>
+                                    <th>@Localizer["ChannelSaleGroup"]</th>
+                                    <th>@Localizer["VendorCode"]</th>
+                                    <th>@Localizer["CustomerCode"]</th>
+                                    <th>@Localizer["AreaId"]</th>
+                                    <th>@Localizer["TaxId"]</th>
+                                    <th>@Localizer["WtName"]</th>
+                                    <th>@Localizer["VatType"]</th>
+                                    <th>@Localizer["CompanyCertifiedFile"]</th>
+                                    <th>@Localizer["CommercialRegistrationFile"]</th>
+                                    <th>@Localizer["DepositAuthorizationLevel"]</th>
+                                    <th>@Localizer["DepositPaymentType"]</th>
+                                    <th>@Localizer["ContractStartDate"]</th>
+                                    <th>@Localizer["ContractEndDate"]</th>
+                                    <th>@Localizer["OverDraftDeposit"]</th>
+                                    <th>@Localizer["BalanceDeposit"]</th>
+                                    <th>@Localizer["CompanyStatus"]</th>
+                                    <th>@Localizer["CompanyAddress"]</th>
+                                    <th>@Localizer["VatAddress"]</th>
+                                    <th>@Localizer["CompanyEmail"]</th>
+                                    <th>@Localizer["ContractPame"]</th>
+                                    <th>@Localizer["ContractPhone"]</th>
+                                    <th>@Localizer["ContractEmail"]</th>
+                                    <th>@Localizer["BankCode"]</th>
+                                    <th>@Localizer["BankName"]</th>
+                                    <th>@Localizer["AccountNumber"]</th>
+                                    <th>@Localizer["AccountName"]</th>
+                                    <th>@Localizer["AttachFile"]</th>
+                                    <th>@Localizer["BranchCode"]</th>
+                                    <th>@Localizer["BranchName"]</th>
+                                    <th>@Localizer["DeptOfInstallName"]</th>
+                                    <th>@Localizer["DeptOfMaintenName"]</th>
+                                    <th>@Localizer["DeptOfAccountName"]</th>
+                                    <th>@Localizer["DeptOfInstallPhone"]</th>
+                                    <th>@Localizer["DeptOfMaintenPhone"]</th>
+                                    <th>@Localizer["DeptOfAccountPhone"]</th>
+                                    <th>@Localizer["DeptOfInstallEmail"]</th>
+                                    <th>@Localizer["DeptOfMaintenEmail"]</th>
+                                    <th>@Localizer["DeptOfAccountEmail"]</th>
+                                    <th>@Localizer["LocationCode"]</th>
+                                    <th>@Localizer["LocationNameTh"]</th>
+                                    <th>@Localizer["LocationNameEn"]</th>
+                                    <th>@Localizer["BankAccountTypeId"]</th>
+                                    <th>@Localizer["SubcontractProfileType"]</th>
+                                    <th>@Localizer["CompanyTitleThId"]</th>
+                                    <th>@Localizer["CompanyTitleEnId"]</th>
+                                    <th>@Localizer["Status"]</th>
+                                    <th>@Localizer["ActivateDate"]</th>
+                                    <th>@Localizer["RegisterDate"]</th>
+                                    <th>@Localizer["RemarkForSub"]</th>
+                                    <th>@Localizer["VerifiedDate"]</th>
                                     <th>@Localizer["Remark"]</th>
+                                    <th>@Localizer["VerifiedDate"]</th>
+                                    <th>@Localizer["Remark"]</th>
+
 
                                 </tr>
 
@@ -440,15 +449,18 @@
 
             return hasError;
         }
+
         function CheckFileUpload(inputId) {
 
+            var tablename = $('#inputmasterdata').val();
             var input = document.getElementById(inputId);
             var files = input.files[0];
+
             var formData = new FormData();
 
 
             formData.append("files", files);
-
+            formData.append("table", tablename);
 
 
             $.ajax(
@@ -456,10 +468,11 @@
                     type: "POST",
                     url: '@Url.Action("onCheckUpload", "MigrationProfile")',
                     processData: false,
-                    async : false,
+                    async: false,
                     contentType: false,
                     dataType: "json",
                     data: formData,
+
                     success: function (data) {
                         if (data.status) {
                             $('#upfileData').val(data.file_id);
@@ -495,16 +508,384 @@
 
 
             );
-            onLoadDataLocation();
+            if (tablename == "Location") {
+                onLoadDataLocation();
+            }
+            else if (tablename == "Team") {
+                onLoadDataTeam();
+            }
+            else if (tablename == "Engineer") {
+                onLoadDataEngineer();
+            }
+
+            else if (tablename == "Personal") {
+                onLoadDataPersonal();
+            }
+            else if (tablename == "Company") {
+                onLoadDataCompany();
+            }
         }
 
+        function onLoadDataCompany() {
+               var i = 0;
+                oTableEngineer = $('#tbCompanySearchResult').DataTable({
+                 processing: true, // for show progress bar
+                 serverSide: true, // for process server side
+                 filter: false, // this is for disable filter (search box)
+                 orderMulti: false, // for disable multiple column at once
+                 pageLength: 10,
+                 order: [],
+                 autoWidth: false,
+                 searching: false,
+                 destroy: true,
+                 lengthChange: false,
+                 "oLanguage": {
+                     "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                     "sInfo": "Showing page _PAGE_ of _PAGES_",
+                     "sSearch": false,
+                     "sLengthMenu": "Results :  _MENU_",
+                 },
+                 "scrollX": false,
+                 "language": {
+                     "zeroRecords": "No data found.",
+                     "decimal": ",",
+                     "thousands": "."
+                 },
+                 ajax: {
+                     url: '@Url.Action("AddDataTableCompany", "MigrationProfile")',
+                     type: "POST",
+                     async: false,
+                     datatype: "JSON",
+
+                 },
+                 columns: [
+
+
+                     { data: "CompanyCode" },
+                     { data: "CompanyName" },
+                     { data: "CompanyNameTh" },
+                     { data: "CompanyNameEn" },
+                     { data: "CompanyAlias" },
+                     { data: "DistributionChannel" },
+                     { data: "ChannelSaleGroup" },
+                     { data: "VendorCode" },
+                     { data: "CustomerCode" },
+                     { data: "AreaId" },
+                     { data: "TaxId" },
+                     { data: "WtName" },
+                     { data: "VatType" },
+                     { data: "CompanyCertifiedFile" },
+                     { data: "CommercialRegistrationFile" },
+                     { data: "DepositAuthorizationLevel" },
+                     { data: "DepositPaymentType" },
+                     { data: "ContractStartDate" },
+                     { data: "ContractEndDate" },
+                     { data: "OverDraftDeposit" },
+                     { data: "BalanceDeposit" },
+                     { data: "CompanyStatus" },
+                     { data: "CompanyAddress" },
+                     { data: "VatAddress" },
+                     { data: "CompanyEmail" },
+                     { data: "ContractName" },
+                     { data: "ContractPhone" },
+                     { data: "ContractEmail" },
+                     { data: "BankCode" },
+                     { data: "BankName" },
+                     { data: "AccountNumber" },
+                     { data: "AccountName" },
+                     { data: "AttachFile" },
+                     { data: "BranchCode" },
+                     { data: "BranchName" },
+                     { data: "DeptOfInstallName" },
+                     { data: "DeptOfMaintenName" },
+                     { data: "DeptOfAccountName" },
+                     { data: "DeptOfInstallPhone" },
+                     { data: "DeptOfMaintenPhone" },
+                     { data: "DeptOfAccountPhone" },
+                     { data: "DeptOfInstallEmail" },
+                     { data: "DeptOfMaintenEmail" },
+                     { data: "DeptOfAccountEmail" },
+                     { data: "LocationCode" },
+                     { data: "LocationNameTh" },
+                     { data: "LocationNameEn" },
+                     { data: "BankAccountTypeId" },
+                     { data: "SubcontractProfileType" },
+                     { data: "CompanyTitleThId" },
+                     { data: "CompanyTitleEnId" },
+                     { data: "Status" },
+                     { data: "_ActivateDate" },
+                     { data: "_RegisterDate" },
+                     { data: "RemarkForSub" },
+                     { data: "_VerifiedDate" },
+                     { data: "Remark" },
+          
+
+                    
+
+
+                 ],
+                 "order": [[0, "desc"]],
+                 "stripeClasses": [],
+                 "initComplete": function (settings, json) {
+
+
+                 },
+                 drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+             });
+
+        }
+
+        function onLoadDataPersonal() {
+             var i = 0;
+                oTableEngineer = $('#tbPersonalSearchResult').DataTable({
+                 processing: true, // for show progress bar
+                 serverSide: true, // for process server side
+                 filter: false, // this is for disable filter (search box)
+                 orderMulti: false, // for disable multiple column at once
+                 pageLength: 10,
+                 order: [],
+                 autoWidth: false,
+                 searching: false,
+                 destroy: true,
+                 lengthChange: false,
+                 "oLanguage": {
+                     "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                     "sInfo": "Showing page _PAGE_ of _PAGES_",
+                     "sSearch": false,
+                     "sLengthMenu": "Results :  _MENU_",
+                 },
+                 "scrollX": false,
+                 "language": {
+                     "zeroRecords": "No data found.",
+                     "decimal": ",",
+                     "thousands": "."
+                 },
+                 ajax: {
+                     url: '@Url.Action("AddDataTablePersonal", "MigrationProfile")',
+                     type: "POST",
+                     async: false,
+                     datatype: "JSON",
+
+                 },
+                 columns: [
+
+
+                     { data: "CitizenId" },
+                     { data: "TitleName" },
+                     { data: "FullNameTh" },
+                     { data: "FullNameEn" },
+                     { data: "_BirthDate" },
+                     { data: "Gender" },
+                     { data: "Race" },
+                     { data: "Nationality" },
+                     { data: "Religion" },
+                     { data: "PassportAttachFile" },
+                     { data: "IdentityBy" },
+                     { data: "AddressId" },
+                     { data: "IdentityCardAddress" },
+                     { data: "ContactPhone1" },
+                     { data: "ContactPhone2" },
+                     { data: "ContactEmail" },
+                     { data: "WorkPermitNo" },
+                     { data: "WorkPermitAttachFile" },
+                     { data: "ProfileImgAttachFile" },
+                     { data: "Education" },
+                     { data: "ThListening" },
+                     { data: "ThSpeaking" },
+                     { data: "ThReading" },
+                     { data: "ThWriting" },
+                     { data: "EnListening" },
+                     { data: "EnSpeaking" },
+                     { data: "EnReading" },
+                     { data: "EnWriting" },
+                     { data: "CertificateType" },
+                     { data: "CertificateNo" },
+                     { data: "_CertificateExpireDate" },
+                     { data: "CertificateAttachFile" },
+                     { data: "BankCode" },
+                     { data: "BankName" },
+                     { data: "AccountNumber" },
+                     { data: "AccountName" },
+                     { data: "Status" }
+
+
+                 ],
+                 "order": [[0, "desc"]],
+                 "stripeClasses": [],
+                 "initComplete": function (settings, json) {
+
+
+                 },
+                 drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+             });
+
+         }
+
+        function onLoadDataEngineer() {
+             var i = 0;
+                oTableEngineer = $('#tbEngineerSearchResult').DataTable({
+                 processing: true, // for show progress bar
+                 serverSide: true, // for process server side
+                 filter: false, // this is for disable filter (search box)
+                 orderMulti: false, // for disable multiple column at once
+                 pageLength: 10,
+                 order: [],
+                 autoWidth: false,
+                 searching: false,
+                 destroy: true,
+                 lengthChange: false,
+                 "oLanguage": {
+                     "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                     "sInfo": "Showing page _PAGE_ of _PAGES_",
+                     "sSearch": false,
+                     "sLengthMenu": "Results :  _MENU_",
+                 },
+                 "scrollX": false,
+                 "language": {
+                     "zeroRecords": "No data found.",
+                     "decimal": ",",
+                     "thousands": "."
+                 },
+                 ajax: {
+                     url: '@Url.Action("AddDataTableEngineer", "MigrationProfile")',
+                     type: "POST",
+                     async: false,
+                     datatype: "JSON",
+
+                 },
+                 columns: [
+
+
+                     { data: "StaffCode" },
+                     { data: "FoaCode" },
+                     { data: "StaffName" },
+                     { data: "StaffNameTh" },
+                     { data: "StaffNameEn" },
+                     { data: "AscCode" },
+                     { data: "TshirtSize" },
+                     { data: "ContractPhone1" },
+                     { data: "ContractPhone2" },
+                     { data: "ContractEmail" },
+                     { data: "WorkExperience" },
+                     { data: "WorkExperienceAttachFile" },
+                     { data: "WorkType" },
+                     { data: "CourseSkill" },
+                     { data: "SkillLevel" },
+                     { data: "VehicleType" },
+                     { data: "VehicleBrand" },
+                     { data: "VehicleSerise" },
+                     { data: "VehicleColor" },
+                     { data: "VehicleYear" },
+                     { data: "VehicleLicensePlate" },
+
+                     { data: "ToolOtrd" },
+                     { data: "ToolSplicing" },
+                     { data: "Position" },
+                     { data: "LocationCode" },
+                     { data: "StaffId" },
+                     { data: "TeamCode" },
+                     { data: "CitizenId" },
+                     { data: "BankCode" },
+                     { data: "BankName" },
+                     { data: "AccountNo" },
+                     { data: "AccountName" },
+                     { data: "PersonalAttachFile" },
+                     { data: "StaffStatus" },
+
+                 ],
+                 "order": [[0, "desc"]],
+                 "stripeClasses": [],
+                 "initComplete": function (settings, json) {
+
+
+                 },
+                 drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+             });
+
+         }
+
+            function onLoadDataTeam() {
+             var i = 0;
+                oTableEngineer = $('#tbTeamSearchResult').DataTable({
+                 processing: true, // for show progress bar
+                 serverSide: true, // for process server side
+                 filter: false, // this is for disable filter (search box)
+                 orderMulti: false, // for disable multiple column at once
+                 pageLength: 10,
+                 order: [],
+                 autoWidth: false,
+                 searching: false,
+                 destroy: true,
+                 lengthChange: false,
+                 "oLanguage": {
+                     "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                     "sInfo": "Showing page _PAGE_ of _PAGES_",
+                     "sSearch": false,
+                     "sLengthMenu": "Results :  _MENU_",
+                 },
+                 "scrollX": false,
+                 "language": {
+                     "zeroRecords": "No data found.",
+                     "decimal": ",",
+                     "thousands": "."
+                 },
+                 ajax: {
+                     url: '@Url.Action("AddDataTableTeam", "MigrationProfile")',
+                     type: "POST",
+                     async: false,
+                     datatype: "JSON",
+
+                 },
+                 columns: [
+
+
+
+                     { data: "TeamCode" },
+                     { data: "TeamName" },
+                     { data: "TeamNameTh" },
+                     { data: "TeamNameEn" },
+                     { data: "ShipTo" },
+                     { data: "StageLocal" },
+                     { data: "OosStorageLocation" },
+                     { data: "LocationCode" },
+                     { data: "VendorCode" },
+                     { data: "JobType" },
+                     { data: "SubcontractType" },
+                     { data: "SubcontractSubType" },
+                     { data: "WarrantyMa" },
+                     { data: "WarrantyInstall" },
+                     { data: "ServiceSkill" },
+                     { data: "InstallationsContractPhone" },
+                     { data: "MaintenanceContractPhone" },
+                     { data: "EtcContractPhone" },
+                     { data: "InstallationsContractEmail" },
+                     { data: "MaintenanceContractEmail" },
+                     { data: "EtcContractEmail" },
+
+                     { data: "Status" },
+                     { data: "CreateDate" },
+                     { data: "CreateBy" },
+                     { data: "UpdateDate" },
+                     { data: "UpdateBy" }
+
+                 ],
+                 "order": [[0, "desc"]],
+                 "stripeClasses": [],
+                 "initComplete": function (settings, json) {
+
+
+                 },
+                 drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+
+             });
+
+         }
+
+
         function onLoadDataLocation() {
-
-
-
-
-
-
              var i = 0;
              oTableEngineer = $('#tbLocSearchResult').DataTable({
                  processing: true, // for show progress bar
@@ -539,7 +920,7 @@
                  columns: [
 
 
-                     { data: "LocationId" },
+
                      { data: "LocationCode" },
                      { data: "LocationName" },
                      { data: "LocationNameTh" },
@@ -550,7 +931,7 @@
                      { data: "ShipTo" },
                      { data: "OutOfServiceStorageLocation" },
                      { data: "SubPhase" },
-                     { data: "EffectiveDate" },
+                     { data: "_EffectiveDate" },
                      { data: "ShopType" },
                      { data: "VatBranchNumber" },
                      { data: "Phone" },
@@ -587,8 +968,8 @@
                      { data: "PenaltyContractPhone" },
                      { data: "PenaltyContractMail" },
                      { data: "ContractPhone" },
-                     { data: "ContractMail" },
-                     { data: "CompanyId" }
+                     { data: "ContractMail" }
+
                  ],
                  "order": [[0, "desc"]],
                  "stripeClasses": [],
@@ -608,11 +989,11 @@
              $.ajax(
                 {
                     type: "POST",
-                    url: '@Url.Action("BulkInsertLocation", "MigrationProfile")',
+                    url: '@Url.Action("BulkInsert", "MigrationProfile")',
                      type: 'POST',
                      data: { 'table': tablename },
                      dataType: "json",
-                     async: false,
+                     async: true,
                      success: function (result) {
 
                          if (result != null) {

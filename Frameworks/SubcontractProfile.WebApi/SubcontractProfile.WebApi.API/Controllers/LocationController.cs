@@ -137,6 +137,51 @@ namespace SubcontractProfile.WebApi.API.Controllers
 
         }
 
+
+
+
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileLocation))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileLocation))]
+        [HttpGet("selectLocationAll/{location_code}/{vendor_code}/{date_from}/{date_to}")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation>> selectLocationAll( 
+                 string location_code, string vendor_code, string date_from , string date_to)
+        {
+            _logger.LogInformation($"Start LocationController::selectLocationAll", location_code, vendor_code, date_from, date_to);
+
+            if (location_code.ToUpper() == "NULL")
+            {
+                location_code = string.Empty;
+            }
+
+            if (vendor_code.ToUpper() == "NULL")
+            {
+                vendor_code = string.Empty;
+            }
+
+            if (date_from.ToUpper() == "NULL")
+            {
+                date_from = string.Empty;
+            }
+
+            if (date_to.ToUpper() == "NULL")
+            {
+                date_to = string.Empty;
+            }
+
+            
+            var entities = _service.selectLocationAll(location_code, vendor_code, date_from, date_to);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"LocationController::", "selectLocationAll NOT FOUND",location_code, vendor_code, date_from, date_to);
+                return null;
+            }
+
+            return entities;
+
+        }
+
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SubcontractProfileLocationOutput))]
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(SubcontractProfileLocationOutput))]
         [HttpPost("GetListLocation")]
@@ -189,6 +234,32 @@ namespace SubcontractProfile.WebApi.API.Controllers
             return result;
 
         }
+        #endregion
+        #region POST
+
+
+        [HttpPost("MigrationInsert")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileLocation))]
+        public Task<bool> MigrationInsert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileLocation subcontractProfileLocation)
+        {
+            _logger.LogInformation($"Start LocationController::MigrationInsert", subcontractProfileLocation);
+
+            if (subcontractProfileLocation == null)
+                _logger.LogWarning($"Start LocationController::MigrationInsert", subcontractProfileLocation);
+
+
+            var result = _service.MigrationInsert(subcontractProfileLocation);
+
+            if (result == null)
+            {
+                _logger.LogWarning($"LocationController::", "Insert NOT FOUND", subcontractProfileLocation);
+
+            }
+            return result;
+
+        }
+
+
 
         [HttpPost("BulkInsert")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SubcontractProfileLocation))]

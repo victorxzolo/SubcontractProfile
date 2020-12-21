@@ -69,6 +69,81 @@ namespace SubcontractProfile.WebApi.API.Controllers
         }
 
 
+
+
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PersonalController))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(PersonalController))]
+        [HttpGet("selectPersonal/{citizen_id}/{full_name}/{contact_phone}/{date_from}/{date_to}")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePersonal>> selectPersonal(
+                 string citizen_id, string full_name, string contact_phone, string date_from, string date_to)
+        {
+            _logger.LogInformation($"Start LocationController::selectPersonal", citizen_id, full_name, contact_phone, date_from, date_to);
+
+            if (citizen_id.ToUpper() == "NULL")
+            {
+                citizen_id = string.Empty;
+            }
+
+            if (full_name.ToUpper() == "NULL")
+            {
+                full_name = string.Empty;
+            }
+
+            if (contact_phone.ToUpper() == "NULL")
+            {
+                contact_phone = string.Empty;
+            }
+
+            if (date_from.ToUpper() == "NULL")
+            {
+                date_from = string.Empty;
+            }
+
+            if (date_to.ToUpper() == "NULL")
+            {
+                date_to = string.Empty;
+            }
+
+
+            var entities = _service.selectPersonal(citizen_id,full_name, contact_phone, date_from, date_to);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"LocationController::", "selectPersonal NOT FOUND", citizen_id, full_name, contact_phone, date_from, date_to);
+                return null;
+            }
+
+            return entities;
+
+        }
+
+
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PersonalController))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(PersonalController))]
+        [HttpGet("selectPersonalAll/{citizen_id}/{full_name}/{contract_phone}/{date_from}/{date_to}")]
+        public Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePersonal>> selectEngineerAll(
+          string citizen_id, string full_name, string contact_phone, string date_from, string date_to)
+        {
+            _logger.LogInformation($"Start Personal::selectPersonalAll", citizen_id, full_name,
+               contact_phone, date_from, date_to);
+
+
+            var entities = _service.selectPersonalAll(citizen_id, full_name, contact_phone, date_from, date_to);
+
+            if (entities == null)
+            {
+                _logger.LogWarning($"EngineerController::", "GetEngineerByTeam NOT FOUND", citizen_id, full_name,
+               contact_phone, date_from, date_to);
+                return null;
+            }
+
+            return entities;
+        }
+
+
+
         #endregion
 
         #region POST

@@ -450,6 +450,29 @@ namespace SubcontractProfile.WebApi.Services
         }
 
 
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> selectCompanyAll(
+         string company_name, string company_code, string vendor_code, string date_from, string date_to)
+        {
+            var p = new DynamicParameters();
+            p.Add("@company_name", company_name);
+
+            p.Add("@company_code", company_code);
+            p.Add("@vendor_code", vendor_code);
+            p.Add("@date_from", date_from);
+            p.Add("@date_to", date_to);
+
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>
+            ("uspSubcontractProfileCompany_selectCompanyAll", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+
+
+        }
+
+
+
+
         public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany>> SearchCompanyVerify(
             SubcontractProfile.WebApi.Services.Model.SubcontractProfileCompany search)
         {

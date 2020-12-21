@@ -171,6 +171,47 @@ namespace SubcontractProfile.WebApi.Services.Services
             return true;
         }
 
+
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePersonal>> selectPersonalAll(
+        string citizen_id, string full_name, string contact_phone, string date_from, string date_to)
+        {
+            var p = new DynamicParameters();
+            p.Add("@citizen_id", citizen_id);
+            p.Add("@full_name", full_name);
+            p.Add("@contact_phone", contact_phone);
+            p.Add("@date_from", date_from);
+            p.Add("@date_to", date_to);
+
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePersonal>
+            ("uspSubcontractProfilePersonal_selectPersonalAll", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+
+
+        }
+
+        public async Task<IEnumerable<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePersonal>> selectPersonal(
+       string citizen_id, string full_name,string contact_phone, string date_from, string date_to)
+        {
+            var p = new DynamicParameters();
+
+            p.Add("@citizen_id", citizen_id);
+            p.Add("@full_name", full_name);
+            p.Add("@contact_phone", contact_phone);
+            p.Add("@date_from", date_from);
+            p.Add("@date_to", date_to);
+
+
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfilePersonal>
+            ("uspSubcontractProfilePersonal_selectPersonal", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
+
+
+
+
         /// <summary>
         /// Bulk insert
         /// </summary>

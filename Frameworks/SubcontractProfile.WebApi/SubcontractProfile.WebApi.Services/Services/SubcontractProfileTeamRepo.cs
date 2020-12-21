@@ -93,6 +93,45 @@ namespace SubcontractProfile.WebApi.Services.Services
             return teamId;
         }
 
+
+        /// <summary>
+        /// MigrationInsert
+        /// </summary>
+        public async Task<bool> MigrationInsert(SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam subcontractProfileTeam)
+        {
+            var p = new DynamicParameters();
+
+            p.Add("@team_code", subcontractProfileTeam.TeamCode);
+            p.Add("@team_name", subcontractProfileTeam.TeamName);
+            p.Add("@team_name_th", subcontractProfileTeam.TeamNameTh);
+            p.Add("@team_name_en", subcontractProfileTeam.TeamNameEn);
+            p.Add("@ship_to", subcontractProfileTeam.ShipTo);
+            p.Add("@stage_local", subcontractProfileTeam.StageLocal);
+            p.Add("@oos_storage_location", subcontractProfileTeam.OosStorageLocation);
+            p.Add("@location_code", subcontractProfileTeam.LocationCode);
+            p.Add("@vendor_code", subcontractProfileTeam.VendorCode);
+            p.Add("@job_type", subcontractProfileTeam.JobType);
+            p.Add("@subcontract_type", subcontractProfileTeam.SubcontractType);
+            p.Add("@subcontract_sub_type", subcontractProfileTeam.SubcontractSubType);
+            p.Add("@warranty_ma", subcontractProfileTeam.WarrantyMa);
+            p.Add("@warranty_install", subcontractProfileTeam.WarrantyInstall);
+            p.Add("@service_skill", subcontractProfileTeam.ServiceSkill);
+            p.Add("@installations_contract_phone", subcontractProfileTeam.InstallationsContractPhone);
+            p.Add("@maintenance_contract_phone", subcontractProfileTeam.MaintenanceContractPhone);
+            p.Add("@etc_contract_phone", subcontractProfileTeam.EtcContractPhone);
+            p.Add("@installations_contract_email", subcontractProfileTeam.InstallationsContractEmail);
+            p.Add("@maintenance_contract_email", subcontractProfileTeam.MaintenanceContractEmail);
+            p.Add("@etc_contract_email", subcontractProfileTeam.EtcContractEmail);
+            p.Add("@status", subcontractProfileTeam.Status);
+         
+           
+
+            var ok = await _dbContext.Connection.ExecuteAsync
+                ("uspSubcontractProfileteam_migrationinsert", p, commandType: CommandType.StoredProcedure, transaction: _dbContext.Transaction);
+         
+            return true;
+        }
+
         /// <summary>
         /// Update
         /// </summary>
@@ -281,6 +320,25 @@ namespace SubcontractProfile.WebApi.Services.Services
          
             var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam>
             ("uspSubcontractProfileTeam_searchTeam", p, commandType: CommandType.StoredProcedure);
+
+            return entity;
+        }
+
+
+
+        public async Task<IEnumerable<SubcontractProfileTeam>> selectTeamAll(
+          string team_code, string vendor_code, string location_code, 
+         string date_from, string date_to)
+        {
+            var p = new DynamicParameters();
+            p.Add("@team_code", team_code);
+            p.Add("@vendor_code", vendor_code);
+            p.Add("@location_code", location_code);
+            p.Add("@date_from ", date_from);
+            p.Add("@date_to", date_to);
+       
+            var entity = await _dbContext.Connection.QueryAsync<SubcontractProfile.WebApi.Services.Model.SubcontractProfileTeam>
+            ("uspSubcontractProfileTeam_selectTeamAll", p, commandType: CommandType.StoredProcedure);
 
             return entity;
         }
