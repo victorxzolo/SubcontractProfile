@@ -148,8 +148,8 @@ namespace SubcontractProfile.Web.Controllers
 
             string uriString = string.Format("{0}/{1}/{2}/{3}/{4}/{5}", strpathAPI + "Company/selectCompanyAll"
                 , HttpUtility.UrlEncode(companycode, Encoding.UTF8)
-                , HttpUtility.UrlEncode(vendorcode, Encoding.UTF8)
                 , HttpUtility.UrlEncode(companyname, Encoding.UTF8)
+                , HttpUtility.UrlEncode(vendorcode, Encoding.UTF8)
                 , HttpUtility.UrlEncode(createFrom, Encoding.UTF8)
                 , HttpUtility.UrlEncode(createTo, Encoding.UTF8));
 
