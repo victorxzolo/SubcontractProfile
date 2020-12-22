@@ -1003,35 +1003,39 @@
                     if (Validateform()) {
                         event.preventDefault();
                         event.stopPropagation();
-
+                        haserror = true;
                     }
-                    else if ($('#CitizenID').val() !='' ) {
+                    else if ($('#CitizenID').val() != '' || $('#CitizenID2').val() != '') {
                         var lenEngineer = $('#CitizenID').val().length;
+                        var lenPersonal = $('#CitizenID2').val().length;
+
                         if (lenEngineer != 13) {
                             $('#errorlengthidcard').show();
                             event.preventDefault();
                             event.stopPropagation();
+
+                            haserror = true;
                         }
                         else {
                             $('#errorlengthidcard').hide();
                         }
-                    }
-                    else if ($('#CitizenID2').val() != '')
-                    {
-                        var lenPersonal = $('#CitizenID2').val().length;
-                          if (lenPersonal != 13) {
+
+                        if (lenPersonal != 13) {
                             $('#errorlengthidcard2').show();
+                            haserror = true;
                         }
                         else {
                             $('#errorlengthidcard2').hide();
                         }
                     }
-                    else {
-                        
+                
+                        if (!haserror) {
                             onSave();
+                        }
+                            
                       
 
-                    }
+              
                     form.classList.add('was-validated');
 
                 });
