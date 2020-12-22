@@ -124,6 +124,9 @@
     <value>วันที่สร้างถึง</value>
   </data>
   <data name="LocationCode" xml:space="preserve">
+    <value>LocationCode</value>
+  </data>
+  <data name="LocationCodeSearch" xml:space="preserve">
     <value>รหัสสถานที่</value>
   </data>
   <data name="ReportLocation" xml:space="preserve">
@@ -138,7 +141,7 @@
   <data name="SearchLocationResult" xml:space="preserve">
     <value>ผลการค้นหาสถานที่</value>
   </data>
-  <data name="VendorCode" xml:space="preserve">
+  <data name="vendorcode" xml:space="preserve">
     <value>รหัสตัวแทน</value>
   </data>
 </root>
